@@ -7,13 +7,23 @@
 let lastMs = 0;
 let seq = 0;
 
-function randomBytes(n: number): Uint8Array {
-  const out = new Uint8Array(n);
-  globalThis.crypto.getRandomValues(out);
-  return out;
-}
+/** Fills `n` cryptographically random bytes. Injectable for runtimes without `crypto.getRandomValues`. */
+export type RandomBytes = (n: number) => Uint8Array;
 
-export function uuidv7(now: number = Date.now()): string {
+/** Default source: `globalThis.crypto.getRandomValues` (browsers, node, Expo with `expo-crypto`'s polyfill). */
+export const cryptoRandomBytes: RandomBytes = (n) => {
+  const c = (globalThis as { crypto?: { getRandomValues?: (a: Uint8Array) => Uint8Array } }).crypto;
+  if (typeof c?.getRandomValues !== "function") {
+    throw new Error(
+      "uuidv7: crypto.getRandomValues is not available; polyfill it (expo-crypto) or pass `randomBytes` to createTankClient",
+    );
+  }
+  const out = new Uint8Array(n);
+  c.getRandomValues(out);
+  return out;
+};
+
+export function uuidv7(now: number = Date.now(), randomBytes: RandomBytes = cryptoRandomBytes): string {
   let ms = Math.max(now, lastMs);
   if (ms === lastMs) {
     seq += 1;

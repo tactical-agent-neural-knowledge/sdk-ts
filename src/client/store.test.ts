@@ -8,7 +8,12 @@ import {
   ChannelSchema,
   ChannelType,
 } from "../contracts/tank/channel/v1/channel_pb.js";
-import { EnvelopeSchema, MessageCreatedSchema, TypingSchema } from "../contracts/tank/events/v1/events_pb.js";
+import {
+  EnvelopeSchema,
+  MessageCreatedSchema,
+  ReadStateUpdatedSchema,
+  TypingSchema,
+} from "../contracts/tank/events/v1/events_pb.js";
 import { type Message, MessageSchema } from "../contracts/tank/message/v1/message_pb.js";
 import { PresenceSchema, PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
 import { MemberSchema, WorkspaceSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
@@ -211,6 +216,82 @@ describe("read states, presence, typing, membership", () => {
       readStates: [create(ChannelReadStateSchema, { channelId: "general", lastReadSeq: 3n, muted: true })],
     });
     expect(store.selectUnreads("ws1").total).toBe(0);
+  });
+
+  it("thread read states come from thread ReadStateUpdated only, and count separately in unreads", () => {
+    const store = bootstrapped();
+    store.dispatch({ type: "messages/created", message: msg("root", 2, { authorId: "me" }) });
+    for (let i = 1; i <= 3; i++) {
+      store.dispatch({
+        type: "messages/created",
+        message: msg(`r${i}`, 0, { threadRootId: "root", threadSeq: BigInt(i), authorId: "u2" }),
+      });
+    }
+    expect(store.getState().messages.root?.replyCount).toBe(3);
+    expect(store.selectThreadUnread("root")).toBe(3);
+    let u = store.selectUnreads("ws1");
+    expect(u.threads).toBe(3);
+    expect(u.byThread).toEqual({ root: 3 });
+    expect(u.total).toBe(2); // channel unreads exclude thread replies
+
+    // Not mine: ignored.
+    store.dispatch({
+      type: "readStates/updated",
+      channelId: "general",
+      lastReadSeq: 0n,
+      userId: "u2",
+      threadRootId: "root",
+      lastReadThreadSeq: 3n,
+    });
+    expect(store.getState().threadReadStates.root).toBeUndefined();
+    // Mine: thread state only, channel read state untouched, and a stable reference when unchanged.
+    const before = store.selectUnreads("ws1");
+    store.dispatch({
+      type: "readStates/updated",
+      channelId: "general",
+      lastReadSeq: 0n,
+      userId: "me",
+      threadRootId: "root",
+      lastReadThreadSeq: 2n,
+    });
+    expect(store.getState().threadReadStates.root).toBe(2n);
+    expect(store.getState().readStates.general?.lastReadSeq).toBe(1n);
+    expect(store.selectThreadUnread("root")).toBe(1);
+    u = store.selectUnreads("ws1");
+    expect(u).not.toBe(before);
+    expect(u.threads).toBe(1);
+    // Going backwards is a no-op.
+    store.dispatch({
+      type: "readStates/updated",
+      channelId: "general",
+      lastReadSeq: 0n,
+      userId: "me",
+      threadRootId: "root",
+      lastReadThreadSeq: 1n,
+    });
+    expect(store.getState().threadReadStates.root).toBe(2n);
+    expect(store.selectUnreads("ws1")).toBe(u);
+    // A thread I do not participate in and have no read state for is not counted.
+    store.dispatch({ type: "messages/created", message: msg("other", 3, { authorId: "u2", replyCount: 5 }) });
+    expect(store.selectUnreads("ws1").threads).toBe(1);
+    expect(store.selectThreadUnread("other")).toBe(5);
+    expect(store.selectThreadUnread("unknown")).toBe(0);
+  });
+
+  it("applies a thread ReadStateUpdated envelope", () => {
+    const store = bootstrapped();
+    const payload = create(ReadStateUpdatedSchema, {
+      userId: "me",
+      channelId: "general",
+      lastReadSeq: 0n,
+      threadRootId: "root",
+      lastReadThreadSeq: 7n,
+    });
+    store.applyEnvelope(
+      create(EnvelopeSchema, { workspaceId: "ws1", payload: anyPack(ReadStateUpdatedSchema, payload) }),
+    );
+    expect(store.getState().threadReadStates.root).toBe(7n);
+    expect(store.getState().readStates.general?.lastReadSeq).toBe(1n);
   });
 
   it("typing entries expire after the TTL and ignore my own", () => {

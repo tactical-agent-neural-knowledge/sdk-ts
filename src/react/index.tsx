@@ -8,7 +8,15 @@ import {
   useSyncExternalStore,
 } from "react";
 import type { TankClient } from "../client/client.js";
-import type { ConnectionState, TankStore, ThreadView, Unreads } from "../client/store.js";
+import type {
+  ChannelPaging,
+  ConnectionState,
+  PendingMessage,
+  TankState,
+  TankStore,
+  ThreadView,
+  Unreads,
+} from "../client/store.js";
 import type { Channel } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
@@ -104,7 +112,9 @@ export function useChannel(id: string): Channel | undefined {
 
 export interface UseMessagesResult {
   messages: Message[];
+  /** A page is being fetched (including the first one). */
   loading: boolean;
+  /** Whether older messages exist. `false` until the first page has loaded. */
   hasMoreBefore: boolean;
   /** Page older messages in. */
   loadOlder: () => Promise<boolean>;
@@ -137,13 +147,13 @@ export function useMessages(channelId: string, opts: UseMessagesOptions = {}): U
   useEffect(() => {
     if (!view || !channelId) return;
     client.viewChannel(channelId);
-    if (client.store.selectChannelMessages(channelId).length === 0) void loadOlder().catch(() => undefined);
+    if (!client.store.getState().channelPaging[channelId]?.loaded) void loadOlder().catch(() => undefined);
     return () => client.realtime.unsubscribe({ channelIds: [channelId] });
   }, [client, channelId, view, loadOlder]);
   return {
     messages,
     loading: paging?.loading ?? false,
-    hasMoreBefore: paging?.hasMoreBefore ?? true,
+    hasMoreBefore: paging?.loaded ? paging.hasMoreBefore : false,
     loadOlder,
   };
 }
@@ -162,8 +172,14 @@ export function useThread(rootId: string, opts: { view?: boolean } = {}): Thread
   return thread;
 }
 
+/** Channel unreads for a workspace, with thread unreads counted separately in `threads` / `byThread`. */
 export function useUnreads(workspaceId: string): Unreads {
   return useTankSelector(useCallback((s: TankStore) => s.selectUnreads(workspaceId), [workspaceId]));
+}
+
+/** Unread replies in one thread (root reply_count minus my last read thread_seq). */
+export function useThreadUnread(rootId: string): number {
+  return useTankSelector(useCallback((s: TankStore) => s.selectThreadUnread(rootId), [rootId]));
 }
 
 /** Presence for a set of users; keeps the gateway presence subscription in sync while mounted. */
@@ -185,4 +201,5 @@ export function useTyping(channelId: string, threadRootId = ""): string[] {
   );
 }
 
-export type { ConnectionState, ThreadView, Unreads };
+export { TankStore } from "../client/store.js";
+export type { ChannelPaging, ConnectionState, PendingMessage, TankState, ThreadView, Unreads };

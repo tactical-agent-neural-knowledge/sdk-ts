@@ -15,6 +15,8 @@ export interface PendingMessage {
 }
 export interface ChannelPaging {
     loading: boolean;
+    /** True once at least one page has been fetched for this channel in this session. */
+    loaded: boolean;
     hasMoreBefore: boolean;
     hasMoreAfter: boolean;
     /** Oldest seq loaded; 0n when the beginning was reached. */
@@ -35,6 +37,8 @@ export interface TankState {
     threadIds: Record<string, string[]>;
     channelPaging: Record<string, ChannelPaging>;
     readStates: Record<string, ChannelReadState>;
+    /** thread root id → my last read thread_seq (from ReadStateUpdated events and markRead). */
+    threadReadStates: Record<string, bigint>;
     presence: Record<string, Presence>;
     /** typing key (channelId or channelId/threadRootId) → userId → expiry (ms since epoch). */
     typing: Record<string, Record<string, number>>;
@@ -100,6 +104,9 @@ export type Action = {
     channelId: string;
     lastReadSeq: bigint;
     userId: string;
+    /** When set, this is a thread read state: `lastReadThreadSeq` applies to `threadRootId`. */
+    threadRootId?: string;
+    lastReadThreadSeq?: bigint;
 } | {
     type: "membership/changed";
     channelId: string;
@@ -166,12 +173,17 @@ export declare function envelopeToActions(env: Envelope, now: number): Action[];
 export type { AgentStatus, Envelope, PresenceChanged, Typing };
 export type Listener = () => void;
 export interface Unreads {
+    /** Unread channel messages across the workspace (threads excluded). */
     total: number;
     mentions: number;
     byChannel: Record<string, {
         unread: number;
         mentions: number;
     }>;
+    /** Unread thread replies across followed threads (see `TankStore.selectThreadUnread`). */
+    threads: number;
+    /** thread root id → unread replies; only threads with unread > 0. */
+    byThread: Record<string, number>;
 }
 export interface ThreadView {
     root: Message | undefined;
@@ -196,6 +208,16 @@ export declare class TankStore {
     selectChannelMessages: (channelId: string) => Message[];
     selectThread: (rootId: string) => ThreadView;
     selectChannels: (workspaceId: string) => Channel[];
+    /**
+     * Unread replies in a thread: the root's reply_count (or the newest loaded
+     * reply's thread_seq) minus my last read thread_seq. 0 when the root is unknown.
+     */
+    selectThreadUnread: (rootId: string) => number;
+    /**
+     * Channel unreads (total/mentions/byChannel) plus thread unreads counted
+     * separately. Threads counted: every root with a known thread read state, and
+     * every loaded root I authored or replied in (`followedThreads`).
+     */
     selectUnreads: (workspaceId: string) => Unreads;
     selectTyping: (channelId: string, threadRootId?: string) => string[];
     selectPresence: (userIds: readonly string[]) => Record<string, Presence>;

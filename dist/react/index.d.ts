@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import type { TankClient } from "../client/client.js";
-import type { ConnectionState, TankStore, ThreadView, Unreads } from "../client/store.js";
+import type { ChannelPaging, ConnectionState, PendingMessage, TankState, TankStore, ThreadView, Unreads } from "../client/store.js";
 import type { Channel } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
@@ -21,7 +21,9 @@ export declare function useChannels(workspaceId: string): Channel[];
 export declare function useChannel(id: string): Channel | undefined;
 export interface UseMessagesResult {
     messages: Message[];
+    /** A page is being fetched (including the first one). */
     loading: boolean;
+    /** Whether older messages exist. `false` until the first page has loaded. */
     hasMoreBefore: boolean;
     /** Page older messages in. */
     loadOlder: () => Promise<boolean>;
@@ -37,9 +39,13 @@ export declare function useMessages(channelId: string, opts?: UseMessagesOptions
 export declare function useThread(rootId: string, opts?: {
     view?: boolean;
 }): ThreadView;
+/** Channel unreads for a workspace, with thread unreads counted separately in `threads` / `byThread`. */
 export declare function useUnreads(workspaceId: string): Unreads;
+/** Unread replies in one thread (root reply_count minus my last read thread_seq). */
+export declare function useThreadUnread(rootId: string): number;
 /** Presence for a set of users; keeps the gateway presence subscription in sync while mounted. */
 export declare function usePresence(userIds: readonly string[]): Record<string, Presence>;
 /** User ids currently typing in a channel (or thread), excluding me. */
 export declare function useTyping(channelId: string, threadRootId?: string): string[];
-export type { ConnectionState, ThreadView, Unreads };
+export { TankStore } from "../client/store.js";
+export type { ChannelPaging, ConnectionState, PendingMessage, TankState, ThreadView, Unreads };

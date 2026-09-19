@@ -15,6 +15,7 @@ export function initialState() {
         threadIds: {},
         channelPaging: {},
         readStates: {},
+        threadReadStates: {},
         presence: {},
         typing: {},
         agentStatus: {},
@@ -305,6 +306,13 @@ export function reduce(state, action) {
         case "readStates/updated": {
             if (state.me && action.userId && action.userId !== state.me.id)
                 return state;
+            if (action.threadRootId) {
+                const seq = action.lastReadThreadSeq ?? 0n;
+                const cur = state.threadReadStates[action.threadRootId] ?? 0n;
+                if (seq <= cur)
+                    return state;
+                return { ...state, threadReadStates: { ...state.threadReadStates, [action.threadRootId]: seq } };
+            }
             const prev = state.readStates[action.channelId];
             const next = {
                 $typeName: "tank.channel.v1.ChannelReadState",
@@ -427,6 +435,7 @@ export function reduce(state, action) {
         case "paging/set": {
             const prev = state.channelPaging[action.channelId] ?? {
                 loading: false,
+                loaded: false,
                 hasMoreBefore: true,
                 hasMoreAfter: false,
                 oldestSeq: 0n,
@@ -504,6 +513,9 @@ export function envelopeToActions(env, now) {
                     channelId: payload.channelId,
                     lastReadSeq: payload.lastReadSeq,
                     userId: payload.userId,
+                    ...(payload.threadRootId
+                        ? { threadRootId: payload.threadRootId, lastReadThreadSeq: payload.lastReadThreadSeq }
+                        : {}),
                 },
             ];
         case "tank.events.v1.ChannelMembershipChanged":
@@ -597,10 +609,23 @@ export class TankStore {
         const order = s.channelOrder[workspaceId] ?? EMPTY_IDS;
         return this.memoize(`channels:${workspaceId}`, [order, s.channels], () => order.map((id) => s.channels[id]).filter((c) => c !== undefined), shallowEqualArrays);
     };
+    /**
+     * Unread replies in a thread: the root's reply_count (or the newest loaded
+     * reply's thread_seq) minus my last read thread_seq. 0 when the root is unknown.
+     */
+    selectThreadUnread = (rootId) => {
+        const s = this.state;
+        return threadUnread(s, rootId);
+    };
+    /**
+     * Channel unreads (total/mentions/byChannel) plus thread unreads counted
+     * separately. Threads counted: every root with a known thread read state, and
+     * every loaded root I authored or replied in (`followedThreads`).
+     */
     selectUnreads = (workspaceId) => {
         const s = this.state;
         const order = s.channelOrder[workspaceId] ?? EMPTY_IDS;
-        return this.memoize(`unreads:${workspaceId}`, [order, s.channels, s.readStates], () => {
+        return this.memoize(`unreads:${workspaceId}`, [order, s.channels, s.readStates, s.threadReadStates, s.messages, s.me], () => {
             const byChannel = {};
             let total = 0;
             let mentions = 0;
@@ -616,8 +641,21 @@ export class TankStore {
                 total += unread;
                 mentions += m;
             }
-            return { total, mentions, byChannel };
-        });
+            const byThread = {};
+            let threads = 0;
+            for (const rootId of followedThreads(s, workspaceId)) {
+                const n = threadUnread(s, rootId);
+                if (n > 0) {
+                    byThread[rootId] = n;
+                    threads += n;
+                }
+            }
+            return { total, mentions, byChannel, threads, byThread };
+        }, (a, b) => a.total === b.total &&
+            a.mentions === b.mentions &&
+            a.threads === b.threads &&
+            shallowEqualRecords(a.byThread, b.byThread) &&
+            shallowEqualRecords(a.byChannel, b.byChannel, (x, y) => x.unread === y.unread && x.mentions === y.mentions));
     };
     selectTyping = (channelId, threadRootId = "") => {
         const users = this.state.typing[typingKey(channelId, threadRootId)] ?? EMPTY_MAP;
@@ -642,3 +680,40 @@ export class TankStore {
 }
 const EMPTY_IDS = [];
 const EMPTY_MAP = {};
+function shallowEqualRecords(a, b, eq = (x, y) => x === y) {
+    const ak = Object.keys(a);
+    const bk = Object.keys(b);
+    return ak.length === bk.length && ak.every((k) => k in b && eq(a[k], b[k]));
+}
+function threadUnread(s, rootId) {
+    const root = s.messages[rootId];
+    const replies = s.threadIds[rootId];
+    let newest = root ? BigInt(root.replyCount) : 0n;
+    if (replies?.length) {
+        const last = s.messages[replies[replies.length - 1]];
+        if (last && last.threadSeq > newest)
+            newest = last.threadSeq;
+    }
+    if (newest === 0n)
+        return 0;
+    return Math.max(0, Number(newest - (s.threadReadStates[rootId] ?? 0n)));
+}
+/** Roots with a known thread read state plus loaded roots I participate in, scoped to one workspace. */
+function followedThreads(s, workspaceId) {
+    const out = new Set();
+    const me = s.me?.id;
+    for (const rootId of Object.keys(s.threadReadStates)) {
+        const root = s.messages[rootId];
+        if (!root || root.workspaceId === workspaceId)
+            out.add(rootId);
+    }
+    if (me) {
+        for (const m of Object.values(s.messages)) {
+            if (m.workspaceId !== workspaceId || m.replyCount === 0 || m.threadRootId !== "")
+                continue;
+            if (m.authorId === me || m.replyUserIds.includes(me))
+                out.add(m.id);
+        }
+    }
+    return Array.from(out);
+}

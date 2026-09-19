@@ -86,14 +86,14 @@ export function useMessages(channelId, opts = {}) {
         if (!view || !channelId)
             return;
         client.viewChannel(channelId);
-        if (client.store.selectChannelMessages(channelId).length === 0)
+        if (!client.store.getState().channelPaging[channelId]?.loaded)
             void loadOlder().catch(() => undefined);
         return () => client.realtime.unsubscribe({ channelIds: [channelId] });
     }, [client, channelId, view, loadOlder]);
     return {
         messages,
         loading: paging?.loading ?? false,
-        hasMoreBefore: paging?.hasMoreBefore ?? true,
+        hasMoreBefore: paging?.loaded ? paging.hasMoreBefore : false,
         loadOlder,
     };
 }
@@ -111,8 +111,13 @@ export function useThread(rootId, opts = {}) {
     }, [client, rootId, view]);
     return thread;
 }
+/** Channel unreads for a workspace, with thread unreads counted separately in `threads` / `byThread`. */
 export function useUnreads(workspaceId) {
     return useTankSelector(useCallback((s) => s.selectUnreads(workspaceId), [workspaceId]));
+}
+/** Unread replies in one thread (root reply_count minus my last read thread_seq). */
+export function useThreadUnread(rootId) {
+    return useTankSelector(useCallback((s) => s.selectThreadUnread(rootId), [rootId]));
 }
 /** Presence for a set of users; keeps the gateway presence subscription in sync while mounted. */
 export function usePresence(userIds) {
@@ -129,3 +134,4 @@ export function usePresence(userIds) {
 export function useTyping(channelId, threadRootId = "") {
     return useTankSelector(useCallback((s) => s.selectTyping(channelId, threadRootId), [channelId, threadRootId]));
 }
+export { TankStore } from "../client/store.js";

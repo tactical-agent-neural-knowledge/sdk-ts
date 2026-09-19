@@ -3,18 +3,24 @@ import { timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { Code, ConnectError, createClient, } from "@connectrpc/connect";
 import { AgentService } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
-import { ChannelService } from "../contracts/tank/channel/v1/channel_pb.js";
+import { ChannelService, ChannelType, TreadGoalSchema, } from "../contracts/tank/channel/v1/channel_pb.js";
 import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } from "../contracts/tank/message/v1/message_pb.js";
 import { PresenceService } from "../contracts/tank/presence/v1/presence_pb.js";
-import { GetBootstrapResponseSchema, WorkspaceService, } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { GetBootstrapResponseSchema, Role, WorkspaceService, } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Backoff } from "./backoff.js";
 import { Emitter } from "./emitter.js";
 import { RealtimeClient } from "./realtime.js";
 import { MemoryStorage, storageKeys } from "./storage.js";
 import { TankStore, unpackEnvelope } from "./store.js";
 import { createTankTransport } from "./transport.js";
-import { uuidv7 } from "./uuidv7.js";
+import { cryptoRandomBytes, uuidv7 } from "./uuidv7.js";
+const ROLE_BY_NAME = {
+    owner: Role.OWNER,
+    admin: Role.ADMIN,
+    member: Role.MEMBER,
+    guest: Role.GUEST,
+};
 const RETRYABLE = new Set([
     Code.Unavailable,
     Code.DeadlineExceeded,
@@ -43,6 +49,7 @@ export class TankClient {
     events = new Emitter();
     opts;
     now;
+    randomBytes;
     outbox = new Map();
     recentChannels = [];
     started = false;
@@ -54,6 +61,7 @@ export class TankClient {
     constructor(opts) {
         this.opts = opts;
         this.now = opts.now ?? Date.now;
+        this.randomBytes = opts.randomBytes ?? cryptoRandomBytes;
         this.storage = opts.storage ?? new MemoryStorage();
         this.store = new TankStore();
         this.transport =
@@ -155,10 +163,11 @@ export class TankClient {
             const patch = direction === "before"
                 ? {
                     loading: false,
+                    loaded: true,
                     hasMoreBefore: res.hasMore,
                     oldestSeq: oldest === 0n || min < oldest ? min : oldest,
                 }
-                : { loading: false, hasMoreAfter: res.hasMore };
+                : { loading: false, loaded: true, hasMoreAfter: res.hasMore };
             this.store.dispatch({ type: "paging/set", channelId, paging: patch });
             this.touchRecent(channelId);
             return res.hasMore;
@@ -198,7 +207,7 @@ export class TankClient {
      * the RPC response, whichever comes first.
      */
     async sendMessage(input) {
-        const clientMsgId = uuidv7(this.now());
+        const clientMsgId = uuidv7(this.now(), this.randomBytes);
         const state = this.store.getState();
         const channel = state.channels[input.channelId];
         const request = create(PostMessageRequestSchema, {
@@ -249,22 +258,203 @@ export class TankClient {
         this.store.dispatch({ type: "pending/discard", clientMsgId });
         await this.storage.delete(storageKeys.outbox(clientMsgId));
     }
-    /** Mark a channel (or thread) read up to `seq` (default: the channel's newest). Optimistic. */
-    async markRead(channelId, seq, threadRootId = "", threadSeq = 0n) {
+    /**
+     * Mark a channel read up to `seq` (default: the channel's newest). Optimistic.
+     * With `threadRootId` set this marks the thread read up to `threadSeq` (default: the newest reply
+     * known to the store) and sends only the thread fields; the channel's read seq is untouched unless
+     * `seq` is passed explicitly.
+     */
+    async markRead(channelId, seq, threadRootId = "", threadSeq) {
+        if (threadRootId)
+            return this.markThreadRead(threadRootId, threadSeq, { channelId, seq });
         const state = this.store.getState();
         const target = seq ?? state.channels[channelId]?.lastSeq ?? 0n;
         const current = state.readStates[channelId]?.lastReadSeq ?? 0n;
-        if (!threadRootId && target <= current)
+        if (target <= current)
             return;
-        if (!threadRootId) {
+        this.store.dispatch({
+            type: "readStates/updated",
+            channelId,
+            lastReadSeq: target,
+            userId: state.me?.id ?? "",
+        });
+        await this.chat.markRead({ channelId, seq: target, threadRootId: "", threadSeq: 0n });
+    }
+    /**
+     * Mark a thread read up to `threadSeq` (default: the newest reply known to the store, or the root's
+     * reply_count). Optimistic: `threadReadStates[rootId]` updates immediately. The channel id comes from
+     * the root message (or `opts.channelId` when the root is not loaded).
+     */
+    async markThreadRead(threadRootId, threadSeq, opts = {}) {
+        const state = this.store.getState();
+        const root = state.messages[threadRootId];
+        const channelId = opts.channelId || root?.channelId || "";
+        const replies = state.threadIds[threadRootId] ?? [];
+        const last = replies.length ? state.messages[replies[replies.length - 1]] : undefined;
+        let target = threadSeq ?? last?.threadSeq ?? 0n;
+        if (threadSeq === undefined && root && BigInt(root.replyCount) > target)
+            target = BigInt(root.replyCount);
+        const current = state.threadReadStates[threadRootId] ?? 0n;
+        if (target <= current && opts.seq === undefined)
+            return;
+        if (opts.seq !== undefined && channelId && opts.seq > (state.readStates[channelId]?.lastReadSeq ?? 0n)) {
             this.store.dispatch({
                 type: "readStates/updated",
                 channelId,
-                lastReadSeq: target,
+                lastReadSeq: opts.seq,
                 userId: state.me?.id ?? "",
             });
         }
-        await this.chat.markRead({ channelId, seq: target, threadRootId, threadSeq });
+        if (target > current) {
+            this.store.dispatch({
+                type: "readStates/updated",
+                channelId,
+                lastReadSeq: 0n,
+                userId: state.me?.id ?? "",
+                threadRootId,
+                lastReadThreadSeq: target,
+            });
+        }
+        await this.chat.markRead({ channelId, seq: opts.seq ?? 0n, threadRootId, threadSeq: target });
+    }
+    /** Edit a message. Optimistic: the store shows the new body immediately and rolls back on error. */
+    async updateMessage(messageId, input) {
+        const prev = this.store.getState().messages[messageId];
+        if (prev) {
+            const optimistic = create(MessageSchema, {
+                ...prev,
+                text: input.text ?? prev.text,
+                richText: input.richText ?? prev.richText,
+                blocks: input.blocks ?? prev.blocks,
+                metadata: input.metadata ?? prev.metadata,
+                editedAt: timestampFromMs(this.now()),
+            });
+            this.store.dispatch({ type: "messages/updated", message: optimistic });
+        }
+        try {
+            const res = await this.chat.updateMessage({
+                messageId,
+                text: input.text ?? prev?.text ?? "",
+                richText: input.richText ?? prev?.richText,
+                blocks: input.blocks ?? prev?.blocks,
+                metadata: input.metadata ?? prev?.metadata,
+                streamSeq: 0n,
+            });
+            if (res.message)
+                this.store.dispatch({ type: "messages/updated", message: res.message });
+            return res.message;
+        }
+        catch (err) {
+            if (prev)
+                this.store.dispatch({ type: "messages/updated", message: prev });
+            throw err;
+        }
+    }
+    /** Delete a message. Optimistic: removed from every index immediately, restored on error. */
+    async deleteMessage(messageId) {
+        const prev = this.store.getState().messages[messageId];
+        if (prev) {
+            this.store.dispatch({
+                type: "messages/deleted",
+                messageId,
+                channelId: prev.channelId,
+                threadRootId: prev.threadRootId,
+            });
+        }
+        try {
+            await this.chat.deleteMessage({ messageId });
+        }
+        catch (err) {
+            if (prev)
+                this.store.dispatch({ type: "messages/upsert", messages: [prev] });
+            throw err;
+        }
+    }
+    /**
+     * Join a channel. Optimistic when the channel is already in the store (e.g. listed as an unjoined
+     * public channel); the server's channel replaces it on success, the previous row comes back on error.
+     */
+    async joinChannel(channelId) {
+        const state = this.store.getState();
+        const prev = state.channels[channelId];
+        const me = state.me?.id;
+        if (prev && me)
+            this.store.dispatch({ type: "membership/changed", channelId, userId: me, joined: true });
+        try {
+            const res = await this.channels.joinChannel({ channelId });
+            if (res.channel)
+                this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
+            return res.channel ?? this.store.getState().channels[channelId];
+        }
+        catch (err) {
+            if (prev)
+                this.store.dispatch({ type: "channels/upsert", channels: [prev] });
+            throw err;
+        }
+    }
+    /** Leave a channel. Optimistic: the channel leaves the sidebar immediately, and returns on error. */
+    async leaveChannel(channelId) {
+        const state = this.store.getState();
+        const prev = state.channels[channelId];
+        const me = state.me?.id;
+        if (prev && me)
+            this.store.dispatch({ type: "membership/changed", channelId, userId: me, joined: false });
+        try {
+            await this.channels.leaveChannel({ channelId });
+        }
+        catch (err) {
+            if (prev)
+                this.store.dispatch({ type: "channels/upsert", channels: [prev] });
+            throw err;
+        }
+    }
+    /** Create a channel and put it in the store. Resolves to the server's channel. */
+    async createChannel(input) {
+        const res = await this.channels.createChannel({
+            workspaceId: input.workspaceId,
+            type: input.type ?? ChannelType.PUBLIC,
+            name: input.name,
+            purpose: input.purpose ?? "",
+            memberIds: input.memberIds ?? [],
+        });
+        if (!res.channel)
+            throw new Error("CreateChannel returned no channel");
+        this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
+        return res.channel;
+    }
+    /** Set a Tread's goal. Optimistic: the channel shows the goal immediately, rolled back on error. */
+    async setGoal(channelId, goal) {
+        const state = this.store.getState();
+        const prev = state.channels[channelId];
+        const next = create(TreadGoalSchema, {
+            goal: goal.goal,
+            assigneeIds: goal.assigneeIds ?? [],
+            pipelineStatus: goal.pipelineStatus ?? "",
+            updatedAt: timestampFromMs(this.now()),
+            updatedBy: state.me?.id ?? "",
+        });
+        if (prev)
+            this.store.dispatch({ type: "channels/upsert", channels: [{ ...prev, goal: next }] });
+        try {
+            const res = await this.channels.setGoal({ channelId, goal: next });
+            if (res.channel)
+                this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
+            return res.channel ?? this.store.getState().channels[channelId];
+        }
+        catch (err) {
+            if (prev)
+                this.store.dispatch({ type: "channels/upsert", channels: [prev] });
+            throw err;
+        }
+    }
+    /** Invite someone to a workspace by email. Resolves to the invite id. */
+    async invite(workspaceId, email, role = "member") {
+        const res = await this.workspaces.inviteMember({
+            workspaceId,
+            email,
+            role: typeof role === "string" ? ROLE_BY_NAME[role] : role,
+        });
+        return res.inviteId;
     }
     addReaction(messageId, emoji) {
         const me = this.store.getState().me;

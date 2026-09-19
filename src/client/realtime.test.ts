@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import WebSocket from "ws";
 import { FakeGateway, fakeMessage, resetSeq } from "../test/fake-gateway.js";
 import type { WebSocketCtor } from "./realtime.js";
-import { RealtimeClient, type RealtimeOptions } from "./realtime.js";
+import { browserOnlineSignal, RealtimeClient, type RealtimeOptions } from "./realtime.js";
 
 let gw: FakeGateway;
 const clients: RealtimeClient[] = [];
@@ -199,6 +199,59 @@ describe("reconnect", () => {
     c.retryNow();
     await until(() => closes.length === 2, 1000);
     gw = await FakeGateway.start();
+  });
+
+  it("an injected onlineSignal triggers an immediate retry and is released on stop()", async () => {
+    await gw.close();
+    let retry: (() => void) | undefined;
+    let released = 0;
+    const c = makeClient({
+      wsUrl: "ws://127.0.0.1:1",
+      backoff: { minMs: 1000, maxMs: 30_000, random: () => 1 },
+      onlineSignal: (r) => {
+        retry = r;
+        return () => {
+          released += 1;
+        };
+      },
+    });
+    const closes: number[] = [];
+    c.on("close", () => closes.push(Date.now()));
+    c.start();
+    expect(retry).toBeDefined();
+    await until(() => closes.length === 1);
+    await sleep(150);
+    expect(closes).toHaveLength(1);
+    retry!();
+    await until(() => closes.length === 2, 1000);
+    c.stop();
+    expect(released).toBe(1);
+    c.start(); // re-subscribes
+    c.stop();
+    expect(released).toBe(2);
+    gw = await FakeGateway.start();
+  });
+
+  it("the default online signal is a no-op without globalThis.addEventListener", async () => {
+    const g = globalThis as { addEventListener?: unknown; removeEventListener?: unknown };
+    const saved = [g.addEventListener, g.removeEventListener];
+    const calls: string[] = [];
+    g.addEventListener = (t: string) => calls.push(`add:${t}`);
+    g.removeEventListener = (t: string) => calls.push(`remove:${t}`);
+    try {
+      const c = makeClient({ listenOnline: undefined });
+      c.start();
+      await until(() => c.state === "ready");
+      c.stop();
+      expect(calls).toEqual(["add:online", "remove:online"]);
+      g.addEventListener = undefined;
+      g.removeEventListener = undefined;
+      const off = browserOnlineSignal(() => undefined);
+      expect(typeof off).toBe("function");
+      off();
+    } finally {
+      [g.addEventListener, g.removeEventListener] = saved;
+    }
   });
 
   it("heartbeat: pings on the server interval and reconnects when pongs stop", async () => {

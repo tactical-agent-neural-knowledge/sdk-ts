@@ -2,6 +2,14 @@ import { create, fromBinary, toBinary } from "@bufbuild/protobuf";
 import { ClientFrameSchema, ErrorCode, ServerFrameSchema, } from "../contracts/tank/realtime/v1/realtime_pb.js";
 import { Backoff } from "./backoff.js";
 import { Emitter } from "./emitter.js";
+/** Retries on the browser `online` event when `globalThis.addEventListener` exists; no-op elsewhere. */
+export const browserOnlineSignal = (retry) => {
+    const g = globalThis;
+    if (typeof g.addEventListener !== "function")
+        return () => { };
+    g.addEventListener("online", retry);
+    return () => g.removeEventListener?.("online", retry);
+};
 const CLOSE_GAP = 4000;
 const CLOSE_STALE = 4001;
 const CLOSE_RESYNC = 4002;
@@ -45,7 +53,7 @@ export class RealtimeClient {
     subThreads = new Set();
     presenceUsers = [];
     focused;
-    onlineHandler;
+    offOnline;
     constructor(opts) {
         this.opts = opts;
         const Ws = opts.WebSocket ?? globalThis.WebSocket;
@@ -88,11 +96,10 @@ export class RealtimeClient {
         if (!this.stopped)
             return;
         this.stopped = false;
-        const listen = this.opts.listenOnline ??
-            typeof globalThis.addEventListener === "function";
-        if (listen && !this.onlineHandler) {
-            this.onlineHandler = () => this.retryNow();
-            globalThis.addEventListener("online", this.onlineHandler);
+        if (!this.offOnline) {
+            const signal = this.opts.onlineSignal ?? (this.opts.listenOnline === false ? undefined : browserOnlineSignal);
+            if (signal)
+                this.offOnline = signal(() => this.retryNow());
         }
         void this.connect();
     }
@@ -101,9 +108,9 @@ export class RealtimeClient {
         this.stopped = true;
         this.gen++;
         this.clearTimers();
-        if (this.onlineHandler) {
-            globalThis.removeEventListener?.("online", this.onlineHandler);
-            this.onlineHandler = undefined;
+        if (this.offOnline) {
+            this.offOnline();
+            this.offOnline = undefined;
         }
         const ws = this.ws;
         this.ws = undefined;
