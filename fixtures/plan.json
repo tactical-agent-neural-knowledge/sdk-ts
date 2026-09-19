@@ -1,0 +1,104 @@
+{
+  "blocks": [
+    {
+      "header": {
+        "text": "Plan: add rate limiting to /v1/messages"
+      }
+    },
+    {
+      "planCard": {
+        "summary": "Introduce a token-bucket limiter in the gateway, keyed by principal, with a 429 + Retry-After response and a metric per route.",
+        "steps": [
+          {
+            "id": "s1",
+            "title": "Add limiter middleware in internal/gateway/limit.go",
+            "status": "STEP_STATUS_DONE",
+            "files": ["internal/gateway/limit.go"]
+          },
+          {
+            "id": "s2",
+            "title": "Wire per-route budgets from config",
+            "status": "STEP_STATUS_RUNNING",
+            "files": ["internal/config/config.go", "deploy/values.yaml"]
+          },
+          {
+            "id": "s3",
+            "title": "Emit tank_gateway_ratelimited_total",
+            "status": "STEP_STATUS_PENDING"
+          },
+          {
+            "id": "s4",
+            "title": "Integration test: burst then recover",
+            "status": "STEP_STATUS_PENDING",
+            "files": ["internal/gateway/limit_test.go"]
+          }
+        ],
+        "risks": [
+          "Shared Valkey hop adds ~1ms p99 to every message post",
+          "Bots with legit bursts (CI notifiers) may trip the limit"
+        ],
+        "questions": ["Should bots get a separate, higher budget?"],
+        "approverIds": ["u_robby"],
+        "planHash": "9f3c1d2e",
+        "version": 2
+      }
+    },
+    {
+      "actions": {
+        "buttons": [
+          {
+            "actionId": "plan.approve",
+            "text": "Approve plan",
+            "value": "9f3c1d2e",
+            "style": "BUTTON_STYLE_PRIMARY"
+          },
+          {
+            "actionId": "plan.request_changes",
+            "text": "Request changes",
+            "value": "9f3c1d2e"
+          }
+        ]
+      }
+    },
+    {
+      "context": {
+        "elements": [
+          {
+            "blocks": [
+              {
+                "section": {
+                  "elements": [
+                    {
+                      "text": {
+                        "text": "Agent run "
+                      }
+                    },
+                    {
+                      "text": {
+                        "text": "run_01J8",
+                        "style": {
+                          "code": true
+                        }
+                      }
+                    },
+                    {
+                      "text": {
+                        "text": " · plan v2 · "
+                      }
+                    },
+                    {
+                      "link": {
+                        "url": "https://app.tank.chat/w/tank/runs/run_01J8",
+                        "text": "open run panel"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

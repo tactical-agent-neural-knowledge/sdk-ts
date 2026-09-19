@@ -1,0 +1,40 @@
+{
+  "blocks": [
+    {
+      "ciStatus": {
+        "headSha": "a1b2c3d4e5f6",
+        "checks": [
+          {
+            "name": "lint",
+            "state": "CHECK_STATE_SUCCESS",
+            "url": "https://github.com/tactical-agent-neural-knowledge/api/actions/runs/1"
+          },
+          {
+            "name": "test",
+            "state": "CHECK_STATE_SUCCESS",
+            "url": "https://github.com/tactical-agent-neural-knowledge/api/actions/runs/1"
+          },
+          {
+            "name": "docker-ecr / api",
+            "state": "CHECK_STATE_SUCCESS",
+            "url": "https://github.com/tactical-agent-neural-knowledge/api/actions/runs/1"
+          }
+        ],
+        "prUrl": "https://github.com/tactical-agent-neural-knowledge/api/pull/42",
+        "prNumber": 42
+      }
+    },
+    {
+      "actions": {
+        "buttons": [
+          {
+            "actionId": "merge.approve",
+            "text": "Approve merge",
+            "value": "42",
+            "style": "BUTTON_STYLE_PRIMARY"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "blocks": [
+    {
+      "statusCard": {
+        "runId": "run_01J8",
+        "state": "ci_watching",
+        "detail": "Waiting for 3 checks on PR #42",
+        "branch": "feat/rate-limit",
+        "costUsd": 1.37,
+        "startedAt": "2026-09-18T11:46:00Z",
+        "runPanelUrl": "https://app.tank.chat/w/tank/runs/run_01J8"
+      }
+    },
+    {
+      "divider": {}
+    },
+    {
+      "section": {
+        "text": {
+          "blocks": [
+            {
+              "code": {
+                "language": "console",
+                "text": "go test ./... \nok  \tinternal/gateway\t0.113s"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "actions": {
+        "buttons": [
+          {
+            "actionId": "run.stop",
+            "text": "Stop run",
+            "value": "run_01J8",
+            "style": "BUTTON_STYLE_DANGER",
+            "confirm": {
+              "title": "Stop this run?",
+              "text": "The sandbox is destroyed; pushed commits stay.",
+              "confirm": "Confirm",
+              "deny": "Cancel"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

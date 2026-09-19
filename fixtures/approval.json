@@ -1,0 +1,48 @@
+{
+  "blocks": [
+    {
+      "header": {
+        "text": "Deploy api@a1b2c3d to prod?"
+      }
+    },
+    {
+      "section": {
+        "text": {
+          "blocks": [
+            {
+              "section": {
+                "elements": [
+                  {
+                    "text": {
+                      "text": "The change adds rate limiting to the gateway. Rollout is a rolling update behind ArgoCD; rollback is one revert."
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "fields": [
+          {
+            "label": "Gate",
+            "value": "deploy"
+          },
+          {
+            "label": "Requested by",
+            "value": "@u_agent_tank"
+          }
+        ]
+      }
+    },
+    {
+      "approvalPrompt": {
+        "gateId": "gate_01J8ZX",
+        "kind": "GATE_KIND_DEPLOY",
+        "subject": "api@a1b2c3d → prod",
+        "approverIds": ["u_robby", "u_ops"],
+        "minApprovals": 1,
+        "expiresAt": "2026-09-18T12:30:00Z"
+      }
+    }
+  ]
+}

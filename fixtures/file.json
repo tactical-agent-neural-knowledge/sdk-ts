@@ -1,0 +1,42 @@
+{
+  "blocks": [
+    {
+      "section": {
+        "text": {
+          "blocks": [
+            {
+              "section": {
+                "elements": [
+                  {
+                    "text": {
+                      "text": "Coverage report for feat/rate-limit"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filePreview": {
+        "fileId": "f_01J8COV",
+        "name": "coverage.html",
+        "mime": "text/html",
+        "size": "48213",
+        "thumbnailUrl": "https://files.tank.chat/t/f_01J8COV/256.png"
+      }
+    },
+    {
+      "actions": {
+        "buttons": [
+          {
+            "text": "Download",
+            "url": "https://files.tank.chat/d/f_01J8COV"
+          }
+        ]
+      }
+    }
+  ]
+}

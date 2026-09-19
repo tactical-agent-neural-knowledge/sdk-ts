@@ -1,0 +1,68 @@
+{
+  "blocks": [
+    {
+      "header": {
+        "text": "Pushed 2 commits to feat/rate-limit"
+      }
+    },
+    {
+      "diffPreview": {
+        "commitSha": "a1b2c3d4e5f6",
+        "compareUrl": "https://github.com/tactical-agent-neural-knowledge/api/compare/main...feat/rate-limit",
+        "files": [
+          {
+            "path": "internal/gateway/limit.go",
+            "additions": 88,
+            "hunkPreview": "@@ -0,0 +1,20 @@\n+package gateway\n+\n+type Limiter struct {\n+\tbuckets map[string]*bucket\n+}\n+\n+func (l *Limiter) Allow(principal string) bool {"
+          },
+          {
+            "path": "internal/gateway/server.go",
+            "additions": 6,
+            "deletions": 1,
+            "hunkPreview": "@@ -41,7 +41,12 @@\n-\th.ServeHTTP(w, r)\n+\tif !s.limiter.Allow(p.ID) {\n+\t\tw.Header().Set(\"Retry-After\", \"1\")"
+          },
+          {
+            "path": "internal/gateway/limit_test.go",
+            "additions": 54
+          }
+        ],
+        "totalAdditions": 148,
+        "totalDeletions": 1
+      }
+    },
+    {
+      "context": {
+        "elements": [
+          {
+            "blocks": [
+              {
+                "section": {
+                  "elements": [
+                    {
+                      "text": {
+                        "text": "Branch "
+                      }
+                    },
+                    {
+                      "text": {
+                        "text": "feat/rate-limit",
+                        "style": {
+                          "code": true
+                        }
+                      }
+                    },
+                    {
+                      "text": {
+                        "text": " · +148 −1 across 3 files"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

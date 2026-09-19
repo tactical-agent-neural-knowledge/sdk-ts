@@ -1,0 +1,33 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4 # version comes from package.json packageManager
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      # Consumers install this repo as a git dependency and import dist/ directly,
+      # so a stale dist/ would ship untested code. Same gate as `make check` in contracts.
+      - name: dist/ is current
+        run: |
+          if ! git diff --exit-code --stat dist/; then
+            echo "::error::dist/ is stale. Run 'pnpm build' and commit the result."; exit 1
+          fi
+          if [ -n "$(git status --porcelain dist/)" ]; then
+            echo "::error::dist/ has untracked files. Run 'pnpm build' and commit the result."; git status --porcelain dist/; exit 1
+          fi

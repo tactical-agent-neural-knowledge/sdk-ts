@@ -1,0 +1,53 @@
+{
+  "blocks": [
+    {
+      "ciStatus": {
+        "headSha": "f6e5d4c3b2a1",
+        "checks": [
+          {
+            "name": "lint",
+            "state": "CHECK_STATE_SUCCESS",
+            "url": "https://github.com/tactical-agent-neural-knowledge/api/actions/runs/2"
+          },
+          {
+            "name": "test",
+            "state": "CHECK_STATE_FAILURE",
+            "url": "https://github.com/tactical-agent-neural-knowledge/api/actions/runs/2",
+            "failureExcerpt": "--- FAIL: TestLimiter_Burst (0.01s)\n    limit_test.go:41: expected 429 after 100 requests, got 200\nFAIL\nFAIL\tgithub.com/tactical-agent-neural-knowledge/api/internal/gateway\t0.113s"
+          },
+          {
+            "name": "docker-ecr / api",
+            "state": "CHECK_STATE_CANCELLED"
+          }
+        ],
+        "prUrl": "https://github.com/tactical-agent-neural-knowledge/api/pull/42",
+        "prNumber": 42
+      }
+    },
+    {
+      "section": {
+        "text": {
+          "blocks": [
+            {
+              "section": {
+                "elements": [
+                  {
+                    "text": {
+                      "text": "Fixing the failing test and pushing again. "
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "fields": [
+          {
+            "label": "Attempt",
+            "value": "2 of 3"
+          }
+        ]
+      }
+    }
+  ]
+}
