@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/files/v1/files.proto.
  */
 export const file_tank_files_v1_files: GenFile = /*@__PURE__*/
-  fileDesc("Chl0YW5rL2ZpbGVzL3YxL2ZpbGVzLnByb3RvEg10YW5rLmZpbGVzLnYxIucCCgRGaWxlEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRITCgt1cGxvYWRlcl9pZBgDIAEoCRIMCgRuYW1lGAQgASgJEgwKBG1pbWUYBSABKAkSDAoEc2l6ZRgGIAEoAxIuCgtzY2FuX3N0YXR1cxgHIAEoDjIZLnRhbmsuZmlsZXMudjEuU2NhblN0YXR1cxINCgV3aWR0aBgIIAEoBRIOCgZoZWlnaHQYCSABKAUSEwoLZHVyYXRpb25fbXMYCiABKAMSNwoKdGh1bWJuYWlscxgLIAMoCzIjLnRhbmsuZmlsZXMudjEuRmlsZS5UaHVtYm5haWxzRW50cnkSLgoKY3JlYXRlZF9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaMQoPVGh1bWJuYWlsc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEiaQoTQ3JlYXRlVXBsb2FkUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRtaW1lGAMgASgJEgwKBHNpemUYBCABKAMSEgoKY2hhbm5lbF9pZBgFIAEoCSKGAQoUQ3JlYXRlVXBsb2FkUmVzcG9uc2USIQoEZmlsZRgBIAEoCzITLnRhbmsuZmlsZXMudjEuRmlsZRISCgp1cGxvYWRfdXJsGAIgASgJEhEKCXVwbG9hZF9pZBgDIAEoCRIRCglwYXJ0X3VybHMYBCADKAkSEQoJcGFydF9zaXplGAUgASgDIkoKFUNvbXBsZXRlVXBsb2FkUmVxdWVzdBIPCgdmaWxlX2lkGAEgASgJEhEKCXVwbG9hZF9pZBgCIAEoCRINCgVldGFncxgDIAMoCSI7ChZDb21wbGV0ZVVwbG9hZFJlc3BvbnNlEiEKBGZpbGUYASABKAsyEy50YW5rLmZpbGVzLnYxLkZpbGUiKAoVR2V0RG93bmxvYWRVcmxSZXF1ZXN0Eg8KB2ZpbGVfaWQYASABKAkiVQoWR2V0RG93bmxvYWRVcmxSZXNwb25zZRILCgN1cmwYASABKAkSLgoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAqiwEKClNjYW5TdGF0dXMSGwoXU0NBTl9TVEFUVVNfVU5TUEVDSUZJRUQQABIXChNTQ0FOX1NUQVRVU19QRU5ESU5HEAESFQoRU0NBTl9TVEFUVVNfQ0xFQU4QAhIYChRTQ0FOX1NUQVRVU19JTkZFQ1RFRBADEhYKElNDQU5fU1RBVFVTX0ZBSUxFRBAEMqUCCgxGaWxlc1NlcnZpY2USVwoMQ3JlYXRlVXBsb2FkEiIudGFuay5maWxlcy52MS5DcmVhdGVVcGxvYWRSZXF1ZXN0GiMudGFuay5maWxlcy52MS5DcmVhdGVVcGxvYWRSZXNwb25zZRJdCg5Db21wbGV0ZVVwbG9hZBIkLnRhbmsuZmlsZXMudjEuQ29tcGxldGVVcGxvYWRSZXF1ZXN0GiUudGFuay5maWxlcy52MS5Db21wbGV0ZVVwbG9hZFJlc3BvbnNlEl0KDkdldERvd25sb2FkVXJsEiQudGFuay5maWxlcy52MS5HZXREb3dubG9hZFVybFJlcXVlc3QaJS50YW5rLmZpbGVzLnYxLkdldERvd25sb2FkVXJsUmVzcG9uc2VCyAEKEWNvbS50YW5rLmZpbGVzLnYxQgpGaWxlc1Byb3RvUAFaUWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvZmlsZXMvdjE7ZmlsZXN2MaICA1RGWKoCDVRhbmsuRmlsZXMuVjHKAg1UYW5rXEZpbGVzXFYx4gIZVGFua1xGaWxlc1xWMVxHUEJNZXRhZGF0YeoCD1Rhbms6OkZpbGVzOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+  fileDesc("Chl0YW5rL2ZpbGVzL3YxL2ZpbGVzLnByb3RvEg10YW5rLmZpbGVzLnYxIqUDCgRGaWxlEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRITCgt1cGxvYWRlcl9pZBgDIAEoCRIMCgRuYW1lGAQgASgJEgwKBG1pbWUYBSABKAkSDAoEc2l6ZRgGIAEoAxIuCgtzY2FuX3N0YXR1cxgHIAEoDjIZLnRhbmsuZmlsZXMudjEuU2NhblN0YXR1cxINCgV3aWR0aBgIIAEoBRIOCgZoZWlnaHQYCSABKAUSEwoLZHVyYXRpb25fbXMYCiABKAMSNwoKdGh1bWJuYWlscxgLIAMoCzIjLnRhbmsuZmlsZXMudjEuRmlsZS5UaHVtYm5haWxzRW50cnkSLgoKY3JlYXRlZF9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHQoVc2hhcmVkX2luX2NoYW5uZWxfaWRzGA0gAygJEh0KFXVwbG9hZGVyX2Rpc3BsYXlfbmFtZRgOIAEoCRoxCg9UaHVtYm5haWxzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASJpChNDcmVhdGVVcGxvYWRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEgwKBG1pbWUYAyABKAkSDAoEc2l6ZRgEIAEoAxISCgpjaGFubmVsX2lkGAUgASgJIoYBChRDcmVhdGVVcGxvYWRSZXNwb25zZRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlEhIKCnVwbG9hZF91cmwYAiABKAkSEQoJdXBsb2FkX2lkGAMgASgJEhEKCXBhcnRfdXJscxgEIAMoCRIRCglwYXJ0X3NpemUYBSABKAMiSgoVQ29tcGxldGVVcGxvYWRSZXF1ZXN0Eg8KB2ZpbGVfaWQYASABKAkSEQoJdXBsb2FkX2lkGAIgASgJEg0KBWV0YWdzGAMgAygJIjsKFkNvbXBsZXRlVXBsb2FkUmVzcG9uc2USIQoEZmlsZRgBIAEoCzITLnRhbmsuZmlsZXMudjEuRmlsZSIoChVHZXREb3dubG9hZFVybFJlcXVlc3QSDwoHZmlsZV9pZBgBIAEoCSJVChZHZXREb3dubG9hZFVybFJlc3BvbnNlEgsKA3VybBgBIAEoCRIuCgpleHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIhCg5HZXRGaWxlUmVxdWVzdBIPCgdmaWxlX2lkGAEgASgJIjQKD0dldEZpbGVSZXNwb25zZRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlIlsKEExpc3RGaWxlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDgoGY3Vyc29yGAMgASgJEg0KBWxpbWl0GAQgASgFIkwKEUxpc3RGaWxlc1Jlc3BvbnNlEiIKBWZpbGVzGAEgAygLMhMudGFuay5maWxlcy52MS5GaWxlEhMKC25leHRfY3Vyc29yGAIgASgJKosBCgpTY2FuU3RhdHVzEhsKF1NDQU5fU1RBVFVTX1VOU1BFQ0lGSUVEEAASFwoTU0NBTl9TVEFUVVNfUEVORElORxABEhUKEVNDQU5fU1RBVFVTX0NMRUFOEAISGAoUU0NBTl9TVEFUVVNfSU5GRUNURUQQAxIWChJTQ0FOX1NUQVRVU19GQUlMRUQQBDK/AwoMRmlsZXNTZXJ2aWNlElcKDENyZWF0ZVVwbG9hZBIiLnRhbmsuZmlsZXMudjEuQ3JlYXRlVXBsb2FkUmVxdWVzdBojLnRhbmsuZmlsZXMudjEuQ3JlYXRlVXBsb2FkUmVzcG9uc2USXQoOQ29tcGxldGVVcGxvYWQSJC50YW5rLmZpbGVzLnYxLkNvbXBsZXRlVXBsb2FkUmVxdWVzdBolLnRhbmsuZmlsZXMudjEuQ29tcGxldGVVcGxvYWRSZXNwb25zZRJdCg5HZXREb3dubG9hZFVybBIkLnRhbmsuZmlsZXMudjEuR2V0RG93bmxvYWRVcmxSZXF1ZXN0GiUudGFuay5maWxlcy52MS5HZXREb3dubG9hZFVybFJlc3BvbnNlEkgKB0dldEZpbGUSHS50YW5rLmZpbGVzLnYxLkdldEZpbGVSZXF1ZXN0Gh4udGFuay5maWxlcy52MS5HZXRGaWxlUmVzcG9uc2USTgoJTGlzdEZpbGVzEh8udGFuay5maWxlcy52MS5MaXN0RmlsZXNSZXF1ZXN0GiAudGFuay5maWxlcy52MS5MaXN0RmlsZXNSZXNwb25zZULIAQoRY29tLnRhbmsuZmlsZXMudjFCCkZpbGVzUHJvdG9QAVpRZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9maWxlcy92MTtmaWxlc3YxogIDVEZYqgINVGFuay5GaWxlcy5WMcoCDVRhbmtcRmlsZXNcVjHiAhlUYW5rXEZpbGVzXFYxXEdQQk1ldGFkYXRh6gIPVGFuazo6RmlsZXM6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.files.v1.File
@@ -79,6 +79,18 @@ export type File = Message<"tank.files.v1.File"> & {
    * @generated from field: google.protobuf.Timestamp created_at = 12;
    */
   createdAt?: Timestamp;
+
+  /**
+   * Channels the file has been shared in (through messages) that the caller can see.
+   *
+   * @generated from field: repeated string shared_in_channel_ids = 13;
+   */
+  sharedInChannelIds: string[];
+
+  /**
+   * @generated from field: string uploader_display_name = 14;
+   */
+  uploaderDisplayName: string;
 };
 
 /**
@@ -250,6 +262,102 @@ export const GetDownloadUrlResponseSchema: GenMessage<GetDownloadUrlResponse> = 
   messageDesc(file_tank_files_v1_files, 6);
 
 /**
+ * GetFile returns metadata for one file the caller may read (uploader, member
+ * of a channel it was shared in, or a workspace member for emoji / avatars).
+ *
+ * @generated from message tank.files.v1.GetFileRequest
+ */
+export type GetFileRequest = Message<"tank.files.v1.GetFileRequest"> & {
+  /**
+   * @generated from field: string file_id = 1;
+   */
+  fileId: string;
+};
+
+/**
+ * Describes the message tank.files.v1.GetFileRequest.
+ * Use `create(GetFileRequestSchema)` to create a new message.
+ */
+export const GetFileRequestSchema: GenMessage<GetFileRequest> = /*@__PURE__*/
+  messageDesc(file_tank_files_v1_files, 7);
+
+/**
+ * @generated from message tank.files.v1.GetFileResponse
+ */
+export type GetFileResponse = Message<"tank.files.v1.GetFileResponse"> & {
+  /**
+   * @generated from field: tank.files.v1.File file = 1;
+   */
+  file?: File;
+};
+
+/**
+ * Describes the message tank.files.v1.GetFileResponse.
+ * Use `create(GetFileResponseSchema)` to create a new message.
+ */
+export const GetFileResponseSchema: GenMessage<GetFileResponse> = /*@__PURE__*/
+  messageDesc(file_tank_files_v1_files, 8);
+
+/**
+ * ListFiles pages the files the caller may read in a workspace, newest first;
+ * channel_id narrows to files shared in that channel (caller must be a member).
+ *
+ * @generated from message tank.files.v1.ListFilesRequest
+ */
+export type ListFilesRequest = Message<"tank.files.v1.ListFilesRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string channel_id = 2;
+   */
+  channelId: string;
+
+  /**
+   * opaque
+   *
+   * @generated from field: string cursor = 3;
+   */
+  cursor: string;
+
+  /**
+   * @generated from field: int32 limit = 4;
+   */
+  limit: number;
+};
+
+/**
+ * Describes the message tank.files.v1.ListFilesRequest.
+ * Use `create(ListFilesRequestSchema)` to create a new message.
+ */
+export const ListFilesRequestSchema: GenMessage<ListFilesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_files_v1_files, 9);
+
+/**
+ * @generated from message tank.files.v1.ListFilesResponse
+ */
+export type ListFilesResponse = Message<"tank.files.v1.ListFilesResponse"> & {
+  /**
+   * @generated from field: repeated tank.files.v1.File files = 1;
+   */
+  files: File[];
+
+  /**
+   * @generated from field: string next_cursor = 2;
+   */
+  nextCursor: string;
+};
+
+/**
+ * Describes the message tank.files.v1.ListFilesResponse.
+ * Use `create(ListFilesResponseSchema)` to create a new message.
+ */
+export const ListFilesResponseSchema: GenMessage<ListFilesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_files_v1_files, 10);
+
+/**
  * @generated from enum tank.files.v1.ScanStatus
  */
 export enum ScanStatus {
@@ -312,6 +420,22 @@ export const FilesService: GenService<{
     methodKind: "unary";
     input: typeof GetDownloadUrlRequestSchema;
     output: typeof GetDownloadUrlResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.files.v1.FilesService.GetFile
+   */
+  getFile: {
+    methodKind: "unary";
+    input: typeof GetFileRequestSchema;
+    output: typeof GetFileResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.files.v1.FilesService.ListFiles
+   */
+  listFiles: {
+    methodKind: "unary";
+    input: typeof ListFilesRequestSchema;
+    output: typeof ListFilesResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_files_v1_files, 0);

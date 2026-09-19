@@ -31,6 +31,12 @@ export type Principal = Message<"tank.auth.v1.Principal"> & {
      * @generated from field: string email = 5;
      */
     email: string;
+    /**
+     * Uploaded avatar (tank.files.v1.File id); resolve with GetDownloadUrl. Empty = use avatar_url.
+     *
+     * @generated from field: string avatar_file_id = 6;
+     */
+    avatarFileId: string;
 };
 /**
  * Describes the message tank.auth.v1.Principal.

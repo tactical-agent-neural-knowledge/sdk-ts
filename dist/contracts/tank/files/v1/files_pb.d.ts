@@ -61,6 +61,16 @@ export type File = Message<"tank.files.v1.File"> & {
      * @generated from field: google.protobuf.Timestamp created_at = 12;
      */
     createdAt?: Timestamp;
+    /**
+     * Channels the file has been shared in (through messages) that the caller can see.
+     *
+     * @generated from field: repeated string shared_in_channel_ids = 13;
+     */
+    sharedInChannelIds: string[];
+    /**
+     * @generated from field: string uploader_display_name = 14;
+     */
+    uploaderDisplayName: string;
 };
 /**
  * Describes the message tank.files.v1.File.
@@ -200,6 +210,86 @@ export type GetDownloadUrlResponse = Message<"tank.files.v1.GetDownloadUrlRespon
  */
 export declare const GetDownloadUrlResponseSchema: GenMessage<GetDownloadUrlResponse>;
 /**
+ * GetFile returns metadata for one file the caller may read (uploader, member
+ * of a channel it was shared in, or a workspace member for emoji / avatars).
+ *
+ * @generated from message tank.files.v1.GetFileRequest
+ */
+export type GetFileRequest = Message<"tank.files.v1.GetFileRequest"> & {
+    /**
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.files.v1.GetFileRequest.
+ * Use `create(GetFileRequestSchema)` to create a new message.
+ */
+export declare const GetFileRequestSchema: GenMessage<GetFileRequest>;
+/**
+ * @generated from message tank.files.v1.GetFileResponse
+ */
+export type GetFileResponse = Message<"tank.files.v1.GetFileResponse"> & {
+    /**
+     * @generated from field: tank.files.v1.File file = 1;
+     */
+    file?: File;
+};
+/**
+ * Describes the message tank.files.v1.GetFileResponse.
+ * Use `create(GetFileResponseSchema)` to create a new message.
+ */
+export declare const GetFileResponseSchema: GenMessage<GetFileResponse>;
+/**
+ * ListFiles pages the files the caller may read in a workspace, newest first;
+ * channel_id narrows to files shared in that channel (caller must be a member).
+ *
+ * @generated from message tank.files.v1.ListFilesRequest
+ */
+export type ListFilesRequest = Message<"tank.files.v1.ListFilesRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * opaque
+     *
+     * @generated from field: string cursor = 3;
+     */
+    cursor: string;
+    /**
+     * @generated from field: int32 limit = 4;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.files.v1.ListFilesRequest.
+ * Use `create(ListFilesRequestSchema)` to create a new message.
+ */
+export declare const ListFilesRequestSchema: GenMessage<ListFilesRequest>;
+/**
+ * @generated from message tank.files.v1.ListFilesResponse
+ */
+export type ListFilesResponse = Message<"tank.files.v1.ListFilesResponse"> & {
+    /**
+     * @generated from field: repeated tank.files.v1.File files = 1;
+     */
+    files: File[];
+    /**
+     * @generated from field: string next_cursor = 2;
+     */
+    nextCursor: string;
+};
+/**
+ * Describes the message tank.files.v1.ListFilesResponse.
+ * Use `create(ListFilesResponseSchema)` to create a new message.
+ */
+export declare const ListFilesResponseSchema: GenMessage<ListFilesResponse>;
+/**
  * @generated from enum tank.files.v1.ScanStatus
  */
 export declare enum ScanStatus {
@@ -255,5 +345,21 @@ export declare const FilesService: GenService<{
         methodKind: "unary";
         input: typeof GetDownloadUrlRequestSchema;
         output: typeof GetDownloadUrlResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.files.v1.FilesService.GetFile
+     */
+    getFile: {
+        methodKind: "unary";
+        input: typeof GetFileRequestSchema;
+        output: typeof GetFileResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.files.v1.FilesService.ListFiles
+     */
+    listFiles: {
+        methodKind: "unary";
+        input: typeof ListFilesRequestSchema;
+        output: typeof ListFilesResponseSchema;
     };
 }>;

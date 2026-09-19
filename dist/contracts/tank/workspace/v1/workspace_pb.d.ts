@@ -1,7 +1,8 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Principal } from "../../auth/v1/auth_pb.js";
-import type { Channel, ChannelReadState } from "../../channel/v1/channel_pb.js";
+import type { Channel, ChannelReadState, NotifyPref } from "../../channel/v1/channel_pb.js";
+import type { RichText } from "../../richtext/v1/richtext_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/workspace/v1/workspace.proto.
@@ -169,6 +170,9 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
      */
     members: Member[];
     /**
+     * Changes whenever the workspace's custom emoji set changes; clients
+     * refetch ListEmoji when it differs from their cached value.
+     *
      * @generated from field: string custom_emoji_hash = 6;
      */
     customEmojiHash: string;
@@ -176,6 +180,14 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
      * @generated from field: int32 unread_notification_count = 7;
      */
     unreadNotificationCount: number;
+    /**
+     * @generated from field: tank.workspace.v1.Preferences preferences = 8;
+     */
+    preferences?: Preferences;
+    /**
+     * @generated from field: repeated tank.workspace.v1.UserGroup user_groups = 9;
+     */
+    userGroups: UserGroup[];
 };
 /**
  * Describes the message tank.workspace.v1.GetBootstrapResponse.
@@ -291,6 +303,960 @@ export type JoinWorkspaceResponse = Message<"tank.workspace.v1.JoinWorkspaceResp
  */
 export declare const JoinWorkspaceResponseSchema: GenMessage<JoinWorkspaceResponse>;
 /**
+ * Unset fields are left unchanged. display_name and avatar are global to the
+ * user; title and timezone are per workspace.
+ *
+ * @generated from message tank.workspace.v1.UpdateProfileRequest
+ */
+export type UpdateProfileRequest = Message<"tank.workspace.v1.UpdateProfileRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: optional string display_name = 2;
+     */
+    displayName?: string;
+    /**
+     * @generated from field: optional string title = 3;
+     */
+    title?: string;
+    /**
+     * IANA name
+     *
+     * @generated from field: optional string timezone = 4;
+     */
+    timezone?: string;
+    /**
+     * empty string clears the avatar
+     *
+     * @generated from field: optional string avatar_file_id = 5;
+     */
+    avatarFileId?: string;
+};
+/**
+ * Describes the message tank.workspace.v1.UpdateProfileRequest.
+ * Use `create(UpdateProfileRequestSchema)` to create a new message.
+ */
+export declare const UpdateProfileRequestSchema: GenMessage<UpdateProfileRequest>;
+/**
+ * @generated from message tank.workspace.v1.UpdateProfileResponse
+ */
+export type UpdateProfileResponse = Message<"tank.workspace.v1.UpdateProfileResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Member me = 1;
+     */
+    me?: Member;
+};
+/**
+ * Describes the message tank.workspace.v1.UpdateProfileResponse.
+ * Use `create(UpdateProfileResponseSchema)` to create a new message.
+ */
+export declare const UpdateProfileResponseSchema: GenMessage<UpdateProfileResponse>;
+/**
+ * Armor Mode (do not disturb) on a schedule, in the user's timezone.
+ *
+ * @generated from message tank.workspace.v1.ArmorModeSchedule
+ */
+export type ArmorModeSchedule = Message<"tank.workspace.v1.ArmorModeSchedule"> & {
+    /**
+     * @generated from field: bool enabled = 1;
+     */
+    enabled: boolean;
+    /**
+     * "HH:MM" local time
+     *
+     * @generated from field: string start = 2;
+     */
+    start: string;
+    /**
+     * "HH:MM" local time; earlier than start = overnight
+     *
+     * @generated from field: string end = 3;
+     */
+    end: string;
+    /**
+     * 0 = Sunday .. 6 = Saturday; empty = every day
+     *
+     * @generated from field: repeated int32 days = 4;
+     */
+    days: number[];
+    /**
+     * IANA name; empty = profile timezone
+     *
+     * @generated from field: string timezone = 5;
+     */
+    timezone: string;
+    /**
+     * let critical alerts (agent_needs_input, DMs) through
+     *
+     * @generated from field: bool allow_critical = 6;
+     */
+    allowCritical: boolean;
+};
+/**
+ * Describes the message tank.workspace.v1.ArmorModeSchedule.
+ * Use `create(ArmorModeScheduleSchema)` to create a new message.
+ */
+export declare const ArmorModeScheduleSchema: GenMessage<ArmorModeSchedule>;
+/**
+ * @generated from message tank.workspace.v1.Preferences
+ */
+export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
+    /**
+     * channels without their own preference
+     *
+     * @generated from field: tank.channel.v1.NotifyPref notify_default = 1;
+     */
+    notifyDefault: NotifyPref;
+    /**
+     * DMs and group DMs
+     *
+     * @generated from field: tank.channel.v1.NotifyPref dm_notify_default = 2;
+     */
+    dmNotifyDefault: NotifyPref;
+    /**
+     * system | light | dark
+     *
+     * @generated from field: string theme = 3;
+     */
+    theme: string;
+    /**
+     * @generated from field: tank.workspace.v1.ArmorModeSchedule armor_mode_schedule = 4;
+     */
+    armorModeSchedule?: ArmorModeSchedule;
+    /**
+     * @generated from field: bool email_digest = 5;
+     */
+    emailDigest: boolean;
+    /**
+     * @generated from field: bool desktop_sound = 6;
+     */
+    desktopSound: boolean;
+    /**
+     * @generated from field: bool push_on_mention_only = 7;
+     */
+    pushOnMentionOnly: boolean;
+};
+/**
+ * Describes the message tank.workspace.v1.Preferences.
+ * Use `create(PreferencesSchema)` to create a new message.
+ */
+export declare const PreferencesSchema: GenMessage<Preferences>;
+/**
+ * @generated from message tank.workspace.v1.GetPreferencesRequest
+ */
+export type GetPreferencesRequest = Message<"tank.workspace.v1.GetPreferencesRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.GetPreferencesRequest.
+ * Use `create(GetPreferencesRequestSchema)` to create a new message.
+ */
+export declare const GetPreferencesRequestSchema: GenMessage<GetPreferencesRequest>;
+/**
+ * @generated from message tank.workspace.v1.GetPreferencesResponse
+ */
+export type GetPreferencesResponse = Message<"tank.workspace.v1.GetPreferencesResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Preferences preferences = 1;
+     */
+    preferences?: Preferences;
+};
+/**
+ * Describes the message tank.workspace.v1.GetPreferencesResponse.
+ * Use `create(GetPreferencesResponseSchema)` to create a new message.
+ */
+export declare const GetPreferencesResponseSchema: GenMessage<GetPreferencesResponse>;
+/**
+ * @generated from message tank.workspace.v1.UpdatePreferencesRequest
+ */
+export type UpdatePreferencesRequest = Message<"tank.workspace.v1.UpdatePreferencesRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * replaces the stored preferences
+     *
+     * @generated from field: tank.workspace.v1.Preferences preferences = 2;
+     */
+    preferences?: Preferences;
+};
+/**
+ * Describes the message tank.workspace.v1.UpdatePreferencesRequest.
+ * Use `create(UpdatePreferencesRequestSchema)` to create a new message.
+ */
+export declare const UpdatePreferencesRequestSchema: GenMessage<UpdatePreferencesRequest>;
+/**
+ * @generated from message tank.workspace.v1.UpdatePreferencesResponse
+ */
+export type UpdatePreferencesResponse = Message<"tank.workspace.v1.UpdatePreferencesResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Preferences preferences = 1;
+     */
+    preferences?: Preferences;
+};
+/**
+ * Describes the message tank.workspace.v1.UpdatePreferencesResponse.
+ * Use `create(UpdatePreferencesResponseSchema)` to create a new message.
+ */
+export declare const UpdatePreferencesResponseSchema: GenMessage<UpdatePreferencesResponse>;
+/**
+ * The image is a normal uploaded file readable by every workspace member.
+ *
+ * @generated from message tank.workspace.v1.CustomEmoji
+ */
+export type CustomEmoji = Message<"tank.workspace.v1.CustomEmoji"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * :name:, unique per workspace
+     *
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: string file_id = 4;
+     */
+    fileId: string;
+    /**
+     * @generated from field: string created_by = 5;
+     */
+    createdBy: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 6;
+     */
+    createdAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.CustomEmoji.
+ * Use `create(CustomEmojiSchema)` to create a new message.
+ */
+export declare const CustomEmojiSchema: GenMessage<CustomEmoji>;
+/**
+ * @generated from message tank.workspace.v1.ListEmojiRequest
+ */
+export type ListEmojiRequest = Message<"tank.workspace.v1.ListEmojiRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ListEmojiRequest.
+ * Use `create(ListEmojiRequestSchema)` to create a new message.
+ */
+export declare const ListEmojiRequestSchema: GenMessage<ListEmojiRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListEmojiResponse
+ */
+export type ListEmojiResponse = Message<"tank.workspace.v1.ListEmojiResponse"> & {
+    /**
+     * @generated from field: repeated tank.workspace.v1.CustomEmoji emoji = 1;
+     */
+    emoji: CustomEmoji[];
+    /**
+     * matches GetBootstrap.custom_emoji_hash
+     *
+     * @generated from field: string hash = 2;
+     */
+    hash: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ListEmojiResponse.
+ * Use `create(ListEmojiResponseSchema)` to create a new message.
+ */
+export declare const ListEmojiResponseSchema: GenMessage<ListEmojiResponse>;
+/**
+ * @generated from message tank.workspace.v1.CreateEmojiRequest
+ */
+export type CreateEmojiRequest = Message<"tank.workspace.v1.CreateEmojiRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string file_id = 3;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.CreateEmojiRequest.
+ * Use `create(CreateEmojiRequestSchema)` to create a new message.
+ */
+export declare const CreateEmojiRequestSchema: GenMessage<CreateEmojiRequest>;
+/**
+ * @generated from message tank.workspace.v1.CreateEmojiResponse
+ */
+export type CreateEmojiResponse = Message<"tank.workspace.v1.CreateEmojiResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.CustomEmoji emoji = 1;
+     */
+    emoji?: CustomEmoji;
+};
+/**
+ * Describes the message tank.workspace.v1.CreateEmojiResponse.
+ * Use `create(CreateEmojiResponseSchema)` to create a new message.
+ */
+export declare const CreateEmojiResponseSchema: GenMessage<CreateEmojiResponse>;
+/**
+ * @generated from message tank.workspace.v1.DeleteEmojiRequest
+ */
+export type DeleteEmojiRequest = Message<"tank.workspace.v1.DeleteEmojiRequest"> & {
+    /**
+     * @generated from field: string emoji_id = 1;
+     */
+    emojiId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.DeleteEmojiRequest.
+ * Use `create(DeleteEmojiRequestSchema)` to create a new message.
+ */
+export declare const DeleteEmojiRequestSchema: GenMessage<DeleteEmojiRequest>;
+/**
+ * @generated from message tank.workspace.v1.DeleteEmojiResponse
+ */
+export type DeleteEmojiResponse = Message<"tank.workspace.v1.DeleteEmojiResponse"> & {};
+/**
+ * Describes the message tank.workspace.v1.DeleteEmojiResponse.
+ * Use `create(DeleteEmojiResponseSchema)` to create a new message.
+ */
+export declare const DeleteEmojiResponseSchema: GenMessage<DeleteEmojiResponse>;
+/**
+ * @handle that expands to its members when mentioned.
+ *
+ * @generated from message tank.workspace.v1.UserGroup
+ */
+export type UserGroup = Message<"tank.workspace.v1.UserGroup"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * without the @
+     *
+     * @generated from field: string handle = 3;
+     */
+    handle: string;
+    /**
+     * @generated from field: string name = 4;
+     */
+    name: string;
+    /**
+     * @generated from field: string description = 5;
+     */
+    description: string;
+    /**
+     * @generated from field: repeated string member_ids = 6;
+     */
+    memberIds: string[];
+    /**
+     * @generated from field: string created_by = 7;
+     */
+    createdBy: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 8;
+     */
+    createdAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.UserGroup.
+ * Use `create(UserGroupSchema)` to create a new message.
+ */
+export declare const UserGroupSchema: GenMessage<UserGroup>;
+/**
+ * @generated from message tank.workspace.v1.ListUserGroupsRequest
+ */
+export type ListUserGroupsRequest = Message<"tank.workspace.v1.ListUserGroupsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ListUserGroupsRequest.
+ * Use `create(ListUserGroupsRequestSchema)` to create a new message.
+ */
+export declare const ListUserGroupsRequestSchema: GenMessage<ListUserGroupsRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListUserGroupsResponse
+ */
+export type ListUserGroupsResponse = Message<"tank.workspace.v1.ListUserGroupsResponse"> & {
+    /**
+     * @generated from field: repeated tank.workspace.v1.UserGroup groups = 1;
+     */
+    groups: UserGroup[];
+};
+/**
+ * Describes the message tank.workspace.v1.ListUserGroupsResponse.
+ * Use `create(ListUserGroupsResponseSchema)` to create a new message.
+ */
+export declare const ListUserGroupsResponseSchema: GenMessage<ListUserGroupsResponse>;
+/**
+ * @generated from message tank.workspace.v1.CreateUserGroupRequest
+ */
+export type CreateUserGroupRequest = Message<"tank.workspace.v1.CreateUserGroupRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string handle = 2;
+     */
+    handle: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: string description = 4;
+     */
+    description: string;
+    /**
+     * @generated from field: repeated string member_ids = 5;
+     */
+    memberIds: string[];
+};
+/**
+ * Describes the message tank.workspace.v1.CreateUserGroupRequest.
+ * Use `create(CreateUserGroupRequestSchema)` to create a new message.
+ */
+export declare const CreateUserGroupRequestSchema: GenMessage<CreateUserGroupRequest>;
+/**
+ * @generated from message tank.workspace.v1.CreateUserGroupResponse
+ */
+export type CreateUserGroupResponse = Message<"tank.workspace.v1.CreateUserGroupResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.UserGroup group = 1;
+     */
+    group?: UserGroup;
+};
+/**
+ * Describes the message tank.workspace.v1.CreateUserGroupResponse.
+ * Use `create(CreateUserGroupResponseSchema)` to create a new message.
+ */
+export declare const CreateUserGroupResponseSchema: GenMessage<CreateUserGroupResponse>;
+/**
+ * @generated from message tank.workspace.v1.UpdateUserGroupMembersRequest
+ */
+export type UpdateUserGroupMembersRequest = Message<"tank.workspace.v1.UpdateUserGroupMembersRequest"> & {
+    /**
+     * @generated from field: string group_id = 1;
+     */
+    groupId: string;
+    /**
+     * replaces the member list
+     *
+     * @generated from field: repeated string member_ids = 2;
+     */
+    memberIds: string[];
+};
+/**
+ * Describes the message tank.workspace.v1.UpdateUserGroupMembersRequest.
+ * Use `create(UpdateUserGroupMembersRequestSchema)` to create a new message.
+ */
+export declare const UpdateUserGroupMembersRequestSchema: GenMessage<UpdateUserGroupMembersRequest>;
+/**
+ * @generated from message tank.workspace.v1.UpdateUserGroupMembersResponse
+ */
+export type UpdateUserGroupMembersResponse = Message<"tank.workspace.v1.UpdateUserGroupMembersResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.UserGroup group = 1;
+     */
+    group?: UserGroup;
+};
+/**
+ * Describes the message tank.workspace.v1.UpdateUserGroupMembersResponse.
+ * Use `create(UpdateUserGroupMembersResponseSchema)` to create a new message.
+ */
+export declare const UpdateUserGroupMembersResponseSchema: GenMessage<UpdateUserGroupMembersResponse>;
+/**
+ * @generated from message tank.workspace.v1.DeleteUserGroupRequest
+ */
+export type DeleteUserGroupRequest = Message<"tank.workspace.v1.DeleteUserGroupRequest"> & {
+    /**
+     * @generated from field: string group_id = 1;
+     */
+    groupId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.DeleteUserGroupRequest.
+ * Use `create(DeleteUserGroupRequestSchema)` to create a new message.
+ */
+export declare const DeleteUserGroupRequestSchema: GenMessage<DeleteUserGroupRequest>;
+/**
+ * @generated from message tank.workspace.v1.DeleteUserGroupResponse
+ */
+export type DeleteUserGroupResponse = Message<"tank.workspace.v1.DeleteUserGroupResponse"> & {};
+/**
+ * Describes the message tank.workspace.v1.DeleteUserGroupResponse.
+ * Use `create(DeleteUserGroupResponseSchema)` to create a new message.
+ */
+export declare const DeleteUserGroupResponseSchema: GenMessage<DeleteUserGroupResponse>;
+/**
+ * @generated from message tank.workspace.v1.ChannelBookmark
+ */
+export type ChannelBookmark = Message<"tank.workspace.v1.ChannelBookmark"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string title = 3;
+     */
+    title: string;
+    /**
+     * @generated from field: string url = 4;
+     */
+    url: string;
+    /**
+     * @generated from field: string emoji = 5;
+     */
+    emoji: string;
+    /**
+     * @generated from field: string created_by = 6;
+     */
+    createdBy: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 7;
+     */
+    createdAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.ChannelBookmark.
+ * Use `create(ChannelBookmarkSchema)` to create a new message.
+ */
+export declare const ChannelBookmarkSchema: GenMessage<ChannelBookmark>;
+/**
+ * @generated from message tank.workspace.v1.ListBookmarksRequest
+ */
+export type ListBookmarksRequest = Message<"tank.workspace.v1.ListBookmarksRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ListBookmarksRequest.
+ * Use `create(ListBookmarksRequestSchema)` to create a new message.
+ */
+export declare const ListBookmarksRequestSchema: GenMessage<ListBookmarksRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListBookmarksResponse
+ */
+export type ListBookmarksResponse = Message<"tank.workspace.v1.ListBookmarksResponse"> & {
+    /**
+     * @generated from field: repeated tank.workspace.v1.ChannelBookmark bookmarks = 1;
+     */
+    bookmarks: ChannelBookmark[];
+};
+/**
+ * Describes the message tank.workspace.v1.ListBookmarksResponse.
+ * Use `create(ListBookmarksResponseSchema)` to create a new message.
+ */
+export declare const ListBookmarksResponseSchema: GenMessage<ListBookmarksResponse>;
+/**
+ * @generated from message tank.workspace.v1.AddBookmarkRequest
+ */
+export type AddBookmarkRequest = Message<"tank.workspace.v1.AddBookmarkRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: string url = 3;
+     */
+    url: string;
+    /**
+     * @generated from field: string emoji = 4;
+     */
+    emoji: string;
+};
+/**
+ * Describes the message tank.workspace.v1.AddBookmarkRequest.
+ * Use `create(AddBookmarkRequestSchema)` to create a new message.
+ */
+export declare const AddBookmarkRequestSchema: GenMessage<AddBookmarkRequest>;
+/**
+ * @generated from message tank.workspace.v1.AddBookmarkResponse
+ */
+export type AddBookmarkResponse = Message<"tank.workspace.v1.AddBookmarkResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.ChannelBookmark bookmark = 1;
+     */
+    bookmark?: ChannelBookmark;
+};
+/**
+ * Describes the message tank.workspace.v1.AddBookmarkResponse.
+ * Use `create(AddBookmarkResponseSchema)` to create a new message.
+ */
+export declare const AddBookmarkResponseSchema: GenMessage<AddBookmarkResponse>;
+/**
+ * @generated from message tank.workspace.v1.RemoveBookmarkRequest
+ */
+export type RemoveBookmarkRequest = Message<"tank.workspace.v1.RemoveBookmarkRequest"> & {
+    /**
+     * @generated from field: string bookmark_id = 1;
+     */
+    bookmarkId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.RemoveBookmarkRequest.
+ * Use `create(RemoveBookmarkRequestSchema)` to create a new message.
+ */
+export declare const RemoveBookmarkRequestSchema: GenMessage<RemoveBookmarkRequest>;
+/**
+ * @generated from message tank.workspace.v1.RemoveBookmarkResponse
+ */
+export type RemoveBookmarkResponse = Message<"tank.workspace.v1.RemoveBookmarkResponse"> & {};
+/**
+ * Describes the message tank.workspace.v1.RemoveBookmarkResponse.
+ * Use `create(RemoveBookmarkResponseSchema)` to create a new message.
+ */
+export declare const RemoveBookmarkResponseSchema: GenMessage<RemoveBookmarkResponse>;
+/**
+ * One draft per (user, channel) or (user, thread). Private to the user.
+ *
+ * @generated from message tank.workspace.v1.Draft
+ */
+export type Draft = Message<"tank.workspace.v1.Draft"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * empty for the channel composer
+     *
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: tank.richtext.v1.RichText rich_text = 3;
+     */
+    richText?: RichText;
+    /**
+     * @generated from field: string text = 4;
+     */
+    text: string;
+    /**
+     * @generated from field: repeated string file_ids = 5;
+     */
+    fileIds: string[];
+    /**
+     * @generated from field: google.protobuf.Timestamp updated_at = 6;
+     */
+    updatedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.Draft.
+ * Use `create(DraftSchema)` to create a new message.
+ */
+export declare const DraftSchema: GenMessage<Draft>;
+/**
+ * @generated from message tank.workspace.v1.GetDraftRequest
+ */
+export type GetDraftRequest = Message<"tank.workspace.v1.GetDraftRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.GetDraftRequest.
+ * Use `create(GetDraftRequestSchema)` to create a new message.
+ */
+export declare const GetDraftRequestSchema: GenMessage<GetDraftRequest>;
+/**
+ * @generated from message tank.workspace.v1.GetDraftResponse
+ */
+export type GetDraftResponse = Message<"tank.workspace.v1.GetDraftResponse"> & {
+    /**
+     * unset when there is no draft
+     *
+     * @generated from field: tank.workspace.v1.Draft draft = 1;
+     */
+    draft?: Draft;
+};
+/**
+ * Describes the message tank.workspace.v1.GetDraftResponse.
+ * Use `create(GetDraftResponseSchema)` to create a new message.
+ */
+export declare const GetDraftResponseSchema: GenMessage<GetDraftResponse>;
+/**
+ * @generated from message tank.workspace.v1.PutDraftRequest
+ */
+export type PutDraftRequest = Message<"tank.workspace.v1.PutDraftRequest"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Draft draft = 1;
+     */
+    draft?: Draft;
+};
+/**
+ * Describes the message tank.workspace.v1.PutDraftRequest.
+ * Use `create(PutDraftRequestSchema)` to create a new message.
+ */
+export declare const PutDraftRequestSchema: GenMessage<PutDraftRequest>;
+/**
+ * @generated from message tank.workspace.v1.PutDraftResponse
+ */
+export type PutDraftResponse = Message<"tank.workspace.v1.PutDraftResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Draft draft = 1;
+     */
+    draft?: Draft;
+};
+/**
+ * Describes the message tank.workspace.v1.PutDraftResponse.
+ * Use `create(PutDraftResponseSchema)` to create a new message.
+ */
+export declare const PutDraftResponseSchema: GenMessage<PutDraftResponse>;
+/**
+ * @generated from message tank.workspace.v1.DeleteDraftRequest
+ */
+export type DeleteDraftRequest = Message<"tank.workspace.v1.DeleteDraftRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.DeleteDraftRequest.
+ * Use `create(DeleteDraftRequestSchema)` to create a new message.
+ */
+export declare const DeleteDraftRequestSchema: GenMessage<DeleteDraftRequest>;
+/**
+ * @generated from message tank.workspace.v1.DeleteDraftResponse
+ */
+export type DeleteDraftResponse = Message<"tank.workspace.v1.DeleteDraftResponse"> & {};
+/**
+ * Describes the message tank.workspace.v1.DeleteDraftResponse.
+ * Use `create(DeleteDraftResponseSchema)` to create a new message.
+ */
+export declare const DeleteDraftResponseSchema: GenMessage<DeleteDraftResponse>;
+/**
+ * @generated from message tank.workspace.v1.ListDraftsRequest
+ */
+export type ListDraftsRequest = Message<"tank.workspace.v1.ListDraftsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ListDraftsRequest.
+ * Use `create(ListDraftsRequestSchema)` to create a new message.
+ */
+export declare const ListDraftsRequestSchema: GenMessage<ListDraftsRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListDraftsResponse
+ */
+export type ListDraftsResponse = Message<"tank.workspace.v1.ListDraftsResponse"> & {
+    /**
+     * @generated from field: repeated tank.workspace.v1.Draft drafts = 1;
+     */
+    drafts: Draft[];
+};
+/**
+ * Describes the message tank.workspace.v1.ListDraftsResponse.
+ * Use `create(ListDraftsResponseSchema)` to create a new message.
+ */
+export declare const ListDraftsResponseSchema: GenMessage<ListDraftsResponse>;
+/**
+ * @generated from message tank.workspace.v1.ScheduledMessage
+ */
+export type ScheduledMessage = Message<"tank.workspace.v1.ScheduledMessage"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 3;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 4;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string text = 5;
+     */
+    text: string;
+    /**
+     * @generated from field: tank.richtext.v1.RichText rich_text = 6;
+     */
+    richText?: RichText;
+    /**
+     * @generated from field: repeated string file_ids = 7;
+     */
+    fileIds: string[];
+    /**
+     * @generated from field: google.protobuf.Timestamp send_at = 8;
+     */
+    sendAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 9;
+     */
+    createdAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp sent_at = 10;
+     */
+    sentAt?: Timestamp;
+    /**
+     * @generated from field: string sent_message_id = 11;
+     */
+    sentMessageId: string;
+    /**
+     * set when sending failed (archived channel, left channel, ...)
+     *
+     * @generated from field: string error = 12;
+     */
+    error: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ScheduledMessage.
+ * Use `create(ScheduledMessageSchema)` to create a new message.
+ */
+export declare const ScheduledMessageSchema: GenMessage<ScheduledMessage>;
+/**
+ * @generated from message tank.workspace.v1.ScheduleMessageRequest
+ */
+export type ScheduleMessageRequest = Message<"tank.workspace.v1.ScheduleMessageRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string text = 3;
+     */
+    text: string;
+    /**
+     * @generated from field: tank.richtext.v1.RichText rich_text = 4;
+     */
+    richText?: RichText;
+    /**
+     * @generated from field: repeated string file_ids = 5;
+     */
+    fileIds: string[];
+    /**
+     * @generated from field: google.protobuf.Timestamp send_at = 6;
+     */
+    sendAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.ScheduleMessageRequest.
+ * Use `create(ScheduleMessageRequestSchema)` to create a new message.
+ */
+export declare const ScheduleMessageRequestSchema: GenMessage<ScheduleMessageRequest>;
+/**
+ * @generated from message tank.workspace.v1.ScheduleMessageResponse
+ */
+export type ScheduleMessageResponse = Message<"tank.workspace.v1.ScheduleMessageResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.ScheduledMessage scheduled = 1;
+     */
+    scheduled?: ScheduledMessage;
+};
+/**
+ * Describes the message tank.workspace.v1.ScheduleMessageResponse.
+ * Use `create(ScheduleMessageResponseSchema)` to create a new message.
+ */
+export declare const ScheduleMessageResponseSchema: GenMessage<ScheduleMessageResponse>;
+/**
+ * @generated from message tank.workspace.v1.ListScheduledRequest
+ */
+export type ListScheduledRequest = Message<"tank.workspace.v1.ListScheduledRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ListScheduledRequest.
+ * Use `create(ListScheduledRequestSchema)` to create a new message.
+ */
+export declare const ListScheduledRequestSchema: GenMessage<ListScheduledRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListScheduledResponse
+ */
+export type ListScheduledResponse = Message<"tank.workspace.v1.ListScheduledResponse"> & {
+    /**
+     * pending only, soonest first
+     *
+     * @generated from field: repeated tank.workspace.v1.ScheduledMessage scheduled = 1;
+     */
+    scheduled: ScheduledMessage[];
+};
+/**
+ * Describes the message tank.workspace.v1.ListScheduledResponse.
+ * Use `create(ListScheduledResponseSchema)` to create a new message.
+ */
+export declare const ListScheduledResponseSchema: GenMessage<ListScheduledResponse>;
+/**
+ * @generated from message tank.workspace.v1.CancelScheduledRequest
+ */
+export type CancelScheduledRequest = Message<"tank.workspace.v1.CancelScheduledRequest"> & {
+    /**
+     * @generated from field: string scheduled_id = 1;
+     */
+    scheduledId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.CancelScheduledRequest.
+ * Use `create(CancelScheduledRequestSchema)` to create a new message.
+ */
+export declare const CancelScheduledRequestSchema: GenMessage<CancelScheduledRequest>;
+/**
+ * @generated from message tank.workspace.v1.CancelScheduledResponse
+ */
+export type CancelScheduledResponse = Message<"tank.workspace.v1.CancelScheduledResponse"> & {};
+/**
+ * Describes the message tank.workspace.v1.CancelScheduledResponse.
+ * Use `create(CancelScheduledResponseSchema)` to create a new message.
+ */
+export declare const CancelScheduledResponseSchema: GenMessage<CancelScheduledResponse>;
+/**
  * @generated from enum tank.workspace.v1.Role
  */
 export declare enum Role {
@@ -374,5 +1340,165 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof JoinWorkspaceRequestSchema;
         output: typeof JoinWorkspaceResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.UpdateProfile
+     */
+    updateProfile: {
+        methodKind: "unary";
+        input: typeof UpdateProfileRequestSchema;
+        output: typeof UpdateProfileResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.GetPreferences
+     */
+    getPreferences: {
+        methodKind: "unary";
+        input: typeof GetPreferencesRequestSchema;
+        output: typeof GetPreferencesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.UpdatePreferences
+     */
+    updatePreferences: {
+        methodKind: "unary";
+        input: typeof UpdatePreferencesRequestSchema;
+        output: typeof UpdatePreferencesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListEmoji
+     */
+    listEmoji: {
+        methodKind: "unary";
+        input: typeof ListEmojiRequestSchema;
+        output: typeof ListEmojiResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.CreateEmoji
+     */
+    createEmoji: {
+        methodKind: "unary";
+        input: typeof CreateEmojiRequestSchema;
+        output: typeof CreateEmojiResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.DeleteEmoji
+     */
+    deleteEmoji: {
+        methodKind: "unary";
+        input: typeof DeleteEmojiRequestSchema;
+        output: typeof DeleteEmojiResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListUserGroups
+     */
+    listUserGroups: {
+        methodKind: "unary";
+        input: typeof ListUserGroupsRequestSchema;
+        output: typeof ListUserGroupsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.CreateUserGroup
+     */
+    createUserGroup: {
+        methodKind: "unary";
+        input: typeof CreateUserGroupRequestSchema;
+        output: typeof CreateUserGroupResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.UpdateUserGroupMembers
+     */
+    updateUserGroupMembers: {
+        methodKind: "unary";
+        input: typeof UpdateUserGroupMembersRequestSchema;
+        output: typeof UpdateUserGroupMembersResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.DeleteUserGroup
+     */
+    deleteUserGroup: {
+        methodKind: "unary";
+        input: typeof DeleteUserGroupRequestSchema;
+        output: typeof DeleteUserGroupResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListBookmarks
+     */
+    listBookmarks: {
+        methodKind: "unary";
+        input: typeof ListBookmarksRequestSchema;
+        output: typeof ListBookmarksResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.AddBookmark
+     */
+    addBookmark: {
+        methodKind: "unary";
+        input: typeof AddBookmarkRequestSchema;
+        output: typeof AddBookmarkResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.RemoveBookmark
+     */
+    removeBookmark: {
+        methodKind: "unary";
+        input: typeof RemoveBookmarkRequestSchema;
+        output: typeof RemoveBookmarkResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.GetDraft
+     */
+    getDraft: {
+        methodKind: "unary";
+        input: typeof GetDraftRequestSchema;
+        output: typeof GetDraftResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.PutDraft
+     */
+    putDraft: {
+        methodKind: "unary";
+        input: typeof PutDraftRequestSchema;
+        output: typeof PutDraftResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.DeleteDraft
+     */
+    deleteDraft: {
+        methodKind: "unary";
+        input: typeof DeleteDraftRequestSchema;
+        output: typeof DeleteDraftResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListDrafts
+     */
+    listDrafts: {
+        methodKind: "unary";
+        input: typeof ListDraftsRequestSchema;
+        output: typeof ListDraftsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ScheduleMessage
+     */
+    scheduleMessage: {
+        methodKind: "unary";
+        input: typeof ScheduleMessageRequestSchema;
+        output: typeof ScheduleMessageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListScheduled
+     */
+    listScheduled: {
+        methodKind: "unary";
+        input: typeof ListScheduledRequestSchema;
+        output: typeof ListScheduledResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.CancelScheduled
+     */
+    cancelScheduled: {
+        methodKind: "unary";
+        input: typeof CancelScheduledRequestSchema;
+        output: typeof CancelScheduledResponseSchema;
     };
 }>;

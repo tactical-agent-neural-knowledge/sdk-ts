@@ -8,15 +8,17 @@ import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Principal } from "../../auth/v1/auth_pb.js";
 import { file_tank_auth_v1_auth } from "../../auth/v1/auth_pb.js";
-import type { Channel, ChannelReadState } from "../../channel/v1/channel_pb.js";
+import type { Channel, ChannelReadState, NotifyPref } from "../../channel/v1/channel_pb.js";
 import { file_tank_channel_v1_channel } from "../../channel/v1/channel_pb.js";
+import type { RichText } from "../../richtext/v1/richtext_pb.js";
+import { file_tank_richtext_v1_richtext } from "../../richtext/v1/richtext_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file tank/workspace/v1/workspace.proto.
  */
 export const file_tank_workspace_v1_workspace: GenFile = /*@__PURE__*/
-  fileDesc("CiF0YW5rL3dvcmtzcGFjZS92MS93b3Jrc3BhY2UucHJvdG8SEXRhbmsud29ya3NwYWNlLnYxInUKCVdvcmtzcGFjZRIKCgJpZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSEAoIaWNvbl91cmwYBCABKAkSLgoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAi3wEKBk1lbWJlchIqCglwcmluY2lwYWwYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEiUKBHJvbGUYAiABKA4yFy50YW5rLndvcmtzcGFjZS52MS5Sb2xlEg0KBXRpdGxlGAMgASgJEhAKCHRpbWV6b25lGAQgASgJEi0KCWpvaW5lZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMgoOZGVhY3RpdmF0ZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIjQKFkNyZWF0ZVdvcmtzcGFjZVJlcXVlc3QSDAoEbmFtZRgBIAEoCRIMCgRzbHVnGAIgASgJIkoKF0NyZWF0ZVdvcmtzcGFjZVJlc3BvbnNlEi8KCXdvcmtzcGFjZRgBIAEoCzIcLnRhbmsud29ya3NwYWNlLnYxLldvcmtzcGFjZSIXChVMaXN0V29ya3NwYWNlc1JlcXVlc3QiSgoWTGlzdFdvcmtzcGFjZXNSZXNwb25zZRIwCgp3b3Jrc3BhY2VzGAEgAygLMhwudGFuay53b3Jrc3BhY2UudjEuV29ya3NwYWNlIisKE0dldEJvb3RzdHJhcFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIrwCChRHZXRCb290c3RyYXBSZXNwb25zZRIvCgl3b3Jrc3BhY2UYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Xb3Jrc3BhY2USJQoCbWUYAiABKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXISKgoIY2hhbm5lbHMYAyADKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbBI2CgtyZWFkX3N0YXRlcxgEIAMoCzIhLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsUmVhZFN0YXRlEioKB21lbWJlcnMYBSADKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXISGQoRY3VzdG9tX2Vtb2ppX2hhc2gYBiABKAkSIQoZdW5yZWFkX25vdGlmaWNhdGlvbl9jb3VudBgHIAEoBSJJChJMaXN0TWVtYmVyc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg4KBmN1cnNvchgCIAEoCRINCgVsaW1pdBgDIAEoBSJWChNMaXN0TWVtYmVyc1Jlc3BvbnNlEioKB21lbWJlcnMYASADKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXISEwoLbmV4dF9jdXJzb3IYAiABKAkiYQoTSW52aXRlTWVtYmVyUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDQoFZW1haWwYAiABKAkSJQoEcm9sZRgDIAEoDjIXLnRhbmsud29ya3NwYWNlLnYxLlJvbGUiKQoUSW52aXRlTWVtYmVyUmVzcG9uc2USEQoJaW52aXRlX2lkGAEgASgJIiwKFEpvaW5Xb3Jrc3BhY2VSZXF1ZXN0EhQKDGludml0ZV90b2tlbhgBIAEoCSJvChVKb2luV29ya3NwYWNlUmVzcG9uc2USLwoJd29ya3NwYWNlGAEgASgLMhwudGFuay53b3Jrc3BhY2UudjEuV29ya3NwYWNlEiUKAm1lGAIgASgLMhkudGFuay53b3Jrc3BhY2UudjEuTWVtYmVyKmsKBFJvbGUSFAoQUk9MRV9VTlNQRUNJRklFRBAAEg4KClJPTEVfT1dORVIQARIOCgpST0xFX0FETUlOEAISDwoLUk9MRV9NRU1CRVIQAxIOCgpST0xFX0dVRVNUEAQSDAoIUk9MRV9CT1QQBTLnBAoQV29ya3NwYWNlU2VydmljZRJoCg9DcmVhdGVXb3Jrc3BhY2USKS50YW5rLndvcmtzcGFjZS52MS5DcmVhdGVXb3Jrc3BhY2VSZXF1ZXN0GioudGFuay53b3Jrc3BhY2UudjEuQ3JlYXRlV29ya3NwYWNlUmVzcG9uc2USZQoOTGlzdFdvcmtzcGFjZXMSKC50YW5rLndvcmtzcGFjZS52MS5MaXN0V29ya3NwYWNlc1JlcXVlc3QaKS50YW5rLndvcmtzcGFjZS52MS5MaXN0V29ya3NwYWNlc1Jlc3BvbnNlEl8KDEdldEJvb3RzdHJhcBImLnRhbmsud29ya3NwYWNlLnYxLkdldEJvb3RzdHJhcFJlcXVlc3QaJy50YW5rLndvcmtzcGFjZS52MS5HZXRCb290c3RyYXBSZXNwb25zZRJcCgtMaXN0TWVtYmVycxIlLnRhbmsud29ya3NwYWNlLnYxLkxpc3RNZW1iZXJzUmVxdWVzdBomLnRhbmsud29ya3NwYWNlLnYxLkxpc3RNZW1iZXJzUmVzcG9uc2USXwoMSW52aXRlTWVtYmVyEiYudGFuay53b3Jrc3BhY2UudjEuSW52aXRlTWVtYmVyUmVxdWVzdBonLnRhbmsud29ya3NwYWNlLnYxLkludml0ZU1lbWJlclJlc3BvbnNlEmIKDUpvaW5Xb3Jrc3BhY2USJy50YW5rLndvcmtzcGFjZS52MS5Kb2luV29ya3NwYWNlUmVxdWVzdBooLnRhbmsud29ya3NwYWNlLnYxLkpvaW5Xb3Jrc3BhY2VSZXNwb25zZULoAQoVY29tLnRhbmsud29ya3NwYWNlLnYxQg5Xb3Jrc3BhY2VQcm90b1ABWllnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3dvcmtzcGFjZS92MTt3b3Jrc3BhY2V2MaICA1RXWKoCEVRhbmsuV29ya3NwYWNlLlYxygIRVGFua1xXb3Jrc3BhY2VcVjHiAh1UYW5rXFdvcmtzcGFjZVxWMVxHUEJNZXRhZGF0YeoCE1Rhbms6OldvcmtzcGFjZTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_auth_v1_auth, file_tank_channel_v1_channel]);
+  fileDesc("CiF0YW5rL3dvcmtzcGFjZS92MS93b3Jrc3BhY2UucHJvdG8SEXRhbmsud29ya3NwYWNlLnYxInUKCVdvcmtzcGFjZRIKCgJpZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSEAoIaWNvbl91cmwYBCABKAkSLgoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAi3wEKBk1lbWJlchIqCglwcmluY2lwYWwYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEiUKBHJvbGUYAiABKA4yFy50YW5rLndvcmtzcGFjZS52MS5Sb2xlEg0KBXRpdGxlGAMgASgJEhAKCHRpbWV6b25lGAQgASgJEi0KCWpvaW5lZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMgoOZGVhY3RpdmF0ZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIjQKFkNyZWF0ZVdvcmtzcGFjZVJlcXVlc3QSDAoEbmFtZRgBIAEoCRIMCgRzbHVnGAIgASgJIkoKF0NyZWF0ZVdvcmtzcGFjZVJlc3BvbnNlEi8KCXdvcmtzcGFjZRgBIAEoCzIcLnRhbmsud29ya3NwYWNlLnYxLldvcmtzcGFjZSIXChVMaXN0V29ya3NwYWNlc1JlcXVlc3QiSgoWTGlzdFdvcmtzcGFjZXNSZXNwb25zZRIwCgp3b3Jrc3BhY2VzGAEgAygLMhwudGFuay53b3Jrc3BhY2UudjEuV29ya3NwYWNlIisKE0dldEJvb3RzdHJhcFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIqQDChRHZXRCb290c3RyYXBSZXNwb25zZRIvCgl3b3Jrc3BhY2UYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Xb3Jrc3BhY2USJQoCbWUYAiABKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXISKgoIY2hhbm5lbHMYAyADKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbBI2CgtyZWFkX3N0YXRlcxgEIAMoCzIhLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsUmVhZFN0YXRlEioKB21lbWJlcnMYBSADKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXISGQoRY3VzdG9tX2Vtb2ppX2hhc2gYBiABKAkSIQoZdW5yZWFkX25vdGlmaWNhdGlvbl9jb3VudBgHIAEoBRIzCgtwcmVmZXJlbmNlcxgIIAEoCzIeLnRhbmsud29ya3NwYWNlLnYxLlByZWZlcmVuY2VzEjEKC3VzZXJfZ3JvdXBzGAkgAygLMhwudGFuay53b3Jrc3BhY2UudjEuVXNlckdyb3VwIkkKEkxpc3RNZW1iZXJzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDgoGY3Vyc29yGAIgASgJEg0KBWxpbWl0GAMgASgFIlYKE0xpc3RNZW1iZXJzUmVzcG9uc2USKgoHbWVtYmVycxgBIAMoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlchITCgtuZXh0X2N1cnNvchgCIAEoCSJhChNJbnZpdGVNZW1iZXJSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRINCgVlbWFpbBgCIAEoCRIlCgRyb2xlGAMgASgOMhcudGFuay53b3Jrc3BhY2UudjEuUm9sZSIpChRJbnZpdGVNZW1iZXJSZXNwb25zZRIRCglpbnZpdGVfaWQYASABKAkiLAoUSm9pbldvcmtzcGFjZVJlcXVlc3QSFAoMaW52aXRlX3Rva2VuGAEgASgJIm8KFUpvaW5Xb3Jrc3BhY2VSZXNwb25zZRIvCgl3b3Jrc3BhY2UYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Xb3Jrc3BhY2USJQoCbWUYAiABKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXIiygEKFFVwZGF0ZVByb2ZpbGVSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIZCgxkaXNwbGF5X25hbWUYAiABKAlIAIgBARISCgV0aXRsZRgDIAEoCUgBiAEBEhUKCHRpbWV6b25lGAQgASgJSAKIAQESGwoOYXZhdGFyX2ZpbGVfaWQYBSABKAlIA4gBAUIPCg1fZGlzcGxheV9uYW1lQggKBl90aXRsZUILCglfdGltZXpvbmVCEQoPX2F2YXRhcl9maWxlX2lkIj4KFVVwZGF0ZVByb2ZpbGVSZXNwb25zZRIlCgJtZRgBIAEoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlciJ4ChFBcm1vck1vZGVTY2hlZHVsZRIPCgdlbmFibGVkGAEgASgIEg0KBXN0YXJ0GAIgASgJEgsKA2VuZBgDIAEoCRIMCgRkYXlzGAQgAygFEhAKCHRpbWV6b25lGAUgASgJEhYKDmFsbG93X2NyaXRpY2FsGAYgASgIIpcCCgtQcmVmZXJlbmNlcxIzCg5ub3RpZnlfZGVmYXVsdBgBIAEoDjIbLnRhbmsuY2hhbm5lbC52MS5Ob3RpZnlQcmVmEjYKEWRtX25vdGlmeV9kZWZhdWx0GAIgASgOMhsudGFuay5jaGFubmVsLnYxLk5vdGlmeVByZWYSDQoFdGhlbWUYAyABKAkSQQoTYXJtb3JfbW9kZV9zY2hlZHVsZRgEIAEoCzIkLnRhbmsud29ya3NwYWNlLnYxLkFybW9yTW9kZVNjaGVkdWxlEhQKDGVtYWlsX2RpZ2VzdBgFIAEoCBIVCg1kZXNrdG9wX3NvdW5kGAYgASgIEhwKFHB1c2hfb25fbWVudGlvbl9vbmx5GAcgASgIIi0KFUdldFByZWZlcmVuY2VzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiTQoWR2V0UHJlZmVyZW5jZXNSZXNwb25zZRIzCgtwcmVmZXJlbmNlcxgBIAEoCzIeLnRhbmsud29ya3NwYWNlLnYxLlByZWZlcmVuY2VzImUKGFVwZGF0ZVByZWZlcmVuY2VzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSMwoLcHJlZmVyZW5jZXMYAiABKAsyHi50YW5rLndvcmtzcGFjZS52MS5QcmVmZXJlbmNlcyJQChlVcGRhdGVQcmVmZXJlbmNlc1Jlc3BvbnNlEjMKC3ByZWZlcmVuY2VzGAEgASgLMh4udGFuay53b3Jrc3BhY2UudjEuUHJlZmVyZW5jZXMikgEKC0N1c3RvbUVtb2ppEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRIMCgRuYW1lGAMgASgJEg8KB2ZpbGVfaWQYBCABKAkSEgoKY3JlYXRlZF9ieRgFIAEoCRIuCgpjcmVhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIoChBMaXN0RW1vamlSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJQChFMaXN0RW1vamlSZXNwb25zZRItCgVlbW9qaRgBIAMoCzIeLnRhbmsud29ya3NwYWNlLnYxLkN1c3RvbUVtb2ppEgwKBGhhc2gYAiABKAkiSQoSQ3JlYXRlRW1vamlSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEg8KB2ZpbGVfaWQYAyABKAkiRAoTQ3JlYXRlRW1vamlSZXNwb25zZRItCgVlbW9qaRgBIAEoCzIeLnRhbmsud29ya3NwYWNlLnYxLkN1c3RvbUVtb2ppIiYKEkRlbGV0ZUVtb2ppUmVxdWVzdBIQCghlbW9qaV9pZBgBIAEoCSIVChNEZWxldGVFbW9qaVJlc3BvbnNlIrgBCglVc2VyR3JvdXASCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEg4KBmhhbmRsZRgDIAEoCRIMCgRuYW1lGAQgASgJEhMKC2Rlc2NyaXB0aW9uGAUgASgJEhIKCm1lbWJlcl9pZHMYBiADKAkSEgoKY3JlYXRlZF9ieRgHIAEoCRIuCgpjcmVhdGVkX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCItChVMaXN0VXNlckdyb3Vwc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIkYKFkxpc3RVc2VyR3JvdXBzUmVzcG9uc2USLAoGZ3JvdXBzGAEgAygLMhwudGFuay53b3Jrc3BhY2UudjEuVXNlckdyb3VwInUKFkNyZWF0ZVVzZXJHcm91cFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg4KBmhhbmRsZRgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhIKCm1lbWJlcl9pZHMYBSADKAkiRgoXQ3JlYXRlVXNlckdyb3VwUmVzcG9uc2USKwoFZ3JvdXAYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Vc2VyR3JvdXAiRQodVXBkYXRlVXNlckdyb3VwTWVtYmVyc1JlcXVlc3QSEAoIZ3JvdXBfaWQYASABKAkSEgoKbWVtYmVyX2lkcxgCIAMoCSJNCh5VcGRhdGVVc2VyR3JvdXBNZW1iZXJzUmVzcG9uc2USKwoFZ3JvdXAYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Vc2VyR3JvdXAiKgoWRGVsZXRlVXNlckdyb3VwUmVxdWVzdBIQCghncm91cF9pZBgBIAEoCSIZChdEZWxldGVVc2VyR3JvdXBSZXNwb25zZSKgAQoPQ2hhbm5lbEJvb2ttYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDQoFdGl0bGUYAyABKAkSCwoDdXJsGAQgASgJEg0KBWVtb2ppGAUgASgJEhIKCmNyZWF0ZWRfYnkYBiABKAkSLgoKY3JlYXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiKgoUTGlzdEJvb2ttYXJrc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJOChVMaXN0Qm9va21hcmtzUmVzcG9uc2USNQoJYm9va21hcmtzGAEgAygLMiIudGFuay53b3Jrc3BhY2UudjEuQ2hhbm5lbEJvb2ttYXJrIlMKEkFkZEJvb2ttYXJrUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEg0KBXRpdGxlGAIgASgJEgsKA3VybBgDIAEoCRINCgVlbW9qaRgEIAEoCSJLChNBZGRCb29rbWFya1Jlc3BvbnNlEjQKCGJvb2ttYXJrGAEgASgLMiIudGFuay53b3Jrc3BhY2UudjEuQ2hhbm5lbEJvb2ttYXJrIiwKFVJlbW92ZUJvb2ttYXJrUmVxdWVzdBITCgtib29rbWFya19pZBgBIAEoCSIYChZSZW1vdmVCb29rbWFya1Jlc3BvbnNlIrIBCgVEcmFmdBISCgpjaGFubmVsX2lkGAEgASgJEhYKDnRocmVhZF9yb290X2lkGAIgASgJEi0KCXJpY2hfdGV4dBgDIAEoCzIaLnRhbmsucmljaHRleHQudjEuUmljaFRleHQSDAoEdGV4dBgEIAEoCRIQCghmaWxlX2lkcxgFIAMoCRIuCgp1cGRhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI9Cg9HZXREcmFmdFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCSI7ChBHZXREcmFmdFJlc3BvbnNlEicKBWRyYWZ0GAEgASgLMhgudGFuay53b3Jrc3BhY2UudjEuRHJhZnQiOgoPUHV0RHJhZnRSZXF1ZXN0EicKBWRyYWZ0GAEgASgLMhgudGFuay53b3Jrc3BhY2UudjEuRHJhZnQiOwoQUHV0RHJhZnRSZXNwb25zZRInCgVkcmFmdBgBIAEoCzIYLnRhbmsud29ya3NwYWNlLnYxLkRyYWZ0IkAKEkRlbGV0ZURyYWZ0UmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhYKDnRocmVhZF9yb290X2lkGAIgASgJIhUKE0RlbGV0ZURyYWZ0UmVzcG9uc2UiKQoRTGlzdERyYWZ0c1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIj4KEkxpc3REcmFmdHNSZXNwb25zZRIoCgZkcmFmdHMYASADKAsyGC50YW5rLndvcmtzcGFjZS52MS5EcmFmdCLhAgoQU2NoZWR1bGVkTWVzc2FnZRIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSEgoKY2hhbm5lbF9pZBgDIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIMCgR0ZXh0GAUgASgJEi0KCXJpY2hfdGV4dBgGIAEoCzIaLnRhbmsucmljaHRleHQudjEuUmljaFRleHQSEAoIZmlsZV9pZHMYByADKAkSKwoHc2VuZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKY3JlYXRlZF9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHc2VudF9hdBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFwoPc2VudF9tZXNzYWdlX2lkGAsgASgJEg0KBWVycm9yGAwgASgJIsABChZTY2hlZHVsZU1lc3NhZ2VSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAiABKAkSDAoEdGV4dBgDIAEoCRItCglyaWNoX3RleHQYBCABKAsyGi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0EhAKCGZpbGVfaWRzGAUgAygJEisKB3NlbmRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIlEKF1NjaGVkdWxlTWVzc2FnZVJlc3BvbnNlEjYKCXNjaGVkdWxlZBgBIAEoCzIjLnRhbmsud29ya3NwYWNlLnYxLlNjaGVkdWxlZE1lc3NhZ2UiLAoUTGlzdFNjaGVkdWxlZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIk8KFUxpc3RTY2hlZHVsZWRSZXNwb25zZRI2CglzY2hlZHVsZWQYASADKAsyIy50YW5rLndvcmtzcGFjZS52MS5TY2hlZHVsZWRNZXNzYWdlIi4KFkNhbmNlbFNjaGVkdWxlZFJlcXVlc3QSFAoMc2NoZWR1bGVkX2lkGAEgASgJIhkKF0NhbmNlbFNjaGVkdWxlZFJlc3BvbnNlKmsKBFJvbGUSFAoQUk9MRV9VTlNQRUNJRklFRBAAEg4KClJPTEVfT1dORVIQARIOCgpST0xFX0FETUlOEAISDwoLUk9MRV9NRU1CRVIQAxIOCgpST0xFX0dVRVNUEAQSDAoIUk9MRV9CT1QQBTK0FAoQV29ya3NwYWNlU2VydmljZRJoCg9DcmVhdGVXb3Jrc3BhY2USKS50YW5rLndvcmtzcGFjZS52MS5DcmVhdGVXb3Jrc3BhY2VSZXF1ZXN0GioudGFuay53b3Jrc3BhY2UudjEuQ3JlYXRlV29ya3NwYWNlUmVzcG9uc2USZQoOTGlzdFdvcmtzcGFjZXMSKC50YW5rLndvcmtzcGFjZS52MS5MaXN0V29ya3NwYWNlc1JlcXVlc3QaKS50YW5rLndvcmtzcGFjZS52MS5MaXN0V29ya3NwYWNlc1Jlc3BvbnNlEl8KDEdldEJvb3RzdHJhcBImLnRhbmsud29ya3NwYWNlLnYxLkdldEJvb3RzdHJhcFJlcXVlc3QaJy50YW5rLndvcmtzcGFjZS52MS5HZXRCb290c3RyYXBSZXNwb25zZRJcCgtMaXN0TWVtYmVycxIlLnRhbmsud29ya3NwYWNlLnYxLkxpc3RNZW1iZXJzUmVxdWVzdBomLnRhbmsud29ya3NwYWNlLnYxLkxpc3RNZW1iZXJzUmVzcG9uc2USXwoMSW52aXRlTWVtYmVyEiYudGFuay53b3Jrc3BhY2UudjEuSW52aXRlTWVtYmVyUmVxdWVzdBonLnRhbmsud29ya3NwYWNlLnYxLkludml0ZU1lbWJlclJlc3BvbnNlEmIKDUpvaW5Xb3Jrc3BhY2USJy50YW5rLndvcmtzcGFjZS52MS5Kb2luV29ya3NwYWNlUmVxdWVzdBooLnRhbmsud29ya3NwYWNlLnYxLkpvaW5Xb3Jrc3BhY2VSZXNwb25zZRJiCg1VcGRhdGVQcm9maWxlEicudGFuay53b3Jrc3BhY2UudjEuVXBkYXRlUHJvZmlsZVJlcXVlc3QaKC50YW5rLndvcmtzcGFjZS52MS5VcGRhdGVQcm9maWxlUmVzcG9uc2USZQoOR2V0UHJlZmVyZW5jZXMSKC50YW5rLndvcmtzcGFjZS52MS5HZXRQcmVmZXJlbmNlc1JlcXVlc3QaKS50YW5rLndvcmtzcGFjZS52MS5HZXRQcmVmZXJlbmNlc1Jlc3BvbnNlEm4KEVVwZGF0ZVByZWZlcmVuY2VzEisudGFuay53b3Jrc3BhY2UudjEuVXBkYXRlUHJlZmVyZW5jZXNSZXF1ZXN0GiwudGFuay53b3Jrc3BhY2UudjEuVXBkYXRlUHJlZmVyZW5jZXNSZXNwb25zZRJWCglMaXN0RW1vamkSIy50YW5rLndvcmtzcGFjZS52MS5MaXN0RW1vamlSZXF1ZXN0GiQudGFuay53b3Jrc3BhY2UudjEuTGlzdEVtb2ppUmVzcG9uc2USXAoLQ3JlYXRlRW1vamkSJS50YW5rLndvcmtzcGFjZS52MS5DcmVhdGVFbW9qaVJlcXVlc3QaJi50YW5rLndvcmtzcGFjZS52MS5DcmVhdGVFbW9qaVJlc3BvbnNlElwKC0RlbGV0ZUVtb2ppEiUudGFuay53b3Jrc3BhY2UudjEuRGVsZXRlRW1vamlSZXF1ZXN0GiYudGFuay53b3Jrc3BhY2UudjEuRGVsZXRlRW1vamlSZXNwb25zZRJlCg5MaXN0VXNlckdyb3VwcxIoLnRhbmsud29ya3NwYWNlLnYxLkxpc3RVc2VyR3JvdXBzUmVxdWVzdBopLnRhbmsud29ya3NwYWNlLnYxLkxpc3RVc2VyR3JvdXBzUmVzcG9uc2USaAoPQ3JlYXRlVXNlckdyb3VwEikudGFuay53b3Jrc3BhY2UudjEuQ3JlYXRlVXNlckdyb3VwUmVxdWVzdBoqLnRhbmsud29ya3NwYWNlLnYxLkNyZWF0ZVVzZXJHcm91cFJlc3BvbnNlEn0KFlVwZGF0ZVVzZXJHcm91cE1lbWJlcnMSMC50YW5rLndvcmtzcGFjZS52MS5VcGRhdGVVc2VyR3JvdXBNZW1iZXJzUmVxdWVzdBoxLnRhbmsud29ya3NwYWNlLnYxLlVwZGF0ZVVzZXJHcm91cE1lbWJlcnNSZXNwb25zZRJoCg9EZWxldGVVc2VyR3JvdXASKS50YW5rLndvcmtzcGFjZS52MS5EZWxldGVVc2VyR3JvdXBSZXF1ZXN0GioudGFuay53b3Jrc3BhY2UudjEuRGVsZXRlVXNlckdyb3VwUmVzcG9uc2USYgoNTGlzdEJvb2ttYXJrcxInLnRhbmsud29ya3NwYWNlLnYxLkxpc3RCb29rbWFya3NSZXF1ZXN0GigudGFuay53b3Jrc3BhY2UudjEuTGlzdEJvb2ttYXJrc1Jlc3BvbnNlElwKC0FkZEJvb2ttYXJrEiUudGFuay53b3Jrc3BhY2UudjEuQWRkQm9va21hcmtSZXF1ZXN0GiYudGFuay53b3Jrc3BhY2UudjEuQWRkQm9va21hcmtSZXNwb25zZRJlCg5SZW1vdmVCb29rbWFyaxIoLnRhbmsud29ya3NwYWNlLnYxLlJlbW92ZUJvb2ttYXJrUmVxdWVzdBopLnRhbmsud29ya3NwYWNlLnYxLlJlbW92ZUJvb2ttYXJrUmVzcG9uc2USUwoIR2V0RHJhZnQSIi50YW5rLndvcmtzcGFjZS52MS5HZXREcmFmdFJlcXVlc3QaIy50YW5rLndvcmtzcGFjZS52MS5HZXREcmFmdFJlc3BvbnNlElMKCFB1dERyYWZ0EiIudGFuay53b3Jrc3BhY2UudjEuUHV0RHJhZnRSZXF1ZXN0GiMudGFuay53b3Jrc3BhY2UudjEuUHV0RHJhZnRSZXNwb25zZRJcCgtEZWxldGVEcmFmdBIlLnRhbmsud29ya3NwYWNlLnYxLkRlbGV0ZURyYWZ0UmVxdWVzdBomLnRhbmsud29ya3NwYWNlLnYxLkRlbGV0ZURyYWZ0UmVzcG9uc2USWQoKTGlzdERyYWZ0cxIkLnRhbmsud29ya3NwYWNlLnYxLkxpc3REcmFmdHNSZXF1ZXN0GiUudGFuay53b3Jrc3BhY2UudjEuTGlzdERyYWZ0c1Jlc3BvbnNlEmgKD1NjaGVkdWxlTWVzc2FnZRIpLnRhbmsud29ya3NwYWNlLnYxLlNjaGVkdWxlTWVzc2FnZVJlcXVlc3QaKi50YW5rLndvcmtzcGFjZS52MS5TY2hlZHVsZU1lc3NhZ2VSZXNwb25zZRJiCg1MaXN0U2NoZWR1bGVkEicudGFuay53b3Jrc3BhY2UudjEuTGlzdFNjaGVkdWxlZFJlcXVlc3QaKC50YW5rLndvcmtzcGFjZS52MS5MaXN0U2NoZWR1bGVkUmVzcG9uc2USaAoPQ2FuY2VsU2NoZWR1bGVkEikudGFuay53b3Jrc3BhY2UudjEuQ2FuY2VsU2NoZWR1bGVkUmVxdWVzdBoqLnRhbmsud29ya3NwYWNlLnYxLkNhbmNlbFNjaGVkdWxlZFJlc3BvbnNlQugBChVjb20udGFuay53b3Jrc3BhY2UudjFCDldvcmtzcGFjZVByb3RvUAFaWWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3Rhbmsvd29ya3NwYWNlL3YxO3dvcmtzcGFjZXYxogIDVFdYqgIRVGFuay5Xb3Jrc3BhY2UuVjHKAhFUYW5rXFdvcmtzcGFjZVxWMeICHVRhbmtcV29ya3NwYWNlXFYxXEdQQk1ldGFkYXRh6gITVGFuazo6V29ya3NwYWNlOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_auth_v1_auth, file_tank_channel_v1_channel, file_tank_richtext_v1_richtext]);
 
 /**
  * @generated from message tank.workspace.v1.Workspace
@@ -217,6 +219,9 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
   members: Member[];
 
   /**
+   * Changes whenever the workspace's custom emoji set changes; clients
+   * refetch ListEmoji when it differs from their cached value.
+   *
    * @generated from field: string custom_emoji_hash = 6;
    */
   customEmojiHash: string;
@@ -225,6 +230,16 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
    * @generated from field: int32 unread_notification_count = 7;
    */
   unreadNotificationCount: number;
+
+  /**
+   * @generated from field: tank.workspace.v1.Preferences preferences = 8;
+   */
+  preferences?: Preferences;
+
+  /**
+   * @generated from field: repeated tank.workspace.v1.UserGroup user_groups = 9;
+   */
+  userGroups: UserGroup[];
 };
 
 /**
@@ -367,6 +382,1174 @@ export const JoinWorkspaceResponseSchema: GenMessage<JoinWorkspaceResponse> = /*
   messageDesc(file_tank_workspace_v1_workspace, 13);
 
 /**
+ * Unset fields are left unchanged. display_name and avatar are global to the
+ * user; title and timezone are per workspace.
+ *
+ * @generated from message tank.workspace.v1.UpdateProfileRequest
+ */
+export type UpdateProfileRequest = Message<"tank.workspace.v1.UpdateProfileRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: optional string display_name = 2;
+   */
+  displayName?: string;
+
+  /**
+   * @generated from field: optional string title = 3;
+   */
+  title?: string;
+
+  /**
+   * IANA name
+   *
+   * @generated from field: optional string timezone = 4;
+   */
+  timezone?: string;
+
+  /**
+   * empty string clears the avatar
+   *
+   * @generated from field: optional string avatar_file_id = 5;
+   */
+  avatarFileId?: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.UpdateProfileRequest.
+ * Use `create(UpdateProfileRequestSchema)` to create a new message.
+ */
+export const UpdateProfileRequestSchema: GenMessage<UpdateProfileRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 14);
+
+/**
+ * @generated from message tank.workspace.v1.UpdateProfileResponse
+ */
+export type UpdateProfileResponse = Message<"tank.workspace.v1.UpdateProfileResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.Member me = 1;
+   */
+  me?: Member;
+};
+
+/**
+ * Describes the message tank.workspace.v1.UpdateProfileResponse.
+ * Use `create(UpdateProfileResponseSchema)` to create a new message.
+ */
+export const UpdateProfileResponseSchema: GenMessage<UpdateProfileResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 15);
+
+/**
+ * Armor Mode (do not disturb) on a schedule, in the user's timezone.
+ *
+ * @generated from message tank.workspace.v1.ArmorModeSchedule
+ */
+export type ArmorModeSchedule = Message<"tank.workspace.v1.ArmorModeSchedule"> & {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * "HH:MM" local time
+   *
+   * @generated from field: string start = 2;
+   */
+  start: string;
+
+  /**
+   * "HH:MM" local time; earlier than start = overnight
+   *
+   * @generated from field: string end = 3;
+   */
+  end: string;
+
+  /**
+   * 0 = Sunday .. 6 = Saturday; empty = every day
+   *
+   * @generated from field: repeated int32 days = 4;
+   */
+  days: number[];
+
+  /**
+   * IANA name; empty = profile timezone
+   *
+   * @generated from field: string timezone = 5;
+   */
+  timezone: string;
+
+  /**
+   * let critical alerts (agent_needs_input, DMs) through
+   *
+   * @generated from field: bool allow_critical = 6;
+   */
+  allowCritical: boolean;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ArmorModeSchedule.
+ * Use `create(ArmorModeScheduleSchema)` to create a new message.
+ */
+export const ArmorModeScheduleSchema: GenMessage<ArmorModeSchedule> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 16);
+
+/**
+ * @generated from message tank.workspace.v1.Preferences
+ */
+export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
+  /**
+   * channels without their own preference
+   *
+   * @generated from field: tank.channel.v1.NotifyPref notify_default = 1;
+   */
+  notifyDefault: NotifyPref;
+
+  /**
+   * DMs and group DMs
+   *
+   * @generated from field: tank.channel.v1.NotifyPref dm_notify_default = 2;
+   */
+  dmNotifyDefault: NotifyPref;
+
+  /**
+   * system | light | dark
+   *
+   * @generated from field: string theme = 3;
+   */
+  theme: string;
+
+  /**
+   * @generated from field: tank.workspace.v1.ArmorModeSchedule armor_mode_schedule = 4;
+   */
+  armorModeSchedule?: ArmorModeSchedule;
+
+  /**
+   * @generated from field: bool email_digest = 5;
+   */
+  emailDigest: boolean;
+
+  /**
+   * @generated from field: bool desktop_sound = 6;
+   */
+  desktopSound: boolean;
+
+  /**
+   * @generated from field: bool push_on_mention_only = 7;
+   */
+  pushOnMentionOnly: boolean;
+};
+
+/**
+ * Describes the message tank.workspace.v1.Preferences.
+ * Use `create(PreferencesSchema)` to create a new message.
+ */
+export const PreferencesSchema: GenMessage<Preferences> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 17);
+
+/**
+ * @generated from message tank.workspace.v1.GetPreferencesRequest
+ */
+export type GetPreferencesRequest = Message<"tank.workspace.v1.GetPreferencesRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.GetPreferencesRequest.
+ * Use `create(GetPreferencesRequestSchema)` to create a new message.
+ */
+export const GetPreferencesRequestSchema: GenMessage<GetPreferencesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 18);
+
+/**
+ * @generated from message tank.workspace.v1.GetPreferencesResponse
+ */
+export type GetPreferencesResponse = Message<"tank.workspace.v1.GetPreferencesResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.Preferences preferences = 1;
+   */
+  preferences?: Preferences;
+};
+
+/**
+ * Describes the message tank.workspace.v1.GetPreferencesResponse.
+ * Use `create(GetPreferencesResponseSchema)` to create a new message.
+ */
+export const GetPreferencesResponseSchema: GenMessage<GetPreferencesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 19);
+
+/**
+ * @generated from message tank.workspace.v1.UpdatePreferencesRequest
+ */
+export type UpdatePreferencesRequest = Message<"tank.workspace.v1.UpdatePreferencesRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * replaces the stored preferences
+   *
+   * @generated from field: tank.workspace.v1.Preferences preferences = 2;
+   */
+  preferences?: Preferences;
+};
+
+/**
+ * Describes the message tank.workspace.v1.UpdatePreferencesRequest.
+ * Use `create(UpdatePreferencesRequestSchema)` to create a new message.
+ */
+export const UpdatePreferencesRequestSchema: GenMessage<UpdatePreferencesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 20);
+
+/**
+ * @generated from message tank.workspace.v1.UpdatePreferencesResponse
+ */
+export type UpdatePreferencesResponse = Message<"tank.workspace.v1.UpdatePreferencesResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.Preferences preferences = 1;
+   */
+  preferences?: Preferences;
+};
+
+/**
+ * Describes the message tank.workspace.v1.UpdatePreferencesResponse.
+ * Use `create(UpdatePreferencesResponseSchema)` to create a new message.
+ */
+export const UpdatePreferencesResponseSchema: GenMessage<UpdatePreferencesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 21);
+
+/**
+ * The image is a normal uploaded file readable by every workspace member.
+ *
+ * @generated from message tank.workspace.v1.CustomEmoji
+ */
+export type CustomEmoji = Message<"tank.workspace.v1.CustomEmoji"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string workspace_id = 2;
+   */
+  workspaceId: string;
+
+  /**
+   * :name:, unique per workspace
+   *
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string file_id = 4;
+   */
+  fileId: string;
+
+  /**
+   * @generated from field: string created_by = 5;
+   */
+  createdBy: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 6;
+   */
+  createdAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.workspace.v1.CustomEmoji.
+ * Use `create(CustomEmojiSchema)` to create a new message.
+ */
+export const CustomEmojiSchema: GenMessage<CustomEmoji> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 22);
+
+/**
+ * @generated from message tank.workspace.v1.ListEmojiRequest
+ */
+export type ListEmojiRequest = Message<"tank.workspace.v1.ListEmojiRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListEmojiRequest.
+ * Use `create(ListEmojiRequestSchema)` to create a new message.
+ */
+export const ListEmojiRequestSchema: GenMessage<ListEmojiRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 23);
+
+/**
+ * @generated from message tank.workspace.v1.ListEmojiResponse
+ */
+export type ListEmojiResponse = Message<"tank.workspace.v1.ListEmojiResponse"> & {
+  /**
+   * @generated from field: repeated tank.workspace.v1.CustomEmoji emoji = 1;
+   */
+  emoji: CustomEmoji[];
+
+  /**
+   * matches GetBootstrap.custom_emoji_hash
+   *
+   * @generated from field: string hash = 2;
+   */
+  hash: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListEmojiResponse.
+ * Use `create(ListEmojiResponseSchema)` to create a new message.
+ */
+export const ListEmojiResponseSchema: GenMessage<ListEmojiResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 24);
+
+/**
+ * @generated from message tank.workspace.v1.CreateEmojiRequest
+ */
+export type CreateEmojiRequest = Message<"tank.workspace.v1.CreateEmojiRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string file_id = 3;
+   */
+  fileId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.CreateEmojiRequest.
+ * Use `create(CreateEmojiRequestSchema)` to create a new message.
+ */
+export const CreateEmojiRequestSchema: GenMessage<CreateEmojiRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 25);
+
+/**
+ * @generated from message tank.workspace.v1.CreateEmojiResponse
+ */
+export type CreateEmojiResponse = Message<"tank.workspace.v1.CreateEmojiResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.CustomEmoji emoji = 1;
+   */
+  emoji?: CustomEmoji;
+};
+
+/**
+ * Describes the message tank.workspace.v1.CreateEmojiResponse.
+ * Use `create(CreateEmojiResponseSchema)` to create a new message.
+ */
+export const CreateEmojiResponseSchema: GenMessage<CreateEmojiResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 26);
+
+/**
+ * @generated from message tank.workspace.v1.DeleteEmojiRequest
+ */
+export type DeleteEmojiRequest = Message<"tank.workspace.v1.DeleteEmojiRequest"> & {
+  /**
+   * @generated from field: string emoji_id = 1;
+   */
+  emojiId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.DeleteEmojiRequest.
+ * Use `create(DeleteEmojiRequestSchema)` to create a new message.
+ */
+export const DeleteEmojiRequestSchema: GenMessage<DeleteEmojiRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 27);
+
+/**
+ * @generated from message tank.workspace.v1.DeleteEmojiResponse
+ */
+export type DeleteEmojiResponse = Message<"tank.workspace.v1.DeleteEmojiResponse"> & {
+};
+
+/**
+ * Describes the message tank.workspace.v1.DeleteEmojiResponse.
+ * Use `create(DeleteEmojiResponseSchema)` to create a new message.
+ */
+export const DeleteEmojiResponseSchema: GenMessage<DeleteEmojiResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 28);
+
+/**
+ * @handle that expands to its members when mentioned.
+ *
+ * @generated from message tank.workspace.v1.UserGroup
+ */
+export type UserGroup = Message<"tank.workspace.v1.UserGroup"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string workspace_id = 2;
+   */
+  workspaceId: string;
+
+  /**
+   * without the @
+   *
+   * @generated from field: string handle = 3;
+   */
+  handle: string;
+
+  /**
+   * @generated from field: string name = 4;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string description = 5;
+   */
+  description: string;
+
+  /**
+   * @generated from field: repeated string member_ids = 6;
+   */
+  memberIds: string[];
+
+  /**
+   * @generated from field: string created_by = 7;
+   */
+  createdBy: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 8;
+   */
+  createdAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.workspace.v1.UserGroup.
+ * Use `create(UserGroupSchema)` to create a new message.
+ */
+export const UserGroupSchema: GenMessage<UserGroup> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 29);
+
+/**
+ * @generated from message tank.workspace.v1.ListUserGroupsRequest
+ */
+export type ListUserGroupsRequest = Message<"tank.workspace.v1.ListUserGroupsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListUserGroupsRequest.
+ * Use `create(ListUserGroupsRequestSchema)` to create a new message.
+ */
+export const ListUserGroupsRequestSchema: GenMessage<ListUserGroupsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 30);
+
+/**
+ * @generated from message tank.workspace.v1.ListUserGroupsResponse
+ */
+export type ListUserGroupsResponse = Message<"tank.workspace.v1.ListUserGroupsResponse"> & {
+  /**
+   * @generated from field: repeated tank.workspace.v1.UserGroup groups = 1;
+   */
+  groups: UserGroup[];
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListUserGroupsResponse.
+ * Use `create(ListUserGroupsResponseSchema)` to create a new message.
+ */
+export const ListUserGroupsResponseSchema: GenMessage<ListUserGroupsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 31);
+
+/**
+ * @generated from message tank.workspace.v1.CreateUserGroupRequest
+ */
+export type CreateUserGroupRequest = Message<"tank.workspace.v1.CreateUserGroupRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string handle = 2;
+   */
+  handle: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string description = 4;
+   */
+  description: string;
+
+  /**
+   * @generated from field: repeated string member_ids = 5;
+   */
+  memberIds: string[];
+};
+
+/**
+ * Describes the message tank.workspace.v1.CreateUserGroupRequest.
+ * Use `create(CreateUserGroupRequestSchema)` to create a new message.
+ */
+export const CreateUserGroupRequestSchema: GenMessage<CreateUserGroupRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 32);
+
+/**
+ * @generated from message tank.workspace.v1.CreateUserGroupResponse
+ */
+export type CreateUserGroupResponse = Message<"tank.workspace.v1.CreateUserGroupResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.UserGroup group = 1;
+   */
+  group?: UserGroup;
+};
+
+/**
+ * Describes the message tank.workspace.v1.CreateUserGroupResponse.
+ * Use `create(CreateUserGroupResponseSchema)` to create a new message.
+ */
+export const CreateUserGroupResponseSchema: GenMessage<CreateUserGroupResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 33);
+
+/**
+ * @generated from message tank.workspace.v1.UpdateUserGroupMembersRequest
+ */
+export type UpdateUserGroupMembersRequest = Message<"tank.workspace.v1.UpdateUserGroupMembersRequest"> & {
+  /**
+   * @generated from field: string group_id = 1;
+   */
+  groupId: string;
+
+  /**
+   * replaces the member list
+   *
+   * @generated from field: repeated string member_ids = 2;
+   */
+  memberIds: string[];
+};
+
+/**
+ * Describes the message tank.workspace.v1.UpdateUserGroupMembersRequest.
+ * Use `create(UpdateUserGroupMembersRequestSchema)` to create a new message.
+ */
+export const UpdateUserGroupMembersRequestSchema: GenMessage<UpdateUserGroupMembersRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 34);
+
+/**
+ * @generated from message tank.workspace.v1.UpdateUserGroupMembersResponse
+ */
+export type UpdateUserGroupMembersResponse = Message<"tank.workspace.v1.UpdateUserGroupMembersResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.UserGroup group = 1;
+   */
+  group?: UserGroup;
+};
+
+/**
+ * Describes the message tank.workspace.v1.UpdateUserGroupMembersResponse.
+ * Use `create(UpdateUserGroupMembersResponseSchema)` to create a new message.
+ */
+export const UpdateUserGroupMembersResponseSchema: GenMessage<UpdateUserGroupMembersResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 35);
+
+/**
+ * @generated from message tank.workspace.v1.DeleteUserGroupRequest
+ */
+export type DeleteUserGroupRequest = Message<"tank.workspace.v1.DeleteUserGroupRequest"> & {
+  /**
+   * @generated from field: string group_id = 1;
+   */
+  groupId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.DeleteUserGroupRequest.
+ * Use `create(DeleteUserGroupRequestSchema)` to create a new message.
+ */
+export const DeleteUserGroupRequestSchema: GenMessage<DeleteUserGroupRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 36);
+
+/**
+ * @generated from message tank.workspace.v1.DeleteUserGroupResponse
+ */
+export type DeleteUserGroupResponse = Message<"tank.workspace.v1.DeleteUserGroupResponse"> & {
+};
+
+/**
+ * Describes the message tank.workspace.v1.DeleteUserGroupResponse.
+ * Use `create(DeleteUserGroupResponseSchema)` to create a new message.
+ */
+export const DeleteUserGroupResponseSchema: GenMessage<DeleteUserGroupResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 37);
+
+/**
+ * @generated from message tank.workspace.v1.ChannelBookmark
+ */
+export type ChannelBookmark = Message<"tank.workspace.v1.ChannelBookmark"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string channel_id = 2;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string title = 3;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string url = 4;
+   */
+  url: string;
+
+  /**
+   * @generated from field: string emoji = 5;
+   */
+  emoji: string;
+
+  /**
+   * @generated from field: string created_by = 6;
+   */
+  createdBy: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 7;
+   */
+  createdAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ChannelBookmark.
+ * Use `create(ChannelBookmarkSchema)` to create a new message.
+ */
+export const ChannelBookmarkSchema: GenMessage<ChannelBookmark> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 38);
+
+/**
+ * @generated from message tank.workspace.v1.ListBookmarksRequest
+ */
+export type ListBookmarksRequest = Message<"tank.workspace.v1.ListBookmarksRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListBookmarksRequest.
+ * Use `create(ListBookmarksRequestSchema)` to create a new message.
+ */
+export const ListBookmarksRequestSchema: GenMessage<ListBookmarksRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 39);
+
+/**
+ * @generated from message tank.workspace.v1.ListBookmarksResponse
+ */
+export type ListBookmarksResponse = Message<"tank.workspace.v1.ListBookmarksResponse"> & {
+  /**
+   * @generated from field: repeated tank.workspace.v1.ChannelBookmark bookmarks = 1;
+   */
+  bookmarks: ChannelBookmark[];
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListBookmarksResponse.
+ * Use `create(ListBookmarksResponseSchema)` to create a new message.
+ */
+export const ListBookmarksResponseSchema: GenMessage<ListBookmarksResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 40);
+
+/**
+ * @generated from message tank.workspace.v1.AddBookmarkRequest
+ */
+export type AddBookmarkRequest = Message<"tank.workspace.v1.AddBookmarkRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string url = 3;
+   */
+  url: string;
+
+  /**
+   * @generated from field: string emoji = 4;
+   */
+  emoji: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.AddBookmarkRequest.
+ * Use `create(AddBookmarkRequestSchema)` to create a new message.
+ */
+export const AddBookmarkRequestSchema: GenMessage<AddBookmarkRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 41);
+
+/**
+ * @generated from message tank.workspace.v1.AddBookmarkResponse
+ */
+export type AddBookmarkResponse = Message<"tank.workspace.v1.AddBookmarkResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.ChannelBookmark bookmark = 1;
+   */
+  bookmark?: ChannelBookmark;
+};
+
+/**
+ * Describes the message tank.workspace.v1.AddBookmarkResponse.
+ * Use `create(AddBookmarkResponseSchema)` to create a new message.
+ */
+export const AddBookmarkResponseSchema: GenMessage<AddBookmarkResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 42);
+
+/**
+ * @generated from message tank.workspace.v1.RemoveBookmarkRequest
+ */
+export type RemoveBookmarkRequest = Message<"tank.workspace.v1.RemoveBookmarkRequest"> & {
+  /**
+   * @generated from field: string bookmark_id = 1;
+   */
+  bookmarkId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.RemoveBookmarkRequest.
+ * Use `create(RemoveBookmarkRequestSchema)` to create a new message.
+ */
+export const RemoveBookmarkRequestSchema: GenMessage<RemoveBookmarkRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 43);
+
+/**
+ * @generated from message tank.workspace.v1.RemoveBookmarkResponse
+ */
+export type RemoveBookmarkResponse = Message<"tank.workspace.v1.RemoveBookmarkResponse"> & {
+};
+
+/**
+ * Describes the message tank.workspace.v1.RemoveBookmarkResponse.
+ * Use `create(RemoveBookmarkResponseSchema)` to create a new message.
+ */
+export const RemoveBookmarkResponseSchema: GenMessage<RemoveBookmarkResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 44);
+
+/**
+ * One draft per (user, channel) or (user, thread). Private to the user.
+ *
+ * @generated from message tank.workspace.v1.Draft
+ */
+export type Draft = Message<"tank.workspace.v1.Draft"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * empty for the channel composer
+   *
+   * @generated from field: string thread_root_id = 2;
+   */
+  threadRootId: string;
+
+  /**
+   * @generated from field: tank.richtext.v1.RichText rich_text = 3;
+   */
+  richText?: RichText;
+
+  /**
+   * @generated from field: string text = 4;
+   */
+  text: string;
+
+  /**
+   * @generated from field: repeated string file_ids = 5;
+   */
+  fileIds: string[];
+
+  /**
+   * @generated from field: google.protobuf.Timestamp updated_at = 6;
+   */
+  updatedAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.workspace.v1.Draft.
+ * Use `create(DraftSchema)` to create a new message.
+ */
+export const DraftSchema: GenMessage<Draft> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 45);
+
+/**
+ * @generated from message tank.workspace.v1.GetDraftRequest
+ */
+export type GetDraftRequest = Message<"tank.workspace.v1.GetDraftRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string thread_root_id = 2;
+   */
+  threadRootId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.GetDraftRequest.
+ * Use `create(GetDraftRequestSchema)` to create a new message.
+ */
+export const GetDraftRequestSchema: GenMessage<GetDraftRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 46);
+
+/**
+ * @generated from message tank.workspace.v1.GetDraftResponse
+ */
+export type GetDraftResponse = Message<"tank.workspace.v1.GetDraftResponse"> & {
+  /**
+   * unset when there is no draft
+   *
+   * @generated from field: tank.workspace.v1.Draft draft = 1;
+   */
+  draft?: Draft;
+};
+
+/**
+ * Describes the message tank.workspace.v1.GetDraftResponse.
+ * Use `create(GetDraftResponseSchema)` to create a new message.
+ */
+export const GetDraftResponseSchema: GenMessage<GetDraftResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 47);
+
+/**
+ * @generated from message tank.workspace.v1.PutDraftRequest
+ */
+export type PutDraftRequest = Message<"tank.workspace.v1.PutDraftRequest"> & {
+  /**
+   * @generated from field: tank.workspace.v1.Draft draft = 1;
+   */
+  draft?: Draft;
+};
+
+/**
+ * Describes the message tank.workspace.v1.PutDraftRequest.
+ * Use `create(PutDraftRequestSchema)` to create a new message.
+ */
+export const PutDraftRequestSchema: GenMessage<PutDraftRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 48);
+
+/**
+ * @generated from message tank.workspace.v1.PutDraftResponse
+ */
+export type PutDraftResponse = Message<"tank.workspace.v1.PutDraftResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.Draft draft = 1;
+   */
+  draft?: Draft;
+};
+
+/**
+ * Describes the message tank.workspace.v1.PutDraftResponse.
+ * Use `create(PutDraftResponseSchema)` to create a new message.
+ */
+export const PutDraftResponseSchema: GenMessage<PutDraftResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 49);
+
+/**
+ * @generated from message tank.workspace.v1.DeleteDraftRequest
+ */
+export type DeleteDraftRequest = Message<"tank.workspace.v1.DeleteDraftRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string thread_root_id = 2;
+   */
+  threadRootId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.DeleteDraftRequest.
+ * Use `create(DeleteDraftRequestSchema)` to create a new message.
+ */
+export const DeleteDraftRequestSchema: GenMessage<DeleteDraftRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 50);
+
+/**
+ * @generated from message tank.workspace.v1.DeleteDraftResponse
+ */
+export type DeleteDraftResponse = Message<"tank.workspace.v1.DeleteDraftResponse"> & {
+};
+
+/**
+ * Describes the message tank.workspace.v1.DeleteDraftResponse.
+ * Use `create(DeleteDraftResponseSchema)` to create a new message.
+ */
+export const DeleteDraftResponseSchema: GenMessage<DeleteDraftResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 51);
+
+/**
+ * @generated from message tank.workspace.v1.ListDraftsRequest
+ */
+export type ListDraftsRequest = Message<"tank.workspace.v1.ListDraftsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListDraftsRequest.
+ * Use `create(ListDraftsRequestSchema)` to create a new message.
+ */
+export const ListDraftsRequestSchema: GenMessage<ListDraftsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 52);
+
+/**
+ * @generated from message tank.workspace.v1.ListDraftsResponse
+ */
+export type ListDraftsResponse = Message<"tank.workspace.v1.ListDraftsResponse"> & {
+  /**
+   * @generated from field: repeated tank.workspace.v1.Draft drafts = 1;
+   */
+  drafts: Draft[];
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListDraftsResponse.
+ * Use `create(ListDraftsResponseSchema)` to create a new message.
+ */
+export const ListDraftsResponseSchema: GenMessage<ListDraftsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 53);
+
+/**
+ * @generated from message tank.workspace.v1.ScheduledMessage
+ */
+export type ScheduledMessage = Message<"tank.workspace.v1.ScheduledMessage"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string workspace_id = 2;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string channel_id = 3;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string thread_root_id = 4;
+   */
+  threadRootId: string;
+
+  /**
+   * @generated from field: string text = 5;
+   */
+  text: string;
+
+  /**
+   * @generated from field: tank.richtext.v1.RichText rich_text = 6;
+   */
+  richText?: RichText;
+
+  /**
+   * @generated from field: repeated string file_ids = 7;
+   */
+  fileIds: string[];
+
+  /**
+   * @generated from field: google.protobuf.Timestamp send_at = 8;
+   */
+  sendAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 9;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp sent_at = 10;
+   */
+  sentAt?: Timestamp;
+
+  /**
+   * @generated from field: string sent_message_id = 11;
+   */
+  sentMessageId: string;
+
+  /**
+   * set when sending failed (archived channel, left channel, ...)
+   *
+   * @generated from field: string error = 12;
+   */
+  error: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ScheduledMessage.
+ * Use `create(ScheduledMessageSchema)` to create a new message.
+ */
+export const ScheduledMessageSchema: GenMessage<ScheduledMessage> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 54);
+
+/**
+ * @generated from message tank.workspace.v1.ScheduleMessageRequest
+ */
+export type ScheduleMessageRequest = Message<"tank.workspace.v1.ScheduleMessageRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string thread_root_id = 2;
+   */
+  threadRootId: string;
+
+  /**
+   * @generated from field: string text = 3;
+   */
+  text: string;
+
+  /**
+   * @generated from field: tank.richtext.v1.RichText rich_text = 4;
+   */
+  richText?: RichText;
+
+  /**
+   * @generated from field: repeated string file_ids = 5;
+   */
+  fileIds: string[];
+
+  /**
+   * @generated from field: google.protobuf.Timestamp send_at = 6;
+   */
+  sendAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ScheduleMessageRequest.
+ * Use `create(ScheduleMessageRequestSchema)` to create a new message.
+ */
+export const ScheduleMessageRequestSchema: GenMessage<ScheduleMessageRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 55);
+
+/**
+ * @generated from message tank.workspace.v1.ScheduleMessageResponse
+ */
+export type ScheduleMessageResponse = Message<"tank.workspace.v1.ScheduleMessageResponse"> & {
+  /**
+   * @generated from field: tank.workspace.v1.ScheduledMessage scheduled = 1;
+   */
+  scheduled?: ScheduledMessage;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ScheduleMessageResponse.
+ * Use `create(ScheduleMessageResponseSchema)` to create a new message.
+ */
+export const ScheduleMessageResponseSchema: GenMessage<ScheduleMessageResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 56);
+
+/**
+ * @generated from message tank.workspace.v1.ListScheduledRequest
+ */
+export type ListScheduledRequest = Message<"tank.workspace.v1.ListScheduledRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListScheduledRequest.
+ * Use `create(ListScheduledRequestSchema)` to create a new message.
+ */
+export const ListScheduledRequestSchema: GenMessage<ListScheduledRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 57);
+
+/**
+ * @generated from message tank.workspace.v1.ListScheduledResponse
+ */
+export type ListScheduledResponse = Message<"tank.workspace.v1.ListScheduledResponse"> & {
+  /**
+   * pending only, soonest first
+   *
+   * @generated from field: repeated tank.workspace.v1.ScheduledMessage scheduled = 1;
+   */
+  scheduled: ScheduledMessage[];
+};
+
+/**
+ * Describes the message tank.workspace.v1.ListScheduledResponse.
+ * Use `create(ListScheduledResponseSchema)` to create a new message.
+ */
+export const ListScheduledResponseSchema: GenMessage<ListScheduledResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 58);
+
+/**
+ * @generated from message tank.workspace.v1.CancelScheduledRequest
+ */
+export type CancelScheduledRequest = Message<"tank.workspace.v1.CancelScheduledRequest"> & {
+  /**
+   * @generated from field: string scheduled_id = 1;
+   */
+  scheduledId: string;
+};
+
+/**
+ * Describes the message tank.workspace.v1.CancelScheduledRequest.
+ * Use `create(CancelScheduledRequestSchema)` to create a new message.
+ */
+export const CancelScheduledRequestSchema: GenMessage<CancelScheduledRequest> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 59);
+
+/**
+ * @generated from message tank.workspace.v1.CancelScheduledResponse
+ */
+export type CancelScheduledResponse = Message<"tank.workspace.v1.CancelScheduledResponse"> & {
+};
+
+/**
+ * Describes the message tank.workspace.v1.CancelScheduledResponse.
+ * Use `create(CancelScheduledResponseSchema)` to create a new message.
+ */
+export const CancelScheduledResponseSchema: GenMessage<CancelScheduledResponse> = /*@__PURE__*/
+  messageDesc(file_tank_workspace_v1_workspace, 60);
+
+/**
  * @generated from enum tank.workspace.v1.Role
  */
 export enum Role {
@@ -458,6 +1641,166 @@ export const WorkspaceService: GenService<{
     methodKind: "unary";
     input: typeof JoinWorkspaceRequestSchema;
     output: typeof JoinWorkspaceResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.UpdateProfile
+   */
+  updateProfile: {
+    methodKind: "unary";
+    input: typeof UpdateProfileRequestSchema;
+    output: typeof UpdateProfileResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.GetPreferences
+   */
+  getPreferences: {
+    methodKind: "unary";
+    input: typeof GetPreferencesRequestSchema;
+    output: typeof GetPreferencesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.UpdatePreferences
+   */
+  updatePreferences: {
+    methodKind: "unary";
+    input: typeof UpdatePreferencesRequestSchema;
+    output: typeof UpdatePreferencesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.ListEmoji
+   */
+  listEmoji: {
+    methodKind: "unary";
+    input: typeof ListEmojiRequestSchema;
+    output: typeof ListEmojiResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.CreateEmoji
+   */
+  createEmoji: {
+    methodKind: "unary";
+    input: typeof CreateEmojiRequestSchema;
+    output: typeof CreateEmojiResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.DeleteEmoji
+   */
+  deleteEmoji: {
+    methodKind: "unary";
+    input: typeof DeleteEmojiRequestSchema;
+    output: typeof DeleteEmojiResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.ListUserGroups
+   */
+  listUserGroups: {
+    methodKind: "unary";
+    input: typeof ListUserGroupsRequestSchema;
+    output: typeof ListUserGroupsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.CreateUserGroup
+   */
+  createUserGroup: {
+    methodKind: "unary";
+    input: typeof CreateUserGroupRequestSchema;
+    output: typeof CreateUserGroupResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.UpdateUserGroupMembers
+   */
+  updateUserGroupMembers: {
+    methodKind: "unary";
+    input: typeof UpdateUserGroupMembersRequestSchema;
+    output: typeof UpdateUserGroupMembersResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.DeleteUserGroup
+   */
+  deleteUserGroup: {
+    methodKind: "unary";
+    input: typeof DeleteUserGroupRequestSchema;
+    output: typeof DeleteUserGroupResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.ListBookmarks
+   */
+  listBookmarks: {
+    methodKind: "unary";
+    input: typeof ListBookmarksRequestSchema;
+    output: typeof ListBookmarksResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.AddBookmark
+   */
+  addBookmark: {
+    methodKind: "unary";
+    input: typeof AddBookmarkRequestSchema;
+    output: typeof AddBookmarkResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.RemoveBookmark
+   */
+  removeBookmark: {
+    methodKind: "unary";
+    input: typeof RemoveBookmarkRequestSchema;
+    output: typeof RemoveBookmarkResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.GetDraft
+   */
+  getDraft: {
+    methodKind: "unary";
+    input: typeof GetDraftRequestSchema;
+    output: typeof GetDraftResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.PutDraft
+   */
+  putDraft: {
+    methodKind: "unary";
+    input: typeof PutDraftRequestSchema;
+    output: typeof PutDraftResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.DeleteDraft
+   */
+  deleteDraft: {
+    methodKind: "unary";
+    input: typeof DeleteDraftRequestSchema;
+    output: typeof DeleteDraftResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.ListDrafts
+   */
+  listDrafts: {
+    methodKind: "unary";
+    input: typeof ListDraftsRequestSchema;
+    output: typeof ListDraftsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.ScheduleMessage
+   */
+  scheduleMessage: {
+    methodKind: "unary";
+    input: typeof ScheduleMessageRequestSchema;
+    output: typeof ScheduleMessageResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.ListScheduled
+   */
+  listScheduled: {
+    methodKind: "unary";
+    input: typeof ListScheduledRequestSchema;
+    output: typeof ListScheduledResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.workspace.v1.WorkspaceService.CancelScheduled
+   */
+  cancelScheduled: {
+    methodKind: "unary";
+    input: typeof CancelScheduledRequestSchema;
+    output: typeof CancelScheduledResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_workspace_v1_workspace, 0);

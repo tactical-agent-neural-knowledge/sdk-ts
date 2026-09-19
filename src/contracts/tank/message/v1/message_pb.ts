@@ -10,6 +10,8 @@ import type { PrincipalKind } from "../../auth/v1/auth_pb.js";
 import { file_tank_auth_v1_auth } from "../../auth/v1/auth_pb.js";
 import type { BlockAction, Blocks } from "../../blocks/v1/blocks_pb.js";
 import { file_tank_blocks_v1_blocks } from "../../blocks/v1/blocks_pb.js";
+import type { File } from "../../files/v1/files_pb.js";
+import { file_tank_files_v1_files } from "../../files/v1/files_pb.js";
 import type { RichText } from "../../richtext/v1/richtext_pb.js";
 import { file_tank_richtext_v1_richtext } from "../../richtext/v1/richtext_pb.js";
 import type { JsonObject, Message as Message$1 } from "@bufbuild/protobuf";
@@ -18,7 +20,7 @@ import type { JsonObject, Message as Message$1 } from "@bufbuild/protobuf";
  * Describes the file tank/message/v1/message.proto.
  */
 export const file_tank_message_v1_message: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL21lc3NhZ2UvdjEvbWVzc2FnZS5wcm90bxIPdGFuay5tZXNzYWdlLnYxIksKCFJlYWN0aW9uEg0KBWVtb2ppGAEgASgJEg0KBWNvdW50GAIgASgFEhAKCHVzZXJfaWRzGAMgAygJEg8KB3JlYWN0ZWQYBCABKAgi3AUKB01lc3NhZ2USCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEhIKCmNoYW5uZWxfaWQYAyABKAkSEwoLY2hhbm5lbF9zZXEYBCABKAMSFgoOdGhyZWFkX3Jvb3RfaWQYBSABKAkSEgoKdGhyZWFkX3NlcRgGIAEoAxIRCglhdXRob3JfaWQYByABKAkSMAoLYXV0aG9yX2tpbmQYCCABKA4yGy50YW5rLmF1dGgudjEuUHJpbmNpcGFsS2luZBIqCgRraW5kGAkgASgOMhwudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2VLaW5kEhUKDWNsaWVudF9tc2dfaWQYCiABKAkSDAoEdGV4dBgLIAEoCRItCglyaWNoX3RleHQYDCABKAsyGi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0EiYKBmJsb2NrcxgNIAEoCzIWLnRhbmsuYmxvY2tzLnYxLkJsb2NrcxITCgttZW50aW9uX2lkcxgOIAMoCRIQCghmaWxlX2lkcxgPIAMoCRIsCglyZWFjdGlvbnMYECADKAsyGS50YW5rLm1lc3NhZ2UudjEuUmVhY3Rpb24SLQoJZWRpdGVkX2F0GBEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpkZWxldGVkX2F0GBIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBITCgtyZXBseV9jb3VudBgTIAEoBRIxCg1sYXN0X3JlcGx5X2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIWCg5yZXBseV91c2VyX2lkcxgVIAMoCRIpCghtZXRhZGF0YRgWIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSLgoKY3JlYXRlZF9hdBgXIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAi8QIKElBvc3RNZXNzYWdlUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhYKDnRocmVhZF9yb290X2lkGAIgASgJEhUKDWNsaWVudF9tc2dfaWQYAyABKAkSDAoEdGV4dBgEIAEoCRItCglyaWNoX3RleHQYBSABKAsyGi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0EiYKBmJsb2NrcxgGIAEoCzIWLnRhbmsuYmxvY2tzLnYxLkJsb2NrcxIQCghmaWxlX2lkcxgHIAMoCRIqCgRraW5kGAggASgOMhwudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2VLaW5kEikKCG1ldGFkYXRhGAkgASgLMhcuZ29vZ2xlLnByb3RvYnVmLlN0cnVjdBIcChRhbHNvX3NlbmRfdG9fY2hhbm5lbBgKIAEoCBIRCgllcGhlbWVyYWwYCyABKAgSGQoRZXBoZW1lcmFsX3VzZXJfaWQYDCABKAkiQAoTUG9zdE1lc3NhZ2VSZXNwb25zZRIpCgdtZXNzYWdlGAEgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2UizgEKFFVwZGF0ZU1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkSDAoEdGV4dBgCIAEoCRItCglyaWNoX3RleHQYAyABKAsyGi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0EiYKBmJsb2NrcxgEIAEoCzIWLnRhbmsuYmxvY2tzLnYxLkJsb2NrcxIpCghtZXRhZGF0YRgFIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSEgoKc3RyZWFtX3NlcRgGIAEoAyJCChVVcGRhdGVNZXNzYWdlUmVzcG9uc2USKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIioKFERlbGV0ZU1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiFwoVRGVsZXRlTWVzc2FnZVJlc3BvbnNlIowBChNMaXN0TWVzc2FnZXNSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEgoKYmVmb3JlX3NlcRgCIAEoAxIRCglhZnRlcl9zZXEYAyABKAMSDQoFbGltaXQYBCABKAUSKwoFa2luZHMYBSADKA4yHC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZUtpbmQiVAoUTGlzdE1lc3NhZ2VzUmVzcG9uc2USKgoIbWVzc2FnZXMYASADKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZRIQCghoYXNfbW9yZRgCIAEoCCJTChBHZXRUaHJlYWRSZXF1ZXN0EhYKDnRocmVhZF9yb290X2lkGAEgASgJEhgKEGFmdGVyX3RocmVhZF9zZXEYAiABKAMSDQoFbGltaXQYAyABKAUieAoRR2V0VGhyZWFkUmVzcG9uc2USJgoEcm9vdBgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEikKB3JlcGxpZXMYAiADKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZRIQCghoYXNfbW9yZRgDIAEoCCInChFHZXRNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIj8KEkdldE1lc3NhZ2VSZXNwb25zZRIpCgdtZXNzYWdlGAEgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2UiXgoPTWFya1JlYWRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSCwoDc2VxGAIgASgDEhYKDnRocmVhZF9yb290X2lkGAMgASgJEhIKCnRocmVhZF9zZXEYBCABKAMiEgoQTWFya1JlYWRSZXNwb25zZSI3ChJBZGRSZWFjdGlvblJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCRINCgVlbW9qaRgCIAEoCSIVChNBZGRSZWFjdGlvblJlc3BvbnNlIjoKFVJlbW92ZVJlYWN0aW9uUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJEg0KBWVtb2ppGAIgASgJIhgKFlJlbW92ZVJlYWN0aW9uUmVzcG9uc2UiRAoWU3Vic2NyaWJlVGhyZWFkUmVxdWVzdBIWCg50aHJlYWRfcm9vdF9pZBgBIAEoCRISCgpzdWJzY3JpYmVkGAIgASgIIhkKF1N1YnNjcmliZVRocmVhZFJlc3BvbnNlIkUKFlBvc3RCbG9ja0FjdGlvblJlcXVlc3QSKwoGYWN0aW9uGAEgASgLMhsudGFuay5ibG9ja3MudjEuQmxvY2tBY3Rpb24iGQoXUG9zdEJsb2NrQWN0aW9uUmVzcG9uc2UqkgEKC01lc3NhZ2VLaW5kEhwKGE1FU1NBR0VfS0lORF9VTlNQRUNJRklFRBAAEhgKFE1FU1NBR0VfS0lORF9NRVNTQUdFEAESFwoTTUVTU0FHRV9LSU5EX1NZU1RFTRACEhwKGE1FU1NBR0VfS0lORF9BR0VOVF9FVkVOVBADEhQKEE1FU1NBR0VfS0lORF9CT1QQBDKJCAoLQ2hhdFNlcnZpY2USWAoLUG9zdE1lc3NhZ2USIy50YW5rLm1lc3NhZ2UudjEuUG9zdE1lc3NhZ2VSZXF1ZXN0GiQudGFuay5tZXNzYWdlLnYxLlBvc3RNZXNzYWdlUmVzcG9uc2USXgoNVXBkYXRlTWVzc2FnZRIlLnRhbmsubWVzc2FnZS52MS5VcGRhdGVNZXNzYWdlUmVxdWVzdBomLnRhbmsubWVzc2FnZS52MS5VcGRhdGVNZXNzYWdlUmVzcG9uc2USXgoNRGVsZXRlTWVzc2FnZRIlLnRhbmsubWVzc2FnZS52MS5EZWxldGVNZXNzYWdlUmVxdWVzdBomLnRhbmsubWVzc2FnZS52MS5EZWxldGVNZXNzYWdlUmVzcG9uc2USWwoMTGlzdE1lc3NhZ2VzEiQudGFuay5tZXNzYWdlLnYxLkxpc3RNZXNzYWdlc1JlcXVlc3QaJS50YW5rLm1lc3NhZ2UudjEuTGlzdE1lc3NhZ2VzUmVzcG9uc2USUgoJR2V0VGhyZWFkEiEudGFuay5tZXNzYWdlLnYxLkdldFRocmVhZFJlcXVlc3QaIi50YW5rLm1lc3NhZ2UudjEuR2V0VGhyZWFkUmVzcG9uc2USVQoKR2V0TWVzc2FnZRIiLnRhbmsubWVzc2FnZS52MS5HZXRNZXNzYWdlUmVxdWVzdBojLnRhbmsubWVzc2FnZS52MS5HZXRNZXNzYWdlUmVzcG9uc2USTwoITWFya1JlYWQSIC50YW5rLm1lc3NhZ2UudjEuTWFya1JlYWRSZXF1ZXN0GiEudGFuay5tZXNzYWdlLnYxLk1hcmtSZWFkUmVzcG9uc2USWAoLQWRkUmVhY3Rpb24SIy50YW5rLm1lc3NhZ2UudjEuQWRkUmVhY3Rpb25SZXF1ZXN0GiQudGFuay5tZXNzYWdlLnYxLkFkZFJlYWN0aW9uUmVzcG9uc2USYQoOUmVtb3ZlUmVhY3Rpb24SJi50YW5rLm1lc3NhZ2UudjEuUmVtb3ZlUmVhY3Rpb25SZXF1ZXN0GicudGFuay5tZXNzYWdlLnYxLlJlbW92ZVJlYWN0aW9uUmVzcG9uc2USZAoPU3Vic2NyaWJlVGhyZWFkEicudGFuay5tZXNzYWdlLnYxLlN1YnNjcmliZVRocmVhZFJlcXVlc3QaKC50YW5rLm1lc3NhZ2UudjEuU3Vic2NyaWJlVGhyZWFkUmVzcG9uc2USZAoPUG9zdEJsb2NrQWN0aW9uEicudGFuay5tZXNzYWdlLnYxLlBvc3RCbG9ja0FjdGlvblJlcXVlc3QaKC50YW5rLm1lc3NhZ2UudjEuUG9zdEJsb2NrQWN0aW9uUmVzcG9uc2VC2AEKE2NvbS50YW5rLm1lc3NhZ2UudjFCDE1lc3NhZ2VQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL21lc3NhZ2UvdjE7bWVzc2FnZXYxogIDVE1YqgIPVGFuay5NZXNzYWdlLlYxygIPVGFua1xNZXNzYWdlXFYx4gIbVGFua1xNZXNzYWdlXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6TWVzc2FnZTo6VjFiBnByb3RvMw", [file_google_protobuf_struct, file_google_protobuf_timestamp, file_tank_auth_v1_auth, file_tank_blocks_v1_blocks, file_tank_richtext_v1_richtext]);
+  fileDesc("Ch10YW5rL21lc3NhZ2UvdjEvbWVzc2FnZS5wcm90bxIPdGFuay5tZXNzYWdlLnYxIksKCFJlYWN0aW9uEg0KBWVtb2ppGAEgASgJEg0KBWNvdW50GAIgASgFEhAKCHVzZXJfaWRzGAMgAygJEg8KB3JlYWN0ZWQYBCABKAginwYKB01lc3NhZ2USCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEhIKCmNoYW5uZWxfaWQYAyABKAkSEwoLY2hhbm5lbF9zZXEYBCABKAMSFgoOdGhyZWFkX3Jvb3RfaWQYBSABKAkSEgoKdGhyZWFkX3NlcRgGIAEoAxIRCglhdXRob3JfaWQYByABKAkSMAoLYXV0aG9yX2tpbmQYCCABKA4yGy50YW5rLmF1dGgudjEuUHJpbmNpcGFsS2luZBIqCgRraW5kGAkgASgOMhwudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2VLaW5kEhUKDWNsaWVudF9tc2dfaWQYCiABKAkSDAoEdGV4dBgLIAEoCRItCglyaWNoX3RleHQYDCABKAsyGi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0EiYKBmJsb2NrcxgNIAEoCzIWLnRhbmsuYmxvY2tzLnYxLkJsb2NrcxITCgttZW50aW9uX2lkcxgOIAMoCRIQCghmaWxlX2lkcxgPIAMoCRIsCglyZWFjdGlvbnMYECADKAsyGS50YW5rLm1lc3NhZ2UudjEuUmVhY3Rpb24SLQoJZWRpdGVkX2F0GBEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpkZWxldGVkX2F0GBIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBITCgtyZXBseV9jb3VudBgTIAEoBRIxCg1sYXN0X3JlcGx5X2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIWCg5yZXBseV91c2VyX2lkcxgVIAMoCRIpCghtZXRhZGF0YRgWIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSLgoKY3JlYXRlZF9hdBgXIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGcGlubmVkGBggASgIEg0KBXNhdmVkGBkgASgIEiIKBWZpbGVzGBogAygLMhMudGFuay5maWxlcy52MS5GaWxlIoYDChJQb3N0TWVzc2FnZVJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRIVCg1jbGllbnRfbXNnX2lkGAMgASgJEgwKBHRleHQYBCABKAkSLQoJcmljaF90ZXh0GAUgASgLMhoudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dBImCgZibG9ja3MYBiABKAsyFi50YW5rLmJsb2Nrcy52MS5CbG9ja3MSEAoIZmlsZV9pZHMYByADKAkSKgoEa2luZBgIIAEoDjIcLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlS2luZBIpCghtZXRhZGF0YRgJIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSHAoUYWxzb19zZW5kX3RvX2NoYW5uZWwYCiABKAgSEQoJZXBoZW1lcmFsGAsgASgIEhkKEWVwaGVtZXJhbF91c2VyX2lkGAwgASgJEhMKC21lbnRpb25faWRzGA0gAygJIkAKE1Bvc3RNZXNzYWdlUmVzcG9uc2USKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIs4BChRVcGRhdGVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJEgwKBHRleHQYAiABKAkSLQoJcmljaF90ZXh0GAMgASgLMhoudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dBImCgZibG9ja3MYBCABKAsyFi50YW5rLmJsb2Nrcy52MS5CbG9ja3MSKQoIbWV0YWRhdGEYBSABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0EhIKCnN0cmVhbV9zZXEYBiABKAMiQgoVVXBkYXRlTWVzc2FnZVJlc3BvbnNlEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSIqChREZWxldGVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIhcKFURlbGV0ZU1lc3NhZ2VSZXNwb25zZSKMAQoTTGlzdE1lc3NhZ2VzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKCmJlZm9yZV9zZXEYAiABKAMSEQoJYWZ0ZXJfc2VxGAMgASgDEg0KBWxpbWl0GAQgASgFEisKBWtpbmRzGAUgAygOMhwudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2VLaW5kIlQKFExpc3RNZXNzYWdlc1Jlc3BvbnNlEioKCG1lc3NhZ2VzGAEgAygLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USEAoIaGFzX21vcmUYAiABKAgiUwoQR2V0VGhyZWFkUmVxdWVzdBIWCg50aHJlYWRfcm9vdF9pZBgBIAEoCRIYChBhZnRlcl90aHJlYWRfc2VxGAIgASgDEg0KBWxpbWl0GAMgASgFIngKEUdldFRocmVhZFJlc3BvbnNlEiYKBHJvb3QYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZRIpCgdyZXBsaWVzGAIgAygLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USEAoIaGFzX21vcmUYAyABKAgiJwoRR2V0TWVzc2FnZVJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCSI/ChJHZXRNZXNzYWdlUmVzcG9uc2USKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIl4KD01hcmtSZWFkUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEgsKA3NlcRgCIAEoAxIWCg50aHJlYWRfcm9vdF9pZBgDIAEoCRISCgp0aHJlYWRfc2VxGAQgASgDIhIKEE1hcmtSZWFkUmVzcG9uc2UiNwoSQWRkUmVhY3Rpb25SZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkSDQoFZW1vamkYAiABKAkiFQoTQWRkUmVhY3Rpb25SZXNwb25zZSI6ChVSZW1vdmVSZWFjdGlvblJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCRINCgVlbW9qaRgCIAEoCSIYChZSZW1vdmVSZWFjdGlvblJlc3BvbnNlIkQKFlN1YnNjcmliZVRocmVhZFJlcXVlc3QSFgoOdGhyZWFkX3Jvb3RfaWQYASABKAkSEgoKc3Vic2NyaWJlZBgCIAEoCCIZChdTdWJzY3JpYmVUaHJlYWRSZXNwb25zZSJFChZQb3N0QmxvY2tBY3Rpb25SZXF1ZXN0EisKBmFjdGlvbhgBIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkJsb2NrQWN0aW9uIhkKF1Bvc3RCbG9ja0FjdGlvblJlc3BvbnNlInIKA1BpbhIpCgdtZXNzYWdlGAEgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USEQoJcGlubmVkX2J5GAIgASgJEi0KCXBpbm5lZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiJwoRUGluTWVzc2FnZVJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCSI3ChJQaW5NZXNzYWdlUmVzcG9uc2USIQoDcGluGAEgASgLMhQudGFuay5tZXNzYWdlLnYxLlBpbiIpChNVbnBpbk1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiFgoUVW5waW5NZXNzYWdlUmVzcG9uc2UiRAoPTGlzdFBpbnNSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDgoGY3Vyc29yGAIgASgJEg0KBWxpbWl0GAMgASgFIksKEExpc3RQaW5zUmVzcG9uc2USIgoEcGlucxgBIAMoCzIULnRhbmsubWVzc2FnZS52MS5QaW4SEwoLbmV4dF9jdXJzb3IYAiABKAkiZAoJU2F2ZWRJdGVtEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZRIsCghzYXZlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiKAoSU2F2ZU1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiPwoTU2F2ZU1lc3NhZ2VSZXNwb25zZRIoCgRpdGVtGAEgASgLMhoudGFuay5tZXNzYWdlLnYxLlNhdmVkSXRlbSIqChRVbnNhdmVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIhcKFVVuc2F2ZU1lc3NhZ2VSZXNwb25zZSJHChBMaXN0U2F2ZWRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIOCgZjdXJzb3IYAiABKAkSDQoFbGltaXQYAyABKAUiUwoRTGlzdFNhdmVkUmVzcG9uc2USKQoFaXRlbXMYASADKAsyGi50YW5rLm1lc3NhZ2UudjEuU2F2ZWRJdGVtEhMKC25leHRfY3Vyc29yGAIgASgJKpIBCgtNZXNzYWdlS2luZBIcChhNRVNTQUdFX0tJTkRfVU5TUEVDSUZJRUQQABIYChRNRVNTQUdFX0tJTkRfTUVTU0FHRRABEhcKE01FU1NBR0VfS0lORF9TWVNURU0QAhIcChhNRVNTQUdFX0tJTkRfQUdFTlRfRVZFTlQQAxIUChBNRVNTQUdFX0tJTkRfQk9UEAQynAwKC0NoYXRTZXJ2aWNlElgKC1Bvc3RNZXNzYWdlEiMudGFuay5tZXNzYWdlLnYxLlBvc3RNZXNzYWdlUmVxdWVzdBokLnRhbmsubWVzc2FnZS52MS5Qb3N0TWVzc2FnZVJlc3BvbnNlEl4KDVVwZGF0ZU1lc3NhZ2USJS50YW5rLm1lc3NhZ2UudjEuVXBkYXRlTWVzc2FnZVJlcXVlc3QaJi50YW5rLm1lc3NhZ2UudjEuVXBkYXRlTWVzc2FnZVJlc3BvbnNlEl4KDURlbGV0ZU1lc3NhZ2USJS50YW5rLm1lc3NhZ2UudjEuRGVsZXRlTWVzc2FnZVJlcXVlc3QaJi50YW5rLm1lc3NhZ2UudjEuRGVsZXRlTWVzc2FnZVJlc3BvbnNlElsKDExpc3RNZXNzYWdlcxIkLnRhbmsubWVzc2FnZS52MS5MaXN0TWVzc2FnZXNSZXF1ZXN0GiUudGFuay5tZXNzYWdlLnYxLkxpc3RNZXNzYWdlc1Jlc3BvbnNlElIKCUdldFRocmVhZBIhLnRhbmsubWVzc2FnZS52MS5HZXRUaHJlYWRSZXF1ZXN0GiIudGFuay5tZXNzYWdlLnYxLkdldFRocmVhZFJlc3BvbnNlElUKCkdldE1lc3NhZ2USIi50YW5rLm1lc3NhZ2UudjEuR2V0TWVzc2FnZVJlcXVlc3QaIy50YW5rLm1lc3NhZ2UudjEuR2V0TWVzc2FnZVJlc3BvbnNlEk8KCE1hcmtSZWFkEiAudGFuay5tZXNzYWdlLnYxLk1hcmtSZWFkUmVxdWVzdBohLnRhbmsubWVzc2FnZS52MS5NYXJrUmVhZFJlc3BvbnNlElgKC0FkZFJlYWN0aW9uEiMudGFuay5tZXNzYWdlLnYxLkFkZFJlYWN0aW9uUmVxdWVzdBokLnRhbmsubWVzc2FnZS52MS5BZGRSZWFjdGlvblJlc3BvbnNlEmEKDlJlbW92ZVJlYWN0aW9uEiYudGFuay5tZXNzYWdlLnYxLlJlbW92ZVJlYWN0aW9uUmVxdWVzdBonLnRhbmsubWVzc2FnZS52MS5SZW1vdmVSZWFjdGlvblJlc3BvbnNlEmQKD1N1YnNjcmliZVRocmVhZBInLnRhbmsubWVzc2FnZS52MS5TdWJzY3JpYmVUaHJlYWRSZXF1ZXN0GigudGFuay5tZXNzYWdlLnYxLlN1YnNjcmliZVRocmVhZFJlc3BvbnNlEmQKD1Bvc3RCbG9ja0FjdGlvbhInLnRhbmsubWVzc2FnZS52MS5Qb3N0QmxvY2tBY3Rpb25SZXF1ZXN0GigudGFuay5tZXNzYWdlLnYxLlBvc3RCbG9ja0FjdGlvblJlc3BvbnNlElUKClBpbk1lc3NhZ2USIi50YW5rLm1lc3NhZ2UudjEuUGluTWVzc2FnZVJlcXVlc3QaIy50YW5rLm1lc3NhZ2UudjEuUGluTWVzc2FnZVJlc3BvbnNlElsKDFVucGluTWVzc2FnZRIkLnRhbmsubWVzc2FnZS52MS5VbnBpbk1lc3NhZ2VSZXF1ZXN0GiUudGFuay5tZXNzYWdlLnYxLlVucGluTWVzc2FnZVJlc3BvbnNlEk8KCExpc3RQaW5zEiAudGFuay5tZXNzYWdlLnYxLkxpc3RQaW5zUmVxdWVzdBohLnRhbmsubWVzc2FnZS52MS5MaXN0UGluc1Jlc3BvbnNlElgKC1NhdmVNZXNzYWdlEiMudGFuay5tZXNzYWdlLnYxLlNhdmVNZXNzYWdlUmVxdWVzdBokLnRhbmsubWVzc2FnZS52MS5TYXZlTWVzc2FnZVJlc3BvbnNlEl4KDVVuc2F2ZU1lc3NhZ2USJS50YW5rLm1lc3NhZ2UudjEuVW5zYXZlTWVzc2FnZVJlcXVlc3QaJi50YW5rLm1lc3NhZ2UudjEuVW5zYXZlTWVzc2FnZVJlc3BvbnNlElIKCUxpc3RTYXZlZBIhLnRhbmsubWVzc2FnZS52MS5MaXN0U2F2ZWRSZXF1ZXN0GiIudGFuay5tZXNzYWdlLnYxLkxpc3RTYXZlZFJlc3BvbnNlQtgBChNjb20udGFuay5tZXNzYWdlLnYxQgxNZXNzYWdlUHJvdG9QAVpVZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9tZXNzYWdlL3YxO21lc3NhZ2V2MaICA1RNWKoCD1RhbmsuTWVzc2FnZS5WMcoCD1RhbmtcTWVzc2FnZVxWMeICG1RhbmtcTWVzc2FnZVxWMVxHUEJNZXRhZGF0YeoCEVRhbms6Ok1lc3NhZ2U6OlYxYgZwcm90bzM", [file_google_protobuf_struct, file_google_protobuf_timestamp, file_tank_auth_v1_auth, file_tank_blocks_v1_blocks, file_tank_files_v1_files, file_tank_richtext_v1_richtext]);
 
 /**
  * @generated from message tank.message.v1.Reaction
@@ -178,6 +180,27 @@ export type Message = Message$1<"tank.message.v1.Message"> & {
    * @generated from field: google.protobuf.Timestamp created_at = 23;
    */
   createdAt?: Timestamp;
+
+  /**
+   * pinned in its channel
+   *
+   * @generated from field: bool pinned = 24;
+   */
+  pinned: boolean;
+
+  /**
+   * saved by the caller
+   *
+   * @generated from field: bool saved = 25;
+   */
+  saved: boolean;
+
+  /**
+   * The attached files (same order as file_ids), populated on every read path.
+   *
+   * @generated from field: repeated tank.files.v1.File files = 26;
+   */
+  files: File[];
 };
 
 /**
@@ -254,6 +277,14 @@ export type PostMessageRequest = Message$1<"tank.message.v1.PostMessageRequest">
    * @generated from field: string ephemeral_user_id = 12;
    */
   ephemeralUserId: string;
+
+  /**
+   * Explicit @user mentions merged with those found in rich_text; honoured by
+   * the notify worker even when the client sends plain text.
+   *
+   * @generated from field: repeated string mention_ids = 13;
+   */
+  mentionIds: string[];
 };
 
 /**
@@ -701,6 +732,289 @@ export const PostBlockActionResponseSchema: GenMessage<PostBlockActionResponse> 
   messageDesc(file_tank_message_v1_message, 23);
 
 /**
+ * A channel pin. Anyone who can post in the channel may pin or unpin.
+ *
+ * @generated from message tank.message.v1.Pin
+ */
+export type Pin = Message$1<"tank.message.v1.Pin"> & {
+  /**
+   * @generated from field: tank.message.v1.Message message = 1;
+   */
+  message?: Message;
+
+  /**
+   * @generated from field: string pinned_by = 2;
+   */
+  pinnedBy: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp pinned_at = 3;
+   */
+  pinnedAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.message.v1.Pin.
+ * Use `create(PinSchema)` to create a new message.
+ */
+export const PinSchema: GenMessage<Pin> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 24);
+
+/**
+ * @generated from message tank.message.v1.PinMessageRequest
+ */
+export type PinMessageRequest = Message$1<"tank.message.v1.PinMessageRequest"> & {
+  /**
+   * @generated from field: string message_id = 1;
+   */
+  messageId: string;
+};
+
+/**
+ * Describes the message tank.message.v1.PinMessageRequest.
+ * Use `create(PinMessageRequestSchema)` to create a new message.
+ */
+export const PinMessageRequestSchema: GenMessage<PinMessageRequest> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 25);
+
+/**
+ * @generated from message tank.message.v1.PinMessageResponse
+ */
+export type PinMessageResponse = Message$1<"tank.message.v1.PinMessageResponse"> & {
+  /**
+   * @generated from field: tank.message.v1.Pin pin = 1;
+   */
+  pin?: Pin;
+};
+
+/**
+ * Describes the message tank.message.v1.PinMessageResponse.
+ * Use `create(PinMessageResponseSchema)` to create a new message.
+ */
+export const PinMessageResponseSchema: GenMessage<PinMessageResponse> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 26);
+
+/**
+ * @generated from message tank.message.v1.UnpinMessageRequest
+ */
+export type UnpinMessageRequest = Message$1<"tank.message.v1.UnpinMessageRequest"> & {
+  /**
+   * @generated from field: string message_id = 1;
+   */
+  messageId: string;
+};
+
+/**
+ * Describes the message tank.message.v1.UnpinMessageRequest.
+ * Use `create(UnpinMessageRequestSchema)` to create a new message.
+ */
+export const UnpinMessageRequestSchema: GenMessage<UnpinMessageRequest> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 27);
+
+/**
+ * @generated from message tank.message.v1.UnpinMessageResponse
+ */
+export type UnpinMessageResponse = Message$1<"tank.message.v1.UnpinMessageResponse"> & {
+};
+
+/**
+ * Describes the message tank.message.v1.UnpinMessageResponse.
+ * Use `create(UnpinMessageResponseSchema)` to create a new message.
+ */
+export const UnpinMessageResponseSchema: GenMessage<UnpinMessageResponse> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 28);
+
+/**
+ * @generated from message tank.message.v1.ListPinsRequest
+ */
+export type ListPinsRequest = Message$1<"tank.message.v1.ListPinsRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * opaque; newest pin first
+   *
+   * @generated from field: string cursor = 2;
+   */
+  cursor: string;
+
+  /**
+   * @generated from field: int32 limit = 3;
+   */
+  limit: number;
+};
+
+/**
+ * Describes the message tank.message.v1.ListPinsRequest.
+ * Use `create(ListPinsRequestSchema)` to create a new message.
+ */
+export const ListPinsRequestSchema: GenMessage<ListPinsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 29);
+
+/**
+ * @generated from message tank.message.v1.ListPinsResponse
+ */
+export type ListPinsResponse = Message$1<"tank.message.v1.ListPinsResponse"> & {
+  /**
+   * @generated from field: repeated tank.message.v1.Pin pins = 1;
+   */
+  pins: Pin[];
+
+  /**
+   * @generated from field: string next_cursor = 2;
+   */
+  nextCursor: string;
+};
+
+/**
+ * Describes the message tank.message.v1.ListPinsResponse.
+ * Use `create(ListPinsResponseSchema)` to create a new message.
+ */
+export const ListPinsResponseSchema: GenMessage<ListPinsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 30);
+
+/**
+ * A message saved by the caller ("Saved items"); private to them.
+ *
+ * @generated from message tank.message.v1.SavedItem
+ */
+export type SavedItem = Message$1<"tank.message.v1.SavedItem"> & {
+  /**
+   * @generated from field: tank.message.v1.Message message = 1;
+   */
+  message?: Message;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp saved_at = 2;
+   */
+  savedAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.message.v1.SavedItem.
+ * Use `create(SavedItemSchema)` to create a new message.
+ */
+export const SavedItemSchema: GenMessage<SavedItem> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 31);
+
+/**
+ * @generated from message tank.message.v1.SaveMessageRequest
+ */
+export type SaveMessageRequest = Message$1<"tank.message.v1.SaveMessageRequest"> & {
+  /**
+   * @generated from field: string message_id = 1;
+   */
+  messageId: string;
+};
+
+/**
+ * Describes the message tank.message.v1.SaveMessageRequest.
+ * Use `create(SaveMessageRequestSchema)` to create a new message.
+ */
+export const SaveMessageRequestSchema: GenMessage<SaveMessageRequest> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 32);
+
+/**
+ * @generated from message tank.message.v1.SaveMessageResponse
+ */
+export type SaveMessageResponse = Message$1<"tank.message.v1.SaveMessageResponse"> & {
+  /**
+   * @generated from field: tank.message.v1.SavedItem item = 1;
+   */
+  item?: SavedItem;
+};
+
+/**
+ * Describes the message tank.message.v1.SaveMessageResponse.
+ * Use `create(SaveMessageResponseSchema)` to create a new message.
+ */
+export const SaveMessageResponseSchema: GenMessage<SaveMessageResponse> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 33);
+
+/**
+ * @generated from message tank.message.v1.UnsaveMessageRequest
+ */
+export type UnsaveMessageRequest = Message$1<"tank.message.v1.UnsaveMessageRequest"> & {
+  /**
+   * @generated from field: string message_id = 1;
+   */
+  messageId: string;
+};
+
+/**
+ * Describes the message tank.message.v1.UnsaveMessageRequest.
+ * Use `create(UnsaveMessageRequestSchema)` to create a new message.
+ */
+export const UnsaveMessageRequestSchema: GenMessage<UnsaveMessageRequest> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 34);
+
+/**
+ * @generated from message tank.message.v1.UnsaveMessageResponse
+ */
+export type UnsaveMessageResponse = Message$1<"tank.message.v1.UnsaveMessageResponse"> & {
+};
+
+/**
+ * Describes the message tank.message.v1.UnsaveMessageResponse.
+ * Use `create(UnsaveMessageResponseSchema)` to create a new message.
+ */
+export const UnsaveMessageResponseSchema: GenMessage<UnsaveMessageResponse> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 35);
+
+/**
+ * @generated from message tank.message.v1.ListSavedRequest
+ */
+export type ListSavedRequest = Message$1<"tank.message.v1.ListSavedRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * opaque; newest first
+   *
+   * @generated from field: string cursor = 2;
+   */
+  cursor: string;
+
+  /**
+   * @generated from field: int32 limit = 3;
+   */
+  limit: number;
+};
+
+/**
+ * Describes the message tank.message.v1.ListSavedRequest.
+ * Use `create(ListSavedRequestSchema)` to create a new message.
+ */
+export const ListSavedRequestSchema: GenMessage<ListSavedRequest> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 36);
+
+/**
+ * @generated from message tank.message.v1.ListSavedResponse
+ */
+export type ListSavedResponse = Message$1<"tank.message.v1.ListSavedResponse"> & {
+  /**
+   * @generated from field: repeated tank.message.v1.SavedItem items = 1;
+   */
+  items: SavedItem[];
+
+  /**
+   * @generated from field: string next_cursor = 2;
+   */
+  nextCursor: string;
+};
+
+/**
+ * Describes the message tank.message.v1.ListSavedResponse.
+ * Use `create(ListSavedResponseSchema)` to create a new message.
+ */
+export const ListSavedResponseSchema: GenMessage<ListSavedResponse> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 37);
+
+/**
  * @generated from enum tank.message.v1.MessageKind
  */
 export enum MessageKind {
@@ -827,6 +1141,54 @@ export const ChatService: GenService<{
     methodKind: "unary";
     input: typeof PostBlockActionRequestSchema;
     output: typeof PostBlockActionResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.message.v1.ChatService.PinMessage
+   */
+  pinMessage: {
+    methodKind: "unary";
+    input: typeof PinMessageRequestSchema;
+    output: typeof PinMessageResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.message.v1.ChatService.UnpinMessage
+   */
+  unpinMessage: {
+    methodKind: "unary";
+    input: typeof UnpinMessageRequestSchema;
+    output: typeof UnpinMessageResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.message.v1.ChatService.ListPins
+   */
+  listPins: {
+    methodKind: "unary";
+    input: typeof ListPinsRequestSchema;
+    output: typeof ListPinsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.message.v1.ChatService.SaveMessage
+   */
+  saveMessage: {
+    methodKind: "unary";
+    input: typeof SaveMessageRequestSchema;
+    output: typeof SaveMessageResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.message.v1.ChatService.UnsaveMessage
+   */
+  unsaveMessage: {
+    methodKind: "unary";
+    input: typeof UnsaveMessageRequestSchema;
+    output: typeof UnsaveMessageResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.message.v1.ChatService.ListSaved
+   */
+  listSaved: {
+    methodKind: "unary";
+    input: typeof ListSavedRequestSchema;
+    output: typeof ListSavedResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_message_v1_message, 0);

@@ -2,6 +2,7 @@ import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobu
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { PrincipalKind } from "../../auth/v1/auth_pb.js";
 import type { BlockAction, Blocks } from "../../blocks/v1/blocks_pb.js";
+import type { File } from "../../files/v1/files_pb.js";
 import type { RichText } from "../../richtext/v1/richtext_pb.js";
 import type { JsonObject, Message as Message$1 } from "@bufbuild/protobuf";
 /**
@@ -138,6 +139,24 @@ export type Message = Message$1<"tank.message.v1.Message"> & {
      * @generated from field: google.protobuf.Timestamp created_at = 23;
      */
     createdAt?: Timestamp;
+    /**
+     * pinned in its channel
+     *
+     * @generated from field: bool pinned = 24;
+     */
+    pinned: boolean;
+    /**
+     * saved by the caller
+     *
+     * @generated from field: bool saved = 25;
+     */
+    saved: boolean;
+    /**
+     * The attached files (same order as file_ids), populated on every read path.
+     *
+     * @generated from field: repeated tank.files.v1.File files = 26;
+     */
+    files: File[];
 };
 /**
  * Describes the message tank.message.v1.Message.
@@ -200,6 +219,13 @@ export type PostMessageRequest = Message$1<"tank.message.v1.PostMessageRequest">
      * @generated from field: string ephemeral_user_id = 12;
      */
     ephemeralUserId: string;
+    /**
+     * Explicit @user mentions merged with those found in rich_text; honoured by
+     * the notify worker even when the client sends plain text.
+     *
+     * @generated from field: repeated string mention_ids = 13;
+     */
+    mentionIds: string[];
 };
 /**
  * Describes the message tank.message.v1.PostMessageRequest.
@@ -555,6 +581,236 @@ export type PostBlockActionResponse = Message$1<"tank.message.v1.PostBlockAction
  */
 export declare const PostBlockActionResponseSchema: GenMessage<PostBlockActionResponse>;
 /**
+ * A channel pin. Anyone who can post in the channel may pin or unpin.
+ *
+ * @generated from message tank.message.v1.Pin
+ */
+export type Pin = Message$1<"tank.message.v1.Pin"> & {
+    /**
+     * @generated from field: tank.message.v1.Message message = 1;
+     */
+    message?: Message;
+    /**
+     * @generated from field: string pinned_by = 2;
+     */
+    pinnedBy: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp pinned_at = 3;
+     */
+    pinnedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.message.v1.Pin.
+ * Use `create(PinSchema)` to create a new message.
+ */
+export declare const PinSchema: GenMessage<Pin>;
+/**
+ * @generated from message tank.message.v1.PinMessageRequest
+ */
+export type PinMessageRequest = Message$1<"tank.message.v1.PinMessageRequest"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.message.v1.PinMessageRequest.
+ * Use `create(PinMessageRequestSchema)` to create a new message.
+ */
+export declare const PinMessageRequestSchema: GenMessage<PinMessageRequest>;
+/**
+ * @generated from message tank.message.v1.PinMessageResponse
+ */
+export type PinMessageResponse = Message$1<"tank.message.v1.PinMessageResponse"> & {
+    /**
+     * @generated from field: tank.message.v1.Pin pin = 1;
+     */
+    pin?: Pin;
+};
+/**
+ * Describes the message tank.message.v1.PinMessageResponse.
+ * Use `create(PinMessageResponseSchema)` to create a new message.
+ */
+export declare const PinMessageResponseSchema: GenMessage<PinMessageResponse>;
+/**
+ * @generated from message tank.message.v1.UnpinMessageRequest
+ */
+export type UnpinMessageRequest = Message$1<"tank.message.v1.UnpinMessageRequest"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.message.v1.UnpinMessageRequest.
+ * Use `create(UnpinMessageRequestSchema)` to create a new message.
+ */
+export declare const UnpinMessageRequestSchema: GenMessage<UnpinMessageRequest>;
+/**
+ * @generated from message tank.message.v1.UnpinMessageResponse
+ */
+export type UnpinMessageResponse = Message$1<"tank.message.v1.UnpinMessageResponse"> & {};
+/**
+ * Describes the message tank.message.v1.UnpinMessageResponse.
+ * Use `create(UnpinMessageResponseSchema)` to create a new message.
+ */
+export declare const UnpinMessageResponseSchema: GenMessage<UnpinMessageResponse>;
+/**
+ * @generated from message tank.message.v1.ListPinsRequest
+ */
+export type ListPinsRequest = Message$1<"tank.message.v1.ListPinsRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * opaque; newest pin first
+     *
+     * @generated from field: string cursor = 2;
+     */
+    cursor: string;
+    /**
+     * @generated from field: int32 limit = 3;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.message.v1.ListPinsRequest.
+ * Use `create(ListPinsRequestSchema)` to create a new message.
+ */
+export declare const ListPinsRequestSchema: GenMessage<ListPinsRequest>;
+/**
+ * @generated from message tank.message.v1.ListPinsResponse
+ */
+export type ListPinsResponse = Message$1<"tank.message.v1.ListPinsResponse"> & {
+    /**
+     * @generated from field: repeated tank.message.v1.Pin pins = 1;
+     */
+    pins: Pin[];
+    /**
+     * @generated from field: string next_cursor = 2;
+     */
+    nextCursor: string;
+};
+/**
+ * Describes the message tank.message.v1.ListPinsResponse.
+ * Use `create(ListPinsResponseSchema)` to create a new message.
+ */
+export declare const ListPinsResponseSchema: GenMessage<ListPinsResponse>;
+/**
+ * A message saved by the caller ("Saved items"); private to them.
+ *
+ * @generated from message tank.message.v1.SavedItem
+ */
+export type SavedItem = Message$1<"tank.message.v1.SavedItem"> & {
+    /**
+     * @generated from field: tank.message.v1.Message message = 1;
+     */
+    message?: Message;
+    /**
+     * @generated from field: google.protobuf.Timestamp saved_at = 2;
+     */
+    savedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.message.v1.SavedItem.
+ * Use `create(SavedItemSchema)` to create a new message.
+ */
+export declare const SavedItemSchema: GenMessage<SavedItem>;
+/**
+ * @generated from message tank.message.v1.SaveMessageRequest
+ */
+export type SaveMessageRequest = Message$1<"tank.message.v1.SaveMessageRequest"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.message.v1.SaveMessageRequest.
+ * Use `create(SaveMessageRequestSchema)` to create a new message.
+ */
+export declare const SaveMessageRequestSchema: GenMessage<SaveMessageRequest>;
+/**
+ * @generated from message tank.message.v1.SaveMessageResponse
+ */
+export type SaveMessageResponse = Message$1<"tank.message.v1.SaveMessageResponse"> & {
+    /**
+     * @generated from field: tank.message.v1.SavedItem item = 1;
+     */
+    item?: SavedItem;
+};
+/**
+ * Describes the message tank.message.v1.SaveMessageResponse.
+ * Use `create(SaveMessageResponseSchema)` to create a new message.
+ */
+export declare const SaveMessageResponseSchema: GenMessage<SaveMessageResponse>;
+/**
+ * @generated from message tank.message.v1.UnsaveMessageRequest
+ */
+export type UnsaveMessageRequest = Message$1<"tank.message.v1.UnsaveMessageRequest"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.message.v1.UnsaveMessageRequest.
+ * Use `create(UnsaveMessageRequestSchema)` to create a new message.
+ */
+export declare const UnsaveMessageRequestSchema: GenMessage<UnsaveMessageRequest>;
+/**
+ * @generated from message tank.message.v1.UnsaveMessageResponse
+ */
+export type UnsaveMessageResponse = Message$1<"tank.message.v1.UnsaveMessageResponse"> & {};
+/**
+ * Describes the message tank.message.v1.UnsaveMessageResponse.
+ * Use `create(UnsaveMessageResponseSchema)` to create a new message.
+ */
+export declare const UnsaveMessageResponseSchema: GenMessage<UnsaveMessageResponse>;
+/**
+ * @generated from message tank.message.v1.ListSavedRequest
+ */
+export type ListSavedRequest = Message$1<"tank.message.v1.ListSavedRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * opaque; newest first
+     *
+     * @generated from field: string cursor = 2;
+     */
+    cursor: string;
+    /**
+     * @generated from field: int32 limit = 3;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.message.v1.ListSavedRequest.
+ * Use `create(ListSavedRequestSchema)` to create a new message.
+ */
+export declare const ListSavedRequestSchema: GenMessage<ListSavedRequest>;
+/**
+ * @generated from message tank.message.v1.ListSavedResponse
+ */
+export type ListSavedResponse = Message$1<"tank.message.v1.ListSavedResponse"> & {
+    /**
+     * @generated from field: repeated tank.message.v1.SavedItem items = 1;
+     */
+    items: SavedItem[];
+    /**
+     * @generated from field: string next_cursor = 2;
+     */
+    nextCursor: string;
+};
+/**
+ * Describes the message tank.message.v1.ListSavedResponse.
+ * Use `create(ListSavedResponseSchema)` to create a new message.
+ */
+export declare const ListSavedResponseSchema: GenMessage<ListSavedResponse>;
+/**
  * @generated from enum tank.message.v1.MessageKind
  */
 export declare enum MessageKind {
@@ -674,5 +930,53 @@ export declare const ChatService: GenService<{
         methodKind: "unary";
         input: typeof PostBlockActionRequestSchema;
         output: typeof PostBlockActionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.PinMessage
+     */
+    pinMessage: {
+        methodKind: "unary";
+        input: typeof PinMessageRequestSchema;
+        output: typeof PinMessageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.UnpinMessage
+     */
+    unpinMessage: {
+        methodKind: "unary";
+        input: typeof UnpinMessageRequestSchema;
+        output: typeof UnpinMessageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.ListPins
+     */
+    listPins: {
+        methodKind: "unary";
+        input: typeof ListPinsRequestSchema;
+        output: typeof ListPinsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.SaveMessage
+     */
+    saveMessage: {
+        methodKind: "unary";
+        input: typeof SaveMessageRequestSchema;
+        output: typeof SaveMessageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.UnsaveMessage
+     */
+    unsaveMessage: {
+        methodKind: "unary";
+        input: typeof UnsaveMessageRequestSchema;
+        output: typeof UnsaveMessageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.ListSaved
+     */
+    listSaved: {
+        methodKind: "unary";
+        input: typeof ListSavedRequestSchema;
+        output: typeof ListSavedResponseSchema;
     };
 }>;

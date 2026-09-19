@@ -2,9 +2,12 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import type { BlockAction } from "../../blocks/v1/blocks_pb.js";
+import type { Channel, ChannelReadState } from "../../channel/v1/channel_pb.js";
 import type { File } from "../../files/v1/files_pb.js";
+import type { Huddle } from "../../huddle/v1/huddle_pb.js";
 import type { Message as Message$1 } from "../../message/v1/message_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
+import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/events/v1/events.proto.
@@ -188,6 +191,12 @@ export type ChannelUpdated = Message<"tank.events.v1.ChannelUpdated"> & {
      * @generated from field: string channel_id = 1;
      */
     channelId: string;
+    /**
+     * The channel after the change (name/topic/purpose/goal/archived_at).
+     *
+     * @generated from field: tank.channel.v1.Channel channel = 2;
+     */
+    channel?: Channel;
 };
 /**
  * Describes the message tank.events.v1.ChannelUpdated.
@@ -334,6 +343,8 @@ export type AgentStatus = Message<"tank.events.v1.AgentStatus"> & {
 export declare const AgentStatusSchema: GenMessage<AgentStatus>;
 /**
  * file.ready on evt.{ws}.user.{uploader}: the upload is verified and readable.
+ * Also published on evt.{ws}.ch.{channel} for every channel the file is
+ * shared in, and on evt.{ws}.thread.{root} when the sharing message is a reply.
  *
  * @generated from message tank.events.v1.FileReady
  */
@@ -432,3 +443,243 @@ export type NotificationCreated = Message<"tank.events.v1.NotificationCreated"> 
  * Use `create(NotificationCreatedSchema)` to create a new message.
  */
 export declare const NotificationCreatedSchema: GenMessage<NotificationCreated>;
+/**
+ * pin.changed on evt.{ws}.ch.{channel}.
+ *
+ * @generated from message tank.events.v1.PinChanged
+ */
+export type PinChanged = Message<"tank.events.v1.PinChanged"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string user_id = 3;
+     */
+    userId: string;
+    /**
+     * @generated from field: bool pinned = 4;
+     */
+    pinned: boolean;
+};
+/**
+ * Describes the message tank.events.v1.PinChanged.
+ * Use `create(PinChangedSchema)` to create a new message.
+ */
+export declare const PinChangedSchema: GenMessage<PinChanged>;
+/**
+ * emoji.changed on evt.{ws}.ws: the custom emoji set changed; hash matches
+ * GetBootstrap.custom_emoji_hash after the change.
+ *
+ * @generated from message tank.events.v1.EmojiChanged
+ */
+export type EmojiChanged = Message<"tank.events.v1.EmojiChanged"> & {
+    /**
+     * @generated from field: tank.workspace.v1.CustomEmoji emoji = 1;
+     */
+    emoji?: CustomEmoji;
+    /**
+     * @generated from field: bool deleted = 2;
+     */
+    deleted: boolean;
+    /**
+     * @generated from field: string hash = 3;
+     */
+    hash: string;
+};
+/**
+ * Describes the message tank.events.v1.EmojiChanged.
+ * Use `create(EmojiChangedSchema)` to create a new message.
+ */
+export declare const EmojiChangedSchema: GenMessage<EmojiChanged>;
+/**
+ * preferences.updated on evt.{ws}.user.{uid}: cross-device sync.
+ *
+ * @generated from message tank.events.v1.PreferencesUpdated
+ */
+export type PreferencesUpdated = Message<"tank.events.v1.PreferencesUpdated"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: tank.workspace.v1.Preferences preferences = 2;
+     */
+    preferences?: Preferences;
+};
+/**
+ * Describes the message tank.events.v1.PreferencesUpdated.
+ * Use `create(PreferencesUpdatedSchema)` to create a new message.
+ */
+export declare const PreferencesUpdatedSchema: GenMessage<PreferencesUpdated>;
+/**
+ * channel_preference.updated on evt.{ws}.user.{uid}.
+ *
+ * @generated from message tank.events.v1.ChannelPreferenceUpdated
+ */
+export type ChannelPreferenceUpdated = Message<"tank.events.v1.ChannelPreferenceUpdated"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: tank.channel.v1.ChannelReadState read_state = 2;
+     */
+    readState?: ChannelReadState;
+};
+/**
+ * Describes the message tank.events.v1.ChannelPreferenceUpdated.
+ * Use `create(ChannelPreferenceUpdatedSchema)` to create a new message.
+ */
+export declare const ChannelPreferenceUpdatedSchema: GenMessage<ChannelPreferenceUpdated>;
+/**
+ * draft.updated on evt.{ws}.user.{uid}: cross-device draft sync.
+ *
+ * @generated from message tank.events.v1.DraftUpdated
+ */
+export type DraftUpdated = Message<"tank.events.v1.DraftUpdated"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: tank.workspace.v1.Draft draft = 2;
+     */
+    draft?: Draft;
+    /**
+     * @generated from field: bool deleted = 3;
+     */
+    deleted: boolean;
+};
+/**
+ * Describes the message tank.events.v1.DraftUpdated.
+ * Use `create(DraftUpdatedSchema)` to create a new message.
+ */
+export declare const DraftUpdatedSchema: GenMessage<DraftUpdated>;
+/**
+ * scheduled_message.sent on evt.{ws}.user.{uid}: the scheduler posted (or
+ * failed to post) a scheduled message; message.created follows on the channel.
+ *
+ * @generated from message tank.events.v1.ScheduledMessageSent
+ */
+export type ScheduledMessageSent = Message<"tank.events.v1.ScheduledMessageSent"> & {
+    /**
+     * @generated from field: tank.workspace.v1.ScheduledMessage scheduled = 1;
+     */
+    scheduled?: ScheduledMessage;
+};
+/**
+ * Describes the message tank.events.v1.ScheduledMessageSent.
+ * Use `create(ScheduledMessageSentSchema)` to create a new message.
+ */
+export declare const ScheduledMessageSentSchema: GenMessage<ScheduledMessageSent>;
+/**
+ * user_group.updated on evt.{ws}.ws.
+ *
+ * @generated from message tank.events.v1.UserGroupUpdated
+ */
+export type UserGroupUpdated = Message<"tank.events.v1.UserGroupUpdated"> & {
+    /**
+     * @generated from field: tank.workspace.v1.UserGroup group = 1;
+     */
+    group?: UserGroup;
+    /**
+     * @generated from field: bool deleted = 2;
+     */
+    deleted: boolean;
+};
+/**
+ * Describes the message tank.events.v1.UserGroupUpdated.
+ * Use `create(UserGroupUpdatedSchema)` to create a new message.
+ */
+export declare const UserGroupUpdatedSchema: GenMessage<UserGroupUpdated>;
+/**
+ * bookmark.changed on evt.{ws}.ch.{channel}.
+ *
+ * @generated from message tank.events.v1.BookmarkChanged
+ */
+export type BookmarkChanged = Message<"tank.events.v1.BookmarkChanged"> & {
+    /**
+     * @generated from field: tank.workspace.v1.ChannelBookmark bookmark = 1;
+     */
+    bookmark?: ChannelBookmark;
+    /**
+     * @generated from field: bool removed = 2;
+     */
+    removed: boolean;
+};
+/**
+ * Describes the message tank.events.v1.BookmarkChanged.
+ * Use `create(BookmarkChangedSchema)` to create a new message.
+ */
+export declare const BookmarkChangedSchema: GenMessage<BookmarkChanged>;
+/**
+ * member.updated on evt.{ws}.ws: a member changed their profile (display
+ * name, avatar, title, timezone).
+ *
+ * @generated from message tank.events.v1.MemberUpdated
+ */
+export type MemberUpdated = Message<"tank.events.v1.MemberUpdated"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Member member = 1;
+     */
+    member?: Member;
+};
+/**
+ * Describes the message tank.events.v1.MemberUpdated.
+ * Use `create(MemberUpdatedSchema)` to create a new message.
+ */
+export declare const MemberUpdatedSchema: GenMessage<MemberUpdated>;
+/**
+ * huddle.started on evt.{ws}.ch.{channel} (and evt.{ws}.ws for public channels).
+ *
+ * @generated from message tank.events.v1.HuddleStarted
+ */
+export type HuddleStarted = Message<"tank.events.v1.HuddleStarted"> & {
+    /**
+     * @generated from field: tank.huddle.v1.Huddle huddle = 1;
+     */
+    huddle?: Huddle;
+};
+/**
+ * Describes the message tank.events.v1.HuddleStarted.
+ * Use `create(HuddleStartedSchema)` to create a new message.
+ */
+export declare const HuddleStartedSchema: GenMessage<HuddleStarted>;
+/**
+ * huddle.ended on the same subjects as huddle.started.
+ *
+ * @generated from message tank.events.v1.HuddleEnded
+ */
+export type HuddleEnded = Message<"tank.events.v1.HuddleEnded"> & {
+    /**
+     * @generated from field: tank.huddle.v1.Huddle huddle = 1;
+     */
+    huddle?: Huddle;
+};
+/**
+ * Describes the message tank.events.v1.HuddleEnded.
+ * Use `create(HuddleEndedSchema)` to create a new message.
+ */
+export declare const HuddleEndedSchema: GenMessage<HuddleEnded>;
+/**
+ * huddle.participants.changed on the same subjects: someone joined, left or
+ * (un)muted; huddle.participants is the full current list (sidebar indicator).
+ *
+ * @generated from message tank.events.v1.HuddleParticipantsChanged
+ */
+export type HuddleParticipantsChanged = Message<"tank.events.v1.HuddleParticipantsChanged"> & {
+    /**
+     * @generated from field: tank.huddle.v1.Huddle huddle = 1;
+     */
+    huddle?: Huddle;
+};
+/**
+ * Describes the message tank.events.v1.HuddleParticipantsChanged.
+ * Use `create(HuddleParticipantsChangedSchema)` to create a new message.
+ */
+export declare const HuddleParticipantsChangedSchema: GenMessage<HuddleParticipantsChanged>;

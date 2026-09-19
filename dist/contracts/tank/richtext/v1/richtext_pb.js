@@ -5,7 +5,7 @@ import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
 /**
  * Describes the file tank/richtext/v1/richtext.proto.
  */
-export const file_tank_richtext_v1_richtext = /*@__PURE__*/ fileDesc("Ch90YW5rL3JpY2h0ZXh0L3YxL3JpY2h0ZXh0LnByb3RvEhB0YW5rLnJpY2h0ZXh0LnYxIjsKCFJpY2hUZXh0Ei8KBmJsb2NrcxgBIAMoCzIfLnRhbmsucmljaHRleHQudjEuUmljaFRleHRCbG9jayLfAQoNUmljaFRleHRCbG9jaxI0CgdzZWN0aW9uGAEgASgLMiEudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dFNlY3Rpb25IABIuCgRjb2RlGAIgASgLMh4udGFuay5yaWNodGV4dC52MS5SaWNoVGV4dENvZGVIABIwCgVxdW90ZRgDIAEoCzIfLnRhbmsucmljaHRleHQudjEuUmljaFRleHRRdW90ZUgAEi4KBGxpc3QYBCABKAsyHi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0TGlzdEgAQgYKBGtpbmQiQwoFU3R5bGUSDAoEYm9sZBgBIAEoCBIOCgZpdGFsaWMYAiABKAgSDgoGc3RyaWtlGAMgASgIEgwKBGNvZGUYBCABKAgixQIKD1JpY2hUZXh0RWxlbWVudBItCgR0ZXh0GAEgASgLMh0udGFuay5yaWNodGV4dC52MS5UZXh0RWxlbWVudEgAEi8KBWVtb2ppGAIgASgLMh4udGFuay5yaWNodGV4dC52MS5FbW9qaUVsZW1lbnRIABItCgR1c2VyGAMgASgLMh0udGFuay5yaWNodGV4dC52MS5Vc2VyTWVudGlvbkgAEjMKB2NoYW5uZWwYBCABKAsyIC50YW5rLnJpY2h0ZXh0LnYxLkNoYW5uZWxNZW50aW9uSAASNwoJYnJvYWRjYXN0GAUgASgLMiIudGFuay5yaWNodGV4dC52MS5Ccm9hZGNhc3RNZW50aW9uSAASLQoEbGluaxgGIAEoCzIdLnRhbmsucmljaHRleHQudjEuTGlua0VsZW1lbnRIAEIGCgRraW5kIkMKC1RleHRFbGVtZW50EgwKBHRleHQYASABKAkSJgoFc3R5bGUYAiABKAsyFy50YW5rLnJpY2h0ZXh0LnYxLlN0eWxlIi0KDEVtb2ppRWxlbWVudBIMCgRuYW1lGAEgASgJEg8KB3VuaWNvZGUYAiABKAkiRgoLVXNlck1lbnRpb24SDwoHdXNlcl9pZBgBIAEoCRImCgVzdHlsZRgCIAEoCzIXLnRhbmsucmljaHRleHQudjEuU3R5bGUiJAoOQ2hhbm5lbE1lbnRpb24SEgoKY2hhbm5lbF9pZBgBIAEoCSI+ChBCcm9hZGNhc3RNZW50aW9uEioKBXJhbmdlGAEgASgOMhsudGFuay5yaWNodGV4dC52MS5Ccm9hZGNhc3QiUAoLTGlua0VsZW1lbnQSCwoDdXJsGAEgASgJEgwKBHRleHQYAiABKAkSJgoFc3R5bGUYAyABKAsyFy50YW5rLnJpY2h0ZXh0LnYxLlN0eWxlIkYKD1JpY2hUZXh0U2VjdGlvbhIzCghlbGVtZW50cxgBIAMoCzIhLnRhbmsucmljaHRleHQudjEuUmljaFRleHRFbGVtZW50Ii4KDFJpY2hUZXh0Q29kZRIQCghsYW5ndWFnZRgBIAEoCRIMCgR0ZXh0GAIgASgJIkQKDVJpY2hUZXh0UXVvdGUSMwoIZWxlbWVudHMYASADKAsyIS50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0RWxlbWVudCJhCgxSaWNoVGV4dExpc3QSDwoHb3JkZXJlZBgBIAEoCBIOCgZpbmRlbnQYAiABKAUSMAoFaXRlbXMYAyADKAsyIS50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0U2VjdGlvbippCglCcm9hZGNhc3QSGQoVQlJPQURDQVNUX1VOU1BFQ0lGSUVEEAASEgoOQlJPQURDQVNUX0hFUkUQARIVChFCUk9BRENBU1RfQ0hBTk5FTBACEhYKEkJST0FEQ0FTVF9FVkVSWU9ORRADQuABChRjb20udGFuay5yaWNodGV4dC52MUINUmljaHRleHRQcm90b1ABWldnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3JpY2h0ZXh0L3YxO3JpY2h0ZXh0djGiAgNUUliqAhBUYW5rLlJpY2h0ZXh0LlYxygIQVGFua1xSaWNodGV4dFxWMeICHFRhbmtcUmljaHRleHRcVjFcR1BCTWV0YWRhdGHqAhJUYW5rOjpSaWNodGV4dDo6VjFiBnByb3RvMw");
+export const file_tank_richtext_v1_richtext = /*@__PURE__*/ fileDesc("Ch90YW5rL3JpY2h0ZXh0L3YxL3JpY2h0ZXh0LnByb3RvEhB0YW5rLnJpY2h0ZXh0LnYxIjsKCFJpY2hUZXh0Ei8KBmJsb2NrcxgBIAMoCzIfLnRhbmsucmljaHRleHQudjEuUmljaFRleHRCbG9jayLfAQoNUmljaFRleHRCbG9jaxI0CgdzZWN0aW9uGAEgASgLMiEudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dFNlY3Rpb25IABIuCgRjb2RlGAIgASgLMh4udGFuay5yaWNodGV4dC52MS5SaWNoVGV4dENvZGVIABIwCgVxdW90ZRgDIAEoCzIfLnRhbmsucmljaHRleHQudjEuUmljaFRleHRRdW90ZUgAEi4KBGxpc3QYBCABKAsyHi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0TGlzdEgAQgYKBGtpbmQiQwoFU3R5bGUSDAoEYm9sZBgBIAEoCBIOCgZpdGFsaWMYAiABKAgSDgoGc3RyaWtlGAMgASgIEgwKBGNvZGUYBCABKAgi/wIKD1JpY2hUZXh0RWxlbWVudBItCgR0ZXh0GAEgASgLMh0udGFuay5yaWNodGV4dC52MS5UZXh0RWxlbWVudEgAEi8KBWVtb2ppGAIgASgLMh4udGFuay5yaWNodGV4dC52MS5FbW9qaUVsZW1lbnRIABItCgR1c2VyGAMgASgLMh0udGFuay5yaWNodGV4dC52MS5Vc2VyTWVudGlvbkgAEjMKB2NoYW5uZWwYBCABKAsyIC50YW5rLnJpY2h0ZXh0LnYxLkNoYW5uZWxNZW50aW9uSAASNwoJYnJvYWRjYXN0GAUgASgLMiIudGFuay5yaWNodGV4dC52MS5Ccm9hZGNhc3RNZW50aW9uSAASLQoEbGluaxgGIAEoCzIdLnRhbmsucmljaHRleHQudjEuTGlua0VsZW1lbnRIABI4Cgp1c2VyX2dyb3VwGAcgASgLMiIudGFuay5yaWNodGV4dC52MS5Vc2VyR3JvdXBNZW50aW9uSABCBgoEa2luZCI0ChBVc2VyR3JvdXBNZW50aW9uEhAKCGdyb3VwX2lkGAEgASgJEg4KBmhhbmRsZRgCIAEoCSJDCgtUZXh0RWxlbWVudBIMCgR0ZXh0GAEgASgJEiYKBXN0eWxlGAIgASgLMhcudGFuay5yaWNodGV4dC52MS5TdHlsZSItCgxFbW9qaUVsZW1lbnQSDAoEbmFtZRgBIAEoCRIPCgd1bmljb2RlGAIgASgJIkYKC1VzZXJNZW50aW9uEg8KB3VzZXJfaWQYASABKAkSJgoFc3R5bGUYAiABKAsyFy50YW5rLnJpY2h0ZXh0LnYxLlN0eWxlIiQKDkNoYW5uZWxNZW50aW9uEhIKCmNoYW5uZWxfaWQYASABKAkiPgoQQnJvYWRjYXN0TWVudGlvbhIqCgVyYW5nZRgBIAEoDjIbLnRhbmsucmljaHRleHQudjEuQnJvYWRjYXN0IlAKC0xpbmtFbGVtZW50EgsKA3VybBgBIAEoCRIMCgR0ZXh0GAIgASgJEiYKBXN0eWxlGAMgASgLMhcudGFuay5yaWNodGV4dC52MS5TdHlsZSJGCg9SaWNoVGV4dFNlY3Rpb24SMwoIZWxlbWVudHMYASADKAsyIS50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0RWxlbWVudCIuCgxSaWNoVGV4dENvZGUSEAoIbGFuZ3VhZ2UYASABKAkSDAoEdGV4dBgCIAEoCSJECg1SaWNoVGV4dFF1b3RlEjMKCGVsZW1lbnRzGAEgAygLMiEudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dEVsZW1lbnQiYQoMUmljaFRleHRMaXN0Eg8KB29yZGVyZWQYASABKAgSDgoGaW5kZW50GAIgASgFEjAKBWl0ZW1zGAMgAygLMiEudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dFNlY3Rpb24qaQoJQnJvYWRjYXN0EhkKFUJST0FEQ0FTVF9VTlNQRUNJRklFRBAAEhIKDkJST0FEQ0FTVF9IRVJFEAESFQoRQlJPQURDQVNUX0NIQU5ORUwQAhIWChJCUk9BRENBU1RfRVZFUllPTkUQA0LgAQoUY29tLnRhbmsucmljaHRleHQudjFCDVJpY2h0ZXh0UHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9yaWNodGV4dC92MTtyaWNodGV4dHYxogIDVFJYqgIQVGFuay5SaWNodGV4dC5WMcoCEFRhbmtcUmljaHRleHRcVjHiAhxUYW5rXFJpY2h0ZXh0XFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UmljaHRleHQ6OlYxYgZwcm90bzM");
 /**
  * Describes the message tank.richtext.v1.RichText.
  * Use `create(RichTextSchema)` to create a new message.
@@ -27,55 +27,60 @@ export const StyleSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richt
  */
 export const RichTextElementSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 3);
 /**
+ * Describes the message tank.richtext.v1.UserGroupMention.
+ * Use `create(UserGroupMentionSchema)` to create a new message.
+ */
+export const UserGroupMentionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 4);
+/**
  * Describes the message tank.richtext.v1.TextElement.
  * Use `create(TextElementSchema)` to create a new message.
  */
-export const TextElementSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 4);
+export const TextElementSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 5);
 /**
  * Describes the message tank.richtext.v1.EmojiElement.
  * Use `create(EmojiElementSchema)` to create a new message.
  */
-export const EmojiElementSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 5);
+export const EmojiElementSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 6);
 /**
  * Describes the message tank.richtext.v1.UserMention.
  * Use `create(UserMentionSchema)` to create a new message.
  */
-export const UserMentionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 6);
+export const UserMentionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 7);
 /**
  * Describes the message tank.richtext.v1.ChannelMention.
  * Use `create(ChannelMentionSchema)` to create a new message.
  */
-export const ChannelMentionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 7);
+export const ChannelMentionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 8);
 /**
  * Describes the message tank.richtext.v1.BroadcastMention.
  * Use `create(BroadcastMentionSchema)` to create a new message.
  */
-export const BroadcastMentionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 8);
+export const BroadcastMentionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 9);
 /**
  * Describes the message tank.richtext.v1.LinkElement.
  * Use `create(LinkElementSchema)` to create a new message.
  */
-export const LinkElementSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 9);
+export const LinkElementSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 10);
 /**
  * Describes the message tank.richtext.v1.RichTextSection.
  * Use `create(RichTextSectionSchema)` to create a new message.
  */
-export const RichTextSectionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 10);
+export const RichTextSectionSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 11);
 /**
  * Describes the message tank.richtext.v1.RichTextCode.
  * Use `create(RichTextCodeSchema)` to create a new message.
  */
-export const RichTextCodeSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 11);
+export const RichTextCodeSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 12);
 /**
  * Describes the message tank.richtext.v1.RichTextQuote.
  * Use `create(RichTextQuoteSchema)` to create a new message.
  */
-export const RichTextQuoteSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 12);
+export const RichTextQuoteSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 13);
 /**
  * Describes the message tank.richtext.v1.RichTextList.
  * Use `create(RichTextListSchema)` to create a new message.
  */
-export const RichTextListSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 13);
+export const RichTextListSchema = /*@__PURE__*/ messageDesc(file_tank_richtext_v1_richtext, 14);
 /**
  * @generated from enum tank.richtext.v1.Broadcast
  */

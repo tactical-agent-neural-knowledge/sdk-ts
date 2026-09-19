@@ -292,14 +292,14 @@ describe("EventPayload", () => {
       create(EnvelopeSchema, {
         payload: {
           $typeName: "google.protobuf.Any",
-          typeUrl: "type.googleapis.com/tank.events.v1.PinChanged",
+          typeUrl: "type.googleapis.com/tank.events.v99.NotYetDefined",
           value: new Uint8Array([8, 1]),
         },
       }),
     );
     expect(future).toEqual({
       $typeName: "unknown",
-      typeUrl: "type.googleapis.com/tank.events.v1.PinChanged",
+      typeUrl: "type.googleapis.com/tank.events.v99.NotYetDefined",
       value: new Uint8Array([8, 1]),
     });
     expect(unpackEnvelope(create(EnvelopeSchema, {}))).toBeUndefined();
@@ -318,6 +318,6 @@ describe("EventPayload", () => {
       }
     };
     expect(describe(known!)).toBe("read 1");
-    expect(describe(future!)).toBe("unknown type.googleapis.com/tank.events.v1.PinChanged");
+    expect(describe(future!)).toBe("unknown type.googleapis.com/tank.events.v99.NotYetDefined");
   });
 });
