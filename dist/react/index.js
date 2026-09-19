@@ -1,5 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore, } from "react";
+import { notificationPagingKey, } from "../client/store.js";
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
 class PresenceRegistry {
     client;
@@ -133,5 +134,97 @@ export function usePresence(userIds) {
 /** User ids currently typing in a channel (or thread), excluding me. */
 export function useTyping(channelId, threadRootId = "") {
     return useTankSelector(useCallback((s) => s.selectTyping(channelId, threadRootId), [channelId, threadRootId]));
+}
+/** A workspace's notifications (unread or all), loading the first page on mount. */
+export function useNotifications(workspaceId, opts = {}) {
+    const { client } = useCtx();
+    const unreadOnly = opts.unreadOnly ?? false;
+    const load = opts.load ?? true;
+    const mode = unreadOnly ? "unread" : "all";
+    const notifications = useTankSelector(useCallback((s) => s.selectNotifications(workspaceId, unreadOnly), [workspaceId, unreadOnly]));
+    const paging = useTankSelector(useCallback((s) => s.getState().notificationPaging[notificationPagingKey(workspaceId, mode)], [workspaceId, mode]));
+    const loadMore = useCallback(() => {
+        const cur = client.store.getState().notificationPaging[notificationPagingKey(workspaceId, mode)];
+        if (cur?.loading || (cur?.loaded && !cur.hasMore))
+            return Promise.resolve(undefined);
+        return client.loadNotifications({
+            workspaceId,
+            unreadOnly,
+            ...(cur?.loaded ? { cursor: cur.cursor } : {}),
+            ...(opts.pageSize ? { limit: opts.pageSize } : {}),
+        });
+    }, [client, workspaceId, unreadOnly, mode, opts.pageSize]);
+    const markRead = useCallback((ids) => client.markNotificationsRead(workspaceId, ids), [client, workspaceId]);
+    useEffect(() => {
+        if (!load || !workspaceId)
+            return;
+        const cur = client.store.getState().notificationPaging[notificationPagingKey(workspaceId, mode)];
+        if (!cur?.loaded)
+            void loadMore().catch(() => undefined);
+    }, [client, workspaceId, mode, load, loadMore]);
+    return {
+        notifications,
+        loading: paging?.loading ?? false,
+        hasMore: paging?.loaded ? paging.hasMore : false,
+        loadMore,
+        markRead,
+    };
+}
+/** The workspace's unread notification badge (bootstrap count + live deltas). */
+export function useUnreadNotificationCount(workspaceId) {
+    return useTankSelector(useCallback((s) => s.getState().unreadNotificationCount[workspaceId] ?? 0, [workspaceId]));
+}
+// ---------------------------------------------------------------- agent runs
+/** One run by id; fetched with `GetRun` on mount when the store does not have it. */
+export function useRun(runId, opts = {}) {
+    const { client } = useCtx();
+    const load = opts.load ?? true;
+    const run = useTankSelector(useCallback((s) => s.getState().runsById[runId], [runId]));
+    useEffect(() => {
+        if (!load || !runId || client.store.getState().runsById[runId])
+            return;
+        void client.getRun(runId).catch(() => undefined);
+    }, [client, runId, load]);
+    return run;
+}
+/**
+ * The newest run in a thread; seeds from `ListRuns` on mount when none is known. `agent.run.updated`
+ * is fanned out on the thread subject, so keep `useThread(rootId)` mounted for live updates.
+ */
+export function useThreadRun(rootId, opts = {}) {
+    const { client } = useCtx();
+    const load = opts.load ?? true;
+    const run = useTankSelector(useCallback((s) => s.getState().runsByThread[rootId], [rootId]));
+    useEffect(() => {
+        if (!load || !rootId || client.store.getState().runsByThread[rootId])
+            return;
+        void client.listRuns({ threadRootId: rootId }).catch(() => undefined); // agent:read may be missing
+    }, [client, rootId, load]);
+    return run;
+}
+/** Runs in a workspace, newest first (whatever `ListRuns` pages and events have put in the store). */
+export function useRuns(workspaceId) {
+    return useTankSelector(useCallback((s) => s.selectRuns(workspaceId), [workspaceId]));
+}
+/** The whole thread root id → run map (stable reference); message lists index it per row. */
+export function useRunsByThread() {
+    return useTankSelector(useCallback((s) => s.getState().runsByThread, []));
+}
+/** The live `agent_status` frame for a thread root id (or channel id); `undefined` once it expires (30 s). */
+export function useAgentStatus(threadRootIdOrChannelId) {
+    return useTankSelector(useCallback((s) => s.selectAgentStatus(threadRootIdOrChannelId), [threadRootIdOrChannelId]));
+}
+/** Every live `agent_status` frame in a channel (its threads included). */
+export function useAgentStatuses(channelId) {
+    return useTankSelector(useCallback((s) => s.selectAgentStatuses(channelId), [channelId]));
+}
+// ---------------------------------------------------------------- files
+/** A file the store knows about (from an upload or a `file.ready` event). */
+export function useFile(fileId) {
+    return useTankSelector(useCallback((s) => s.getState().filesById[fileId], [fileId]));
+}
+/** The known `File`s a message references, in `file_ids` order. */
+export function useMessageFiles(messageId) {
+    return useTankSelector(useCallback((s) => s.selectMessageFiles(messageId), [messageId]));
 }
 export { TankStore } from "../client/store.js";

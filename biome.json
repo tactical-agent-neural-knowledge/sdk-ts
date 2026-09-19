@@ -3,18 +3,26 @@
   "files": {
     "includes": ["src/**", "scripts/**", "fixtures/**", "*.ts", "*.json", "!src/contracts/tank", "!dist"]
   },
-  "formatter": { "indentStyle": "space", "indentWidth": 2, "lineWidth": 110 },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 110
+  },
   "linter": {
     "enabled": true,
     "rules": {
       "preset": "recommended",
-      "suspicious": { "noExplicitAny": "error" },
-      "style": { "noNonNullAssertion": "off" }
+      "suspicious": {
+        "noExplicitAny": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "off"
+      }
     }
   },
   "overrides": [
     {
-      "includes": ["src/blocks-web/**"],
+      "includes": ["src/blocks-web/**", "src/blocks-native/**"],
       "linter": {
         "rules": {
           "suspicious": {

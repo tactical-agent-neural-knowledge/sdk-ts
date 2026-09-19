@@ -1,8 +1,11 @@
-import { createRegistry } from "@bufbuild/protobuf";
-import { anyUnpack } from "@bufbuild/protobuf/wkt";
+import { create, createRegistry } from "@bufbuild/protobuf";
+import { anyUnpack, timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { file_tank_events_v1_events, } from "../contracts/tank/events/v1/events_pb.js";
+import { NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
 import { uuidv7Time } from "./uuidv7.js";
 export const TYPING_TTL_MS = 5_000;
+/** How long an `agent_status` frame stays live without a newer one. */
+export const AGENT_STATUS_TTL_MS = 30_000;
 export function initialState() {
     return {
         me: undefined,
@@ -19,9 +22,17 @@ export function initialState() {
         presence: {},
         typing: {},
         agentStatus: {},
+        agentStatusByThread: {},
         pending: {},
         connection: "idle",
         cursors: {},
+        notifications: {},
+        notificationIds: {},
+        unreadNotificationCount: {},
+        notificationPaging: {},
+        runsById: {},
+        runsByThread: {},
+        filesById: {},
     };
 }
 // ---------------------------------------------------------------- helpers
@@ -43,6 +54,36 @@ function createdMs(m) {
         }
     }
     return 0;
+}
+export function tsMs(t) {
+    return t ? Number(t.seconds) * 1000 + Math.floor(t.nanos / 1e6) : 0;
+}
+export function notificationPagingKey(workspaceId, mode) {
+    return `${workspaceId}:${mode}`;
+}
+function isUnread(n) {
+    return n !== undefined && n.readAt === undefined;
+}
+/** Ids of a workspace's notifications newest first; ties keep insertion order. */
+function orderNotifications(ids, byId) {
+    return Array.from(new Set(ids))
+        .filter((id) => byId[id] !== undefined)
+        .sort((a, b) => tsMs(byId[b]?.createdAt) - tsMs(byId[a]?.createdAt));
+}
+function upsertRuns(state, runs) {
+    if (runs.length === 0)
+        return state;
+    const runsById = { ...state.runsById };
+    const runsByThread = { ...state.runsByThread };
+    for (const run of runs) {
+        runsById[run.id] = run;
+        if (!run.threadRootId)
+            continue;
+        const cur = runsByThread[run.threadRootId];
+        if (!cur || cur.id === run.id || tsMs(run.startedAt) >= tsMs(cur.startedAt))
+            runsByThread[run.threadRootId] = run;
+    }
+    return { ...state, runsById, runsByThread };
 }
 /** Sort key: real messages by seq, optimistic ones after every real one by creation time. */
 function orderKey(seq, m) {
@@ -224,6 +265,12 @@ export function reduce(state, action) {
             const readStates = { ...state.readStates };
             for (const rs of action.readStates)
                 readStates[rs.channelId] = rs;
+            const unreadNotificationCount = action.unreadNotificationCount === undefined
+                ? state.unreadNotificationCount
+                : {
+                    ...state.unreadNotificationCount,
+                    [action.workspace.id]: Math.max(0, action.unreadNotificationCount),
+                };
             return {
                 ...state,
                 me: action.me?.principal ?? state.me,
@@ -232,6 +279,7 @@ export function reduce(state, action) {
                 channelOrder: { ...state.channelOrder, [action.workspace.id]: orderChannels(all) },
                 members: { ...state.members, [action.workspace.id]: membersForWs },
                 readStates,
+                unreadNotificationCount,
             };
         }
         case "workspaces/upsert":
@@ -351,6 +399,13 @@ export function reduce(state, action) {
                 presence[p.userId] = p;
             return { ...state, presence };
         }
+        case "presence/remove": {
+            if (!state.presence[action.userId])
+                return state;
+            const presence = { ...state.presence };
+            delete presence[action.userId];
+            return { ...state, presence };
+        }
         case "typing": {
             const key = typingKey(action.typing.channelId, action.typing.threadRootId);
             if (state.me && action.typing.userId === state.me.id)
@@ -378,7 +433,149 @@ export function reduce(state, action) {
         }
         case "agentStatus": {
             const key = action.status.threadRootId || action.status.channelId;
-            return { ...state, agentStatus: { ...state.agentStatus, [key]: action.status } };
+            if (action.status.status === "") {
+                if (!state.agentStatus[key] && !state.agentStatusByThread[key])
+                    return state;
+                const agentStatus = { ...state.agentStatus };
+                const agentStatusByThread = { ...state.agentStatusByThread };
+                delete agentStatus[key];
+                delete agentStatusByThread[key];
+                return { ...state, agentStatus, agentStatusByThread };
+            }
+            const now = action.now ?? Date.now();
+            return {
+                ...state,
+                agentStatus: { ...state.agentStatus, [key]: action.status },
+                agentStatusByThread: {
+                    ...state.agentStatusByThread,
+                    [key]: { status: action.status, expiresAt: now + AGENT_STATUS_TTL_MS },
+                },
+            };
+        }
+        case "agentStatus/expire": {
+            let changed = false;
+            const agentStatusByThread = {};
+            const agentStatus = { ...state.agentStatus };
+            for (const [key, entry] of Object.entries(state.agentStatusByThread)) {
+                if (entry.expiresAt > action.now)
+                    agentStatusByThread[key] = entry;
+                else {
+                    changed = true;
+                    delete agentStatus[key];
+                }
+            }
+            return changed ? { ...state, agentStatus, agentStatusByThread } : state;
+        }
+        case "notifications/upsert": {
+            const ws = action.workspaceId;
+            const notifications = { ...state.notifications };
+            for (const n of action.notifications)
+                notifications[n.id] = n;
+            const ids = orderNotifications([...(state.notificationIds[ws] ?? []), ...action.notifications.map((n) => n.id)], notifications);
+            const unreadNotificationCount = action.unreadCount === undefined
+                ? state.unreadNotificationCount
+                : { ...state.unreadNotificationCount, [ws]: Math.max(0, action.unreadCount) };
+            return {
+                ...state,
+                notifications,
+                notificationIds: { ...state.notificationIds, [ws]: ids },
+                unreadNotificationCount,
+            };
+        }
+        case "notifications/created": {
+            const ev = action.event;
+            if (state.notifications[ev.notificationId])
+                return state;
+            const ws = action.workspaceId;
+            const n = create(NotificationSchema, {
+                id: ev.notificationId,
+                workspaceId: ws,
+                userId: state.me?.id ?? "",
+                kind: ev.kind,
+                messageId: ev.messageId,
+                channelId: ev.channelId,
+                actorId: ev.actorId,
+                createdAt: action.occurredAt ?? timestampFromMs(Date.now()),
+            });
+            const notifications = { ...state.notifications, [n.id]: n };
+            return {
+                ...state,
+                notifications,
+                notificationIds: {
+                    ...state.notificationIds,
+                    [ws]: orderNotifications([n.id, ...(state.notificationIds[ws] ?? [])], notifications),
+                },
+                unreadNotificationCount: {
+                    ...state.unreadNotificationCount,
+                    [ws]: (state.unreadNotificationCount[ws] ?? 0) + 1,
+                },
+            };
+        }
+        case "notifications/read": {
+            const ws = action.workspaceId;
+            const notifications = { ...state.notifications };
+            const all = action.notificationIds.length === 0;
+            const targets = all ? (state.notificationIds[ws] ?? []) : action.notificationIds;
+            let flipped = 0;
+            for (const id of targets) {
+                const n = notifications[id];
+                if (n && isUnread(n)) {
+                    notifications[id] = { ...n, readAt: action.readAt };
+                    flipped++;
+                }
+            }
+            // Ids we have not loaded still count against the badge; "all read" zeroes it.
+            const unknown = all ? 0 : action.notificationIds.filter((id) => !state.notifications[id]).length;
+            const count = all ? 0 : Math.max(0, (state.unreadNotificationCount[ws] ?? 0) - flipped - unknown);
+            if (flipped === 0 && count === (state.unreadNotificationCount[ws] ?? 0))
+                return state;
+            return {
+                ...state,
+                notifications,
+                unreadNotificationCount: { ...state.unreadNotificationCount, [ws]: count },
+            };
+        }
+        case "notifications/restore": {
+            const notifications = { ...state.notifications };
+            for (const n of action.notifications)
+                notifications[n.id] = n;
+            return {
+                ...state,
+                notifications,
+                unreadNotificationCount: {
+                    ...state.unreadNotificationCount,
+                    [action.workspaceId]: Math.max(0, action.unreadCount),
+                },
+            };
+        }
+        case "unreadNotificationCount/set": {
+            const count = Math.max(0, action.count);
+            if (state.unreadNotificationCount[action.workspaceId] === count)
+                return state;
+            return {
+                ...state,
+                unreadNotificationCount: { ...state.unreadNotificationCount, [action.workspaceId]: count },
+            };
+        }
+        case "notificationPaging/set": {
+            const key = notificationPagingKey(action.workspaceId, action.mode);
+            const prev = state.notificationPaging[key] ?? {
+                loading: false,
+                loaded: false,
+                hasMore: false,
+                cursor: "",
+            };
+            return {
+                ...state,
+                notificationPaging: { ...state.notificationPaging, [key]: { ...prev, ...action.paging } },
+            };
+        }
+        case "runs/upsert":
+            return upsertRuns(state, action.runs);
+        case "files/upsert": {
+            if (action.files.length === 0)
+                return state;
+            return { ...state, filesById: { ...state.filesById, ...byId(action.files) } };
         }
         case "pending/add": {
             const m = action.message;
@@ -463,11 +660,14 @@ export function reduce(state, action) {
 }
 // ---------------------------------------------------------------- envelopes
 const eventsRegistry = createRegistry(file_tank_events_v1_events);
-/** Decode an envelope's Any payload into one of the tank.events.v1 messages. */
+/** Decode an envelope's Any payload into one of the tank.events.v1 messages (or an `UnknownEventPayload`). */
 export function unpackEnvelope(env) {
     if (!env.payload)
         return undefined;
-    return anyUnpack(env.payload, eventsRegistry);
+    const known = anyUnpack(env.payload, eventsRegistry);
+    if (known)
+        return known;
+    return { $typeName: "unknown", typeUrl: env.payload.typeUrl, value: env.payload.value };
 }
 /** Reduce a gateway envelope into the store. Unknown payload types are ignored. */
 export function envelopeToActions(env, now) {
@@ -532,9 +732,31 @@ export function envelopeToActions(env, now) {
         case "tank.events.v1.Typing":
             return [{ type: "typing", typing: payload, now }];
         case "tank.events.v1.AgentStatus":
-            return [{ type: "agentStatus", status: payload }];
+            return [{ type: "agentStatus", status: payload, now }];
+        case "tank.events.v1.AgentRunUpdated":
+            return payload.run ? [{ type: "runs/upsert", runs: [payload.run] }] : [];
+        case "tank.events.v1.FileReady":
+            return payload.file ? [{ type: "files/upsert", files: [payload.file] }] : [];
+        case "tank.events.v1.NotificationCreated":
+            return [
+                {
+                    type: "notifications/created",
+                    workspaceId: env.workspaceId,
+                    event: payload,
+                    ...(env.occurredAt ? { occurredAt: env.occurredAt } : {}),
+                },
+            ];
+        case "tank.events.v1.NotificationsRead":
+            return [
+                {
+                    type: "notifications/read",
+                    workspaceId: env.workspaceId,
+                    notificationIds: payload.notificationIds,
+                    readAt: env.occurredAt ?? timestampFromMs(now),
+                },
+            ];
         // ChannelUpdated carries only an id: the client refetches (see TankClient).
-        // CardAction / AppCommand / NotificationCreated are for apps and the notify worker.
+        // CardAction / AppCommand are for apps; MessageEphemeral is surfaced by apps that want it.
         default:
             return [];
     }
@@ -660,6 +882,36 @@ export class TankStore {
     selectTyping = (channelId, threadRootId = "") => {
         const users = this.state.typing[typingKey(channelId, threadRootId)] ?? EMPTY_MAP;
         return this.memoize(`typing:${typingKey(channelId, threadRootId)}`, [users], () => Object.keys(users), shallowEqualArrays);
+    };
+    /** A workspace's notifications newest first; `unreadOnly` keeps only rows without `read_at`. */
+    selectNotifications = (workspaceId, unreadOnly = false) => {
+        const s = this.state;
+        const ids = s.notificationIds[workspaceId] ?? EMPTY_IDS;
+        return this.memoize(`notifications:${workspaceId}:${unreadOnly ? "unread" : "all"}`, [ids, s.notifications], () => ids
+            .map((id) => s.notifications[id])
+            .filter((n) => n !== undefined && (!unreadOnly || n.readAt === undefined)), shallowEqualArrays);
+    };
+    /** Runs in a workspace, newest first (by started_at). */
+    selectRuns = (workspaceId) => {
+        const s = this.state;
+        return this.memoize(`runs:${workspaceId}`, [s.runsById], () => Object.values(s.runsById)
+            .filter((r) => r.workspaceId === workspaceId)
+            .sort((a, b) => tsMs(b.startedAt) - tsMs(a.startedAt)), shallowEqualArrays);
+    };
+    /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
+    selectAgentStatus = (key) => this.state.agentStatusByThread[key]?.status;
+    /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
+    selectAgentStatuses = (channelId) => {
+        const s = this.state;
+        return this.memoize(`agentStatuses:${channelId}`, [s.agentStatusByThread], () => Object.values(s.agentStatusByThread)
+            .map((e) => e.status)
+            .filter((f) => f.channelId === channelId), shallowEqualArrays);
+    };
+    /** The `File`s a message references that the store knows about (from uploads and `file.ready`). */
+    selectMessageFiles = (messageId) => {
+        const s = this.state;
+        const ids = s.messages[messageId]?.fileIds ?? EMPTY_IDS;
+        return this.memoize(`files:${messageId}`, [ids, s.filesById], () => ids.map((id) => s.filesById[id]).filter((f) => f !== undefined), shallowEqualArrays);
     };
     selectPresence = (userIds) => {
         const s = this.state;

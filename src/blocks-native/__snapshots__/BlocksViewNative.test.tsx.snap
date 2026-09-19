@@ -1,0 +1,2602 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BlocksViewNative fixtures > renders approval and matches its snapshot 1`] = `
+<View
+  style={
+    {
+      "gap": 10,
+      "maxWidth": 720,
+    }
+  }
+  testID="blocks"
+>
+  <View
+    accessibilityLabel="header"
+    testID="block-b1"
+  >
+    <Text
+      accessibilityRole="header"
+      variant="titleMedium"
+    >
+      Deploy api@a1b2c3d to prod?
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="section"
+    testID="block-b2"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 8,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "flex": 1,
+            "gap": 4,
+            "minWidth": 0,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "gap": 6,
+            }
+          }
+        >
+          <Text
+            variant="bodyMedium"
+          >
+            The change adds rate limiting to the gateway. Rollout is a rolling update behind ArgoCD; rollback is one revert.
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "gap": 8,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "flexGrow": 1,
+                "minWidth": 140,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#9FB0BF",
+                }
+              }
+              variant="labelSmall"
+            >
+              Gate
+            </Text>
+            <Text
+              variant="bodyMedium"
+            >
+              deploy
+            </Text>
+          </View>
+          <View
+            style={
+              {
+                "flexGrow": 1,
+                "minWidth": 140,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#9FB0BF",
+                }
+              }
+              variant="labelSmall"
+            >
+              Requested by
+            </Text>
+            <Text
+              variant="bodyMedium"
+            >
+              @u_agent_tank
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="approvalPrompt"
+    testID="block-b3"
+  >
+    <View
+      style={
+        [
+          {
+            "borderLeftWidth": 3,
+            "borderWidth": 1,
+            "gap": 8,
+            "padding": 12,
+          },
+          {
+            "backgroundColor": "#161B22",
+            "borderColor": "#263238",
+            "borderLeftColor": "#FFC107",
+            "borderRadius": 4,
+          },
+        ]
+      }
+      testID="card-alert"
+    >
+      <Text
+        style={
+          {
+            "color": "#FFC107",
+            "textTransform": "uppercase",
+          }
+        }
+        variant="labelSmall"
+      >
+        deploy approval
+      </Text>
+      <Text
+        variant="bodyLarge"
+      >
+        api@a1b2c3d → prod
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#9FB0BF",
+          }
+        }
+        variant="bodySmall"
+      >
+        1
+         approval
+         needed
+         from u_robby, u_ops
+         · expires 2026-09-18T12:30:00.000Z
+      </Text>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "gap": 8,
+          }
+        }
+      >
+        <Button
+          compact={true}
+          mode="contained"
+          onPress={[Function]}
+          style={
+            {
+              "alignSelf": "flex-start",
+            }
+          }
+          testID="action-approve"
+        >
+          Approve
+        </Button>
+        <Button
+          compact={true}
+          mode="outlined"
+          onPress={[Function]}
+          style={
+            {
+              "alignSelf": "flex-start",
+            }
+          }
+          testID="action-reject"
+          textColor="#FF6B6B"
+        >
+          Reject
+        </Button>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`BlocksViewNative fixtures > renders ci-green and matches its snapshot 1`] = `
+<View
+  style={
+    {
+      "gap": 10,
+      "maxWidth": 720,
+    }
+  }
+  testID="blocks"
+>
+  <View
+    accessibilityLabel="ciStatus"
+    testID="block-b1"
+  >
+    <View
+      style={
+        [
+          {
+            "borderLeftWidth": 3,
+            "borderWidth": 1,
+            "gap": 8,
+            "padding": 12,
+          },
+          {
+            "backgroundColor": "#161B22",
+            "borderColor": "#263238",
+            "borderLeftColor": "#6200EA",
+            "borderRadius": 4,
+          },
+        ]
+      }
+      testID="card-agent"
+    >
+      <Text
+        style={
+          {
+            "color": "#6200EA",
+            "textTransform": "uppercase",
+          }
+        }
+        variant="labelSmall"
+      >
+        CI green · a1b2c3d
+      </Text>
+      <Text
+        accessibilityRole="link"
+        onPress={[Function]}
+        style={
+          {
+            "color": "#00E5FF",
+            "textDecorationLine": "underline",
+          }
+        }
+        testID="link-https://github.com/tactical-agent-neural-knowledge/api/pull/42"
+        variant="bodyMedium"
+      >
+        PR #
+        42
+      </Text>
+      <View
+        testID="check-success"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+        >
+          <Chip
+            accessibilityLabel="success"
+            compact={true}
+            mode="flat"
+            style={
+              [
+                {
+                  "alignSelf": "flex-start",
+                  "height": 24,
+                },
+                {
+                  "backgroundColor": "#00E67633",
+                  "borderColor": "#00E676",
+                },
+              ]
+            }
+            textStyle={
+              [
+                {
+                  "fontSize": 11,
+                  "lineHeight": 14,
+                  "marginVertical": 0,
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+          >
+            success
+          </Chip>
+          <Text
+            accessibilityRole="link"
+            onPress={[Function]}
+            style={
+              {
+                "color": "#00E5FF",
+                "textDecorationLine": "underline",
+              }
+            }
+            testID="link-https://github.com/tactical-agent-neural-knowledge/api/actions/runs/1"
+            variant="bodyMedium"
+          >
+            lint
+          </Text>
+        </View>
+      </View>
+      <View
+        testID="check-success"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+        >
+          <Chip
+            accessibilityLabel="success"
+            compact={true}
+            mode="flat"
+            style={
+              [
+                {
+                  "alignSelf": "flex-start",
+                  "height": 24,
+                },
+                {
+                  "backgroundColor": "#00E67633",
+                  "borderColor": "#00E676",
+                },
+              ]
+            }
+            textStyle={
+              [
+                {
+                  "fontSize": 11,
+                  "lineHeight": 14,
+                  "marginVertical": 0,
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+          >
+            success
+          </Chip>
+          <Text
+            accessibilityRole="link"
+            onPress={[Function]}
+            style={
+              {
+                "color": "#00E5FF",
+                "textDecorationLine": "underline",
+              }
+            }
+            testID="link-https://github.com/tactical-agent-neural-knowledge/api/actions/runs/1"
+            variant="bodyMedium"
+          >
+            test
+          </Text>
+        </View>
+      </View>
+      <View
+        testID="check-success"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+        >
+          <Chip
+            accessibilityLabel="success"
+            compact={true}
+            mode="flat"
+            style={
+              [
+                {
+                  "alignSelf": "flex-start",
+                  "height": 24,
+                },
+                {
+                  "backgroundColor": "#00E67633",
+                  "borderColor": "#00E676",
+                },
+              ]
+            }
+            textStyle={
+              [
+                {
+                  "fontSize": 11,
+                  "lineHeight": 14,
+                  "marginVertical": 0,
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+          >
+            success
+          </Chip>
+          <Text
+            accessibilityRole="link"
+            onPress={[Function]}
+            style={
+              {
+                "color": "#00E5FF",
+                "textDecorationLine": "underline",
+              }
+            }
+            testID="link-https://github.com/tactical-agent-neural-knowledge/api/actions/runs/1"
+            variant="bodyMedium"
+          >
+            docker-ecr / api
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="actions"
+    testID="block-b2"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "gap": 8,
+        }
+      }
+    >
+      <Button
+        accessibilityLabel="Approve merge"
+        compact={true}
+        mode="contained"
+        onPress={[Function]}
+        style={
+          {
+            "alignSelf": "flex-start",
+          }
+        }
+        testID="action-merge.approve"
+      >
+        Approve merge
+      </Button>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`BlocksViewNative fixtures > renders ci-red and matches its snapshot 1`] = `
+<View
+  style={
+    {
+      "gap": 10,
+      "maxWidth": 720,
+    }
+  }
+  testID="blocks"
+>
+  <View
+    accessibilityLabel="ciStatus"
+    testID="block-b1"
+  >
+    <View
+      style={
+        [
+          {
+            "borderLeftWidth": 3,
+            "borderWidth": 1,
+            "gap": 8,
+            "padding": 12,
+          },
+          {
+            "backgroundColor": "#161B22",
+            "borderColor": "#263238",
+            "borderLeftColor": "#FFC107",
+            "borderRadius": 4,
+          },
+        ]
+      }
+      testID="card-alert"
+    >
+      <Text
+        style={
+          {
+            "color": "#FFC107",
+            "textTransform": "uppercase",
+          }
+        }
+        variant="labelSmall"
+      >
+        CI red · f6e5d4c
+      </Text>
+      <Text
+        accessibilityRole="link"
+        onPress={[Function]}
+        style={
+          {
+            "color": "#00E5FF",
+            "textDecorationLine": "underline",
+          }
+        }
+        testID="link-https://github.com/tactical-agent-neural-knowledge/api/pull/42"
+        variant="bodyMedium"
+      >
+        PR #
+        42
+      </Text>
+      <View
+        testID="check-success"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+        >
+          <Chip
+            accessibilityLabel="success"
+            compact={true}
+            mode="flat"
+            style={
+              [
+                {
+                  "alignSelf": "flex-start",
+                  "height": 24,
+                },
+                {
+                  "backgroundColor": "#00E67633",
+                  "borderColor": "#00E676",
+                },
+              ]
+            }
+            textStyle={
+              [
+                {
+                  "fontSize": 11,
+                  "lineHeight": 14,
+                  "marginVertical": 0,
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+          >
+            success
+          </Chip>
+          <Text
+            accessibilityRole="link"
+            onPress={[Function]}
+            style={
+              {
+                "color": "#00E5FF",
+                "textDecorationLine": "underline",
+              }
+            }
+            testID="link-https://github.com/tactical-agent-neural-knowledge/api/actions/runs/2"
+            variant="bodyMedium"
+          >
+            lint
+          </Text>
+        </View>
+      </View>
+      <View
+        testID="check-failure"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+        >
+          <Chip
+            accessibilityLabel="failure"
+            compact={true}
+            mode="flat"
+            style={
+              [
+                {
+                  "alignSelf": "flex-start",
+                  "height": 24,
+                },
+                {
+                  "backgroundColor": "#FF6B6B33",
+                  "borderColor": "#FF6B6B",
+                },
+              ]
+            }
+            textStyle={
+              [
+                {
+                  "fontSize": 11,
+                  "lineHeight": 14,
+                  "marginVertical": 0,
+                },
+                {
+                  "color": "#FF6B6B",
+                },
+              ]
+            }
+          >
+            failure
+          </Chip>
+          <Text
+            accessibilityRole="link"
+            onPress={[Function]}
+            style={
+              {
+                "color": "#00E5FF",
+                "textDecorationLine": "underline",
+              }
+            }
+            testID="link-https://github.com/tactical-agent-neural-knowledge/api/actions/runs/2"
+            variant="bodyMedium"
+          >
+            test
+          </Text>
+        </View>
+        <View
+          style={
+            [
+              {
+                "borderRadius": 6,
+                "marginTop": 4,
+                "padding": 8,
+              },
+              {
+                "backgroundColor": "#263238",
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#FF6B6B",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            --- FAIL: TestLimiter_Burst (0.01s)
+    limit_test.go:41: expected 429 after 100 requests, got 200
+FAIL
+FAIL	github.com/tactical-agent-neural-knowledge/api/internal/gateway	0.113s
+          </Text>
+        </View>
+      </View>
+      <View
+        testID="check-cancelled"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+        >
+          <Chip
+            accessibilityLabel="cancelled"
+            compact={true}
+            mode="flat"
+            style={
+              [
+                {
+                  "alignSelf": "flex-start",
+                  "height": 24,
+                },
+                {
+                  "backgroundColor": "#FFC10733",
+                  "borderColor": "#FFC107",
+                },
+              ]
+            }
+            textStyle={
+              [
+                {
+                  "fontSize": 11,
+                  "lineHeight": 14,
+                  "marginVertical": 0,
+                },
+                {
+                  "color": "#FFC107",
+                },
+              ]
+            }
+          >
+            cancelled
+          </Chip>
+          <Text
+            variant="bodyMedium"
+          >
+            docker-ecr / api
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="section"
+    testID="block-b2"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 8,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "flex": 1,
+            "gap": 4,
+            "minWidth": 0,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "gap": 6,
+            }
+          }
+        >
+          <Text
+            variant="bodyMedium"
+          >
+            Fixing the failing test and pushing again. 
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "gap": 8,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "flexGrow": 1,
+                "minWidth": 140,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#9FB0BF",
+                }
+              }
+              variant="labelSmall"
+            >
+              Attempt
+            </Text>
+            <Text
+              variant="bodyMedium"
+            >
+              2 of 3
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`BlocksViewNative fixtures > renders diff and matches its snapshot 1`] = `
+<View
+  style={
+    {
+      "gap": 10,
+      "maxWidth": 720,
+    }
+  }
+  testID="blocks"
+>
+  <View
+    accessibilityLabel="header"
+    testID="block-b1"
+  >
+    <Text
+      accessibilityRole="header"
+      variant="titleMedium"
+    >
+      Pushed 2 commits to feat/rate-limit
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="diffPreview"
+    testID="block-b2"
+  >
+    <View
+      style={
+        [
+          {
+            "borderLeftWidth": 3,
+            "borderWidth": 1,
+            "gap": 8,
+            "padding": 12,
+          },
+          {
+            "backgroundColor": "#161B22",
+            "borderColor": "#263238",
+            "borderLeftColor": "#6200EA",
+            "borderRadius": 4,
+          },
+        ]
+      }
+      testID="card-agent"
+    >
+      <Text
+        style={
+          {
+            "color": "#6200EA",
+            "textTransform": "uppercase",
+          }
+        }
+        variant="labelSmall"
+      >
+        Diff · a1b2c3d
+      </Text>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "gap": 8,
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "fontFamily": "JetBrainsMono_400Regular",
+            }
+          }
+          variant="bodyMedium"
+        >
+          3
+           file
+          s
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "#00E676",
+              },
+            ]
+          }
+          variant="bodyMedium"
+        >
+          +
+          148
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "#FF6B6B",
+              },
+            ]
+          }
+          variant="bodyMedium"
+        >
+          −
+          1
+        </Text>
+        <Text
+          accessibilityRole="link"
+          onPress={[Function]}
+          style={
+            {
+              "color": "#00E5FF",
+              "textDecorationLine": "underline",
+            }
+          }
+          testID="link-https://github.com/tactical-agent-neural-knowledge/api/compare/main...feat/rate-limit"
+          variant="bodyMedium"
+        >
+          compare
+        </Text>
+      </View>
+      <View
+        testID="diff-internal/gateway/limit.go"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "gap": 8,
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "flex": 1,
+                  "gap": 4,
+                  "minWidth": 0,
+                },
+              ]
+            }
+            variant="bodyMedium"
+          >
+            internal/gateway/limit.go
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +
+            88
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#FF6B6B",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            −
+            0
+          </Text>
+        </View>
+        <View
+          style={
+            [
+              {
+                "borderRadius": 6,
+                "marginTop": 4,
+                "padding": 8,
+              },
+              {
+                "backgroundColor": "#263238",
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E5FF",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            @@ -0,0 +1,20 @@
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +package gateway
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +type Limiter struct {
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +	buckets map[string]*bucket
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +}
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +func (l *Limiter) Allow(principal string) bool {
+          </Text>
+        </View>
+      </View>
+      <View
+        testID="diff-internal/gateway/server.go"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "gap": 8,
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "flex": 1,
+                  "gap": 4,
+                  "minWidth": 0,
+                },
+              ]
+            }
+            variant="bodyMedium"
+          >
+            internal/gateway/server.go
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +
+            6
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#FF6B6B",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            −
+            1
+          </Text>
+        </View>
+        <View
+          style={
+            [
+              {
+                "borderRadius": 6,
+                "marginTop": 4,
+                "padding": 8,
+              },
+              {
+                "backgroundColor": "#263238",
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E5FF",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            @@ -41,7 +41,12 @@
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#FF6B6B",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            -	h.ServeHTTP(w, r)
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +	if !s.limiter.Allow(p.ID) {
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +		w.Header().Set("Retry-After", "1")
+          </Text>
+        </View>
+      </View>
+      <View
+        testID="diff-internal/gateway/limit_test.go"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "gap": 8,
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "flex": 1,
+                  "gap": 4,
+                  "minWidth": 0,
+                },
+              ]
+            }
+            variant="bodyMedium"
+          >
+            internal/gateway/limit_test.go
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#00E676",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            +
+            54
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                },
+                {
+                  "color": "#FF6B6B",
+                },
+              ]
+            }
+            variant="bodySmall"
+          >
+            −
+            0
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="context"
+    testID="block-b3"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "gap": 8,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "gap": 6,
+          }
+        }
+      >
+        <Text
+          variant="bodySmall"
+        >
+          Branch 
+          <Text
+            style={
+              {
+                "backgroundColor": "#263238",
+                "fontFamily": "JetBrainsMono_400Regular",
+              }
+            }
+          >
+            feat/rate-limit
+          </Text>
+           · +148 −1 across 3 files
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`BlocksViewNative fixtures > renders file and matches its snapshot 1`] = `
+<View
+  style={
+    {
+      "gap": 10,
+      "maxWidth": 720,
+    }
+  }
+  testID="blocks"
+>
+  <View
+    accessibilityLabel="section"
+    testID="block-b1"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 8,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "flex": 1,
+            "gap": 4,
+            "minWidth": 0,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "gap": 6,
+            }
+          }
+        >
+          <Text
+            variant="bodyMedium"
+          >
+            Coverage report for feat/rate-limit
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="filePreview"
+    testID="block-b2"
+  >
+    <View
+      style={
+        [
+          {
+            "borderLeftWidth": 3,
+            "borderWidth": 1,
+            "gap": 8,
+            "padding": 12,
+          },
+          {
+            "backgroundColor": "#161B22",
+            "borderColor": "#263238",
+            "borderLeftColor": "#263238",
+            "borderRadius": 4,
+          },
+        ]
+      }
+      testID="card-none"
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 8,
+          }
+        }
+      >
+        <Image
+          accessibilityIgnoresInvertColors={true}
+          source={
+            {
+              "uri": "https://files.tank.chat/t/f_01J8COV/256.png",
+            }
+          }
+          style={
+            [
+              {
+                "borderRadius": 6,
+                "height": 56,
+                "width": 56,
+              },
+              {
+                "backgroundColor": "#263238",
+              },
+            ]
+          }
+        />
+        <View
+          style={
+            {
+              "flex": 1,
+              "gap": 4,
+              "minWidth": 0,
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "fontWeight": "600",
+              }
+            }
+            testID="file-f_01J8COV"
+            variant="bodyMedium"
+          >
+            coverage.html
+          </Text>
+          <Text
+            style={
+              {
+                "color": "#9FB0BF",
+              }
+            }
+            variant="bodySmall"
+          >
+            text/html
+             · 
+            47.1 KB
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="actions"
+    testID="block-b3"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "gap": 8,
+        }
+      }
+    >
+      <Button
+        accessibilityLabel="Download"
+        compact={true}
+        mode="outlined"
+        onPress={[Function]}
+        style={
+          {
+            "alignSelf": "flex-start",
+          }
+        }
+        testID="action-https://files.tank.chat/d/f_01J8COV"
+      >
+        Download
+      </Button>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] = `
+<View
+  style={
+    {
+      "gap": 10,
+      "maxWidth": 720,
+    }
+  }
+  testID="blocks"
+>
+  <View
+    accessibilityLabel="header"
+    testID="block-b1"
+  >
+    <Text
+      accessibilityRole="header"
+      variant="titleMedium"
+    >
+      Plan: add rate limiting to /v1/messages
+    </Text>
+  </View>
+  <View
+    accessibilityLabel="planCard"
+    testID="block-b2"
+  >
+    <View
+      style={
+        [
+          {
+            "borderLeftWidth": 3,
+            "borderWidth": 1,
+            "gap": 8,
+            "padding": 12,
+          },
+          {
+            "backgroundColor": "#161B22",
+            "borderColor": "#263238",
+            "borderLeftColor": "#6200EA",
+            "borderRadius": 4,
+          },
+        ]
+      }
+      testID="card-agent"
+    >
+      <Text
+        style={
+          {
+            "color": "#6200EA",
+            "textTransform": "uppercase",
+          }
+        }
+        variant="labelSmall"
+      >
+        Plan · v2 · 9f3c1d2e
+      </Text>
+      <Text
+        variant="bodyLarge"
+      >
+        Introduce a token-bucket limiter in the gateway, keyed by principal, with a 429 + Retry-After response and a metric per route.
+      </Text>
+      <View
+        style={
+          {
+            "gap": 4,
+          }
+        }
+      >
+        <ProgressBar
+          accessibilityLabel="1 of 4 steps done"
+          color="#6200EA"
+          progress={0.25}
+          style={
+            {
+              "borderRadius": 2,
+              "height": 4,
+              "marginBottom": 4,
+            }
+          }
+        />
+        <View
+          style={
+            {
+              "alignItems": "flex-start",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+          testID="step-done"
+        >
+          <Text
+            style={
+              {
+                "color": "#00E676",
+                "fontFamily": "JetBrainsMono_400Regular",
+                "width": 16,
+              }
+            }
+          >
+            ●
+          </Text>
+          <View
+            style={
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              }
+            }
+          >
+            <Text
+              variant="bodyMedium"
+            >
+              Add limiter middleware in internal/gateway/limit.go
+            </Text>
+            <Text
+              style={
+                {
+                  "color": "#9FB0BF",
+                  "fontFamily": "JetBrainsMono_400Regular",
+                }
+              }
+              variant="bodySmall"
+            >
+              internal/gateway/limit.go
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            {
+              "alignItems": "flex-start",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+          testID="step-running"
+        >
+          <Text
+            style={
+              {
+                "color": "#6200EA",
+                "fontFamily": "JetBrainsMono_400Regular",
+                "width": 16,
+              }
+            }
+          >
+            ◐
+          </Text>
+          <View
+            style={
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              }
+            }
+          >
+            <Text
+              variant="bodyMedium"
+            >
+              Wire per-route budgets from config
+            </Text>
+            <Text
+              style={
+                {
+                  "color": "#9FB0BF",
+                  "fontFamily": "JetBrainsMono_400Regular",
+                }
+              }
+              variant="bodySmall"
+            >
+              internal/config/config.go  deploy/values.yaml
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            {
+              "alignItems": "flex-start",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+          testID="step-pending"
+        >
+          <Text
+            style={
+              {
+                "color": "rgba(230, 237, 243, 0.38)",
+                "fontFamily": "JetBrainsMono_400Regular",
+                "width": 16,
+              }
+            }
+          >
+            ○
+          </Text>
+          <View
+            style={
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              }
+            }
+          >
+            <Text
+              variant="bodyMedium"
+            >
+              Emit tank_gateway_ratelimited_total
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            {
+              "alignItems": "flex-start",
+              "flexDirection": "row",
+              "gap": 8,
+            }
+          }
+          testID="step-pending"
+        >
+          <Text
+            style={
+              {
+                "color": "rgba(230, 237, 243, 0.38)",
+                "fontFamily": "JetBrainsMono_400Regular",
+                "width": 16,
+              }
+            }
+          >
+            ○
+          </Text>
+          <View
+            style={
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              }
+            }
+          >
+            <Text
+              variant="bodyMedium"
+            >
+              Integration test: burst then recover
+            </Text>
+            <Text
+              style={
+                {
+                  "color": "#9FB0BF",
+                  "fontFamily": "JetBrainsMono_400Regular",
+                }
+              }
+              variant="bodySmall"
+            >
+              internal/gateway/limit_test.go
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View>
+        <Text
+          style={
+            {
+              "color": "#FFC107",
+            }
+          }
+          variant="labelLarge"
+        >
+          Risks
+        </Text>
+        <Text
+          variant="bodyMedium"
+        >
+          • 
+          Shared Valkey hop adds ~1ms p99 to every message post
+        </Text>
+        <Text
+          variant="bodyMedium"
+        >
+          • 
+          Bots with legit bursts (CI notifiers) may trip the limit
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            {
+              "color": "#00E5FF",
+            }
+          }
+          variant="labelLarge"
+        >
+          Questions
+        </Text>
+        <Text
+          variant="bodyMedium"
+        >
+          • 
+          Should bots get a separate, higher budget?
+        </Text>
+      </View>
+      <Text
+        style={
+          {
+            "color": "#9FB0BF",
+          }
+        }
+        variant="bodySmall"
+      >
+        Approvers: 
+        u_robby
+      </Text>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="actions"
+    testID="block-b3"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "gap": 8,
+        }
+      }
+    >
+      <Button
+        accessibilityLabel="Approve plan"
+        compact={true}
+        mode="contained"
+        onPress={[Function]}
+        style={
+          {
+            "alignSelf": "flex-start",
+          }
+        }
+        testID="action-plan.approve"
+      >
+        Approve plan
+      </Button>
+      <Button
+        accessibilityLabel="Request changes"
+        compact={true}
+        mode="outlined"
+        onPress={[Function]}
+        style={
+          {
+            "alignSelf": "flex-start",
+          }
+        }
+        testID="action-plan.request_changes"
+      >
+        Request changes
+      </Button>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="context"
+    testID="block-b4"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "gap": 8,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "gap": 6,
+          }
+        }
+      >
+        <Text
+          variant="bodySmall"
+        >
+          Agent run 
+          <Text
+            style={
+              {
+                "backgroundColor": "#263238",
+                "fontFamily": "JetBrainsMono_400Regular",
+              }
+            }
+          >
+            run_01J8
+          </Text>
+           · plan v2 · 
+          <Text
+            accessibilityRole="link"
+            onPress={[Function]}
+            style={
+              {
+                "color": "#00E5FF",
+                "textDecorationLine": "underline",
+              }
+            }
+          >
+            open run panel
+          </Text>
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`BlocksViewNative fixtures > renders status and matches its snapshot 1`] = `
+<View
+  style={
+    {
+      "gap": 10,
+      "maxWidth": 720,
+    }
+  }
+  testID="blocks"
+>
+  <View
+    accessibilityLabel="statusCard"
+    testID="block-b1"
+  >
+    <View
+      style={
+        [
+          {
+            "borderLeftWidth": 3,
+            "borderWidth": 1,
+            "gap": 8,
+            "padding": 12,
+          },
+          {
+            "backgroundColor": "#161B22",
+            "borderColor": "#263238",
+            "borderLeftColor": "#6200EA",
+            "borderRadius": 4,
+          },
+        ]
+      }
+      testID="card-agent"
+    >
+      <Text
+        style={
+          {
+            "color": "#6200EA",
+            "textTransform": "uppercase",
+          }
+        }
+        variant="labelSmall"
+      >
+        Run · run_01J8
+      </Text>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "gap": 8,
+          }
+        }
+      >
+        <Chip
+          accessibilityLabel="ci watching"
+          compact={true}
+          mode="flat"
+          style={
+            [
+              {
+                "alignSelf": "flex-start",
+                "height": 24,
+              },
+              {
+                "backgroundColor": "#6200EA33",
+                "borderColor": "#B388FF",
+              },
+            ]
+          }
+          testID="run-state"
+          textStyle={
+            [
+              {
+                "fontSize": 11,
+                "lineHeight": 14,
+                "marginVertical": 0,
+              },
+              {
+                "color": "#B388FF",
+              },
+            ]
+          }
+        >
+          ci watching
+        </Chip>
+        <Text
+          style={
+            {
+              "fontFamily": "JetBrainsMono_400Regular",
+            }
+          }
+          variant="bodyMedium"
+        >
+          feat/rate-limit
+        </Text>
+        <Text
+          style={
+            {
+              "color": "#9FB0BF",
+            }
+          }
+          variant="bodyMedium"
+        >
+          $
+          1.37
+        </Text>
+      </View>
+      <Text
+        variant="bodyMedium"
+      >
+        Waiting for 3 checks on PR #42
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#9FB0BF",
+          }
+        }
+        variant="bodySmall"
+      >
+        started 
+        2026-09-18T11:46:00.000Z
+      </Text>
+      <Text
+        accessibilityRole="link"
+        onPress={[Function]}
+        style={
+          {
+            "color": "#00E5FF",
+            "textDecorationLine": "underline",
+          }
+        }
+        testID="link-https://app.tank.chat/w/tank/runs/run_01J8"
+        variant="bodyMedium"
+      >
+        run panel
+      </Text>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="divider"
+    testID="block-b2"
+  >
+    <Divider />
+  </View>
+  <View
+    accessibilityLabel="section"
+    testID="block-b3"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 8,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "flex": 1,
+            "gap": 4,
+            "minWidth": 0,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "gap": 6,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderRadius": 6,
+                  "padding": 10,
+                },
+                {
+                  "backgroundColor": "#263238",
+                },
+              ]
+            }
+            testID="code-console"
+          >
+            <Text
+              style={
+                {
+                  "fontFamily": "JetBrainsMono_400Regular",
+                }
+              }
+              variant="bodySmall"
+            >
+              go test ./... 
+ok  	internal/gateway	0.113s
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityLabel="actions"
+    testID="block-b4"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+          "gap": 8,
+        }
+      }
+    >
+      <Button
+        accessibilityLabel="Stop run"
+        buttonColor="#FF6B6B"
+        compact={true}
+        mode="contained"
+        onPress={[Function]}
+        style={
+          {
+            "alignSelf": "flex-start",
+          }
+        }
+        testID="action-run.stop"
+        textColor="#000000"
+      >
+        Stop run
+      </Button>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`BlocksViewNative fixtures > renders tool-log and matches its snapshot 1`] = `
+<View
+  style={
+    {
+      "gap": 10,
+      "maxWidth": 720,
+    }
+  }
+  testID="blocks"
+>
+  <View
+    accessibilityLabel="toolLog"
+    testID="block-b1"
+  >
+    <View
+      style={
+        [
+          {
+            "borderLeftWidth": 3,
+            "borderWidth": 1,
+            "gap": 8,
+            "padding": 12,
+          },
+          {
+            "backgroundColor": "#161B22",
+            "borderColor": "#263238",
+            "borderLeftColor": "#6200EA",
+            "borderRadius": 4,
+          },
+        ]
+      }
+      testID="card-agent"
+    >
+      <Text
+        style={
+          {
+            "color": "#6200EA",
+            "textTransform": "uppercase",
+          }
+        }
+        variant="labelSmall"
+      >
+        Agent · implementing
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#9FB0BF",
+          }
+        }
+        variant="bodySmall"
+      >
+        37
+         tool call
+        s
+         · 
+        4
+         file
+        s
+         edited
+      </Text>
+      <Text
+        accessibilityRole="link"
+        onPress={[Function]}
+        style={
+          {
+            "color": "#00E5FF",
+            "textDecorationLine": "underline",
+          }
+        }
+        testID="link-https://app.tank.chat/w/tank/runs/run_01J8"
+        variant="bodyMedium"
+      >
+        run panel
+      </Text>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 8,
+          }
+        }
+        testID="tool-ok"
+      >
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "rgba(230, 237, 243, 0.38)",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          2026-09-18T11:59:20.000Z
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "#B388FF",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          Read
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              },
+              {
+                "color": "#E6EDF3",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          internal/gateway/server.go
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 8,
+          }
+        }
+        testID="tool-ok"
+      >
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "rgba(230, 237, 243, 0.38)",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          2026-09-18T11:59:29.000Z
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "#B388FF",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          Edit
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              },
+              {
+                "color": "#E6EDF3",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          internal/gateway/limit.go (+12 −3)
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 8,
+          }
+        }
+        testID="tool-failed"
+      >
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "rgba(230, 237, 243, 0.38)",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          2026-09-18T11:59:40.000Z
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "#B388FF",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          Bash
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              },
+              {
+                "color": "#FF6B6B",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          go test ./internal/gateway/... (exit 1)
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 8,
+          }
+        }
+        testID="tool-ok"
+      >
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "rgba(230, 237, 243, 0.38)",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          2026-09-18T11:59:52.000Z
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "#B388FF",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          Edit
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              },
+              {
+                "color": "#E6EDF3",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          internal/gateway/limit_test.go (+2 −2)
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 8,
+          }
+        }
+        testID="tool-ok"
+      >
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "rgba(230, 237, 243, 0.38)",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          2026-09-18T11:59:59.000Z
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "color": "#B388FF",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          Bash
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "JetBrainsMono_400Regular",
+              },
+              {
+                "flex": 1,
+                "gap": 4,
+                "minWidth": 0,
+              },
+              {
+                "color": "#E6EDF3",
+              },
+            ]
+          }
+          variant="bodySmall"
+        >
+          go test ./internal/gateway/... (ok)
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
