@@ -1,6 +1,8 @@
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Run } from "../../agent/v1/agent_pb.js";
 import type { BlockAction } from "../../blocks/v1/blocks_pb.js";
+import type { File } from "../../files/v1/files_pb.js";
 import type { Message as Message$1 } from "../../message/v1/message_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -208,6 +210,12 @@ export type ChannelMembershipChanged = Message<"tank.events.v1.ChannelMembership
      * @generated from field: bool joined = 3;
      */
     joined: boolean;
+    /**
+     * who added or removed the member; empty when they acted on themselves
+     *
+     * @generated from field: string actor_id = 4;
+     */
+    actorId: string;
 };
 /**
  * Describes the message tank.events.v1.ChannelMembershipChanged.
@@ -324,6 +332,76 @@ export type AgentStatus = Message<"tank.events.v1.AgentStatus"> & {
  * Use `create(AgentStatusSchema)` to create a new message.
  */
 export declare const AgentStatusSchema: GenMessage<AgentStatus>;
+/**
+ * file.ready on evt.{ws}.user.{uploader}: the upload is verified and readable.
+ *
+ * @generated from message tank.events.v1.FileReady
+ */
+export type FileReady = Message<"tank.events.v1.FileReady"> & {
+    /**
+     * @generated from field: tank.files.v1.File file = 1;
+     */
+    file?: File;
+};
+/**
+ * Describes the message tank.events.v1.FileReady.
+ * Use `create(FileReadySchema)` to create a new message.
+ */
+export declare const FileReadySchema: GenMessage<FileReady>;
+/**
+ * message.ephemeral on evt.{ws}.user.{uid}: never stored, shown only to user_id.
+ *
+ * @generated from message tank.events.v1.MessageEphemeral
+ */
+export type MessageEphemeral = Message<"tank.events.v1.MessageEphemeral"> & {
+    /**
+     * @generated from field: tank.message.v1.Message message = 1;
+     */
+    message?: Message$1;
+    /**
+     * @generated from field: string user_id = 2;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.events.v1.MessageEphemeral.
+ * Use `create(MessageEphemeralSchema)` to create a new message.
+ */
+export declare const MessageEphemeralSchema: GenMessage<MessageEphemeral>;
+/**
+ * notifications.read on evt.{ws}.user.{uid}: cross-device badge sync.
+ *
+ * @generated from message tank.events.v1.NotificationsRead
+ */
+export type NotificationsRead = Message<"tank.events.v1.NotificationsRead"> & {
+    /**
+     * empty = every notification in the workspace
+     *
+     * @generated from field: repeated string notification_ids = 1;
+     */
+    notificationIds: string[];
+};
+/**
+ * Describes the message tank.events.v1.NotificationsRead.
+ * Use `create(NotificationsReadSchema)` to create a new message.
+ */
+export declare const NotificationsReadSchema: GenMessage<NotificationsRead>;
+/**
+ * agent.run.updated on evt.{ws}.thread.{root}: state, status message or cost changed.
+ *
+ * @generated from message tank.events.v1.AgentRunUpdated
+ */
+export type AgentRunUpdated = Message<"tank.events.v1.AgentRunUpdated"> & {
+    /**
+     * @generated from field: tank.agent.v1.Run run = 1;
+     */
+    run?: Run;
+};
+/**
+ * Describes the message tank.events.v1.AgentRunUpdated.
+ * Use `create(AgentRunUpdatedSchema)` to create a new message.
+ */
+export declare const AgentRunUpdatedSchema: GenMessage<AgentRunUpdated>;
 /**
  * @generated from message tank.events.v1.NotificationCreated
  */
