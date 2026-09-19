@@ -3,6 +3,7 @@ import { anyUnpack, type Timestamp, timestampFromMs } from "@bufbuild/protobuf/w
 import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { Channel, ChannelReadState } from "../contracts/tank/channel/v1/channel_pb.js";
+import { ChannelReadStateSchema } from "../contracts/tank/channel/v1/channel_pb.js";
 import {
   type AgentRunUpdated,
   type AgentStatus,
@@ -559,14 +560,13 @@ export function reduce(state: TankState, action: Action): TankState {
         return { ...state, threadReadStates: { ...state.threadReadStates, [action.threadRootId]: seq } };
       }
       const prev = state.readStates[action.channelId];
-      const next: ChannelReadState = {
-        $typeName: "tank.channel.v1.ChannelReadState",
+      const next: ChannelReadState = create(ChannelReadStateSchema, {
         channelId: action.channelId,
         lastReadSeq: action.lastReadSeq,
         mentionCount: 0,
         muted: prev?.muted ?? false,
         starred: prev?.starred ?? false,
-      };
+      });
       if (prev && prev.lastReadSeq >= next.lastReadSeq && prev.mentionCount === 0) return state;
       return { ...state, readStates: { ...state.readStates, [action.channelId]: next } };
     }

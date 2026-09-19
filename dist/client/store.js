@@ -1,5 +1,6 @@
 import { create, createRegistry } from "@bufbuild/protobuf";
 import { anyUnpack, timestampFromMs } from "@bufbuild/protobuf/wkt";
+import { ChannelReadStateSchema } from "../contracts/tank/channel/v1/channel_pb.js";
 import { file_tank_events_v1_events, } from "../contracts/tank/events/v1/events_pb.js";
 import { NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
 import { uuidv7Time } from "./uuidv7.js";
@@ -362,14 +363,13 @@ export function reduce(state, action) {
                 return { ...state, threadReadStates: { ...state.threadReadStates, [action.threadRootId]: seq } };
             }
             const prev = state.readStates[action.channelId];
-            const next = {
-                $typeName: "tank.channel.v1.ChannelReadState",
+            const next = create(ChannelReadStateSchema, {
                 channelId: action.channelId,
                 lastReadSeq: action.lastReadSeq,
                 mentionCount: 0,
                 muted: prev?.muted ?? false,
                 starred: prev?.starred ?? false,
-            };
+            });
             if (prev && prev.lastReadSeq >= next.lastReadSeq && prev.mentionCount === 0)
                 return state;
             return { ...state, readStates: { ...state.readStates, [action.channelId]: next } };
