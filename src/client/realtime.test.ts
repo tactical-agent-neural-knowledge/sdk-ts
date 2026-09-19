@@ -136,19 +136,29 @@ describe("event ordering", () => {
 
 describe("reconnect", () => {
   it("resumes after the server closes and replays what was missed; backoff resets", async () => {
-    const c = makeClient();
+    // Deterministic 100ms reconnect delay so there is a real disconnected window to append into.
+    const c = makeClient({ backoff: { minMs: 200, maxMs: 200, random: () => 0.5 } });
     const seen: bigint[] = [];
+    let replayed = -1;
+    let closes = 0;
     c.on("event", (e) => seen.push(e.cursor));
+    c.on("close", () => closes++);
+    c.on("resumed", (r) => {
+      replayed = r.replayed;
+    });
     c.start();
     await until(() => c.state === "ready");
     gw.emit("ws1", gw.messageCreated(fakeMessage({ channelId: "general" })));
     await until(() => seen.length === 1);
     gw.closeAll();
-    await until(() => c.state === "reconnecting");
+    // The client observed the close; with a fixed 100ms backoff it has not reconnected yet.
+    await until(() => closes === 1);
+    expect(c.state).toBe("reconnecting");
     // while disconnected, the server appends
     gw.emit("ws1", gw.messageCreated(fakeMessage({ channelId: "general" })));
     await until(() => c.state === "ready" && seen.length === 2);
     expect(seen).toEqual([1n, 2n]);
+    expect(replayed).toBe(1);
     expect(gw.conns[1]?.received[0]?.kind.case).toBe("resume");
   });
 
