@@ -6,7 +6,8 @@ import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js
 import { ChannelService, ChannelType, TreadGoalSchema, } from "../contracts/tank/channel/v1/channel_pb.js";
 import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } from "../contracts/tank/message/v1/message_pb.js";
-import { PresenceService } from "../contracts/tank/presence/v1/presence_pb.js";
+import { NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
+import { PresenceSchema, PresenceService, } from "../contracts/tank/presence/v1/presence_pb.js";
 import { GetBootstrapResponseSchema, Role, WorkspaceService, } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Backoff } from "./backoff.js";
 import { Emitter } from "./emitter.js";
@@ -14,7 +15,9 @@ import { RealtimeClient } from "./realtime.js";
 import { MemoryStorage, storageKeys } from "./storage.js";
 import { TankStore, unpackEnvelope } from "./store.js";
 import { createTankTransport } from "./transport.js";
+import { inputMime, inputName, inputSize, putUpload, toBlob, } from "./upload.js";
 import { cryptoRandomBytes, uuidv7 } from "./uuidv7.js";
+const DOWNLOAD_URL_TTL_MS = 10 * 60_000;
 const ROLE_BY_NAME = {
     owner: Role.OWNER,
     admin: Role.ADMIN,
@@ -43,6 +46,9 @@ export class TankClient {
     presence;
     files;
     agents;
+    /** Same client as `agents`. */
+    agent;
+    notifications;
     realtime;
     store;
     storage;
@@ -58,6 +64,8 @@ export class TankClient {
     persistTimer;
     unsubscribers = [];
     sendBackoff = new Backoff({ minMs: 500, maxMs: 15_000 });
+    downloadUrls = new Map();
+    downloadUrlInFlight = new Map();
     constructor(opts) {
         this.opts = opts;
         this.now = opts.now ?? Date.now;
@@ -79,6 +87,8 @@ export class TankClient {
         this.presence = createClient(PresenceService, this.transport);
         this.files = createClient(FilesService, this.transport);
         this.agents = createClient(AgentService, this.transport);
+        this.agent = this.agents;
+        this.notifications = createClient(NotificationService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
             getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
@@ -97,7 +107,11 @@ export class TankClient {
         await this.hydrate();
         this.realtime.setWorkspaceIds(Object.keys(this.store.getState().workspaces));
         this.realtime.start();
-        this.typingSweep = setInterval(() => this.store.dispatch({ type: "typing/expire", now: this.now() }), 1_000);
+        this.typingSweep = setInterval(() => {
+            const now = this.now();
+            this.store.dispatch({ type: "typing/expire", now });
+            this.store.dispatch({ type: "agentStatus/expire", now });
+        }, 1_000);
         this.unsubscribers.push(this.store.subscribe(() => this.schedulePersist()));
         void this.flushOutbox();
     }
@@ -128,6 +142,7 @@ export class TankClient {
                 channels: res.channels,
                 readStates: res.readStates,
                 members: res.members,
+                unreadNotificationCount: res.unreadNotificationCount,
             });
             this.realtime.setWorkspaceIds(Object.keys(this.store.getState().workspaces));
             await this.storage.put(storageKeys.bootstrap(workspaceId), JSON.stringify(toJson(GetBootstrapResponseSchema, res)));
@@ -474,6 +489,237 @@ export class TankClient {
             action: { ...action, userId: this.store.getState().me?.id ?? "", at: timestampFromMs(this.now()) },
         });
     }
+    // ------------------------------------------------------------ notifications
+    /**
+     * Page a workspace's notifications (newest first) into the store. Without `cursor` this is the first
+     * page of the `unreadOnly ? "unread" : "all"` list; pass the previous `nextCursor` for the next one.
+     * The response's `unread_count` reseeds `unreadNotificationCount[workspaceId]`.
+     */
+    async loadNotifications(input) {
+        const { workspaceId } = input;
+        const mode = input.unreadOnly ? "unread" : "all";
+        const cursor = input.cursor ?? "";
+        this.store.dispatch({ type: "notificationPaging/set", workspaceId, mode, paging: { loading: true } });
+        try {
+            const res = await this.notifications.listNotifications({
+                workspaceId,
+                unreadOnly: mode === "unread",
+                cursor,
+                limit: input.limit ?? 30,
+            });
+            this.store.dispatch({
+                type: "notifications/upsert",
+                workspaceId,
+                notifications: res.notifications,
+                unreadCount: res.unreadCount,
+            });
+            this.store.dispatch({
+                type: "notificationPaging/set",
+                workspaceId,
+                mode,
+                paging: { loading: false, loaded: true, cursor: res.nextCursor, hasMore: res.nextCursor !== "" },
+            });
+            return {
+                notifications: res.notifications,
+                nextCursor: res.nextCursor,
+                hasMore: res.nextCursor !== "",
+                unreadCount: res.unreadCount,
+            };
+        }
+        catch (err) {
+            this.store.dispatch({ type: "notificationPaging/set", workspaceId, mode, paging: { loading: false } });
+            throw err;
+        }
+    }
+    /**
+     * Mark notifications read (no ids = every unread one in the workspace). Optimistic: rows flip and the
+     * badge drops immediately; the previous rows and count come back if the RPC fails.
+     */
+    async markNotificationsRead(workspaceId, notificationIds = []) {
+        const state = this.store.getState();
+        const targets = notificationIds.length ? notificationIds : (state.notificationIds[workspaceId] ?? []);
+        const before = targets.map((id) => state.notifications[id]).filter((n) => !!n);
+        const unreadBefore = state.unreadNotificationCount[workspaceId] ?? 0;
+        this.store.dispatch({
+            type: "notifications/read",
+            workspaceId,
+            notificationIds,
+            readAt: timestampFromMs(this.now()),
+        });
+        try {
+            await this.notifications.markNotificationsRead({ workspaceId, notificationIds });
+        }
+        catch (err) {
+            this.store.dispatch({
+                type: "notifications/restore",
+                workspaceId,
+                notifications: before,
+                unreadCount: unreadBefore,
+            });
+            throw err;
+        }
+    }
+    // ------------------------------------------------------------ agent runs
+    /** Page runs (newest first) into `runsById` / `runsByThread`. Resolves to the page and its next cursor. */
+    async listRuns(input = {}) {
+        const res = await this.agents.listRuns({
+            workspaceId: input.workspaceId ?? "",
+            channelId: input.channelId ?? "",
+            threadRootId: input.threadRootId ?? "",
+            cursor: input.cursor ?? "",
+            limit: input.limit ?? (input.threadRootId ? 5 : 50),
+        });
+        this.store.dispatch({ type: "runs/upsert", runs: res.runs });
+        return { runs: res.runs, nextCursor: res.nextCursor };
+    }
+    /** Fetch one run into the store. */
+    async getRun(runId) {
+        const res = await this.agents.getRun({ runId });
+        if (res.run)
+            this.store.dispatch({ type: "runs/upsert", runs: [res.run] });
+        return res.run;
+    }
+    // ------------------------------------------------------------ presence
+    /**
+     * Set my presence status (and optional custom status). Optimistic: `presence[me]` changes immediately
+     * and is rolled back if the RPC fails; the server's presence replaces it on success.
+     */
+    async setStatus(input) {
+        const state = this.store.getState();
+        const me = state.me?.id ?? "";
+        const prev = me ? state.presence[me] : undefined;
+        const expiresMs = input.expiresAt === undefined
+            ? undefined
+            : typeof input.expiresAt === "number"
+                ? input.expiresAt
+                : input.expiresAt.getTime();
+        const expiresAt = expiresMs === undefined ? undefined : timestampFromMs(expiresMs);
+        if (me) {
+            this.store.dispatch({
+                type: "presence/changed",
+                presence: create(PresenceSchema, {
+                    ...(prev ?? {}),
+                    userId: me,
+                    status: input.status,
+                    customStatusText: input.customText ?? "",
+                    customStatusEmoji: input.customEmoji ?? "",
+                    statusExpiresAt: expiresAt,
+                    lastSeen: timestampFromMs(this.now()),
+                }),
+            });
+        }
+        try {
+            const res = await this.presence.setStatus({
+                workspaceId: input.workspaceId,
+                status: input.status,
+                customStatusText: input.customText ?? "",
+                customStatusEmoji: input.customEmoji ?? "",
+                expiresAt,
+            });
+            if (res.presence)
+                this.store.dispatch({ type: "presence/changed", presence: res.presence });
+            return res.presence ?? (me ? this.store.getState().presence[me] : undefined);
+        }
+        catch (err) {
+            if (me) {
+                if (prev)
+                    this.store.dispatch({ type: "presence/changed", presence: prev });
+                else
+                    this.store.dispatch({ type: "presence/remove", userId: me });
+            }
+            throw err;
+        }
+    }
+    // ------------------------------------------------------------ files
+    /**
+     * Upload a file: `CreateUpload` → PUT the bytes to the pre-signed URL (multipart parts when the server
+     * returns `part_urls`) → `CompleteUpload`. Resolves to the `File`, which is also put in `filesById`.
+     * `file` is a Blob/File on web and node, or `{ uri, name, mime, size }` on React Native.
+     */
+    async uploadFile(file, opts) {
+        const size = inputSize(file);
+        const contentType = inputMime(file);
+        const created = await this.files.createUpload({
+            workspaceId: opts.workspaceId,
+            name: inputName(file),
+            mime: contentType,
+            size: BigInt(size),
+            channelId: opts.channelId ?? "",
+        });
+        if (!created.file)
+            throw new Error("CreateUpload returned no file");
+        this.store.dispatch({ type: "files/upsert", files: [created.file] });
+        const put = {
+            XMLHttpRequest: this.opts.XMLHttpRequest,
+            fetch: this.opts.fetch,
+            signal: opts.signal,
+        };
+        const etags = [];
+        if (created.partUrls.length > 0) {
+            const blob = await toBlob(file, this.opts.fetch ?? globalThis.fetch);
+            const partSize = Number(created.partSize) || Math.ceil(size / created.partUrls.length);
+            const progress = new Array(created.partUrls.length).fill(0);
+            for (let i = 0; i < created.partUrls.length; i++) {
+                const part = blob.slice(i * partSize, Math.min(size, (i + 1) * partSize));
+                const { etag } = await putUpload({
+                    ...put,
+                    url: created.partUrls[i],
+                    body: part,
+                    contentType,
+                    onProgress: (loaded) => {
+                        progress[i] = loaded;
+                        opts.onProgress?.(progress.reduce((a, b) => a + b, 0), size);
+                    },
+                });
+                etags.push(etag);
+            }
+        }
+        else {
+            await putUpload({
+                ...put,
+                url: created.uploadUrl,
+                body: file,
+                contentType,
+                onProgress: opts.onProgress,
+            });
+        }
+        const done = await this.files.completeUpload({
+            fileId: created.file.id,
+            uploadId: created.uploadId,
+            etags,
+        });
+        const result = done.file ?? created.file;
+        this.store.dispatch({ type: "files/upsert", files: [result] });
+        return result;
+    }
+    /** A pre-signed download URL for a file, memoized for 10 minutes (or the server's expiry, if sooner). */
+    getDownloadUrl(fileId) {
+        const hit = this.downloadUrls.get(fileId);
+        if (hit && hit.expiresAt > this.now())
+            return Promise.resolve(hit.url);
+        const inFlight = this.downloadUrlInFlight.get(fileId);
+        if (inFlight)
+            return inFlight;
+        const p = (async () => {
+            try {
+                const res = await this.files.getDownloadUrl({ fileId });
+                const now = this.now();
+                const serverExpiry = res.expiresAt
+                    ? Number(res.expiresAt.seconds) * 1000 + Math.floor(res.expiresAt.nanos / 1e6)
+                    : Number.POSITIVE_INFINITY;
+                this.downloadUrls.set(fileId, {
+                    url: res.url,
+                    expiresAt: Math.min(now + DOWNLOAD_URL_TTL_MS, serverExpiry),
+                });
+                return res.url;
+            }
+            finally {
+                this.downloadUrlInFlight.delete(fileId);
+            }
+        })();
+        this.downloadUrlInFlight.set(fileId, p);
+        return p;
+    }
     // ------------------------------------------------------------ outbox
     async flushOutbox() {
         const ids = Array.from(this.outbox.entries())
@@ -553,7 +799,7 @@ export class TankClient {
             if (p.presence)
                 this.store.dispatch({ type: "presence/changed", presence: p.presence });
         });
-        rt.on("agent_status", (s) => this.store.dispatch({ type: "agentStatus", status: s }));
+        rt.on("agent_status", (s) => this.store.dispatch({ type: "agentStatus", status: s, now: this.now() }));
         rt.on("resync", () => void this.resync());
     }
     async refreshChannel(channelId) {
@@ -641,6 +887,7 @@ export class TankClient {
                         channels: res.channels,
                         readStates: res.readStates,
                         members: res.members,
+                        unreadNotificationCount: res.unreadNotificationCount,
                     });
                 }
             }

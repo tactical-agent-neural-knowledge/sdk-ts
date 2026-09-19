@@ -41,6 +41,11 @@
       "import": "./dist/blocks-web/index.js",
       "default": "./dist/blocks-web/index.js"
     },
+    "./blocks-native": {
+      "types": "./dist/blocks-native/index.d.ts",
+      "import": "./dist/blocks-native/index.js",
+      "default": "./dist/blocks-native/index.js"
+    },
     "./contracts": {
       "types": "./dist/contracts/index.d.ts",
       "import": "./dist/contracts/index.js",
@@ -69,7 +74,9 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-native": ">=0.76",
+    "react-native-paper": "^5.0.0"
   },
   "peerDependenciesMeta": {
     "@emotion/react": {
@@ -85,6 +92,12 @@
       "optional": true
     },
     "react-dom": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "react-native-paper": {
       "optional": true
     }
   },
@@ -103,10 +116,15 @@
     "@types/node": "^24.0.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "@types/react-test-renderer": "^19.3.0",
     "@types/ws": "^8.18.0",
     "jsdom": "^26.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-native": "0.81.5",
+    "react-native-paper": "^5.15.3",
+    "react-native-safe-area-context": "^5.10.0",
+    "react-test-renderer": "19.1.0",
     "typescript": "~5.9.0",
     "vitest": "^3.2.0",
     "ws": "^8.18.0"

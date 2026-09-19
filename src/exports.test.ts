@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
@@ -16,6 +16,7 @@ const SUBPATHS = [
   "./design",
   "./blocks",
   "./blocks-web",
+  "./blocks-native",
   "./contracts",
   "./contracts/message",
 ];
@@ -78,5 +79,25 @@ describe("package exports", () => {
       console.log([typeof design.brand, typeof blocks.normalizeBlocks, typeof contracts.ChatService].join(","));
     `);
     expect(out).toBe("object,function,object");
+  });
+});
+
+function walk(dir: string): string[] {
+  const out: string[] = [];
+  for (const name of readdirSync(dir)) {
+    const p = join(dir, name);
+    if (statSync(p).isDirectory()) out.push(...walk(p));
+    else if (/\.(js|ts|tsx)$/.test(p)) out.push(p);
+  }
+  return out;
+}
+
+describe("react-native isolation", () => {
+  it("only src/blocks-native imports react-native / react-native-paper, so every other subpath is DOM/node safe", () => {
+    const offenders = walk(join(ROOT, "src"))
+      .concat(walk(join(ROOT, "dist")))
+      .filter((p) => !p.includes("/blocks-native/") && !p.includes("/test/mocks/"))
+      .filter((p) => /from\s+["']react-native(-paper)?["']/.test(readFileSync(p, "utf8")));
+    expect(offenders).toEqual([]);
   });
 });

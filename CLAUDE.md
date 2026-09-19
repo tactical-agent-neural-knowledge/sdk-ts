@@ -10,10 +10,10 @@ One npm package, `@tactical-agent-neural-knowledge/sdk`, repo root is the packag
 built with `tsc` to `dist/` — **`dist/` is committed** because consumers (`web`, `mobile`, `agent-runner`) install it as
 a git dependency `github:tactical-agent-neural-knowledge/sdk-ts#<sha>` with no registry or token. pnpm 11, Node 24,
 Biome 2, Vitest. Runtime deps: `@bufbuild/protobuf`, `@connectrpc/connect(-web)`, `idb`. Peers (optional): React 19,
-MUI 7 + Emotion (`blocks-web` only).
+MUI 7 + Emotion (`blocks-web` only), `react-native` + `react-native-paper` 5 (`blocks-native` only).
 
-Subpaths: `.` (client), `./react`, `./design`, `./blocks`, `./blocks-web`, `./contracts`, `./contracts/*`,
-`./fixtures/*`. `./blocks-native` (React Native Paper renderer) comes later, as its own subpath.
+Subpaths: `.` (client), `./react`, `./design`, `./blocks`, `./blocks-web`, `./blocks-native`, `./contracts`,
+`./contracts/*`, `./fixtures/*`.
 
 ## CI / deploy path
 | Workflow | Trigger | Does | Verified by |
@@ -29,18 +29,21 @@ There is no deploy: a green `main` sha is the artifact. Consumers bump the sha i
 | Build (and commit) `dist/` | `pnpm build` |
 | Re-vendor contracts | `pnpm sync-contracts <contracts-sha>` (updates `src/contracts/tank`, `src/contracts/VERSION`, flat shims) |
 | Regenerate block goldens | `UPDATE_FIXTURES=1 pnpm test` (edit `src/test/fixture-defs.ts` first) |
-| Update renderer snapshots | `pnpm vitest run -u src/blocks-web` (only with a deliberate visual change) |
+| Update renderer snapshots | `pnpm vitest run -u src/blocks-web` / `src/blocks-native` (only with a deliberate visual change) |
 | Wait for CI | `../bin/ci-wait sdk-ts [sha]` |
 
 ## Layout
 `src/contracts` vendored generated code + namespaced barrel · `src/design` tokens, fonts (names + Google/Expo sources, no binaries), MUI options, Paper theme, contrast ·
 `src/client` transport, `RealtimeClient`, `TankStore`, outbox, storage adapters · `src/react` provider + hooks ·
-`src/blocks` types, builders, normalizer · `src/blocks-web` MUI renderers · `src/test` fake gateway + fixture defs
+`src/blocks` types, builders, normalizer, `runTone` · `src/blocks-web` MUI renderers · `src/blocks-native` react-native-paper
+renderers (the only place `react-native` may be imported) · `src/client/upload.ts` PUT with XHR progress / fetch fallback ·
+`src/test` fake gateway, fixture defs and the `react-native` / `react-native-paper` stand-ins Vitest aliases in
 (never built) · `fixtures/` golden JSON · `scripts/sync-contracts.sh`.
 
 ## Hard prohibitions
 Editing `dist/` by hand (run `pnpm build`); editing `src/contracts/tank/` by hand (run the sync script); importing
-`react-native` anywhere in this repo; `link:`/`file:` deps in a PR; pushing without committing the rebuilt `dist/`;
+`react-native` / `react-native-paper` outside `src/blocks-native` (`src/exports.test.ts` scans `src/` and `dist/`);
+`link:`/`file:` deps in a PR; pushing without committing the rebuilt `dist/`;
 adding a non-optional peer that the client subpath would drag into node/mobile; message bodies anywhere but the
 store (no logging of `text`).
 
@@ -55,4 +58,11 @@ helpers (`updateMessage`, `deleteMessage`, `joinChannel`, `leaveChannel`, `creat
 `markThreadRead`) update the store optimistically and roll back on error so apps never dispatch raw actions;
 thread read state lives in `threadReadStates` and is counted separately from channel unreads; the realtime
 "back online" signal is injectable (`realtime.onlineSignal`); `TankStorage` is string key/value (IndexedDB on web, SQLite on
-mobile, memory in tests); Biome not ESLint+Prettier; Vitest not Jest.
+mobile, memory in tests); Biome not ESLint+Prettier; Vitest not Jest; the store owns notifications
+(`notifications` / `notificationIds` / `unreadNotificationCount`, seeded from `GetBootstrap`), agent runs
+(`runsById` / `runsByThread`, `agentStatusByThread` with a 30 s expiry) and files (`filesById`) so web/mobile keep no
+side stores; `EventPayload` is the closed union of vendored `tank.events.v1` types plus `{ $typeName: "unknown", typeUrl, value }`
+(a literal discriminant keeps `switch` narrowing; an open `{ $typeName: string }` member would not); `runTone` lives in
+`./blocks` so both renderers share one state → colour mapping; `./blocks-native` renders with react-native-paper against
+Vitest stand-ins (real `react-native` is a dev dependency for types only); `uploadFile` runs CreateUpload → PUT
+(XHR for progress, fetch fallback, multipart parts when returned) → CompleteUpload.

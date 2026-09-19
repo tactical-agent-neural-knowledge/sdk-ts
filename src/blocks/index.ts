@@ -16,4 +16,12 @@ export {
   rt,
   type TextStyle,
 } from "./richtext.js";
+export {
+  isTerminalRunState,
+  RUN_TONE_MUI_COLOR,
+  RUN_TONE_PAPER_COLOR,
+  type RunTone,
+  runStateLabel,
+  runTone,
+} from "./runTone.js";
 export * from "./types.js";

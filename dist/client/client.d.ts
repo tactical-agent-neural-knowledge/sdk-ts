@@ -1,17 +1,19 @@
 import { type Client, type Interceptor, type Transport } from "@connectrpc/connect";
-import { AgentService } from "../contracts/tank/agent/v1/agent_pb.js";
+import { AgentService, type Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AuthService } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type Channel, ChannelService, ChannelType, type TreadGoal } from "../contracts/tank/channel/v1/channel_pb.js";
-import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
+import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
-import { PresenceService } from "../contracts/tank/presence/v1/presence_pb.js";
+import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
+import { type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
 import { type GetBootstrapResponse, Role, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
 import { RealtimeClient, type RealtimeOptions, type WebSocketCtor } from "./realtime.js";
 import { type TankStorage } from "./storage.js";
 import { TankStore } from "./store.js";
 import { type TankAuth } from "./transport.js";
+import { type UploadInput, type XhrCtor } from "./upload.js";
 import { type RandomBytes } from "./uuidv7.js";
 export interface TankClientOptions {
     /** API origin, e.g. `https://api.tank.chat`. */
@@ -23,6 +25,8 @@ export interface TankClientOptions {
     storage?: TankStorage;
     fetch?: typeof globalThis.fetch;
     WebSocket?: WebSocketCtor;
+    /** For `uploadFile` progress. Default: `globalThis.XMLHttpRequest` when present, else `fetch` (no byte progress). */
+    XMLHttpRequest?: XhrCtor;
     interceptors?: Interceptor[];
     /** Replace the Connect transport entirely (tests, React Native, node). `baseUrl`/`auth`/`fetch` are then unused. */
     transport?: Transport;
@@ -69,6 +73,46 @@ export interface SetGoalInput {
     pipelineStatus?: string;
 }
 export type RoleName = "owner" | "admin" | "member" | "guest";
+export interface LoadNotificationsInput {
+    workspaceId: string;
+    /** Only rows without `read_at`. Default false. */
+    unreadOnly?: boolean;
+    /** Opaque cursor from a previous page (`nextCursor`); omit for the first page. */
+    cursor?: string;
+    /** Default 30. */
+    limit?: number;
+}
+export interface LoadNotificationsResult {
+    notifications: Notification[];
+    /** "" when there is no further page. */
+    nextCursor: string;
+    hasMore: boolean;
+    /** Total unread in the workspace, independent of paging. */
+    unreadCount: number;
+}
+export interface ListRunsInput {
+    workspaceId?: string;
+    channelId?: string;
+    threadRootId?: string;
+    cursor?: string;
+    /** Default 50 (5 with a `threadRootId`). */
+    limit?: number;
+}
+export interface SetStatusInput {
+    workspaceId: string;
+    status: PresenceStatus;
+    customText?: string;
+    customEmoji?: string;
+    /** When the custom status clears: ms since epoch or a Date. */
+    expiresAt?: number | Date;
+}
+export interface UploadFileOptions {
+    workspaceId: string;
+    channelId?: string;
+    /** Bytes sent so far out of the total (called at least at 0 and at `total`). */
+    onProgress?: (loaded: number, total: number) => void;
+    signal?: AbortSignal;
+}
 export interface LoadChannelOptions {
     /** `before` pages older than what is loaded (default); `after` pages newer (catch-up). */
     direction?: "before" | "after";
@@ -98,6 +142,9 @@ export declare class TankClient {
     readonly presence: Client<typeof PresenceService>;
     readonly files: Client<typeof FilesService>;
     readonly agents: Client<typeof AgentService>;
+    /** Same client as `agents`. */
+    readonly agent: Client<typeof AgentService>;
+    readonly notifications: Client<typeof NotificationService>;
     readonly realtime: RealtimeClient;
     readonly store: TankStore;
     readonly storage: TankStorage;
@@ -113,6 +160,8 @@ export declare class TankClient {
     private persistTimer;
     private unsubscribers;
     private sendBackoff;
+    private downloadUrls;
+    private downloadUrlInFlight;
     constructor(opts: TankClientOptions);
     /** Hydrates from storage, opens the gateway socket and flushes the outbox. */
     start(): Promise<void>;
@@ -178,6 +227,37 @@ export declare class TankClient {
     removeReaction(messageId: string, emoji: string): Promise<unknown>;
     /** A user interacted with a block; delivered to the owning app/agent as an event. */
     postBlockAction(action: Pick<BlockAction, "messageId" | "blockId" | "actionId" | "value">): Promise<unknown>;
+    /**
+     * Page a workspace's notifications (newest first) into the store. Without `cursor` this is the first
+     * page of the `unreadOnly ? "unread" : "all"` list; pass the previous `nextCursor` for the next one.
+     * The response's `unread_count` reseeds `unreadNotificationCount[workspaceId]`.
+     */
+    loadNotifications(input: LoadNotificationsInput): Promise<LoadNotificationsResult>;
+    /**
+     * Mark notifications read (no ids = every unread one in the workspace). Optimistic: rows flip and the
+     * badge drops immediately; the previous rows and count come back if the RPC fails.
+     */
+    markNotificationsRead(workspaceId: string, notificationIds?: string[]): Promise<void>;
+    /** Page runs (newest first) into `runsById` / `runsByThread`. Resolves to the page and its next cursor. */
+    listRuns(input?: ListRunsInput): Promise<{
+        runs: Run[];
+        nextCursor: string;
+    }>;
+    /** Fetch one run into the store. */
+    getRun(runId: string): Promise<Run | undefined>;
+    /**
+     * Set my presence status (and optional custom status). Optimistic: `presence[me]` changes immediately
+     * and is rolled back if the RPC fails; the server's presence replaces it on success.
+     */
+    setStatus(input: SetStatusInput): Promise<Presence | undefined>;
+    /**
+     * Upload a file: `CreateUpload` → PUT the bytes to the pre-signed URL (multipart parts when the server
+     * returns `part_urls`) → `CompleteUpload`. Resolves to the `File`, which is also put in `filesById`.
+     * `file` is a Blob/File on web and node, or `{ uri, name, mime, size }` on React Native.
+     */
+    uploadFile(file: UploadInput, opts: UploadFileOptions): Promise<File>;
+    /** A pre-signed download URL for a file, memoized for 10 minutes (or the server's expiry, if sooner). */
+    getDownloadUrl(fileId: string): Promise<string>;
     private flushOutbox;
     private flushOne;
     private persistOutboxEntry;

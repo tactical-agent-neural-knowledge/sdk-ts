@@ -14,8 +14,9 @@ No registry, no token. Pin a commit:
 pnpm add "github:tactical-agent-neural-knowledge/sdk-ts#<sha>"
 ```
 
-Peer dependencies (only for the subpaths that need them): `react` ^19, `react-dom` ^19 (`./react`, `./blocks-web`)
-and `@mui/material` ^7 + `@emotion/react` + `@emotion/styled` (`./blocks-web`).
+Peer dependencies (only for the subpaths that need them): `react` ^19, `react-dom` ^19 (`./react`, `./blocks-web`),
+`@mui/material` ^7 + `@emotion/react` + `@emotion/styled` (`./blocks-web`), and `react-native` + `react-native-paper` ^5
+(`./blocks-native` only; nothing else in the package imports them).
 
 Every subpath's `exports` entry carries `types`, `import` and `default` (the same ESM files), so CommonJS-style
 resolvers (Jest, `jest-expo`, Metro) find `…/sdk/react`, `…/sdk/contracts/message` etc. without a
@@ -26,8 +27,9 @@ resolvers (Jest, `jest-expo`, Metro) find `…/sdk/react`, `…/sdk/contracts/me
 | `@tactical-agent-neural-knowledge/sdk` | `createTankClient`, `RealtimeClient`, `TankStore`, storage adapters, `uuidv7` |
 | `…/sdk/react` | `TankProvider` and hooks |
 | `…/sdk/design` | brand tokens, `muiThemeOptions`, `paperTheme`, contrast helpers, `fonts` / `googleFontsUrl` / `expoGoogleFontsPackages` |
-| `…/sdk/blocks` | block types, builders, `normalizeBlocks`, `validateBlocks`, rich-text helpers |
+| `…/sdk/blocks` | block types, builders, `normalizeBlocks`, `validateBlocks`, rich-text helpers, `runTone` / `runStateLabel` |
 | `…/sdk/blocks-web` | `<BlocksView>` and per-block MUI components, `tankTheme` |
+| `…/sdk/blocks-native` | `<BlocksViewNative>` and per-block react-native-paper components (same tones as web) |
 | `…/sdk/contracts` | namespaced barrel of the generated protobuf/Connect code (`message.ChatService`, …) |
 | `…/sdk/contracts/<pkg>` | one generated package, e.g. `…/contracts/message` |
 | `…/sdk/fixtures/<name>.json` | golden block cards (plan, diff, ci-green, ci-red, approval, tool-log, status, file) |
@@ -64,8 +66,25 @@ await tank.joinChannel(channelId);
 await tank.leaveChannel(channelId);
 await tank.setGoal(channelId, { goal: "Ship rate limiting", assigneeIds: [meId] });
 const inviteId = await tank.invite(workspaceId, "ada@example.com", "admin"); // or Role.ADMIN
+await tank.setStatus({ workspaceId, status: PresenceStatus.DND, customText: "heads down", expiresAt: Date.now() + 3600e3 });
 
-// raw services are there too: tank.auth, tank.workspaces, tank.channels, tank.chat, tank.presence, tank.files, tank.agents
+// notifications (NotificationService): pages land in the store; the badge is seeded from GetBootstrap
+const { hasMore, nextCursor } = await tank.loadNotifications({ workspaceId, unreadOnly: true });
+await tank.loadNotifications({ workspaceId, unreadOnly: true, cursor: nextCursor }); // next page
+await tank.markNotificationsRead(workspaceId, [notificationId]); // no ids = every unread one; optimistic
+await tank.markNotificationsRead(workspaceId);
+
+// agent runs (AgentService): `runsById` / `runsByThread`, kept live by agent.run.updated events
+await tank.listRuns({ workspaceId, channelId }); // or { threadRootId }, cursor, limit
+const run = await tank.getRun(runId);
+
+// files (FilesService): CreateUpload → PUT (XHR with progress when available, multipart when returned) → CompleteUpload
+const file = await tank.uploadFile(blob, { workspaceId, channelId, onProgress: (sent, total) => {} }); // RN: { uri, name, mime, size }
+await tank.sendMessage({ channelId, text: "see attached", fileIds: [file.id] });
+const url = await tank.getDownloadUrl(file.id); // memoized for 10 minutes
+
+// raw services are there too: tank.auth, tank.workspaces, tank.channels, tank.chat, tank.presence, tank.files,
+// tank.agents (alias tank.agent), tank.notifications
 ```
 
 `markRead(channelId, seq?, threadRootId?, threadSeq?)` keeps its old signature; with a `threadRootId` it now delegates
@@ -119,11 +138,33 @@ tank.realtime.retryNow(); // skip the pending backoff, e.g. on app foreground
 ```
 
 `tank.store` is a plain normalized store (`workspaces, members, channels, channelOrder, messages,
-messageIdsByChannel, threadIds, channelPaging, readStates, threadReadStates, presence, typing, agentStatus, pending,
-connection, cursors`) with memoized selectors (`selectChannelMessages, selectThread, selectChannels, selectUnreads,
-selectThreadUnread, selectTyping, selectPresence`) that return stable references, so it plugs into
+messageIdsByChannel, threadIds, channelPaging, readStates, threadReadStates, presence, typing, agentStatus,
+agentStatusByThread, pending, connection, cursors, notifications, notificationIds, unreadNotificationCount,
+notificationPaging, runsById, runsByThread, filesById`) with memoized selectors (`selectChannelMessages, selectThread,
+selectChannels, selectUnreads, selectThreadUnread, selectTyping, selectPresence, selectNotifications, selectRuns,
+selectAgentStatus, selectAgentStatuses, selectMessageFiles`) that return stable references, so it plugs into
 `useSyncExternalStore` directly. `threadReadStates` (thread root id → my last read `thread_seq`) is fed by
 `ReadStateUpdated` events and `markThreadRead`.
+
+The store owns notifications, agent runs and files, so apps never keep side stores for them:
+
+- `notifications` (by id) + `notificationIds[workspaceId]` (newest first) + `unreadNotificationCount[workspaceId]`,
+  seeded from `GetBootstrap.unread_notification_count`, paged by `loadNotifications`, kept live by
+  `notification.created` (+1, row prepended) and `notifications.read` (rows flip, count drops; no ids = zero).
+- `runsById` + `runsByThread` (newest run per thread root; a run's own update always wins), fed by
+  `agent.run.updated` events, `listRuns` and `getRun`.
+- `agentStatusByThread` (thread root id or channel id → the latest `agent_status` frame), each frame dropped
+  30 s after arrival (`AGENT_STATUS_TTL_MS`) or on an empty status. `agentStatus` mirrors it for older code.
+- `filesById`, fed by `file.ready` events and upload responses; `selectMessageFiles(messageId)` follows a message's
+  `file_ids`. (`FilesService` has no `GetFile`, so files seen neither way stay unknown.)
+
+### Event payloads
+
+`unpackEnvelope(env)` returns an `EventPayload`: every `tank.events.v1` message the vendored contracts know
+(`MessageCreated … NotificationCreated, NotificationsRead, AgentRunUpdated, FileReady, MessageEphemeral`) or, for a
+type this build does not know, `{ $typeName: "unknown", typeUrl, value }`. The fallback's literal `$typeName`
+keeps a `switch (payload.$typeName)` narrowing every known case (and exhaustive over `default`), which an open
+`{ $typeName: string }` member cannot do in TypeScript.
 
 ## React
 
@@ -143,8 +184,23 @@ function Tread({ channelId }: { channelId: string }) {
 }
 ```
 
-Hooks: `useTank, useWorkspace, useChannels, useChannel, useMessages, useThread, useUnreads, useThreadUnread,
-usePresence, useTyping, useConnectionState, useTankSelector`.
+Hooks:
+
+| Hook | Returns |
+|---|---|
+| `useTank()` | the `TankClient` |
+| `useWorkspace(id)`, `useChannels(workspaceId)`, `useChannel(id)` | store rows |
+| `useMessages(channelId, { view?, pageSize? })` | `{ messages, loading, hasMoreBefore, loadOlder }` |
+| `useThread(rootId, { view? })` | `{ root, replies }` |
+| `useUnreads(workspaceId)`, `useThreadUnread(rootId)` | unread counts |
+| `usePresence(userIds)`, `useTyping(channelId, threadRootId?)`, `useConnectionState()` | live state |
+| `useNotifications(workspaceId, { unreadOnly?, load?, pageSize? })` | `{ notifications, loading, hasMore, loadMore, markRead }` (first page loads on mount) |
+| `useUnreadNotificationCount(workspaceId)` | the badge |
+| `useRun(runId)`, `useThreadRun(rootId)` | a `Run`, fetched via `GetRun` / `ListRuns` when the store has none |
+| `useRuns(workspaceId)`, `useRunsByThread()` | runs newest first / the thread → run map |
+| `useAgentStatus(threadRootId \| channelId)`, `useAgentStatuses(channelId)` | live `agent_status` frames (30 s expiry) |
+| `useFile(fileId)`, `useMessageFiles(messageId)` | `File`s from `filesById` |
+| `useTankSelector(select)` | any memoized selector |
 
 `useMessages` loads the first page on mount; `loading` is true while any page is in flight and `hasMoreBefore` is
 `false` until that first page has landed (then it reflects the server's `has_more`), so a "load older" affordance never
@@ -152,7 +208,7 @@ shows before there is anything to page. `useUnreads` counts channel unreads in `
 in `threads` / `byThread` (threads with a known read state plus loaded threads you authored or replied in).
 
 `./react` also re-exports `TankStore`, `TankState`, `PendingMessage`, `ConnectionState`, `ChannelPaging`,
-`ThreadView` and `Unreads`, so a hooks-only import site does not need the root subpath for types.
+`NotificationPaging`, `ThreadView` and `Unreads`, so a hooks-only import site does not need the root subpath for types.
 
 ## Design
 
@@ -211,6 +267,31 @@ Builders exist for every kind (`header, section, context, divider, actions, plan
 approvalPrompt, toolLog, statusCard, filePreview`). `normalizeBlocks` fills `block_id`s, truncates long strings and
 caps arrays; `validateBlocks` reports what it cannot fix.
 
+`./blocks` also carries the run-state tone shared by web and mobile chips: `runTone(state)` → `running` (purple) /
+`awaiting` (amber) / `done` (green) / `failed` (red) / `cancelled` (grey), `runStateLabel(state)`,
+`isTerminalRunState(state)`, and the palette slots `RUN_TONE_MUI_COLOR` / `RUN_TONE_PAPER_COLOR`.
+
+### React Native
+
+```tsx
+import { BlocksViewNative } from "@tactical-agent-neural-knowledge/sdk/blocks-native";
+
+<PaperProvider theme={darkTheme /* MD3DarkTheme + paperTheme.colors */}>
+  <BlocksViewNative
+    blocks={message.blocks}
+    onAction={(a) => tank.postBlockAction({ messageId: message.id, ...a })}
+    resolveUser={(id) => members[id]?.principal?.displayName}
+    codeFontFamily="JetBrainsMono_400Regular" // default: fonts.code.expoFonts[400]
+  />
+</PaperProvider>;
+```
+
+Every block kind renders with react-native-paper (`Text`, `Button`, `Chip`, `ProgressBar`, `Divider`) plus core
+`View` / `Image` / `Alert` / `Linking`, no DOM: cards get the same accent stripes as web (purple = agent execution,
+cyan = AI/context, amber = needs a human), confirm buttons go through `Alert.alert`, links and URL buttons through
+`openUrl` (default `Linking.openURL`). `react-native` and `react-native-paper` are optional peers used by this
+subpath only; the tests render against host-element stand-ins with `react-test-renderer`.
+
 ## Develop
 
 ```sh
@@ -221,3 +302,4 @@ UPDATE_FIXTURES=1 pnpm test     # regenerate fixtures/*.json from src/test/fixtu
 ```
 
 `dist/` is committed and CI fails when it is stale. Never edit `dist/` or `src/contracts/tank/` by hand.
+`pnpm vitest run -u src/blocks-native` refreshes the native snapshots after a deliberate visual change.

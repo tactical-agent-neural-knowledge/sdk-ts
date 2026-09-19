@@ -8,17 +8,23 @@ import {
   useSyncExternalStore,
 } from "react";
 import type { TankClient } from "../client/client.js";
-import type {
-  ChannelPaging,
-  ConnectionState,
-  PendingMessage,
-  TankState,
-  TankStore,
-  ThreadView,
-  Unreads,
+import {
+  type ChannelPaging,
+  type ConnectionState,
+  type NotificationPaging,
+  notificationPagingKey,
+  type PendingMessage,
+  type TankState,
+  type TankStore,
+  type ThreadView,
+  type Unreads,
 } from "../client/store.js";
+import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Channel } from "../contracts/tank/channel/v1/channel_pb.js";
+import type { AgentStatus } from "../contracts/tank/events/v1/events_pb.js";
+import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
+import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 
@@ -201,5 +207,151 @@ export function useTyping(channelId: string, threadRootId = ""): string[] {
   );
 }
 
+// ---------------------------------------------------------------- notifications
+
+export interface UseNotificationsOptions {
+  /** Only unread rows. Default false. */
+  unreadOnly?: boolean;
+  /** Load the first page on mount when it has not been loaded yet. Default true. */
+  load?: boolean;
+  pageSize?: number;
+}
+
+export interface UseNotificationsResult {
+  /** Newest first. */
+  notifications: Notification[];
+  loading: boolean;
+  /** `false` until the first page has landed, then the server's paging flag. */
+  hasMore: boolean;
+  loadMore: () => Promise<unknown>;
+  /** Mark rows read (no ids = every unread one in the workspace). Optimistic. */
+  markRead: (notificationIds?: string[]) => Promise<void>;
+}
+
+/** A workspace's notifications (unread or all), loading the first page on mount. */
+export function useNotifications(
+  workspaceId: string,
+  opts: UseNotificationsOptions = {},
+): UseNotificationsResult {
+  const { client } = useCtx();
+  const unreadOnly = opts.unreadOnly ?? false;
+  const load = opts.load ?? true;
+  const mode = unreadOnly ? "unread" : "all";
+  const notifications = useTankSelector(
+    useCallback((s: TankStore) => s.selectNotifications(workspaceId, unreadOnly), [workspaceId, unreadOnly]),
+  );
+  const paging = useTankSelector(
+    useCallback(
+      (s: TankStore): NotificationPaging | undefined =>
+        s.getState().notificationPaging[notificationPagingKey(workspaceId, mode)],
+      [workspaceId, mode],
+    ),
+  );
+  const loadMore = useCallback(() => {
+    const cur = client.store.getState().notificationPaging[notificationPagingKey(workspaceId, mode)];
+    if (cur?.loading || (cur?.loaded && !cur.hasMore)) return Promise.resolve(undefined);
+    return client.loadNotifications({
+      workspaceId,
+      unreadOnly,
+      ...(cur?.loaded ? { cursor: cur.cursor } : {}),
+      ...(opts.pageSize ? { limit: opts.pageSize } : {}),
+    });
+  }, [client, workspaceId, unreadOnly, mode, opts.pageSize]);
+  const markRead = useCallback(
+    (ids?: string[]) => client.markNotificationsRead(workspaceId, ids),
+    [client, workspaceId],
+  );
+  useEffect(() => {
+    if (!load || !workspaceId) return;
+    const cur = client.store.getState().notificationPaging[notificationPagingKey(workspaceId, mode)];
+    if (!cur?.loaded) void loadMore().catch(() => undefined);
+  }, [client, workspaceId, mode, load, loadMore]);
+  return {
+    notifications,
+    loading: paging?.loading ?? false,
+    hasMore: paging?.loaded ? paging.hasMore : false,
+    loadMore,
+    markRead,
+  };
+}
+
+/** The workspace's unread notification badge (bootstrap count + live deltas). */
+export function useUnreadNotificationCount(workspaceId: string): number {
+  return useTankSelector(
+    useCallback((s: TankStore) => s.getState().unreadNotificationCount[workspaceId] ?? 0, [workspaceId]),
+  );
+}
+
+// ---------------------------------------------------------------- agent runs
+
+/** One run by id; fetched with `GetRun` on mount when the store does not have it. */
+export function useRun(runId: string, opts: { load?: boolean } = {}): Run | undefined {
+  const { client } = useCtx();
+  const load = opts.load ?? true;
+  const run = useTankSelector(useCallback((s: TankStore) => s.getState().runsById[runId], [runId]));
+  useEffect(() => {
+    if (!load || !runId || client.store.getState().runsById[runId]) return;
+    void client.getRun(runId).catch(() => undefined);
+  }, [client, runId, load]);
+  return run;
+}
+
+/**
+ * The newest run in a thread; seeds from `ListRuns` on mount when none is known. `agent.run.updated`
+ * is fanned out on the thread subject, so keep `useThread(rootId)` mounted for live updates.
+ */
+export function useThreadRun(rootId: string, opts: { load?: boolean } = {}): Run | undefined {
+  const { client } = useCtx();
+  const load = opts.load ?? true;
+  const run = useTankSelector(useCallback((s: TankStore) => s.getState().runsByThread[rootId], [rootId]));
+  useEffect(() => {
+    if (!load || !rootId || client.store.getState().runsByThread[rootId]) return;
+    void client.listRuns({ threadRootId: rootId }).catch(() => undefined); // agent:read may be missing
+  }, [client, rootId, load]);
+  return run;
+}
+
+/** Runs in a workspace, newest first (whatever `ListRuns` pages and events have put in the store). */
+export function useRuns(workspaceId: string): Run[] {
+  return useTankSelector(useCallback((s: TankStore) => s.selectRuns(workspaceId), [workspaceId]));
+}
+
+/** The whole thread root id → run map (stable reference); message lists index it per row. */
+export function useRunsByThread(): Record<string, Run> {
+  return useTankSelector(useCallback((s: TankStore) => s.getState().runsByThread, []));
+}
+
+/** The live `agent_status` frame for a thread root id (or channel id); `undefined` once it expires (30 s). */
+export function useAgentStatus(threadRootIdOrChannelId: string): AgentStatus | undefined {
+  return useTankSelector(
+    useCallback((s: TankStore) => s.selectAgentStatus(threadRootIdOrChannelId), [threadRootIdOrChannelId]),
+  );
+}
+
+/** Every live `agent_status` frame in a channel (its threads included). */
+export function useAgentStatuses(channelId: string): AgentStatus[] {
+  return useTankSelector(useCallback((s: TankStore) => s.selectAgentStatuses(channelId), [channelId]));
+}
+
+// ---------------------------------------------------------------- files
+
+/** A file the store knows about (from an upload or a `file.ready` event). */
+export function useFile(fileId: string): File | undefined {
+  return useTankSelector(useCallback((s: TankStore) => s.getState().filesById[fileId], [fileId]));
+}
+
+/** The known `File`s a message references, in `file_ids` order. */
+export function useMessageFiles(messageId: string): File[] {
+  return useTankSelector(useCallback((s: TankStore) => s.selectMessageFiles(messageId), [messageId]));
+}
+
 export { TankStore } from "../client/store.js";
-export type { ChannelPaging, ConnectionState, PendingMessage, TankState, ThreadView, Unreads };
+export type {
+  ChannelPaging,
+  ConnectionState,
+  NotificationPaging,
+  PendingMessage,
+  TankState,
+  ThreadView,
+  Unreads,
+};
