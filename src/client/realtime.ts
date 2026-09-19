@@ -67,6 +67,7 @@ export interface RealtimeOptions {
   /** Client heartbeat interval; the server's Ready.heartbeat_interval_ms overrides it when > 0. Default 25s. */
   heartbeatMs?: number;
   /** How long an out-of-order event may wait for its predecessor before we Resume. Default 500ms. */
+  /** @deprecated No longer used: cursor skips are normal and never trigger a Resume. */
   gapBufferMs?: number;
   backoff?: BackoffOptions;
   /** Cursors persisted from a previous session, per workspace. */
@@ -129,12 +130,10 @@ export class RealtimeClient {
   private heartbeatMs: number;
   private heartbeatTimer: ReturnType<typeof setInterval> | undefined;
   private reconnectTimer: ReturnType<typeof setTimeout> | undefined;
-  private gapTimer: ReturnType<typeof setTimeout> | undefined;
   private lastActivity = 0;
   private workspaceIds: string[];
 
   private readonly cursors = new Map<string, bigint>();
-  private readonly buffered = new Map<string, Map<bigint, Event>>();
 
   private readonly subChannels = new Set<string>();
   private readonly subThreads = new Set<string>();
@@ -274,8 +273,7 @@ export class RealtimeClient {
   private clearTimers(): void {
     if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
     if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
-    if (this.gapTimer) clearTimeout(this.gapTimer);
-    this.heartbeatTimer = this.reconnectTimer = this.gapTimer = undefined;
+    this.heartbeatTimer = this.reconnectTimer = undefined;
   }
 
   private async connect(): Promise<void> {
@@ -518,27 +516,15 @@ export class RealtimeClient {
   // ------------------------------------------------------------ ordering
 
   private handleEvent(ev: Event): void {
+    // Cursors are JetStream stream sequences and only ever used to Resume.
+    // The gateway delivers just the events this socket is subscribed to, so
+    // cursor numbers legitimately skip; a skip is not a gap. The server
+    // guarantees per-connection ordering, so anything at or below the last
+    // applied cursor is a replay overlap and is dropped.
     const ws = ev.envelope?.workspaceId ?? "";
     const last = this.cursors.get(ws);
-    if (last === undefined || ev.cursor === last + 1n) {
-      this.apply(ws, ev);
-      this.drain(ws);
-      return;
-    }
-    if (ev.cursor <= last) return; // duplicate (replay overlap)
-    // Skipped ahead: hold it and wait for the gap to fill.
-    let buf = this.buffered.get(ws);
-    if (!buf) {
-      buf = new Map();
-      this.buffered.set(ws, buf);
-    }
-    buf.set(ev.cursor, ev);
-    if (!this.gapTimer) {
-      this.gapTimer = setTimeout(() => {
-        this.gapTimer = undefined;
-        this.onGapTimeout();
-      }, this.opts.gapBufferMs ?? 500);
-    }
+    if (last !== undefined && ev.cursor <= last) return;
+    this.apply(ws, ev);
   }
 
   private apply(ws: string, ev: Event): void {
@@ -547,31 +533,7 @@ export class RealtimeClient {
     this.events.emit("cursor", { workspaceId: ws, cursor: ev.cursor });
   }
 
-  private drain(ws: string): void {
-    const buf = this.buffered.get(ws);
-    if (!buf) return;
-    let next = this.cursors.get(ws)! + 1n;
-    while (buf.has(next)) {
-      const ev = buf.get(next)!;
-      buf.delete(next);
-      this.apply(ws, ev);
-      next += 1n;
-    }
-    if (buf.size === 0) this.buffered.delete(ws);
-    if (this.buffered.size === 0) this.clearGap();
-  }
-
   private clearGap(): void {
-    if (this.gapTimer) clearTimeout(this.gapTimer);
-    this.gapTimer = undefined;
-    this.buffered.clear();
-  }
-
-  private onGapTimeout(): void {
-    if (this.buffered.size === 0) return;
-    // Anything held is dropped: the Resume replays everything after our cursors.
-    this.buffered.clear();
-    if (this.session) this.reopen(CLOSE_GAP, "cursor gap");
-    else this.reopen(CLOSE_STALE, "cursor gap without session");
+    // Kept for callers; there is no gap buffer any more.
   }
 }

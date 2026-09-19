@@ -44,11 +44,9 @@ export class RealtimeClient {
     heartbeatMs;
     heartbeatTimer;
     reconnectTimer;
-    gapTimer;
     lastActivity = 0;
     workspaceIds;
     cursors = new Map();
-    buffered = new Map();
     subChannels = new Set();
     subThreads = new Set();
     presenceUsers = [];
@@ -182,9 +180,7 @@ export class RealtimeClient {
             clearInterval(this.heartbeatTimer);
         if (this.reconnectTimer)
             clearTimeout(this.reconnectTimer);
-        if (this.gapTimer)
-            clearTimeout(this.gapTimer);
-        this.heartbeatTimer = this.reconnectTimer = this.gapTimer = undefined;
+        this.heartbeatTimer = this.reconnectTimer = undefined;
     }
     async connect() {
         if (this.stopped || this.ws)
@@ -433,64 +429,23 @@ export class RealtimeClient {
     }
     // ------------------------------------------------------------ ordering
     handleEvent(ev) {
+        // Cursors are JetStream stream sequences and only ever used to Resume.
+        // The gateway delivers just the events this socket is subscribed to, so
+        // cursor numbers legitimately skip; a skip is not a gap. The server
+        // guarantees per-connection ordering, so anything at or below the last
+        // applied cursor is a replay overlap and is dropped.
         const ws = ev.envelope?.workspaceId ?? "";
         const last = this.cursors.get(ws);
-        if (last === undefined || ev.cursor === last + 1n) {
-            this.apply(ws, ev);
-            this.drain(ws);
+        if (last !== undefined && ev.cursor <= last)
             return;
-        }
-        if (ev.cursor <= last)
-            return; // duplicate (replay overlap)
-        // Skipped ahead: hold it and wait for the gap to fill.
-        let buf = this.buffered.get(ws);
-        if (!buf) {
-            buf = new Map();
-            this.buffered.set(ws, buf);
-        }
-        buf.set(ev.cursor, ev);
-        if (!this.gapTimer) {
-            this.gapTimer = setTimeout(() => {
-                this.gapTimer = undefined;
-                this.onGapTimeout();
-            }, this.opts.gapBufferMs ?? 500);
-        }
+        this.apply(ws, ev);
     }
     apply(ws, ev) {
         this.cursors.set(ws, ev.cursor);
         this.events.emit("event", ev);
         this.events.emit("cursor", { workspaceId: ws, cursor: ev.cursor });
     }
-    drain(ws) {
-        const buf = this.buffered.get(ws);
-        if (!buf)
-            return;
-        let next = this.cursors.get(ws) + 1n;
-        while (buf.has(next)) {
-            const ev = buf.get(next);
-            buf.delete(next);
-            this.apply(ws, ev);
-            next += 1n;
-        }
-        if (buf.size === 0)
-            this.buffered.delete(ws);
-        if (this.buffered.size === 0)
-            this.clearGap();
-    }
     clearGap() {
-        if (this.gapTimer)
-            clearTimeout(this.gapTimer);
-        this.gapTimer = undefined;
-        this.buffered.clear();
-    }
-    onGapTimeout() {
-        if (this.buffered.size === 0)
-            return;
-        // Anything held is dropped: the Resume replays everything after our cursors.
-        this.buffered.clear();
-        if (this.session)
-            this.reopen(CLOSE_GAP, "cursor gap");
-        else
-            this.reopen(CLOSE_STALE, "cursor gap without session");
+        // Kept for callers; there is no gap buffer any more.
     }
 }

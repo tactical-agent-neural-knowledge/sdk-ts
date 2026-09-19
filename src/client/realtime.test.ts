@@ -84,7 +84,7 @@ describe("handshake", () => {
 });
 
 describe("event ordering", () => {
-  it("delivers events in cursor order per workspace, reorders within the gap window, drops duplicates", async () => {
+  it("applies events monotonically per workspace and drops duplicates or older cursors", async () => {
     const c = makeClient();
     const seen: bigint[] = [];
     c.on("event", (e) => seen.push(e.cursor));
@@ -93,43 +93,42 @@ describe("event ordering", () => {
     await until(() => c.state === "ready");
     const m = fakeMessage({ channelId: "general" });
     const e1 = gw.messageCreated(m);
-    // cursor 1 in order, then 3 before 2 (out of order but within the buffer window), then a duplicate 2
+    // Cursors are stream sequences filtered per subscription: skips are normal.
     gw.sendEvent(conn, 1n, e1);
     gw.sendEvent(conn, 3n, e1);
-    gw.sendEvent(conn, 2n, e1);
-    gw.sendEvent(conn, 2n, e1);
+    gw.sendEvent(conn, 2n, e1); // older than the last applied cursor → dropped
+    gw.sendEvent(conn, 3n, e1); // duplicate → dropped
     gw.sendEvent(conn, 4n, e1);
-    await until(() => seen.length === 4);
-    expect(seen).toEqual([1n, 2n, 3n, 4n]);
+    await until(() => seen.length === 3);
+    expect(seen).toEqual([1n, 3n, 4n]);
     expect(c.getCursors()).toEqual({ ws1: 4n });
     // another workspace has its own sequence
     const other = gw.messageCreated(fakeMessage({ channelId: "x", workspaceId: "ws2" }));
     gw.sendEvent(conn, 1n, other);
-    await until(() => seen.length === 5);
+    await until(() => seen.length === 4);
     expect(c.getCursors()).toEqual({ ws1: 4n, ws2: 1n });
   });
 
-  it("an unfilled gap triggers Resume with cursors and the server replays the missing range", async () => {
+  it("skipped cursors never trigger a Resume (the gateway filters events per subscription)", async () => {
     const c = makeClient();
     const seen: bigint[] = [];
     let resumed = 0;
     c.on("event", (e) => seen.push(e.cursor));
     c.on("resumed", () => resumed++);
     c.start();
-    const conn = await gw.waitFor();
+    await gw.waitFor();
     await until(() => c.state === "ready");
-    // Server log: cursors 1..4. Only 1 and 4 get delivered live; 2 and 3 are "lost".
     const m = fakeMessage({ channelId: "general" });
     gw.emit("ws1", gw.messageCreated(m)); // 1 delivered
-    gw.emit("ws1", gw.messageCreated(m), { deliver: false }); // 2 lost
-    gw.emit("ws1", gw.messageCreated(m), { deliver: false }); // 3 lost
-    gw.emit("ws1", gw.messageCreated(m)); // 4 delivered → buffered
-    await until(() => resumed === 1 && seen.length === 4);
-    expect(seen).toEqual([1n, 2n, 3n, 4n]);
-    const resumeConn = gw.conns[1]!;
-    const resume = resumeConn.received.find((f) => f.kind.case === "resume");
-    expect(resume?.kind.case === "resume" && resume.kind.value.cursors.ws1).toBe(1n);
-    expect(resume?.kind.case === "resume" && resume.kind.value.sessionId).toBe(conn.sessionId);
+    gw.emit("ws1", gw.messageCreated(m), { deliver: false }); // 2 not for this socket
+    gw.emit("ws1", gw.messageCreated(m), { deliver: false }); // 3 not for this socket
+    gw.emit("ws1", gw.messageCreated(m)); // 4 delivered
+    await until(() => seen.length === 2);
+    await new Promise((r) => setTimeout(r, 200));
+    expect(seen).toEqual([1n, 4n]);
+    expect(resumed).toBe(0);
+    expect(gw.conns.length).toBe(1);
+    expect(c.getCursors()).toEqual({ ws1: 4n });
     expect(c.state).toBe("ready");
   });
 });
