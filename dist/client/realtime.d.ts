@@ -63,6 +63,7 @@ export interface RealtimeOptions {
     /** Client heartbeat interval; the server's Ready.heartbeat_interval_ms overrides it when > 0. Default 25s. */
     heartbeatMs?: number;
     /** How long an out-of-order event may wait for its predecessor before we Resume. Default 500ms. */
+    /** @deprecated No longer used: cursor skips are normal and never trigger a Resume. */
     gapBufferMs?: number;
     backoff?: BackoffOptions;
     /** Cursors persisted from a previous session, per workspace. */
@@ -110,11 +111,9 @@ export declare class RealtimeClient {
     private heartbeatMs;
     private heartbeatTimer;
     private reconnectTimer;
-    private gapTimer;
     private lastActivity;
     private workspaceIds;
     private readonly cursors;
-    private readonly buffered;
     private readonly subChannels;
     private readonly subThreads;
     private presenceUsers;
@@ -163,7 +162,5 @@ export declare class RealtimeClient {
     private handleFrame;
     private handleEvent;
     private apply;
-    private drain;
     private clearGap;
-    private onGapTimeout;
 }

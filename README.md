@@ -303,3 +303,9 @@ UPDATE_FIXTURES=1 pnpm test     # regenerate fixtures/*.json from src/test/fixtu
 
 `dist/` is committed and CI fails when it is stale. Never edit `dist/` or `src/contracts/tank/` by hand.
 `pnpm vitest run -u src/blocks-native` refreshes the native snapshots after a deliberate visual change.
+
+## Cursors and ordering
+
+`Event.cursor` is the JetStream stream sequence and exists only to `Resume` after a disconnect. The gateway delivers
+only the events a socket is subscribed to, so cursor numbers skip; skips are normal and never trigger a Resume. The
+client applies events monotonically per workspace and drops anything at or below the last applied cursor.
