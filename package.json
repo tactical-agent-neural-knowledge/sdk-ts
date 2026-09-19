@@ -18,31 +18,38 @@
   "exports": {
     ".": {
       "types": "./dist/client/index.d.ts",
-      "import": "./dist/client/index.js"
+      "import": "./dist/client/index.js",
+      "default": "./dist/client/index.js"
     },
     "./react": {
       "types": "./dist/react/index.d.ts",
-      "import": "./dist/react/index.js"
+      "import": "./dist/react/index.js",
+      "default": "./dist/react/index.js"
     },
     "./design": {
       "types": "./dist/design/index.d.ts",
-      "import": "./dist/design/index.js"
+      "import": "./dist/design/index.js",
+      "default": "./dist/design/index.js"
     },
     "./blocks": {
       "types": "./dist/blocks/index.d.ts",
-      "import": "./dist/blocks/index.js"
+      "import": "./dist/blocks/index.js",
+      "default": "./dist/blocks/index.js"
     },
     "./blocks-web": {
       "types": "./dist/blocks-web/index.d.ts",
-      "import": "./dist/blocks-web/index.js"
+      "import": "./dist/blocks-web/index.js",
+      "default": "./dist/blocks-web/index.js"
     },
     "./contracts": {
       "types": "./dist/contracts/index.d.ts",
-      "import": "./dist/contracts/index.js"
+      "import": "./dist/contracts/index.js",
+      "default": "./dist/contracts/index.js"
     },
     "./contracts/*": {
       "types": "./dist/contracts/*.d.ts",
-      "import": "./dist/contracts/*.js"
+      "import": "./dist/contracts/*.js",
+      "default": "./dist/contracts/*.js"
     },
     "./fixtures/*": "./fixtures/*",
     "./package.json": "./package.json"

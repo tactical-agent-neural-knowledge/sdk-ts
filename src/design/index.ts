@@ -1,4 +1,12 @@
 export { contrastRatio, hexToRgb, meetsAA, relativeLuminance, WCAG } from "./contrast.js";
+export {
+  expoGoogleFontsPackages,
+  type FontFace,
+  fontFamilies,
+  fonts,
+  googleFontsLinkTag,
+  googleFontsUrl,
+} from "./fonts.js";
 export { muiThemeOptions, type TankMuiThemeOptions } from "./mui.js";
 export {
   type PaperColors,

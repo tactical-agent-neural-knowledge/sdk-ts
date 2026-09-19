@@ -74,8 +74,24 @@ export interface RealtimeOptions {
   session?: RealtimeSession;
   /** Listen for the browser `online` event to retry immediately. Default: when `globalThis.addEventListener` exists. */
   listenOnline?: boolean;
+  /**
+   * Injectable "we are back online" signal: called with `retry` on start(); must return an unsubscribe
+   * function. Default: `globalThis.addEventListener("online", retry)` when available, otherwise a no-op.
+   * React Native: wire `@react-native-community/netinfo` here.
+   */
+  onlineSignal?: OnlineSignal;
   now?: () => number;
 }
+
+export type OnlineSignal = (retry: () => void) => () => void;
+
+/** Retries on the browser `online` event when `globalThis.addEventListener` exists; no-op elsewhere. */
+export const browserOnlineSignal: OnlineSignal = (retry) => {
+  const g = globalThis as { addEventListener?: unknown; removeEventListener?: unknown };
+  if (typeof g.addEventListener !== "function") return () => {};
+  (g.addEventListener as (t: string, h: () => void) => void)("online", retry);
+  return () => (g.removeEventListener as ((t: string, h: () => void) => void) | undefined)?.("online", retry);
+};
 
 const CLOSE_GAP = 4000;
 const CLOSE_STALE = 4001;
@@ -124,7 +140,7 @@ export class RealtimeClient {
   private readonly subThreads = new Set<string>();
   private presenceUsers: string[] = [];
   private focused: string | undefined;
-  private onlineHandler: (() => void) | undefined;
+  private offOnline: (() => void) | undefined;
 
   constructor(opts: RealtimeOptions) {
     this.opts = opts;
@@ -170,15 +186,10 @@ export class RealtimeClient {
   start(): void {
     if (!this.stopped) return;
     this.stopped = false;
-    const listen =
-      this.opts.listenOnline ??
-      typeof (globalThis as { addEventListener?: unknown }).addEventListener === "function";
-    if (listen && !this.onlineHandler) {
-      this.onlineHandler = () => this.retryNow();
-      (globalThis as unknown as { addEventListener: (t: string, h: () => void) => void }).addEventListener(
-        "online",
-        this.onlineHandler,
-      );
+    if (!this.offOnline) {
+      const signal =
+        this.opts.onlineSignal ?? (this.opts.listenOnline === false ? undefined : browserOnlineSignal);
+      if (signal) this.offOnline = signal(() => this.retryNow());
     }
     void this.connect();
   }
@@ -188,11 +199,9 @@ export class RealtimeClient {
     this.stopped = true;
     this.gen++;
     this.clearTimers();
-    if (this.onlineHandler) {
-      (
-        globalThis as unknown as { removeEventListener?: (t: string, h: () => void) => void }
-      ).removeEventListener?.("online", this.onlineHandler);
-      this.onlineHandler = undefined;
+    if (this.offOnline) {
+      this.offOnline();
+      this.offOnline = undefined;
     }
     const ws = this.ws;
     this.ws = undefined;

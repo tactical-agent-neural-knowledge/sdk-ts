@@ -70,8 +70,17 @@ export interface RealtimeOptions {
     session?: RealtimeSession;
     /** Listen for the browser `online` event to retry immediately. Default: when `globalThis.addEventListener` exists. */
     listenOnline?: boolean;
+    /**
+     * Injectable "we are back online" signal: called with `retry` on start(); must return an unsubscribe
+     * function. Default: `globalThis.addEventListener("online", retry)` when available, otherwise a no-op.
+     * React Native: wire `@react-native-community/netinfo` here.
+     */
+    onlineSignal?: OnlineSignal;
     now?: () => number;
 }
+export type OnlineSignal = (retry: () => void) => () => void;
+/** Retries on the browser `online` event when `globalThis.addEventListener` exists; no-op elsewhere. */
+export declare const browserOnlineSignal: OnlineSignal;
 /**
  * Binary tank.realtime.v1 client over one WebSocket.
  *
@@ -110,7 +119,7 @@ export declare class RealtimeClient {
     private readonly subThreads;
     private presenceUsers;
     private focused;
-    private onlineHandler;
+    private offOnline;
     constructor(opts: RealtimeOptions);
     get state(): ConnectionState;
     get currentSession(): RealtimeSession | undefined;

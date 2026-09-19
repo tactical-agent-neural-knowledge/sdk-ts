@@ -1,14 +1,20 @@
 export { Backoff, type BackoffOptions } from "./backoff.js";
 export {
+  type CreateChannelInput,
   createTankClient,
   type LoadChannelOptions,
+  type RoleName,
   type SendMessageInput,
+  type SetGoalInput,
   TankClient,
   type TankClientEvents,
   type TankClientOptions,
+  type UpdateMessageInput,
 } from "./client.js";
 export { Emitter, type Handler } from "./emitter.js";
 export {
+  browserOnlineSignal,
+  type OnlineSignal,
   RealtimeClient,
   type RealtimeEvents,
   type RealtimeOptions,
@@ -37,4 +43,4 @@ export {
   unpackEnvelope,
 } from "./store.js";
 export { createTankTransport, type TankAuth, type TransportOptions } from "./transport.js";
-export { isUuidv7, uuidv7, uuidv7Time } from "./uuidv7.js";
+export { cryptoRandomBytes, isUuidv7, type RandomBytes, uuidv7, uuidv7Time } from "./uuidv7.js";

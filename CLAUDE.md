@@ -33,7 +33,7 @@ There is no deploy: a green `main` sha is the artifact. Consumers bump the sha i
 | Wait for CI | `../bin/ci-wait sdk-ts [sha]` |
 
 ## Layout
-`src/contracts` vendored generated code + namespaced barrel · `src/design` tokens, MUI options, Paper theme, contrast ·
+`src/contracts` vendored generated code + namespaced barrel · `src/design` tokens, fonts (names + Google/Expo sources, no binaries), MUI options, Paper theme, contrast ·
 `src/client` transport, `RealtimeClient`, `TankStore`, outbox, storage adapters · `src/react` provider + hooks ·
 `src/blocks` types, builders, normalizer · `src/blocks-web` MUI renderers · `src/test` fake gateway + fixture defs
 (never built) · `fixtures/` golden JSON · `scripts/sync-contracts.sh`.
@@ -45,9 +45,14 @@ adding a non-optional peer that the client subpath would drag into node/mobile; 
 store (no logging of `text`).
 
 ## Decided — do not re-litigate
-One package with subpaths (not a pnpm workspace); `dist/` committed and gated in CI; git dependency install (no
+One package with subpaths (not a pnpm workspace); exports carry `types`/`import`/`default` (same ESM files, so
+Jest/jest-expo resolve subpaths without a moduleNameMapper; `src/exports.test.ts` guards it); `dist/` committed and gated in CI; git dependency install (no
 GitHub Packages token in consumers); contracts vendored by sha (no submodule, no fetch at build time); MUI 7 on web
 and React Native Paper on mobile from the same tokens; `@bufbuild/protobuf` v2 shapes are the store's message types (no
 parallel DTOs); binary Connect + binary gateway frames; cursors per workspace with strict ordering + gap buffer + Resume;
-optimistic outbox keyed by UUIDv7 `client_msg_id`; `TankStorage` is string key/value (IndexedDB on web, SQLite on
+optimistic outbox keyed by UUIDv7 `client_msg_id` (`crypto.getRandomValues` or an injected `randomBytes`); client
+helpers (`updateMessage`, `deleteMessage`, `joinChannel`, `leaveChannel`, `createChannel`, `setGoal`, `invite`,
+`markThreadRead`) update the store optimistically and roll back on error so apps never dispatch raw actions;
+thread read state lives in `threadReadStates` and is counted separately from channel unreads; the realtime
+"back online" signal is injectable (`realtime.onlineSignal`); `TankStorage` is string key/value (IndexedDB on web, SQLite on
 mobile, memory in tests); Biome not ESLint+Prettier; Vitest not Jest.

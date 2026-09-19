@@ -269,11 +269,26 @@ export class FakeGateway {
       anyPack(ReactionAddedSchema, create(ReactionAddedSchema, { messageId, userId, emoji })),
     );
   }
-  readStateUpdated(workspaceId: string, userId: string, channelId: string, lastReadSeq: bigint): Envelope {
+  readStateUpdated(
+    workspaceId: string,
+    userId: string,
+    channelId: string,
+    lastReadSeq: bigint,
+    thread?: { rootId: string; seq: bigint },
+  ): Envelope {
     return this.envelope(
       workspaceId,
       "read_state.updated",
-      anyPack(ReadStateUpdatedSchema, create(ReadStateUpdatedSchema, { userId, channelId, lastReadSeq })),
+      anyPack(
+        ReadStateUpdatedSchema,
+        create(ReadStateUpdatedSchema, {
+          userId,
+          channelId,
+          lastReadSeq,
+          threadRootId: thread?.rootId ?? "",
+          lastReadThreadSeq: thread?.seq ?? 0n,
+        }),
+      ),
     );
   }
 }
