@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/channel/v1/channel.proto.
  */
 export const file_tank_channel_v1_channel: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2NoYW5uZWwvdjEvY2hhbm5lbC5wcm90bxIPdGFuay5jaGFubmVsLnYxIowBCglUcmVhZEdvYWwSDAoEZ29hbBgBIAEoCRIUCgxhc3NpZ25lZV9pZHMYAiADKAkSFwoPcGlwZWxpbmVfc3RhdHVzGAMgASgJEi4KCnVwZGF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYBSABKAkikQMKB0NoYW5uZWwSCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEioKBHR5cGUYAyABKA4yHC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFR5cGUSDAoEbmFtZRgEIAEoCRINCgV0b3BpYxgFIAEoCRIPCgdwdXJwb3NlGAYgASgJEhAKCGxhc3Rfc2VxGAcgASgDEhQKDG1lbWJlcl9jb3VudBgIIAEoBRIzCg9sYXN0X21lc3NhZ2VfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi8KC2FyY2hpdmVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgRnb2FsGAwgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkR29hbBISCgptZW1iZXJfaWRzGA0gAygJEg4KBmpvaW5lZBgOIAEoCCJ0ChBDaGFubmVsUmVhZFN0YXRlEhIKCmNoYW5uZWxfaWQYASABKAkSFQoNbGFzdF9yZWFkX3NlcRgCIAEoAxIVCg1tZW50aW9uX2NvdW50GAMgASgFEg0KBW11dGVkGAQgASgIEg8KB3N0YXJyZWQYBSABKAgiiwEKFENyZWF0ZUNoYW5uZWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIqCgR0eXBlGAIgASgOMhwudGFuay5jaGFubmVsLnYxLkNoYW5uZWxUeXBlEgwKBG5hbWUYAyABKAkSDwoHcHVycG9zZRgEIAEoCRISCgptZW1iZXJfaWRzGAUgAygJIkIKFUNyZWF0ZUNoYW5uZWxSZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiawoTTGlzdENoYW5uZWxzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSHwoXaW5jbHVkZV91bmpvaW5lZF9wdWJsaWMYAiABKAgSDgoGY3Vyc29yGAMgASgJEg0KBWxpbWl0GAQgASgFIlcKFExpc3RDaGFubmVsc1Jlc3BvbnNlEioKCGNoYW5uZWxzGAEgAygLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwSEwoLbmV4dF9jdXJzb3IYAiABKAkiJwoRR2V0Q2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJ2ChJHZXRDaGFubmVsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsEjUKCnJlYWRfc3RhdGUYAiABKAsyIS50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFJlYWRTdGF0ZSIoChJKb2luQ2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJAChNKb2luQ2hhbm5lbFJlc3BvbnNlEikKB2NoYW5uZWwYASABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCIpChNMZWF2ZUNoYW5uZWxSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiFgoUTGVhdmVDaGFubmVsUmVzcG9uc2UiQAoWSW52aXRlVG9DaGFubmVsUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKCm1lbWJlcl9pZHMYAiADKAkiGQoXSW52aXRlVG9DaGFubmVsUmVzcG9uc2UiTgoOU2V0R29hbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIoCgRnb2FsGAIgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkR29hbCI8Cg9TZXRHb2FsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIk4KGUxpc3RDaGFubmVsTWVtYmVyc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIOCgZjdXJzb3IYAiABKAkSDQoFbGltaXQYAyABKAUiRQoaTGlzdENoYW5uZWxNZW1iZXJzUmVzcG9uc2USEgoKbWVtYmVyX2lkcxgBIAMoCRITCgtuZXh0X2N1cnNvchgCIAEoCSqKAQoLQ2hhbm5lbFR5cGUSHAoYQ0hBTk5FTF9UWVBFX1VOU1BFQ0lGSUVEEAASFwoTQ0hBTk5FTF9UWVBFX1BVQkxJQxABEhgKFENIQU5ORUxfVFlQRV9QUklWQVRFEAISEwoPQ0hBTk5FTF9UWVBFX0RNEAMSFQoRQ0hBTk5FTF9UWVBFX01QRE0QBDL+BQoOQ2hhbm5lbFNlcnZpY2USXgoNQ3JlYXRlQ2hhbm5lbBIlLnRhbmsuY2hhbm5lbC52MS5DcmVhdGVDaGFubmVsUmVxdWVzdBomLnRhbmsuY2hhbm5lbC52MS5DcmVhdGVDaGFubmVsUmVzcG9uc2USWwoMTGlzdENoYW5uZWxzEiQudGFuay5jaGFubmVsLnYxLkxpc3RDaGFubmVsc1JlcXVlc3QaJS50YW5rLmNoYW5uZWwudjEuTGlzdENoYW5uZWxzUmVzcG9uc2USVQoKR2V0Q2hhbm5lbBIiLnRhbmsuY2hhbm5lbC52MS5HZXRDaGFubmVsUmVxdWVzdBojLnRhbmsuY2hhbm5lbC52MS5HZXRDaGFubmVsUmVzcG9uc2USWAoLSm9pbkNoYW5uZWwSIy50YW5rLmNoYW5uZWwudjEuSm9pbkNoYW5uZWxSZXF1ZXN0GiQudGFuay5jaGFubmVsLnYxLkpvaW5DaGFubmVsUmVzcG9uc2USWwoMTGVhdmVDaGFubmVsEiQudGFuay5jaGFubmVsLnYxLkxlYXZlQ2hhbm5lbFJlcXVlc3QaJS50YW5rLmNoYW5uZWwudjEuTGVhdmVDaGFubmVsUmVzcG9uc2USZAoPSW52aXRlVG9DaGFubmVsEicudGFuay5jaGFubmVsLnYxLkludml0ZVRvQ2hhbm5lbFJlcXVlc3QaKC50YW5rLmNoYW5uZWwudjEuSW52aXRlVG9DaGFubmVsUmVzcG9uc2USTAoHU2V0R29hbBIfLnRhbmsuY2hhbm5lbC52MS5TZXRHb2FsUmVxdWVzdBogLnRhbmsuY2hhbm5lbC52MS5TZXRHb2FsUmVzcG9uc2USbQoSTGlzdENoYW5uZWxNZW1iZXJzEioudGFuay5jaGFubmVsLnYxLkxpc3RDaGFubmVsTWVtYmVyc1JlcXVlc3QaKy50YW5rLmNoYW5uZWwudjEuTGlzdENoYW5uZWxNZW1iZXJzUmVzcG9uc2VC2AEKE2NvbS50YW5rLmNoYW5uZWwudjFCDENoYW5uZWxQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2NoYW5uZWwvdjE7Y2hhbm5lbHYxogIDVENYqgIPVGFuay5DaGFubmVsLlYxygIPVGFua1xDaGFubmVsXFYx4gIbVGFua1xDaGFubmVsXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6Q2hhbm5lbDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2NoYW5uZWwvdjEvY2hhbm5lbC5wcm90bxIPdGFuay5jaGFubmVsLnYxIowBCglUcmVhZEdvYWwSDAoEZ29hbBgBIAEoCRIUCgxhc3NpZ25lZV9pZHMYAiADKAkSFwoPcGlwZWxpbmVfc3RhdHVzGAMgASgJEi4KCnVwZGF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYBSABKAkikQMKB0NoYW5uZWwSCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEioKBHR5cGUYAyABKA4yHC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFR5cGUSDAoEbmFtZRgEIAEoCRINCgV0b3BpYxgFIAEoCRIPCgdwdXJwb3NlGAYgASgJEhAKCGxhc3Rfc2VxGAcgASgDEhQKDG1lbWJlcl9jb3VudBgIIAEoBRIzCg9sYXN0X21lc3NhZ2VfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi8KC2FyY2hpdmVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgRnb2FsGAwgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkR29hbBISCgptZW1iZXJfaWRzGA0gAygJEg4KBmpvaW5lZBgOIAEoCCKmAQoQQ2hhbm5lbFJlYWRTdGF0ZRISCgpjaGFubmVsX2lkGAEgASgJEhUKDWxhc3RfcmVhZF9zZXEYAiABKAMSFQoNbWVudGlvbl9jb3VudBgDIAEoBRINCgVtdXRlZBgEIAEoCBIPCgdzdGFycmVkGAUgASgIEjAKC25vdGlmeV9wcmVmGAYgASgOMhsudGFuay5jaGFubmVsLnYxLk5vdGlmeVByZWYiiwEKFENyZWF0ZUNoYW5uZWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIqCgR0eXBlGAIgASgOMhwudGFuay5jaGFubmVsLnYxLkNoYW5uZWxUeXBlEgwKBG5hbWUYAyABKAkSDwoHcHVycG9zZRgEIAEoCRISCgptZW1iZXJfaWRzGAUgAygJIkIKFUNyZWF0ZUNoYW5uZWxSZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiawoTTGlzdENoYW5uZWxzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSHwoXaW5jbHVkZV91bmpvaW5lZF9wdWJsaWMYAiABKAgSDgoGY3Vyc29yGAMgASgJEg0KBWxpbWl0GAQgASgFIlcKFExpc3RDaGFubmVsc1Jlc3BvbnNlEioKCGNoYW5uZWxzGAEgAygLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwSEwoLbmV4dF9jdXJzb3IYAiABKAkiJwoRR2V0Q2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJ2ChJHZXRDaGFubmVsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsEjUKCnJlYWRfc3RhdGUYAiABKAsyIS50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFJlYWRTdGF0ZSIoChJKb2luQ2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJAChNKb2luQ2hhbm5lbFJlc3BvbnNlEikKB2NoYW5uZWwYASABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCIpChNMZWF2ZUNoYW5uZWxSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiFgoUTGVhdmVDaGFubmVsUmVzcG9uc2UiQAoWSW52aXRlVG9DaGFubmVsUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKCm1lbWJlcl9pZHMYAiADKAkiGQoXSW52aXRlVG9DaGFubmVsUmVzcG9uc2UiTgoOU2V0R29hbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIoCgRnb2FsGAIgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkR29hbCI8Cg9TZXRHb2FsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIk4KGUxpc3RDaGFubmVsTWVtYmVyc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIOCgZjdXJzb3IYAiABKAkSDQoFbGltaXQYAyABKAUiRQoaTGlzdENoYW5uZWxNZW1iZXJzUmVzcG9uc2USEgoKbWVtYmVyX2lkcxgBIAMoCRITCgtuZXh0X2N1cnNvchgCIAEoCSKGAQoUVXBkYXRlQ2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIRCgRuYW1lGAIgASgJSACIAQESEgoFdG9waWMYAyABKAlIAYgBARIUCgdwdXJwb3NlGAQgASgJSAKIAQFCBwoFX25hbWVCCAoGX3RvcGljQgoKCF9wdXJwb3NlIkIKFVVwZGF0ZUNoYW5uZWxSZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiKwoVQXJjaGl2ZUNoYW5uZWxSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiQwoWQXJjaGl2ZUNoYW5uZWxSZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiLQoXVW5hcmNoaXZlQ2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJFChhVbmFyY2hpdmVDaGFubmVsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIrgBChtTZXRDaGFubmVsUHJlZmVyZW5jZVJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRI1Cgtub3RpZnlfcHJlZhgCIAEoDjIbLnRhbmsuY2hhbm5lbC52MS5Ob3RpZnlQcmVmSACIAQESEgoFbXV0ZWQYAyABKAhIAYgBARIUCgdzdGFycmVkGAQgASgISAKIAQFCDgoMX25vdGlmeV9wcmVmQggKBl9tdXRlZEIKCghfc3RhcnJlZCJVChxTZXRDaGFubmVsUHJlZmVyZW5jZVJlc3BvbnNlEjUKCnJlYWRfc3RhdGUYASABKAsyIS50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFJlYWRTdGF0ZSqKAQoLQ2hhbm5lbFR5cGUSHAoYQ0hBTk5FTF9UWVBFX1VOU1BFQ0lGSUVEEAASFwoTQ0hBTk5FTF9UWVBFX1BVQkxJQxABEhgKFENIQU5ORUxfVFlQRV9QUklWQVRFEAISEwoPQ0hBTk5FTF9UWVBFX0RNEAMSFQoRQ0hBTk5FTF9UWVBFX01QRE0QBCpxCgpOb3RpZnlQcmVmEhsKF05PVElGWV9QUkVGX1VOU1BFQ0lGSUVEEAASEwoPTk9USUZZX1BSRUZfQUxMEAESGAoUTk9USUZZX1BSRUZfTUVOVElPTlMQAhIXChNOT1RJRllfUFJFRl9OT1RISU5HEAMynwkKDkNoYW5uZWxTZXJ2aWNlEl4KDUNyZWF0ZUNoYW5uZWwSJS50YW5rLmNoYW5uZWwudjEuQ3JlYXRlQ2hhbm5lbFJlcXVlc3QaJi50YW5rLmNoYW5uZWwudjEuQ3JlYXRlQ2hhbm5lbFJlc3BvbnNlElsKDExpc3RDaGFubmVscxIkLnRhbmsuY2hhbm5lbC52MS5MaXN0Q2hhbm5lbHNSZXF1ZXN0GiUudGFuay5jaGFubmVsLnYxLkxpc3RDaGFubmVsc1Jlc3BvbnNlElUKCkdldENoYW5uZWwSIi50YW5rLmNoYW5uZWwudjEuR2V0Q2hhbm5lbFJlcXVlc3QaIy50YW5rLmNoYW5uZWwudjEuR2V0Q2hhbm5lbFJlc3BvbnNlElgKC0pvaW5DaGFubmVsEiMudGFuay5jaGFubmVsLnYxLkpvaW5DaGFubmVsUmVxdWVzdBokLnRhbmsuY2hhbm5lbC52MS5Kb2luQ2hhbm5lbFJlc3BvbnNlElsKDExlYXZlQ2hhbm5lbBIkLnRhbmsuY2hhbm5lbC52MS5MZWF2ZUNoYW5uZWxSZXF1ZXN0GiUudGFuay5jaGFubmVsLnYxLkxlYXZlQ2hhbm5lbFJlc3BvbnNlEmQKD0ludml0ZVRvQ2hhbm5lbBInLnRhbmsuY2hhbm5lbC52MS5JbnZpdGVUb0NoYW5uZWxSZXF1ZXN0GigudGFuay5jaGFubmVsLnYxLkludml0ZVRvQ2hhbm5lbFJlc3BvbnNlEkwKB1NldEdvYWwSHy50YW5rLmNoYW5uZWwudjEuU2V0R29hbFJlcXVlc3QaIC50YW5rLmNoYW5uZWwudjEuU2V0R29hbFJlc3BvbnNlEm0KEkxpc3RDaGFubmVsTWVtYmVycxIqLnRhbmsuY2hhbm5lbC52MS5MaXN0Q2hhbm5lbE1lbWJlcnNSZXF1ZXN0GisudGFuay5jaGFubmVsLnYxLkxpc3RDaGFubmVsTWVtYmVyc1Jlc3BvbnNlEl4KDVVwZGF0ZUNoYW5uZWwSJS50YW5rLmNoYW5uZWwudjEuVXBkYXRlQ2hhbm5lbFJlcXVlc3QaJi50YW5rLmNoYW5uZWwudjEuVXBkYXRlQ2hhbm5lbFJlc3BvbnNlEmEKDkFyY2hpdmVDaGFubmVsEiYudGFuay5jaGFubmVsLnYxLkFyY2hpdmVDaGFubmVsUmVxdWVzdBonLnRhbmsuY2hhbm5lbC52MS5BcmNoaXZlQ2hhbm5lbFJlc3BvbnNlEmcKEFVuYXJjaGl2ZUNoYW5uZWwSKC50YW5rLmNoYW5uZWwudjEuVW5hcmNoaXZlQ2hhbm5lbFJlcXVlc3QaKS50YW5rLmNoYW5uZWwudjEuVW5hcmNoaXZlQ2hhbm5lbFJlc3BvbnNlEnMKFFNldENoYW5uZWxQcmVmZXJlbmNlEiwudGFuay5jaGFubmVsLnYxLlNldENoYW5uZWxQcmVmZXJlbmNlUmVxdWVzdBotLnRhbmsuY2hhbm5lbC52MS5TZXRDaGFubmVsUHJlZmVyZW5jZVJlc3BvbnNlQtgBChNjb20udGFuay5jaGFubmVsLnYxQgxDaGFubmVsUHJvdG9QAVpVZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9jaGFubmVsL3YxO2NoYW5uZWx2MaICA1RDWKoCD1RhbmsuQ2hhbm5lbC5WMcoCD1RhbmtcQ2hhbm5lbFxWMeICG1RhbmtcQ2hhbm5lbFxWMVxHUEJNZXRhZGF0YeoCEVRhbms6OkNoYW5uZWw6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * The pinned Goal Header of a Tread.
@@ -171,6 +171,11 @@ export type ChannelReadState = Message<"tank.channel.v1.ChannelReadState"> & {
    * @generated from field: bool starred = 5;
    */
   starred: boolean;
+
+  /**
+   * @generated from field: tank.channel.v1.NotifyPref notify_pref = 6;
+   */
+  notifyPref: NotifyPref;
 };
 
 /**
@@ -519,6 +524,178 @@ export const ListChannelMembersResponseSchema: GenMessage<ListChannelMembersResp
   messageDesc(file_tank_channel_v1_channel, 18);
 
 /**
+ * Unset fields are left unchanged.
+ *
+ * @generated from message tank.channel.v1.UpdateChannelRequest
+ */
+export type UpdateChannelRequest = Message<"tank.channel.v1.UpdateChannelRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: optional string name = 2;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: optional string topic = 3;
+   */
+  topic?: string;
+
+  /**
+   * @generated from field: optional string purpose = 4;
+   */
+  purpose?: string;
+};
+
+/**
+ * Describes the message tank.channel.v1.UpdateChannelRequest.
+ * Use `create(UpdateChannelRequestSchema)` to create a new message.
+ */
+export const UpdateChannelRequestSchema: GenMessage<UpdateChannelRequest> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 19);
+
+/**
+ * @generated from message tank.channel.v1.UpdateChannelResponse
+ */
+export type UpdateChannelResponse = Message<"tank.channel.v1.UpdateChannelResponse"> & {
+  /**
+   * @generated from field: tank.channel.v1.Channel channel = 1;
+   */
+  channel?: Channel;
+};
+
+/**
+ * Describes the message tank.channel.v1.UpdateChannelResponse.
+ * Use `create(UpdateChannelResponseSchema)` to create a new message.
+ */
+export const UpdateChannelResponseSchema: GenMessage<UpdateChannelResponse> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 20);
+
+/**
+ * Archived channels stay readable; posting is refused until unarchived.
+ *
+ * @generated from message tank.channel.v1.ArchiveChannelRequest
+ */
+export type ArchiveChannelRequest = Message<"tank.channel.v1.ArchiveChannelRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+};
+
+/**
+ * Describes the message tank.channel.v1.ArchiveChannelRequest.
+ * Use `create(ArchiveChannelRequestSchema)` to create a new message.
+ */
+export const ArchiveChannelRequestSchema: GenMessage<ArchiveChannelRequest> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 21);
+
+/**
+ * @generated from message tank.channel.v1.ArchiveChannelResponse
+ */
+export type ArchiveChannelResponse = Message<"tank.channel.v1.ArchiveChannelResponse"> & {
+  /**
+   * @generated from field: tank.channel.v1.Channel channel = 1;
+   */
+  channel?: Channel;
+};
+
+/**
+ * Describes the message tank.channel.v1.ArchiveChannelResponse.
+ * Use `create(ArchiveChannelResponseSchema)` to create a new message.
+ */
+export const ArchiveChannelResponseSchema: GenMessage<ArchiveChannelResponse> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 22);
+
+/**
+ * @generated from message tank.channel.v1.UnarchiveChannelRequest
+ */
+export type UnarchiveChannelRequest = Message<"tank.channel.v1.UnarchiveChannelRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+};
+
+/**
+ * Describes the message tank.channel.v1.UnarchiveChannelRequest.
+ * Use `create(UnarchiveChannelRequestSchema)` to create a new message.
+ */
+export const UnarchiveChannelRequestSchema: GenMessage<UnarchiveChannelRequest> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 23);
+
+/**
+ * @generated from message tank.channel.v1.UnarchiveChannelResponse
+ */
+export type UnarchiveChannelResponse = Message<"tank.channel.v1.UnarchiveChannelResponse"> & {
+  /**
+   * @generated from field: tank.channel.v1.Channel channel = 1;
+   */
+  channel?: Channel;
+};
+
+/**
+ * Describes the message tank.channel.v1.UnarchiveChannelResponse.
+ * Use `create(UnarchiveChannelResponseSchema)` to create a new message.
+ */
+export const UnarchiveChannelResponseSchema: GenMessage<UnarchiveChannelResponse> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 24);
+
+/**
+ * The caller's own per-channel settings; unset fields are left unchanged.
+ *
+ * @generated from message tank.channel.v1.SetChannelPreferenceRequest
+ */
+export type SetChannelPreferenceRequest = Message<"tank.channel.v1.SetChannelPreferenceRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: optional tank.channel.v1.NotifyPref notify_pref = 2;
+   */
+  notifyPref?: NotifyPref;
+
+  /**
+   * @generated from field: optional bool muted = 3;
+   */
+  muted?: boolean;
+
+  /**
+   * @generated from field: optional bool starred = 4;
+   */
+  starred?: boolean;
+};
+
+/**
+ * Describes the message tank.channel.v1.SetChannelPreferenceRequest.
+ * Use `create(SetChannelPreferenceRequestSchema)` to create a new message.
+ */
+export const SetChannelPreferenceRequestSchema: GenMessage<SetChannelPreferenceRequest> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 25);
+
+/**
+ * @generated from message tank.channel.v1.SetChannelPreferenceResponse
+ */
+export type SetChannelPreferenceResponse = Message<"tank.channel.v1.SetChannelPreferenceResponse"> & {
+  /**
+   * @generated from field: tank.channel.v1.ChannelReadState read_state = 1;
+   */
+  readState?: ChannelReadState;
+};
+
+/**
+ * Describes the message tank.channel.v1.SetChannelPreferenceResponse.
+ * Use `create(SetChannelPreferenceResponseSchema)` to create a new message.
+ */
+export const SetChannelPreferenceResponseSchema: GenMessage<SetChannelPreferenceResponse> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 26);
+
+/**
  * A Channel is presented as a "Tread" in the product: an objective-centric
  * stream with a pinned Goal Header. The wire name stays Channel.
  *
@@ -556,6 +733,41 @@ export enum ChannelType {
  */
 export const ChannelTypeSchema: GenEnum<ChannelType> = /*@__PURE__*/
   enumDesc(file_tank_channel_v1_channel, 0);
+
+/**
+ * Per-member notification level for a channel.
+ *
+ * @generated from enum tank.channel.v1.NotifyPref
+ */
+export enum NotifyPref {
+  /**
+   * follow the workspace preference
+   *
+   * @generated from enum value: NOTIFY_PREF_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: NOTIFY_PREF_ALL = 1;
+   */
+  ALL = 1,
+
+  /**
+   * @generated from enum value: NOTIFY_PREF_MENTIONS = 2;
+   */
+  MENTIONS = 2,
+
+  /**
+   * @generated from enum value: NOTIFY_PREF_NOTHING = 3;
+   */
+  NOTHING = 3,
+}
+
+/**
+ * Describes the enum tank.channel.v1.NotifyPref.
+ */
+export const NotifyPrefSchema: GenEnum<NotifyPref> = /*@__PURE__*/
+  enumDesc(file_tank_channel_v1_channel, 1);
 
 /**
  * @generated from service tank.channel.v1.ChannelService
@@ -624,6 +836,38 @@ export const ChannelService: GenService<{
     methodKind: "unary";
     input: typeof ListChannelMembersRequestSchema;
     output: typeof ListChannelMembersResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.channel.v1.ChannelService.UpdateChannel
+   */
+  updateChannel: {
+    methodKind: "unary";
+    input: typeof UpdateChannelRequestSchema;
+    output: typeof UpdateChannelResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.channel.v1.ChannelService.ArchiveChannel
+   */
+  archiveChannel: {
+    methodKind: "unary";
+    input: typeof ArchiveChannelRequestSchema;
+    output: typeof ArchiveChannelResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.channel.v1.ChannelService.UnarchiveChannel
+   */
+  unarchiveChannel: {
+    methodKind: "unary";
+    input: typeof UnarchiveChannelRequestSchema;
+    output: typeof UnarchiveChannelResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.channel.v1.ChannelService.SetChannelPreference
+   */
+  setChannelPreference: {
+    methodKind: "unary";
+    input: typeof SetChannelPreferenceRequestSchema;
+    output: typeof SetChannelPreferenceResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_channel_v1_channel, 0);

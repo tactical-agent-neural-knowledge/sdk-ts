@@ -132,6 +132,12 @@ export type RichTextElement = Message<"tank.richtext.v1.RichTextElement"> & {
         value: LinkElement;
         case: "link";
     } | {
+        /**
+         * @generated from field: tank.richtext.v1.UserGroupMention user_group = 7;
+         */
+        value: UserGroupMention;
+        case: "userGroup";
+    } | {
         case: undefined;
         value?: undefined;
     };
@@ -141,6 +147,27 @@ export type RichTextElement = Message<"tank.richtext.v1.RichTextElement"> & {
  * Use `create(RichTextElementSchema)` to create a new message.
  */
 export declare const RichTextElementSchema: GenMessage<RichTextElement>;
+/**
+ * @handle of a tank.workspace.v1.UserGroup; the notify worker expands it to
+ * the group's members.
+ *
+ * @generated from message tank.richtext.v1.UserGroupMention
+ */
+export type UserGroupMention = Message<"tank.richtext.v1.UserGroupMention"> & {
+    /**
+     * @generated from field: string group_id = 1;
+     */
+    groupId: string;
+    /**
+     * @generated from field: string handle = 2;
+     */
+    handle: string;
+};
+/**
+ * Describes the message tank.richtext.v1.UserGroupMention.
+ * Use `create(UserGroupMentionSchema)` to create a new message.
+ */
+export declare const UserGroupMentionSchema: GenMessage<UserGroupMention>;
 /**
  * @generated from message tank.richtext.v1.TextElement
  */

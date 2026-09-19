@@ -135,6 +135,10 @@ export type ChannelReadState = Message<"tank.channel.v1.ChannelReadState"> & {
      * @generated from field: bool starred = 5;
      */
     starred: boolean;
+    /**
+     * @generated from field: tank.channel.v1.NotifyPref notify_pref = 6;
+     */
+    notifyPref: NotifyPref;
 };
 /**
  * Describes the message tank.channel.v1.ChannelReadState.
@@ -416,6 +420,148 @@ export type ListChannelMembersResponse = Message<"tank.channel.v1.ListChannelMem
  */
 export declare const ListChannelMembersResponseSchema: GenMessage<ListChannelMembersResponse>;
 /**
+ * Unset fields are left unchanged.
+ *
+ * @generated from message tank.channel.v1.UpdateChannelRequest
+ */
+export type UpdateChannelRequest = Message<"tank.channel.v1.UpdateChannelRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: optional string name = 2;
+     */
+    name?: string;
+    /**
+     * @generated from field: optional string topic = 3;
+     */
+    topic?: string;
+    /**
+     * @generated from field: optional string purpose = 4;
+     */
+    purpose?: string;
+};
+/**
+ * Describes the message tank.channel.v1.UpdateChannelRequest.
+ * Use `create(UpdateChannelRequestSchema)` to create a new message.
+ */
+export declare const UpdateChannelRequestSchema: GenMessage<UpdateChannelRequest>;
+/**
+ * @generated from message tank.channel.v1.UpdateChannelResponse
+ */
+export type UpdateChannelResponse = Message<"tank.channel.v1.UpdateChannelResponse"> & {
+    /**
+     * @generated from field: tank.channel.v1.Channel channel = 1;
+     */
+    channel?: Channel;
+};
+/**
+ * Describes the message tank.channel.v1.UpdateChannelResponse.
+ * Use `create(UpdateChannelResponseSchema)` to create a new message.
+ */
+export declare const UpdateChannelResponseSchema: GenMessage<UpdateChannelResponse>;
+/**
+ * Archived channels stay readable; posting is refused until unarchived.
+ *
+ * @generated from message tank.channel.v1.ArchiveChannelRequest
+ */
+export type ArchiveChannelRequest = Message<"tank.channel.v1.ArchiveChannelRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.channel.v1.ArchiveChannelRequest.
+ * Use `create(ArchiveChannelRequestSchema)` to create a new message.
+ */
+export declare const ArchiveChannelRequestSchema: GenMessage<ArchiveChannelRequest>;
+/**
+ * @generated from message tank.channel.v1.ArchiveChannelResponse
+ */
+export type ArchiveChannelResponse = Message<"tank.channel.v1.ArchiveChannelResponse"> & {
+    /**
+     * @generated from field: tank.channel.v1.Channel channel = 1;
+     */
+    channel?: Channel;
+};
+/**
+ * Describes the message tank.channel.v1.ArchiveChannelResponse.
+ * Use `create(ArchiveChannelResponseSchema)` to create a new message.
+ */
+export declare const ArchiveChannelResponseSchema: GenMessage<ArchiveChannelResponse>;
+/**
+ * @generated from message tank.channel.v1.UnarchiveChannelRequest
+ */
+export type UnarchiveChannelRequest = Message<"tank.channel.v1.UnarchiveChannelRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.channel.v1.UnarchiveChannelRequest.
+ * Use `create(UnarchiveChannelRequestSchema)` to create a new message.
+ */
+export declare const UnarchiveChannelRequestSchema: GenMessage<UnarchiveChannelRequest>;
+/**
+ * @generated from message tank.channel.v1.UnarchiveChannelResponse
+ */
+export type UnarchiveChannelResponse = Message<"tank.channel.v1.UnarchiveChannelResponse"> & {
+    /**
+     * @generated from field: tank.channel.v1.Channel channel = 1;
+     */
+    channel?: Channel;
+};
+/**
+ * Describes the message tank.channel.v1.UnarchiveChannelResponse.
+ * Use `create(UnarchiveChannelResponseSchema)` to create a new message.
+ */
+export declare const UnarchiveChannelResponseSchema: GenMessage<UnarchiveChannelResponse>;
+/**
+ * The caller's own per-channel settings; unset fields are left unchanged.
+ *
+ * @generated from message tank.channel.v1.SetChannelPreferenceRequest
+ */
+export type SetChannelPreferenceRequest = Message<"tank.channel.v1.SetChannelPreferenceRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: optional tank.channel.v1.NotifyPref notify_pref = 2;
+     */
+    notifyPref?: NotifyPref;
+    /**
+     * @generated from field: optional bool muted = 3;
+     */
+    muted?: boolean;
+    /**
+     * @generated from field: optional bool starred = 4;
+     */
+    starred?: boolean;
+};
+/**
+ * Describes the message tank.channel.v1.SetChannelPreferenceRequest.
+ * Use `create(SetChannelPreferenceRequestSchema)` to create a new message.
+ */
+export declare const SetChannelPreferenceRequestSchema: GenMessage<SetChannelPreferenceRequest>;
+/**
+ * @generated from message tank.channel.v1.SetChannelPreferenceResponse
+ */
+export type SetChannelPreferenceResponse = Message<"tank.channel.v1.SetChannelPreferenceResponse"> & {
+    /**
+     * @generated from field: tank.channel.v1.ChannelReadState read_state = 1;
+     */
+    readState?: ChannelReadState;
+};
+/**
+ * Describes the message tank.channel.v1.SetChannelPreferenceResponse.
+ * Use `create(SetChannelPreferenceResponseSchema)` to create a new message.
+ */
+export declare const SetChannelPreferenceResponseSchema: GenMessage<SetChannelPreferenceResponse>;
+/**
  * A Channel is presented as a "Tread" in the product: an objective-centric
  * stream with a pinned Goal Header. The wire name stays Channel.
  *
@@ -447,6 +593,35 @@ export declare enum ChannelType {
  * Describes the enum tank.channel.v1.ChannelType.
  */
 export declare const ChannelTypeSchema: GenEnum<ChannelType>;
+/**
+ * Per-member notification level for a channel.
+ *
+ * @generated from enum tank.channel.v1.NotifyPref
+ */
+export declare enum NotifyPref {
+    /**
+     * follow the workspace preference
+     *
+     * @generated from enum value: NOTIFY_PREF_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: NOTIFY_PREF_ALL = 1;
+     */
+    ALL = 1,
+    /**
+     * @generated from enum value: NOTIFY_PREF_MENTIONS = 2;
+     */
+    MENTIONS = 2,
+    /**
+     * @generated from enum value: NOTIFY_PREF_NOTHING = 3;
+     */
+    NOTHING = 3
+}
+/**
+ * Describes the enum tank.channel.v1.NotifyPref.
+ */
+export declare const NotifyPrefSchema: GenEnum<NotifyPref>;
 /**
  * @generated from service tank.channel.v1.ChannelService
  */
@@ -514,5 +689,37 @@ export declare const ChannelService: GenService<{
         methodKind: "unary";
         input: typeof ListChannelMembersRequestSchema;
         output: typeof ListChannelMembersResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.channel.v1.ChannelService.UpdateChannel
+     */
+    updateChannel: {
+        methodKind: "unary";
+        input: typeof UpdateChannelRequestSchema;
+        output: typeof UpdateChannelResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.channel.v1.ChannelService.ArchiveChannel
+     */
+    archiveChannel: {
+        methodKind: "unary";
+        input: typeof ArchiveChannelRequestSchema;
+        output: typeof ArchiveChannelResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.channel.v1.ChannelService.UnarchiveChannel
+     */
+    unarchiveChannel: {
+        methodKind: "unary";
+        input: typeof UnarchiveChannelRequestSchema;
+        output: typeof UnarchiveChannelResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.channel.v1.ChannelService.SetChannelPreference
+     */
+    setChannelPreference: {
+        methodKind: "unary";
+        input: typeof SetChannelPreferenceRequestSchema;
+        output: typeof SetChannelPreferenceResponseSchema;
     };
 }>;
