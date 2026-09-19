@@ -99,6 +99,12 @@ export type Channel = Message<"tank.channel.v1.Channel"> & {
      * @generated from field: repeated string member_ids = 13;
      */
     memberIds: string[];
+    /**
+     * Whether the caller is a member (public channels are listed even when not joined).
+     *
+     * @generated from field: bool joined = 14;
+     */
+    joined: boolean;
 };
 /**
  * Describes the message tank.channel.v1.Channel.

@@ -59,6 +59,12 @@ export type SetStatusRequest = Message<"tank.presence.v1.SetStatusRequest"> & {
      * @generated from field: google.protobuf.Timestamp expires_at = 4;
      */
     expiresAt?: Timestamp;
+    /**
+     * When set, only this workspace's presence is written; otherwise every workspace the caller belongs to.
+     *
+     * @generated from field: string workspace_id = 5;
+     */
+    workspaceId: string;
 };
 /**
  * Describes the message tank.presence.v1.SetStatusRequest.
@@ -89,6 +95,12 @@ export type GetPresenceRequest = Message<"tank.presence.v1.GetPresenceRequest"> 
      * @generated from field: repeated string user_ids = 1;
      */
     userIds: string[];
+    /**
+     * When set, presence is read from this workspace; otherwise from any workspace the caller shares with each user.
+     *
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
 };
 /**
  * Describes the message tank.presence.v1.GetPresenceRequest.

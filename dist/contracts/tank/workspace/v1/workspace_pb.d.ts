@@ -172,6 +172,10 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
      * @generated from field: string custom_emoji_hash = 6;
      */
     customEmojiHash: string;
+    /**
+     * @generated from field: int32 unread_notification_count = 7;
+     */
+    unreadNotificationCount: number;
 };
 /**
  * Describes the message tank.workspace.v1.GetBootstrapResponse.

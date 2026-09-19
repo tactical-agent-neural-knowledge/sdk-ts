@@ -388,6 +388,34 @@ export type GetThreadResponse = Message$1<"tank.message.v1.GetThreadResponse"> &
  */
 export declare const GetThreadResponseSchema: GenMessage<GetThreadResponse>;
 /**
+ * @generated from message tank.message.v1.GetMessageRequest
+ */
+export type GetMessageRequest = Message$1<"tank.message.v1.GetMessageRequest"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.message.v1.GetMessageRequest.
+ * Use `create(GetMessageRequestSchema)` to create a new message.
+ */
+export declare const GetMessageRequestSchema: GenMessage<GetMessageRequest>;
+/**
+ * @generated from message tank.message.v1.GetMessageResponse
+ */
+export type GetMessageResponse = Message$1<"tank.message.v1.GetMessageResponse"> & {
+    /**
+     * @generated from field: tank.message.v1.Message message = 1;
+     */
+    message?: Message;
+};
+/**
+ * Describes the message tank.message.v1.GetMessageResponse.
+ * Use `create(GetMessageResponseSchema)` to create a new message.
+ */
+export declare const GetMessageResponseSchema: GenMessage<GetMessageResponse>;
+/**
  * @generated from message tank.message.v1.MarkReadRequest
  */
 export type MarkReadRequest = Message$1<"tank.message.v1.MarkReadRequest"> & {
@@ -598,6 +626,14 @@ export declare const ChatService: GenService<{
         methodKind: "unary";
         input: typeof GetThreadRequestSchema;
         output: typeof GetThreadResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.GetMessage
+     */
+    getMessage: {
+        methodKind: "unary";
+        input: typeof GetMessageRequestSchema;
+        output: typeof GetMessageResponseSchema;
     };
     /**
      * @generated from rpc tank.message.v1.ChatService.MarkRead

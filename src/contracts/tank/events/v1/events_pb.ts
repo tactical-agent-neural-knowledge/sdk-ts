@@ -6,8 +6,12 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_any, file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type { Run } from "../../agent/v1/agent_pb.js";
+import { file_tank_agent_v1_agent } from "../../agent/v1/agent_pb.js";
 import type { BlockAction } from "../../blocks/v1/blocks_pb.js";
 import { file_tank_blocks_v1_blocks } from "../../blocks/v1/blocks_pb.js";
+import type { File } from "../../files/v1/files_pb.js";
+import { file_tank_files_v1_files } from "../../files/v1/files_pb.js";
 import type { Message as Message$1 } from "../../message/v1/message_pb.js";
 import { file_tank_message_v1_message } from "../../message/v1/message_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
@@ -18,7 +22,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/events/v1/events.proto.
  */
 export const file_tank_events_v1_events: GenFile = /*@__PURE__*/
-  fileDesc("Cht0YW5rL2V2ZW50cy92MS9ldmVudHMucHJvdG8SDnRhbmsuZXZlbnRzLnYxIrkBCghFbnZlbG9wZRIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSDAoEdHlwZRgDIAEoCRIPCgdzdWJqZWN0GAQgASgJEi8KC29jY3VycmVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx0cmFjZV9wYXJlbnQYBiABKAkSJQoHcGF5bG9hZBgHIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkiOwoOTWVzc2FnZUNyZWF0ZWQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIjsKDk1lc3NhZ2VVcGRhdGVkEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJQCg5NZXNzYWdlRGVsZXRlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiQwoNUmVhY3Rpb25BZGRlZBISCgptZXNzYWdlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSDQoFZW1vamkYAyABKAkiRQoPUmVhY3Rpb25SZW1vdmVkEhIKCm1lc3NhZ2VfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRINCgVlbW9qaRgDIAEoCSKEAQoQUmVhZFN0YXRlVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFQoNbGFzdF9yZWFkX3NlcRgDIAEoAxIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIcChRsYXN0X3JlYWRfdGhyZWFkX3NlcRgFIAEoAyIkCg5DaGFubmVsVXBkYXRlZBISCgpjaGFubmVsX2lkGAEgASgJIk8KGENoYW5uZWxNZW1iZXJzaGlwQ2hhbmdlZBISCgpjaGFubmVsX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSDgoGam9pbmVkGAMgASgIIjkKCkNhcmRBY3Rpb24SKwoGYWN0aW9uGAEgASgLMhsudGFuay5ibG9ja3MudjEuQmxvY2tBY3Rpb24iaAoKQXBwQ29tbWFuZBIPCgdjb21tYW5kGAEgASgJEgwKBHRleHQYAiABKAkSDwoHdXNlcl9pZBgDIAEoCRISCgpjaGFubmVsX2lkGAQgASgJEhYKDnRocmVhZF9yb290X2lkGAUgASgJIj8KD1ByZXNlbmNlQ2hhbmdlZBIsCghwcmVzZW5jZRgBIAEoCzIaLnRhbmsucHJlc2VuY2UudjEuUHJlc2VuY2UiRQoGVHlwaW5nEhIKCmNoYW5uZWxfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgDIAEoCSJZCgtBZ2VudFN0YXR1cxISCgpjaGFubmVsX2lkGAEgASgJEhYKDnRocmVhZF9yb290X2lkGAIgASgJEg4KBnJ1bl9pZBgDIAEoCRIOCgZzdGF0dXMYBCABKAkidgoTTm90aWZpY2F0aW9uQ3JlYXRlZBIXCg9ub3RpZmljYXRpb25faWQYASABKAkSDAoEa2luZBgCIAEoCRISCgptZXNzYWdlX2lkGAMgASgJEhIKCmNoYW5uZWxfaWQYBCABKAkSEAoIYWN0b3JfaWQYBSABKAlC0AEKEmNvbS50YW5rLmV2ZW50cy52MUILRXZlbnRzUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9ldmVudHMvdjE7ZXZlbnRzdjGiAgNURViqAg5UYW5rLkV2ZW50cy5WMcoCDlRhbmtcRXZlbnRzXFYx4gIaVGFua1xFdmVudHNcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpFdmVudHM6OlYxYgZwcm90bzM", [file_google_protobuf_any, file_google_protobuf_timestamp, file_tank_blocks_v1_blocks, file_tank_message_v1_message, file_tank_presence_v1_presence]);
+  fileDesc("Cht0YW5rL2V2ZW50cy92MS9ldmVudHMucHJvdG8SDnRhbmsuZXZlbnRzLnYxIrkBCghFbnZlbG9wZRIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSDAoEdHlwZRgDIAEoCRIPCgdzdWJqZWN0GAQgASgJEi8KC29jY3VycmVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx0cmFjZV9wYXJlbnQYBiABKAkSJQoHcGF5bG9hZBgHIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkiOwoOTWVzc2FnZUNyZWF0ZWQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIjsKDk1lc3NhZ2VVcGRhdGVkEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJQCg5NZXNzYWdlRGVsZXRlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiQwoNUmVhY3Rpb25BZGRlZBISCgptZXNzYWdlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSDQoFZW1vamkYAyABKAkiRQoPUmVhY3Rpb25SZW1vdmVkEhIKCm1lc3NhZ2VfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRINCgVlbW9qaRgDIAEoCSKEAQoQUmVhZFN0YXRlVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFQoNbGFzdF9yZWFkX3NlcRgDIAEoAxIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIcChRsYXN0X3JlYWRfdGhyZWFkX3NlcRgFIAEoAyIkCg5DaGFubmVsVXBkYXRlZBISCgpjaGFubmVsX2lkGAEgASgJImEKGENoYW5uZWxNZW1iZXJzaGlwQ2hhbmdlZBISCgpjaGFubmVsX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSDgoGam9pbmVkGAMgASgIEhAKCGFjdG9yX2lkGAQgASgJIjkKCkNhcmRBY3Rpb24SKwoGYWN0aW9uGAEgASgLMhsudGFuay5ibG9ja3MudjEuQmxvY2tBY3Rpb24iaAoKQXBwQ29tbWFuZBIPCgdjb21tYW5kGAEgASgJEgwKBHRleHQYAiABKAkSDwoHdXNlcl9pZBgDIAEoCRISCgpjaGFubmVsX2lkGAQgASgJEhYKDnRocmVhZF9yb290X2lkGAUgASgJIj8KD1ByZXNlbmNlQ2hhbmdlZBIsCghwcmVzZW5jZRgBIAEoCzIaLnRhbmsucHJlc2VuY2UudjEuUHJlc2VuY2UiRQoGVHlwaW5nEhIKCmNoYW5uZWxfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgDIAEoCSJZCgtBZ2VudFN0YXR1cxISCgpjaGFubmVsX2lkGAEgASgJEhYKDnRocmVhZF9yb290X2lkGAIgASgJEg4KBnJ1bl9pZBgDIAEoCRIOCgZzdGF0dXMYBCABKAkiLgoJRmlsZVJlYWR5EiEKBGZpbGUYASABKAsyEy50YW5rLmZpbGVzLnYxLkZpbGUiTgoQTWVzc2FnZUVwaGVtZXJhbBIpCgdtZXNzYWdlGAEgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USDwoHdXNlcl9pZBgCIAEoCSItChFOb3RpZmljYXRpb25zUmVhZBIYChBub3RpZmljYXRpb25faWRzGAEgAygJIjIKD0FnZW50UnVuVXBkYXRlZBIfCgNydW4YASABKAsyEi50YW5rLmFnZW50LnYxLlJ1biJ2ChNOb3RpZmljYXRpb25DcmVhdGVkEhcKD25vdGlmaWNhdGlvbl9pZBgBIAEoCRIMCgRraW5kGAIgASgJEhIKCm1lc3NhZ2VfaWQYAyABKAkSEgoKY2hhbm5lbF9pZBgEIAEoCRIQCghhY3Rvcl9pZBgFIAEoCULQAQoSY29tLnRhbmsuZXZlbnRzLnYxQgtFdmVudHNQcm90b1ABWlNnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2V2ZW50cy92MTtldmVudHN2MaICA1RFWKoCDlRhbmsuRXZlbnRzLlYxygIOVGFua1xFdmVudHNcVjHiAhpUYW5rXEV2ZW50c1xWMVxHUEJNZXRhZGF0YeoCEFRhbms6OkV2ZW50czo6VjFiBnByb3RvMw", [file_google_protobuf_any, file_google_protobuf_timestamp, file_tank_agent_v1_agent, file_tank_blocks_v1_blocks, file_tank_files_v1_files, file_tank_message_v1_message, file_tank_presence_v1_presence]);
 
 /**
  * Every durable event on the bus and every realtime frame payload is one of
@@ -262,6 +266,13 @@ export type ChannelMembershipChanged = Message<"tank.events.v1.ChannelMembership
    * @generated from field: bool joined = 3;
    */
   joined: boolean;
+
+  /**
+   * who added or removed the member; empty when they acted on themselves
+   *
+   * @generated from field: string actor_id = 4;
+   */
+  actorId: string;
 };
 
 /**
@@ -406,6 +417,89 @@ export const AgentStatusSchema: GenMessage<AgentStatus> = /*@__PURE__*/
   messageDesc(file_tank_events_v1_events, 13);
 
 /**
+ * file.ready on evt.{ws}.user.{uploader}: the upload is verified and readable.
+ *
+ * @generated from message tank.events.v1.FileReady
+ */
+export type FileReady = Message<"tank.events.v1.FileReady"> & {
+  /**
+   * @generated from field: tank.files.v1.File file = 1;
+   */
+  file?: File;
+};
+
+/**
+ * Describes the message tank.events.v1.FileReady.
+ * Use `create(FileReadySchema)` to create a new message.
+ */
+export const FileReadySchema: GenMessage<FileReady> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 14);
+
+/**
+ * message.ephemeral on evt.{ws}.user.{uid}: never stored, shown only to user_id.
+ *
+ * @generated from message tank.events.v1.MessageEphemeral
+ */
+export type MessageEphemeral = Message<"tank.events.v1.MessageEphemeral"> & {
+  /**
+   * @generated from field: tank.message.v1.Message message = 1;
+   */
+  message?: Message$1;
+
+  /**
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message tank.events.v1.MessageEphemeral.
+ * Use `create(MessageEphemeralSchema)` to create a new message.
+ */
+export const MessageEphemeralSchema: GenMessage<MessageEphemeral> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 15);
+
+/**
+ * notifications.read on evt.{ws}.user.{uid}: cross-device badge sync.
+ *
+ * @generated from message tank.events.v1.NotificationsRead
+ */
+export type NotificationsRead = Message<"tank.events.v1.NotificationsRead"> & {
+  /**
+   * empty = every notification in the workspace
+   *
+   * @generated from field: repeated string notification_ids = 1;
+   */
+  notificationIds: string[];
+};
+
+/**
+ * Describes the message tank.events.v1.NotificationsRead.
+ * Use `create(NotificationsReadSchema)` to create a new message.
+ */
+export const NotificationsReadSchema: GenMessage<NotificationsRead> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 16);
+
+/**
+ * agent.run.updated on evt.{ws}.thread.{root}: state, status message or cost changed.
+ *
+ * @generated from message tank.events.v1.AgentRunUpdated
+ */
+export type AgentRunUpdated = Message<"tank.events.v1.AgentRunUpdated"> & {
+  /**
+   * @generated from field: tank.agent.v1.Run run = 1;
+   */
+  run?: Run;
+};
+
+/**
+ * Describes the message tank.events.v1.AgentRunUpdated.
+ * Use `create(AgentRunUpdatedSchema)` to create a new message.
+ */
+export const AgentRunUpdatedSchema: GenMessage<AgentRunUpdated> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 17);
+
+/**
  * @generated from message tank.events.v1.NotificationCreated
  */
 export type NotificationCreated = Message<"tank.events.v1.NotificationCreated"> & {
@@ -440,5 +534,5 @@ export type NotificationCreated = Message<"tank.events.v1.NotificationCreated"> 
  * Use `create(NotificationCreatedSchema)` to create a new message.
  */
 export const NotificationCreatedSchema: GenMessage<NotificationCreated> = /*@__PURE__*/
-  messageDesc(file_tank_events_v1_events, 14);
+  messageDesc(file_tank_events_v1_events, 18);
 

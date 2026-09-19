@@ -262,6 +262,12 @@ export type ResyncRequired = Message<"tank.realtime.v1.ResyncRequired"> & {
      * @generated from field: string reason = 1;
      */
     reason: string;
+    /**
+     * the workspace whose cursor could not be replayed
+     *
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
 };
 /**
  * Describes the message tank.realtime.v1.ResyncRequired.

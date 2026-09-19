@@ -93,6 +93,18 @@ export type Run = Message<"tank.agent.v1.Run"> & {
      * @generated from field: google.protobuf.Timestamp ended_at = 13;
      */
     endedAt?: Timestamp;
+    /**
+     * hash of the approved plan, set by the control plane
+     *
+     * @generated from field: string plan_hash = 14;
+     */
+    planHash: string;
+    /**
+     * gate the run is blocked on, if any
+     *
+     * @generated from field: string pending_gate_id = 15;
+     */
+    pendingGateId: string;
 };
 /**
  * Describes the message tank.agent.v1.Run.
@@ -327,6 +339,34 @@ export type ListRunsResponse = Message<"tank.agent.v1.ListRunsResponse"> & {
  */
 export declare const ListRunsResponseSchema: GenMessage<ListRunsResponse>;
 /**
+ * @generated from message tank.agent.v1.ListAgentsRequest
+ */
+export type ListAgentsRequest = Message<"tank.agent.v1.ListAgentsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.ListAgentsRequest.
+ * Use `create(ListAgentsRequestSchema)` to create a new message.
+ */
+export declare const ListAgentsRequestSchema: GenMessage<ListAgentsRequest>;
+/**
+ * @generated from message tank.agent.v1.ListAgentsResponse
+ */
+export type ListAgentsResponse = Message<"tank.agent.v1.ListAgentsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.Agent agents = 1;
+     */
+    agents: Agent[];
+};
+/**
+ * Describes the message tank.agent.v1.ListAgentsResponse.
+ * Use `create(ListAgentsResponseSchema)` to create a new message.
+ */
+export declare const ListAgentsResponseSchema: GenMessage<ListAgentsResponse>;
+/**
  * @generated from enum tank.agent.v1.RunState
  */
 export declare enum RunState {
@@ -462,5 +502,13 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof ListRunsRequestSchema;
         output: typeof ListRunsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.ListAgents
+     */
+    listAgents: {
+        methodKind: "unary";
+        input: typeof ListAgentsRequestSchema;
+        output: typeof ListAgentsResponseSchema;
     };
 }>;
