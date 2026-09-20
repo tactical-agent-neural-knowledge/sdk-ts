@@ -7,6 +7,7 @@ import {
   useMemo,
   useSyncExternalStore,
 } from "react";
+import { isTerminalRunState } from "../blocks/runTone.js";
 import type { TankClient } from "../client/client.js";
 import {
   type ChannelPaging,
@@ -308,8 +309,24 @@ export function useThreadRun(rootId: string, opts: { load?: boolean } = {}): Run
     if (!load || !rootId || client.store.getState().runsByThread[rootId]) return;
     void client.listRuns({ threadRootId: rootId }).catch(() => undefined); // agent:read may be missing
   }, [client, rootId, load]);
+
+  // A run chip spins while the run is live, so a missed agent.run.updated
+  // leaves it spinning forever and lying about a run that finished minutes
+  // ago. Realtime stays the fast path; this is the reconciliation that makes
+  // the chip eventually honest. It stops as soon as the run is terminal.
+  const live = run !== undefined && !isTerminalRunState(run.state);
+  useEffect(() => {
+    if (!load || !rootId || !live) return;
+    const id = setInterval(() => {
+      void client.listRuns({ threadRootId: rootId }).catch(() => undefined);
+    }, RUN_REFRESH_MS);
+    return () => clearInterval(id);
+  }, [client, rootId, load, live]);
   return run;
 }
+
+/** How often a live run is re-fetched when no event has corrected it. */
+const RUN_REFRESH_MS = 15_000;
 
 /** Runs in a workspace, newest first (whatever `ListRuns` pages and events have put in the store). */
 export function useRuns(workspaceId: string): Run[] {

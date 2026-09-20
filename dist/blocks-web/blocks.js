@@ -16,7 +16,15 @@ import { useState } from "react";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { typography } from "../design/tokens.js";
 import { RichTextView } from "./RichTextView.js";
-const mono = { fontFamily: typography.fontCode, fontSize: "0.8125rem" };
+// Branch names, run ids and diagnostic codes are single unbroken tokens that
+// are wider than a phone. Without this they push the card sideways and the
+// message list scrolls horizontally.
+const mono = {
+    fontFamily: typography.fontCode,
+    fontSize: "0.8125rem",
+    overflowWrap: "anywhere",
+    minWidth: 0,
+};
 function tsMs(t) {
     return t ? Number(t.seconds) * 1000 + Math.floor(t.nanos / 1e6) : undefined;
 }
@@ -34,6 +42,10 @@ export function Card({ accent, children, label, }) {
             display: "flex",
             flexDirection: "column",
             gap: 1,
+            // Nothing inside a card may widen it: a long token wraps instead.
+            minWidth: 0,
+            maxWidth: "100%",
+            overflowWrap: "anywhere",
         }, children: [label ? (_jsx(Typography, { variant: "overline", sx: { color: accent === "none" ? "text.secondary" : `tank.${accent}`, lineHeight: 1.5 }, children: label })) : null, children] }));
 }
 // ------------------------------------------------------------------ simple blocks
