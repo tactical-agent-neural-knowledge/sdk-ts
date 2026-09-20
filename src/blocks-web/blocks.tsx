@@ -46,7 +46,15 @@ export interface BlockContext extends Pick<RichTextViewProps, "resolveUser" | "r
   formatTime?: (ms: number) => string;
 }
 
-const mono = { fontFamily: typography.fontCode, fontSize: "0.8125rem" } as const;
+// Branch names, run ids and diagnostic codes are single unbroken tokens that
+// are wider than a phone. Without this they push the card sideways and the
+// message list scrolls horizontally.
+const mono = {
+  fontFamily: typography.fontCode,
+  fontSize: "0.8125rem",
+  overflowWrap: "anywhere",
+  minWidth: 0,
+} as const;
 
 function tsMs(t: { seconds: bigint; nanos: number } | undefined): number | undefined {
   return t ? Number(t.seconds) * 1000 + Math.floor(t.nanos / 1e6) : undefined;
@@ -77,6 +85,10 @@ export function Card({
         display: "flex",
         flexDirection: "column",
         gap: 1,
+        // Nothing inside a card may widen it: a long token wraps instead.
+        minWidth: 0,
+        maxWidth: "100%",
+        overflowWrap: "anywhere",
       }}
     >
       {label ? (
