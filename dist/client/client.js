@@ -472,6 +472,15 @@ export class TankClient {
         });
         return res.inviteId;
     }
+    /** Invites sent and not yet accepted. Shown beside members, so an invite is visible work. */
+    async listInvites(workspaceId) {
+        const res = await this.workspaces.listInvites({ workspaceId });
+        return res.invites;
+    }
+    /** Makes the emailed link stop working. Admins only, matching who may send one. */
+    async revokeInvite(workspaceId, inviteId) {
+        await this.workspaces.revokeInvite({ workspaceId, inviteId });
+    }
     addReaction(messageId, emoji) {
         const me = this.store.getState().me;
         if (me)
