@@ -8,6 +8,42 @@ import type { JsonObject, Message } from "@bufbuild/protobuf";
  */
 export declare const file_tank_agentctl_v1_agentctl: GenFile;
 /**
+ * A file a human put in the thread. The sandbox has no route to the file
+ * store, so the bytes come back through GetAttachment; this is only what the
+ * agent needs to decide whether it wants them.
+ *
+ * @generated from message tank.agentctl.v1.Attachment
+ */
+export type Attachment = Message<"tank.agentctl.v1.Attachment"> & {
+    /**
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string mime = 3;
+     */
+    mime: string;
+    /**
+     * @generated from field: int64 size = 4;
+     */
+    size: bigint;
+    /**
+     * the message it arrived on
+     *
+     * @generated from field: string message_id = 5;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.Attachment.
+ * Use `create(AttachmentSchema)` to create a new message.
+ */
+export declare const AttachmentSchema: GenMessage<Attachment>;
+/**
  * @generated from message tank.agentctl.v1.ThreadMessage
  */
 export type ThreadMessage = Message<"tank.agentctl.v1.ThreadMessage"> & {
@@ -37,6 +73,10 @@ export type ThreadMessage = Message<"tank.agentctl.v1.ThreadMessage"> & {
      * @generated from field: google.protobuf.Timestamp created_at = 6;
      */
     createdAt?: Timestamp;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.Attachment attachments = 7;
+     */
+    attachments: Attachment[];
 };
 /**
  * Describes the message tank.agentctl.v1.ThreadMessage.
@@ -232,6 +272,14 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: string git_remote_url = 20;
      */
     gitRemoteUrl: string;
+    /**
+     * Everything attached in this thread, newest last. Present from the first
+     * turn so the agent knows an image or a video exists without asking for it:
+     * "add a filter to this image" is unanswerable otherwise.
+     *
+     * @generated from field: repeated tank.agentctl.v1.Attachment attachments = 21;
+     */
+    attachments: Attachment[];
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -430,6 +478,16 @@ export type AttachArtifactRequest = Message<"tank.agentctl.v1.AttachArtifactRequ
      * @generated from field: string caption = 4;
      */
     caption: string;
+    /**
+     * This is the finished thing, not something to look at before deciding. The
+     * control plane posts it into the thread on its own message immediately,
+     * which is both how a person gets it and the only way it becomes readable:
+     * file_shares rows come from a message's file_ids and nothing else. A
+     * preview waits instead for the plan card that will carry it.
+     *
+     * @generated from field: bool deliver = 5;
+     */
+    deliver: boolean;
 };
 /**
  * Describes the message tank.agentctl.v1.AttachArtifactRequest.
@@ -450,6 +508,45 @@ export type AttachArtifactResponse = Message<"tank.agentctl.v1.AttachArtifactRes
  * Use `create(AttachArtifactResponseSchema)` to create a new message.
  */
 export declare const AttachArtifactResponseSchema: GenMessage<AttachArtifactResponse>;
+/**
+ * GetAttachment streams one attachment's bytes into the sandbox. Server
+ * streaming because a video is not a message-sized thing, and because the
+ * runner writes each chunk straight to disk rather than holding the file in
+ * memory.
+ *
+ * @generated from message tank.agentctl.v1.GetAttachmentRequest
+ */
+export type GetAttachmentRequest = Message<"tank.agentctl.v1.GetAttachmentRequest"> & {
+    /**
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetAttachmentRequest.
+ * Use `create(GetAttachmentRequestSchema)` to create a new message.
+ */
+export declare const GetAttachmentRequestSchema: GenMessage<GetAttachmentRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetAttachmentResponse
+ */
+export type GetAttachmentResponse = Message<"tank.agentctl.v1.GetAttachmentResponse"> & {
+    /**
+     * Set on the first response only.
+     *
+     * @generated from field: tank.agentctl.v1.Attachment attachment = 1;
+     */
+    attachment?: Attachment;
+    /**
+     * @generated from field: bytes chunk = 2;
+     */
+    chunk: Uint8Array;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetAttachmentResponse.
+ * Use `create(GetAttachmentResponseSchema)` to create a new message.
+ */
+export declare const GetAttachmentResponseSchema: GenMessage<GetAttachmentResponse>;
 /**
  * @generated from message tank.agentctl.v1.UpdateCardRequest
  */
@@ -1789,6 +1886,14 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof AttachArtifactRequestSchema;
         output: typeof AttachArtifactResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.GetAttachment
+     */
+    getAttachment: {
+        methodKind: "server_streaming";
+        input: typeof GetAttachmentRequestSchema;
+        output: typeof GetAttachmentResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PostPlan

@@ -37,6 +37,7 @@ import {
 import {
   type GetBootstrapResponse,
   GetBootstrapResponseSchema,
+  type Invite,
   Role,
   WorkspaceService,
 } from "../contracts/tank/workspace/v1/workspace_pb.js";
@@ -657,6 +658,17 @@ export class TankClient {
       role: typeof role === "string" ? ROLE_BY_NAME[role] : role,
     });
     return res.inviteId;
+  }
+
+  /** Invites sent and not yet accepted. Shown beside members, so an invite is visible work. */
+  async listInvites(workspaceId: string): Promise<Invite[]> {
+    const res = await this.workspaces.listInvites({ workspaceId });
+    return res.invites;
+  }
+
+  /** Makes the emailed link stop working. Admins only, matching who may send one. */
+  async revokeInvite(workspaceId: string, inviteId: string): Promise<void> {
+    await this.workspaces.revokeInvite({ workspaceId, inviteId });
   }
 
   addReaction(messageId: string, emoji: string): Promise<unknown> {

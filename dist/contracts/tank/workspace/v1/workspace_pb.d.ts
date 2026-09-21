@@ -330,6 +330,95 @@ export type InviteMemberResponse = Message<"tank.workspace.v1.InviteMemberRespon
  */
 export declare const InviteMemberResponseSchema: GenMessage<InviteMemberResponse>;
 /**
+ * An invitation that has been sent and not yet accepted. Members lists these
+ * beside real members: inviting five people and seeing the screen unchanged
+ * reads as a failure, and there is otherwise no way to tell who is outstanding
+ * or to take an invite back.
+ *
+ * @generated from message tank.workspace.v1.Invite
+ */
+export type Invite = Message<"tank.workspace.v1.Invite"> & {
+    /**
+     * Stable handle for revoking. Not the token: that only ever exists in the
+     * email, and anyone who can list invites must not be able to accept them.
+     *
+     * @generated from field: string invite_id = 1;
+     */
+    inviteId: string;
+    /**
+     * @generated from field: string email = 2;
+     */
+    email: string;
+    /**
+     * @generated from field: tank.workspace.v1.Role role = 3;
+     */
+    role: Role;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 4;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.Invite.
+ * Use `create(InviteSchema)` to create a new message.
+ */
+export declare const InviteSchema: GenMessage<Invite>;
+/**
+ * @generated from message tank.workspace.v1.ListInvitesRequest
+ */
+export type ListInvitesRequest = Message<"tank.workspace.v1.ListInvitesRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ListInvitesRequest.
+ * Use `create(ListInvitesRequestSchema)` to create a new message.
+ */
+export declare const ListInvitesRequestSchema: GenMessage<ListInvitesRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListInvitesResponse
+ */
+export type ListInvitesResponse = Message<"tank.workspace.v1.ListInvitesResponse"> & {
+    /**
+     * @generated from field: repeated tank.workspace.v1.Invite invites = 1;
+     */
+    invites: Invite[];
+};
+/**
+ * Describes the message tank.workspace.v1.ListInvitesResponse.
+ * Use `create(ListInvitesResponseSchema)` to create a new message.
+ */
+export declare const ListInvitesResponseSchema: GenMessage<ListInvitesResponse>;
+/**
+ * @generated from message tank.workspace.v1.RevokeInviteRequest
+ */
+export type RevokeInviteRequest = Message<"tank.workspace.v1.RevokeInviteRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string invite_id = 2;
+     */
+    inviteId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.RevokeInviteRequest.
+ * Use `create(RevokeInviteRequestSchema)` to create a new message.
+ */
+export declare const RevokeInviteRequestSchema: GenMessage<RevokeInviteRequest>;
+/**
+ * @generated from message tank.workspace.v1.RevokeInviteResponse
+ */
+export type RevokeInviteResponse = Message<"tank.workspace.v1.RevokeInviteResponse"> & {};
+/**
+ * Describes the message tank.workspace.v1.RevokeInviteResponse.
+ * Use `create(RevokeInviteResponseSchema)` to create a new message.
+ */
+export declare const RevokeInviteResponseSchema: GenMessage<RevokeInviteResponse>;
+/**
  * @generated from message tank.workspace.v1.JoinWorkspaceRequest
  */
 export type JoinWorkspaceRequest = Message<"tank.workspace.v1.JoinWorkspaceRequest"> & {
@@ -1399,6 +1488,22 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof JoinWorkspaceRequestSchema;
         output: typeof JoinWorkspaceResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListInvites
+     */
+    listInvites: {
+        methodKind: "unary";
+        input: typeof ListInvitesRequestSchema;
+        output: typeof ListInvitesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.RevokeInvite
+     */
+    revokeInvite: {
+        methodKind: "unary";
+        input: typeof RevokeInviteRequestSchema;
+        output: typeof RevokeInviteResponseSchema;
     };
     /**
      * @generated from rpc tank.workspace.v1.WorkspaceService.UpdateProfile

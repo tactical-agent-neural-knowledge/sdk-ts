@@ -7,7 +7,7 @@ import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js"
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
-import { type GetBootstrapResponse, Role, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { type GetBootstrapResponse, type Invite, Role, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
 import { RealtimeClient, type RealtimeOptions, type WebSocketCtor } from "./realtime.js";
 import { type TankStorage } from "./storage.js";
@@ -223,6 +223,10 @@ export declare class TankClient {
     setGoal(channelId: string, goal: SetGoalInput | TreadGoal): Promise<Channel | undefined>;
     /** Invite someone to a workspace by email. Resolves to the invite id. */
     invite(workspaceId: string, email: string, role?: Role | RoleName): Promise<string>;
+    /** Invites sent and not yet accepted. Shown beside members, so an invite is visible work. */
+    listInvites(workspaceId: string): Promise<Invite[]>;
+    /** Makes the emailed link stop working. Admins only, matching who may send one. */
+    revokeInvite(workspaceId: string, inviteId: string): Promise<void>;
     addReaction(messageId: string, emoji: string): Promise<unknown>;
     removeReaction(messageId: string, emoji: string): Promise<unknown>;
     /** A user interacted with a block; delivered to the owning app/agent as an event. */
