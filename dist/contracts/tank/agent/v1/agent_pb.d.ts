@@ -127,6 +127,16 @@ export type StartRunRequest = Message<"tank.agent.v1.StartRunRequest"> & {
      * @generated from field: string instructions = 3;
      */
     instructions: string;
+    /**
+     * Who summoned the agent. The control plane calls this as a bot whose
+     * principal is the agent itself, and an agent is not a member of a private
+     * Tread until it is brought in, so the caller cannot be the authority on
+     * access. This person must be a member of the channel; their membership is
+     * what permits the run and what adds the agent to the Tread.
+     *
+     * @generated from field: string requested_by = 4;
+     */
+    requestedBy: string;
 };
 /**
  * Describes the message tank.agent.v1.StartRunRequest.

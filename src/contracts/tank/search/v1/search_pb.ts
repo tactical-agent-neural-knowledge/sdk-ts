@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/search/v1/search.proto.
  */
 export const file_tank_search_v1_search: GenFile = /*@__PURE__*/
-  fileDesc("Cht0YW5rL3NlYXJjaC92MS9zZWFyY2gucHJvdG8SDnRhbmsuc2VhcmNoLnYxIr0BCg1TZWFyY2hGaWx0ZXJzEhUKDWZyb21fdXNlcl9pZHMYASADKAkSFgoOaW5fY2hhbm5lbF9pZHMYAiADKAkSJgoDaGFzGAMgAygOMhkudGFuay5zZWFyY2gudjEuSGFzRmlsdGVyEioKBmJlZm9yZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKQoFYWZ0ZXIYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIo4BCg1TZWFyY2hSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRINCgVxdWVyeRgCIAEoCRIuCgdmaWx0ZXJzGAMgASgLMh0udGFuay5zZWFyY2gudjEuU2VhcmNoRmlsdGVycxIOCgZjdXJzb3IYBCABKAkSDQoFbGltaXQYBSABKAUSCQoBcRgGIAEoCSJtCglTZWFyY2hIaXQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKaGlnaGxpZ2h0cxgDIAMoCRINCgVzY29yZRgEIAEoASKzAQoOU2VhcmNoUmVzcG9uc2USJwoEaGl0cxgBIAMoCzIZLnRhbmsuc2VhcmNoLnYxLlNlYXJjaEhpdBITCgtuZXh0X2N1cnNvchgCIAEoCRIWCg50b3RhbF9lc3RpbWF0ZRgDIAEoAxI1Cg5wYXJzZWRfZmlsdGVycxgEIAEoCzIdLnRhbmsuc2VhcmNoLnYxLlNlYXJjaEZpbHRlcnMSFAoMcGFyc2VkX3F1ZXJ5GAUgASgJKoQBCglIYXNGaWx0ZXISGgoWSEFTX0ZJTFRFUl9VTlNQRUNJRklFRBAAEhQKEEhBU19GSUxURVJfRklMRVMQARIUChBIQVNfRklMVEVSX0xJTktTEAISGAoUSEFTX0ZJTFRFUl9SRUFDVElPTlMQAxIVChFIQVNfRklMVEVSX0JMT0NLUxAEMlgKDVNlYXJjaFNlcnZpY2USRwoGU2VhcmNoEh0udGFuay5zZWFyY2gudjEuU2VhcmNoUmVxdWVzdBoeLnRhbmsuc2VhcmNoLnYxLlNlYXJjaFJlc3BvbnNlQtABChJjb20udGFuay5zZWFyY2gudjFCC1NlYXJjaFByb3RvUAFaU2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3Rhbmsvc2VhcmNoL3YxO3NlYXJjaHYxogIDVFNYqgIOVGFuay5TZWFyY2guVjHKAg5UYW5rXFNlYXJjaFxWMeICGlRhbmtcU2VhcmNoXFYxXEdQQk1ldGFkYXRh6gIQVGFuazo6U2VhcmNoOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
+  fileDesc("Cht0YW5rL3NlYXJjaC92MS9zZWFyY2gucHJvdG8SDnRhbmsuc2VhcmNoLnYxIr0BCg1TZWFyY2hGaWx0ZXJzEhUKDWZyb21fdXNlcl9pZHMYASADKAkSFgoOaW5fY2hhbm5lbF9pZHMYAiADKAkSJgoDaGFzGAMgAygOMhkudGFuay5zZWFyY2gudjEuSGFzRmlsdGVyEioKBmJlZm9yZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKQoFYWZ0ZXIYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIqABCg1TZWFyY2hSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRINCgVxdWVyeRgCIAEoCRIuCgdmaWx0ZXJzGAMgASgLMh0udGFuay5zZWFyY2gudjEuU2VhcmNoRmlsdGVycxIOCgZjdXJzb3IYBCABKAkSDQoFbGltaXQYBSABKAUSCQoBcRgGIAEoCRIQCghzZW1hbnRpYxgHIAEoCCJtCglTZWFyY2hIaXQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKaGlnaGxpZ2h0cxgDIAMoCRINCgVzY29yZRgEIAEoASLKAQoOU2VhcmNoUmVzcG9uc2USJwoEaGl0cxgBIAMoCzIZLnRhbmsuc2VhcmNoLnYxLlNlYXJjaEhpdBITCgtuZXh0X2N1cnNvchgCIAEoCRIWCg50b3RhbF9lc3RpbWF0ZRgDIAEoAxI1Cg5wYXJzZWRfZmlsdGVycxgEIAEoCzIdLnRhbmsuc2VhcmNoLnYxLlNlYXJjaEZpbHRlcnMSFAoMcGFyc2VkX3F1ZXJ5GAUgASgJEhUKDXNlbWFudGljX3VzZWQYBiABKAgqhAEKCUhhc0ZpbHRlchIaChZIQVNfRklMVEVSX1VOU1BFQ0lGSUVEEAASFAoQSEFTX0ZJTFRFUl9GSUxFUxABEhQKEEhBU19GSUxURVJfTElOS1MQAhIYChRIQVNfRklMVEVSX1JFQUNUSU9OUxADEhUKEUhBU19GSUxURVJfQkxPQ0tTEAQyWAoNU2VhcmNoU2VydmljZRJHCgZTZWFyY2gSHS50YW5rLnNlYXJjaC52MS5TZWFyY2hSZXF1ZXN0Gh4udGFuay5zZWFyY2gudjEuU2VhcmNoUmVzcG9uc2VC0AEKEmNvbS50YW5rLnNlYXJjaC52MUILU2VhcmNoUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9zZWFyY2gvdjE7c2VhcmNodjGiAgNUU1iqAg5UYW5rLlNlYXJjaC5WMcoCDlRhbmtcU2VhcmNoXFYx4gIaVGFua1xTZWFyY2hcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpTZWFyY2g6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
 
 /**
  * @generated from message tank.search.v1.SearchFilters
@@ -91,6 +91,15 @@ export type SearchRequest = Message<"tank.search.v1.SearchRequest"> & {
    * @generated from field: string q = 6;
    */
   q: string;
+
+  /**
+   * Ask for the Neural Vault: keyword results fused with semantic neighbours.
+   * Keyword search is Slack parity and always free; the semantic half is the
+   * paid feature, so it is requested explicitly and metered per request.
+   *
+   * @generated from field: bool semantic = 7;
+   */
+  semantic: boolean;
 };
 
 /**
@@ -166,6 +175,15 @@ export type SearchResponse = Message<"tank.search.v1.SearchResponse"> & {
    * @generated from field: string parsed_query = 5;
    */
   parsedQuery: string;
+
+  /**
+   * Whether semantic neighbours actually contributed. False when the caller
+   * did not ask, on later pages, or when the embedder was unreachable — so a
+   * client never claims the Vault answered when only keywords did.
+   *
+   * @generated from field: bool semantic_used = 6;
+   */
+  semanticUsed: boolean;
 };
 
 /**

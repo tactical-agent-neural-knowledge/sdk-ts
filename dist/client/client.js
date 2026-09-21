@@ -143,6 +143,7 @@ export class TankClient {
                 readStates: res.readStates,
                 members: res.members,
                 unreadNotificationCount: res.unreadNotificationCount,
+                entitlements: res.entitlements,
             });
             this.realtime.setWorkspaceIds(Object.keys(this.store.getState().workspaces));
             await this.storage.put(storageKeys.bootstrap(workspaceId), JSON.stringify(toJson(GetBootstrapResponseSchema, res)));
@@ -888,6 +889,7 @@ export class TankClient {
                         readStates: res.readStates,
                         members: res.members,
                         unreadNotificationCount: res.unreadNotificationCount,
+                        entitlements: res.entitlements,
                     });
                 }
             }

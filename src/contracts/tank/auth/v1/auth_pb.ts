@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/auth/v1/auth.proto.
  */
 export const file_tank_auth_v1_auth: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL2F1dGgvdjEvYXV0aC5wcm90bxIMdGFuay5hdXRoLnYxIpMBCglQcmluY2lwYWwSCgoCaWQYASABKAkSKQoEa2luZBgCIAEoDjIbLnRhbmsuYXV0aC52MS5QcmluY2lwYWxLaW5kEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEg0KBWVtYWlsGAUgASgJEhYKDmF2YXRhcl9maWxlX2lkGAYgASgJIiYKFVN0YXJ0TWFnaWNMaW5rUmVxdWVzdBINCgVlbWFpbBgBIAEoCSIYChZTdGFydE1hZ2ljTGlua1Jlc3BvbnNlIikKGENvbXBsZXRlTWFnaWNMaW5rUmVxdWVzdBINCgV0b2tlbhgBIAEoCSKkAQoZQ29tcGxldGVNYWdpY0xpbmtSZXNwb25zZRIjCgJtZRgBIAEoCzIXLnRhbmsuYXV0aC52MS5QcmluY2lwYWwSFAoMYWNjZXNzX3Rva2VuGAIgASgJEhUKDXJlZnJlc2hfdG9rZW4YAyABKAkSNQoRYWNjZXNzX2V4cGlyZXNfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImIKE0V4Y2hhbmdlQ29kZVJlcXVlc3QSEAoIcHJvdmlkZXIYASABKAkSDAoEY29kZRgCIAEoCRIVCg1jb2RlX3ZlcmlmaWVyGAMgASgJEhQKDHJlZGlyZWN0X3VyaRgEIAEoCSKfAQoURXhjaGFuZ2VDb2RlUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCInCg5SZWZyZXNoUmVxdWVzdBIVCg1yZWZyZXNoX3Rva2VuGAEgASgJInUKD1JlZnJlc2hSZXNwb25zZRIUCgxhY2Nlc3NfdG9rZW4YASABKAkSFQoNcmVmcmVzaF90b2tlbhgCIAEoCRI1ChFhY2Nlc3NfZXhwaXJlc19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDwoNTG9nb3V0UmVxdWVzdCIQCg5Mb2dvdXRSZXNwb25zZSIZChdNaW50R2F0ZXdheVRva2VuUmVxdWVzdCJZChhNaW50R2F0ZXdheVRva2VuUmVzcG9uc2USDQoFdG9rZW4YASABKAkSLgoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDgoMR2V0TWVSZXF1ZXN0IjQKDUdldE1lUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsKnoKDVByaW5jaXBhbEtpbmQSHgoaUFJJTkNJUEFMX0tJTkRfVU5TUEVDSUZJRUQQABIXChNQUklOQ0lQQUxfS0lORF9VU0VSEAESFgoSUFJJTkNJUEFMX0tJTkRfQk9UEAISGAoUUFJJTkNJUEFMX0tJTkRfQUdFTlQQAzLZBAoLQXV0aFNlcnZpY2USWwoOU3RhcnRNYWdpY0xpbmsSIy50YW5rLmF1dGgudjEuU3RhcnRNYWdpY0xpbmtSZXF1ZXN0GiQudGFuay5hdXRoLnYxLlN0YXJ0TWFnaWNMaW5rUmVzcG9uc2USZAoRQ29tcGxldGVNYWdpY0xpbmsSJi50YW5rLmF1dGgudjEuQ29tcGxldGVNYWdpY0xpbmtSZXF1ZXN0GicudGFuay5hdXRoLnYxLkNvbXBsZXRlTWFnaWNMaW5rUmVzcG9uc2USVQoMRXhjaGFuZ2VDb2RlEiEudGFuay5hdXRoLnYxLkV4Y2hhbmdlQ29kZVJlcXVlc3QaIi50YW5rLmF1dGgudjEuRXhjaGFuZ2VDb2RlUmVzcG9uc2USRgoHUmVmcmVzaBIcLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVxdWVzdBodLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVzcG9uc2USQwoGTG9nb3V0EhsudGFuay5hdXRoLnYxLkxvZ291dFJlcXVlc3QaHC50YW5rLmF1dGgudjEuTG9nb3V0UmVzcG9uc2USYQoQTWludEdhdGV3YXlUb2tlbhIlLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVxdWVzdBomLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVzcG9uc2USQAoFR2V0TWUSGi50YW5rLmF1dGgudjEuR2V0TWVSZXF1ZXN0GhsudGFuay5hdXRoLnYxLkdldE1lUmVzcG9uc2VCwAEKEGNvbS50YW5rLmF1dGgudjFCCUF1dGhQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2F1dGgvdjE7YXV0aHYxogIDVEFYqgIMVGFuay5BdXRoLlYxygIMVGFua1xBdXRoXFYx4gIYVGFua1xBdXRoXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXV0aDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Chd0YW5rL2F1dGgvdjEvYXV0aC5wcm90bxIMdGFuay5hdXRoLnYxIpMBCglQcmluY2lwYWwSCgoCaWQYASABKAkSKQoEa2luZBgCIAEoDjIbLnRhbmsuYXV0aC52MS5QcmluY2lwYWxLaW5kEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEg0KBWVtYWlsGAUgASgJEhYKDmF2YXRhcl9maWxlX2lkGAYgASgJIiYKFVN0YXJ0TWFnaWNMaW5rUmVxdWVzdBINCgVlbWFpbBgBIAEoCSIYChZTdGFydE1hZ2ljTGlua1Jlc3BvbnNlIikKGENvbXBsZXRlTWFnaWNMaW5rUmVxdWVzdBINCgV0b2tlbhgBIAEoCSKkAQoZQ29tcGxldGVNYWdpY0xpbmtSZXNwb25zZRIjCgJtZRgBIAEoCzIXLnRhbmsuYXV0aC52MS5QcmluY2lwYWwSFAoMYWNjZXNzX3Rva2VuGAIgASgJEhUKDXJlZnJlc2hfdG9rZW4YAyABKAkSNQoRYWNjZXNzX2V4cGlyZXNfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImIKE0V4Y2hhbmdlQ29kZVJlcXVlc3QSEAoIcHJvdmlkZXIYASABKAkSDAoEY29kZRgCIAEoCRIVCg1jb2RlX3ZlcmlmaWVyGAMgASgJEhQKDHJlZGlyZWN0X3VyaRgEIAEoCSKfAQoURXhjaGFuZ2VDb2RlUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCInCg5SZWZyZXNoUmVxdWVzdBIVCg1yZWZyZXNoX3Rva2VuGAEgASgJInUKD1JlZnJlc2hSZXNwb25zZRIUCgxhY2Nlc3NfdG9rZW4YASABKAkSFQoNcmVmcmVzaF90b2tlbhgCIAEoCRI1ChFhY2Nlc3NfZXhwaXJlc19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDwoNTG9nb3V0UmVxdWVzdCIQCg5Mb2dvdXRSZXNwb25zZSIZChdNaW50R2F0ZXdheVRva2VuUmVxdWVzdCJZChhNaW50R2F0ZXdheVRva2VuUmVzcG9uc2USDQoFdG9rZW4YASABKAkSLgoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDgoMR2V0TWVSZXF1ZXN0IjQKDUdldE1lUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsIrQBCgdTZXNzaW9uEgoKAmlkGAEgASgJEgwKBGtpbmQYAiABKAkSLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKZXhwaXJlc19hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKdXNlcl9hZ2VudBgFIAEoCRIKCgJpcBgGIAEoCRIPCgdjdXJyZW50GAcgASgIIhUKE0xpc3RTZXNzaW9uc1JlcXVlc3QiPwoUTGlzdFNlc3Npb25zUmVzcG9uc2USJwoIc2Vzc2lvbnMYASADKAsyFS50YW5rLmF1dGgudjEuU2Vzc2lvbiIqChRSZXZva2VTZXNzaW9uUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJIhcKFVJldm9rZVNlc3Npb25SZXNwb25zZSJHCh5BZG1pblJldm9rZVVzZXJTZXNzaW9uc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkiMgofQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnNSZXNwb25zZRIPCgdyZXZva2VkGAEgASgFIvsCCglTc29Db25maWcSFAoMd29ya3NwYWNlX2lkGAEgASgJEisKCHByb3ZpZGVyGAIgASgOMhkudGFuay5hdXRoLnYxLlNzb1Byb3ZpZGVyEg8KB2VuYWJsZWQYAyABKAgSDgoGaXNzdWVyGAQgASgJEhQKDG1ldGFkYXRhX3htbBgFIAEoCRIRCgljbGllbnRfaWQYBiABKAkSGQoRY2xpZW50X3NlY3JldF9yZWYYByABKAkSGQoRaGFzX2NsaWVudF9zZWNyZXQYCCABKAgSFAoMZG9tYWluX2NsYWltGAkgASgJEg8KB2VuZm9yY2UYCiABKAgSFAoMcmVkaXJlY3RfdXJpGAsgASgJEhQKDHNwX2VudGl0eV9pZBgMIAEoCRIXCg9zcF9tZXRhZGF0YV91cmwYDSABKAkSDwoHYWNzX3VybBgOIAEoCRIuCgp1cGRhdGVkX2F0GA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIrChNHZXRTc29Db25maWdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI/ChRHZXRTc29Db25maWdSZXNwb25zZRInCgZjb25maWcYASABKAsyFy50YW5rLmF1dGgudjEuU3NvQ29uZmlnIvsBChNTZXRTc29Db25maWdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIrCghwcm92aWRlchgCIAEoDjIZLnRhbmsuYXV0aC52MS5Tc29Qcm92aWRlchIPCgdlbmFibGVkGAMgASgIEg4KBmlzc3VlchgEIAEoCRIUCgxtZXRhZGF0YV94bWwYBSABKAkSEQoJY2xpZW50X2lkGAYgASgJEhUKDWNsaWVudF9zZWNyZXQYByABKAkSGQoRY2xpZW50X3NlY3JldF9yZWYYCCABKAkSFAoMZG9tYWluX2NsYWltGAkgASgJEg8KB2VuZm9yY2UYCiABKAgiPwoUU2V0U3NvQ29uZmlnUmVzcG9uc2USJwoGY29uZmlnGAEgASgLMhcudGFuay5hdXRoLnYxLlNzb0NvbmZpZyI/Cg9TdGFydFNzb1JlcXVlc3QSFgoOd29ya3NwYWNlX3NsdWcYASABKAkSFAoMcmVkaXJlY3RfdXJpGAIgASgJImcKEFN0YXJ0U3NvUmVzcG9uc2USFAoMcmVkaXJlY3RfdXJsGAEgASgJEg0KBXN0YXRlGAIgASgJEi4KCmV4cGlyZXNfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIkgKEkNvbXBsZXRlU3NvUmVxdWVzdBINCgVzdGF0ZRgBIAEoCRIMCgRjb2RlGAIgASgJEhUKDXNhbWxfcmVzcG9uc2UYAyABKAkitAEKE0NvbXBsZXRlU3NvUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx3b3Jrc3BhY2VfaWQYBSABKAkqegoNUHJpbmNpcGFsS2luZBIeChpQUklOQ0lQQUxfS0lORF9VTlNQRUNJRklFRBAAEhcKE1BSSU5DSVBBTF9LSU5EX1VTRVIQARIWChJQUklOQ0lQQUxfS0lORF9CT1QQAhIYChRQUklOQ0lQQUxfS0lORF9BR0VOVBADKlkKC1Nzb1Byb3ZpZGVyEhwKGFNTT19QUk9WSURFUl9VTlNQRUNJRklFRBAAEhUKEVNTT19QUk9WSURFUl9PSURDEAESFQoRU1NPX1BST1ZJREVSX1NBTUwQAjLPCQoLQXV0aFNlcnZpY2USWwoOU3RhcnRNYWdpY0xpbmsSIy50YW5rLmF1dGgudjEuU3RhcnRNYWdpY0xpbmtSZXF1ZXN0GiQudGFuay5hdXRoLnYxLlN0YXJ0TWFnaWNMaW5rUmVzcG9uc2USZAoRQ29tcGxldGVNYWdpY0xpbmsSJi50YW5rLmF1dGgudjEuQ29tcGxldGVNYWdpY0xpbmtSZXF1ZXN0GicudGFuay5hdXRoLnYxLkNvbXBsZXRlTWFnaWNMaW5rUmVzcG9uc2USVQoMRXhjaGFuZ2VDb2RlEiEudGFuay5hdXRoLnYxLkV4Y2hhbmdlQ29kZVJlcXVlc3QaIi50YW5rLmF1dGgudjEuRXhjaGFuZ2VDb2RlUmVzcG9uc2USRgoHUmVmcmVzaBIcLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVxdWVzdBodLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVzcG9uc2USQwoGTG9nb3V0EhsudGFuay5hdXRoLnYxLkxvZ291dFJlcXVlc3QaHC50YW5rLmF1dGgudjEuTG9nb3V0UmVzcG9uc2USYQoQTWludEdhdGV3YXlUb2tlbhIlLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVxdWVzdBomLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVzcG9uc2USQAoFR2V0TWUSGi50YW5rLmF1dGgudjEuR2V0TWVSZXF1ZXN0GhsudGFuay5hdXRoLnYxLkdldE1lUmVzcG9uc2USVQoMTGlzdFNlc3Npb25zEiEudGFuay5hdXRoLnYxLkxpc3RTZXNzaW9uc1JlcXVlc3QaIi50YW5rLmF1dGgudjEuTGlzdFNlc3Npb25zUmVzcG9uc2USWAoNUmV2b2tlU2Vzc2lvbhIiLnRhbmsuYXV0aC52MS5SZXZva2VTZXNzaW9uUmVxdWVzdBojLnRhbmsuYXV0aC52MS5SZXZva2VTZXNzaW9uUmVzcG9uc2USdgoXQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnMSLC50YW5rLmF1dGgudjEuQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnNSZXF1ZXN0Gi0udGFuay5hdXRoLnYxLkFkbWluUmV2b2tlVXNlclNlc3Npb25zUmVzcG9uc2USVQoMR2V0U3NvQ29uZmlnEiEudGFuay5hdXRoLnYxLkdldFNzb0NvbmZpZ1JlcXVlc3QaIi50YW5rLmF1dGgudjEuR2V0U3NvQ29uZmlnUmVzcG9uc2USVQoMU2V0U3NvQ29uZmlnEiEudGFuay5hdXRoLnYxLlNldFNzb0NvbmZpZ1JlcXVlc3QaIi50YW5rLmF1dGgudjEuU2V0U3NvQ29uZmlnUmVzcG9uc2USSQoIU3RhcnRTc28SHS50YW5rLmF1dGgudjEuU3RhcnRTc29SZXF1ZXN0Gh4udGFuay5hdXRoLnYxLlN0YXJ0U3NvUmVzcG9uc2USUgoLQ29tcGxldGVTc28SIC50YW5rLmF1dGgudjEuQ29tcGxldGVTc29SZXF1ZXN0GiEudGFuay5hdXRoLnYxLkNvbXBsZXRlU3NvUmVzcG9uc2VCwAEKEGNvbS50YW5rLmF1dGgudjFCCUF1dGhQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2F1dGgvdjE7YXV0aHYxogIDVEFYqgIMVGFuay5BdXRoLlYxygIMVGFua1xBdXRoXFYx4gIYVGFua1xBdXRoXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXV0aDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.auth.v1.Principal
@@ -346,6 +346,512 @@ export const GetMeResponseSchema: GenMessage<GetMeResponse> = /*@__PURE__*/
   messageDesc(file_tank_auth_v1_auth, 14);
 
 /**
+ * One signed-in device: a web cookie session or a mobile refresh session.
+ *
+ * @generated from message tank.auth.v1.Session
+ */
+export type Session = Message<"tank.auth.v1.Session"> & {
+  /**
+   * opaque; never the secret
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * web | mobile
+   *
+   * @generated from field: string kind = 2;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 3;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp expires_at = 4;
+   */
+  expiresAt?: Timestamp;
+
+  /**
+   * @generated from field: string user_agent = 5;
+   */
+  userAgent: string;
+
+  /**
+   * @generated from field: string ip = 6;
+   */
+  ip: string;
+
+  /**
+   * the session making this call
+   *
+   * @generated from field: bool current = 7;
+   */
+  current: boolean;
+};
+
+/**
+ * Describes the message tank.auth.v1.Session.
+ * Use `create(SessionSchema)` to create a new message.
+ */
+export const SessionSchema: GenMessage<Session> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 15);
+
+/**
+ * @generated from message tank.auth.v1.ListSessionsRequest
+ */
+export type ListSessionsRequest = Message<"tank.auth.v1.ListSessionsRequest"> & {
+};
+
+/**
+ * Describes the message tank.auth.v1.ListSessionsRequest.
+ * Use `create(ListSessionsRequestSchema)` to create a new message.
+ */
+export const ListSessionsRequestSchema: GenMessage<ListSessionsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 16);
+
+/**
+ * @generated from message tank.auth.v1.ListSessionsResponse
+ */
+export type ListSessionsResponse = Message<"tank.auth.v1.ListSessionsResponse"> & {
+  /**
+   * @generated from field: repeated tank.auth.v1.Session sessions = 1;
+   */
+  sessions: Session[];
+};
+
+/**
+ * Describes the message tank.auth.v1.ListSessionsResponse.
+ * Use `create(ListSessionsResponseSchema)` to create a new message.
+ */
+export const ListSessionsResponseSchema: GenMessage<ListSessionsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 17);
+
+/**
+ * Revokes one of the caller's own sessions (the current one included).
+ *
+ * @generated from message tank.auth.v1.RevokeSessionRequest
+ */
+export type RevokeSessionRequest = Message<"tank.auth.v1.RevokeSessionRequest"> & {
+  /**
+   * @generated from field: string session_id = 1;
+   */
+  sessionId: string;
+};
+
+/**
+ * Describes the message tank.auth.v1.RevokeSessionRequest.
+ * Use `create(RevokeSessionRequestSchema)` to create a new message.
+ */
+export const RevokeSessionRequestSchema: GenMessage<RevokeSessionRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 18);
+
+/**
+ * @generated from message tank.auth.v1.RevokeSessionResponse
+ */
+export type RevokeSessionResponse = Message<"tank.auth.v1.RevokeSessionResponse"> & {
+};
+
+/**
+ * Describes the message tank.auth.v1.RevokeSessionResponse.
+ * Use `create(RevokeSessionResponseSchema)` to create a new message.
+ */
+export const RevokeSessionResponseSchema: GenMessage<RevokeSessionResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 19);
+
+/**
+ * Workspace admins sign a member out of every device. The user must be a
+ * member of workspace_id; every session of theirs is revoked, and so are
+ * API tokens bound to that workspace.
+ *
+ * @generated from message tank.auth.v1.AdminRevokeUserSessionsRequest
+ */
+export type AdminRevokeUserSessionsRequest = Message<"tank.auth.v1.AdminRevokeUserSessionsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message tank.auth.v1.AdminRevokeUserSessionsRequest.
+ * Use `create(AdminRevokeUserSessionsRequestSchema)` to create a new message.
+ */
+export const AdminRevokeUserSessionsRequestSchema: GenMessage<AdminRevokeUserSessionsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 20);
+
+/**
+ * @generated from message tank.auth.v1.AdminRevokeUserSessionsResponse
+ */
+export type AdminRevokeUserSessionsResponse = Message<"tank.auth.v1.AdminRevokeUserSessionsResponse"> & {
+  /**
+   * @generated from field: int32 revoked = 1;
+   */
+  revoked: number;
+};
+
+/**
+ * Describes the message tank.auth.v1.AdminRevokeUserSessionsResponse.
+ * Use `create(AdminRevokeUserSessionsResponseSchema)` to create a new message.
+ */
+export const AdminRevokeUserSessionsResponseSchema: GenMessage<AdminRevokeUserSessionsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 21);
+
+/**
+ * @generated from message tank.auth.v1.SsoConfig
+ */
+export type SsoConfig = Message<"tank.auth.v1.SsoConfig"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: tank.auth.v1.SsoProvider provider = 2;
+   */
+  provider: SsoProvider;
+
+  /**
+   * @generated from field: bool enabled = 3;
+   */
+  enabled: boolean;
+
+  /**
+   * OIDC: the issuer URL (discovery at <issuer>/.well-known/openid-configuration).
+   * SAML: the IdP metadata URL; metadata_xml may be given instead.
+   *
+   * @generated from field: string issuer = 4;
+   */
+  issuer: string;
+
+  /**
+   * @generated from field: string metadata_xml = 5;
+   */
+  metadataXml: string;
+
+  /**
+   * @generated from field: string client_id = 6;
+   */
+  clientId: string;
+
+  /**
+   * Where the client secret lives (env or secret-manager name); the secret
+   * itself is write-only through SetSsoConfig.client_secret.
+   *
+   * @generated from field: string client_secret_ref = 7;
+   */
+  clientSecretRef: string;
+
+  /**
+   * @generated from field: bool has_client_secret = 8;
+   */
+  hasClientSecret: boolean;
+
+  /**
+   * Email domain the IdP must assert (e.g. "acme.com"); empty = any.
+   *
+   * @generated from field: string domain_claim = 9;
+   */
+  domainClaim: string;
+
+  /**
+   * Users of domain_claim must sign in through SSO (mirrors
+   * WorkspaceSettings.require_sso).
+   *
+   * @generated from field: bool enforce = 10;
+   */
+  enforce: boolean;
+
+  /**
+   * Read-only helpers for configuring the IdP.
+   *
+   * OIDC callback (web)
+   *
+   * @generated from field: string redirect_uri = 11;
+   */
+  redirectUri: string;
+
+  /**
+   * SAML SP entity id
+   *
+   * @generated from field: string sp_entity_id = 12;
+   */
+  spEntityId: string;
+
+  /**
+   * SAML SP metadata (/saml/{workspace}/metadata)
+   *
+   * @generated from field: string sp_metadata_url = 13;
+   */
+  spMetadataUrl: string;
+
+  /**
+   * SAML ACS (/saml/{workspace}/acs)
+   *
+   * @generated from field: string acs_url = 14;
+   */
+  acsUrl: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp updated_at = 15;
+   */
+  updatedAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.auth.v1.SsoConfig.
+ * Use `create(SsoConfigSchema)` to create a new message.
+ */
+export const SsoConfigSchema: GenMessage<SsoConfig> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 22);
+
+/**
+ * @generated from message tank.auth.v1.GetSsoConfigRequest
+ */
+export type GetSsoConfigRequest = Message<"tank.auth.v1.GetSsoConfigRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.auth.v1.GetSsoConfigRequest.
+ * Use `create(GetSsoConfigRequestSchema)` to create a new message.
+ */
+export const GetSsoConfigRequestSchema: GenMessage<GetSsoConfigRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 23);
+
+/**
+ * @generated from message tank.auth.v1.GetSsoConfigResponse
+ */
+export type GetSsoConfigResponse = Message<"tank.auth.v1.GetSsoConfigResponse"> & {
+  /**
+   * unset when never configured
+   *
+   * @generated from field: tank.auth.v1.SsoConfig config = 1;
+   */
+  config?: SsoConfig;
+};
+
+/**
+ * Describes the message tank.auth.v1.GetSsoConfigResponse.
+ * Use `create(GetSsoConfigResponseSchema)` to create a new message.
+ */
+export const GetSsoConfigResponseSchema: GenMessage<GetSsoConfigResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 24);
+
+/**
+ * Owner or admin. client_secret empty = keep the stored secret.
+ *
+ * @generated from message tank.auth.v1.SetSsoConfigRequest
+ */
+export type SetSsoConfigRequest = Message<"tank.auth.v1.SetSsoConfigRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: tank.auth.v1.SsoProvider provider = 2;
+   */
+  provider: SsoProvider;
+
+  /**
+   * @generated from field: bool enabled = 3;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: string issuer = 4;
+   */
+  issuer: string;
+
+  /**
+   * @generated from field: string metadata_xml = 5;
+   */
+  metadataXml: string;
+
+  /**
+   * @generated from field: string client_id = 6;
+   */
+  clientId: string;
+
+  /**
+   * @generated from field: string client_secret = 7;
+   */
+  clientSecret: string;
+
+  /**
+   * @generated from field: string client_secret_ref = 8;
+   */
+  clientSecretRef: string;
+
+  /**
+   * @generated from field: string domain_claim = 9;
+   */
+  domainClaim: string;
+
+  /**
+   * @generated from field: bool enforce = 10;
+   */
+  enforce: boolean;
+};
+
+/**
+ * Describes the message tank.auth.v1.SetSsoConfigRequest.
+ * Use `create(SetSsoConfigRequestSchema)` to create a new message.
+ */
+export const SetSsoConfigRequestSchema: GenMessage<SetSsoConfigRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 25);
+
+/**
+ * @generated from message tank.auth.v1.SetSsoConfigResponse
+ */
+export type SetSsoConfigResponse = Message<"tank.auth.v1.SetSsoConfigResponse"> & {
+  /**
+   * @generated from field: tank.auth.v1.SsoConfig config = 1;
+   */
+  config?: SsoConfig;
+};
+
+/**
+ * Describes the message tank.auth.v1.SetSsoConfigResponse.
+ * Use `create(SetSsoConfigResponseSchema)` to create a new message.
+ */
+export const SetSsoConfigResponseSchema: GenMessage<SetSsoConfigResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 26);
+
+/**
+ * Begins SSO for a workspace: returns the IdP URL to send the browser to.
+ * redirect_uri is where the IdP (OIDC) or the ACS (SAML) sends the user
+ * back; it must be PUBLIC_WEB_URL or a registered mobile scheme.
+ *
+ * @generated from message tank.auth.v1.StartSsoRequest
+ */
+export type StartSsoRequest = Message<"tank.auth.v1.StartSsoRequest"> & {
+  /**
+   * @generated from field: string workspace_slug = 1;
+   */
+  workspaceSlug: string;
+
+  /**
+   * @generated from field: string redirect_uri = 2;
+   */
+  redirectUri: string;
+};
+
+/**
+ * Describes the message tank.auth.v1.StartSsoRequest.
+ * Use `create(StartSsoRequestSchema)` to create a new message.
+ */
+export const StartSsoRequestSchema: GenMessage<StartSsoRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 27);
+
+/**
+ * @generated from message tank.auth.v1.StartSsoResponse
+ */
+export type StartSsoResponse = Message<"tank.auth.v1.StartSsoResponse"> & {
+  /**
+   * @generated from field: string redirect_url = 1;
+   */
+  redirectUrl: string;
+
+  /**
+   * @generated from field: string state = 2;
+   */
+  state: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp expires_at = 3;
+   */
+  expiresAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.auth.v1.StartSsoResponse.
+ * Use `create(StartSsoResponseSchema)` to create a new message.
+ */
+export const StartSsoResponseSchema: GenMessage<StartSsoResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 28);
+
+/**
+ * Finishes SSO. OIDC: state + code from the callback query. SAML: state
+ * (RelayState) + code (the one-time ticket the ACS redirected with), or the
+ * raw saml_response when the client received the POST itself.
+ *
+ * @generated from message tank.auth.v1.CompleteSsoRequest
+ */
+export type CompleteSsoRequest = Message<"tank.auth.v1.CompleteSsoRequest"> & {
+  /**
+   * @generated from field: string state = 1;
+   */
+  state: string;
+
+  /**
+   * @generated from field: string code = 2;
+   */
+  code: string;
+
+  /**
+   * @generated from field: string saml_response = 3;
+   */
+  samlResponse: string;
+};
+
+/**
+ * Describes the message tank.auth.v1.CompleteSsoRequest.
+ * Use `create(CompleteSsoRequestSchema)` to create a new message.
+ */
+export const CompleteSsoRequestSchema: GenMessage<CompleteSsoRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 29);
+
+/**
+ * @generated from message tank.auth.v1.CompleteSsoResponse
+ */
+export type CompleteSsoResponse = Message<"tank.auth.v1.CompleteSsoResponse"> & {
+  /**
+   * @generated from field: tank.auth.v1.Principal me = 1;
+   */
+  me?: Principal;
+
+  /**
+   * @generated from field: string access_token = 2;
+   */
+  accessToken: string;
+
+  /**
+   * @generated from field: string refresh_token = 3;
+   */
+  refreshToken: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp access_expires_at = 4;
+   */
+  accessExpiresAt?: Timestamp;
+
+  /**
+   * @generated from field: string workspace_id = 5;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.auth.v1.CompleteSsoResponse.
+ * Use `create(CompleteSsoResponseSchema)` to create a new message.
+ */
+export const CompleteSsoResponseSchema: GenMessage<CompleteSsoResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 30);
+
+/**
  * Every actor is a principal. Bots and agents are first-class so every author
  * reference is uniform across the data model.
  *
@@ -378,6 +884,32 @@ export enum PrincipalKind {
  */
 export const PrincipalKindSchema: GenEnum<PrincipalKind> = /*@__PURE__*/
   enumDesc(file_tank_auth_v1_auth, 0);
+
+/**
+ * @generated from enum tank.auth.v1.SsoProvider
+ */
+export enum SsoProvider {
+  /**
+   * @generated from enum value: SSO_PROVIDER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: SSO_PROVIDER_OIDC = 1;
+   */
+  OIDC = 1,
+
+  /**
+   * @generated from enum value: SSO_PROVIDER_SAML = 2;
+   */
+  SAML = 2,
+}
+
+/**
+ * Describes the enum tank.auth.v1.SsoProvider.
+ */
+export const SsoProviderSchema: GenEnum<SsoProvider> = /*@__PURE__*/
+  enumDesc(file_tank_auth_v1_auth, 1);
 
 /**
  * @generated from service tank.auth.v1.AuthService
@@ -438,6 +970,62 @@ export const AuthService: GenService<{
     methodKind: "unary";
     input: typeof GetMeRequestSchema;
     output: typeof GetMeResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.ListSessions
+   */
+  listSessions: {
+    methodKind: "unary";
+    input: typeof ListSessionsRequestSchema;
+    output: typeof ListSessionsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.RevokeSession
+   */
+  revokeSession: {
+    methodKind: "unary";
+    input: typeof RevokeSessionRequestSchema;
+    output: typeof RevokeSessionResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.AdminRevokeUserSessions
+   */
+  adminRevokeUserSessions: {
+    methodKind: "unary";
+    input: typeof AdminRevokeUserSessionsRequestSchema;
+    output: typeof AdminRevokeUserSessionsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.GetSsoConfig
+   */
+  getSsoConfig: {
+    methodKind: "unary";
+    input: typeof GetSsoConfigRequestSchema;
+    output: typeof GetSsoConfigResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.SetSsoConfig
+   */
+  setSsoConfig: {
+    methodKind: "unary";
+    input: typeof SetSsoConfigRequestSchema;
+    output: typeof SetSsoConfigResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.StartSso
+   */
+  startSso: {
+    methodKind: "unary";
+    input: typeof StartSsoRequestSchema;
+    output: typeof StartSsoResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.CompleteSso
+   */
+  completeSso: {
+    methodKind: "unary";
+    input: typeof CompleteSsoRequestSchema;
+    output: typeof CompleteSsoResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_auth_v1_auth, 0);

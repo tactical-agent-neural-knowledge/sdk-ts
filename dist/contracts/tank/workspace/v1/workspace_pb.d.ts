@@ -188,12 +188,71 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
      * @generated from field: repeated tank.workspace.v1.UserGroup user_groups = 9;
      */
     userGroups: UserGroup[];
+    /**
+     * What this workspace's plan allows, so clients can mark premium surfaces
+     * before anyone hits a wall. The server is still the authority: every gated
+     * call is checked again server-side.
+     *
+     * @generated from field: tank.workspace.v1.Entitlements entitlements = 10;
+     */
+    entitlements?: Entitlements;
 };
 /**
  * Describes the message tank.workspace.v1.GetBootstrapResponse.
  * Use `create(GetBootstrapResponseSchema)` to create a new message.
  */
 export declare const GetBootstrapResponseSchema: GenMessage<GetBootstrapResponse>;
+/**
+ * Everything Slack does is free. The agent and the Neural Vault are what a
+ * subscription buys; a free workspace gets one of each to try.
+ *
+ * @generated from message tank.workspace.v1.Entitlements
+ */
+export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
+    /**
+     * "free" or "premium".
+     *
+     * @generated from field: string plan = 1;
+     */
+    plan: string;
+    /**
+     * Whether another agent run / Neural Vault query is allowed right now.
+     *
+     * @generated from field: bool agent_runs = 2;
+     */
+    agentRuns: boolean;
+    /**
+     * @generated from field: bool neural_vault = 3;
+     */
+    neuralVault: boolean;
+    /**
+     * @generated from field: int32 agent_runs_used = 4;
+     */
+    agentRunsUsed: number;
+    /**
+     * @generated from field: int32 agent_runs_limit = 5;
+     */
+    agentRunsLimit: number;
+    /**
+     * @generated from field: int32 vault_queries_used = 6;
+     */
+    vaultQueriesUsed: number;
+    /**
+     * @generated from field: int32 vault_queries_limit = 7;
+     */
+    vaultQueriesLimit: number;
+    /**
+     * Where to write to upgrade; the clients show it rather than hard-coding it.
+     *
+     * @generated from field: string contact_email = 8;
+     */
+    contactEmail: string;
+};
+/**
+ * Describes the message tank.workspace.v1.Entitlements.
+ * Use `create(EntitlementsSchema)` to create a new message.
+ */
+export declare const EntitlementsSchema: GenMessage<Entitlements>;
 /**
  * @generated from message tank.workspace.v1.ListMembersRequest
  */

@@ -175,6 +175,14 @@ export function useNotifications(workspaceId, opts = {}) {
 export function useUnreadNotificationCount(workspaceId) {
     return useTankSelector(useCallback((s) => s.getState().unreadNotificationCount[workspaceId] ?? 0, [workspaceId]));
 }
+// ---------------------------------------------------------------- entitlements
+/**
+ * What this workspace's plan allows. Absent until bootstrap lands, and absent from an older server,
+ * so a caller treats `undefined` as "assume free and let the server decide" rather than unlocking.
+ */
+export function useEntitlements(workspaceId) {
+    return useTankSelector(useCallback((s) => s.getState().entitlements[workspaceId], [workspaceId]));
+}
 // ---------------------------------------------------------------- agent runs
 /** One run by id; fetched with `GetRun` on mount when the store does not have it. */
 export function useRun(runId, opts = {}) {

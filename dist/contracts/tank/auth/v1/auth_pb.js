@@ -6,7 +6,7 @@ import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 /**
  * Describes the file tank/auth/v1/auth.proto.
  */
-export const file_tank_auth_v1_auth = /*@__PURE__*/ fileDesc("Chd0YW5rL2F1dGgvdjEvYXV0aC5wcm90bxIMdGFuay5hdXRoLnYxIpMBCglQcmluY2lwYWwSCgoCaWQYASABKAkSKQoEa2luZBgCIAEoDjIbLnRhbmsuYXV0aC52MS5QcmluY2lwYWxLaW5kEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEg0KBWVtYWlsGAUgASgJEhYKDmF2YXRhcl9maWxlX2lkGAYgASgJIiYKFVN0YXJ0TWFnaWNMaW5rUmVxdWVzdBINCgVlbWFpbBgBIAEoCSIYChZTdGFydE1hZ2ljTGlua1Jlc3BvbnNlIikKGENvbXBsZXRlTWFnaWNMaW5rUmVxdWVzdBINCgV0b2tlbhgBIAEoCSKkAQoZQ29tcGxldGVNYWdpY0xpbmtSZXNwb25zZRIjCgJtZRgBIAEoCzIXLnRhbmsuYXV0aC52MS5QcmluY2lwYWwSFAoMYWNjZXNzX3Rva2VuGAIgASgJEhUKDXJlZnJlc2hfdG9rZW4YAyABKAkSNQoRYWNjZXNzX2V4cGlyZXNfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImIKE0V4Y2hhbmdlQ29kZVJlcXVlc3QSEAoIcHJvdmlkZXIYASABKAkSDAoEY29kZRgCIAEoCRIVCg1jb2RlX3ZlcmlmaWVyGAMgASgJEhQKDHJlZGlyZWN0X3VyaRgEIAEoCSKfAQoURXhjaGFuZ2VDb2RlUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCInCg5SZWZyZXNoUmVxdWVzdBIVCg1yZWZyZXNoX3Rva2VuGAEgASgJInUKD1JlZnJlc2hSZXNwb25zZRIUCgxhY2Nlc3NfdG9rZW4YASABKAkSFQoNcmVmcmVzaF90b2tlbhgCIAEoCRI1ChFhY2Nlc3NfZXhwaXJlc19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDwoNTG9nb3V0UmVxdWVzdCIQCg5Mb2dvdXRSZXNwb25zZSIZChdNaW50R2F0ZXdheVRva2VuUmVxdWVzdCJZChhNaW50R2F0ZXdheVRva2VuUmVzcG9uc2USDQoFdG9rZW4YASABKAkSLgoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDgoMR2V0TWVSZXF1ZXN0IjQKDUdldE1lUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsKnoKDVByaW5jaXBhbEtpbmQSHgoaUFJJTkNJUEFMX0tJTkRfVU5TUEVDSUZJRUQQABIXChNQUklOQ0lQQUxfS0lORF9VU0VSEAESFgoSUFJJTkNJUEFMX0tJTkRfQk9UEAISGAoUUFJJTkNJUEFMX0tJTkRfQUdFTlQQAzLZBAoLQXV0aFNlcnZpY2USWwoOU3RhcnRNYWdpY0xpbmsSIy50YW5rLmF1dGgudjEuU3RhcnRNYWdpY0xpbmtSZXF1ZXN0GiQudGFuay5hdXRoLnYxLlN0YXJ0TWFnaWNMaW5rUmVzcG9uc2USZAoRQ29tcGxldGVNYWdpY0xpbmsSJi50YW5rLmF1dGgudjEuQ29tcGxldGVNYWdpY0xpbmtSZXF1ZXN0GicudGFuay5hdXRoLnYxLkNvbXBsZXRlTWFnaWNMaW5rUmVzcG9uc2USVQoMRXhjaGFuZ2VDb2RlEiEudGFuay5hdXRoLnYxLkV4Y2hhbmdlQ29kZVJlcXVlc3QaIi50YW5rLmF1dGgudjEuRXhjaGFuZ2VDb2RlUmVzcG9uc2USRgoHUmVmcmVzaBIcLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVxdWVzdBodLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVzcG9uc2USQwoGTG9nb3V0EhsudGFuay5hdXRoLnYxLkxvZ291dFJlcXVlc3QaHC50YW5rLmF1dGgudjEuTG9nb3V0UmVzcG9uc2USYQoQTWludEdhdGV3YXlUb2tlbhIlLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVxdWVzdBomLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVzcG9uc2USQAoFR2V0TWUSGi50YW5rLmF1dGgudjEuR2V0TWVSZXF1ZXN0GhsudGFuay5hdXRoLnYxLkdldE1lUmVzcG9uc2VCwAEKEGNvbS50YW5rLmF1dGgudjFCCUF1dGhQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2F1dGgvdjE7YXV0aHYxogIDVEFYqgIMVGFuay5BdXRoLlYxygIMVGFua1xBdXRoXFYx4gIYVGFua1xBdXRoXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXV0aDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+export const file_tank_auth_v1_auth = /*@__PURE__*/ fileDesc("Chd0YW5rL2F1dGgvdjEvYXV0aC5wcm90bxIMdGFuay5hdXRoLnYxIpMBCglQcmluY2lwYWwSCgoCaWQYASABKAkSKQoEa2luZBgCIAEoDjIbLnRhbmsuYXV0aC52MS5QcmluY2lwYWxLaW5kEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEg0KBWVtYWlsGAUgASgJEhYKDmF2YXRhcl9maWxlX2lkGAYgASgJIiYKFVN0YXJ0TWFnaWNMaW5rUmVxdWVzdBINCgVlbWFpbBgBIAEoCSIYChZTdGFydE1hZ2ljTGlua1Jlc3BvbnNlIikKGENvbXBsZXRlTWFnaWNMaW5rUmVxdWVzdBINCgV0b2tlbhgBIAEoCSKkAQoZQ29tcGxldGVNYWdpY0xpbmtSZXNwb25zZRIjCgJtZRgBIAEoCzIXLnRhbmsuYXV0aC52MS5QcmluY2lwYWwSFAoMYWNjZXNzX3Rva2VuGAIgASgJEhUKDXJlZnJlc2hfdG9rZW4YAyABKAkSNQoRYWNjZXNzX2V4cGlyZXNfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImIKE0V4Y2hhbmdlQ29kZVJlcXVlc3QSEAoIcHJvdmlkZXIYASABKAkSDAoEY29kZRgCIAEoCRIVCg1jb2RlX3ZlcmlmaWVyGAMgASgJEhQKDHJlZGlyZWN0X3VyaRgEIAEoCSKfAQoURXhjaGFuZ2VDb2RlUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCInCg5SZWZyZXNoUmVxdWVzdBIVCg1yZWZyZXNoX3Rva2VuGAEgASgJInUKD1JlZnJlc2hSZXNwb25zZRIUCgxhY2Nlc3NfdG9rZW4YASABKAkSFQoNcmVmcmVzaF90b2tlbhgCIAEoCRI1ChFhY2Nlc3NfZXhwaXJlc19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDwoNTG9nb3V0UmVxdWVzdCIQCg5Mb2dvdXRSZXNwb25zZSIZChdNaW50R2F0ZXdheVRva2VuUmVxdWVzdCJZChhNaW50R2F0ZXdheVRva2VuUmVzcG9uc2USDQoFdG9rZW4YASABKAkSLgoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDgoMR2V0TWVSZXF1ZXN0IjQKDUdldE1lUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsIrQBCgdTZXNzaW9uEgoKAmlkGAEgASgJEgwKBGtpbmQYAiABKAkSLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKZXhwaXJlc19hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKdXNlcl9hZ2VudBgFIAEoCRIKCgJpcBgGIAEoCRIPCgdjdXJyZW50GAcgASgIIhUKE0xpc3RTZXNzaW9uc1JlcXVlc3QiPwoUTGlzdFNlc3Npb25zUmVzcG9uc2USJwoIc2Vzc2lvbnMYASADKAsyFS50YW5rLmF1dGgudjEuU2Vzc2lvbiIqChRSZXZva2VTZXNzaW9uUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJIhcKFVJldm9rZVNlc3Npb25SZXNwb25zZSJHCh5BZG1pblJldm9rZVVzZXJTZXNzaW9uc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkiMgofQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnNSZXNwb25zZRIPCgdyZXZva2VkGAEgASgFIvsCCglTc29Db25maWcSFAoMd29ya3NwYWNlX2lkGAEgASgJEisKCHByb3ZpZGVyGAIgASgOMhkudGFuay5hdXRoLnYxLlNzb1Byb3ZpZGVyEg8KB2VuYWJsZWQYAyABKAgSDgoGaXNzdWVyGAQgASgJEhQKDG1ldGFkYXRhX3htbBgFIAEoCRIRCgljbGllbnRfaWQYBiABKAkSGQoRY2xpZW50X3NlY3JldF9yZWYYByABKAkSGQoRaGFzX2NsaWVudF9zZWNyZXQYCCABKAgSFAoMZG9tYWluX2NsYWltGAkgASgJEg8KB2VuZm9yY2UYCiABKAgSFAoMcmVkaXJlY3RfdXJpGAsgASgJEhQKDHNwX2VudGl0eV9pZBgMIAEoCRIXCg9zcF9tZXRhZGF0YV91cmwYDSABKAkSDwoHYWNzX3VybBgOIAEoCRIuCgp1cGRhdGVkX2F0GA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIrChNHZXRTc29Db25maWdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI/ChRHZXRTc29Db25maWdSZXNwb25zZRInCgZjb25maWcYASABKAsyFy50YW5rLmF1dGgudjEuU3NvQ29uZmlnIvsBChNTZXRTc29Db25maWdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIrCghwcm92aWRlchgCIAEoDjIZLnRhbmsuYXV0aC52MS5Tc29Qcm92aWRlchIPCgdlbmFibGVkGAMgASgIEg4KBmlzc3VlchgEIAEoCRIUCgxtZXRhZGF0YV94bWwYBSABKAkSEQoJY2xpZW50X2lkGAYgASgJEhUKDWNsaWVudF9zZWNyZXQYByABKAkSGQoRY2xpZW50X3NlY3JldF9yZWYYCCABKAkSFAoMZG9tYWluX2NsYWltGAkgASgJEg8KB2VuZm9yY2UYCiABKAgiPwoUU2V0U3NvQ29uZmlnUmVzcG9uc2USJwoGY29uZmlnGAEgASgLMhcudGFuay5hdXRoLnYxLlNzb0NvbmZpZyI/Cg9TdGFydFNzb1JlcXVlc3QSFgoOd29ya3NwYWNlX3NsdWcYASABKAkSFAoMcmVkaXJlY3RfdXJpGAIgASgJImcKEFN0YXJ0U3NvUmVzcG9uc2USFAoMcmVkaXJlY3RfdXJsGAEgASgJEg0KBXN0YXRlGAIgASgJEi4KCmV4cGlyZXNfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIkgKEkNvbXBsZXRlU3NvUmVxdWVzdBINCgVzdGF0ZRgBIAEoCRIMCgRjb2RlGAIgASgJEhUKDXNhbWxfcmVzcG9uc2UYAyABKAkitAEKE0NvbXBsZXRlU3NvUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx3b3Jrc3BhY2VfaWQYBSABKAkqegoNUHJpbmNpcGFsS2luZBIeChpQUklOQ0lQQUxfS0lORF9VTlNQRUNJRklFRBAAEhcKE1BSSU5DSVBBTF9LSU5EX1VTRVIQARIWChJQUklOQ0lQQUxfS0lORF9CT1QQAhIYChRQUklOQ0lQQUxfS0lORF9BR0VOVBADKlkKC1Nzb1Byb3ZpZGVyEhwKGFNTT19QUk9WSURFUl9VTlNQRUNJRklFRBAAEhUKEVNTT19QUk9WSURFUl9PSURDEAESFQoRU1NPX1BST1ZJREVSX1NBTUwQAjLPCQoLQXV0aFNlcnZpY2USWwoOU3RhcnRNYWdpY0xpbmsSIy50YW5rLmF1dGgudjEuU3RhcnRNYWdpY0xpbmtSZXF1ZXN0GiQudGFuay5hdXRoLnYxLlN0YXJ0TWFnaWNMaW5rUmVzcG9uc2USZAoRQ29tcGxldGVNYWdpY0xpbmsSJi50YW5rLmF1dGgudjEuQ29tcGxldGVNYWdpY0xpbmtSZXF1ZXN0GicudGFuay5hdXRoLnYxLkNvbXBsZXRlTWFnaWNMaW5rUmVzcG9uc2USVQoMRXhjaGFuZ2VDb2RlEiEudGFuay5hdXRoLnYxLkV4Y2hhbmdlQ29kZVJlcXVlc3QaIi50YW5rLmF1dGgudjEuRXhjaGFuZ2VDb2RlUmVzcG9uc2USRgoHUmVmcmVzaBIcLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVxdWVzdBodLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVzcG9uc2USQwoGTG9nb3V0EhsudGFuay5hdXRoLnYxLkxvZ291dFJlcXVlc3QaHC50YW5rLmF1dGgudjEuTG9nb3V0UmVzcG9uc2USYQoQTWludEdhdGV3YXlUb2tlbhIlLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVxdWVzdBomLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVzcG9uc2USQAoFR2V0TWUSGi50YW5rLmF1dGgudjEuR2V0TWVSZXF1ZXN0GhsudGFuay5hdXRoLnYxLkdldE1lUmVzcG9uc2USVQoMTGlzdFNlc3Npb25zEiEudGFuay5hdXRoLnYxLkxpc3RTZXNzaW9uc1JlcXVlc3QaIi50YW5rLmF1dGgudjEuTGlzdFNlc3Npb25zUmVzcG9uc2USWAoNUmV2b2tlU2Vzc2lvbhIiLnRhbmsuYXV0aC52MS5SZXZva2VTZXNzaW9uUmVxdWVzdBojLnRhbmsuYXV0aC52MS5SZXZva2VTZXNzaW9uUmVzcG9uc2USdgoXQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnMSLC50YW5rLmF1dGgudjEuQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnNSZXF1ZXN0Gi0udGFuay5hdXRoLnYxLkFkbWluUmV2b2tlVXNlclNlc3Npb25zUmVzcG9uc2USVQoMR2V0U3NvQ29uZmlnEiEudGFuay5hdXRoLnYxLkdldFNzb0NvbmZpZ1JlcXVlc3QaIi50YW5rLmF1dGgudjEuR2V0U3NvQ29uZmlnUmVzcG9uc2USVQoMU2V0U3NvQ29uZmlnEiEudGFuay5hdXRoLnYxLlNldFNzb0NvbmZpZ1JlcXVlc3QaIi50YW5rLmF1dGgudjEuU2V0U3NvQ29uZmlnUmVzcG9uc2USSQoIU3RhcnRTc28SHS50YW5rLmF1dGgudjEuU3RhcnRTc29SZXF1ZXN0Gh4udGFuay5hdXRoLnYxLlN0YXJ0U3NvUmVzcG9uc2USUgoLQ29tcGxldGVTc28SIC50YW5rLmF1dGgudjEuQ29tcGxldGVTc29SZXF1ZXN0GiEudGFuay5hdXRoLnYxLkNvbXBsZXRlU3NvUmVzcG9uc2VCwAEKEGNvbS50YW5rLmF1dGgudjFCCUF1dGhQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2F1dGgvdjE7YXV0aHYxogIDVEFYqgIMVGFuay5BdXRoLlYxygIMVGFua1xBdXRoXFYx4gIYVGFua1xBdXRoXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXV0aDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 /**
  * Describes the message tank.auth.v1.Principal.
  * Use `create(PrincipalSchema)` to create a new message.
@@ -83,6 +83,86 @@ export const GetMeRequestSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_au
  */
 export const GetMeResponseSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 14);
 /**
+ * Describes the message tank.auth.v1.Session.
+ * Use `create(SessionSchema)` to create a new message.
+ */
+export const SessionSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 15);
+/**
+ * Describes the message tank.auth.v1.ListSessionsRequest.
+ * Use `create(ListSessionsRequestSchema)` to create a new message.
+ */
+export const ListSessionsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 16);
+/**
+ * Describes the message tank.auth.v1.ListSessionsResponse.
+ * Use `create(ListSessionsResponseSchema)` to create a new message.
+ */
+export const ListSessionsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 17);
+/**
+ * Describes the message tank.auth.v1.RevokeSessionRequest.
+ * Use `create(RevokeSessionRequestSchema)` to create a new message.
+ */
+export const RevokeSessionRequestSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 18);
+/**
+ * Describes the message tank.auth.v1.RevokeSessionResponse.
+ * Use `create(RevokeSessionResponseSchema)` to create a new message.
+ */
+export const RevokeSessionResponseSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 19);
+/**
+ * Describes the message tank.auth.v1.AdminRevokeUserSessionsRequest.
+ * Use `create(AdminRevokeUserSessionsRequestSchema)` to create a new message.
+ */
+export const AdminRevokeUserSessionsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 20);
+/**
+ * Describes the message tank.auth.v1.AdminRevokeUserSessionsResponse.
+ * Use `create(AdminRevokeUserSessionsResponseSchema)` to create a new message.
+ */
+export const AdminRevokeUserSessionsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 21);
+/**
+ * Describes the message tank.auth.v1.SsoConfig.
+ * Use `create(SsoConfigSchema)` to create a new message.
+ */
+export const SsoConfigSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 22);
+/**
+ * Describes the message tank.auth.v1.GetSsoConfigRequest.
+ * Use `create(GetSsoConfigRequestSchema)` to create a new message.
+ */
+export const GetSsoConfigRequestSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 23);
+/**
+ * Describes the message tank.auth.v1.GetSsoConfigResponse.
+ * Use `create(GetSsoConfigResponseSchema)` to create a new message.
+ */
+export const GetSsoConfigResponseSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 24);
+/**
+ * Describes the message tank.auth.v1.SetSsoConfigRequest.
+ * Use `create(SetSsoConfigRequestSchema)` to create a new message.
+ */
+export const SetSsoConfigRequestSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 25);
+/**
+ * Describes the message tank.auth.v1.SetSsoConfigResponse.
+ * Use `create(SetSsoConfigResponseSchema)` to create a new message.
+ */
+export const SetSsoConfigResponseSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 26);
+/**
+ * Describes the message tank.auth.v1.StartSsoRequest.
+ * Use `create(StartSsoRequestSchema)` to create a new message.
+ */
+export const StartSsoRequestSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 27);
+/**
+ * Describes the message tank.auth.v1.StartSsoResponse.
+ * Use `create(StartSsoResponseSchema)` to create a new message.
+ */
+export const StartSsoResponseSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 28);
+/**
+ * Describes the message tank.auth.v1.CompleteSsoRequest.
+ * Use `create(CompleteSsoRequestSchema)` to create a new message.
+ */
+export const CompleteSsoRequestSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 29);
+/**
+ * Describes the message tank.auth.v1.CompleteSsoResponse.
+ * Use `create(CompleteSsoResponseSchema)` to create a new message.
+ */
+export const CompleteSsoResponseSchema = /*@__PURE__*/ messageDesc(file_tank_auth_v1_auth, 30);
+/**
  * Every actor is a principal. Bots and agents are first-class so every author
  * reference is uniform across the data model.
  *
@@ -111,6 +191,28 @@ export var PrincipalKind;
  * Describes the enum tank.auth.v1.PrincipalKind.
  */
 export const PrincipalKindSchema = /*@__PURE__*/ enumDesc(file_tank_auth_v1_auth, 0);
+/**
+ * @generated from enum tank.auth.v1.SsoProvider
+ */
+export var SsoProvider;
+(function (SsoProvider) {
+    /**
+     * @generated from enum value: SSO_PROVIDER_UNSPECIFIED = 0;
+     */
+    SsoProvider[SsoProvider["UNSPECIFIED"] = 0] = "UNSPECIFIED";
+    /**
+     * @generated from enum value: SSO_PROVIDER_OIDC = 1;
+     */
+    SsoProvider[SsoProvider["OIDC"] = 1] = "OIDC";
+    /**
+     * @generated from enum value: SSO_PROVIDER_SAML = 2;
+     */
+    SsoProvider[SsoProvider["SAML"] = 2] = "SAML";
+})(SsoProvider || (SsoProvider = {}));
+/**
+ * Describes the enum tank.auth.v1.SsoProvider.
+ */
+export const SsoProviderSchema = /*@__PURE__*/ enumDesc(file_tank_auth_v1_auth, 1);
 /**
  * @generated from service tank.auth.v1.AuthService
  */
