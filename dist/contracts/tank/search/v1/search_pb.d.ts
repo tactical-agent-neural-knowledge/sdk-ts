@@ -69,6 +69,14 @@ export type SearchRequest = Message<"tank.search.v1.SearchRequest"> & {
      * @generated from field: string q = 6;
      */
     q: string;
+    /**
+     * Ask for the Neural Vault: keyword results fused with semantic neighbours.
+     * Keyword search is Slack parity and always free; the semantic half is the
+     * paid feature, so it is requested explicitly and metered per request.
+     *
+     * @generated from field: bool semantic = 7;
+     */
+    semantic: boolean;
 };
 /**
  * Describes the message tank.search.v1.SearchRequest.
@@ -131,6 +139,14 @@ export type SearchResponse = Message<"tank.search.v1.SearchResponse"> & {
      * @generated from field: string parsed_query = 5;
      */
     parsedQuery: string;
+    /**
+     * Whether semantic neighbours actually contributed. False when the caller
+     * did not ask, on later pages, or when the embedder was unreachable — so a
+     * client never claims the Vault answered when only keywords did.
+     *
+     * @generated from field: bool semantic_used = 6;
+     */
+    semanticUsed: boolean;
 };
 /**
  * Describes the message tank.search.v1.SearchResponse.

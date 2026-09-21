@@ -1,6 +1,7 @@
 export { Backoff, type BackoffOptions } from "./backoff.js";
 export { type CreateChannelInput, createTankClient, type ListRunsInput, type LoadChannelOptions, type LoadNotificationsInput, type LoadNotificationsResult, type RoleName, type SendMessageInput, type SetGoalInput, type SetStatusInput, TankClient, type TankClientEvents, type TankClientOptions, type UpdateMessageInput, type UploadFileOptions, } from "./client.js";
 export { Emitter, type Handler } from "./emitter.js";
+export { isPaywall, paywallMessage } from "./paywall.js";
 export { browserOnlineSignal, type OnlineSignal, RealtimeClient, type RealtimeEvents, type RealtimeOptions, type RealtimeSession, type WebSocketCtor, type WebSocketLike, } from "./realtime.js";
 export { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";
 export { IndexedDbStorage, type IndexedDbStorageOptions } from "./storage-idb.js";

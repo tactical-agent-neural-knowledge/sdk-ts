@@ -7,7 +7,7 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
-import type { Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import type { Entitlements, Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export type ConnectionState = "idle" | "connecting" | "open" | "ready" | "reconnecting" | "closed";
 export interface PendingMessage {
     clientMsgId: string;
@@ -75,6 +75,8 @@ export interface TankState {
     notificationIds: Record<string, string[]>;
     /** workspaceId → unread total (`GetBootstrap.unread_notification_count` + live deltas), independent of paging. */
     unreadNotificationCount: Record<string, number>;
+    /** What each workspace's plan allows, from `GetBootstrap`. A hint for the UI; the server still decides. */
+    entitlements: Record<string, Entitlements>;
     /** `${workspaceId}:${mode}` → paging state for `loadNotifications`. */
     notificationPaging: Record<string, NotificationPaging>;
     /** run id → Run (from `AgentRunUpdated` events, `ListRuns` and `GetRun`). */
@@ -97,6 +99,8 @@ export type Action = {
     members: Member[];
     /** `GetBootstrap.unread_notification_count`; seeds `unreadNotificationCount[workspace.id]`. */
     unreadNotificationCount?: number;
+    /** `GetBootstrap.entitlements`; absent on an older server, which the UI reads as "assume free". */
+    entitlements?: Entitlements | undefined;
 } | {
     type: "workspaces/upsert";
     workspaces: Workspace[];
@@ -205,6 +209,10 @@ export type Action = {
     type: "unreadNotificationCount/set";
     workspaceId: string;
     count: number;
+} | {
+    type: "entitlements/set";
+    workspaceId: string;
+    entitlements: Entitlements;
 } | {
     type: "notificationPaging/set";
     workspaceId: string;

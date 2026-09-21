@@ -27,7 +27,7 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
-import type { Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
 class PresenceRegistry {
@@ -280,6 +280,18 @@ export function useNotifications(
 export function useUnreadNotificationCount(workspaceId: string): number {
   return useTankSelector(
     useCallback((s: TankStore) => s.getState().unreadNotificationCount[workspaceId] ?? 0, [workspaceId]),
+  );
+}
+
+// ---------------------------------------------------------------- entitlements
+
+/**
+ * What this workspace's plan allows. Absent until bootstrap lands, and absent from an older server,
+ * so a caller treats `undefined` as "assume free and let the server decide" rather than unlocking.
+ */
+export function useEntitlements(workspaceId: string): Entitlements | undefined {
+  return useTankSelector(
+    useCallback((s: TankStore) => s.getState().entitlements[workspaceId], [workspaceId]),
   );
 }
 

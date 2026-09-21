@@ -326,6 +326,7 @@ export class TankClient {
         readStates: res.readStates,
         members: res.members,
         unreadNotificationCount: res.unreadNotificationCount,
+        entitlements: res.entitlements,
       });
       this.realtime.setWorkspaceIds(Object.keys(this.store.getState().workspaces));
       await this.storage.put(
@@ -1078,6 +1079,7 @@ export class TankClient {
             readStates: res.readStates,
             members: res.members,
             unreadNotificationCount: res.unreadNotificationCount,
+            entitlements: res.entitlements,
           });
         }
       } catch {

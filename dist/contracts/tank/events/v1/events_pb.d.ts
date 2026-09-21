@@ -1,5 +1,6 @@
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
+import type { AuditEntry, ExportJob, WorkspaceSettings } from "../../admin/v1/admin_pb.js";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import type { BlockAction } from "../../blocks/v1/blocks_pb.js";
 import type { Channel, ChannelReadState } from "../../channel/v1/channel_pb.js";
@@ -7,7 +8,7 @@ import type { File } from "../../files/v1/files_pb.js";
 import type { Huddle } from "../../huddle/v1/huddle_pb.js";
 import type { Message as Message$1 } from "../../message/v1/message_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
-import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
+import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/events/v1/events.proto.
@@ -683,3 +684,110 @@ export type HuddleParticipantsChanged = Message<"tank.events.v1.HuddleParticipan
  * Use `create(HuddleParticipantsChangedSchema)` to create a new message.
  */
 export declare const HuddleParticipantsChangedSchema: GenMessage<HuddleParticipantsChanged>;
+/**
+ * member.role_changed on evt.{ws}.ws and on the member's user subject.
+ *
+ * @generated from message tank.events.v1.MemberRoleChanged
+ */
+export type MemberRoleChanged = Message<"tank.events.v1.MemberRoleChanged"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Member member = 1;
+     */
+    member?: Member;
+    /**
+     * @generated from field: tank.workspace.v1.Role previous_role = 2;
+     */
+    previousRole: Role;
+    /**
+     * @generated from field: string actor_id = 3;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.events.v1.MemberRoleChanged.
+ * Use `create(MemberRoleChangedSchema)` to create a new message.
+ */
+export declare const MemberRoleChangedSchema: GenMessage<MemberRoleChanged>;
+/**
+ * member.deactivated on evt.{ws}.ws (also for reactivation and removal;
+ * clients drop removed members and grey out deactivated ones).
+ *
+ * @generated from message tank.events.v1.MemberDeactivated
+ */
+export type MemberDeactivated = Message<"tank.events.v1.MemberDeactivated"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Member member = 1;
+     */
+    member?: Member;
+    /**
+     * @generated from field: bool reactivated = 2;
+     */
+    reactivated: boolean;
+    /**
+     * @generated from field: bool removed = 3;
+     */
+    removed: boolean;
+    /**
+     * @generated from field: string actor_id = 4;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.events.v1.MemberDeactivated.
+ * Use `create(MemberDeactivatedSchema)` to create a new message.
+ */
+export declare const MemberDeactivatedSchema: GenMessage<MemberDeactivated>;
+/**
+ * workspace.settings_updated on evt.{ws}.ws.
+ *
+ * @generated from message tank.events.v1.WorkspaceSettingsUpdated
+ */
+export type WorkspaceSettingsUpdated = Message<"tank.events.v1.WorkspaceSettingsUpdated"> & {
+    /**
+     * @generated from field: tank.admin.v1.WorkspaceSettings settings = 1;
+     */
+    settings?: WorkspaceSettings;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.events.v1.WorkspaceSettingsUpdated.
+ * Use `create(WorkspaceSettingsUpdatedSchema)` to create a new message.
+ */
+export declare const WorkspaceSettingsUpdatedSchema: GenMessage<WorkspaceSettingsUpdated>;
+/**
+ * audit.logged on evt.{ws}.audit.{entry}: internal (SIEM forwarders, the
+ * knowledge indexer); the gateway never fans it out to clients.
+ *
+ * @generated from message tank.events.v1.AuditLogged
+ */
+export type AuditLogged = Message<"tank.events.v1.AuditLogged"> & {
+    /**
+     * @generated from field: tank.admin.v1.AuditEntry entry = 1;
+     */
+    entry?: AuditEntry;
+};
+/**
+ * Describes the message tank.events.v1.AuditLogged.
+ * Use `create(AuditLoggedSchema)` to create a new message.
+ */
+export declare const AuditLoggedSchema: GenMessage<AuditLogged>;
+/**
+ * export.ready on the requester's user subject: the zip can be downloaded
+ * with AdminService.GetExportDownloadUrl (also sent when the job failed).
+ *
+ * @generated from message tank.events.v1.ExportReady
+ */
+export type ExportReady = Message<"tank.events.v1.ExportReady"> & {
+    /**
+     * @generated from field: tank.admin.v1.ExportJob job = 1;
+     */
+    job?: ExportJob;
+};
+/**
+ * Describes the message tank.events.v1.ExportReady.
+ * Use `create(ExportReadySchema)` to create a new message.
+ */
+export declare const ExportReadySchema: GenMessage<ExportReady>;

@@ -270,6 +270,423 @@ export type GetMeResponse = Message<"tank.auth.v1.GetMeResponse"> & {
  */
 export declare const GetMeResponseSchema: GenMessage<GetMeResponse>;
 /**
+ * One signed-in device: a web cookie session or a mobile refresh session.
+ *
+ * @generated from message tank.auth.v1.Session
+ */
+export type Session = Message<"tank.auth.v1.Session"> & {
+    /**
+     * opaque; never the secret
+     *
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * web | mobile
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 3;
+     */
+    createdAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 4;
+     */
+    expiresAt?: Timestamp;
+    /**
+     * @generated from field: string user_agent = 5;
+     */
+    userAgent: string;
+    /**
+     * @generated from field: string ip = 6;
+     */
+    ip: string;
+    /**
+     * the session making this call
+     *
+     * @generated from field: bool current = 7;
+     */
+    current: boolean;
+};
+/**
+ * Describes the message tank.auth.v1.Session.
+ * Use `create(SessionSchema)` to create a new message.
+ */
+export declare const SessionSchema: GenMessage<Session>;
+/**
+ * @generated from message tank.auth.v1.ListSessionsRequest
+ */
+export type ListSessionsRequest = Message<"tank.auth.v1.ListSessionsRequest"> & {};
+/**
+ * Describes the message tank.auth.v1.ListSessionsRequest.
+ * Use `create(ListSessionsRequestSchema)` to create a new message.
+ */
+export declare const ListSessionsRequestSchema: GenMessage<ListSessionsRequest>;
+/**
+ * @generated from message tank.auth.v1.ListSessionsResponse
+ */
+export type ListSessionsResponse = Message<"tank.auth.v1.ListSessionsResponse"> & {
+    /**
+     * @generated from field: repeated tank.auth.v1.Session sessions = 1;
+     */
+    sessions: Session[];
+};
+/**
+ * Describes the message tank.auth.v1.ListSessionsResponse.
+ * Use `create(ListSessionsResponseSchema)` to create a new message.
+ */
+export declare const ListSessionsResponseSchema: GenMessage<ListSessionsResponse>;
+/**
+ * Revokes one of the caller's own sessions (the current one included).
+ *
+ * @generated from message tank.auth.v1.RevokeSessionRequest
+ */
+export type RevokeSessionRequest = Message<"tank.auth.v1.RevokeSessionRequest"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+};
+/**
+ * Describes the message tank.auth.v1.RevokeSessionRequest.
+ * Use `create(RevokeSessionRequestSchema)` to create a new message.
+ */
+export declare const RevokeSessionRequestSchema: GenMessage<RevokeSessionRequest>;
+/**
+ * @generated from message tank.auth.v1.RevokeSessionResponse
+ */
+export type RevokeSessionResponse = Message<"tank.auth.v1.RevokeSessionResponse"> & {};
+/**
+ * Describes the message tank.auth.v1.RevokeSessionResponse.
+ * Use `create(RevokeSessionResponseSchema)` to create a new message.
+ */
+export declare const RevokeSessionResponseSchema: GenMessage<RevokeSessionResponse>;
+/**
+ * Workspace admins sign a member out of every device. The user must be a
+ * member of workspace_id; every session of theirs is revoked, and so are
+ * API tokens bound to that workspace.
+ *
+ * @generated from message tank.auth.v1.AdminRevokeUserSessionsRequest
+ */
+export type AdminRevokeUserSessionsRequest = Message<"tank.auth.v1.AdminRevokeUserSessionsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string user_id = 2;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.auth.v1.AdminRevokeUserSessionsRequest.
+ * Use `create(AdminRevokeUserSessionsRequestSchema)` to create a new message.
+ */
+export declare const AdminRevokeUserSessionsRequestSchema: GenMessage<AdminRevokeUserSessionsRequest>;
+/**
+ * @generated from message tank.auth.v1.AdminRevokeUserSessionsResponse
+ */
+export type AdminRevokeUserSessionsResponse = Message<"tank.auth.v1.AdminRevokeUserSessionsResponse"> & {
+    /**
+     * @generated from field: int32 revoked = 1;
+     */
+    revoked: number;
+};
+/**
+ * Describes the message tank.auth.v1.AdminRevokeUserSessionsResponse.
+ * Use `create(AdminRevokeUserSessionsResponseSchema)` to create a new message.
+ */
+export declare const AdminRevokeUserSessionsResponseSchema: GenMessage<AdminRevokeUserSessionsResponse>;
+/**
+ * @generated from message tank.auth.v1.SsoConfig
+ */
+export type SsoConfig = Message<"tank.auth.v1.SsoConfig"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.auth.v1.SsoProvider provider = 2;
+     */
+    provider: SsoProvider;
+    /**
+     * @generated from field: bool enabled = 3;
+     */
+    enabled: boolean;
+    /**
+     * OIDC: the issuer URL (discovery at <issuer>/.well-known/openid-configuration).
+     * SAML: the IdP metadata URL; metadata_xml may be given instead.
+     *
+     * @generated from field: string issuer = 4;
+     */
+    issuer: string;
+    /**
+     * @generated from field: string metadata_xml = 5;
+     */
+    metadataXml: string;
+    /**
+     * @generated from field: string client_id = 6;
+     */
+    clientId: string;
+    /**
+     * Where the client secret lives (env or secret-manager name); the secret
+     * itself is write-only through SetSsoConfig.client_secret.
+     *
+     * @generated from field: string client_secret_ref = 7;
+     */
+    clientSecretRef: string;
+    /**
+     * @generated from field: bool has_client_secret = 8;
+     */
+    hasClientSecret: boolean;
+    /**
+     * Email domain the IdP must assert (e.g. "acme.com"); empty = any.
+     *
+     * @generated from field: string domain_claim = 9;
+     */
+    domainClaim: string;
+    /**
+     * Users of domain_claim must sign in through SSO (mirrors
+     * WorkspaceSettings.require_sso).
+     *
+     * @generated from field: bool enforce = 10;
+     */
+    enforce: boolean;
+    /**
+     * Read-only helpers for configuring the IdP.
+     *
+     * OIDC callback (web)
+     *
+     * @generated from field: string redirect_uri = 11;
+     */
+    redirectUri: string;
+    /**
+     * SAML SP entity id
+     *
+     * @generated from field: string sp_entity_id = 12;
+     */
+    spEntityId: string;
+    /**
+     * SAML SP metadata (/saml/{workspace}/metadata)
+     *
+     * @generated from field: string sp_metadata_url = 13;
+     */
+    spMetadataUrl: string;
+    /**
+     * SAML ACS (/saml/{workspace}/acs)
+     *
+     * @generated from field: string acs_url = 14;
+     */
+    acsUrl: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp updated_at = 15;
+     */
+    updatedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.auth.v1.SsoConfig.
+ * Use `create(SsoConfigSchema)` to create a new message.
+ */
+export declare const SsoConfigSchema: GenMessage<SsoConfig>;
+/**
+ * @generated from message tank.auth.v1.GetSsoConfigRequest
+ */
+export type GetSsoConfigRequest = Message<"tank.auth.v1.GetSsoConfigRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.auth.v1.GetSsoConfigRequest.
+ * Use `create(GetSsoConfigRequestSchema)` to create a new message.
+ */
+export declare const GetSsoConfigRequestSchema: GenMessage<GetSsoConfigRequest>;
+/**
+ * @generated from message tank.auth.v1.GetSsoConfigResponse
+ */
+export type GetSsoConfigResponse = Message<"tank.auth.v1.GetSsoConfigResponse"> & {
+    /**
+     * unset when never configured
+     *
+     * @generated from field: tank.auth.v1.SsoConfig config = 1;
+     */
+    config?: SsoConfig;
+};
+/**
+ * Describes the message tank.auth.v1.GetSsoConfigResponse.
+ * Use `create(GetSsoConfigResponseSchema)` to create a new message.
+ */
+export declare const GetSsoConfigResponseSchema: GenMessage<GetSsoConfigResponse>;
+/**
+ * Owner or admin. client_secret empty = keep the stored secret.
+ *
+ * @generated from message tank.auth.v1.SetSsoConfigRequest
+ */
+export type SetSsoConfigRequest = Message<"tank.auth.v1.SetSsoConfigRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.auth.v1.SsoProvider provider = 2;
+     */
+    provider: SsoProvider;
+    /**
+     * @generated from field: bool enabled = 3;
+     */
+    enabled: boolean;
+    /**
+     * @generated from field: string issuer = 4;
+     */
+    issuer: string;
+    /**
+     * @generated from field: string metadata_xml = 5;
+     */
+    metadataXml: string;
+    /**
+     * @generated from field: string client_id = 6;
+     */
+    clientId: string;
+    /**
+     * @generated from field: string client_secret = 7;
+     */
+    clientSecret: string;
+    /**
+     * @generated from field: string client_secret_ref = 8;
+     */
+    clientSecretRef: string;
+    /**
+     * @generated from field: string domain_claim = 9;
+     */
+    domainClaim: string;
+    /**
+     * @generated from field: bool enforce = 10;
+     */
+    enforce: boolean;
+};
+/**
+ * Describes the message tank.auth.v1.SetSsoConfigRequest.
+ * Use `create(SetSsoConfigRequestSchema)` to create a new message.
+ */
+export declare const SetSsoConfigRequestSchema: GenMessage<SetSsoConfigRequest>;
+/**
+ * @generated from message tank.auth.v1.SetSsoConfigResponse
+ */
+export type SetSsoConfigResponse = Message<"tank.auth.v1.SetSsoConfigResponse"> & {
+    /**
+     * @generated from field: tank.auth.v1.SsoConfig config = 1;
+     */
+    config?: SsoConfig;
+};
+/**
+ * Describes the message tank.auth.v1.SetSsoConfigResponse.
+ * Use `create(SetSsoConfigResponseSchema)` to create a new message.
+ */
+export declare const SetSsoConfigResponseSchema: GenMessage<SetSsoConfigResponse>;
+/**
+ * Begins SSO for a workspace: returns the IdP URL to send the browser to.
+ * redirect_uri is where the IdP (OIDC) or the ACS (SAML) sends the user
+ * back; it must be PUBLIC_WEB_URL or a registered mobile scheme.
+ *
+ * @generated from message tank.auth.v1.StartSsoRequest
+ */
+export type StartSsoRequest = Message<"tank.auth.v1.StartSsoRequest"> & {
+    /**
+     * @generated from field: string workspace_slug = 1;
+     */
+    workspaceSlug: string;
+    /**
+     * @generated from field: string redirect_uri = 2;
+     */
+    redirectUri: string;
+};
+/**
+ * Describes the message tank.auth.v1.StartSsoRequest.
+ * Use `create(StartSsoRequestSchema)` to create a new message.
+ */
+export declare const StartSsoRequestSchema: GenMessage<StartSsoRequest>;
+/**
+ * @generated from message tank.auth.v1.StartSsoResponse
+ */
+export type StartSsoResponse = Message<"tank.auth.v1.StartSsoResponse"> & {
+    /**
+     * @generated from field: string redirect_url = 1;
+     */
+    redirectUrl: string;
+    /**
+     * @generated from field: string state = 2;
+     */
+    state: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 3;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.auth.v1.StartSsoResponse.
+ * Use `create(StartSsoResponseSchema)` to create a new message.
+ */
+export declare const StartSsoResponseSchema: GenMessage<StartSsoResponse>;
+/**
+ * Finishes SSO. OIDC: state + code from the callback query. SAML: state
+ * (RelayState) + code (the one-time ticket the ACS redirected with), or the
+ * raw saml_response when the client received the POST itself.
+ *
+ * @generated from message tank.auth.v1.CompleteSsoRequest
+ */
+export type CompleteSsoRequest = Message<"tank.auth.v1.CompleteSsoRequest"> & {
+    /**
+     * @generated from field: string state = 1;
+     */
+    state: string;
+    /**
+     * @generated from field: string code = 2;
+     */
+    code: string;
+    /**
+     * @generated from field: string saml_response = 3;
+     */
+    samlResponse: string;
+};
+/**
+ * Describes the message tank.auth.v1.CompleteSsoRequest.
+ * Use `create(CompleteSsoRequestSchema)` to create a new message.
+ */
+export declare const CompleteSsoRequestSchema: GenMessage<CompleteSsoRequest>;
+/**
+ * @generated from message tank.auth.v1.CompleteSsoResponse
+ */
+export type CompleteSsoResponse = Message<"tank.auth.v1.CompleteSsoResponse"> & {
+    /**
+     * @generated from field: tank.auth.v1.Principal me = 1;
+     */
+    me?: Principal;
+    /**
+     * @generated from field: string access_token = 2;
+     */
+    accessToken: string;
+    /**
+     * @generated from field: string refresh_token = 3;
+     */
+    refreshToken: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp access_expires_at = 4;
+     */
+    accessExpiresAt?: Timestamp;
+    /**
+     * @generated from field: string workspace_id = 5;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.auth.v1.CompleteSsoResponse.
+ * Use `create(CompleteSsoResponseSchema)` to create a new message.
+ */
+export declare const CompleteSsoResponseSchema: GenMessage<CompleteSsoResponse>;
+/**
  * Every actor is a principal. Bots and agents are first-class so every author
  * reference is uniform across the data model.
  *
@@ -297,6 +714,27 @@ export declare enum PrincipalKind {
  * Describes the enum tank.auth.v1.PrincipalKind.
  */
 export declare const PrincipalKindSchema: GenEnum<PrincipalKind>;
+/**
+ * @generated from enum tank.auth.v1.SsoProvider
+ */
+export declare enum SsoProvider {
+    /**
+     * @generated from enum value: SSO_PROVIDER_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: SSO_PROVIDER_OIDC = 1;
+     */
+    OIDC = 1,
+    /**
+     * @generated from enum value: SSO_PROVIDER_SAML = 2;
+     */
+    SAML = 2
+}
+/**
+ * Describes the enum tank.auth.v1.SsoProvider.
+ */
+export declare const SsoProviderSchema: GenEnum<SsoProvider>;
 /**
  * @generated from service tank.auth.v1.AuthService
  */
@@ -356,5 +794,61 @@ export declare const AuthService: GenService<{
         methodKind: "unary";
         input: typeof GetMeRequestSchema;
         output: typeof GetMeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.ListSessions
+     */
+    listSessions: {
+        methodKind: "unary";
+        input: typeof ListSessionsRequestSchema;
+        output: typeof ListSessionsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.RevokeSession
+     */
+    revokeSession: {
+        methodKind: "unary";
+        input: typeof RevokeSessionRequestSchema;
+        output: typeof RevokeSessionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.AdminRevokeUserSessions
+     */
+    adminRevokeUserSessions: {
+        methodKind: "unary";
+        input: typeof AdminRevokeUserSessionsRequestSchema;
+        output: typeof AdminRevokeUserSessionsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.GetSsoConfig
+     */
+    getSsoConfig: {
+        methodKind: "unary";
+        input: typeof GetSsoConfigRequestSchema;
+        output: typeof GetSsoConfigResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.SetSsoConfig
+     */
+    setSsoConfig: {
+        methodKind: "unary";
+        input: typeof SetSsoConfigRequestSchema;
+        output: typeof SetSsoConfigResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.StartSso
+     */
+    startSso: {
+        methodKind: "unary";
+        input: typeof StartSsoRequestSchema;
+        output: typeof StartSsoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.CompleteSso
+     */
+    completeSso: {
+        methodKind: "unary";
+        input: typeof CompleteSsoRequestSchema;
+        output: typeof CompleteSsoResponseSchema;
     };
 }>;

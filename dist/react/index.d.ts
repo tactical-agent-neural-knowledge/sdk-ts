@@ -8,7 +8,7 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
-import type { Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export interface TankProviderProps {
     client: TankClient;
     /** Call client.start() on mount and stop() on unmount. Default true. */
@@ -72,6 +72,11 @@ export interface UseNotificationsResult {
 export declare function useNotifications(workspaceId: string, opts?: UseNotificationsOptions): UseNotificationsResult;
 /** The workspace's unread notification badge (bootstrap count + live deltas). */
 export declare function useUnreadNotificationCount(workspaceId: string): number;
+/**
+ * What this workspace's plan allows. Absent until bootstrap lands, and absent from an older server,
+ * so a caller treats `undefined` as "assume free and let the server decide" rather than unlocking.
+ */
+export declare function useEntitlements(workspaceId: string): Entitlements | undefined;
 /** One run by id; fetched with `GetRun` on mount when the store does not have it. */
 export declare function useRun(runId: string, opts?: {
     load?: boolean;

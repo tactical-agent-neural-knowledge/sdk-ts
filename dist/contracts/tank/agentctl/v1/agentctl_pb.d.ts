@@ -361,6 +361,14 @@ export type PostPlanRequest = Message<"tank.agentctl.v1.PostPlanRequest"> & {
      * @generated from field: repeated string questions = 4;
      */
     questions: string[];
+    /**
+     * Artifacts from AttachArtifact, rendered above the approve buttons so a
+     * human can see what the agent is proposing to change before approving it:
+     * the page as it looks now, the slide being rewritten, the source image.
+     *
+     * @generated from field: repeated string preview_file_ids = 5;
+     */
+    previewFileIds: string[];
 };
 /**
  * Describes the message tank.agentctl.v1.PostPlanRequest.
@@ -393,6 +401,55 @@ export type PostPlanResponse = Message<"tank.agentctl.v1.PostPlanResponse"> & {
  * Use `create(PostPlanResponseSchema)` to create a new message.
  */
 export declare const PostPlanResponseSchema: GenMessage<PostPlanResponse>;
+/**
+ * AttachArtifact publishes one file the sandbox produced (a screenshot, a
+ * rendered slide, an exported image) into the run's channel, and returns the
+ * file id to put on a card. The sandbox has no storage credentials and no
+ * egress to S3: the bytes go through the control plane, which uploads them as
+ * the agent principal. Capped at max_artifact_bytes; anything larger belongs
+ * in the repo, not in a card.
+ *
+ * @generated from message tank.agentctl.v1.AttachArtifactRequest
+ */
+export type AttachArtifactRequest = Message<"tank.agentctl.v1.AttachArtifactRequest"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string mime = 2;
+     */
+    mime: string;
+    /**
+     * @generated from field: bytes content = 3;
+     */
+    content: Uint8Array;
+    /**
+     * Shown under the preview. Say what the reader is looking at.
+     *
+     * @generated from field: string caption = 4;
+     */
+    caption: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.AttachArtifactRequest.
+ * Use `create(AttachArtifactRequestSchema)` to create a new message.
+ */
+export declare const AttachArtifactRequestSchema: GenMessage<AttachArtifactRequest>;
+/**
+ * @generated from message tank.agentctl.v1.AttachArtifactResponse
+ */
+export type AttachArtifactResponse = Message<"tank.agentctl.v1.AttachArtifactResponse"> & {
+    /**
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.AttachArtifactResponse.
+ * Use `create(AttachArtifactResponseSchema)` to create a new message.
+ */
+export declare const AttachArtifactResponseSchema: GenMessage<AttachArtifactResponse>;
 /**
  * @generated from message tank.agentctl.v1.UpdateCardRequest
  */
@@ -1724,6 +1781,14 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof PostToThreadRequestSchema;
         output: typeof PostToThreadResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.AttachArtifact
+     */
+    attachArtifact: {
+        methodKind: "unary";
+        input: typeof AttachArtifactRequestSchema;
+        output: typeof AttachArtifactResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PostPlan

@@ -6,6 +6,8 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_any, file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type { AuditEntry, ExportJob, WorkspaceSettings } from "../../admin/v1/admin_pb.js";
+import { file_tank_admin_v1_admin } from "../../admin/v1/admin_pb.js";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import { file_tank_agent_v1_agent } from "../../agent/v1/agent_pb.js";
 import type { BlockAction } from "../../blocks/v1/blocks_pb.js";
@@ -20,7 +22,7 @@ import type { Message as Message$1 } from "../../message/v1/message_pb.js";
 import { file_tank_message_v1_message } from "../../message/v1/message_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
 import { file_tank_presence_v1_presence } from "../../presence/v1/presence_pb.js";
-import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
+import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
 import { file_tank_workspace_v1_workspace } from "../../workspace/v1/workspace_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -28,7 +30,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/events/v1/events.proto.
  */
 export const file_tank_events_v1_events: GenFile = /*@__PURE__*/
-  fileDesc("Cht0YW5rL2V2ZW50cy92MS9ldmVudHMucHJvdG8SDnRhbmsuZXZlbnRzLnYxIrkBCghFbnZlbG9wZRIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSDAoEdHlwZRgDIAEoCRIPCgdzdWJqZWN0GAQgASgJEi8KC29jY3VycmVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx0cmFjZV9wYXJlbnQYBiABKAkSJQoHcGF5bG9hZBgHIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkiOwoOTWVzc2FnZUNyZWF0ZWQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIjsKDk1lc3NhZ2VVcGRhdGVkEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJQCg5NZXNzYWdlRGVsZXRlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiQwoNUmVhY3Rpb25BZGRlZBISCgptZXNzYWdlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSDQoFZW1vamkYAyABKAkiRQoPUmVhY3Rpb25SZW1vdmVkEhIKCm1lc3NhZ2VfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRINCgVlbW9qaRgDIAEoCSKEAQoQUmVhZFN0YXRlVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFQoNbGFzdF9yZWFkX3NlcRgDIAEoAxIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIcChRsYXN0X3JlYWRfdGhyZWFkX3NlcRgFIAEoAyJPCg5DaGFubmVsVXBkYXRlZBISCgpjaGFubmVsX2lkGAEgASgJEikKB2NoYW5uZWwYAiABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCJhChhDaGFubmVsTWVtYmVyc2hpcENoYW5nZWQSEgoKY2hhbm5lbF9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEg4KBmpvaW5lZBgDIAEoCBIQCghhY3Rvcl9pZBgEIAEoCSI5CgpDYXJkQWN0aW9uEisKBmFjdGlvbhgBIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkJsb2NrQWN0aW9uImgKCkFwcENvbW1hbmQSDwoHY29tbWFuZBgBIAEoCRIMCgR0ZXh0GAIgASgJEg8KB3VzZXJfaWQYAyABKAkSEgoKY2hhbm5lbF9pZBgEIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgFIAEoCSI/Cg9QcmVzZW5jZUNoYW5nZWQSLAoIcHJlc2VuY2UYASABKAsyGi50YW5rLnByZXNlbmNlLnYxLlByZXNlbmNlIkUKBlR5cGluZxISCgpjaGFubmVsX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiWQoLQWdlbnRTdGF0dXMSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRIOCgZydW5faWQYAyABKAkSDgoGc3RhdHVzGAQgASgJIi4KCUZpbGVSZWFkeRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlIk4KEE1lc3NhZ2VFcGhlbWVyYWwSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEg8KB3VzZXJfaWQYAiABKAkiLQoRTm90aWZpY2F0aW9uc1JlYWQSGAoQbm90aWZpY2F0aW9uX2lkcxgBIAMoCSIyCg9BZ2VudFJ1blVwZGF0ZWQSHwoDcnVuGAEgASgLMhIudGFuay5hZ2VudC52MS5SdW4idgoTTm90aWZpY2F0aW9uQ3JlYXRlZBIXCg9ub3RpZmljYXRpb25faWQYASABKAkSDAoEa2luZBgCIAEoCRISCgptZXNzYWdlX2lkGAMgASgJEhIKCmNoYW5uZWxfaWQYBCABKAkSEAoIYWN0b3JfaWQYBSABKAkiVQoKUGluQ2hhbmdlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDwoHdXNlcl9pZBgDIAEoCRIOCgZwaW5uZWQYBCABKAgiXAoMRW1vamlDaGFuZ2VkEi0KBWVtb2ppGAEgASgLMh4udGFuay53b3Jrc3BhY2UudjEuQ3VzdG9tRW1vamkSDwoHZGVsZXRlZBgCIAEoCBIMCgRoYXNoGAMgASgJIloKElByZWZlcmVuY2VzVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEjMKC3ByZWZlcmVuY2VzGAIgASgLMh4udGFuay53b3Jrc3BhY2UudjEuUHJlZmVyZW5jZXMiYgoYQ2hhbm5lbFByZWZlcmVuY2VVcGRhdGVkEg8KB3VzZXJfaWQYASABKAkSNQoKcmVhZF9zdGF0ZRgCIAEoCzIhLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsUmVhZFN0YXRlIlkKDERyYWZ0VXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEicKBWRyYWZ0GAIgASgLMhgudGFuay53b3Jrc3BhY2UudjEuRHJhZnQSDwoHZGVsZXRlZBgDIAEoCCJOChRTY2hlZHVsZWRNZXNzYWdlU2VudBI2CglzY2hlZHVsZWQYASABKAsyIy50YW5rLndvcmtzcGFjZS52MS5TY2hlZHVsZWRNZXNzYWdlIlAKEFVzZXJHcm91cFVwZGF0ZWQSKwoFZ3JvdXAYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Vc2VyR3JvdXASDwoHZGVsZXRlZBgCIAEoCCJYCg9Cb29rbWFya0NoYW5nZWQSNAoIYm9va21hcmsYASABKAsyIi50YW5rLndvcmtzcGFjZS52MS5DaGFubmVsQm9va21hcmsSDwoHcmVtb3ZlZBgCIAEoCCI6Cg1NZW1iZXJVcGRhdGVkEikKBm1lbWJlchgBIAEoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlciI3Cg1IdWRkbGVTdGFydGVkEiYKBmh1ZGRsZRgBIAEoCzIWLnRhbmsuaHVkZGxlLnYxLkh1ZGRsZSI1CgtIdWRkbGVFbmRlZBImCgZodWRkbGUYASABKAsyFi50YW5rLmh1ZGRsZS52MS5IdWRkbGUiQwoZSHVkZGxlUGFydGljaXBhbnRzQ2hhbmdlZBImCgZodWRkbGUYASABKAsyFi50YW5rLmh1ZGRsZS52MS5IdWRkbGVC0AEKEmNvbS50YW5rLmV2ZW50cy52MUILRXZlbnRzUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9ldmVudHMvdjE7ZXZlbnRzdjGiAgNURViqAg5UYW5rLkV2ZW50cy5WMcoCDlRhbmtcRXZlbnRzXFYx4gIaVGFua1xFdmVudHNcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpFdmVudHM6OlYxYgZwcm90bzM", [file_google_protobuf_any, file_google_protobuf_timestamp, file_tank_agent_v1_agent, file_tank_blocks_v1_blocks, file_tank_channel_v1_channel, file_tank_files_v1_files, file_tank_huddle_v1_huddle, file_tank_message_v1_message, file_tank_presence_v1_presence, file_tank_workspace_v1_workspace]);
+  fileDesc("Cht0YW5rL2V2ZW50cy92MS9ldmVudHMucHJvdG8SDnRhbmsuZXZlbnRzLnYxIrkBCghFbnZlbG9wZRIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSDAoEdHlwZRgDIAEoCRIPCgdzdWJqZWN0GAQgASgJEi8KC29jY3VycmVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx0cmFjZV9wYXJlbnQYBiABKAkSJQoHcGF5bG9hZBgHIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkiOwoOTWVzc2FnZUNyZWF0ZWQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIjsKDk1lc3NhZ2VVcGRhdGVkEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJQCg5NZXNzYWdlRGVsZXRlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiQwoNUmVhY3Rpb25BZGRlZBISCgptZXNzYWdlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSDQoFZW1vamkYAyABKAkiRQoPUmVhY3Rpb25SZW1vdmVkEhIKCm1lc3NhZ2VfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRINCgVlbW9qaRgDIAEoCSKEAQoQUmVhZFN0YXRlVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFQoNbGFzdF9yZWFkX3NlcRgDIAEoAxIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIcChRsYXN0X3JlYWRfdGhyZWFkX3NlcRgFIAEoAyJPCg5DaGFubmVsVXBkYXRlZBISCgpjaGFubmVsX2lkGAEgASgJEikKB2NoYW5uZWwYAiABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCJhChhDaGFubmVsTWVtYmVyc2hpcENoYW5nZWQSEgoKY2hhbm5lbF9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEg4KBmpvaW5lZBgDIAEoCBIQCghhY3Rvcl9pZBgEIAEoCSI5CgpDYXJkQWN0aW9uEisKBmFjdGlvbhgBIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkJsb2NrQWN0aW9uImgKCkFwcENvbW1hbmQSDwoHY29tbWFuZBgBIAEoCRIMCgR0ZXh0GAIgASgJEg8KB3VzZXJfaWQYAyABKAkSEgoKY2hhbm5lbF9pZBgEIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgFIAEoCSI/Cg9QcmVzZW5jZUNoYW5nZWQSLAoIcHJlc2VuY2UYASABKAsyGi50YW5rLnByZXNlbmNlLnYxLlByZXNlbmNlIkUKBlR5cGluZxISCgpjaGFubmVsX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiWQoLQWdlbnRTdGF0dXMSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRIOCgZydW5faWQYAyABKAkSDgoGc3RhdHVzGAQgASgJIi4KCUZpbGVSZWFkeRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlIk4KEE1lc3NhZ2VFcGhlbWVyYWwSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEg8KB3VzZXJfaWQYAiABKAkiLQoRTm90aWZpY2F0aW9uc1JlYWQSGAoQbm90aWZpY2F0aW9uX2lkcxgBIAMoCSIyCg9BZ2VudFJ1blVwZGF0ZWQSHwoDcnVuGAEgASgLMhIudGFuay5hZ2VudC52MS5SdW4idgoTTm90aWZpY2F0aW9uQ3JlYXRlZBIXCg9ub3RpZmljYXRpb25faWQYASABKAkSDAoEa2luZBgCIAEoCRISCgptZXNzYWdlX2lkGAMgASgJEhIKCmNoYW5uZWxfaWQYBCABKAkSEAoIYWN0b3JfaWQYBSABKAkiVQoKUGluQ2hhbmdlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDwoHdXNlcl9pZBgDIAEoCRIOCgZwaW5uZWQYBCABKAgiXAoMRW1vamlDaGFuZ2VkEi0KBWVtb2ppGAEgASgLMh4udGFuay53b3Jrc3BhY2UudjEuQ3VzdG9tRW1vamkSDwoHZGVsZXRlZBgCIAEoCBIMCgRoYXNoGAMgASgJIloKElByZWZlcmVuY2VzVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEjMKC3ByZWZlcmVuY2VzGAIgASgLMh4udGFuay53b3Jrc3BhY2UudjEuUHJlZmVyZW5jZXMiYgoYQ2hhbm5lbFByZWZlcmVuY2VVcGRhdGVkEg8KB3VzZXJfaWQYASABKAkSNQoKcmVhZF9zdGF0ZRgCIAEoCzIhLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsUmVhZFN0YXRlIlkKDERyYWZ0VXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEicKBWRyYWZ0GAIgASgLMhgudGFuay53b3Jrc3BhY2UudjEuRHJhZnQSDwoHZGVsZXRlZBgDIAEoCCJOChRTY2hlZHVsZWRNZXNzYWdlU2VudBI2CglzY2hlZHVsZWQYASABKAsyIy50YW5rLndvcmtzcGFjZS52MS5TY2hlZHVsZWRNZXNzYWdlIlAKEFVzZXJHcm91cFVwZGF0ZWQSKwoFZ3JvdXAYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Vc2VyR3JvdXASDwoHZGVsZXRlZBgCIAEoCCJYCg9Cb29rbWFya0NoYW5nZWQSNAoIYm9va21hcmsYASABKAsyIi50YW5rLndvcmtzcGFjZS52MS5DaGFubmVsQm9va21hcmsSDwoHcmVtb3ZlZBgCIAEoCCI6Cg1NZW1iZXJVcGRhdGVkEikKBm1lbWJlchgBIAEoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlciI3Cg1IdWRkbGVTdGFydGVkEiYKBmh1ZGRsZRgBIAEoCzIWLnRhbmsuaHVkZGxlLnYxLkh1ZGRsZSI1CgtIdWRkbGVFbmRlZBImCgZodWRkbGUYASABKAsyFi50YW5rLmh1ZGRsZS52MS5IdWRkbGUiQwoZSHVkZGxlUGFydGljaXBhbnRzQ2hhbmdlZBImCgZodWRkbGUYASABKAsyFi50YW5rLmh1ZGRsZS52MS5IdWRkbGUigAEKEU1lbWJlclJvbGVDaGFuZ2VkEikKBm1lbWJlchgBIAEoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlchIuCg1wcmV2aW91c19yb2xlGAIgASgOMhcudGFuay53b3Jrc3BhY2UudjEuUm9sZRIQCghhY3Rvcl9pZBgDIAEoCSJ2ChFNZW1iZXJEZWFjdGl2YXRlZBIpCgZtZW1iZXIYASABKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXISEwoLcmVhY3RpdmF0ZWQYAiABKAgSDwoHcmVtb3ZlZBgDIAEoCBIQCghhY3Rvcl9pZBgEIAEoCSJgChhXb3Jrc3BhY2VTZXR0aW5nc1VwZGF0ZWQSMgoIc2V0dGluZ3MYASABKAsyIC50YW5rLmFkbWluLnYxLldvcmtzcGFjZVNldHRpbmdzEhAKCGFjdG9yX2lkGAIgASgJIjcKC0F1ZGl0TG9nZ2VkEigKBWVudHJ5GAEgASgLMhkudGFuay5hZG1pbi52MS5BdWRpdEVudHJ5IjQKC0V4cG9ydFJlYWR5EiUKA2pvYhgBIAEoCzIYLnRhbmsuYWRtaW4udjEuRXhwb3J0Sm9iQtABChJjb20udGFuay5ldmVudHMudjFCC0V2ZW50c1Byb3RvUAFaU2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvZXZlbnRzL3YxO2V2ZW50c3YxogIDVEVYqgIOVGFuay5FdmVudHMuVjHKAg5UYW5rXEV2ZW50c1xWMeICGlRhbmtcRXZlbnRzXFYxXEdQQk1ldGFkYXRh6gIQVGFuazo6RXZlbnRzOjpWMWIGcHJvdG8z", [file_google_protobuf_any, file_google_protobuf_timestamp, file_tank_admin_v1_admin, file_tank_agent_v1_agent, file_tank_blocks_v1_blocks, file_tank_channel_v1_channel, file_tank_files_v1_files, file_tank_huddle_v1_huddle, file_tank_message_v1_message, file_tank_presence_v1_presence, file_tank_workspace_v1_workspace]);
 
 /**
  * Every durable event on the bus and every realtime frame payload is one of
@@ -837,4 +839,132 @@ export type HuddleParticipantsChanged = Message<"tank.events.v1.HuddleParticipan
  */
 export const HuddleParticipantsChangedSchema: GenMessage<HuddleParticipantsChanged> = /*@__PURE__*/
   messageDesc(file_tank_events_v1_events, 30);
+
+/**
+ * member.role_changed on evt.{ws}.ws and on the member's user subject.
+ *
+ * @generated from message tank.events.v1.MemberRoleChanged
+ */
+export type MemberRoleChanged = Message<"tank.events.v1.MemberRoleChanged"> & {
+  /**
+   * @generated from field: tank.workspace.v1.Member member = 1;
+   */
+  member?: Member;
+
+  /**
+   * @generated from field: tank.workspace.v1.Role previous_role = 2;
+   */
+  previousRole: Role;
+
+  /**
+   * @generated from field: string actor_id = 3;
+   */
+  actorId: string;
+};
+
+/**
+ * Describes the message tank.events.v1.MemberRoleChanged.
+ * Use `create(MemberRoleChangedSchema)` to create a new message.
+ */
+export const MemberRoleChangedSchema: GenMessage<MemberRoleChanged> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 31);
+
+/**
+ * member.deactivated on evt.{ws}.ws (also for reactivation and removal;
+ * clients drop removed members and grey out deactivated ones).
+ *
+ * @generated from message tank.events.v1.MemberDeactivated
+ */
+export type MemberDeactivated = Message<"tank.events.v1.MemberDeactivated"> & {
+  /**
+   * @generated from field: tank.workspace.v1.Member member = 1;
+   */
+  member?: Member;
+
+  /**
+   * @generated from field: bool reactivated = 2;
+   */
+  reactivated: boolean;
+
+  /**
+   * @generated from field: bool removed = 3;
+   */
+  removed: boolean;
+
+  /**
+   * @generated from field: string actor_id = 4;
+   */
+  actorId: string;
+};
+
+/**
+ * Describes the message tank.events.v1.MemberDeactivated.
+ * Use `create(MemberDeactivatedSchema)` to create a new message.
+ */
+export const MemberDeactivatedSchema: GenMessage<MemberDeactivated> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 32);
+
+/**
+ * workspace.settings_updated on evt.{ws}.ws.
+ *
+ * @generated from message tank.events.v1.WorkspaceSettingsUpdated
+ */
+export type WorkspaceSettingsUpdated = Message<"tank.events.v1.WorkspaceSettingsUpdated"> & {
+  /**
+   * @generated from field: tank.admin.v1.WorkspaceSettings settings = 1;
+   */
+  settings?: WorkspaceSettings;
+
+  /**
+   * @generated from field: string actor_id = 2;
+   */
+  actorId: string;
+};
+
+/**
+ * Describes the message tank.events.v1.WorkspaceSettingsUpdated.
+ * Use `create(WorkspaceSettingsUpdatedSchema)` to create a new message.
+ */
+export const WorkspaceSettingsUpdatedSchema: GenMessage<WorkspaceSettingsUpdated> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 33);
+
+/**
+ * audit.logged on evt.{ws}.audit.{entry}: internal (SIEM forwarders, the
+ * knowledge indexer); the gateway never fans it out to clients.
+ *
+ * @generated from message tank.events.v1.AuditLogged
+ */
+export type AuditLogged = Message<"tank.events.v1.AuditLogged"> & {
+  /**
+   * @generated from field: tank.admin.v1.AuditEntry entry = 1;
+   */
+  entry?: AuditEntry;
+};
+
+/**
+ * Describes the message tank.events.v1.AuditLogged.
+ * Use `create(AuditLoggedSchema)` to create a new message.
+ */
+export const AuditLoggedSchema: GenMessage<AuditLogged> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 34);
+
+/**
+ * export.ready on the requester's user subject: the zip can be downloaded
+ * with AdminService.GetExportDownloadUrl (also sent when the job failed).
+ *
+ * @generated from message tank.events.v1.ExportReady
+ */
+export type ExportReady = Message<"tank.events.v1.ExportReady"> & {
+  /**
+   * @generated from field: tank.admin.v1.ExportJob job = 1;
+   */
+  job?: ExportJob;
+};
+
+/**
+ * Describes the message tank.events.v1.ExportReady.
+ * Use `create(ExportReadySchema)` to create a new message.
+ */
+export const ExportReadySchema: GenMessage<ExportReady> = /*@__PURE__*/
+  messageDesc(file_tank_events_v1_events, 35);
 

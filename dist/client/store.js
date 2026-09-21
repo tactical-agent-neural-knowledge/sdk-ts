@@ -30,6 +30,7 @@ export function initialState() {
         notifications: {},
         notificationIds: {},
         unreadNotificationCount: {},
+        entitlements: {},
         notificationPaging: {},
         runsById: {},
         runsByThread: {},
@@ -272,6 +273,9 @@ export function reduce(state, action) {
                     ...state.unreadNotificationCount,
                     [action.workspace.id]: Math.max(0, action.unreadNotificationCount),
                 };
+            const entitlements = action.entitlements
+                ? { ...state.entitlements, [action.workspace.id]: action.entitlements }
+                : state.entitlements;
             return {
                 ...state,
                 me: action.me?.principal ?? state.me,
@@ -281,8 +285,14 @@ export function reduce(state, action) {
                 members: { ...state.members, [action.workspace.id]: membersForWs },
                 readStates,
                 unreadNotificationCount,
+                entitlements,
             };
         }
+        case "entitlements/set":
+            return {
+                ...state,
+                entitlements: { ...state.entitlements, [action.workspaceId]: action.entitlements },
+            };
         case "workspaces/upsert":
             return { ...state, workspaces: { ...state.workspaces, ...byId(action.workspaces) } };
         case "members/upsert": {
