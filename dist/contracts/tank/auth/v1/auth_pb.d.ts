@@ -270,6 +270,96 @@ export type GetMeResponse = Message<"tank.auth.v1.GetMeResponse"> & {
  */
 export declare const GetMeResponseSchema: GenMessage<GetMeResponse>;
 /**
+ * One account signed in on this device. A session holds several: the same
+ * person often belongs to workspaces under different email addresses, and
+ * signing into one must never sign them out of another.
+ *
+ * Which identity a request acts as is chosen per request by the
+ * `x-tank-user` header, not by server-side "active" state, so two tabs can
+ * sit in two accounts at once.
+ *
+ * @generated from message tank.auth.v1.Identity
+ */
+export type Identity = Message<"tank.auth.v1.Identity"> & {
+    /**
+     * @generated from field: tank.auth.v1.Principal principal = 1;
+     */
+    principal?: Principal;
+    /**
+     * True for the identity used when a request names none.
+     *
+     * @generated from field: bool is_default = 2;
+     */
+    isDefault: boolean;
+    /**
+     * When this account was added to the session.
+     *
+     * @generated from field: google.protobuf.Timestamp added_at = 3;
+     */
+    addedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.auth.v1.Identity.
+ * Use `create(IdentitySchema)` to create a new message.
+ */
+export declare const IdentitySchema: GenMessage<Identity>;
+/**
+ * @generated from message tank.auth.v1.ListIdentitiesRequest
+ */
+export type ListIdentitiesRequest = Message<"tank.auth.v1.ListIdentitiesRequest"> & {};
+/**
+ * Describes the message tank.auth.v1.ListIdentitiesRequest.
+ * Use `create(ListIdentitiesRequestSchema)` to create a new message.
+ */
+export declare const ListIdentitiesRequestSchema: GenMessage<ListIdentitiesRequest>;
+/**
+ * @generated from message tank.auth.v1.ListIdentitiesResponse
+ */
+export type ListIdentitiesResponse = Message<"tank.auth.v1.ListIdentitiesResponse"> & {
+    /**
+     * @generated from field: repeated tank.auth.v1.Identity identities = 1;
+     */
+    identities: Identity[];
+};
+/**
+ * Describes the message tank.auth.v1.ListIdentitiesResponse.
+ * Use `create(ListIdentitiesResponseSchema)` to create a new message.
+ */
+export declare const ListIdentitiesResponseSchema: GenMessage<ListIdentitiesResponse>;
+/**
+ * Removes one account from this device, leaving the others signed in. Removing
+ * the last one ends the session, exactly like Logout.
+ *
+ * @generated from message tank.auth.v1.SignOutIdentityRequest
+ */
+export type SignOutIdentityRequest = Message<"tank.auth.v1.SignOutIdentityRequest"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.auth.v1.SignOutIdentityRequest.
+ * Use `create(SignOutIdentityRequestSchema)` to create a new message.
+ */
+export declare const SignOutIdentityRequestSchema: GenMessage<SignOutIdentityRequest>;
+/**
+ * @generated from message tank.auth.v1.SignOutIdentityResponse
+ */
+export type SignOutIdentityResponse = Message<"tank.auth.v1.SignOutIdentityResponse"> & {
+    /**
+     * False once the session itself is gone, so the client knows to stop.
+     *
+     * @generated from field: bool session_remains = 1;
+     */
+    sessionRemains: boolean;
+};
+/**
+ * Describes the message tank.auth.v1.SignOutIdentityResponse.
+ * Use `create(SignOutIdentityResponseSchema)` to create a new message.
+ */
+export declare const SignOutIdentityResponseSchema: GenMessage<SignOutIdentityResponse>;
+/**
  * One signed-in device: a web cookie session or a mobile refresh session.
  *
  * @generated from message tank.auth.v1.Session
@@ -794,6 +884,22 @@ export declare const AuthService: GenService<{
         methodKind: "unary";
         input: typeof GetMeRequestSchema;
         output: typeof GetMeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.ListIdentities
+     */
+    listIdentities: {
+        methodKind: "unary";
+        input: typeof ListIdentitiesRequestSchema;
+        output: typeof ListIdentitiesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.SignOutIdentity
+     */
+    signOutIdentity: {
+        methodKind: "unary";
+        input: typeof SignOutIdentityRequestSchema;
+        output: typeof SignOutIdentityResponseSchema;
     };
     /**
      * @generated from rpc tank.auth.v1.AuthService.ListSessions

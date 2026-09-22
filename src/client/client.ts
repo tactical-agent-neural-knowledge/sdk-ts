@@ -75,6 +75,13 @@ export interface TankClientOptions {
   interceptors?: Interceptor[];
   /** Replace the Connect transport entirely (tests, React Native, node). `baseUrl`/`auth`/`fetch` are then unused. */
   transport?: Transport;
+  /**
+   * Which of the device's signed-in accounts this client acts as. One device holds several — the
+   * same person often belongs to workspaces under different email addresses — and each gets its own
+   * client, its own store and its own socket, so unread counts stay live in all of them at once.
+   * Give each one its own `storage` namespace or they will overwrite each other's cache.
+   */
+  actAsUserId?: string;
   realtime?: Pick<
     RealtimeOptions,
     "heartbeatMs" | "gapBufferMs" | "backoff" | "capabilities" | "listenOnline" | "onlineSignal"
@@ -266,6 +273,7 @@ export class TankClient {
         auth: opts.auth,
         ...(opts.fetch ? { fetch: opts.fetch } : {}),
         ...(opts.interceptors ? { interceptors: opts.interceptors } : {}),
+        ...(opts.actAsUserId ? { actAsUserId: opts.actAsUserId } : {}),
       });
     this.auth = createClient(AuthService, this.transport);
     this.workspaces = createClient(WorkspaceService, this.transport);
