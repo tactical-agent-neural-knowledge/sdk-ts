@@ -419,6 +419,100 @@ export type RevokeInviteResponse = Message<"tank.workspace.v1.RevokeInviteRespon
  */
 export declare const RevokeInviteResponseSchema: GenMessage<RevokeInviteResponse>;
 /**
+ * An invite waiting for the signed-in person, across every workspace. Someone
+ * who signs up instead of opening the emailed link lands with no workspaces and
+ * is shown "create one" — so the two people invited to Cache7 each made their
+ * own workspace and never joined the one they were invited to.
+ *
+ * @generated from message tank.workspace.v1.PendingInvite
+ */
+export type PendingInvite = Message<"tank.workspace.v1.PendingInvite"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string workspace_name = 2;
+     */
+    workspaceName: string;
+    /**
+     * @generated from field: string workspace_slug = 3;
+     */
+    workspaceSlug: string;
+    /**
+     * @generated from field: tank.workspace.v1.Role role = 4;
+     */
+    role: Role;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 5;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.PendingInvite.
+ * Use `create(PendingInviteSchema)` to create a new message.
+ */
+export declare const PendingInviteSchema: GenMessage<PendingInvite>;
+/**
+ * @generated from message tank.workspace.v1.ListMyInvitesRequest
+ */
+export type ListMyInvitesRequest = Message<"tank.workspace.v1.ListMyInvitesRequest"> & {};
+/**
+ * Describes the message tank.workspace.v1.ListMyInvitesRequest.
+ * Use `create(ListMyInvitesRequestSchema)` to create a new message.
+ */
+export declare const ListMyInvitesRequestSchema: GenMessage<ListMyInvitesRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListMyInvitesResponse
+ */
+export type ListMyInvitesResponse = Message<"tank.workspace.v1.ListMyInvitesResponse"> & {
+    /**
+     * @generated from field: repeated tank.workspace.v1.PendingInvite invites = 1;
+     */
+    invites: PendingInvite[];
+};
+/**
+ * Describes the message tank.workspace.v1.ListMyInvitesResponse.
+ * Use `create(ListMyInvitesResponseSchema)` to create a new message.
+ */
+export declare const ListMyInvitesResponseSchema: GenMessage<ListMyInvitesResponse>;
+/**
+ * Accepts an invite already addressed to the caller. No token: only the hash is
+ * stored, so the emailed one cannot be handed back — and matching on an address
+ * the caller proved at sign-in is the stronger check anyway.
+ *
+ * @generated from message tank.workspace.v1.AcceptInviteRequest
+ */
+export type AcceptInviteRequest = Message<"tank.workspace.v1.AcceptInviteRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.AcceptInviteRequest.
+ * Use `create(AcceptInviteRequestSchema)` to create a new message.
+ */
+export declare const AcceptInviteRequestSchema: GenMessage<AcceptInviteRequest>;
+/**
+ * @generated from message tank.workspace.v1.AcceptInviteResponse
+ */
+export type AcceptInviteResponse = Message<"tank.workspace.v1.AcceptInviteResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Workspace workspace = 1;
+     */
+    workspace?: Workspace;
+    /**
+     * @generated from field: tank.workspace.v1.Member me = 2;
+     */
+    me?: Member;
+};
+/**
+ * Describes the message tank.workspace.v1.AcceptInviteResponse.
+ * Use `create(AcceptInviteResponseSchema)` to create a new message.
+ */
+export declare const AcceptInviteResponseSchema: GenMessage<AcceptInviteResponse>;
+/**
  * @generated from message tank.workspace.v1.JoinWorkspaceRequest
  */
 export type JoinWorkspaceRequest = Message<"tank.workspace.v1.JoinWorkspaceRequest"> & {
@@ -1496,6 +1590,22 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof ListInvitesRequestSchema;
         output: typeof ListInvitesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListMyInvites
+     */
+    listMyInvites: {
+        methodKind: "unary";
+        input: typeof ListMyInvitesRequestSchema;
+        output: typeof ListMyInvitesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.AcceptInvite
+     */
+    acceptInvite: {
+        methodKind: "unary";
+        input: typeof AcceptInviteRequestSchema;
+        output: typeof AcceptInviteResponseSchema;
     };
     /**
      * @generated from rpc tank.workspace.v1.WorkspaceService.RevokeInvite

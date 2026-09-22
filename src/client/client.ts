@@ -38,7 +38,9 @@ import {
   type GetBootstrapResponse,
   GetBootstrapResponseSchema,
   type Invite,
+  type PendingInvite,
   Role,
+  type Workspace,
   WorkspaceService,
 } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Backoff } from "./backoff.js";
@@ -669,6 +671,27 @@ export class TankClient {
   /** Makes the emailed link stop working. Admins only, matching who may send one. */
   async revokeInvite(workspaceId: string, inviteId: string): Promise<void> {
     await this.workspaces.revokeInvite({ workspaceId, inviteId });
+  }
+
+  /**
+   * Invites waiting for the signed-in person, across every workspace.
+   *
+   * Signing up instead of opening the emailed link leaves you with no workspaces and a screen that
+   * says "create one" — which is what the first two people invited to a real team both did, ending
+   * up alone in workspaces of their own while their invites sat unopened.
+   */
+  async myInvites(): Promise<PendingInvite[]> {
+    const res = await this.workspaces.listMyInvites({});
+    return res.invites;
+  }
+
+  /** Joins a workspace already expecting you. Matched on your own address, so it needs no token. */
+  async acceptInvite(workspaceId: string): Promise<Workspace | undefined> {
+    const res = await this.workspaces.acceptInvite({ workspaceId });
+    if (res.workspace) {
+      this.store.dispatch({ type: "workspaces/upsert", workspaces: [res.workspace] });
+    }
+    return res.workspace;
   }
 
   addReaction(messageId: string, emoji: string): Promise<unknown> {
