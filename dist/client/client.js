@@ -481,6 +481,25 @@ export class TankClient {
     async revokeInvite(workspaceId, inviteId) {
         await this.workspaces.revokeInvite({ workspaceId, inviteId });
     }
+    /**
+     * Invites waiting for the signed-in person, across every workspace.
+     *
+     * Signing up instead of opening the emailed link leaves you with no workspaces and a screen that
+     * says "create one" — which is what the first two people invited to a real team both did, ending
+     * up alone in workspaces of their own while their invites sat unopened.
+     */
+    async myInvites() {
+        const res = await this.workspaces.listMyInvites({});
+        return res.invites;
+    }
+    /** Joins a workspace already expecting you. Matched on your own address, so it needs no token. */
+    async acceptInvite(workspaceId) {
+        const res = await this.workspaces.acceptInvite({ workspaceId });
+        if (res.workspace) {
+            this.store.dispatch({ type: "workspaces/upsert", workspaces: [res.workspace] });
+        }
+        return res.workspace;
+    }
     addReaction(messageId, emoji) {
         const me = this.store.getState().me;
         if (me)

@@ -7,7 +7,7 @@ import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js"
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
-import { type GetBootstrapResponse, type Invite, Role, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { type GetBootstrapResponse, type Invite, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
 import { RealtimeClient, type RealtimeOptions, type WebSocketCtor } from "./realtime.js";
 import { type TankStorage } from "./storage.js";
@@ -227,6 +227,16 @@ export declare class TankClient {
     listInvites(workspaceId: string): Promise<Invite[]>;
     /** Makes the emailed link stop working. Admins only, matching who may send one. */
     revokeInvite(workspaceId: string, inviteId: string): Promise<void>;
+    /**
+     * Invites waiting for the signed-in person, across every workspace.
+     *
+     * Signing up instead of opening the emailed link leaves you with no workspaces and a screen that
+     * says "create one" — which is what the first two people invited to a real team both did, ending
+     * up alone in workspaces of their own while their invites sat unopened.
+     */
+    myInvites(): Promise<PendingInvite[]>;
+    /** Joins a workspace already expecting you. Matched on your own address, so it needs no token. */
+    acceptInvite(workspaceId: string): Promise<Workspace | undefined>;
     addReaction(messageId: string, emoji: string): Promise<unknown>;
     removeReaction(messageId: string, emoji: string): Promise<unknown>;
     /** A user interacted with a block; delivered to the owning app/agent as an event. */
