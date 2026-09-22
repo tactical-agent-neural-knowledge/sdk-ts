@@ -170,6 +170,12 @@ export declare class TankClient {
     bootstrap(workspaceId: string): Promise<GetBootstrapResponse>;
     /** Pages messages into the store. Resolves to whether more exist in that direction. */
     loadChannel(channelId: string, opts?: LoadChannelOptions): Promise<boolean>;
+    /**
+     * Fetches the newest page and makes it the channel's timeline, discarding cached rows the server no
+     * longer returns (deleted messages, tombstoned agent cards). On failure the cache is left alone, so
+     * an offline open still paints. Resolves to whether older messages exist.
+     */
+    private loadChannelTail;
     /** Loads a thread's root and replies (paging with after_thread_seq). Resolves to whether more exist. */
     loadThread(rootId: string, opts?: {
         limit?: number;

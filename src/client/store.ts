@@ -171,6 +171,10 @@ export type Action =
   | { type: "channels/upsert"; channels: Channel[] }
   | { type: "channels/remove"; channelId: string }
   | { type: "messages/upsert"; messages: Message[] }
+  /** Replace a channel's timeline with a freshly fetched page, dropping rows the server no longer
+   *  returns. Unsent optimistic rows survive; the `messages` map keeps its entries so threads that
+   *  still reference them are unaffected. */
+  | { type: "messages/resetChannel"; channelId: string; messages: Message[] }
   | { type: "messages/created"; message: Message }
   | { type: "messages/updated"; message: Message }
   | { type: "messages/deleted"; messageId: string; channelId: string; threadRootId: string }
@@ -538,6 +542,24 @@ export function reduce(state: TankState, action: Action): TankState {
         s = bumpChannelSeq(s, m);
       }
       return s;
+    }
+    case "messages/resetChannel": {
+      let s = state;
+      for (const m of action.messages) {
+        if (m.deletedAt) continue;
+        s = upsertMessage(s, m);
+        s = bumpChannelSeq(s, m);
+      }
+      const fresh = new Set(action.messages.map((m) => m.id));
+      const prev = s.messageIdsByChannel[action.channelId] ?? [];
+      const next = prev.filter((id) => {
+        const m = s.messages[id];
+        if (!m) return false;
+        // Keep what the server just sent, plus anything still in flight from this device.
+        return fresh.has(id) || m.channelSeq === 0n;
+      });
+      if (next.length === prev.length) return s;
+      return { ...s, messageIdsByChannel: { ...s.messageIdsByChannel, [action.channelId]: next } };
     }
     case "messages/created": {
       const m = action.message;

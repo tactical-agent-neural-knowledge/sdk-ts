@@ -9,6 +9,7 @@ import {
   ChatService,
   type MarkReadRequest,
   type Message,
+  MessageKind,
   MessageSchema,
   type PostMessageRequest,
 } from "../contracts/tank/message/v1/message_pb.js";
@@ -611,5 +612,47 @@ describe("TankClient", () => {
       value: { channelId: "general", threadRootId: "root", runId: "r1", status: "running tests" },
     });
     await until(() => c.store.getState().agentStatus.root?.status === "running tests");
+  });
+});
+
+describe("stale persisted timeline", () => {
+  // A phone that was closed while the Tread moved on hydrates its cache, and paging "before" the
+  // newest cached row asks for messages older than the gap — so the gap is never fetched and the
+  // Tread stays frozen on old content, including cards the server has since deleted.
+  it("replaces a cached tail that is behind the server on the first open", async () => {
+    const storage = new MemoryStorage();
+    const c1 = makeClient(storage);
+    await c1.bootstrap("ws1");
+    await c1.start();
+    await until(() => c1.store.getState().connection === "ready");
+    c1.viewChannel("general");
+    for (let i = 0; i < 3; i++) gw.emit("ws1", gw.messageCreated(fakeMessage({ channelId: "general" })));
+    await until(() => c1.store.selectChannelMessages("general").length === 3);
+    await c1.stop();
+    clients.splice(clients.indexOf(c1), 1);
+
+    const row = (id: string, channelSeq: bigint, text: string, kind?: MessageKind) =>
+      create(MessageSchema, {
+        id,
+        workspaceId: "ws1",
+        channelId: "general",
+        channelSeq,
+        authorId: "someone",
+        text,
+        ...(kind === undefined ? {} : { kind }),
+      });
+    // m2 was deleted while the device was away, and a webhook posted well past the cached tail.
+    api.messages = [
+      row("m1", 1n, "one"),
+      row("m3", 3n, "three"),
+      row("hook", 9n, "webhook", MessageKind.BOT),
+    ];
+
+    const c2 = makeClient(storage);
+    await c2.start();
+    expect(c2.store.selectChannelMessages("general").map((m) => m.id)).toEqual(["m1", "m2", "m3"]);
+
+    await c2.loadChannel("general");
+    expect(c2.store.selectChannelMessages("general").map((m) => m.id)).toEqual(["m1", "m3", "hook"]);
   });
 });
