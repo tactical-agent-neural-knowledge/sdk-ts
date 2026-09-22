@@ -79,6 +79,7 @@ export class TankClient {
                     auth: opts.auth,
                     ...(opts.fetch ? { fetch: opts.fetch } : {}),
                     ...(opts.interceptors ? { interceptors: opts.interceptors } : {}),
+                    ...(opts.actAsUserId ? { actAsUserId: opts.actAsUserId } : {}),
                 });
         this.auth = createClient(AuthService, this.transport);
         this.workspaces = createClient(WorkspaceService, this.transport);

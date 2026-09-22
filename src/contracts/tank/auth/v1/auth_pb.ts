@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/auth/v1/auth.proto.
  */
 export const file_tank_auth_v1_auth: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL2F1dGgvdjEvYXV0aC5wcm90bxIMdGFuay5hdXRoLnYxIpMBCglQcmluY2lwYWwSCgoCaWQYASABKAkSKQoEa2luZBgCIAEoDjIbLnRhbmsuYXV0aC52MS5QcmluY2lwYWxLaW5kEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEg0KBWVtYWlsGAUgASgJEhYKDmF2YXRhcl9maWxlX2lkGAYgASgJIiYKFVN0YXJ0TWFnaWNMaW5rUmVxdWVzdBINCgVlbWFpbBgBIAEoCSIYChZTdGFydE1hZ2ljTGlua1Jlc3BvbnNlIikKGENvbXBsZXRlTWFnaWNMaW5rUmVxdWVzdBINCgV0b2tlbhgBIAEoCSKkAQoZQ29tcGxldGVNYWdpY0xpbmtSZXNwb25zZRIjCgJtZRgBIAEoCzIXLnRhbmsuYXV0aC52MS5QcmluY2lwYWwSFAoMYWNjZXNzX3Rva2VuGAIgASgJEhUKDXJlZnJlc2hfdG9rZW4YAyABKAkSNQoRYWNjZXNzX2V4cGlyZXNfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImIKE0V4Y2hhbmdlQ29kZVJlcXVlc3QSEAoIcHJvdmlkZXIYASABKAkSDAoEY29kZRgCIAEoCRIVCg1jb2RlX3ZlcmlmaWVyGAMgASgJEhQKDHJlZGlyZWN0X3VyaRgEIAEoCSKfAQoURXhjaGFuZ2VDb2RlUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCInCg5SZWZyZXNoUmVxdWVzdBIVCg1yZWZyZXNoX3Rva2VuGAEgASgJInUKD1JlZnJlc2hSZXNwb25zZRIUCgxhY2Nlc3NfdG9rZW4YASABKAkSFQoNcmVmcmVzaF90b2tlbhgCIAEoCRI1ChFhY2Nlc3NfZXhwaXJlc19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDwoNTG9nb3V0UmVxdWVzdCIQCg5Mb2dvdXRSZXNwb25zZSIZChdNaW50R2F0ZXdheVRva2VuUmVxdWVzdCJZChhNaW50R2F0ZXdheVRva2VuUmVzcG9uc2USDQoFdG9rZW4YASABKAkSLgoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDgoMR2V0TWVSZXF1ZXN0IjQKDUdldE1lUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsIrQBCgdTZXNzaW9uEgoKAmlkGAEgASgJEgwKBGtpbmQYAiABKAkSLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKZXhwaXJlc19hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKdXNlcl9hZ2VudBgFIAEoCRIKCgJpcBgGIAEoCRIPCgdjdXJyZW50GAcgASgIIhUKE0xpc3RTZXNzaW9uc1JlcXVlc3QiPwoUTGlzdFNlc3Npb25zUmVzcG9uc2USJwoIc2Vzc2lvbnMYASADKAsyFS50YW5rLmF1dGgudjEuU2Vzc2lvbiIqChRSZXZva2VTZXNzaW9uUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJIhcKFVJldm9rZVNlc3Npb25SZXNwb25zZSJHCh5BZG1pblJldm9rZVVzZXJTZXNzaW9uc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkiMgofQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnNSZXNwb25zZRIPCgdyZXZva2VkGAEgASgFIvsCCglTc29Db25maWcSFAoMd29ya3NwYWNlX2lkGAEgASgJEisKCHByb3ZpZGVyGAIgASgOMhkudGFuay5hdXRoLnYxLlNzb1Byb3ZpZGVyEg8KB2VuYWJsZWQYAyABKAgSDgoGaXNzdWVyGAQgASgJEhQKDG1ldGFkYXRhX3htbBgFIAEoCRIRCgljbGllbnRfaWQYBiABKAkSGQoRY2xpZW50X3NlY3JldF9yZWYYByABKAkSGQoRaGFzX2NsaWVudF9zZWNyZXQYCCABKAgSFAoMZG9tYWluX2NsYWltGAkgASgJEg8KB2VuZm9yY2UYCiABKAgSFAoMcmVkaXJlY3RfdXJpGAsgASgJEhQKDHNwX2VudGl0eV9pZBgMIAEoCRIXCg9zcF9tZXRhZGF0YV91cmwYDSABKAkSDwoHYWNzX3VybBgOIAEoCRIuCgp1cGRhdGVkX2F0GA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIrChNHZXRTc29Db25maWdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI/ChRHZXRTc29Db25maWdSZXNwb25zZRInCgZjb25maWcYASABKAsyFy50YW5rLmF1dGgudjEuU3NvQ29uZmlnIvsBChNTZXRTc29Db25maWdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIrCghwcm92aWRlchgCIAEoDjIZLnRhbmsuYXV0aC52MS5Tc29Qcm92aWRlchIPCgdlbmFibGVkGAMgASgIEg4KBmlzc3VlchgEIAEoCRIUCgxtZXRhZGF0YV94bWwYBSABKAkSEQoJY2xpZW50X2lkGAYgASgJEhUKDWNsaWVudF9zZWNyZXQYByABKAkSGQoRY2xpZW50X3NlY3JldF9yZWYYCCABKAkSFAoMZG9tYWluX2NsYWltGAkgASgJEg8KB2VuZm9yY2UYCiABKAgiPwoUU2V0U3NvQ29uZmlnUmVzcG9uc2USJwoGY29uZmlnGAEgASgLMhcudGFuay5hdXRoLnYxLlNzb0NvbmZpZyI/Cg9TdGFydFNzb1JlcXVlc3QSFgoOd29ya3NwYWNlX3NsdWcYASABKAkSFAoMcmVkaXJlY3RfdXJpGAIgASgJImcKEFN0YXJ0U3NvUmVzcG9uc2USFAoMcmVkaXJlY3RfdXJsGAEgASgJEg0KBXN0YXRlGAIgASgJEi4KCmV4cGlyZXNfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIkgKEkNvbXBsZXRlU3NvUmVxdWVzdBINCgVzdGF0ZRgBIAEoCRIMCgRjb2RlGAIgASgJEhUKDXNhbWxfcmVzcG9uc2UYAyABKAkitAEKE0NvbXBsZXRlU3NvUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx3b3Jrc3BhY2VfaWQYBSABKAkqegoNUHJpbmNpcGFsS2luZBIeChpQUklOQ0lQQUxfS0lORF9VTlNQRUNJRklFRBAAEhcKE1BSSU5DSVBBTF9LSU5EX1VTRVIQARIWChJQUklOQ0lQQUxfS0lORF9CT1QQAhIYChRQUklOQ0lQQUxfS0lORF9BR0VOVBADKlkKC1Nzb1Byb3ZpZGVyEhwKGFNTT19QUk9WSURFUl9VTlNQRUNJRklFRBAAEhUKEVNTT19QUk9WSURFUl9PSURDEAESFQoRU1NPX1BST1ZJREVSX1NBTUwQAjLPCQoLQXV0aFNlcnZpY2USWwoOU3RhcnRNYWdpY0xpbmsSIy50YW5rLmF1dGgudjEuU3RhcnRNYWdpY0xpbmtSZXF1ZXN0GiQudGFuay5hdXRoLnYxLlN0YXJ0TWFnaWNMaW5rUmVzcG9uc2USZAoRQ29tcGxldGVNYWdpY0xpbmsSJi50YW5rLmF1dGgudjEuQ29tcGxldGVNYWdpY0xpbmtSZXF1ZXN0GicudGFuay5hdXRoLnYxLkNvbXBsZXRlTWFnaWNMaW5rUmVzcG9uc2USVQoMRXhjaGFuZ2VDb2RlEiEudGFuay5hdXRoLnYxLkV4Y2hhbmdlQ29kZVJlcXVlc3QaIi50YW5rLmF1dGgudjEuRXhjaGFuZ2VDb2RlUmVzcG9uc2USRgoHUmVmcmVzaBIcLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVxdWVzdBodLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVzcG9uc2USQwoGTG9nb3V0EhsudGFuay5hdXRoLnYxLkxvZ291dFJlcXVlc3QaHC50YW5rLmF1dGgudjEuTG9nb3V0UmVzcG9uc2USYQoQTWludEdhdGV3YXlUb2tlbhIlLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVxdWVzdBomLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVzcG9uc2USQAoFR2V0TWUSGi50YW5rLmF1dGgudjEuR2V0TWVSZXF1ZXN0GhsudGFuay5hdXRoLnYxLkdldE1lUmVzcG9uc2USVQoMTGlzdFNlc3Npb25zEiEudGFuay5hdXRoLnYxLkxpc3RTZXNzaW9uc1JlcXVlc3QaIi50YW5rLmF1dGgudjEuTGlzdFNlc3Npb25zUmVzcG9uc2USWAoNUmV2b2tlU2Vzc2lvbhIiLnRhbmsuYXV0aC52MS5SZXZva2VTZXNzaW9uUmVxdWVzdBojLnRhbmsuYXV0aC52MS5SZXZva2VTZXNzaW9uUmVzcG9uc2USdgoXQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnMSLC50YW5rLmF1dGgudjEuQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnNSZXF1ZXN0Gi0udGFuay5hdXRoLnYxLkFkbWluUmV2b2tlVXNlclNlc3Npb25zUmVzcG9uc2USVQoMR2V0U3NvQ29uZmlnEiEudGFuay5hdXRoLnYxLkdldFNzb0NvbmZpZ1JlcXVlc3QaIi50YW5rLmF1dGgudjEuR2V0U3NvQ29uZmlnUmVzcG9uc2USVQoMU2V0U3NvQ29uZmlnEiEudGFuay5hdXRoLnYxLlNldFNzb0NvbmZpZ1JlcXVlc3QaIi50YW5rLmF1dGgudjEuU2V0U3NvQ29uZmlnUmVzcG9uc2USSQoIU3RhcnRTc28SHS50YW5rLmF1dGgudjEuU3RhcnRTc29SZXF1ZXN0Gh4udGFuay5hdXRoLnYxLlN0YXJ0U3NvUmVzcG9uc2USUgoLQ29tcGxldGVTc28SIC50YW5rLmF1dGgudjEuQ29tcGxldGVTc29SZXF1ZXN0GiEudGFuay5hdXRoLnYxLkNvbXBsZXRlU3NvUmVzcG9uc2VCwAEKEGNvbS50YW5rLmF1dGgudjFCCUF1dGhQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2F1dGgvdjE7YXV0aHYxogIDVEFYqgIMVGFuay5BdXRoLlYxygIMVGFua1xBdXRoXFYx4gIYVGFua1xBdXRoXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXV0aDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Chd0YW5rL2F1dGgvdjEvYXV0aC5wcm90bxIMdGFuay5hdXRoLnYxIpMBCglQcmluY2lwYWwSCgoCaWQYASABKAkSKQoEa2luZBgCIAEoDjIbLnRhbmsuYXV0aC52MS5QcmluY2lwYWxLaW5kEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEg0KBWVtYWlsGAUgASgJEhYKDmF2YXRhcl9maWxlX2lkGAYgASgJIiYKFVN0YXJ0TWFnaWNMaW5rUmVxdWVzdBINCgVlbWFpbBgBIAEoCSIYChZTdGFydE1hZ2ljTGlua1Jlc3BvbnNlIikKGENvbXBsZXRlTWFnaWNMaW5rUmVxdWVzdBINCgV0b2tlbhgBIAEoCSKkAQoZQ29tcGxldGVNYWdpY0xpbmtSZXNwb25zZRIjCgJtZRgBIAEoCzIXLnRhbmsuYXV0aC52MS5QcmluY2lwYWwSFAoMYWNjZXNzX3Rva2VuGAIgASgJEhUKDXJlZnJlc2hfdG9rZW4YAyABKAkSNQoRYWNjZXNzX2V4cGlyZXNfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImIKE0V4Y2hhbmdlQ29kZVJlcXVlc3QSEAoIcHJvdmlkZXIYASABKAkSDAoEY29kZRgCIAEoCRIVCg1jb2RlX3ZlcmlmaWVyGAMgASgJEhQKDHJlZGlyZWN0X3VyaRgEIAEoCSKfAQoURXhjaGFuZ2VDb2RlUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCInCg5SZWZyZXNoUmVxdWVzdBIVCg1yZWZyZXNoX3Rva2VuGAEgASgJInUKD1JlZnJlc2hSZXNwb25zZRIUCgxhY2Nlc3NfdG9rZW4YASABKAkSFQoNcmVmcmVzaF90b2tlbhgCIAEoCRI1ChFhY2Nlc3NfZXhwaXJlc19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDwoNTG9nb3V0UmVxdWVzdCIQCg5Mb2dvdXRSZXNwb25zZSIZChdNaW50R2F0ZXdheVRva2VuUmVxdWVzdCJZChhNaW50R2F0ZXdheVRva2VuUmVzcG9uc2USDQoFdG9rZW4YASABKAkSLgoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiDgoMR2V0TWVSZXF1ZXN0IjQKDUdldE1lUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsIngKCElkZW50aXR5EioKCXByaW5jaXBhbBgBIAEoCzIXLnRhbmsuYXV0aC52MS5QcmluY2lwYWwSEgoKaXNfZGVmYXVsdBgCIAEoCBIsCghhZGRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFwoVTGlzdElkZW50aXRpZXNSZXF1ZXN0IkQKFkxpc3RJZGVudGl0aWVzUmVzcG9uc2USKgoKaWRlbnRpdGllcxgBIAMoCzIWLnRhbmsuYXV0aC52MS5JZGVudGl0eSIpChZTaWduT3V0SWRlbnRpdHlSZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkiMgoXU2lnbk91dElkZW50aXR5UmVzcG9uc2USFwoPc2Vzc2lvbl9yZW1haW5zGAEgASgIIrQBCgdTZXNzaW9uEgoKAmlkGAEgASgJEgwKBGtpbmQYAiABKAkSLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKZXhwaXJlc19hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKdXNlcl9hZ2VudBgFIAEoCRIKCgJpcBgGIAEoCRIPCgdjdXJyZW50GAcgASgIIhUKE0xpc3RTZXNzaW9uc1JlcXVlc3QiPwoUTGlzdFNlc3Npb25zUmVzcG9uc2USJwoIc2Vzc2lvbnMYASADKAsyFS50YW5rLmF1dGgudjEuU2Vzc2lvbiIqChRSZXZva2VTZXNzaW9uUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJIhcKFVJldm9rZVNlc3Npb25SZXNwb25zZSJHCh5BZG1pblJldm9rZVVzZXJTZXNzaW9uc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkiMgofQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnNSZXNwb25zZRIPCgdyZXZva2VkGAEgASgFIvsCCglTc29Db25maWcSFAoMd29ya3NwYWNlX2lkGAEgASgJEisKCHByb3ZpZGVyGAIgASgOMhkudGFuay5hdXRoLnYxLlNzb1Byb3ZpZGVyEg8KB2VuYWJsZWQYAyABKAgSDgoGaXNzdWVyGAQgASgJEhQKDG1ldGFkYXRhX3htbBgFIAEoCRIRCgljbGllbnRfaWQYBiABKAkSGQoRY2xpZW50X3NlY3JldF9yZWYYByABKAkSGQoRaGFzX2NsaWVudF9zZWNyZXQYCCABKAgSFAoMZG9tYWluX2NsYWltGAkgASgJEg8KB2VuZm9yY2UYCiABKAgSFAoMcmVkaXJlY3RfdXJpGAsgASgJEhQKDHNwX2VudGl0eV9pZBgMIAEoCRIXCg9zcF9tZXRhZGF0YV91cmwYDSABKAkSDwoHYWNzX3VybBgOIAEoCRIuCgp1cGRhdGVkX2F0GA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIrChNHZXRTc29Db25maWdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI/ChRHZXRTc29Db25maWdSZXNwb25zZRInCgZjb25maWcYASABKAsyFy50YW5rLmF1dGgudjEuU3NvQ29uZmlnIvsBChNTZXRTc29Db25maWdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIrCghwcm92aWRlchgCIAEoDjIZLnRhbmsuYXV0aC52MS5Tc29Qcm92aWRlchIPCgdlbmFibGVkGAMgASgIEg4KBmlzc3VlchgEIAEoCRIUCgxtZXRhZGF0YV94bWwYBSABKAkSEQoJY2xpZW50X2lkGAYgASgJEhUKDWNsaWVudF9zZWNyZXQYByABKAkSGQoRY2xpZW50X3NlY3JldF9yZWYYCCABKAkSFAoMZG9tYWluX2NsYWltGAkgASgJEg8KB2VuZm9yY2UYCiABKAgiPwoUU2V0U3NvQ29uZmlnUmVzcG9uc2USJwoGY29uZmlnGAEgASgLMhcudGFuay5hdXRoLnYxLlNzb0NvbmZpZyI/Cg9TdGFydFNzb1JlcXVlc3QSFgoOd29ya3NwYWNlX3NsdWcYASABKAkSFAoMcmVkaXJlY3RfdXJpGAIgASgJImcKEFN0YXJ0U3NvUmVzcG9uc2USFAoMcmVkaXJlY3RfdXJsGAEgASgJEg0KBXN0YXRlGAIgASgJEi4KCmV4cGlyZXNfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIkgKEkNvbXBsZXRlU3NvUmVxdWVzdBINCgVzdGF0ZRgBIAEoCRIMCgRjb2RlGAIgASgJEhUKDXNhbWxfcmVzcG9uc2UYAyABKAkitAEKE0NvbXBsZXRlU3NvUmVzcG9uc2USIwoCbWUYASABKAsyFy50YW5rLmF1dGgudjEuUHJpbmNpcGFsEhQKDGFjY2Vzc190b2tlbhgCIAEoCRIVCg1yZWZyZXNoX3Rva2VuGAMgASgJEjUKEWFjY2Vzc19leHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx3b3Jrc3BhY2VfaWQYBSABKAkqegoNUHJpbmNpcGFsS2luZBIeChpQUklOQ0lQQUxfS0lORF9VTlNQRUNJRklFRBAAEhcKE1BSSU5DSVBBTF9LSU5EX1VTRVIQARIWChJQUklOQ0lQQUxfS0lORF9CT1QQAhIYChRQUklOQ0lQQUxfS0lORF9BR0VOVBADKlkKC1Nzb1Byb3ZpZGVyEhwKGFNTT19QUk9WSURFUl9VTlNQRUNJRklFRBAAEhUKEVNTT19QUk9WSURFUl9PSURDEAESFQoRU1NPX1BST1ZJREVSX1NBTUwQAjKMCwoLQXV0aFNlcnZpY2USWwoOU3RhcnRNYWdpY0xpbmsSIy50YW5rLmF1dGgudjEuU3RhcnRNYWdpY0xpbmtSZXF1ZXN0GiQudGFuay5hdXRoLnYxLlN0YXJ0TWFnaWNMaW5rUmVzcG9uc2USZAoRQ29tcGxldGVNYWdpY0xpbmsSJi50YW5rLmF1dGgudjEuQ29tcGxldGVNYWdpY0xpbmtSZXF1ZXN0GicudGFuay5hdXRoLnYxLkNvbXBsZXRlTWFnaWNMaW5rUmVzcG9uc2USVQoMRXhjaGFuZ2VDb2RlEiEudGFuay5hdXRoLnYxLkV4Y2hhbmdlQ29kZVJlcXVlc3QaIi50YW5rLmF1dGgudjEuRXhjaGFuZ2VDb2RlUmVzcG9uc2USRgoHUmVmcmVzaBIcLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVxdWVzdBodLnRhbmsuYXV0aC52MS5SZWZyZXNoUmVzcG9uc2USQwoGTG9nb3V0EhsudGFuay5hdXRoLnYxLkxvZ291dFJlcXVlc3QaHC50YW5rLmF1dGgudjEuTG9nb3V0UmVzcG9uc2USYQoQTWludEdhdGV3YXlUb2tlbhIlLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVxdWVzdBomLnRhbmsuYXV0aC52MS5NaW50R2F0ZXdheVRva2VuUmVzcG9uc2USQAoFR2V0TWUSGi50YW5rLmF1dGgudjEuR2V0TWVSZXF1ZXN0GhsudGFuay5hdXRoLnYxLkdldE1lUmVzcG9uc2USWwoOTGlzdElkZW50aXRpZXMSIy50YW5rLmF1dGgudjEuTGlzdElkZW50aXRpZXNSZXF1ZXN0GiQudGFuay5hdXRoLnYxLkxpc3RJZGVudGl0aWVzUmVzcG9uc2USXgoPU2lnbk91dElkZW50aXR5EiQudGFuay5hdXRoLnYxLlNpZ25PdXRJZGVudGl0eVJlcXVlc3QaJS50YW5rLmF1dGgudjEuU2lnbk91dElkZW50aXR5UmVzcG9uc2USVQoMTGlzdFNlc3Npb25zEiEudGFuay5hdXRoLnYxLkxpc3RTZXNzaW9uc1JlcXVlc3QaIi50YW5rLmF1dGgudjEuTGlzdFNlc3Npb25zUmVzcG9uc2USWAoNUmV2b2tlU2Vzc2lvbhIiLnRhbmsuYXV0aC52MS5SZXZva2VTZXNzaW9uUmVxdWVzdBojLnRhbmsuYXV0aC52MS5SZXZva2VTZXNzaW9uUmVzcG9uc2USdgoXQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnMSLC50YW5rLmF1dGgudjEuQWRtaW5SZXZva2VVc2VyU2Vzc2lvbnNSZXF1ZXN0Gi0udGFuay5hdXRoLnYxLkFkbWluUmV2b2tlVXNlclNlc3Npb25zUmVzcG9uc2USVQoMR2V0U3NvQ29uZmlnEiEudGFuay5hdXRoLnYxLkdldFNzb0NvbmZpZ1JlcXVlc3QaIi50YW5rLmF1dGgudjEuR2V0U3NvQ29uZmlnUmVzcG9uc2USVQoMU2V0U3NvQ29uZmlnEiEudGFuay5hdXRoLnYxLlNldFNzb0NvbmZpZ1JlcXVlc3QaIi50YW5rLmF1dGgudjEuU2V0U3NvQ29uZmlnUmVzcG9uc2USSQoIU3RhcnRTc28SHS50YW5rLmF1dGgudjEuU3RhcnRTc29SZXF1ZXN0Gh4udGFuay5hdXRoLnYxLlN0YXJ0U3NvUmVzcG9uc2USUgoLQ29tcGxldGVTc28SIC50YW5rLmF1dGgudjEuQ29tcGxldGVTc29SZXF1ZXN0GiEudGFuay5hdXRoLnYxLkNvbXBsZXRlU3NvUmVzcG9uc2VCwAEKEGNvbS50YW5rLmF1dGgudjFCCUF1dGhQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2F1dGgvdjE7YXV0aHYxogIDVEFYqgIMVGFuay5BdXRoLlYxygIMVGFua1xBdXRoXFYx4gIYVGFua1xBdXRoXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXV0aDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.auth.v1.Principal
@@ -346,6 +346,114 @@ export const GetMeResponseSchema: GenMessage<GetMeResponse> = /*@__PURE__*/
   messageDesc(file_tank_auth_v1_auth, 14);
 
 /**
+ * One account signed in on this device. A session holds several: the same
+ * person often belongs to workspaces under different email addresses, and
+ * signing into one must never sign them out of another.
+ *
+ * Which identity a request acts as is chosen per request by the
+ * `x-tank-user` header, not by server-side "active" state, so two tabs can
+ * sit in two accounts at once.
+ *
+ * @generated from message tank.auth.v1.Identity
+ */
+export type Identity = Message<"tank.auth.v1.Identity"> & {
+  /**
+   * @generated from field: tank.auth.v1.Principal principal = 1;
+   */
+  principal?: Principal;
+
+  /**
+   * True for the identity used when a request names none.
+   *
+   * @generated from field: bool is_default = 2;
+   */
+  isDefault: boolean;
+
+  /**
+   * When this account was added to the session.
+   *
+   * @generated from field: google.protobuf.Timestamp added_at = 3;
+   */
+  addedAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.auth.v1.Identity.
+ * Use `create(IdentitySchema)` to create a new message.
+ */
+export const IdentitySchema: GenMessage<Identity> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 15);
+
+/**
+ * @generated from message tank.auth.v1.ListIdentitiesRequest
+ */
+export type ListIdentitiesRequest = Message<"tank.auth.v1.ListIdentitiesRequest"> & {
+};
+
+/**
+ * Describes the message tank.auth.v1.ListIdentitiesRequest.
+ * Use `create(ListIdentitiesRequestSchema)` to create a new message.
+ */
+export const ListIdentitiesRequestSchema: GenMessage<ListIdentitiesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 16);
+
+/**
+ * @generated from message tank.auth.v1.ListIdentitiesResponse
+ */
+export type ListIdentitiesResponse = Message<"tank.auth.v1.ListIdentitiesResponse"> & {
+  /**
+   * @generated from field: repeated tank.auth.v1.Identity identities = 1;
+   */
+  identities: Identity[];
+};
+
+/**
+ * Describes the message tank.auth.v1.ListIdentitiesResponse.
+ * Use `create(ListIdentitiesResponseSchema)` to create a new message.
+ */
+export const ListIdentitiesResponseSchema: GenMessage<ListIdentitiesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 17);
+
+/**
+ * Removes one account from this device, leaving the others signed in. Removing
+ * the last one ends the session, exactly like Logout.
+ *
+ * @generated from message tank.auth.v1.SignOutIdentityRequest
+ */
+export type SignOutIdentityRequest = Message<"tank.auth.v1.SignOutIdentityRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message tank.auth.v1.SignOutIdentityRequest.
+ * Use `create(SignOutIdentityRequestSchema)` to create a new message.
+ */
+export const SignOutIdentityRequestSchema: GenMessage<SignOutIdentityRequest> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 18);
+
+/**
+ * @generated from message tank.auth.v1.SignOutIdentityResponse
+ */
+export type SignOutIdentityResponse = Message<"tank.auth.v1.SignOutIdentityResponse"> & {
+  /**
+   * False once the session itself is gone, so the client knows to stop.
+   *
+   * @generated from field: bool session_remains = 1;
+   */
+  sessionRemains: boolean;
+};
+
+/**
+ * Describes the message tank.auth.v1.SignOutIdentityResponse.
+ * Use `create(SignOutIdentityResponseSchema)` to create a new message.
+ */
+export const SignOutIdentityResponseSchema: GenMessage<SignOutIdentityResponse> = /*@__PURE__*/
+  messageDesc(file_tank_auth_v1_auth, 19);
+
+/**
  * One signed-in device: a web cookie session or a mobile refresh session.
  *
  * @generated from message tank.auth.v1.Session
@@ -398,7 +506,7 @@ export type Session = Message<"tank.auth.v1.Session"> & {
  * Use `create(SessionSchema)` to create a new message.
  */
 export const SessionSchema: GenMessage<Session> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 15);
+  messageDesc(file_tank_auth_v1_auth, 20);
 
 /**
  * @generated from message tank.auth.v1.ListSessionsRequest
@@ -411,7 +519,7 @@ export type ListSessionsRequest = Message<"tank.auth.v1.ListSessionsRequest"> & 
  * Use `create(ListSessionsRequestSchema)` to create a new message.
  */
 export const ListSessionsRequestSchema: GenMessage<ListSessionsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 16);
+  messageDesc(file_tank_auth_v1_auth, 21);
 
 /**
  * @generated from message tank.auth.v1.ListSessionsResponse
@@ -428,7 +536,7 @@ export type ListSessionsResponse = Message<"tank.auth.v1.ListSessionsResponse"> 
  * Use `create(ListSessionsResponseSchema)` to create a new message.
  */
 export const ListSessionsResponseSchema: GenMessage<ListSessionsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 17);
+  messageDesc(file_tank_auth_v1_auth, 22);
 
 /**
  * Revokes one of the caller's own sessions (the current one included).
@@ -447,7 +555,7 @@ export type RevokeSessionRequest = Message<"tank.auth.v1.RevokeSessionRequest"> 
  * Use `create(RevokeSessionRequestSchema)` to create a new message.
  */
 export const RevokeSessionRequestSchema: GenMessage<RevokeSessionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 18);
+  messageDesc(file_tank_auth_v1_auth, 23);
 
 /**
  * @generated from message tank.auth.v1.RevokeSessionResponse
@@ -460,7 +568,7 @@ export type RevokeSessionResponse = Message<"tank.auth.v1.RevokeSessionResponse"
  * Use `create(RevokeSessionResponseSchema)` to create a new message.
  */
 export const RevokeSessionResponseSchema: GenMessage<RevokeSessionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 19);
+  messageDesc(file_tank_auth_v1_auth, 24);
 
 /**
  * Workspace admins sign a member out of every device. The user must be a
@@ -486,7 +594,7 @@ export type AdminRevokeUserSessionsRequest = Message<"tank.auth.v1.AdminRevokeUs
  * Use `create(AdminRevokeUserSessionsRequestSchema)` to create a new message.
  */
 export const AdminRevokeUserSessionsRequestSchema: GenMessage<AdminRevokeUserSessionsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 20);
+  messageDesc(file_tank_auth_v1_auth, 25);
 
 /**
  * @generated from message tank.auth.v1.AdminRevokeUserSessionsResponse
@@ -503,7 +611,7 @@ export type AdminRevokeUserSessionsResponse = Message<"tank.auth.v1.AdminRevokeU
  * Use `create(AdminRevokeUserSessionsResponseSchema)` to create a new message.
  */
 export const AdminRevokeUserSessionsResponseSchema: GenMessage<AdminRevokeUserSessionsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 21);
+  messageDesc(file_tank_auth_v1_auth, 26);
 
 /**
  * @generated from message tank.auth.v1.SsoConfig
@@ -611,7 +719,7 @@ export type SsoConfig = Message<"tank.auth.v1.SsoConfig"> & {
  * Use `create(SsoConfigSchema)` to create a new message.
  */
 export const SsoConfigSchema: GenMessage<SsoConfig> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 22);
+  messageDesc(file_tank_auth_v1_auth, 27);
 
 /**
  * @generated from message tank.auth.v1.GetSsoConfigRequest
@@ -628,7 +736,7 @@ export type GetSsoConfigRequest = Message<"tank.auth.v1.GetSsoConfigRequest"> & 
  * Use `create(GetSsoConfigRequestSchema)` to create a new message.
  */
 export const GetSsoConfigRequestSchema: GenMessage<GetSsoConfigRequest> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 23);
+  messageDesc(file_tank_auth_v1_auth, 28);
 
 /**
  * @generated from message tank.auth.v1.GetSsoConfigResponse
@@ -647,7 +755,7 @@ export type GetSsoConfigResponse = Message<"tank.auth.v1.GetSsoConfigResponse"> 
  * Use `create(GetSsoConfigResponseSchema)` to create a new message.
  */
 export const GetSsoConfigResponseSchema: GenMessage<GetSsoConfigResponse> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 24);
+  messageDesc(file_tank_auth_v1_auth, 29);
 
 /**
  * Owner or admin. client_secret empty = keep the stored secret.
@@ -711,7 +819,7 @@ export type SetSsoConfigRequest = Message<"tank.auth.v1.SetSsoConfigRequest"> & 
  * Use `create(SetSsoConfigRequestSchema)` to create a new message.
  */
 export const SetSsoConfigRequestSchema: GenMessage<SetSsoConfigRequest> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 25);
+  messageDesc(file_tank_auth_v1_auth, 30);
 
 /**
  * @generated from message tank.auth.v1.SetSsoConfigResponse
@@ -728,7 +836,7 @@ export type SetSsoConfigResponse = Message<"tank.auth.v1.SetSsoConfigResponse"> 
  * Use `create(SetSsoConfigResponseSchema)` to create a new message.
  */
 export const SetSsoConfigResponseSchema: GenMessage<SetSsoConfigResponse> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 26);
+  messageDesc(file_tank_auth_v1_auth, 31);
 
 /**
  * Begins SSO for a workspace: returns the IdP URL to send the browser to.
@@ -754,7 +862,7 @@ export type StartSsoRequest = Message<"tank.auth.v1.StartSsoRequest"> & {
  * Use `create(StartSsoRequestSchema)` to create a new message.
  */
 export const StartSsoRequestSchema: GenMessage<StartSsoRequest> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 27);
+  messageDesc(file_tank_auth_v1_auth, 32);
 
 /**
  * @generated from message tank.auth.v1.StartSsoResponse
@@ -781,7 +889,7 @@ export type StartSsoResponse = Message<"tank.auth.v1.StartSsoResponse"> & {
  * Use `create(StartSsoResponseSchema)` to create a new message.
  */
 export const StartSsoResponseSchema: GenMessage<StartSsoResponse> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 28);
+  messageDesc(file_tank_auth_v1_auth, 33);
 
 /**
  * Finishes SSO. OIDC: state + code from the callback query. SAML: state
@@ -812,7 +920,7 @@ export type CompleteSsoRequest = Message<"tank.auth.v1.CompleteSsoRequest"> & {
  * Use `create(CompleteSsoRequestSchema)` to create a new message.
  */
 export const CompleteSsoRequestSchema: GenMessage<CompleteSsoRequest> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 29);
+  messageDesc(file_tank_auth_v1_auth, 34);
 
 /**
  * @generated from message tank.auth.v1.CompleteSsoResponse
@@ -849,7 +957,7 @@ export type CompleteSsoResponse = Message<"tank.auth.v1.CompleteSsoResponse"> & 
  * Use `create(CompleteSsoResponseSchema)` to create a new message.
  */
 export const CompleteSsoResponseSchema: GenMessage<CompleteSsoResponse> = /*@__PURE__*/
-  messageDesc(file_tank_auth_v1_auth, 30);
+  messageDesc(file_tank_auth_v1_auth, 35);
 
 /**
  * Every actor is a principal. Bots and agents are first-class so every author
@@ -970,6 +1078,22 @@ export const AuthService: GenService<{
     methodKind: "unary";
     input: typeof GetMeRequestSchema;
     output: typeof GetMeResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.ListIdentities
+   */
+  listIdentities: {
+    methodKind: "unary";
+    input: typeof ListIdentitiesRequestSchema;
+    output: typeof ListIdentitiesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.auth.v1.AuthService.SignOutIdentity
+   */
+  signOutIdentity: {
+    methodKind: "unary";
+    input: typeof SignOutIdentityRequestSchema;
+    output: typeof SignOutIdentityResponseSchema;
   },
   /**
    * @generated from rpc tank.auth.v1.AuthService.ListSessions
