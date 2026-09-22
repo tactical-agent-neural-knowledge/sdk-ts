@@ -1210,6 +1210,160 @@ export type RevokeScimTokenResponse = Message<"tank.admin.v1.RevokeScimTokenResp
  */
 export declare const RevokeScimTokenResponseSchema: GenMessage<RevokeScimTokenResponse>;
 /**
+ * An incoming webhook: a URL something outside TANK posts to, so its messages
+ * land in one Tread. The first integration point, and deliberately the
+ * dumbest one — a URL and a name is the whole contract, which is why every
+ * build system and monitor already knows how to use it.
+ *
+ * @generated from message tank.admin.v1.IncomingWebhook
+ */
+export type IncomingWebhook = Message<"tank.admin.v1.IncomingWebhook"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 3;
+     */
+    channelId: string;
+    /**
+     * Optional: post into this thread rather than the channel.
+     *
+     * @generated from field: string thread_root_id = 4;
+     */
+    threadRootId: string;
+    /**
+     * Shown as the author of everything it posts, so a Tread says "Deploys"
+     * rather than the name of whoever set it up.
+     *
+     * @generated from field: string name = 5;
+     */
+    name: string;
+    /**
+     * @generated from field: string created_by = 6;
+     */
+    createdBy: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 7;
+     */
+    createdAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_post_at = 8;
+     */
+    lastPostAt?: Timestamp;
+    /**
+     * The full URL including its secret. Returned only when it is created:
+     * only a hash is stored, so this cannot be shown again.
+     *
+     * @generated from field: string url = 9;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.admin.v1.IncomingWebhook.
+ * Use `create(IncomingWebhookSchema)` to create a new message.
+ */
+export declare const IncomingWebhookSchema: GenMessage<IncomingWebhook>;
+/**
+ * @generated from message tank.admin.v1.CreateIncomingWebhookRequest
+ */
+export type CreateIncomingWebhookRequest = Message<"tank.admin.v1.CreateIncomingWebhookRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 3;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string name = 4;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.admin.v1.CreateIncomingWebhookRequest.
+ * Use `create(CreateIncomingWebhookRequestSchema)` to create a new message.
+ */
+export declare const CreateIncomingWebhookRequestSchema: GenMessage<CreateIncomingWebhookRequest>;
+/**
+ * @generated from message tank.admin.v1.CreateIncomingWebhookResponse
+ */
+export type CreateIncomingWebhookResponse = Message<"tank.admin.v1.CreateIncomingWebhookResponse"> & {
+    /**
+     * @generated from field: tank.admin.v1.IncomingWebhook webhook = 1;
+     */
+    webhook?: IncomingWebhook;
+};
+/**
+ * Describes the message tank.admin.v1.CreateIncomingWebhookResponse.
+ * Use `create(CreateIncomingWebhookResponseSchema)` to create a new message.
+ */
+export declare const CreateIncomingWebhookResponseSchema: GenMessage<CreateIncomingWebhookResponse>;
+/**
+ * @generated from message tank.admin.v1.ListIncomingWebhooksRequest
+ */
+export type ListIncomingWebhooksRequest = Message<"tank.admin.v1.ListIncomingWebhooksRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.admin.v1.ListIncomingWebhooksRequest.
+ * Use `create(ListIncomingWebhooksRequestSchema)` to create a new message.
+ */
+export declare const ListIncomingWebhooksRequestSchema: GenMessage<ListIncomingWebhooksRequest>;
+/**
+ * @generated from message tank.admin.v1.ListIncomingWebhooksResponse
+ */
+export type ListIncomingWebhooksResponse = Message<"tank.admin.v1.ListIncomingWebhooksResponse"> & {
+    /**
+     * @generated from field: repeated tank.admin.v1.IncomingWebhook webhooks = 1;
+     */
+    webhooks: IncomingWebhook[];
+};
+/**
+ * Describes the message tank.admin.v1.ListIncomingWebhooksResponse.
+ * Use `create(ListIncomingWebhooksResponseSchema)` to create a new message.
+ */
+export declare const ListIncomingWebhooksResponseSchema: GenMessage<ListIncomingWebhooksResponse>;
+/**
+ * @generated from message tank.admin.v1.RevokeIncomingWebhookRequest
+ */
+export type RevokeIncomingWebhookRequest = Message<"tank.admin.v1.RevokeIncomingWebhookRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+};
+/**
+ * Describes the message tank.admin.v1.RevokeIncomingWebhookRequest.
+ * Use `create(RevokeIncomingWebhookRequestSchema)` to create a new message.
+ */
+export declare const RevokeIncomingWebhookRequestSchema: GenMessage<RevokeIncomingWebhookRequest>;
+/**
+ * @generated from message tank.admin.v1.RevokeIncomingWebhookResponse
+ */
+export type RevokeIncomingWebhookResponse = Message<"tank.admin.v1.RevokeIncomingWebhookResponse"> & {};
+/**
+ * Describes the message tank.admin.v1.RevokeIncomingWebhookResponse.
+ * Use `create(RevokeIncomingWebhookResponseSchema)` to create a new message.
+ */
+export declare const RevokeIncomingWebhookResponseSchema: GenMessage<RevokeIncomingWebhookResponse>;
+/**
  * Who may perform an action in the workspace.
  *
  * @generated from enum tank.admin.v1.Permission
@@ -1362,6 +1516,30 @@ export declare const AdminService: GenService<{
         methodKind: "unary";
         input: typeof AdminSetChannelMembersRequestSchema;
         output: typeof AdminSetChannelMembersResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.admin.v1.AdminService.CreateIncomingWebhook
+     */
+    createIncomingWebhook: {
+        methodKind: "unary";
+        input: typeof CreateIncomingWebhookRequestSchema;
+        output: typeof CreateIncomingWebhookResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.admin.v1.AdminService.ListIncomingWebhooks
+     */
+    listIncomingWebhooks: {
+        methodKind: "unary";
+        input: typeof ListIncomingWebhooksRequestSchema;
+        output: typeof ListIncomingWebhooksResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.admin.v1.AdminService.RevokeIncomingWebhook
+     */
+    revokeIncomingWebhook: {
+        methodKind: "unary";
+        input: typeof RevokeIncomingWebhookRequestSchema;
+        output: typeof RevokeIncomingWebhookResponseSchema;
     };
     /**
      * @generated from rpc tank.admin.v1.AdminService.GetWorkspaceSettings
