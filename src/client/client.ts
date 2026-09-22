@@ -352,6 +352,13 @@ export class TankClient {
     if (paging?.loading)
       return direction === "before" ? (paging.hasMoreBefore ?? true) : (paging.hasMoreAfter ?? false);
     if (direction === "before" && paging && !paging.hasMoreBefore && loaded.length > 0) return false;
+    // A persisted store is a first paint, not a sync point: the device may have been closed while the
+    // Tread moved on, so its newest cached row can be far behind the server. Paging "before" that row
+    // asks for messages older than the gap and never fetches it, leaving the Tread frozen on old
+    // content. The first open of a channel in a session therefore takes the newest page instead.
+    if (direction === "before" && !paging?.loaded && loaded.length > 0) {
+      return this.loadChannelTail(channelId, limit, opts.kinds ?? []);
+    }
 
     const oldest = loaded[0]?.channelSeq ?? 0n;
     const newest = loaded[loaded.length - 1]?.channelSeq ?? 0n;
@@ -377,6 +384,31 @@ export class TankClient {
             }
           : { loading: false, loaded: true, hasMoreAfter: res.hasMore };
       this.store.dispatch({ type: "paging/set", channelId, paging: patch });
+      this.touchRecent(channelId);
+      return res.hasMore;
+    } catch (err) {
+      this.store.dispatch({ type: "paging/set", channelId, paging: { loading: false } });
+      throw err;
+    }
+  }
+
+  /**
+   * Fetches the newest page and makes it the channel's timeline, discarding cached rows the server no
+   * longer returns (deleted messages, tombstoned agent cards). On failure the cache is left alone, so
+   * an offline open still paints. Resolves to whether older messages exist.
+   */
+  private async loadChannelTail(channelId: string, limit: number, kinds: MessageKind[]): Promise<boolean> {
+    this.store.dispatch({ type: "paging/set", channelId, paging: { loading: true } });
+    try {
+      const res = await this.chat.listMessages({ channelId, beforeSeq: 0n, afterSeq: 0n, limit, kinds });
+      this.store.dispatch({ type: "messages/resetChannel", channelId, messages: res.messages });
+      const seqs = res.messages.map((m) => m.channelSeq).filter((x) => x > 0n);
+      const oldestSeq = seqs.length ? seqs.reduce((a, b) => (a < b ? a : b)) : 0n;
+      this.store.dispatch({
+        type: "paging/set",
+        channelId,
+        paging: { loading: false, loaded: true, hasMoreBefore: res.hasMore, hasMoreAfter: false, oldestSeq },
+      });
       this.touchRecent(channelId);
       return res.hasMore;
     } catch (err) {

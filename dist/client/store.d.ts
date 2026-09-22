@@ -117,6 +117,14 @@ export type Action = {
 } | {
     type: "messages/upsert";
     messages: Message[];
+}
+/** Replace a channel's timeline with a freshly fetched page, dropping rows the server no longer
+ *  returns. Unsent optimistic rows survive; the `messages` map keeps its entries so threads that
+ *  still reference them are unaffected. */
+ | {
+    type: "messages/resetChannel";
+    channelId: string;
+    messages: Message[];
 } | {
     type: "messages/created";
     message: Message;

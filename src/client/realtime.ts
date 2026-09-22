@@ -205,7 +205,10 @@ export class RealtimeClient {
     const ws = this.ws;
     this.ws = undefined;
     if (ws) {
-      ws.onopen = ws.onmessage = ws.onclose = ws.onerror = null;
+      ws.onopen = ws.onmessage = ws.onclose = null;
+      // Closing a socket that is still CONNECTING raises an error asynchronously; with no handler
+      // left that is an uncaught exception under `ws` in Node, so keep a sink rather than nulling it.
+      ws.onerror = () => {};
       try {
         ws.close(CLOSE_STOP, "stop");
       } catch {
