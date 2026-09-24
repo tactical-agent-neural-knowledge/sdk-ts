@@ -26,6 +26,11 @@
       "import": "./dist/react/index.js",
       "default": "./dist/react/index.js"
     },
+    "./topo": {
+      "types": "./dist/topo/index.d.ts",
+      "import": "./dist/topo/index.js",
+      "default": "./dist/topo/index.js"
+    },
     "./design": {
       "types": "./dist/design/index.d.ts",
       "import": "./dist/design/index.js",
