@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useState,
   useSyncExternalStore,
 } from "react";
 import { isTerminalRunState } from "../blocks/runTone.js";
@@ -27,6 +28,7 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
+import type { Mark } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
@@ -115,6 +117,49 @@ export function useChannels(workspaceId: string): Channel[] {
 
 export function useChannel(id: string): Channel | undefined {
   return useTankSelector(useCallback((s: TankStore) => s.getState().channels[id], [id]));
+}
+
+export interface TopoMarks {
+  marks: Mark[];
+  /** The channel's newest seq, which is the strip's axis length. */
+  lastSeq: bigint;
+  loading: boolean;
+}
+
+/**
+ * The marks for a channel's Topo strip.
+ *
+ * Refetches when the channel's `lastSeq` moves, which is the one signal that can add, move or
+ * retire a derived mark — a new message, a new mention, or the read horizon advancing. Marks are
+ * not in the normalized store, so this owns the small amount of state a strip needs. A stale
+ * response from a channel the user has already left is dropped rather than rendered.
+ */
+export function useTopoMarks(channelId: string): TopoMarks {
+  const client = useTank();
+  const channel = useChannel(channelId);
+  const seq = channel?.lastSeq ?? 0n;
+  const [state, setState] = useState<TopoMarks>({ marks: [], lastSeq: 0n, loading: true });
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: `seq` is the refetch trigger, not a read
+  useEffect(() => {
+    if (!channelId) return;
+    let live = true;
+    setState((s) => ({ ...s, loading: true }));
+    client
+      .listMarks(channelId)
+      .then((r) => {
+        if (live) setState({ marks: r.marks, lastSeq: r.lastSeq, loading: false });
+      })
+      .catch(() => {
+        // A strip is an aid, not the conversation: if it cannot be drawn, the Tread still reads.
+        if (live) setState({ marks: [], lastSeq: 0n, loading: false });
+      });
+    return () => {
+      live = false;
+    };
+  }, [client, channelId, seq]);
+
+  return state;
 }
 
 export interface UseMessagesResult {

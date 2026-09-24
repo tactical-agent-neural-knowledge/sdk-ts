@@ -7,6 +7,7 @@ import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js"
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
+import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import { type GetBootstrapResponse, type Invite, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
 import { RealtimeClient, type RealtimeOptions, type WebSocketCtor } from "./realtime.js";
@@ -152,6 +153,8 @@ export declare class TankClient {
     /** Same client as `agents`. */
     readonly agent: Client<typeof AgentService>;
     readonly notifications: Client<typeof NotificationService>;
+    /** The map of a Tread: the marks that make up its Topo strip. */
+    readonly topo: Client<typeof TopoService>;
     readonly realtime: RealtimeClient;
     readonly store: TankStore;
     readonly storage: TankStorage;
@@ -260,6 +263,19 @@ export declare class TankClient {
      * The response's `unread_count` reseeds `unreadNotificationCount[workspaceId]`.
      */
     loadNotifications(input: LoadNotificationsInput): Promise<LoadNotificationsResult>;
+    /**
+     * The marks for a channel's Topo strip, plus the channel's newest seq so the strip can scale its
+     * axis without having paged the messages in.
+     *
+     * Deliberately not in the normalized store. Marks are derived from rows the server already has,
+     * they are scoped to the caller, and a channel's strip is cheap to recompute — caching them would
+     * mean inventing an invalidation rule for every event that can move a mention, a read horizon or
+     * a deletion, which is strictly more work than asking again.
+     */
+    listMarks(channelId: string, types?: MarkType[]): Promise<{
+        marks: Mark[];
+        lastSeq: bigint;
+    }>;
     /**
      * Mark notifications read (no ids = every unread one in the workspace). Optimistic: rows flip and the
      * badge drops immediately; the previous rows and count come back if the RPC fails.

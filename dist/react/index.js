@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore, } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, useSyncExternalStore, } from "react";
 import { isTerminalRunState } from "../blocks/runTone.js";
 import { notificationPagingKey, } from "../client/store.js";
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
@@ -73,6 +73,42 @@ export function useChannels(workspaceId) {
 }
 export function useChannel(id) {
     return useTankSelector(useCallback((s) => s.getState().channels[id], [id]));
+}
+/**
+ * The marks for a channel's Topo strip.
+ *
+ * Refetches when the channel's `lastSeq` moves, which is the one signal that can add, move or
+ * retire a derived mark — a new message, a new mention, or the read horizon advancing. Marks are
+ * not in the normalized store, so this owns the small amount of state a strip needs. A stale
+ * response from a channel the user has already left is dropped rather than rendered.
+ */
+export function useTopoMarks(channelId) {
+    const client = useTank();
+    const channel = useChannel(channelId);
+    const seq = channel?.lastSeq ?? 0n;
+    const [state, setState] = useState({ marks: [], lastSeq: 0n, loading: true });
+    // biome-ignore lint/correctness/useExhaustiveDependencies: `seq` is the refetch trigger, not a read
+    useEffect(() => {
+        if (!channelId)
+            return;
+        let live = true;
+        setState((s) => ({ ...s, loading: true }));
+        client
+            .listMarks(channelId)
+            .then((r) => {
+            if (live)
+                setState({ marks: r.marks, lastSeq: r.lastSeq, loading: false });
+        })
+            .catch(() => {
+            // A strip is an aid, not the conversation: if it cannot be drawn, the Tread still reads.
+            if (live)
+                setState({ marks: [], lastSeq: 0n, loading: false });
+        });
+        return () => {
+            live = false;
+        };
+    }, [client, channelId, seq]);
+    return state;
 }
 /** Messages for a channel in channel_seq order (optimistic sends trail), with paging. */
 export function useMessages(channelId, opts = {}) {

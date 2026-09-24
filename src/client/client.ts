@@ -34,6 +34,7 @@ import {
   PresenceService,
   type PresenceStatus,
 } from "../contracts/tank/presence/v1/presence_pb.js";
+import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import {
   type GetBootstrapResponse,
   GetBootstrapResponseSchema,
@@ -241,6 +242,8 @@ export class TankClient {
   /** Same client as `agents`. */
   readonly agent: Client<typeof AgentService>;
   readonly notifications: Client<typeof NotificationService>;
+  /** The map of a Tread: the marks that make up its Topo strip. */
+  readonly topo: Client<typeof TopoService>;
   readonly realtime: RealtimeClient;
   readonly store: TankStore;
   readonly storage: TankStorage;
@@ -284,6 +287,7 @@ export class TankClient {
     this.agents = createClient(AgentService, this.transport);
     this.agent = this.agents;
     this.notifications = createClient(NotificationService, this.transport);
+    this.topo = createClient(TopoService, this.transport);
     this.realtime = new RealtimeClient({
       wsUrl: opts.wsUrl,
       getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
@@ -796,6 +800,20 @@ export class TankClient {
       this.store.dispatch({ type: "notificationPaging/set", workspaceId, mode, paging: { loading: false } });
       throw err;
     }
+  }
+
+  /**
+   * The marks for a channel's Topo strip, plus the channel's newest seq so the strip can scale its
+   * axis without having paged the messages in.
+   *
+   * Deliberately not in the normalized store. Marks are derived from rows the server already has,
+   * they are scoped to the caller, and a channel's strip is cheap to recompute — caching them would
+   * mean inventing an invalidation rule for every event that can move a mention, a read horizon or
+   * a deletion, which is strictly more work than asking again.
+   */
+  async listMarks(channelId: string, types: MarkType[] = []): Promise<{ marks: Mark[]; lastSeq: bigint }> {
+    const res = await this.topo.listMarks({ channelId, types });
+    return { marks: res.marks, lastSeq: res.lastSeq };
   }
 
   /**
