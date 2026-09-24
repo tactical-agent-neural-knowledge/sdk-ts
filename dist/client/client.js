@@ -8,6 +8,7 @@ import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } from "../contracts/tank/message/v1/message_pb.js";
 import { NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { PresenceSchema, PresenceService, } from "../contracts/tank/presence/v1/presence_pb.js";
+import { TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import { GetBootstrapResponseSchema, Role, WorkspaceService, } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Backoff } from "./backoff.js";
 import { Emitter } from "./emitter.js";
@@ -49,6 +50,8 @@ export class TankClient {
     /** Same client as `agents`. */
     agent;
     notifications;
+    /** The map of a Tread: the marks that make up its Topo strip. */
+    topo;
     realtime;
     store;
     storage;
@@ -90,6 +93,7 @@ export class TankClient {
         this.agents = createClient(AgentService, this.transport);
         this.agent = this.agents;
         this.notifications = createClient(NotificationService, this.transport);
+        this.topo = createClient(TopoService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
             getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
@@ -592,6 +596,19 @@ export class TankClient {
             this.store.dispatch({ type: "notificationPaging/set", workspaceId, mode, paging: { loading: false } });
             throw err;
         }
+    }
+    /**
+     * The marks for a channel's Topo strip, plus the channel's newest seq so the strip can scale its
+     * axis without having paged the messages in.
+     *
+     * Deliberately not in the normalized store. Marks are derived from rows the server already has,
+     * they are scoped to the caller, and a channel's strip is cheap to recompute — caching them would
+     * mean inventing an invalidation rule for every event that can move a mention, a read horizon or
+     * a deletion, which is strictly more work than asking again.
+     */
+    async listMarks(channelId, types = []) {
+        const res = await this.topo.listMarks({ channelId, types });
+        return { marks: res.marks, lastSeq: res.lastSeq };
     }
     /**
      * Mark notifications read (no ids = every unread one in the workspace). Optimistic: rows flip and the

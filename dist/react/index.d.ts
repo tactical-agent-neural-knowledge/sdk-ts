@@ -8,6 +8,7 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
+import type { Mark } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export interface TankProviderProps {
     client: TankClient;
@@ -23,6 +24,21 @@ export declare function useConnectionState(): ConnectionState;
 export declare function useWorkspace(id: string): Workspace | undefined;
 export declare function useChannels(workspaceId: string): Channel[];
 export declare function useChannel(id: string): Channel | undefined;
+export interface TopoMarks {
+    marks: Mark[];
+    /** The channel's newest seq, which is the strip's axis length. */
+    lastSeq: bigint;
+    loading: boolean;
+}
+/**
+ * The marks for a channel's Topo strip.
+ *
+ * Refetches when the channel's `lastSeq` moves, which is the one signal that can add, move or
+ * retire a derived mark — a new message, a new mention, or the read horizon advancing. Marks are
+ * not in the normalized store, so this owns the small amount of state a strip needs. A stale
+ * response from a channel the user has already left is dropped rather than rendered.
+ */
+export declare function useTopoMarks(channelId: string): TopoMarks;
 export interface UseMessagesResult {
     messages: Message[];
     /** A page is being fetched (including the first one). */
