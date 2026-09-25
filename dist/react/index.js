@@ -2,6 +2,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, useSyncExternalStore, } from "react";
 import { isTerminalRunState } from "../blocks/runTone.js";
 import { notificationPagingKey, } from "../client/store.js";
+import { visibleMarkTypes } from "../topo/visibility.js";
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
 class PresenceRegistry {
     client;
@@ -73,6 +74,73 @@ export function useChannels(workspaceId) {
 }
 export function useChannel(id) {
     return useTankSelector(useCallback((s) => s.getState().channels[id], [id]));
+}
+/**
+ * The person's Topo preferences: which mark families to draw, and how the axis is scaled.
+ *
+ * Stored per workspace on the server rather than per device, so the strip looks the same on the
+ * phone as on the laptop.
+ *
+ * Every write is read-modify-write: UpdatePreferences replaces the whole Preferences message, so
+ * sending only the Topo part would quietly reset somebody's notification and theme settings.
+ */
+export function useTopoVisibility(workspaceId) {
+    const client = useTank();
+    const [prefs, setPrefs] = useState();
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        if (!workspaceId)
+            return;
+        let live = true;
+        client.workspaces
+            .getPreferences({ workspaceId })
+            .then((res) => {
+            if (live) {
+                setPrefs(res.preferences);
+                setLoading(false);
+            }
+        })
+            .catch(() => {
+            // The strip still draws, on the defaults. Preferences failing to load is not a reason to
+            // show somebody an empty map.
+            if (live)
+                setLoading(false);
+        });
+        return () => {
+            live = false;
+        };
+    }, [client, workspaceId]);
+    const save = useCallback(async (next) => {
+        const current = prefs ?? (await client.workspaces.getPreferences({ workspaceId })).preferences;
+        const merged = { ...(current ?? {}), topo: next };
+        setPrefs(merged);
+        const res = await client.workspaces.updatePreferences({ workspaceId, preferences: merged });
+        setPrefs(res.preferences);
+    }, [client, workspaceId, prefs]);
+    const topo = prefs?.topo;
+    const visible = useMemo(() => visibleMarkTypes(topo), [topo]);
+    const toggle = useCallback(async (type) => {
+        const next = new Set(visible);
+        if (next.has(type))
+            next.delete(type);
+        else
+            next.add(type);
+        // configured flips on the first change, which is what lets "everything off" survive instead
+        // of reading as "never chosen".
+        await save({
+            configured: true,
+            visible: [...next],
+            timeAxis: topo?.timeAxis ?? false,
+        });
+    }, [save, visible, topo]);
+    const setTimeAxis = useCallback(async (on) => {
+        await save({
+            configured: topo?.configured ?? false,
+            visible: topo?.visible ?? [...visible],
+            timeAxis: on,
+        });
+    }, [save, visible, topo]);
+    return { visible, timeAxis: topo?.timeAxis ?? false, loading, toggle, setTimeAxis };
 }
 /**
  * The marks for a channel's Topo strip.
