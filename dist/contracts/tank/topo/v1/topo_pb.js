@@ -7,67 +7,119 @@ import { file_tank_message_v1_message } from "../../message/v1/message_pb.js";
 /**
  * Describes the file tank/topo/v1/topo.proto.
  */
-export const file_tank_topo_v1_topo = /*@__PURE__*/ fileDesc("Chd0YW5rL3RvcG8vdjEvdG9wby5wcm90bxIMdGFuay50b3BvLnYxIs8DCgRNYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoCRITCgtjaGFubmVsX3NlcRgEIAEoAxIkCgR0eXBlGAUgASgOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlEiAKBGxhbmUYBiABKA4yEi50YW5rLnRvcG8udjEuTGFuZRIRCgllbGV2YXRpb24YByABKAUSDwoHcHJldmlldxgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgZzdGF0dXMYCiABKA4yGC50YW5rLnRvcG8udjEuTWFya1N0YXR1cxIbChN3YWl0aW5nX29uX3VzZXJfaWRzGAsgAygJEhoKEmNyZWF0ZWRfYnlfdXNlcl9pZBgMIAEoCRIvCgtyZXNvbHZlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV0YWlsGA4gASgJEgsKA3VybBgPIAEoCRIxCg1hcnRpZmFjdF9raW5kGBAgASgOMhoudGFuay50b3BvLnYxLkFydGlmYWN0S2luZCJNChBMaXN0TWFya3NSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSJQoFdHlwZXMYAiADKA4yFi50YW5rLnRvcG8udjEuTWFya1R5cGUiSAoRTGlzdE1hcmtzUmVzcG9uc2USIQoFbWFya3MYASADKAsyEi50YW5rLnRvcG8udjEuTWFyaxIQCghsYXN0X3NlcRgCIAEoAyI8ChRGbGFnV2FpdGluZ09uUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJEhAKCHVzZXJfaWRzGAIgAygJIjkKFUZsYWdXYWl0aW5nT25SZXNwb25zZRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsiOwoXUmVzb2x2ZVdhaXRpbmdPblJlcXVlc3QSDwoHbWFya19pZBgBIAEoCRIPCgdkaXNtaXNzGAIgASgIIjwKGFJlc29sdmVXYWl0aW5nT25SZXNwb25zZRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsidwoUTGlzdFdhaXRpbmdPblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEjEKCWRpcmVjdGlvbhgCIAEoDjIeLnRhbmsudG9wby52MS5XYWl0aW5nRGlyZWN0aW9uEhYKDmluY2x1ZGVfY2xvc2VkGAMgASgIIlwKDVdhaXRpbmdPbkl0ZW0SIAoEbWFyaxgBIAEoCzISLnRhbmsudG9wby52MS5NYXJrEikKB21lc3NhZ2UYAiABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJnChJSZWNvcmRFdmVudFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIMCgRraW5kGAIgASgJEg4KBmRldGFpbBgDIAEoCRILCgN1cmwYBCABKAkSEgoKZGVkdXBlX2tleRgFIAEoCSI3ChNSZWNvcmRFdmVudFJlc3BvbnNlEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyayJDChVMaXN0V2FpdGluZ09uUmVzcG9uc2USKgoFaXRlbXMYASADKAsyGy50YW5rLnRvcG8udjEuV2FpdGluZ09uSXRlbSrUAQoITWFya1R5cGUSGQoVTUFSS19UWVBFX1VOU1BFQ0lGSUVEEAASFQoRTUFSS19UWVBFX01FTlRJT04QARIZChVNQVJLX1RZUEVfT1dOX01FU1NBR0UQAhIaChZNQVJLX1RZUEVfUkVBRF9IT1JJWk9OEAMSGAoUTUFSS19UWVBFX1NFQVJDSF9ISVQQBBIYChRNQVJLX1RZUEVfV0FJVElOR19PThAFEhYKEk1BUktfVFlQRV9BUlRJRkFDVBAGEhMKD01BUktfVFlQRV9FVkVOVBAHKnUKDEFydGlmYWN0S2luZBIdChlBUlRJRkFDVF9LSU5EX1VOU1BFQ0lGSUVEEAASFgoSQVJUSUZBQ1RfS0lORF9GSUxFEAESFgoSQVJUSUZBQ1RfS0lORF9MSU5LEAISFgoSQVJUSUZBQ1RfS0lORF9DT0RFEAMqdAoKTWFya1N0YXR1cxIbChdNQVJLX1NUQVRVU19VTlNQRUNJRklFRBAAEhQKEE1BUktfU1RBVFVTX09QRU4QARIYChRNQVJLX1NUQVRVU19SRVNPTFZFRBACEhkKFU1BUktfU1RBVFVTX0RJU01JU1NFRBADKlUKBExhbmUSFAoQTEFORV9VTlNQRUNJRklFRBAAEhIKDkxBTkVfU1RSVUNUVVJFEAESEAoMTEFORV9NRVNTQUdFEAISEQoNTEFORV9QRVJTT05BTBADKm8KEFdhaXRpbmdEaXJlY3Rpb24SIQodV0FJVElOR19ESVJFQ1RJT05fVU5TUEVDSUZJRUQQABIbChdXQUlUSU5HX0RJUkVDVElPTl9PTl9NRRABEhsKF1dBSVRJTkdfRElSRUNUSU9OX0JZX01FEAIyxgMKC1RvcG9TZXJ2aWNlEkwKCUxpc3RNYXJrcxIeLnRhbmsudG9wby52MS5MaXN0TWFya3NSZXF1ZXN0Gh8udGFuay50b3BvLnYxLkxpc3RNYXJrc1Jlc3BvbnNlElgKDUZsYWdXYWl0aW5nT24SIi50YW5rLnRvcG8udjEuRmxhZ1dhaXRpbmdPblJlcXVlc3QaIy50YW5rLnRvcG8udjEuRmxhZ1dhaXRpbmdPblJlc3BvbnNlEmEKEFJlc29sdmVXYWl0aW5nT24SJS50YW5rLnRvcG8udjEuUmVzb2x2ZVdhaXRpbmdPblJlcXVlc3QaJi50YW5rLnRvcG8udjEuUmVzb2x2ZVdhaXRpbmdPblJlc3BvbnNlElgKDUxpc3RXYWl0aW5nT24SIi50YW5rLnRvcG8udjEuTGlzdFdhaXRpbmdPblJlcXVlc3QaIy50YW5rLnRvcG8udjEuTGlzdFdhaXRpbmdPblJlc3BvbnNlElIKC1JlY29yZEV2ZW50EiAudGFuay50b3BvLnYxLlJlY29yZEV2ZW50UmVxdWVzdBohLnRhbmsudG9wby52MS5SZWNvcmRFdmVudFJlc3BvbnNlQsABChBjb20udGFuay50b3BvLnYxQglUb3BvUHJvdG9QAVpPZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay90b3BvL3YxO3RvcG92MaICA1RUWKoCDFRhbmsuVG9wby5WMcoCDFRhbmtcVG9wb1xWMeICGFRhbmtcVG9wb1xWMVxHUEJNZXRhZGF0YeoCDlRhbms6OlRvcG86OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
+export const file_tank_topo_v1_topo = /*@__PURE__*/ fileDesc("Chd0YW5rL3RvcG8vdjEvdG9wby5wcm90bxIMdGFuay50b3BvLnYxIvsDCgRNYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoCRITCgtjaGFubmVsX3NlcRgEIAEoAxIkCgR0eXBlGAUgASgOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlEiAKBGxhbmUYBiABKA4yEi50YW5rLnRvcG8udjEuTGFuZRIRCgllbGV2YXRpb24YByABKAUSDwoHcHJldmlldxgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgZzdGF0dXMYCiABKA4yGC50YW5rLnRvcG8udjEuTWFya1N0YXR1cxIbChN3YWl0aW5nX29uX3VzZXJfaWRzGAsgAygJEhoKEmNyZWF0ZWRfYnlfdXNlcl9pZBgMIAEoCRIvCgtyZXNvbHZlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV0YWlsGA4gASgJEgsKA3VybBgPIAEoCRIxCg1hcnRpZmFjdF9raW5kGBAgASgOMhoudGFuay50b3BvLnYxLkFydGlmYWN0S2luZBIqCgZzdXJ2ZXkYESABKAsyGi50YW5rLnRvcG8udjEuU3VydmV5T3JpZ2luIlUKDFN1cnZleU9yaWdpbhIRCglleHRyYWN0b3IYASABKAkSDwoHdmVyc2lvbhgCIAEoCRINCgVtb2RlbBgDIAEoCRISCgpjb25maWRlbmNlGAQgASgCIk0KEExpc3RNYXJrc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIlCgV0eXBlcxgCIAMoDjIWLnRhbmsudG9wby52MS5NYXJrVHlwZSJIChFMaXN0TWFya3NSZXNwb25zZRIhCgVtYXJrcxgBIAMoCzISLnRhbmsudG9wby52MS5NYXJrEhAKCGxhc3Rfc2VxGAIgASgDIjwKFEZsYWdXYWl0aW5nT25SZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkSEAoIdXNlcl9pZHMYAiADKAkiOQoVRmxhZ1dhaXRpbmdPblJlc3BvbnNlEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyayI7ChdSZXNvbHZlV2FpdGluZ09uUmVxdWVzdBIPCgdtYXJrX2lkGAEgASgJEg8KB2Rpc21pc3MYAiABKAgiPAoYUmVzb2x2ZVdhaXRpbmdPblJlc3BvbnNlEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyayJ3ChRMaXN0V2FpdGluZ09uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSMQoJZGlyZWN0aW9uGAIgASgOMh4udGFuay50b3BvLnYxLldhaXRpbmdEaXJlY3Rpb24SFgoOaW5jbHVkZV9jbG9zZWQYAyABKAgiXAoNV2FpdGluZ09uSXRlbRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsSKQoHbWVzc2FnZRgCIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIu8CCglCZW5jaG1hcmsSCgoCaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRIRCglzdGF0ZW1lbnQYAyABKAkSDgoGZGV0YWlsGAQgASgJEhoKEnNvdXJjZV9tZXNzYWdlX2lkcxgFIAMoCRIXCg9wYXJ0aWNpcGFudF9pZHMYBiADKAkSKAoGc3RhdHVzGAcgASgOMhgudGFuay50b3BvLnYxLk1hcmtTdGF0dXMSGgoSZGVjaWRlZF9ieV91c2VyX2lkGAggASgJEi4KCmRlY2lkZWRfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhgKEHN1cGVyc2VkZWRfYnlfaWQYCiABKAkSKgoGc3VydmV5GAsgASgLMhoudGFuay50b3BvLnYxLlN1cnZleU9yaWdpbhIuCgpjcmVhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJDChVMaXN0QmVuY2htYXJrc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg5pbmNsdWRlX2Nsb3NlZBgCIAEoCCJFChZMaXN0QmVuY2htYXJrc1Jlc3BvbnNlEisKCmJlbmNobWFya3MYASADKAsyFy50YW5rLnRvcG8udjEuQmVuY2htYXJrIuQBChZEZWNpZGVCZW5jaG1hcmtSZXF1ZXN0EhQKDGJlbmNobWFya19pZBgBIAEoCRI/CghkZWNpc2lvbhgCIAEoDjItLnRhbmsudG9wby52MS5EZWNpZGVCZW5jaG1hcmtSZXF1ZXN0LkRlY2lzaW9uEhEKCXN0YXRlbWVudBgDIAEoCRIOCgZkZXRhaWwYBCABKAkiUAoIRGVjaXNpb24SGAoUREVDSVNJT05fVU5TUEVDSUZJRUQQABIUChBERUNJU0lPTl9DT05GSVJNEAESFAoQREVDSVNJT05fRElTTUlTUxACIkUKF0RlY2lkZUJlbmNobWFya1Jlc3BvbnNlEioKCWJlbmNobWFyaxgBIAEoCzIXLnRhbmsudG9wby52MS5CZW5jaG1hcmsiZwoSUmVjb3JkRXZlbnRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEa2luZBgCIAEoCRIOCgZkZXRhaWwYAyABKAkSCwoDdXJsGAQgASgJEhIKCmRlZHVwZV9rZXkYBSABKAkiNwoTUmVjb3JkRXZlbnRSZXNwb25zZRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsiQwoVTGlzdFdhaXRpbmdPblJlc3BvbnNlEioKBWl0ZW1zGAEgAygLMhsudGFuay50b3BvLnYxLldhaXRpbmdPbkl0ZW0qkAIKCE1hcmtUeXBlEhkKFU1BUktfVFlQRV9VTlNQRUNJRklFRBAAEhUKEU1BUktfVFlQRV9NRU5USU9OEAESGQoVTUFSS19UWVBFX09XTl9NRVNTQUdFEAISGgoWTUFSS19UWVBFX1JFQURfSE9SSVpPThADEhgKFE1BUktfVFlQRV9TRUFSQ0hfSElUEAQSGAoUTUFSS19UWVBFX1dBSVRJTkdfT04QBRIWChJNQVJLX1RZUEVfQVJUSUZBQ1QQBhITCg9NQVJLX1RZUEVfRVZFTlQQBxIhCh1NQVJLX1RZUEVfVU5BTlNXRVJFRF9RVUVTVElPThAIEhcKE01BUktfVFlQRV9CRU5DSE1BUksQCSp1CgxBcnRpZmFjdEtpbmQSHQoZQVJUSUZBQ1RfS0lORF9VTlNQRUNJRklFRBAAEhYKEkFSVElGQUNUX0tJTkRfRklMRRABEhYKEkFSVElGQUNUX0tJTkRfTElOSxACEhYKEkFSVElGQUNUX0tJTkRfQ09ERRADKqoBCgpNYXJrU3RhdHVzEhsKF01BUktfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFAoQTUFSS19TVEFUVVNfT1BFThABEhgKFE1BUktfU1RBVFVTX1JFU09MVkVEEAISGQoVTUFSS19TVEFUVVNfRElTTUlTU0VEEAMSGAoUTUFSS19TVEFUVVNfUFJPUE9TRUQQBBIaChZNQVJLX1NUQVRVU19TVVBFUlNFREVEEAUqVQoETGFuZRIUChBMQU5FX1VOU1BFQ0lGSUVEEAASEgoOTEFORV9TVFJVQ1RVUkUQARIQCgxMQU5FX01FU1NBR0UQAhIRCg1MQU5FX1BFUlNPTkFMEAMqbwoQV2FpdGluZ0RpcmVjdGlvbhIhCh1XQUlUSU5HX0RJUkVDVElPTl9VTlNQRUNJRklFRBAAEhsKF1dBSVRJTkdfRElSRUNUSU9OX09OX01FEAESGwoXV0FJVElOR19ESVJFQ1RJT05fQllfTUUQAjKDBQoLVG9wb1NlcnZpY2USTAoJTGlzdE1hcmtzEh4udGFuay50b3BvLnYxLkxpc3RNYXJrc1JlcXVlc3QaHy50YW5rLnRvcG8udjEuTGlzdE1hcmtzUmVzcG9uc2USWAoNRmxhZ1dhaXRpbmdPbhIiLnRhbmsudG9wby52MS5GbGFnV2FpdGluZ09uUmVxdWVzdBojLnRhbmsudG9wby52MS5GbGFnV2FpdGluZ09uUmVzcG9uc2USYQoQUmVzb2x2ZVdhaXRpbmdPbhIlLnRhbmsudG9wby52MS5SZXNvbHZlV2FpdGluZ09uUmVxdWVzdBomLnRhbmsudG9wby52MS5SZXNvbHZlV2FpdGluZ09uUmVzcG9uc2USWAoNTGlzdFdhaXRpbmdPbhIiLnRhbmsudG9wby52MS5MaXN0V2FpdGluZ09uUmVxdWVzdBojLnRhbmsudG9wby52MS5MaXN0V2FpdGluZ09uUmVzcG9uc2USUgoLUmVjb3JkRXZlbnQSIC50YW5rLnRvcG8udjEuUmVjb3JkRXZlbnRSZXF1ZXN0GiEudGFuay50b3BvLnYxLlJlY29yZEV2ZW50UmVzcG9uc2USWwoOTGlzdEJlbmNobWFya3MSIy50YW5rLnRvcG8udjEuTGlzdEJlbmNobWFya3NSZXF1ZXN0GiQudGFuay50b3BvLnYxLkxpc3RCZW5jaG1hcmtzUmVzcG9uc2USXgoPRGVjaWRlQmVuY2htYXJrEiQudGFuay50b3BvLnYxLkRlY2lkZUJlbmNobWFya1JlcXVlc3QaJS50YW5rLnRvcG8udjEuRGVjaWRlQmVuY2htYXJrUmVzcG9uc2VCwAEKEGNvbS50YW5rLnRvcG8udjFCCVRvcG9Qcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3RvcG8vdjE7dG9wb3YxogIDVFRYqgIMVGFuay5Ub3BvLlYxygIMVGFua1xUb3BvXFYx4gIYVGFua1xUb3BvXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6VG9wbzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
 /**
  * Describes the message tank.topo.v1.Mark.
  * Use `create(MarkSchema)` to create a new message.
  */
 export const MarkSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 0);
 /**
+ * Describes the message tank.topo.v1.SurveyOrigin.
+ * Use `create(SurveyOriginSchema)` to create a new message.
+ */
+export const SurveyOriginSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 1);
+/**
  * Describes the message tank.topo.v1.ListMarksRequest.
  * Use `create(ListMarksRequestSchema)` to create a new message.
  */
-export const ListMarksRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 1);
+export const ListMarksRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 2);
 /**
  * Describes the message tank.topo.v1.ListMarksResponse.
  * Use `create(ListMarksResponseSchema)` to create a new message.
  */
-export const ListMarksResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 2);
+export const ListMarksResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 3);
 /**
  * Describes the message tank.topo.v1.FlagWaitingOnRequest.
  * Use `create(FlagWaitingOnRequestSchema)` to create a new message.
  */
-export const FlagWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 3);
+export const FlagWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 4);
 /**
  * Describes the message tank.topo.v1.FlagWaitingOnResponse.
  * Use `create(FlagWaitingOnResponseSchema)` to create a new message.
  */
-export const FlagWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 4);
+export const FlagWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 5);
 /**
  * Describes the message tank.topo.v1.ResolveWaitingOnRequest.
  * Use `create(ResolveWaitingOnRequestSchema)` to create a new message.
  */
-export const ResolveWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 5);
+export const ResolveWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 6);
 /**
  * Describes the message tank.topo.v1.ResolveWaitingOnResponse.
  * Use `create(ResolveWaitingOnResponseSchema)` to create a new message.
  */
-export const ResolveWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 6);
+export const ResolveWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 7);
 /**
  * Describes the message tank.topo.v1.ListWaitingOnRequest.
  * Use `create(ListWaitingOnRequestSchema)` to create a new message.
  */
-export const ListWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 7);
+export const ListWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 8);
 /**
  * Describes the message tank.topo.v1.WaitingOnItem.
  * Use `create(WaitingOnItemSchema)` to create a new message.
  */
-export const WaitingOnItemSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 8);
+export const WaitingOnItemSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 9);
+/**
+ * Describes the message tank.topo.v1.Benchmark.
+ * Use `create(BenchmarkSchema)` to create a new message.
+ */
+export const BenchmarkSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 10);
+/**
+ * Describes the message tank.topo.v1.ListBenchmarksRequest.
+ * Use `create(ListBenchmarksRequestSchema)` to create a new message.
+ */
+export const ListBenchmarksRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 11);
+/**
+ * Describes the message tank.topo.v1.ListBenchmarksResponse.
+ * Use `create(ListBenchmarksResponseSchema)` to create a new message.
+ */
+export const ListBenchmarksResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 12);
+/**
+ * Describes the message tank.topo.v1.DecideBenchmarkRequest.
+ * Use `create(DecideBenchmarkRequestSchema)` to create a new message.
+ */
+export const DecideBenchmarkRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 13);
+/**
+ * @generated from enum tank.topo.v1.DecideBenchmarkRequest.Decision
+ */
+export var DecideBenchmarkRequest_Decision;
+(function (DecideBenchmarkRequest_Decision) {
+    /**
+     * @generated from enum value: DECISION_UNSPECIFIED = 0;
+     */
+    DecideBenchmarkRequest_Decision[DecideBenchmarkRequest_Decision["UNSPECIFIED"] = 0] = "UNSPECIFIED";
+    /**
+     * @generated from enum value: DECISION_CONFIRM = 1;
+     */
+    DecideBenchmarkRequest_Decision[DecideBenchmarkRequest_Decision["CONFIRM"] = 1] = "CONFIRM";
+    /**
+     * @generated from enum value: DECISION_DISMISS = 2;
+     */
+    DecideBenchmarkRequest_Decision[DecideBenchmarkRequest_Decision["DISMISS"] = 2] = "DISMISS";
+})(DecideBenchmarkRequest_Decision || (DecideBenchmarkRequest_Decision = {}));
+/**
+ * Describes the enum tank.topo.v1.DecideBenchmarkRequest.Decision.
+ */
+export const DecideBenchmarkRequest_DecisionSchema = /*@__PURE__*/ enumDesc(file_tank_topo_v1_topo, 13, 0);
+/**
+ * Describes the message tank.topo.v1.DecideBenchmarkResponse.
+ * Use `create(DecideBenchmarkResponseSchema)` to create a new message.
+ */
+export const DecideBenchmarkResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 14);
 /**
  * Describes the message tank.topo.v1.RecordEventRequest.
  * Use `create(RecordEventRequestSchema)` to create a new message.
  */
-export const RecordEventRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 9);
+export const RecordEventRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 15);
 /**
  * Describes the message tank.topo.v1.RecordEventResponse.
  * Use `create(RecordEventResponseSchema)` to create a new message.
  */
-export const RecordEventResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 10);
+export const RecordEventResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 16);
 /**
  * Describes the message tank.topo.v1.ListWaitingOnResponse.
  * Use `create(ListWaitingOnResponseSchema)` to create a new message.
  */
-export const ListWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 11);
+export const ListWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 17);
 /**
  * @generated from enum tank.topo.v1.MarkType
  */
@@ -121,6 +173,19 @@ export var MarkType;
      * @generated from enum value: MARK_TYPE_EVENT = 7;
      */
     MarkType[MarkType["EVENT"] = 7] = "EVENT";
+    /**
+     * A question nobody answered. Proposed by Survey, resolved by an answer
+     * arriving rather than by anyone pressing a button.
+     *
+     * @generated from enum value: MARK_TYPE_UNANSWERED_QUESTION = 8;
+     */
+    MarkType[MarkType["UNANSWERED_QUESTION"] = 8] = "UNANSWERED_QUESTION";
+    /**
+     * A decision, recorded with its sources and the people who made it.
+     *
+     * @generated from enum value: MARK_TYPE_BENCHMARK = 9;
+     */
+    MarkType[MarkType["BENCHMARK"] = 9] = "BENCHMARK";
 })(MarkType || (MarkType = {}));
 /**
  * Describes the enum tank.topo.v1.MarkType.
@@ -184,6 +249,21 @@ export var MarkStatus;
      * @generated from enum value: MARK_STATUS_DISMISSED = 3;
      */
     MarkStatus[MarkStatus["DISMISSED"] = 3] = "DISMISSED";
+    /**
+     * Extracted but not yet confirmed by a person. High-stakes extractions start
+     * here: a decision nobody has agreed to is a suggestion, and rendering it as
+     * a fact is how a ledger stops being trustworthy.
+     *
+     * @generated from enum value: MARK_STATUS_PROPOSED = 4;
+     */
+    MarkStatus[MarkStatus["PROPOSED"] = 4] = "PROPOSED";
+    /**
+     * Replaced by a later decision. Kept rather than deleted, because "what did
+     * we decide, and when did that change" is the question a ledger exists for.
+     *
+     * @generated from enum value: MARK_STATUS_SUPERSEDED = 5;
+     */
+    MarkStatus[MarkStatus["SUPERSEDED"] = 5] = "SUPERSEDED";
 })(MarkStatus || (MarkStatus = {}));
 /**
  * Describes the enum tank.topo.v1.MarkStatus.

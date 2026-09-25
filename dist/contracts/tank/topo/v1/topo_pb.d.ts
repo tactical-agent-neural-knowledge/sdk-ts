@@ -100,12 +100,64 @@ export type Mark = Message<"tank.topo.v1.Mark"> & {
      * @generated from field: tank.topo.v1.ArtifactKind artifact_kind = 16;
      */
     artifactKind: ArtifactKind;
+    /**
+     * Set on anything Survey proposed, so a mark can always say which extractor
+     * and which version of it produced the claim — and so a later version can
+     * supersede an earlier one rather than duplicating it.
+     *
+     * @generated from field: tank.topo.v1.SurveyOrigin survey = 17;
+     */
+    survey?: SurveyOrigin;
 };
 /**
  * Describes the message tank.topo.v1.Mark.
  * Use `create(MarkSchema)` to create a new message.
  */
 export declare const MarkSchema: GenMessage<Mark>;
+/**
+ * Where an extracted mark came from.
+ *
+ * Every field here exists to answer "why am I seeing this?" after the fact. A
+ * mark whose provenance cannot be reconstructed is one nobody can debug, retire
+ * or trust, and Survey will eventually be proposing things people act on.
+ *
+ * @generated from message tank.topo.v1.SurveyOrigin
+ */
+export type SurveyOrigin = Message<"tank.topo.v1.SurveyOrigin"> & {
+    /**
+     * Which extractor produced it, e.g. "unanswered_question".
+     *
+     * @generated from field: string extractor = 1;
+     */
+    extractor: string;
+    /**
+     * The extractor's version. Changing prompt, model or logic changes this, and
+     * a new version supersedes the marks the old one wrote.
+     *
+     * @generated from field: string version = 2;
+     */
+    version: string;
+    /**
+     * The model, where one was involved. Empty for a deterministic extractor —
+     * which is worth being able to tell apart from a model that happened to
+     * agree.
+     *
+     * @generated from field: string model = 3;
+     */
+    model: string;
+    /**
+     * 0-1. The runner drops anything under the configured threshold before it
+     * ever becomes a mark, so what reaches a person has already cleared the bar.
+     *
+     * @generated from field: float confidence = 4;
+     */
+    confidence: number;
+};
+/**
+ * Describes the message tank.topo.v1.SurveyOrigin.
+ * Use `create(SurveyOriginSchema)` to create a new message.
+ */
+export declare const SurveyOriginSchema: GenMessage<SurveyOrigin>;
 /**
  * @generated from message tank.topo.v1.ListMarksRequest
  */
@@ -262,6 +314,185 @@ export type WaitingOnItem = Message<"tank.topo.v1.WaitingOnItem"> & {
  */
 export declare const WaitingOnItemSchema: GenMessage<WaitingOnItem>;
 /**
+ * A decision the team made.
+ *
+ * Every field here exists so a benchmark can be argued with. A decision without
+ * its sources is hearsay, and a ledger of hearsay is worse than no ledger —
+ * people act on these.
+ *
+ * @generated from message tank.topo.v1.Benchmark
+ */
+export type Benchmark = Message<"tank.topo.v1.Benchmark"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * One line: "Ship the rate limiter behind a flag".
+     *
+     * @generated from field: string statement = 3;
+     */
+    statement: string;
+    /**
+     * Fuller context, where the statement alone loses the reasoning.
+     *
+     * @generated from field: string detail = 4;
+     */
+    detail: string;
+    /**
+     * The messages this was read from. Never empty — an extraction that cannot
+     * point at what it read does not become a benchmark.
+     *
+     * @generated from field: repeated string source_message_ids = 5;
+     */
+    sourceMessageIds: string[];
+    /**
+     * Who was part of the conversation it came from.
+     *
+     * @generated from field: repeated string participant_ids = 6;
+     */
+    participantIds: string[];
+    /**
+     * @generated from field: tank.topo.v1.MarkStatus status = 7;
+     */
+    status: MarkStatus;
+    /**
+     * Who confirmed or dismissed it, and when.
+     *
+     * @generated from field: string decided_by_user_id = 8;
+     */
+    decidedByUserId: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp decided_at = 9;
+     */
+    decidedAt?: Timestamp;
+    /**
+     * The benchmark that replaced this one, when something did.
+     *
+     * @generated from field: string superseded_by_id = 10;
+     */
+    supersededById: string;
+    /**
+     * @generated from field: tank.topo.v1.SurveyOrigin survey = 11;
+     */
+    survey?: SurveyOrigin;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 12;
+     */
+    createdAt?: Timestamp;
+};
+/**
+ * Describes the message tank.topo.v1.Benchmark.
+ * Use `create(BenchmarkSchema)` to create a new message.
+ */
+export declare const BenchmarkSchema: GenMessage<Benchmark>;
+/**
+ * @generated from message tank.topo.v1.ListBenchmarksRequest
+ */
+export type ListBenchmarksRequest = Message<"tank.topo.v1.ListBenchmarksRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * Include dismissed and superseded ones. Off by default: a ledger shows what
+     * stands, and history is something you ask for.
+     *
+     * @generated from field: bool include_closed = 2;
+     */
+    includeClosed: boolean;
+};
+/**
+ * Describes the message tank.topo.v1.ListBenchmarksRequest.
+ * Use `create(ListBenchmarksRequestSchema)` to create a new message.
+ */
+export declare const ListBenchmarksRequestSchema: GenMessage<ListBenchmarksRequest>;
+/**
+ * @generated from message tank.topo.v1.ListBenchmarksResponse
+ */
+export type ListBenchmarksResponse = Message<"tank.topo.v1.ListBenchmarksResponse"> & {
+    /**
+     * @generated from field: repeated tank.topo.v1.Benchmark benchmarks = 1;
+     */
+    benchmarks: Benchmark[];
+};
+/**
+ * Describes the message tank.topo.v1.ListBenchmarksResponse.
+ * Use `create(ListBenchmarksResponseSchema)` to create a new message.
+ */
+export declare const ListBenchmarksResponseSchema: GenMessage<ListBenchmarksResponse>;
+/**
+ * Confirm, edit or dismiss a proposal. The three are one call because they are
+ * one decision — a person looking at a proposal is choosing between them.
+ *
+ * @generated from message tank.topo.v1.DecideBenchmarkRequest
+ */
+export type DecideBenchmarkRequest = Message<"tank.topo.v1.DecideBenchmarkRequest"> & {
+    /**
+     * @generated from field: string benchmark_id = 1;
+     */
+    benchmarkId: string;
+    /**
+     * @generated from field: tank.topo.v1.DecideBenchmarkRequest.Decision decision = 2;
+     */
+    decision: DecideBenchmarkRequest_Decision;
+    /**
+     * Optional corrections, applied on confirm. Editing is how a nearly-right
+     * extraction becomes right, instead of being thrown away and retyped.
+     *
+     * @generated from field: string statement = 3;
+     */
+    statement: string;
+    /**
+     * @generated from field: string detail = 4;
+     */
+    detail: string;
+};
+/**
+ * Describes the message tank.topo.v1.DecideBenchmarkRequest.
+ * Use `create(DecideBenchmarkRequestSchema)` to create a new message.
+ */
+export declare const DecideBenchmarkRequestSchema: GenMessage<DecideBenchmarkRequest>;
+/**
+ * @generated from enum tank.topo.v1.DecideBenchmarkRequest.Decision
+ */
+export declare enum DecideBenchmarkRequest_Decision {
+    /**
+     * @generated from enum value: DECISION_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: DECISION_CONFIRM = 1;
+     */
+    CONFIRM = 1,
+    /**
+     * @generated from enum value: DECISION_DISMISS = 2;
+     */
+    DISMISS = 2
+}
+/**
+ * Describes the enum tank.topo.v1.DecideBenchmarkRequest.Decision.
+ */
+export declare const DecideBenchmarkRequest_DecisionSchema: GenEnum<DecideBenchmarkRequest_Decision>;
+/**
+ * @generated from message tank.topo.v1.DecideBenchmarkResponse
+ */
+export type DecideBenchmarkResponse = Message<"tank.topo.v1.DecideBenchmarkResponse"> & {
+    /**
+     * @generated from field: tank.topo.v1.Benchmark benchmark = 1;
+     */
+    benchmark?: Benchmark;
+};
+/**
+ * Describes the message tank.topo.v1.DecideBenchmarkResponse.
+ * Use `create(DecideBenchmarkResponseSchema)` to create a new message.
+ */
+export declare const DecideBenchmarkResponseSchema: GenMessage<DecideBenchmarkResponse>;
+/**
  * @generated from message tank.topo.v1.RecordEventRequest
  */
 export type RecordEventRequest = Message<"tank.topo.v1.RecordEventRequest"> & {
@@ -381,7 +612,20 @@ export declare enum MarkType {
      *
      * @generated from enum value: MARK_TYPE_EVENT = 7;
      */
-    EVENT = 7
+    EVENT = 7,
+    /**
+     * A question nobody answered. Proposed by Survey, resolved by an answer
+     * arriving rather than by anyone pressing a button.
+     *
+     * @generated from enum value: MARK_TYPE_UNANSWERED_QUESTION = 8;
+     */
+    UNANSWERED_QUESTION = 8,
+    /**
+     * A decision, recorded with its sources and the people who made it.
+     *
+     * @generated from enum value: MARK_TYPE_BENCHMARK = 9;
+     */
+    BENCHMARK = 9
 }
 /**
  * Describes the enum tank.topo.v1.MarkType.
@@ -442,7 +686,22 @@ export declare enum MarkStatus {
      *
      * @generated from enum value: MARK_STATUS_DISMISSED = 3;
      */
-    DISMISSED = 3
+    DISMISSED = 3,
+    /**
+     * Extracted but not yet confirmed by a person. High-stakes extractions start
+     * here: a decision nobody has agreed to is a suggestion, and rendering it as
+     * a fact is how a ledger stops being trustworthy.
+     *
+     * @generated from enum value: MARK_STATUS_PROPOSED = 4;
+     */
+    PROPOSED = 4,
+    /**
+     * Replaced by a later decision. Kept rather than deleted, because "what did
+     * we decide, and when did that change" is the question a ledger exists for.
+     *
+     * @generated from enum value: MARK_STATUS_SUPERSEDED = 5;
+     */
+    SUPERSEDED = 5
 }
 /**
  * Describes the enum tank.topo.v1.MarkStatus.
@@ -566,5 +825,27 @@ export declare const TopoService: GenService<{
         methodKind: "unary";
         input: typeof RecordEventRequestSchema;
         output: typeof RecordEventResponseSchema;
+    };
+    /**
+     * The channel's decision ledger.
+     *
+     * @generated from rpc tank.topo.v1.TopoService.ListBenchmarks
+     */
+    listBenchmarks: {
+        methodKind: "unary";
+        input: typeof ListBenchmarksRequestSchema;
+        output: typeof ListBenchmarksResponseSchema;
+    };
+    /**
+     * Confirm, correct or dismiss a proposed decision. Anyone who can post in the
+     * channel may decide: a decision belongs to the people who made it, not to
+     * whoever happened to be mentioned in the message it was read from.
+     *
+     * @generated from rpc tank.topo.v1.TopoService.DecideBenchmark
+     */
+    decideBenchmark: {
+        methodKind: "unary";
+        input: typeof DecideBenchmarkRequestSchema;
+        output: typeof DecideBenchmarkResponseSchema;
     };
 }>;
