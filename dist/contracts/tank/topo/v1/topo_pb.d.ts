@@ -80,6 +80,26 @@ export type Mark = Message<"tank.topo.v1.Mark"> & {
      * @generated from field: google.protobuf.Timestamp resolved_at = 13;
      */
     resolvedAt?: Timestamp;
+    /**
+     * One extra line for the hover, beyond the preview: "3 files", "Deployed
+     * api@1fbe86c", "PR #24 merged". Empty when the preview says it all.
+     *
+     * @generated from field: string detail = 14;
+     */
+    detail: string;
+    /**
+     * Where the mark points outside TANK, if anywhere — a PR, a run, a dashboard.
+     * Never a link to content the caller cannot already reach.
+     *
+     * @generated from field: string url = 15;
+     */
+    url: string;
+    /**
+     * Only meaningful for MARK_TYPE_ARTIFACT.
+     *
+     * @generated from field: tank.topo.v1.ArtifactKind artifact_kind = 16;
+     */
+    artifactKind: ArtifactKind;
 };
 /**
  * Describes the message tank.topo.v1.Mark.
@@ -242,6 +262,61 @@ export type WaitingOnItem = Message<"tank.topo.v1.WaitingOnItem"> & {
  */
 export declare const WaitingOnItemSchema: GenMessage<WaitingOnItem>;
 /**
+ * @generated from message tank.topo.v1.RecordEventRequest
+ */
+export type RecordEventRequest = Message<"tank.topo.v1.RecordEventRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * What happened: "deploy", "pr_merged", "incident". Free-form on purpose, so
+     * a new source of events needs no contract change; the strip lanes them all
+     * together and the hover reads `detail`.
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * The one line a human reads: "Deployed api@1fbe86c", "PR #24 merged".
+     *
+     * @generated from field: string detail = 3;
+     */
+    detail: string;
+    /**
+     * Where to go for the whole story. Optional.
+     *
+     * @generated from field: string url = 4;
+     */
+    url: string;
+    /**
+     * Idempotency. A webhook redelivered, or a workflow retried, must not tick
+     * the strip twice.
+     *
+     * @generated from field: string dedupe_key = 5;
+     */
+    dedupeKey: string;
+};
+/**
+ * Describes the message tank.topo.v1.RecordEventRequest.
+ * Use `create(RecordEventRequestSchema)` to create a new message.
+ */
+export declare const RecordEventRequestSchema: GenMessage<RecordEventRequest>;
+/**
+ * @generated from message tank.topo.v1.RecordEventResponse
+ */
+export type RecordEventResponse = Message<"tank.topo.v1.RecordEventResponse"> & {
+    /**
+     * @generated from field: tank.topo.v1.Mark mark = 1;
+     */
+    mark?: Mark;
+};
+/**
+ * Describes the message tank.topo.v1.RecordEventResponse.
+ * Use `create(RecordEventResponseSchema)` to create a new message.
+ */
+export declare const RecordEventResponseSchema: GenMessage<RecordEventResponse>;
+/**
  * @generated from message tank.topo.v1.ListWaitingOnResponse
  */
 export type ListWaitingOnResponse = Message<"tank.topo.v1.ListWaitingOnResponse"> & {
@@ -292,12 +367,55 @@ export declare enum MarkType {
      *
      * @generated from enum value: MARK_TYPE_WAITING_ON = 5;
      */
-    WAITING_ON = 5
+    WAITING_ON = 5,
+    /**
+     * A message carrying something durable: a file, a link, a code block. These
+     * are the things people scroll back looking for.
+     *
+     * @generated from enum value: MARK_TYPE_ARTIFACT = 6;
+     */
+    ARTIFACT = 6,
+    /**
+     * Something that happened to the channel rather than in it: a deploy, a
+     * merged PR, an incident. Written by whatever observed it.
+     *
+     * @generated from enum value: MARK_TYPE_EVENT = 7;
+     */
+    EVENT = 7
 }
 /**
  * Describes the enum tank.topo.v1.MarkType.
  */
 export declare const MarkTypeSchema: GenEnum<MarkType>;
+/**
+ * What kind of durable thing an artifact mark points at. Kept separate from
+ * MarkType so the strip can lane every artifact together while the hover and
+ * the legend still say which sort it is.
+ *
+ * @generated from enum tank.topo.v1.ArtifactKind
+ */
+export declare enum ArtifactKind {
+    /**
+     * @generated from enum value: ARTIFACT_KIND_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: ARTIFACT_KIND_FILE = 1;
+     */
+    FILE = 1,
+    /**
+     * @generated from enum value: ARTIFACT_KIND_LINK = 2;
+     */
+    LINK = 2,
+    /**
+     * @generated from enum value: ARTIFACT_KIND_CODE = 3;
+     */
+    CODE = 3
+}
+/**
+ * Describes the enum tank.topo.v1.ArtifactKind.
+ */
+export declare const ArtifactKindSchema: GenEnum<ArtifactKind>;
 /**
  * Whether a mark is still live. Derived marks are always open: they exist only
  * while the thing they describe is true. Stored marks carry a real lifecycle.
@@ -435,5 +553,18 @@ export declare const TopoService: GenService<{
         methodKind: "unary";
         input: typeof ListWaitingOnRequestSchema;
         output: typeof ListWaitingOnResponseSchema;
+    };
+    /**
+     * Record something that happened to a channel rather than in it. For the
+     * control plane and other first-party observers, never for a person: an
+     * event tick claims something occurred, and a human claim belongs in a
+     * message where it can be argued with.
+     *
+     * @generated from rpc tank.topo.v1.TopoService.RecordEvent
+     */
+    recordEvent: {
+        methodKind: "unary";
+        input: typeof RecordEventRequestSchema;
+        output: typeof RecordEventResponseSchema;
     };
 }>;
