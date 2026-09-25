@@ -24,6 +24,7 @@ import {
   type ReactionAdded,
   type ReactionRemoved,
   type ReadStateUpdated,
+  type TopoMarkUpdated,
   type Typing,
 } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
@@ -899,7 +900,8 @@ export type KnownEventPayload =
   | MessageEphemeral
   | NotificationsRead
   | AgentRunUpdated
-  | NotificationCreated;
+  | NotificationCreated
+  | TopoMarkUpdated;
 
 /**
  * A payload whose type is not in the vendored contracts (a newer event than this SDK build). The

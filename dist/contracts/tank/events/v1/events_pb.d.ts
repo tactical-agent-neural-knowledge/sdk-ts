@@ -8,6 +8,7 @@ import type { File } from "../../files/v1/files_pb.js";
 import type { Huddle } from "../../huddle/v1/huddle_pb.js";
 import type { Message as Message$1 } from "../../message/v1/message_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
+import type { Mark } from "../../topo/v1/topo_pb.js";
 import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
@@ -791,3 +792,21 @@ export type ExportReady = Message<"tank.events.v1.ExportReady"> & {
  * Use `create(ExportReadySchema)` to create a new message.
  */
 export declare const ExportReadySchema: GenMessage<ExportReady>;
+/**
+ * topo.mark.updated on the channel subject: a stored mark was created,
+ * resolved or dismissed. Derived marks never appear here — they have no
+ * lifecycle to report, and the client recomputes them on its next read.
+ *
+ * @generated from message tank.events.v1.TopoMarkUpdated
+ */
+export type TopoMarkUpdated = Message<"tank.events.v1.TopoMarkUpdated"> & {
+    /**
+     * @generated from field: tank.topo.v1.Mark mark = 1;
+     */
+    mark?: Mark;
+};
+/**
+ * Describes the message tank.events.v1.TopoMarkUpdated.
+ * Use `create(TopoMarkUpdatedSchema)` to create a new message.
+ */
+export declare const TopoMarkUpdatedSchema: GenMessage<TopoMarkUpdated>;

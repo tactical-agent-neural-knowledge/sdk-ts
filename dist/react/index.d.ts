@@ -8,7 +8,7 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
-import type { Mark } from "../contracts/tank/topo/v1/topo_pb.js";
+import type { Mark, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export interface TankProviderProps {
     client: TankClient;
@@ -39,6 +39,20 @@ export interface TopoMarks {
  * response from a channel the user has already left is dropped rather than rendered.
  */
 export declare function useTopoMarks(channelId: string): TopoMarks;
+export interface WaitingOn {
+    items: WaitingOnItem[];
+    loading: boolean;
+    /** Refetch. The queues are small and read rarely; a re-read beats an invalidation rule. */
+    reload: () => void;
+}
+/**
+ * One side of the waiting-on relationship: what is owed to you, or what you owe.
+ *
+ * Re-reads whenever a stored mark changes anywhere in the workspace. That is coarser than tracking
+ * which mark moved, and deliberately so — the queues hold a handful of rows, and a wrong
+ * invalidation rule here shows somebody an obligation they have already discharged.
+ */
+export declare function useWaitingOn(workspaceId: string, direction: WaitingDirection): WaitingOn;
 export interface UseMessagesResult {
     messages: Message[];
     /** A page is being fetched (including the first one). */
