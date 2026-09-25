@@ -2,6 +2,7 @@ import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobu
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Principal } from "../../auth/v1/auth_pb.js";
 import type { Channel, ChannelReadState, NotifyPref } from "../../channel/v1/channel_pb.js";
+import type { MarkType } from "../../topo/v1/topo_pb.js";
 import type { RichText } from "../../richtext/v1/richtext_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
@@ -679,12 +680,46 @@ export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
      * @generated from field: bool push_on_mention_only = 7;
      */
     pushOnMentionOnly: boolean;
+    /**
+     * @generated from field: tank.workspace.v1.TopoPreferences topo = 8;
+     */
+    topo?: TopoPreferences;
 };
 /**
  * Describes the message tank.workspace.v1.Preferences.
  * Use `create(PreferencesSchema)` to create a new message.
  */
 export declare const PreferencesSchema: GenMessage<Preferences>;
+/**
+ * Which Topo mark families the strip draws for this person.
+ *
+ * `configured` exists because an empty `visible` has two meanings otherwise —
+ * "never chosen" and "turned everything off" — and UpdatePreferences replaces
+ * the whole message, so the difference cannot be recovered from the wire.
+ *
+ * @generated from message tank.workspace.v1.TopoPreferences
+ */
+export type TopoPreferences = Message<"tank.workspace.v1.TopoPreferences"> & {
+    /**
+     * @generated from field: bool configured = 1;
+     */
+    configured: boolean;
+    /**
+     * @generated from field: repeated tank.topo.v1.MarkType visible = 2;
+     */
+    visible: MarkType[];
+    /**
+     * Message-indexed (the default) or time-indexed scaling. R6.
+     *
+     * @generated from field: bool time_axis = 3;
+     */
+    timeAxis: boolean;
+};
+/**
+ * Describes the message tank.workspace.v1.TopoPreferences.
+ * Use `create(TopoPreferencesSchema)` to create a new message.
+ */
+export declare const TopoPreferencesSchema: GenMessage<TopoPreferences>;
 /**
  * @generated from message tank.workspace.v1.GetPreferencesRequest
  */

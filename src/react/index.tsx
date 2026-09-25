@@ -28,8 +28,14 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
-import type { Mark, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
-import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import type { Mark, MarkType, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
+import type {
+  Entitlements,
+  Preferences,
+  TopoPreferences,
+  Workspace,
+} from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { visibleMarkTypes } from "../topo/visibility.js";
 
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
 class PresenceRegistry {
@@ -117,6 +123,95 @@ export function useChannels(workspaceId: string): Channel[] {
 
 export function useChannel(id: string): Channel | undefined {
   return useTankSelector(useCallback((s: TankStore) => s.getState().channels[id], [id]));
+}
+
+export interface TopoVisibility {
+  /** The families the strip should draw, already accounting for the defaults. */
+  visible: Set<MarkType>;
+  /** Message-indexed (false) or time-indexed (true) axis. */
+  timeAxis: boolean;
+  loading: boolean;
+  toggle: (type: MarkType) => Promise<void>;
+  setTimeAxis: (on: boolean) => Promise<void>;
+}
+
+/**
+ * The person's Topo preferences: which mark families to draw, and how the axis is scaled.
+ *
+ * Stored per workspace on the server rather than per device, so the strip looks the same on the
+ * phone as on the laptop.
+ *
+ * Every write is read-modify-write: UpdatePreferences replaces the whole Preferences message, so
+ * sending only the Topo part would quietly reset somebody's notification and theme settings.
+ */
+export function useTopoVisibility(workspaceId: string): TopoVisibility {
+  const client = useTank();
+  const [prefs, setPrefs] = useState<Preferences | undefined>();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!workspaceId) return;
+    let live = true;
+    client.workspaces
+      .getPreferences({ workspaceId })
+      .then((res) => {
+        if (live) {
+          setPrefs(res.preferences);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        // The strip still draws, on the defaults. Preferences failing to load is not a reason to
+        // show somebody an empty map.
+        if (live) setLoading(false);
+      });
+    return () => {
+      live = false;
+    };
+  }, [client, workspaceId]);
+
+  const save = useCallback(
+    async (next: TopoPreferences) => {
+      const current = prefs ?? (await client.workspaces.getPreferences({ workspaceId })).preferences;
+      const merged = { ...(current ?? {}), topo: next } as Preferences;
+      setPrefs(merged);
+      const res = await client.workspaces.updatePreferences({ workspaceId, preferences: merged });
+      setPrefs(res.preferences);
+    },
+    [client, workspaceId, prefs],
+  );
+
+  const topo = prefs?.topo;
+  const visible = useMemo(() => visibleMarkTypes(topo), [topo]);
+
+  const toggle = useCallback(
+    async (type: MarkType) => {
+      const next = new Set(visible);
+      if (next.has(type)) next.delete(type);
+      else next.add(type);
+      // configured flips on the first change, which is what lets "everything off" survive instead
+      // of reading as "never chosen".
+      await save({
+        configured: true,
+        visible: [...next],
+        timeAxis: topo?.timeAxis ?? false,
+      } as TopoPreferences);
+    },
+    [save, visible, topo],
+  );
+
+  const setTimeAxis = useCallback(
+    async (on: boolean) => {
+      await save({
+        configured: topo?.configured ?? false,
+        visible: topo?.visible ?? [...visible],
+        timeAxis: on,
+      } as TopoPreferences);
+    },
+    [save, visible, topo],
+  );
+
+  return { visible, timeAxis: topo?.timeAxis ?? false, loading, toggle, setTimeAxis };
 }
 
 export interface TopoMarks {

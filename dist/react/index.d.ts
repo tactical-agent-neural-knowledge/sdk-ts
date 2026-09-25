@@ -8,7 +8,7 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
-import type { Mark, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
+import type { Mark, MarkType, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export interface TankProviderProps {
     client: TankClient;
@@ -24,6 +24,25 @@ export declare function useConnectionState(): ConnectionState;
 export declare function useWorkspace(id: string): Workspace | undefined;
 export declare function useChannels(workspaceId: string): Channel[];
 export declare function useChannel(id: string): Channel | undefined;
+export interface TopoVisibility {
+    /** The families the strip should draw, already accounting for the defaults. */
+    visible: Set<MarkType>;
+    /** Message-indexed (false) or time-indexed (true) axis. */
+    timeAxis: boolean;
+    loading: boolean;
+    toggle: (type: MarkType) => Promise<void>;
+    setTimeAxis: (on: boolean) => Promise<void>;
+}
+/**
+ * The person's Topo preferences: which mark families to draw, and how the axis is scaled.
+ *
+ * Stored per workspace on the server rather than per device, so the strip looks the same on the
+ * phone as on the laptop.
+ *
+ * Every write is read-modify-write: UpdatePreferences replaces the whole Preferences message, so
+ * sending only the Topo part would quietly reset somebody's notification and theme settings.
+ */
+export declare function useTopoVisibility(workspaceId: string): TopoVisibility;
 export interface TopoMarks {
     marks: Mark[];
     /** The channel's newest seq, which is the strip's axis length. */
