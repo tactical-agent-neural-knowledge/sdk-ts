@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/topo/v1/topo.proto.
  */
 export const file_tank_topo_v1_topo: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL3RvcG8vdjEvdG9wby5wcm90bxIMdGFuay50b3BvLnYxIv8CCgRNYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoCRITCgtjaGFubmVsX3NlcRgEIAEoAxIkCgR0eXBlGAUgASgOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlEiAKBGxhbmUYBiABKA4yEi50YW5rLnRvcG8udjEuTGFuZRIRCgllbGV2YXRpb24YByABKAUSDwoHcHJldmlldxgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgZzdGF0dXMYCiABKA4yGC50YW5rLnRvcG8udjEuTWFya1N0YXR1cxIbChN3YWl0aW5nX29uX3VzZXJfaWRzGAsgAygJEhoKEmNyZWF0ZWRfYnlfdXNlcl9pZBgMIAEoCRIvCgtyZXNvbHZlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiTQoQTGlzdE1hcmtzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEiUKBXR5cGVzGAIgAygOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlIkgKEUxpc3RNYXJrc1Jlc3BvbnNlEiEKBW1hcmtzGAEgAygLMhIudGFuay50b3BvLnYxLk1hcmsSEAoIbGFzdF9zZXEYAiABKAMiPAoURmxhZ1dhaXRpbmdPblJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCRIQCgh1c2VyX2lkcxgCIAMoCSI5ChVGbGFnV2FpdGluZ09uUmVzcG9uc2USIAoEbWFyaxgBIAEoCzISLnRhbmsudG9wby52MS5NYXJrIjsKF1Jlc29sdmVXYWl0aW5nT25SZXF1ZXN0Eg8KB21hcmtfaWQYASABKAkSDwoHZGlzbWlzcxgCIAEoCCI8ChhSZXNvbHZlV2FpdGluZ09uUmVzcG9uc2USIAoEbWFyaxgBIAEoCzISLnRhbmsudG9wby52MS5NYXJrIncKFExpc3RXYWl0aW5nT25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIxCglkaXJlY3Rpb24YAiABKA4yHi50YW5rLnRvcG8udjEuV2FpdGluZ0RpcmVjdGlvbhIWCg5pbmNsdWRlX2Nsb3NlZBgDIAEoCCJcCg1XYWl0aW5nT25JdGVtEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyaxIpCgdtZXNzYWdlGAIgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2UiQwoVTGlzdFdhaXRpbmdPblJlc3BvbnNlEioKBWl0ZW1zGAEgAygLMhsudGFuay50b3BvLnYxLldhaXRpbmdPbkl0ZW0qpwEKCE1hcmtUeXBlEhkKFU1BUktfVFlQRV9VTlNQRUNJRklFRBAAEhUKEU1BUktfVFlQRV9NRU5USU9OEAESGQoVTUFSS19UWVBFX09XTl9NRVNTQUdFEAISGgoWTUFSS19UWVBFX1JFQURfSE9SSVpPThADEhgKFE1BUktfVFlQRV9TRUFSQ0hfSElUEAQSGAoUTUFSS19UWVBFX1dBSVRJTkdfT04QBSp0CgpNYXJrU3RhdHVzEhsKF01BUktfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFAoQTUFSS19TVEFUVVNfT1BFThABEhgKFE1BUktfU1RBVFVTX1JFU09MVkVEEAISGQoVTUFSS19TVEFUVVNfRElTTUlTU0VEEAMqVQoETGFuZRIUChBMQU5FX1VOU1BFQ0lGSUVEEAASEgoOTEFORV9TVFJVQ1RVUkUQARIQCgxMQU5FX01FU1NBR0UQAhIRCg1MQU5FX1BFUlNPTkFMEAMqbwoQV2FpdGluZ0RpcmVjdGlvbhIhCh1XQUlUSU5HX0RJUkVDVElPTl9VTlNQRUNJRklFRBAAEhsKF1dBSVRJTkdfRElSRUNUSU9OX09OX01FEAESGwoXV0FJVElOR19ESVJFQ1RJT05fQllfTUUQAjLyAgoLVG9wb1NlcnZpY2USTAoJTGlzdE1hcmtzEh4udGFuay50b3BvLnYxLkxpc3RNYXJrc1JlcXVlc3QaHy50YW5rLnRvcG8udjEuTGlzdE1hcmtzUmVzcG9uc2USWAoNRmxhZ1dhaXRpbmdPbhIiLnRhbmsudG9wby52MS5GbGFnV2FpdGluZ09uUmVxdWVzdBojLnRhbmsudG9wby52MS5GbGFnV2FpdGluZ09uUmVzcG9uc2USYQoQUmVzb2x2ZVdhaXRpbmdPbhIlLnRhbmsudG9wby52MS5SZXNvbHZlV2FpdGluZ09uUmVxdWVzdBomLnRhbmsudG9wby52MS5SZXNvbHZlV2FpdGluZ09uUmVzcG9uc2USWAoNTGlzdFdhaXRpbmdPbhIiLnRhbmsudG9wby52MS5MaXN0V2FpdGluZ09uUmVxdWVzdBojLnRhbmsudG9wby52MS5MaXN0V2FpdGluZ09uUmVzcG9uc2VCwAEKEGNvbS50YW5rLnRvcG8udjFCCVRvcG9Qcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3RvcG8vdjE7dG9wb3YxogIDVFRYqgIMVGFuay5Ub3BvLlYxygIMVGFua1xUb3BvXFYx4gIYVGFua1xUb3BvXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6VG9wbzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
+  fileDesc("Chd0YW5rL3RvcG8vdjEvdG9wby5wcm90bxIMdGFuay50b3BvLnYxIs8DCgRNYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoCRITCgtjaGFubmVsX3NlcRgEIAEoAxIkCgR0eXBlGAUgASgOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlEiAKBGxhbmUYBiABKA4yEi50YW5rLnRvcG8udjEuTGFuZRIRCgllbGV2YXRpb24YByABKAUSDwoHcHJldmlldxgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgZzdGF0dXMYCiABKA4yGC50YW5rLnRvcG8udjEuTWFya1N0YXR1cxIbChN3YWl0aW5nX29uX3VzZXJfaWRzGAsgAygJEhoKEmNyZWF0ZWRfYnlfdXNlcl9pZBgMIAEoCRIvCgtyZXNvbHZlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV0YWlsGA4gASgJEgsKA3VybBgPIAEoCRIxCg1hcnRpZmFjdF9raW5kGBAgASgOMhoudGFuay50b3BvLnYxLkFydGlmYWN0S2luZCJNChBMaXN0TWFya3NSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSJQoFdHlwZXMYAiADKA4yFi50YW5rLnRvcG8udjEuTWFya1R5cGUiSAoRTGlzdE1hcmtzUmVzcG9uc2USIQoFbWFya3MYASADKAsyEi50YW5rLnRvcG8udjEuTWFyaxIQCghsYXN0X3NlcRgCIAEoAyI8ChRGbGFnV2FpdGluZ09uUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJEhAKCHVzZXJfaWRzGAIgAygJIjkKFUZsYWdXYWl0aW5nT25SZXNwb25zZRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsiOwoXUmVzb2x2ZVdhaXRpbmdPblJlcXVlc3QSDwoHbWFya19pZBgBIAEoCRIPCgdkaXNtaXNzGAIgASgIIjwKGFJlc29sdmVXYWl0aW5nT25SZXNwb25zZRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsidwoUTGlzdFdhaXRpbmdPblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEjEKCWRpcmVjdGlvbhgCIAEoDjIeLnRhbmsudG9wby52MS5XYWl0aW5nRGlyZWN0aW9uEhYKDmluY2x1ZGVfY2xvc2VkGAMgASgIIlwKDVdhaXRpbmdPbkl0ZW0SIAoEbWFyaxgBIAEoCzISLnRhbmsudG9wby52MS5NYXJrEikKB21lc3NhZ2UYAiABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJnChJSZWNvcmRFdmVudFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIMCgRraW5kGAIgASgJEg4KBmRldGFpbBgDIAEoCRILCgN1cmwYBCABKAkSEgoKZGVkdXBlX2tleRgFIAEoCSI3ChNSZWNvcmRFdmVudFJlc3BvbnNlEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyayJDChVMaXN0V2FpdGluZ09uUmVzcG9uc2USKgoFaXRlbXMYASADKAsyGy50YW5rLnRvcG8udjEuV2FpdGluZ09uSXRlbSrUAQoITWFya1R5cGUSGQoVTUFSS19UWVBFX1VOU1BFQ0lGSUVEEAASFQoRTUFSS19UWVBFX01FTlRJT04QARIZChVNQVJLX1RZUEVfT1dOX01FU1NBR0UQAhIaChZNQVJLX1RZUEVfUkVBRF9IT1JJWk9OEAMSGAoUTUFSS19UWVBFX1NFQVJDSF9ISVQQBBIYChRNQVJLX1RZUEVfV0FJVElOR19PThAFEhYKEk1BUktfVFlQRV9BUlRJRkFDVBAGEhMKD01BUktfVFlQRV9FVkVOVBAHKnUKDEFydGlmYWN0S2luZBIdChlBUlRJRkFDVF9LSU5EX1VOU1BFQ0lGSUVEEAASFgoSQVJUSUZBQ1RfS0lORF9GSUxFEAESFgoSQVJUSUZBQ1RfS0lORF9MSU5LEAISFgoSQVJUSUZBQ1RfS0lORF9DT0RFEAMqdAoKTWFya1N0YXR1cxIbChdNQVJLX1NUQVRVU19VTlNQRUNJRklFRBAAEhQKEE1BUktfU1RBVFVTX09QRU4QARIYChRNQVJLX1NUQVRVU19SRVNPTFZFRBACEhkKFU1BUktfU1RBVFVTX0RJU01JU1NFRBADKlUKBExhbmUSFAoQTEFORV9VTlNQRUNJRklFRBAAEhIKDkxBTkVfU1RSVUNUVVJFEAESEAoMTEFORV9NRVNTQUdFEAISEQoNTEFORV9QRVJTT05BTBADKm8KEFdhaXRpbmdEaXJlY3Rpb24SIQodV0FJVElOR19ESVJFQ1RJT05fVU5TUEVDSUZJRUQQABIbChdXQUlUSU5HX0RJUkVDVElPTl9PTl9NRRABEhsKF1dBSVRJTkdfRElSRUNUSU9OX0JZX01FEAIyxgMKC1RvcG9TZXJ2aWNlEkwKCUxpc3RNYXJrcxIeLnRhbmsudG9wby52MS5MaXN0TWFya3NSZXF1ZXN0Gh8udGFuay50b3BvLnYxLkxpc3RNYXJrc1Jlc3BvbnNlElgKDUZsYWdXYWl0aW5nT24SIi50YW5rLnRvcG8udjEuRmxhZ1dhaXRpbmdPblJlcXVlc3QaIy50YW5rLnRvcG8udjEuRmxhZ1dhaXRpbmdPblJlc3BvbnNlEmEKEFJlc29sdmVXYWl0aW5nT24SJS50YW5rLnRvcG8udjEuUmVzb2x2ZVdhaXRpbmdPblJlcXVlc3QaJi50YW5rLnRvcG8udjEuUmVzb2x2ZVdhaXRpbmdPblJlc3BvbnNlElgKDUxpc3RXYWl0aW5nT24SIi50YW5rLnRvcG8udjEuTGlzdFdhaXRpbmdPblJlcXVlc3QaIy50YW5rLnRvcG8udjEuTGlzdFdhaXRpbmdPblJlc3BvbnNlElIKC1JlY29yZEV2ZW50EiAudGFuay50b3BvLnYxLlJlY29yZEV2ZW50UmVxdWVzdBohLnRhbmsudG9wby52MS5SZWNvcmRFdmVudFJlc3BvbnNlQsABChBjb20udGFuay50b3BvLnYxQglUb3BvUHJvdG9QAVpPZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay90b3BvL3YxO3RvcG92MaICA1RUWKoCDFRhbmsuVG9wby5WMcoCDFRhbmtcVG9wb1xWMeICGFRhbmtcVG9wb1xWMVxHUEJNZXRhZGF0YeoCDlRhbms6OlRvcG86OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
 
 /**
  * @generated from message tank.topo.v1.Mark
@@ -102,6 +102,29 @@ export type Mark = Message<"tank.topo.v1.Mark"> & {
    * @generated from field: google.protobuf.Timestamp resolved_at = 13;
    */
   resolvedAt?: Timestamp;
+
+  /**
+   * One extra line for the hover, beyond the preview: "3 files", "Deployed
+   * api@1fbe86c", "PR #24 merged". Empty when the preview says it all.
+   *
+   * @generated from field: string detail = 14;
+   */
+  detail: string;
+
+  /**
+   * Where the mark points outside TANK, if anywhere — a PR, a run, a dashboard.
+   * Never a link to content the caller cannot already reach.
+   *
+   * @generated from field: string url = 15;
+   */
+  url: string;
+
+  /**
+   * Only meaningful for MARK_TYPE_ARTIFACT.
+   *
+   * @generated from field: tank.topo.v1.ArtifactKind artifact_kind = 16;
+   */
+  artifactKind: ArtifactKind;
 };
 
 /**
@@ -298,6 +321,71 @@ export const WaitingOnItemSchema: GenMessage<WaitingOnItem> = /*@__PURE__*/
   messageDesc(file_tank_topo_v1_topo, 8);
 
 /**
+ * @generated from message tank.topo.v1.RecordEventRequest
+ */
+export type RecordEventRequest = Message<"tank.topo.v1.RecordEventRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * What happened: "deploy", "pr_merged", "incident". Free-form on purpose, so
+   * a new source of events needs no contract change; the strip lanes them all
+   * together and the hover reads `detail`.
+   *
+   * @generated from field: string kind = 2;
+   */
+  kind: string;
+
+  /**
+   * The one line a human reads: "Deployed api@1fbe86c", "PR #24 merged".
+   *
+   * @generated from field: string detail = 3;
+   */
+  detail: string;
+
+  /**
+   * Where to go for the whole story. Optional.
+   *
+   * @generated from field: string url = 4;
+   */
+  url: string;
+
+  /**
+   * Idempotency. A webhook redelivered, or a workflow retried, must not tick
+   * the strip twice.
+   *
+   * @generated from field: string dedupe_key = 5;
+   */
+  dedupeKey: string;
+};
+
+/**
+ * Describes the message tank.topo.v1.RecordEventRequest.
+ * Use `create(RecordEventRequestSchema)` to create a new message.
+ */
+export const RecordEventRequestSchema: GenMessage<RecordEventRequest> = /*@__PURE__*/
+  messageDesc(file_tank_topo_v1_topo, 9);
+
+/**
+ * @generated from message tank.topo.v1.RecordEventResponse
+ */
+export type RecordEventResponse = Message<"tank.topo.v1.RecordEventResponse"> & {
+  /**
+   * @generated from field: tank.topo.v1.Mark mark = 1;
+   */
+  mark?: Mark;
+};
+
+/**
+ * Describes the message tank.topo.v1.RecordEventResponse.
+ * Use `create(RecordEventResponseSchema)` to create a new message.
+ */
+export const RecordEventResponseSchema: GenMessage<RecordEventResponse> = /*@__PURE__*/
+  messageDesc(file_tank_topo_v1_topo, 10);
+
+/**
  * @generated from message tank.topo.v1.ListWaitingOnResponse
  */
 export type ListWaitingOnResponse = Message<"tank.topo.v1.ListWaitingOnResponse"> & {
@@ -312,7 +400,7 @@ export type ListWaitingOnResponse = Message<"tank.topo.v1.ListWaitingOnResponse"
  * Use `create(ListWaitingOnResponseSchema)` to create a new message.
  */
 export const ListWaitingOnResponseSchema: GenMessage<ListWaitingOnResponse> = /*@__PURE__*/
-  messageDesc(file_tank_topo_v1_topo, 9);
+  messageDesc(file_tank_topo_v1_topo, 11);
 
 /**
  * @generated from enum tank.topo.v1.MarkType
@@ -357,6 +445,22 @@ export enum MarkType {
    * @generated from enum value: MARK_TYPE_WAITING_ON = 5;
    */
   WAITING_ON = 5,
+
+  /**
+   * A message carrying something durable: a file, a link, a code block. These
+   * are the things people scroll back looking for.
+   *
+   * @generated from enum value: MARK_TYPE_ARTIFACT = 6;
+   */
+  ARTIFACT = 6,
+
+  /**
+   * Something that happened to the channel rather than in it: a deploy, a
+   * merged PR, an incident. Written by whatever observed it.
+   *
+   * @generated from enum value: MARK_TYPE_EVENT = 7;
+   */
+  EVENT = 7,
 }
 
 /**
@@ -364,6 +468,41 @@ export enum MarkType {
  */
 export const MarkTypeSchema: GenEnum<MarkType> = /*@__PURE__*/
   enumDesc(file_tank_topo_v1_topo, 0);
+
+/**
+ * What kind of durable thing an artifact mark points at. Kept separate from
+ * MarkType so the strip can lane every artifact together while the hover and
+ * the legend still say which sort it is.
+ *
+ * @generated from enum tank.topo.v1.ArtifactKind
+ */
+export enum ArtifactKind {
+  /**
+   * @generated from enum value: ARTIFACT_KIND_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ARTIFACT_KIND_FILE = 1;
+   */
+  FILE = 1,
+
+  /**
+   * @generated from enum value: ARTIFACT_KIND_LINK = 2;
+   */
+  LINK = 2,
+
+  /**
+   * @generated from enum value: ARTIFACT_KIND_CODE = 3;
+   */
+  CODE = 3,
+}
+
+/**
+ * Describes the enum tank.topo.v1.ArtifactKind.
+ */
+export const ArtifactKindSchema: GenEnum<ArtifactKind> = /*@__PURE__*/
+  enumDesc(file_tank_topo_v1_topo, 1);
 
 /**
  * Whether a mark is still live. Derived marks are always open: they exist only
@@ -401,7 +540,7 @@ export enum MarkStatus {
  * Describes the enum tank.topo.v1.MarkStatus.
  */
 export const MarkStatusSchema: GenEnum<MarkStatus> = /*@__PURE__*/
-  enumDesc(file_tank_topo_v1_topo, 1);
+  enumDesc(file_tank_topo_v1_topo, 2);
 
 /**
  * Which vertical strip a mark belongs to. Keeping families apart is what stops
@@ -441,7 +580,7 @@ export enum Lane {
  * Describes the enum tank.topo.v1.Lane.
  */
 export const LaneSchema: GenEnum<Lane> = /*@__PURE__*/
-  enumDesc(file_tank_topo_v1_topo, 2);
+  enumDesc(file_tank_topo_v1_topo, 3);
 
 /**
  * Which side of a waiting-on the caller is on.
@@ -473,7 +612,7 @@ export enum WaitingDirection {
  * Describes the enum tank.topo.v1.WaitingDirection.
  */
 export const WaitingDirectionSchema: GenEnum<WaitingDirection> = /*@__PURE__*/
-  enumDesc(file_tank_topo_v1_topo, 3);
+  enumDesc(file_tank_topo_v1_topo, 4);
 
 /**
  * Marks are always read through the channel, so a Tread the caller cannot see
@@ -519,6 +658,19 @@ export const TopoService: GenService<{
     methodKind: "unary";
     input: typeof ListWaitingOnRequestSchema;
     output: typeof ListWaitingOnResponseSchema;
+  },
+  /**
+   * Record something that happened to a channel rather than in it. For the
+   * control plane and other first-party observers, never for a person: an
+   * event tick claims something occurred, and a human claim belongs in a
+   * message where it can be argued with.
+   *
+   * @generated from rpc tank.topo.v1.TopoService.RecordEvent
+   */
+  recordEvent: {
+    methodKind: "unary";
+    input: typeof RecordEventRequestSchema;
+    output: typeof RecordEventResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_topo_v1_topo, 0);
