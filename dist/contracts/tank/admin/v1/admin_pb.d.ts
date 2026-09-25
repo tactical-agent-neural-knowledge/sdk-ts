@@ -597,6 +597,17 @@ export type WorkspaceSettings = Message<"tank.admin.v1.WorkspaceSettings"> & {
      * @generated from field: google.protobuf.Timestamp updated_at = 11;
      */
     updatedAt?: Timestamp;
+    /**
+     * Stops Survey reading this workspace's messages at all.
+     *
+     * Opt-out rather than opt-in, because a workspace that cannot see the feature
+     * will not know to enable it — but it is a hard off: Survey checks this
+     * before a batch is read, so disabling it stops the reading, not just the
+     * writing of marks.
+     *
+     * @generated from field: bool survey_disabled = 12;
+     */
+    surveyDisabled: boolean;
 };
 /**
  * Describes the message tank.admin.v1.WorkspaceSettings.
