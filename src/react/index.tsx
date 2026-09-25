@@ -1,3 +1,4 @@
+import { create, type MessageInitShape } from "@bufbuild/protobuf";
 import {
   createContext,
   type ReactNode,
@@ -29,12 +30,8 @@ import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Mark, MarkType, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
-import type {
-  Entitlements,
-  Preferences,
-  TopoPreferences,
-  Workspace,
-} from "../contracts/tank/workspace/v1/workspace_pb.js";
+import type { Entitlements, Preferences, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { visibleMarkTypes } from "../topo/visibility.js";
 
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
@@ -171,9 +168,16 @@ export function useTopoVisibility(workspaceId: string): TopoVisibility {
   }, [client, workspaceId]);
 
   const save = useCallback(
-    async (next: TopoPreferences) => {
+    async (topo: MessageInitShape<typeof TopoPreferencesSchema>) => {
       const current = prefs ?? (await client.workspaces.getPreferences({ workspaceId })).preferences;
-      const merged = { ...(current ?? {}), topo: next } as Preferences;
+      // Built with create() rather than by spreading: a spread keeps the outer message's $typeName
+      // while the nested object has none, and protobuf-es rejects that mix. The save then fails and
+      // the toggle silently does nothing, which reads as the feature being broken.
+      const merged = create(PreferencesSchema, {
+        ...current,
+        $typeName: undefined,
+        topo: create(TopoPreferencesSchema, topo),
+      } as MessageInitShape<typeof PreferencesSchema>);
       setPrefs(merged);
       const res = await client.workspaces.updatePreferences({ workspaceId, preferences: merged });
       setPrefs(res.preferences);
@@ -191,11 +195,7 @@ export function useTopoVisibility(workspaceId: string): TopoVisibility {
       else next.add(type);
       // configured flips on the first change, which is what lets "everything off" survive instead
       // of reading as "never chosen".
-      await save({
-        configured: true,
-        visible: [...next],
-        timeAxis: topo?.timeAxis ?? false,
-      } as TopoPreferences);
+      await save({ configured: true, visible: [...next], timeAxis: topo?.timeAxis ?? false });
     },
     [save, visible, topo],
   );
@@ -206,7 +206,7 @@ export function useTopoVisibility(workspaceId: string): TopoVisibility {
         configured: topo?.configured ?? false,
         visible: topo?.visible ?? [...visible],
         timeAxis: on,
-      } as TopoPreferences);
+      });
     },
     [save, visible, topo],
   );

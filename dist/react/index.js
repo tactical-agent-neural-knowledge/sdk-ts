@@ -1,7 +1,9 @@
 import { jsx as _jsx } from "react/jsx-runtime";
+import { create } from "@bufbuild/protobuf";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, useSyncExternalStore, } from "react";
 import { isTerminalRunState } from "../blocks/runTone.js";
 import { notificationPagingKey, } from "../client/store.js";
+import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { visibleMarkTypes } from "../topo/visibility.js";
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
 class PresenceRegistry {
@@ -110,9 +112,16 @@ export function useTopoVisibility(workspaceId) {
             live = false;
         };
     }, [client, workspaceId]);
-    const save = useCallback(async (next) => {
+    const save = useCallback(async (topo) => {
         const current = prefs ?? (await client.workspaces.getPreferences({ workspaceId })).preferences;
-        const merged = { ...(current ?? {}), topo: next };
+        // Built with create() rather than by spreading: a spread keeps the outer message's $typeName
+        // while the nested object has none, and protobuf-es rejects that mix. The save then fails and
+        // the toggle silently does nothing, which reads as the feature being broken.
+        const merged = create(PreferencesSchema, {
+            ...current,
+            $typeName: undefined,
+            topo: create(TopoPreferencesSchema, topo),
+        });
         setPrefs(merged);
         const res = await client.workspaces.updatePreferences({ workspaceId, preferences: merged });
         setPrefs(res.preferences);
@@ -127,11 +136,7 @@ export function useTopoVisibility(workspaceId) {
             next.add(type);
         // configured flips on the first change, which is what lets "everything off" survive instead
         // of reading as "never chosen".
-        await save({
-            configured: true,
-            visible: [...next],
-            timeAxis: topo?.timeAxis ?? false,
-        });
+        await save({ configured: true, visible: [...next], timeAxis: topo?.timeAxis ?? false });
     }, [save, visible, topo]);
     const setTimeAxis = useCallback(async (on) => {
         await save({
