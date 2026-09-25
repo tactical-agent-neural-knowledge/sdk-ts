@@ -261,6 +261,7 @@ export class TankClient {
   private unsubscribers: Array<() => void> = [];
   private sendBackoff = new Backoff({ minMs: 500, maxMs: 15_000 });
   private downloadUrls = new Map<string, { url: string; expiresAt: number }>();
+  private markListeners = new Set<(mark: Mark) => void>();
   private downloadUrlInFlight = new Map<string, Promise<string>>();
 
   constructor(opts: TankClientOptions) {
@@ -811,6 +812,20 @@ export class TankClient {
    * mean inventing an invalidation rule for every event that can move a mention, a read horizon or
    * a deletion, which is strictly more work than asking again.
    */
+  /**
+   * Called when a stored mark is created, resolved or dismissed anywhere the caller is subscribed.
+   * Returns its own unsubscribe, so a component can hand it straight to an effect.
+   *
+   * Stored marks only: a derived mark has no lifecycle to report, and recomputing one is cheaper
+   * than keeping it in step.
+   */
+  onMarkUpdated(fn: (mark: Mark) => void): () => void {
+    this.markListeners.add(fn);
+    return () => {
+      this.markListeners.delete(fn);
+    };
+  }
+
   async listMarks(channelId: string, types: MarkType[] = []): Promise<{ marks: Mark[]; lastSeq: bigint }> {
     const res = await this.topo.listMarks({ channelId, types });
     return { marks: res.marks, lastSeq: res.lastSeq };
@@ -1068,6 +1083,9 @@ export class TankClient {
       this.store.applyEnvelope(env, this.now());
       const payload = unpackEnvelope(env);
       if (payload?.$typeName === "tank.events.v1.ChannelUpdated") void this.refreshChannel(payload.channelId);
+      if (payload?.$typeName === "tank.events.v1.TopoMarkUpdated" && payload.mark) {
+        for (const fn of this.markListeners) fn(payload.mark);
+      }
     });
     rt.on("cursor", ({ workspaceId, cursor }) => {
       this.store.dispatch({ type: "cursor", workspaceId, cursor });

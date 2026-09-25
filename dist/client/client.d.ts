@@ -171,6 +171,7 @@ export declare class TankClient {
     private unsubscribers;
     private sendBackoff;
     private downloadUrls;
+    private markListeners;
     private downloadUrlInFlight;
     constructor(opts: TankClientOptions);
     /** Hydrates from storage, opens the gateway socket and flushes the outbox. */
@@ -272,6 +273,14 @@ export declare class TankClient {
      * mean inventing an invalidation rule for every event that can move a mention, a read horizon or
      * a deletion, which is strictly more work than asking again.
      */
+    /**
+     * Called when a stored mark is created, resolved or dismissed anywhere the caller is subscribed.
+     * Returns its own unsubscribe, so a component can hand it straight to an effect.
+     *
+     * Stored marks only: a derived mark has no lifecycle to report, and recomputing one is cheaper
+     * than keeping it in step.
+     */
+    onMarkUpdated(fn: (mark: Mark) => void): () => void;
     listMarks(channelId: string, types?: MarkType[]): Promise<{
         marks: Mark[];
         lastSeq: bigint;

@@ -3,10 +3,11 @@
 /* eslint-disable */
 import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import { file_tank_message_v1_message } from "../../message/v1/message_pb.js";
 /**
  * Describes the file tank/topo/v1/topo.proto.
  */
-export const file_tank_topo_v1_topo = /*@__PURE__*/ fileDesc("Chd0YW5rL3RvcG8vdjEvdG9wby5wcm90bxIMdGFuay50b3BvLnYxIusBCgRNYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoCRITCgtjaGFubmVsX3NlcRgEIAEoAxIkCgR0eXBlGAUgASgOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlEiAKBGxhbmUYBiABKA4yEi50YW5rLnRvcG8udjEuTGFuZRIRCgllbGV2YXRpb24YByABKAUSDwoHcHJldmlldxgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJNChBMaXN0TWFya3NSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSJQoFdHlwZXMYAiADKA4yFi50YW5rLnRvcG8udjEuTWFya1R5cGUiSAoRTGlzdE1hcmtzUmVzcG9uc2USIQoFbWFya3MYASADKAsyEi50YW5rLnRvcG8udjEuTWFyaxIQCghsYXN0X3NlcRgCIAEoAyqNAQoITWFya1R5cGUSGQoVTUFSS19UWVBFX1VOU1BFQ0lGSUVEEAASFQoRTUFSS19UWVBFX01FTlRJT04QARIZChVNQVJLX1RZUEVfT1dOX01FU1NBR0UQAhIaChZNQVJLX1RZUEVfUkVBRF9IT1JJWk9OEAMSGAoUTUFSS19UWVBFX1NFQVJDSF9ISVQQBCpVCgRMYW5lEhQKEExBTkVfVU5TUEVDSUZJRUQQABISCg5MQU5FX1NUUlVDVFVSRRABEhAKDExBTkVfTUVTU0FHRRACEhEKDUxBTkVfUEVSU09OQUwQAzJbCgtUb3BvU2VydmljZRJMCglMaXN0TWFya3MSHi50YW5rLnRvcG8udjEuTGlzdE1hcmtzUmVxdWVzdBofLnRhbmsudG9wby52MS5MaXN0TWFya3NSZXNwb25zZULAAQoQY29tLnRhbmsudG9wby52MUIJVG9wb1Byb3RvUAFaT2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvdG9wby92MTt0b3BvdjGiAgNUVFiqAgxUYW5rLlRvcG8uVjHKAgxUYW5rXFRvcG9cVjHiAhhUYW5rXFRvcG9cVjFcR1BCTWV0YWRhdGHqAg5UYW5rOjpUb3BvOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+export const file_tank_topo_v1_topo = /*@__PURE__*/ fileDesc("Chd0YW5rL3RvcG8vdjEvdG9wby5wcm90bxIMdGFuay50b3BvLnYxIv8CCgRNYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoCRITCgtjaGFubmVsX3NlcRgEIAEoAxIkCgR0eXBlGAUgASgOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlEiAKBGxhbmUYBiABKA4yEi50YW5rLnRvcG8udjEuTGFuZRIRCgllbGV2YXRpb24YByABKAUSDwoHcHJldmlldxgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgZzdGF0dXMYCiABKA4yGC50YW5rLnRvcG8udjEuTWFya1N0YXR1cxIbChN3YWl0aW5nX29uX3VzZXJfaWRzGAsgAygJEhoKEmNyZWF0ZWRfYnlfdXNlcl9pZBgMIAEoCRIvCgtyZXNvbHZlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiTQoQTGlzdE1hcmtzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEiUKBXR5cGVzGAIgAygOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlIkgKEUxpc3RNYXJrc1Jlc3BvbnNlEiEKBW1hcmtzGAEgAygLMhIudGFuay50b3BvLnYxLk1hcmsSEAoIbGFzdF9zZXEYAiABKAMiPAoURmxhZ1dhaXRpbmdPblJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCRIQCgh1c2VyX2lkcxgCIAMoCSI5ChVGbGFnV2FpdGluZ09uUmVzcG9uc2USIAoEbWFyaxgBIAEoCzISLnRhbmsudG9wby52MS5NYXJrIjsKF1Jlc29sdmVXYWl0aW5nT25SZXF1ZXN0Eg8KB21hcmtfaWQYASABKAkSDwoHZGlzbWlzcxgCIAEoCCI8ChhSZXNvbHZlV2FpdGluZ09uUmVzcG9uc2USIAoEbWFyaxgBIAEoCzISLnRhbmsudG9wby52MS5NYXJrIncKFExpc3RXYWl0aW5nT25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIxCglkaXJlY3Rpb24YAiABKA4yHi50YW5rLnRvcG8udjEuV2FpdGluZ0RpcmVjdGlvbhIWCg5pbmNsdWRlX2Nsb3NlZBgDIAEoCCJcCg1XYWl0aW5nT25JdGVtEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyaxIpCgdtZXNzYWdlGAIgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2UiQwoVTGlzdFdhaXRpbmdPblJlc3BvbnNlEioKBWl0ZW1zGAEgAygLMhsudGFuay50b3BvLnYxLldhaXRpbmdPbkl0ZW0qpwEKCE1hcmtUeXBlEhkKFU1BUktfVFlQRV9VTlNQRUNJRklFRBAAEhUKEU1BUktfVFlQRV9NRU5USU9OEAESGQoVTUFSS19UWVBFX09XTl9NRVNTQUdFEAISGgoWTUFSS19UWVBFX1JFQURfSE9SSVpPThADEhgKFE1BUktfVFlQRV9TRUFSQ0hfSElUEAQSGAoUTUFSS19UWVBFX1dBSVRJTkdfT04QBSp0CgpNYXJrU3RhdHVzEhsKF01BUktfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFAoQTUFSS19TVEFUVVNfT1BFThABEhgKFE1BUktfU1RBVFVTX1JFU09MVkVEEAISGQoVTUFSS19TVEFUVVNfRElTTUlTU0VEEAMqVQoETGFuZRIUChBMQU5FX1VOU1BFQ0lGSUVEEAASEgoOTEFORV9TVFJVQ1RVUkUQARIQCgxMQU5FX01FU1NBR0UQAhIRCg1MQU5FX1BFUlNPTkFMEAMqbwoQV2FpdGluZ0RpcmVjdGlvbhIhCh1XQUlUSU5HX0RJUkVDVElPTl9VTlNQRUNJRklFRBAAEhsKF1dBSVRJTkdfRElSRUNUSU9OX09OX01FEAESGwoXV0FJVElOR19ESVJFQ1RJT05fQllfTUUQAjLyAgoLVG9wb1NlcnZpY2USTAoJTGlzdE1hcmtzEh4udGFuay50b3BvLnYxLkxpc3RNYXJrc1JlcXVlc3QaHy50YW5rLnRvcG8udjEuTGlzdE1hcmtzUmVzcG9uc2USWAoNRmxhZ1dhaXRpbmdPbhIiLnRhbmsudG9wby52MS5GbGFnV2FpdGluZ09uUmVxdWVzdBojLnRhbmsudG9wby52MS5GbGFnV2FpdGluZ09uUmVzcG9uc2USYQoQUmVzb2x2ZVdhaXRpbmdPbhIlLnRhbmsudG9wby52MS5SZXNvbHZlV2FpdGluZ09uUmVxdWVzdBomLnRhbmsudG9wby52MS5SZXNvbHZlV2FpdGluZ09uUmVzcG9uc2USWAoNTGlzdFdhaXRpbmdPbhIiLnRhbmsudG9wby52MS5MaXN0V2FpdGluZ09uUmVxdWVzdBojLnRhbmsudG9wby52MS5MaXN0V2FpdGluZ09uUmVzcG9uc2VCwAEKEGNvbS50YW5rLnRvcG8udjFCCVRvcG9Qcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3RvcG8vdjE7dG9wb3YxogIDVFRYqgIMVGFuay5Ub3BvLlYxygIMVGFua1xUb3BvXFYx4gIYVGFua1xUb3BvXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6VG9wbzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
 /**
  * Describes the message tank.topo.v1.Mark.
  * Use `create(MarkSchema)` to create a new message.
@@ -22,6 +23,41 @@ export const ListMarksRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v
  * Use `create(ListMarksResponseSchema)` to create a new message.
  */
 export const ListMarksResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 2);
+/**
+ * Describes the message tank.topo.v1.FlagWaitingOnRequest.
+ * Use `create(FlagWaitingOnRequestSchema)` to create a new message.
+ */
+export const FlagWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 3);
+/**
+ * Describes the message tank.topo.v1.FlagWaitingOnResponse.
+ * Use `create(FlagWaitingOnResponseSchema)` to create a new message.
+ */
+export const FlagWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 4);
+/**
+ * Describes the message tank.topo.v1.ResolveWaitingOnRequest.
+ * Use `create(ResolveWaitingOnRequestSchema)` to create a new message.
+ */
+export const ResolveWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 5);
+/**
+ * Describes the message tank.topo.v1.ResolveWaitingOnResponse.
+ * Use `create(ResolveWaitingOnResponseSchema)` to create a new message.
+ */
+export const ResolveWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 6);
+/**
+ * Describes the message tank.topo.v1.ListWaitingOnRequest.
+ * Use `create(ListWaitingOnRequestSchema)` to create a new message.
+ */
+export const ListWaitingOnRequestSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 7);
+/**
+ * Describes the message tank.topo.v1.WaitingOnItem.
+ * Use `create(WaitingOnItemSchema)` to create a new message.
+ */
+export const WaitingOnItemSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 8);
+/**
+ * Describes the message tank.topo.v1.ListWaitingOnResponse.
+ * Use `create(ListWaitingOnResponseSchema)` to create a new message.
+ */
+export const ListWaitingOnResponseSchema = /*@__PURE__*/ messageDesc(file_tank_topo_v1_topo, 9);
 /**
  * @generated from enum tank.topo.v1.MarkType
  */
@@ -55,11 +91,50 @@ export var MarkType;
      * @generated from enum value: MARK_TYPE_SEARCH_HIT = 4;
      */
     MarkType[MarkType["SEARCH_HIT"] = 4] = "SEARCH_HIT";
+    /**
+     * A message flagged as needing a reply from specific people.
+     *
+     * @generated from enum value: MARK_TYPE_WAITING_ON = 5;
+     */
+    MarkType[MarkType["WAITING_ON"] = 5] = "WAITING_ON";
 })(MarkType || (MarkType = {}));
 /**
  * Describes the enum tank.topo.v1.MarkType.
  */
 export const MarkTypeSchema = /*@__PURE__*/ enumDesc(file_tank_topo_v1_topo, 0);
+/**
+ * Whether a mark is still live. Derived marks are always open: they exist only
+ * while the thing they describe is true. Stored marks carry a real lifecycle.
+ *
+ * @generated from enum tank.topo.v1.MarkStatus
+ */
+export var MarkStatus;
+(function (MarkStatus) {
+    /**
+     * @generated from enum value: MARK_STATUS_UNSPECIFIED = 0;
+     */
+    MarkStatus[MarkStatus["UNSPECIFIED"] = 0] = "UNSPECIFIED";
+    /**
+     * @generated from enum value: MARK_STATUS_OPEN = 1;
+     */
+    MarkStatus[MarkStatus["OPEN"] = 1] = "OPEN";
+    /**
+     * Answered: the people being waited on replied.
+     *
+     * @generated from enum value: MARK_STATUS_RESOLVED = 2;
+     */
+    MarkStatus[MarkStatus["RESOLVED"] = 2] = "RESOLVED";
+    /**
+     * Called off by a person, answered or not.
+     *
+     * @generated from enum value: MARK_STATUS_DISMISSED = 3;
+     */
+    MarkStatus[MarkStatus["DISMISSED"] = 3] = "DISMISSED";
+})(MarkStatus || (MarkStatus = {}));
+/**
+ * Describes the enum tank.topo.v1.MarkStatus.
+ */
+export const MarkStatusSchema = /*@__PURE__*/ enumDesc(file_tank_topo_v1_topo, 1);
 /**
  * Which vertical strip a mark belongs to. Keeping families apart is what stops
  * a busy Tread reading as one undifferentiated smear.
@@ -94,7 +169,35 @@ export var Lane;
 /**
  * Describes the enum tank.topo.v1.Lane.
  */
-export const LaneSchema = /*@__PURE__*/ enumDesc(file_tank_topo_v1_topo, 1);
+export const LaneSchema = /*@__PURE__*/ enumDesc(file_tank_topo_v1_topo, 2);
+/**
+ * Which side of a waiting-on the caller is on.
+ *
+ * @generated from enum tank.topo.v1.WaitingDirection
+ */
+export var WaitingDirection;
+(function (WaitingDirection) {
+    /**
+     * @generated from enum value: WAITING_DIRECTION_UNSPECIFIED = 0;
+     */
+    WaitingDirection[WaitingDirection["UNSPECIFIED"] = 0] = "UNSPECIFIED";
+    /**
+     * Things other people are waiting on the caller for.
+     *
+     * @generated from enum value: WAITING_DIRECTION_ON_ME = 1;
+     */
+    WaitingDirection[WaitingDirection["ON_ME"] = 1] = "ON_ME";
+    /**
+     * Things the caller is waiting on other people for.
+     *
+     * @generated from enum value: WAITING_DIRECTION_BY_ME = 2;
+     */
+    WaitingDirection[WaitingDirection["BY_ME"] = 2] = "BY_ME";
+})(WaitingDirection || (WaitingDirection = {}));
+/**
+ * Describes the enum tank.topo.v1.WaitingDirection.
+ */
+export const WaitingDirectionSchema = /*@__PURE__*/ enumDesc(file_tank_topo_v1_topo, 3);
 /**
  * Marks are always read through the channel, so a Tread the caller cannot see
  * has no marks, and a mark can never carry content from one that they cannot.
