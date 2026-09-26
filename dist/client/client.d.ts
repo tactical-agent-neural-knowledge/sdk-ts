@@ -8,7 +8,7 @@ import { ChatService, type Message, MessageKind, type PostMessageRequest } from 
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
-import { type GetBootstrapResponse, type Invite, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { type GetBootstrapResponse, type Invite, type Member, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
 import { RealtimeClient, type RealtimeOptions, type WebSocketCtor } from "./realtime.js";
 import { type TankStorage } from "./storage.js";
@@ -177,6 +177,17 @@ export declare class TankClient {
     /** Hydrates from storage, opens the gateway socket and flushes the outbox. */
     start(): Promise<void>;
     stop(): Promise<void>;
+    /**
+     * Members matching `query`, from the server.
+     *
+     * Bootstrap loads at most 200 members and mention suggestions used to filter
+     * only those, so in a larger workspace the person you meant was simply
+     * absent from the list. This asks the server, which searches everyone, and
+     * folds the results into the store so their names resolve everywhere else.
+     * An empty query returns nothing rather than the first page: the caller has
+     * the bootstrap set for that.
+     */
+    searchMembers(workspaceId: string, query: string, limit?: number): Promise<Member[]>;
     /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
     bootstrap(workspaceId: string): Promise<GetBootstrapResponse>;
     /** Pages messages into the store. Resolves to whether more exist in that direction. */

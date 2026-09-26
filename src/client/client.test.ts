@@ -60,6 +60,20 @@ function fakeTransport() {
       mintGatewayToken: () => ({ token: "tok", expiresAt: timestampFromMs(Date.now() + 60_000) }),
     });
     service(WorkspaceService, {
+      listMembers: (req) => {
+        record("listMembers", req);
+        const all = [
+          create(MemberSchema, {
+            principal: create(PrincipalSchema, { id: "u9", displayName: "Kailey Ketchell" }),
+          }),
+          create(MemberSchema, { principal: create(PrincipalSchema, { id: "u10", displayName: "Kevin" }) }),
+        ];
+        const q = req.query.toLowerCase();
+        return {
+          members: q ? all.filter((m) => m.principal!.displayName.toLowerCase().includes(q)) : all,
+          nextCursor: "",
+        };
+      },
       inviteMember: (req) => {
         record("inviteMember", req);
         return { inviteId: `inv-${req.email}-${req.role}` };
@@ -709,5 +723,29 @@ describe("stale persisted timeline", () => {
 
     await c2.loadChannel("general");
     expect(c2.store.selectChannelMessages("general").map((m) => m.id)).toEqual(["m1", "m3", "hook"]);
+  });
+});
+
+describe("searchMembers", () => {
+  it("asks the server and folds the results into the store", async () => {
+    // Bootstrap loads at most 200 members; suggestions used to filter only
+    // those, so anyone past the cap was simply absent from the list.
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    const found = await c.searchMembers("ws1", "kai");
+    expect(found.map((m) => m.principal?.id)).toEqual(["u9"]);
+    expect(c.store.getState().members.ws1?.u9?.principal?.displayName).toBe("Kailey Ketchell");
+    expect(api.calls.filter((x) => x.rpc === "listMembers").at(-1)?.req).toMatchObject({
+      workspaceId: "ws1",
+      query: "kai",
+      limit: 8,
+    });
+  });
+
+  it("does not ask for an empty query", async () => {
+    const c = makeClient();
+    const before = api.calls.filter((x) => x.rpc === "listMembers").length;
+    expect(await c.searchMembers("ws1", "   ")).toEqual([]);
+    expect(api.calls.filter((x) => x.rpc === "listMembers").length).toBe(before);
   });
 });
