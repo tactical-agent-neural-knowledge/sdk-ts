@@ -188,6 +188,13 @@ export declare class TankClient {
      * the bootstrap set for that.
      */
     searchMembers(workspaceId: string, query: string, limit?: number): Promise<Member[]>;
+    /**
+     * Delete a file: its bytes, its record, and its place in every message that
+     * carried it. The server decides who may — the uploader or a workspace
+     * admin — and answers with the messages that changed, which are applied
+     * here so the chip goes at once rather than on the next event.
+     */
+    deleteFile(fileId: string): Promise<void>;
     /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
     bootstrap(workspaceId: string): Promise<GetBootstrapResponse>;
     /** Pages messages into the store. Resolves to whether more exist in that direction. */

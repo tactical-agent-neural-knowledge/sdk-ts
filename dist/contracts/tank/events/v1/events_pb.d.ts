@@ -112,6 +112,32 @@ export type MessageDeleted = Message<"tank.events.v1.MessageDeleted"> & {
  */
 export declare const MessageDeletedSchema: GenMessage<MessageDeleted>;
 /**
+ * A file was removed. Sent on every channel it was shared in, so each open
+ * Tread drops the chip; the messages are re-sent as MessageUpdated with the id
+ * gone, and this exists for clients that keep a files index of their own.
+ *
+ * @generated from message tank.events.v1.FileDeleted
+ */
+export type FileDeleted = Message<"tank.events.v1.FileDeleted"> & {
+    /**
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+    /**
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: repeated string message_ids = 3;
+     */
+    messageIds: string[];
+};
+/**
+ * Describes the message tank.events.v1.FileDeleted.
+ * Use `create(FileDeletedSchema)` to create a new message.
+ */
+export declare const FileDeletedSchema: GenMessage<FileDeleted>;
+/**
  * @generated from message tank.events.v1.ReactionAdded
  */
 export type ReactionAdded = Message<"tank.events.v1.ReactionAdded"> & {

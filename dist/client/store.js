@@ -646,6 +646,25 @@ export function reduce(state, action) {
                 return state;
             return { ...state, filesById: { ...state.filesById, ...byId(action.files) } };
         }
+        case "files/deleted": {
+            // The file is gone and so is its place in every message that carried
+            // it. Both go together: a chip whose file no longer exists is the thing
+            // this exists to prevent.
+            const filesById = { ...state.filesById };
+            delete filesById[action.fileId];
+            const messages = { ...state.messages };
+            for (const id of action.messageIds) {
+                const msg = messages[id];
+                if (!msg || !msg.fileIds.includes(action.fileId))
+                    continue;
+                messages[id] = {
+                    ...msg,
+                    fileIds: msg.fileIds.filter((f) => f !== action.fileId),
+                    files: msg.files.filter((f) => f.id !== action.fileId),
+                };
+            }
+            return { ...state, filesById, messages };
+        }
         case "pending/add": {
             const m = action.message;
             const pending = {
@@ -748,6 +767,8 @@ export function envelopeToActions(env, now) {
             return payload.message ? [{ type: "messages/created", message: payload.message }] : [];
         case "tank.events.v1.MessageUpdated":
             return payload.message ? [{ type: "messages/updated", message: payload.message }] : [];
+        case "tank.events.v1.FileDeleted":
+            return [{ type: "files/deleted", fileId: payload.fileId, messageIds: payload.messageIds }];
         case "tank.events.v1.MessageDeleted":
             return [
                 {

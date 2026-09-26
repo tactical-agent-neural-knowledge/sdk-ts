@@ -351,6 +351,17 @@ export class TankClient {
     return res.members;
   }
 
+  /**
+   * Delete a file: its bytes, its record, and its place in every message that
+   * carried it. The server decides who may — the uploader or a workspace
+   * admin — and answers with the messages that changed, which are applied
+   * here so the chip goes at once rather than on the next event.
+   */
+  async deleteFile(fileId: string): Promise<void> {
+    const res = await this.files.deleteFile({ fileId });
+    this.store.dispatch({ type: "files/deleted", fileId, messageIds: res.messageIds });
+  }
+
   /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
   async bootstrap(workspaceId: string): Promise<GetBootstrapResponse> {
     const res = await this.workspaces.getBootstrap({ workspaceId });
