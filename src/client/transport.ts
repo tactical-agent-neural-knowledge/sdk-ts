@@ -35,6 +35,12 @@ export function createTankTransport(opts: TransportOptions): Transport {
   if (opts.auth === "cookie") {
     fetchImpl = (input, init) => baseFetch(input, { ...init, credentials: "include" });
   } else {
+    // A bearer client authenticates with its header alone. Left to itself, a
+    // phone's URL loader stores the cookie every sign-in also sets and
+    // replays it on every request, and the server then has two credentials
+    // to choose between — which is how adding a second account joined it to
+    // a cookie session the app never uses. Send none.
+    fetchImpl = (input, init) => baseFetch(input, { ...init, credentials: "omit" });
     const { bearer } = opts.auth;
     interceptors.unshift((next) => async (req) => {
       req.header.set("Authorization", `Bearer ${await bearer()}`);
