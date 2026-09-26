@@ -184,7 +184,32 @@ function bumpChannelSeq(state, m) {
     if (!ch || m.channelSeq <= ch.lastSeq)
         return state;
     const next = { ...ch, lastSeq: m.channelSeq, lastMessageAt: m.createdAt ?? ch.lastMessageAt };
-    return { ...state, channels: { ...state.channels, [ch.id]: next } };
+    return countUnread({ ...state, channels: { ...state.channels, [ch.id]: next } }, m, +1);
+}
+/**
+ * Keep the server's unread count current between bootstraps.
+ *
+ * Only for what the channel view shows — a thread reply is not new in the
+ * channel, whoever wrote it — and only for other people's messages: the server
+ * moves the author's own cursor when it stores the message. A reply that was
+ * also sent to the channel cannot be told apart on the wire and is missed
+ * here, which under-counts by one until the Tread is opened; the alternative
+ * was over-counting every reply, which is the bug this replaces.
+ */
+function countUnread(state, m, delta) {
+    const rs = state.readStates[m.channelId];
+    if (!rs || rs.unreadCount === undefined)
+        return state;
+    if (m.threadRootId !== "" || m.deletedAt)
+        return state;
+    if (state.me && m.authorId === state.me.id)
+        return state;
+    if (m.channelSeq <= rs.lastReadSeq)
+        return state;
+    const unreadCount = Math.max(0, rs.unreadCount + delta);
+    if (unreadCount === rs.unreadCount)
+        return state;
+    return { ...state, readStates: { ...state.readStates, [m.channelId]: { ...rs, unreadCount } } };
 }
 function bumpReplyCount(state, m) {
     if (m.threadRootId === "" || m.threadSeq === 0n)
@@ -371,8 +396,14 @@ export function reduce(state, action) {
                 return removeMessage(state, m.id, m.channelId, m.threadRootId);
             return upsertMessage(state, m);
         }
-        case "messages/deleted":
-            return removeMessage(state, action.messageId, action.channelId, action.threadRootId);
+        case "messages/deleted": {
+            const gone = state.messages[action.messageId];
+            const s = removeMessage(state, action.messageId, action.channelId, action.threadRootId);
+            // Only when the row is still here to say whether it was unread; a delete
+            // of something never loaded cannot move the count, and the next
+            // bootstrap recounts anyway.
+            return gone ? countUnread(s, gone, -1) : s;
+        }
         case "reactions/added":
             return updateReaction(state, action.messageId, action.userId, action.emoji, true);
         case "reactions/removed":
@@ -394,12 +425,19 @@ export function reduce(state, action) {
                 return { ...state, threadReadStates: { ...state.threadReadStates, [action.threadRootId]: seq } };
             }
             const prev = state.readStates[action.channelId];
+            const ch = state.channels[action.channelId];
             const next = create(ChannelReadStateSchema, {
                 channelId: action.channelId,
                 lastReadSeq: action.lastReadSeq,
                 mentionCount: 0,
                 muted: prev?.muted ?? false,
                 starred: prev?.starred ?? false,
+                // Read to the end is zero by definition. Read part-way is rare and the
+                // exact remainder is not knowable here; keeping the last count is
+                // wrong by at most what was just read, and the next bootstrap fixes it.
+                ...(prev?.unreadCount !== undefined
+                    ? { unreadCount: ch && action.lastReadSeq >= ch.lastSeq ? 0 : prev.unreadCount }
+                    : {}),
             });
             if (prev && prev.lastReadSeq >= next.lastReadSeq && prev.mentionCount === 0)
                 return state;
@@ -887,7 +925,15 @@ export class TankStore {
                 if (!ch)
                     continue;
                 const rs = s.readStates[id];
-                const unread = rs?.muted ? 0 : Math.max(0, Number(ch.lastSeq - (rs?.lastReadSeq ?? 0n)));
+                // The server's count is over what the channel view shows; the
+                // arithmetic counts every row that took a seq, hidden replies and
+                // deleted messages included, and left Treads unread with nothing new
+                // in them. Fall back only when an older server sent no count.
+                const unread = rs?.muted
+                    ? 0
+                    : rs?.unreadCount !== undefined
+                        ? rs.unreadCount
+                        : Math.max(0, Number(ch.lastSeq - (rs?.lastReadSeq ?? 0n)));
                 const m = rs?.mentionCount ?? 0;
                 if (unread > 0 || m > 0)
                     byChannel[id] = { unread, mentions: m };

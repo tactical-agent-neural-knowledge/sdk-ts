@@ -139,6 +139,19 @@ export type ChannelReadState = Message<"tank.channel.v1.ChannelReadState"> & {
      * @generated from field: tank.channel.v1.NotifyPref notify_pref = 6;
      */
     notifyPref: NotifyPref;
+    /**
+     * How many messages after last_read_seq the channel view would actually show.
+     *
+     * last_seq - last_read_seq is not that number: every row consumes a
+     * channel_seq, including thread replies the channel hides and messages that
+     * were later deleted, so the arithmetic counted things nobody could read and
+     * a Tread stayed unread with nothing new in it. Only the server can see what
+     * is visible, so only the server can count it. Optional so a client can tell
+     * "the server said zero" from "an older server said nothing" and fall back.
+     *
+     * @generated from field: optional int32 unread_count = 7;
+     */
+    unreadCount?: number;
 };
 /**
  * Describes the message tank.channel.v1.ChannelReadState.

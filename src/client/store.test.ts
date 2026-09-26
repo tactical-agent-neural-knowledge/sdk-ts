@@ -354,3 +354,63 @@ describe("envelopes", () => {
     expect(store.getState().connection).toBe("ready");
   });
 });
+
+describe("unread count", () => {
+  // The server counts what the channel view shows. The store keeps that number
+  // current between bootstraps, and only falls back to seq arithmetic when an
+  // older server sent none — which is what counted hidden replies and deleted
+  // rows and left Treads unread with nothing new in them.
+  let store: TankStore;
+  beforeEach(() => {
+    store = bootstrapped();
+    store.dispatch({
+      type: "readStates/upsert",
+      readStates: [create(ChannelReadStateSchema, { channelId: "general", lastReadSeq: 1n, unreadCount: 0 })],
+    });
+  });
+
+  it("prefers the server's count over last_seq arithmetic", () => {
+    // lastSeq 3, lastReadSeq 1: arithmetic says 2, the server says 0.
+    expect(store.selectUnreads("ws1").byChannel.general).toBeUndefined();
+    expect(store.selectUnreads("ws1").total).toBe(0);
+  });
+
+  it("falls back to arithmetic when the server sent no count", () => {
+    const s = bootstrapped(); // fixture read state carries no unreadCount
+    expect(s.selectUnreads("ws1").byChannel.general?.unread).toBe(2);
+  });
+
+  it("counts a new top-level message from someone else", () => {
+    store.dispatch({ type: "messages/created", message: msg("m4", 4) });
+    expect(store.selectUnreads("ws1").byChannel.general?.unread).toBe(1);
+  });
+
+  it("does not count a thread reply: it is not new in the channel", () => {
+    store.dispatch({
+      type: "messages/created",
+      message: msg("r1", 4, { threadRootId: "m1", threadSeq: 1n }),
+    });
+    expect(store.getState().channels.general?.lastSeq).toBe(4n); // the seq still moves
+    expect(store.selectUnreads("ws1").total).toBe(0); // but nothing is unread
+  });
+
+  it("does not count my own message", () => {
+    store.dispatch({ type: "messages/created", message: msg("mine", 4, { authorId: "me" }) });
+    expect(store.selectUnreads("ws1").total).toBe(0);
+  });
+
+  it("uncounts an unread message when it is deleted", () => {
+    store.dispatch({ type: "messages/created", message: msg("m4", 4) });
+    store.dispatch({ type: "messages/created", message: msg("m5", 5) });
+    expect(store.selectUnreads("ws1").byChannel.general?.unread).toBe(2);
+    store.dispatch({ type: "messages/deleted", messageId: "m5", channelId: "general", threadRootId: "" });
+    expect(store.selectUnreads("ws1").byChannel.general?.unread).toBe(1);
+  });
+
+  it("is zero once read to the end", () => {
+    store.dispatch({ type: "messages/created", message: msg("m4", 4) });
+    store.dispatch({ type: "readStates/updated", channelId: "general", lastReadSeq: 4n, userId: "me" });
+    expect(store.selectUnreads("ws1").total).toBe(0);
+    expect(store.getState().readStates.general?.unreadCount).toBe(0);
+  });
+});

@@ -384,6 +384,16 @@ export type Benchmark = Message<"tank.topo.v1.Benchmark"> & {
      * @generated from field: google.protobuf.Timestamp created_at = 12;
      */
     createdAt?: Timestamp;
+    /**
+     * The benchmark this one replaces. On a proposal it is Survey's claim, which
+     * is why confirming is the only thing that applies it: retiring a decision
+     * somebody made is not a side effect anyone should get without being asked.
+     * Together with superseded_by_id this links a chain in both directions, so a
+     * ledger can show the history of a position without a second round trip.
+     *
+     * @generated from field: string supersedes_id = 13;
+     */
+    supersedesId: string;
 };
 /**
  * Describes the message tank.topo.v1.Benchmark.
@@ -451,6 +461,17 @@ export type DecideBenchmarkRequest = Message<"tank.topo.v1.DecideBenchmarkReques
      * @generated from field: string detail = 4;
      */
     detail: string;
+    /**
+     * Which earlier benchmark this one retires, applied on confirm.
+     *
+     * Optional so that absent and empty differ: absent accepts whatever Survey
+     * proposed, "" rejects it and confirms the new decision on its own, and an id
+     * corrects a wrong guess. Without presence there would be no way to say "this
+     * does not replace anything" — the commonest correction of the three.
+     *
+     * @generated from field: optional string supersedes_id = 5;
+     */
+    supersedesId?: string;
 };
 /**
  * Describes the message tank.topo.v1.DecideBenchmarkRequest.
