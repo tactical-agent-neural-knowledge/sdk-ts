@@ -137,6 +137,25 @@ export class TankClient {
         this.persistTimer = undefined;
         await this.persistNow();
     }
+    /**
+     * Members matching `query`, from the server.
+     *
+     * Bootstrap loads at most 200 members and mention suggestions used to filter
+     * only those, so in a larger workspace the person you meant was simply
+     * absent from the list. This asks the server, which searches everyone, and
+     * folds the results into the store so their names resolve everywhere else.
+     * An empty query returns nothing rather than the first page: the caller has
+     * the bootstrap set for that.
+     */
+    async searchMembers(workspaceId, query, limit = 8) {
+        const q = query.trim();
+        if (!q)
+            return [];
+        const res = await this.workspaces.listMembers({ workspaceId, query: q, limit });
+        if (res.members.length)
+            this.store.dispatch({ type: "members/upsert", workspaceId, members: res.members });
+        return res.members;
+    }
     /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
     async bootstrap(workspaceId) {
         const res = await this.workspaces.getBootstrap({ workspaceId });

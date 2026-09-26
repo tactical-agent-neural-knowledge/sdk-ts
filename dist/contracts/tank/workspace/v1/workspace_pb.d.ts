@@ -270,6 +270,16 @@ export type ListMembersRequest = Message<"tank.workspace.v1.ListMembersRequest">
      * @generated from field: int32 limit = 3;
      */
     limit: number;
+    /**
+     * Narrow to members whose name, handle or email contains this, case-insensitively.
+     *
+     * Bootstrap loads at most 200 members, and mention suggestions filtered only
+     * that set — so in a larger workspace the person you meant was simply absent
+     * from the list, with nothing to say why. Typing @ should ask the server.
+     *
+     * @generated from field: string query = 4;
+     */
+    query: string;
 };
 /**
  * Describes the message tank.workspace.v1.ListMembersRequest.
