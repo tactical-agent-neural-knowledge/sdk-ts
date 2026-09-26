@@ -13,6 +13,7 @@ import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import {
   type Channel,
+  ChannelReadStateSchema,
   ChannelService,
   ChannelType,
   type TreadGoal,
@@ -1157,6 +1158,29 @@ export class TankClient {
       const tail = msgs.slice(-max).map((m) => toJson(MessageSchema, m));
       await this.storage.put(storageKeys.channelMessages(channelId), JSON.stringify(tail));
     }
+    await this.persistReadStates();
+  }
+
+  /**
+   * Read progress, saved whenever it moves.
+   *
+   * Without this the only record of what had been read was the bootstrap
+   * snapshot, which is written once per GetBootstrap and never updated. Anything
+   * read afterwards was lost on the next launch, so the same messages came back
+   * unread every time somebody signed in — no amount of reading them helped,
+   * because reading was not what got saved.
+   */
+  private async persistReadStates(): Promise<void> {
+    const s = this.store.getState();
+    await this.storage.put(
+      storageKeys.readStates,
+      JSON.stringify({
+        channels: Object.values(s.readStates).map((rs) => toJson(ChannelReadStateSchema, rs)),
+        threads: Object.fromEntries(
+          Object.entries(s.threadReadStates).map(([id, seq]) => [id, seq.toString()]),
+        ),
+      }),
+    );
   }
 
   private hydrate(): Promise<void> {
@@ -1166,12 +1190,13 @@ export class TankClient {
 
   private async hydrateOnce(): Promise<void> {
     const s = this.storage;
-    const [sessionRaw, recentRaw, cursorRows, bootstrapRows, outboxRows] = await Promise.all([
+    const [sessionRaw, recentRaw, cursorRows, bootstrapRows, outboxRows, readStatesRaw] = await Promise.all([
       s.get(storageKeys.session),
       s.get(storageKeys.recentChannels),
       s.scan(storageKeys.cursorPrefix),
       s.scan(storageKeys.bootstrapPrefix),
       s.scan(storageKeys.outboxPrefix),
+      s.get(storageKeys.readStates),
     ]);
 
     const cursors: Record<string, string> = {};
@@ -1195,6 +1220,39 @@ export class TankClient {
         }
       } catch {
         // corrupt cache row: ignore, the next bootstrap overwrites it
+      }
+    }
+
+    // After the snapshots, deliberately. The snapshot's read states are as old as
+    // the last GetBootstrap; these are as new as the last thing actually read, and
+    // the reducers only ever move a cursor forward, so replaying them here cannot
+    // un-read anything the server has since told us about.
+    if (readStatesRaw) {
+      try {
+        const saved = JSON.parse(readStatesRaw) as {
+          channels?: JsonValue[];
+          threads?: Record<string, string>;
+        };
+        // Forward-only, explicitly: "upsert" replaces, so a saved cursor that is
+        // somehow behind the snapshot must not be allowed to un-read anything.
+        const current = this.store.getState().readStates;
+        const readStates = (saved.channels ?? [])
+          .map((j) => fromJson(ChannelReadStateSchema, j))
+          .filter((rs) => rs.lastReadSeq > (current[rs.channelId]?.lastReadSeq ?? 0n));
+        if (readStates.length) this.store.dispatch({ type: "readStates/upsert", readStates });
+        for (const [threadRootId, seq] of Object.entries(saved.threads ?? {})) {
+          this.store.dispatch({
+            type: "readStates/updated",
+            channelId: "",
+            lastReadSeq: 0n,
+            userId: "",
+            threadRootId,
+            lastReadThreadSeq: BigInt(seq),
+          });
+        }
+      } catch {
+        // corrupt row: ignore. The cursors are a cache, and a bootstrap or the
+        // next markRead re-establishes them.
       }
     }
 

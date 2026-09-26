@@ -31,4 +31,5 @@ export declare const storageKeys: {
     readonly channelMessages: (channelId: string) => string;
     readonly channelMessagesPrefix: "channel:";
     readonly recentChannels: "recent-channels";
+    readonly readStates: "read-states";
 };
