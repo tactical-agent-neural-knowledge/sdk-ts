@@ -2,7 +2,7 @@ import { type Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { Channel, ChannelReadState } from "../contracts/tank/channel/v1/channel_pb.js";
-import { type AgentRunUpdated, type AgentStatus, type AppCommand, type CardAction, type ChannelMembershipChanged, type ChannelUpdated, type Envelope, type FileReady, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type NotificationCreated, type NotificationsRead, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type TopoMarkUpdated, type Typing } from "../contracts/tank/events/v1/events_pb.js";
+import { type AgentRunUpdated, type AgentStatus, type AppCommand, type CardAction, type ChannelMembershipChanged, type ChannelUpdated, type Envelope, type FileDeleted, type FileReady, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type NotificationCreated, type NotificationsRead, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type TopoMarkUpdated, type Typing } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification } from "../contracts/tank/notification/v1/notification_pb.js";
@@ -233,6 +233,10 @@ export type Action = {
     type: "files/upsert";
     files: File[];
 } | {
+    type: "files/deleted";
+    fileId: string;
+    messageIds: string[];
+} | {
     type: "pending/add";
     message: Message;
     now: number;
@@ -272,7 +276,7 @@ export declare function notificationPagingKey(workspaceId: string, mode: Notific
 export declare function typingKey(channelId: string, threadRootId?: string): string;
 export declare function reduce(state: TankState, action: Action): TankState;
 /** Every `tank.events.v1` payload this SDK's vendored contracts know how to decode. */
-export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelMembershipChanged | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated;
+export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelMembershipChanged | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | FileDeleted | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated;
 /**
  * A payload whose type is not in the vendored contracts (a newer event than this SDK build). The
  * `$typeName` is the literal `"unknown"` so a `switch ($typeName)` still narrows every known case and

@@ -12,6 +12,7 @@ import {
   type ChannelMembershipChanged,
   type ChannelUpdated,
   type Envelope,
+  type FileDeleted,
   type FileReady,
   file_tank_events_v1_events,
   type MessageCreated,
@@ -217,6 +218,7 @@ export type Action =
     }
   | { type: "runs/upsert"; runs: Run[] }
   | { type: "files/upsert"; files: File[] }
+  | { type: "files/deleted"; fileId: string; messageIds: string[] }
   | { type: "pending/add"; message: Message; now: number }
   | { type: "pending/failed"; clientMsgId: string; error: string }
   | { type: "pending/retry"; clientMsgId: string }
@@ -833,6 +835,24 @@ export function reduce(state: TankState, action: Action): TankState {
       if (action.files.length === 0) return state;
       return { ...state, filesById: { ...state.filesById, ...byId(action.files) } };
     }
+    case "files/deleted": {
+      // The file is gone and so is its place in every message that carried
+      // it. Both go together: a chip whose file no longer exists is the thing
+      // this exists to prevent.
+      const filesById = { ...state.filesById };
+      delete filesById[action.fileId];
+      const messages = { ...state.messages };
+      for (const id of action.messageIds) {
+        const msg = messages[id];
+        if (!msg || !msg.fileIds.includes(action.fileId)) continue;
+        messages[id] = {
+          ...msg,
+          fileIds: msg.fileIds.filter((f) => f !== action.fileId),
+          files: msg.files.filter((f) => f.id !== action.fileId),
+        };
+      }
+      return { ...state, filesById, messages };
+    }
     case "pending/add": {
       const m = action.message;
       const pending: PendingMessage = {
@@ -931,6 +951,7 @@ export type KnownEventPayload =
   | Typing
   | AgentStatus
   | FileReady
+  | FileDeleted
   | MessageEphemeral
   | NotificationsRead
   | AgentRunUpdated
@@ -968,6 +989,8 @@ export function envelopeToActions(env: Envelope, now: number): Action[] {
       return payload.message ? [{ type: "messages/created", message: payload.message }] : [];
     case "tank.events.v1.MessageUpdated":
       return payload.message ? [{ type: "messages/updated", message: payload.message }] : [];
+    case "tank.events.v1.FileDeleted":
+      return [{ type: "files/deleted", fileId: payload.fileId, messageIds: payload.messageIds }];
     case "tank.events.v1.MessageDeleted":
       return [
         {

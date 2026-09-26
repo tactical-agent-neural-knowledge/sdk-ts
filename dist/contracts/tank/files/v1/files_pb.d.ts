@@ -290,6 +290,38 @@ export type ListFilesResponse = Message<"tank.files.v1.ListFilesResponse"> & {
  */
 export declare const ListFilesResponseSchema: GenMessage<ListFilesResponse>;
 /**
+ * @generated from message tank.files.v1.DeleteFileRequest
+ */
+export type DeleteFileRequest = Message<"tank.files.v1.DeleteFileRequest"> & {
+    /**
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.files.v1.DeleteFileRequest.
+ * Use `create(DeleteFileRequestSchema)` to create a new message.
+ */
+export declare const DeleteFileRequestSchema: GenMessage<DeleteFileRequest>;
+/**
+ * @generated from message tank.files.v1.DeleteFileResponse
+ */
+export type DeleteFileResponse = Message<"tank.files.v1.DeleteFileResponse"> & {
+    /**
+     * The messages that carried the file, now without it. Clients replace their
+     * copies so the chip disappears everywhere at once, not just where the
+     * delete was pressed.
+     *
+     * @generated from field: repeated string message_ids = 1;
+     */
+    messageIds: string[];
+};
+/**
+ * Describes the message tank.files.v1.DeleteFileResponse.
+ * Use `create(DeleteFileResponseSchema)` to create a new message.
+ */
+export declare const DeleteFileResponseSchema: GenMessage<DeleteFileResponse>;
+/**
  * @generated from enum tank.files.v1.ScanStatus
  */
 export declare enum ScanStatus {
@@ -361,5 +393,17 @@ export declare const FilesService: GenService<{
         methodKind: "unary";
         input: typeof ListFilesRequestSchema;
         output: typeof ListFilesResponseSchema;
+    };
+    /**
+     * Remove a file: its bytes, its record, and its place in every message that
+     * carried it. The uploader may, and so may a workspace admin — a file
+     * someone else attached is still the workspace's to take down.
+     *
+     * @generated from rpc tank.files.v1.FilesService.DeleteFile
+     */
+    deleteFile: {
+        methodKind: "unary";
+        input: typeof DeleteFileRequestSchema;
+        output: typeof DeleteFileResponseSchema;
     };
 }>;

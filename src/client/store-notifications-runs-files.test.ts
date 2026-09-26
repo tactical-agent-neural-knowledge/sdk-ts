@@ -8,6 +8,7 @@ import {
   AgentRunUpdatedSchema,
   AgentStatusSchema,
   EnvelopeSchema,
+  FileDeletedSchema,
   FileReadySchema,
   NotificationCreatedSchema,
   NotificationsReadSchema,
@@ -16,7 +17,13 @@ import { FileSchema } from "../contracts/tank/files/v1/files_pb.js";
 import { MessageSchema } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification, NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
 import { MemberSchema, WorkspaceSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
-import { AGENT_STATUS_TTL_MS, type EventPayload, TankStore, unpackEnvelope } from "./store.js";
+import {
+  AGENT_STATUS_TTL_MS,
+  type EventPayload,
+  envelopeToActions,
+  TankStore,
+  unpackEnvelope,
+} from "./store.js";
 
 const T0 = 1_700_000_000_000;
 const notif = (
@@ -319,5 +326,67 @@ describe("EventPayload", () => {
     };
     expect(describe(known!)).toBe("read 1");
     expect(describe(future!)).toBe("unknown type.googleapis.com/tank.events.v99.NotYetDefined");
+  });
+});
+
+describe("files/deleted", () => {
+  it("drops the file and its place in every message that carried it", () => {
+    const store = new TankStore();
+    const file = create(FileSchema, {
+      id: "f1",
+      workspaceId: "ws1",
+      name: "plan.pdf",
+      mime: "application/pdf",
+    });
+    store.dispatch({ type: "files/upsert", files: [file] });
+    store.dispatch({
+      type: "messages/upsert",
+      messages: [
+        create(MessageSchema, {
+          id: "m1",
+          workspaceId: "ws1",
+          channelId: "c1",
+          channelSeq: 1n,
+          fileIds: ["f1", "f2"],
+          files: [file],
+        }),
+        create(MessageSchema, {
+          id: "m2",
+          workspaceId: "ws1",
+          channelId: "c1",
+          channelSeq: 2n,
+          fileIds: ["f1"],
+          files: [file],
+        }),
+        create(MessageSchema, {
+          id: "m3",
+          workspaceId: "ws1",
+          channelId: "c1",
+          channelSeq: 3n,
+          fileIds: ["f2"],
+        }),
+      ],
+    });
+    store.dispatch({ type: "files/deleted", fileId: "f1", messageIds: ["m1", "m2", "m3"] });
+    const s = store.getState();
+    expect(s.filesById.f1).toBeUndefined();
+    expect(s.messages.m1?.fileIds).toEqual(["f2"]);
+    expect(s.messages.m1?.files).toEqual([]);
+    expect(s.messages.m2?.fileIds).toEqual([]);
+    // Untouched: it never carried the file, so its identity must not change.
+    expect(s.messages.m3?.fileIds).toEqual(["f2"]);
+  });
+
+  it("arrives as a gateway event too", () => {
+    const actions = envelopeToActions(
+      create(EnvelopeSchema, {
+        payload: anyPack(
+          FileDeletedSchema,
+          create(FileDeletedSchema, { fileId: "f1", workspaceId: "ws1", messageIds: ["m1"] }),
+        ),
+      }),
+      0,
+    );
+    expect(actions).toEqual([{ type: "files/deleted", fileId: "f1", messageIds: ["m1"] }]);
   });
 });
