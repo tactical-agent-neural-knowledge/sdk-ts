@@ -16,7 +16,7 @@ import { file_tank_workspace_v1_workspace } from "../../workspace/v1/workspace_p
 /**
  * Describes the file tank/events/v1/events.proto.
  */
-export const file_tank_events_v1_events = /*@__PURE__*/ fileDesc("Cht0YW5rL2V2ZW50cy92MS9ldmVudHMucHJvdG8SDnRhbmsuZXZlbnRzLnYxIrkBCghFbnZlbG9wZRIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSDAoEdHlwZRgDIAEoCRIPCgdzdWJqZWN0GAQgASgJEi8KC29jY3VycmVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx0cmFjZV9wYXJlbnQYBiABKAkSJQoHcGF5bG9hZBgHIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkiOwoOTWVzc2FnZUNyZWF0ZWQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIjsKDk1lc3NhZ2VVcGRhdGVkEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJQCg5NZXNzYWdlRGVsZXRlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiQwoNUmVhY3Rpb25BZGRlZBISCgptZXNzYWdlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSDQoFZW1vamkYAyABKAkiRQoPUmVhY3Rpb25SZW1vdmVkEhIKCm1lc3NhZ2VfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRINCgVlbW9qaRgDIAEoCSKEAQoQUmVhZFN0YXRlVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFQoNbGFzdF9yZWFkX3NlcRgDIAEoAxIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIcChRsYXN0X3JlYWRfdGhyZWFkX3NlcRgFIAEoAyJPCg5DaGFubmVsVXBkYXRlZBISCgpjaGFubmVsX2lkGAEgASgJEikKB2NoYW5uZWwYAiABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCJhChhDaGFubmVsTWVtYmVyc2hpcENoYW5nZWQSEgoKY2hhbm5lbF9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEg4KBmpvaW5lZBgDIAEoCBIQCghhY3Rvcl9pZBgEIAEoCSI5CgpDYXJkQWN0aW9uEisKBmFjdGlvbhgBIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkJsb2NrQWN0aW9uImgKCkFwcENvbW1hbmQSDwoHY29tbWFuZBgBIAEoCRIMCgR0ZXh0GAIgASgJEg8KB3VzZXJfaWQYAyABKAkSEgoKY2hhbm5lbF9pZBgEIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgFIAEoCSI/Cg9QcmVzZW5jZUNoYW5nZWQSLAoIcHJlc2VuY2UYASABKAsyGi50YW5rLnByZXNlbmNlLnYxLlByZXNlbmNlIkUKBlR5cGluZxISCgpjaGFubmVsX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiWQoLQWdlbnRTdGF0dXMSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRIOCgZydW5faWQYAyABKAkSDgoGc3RhdHVzGAQgASgJIi4KCUZpbGVSZWFkeRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlIk4KEE1lc3NhZ2VFcGhlbWVyYWwSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEg8KB3VzZXJfaWQYAiABKAkiLQoRTm90aWZpY2F0aW9uc1JlYWQSGAoQbm90aWZpY2F0aW9uX2lkcxgBIAMoCSIyCg9BZ2VudFJ1blVwZGF0ZWQSHwoDcnVuGAEgASgLMhIudGFuay5hZ2VudC52MS5SdW4idgoTTm90aWZpY2F0aW9uQ3JlYXRlZBIXCg9ub3RpZmljYXRpb25faWQYASABKAkSDAoEa2luZBgCIAEoCRISCgptZXNzYWdlX2lkGAMgASgJEhIKCmNoYW5uZWxfaWQYBCABKAkSEAoIYWN0b3JfaWQYBSABKAkiVQoKUGluQ2hhbmdlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDwoHdXNlcl9pZBgDIAEoCRIOCgZwaW5uZWQYBCABKAgiXAoMRW1vamlDaGFuZ2VkEi0KBWVtb2ppGAEgASgLMh4udGFuay53b3Jrc3BhY2UudjEuQ3VzdG9tRW1vamkSDwoHZGVsZXRlZBgCIAEoCBIMCgRoYXNoGAMgASgJIloKElByZWZlcmVuY2VzVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEjMKC3ByZWZlcmVuY2VzGAIgASgLMh4udGFuay53b3Jrc3BhY2UudjEuUHJlZmVyZW5jZXMiYgoYQ2hhbm5lbFByZWZlcmVuY2VVcGRhdGVkEg8KB3VzZXJfaWQYASABKAkSNQoKcmVhZF9zdGF0ZRgCIAEoCzIhLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsUmVhZFN0YXRlIlkKDERyYWZ0VXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEicKBWRyYWZ0GAIgASgLMhgudGFuay53b3Jrc3BhY2UudjEuRHJhZnQSDwoHZGVsZXRlZBgDIAEoCCJOChRTY2hlZHVsZWRNZXNzYWdlU2VudBI2CglzY2hlZHVsZWQYASABKAsyIy50YW5rLndvcmtzcGFjZS52MS5TY2hlZHVsZWRNZXNzYWdlIlAKEFVzZXJHcm91cFVwZGF0ZWQSKwoFZ3JvdXAYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Vc2VyR3JvdXASDwoHZGVsZXRlZBgCIAEoCCJYCg9Cb29rbWFya0NoYW5nZWQSNAoIYm9va21hcmsYASABKAsyIi50YW5rLndvcmtzcGFjZS52MS5DaGFubmVsQm9va21hcmsSDwoHcmVtb3ZlZBgCIAEoCCI6Cg1NZW1iZXJVcGRhdGVkEikKBm1lbWJlchgBIAEoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlciI3Cg1IdWRkbGVTdGFydGVkEiYKBmh1ZGRsZRgBIAEoCzIWLnRhbmsuaHVkZGxlLnYxLkh1ZGRsZSI1CgtIdWRkbGVFbmRlZBImCgZodWRkbGUYASABKAsyFi50YW5rLmh1ZGRsZS52MS5IdWRkbGUiQwoZSHVkZGxlUGFydGljaXBhbnRzQ2hhbmdlZBImCgZodWRkbGUYASABKAsyFi50YW5rLmh1ZGRsZS52MS5IdWRkbGUigAEKEU1lbWJlclJvbGVDaGFuZ2VkEikKBm1lbWJlchgBIAEoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlchIuCg1wcmV2aW91c19yb2xlGAIgASgOMhcudGFuay53b3Jrc3BhY2UudjEuUm9sZRIQCghhY3Rvcl9pZBgDIAEoCSJ2ChFNZW1iZXJEZWFjdGl2YXRlZBIpCgZtZW1iZXIYASABKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXISEwoLcmVhY3RpdmF0ZWQYAiABKAgSDwoHcmVtb3ZlZBgDIAEoCBIQCghhY3Rvcl9pZBgEIAEoCSJgChhXb3Jrc3BhY2VTZXR0aW5nc1VwZGF0ZWQSMgoIc2V0dGluZ3MYASABKAsyIC50YW5rLmFkbWluLnYxLldvcmtzcGFjZVNldHRpbmdzEhAKCGFjdG9yX2lkGAIgASgJIjcKC0F1ZGl0TG9nZ2VkEigKBWVudHJ5GAEgASgLMhkudGFuay5hZG1pbi52MS5BdWRpdEVudHJ5IjQKC0V4cG9ydFJlYWR5EiUKA2pvYhgBIAEoCzIYLnRhbmsuYWRtaW4udjEuRXhwb3J0Sm9iIjMKD1RvcG9NYXJrVXBkYXRlZBIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmtC0AEKEmNvbS50YW5rLmV2ZW50cy52MUILRXZlbnRzUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9ldmVudHMvdjE7ZXZlbnRzdjGiAgNURViqAg5UYW5rLkV2ZW50cy5WMcoCDlRhbmtcRXZlbnRzXFYx4gIaVGFua1xFdmVudHNcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpFdmVudHM6OlYxYgZwcm90bzM", [file_google_protobuf_any, file_google_protobuf_timestamp, file_tank_admin_v1_admin, file_tank_agent_v1_agent, file_tank_blocks_v1_blocks, file_tank_channel_v1_channel, file_tank_files_v1_files, file_tank_huddle_v1_huddle, file_tank_message_v1_message, file_tank_presence_v1_presence, file_tank_topo_v1_topo, file_tank_workspace_v1_workspace]);
+export const file_tank_events_v1_events = /*@__PURE__*/ fileDesc("Cht0YW5rL2V2ZW50cy92MS9ldmVudHMucHJvdG8SDnRhbmsuZXZlbnRzLnYxIrkBCghFbnZlbG9wZRIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSDAoEdHlwZRgDIAEoCRIPCgdzdWJqZWN0GAQgASgJEi8KC29jY3VycmVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgx0cmFjZV9wYXJlbnQYBiABKAkSJQoHcGF5bG9hZBgHIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkiOwoOTWVzc2FnZUNyZWF0ZWQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIjsKDk1lc3NhZ2VVcGRhdGVkEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJQCg5NZXNzYWdlRGVsZXRlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiSQoLRmlsZURlbGV0ZWQSDwoHZmlsZV9pZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSEwoLbWVzc2FnZV9pZHMYAyADKAkiQwoNUmVhY3Rpb25BZGRlZBISCgptZXNzYWdlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSDQoFZW1vamkYAyABKAkiRQoPUmVhY3Rpb25SZW1vdmVkEhIKCm1lc3NhZ2VfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRINCgVlbW9qaRgDIAEoCSKEAQoQUmVhZFN0YXRlVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFQoNbGFzdF9yZWFkX3NlcRgDIAEoAxIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIcChRsYXN0X3JlYWRfdGhyZWFkX3NlcRgFIAEoAyJPCg5DaGFubmVsVXBkYXRlZBISCgpjaGFubmVsX2lkGAEgASgJEikKB2NoYW5uZWwYAiABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCJhChhDaGFubmVsTWVtYmVyc2hpcENoYW5nZWQSEgoKY2hhbm5lbF9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEg4KBmpvaW5lZBgDIAEoCBIQCghhY3Rvcl9pZBgEIAEoCSI5CgpDYXJkQWN0aW9uEisKBmFjdGlvbhgBIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkJsb2NrQWN0aW9uImgKCkFwcENvbW1hbmQSDwoHY29tbWFuZBgBIAEoCRIMCgR0ZXh0GAIgASgJEg8KB3VzZXJfaWQYAyABKAkSEgoKY2hhbm5lbF9pZBgEIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgFIAEoCSI/Cg9QcmVzZW5jZUNoYW5nZWQSLAoIcHJlc2VuY2UYASABKAsyGi50YW5rLnByZXNlbmNlLnYxLlByZXNlbmNlIkUKBlR5cGluZxISCgpjaGFubmVsX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkiWQoLQWdlbnRTdGF0dXMSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRIOCgZydW5faWQYAyABKAkSDgoGc3RhdHVzGAQgASgJIi4KCUZpbGVSZWFkeRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlIk4KEE1lc3NhZ2VFcGhlbWVyYWwSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEg8KB3VzZXJfaWQYAiABKAkiLQoRTm90aWZpY2F0aW9uc1JlYWQSGAoQbm90aWZpY2F0aW9uX2lkcxgBIAMoCSIyCg9BZ2VudFJ1blVwZGF0ZWQSHwoDcnVuGAEgASgLMhIudGFuay5hZ2VudC52MS5SdW4idgoTTm90aWZpY2F0aW9uQ3JlYXRlZBIXCg9ub3RpZmljYXRpb25faWQYASABKAkSDAoEa2luZBgCIAEoCRISCgptZXNzYWdlX2lkGAMgASgJEhIKCmNoYW5uZWxfaWQYBCABKAkSEAoIYWN0b3JfaWQYBSABKAkiVQoKUGluQ2hhbmdlZBISCgptZXNzYWdlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDwoHdXNlcl9pZBgDIAEoCRIOCgZwaW5uZWQYBCABKAgiXAoMRW1vamlDaGFuZ2VkEi0KBWVtb2ppGAEgASgLMh4udGFuay53b3Jrc3BhY2UudjEuQ3VzdG9tRW1vamkSDwoHZGVsZXRlZBgCIAEoCBIMCgRoYXNoGAMgASgJIloKElByZWZlcmVuY2VzVXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEjMKC3ByZWZlcmVuY2VzGAIgASgLMh4udGFuay53b3Jrc3BhY2UudjEuUHJlZmVyZW5jZXMiYgoYQ2hhbm5lbFByZWZlcmVuY2VVcGRhdGVkEg8KB3VzZXJfaWQYASABKAkSNQoKcmVhZF9zdGF0ZRgCIAEoCzIhLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsUmVhZFN0YXRlIlkKDERyYWZ0VXBkYXRlZBIPCgd1c2VyX2lkGAEgASgJEicKBWRyYWZ0GAIgASgLMhgudGFuay53b3Jrc3BhY2UudjEuRHJhZnQSDwoHZGVsZXRlZBgDIAEoCCJOChRTY2hlZHVsZWRNZXNzYWdlU2VudBI2CglzY2hlZHVsZWQYASABKAsyIy50YW5rLndvcmtzcGFjZS52MS5TY2hlZHVsZWRNZXNzYWdlIlAKEFVzZXJHcm91cFVwZGF0ZWQSKwoFZ3JvdXAYASABKAsyHC50YW5rLndvcmtzcGFjZS52MS5Vc2VyR3JvdXASDwoHZGVsZXRlZBgCIAEoCCJYCg9Cb29rbWFya0NoYW5nZWQSNAoIYm9va21hcmsYASABKAsyIi50YW5rLndvcmtzcGFjZS52MS5DaGFubmVsQm9va21hcmsSDwoHcmVtb3ZlZBgCIAEoCCI6Cg1NZW1iZXJVcGRhdGVkEikKBm1lbWJlchgBIAEoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlciI3Cg1IdWRkbGVTdGFydGVkEiYKBmh1ZGRsZRgBIAEoCzIWLnRhbmsuaHVkZGxlLnYxLkh1ZGRsZSI1CgtIdWRkbGVFbmRlZBImCgZodWRkbGUYASABKAsyFi50YW5rLmh1ZGRsZS52MS5IdWRkbGUiQwoZSHVkZGxlUGFydGljaXBhbnRzQ2hhbmdlZBImCgZodWRkbGUYASABKAsyFi50YW5rLmh1ZGRsZS52MS5IdWRkbGUigAEKEU1lbWJlclJvbGVDaGFuZ2VkEikKBm1lbWJlchgBIAEoCzIZLnRhbmsud29ya3NwYWNlLnYxLk1lbWJlchIuCg1wcmV2aW91c19yb2xlGAIgASgOMhcudGFuay53b3Jrc3BhY2UudjEuUm9sZRIQCghhY3Rvcl9pZBgDIAEoCSJ2ChFNZW1iZXJEZWFjdGl2YXRlZBIpCgZtZW1iZXIYASABKAsyGS50YW5rLndvcmtzcGFjZS52MS5NZW1iZXISEwoLcmVhY3RpdmF0ZWQYAiABKAgSDwoHcmVtb3ZlZBgDIAEoCBIQCghhY3Rvcl9pZBgEIAEoCSJgChhXb3Jrc3BhY2VTZXR0aW5nc1VwZGF0ZWQSMgoIc2V0dGluZ3MYASABKAsyIC50YW5rLmFkbWluLnYxLldvcmtzcGFjZVNldHRpbmdzEhAKCGFjdG9yX2lkGAIgASgJIjcKC0F1ZGl0TG9nZ2VkEigKBWVudHJ5GAEgASgLMhkudGFuay5hZG1pbi52MS5BdWRpdEVudHJ5IjQKC0V4cG9ydFJlYWR5EiUKA2pvYhgBIAEoCzIYLnRhbmsuYWRtaW4udjEuRXhwb3J0Sm9iIjMKD1RvcG9NYXJrVXBkYXRlZBIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmtC0AEKEmNvbS50YW5rLmV2ZW50cy52MUILRXZlbnRzUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9ldmVudHMvdjE7ZXZlbnRzdjGiAgNURViqAg5UYW5rLkV2ZW50cy5WMcoCDlRhbmtcRXZlbnRzXFYx4gIaVGFua1xFdmVudHNcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpFdmVudHM6OlYxYgZwcm90bzM", [file_google_protobuf_any, file_google_protobuf_timestamp, file_tank_admin_v1_admin, file_tank_agent_v1_agent, file_tank_blocks_v1_blocks, file_tank_channel_v1_channel, file_tank_files_v1_files, file_tank_huddle_v1_huddle, file_tank_message_v1_message, file_tank_presence_v1_presence, file_tank_topo_v1_topo, file_tank_workspace_v1_workspace]);
 /**
  * Describes the message tank.events.v1.Envelope.
  * Use `create(EnvelopeSchema)` to create a new message.
@@ -38,167 +38,172 @@ export const MessageUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v
  */
 export const MessageDeletedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 3);
 /**
+ * Describes the message tank.events.v1.FileDeleted.
+ * Use `create(FileDeletedSchema)` to create a new message.
+ */
+export const FileDeletedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 4);
+/**
  * Describes the message tank.events.v1.ReactionAdded.
  * Use `create(ReactionAddedSchema)` to create a new message.
  */
-export const ReactionAddedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 4);
+export const ReactionAddedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 5);
 /**
  * Describes the message tank.events.v1.ReactionRemoved.
  * Use `create(ReactionRemovedSchema)` to create a new message.
  */
-export const ReactionRemovedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 5);
+export const ReactionRemovedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 6);
 /**
  * Describes the message tank.events.v1.ReadStateUpdated.
  * Use `create(ReadStateUpdatedSchema)` to create a new message.
  */
-export const ReadStateUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 6);
+export const ReadStateUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 7);
 /**
  * Describes the message tank.events.v1.ChannelUpdated.
  * Use `create(ChannelUpdatedSchema)` to create a new message.
  */
-export const ChannelUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 7);
+export const ChannelUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 8);
 /**
  * Describes the message tank.events.v1.ChannelMembershipChanged.
  * Use `create(ChannelMembershipChangedSchema)` to create a new message.
  */
-export const ChannelMembershipChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 8);
+export const ChannelMembershipChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 9);
 /**
  * Describes the message tank.events.v1.CardAction.
  * Use `create(CardActionSchema)` to create a new message.
  */
-export const CardActionSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 9);
+export const CardActionSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 10);
 /**
  * Describes the message tank.events.v1.AppCommand.
  * Use `create(AppCommandSchema)` to create a new message.
  */
-export const AppCommandSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 10);
+export const AppCommandSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 11);
 /**
  * Describes the message tank.events.v1.PresenceChanged.
  * Use `create(PresenceChangedSchema)` to create a new message.
  */
-export const PresenceChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 11);
+export const PresenceChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 12);
 /**
  * Describes the message tank.events.v1.Typing.
  * Use `create(TypingSchema)` to create a new message.
  */
-export const TypingSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 12);
+export const TypingSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 13);
 /**
  * Describes the message tank.events.v1.AgentStatus.
  * Use `create(AgentStatusSchema)` to create a new message.
  */
-export const AgentStatusSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 13);
+export const AgentStatusSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 14);
 /**
  * Describes the message tank.events.v1.FileReady.
  * Use `create(FileReadySchema)` to create a new message.
  */
-export const FileReadySchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 14);
+export const FileReadySchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 15);
 /**
  * Describes the message tank.events.v1.MessageEphemeral.
  * Use `create(MessageEphemeralSchema)` to create a new message.
  */
-export const MessageEphemeralSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 15);
+export const MessageEphemeralSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 16);
 /**
  * Describes the message tank.events.v1.NotificationsRead.
  * Use `create(NotificationsReadSchema)` to create a new message.
  */
-export const NotificationsReadSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 16);
+export const NotificationsReadSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 17);
 /**
  * Describes the message tank.events.v1.AgentRunUpdated.
  * Use `create(AgentRunUpdatedSchema)` to create a new message.
  */
-export const AgentRunUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 17);
+export const AgentRunUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 18);
 /**
  * Describes the message tank.events.v1.NotificationCreated.
  * Use `create(NotificationCreatedSchema)` to create a new message.
  */
-export const NotificationCreatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 18);
+export const NotificationCreatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 19);
 /**
  * Describes the message tank.events.v1.PinChanged.
  * Use `create(PinChangedSchema)` to create a new message.
  */
-export const PinChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 19);
+export const PinChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 20);
 /**
  * Describes the message tank.events.v1.EmojiChanged.
  * Use `create(EmojiChangedSchema)` to create a new message.
  */
-export const EmojiChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 20);
+export const EmojiChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 21);
 /**
  * Describes the message tank.events.v1.PreferencesUpdated.
  * Use `create(PreferencesUpdatedSchema)` to create a new message.
  */
-export const PreferencesUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 21);
+export const PreferencesUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 22);
 /**
  * Describes the message tank.events.v1.ChannelPreferenceUpdated.
  * Use `create(ChannelPreferenceUpdatedSchema)` to create a new message.
  */
-export const ChannelPreferenceUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 22);
+export const ChannelPreferenceUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 23);
 /**
  * Describes the message tank.events.v1.DraftUpdated.
  * Use `create(DraftUpdatedSchema)` to create a new message.
  */
-export const DraftUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 23);
+export const DraftUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 24);
 /**
  * Describes the message tank.events.v1.ScheduledMessageSent.
  * Use `create(ScheduledMessageSentSchema)` to create a new message.
  */
-export const ScheduledMessageSentSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 24);
+export const ScheduledMessageSentSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 25);
 /**
  * Describes the message tank.events.v1.UserGroupUpdated.
  * Use `create(UserGroupUpdatedSchema)` to create a new message.
  */
-export const UserGroupUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 25);
+export const UserGroupUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 26);
 /**
  * Describes the message tank.events.v1.BookmarkChanged.
  * Use `create(BookmarkChangedSchema)` to create a new message.
  */
-export const BookmarkChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 26);
+export const BookmarkChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 27);
 /**
  * Describes the message tank.events.v1.MemberUpdated.
  * Use `create(MemberUpdatedSchema)` to create a new message.
  */
-export const MemberUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 27);
+export const MemberUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 28);
 /**
  * Describes the message tank.events.v1.HuddleStarted.
  * Use `create(HuddleStartedSchema)` to create a new message.
  */
-export const HuddleStartedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 28);
+export const HuddleStartedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 29);
 /**
  * Describes the message tank.events.v1.HuddleEnded.
  * Use `create(HuddleEndedSchema)` to create a new message.
  */
-export const HuddleEndedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 29);
+export const HuddleEndedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 30);
 /**
  * Describes the message tank.events.v1.HuddleParticipantsChanged.
  * Use `create(HuddleParticipantsChangedSchema)` to create a new message.
  */
-export const HuddleParticipantsChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 30);
+export const HuddleParticipantsChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 31);
 /**
  * Describes the message tank.events.v1.MemberRoleChanged.
  * Use `create(MemberRoleChangedSchema)` to create a new message.
  */
-export const MemberRoleChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 31);
+export const MemberRoleChangedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 32);
 /**
  * Describes the message tank.events.v1.MemberDeactivated.
  * Use `create(MemberDeactivatedSchema)` to create a new message.
  */
-export const MemberDeactivatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 32);
+export const MemberDeactivatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 33);
 /**
  * Describes the message tank.events.v1.WorkspaceSettingsUpdated.
  * Use `create(WorkspaceSettingsUpdatedSchema)` to create a new message.
  */
-export const WorkspaceSettingsUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 33);
+export const WorkspaceSettingsUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 34);
 /**
  * Describes the message tank.events.v1.AuditLogged.
  * Use `create(AuditLoggedSchema)` to create a new message.
  */
-export const AuditLoggedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 34);
+export const AuditLoggedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 35);
 /**
  * Describes the message tank.events.v1.ExportReady.
  * Use `create(ExportReadySchema)` to create a new message.
  */
-export const ExportReadySchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 35);
+export const ExportReadySchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 36);
 /**
  * Describes the message tank.events.v1.TopoMarkUpdated.
  * Use `create(TopoMarkUpdatedSchema)` to create a new message.
  */
-export const TopoMarkUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 36);
+export const TopoMarkUpdatedSchema = /*@__PURE__*/ messageDesc(file_tank_events_v1_events, 37);
