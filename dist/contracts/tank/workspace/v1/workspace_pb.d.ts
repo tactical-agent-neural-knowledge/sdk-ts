@@ -1436,6 +1436,16 @@ export type ScheduledMessage = Message<"tank.workspace.v1.ScheduledMessage"> & {
      * @generated from field: string error = 12;
      */
     error: string;
+    /**
+     * Calm send: waits for this much quiet in the channel after send_at, never past no_later_than.
+     *
+     * @generated from field: int32 quiet_for_seconds = 13;
+     */
+    quietForSeconds: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp no_later_than = 14;
+     */
+    noLaterThan?: Timestamp;
 };
 /**
  * Describes the message tank.workspace.v1.ScheduledMessage.
@@ -1467,9 +1477,26 @@ export type ScheduleMessageRequest = Message<"tank.workspace.v1.ScheduleMessageR
      */
     fileIds: string[];
     /**
+     * When to send. With quiet_for_seconds set this is the earliest moment and
+     * may be omitted (now); otherwise it is the moment itself.
+     *
      * @generated from field: google.protobuf.Timestamp send_at = 6;
      */
     sendAt?: Timestamp;
+    /**
+     * Send when things are calm: once the channel has had no new message for
+     * this long (and send_at has passed). 0 = send at send_at exactly.
+     *
+     * @generated from field: int32 quiet_for_seconds = 7;
+     */
+    quietForSeconds: number;
+    /**
+     * The latest moment a calm send waits for; it goes out then regardless.
+     * Defaults to 24 hours after send_at.
+     *
+     * @generated from field: google.protobuf.Timestamp no_later_than = 8;
+     */
+    noLaterThan?: Timestamp;
 };
 /**
  * Describes the message tank.workspace.v1.ScheduleMessageRequest.
