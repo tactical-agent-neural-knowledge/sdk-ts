@@ -22,7 +22,7 @@ import {
 import { FakeGateway, fakeMessage, resetSeq } from "../test/fake-gateway.js";
 import { createTankClient, type TankClient } from "./client.js";
 import type { WebSocketCtor } from "./realtime.js";
-import { MemoryStorage } from "./storage.js";
+import { MemoryStorage, storageKeys } from "./storage.js";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 async function until(pred: () => boolean, timeoutMs = 4000): Promise<void> {
@@ -303,6 +303,61 @@ describe("TankClient", () => {
     c.retryMessage(second.clientMsgId);
     await until(() => c.store.getState().pending[second.clientMsgId] === undefined);
     expect(c.store.selectChannelMessages("general")).toHaveLength(2);
+  });
+
+  it("remembers what was read across a restart, not just what bootstrap last said", async () => {
+    // The bug: read progress lived only in the bootstrap snapshot, which is
+    // written once per GetBootstrap and never updated afterwards. Everything read
+    // after it was lost on the next launch, so the same messages came back unread
+    // however many times they had been read.
+    const storage = new MemoryStorage();
+    const c1 = makeClient(storage);
+    await c1.bootstrap("ws1"); // snapshot saved here, with the read cursor as it is now
+    await c1.start();
+    await until(() => c1.store.getState().connection === "ready");
+    c1.viewChannel("general");
+    for (let i = 0; i < 3; i++) gw.emit("ws1", gw.messageCreated(fakeMessage({ channelId: "general" })));
+    await until(() => c1.store.selectUnreads("ws1").total === 3);
+
+    // Read them. The server is told; the snapshot in storage is now out of date.
+    const lastSeq = c1.store.getState().channels.general!.lastSeq;
+    await c1.markRead("general", lastSeq);
+    expect(c1.store.selectUnreads("ws1").total).toBe(0);
+    await c1.stop();
+    clients.splice(clients.indexOf(c1), 1);
+
+    // Sign in again: storage only, exactly as a cold launch behaves before its
+    // first GetBootstrap resolves.
+    const c2 = makeClient(storage);
+    await c2.start();
+    expect(c2.store.getState().readStates.general?.lastReadSeq).toBe(lastSeq);
+    expect(c2.store.selectUnreads("ws1").total).toBe(0);
+  });
+
+  it("never lets a saved read cursor move backwards", async () => {
+    // The snapshot and the saved cursors are written at different times, so the
+    // saved one is normally the newer. If it is ever behind — an older build, a
+    // half-finished write — hydrating it must not un-read anything.
+    const storage = new MemoryStorage();
+    const c1 = makeClient(storage);
+    await c1.bootstrap("ws1");
+    await c1.stop();
+    clients.splice(clients.indexOf(c1), 1);
+
+    // A snapshot that says seq 5 was read...
+    const snapshotRaw = (await storage.get(storageKeys.bootstrap("ws1")))!;
+    const snapshot = JSON.parse(snapshotRaw) as { readStates?: unknown[] };
+    snapshot.readStates = [{ channelId: "general", lastReadSeq: "5" }];
+    await storage.put(storageKeys.bootstrap("ws1"), JSON.stringify(snapshot));
+    // ...and a stale saved cursor that says nothing has been read.
+    await storage.put(
+      storageKeys.readStates,
+      JSON.stringify({ channels: [{ channelId: "general", lastReadSeq: "0" }], threads: {} }),
+    );
+
+    const c2 = makeClient(storage);
+    await c2.start();
+    expect(c2.store.getState().readStates.general?.lastReadSeq).toBe(5n);
   });
 
   it("hydrates bootstrap, cursors, cached messages and the outbox from storage, then resumes", async () => {

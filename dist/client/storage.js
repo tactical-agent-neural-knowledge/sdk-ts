@@ -26,4 +26,10 @@ export const storageKeys = {
     channelMessages: (channelId) => `channel:${channelId}:messages`,
     channelMessagesPrefix: "channel:",
     recentChannels: "recent-channels",
+    // Read progress, kept apart from the bootstrap snapshot on purpose. The
+    // snapshot is only rewritten when GetBootstrap runs, so everything read after
+    // it used to be lost on the next launch: hydrating the snapshot resurrected an
+    // old cursor and the same messages came back unread, however many times they
+    // had been read.
+    readStates: "read-states",
 };

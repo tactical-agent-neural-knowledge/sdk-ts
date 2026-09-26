@@ -319,6 +319,16 @@ export declare class TankClient {
     private touchRecent;
     private schedulePersist;
     private persistNow;
+    /**
+     * Read progress, saved whenever it moves.
+     *
+     * Without this the only record of what had been read was the bootstrap
+     * snapshot, which is written once per GetBootstrap and never updated. Anything
+     * read afterwards was lost on the next launch, so the same messages came back
+     * unread every time somebody signed in — no amount of reading them helped,
+     * because reading was not what got saved.
+     */
+    private persistReadStates;
     private hydrate;
     private hydrateOnce;
 }
