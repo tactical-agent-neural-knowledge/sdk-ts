@@ -248,6 +248,13 @@ export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
      * @generated from field: string contact_email = 8;
      */
     contactEmail: string;
+    /**
+     * Scheduling around people and quiet (send when calm, when they are here,
+     * nudge unless answered) is premium; plain "send at a time" is free.
+     *
+     * @generated from field: bool conditional_sends = 9;
+     */
+    conditionalSends: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.Entitlements.
@@ -1446,6 +1453,14 @@ export type ScheduledMessage = Message<"tank.workspace.v1.ScheduledMessage"> & {
      * @generated from field: google.protobuf.Timestamp no_later_than = 14;
      */
     noLaterThan?: Timestamp;
+    /**
+     * @generated from field: repeated string wait_for_user_ids = 15;
+     */
+    waitForUserIds: string[];
+    /**
+     * @generated from field: string unless_replied_to_message_id = 16;
+     */
+    unlessRepliedToMessageId: string;
 };
 /**
  * Describes the message tank.workspace.v1.ScheduledMessage.
@@ -1491,12 +1506,26 @@ export type ScheduleMessageRequest = Message<"tank.workspace.v1.ScheduleMessageR
      */
     quietForSeconds: number;
     /**
-     * The latest moment a calm send waits for; it goes out then regardless.
-     * Defaults to 24 hours after send_at.
+     * The latest moment a conditional send (calm, or waiting for people) waits
+     * for; it goes out then regardless. Defaults to 24 hours after send_at.
      *
      * @generated from field: google.protobuf.Timestamp no_later_than = 8;
      */
     noLaterThan?: Timestamp;
+    /**
+     * Send when they are here: once every one of these people is active (after
+     * send_at, no later than no_later_than). Members of the workspace.
+     *
+     * @generated from field: repeated string wait_for_user_ids = 9;
+     */
+    waitForUserIds: string[];
+    /**
+     * A nudge with a fuse: skip the send if this message has been replied to by
+     * someone other than its author before the send is due.
+     *
+     * @generated from field: string unless_replied_to_message_id = 10;
+     */
+    unlessRepliedToMessageId: string;
 };
 /**
  * Describes the message tank.workspace.v1.ScheduleMessageRequest.
