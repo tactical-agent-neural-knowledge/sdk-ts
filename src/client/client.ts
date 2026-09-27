@@ -28,7 +28,7 @@ import {
   type PostMessageRequest,
   PostMessageRequestSchema,
 } from "../contracts/tank/message/v1/message_pb.js";
-import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
+import { MonitorService, type Widget } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import {
   type Presence,
@@ -267,6 +267,7 @@ export class TankClient {
   private sendBackoff = new Backoff({ minMs: 500, maxMs: 15_000 });
   private downloadUrls = new Map<string, { url: string; expiresAt: number }>();
   private markListeners = new Set<(mark: Mark) => void>();
+  private widgetListeners = new Set<(widget: Widget) => void>();
   private downloadUrlInFlight = new Map<string, Promise<string>>();
 
   constructor(opts: TankClientOptions) {
@@ -855,6 +856,14 @@ export class TankClient {
    * Stored marks only: a derived mark has no lifecycle to report, and recomputing one is cheaper
    * than keeping it in step.
    */
+  /** A Radar widget got a new point or health (monitor.widget.updated on a subscribed channel). */
+  onWidgetUpdated(fn: (widget: Widget) => void): () => void {
+    this.widgetListeners.add(fn);
+    return () => {
+      this.widgetListeners.delete(fn);
+    };
+  }
+
   onMarkUpdated(fn: (mark: Mark) => void): () => void {
     this.markListeners.add(fn);
     return () => {
@@ -1121,6 +1130,9 @@ export class TankClient {
       if (payload?.$typeName === "tank.events.v1.ChannelUpdated") void this.refreshChannel(payload.channelId);
       if (payload?.$typeName === "tank.events.v1.TopoMarkUpdated" && payload.mark) {
         for (const fn of this.markListeners) fn(payload.mark);
+      }
+      if (payload?.$typeName === "tank.events.v1.MonitorWidgetUpdated" && payload.widget) {
+        for (const fn of this.widgetListeners) fn(payload.widget);
       }
     });
     rt.on("cursor", ({ workspaceId, cursor }) => {

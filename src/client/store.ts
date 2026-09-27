@@ -19,6 +19,7 @@ import {
   type MessageDeleted,
   type MessageEphemeral,
   type MessageUpdated,
+  type MonitorWidgetUpdated,
   type NotificationCreated,
   type NotificationsRead,
   type PresenceChanged,
@@ -956,7 +957,8 @@ export type KnownEventPayload =
   | NotificationsRead
   | AgentRunUpdated
   | NotificationCreated
-  | TopoMarkUpdated;
+  | TopoMarkUpdated
+  | MonitorWidgetUpdated;
 
 /**
  * A payload whose type is not in the vendored contracts (a newer event than this SDK build). The
