@@ -4,6 +4,7 @@ import { Code, ConnectError, createClient, } from "@connectrpc/connect";
 import { AgentService } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
 import { ChannelReadStateSchema, ChannelService, ChannelType, TreadGoalSchema, } from "../contracts/tank/channel/v1/channel_pb.js";
+import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } from "../contracts/tank/message/v1/message_pb.js";
 import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
@@ -55,6 +56,8 @@ export class TankClient {
     topo;
     /** Radar: widgets, sources and series. */
     monitor;
+    /** Slash commands: what the composer offers and what happens when one is sent. */
+    command;
     realtime;
     store;
     storage;
@@ -100,6 +103,7 @@ export class TankClient {
         this.notifications = createClient(NotificationService, this.transport);
         this.topo = createClient(TopoService, this.transport);
         this.monitor = createClient(MonitorService, this.transport);
+        this.command = createClient(CommandService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
             getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
