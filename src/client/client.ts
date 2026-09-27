@@ -19,6 +19,7 @@ import {
   type TreadGoal,
   TreadGoalSchema,
 } from "../contracts/tank/channel/v1/channel_pb.js";
+import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import {
   ChatService,
@@ -252,6 +253,8 @@ export class TankClient {
   readonly topo: Client<typeof TopoService>;
   /** Radar: widgets, sources and series. */
   readonly monitor: Client<typeof MonitorService>;
+  /** Slash commands: what the composer offers and what happens when one is sent. */
+  readonly command: Client<typeof CommandService>;
   readonly realtime: RealtimeClient;
   readonly store: TankStore;
   readonly storage: TankStorage;
@@ -299,6 +302,7 @@ export class TankClient {
     this.notifications = createClient(NotificationService, this.transport);
     this.topo = createClient(TopoService, this.transport);
     this.monitor = createClient(MonitorService, this.transport);
+    this.command = createClient(CommandService, this.transport);
     this.realtime = new RealtimeClient({
       wsUrl: opts.wsUrl,
       getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,

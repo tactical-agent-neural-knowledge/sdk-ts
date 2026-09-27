@@ -3,6 +3,7 @@ import { AgentService, type Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AuthService } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type Channel, ChannelService, ChannelType, type TreadGoal } from "../contracts/tank/channel/v1/channel_pb.js";
+import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
 import { MonitorService, type Widget } from "../contracts/tank/monitor/v1/monitor_pb.js";
@@ -160,6 +161,8 @@ export declare class TankClient {
     readonly topo: Client<typeof TopoService>;
     /** Radar: widgets, sources and series. */
     readonly monitor: Client<typeof MonitorService>;
+    /** Slash commands: what the composer offers and what happens when one is sent. */
+    readonly command: Client<typeof CommandService>;
     readonly realtime: RealtimeClient;
     readonly store: TankStore;
     readonly storage: TankStorage;
