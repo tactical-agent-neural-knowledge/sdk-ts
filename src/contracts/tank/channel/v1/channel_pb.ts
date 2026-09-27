@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/channel/v1/channel.proto.
  */
 export const file_tank_channel_v1_channel: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2NoYW5uZWwvdjEvY2hhbm5lbC5wcm90bxIPdGFuay5jaGFubmVsLnYxIowBCglUcmVhZEdvYWwSDAoEZ29hbBgBIAEoCRIUCgxhc3NpZ25lZV9pZHMYAiADKAkSFwoPcGlwZWxpbmVfc3RhdHVzGAMgASgJEi4KCnVwZGF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYBSABKAkipwMKB0NoYW5uZWwSCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEioKBHR5cGUYAyABKA4yHC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFR5cGUSDAoEbmFtZRgEIAEoCRINCgV0b3BpYxgFIAEoCRIPCgdwdXJwb3NlGAYgASgJEhAKCGxhc3Rfc2VxGAcgASgDEhQKDG1lbWJlcl9jb3VudBgIIAEoBRIzCg9sYXN0X21lc3NhZ2VfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi8KC2FyY2hpdmVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgRnb2FsGAwgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkR29hbBISCgptZW1iZXJfaWRzGA0gAygJEg4KBmpvaW5lZBgOIAEoCBIUCgxpY29uX2ZpbGVfaWQYDyABKAki0gEKEENoYW5uZWxSZWFkU3RhdGUSEgoKY2hhbm5lbF9pZBgBIAEoCRIVCg1sYXN0X3JlYWRfc2VxGAIgASgDEhUKDW1lbnRpb25fY291bnQYAyABKAUSDQoFbXV0ZWQYBCABKAgSDwoHc3RhcnJlZBgFIAEoCBIwCgtub3RpZnlfcHJlZhgGIAEoDjIbLnRhbmsuY2hhbm5lbC52MS5Ob3RpZnlQcmVmEhkKDHVucmVhZF9jb3VudBgHIAEoBUgAiAEBQg8KDV91bnJlYWRfY291bnQiiwEKFENyZWF0ZUNoYW5uZWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIqCgR0eXBlGAIgASgOMhwudGFuay5jaGFubmVsLnYxLkNoYW5uZWxUeXBlEgwKBG5hbWUYAyABKAkSDwoHcHVycG9zZRgEIAEoCRISCgptZW1iZXJfaWRzGAUgAygJIkIKFUNyZWF0ZUNoYW5uZWxSZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiawoTTGlzdENoYW5uZWxzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSHwoXaW5jbHVkZV91bmpvaW5lZF9wdWJsaWMYAiABKAgSDgoGY3Vyc29yGAMgASgJEg0KBWxpbWl0GAQgASgFIlcKFExpc3RDaGFubmVsc1Jlc3BvbnNlEioKCGNoYW5uZWxzGAEgAygLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwSEwoLbmV4dF9jdXJzb3IYAiABKAkiJwoRR2V0Q2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJ2ChJHZXRDaGFubmVsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsEjUKCnJlYWRfc3RhdGUYAiABKAsyIS50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFJlYWRTdGF0ZSIoChJKb2luQ2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJAChNKb2luQ2hhbm5lbFJlc3BvbnNlEikKB2NoYW5uZWwYASABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCIpChNMZWF2ZUNoYW5uZWxSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiFgoUTGVhdmVDaGFubmVsUmVzcG9uc2UiQAoWSW52aXRlVG9DaGFubmVsUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKCm1lbWJlcl9pZHMYAiADKAkiGQoXSW52aXRlVG9DaGFubmVsUmVzcG9uc2UiTgoOU2V0R29hbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIoCgRnb2FsGAIgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkR29hbCI8Cg9TZXRHb2FsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIjwKFVNldENoYW5uZWxJY29uUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEg8KB2ZpbGVfaWQYAiABKAkiQwoWU2V0Q2hhbm5lbEljb25SZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiTgoZTGlzdENoYW5uZWxNZW1iZXJzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEg4KBmN1cnNvchgCIAEoCRINCgVsaW1pdBgDIAEoBSJFChpMaXN0Q2hhbm5lbE1lbWJlcnNSZXNwb25zZRISCgptZW1iZXJfaWRzGAEgAygJEhMKC25leHRfY3Vyc29yGAIgASgJIoYBChRVcGRhdGVDaGFubmVsUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhEKBG5hbWUYAiABKAlIAIgBARISCgV0b3BpYxgDIAEoCUgBiAEBEhQKB3B1cnBvc2UYBCABKAlIAogBAUIHCgVfbmFtZUIICgZfdG9waWNCCgoIX3B1cnBvc2UiQgoVVXBkYXRlQ2hhbm5lbFJlc3BvbnNlEikKB2NoYW5uZWwYASABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCIrChVBcmNoaXZlQ2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJDChZBcmNoaXZlQ2hhbm5lbFJlc3BvbnNlEikKB2NoYW5uZWwYASABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCItChdVbmFyY2hpdmVDaGFubmVsUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJIkUKGFVuYXJjaGl2ZUNoYW5uZWxSZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiuAEKG1NldENoYW5uZWxQcmVmZXJlbmNlUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEjUKC25vdGlmeV9wcmVmGAIgASgOMhsudGFuay5jaGFubmVsLnYxLk5vdGlmeVByZWZIAIgBARISCgVtdXRlZBgDIAEoCEgBiAEBEhQKB3N0YXJyZWQYBCABKAhIAogBAUIOCgxfbm90aWZ5X3ByZWZCCAoGX211dGVkQgoKCF9zdGFycmVkIlUKHFNldENoYW5uZWxQcmVmZXJlbmNlUmVzcG9uc2USNQoKcmVhZF9zdGF0ZRgBIAEoCzIhLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsUmVhZFN0YXRlKqQBCgtDaGFubmVsVHlwZRIcChhDSEFOTkVMX1RZUEVfVU5TUEVDSUZJRUQQABIXChNDSEFOTkVMX1RZUEVfUFVCTElDEAESGAoUQ0hBTk5FTF9UWVBFX1BSSVZBVEUQAhITCg9DSEFOTkVMX1RZUEVfRE0QAxIVChFDSEFOTkVMX1RZUEVfTVBETRAEEhgKFENIQU5ORUxfVFlQRV9NT05JVE9SEAUqcQoKTm90aWZ5UHJlZhIbChdOT1RJRllfUFJFRl9VTlNQRUNJRklFRBAAEhMKD05PVElGWV9QUkVGX0FMTBABEhgKFE5PVElGWV9QUkVGX01FTlRJT05TEAISFwoTTk9USUZZX1BSRUZfTk9USElORxADMoIKCg5DaGFubmVsU2VydmljZRJeCg1DcmVhdGVDaGFubmVsEiUudGFuay5jaGFubmVsLnYxLkNyZWF0ZUNoYW5uZWxSZXF1ZXN0GiYudGFuay5jaGFubmVsLnYxLkNyZWF0ZUNoYW5uZWxSZXNwb25zZRJbCgxMaXN0Q2hhbm5lbHMSJC50YW5rLmNoYW5uZWwudjEuTGlzdENoYW5uZWxzUmVxdWVzdBolLnRhbmsuY2hhbm5lbC52MS5MaXN0Q2hhbm5lbHNSZXNwb25zZRJVCgpHZXRDaGFubmVsEiIudGFuay5jaGFubmVsLnYxLkdldENoYW5uZWxSZXF1ZXN0GiMudGFuay5jaGFubmVsLnYxLkdldENoYW5uZWxSZXNwb25zZRJYCgtKb2luQ2hhbm5lbBIjLnRhbmsuY2hhbm5lbC52MS5Kb2luQ2hhbm5lbFJlcXVlc3QaJC50YW5rLmNoYW5uZWwudjEuSm9pbkNoYW5uZWxSZXNwb25zZRJbCgxMZWF2ZUNoYW5uZWwSJC50YW5rLmNoYW5uZWwudjEuTGVhdmVDaGFubmVsUmVxdWVzdBolLnRhbmsuY2hhbm5lbC52MS5MZWF2ZUNoYW5uZWxSZXNwb25zZRJkCg9JbnZpdGVUb0NoYW5uZWwSJy50YW5rLmNoYW5uZWwudjEuSW52aXRlVG9DaGFubmVsUmVxdWVzdBooLnRhbmsuY2hhbm5lbC52MS5JbnZpdGVUb0NoYW5uZWxSZXNwb25zZRJMCgdTZXRHb2FsEh8udGFuay5jaGFubmVsLnYxLlNldEdvYWxSZXF1ZXN0GiAudGFuay5jaGFubmVsLnYxLlNldEdvYWxSZXNwb25zZRJhCg5TZXRDaGFubmVsSWNvbhImLnRhbmsuY2hhbm5lbC52MS5TZXRDaGFubmVsSWNvblJlcXVlc3QaJy50YW5rLmNoYW5uZWwudjEuU2V0Q2hhbm5lbEljb25SZXNwb25zZRJtChJMaXN0Q2hhbm5lbE1lbWJlcnMSKi50YW5rLmNoYW5uZWwudjEuTGlzdENoYW5uZWxNZW1iZXJzUmVxdWVzdBorLnRhbmsuY2hhbm5lbC52MS5MaXN0Q2hhbm5lbE1lbWJlcnNSZXNwb25zZRJeCg1VcGRhdGVDaGFubmVsEiUudGFuay5jaGFubmVsLnYxLlVwZGF0ZUNoYW5uZWxSZXF1ZXN0GiYudGFuay5jaGFubmVsLnYxLlVwZGF0ZUNoYW5uZWxSZXNwb25zZRJhCg5BcmNoaXZlQ2hhbm5lbBImLnRhbmsuY2hhbm5lbC52MS5BcmNoaXZlQ2hhbm5lbFJlcXVlc3QaJy50YW5rLmNoYW5uZWwudjEuQXJjaGl2ZUNoYW5uZWxSZXNwb25zZRJnChBVbmFyY2hpdmVDaGFubmVsEigudGFuay5jaGFubmVsLnYxLlVuYXJjaGl2ZUNoYW5uZWxSZXF1ZXN0GikudGFuay5jaGFubmVsLnYxLlVuYXJjaGl2ZUNoYW5uZWxSZXNwb25zZRJzChRTZXRDaGFubmVsUHJlZmVyZW5jZRIsLnRhbmsuY2hhbm5lbC52MS5TZXRDaGFubmVsUHJlZmVyZW5jZVJlcXVlc3QaLS50YW5rLmNoYW5uZWwudjEuU2V0Q2hhbm5lbFByZWZlcmVuY2VSZXNwb25zZULYAQoTY29tLnRhbmsuY2hhbm5lbC52MUIMQ2hhbm5lbFByb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvY2hhbm5lbC92MTtjaGFubmVsdjGiAgNUQ1iqAg9UYW5rLkNoYW5uZWwuVjHKAg9UYW5rXENoYW5uZWxcVjHiAhtUYW5rXENoYW5uZWxcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpDaGFubmVsOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2NoYW5uZWwvdjEvY2hhbm5lbC5wcm90bxIPdGFuay5jaGFubmVsLnYxIowBCglUcmVhZEdvYWwSDAoEZ29hbBgBIAEoCRIUCgxhc3NpZ25lZV9pZHMYAiADKAkSFwoPcGlwZWxpbmVfc3RhdHVzGAMgASgJEi4KCnVwZGF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYBSABKAkipwMKB0NoYW5uZWwSCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEioKBHR5cGUYAyABKA4yHC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFR5cGUSDAoEbmFtZRgEIAEoCRINCgV0b3BpYxgFIAEoCRIPCgdwdXJwb3NlGAYgASgJEhAKCGxhc3Rfc2VxGAcgASgDEhQKDG1lbWJlcl9jb3VudBgIIAEoBRIzCg9sYXN0X21lc3NhZ2VfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi8KC2FyY2hpdmVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgRnb2FsGAwgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkR29hbBISCgptZW1iZXJfaWRzGA0gAygJEg4KBmpvaW5lZBgOIAEoCBIUCgxpY29uX2ZpbGVfaWQYDyABKAki0gEKEENoYW5uZWxSZWFkU3RhdGUSEgoKY2hhbm5lbF9pZBgBIAEoCRIVCg1sYXN0X3JlYWRfc2VxGAIgASgDEhUKDW1lbnRpb25fY291bnQYAyABKAUSDQoFbXV0ZWQYBCABKAgSDwoHc3RhcnJlZBgFIAEoCBIwCgtub3RpZnlfcHJlZhgGIAEoDjIbLnRhbmsuY2hhbm5lbC52MS5Ob3RpZnlQcmVmEhkKDHVucmVhZF9jb3VudBgHIAEoBUgAiAEBQg8KDV91bnJlYWRfY291bnQiiwEKFENyZWF0ZUNoYW5uZWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIqCgR0eXBlGAIgASgOMhwudGFuay5jaGFubmVsLnYxLkNoYW5uZWxUeXBlEgwKBG5hbWUYAyABKAkSDwoHcHVycG9zZRgEIAEoCRISCgptZW1iZXJfaWRzGAUgAygJIkIKFUNyZWF0ZUNoYW5uZWxSZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiawoTTGlzdENoYW5uZWxzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSHwoXaW5jbHVkZV91bmpvaW5lZF9wdWJsaWMYAiABKAgSDgoGY3Vyc29yGAMgASgJEg0KBWxpbWl0GAQgASgFIlcKFExpc3RDaGFubmVsc1Jlc3BvbnNlEioKCGNoYW5uZWxzGAEgAygLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwSEwoLbmV4dF9jdXJzb3IYAiABKAkiJwoRR2V0Q2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJ2ChJHZXRDaGFubmVsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsEjUKCnJlYWRfc3RhdGUYAiABKAsyIS50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbFJlYWRTdGF0ZSIoChJKb2luQ2hhbm5lbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJAChNKb2luQ2hhbm5lbFJlc3BvbnNlEikKB2NoYW5uZWwYASABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCIpChNMZWF2ZUNoYW5uZWxSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiFgoUTGVhdmVDaGFubmVsUmVzcG9uc2UiQAoWSW52aXRlVG9DaGFubmVsUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKCm1lbWJlcl9pZHMYAiADKAkiGQoXSW52aXRlVG9DaGFubmVsUmVzcG9uc2UiTgoOU2V0R29hbFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIoCgRnb2FsGAIgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkR29hbCI8Cg9TZXRHb2FsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIjwKFVNldENoYW5uZWxJY29uUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEg8KB2ZpbGVfaWQYAiABKAkiQwoWU2V0Q2hhbm5lbEljb25SZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwinwEKCVRyZWFkUGxhbhIMCgRuYW1lGAEgASgJEg8KB3B1cnBvc2UYAiABKAkSDAoEZ29hbBgDIAEoCRIqCgRwaW5zGAQgAygLMhwudGFuay5jaGFubmVsLnYxLlBsYW5uZWRQb3N0Eg0KBXJhZGFyGAUgASgIEhUKDXJhZGFyX21ldHJpY3MYBiADKAkSEwoLZGVzY3JpcHRpb24YByABKAkiKgoLUGxhbm5lZFBvc3QSDQoFdGl0bGUYASABKAkSDAoEYm9keRgCIAEoCSJBChREZXNjcmliZVRyZWFkUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkiQQoVRGVzY3JpYmVUcmVhZFJlc3BvbnNlEigKBHBsYW4YASABKAsyGi50YW5rLmNoYW5uZWwudjEuVHJlYWRQbGFuIm0KGkNyZWF0ZVRyZWFkRnJvbVBsYW5SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIoCgRwbGFuGAIgASgLMhoudGFuay5jaGFubmVsLnYxLlRyZWFkUGxhbhIPCgdwcml2YXRlGAMgASgIInEKG0NyZWF0ZVRyZWFkRnJvbVBsYW5SZXNwb25zZRIpCgdjaGFubmVsGAEgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwSJwoFcmFkYXIYAiABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCJOChlMaXN0Q2hhbm5lbE1lbWJlcnNSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDgoGY3Vyc29yGAIgASgJEg0KBWxpbWl0GAMgASgFIkUKGkxpc3RDaGFubmVsTWVtYmVyc1Jlc3BvbnNlEhIKCm1lbWJlcl9pZHMYASADKAkSEwoLbmV4dF9jdXJzb3IYAiABKAkihgEKFFVwZGF0ZUNoYW5uZWxSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEQoEbmFtZRgCIAEoCUgAiAEBEhIKBXRvcGljGAMgASgJSAGIAQESFAoHcHVycG9zZRgEIAEoCUgCiAEBQgcKBV9uYW1lQggKBl90b3BpY0IKCghfcHVycG9zZSJCChVVcGRhdGVDaGFubmVsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIisKFUFyY2hpdmVDaGFubmVsUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJIkMKFkFyY2hpdmVDaGFubmVsUmVzcG9uc2USKQoHY2hhbm5lbBgBIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIi0KF1VuYXJjaGl2ZUNoYW5uZWxSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiRQoYVW5hcmNoaXZlQ2hhbm5lbFJlc3BvbnNlEikKB2NoYW5uZWwYASABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCK4AQobU2V0Q2hhbm5lbFByZWZlcmVuY2VSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSNQoLbm90aWZ5X3ByZWYYAiABKA4yGy50YW5rLmNoYW5uZWwudjEuTm90aWZ5UHJlZkgAiAEBEhIKBW11dGVkGAMgASgISAGIAQESFAoHc3RhcnJlZBgEIAEoCEgCiAEBQg4KDF9ub3RpZnlfcHJlZkIICgZfbXV0ZWRCCgoIX3N0YXJyZWQiVQocU2V0Q2hhbm5lbFByZWZlcmVuY2VSZXNwb25zZRI1CgpyZWFkX3N0YXRlGAEgASgLMiEudGFuay5jaGFubmVsLnYxLkNoYW5uZWxSZWFkU3RhdGUqpAEKC0NoYW5uZWxUeXBlEhwKGENIQU5ORUxfVFlQRV9VTlNQRUNJRklFRBAAEhcKE0NIQU5ORUxfVFlQRV9QVUJMSUMQARIYChRDSEFOTkVMX1RZUEVfUFJJVkFURRACEhMKD0NIQU5ORUxfVFlQRV9ETRADEhUKEUNIQU5ORUxfVFlQRV9NUERNEAQSGAoUQ0hBTk5FTF9UWVBFX01PTklUT1IQBSpxCgpOb3RpZnlQcmVmEhsKF05PVElGWV9QUkVGX1VOU1BFQ0lGSUVEEAASEwoPTk9USUZZX1BSRUZfQUxMEAESGAoUTk9USUZZX1BSRUZfTUVOVElPTlMQAhIXChNOT1RJRllfUFJFRl9OT1RISU5HEAMy1AsKDkNoYW5uZWxTZXJ2aWNlEl4KDUNyZWF0ZUNoYW5uZWwSJS50YW5rLmNoYW5uZWwudjEuQ3JlYXRlQ2hhbm5lbFJlcXVlc3QaJi50YW5rLmNoYW5uZWwudjEuQ3JlYXRlQ2hhbm5lbFJlc3BvbnNlElsKDExpc3RDaGFubmVscxIkLnRhbmsuY2hhbm5lbC52MS5MaXN0Q2hhbm5lbHNSZXF1ZXN0GiUudGFuay5jaGFubmVsLnYxLkxpc3RDaGFubmVsc1Jlc3BvbnNlElUKCkdldENoYW5uZWwSIi50YW5rLmNoYW5uZWwudjEuR2V0Q2hhbm5lbFJlcXVlc3QaIy50YW5rLmNoYW5uZWwudjEuR2V0Q2hhbm5lbFJlc3BvbnNlElgKC0pvaW5DaGFubmVsEiMudGFuay5jaGFubmVsLnYxLkpvaW5DaGFubmVsUmVxdWVzdBokLnRhbmsuY2hhbm5lbC52MS5Kb2luQ2hhbm5lbFJlc3BvbnNlElsKDExlYXZlQ2hhbm5lbBIkLnRhbmsuY2hhbm5lbC52MS5MZWF2ZUNoYW5uZWxSZXF1ZXN0GiUudGFuay5jaGFubmVsLnYxLkxlYXZlQ2hhbm5lbFJlc3BvbnNlEmQKD0ludml0ZVRvQ2hhbm5lbBInLnRhbmsuY2hhbm5lbC52MS5JbnZpdGVUb0NoYW5uZWxSZXF1ZXN0GigudGFuay5jaGFubmVsLnYxLkludml0ZVRvQ2hhbm5lbFJlc3BvbnNlEkwKB1NldEdvYWwSHy50YW5rLmNoYW5uZWwudjEuU2V0R29hbFJlcXVlc3QaIC50YW5rLmNoYW5uZWwudjEuU2V0R29hbFJlc3BvbnNlEmEKDlNldENoYW5uZWxJY29uEiYudGFuay5jaGFubmVsLnYxLlNldENoYW5uZWxJY29uUmVxdWVzdBonLnRhbmsuY2hhbm5lbC52MS5TZXRDaGFubmVsSWNvblJlc3BvbnNlEl4KDURlc2NyaWJlVHJlYWQSJS50YW5rLmNoYW5uZWwudjEuRGVzY3JpYmVUcmVhZFJlcXVlc3QaJi50YW5rLmNoYW5uZWwudjEuRGVzY3JpYmVUcmVhZFJlc3BvbnNlEnAKE0NyZWF0ZVRyZWFkRnJvbVBsYW4SKy50YW5rLmNoYW5uZWwudjEuQ3JlYXRlVHJlYWRGcm9tUGxhblJlcXVlc3QaLC50YW5rLmNoYW5uZWwudjEuQ3JlYXRlVHJlYWRGcm9tUGxhblJlc3BvbnNlEm0KEkxpc3RDaGFubmVsTWVtYmVycxIqLnRhbmsuY2hhbm5lbC52MS5MaXN0Q2hhbm5lbE1lbWJlcnNSZXF1ZXN0GisudGFuay5jaGFubmVsLnYxLkxpc3RDaGFubmVsTWVtYmVyc1Jlc3BvbnNlEl4KDVVwZGF0ZUNoYW5uZWwSJS50YW5rLmNoYW5uZWwudjEuVXBkYXRlQ2hhbm5lbFJlcXVlc3QaJi50YW5rLmNoYW5uZWwudjEuVXBkYXRlQ2hhbm5lbFJlc3BvbnNlEmEKDkFyY2hpdmVDaGFubmVsEiYudGFuay5jaGFubmVsLnYxLkFyY2hpdmVDaGFubmVsUmVxdWVzdBonLnRhbmsuY2hhbm5lbC52MS5BcmNoaXZlQ2hhbm5lbFJlc3BvbnNlEmcKEFVuYXJjaGl2ZUNoYW5uZWwSKC50YW5rLmNoYW5uZWwudjEuVW5hcmNoaXZlQ2hhbm5lbFJlcXVlc3QaKS50YW5rLmNoYW5uZWwudjEuVW5hcmNoaXZlQ2hhbm5lbFJlc3BvbnNlEnMKFFNldENoYW5uZWxQcmVmZXJlbmNlEiwudGFuay5jaGFubmVsLnYxLlNldENoYW5uZWxQcmVmZXJlbmNlUmVxdWVzdBotLnRhbmsuY2hhbm5lbC52MS5TZXRDaGFubmVsUHJlZmVyZW5jZVJlc3BvbnNlQtgBChNjb20udGFuay5jaGFubmVsLnYxQgxDaGFubmVsUHJvdG9QAVpVZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9jaGFubmVsL3YxO2NoYW5uZWx2MaICA1RDWKoCD1RhbmsuQ2hhbm5lbC5WMcoCD1RhbmtcQ2hhbm5lbFxWMeICG1RhbmtcQ2hhbm5lbFxWMVxHUEJNZXRhZGF0YeoCEVRhbms6OkNoYW5uZWw6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * The pinned Goal Header of a Tread.
@@ -537,6 +537,182 @@ export const SetChannelIconResponseSchema: GenMessage<SetChannelIconResponse> = 
   messageDesc(file_tank_channel_v1_channel, 18);
 
 /**
+ * What "a Tread for the Q4 launch with a checklist and a Radar on signups" becomes:
+ * a name, a purpose, a goal header, posts to pin, and optionally a Radar.
+ *
+ * @generated from message tank.channel.v1.TreadPlan
+ */
+export type TreadPlan = Message<"tank.channel.v1.TreadPlan"> & {
+  /**
+   * the slug, lowercase-dashes
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string purpose = 2;
+   */
+  purpose: string;
+
+  /**
+   * @generated from field: string goal = 3;
+   */
+  goal: string;
+
+  /**
+   * @generated from field: repeated tank.channel.v1.PlannedPost pins = 4;
+   */
+  pins: PlannedPost[];
+
+  /**
+   * @generated from field: bool radar = 5;
+   */
+  radar: boolean;
+
+  /**
+   * internal metric keys the Radar starts with
+   *
+   * @generated from field: repeated string radar_metrics = 6;
+   */
+  radarMetrics: string[];
+
+  /**
+   * what it was made from
+   *
+   * @generated from field: string description = 7;
+   */
+  description: string;
+};
+
+/**
+ * Describes the message tank.channel.v1.TreadPlan.
+ * Use `create(TreadPlanSchema)` to create a new message.
+ */
+export const TreadPlanSchema: GenMessage<TreadPlan> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 19);
+
+/**
+ * @generated from message tank.channel.v1.PlannedPost
+ */
+export type PlannedPost = Message<"tank.channel.v1.PlannedPost"> & {
+  /**
+   * @generated from field: string title = 1;
+   */
+  title: string;
+
+  /**
+   * plain text, may hold a checklist as lines starting with "- [ ] "
+   *
+   * @generated from field: string body = 2;
+   */
+  body: string;
+};
+
+/**
+ * Describes the message tank.channel.v1.PlannedPost.
+ * Use `create(PlannedPostSchema)` to create a new message.
+ */
+export const PlannedPostSchema: GenMessage<PlannedPost> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 20);
+
+/**
+ * A sentence → a plan to review; nothing is created.
+ *
+ * @generated from message tank.channel.v1.DescribeTreadRequest
+ */
+export type DescribeTreadRequest = Message<"tank.channel.v1.DescribeTreadRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * at most 15 words
+   *
+   * @generated from field: string description = 2;
+   */
+  description: string;
+};
+
+/**
+ * Describes the message tank.channel.v1.DescribeTreadRequest.
+ * Use `create(DescribeTreadRequestSchema)` to create a new message.
+ */
+export const DescribeTreadRequestSchema: GenMessage<DescribeTreadRequest> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 21);
+
+/**
+ * @generated from message tank.channel.v1.DescribeTreadResponse
+ */
+export type DescribeTreadResponse = Message<"tank.channel.v1.DescribeTreadResponse"> & {
+  /**
+   * @generated from field: tank.channel.v1.TreadPlan plan = 1;
+   */
+  plan?: TreadPlan;
+};
+
+/**
+ * Describes the message tank.channel.v1.DescribeTreadResponse.
+ * Use `create(DescribeTreadResponseSchema)` to create a new message.
+ */
+export const DescribeTreadResponseSchema: GenMessage<DescribeTreadResponse> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 22);
+
+/**
+ * Creates the Tread (and Radar) the plan describes, as the caller.
+ *
+ * @generated from message tank.channel.v1.CreateTreadFromPlanRequest
+ */
+export type CreateTreadFromPlanRequest = Message<"tank.channel.v1.CreateTreadFromPlanRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: tank.channel.v1.TreadPlan plan = 2;
+   */
+  plan?: TreadPlan;
+
+  /**
+   * @generated from field: bool private = 3;
+   */
+  private: boolean;
+};
+
+/**
+ * Describes the message tank.channel.v1.CreateTreadFromPlanRequest.
+ * Use `create(CreateTreadFromPlanRequestSchema)` to create a new message.
+ */
+export const CreateTreadFromPlanRequestSchema: GenMessage<CreateTreadFromPlanRequest> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 23);
+
+/**
+ * @generated from message tank.channel.v1.CreateTreadFromPlanResponse
+ */
+export type CreateTreadFromPlanResponse = Message<"tank.channel.v1.CreateTreadFromPlanResponse"> & {
+  /**
+   * @generated from field: tank.channel.v1.Channel channel = 1;
+   */
+  channel?: Channel;
+
+  /**
+   * unset when the plan had none
+   *
+   * @generated from field: tank.channel.v1.Channel radar = 2;
+   */
+  radar?: Channel;
+};
+
+/**
+ * Describes the message tank.channel.v1.CreateTreadFromPlanResponse.
+ * Use `create(CreateTreadFromPlanResponseSchema)` to create a new message.
+ */
+export const CreateTreadFromPlanResponseSchema: GenMessage<CreateTreadFromPlanResponse> = /*@__PURE__*/
+  messageDesc(file_tank_channel_v1_channel, 24);
+
+/**
  * @generated from message tank.channel.v1.ListChannelMembersRequest
  */
 export type ListChannelMembersRequest = Message<"tank.channel.v1.ListChannelMembersRequest"> & {
@@ -561,7 +737,7 @@ export type ListChannelMembersRequest = Message<"tank.channel.v1.ListChannelMemb
  * Use `create(ListChannelMembersRequestSchema)` to create a new message.
  */
 export const ListChannelMembersRequestSchema: GenMessage<ListChannelMembersRequest> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 19);
+  messageDesc(file_tank_channel_v1_channel, 25);
 
 /**
  * @generated from message tank.channel.v1.ListChannelMembersResponse
@@ -583,7 +759,7 @@ export type ListChannelMembersResponse = Message<"tank.channel.v1.ListChannelMem
  * Use `create(ListChannelMembersResponseSchema)` to create a new message.
  */
 export const ListChannelMembersResponseSchema: GenMessage<ListChannelMembersResponse> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 20);
+  messageDesc(file_tank_channel_v1_channel, 26);
 
 /**
  * Unset fields are left unchanged.
@@ -617,7 +793,7 @@ export type UpdateChannelRequest = Message<"tank.channel.v1.UpdateChannelRequest
  * Use `create(UpdateChannelRequestSchema)` to create a new message.
  */
 export const UpdateChannelRequestSchema: GenMessage<UpdateChannelRequest> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 21);
+  messageDesc(file_tank_channel_v1_channel, 27);
 
 /**
  * @generated from message tank.channel.v1.UpdateChannelResponse
@@ -634,7 +810,7 @@ export type UpdateChannelResponse = Message<"tank.channel.v1.UpdateChannelRespon
  * Use `create(UpdateChannelResponseSchema)` to create a new message.
  */
 export const UpdateChannelResponseSchema: GenMessage<UpdateChannelResponse> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 22);
+  messageDesc(file_tank_channel_v1_channel, 28);
 
 /**
  * Archived channels stay readable; posting is refused until unarchived.
@@ -653,7 +829,7 @@ export type ArchiveChannelRequest = Message<"tank.channel.v1.ArchiveChannelReque
  * Use `create(ArchiveChannelRequestSchema)` to create a new message.
  */
 export const ArchiveChannelRequestSchema: GenMessage<ArchiveChannelRequest> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 23);
+  messageDesc(file_tank_channel_v1_channel, 29);
 
 /**
  * @generated from message tank.channel.v1.ArchiveChannelResponse
@@ -670,7 +846,7 @@ export type ArchiveChannelResponse = Message<"tank.channel.v1.ArchiveChannelResp
  * Use `create(ArchiveChannelResponseSchema)` to create a new message.
  */
 export const ArchiveChannelResponseSchema: GenMessage<ArchiveChannelResponse> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 24);
+  messageDesc(file_tank_channel_v1_channel, 30);
 
 /**
  * @generated from message tank.channel.v1.UnarchiveChannelRequest
@@ -687,7 +863,7 @@ export type UnarchiveChannelRequest = Message<"tank.channel.v1.UnarchiveChannelR
  * Use `create(UnarchiveChannelRequestSchema)` to create a new message.
  */
 export const UnarchiveChannelRequestSchema: GenMessage<UnarchiveChannelRequest> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 25);
+  messageDesc(file_tank_channel_v1_channel, 31);
 
 /**
  * @generated from message tank.channel.v1.UnarchiveChannelResponse
@@ -704,7 +880,7 @@ export type UnarchiveChannelResponse = Message<"tank.channel.v1.UnarchiveChannel
  * Use `create(UnarchiveChannelResponseSchema)` to create a new message.
  */
 export const UnarchiveChannelResponseSchema: GenMessage<UnarchiveChannelResponse> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 26);
+  messageDesc(file_tank_channel_v1_channel, 32);
 
 /**
  * The caller's own per-channel settings; unset fields are left unchanged.
@@ -738,7 +914,7 @@ export type SetChannelPreferenceRequest = Message<"tank.channel.v1.SetChannelPre
  * Use `create(SetChannelPreferenceRequestSchema)` to create a new message.
  */
 export const SetChannelPreferenceRequestSchema: GenMessage<SetChannelPreferenceRequest> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 27);
+  messageDesc(file_tank_channel_v1_channel, 33);
 
 /**
  * @generated from message tank.channel.v1.SetChannelPreferenceResponse
@@ -755,7 +931,7 @@ export type SetChannelPreferenceResponse = Message<"tank.channel.v1.SetChannelPr
  * Use `create(SetChannelPreferenceResponseSchema)` to create a new message.
  */
 export const SetChannelPreferenceResponseSchema: GenMessage<SetChannelPreferenceResponse> = /*@__PURE__*/
-  messageDesc(file_tank_channel_v1_channel, 28);
+  messageDesc(file_tank_channel_v1_channel, 34);
 
 /**
  * A Channel is presented as a "Tread" in the product: an objective-centric
@@ -905,6 +1081,22 @@ export const ChannelService: GenService<{
     methodKind: "unary";
     input: typeof SetChannelIconRequestSchema;
     output: typeof SetChannelIconResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.channel.v1.ChannelService.DescribeTread
+   */
+  describeTread: {
+    methodKind: "unary";
+    input: typeof DescribeTreadRequestSchema;
+    output: typeof DescribeTreadResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.channel.v1.ChannelService.CreateTreadFromPlan
+   */
+  createTreadFromPlan: {
+    methodKind: "unary";
+    input: typeof CreateTreadFromPlanRequestSchema;
+    output: typeof CreateTreadFromPlanResponseSchema;
   },
   /**
    * @generated from rpc tank.channel.v1.ChannelService.ListChannelMembers
