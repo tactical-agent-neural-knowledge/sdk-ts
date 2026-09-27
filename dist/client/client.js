@@ -738,6 +738,7 @@ export class TankClient {
                     customStatusText: input.customText ?? "",
                     customStatusEmoji: input.customEmoji ?? "",
                     statusExpiresAt: expiresAt,
+                    autoReply: input.autoReply ?? "",
                     lastSeen: timestampFromMs(this.now()),
                 }),
             });
@@ -749,6 +750,7 @@ export class TankClient {
                 customStatusText: input.customText ?? "",
                 customStatusEmoji: input.customEmoji ?? "",
                 expiresAt,
+                autoReply: input.autoReply ?? "",
             });
             if (res.presence)
                 this.store.dispatch({ type: "presence/changed", presence: res.presence });
@@ -763,6 +765,15 @@ export class TankClient {
             }
             throw err;
         }
+    }
+    /**
+     * "Deep in a Rust refactor until 3" → a status, emoji, expiry and auto-reply to review. Nothing is
+     * written; pass the result to `setStatus`. `localTime` is "HH:MM" in the person's zone (defaults to now).
+     */
+    async describeStatus(description, localTime) {
+        const now = new Date(this.now());
+        const hhmm = localTime ?? `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+        return this.presence.describeStatus({ description, localTime: hhmm });
     }
     // ------------------------------------------------------------ files
     /**

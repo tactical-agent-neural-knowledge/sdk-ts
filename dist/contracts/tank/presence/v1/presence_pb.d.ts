@@ -33,6 +33,12 @@ export type Presence = Message<"tank.presence.v1.Presence"> & {
      * @generated from field: google.protobuf.Timestamp status_expires_at = 6;
      */
     statusExpiresAt?: Timestamp;
+    /**
+     * When set, TANK answers anyone who @mentions this person with this text, on their behalf.
+     *
+     * @generated from field: string auto_reply = 7;
+     */
+    autoReply: string;
 };
 /**
  * Describes the message tank.presence.v1.Presence.
@@ -65,6 +71,12 @@ export type SetStatusRequest = Message<"tank.presence.v1.SetStatusRequest"> & {
      * @generated from field: string workspace_id = 5;
      */
     workspaceId: string;
+    /**
+     * Answer @mentions with this text while the status lasts. Empty turns it off.
+     *
+     * @generated from field: string auto_reply = 6;
+     */
+    autoReply: string;
 };
 /**
  * Describes the message tank.presence.v1.SetStatusRequest.
@@ -122,6 +134,62 @@ export type GetPresenceResponse = Message<"tank.presence.v1.GetPresenceResponse"
  */
 export declare const GetPresenceResponseSchema: GenMessage<GetPresenceResponse>;
 /**
+ * "Deep in a Rust refactor until 3" → a status, an emoji, when it clears, and an auto-reply.
+ *
+ * @generated from message tank.presence.v1.DescribeStatusRequest
+ */
+export type DescribeStatusRequest = Message<"tank.presence.v1.DescribeStatusRequest"> & {
+    /**
+     * at most 15 words
+     *
+     * @generated from field: string description = 1;
+     */
+    description: string;
+    /**
+     * The person's local time, "HH:MM", so "until 3" becomes a duration.
+     *
+     * @generated from field: string local_time = 2;
+     */
+    localTime: string;
+};
+/**
+ * Describes the message tank.presence.v1.DescribeStatusRequest.
+ * Use `create(DescribeStatusRequestSchema)` to create a new message.
+ */
+export declare const DescribeStatusRequestSchema: GenMessage<DescribeStatusRequest>;
+/**
+ * @generated from message tank.presence.v1.DescribeStatusResponse
+ */
+export type DescribeStatusResponse = Message<"tank.presence.v1.DescribeStatusResponse"> & {
+    /**
+     * @generated from field: tank.presence.v1.PresenceStatus status = 1;
+     */
+    status: PresenceStatus;
+    /**
+     * @generated from field: string custom_status_text = 2;
+     */
+    customStatusText: string;
+    /**
+     * @generated from field: string custom_status_emoji = 3;
+     */
+    customStatusEmoji: string;
+    /**
+     * Minutes from now until the status clears; 0 means it does not.
+     *
+     * @generated from field: int32 expires_in_minutes = 4;
+     */
+    expiresInMinutes: number;
+    /**
+     * @generated from field: string auto_reply = 5;
+     */
+    autoReply: string;
+};
+/**
+ * Describes the message tank.presence.v1.DescribeStatusResponse.
+ * Use `create(DescribeStatusResponseSchema)` to create a new message.
+ */
+export declare const DescribeStatusResponseSchema: GenMessage<DescribeStatusResponse>;
+/**
  * @generated from enum tank.presence.v1.PresenceStatus
  */
 export declare enum PresenceStatus {
@@ -163,6 +231,16 @@ export declare const PresenceService: GenService<{
         methodKind: "unary";
         input: typeof SetStatusRequestSchema;
         output: typeof SetStatusResponseSchema;
+    };
+    /**
+     * Turns a sentence into a status to review before saving; nothing is written.
+     *
+     * @generated from rpc tank.presence.v1.PresenceService.DescribeStatus
+     */
+    describeStatus: {
+        methodKind: "unary";
+        input: typeof DescribeStatusRequestSchema;
+        output: typeof DescribeStatusResponseSchema;
     };
     /**
      * @generated from rpc tank.presence.v1.PresenceService.GetPresence

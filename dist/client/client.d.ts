@@ -7,7 +7,7 @@ import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js"
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
 import { MonitorService, type Widget } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
-import { type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
+import { type DescribeStatusResponse, type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import { type GetBootstrapResponse, type Invite, type Member, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
@@ -114,6 +114,8 @@ export interface SetStatusInput {
     customEmoji?: string;
     /** When the custom status clears: ms since epoch or a Date. */
     expiresAt?: number | Date;
+    /** While the status lasts, TANK answers anyone who @mentions or DMs me with this. Empty turns it off. */
+    autoReply?: string;
 }
 export interface UploadFileOptions {
     workspaceId: string;
@@ -326,6 +328,11 @@ export declare class TankClient {
      * and is rolled back if the RPC fails; the server's presence replaces it on success.
      */
     setStatus(input: SetStatusInput): Promise<Presence | undefined>;
+    /**
+     * "Deep in a Rust refactor until 3" → a status, emoji, expiry and auto-reply to review. Nothing is
+     * written; pass the result to `setStatus`. `localTime` is "HH:MM" in the person's zone (defaults to now).
+     */
+    describeStatus(description: string, localTime?: string): Promise<DescribeStatusResponse>;
     /**
      * Upload a file: `CreateUpload` → PUT the bytes to the pre-signed URL (multipart parts when the server
      * returns `part_urls`) → `CompleteUpload`. Resolves to the `File`, which is also put in `filesById`.

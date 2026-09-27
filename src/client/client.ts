@@ -31,6 +31,7 @@ import {
 import { MonitorService, type Widget } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import {
+  type DescribeStatusResponse,
   type Presence,
   PresenceSchema,
   PresenceService,
@@ -173,6 +174,8 @@ export interface SetStatusInput {
   customEmoji?: string;
   /** When the custom status clears: ms since epoch or a Date. */
   expiresAt?: number | Date;
+  /** While the status lasts, TANK answers anyone who @mentions or DMs me with this. Empty turns it off. */
+  autoReply?: string;
 }
 
 export interface UploadFileOptions {
@@ -953,6 +956,7 @@ export class TankClient {
           customStatusText: input.customText ?? "",
           customStatusEmoji: input.customEmoji ?? "",
           statusExpiresAt: expiresAt,
+          autoReply: input.autoReply ?? "",
           lastSeen: timestampFromMs(this.now()),
         }),
       });
@@ -964,6 +968,7 @@ export class TankClient {
         customStatusText: input.customText ?? "",
         customStatusEmoji: input.customEmoji ?? "",
         expiresAt,
+        autoReply: input.autoReply ?? "",
       });
       if (res.presence) this.store.dispatch({ type: "presence/changed", presence: res.presence });
       return res.presence ?? (me ? this.store.getState().presence[me] : undefined);
@@ -974,6 +979,17 @@ export class TankClient {
       }
       throw err;
     }
+  }
+
+  /**
+   * "Deep in a Rust refactor until 3" → a status, emoji, expiry and auto-reply to review. Nothing is
+   * written; pass the result to `setStatus`. `localTime` is "HH:MM" in the person's zone (defaults to now).
+   */
+  async describeStatus(description: string, localTime?: string): Promise<DescribeStatusResponse> {
+    const now = new Date(this.now());
+    const hhmm =
+      localTime ?? `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+    return this.presence.describeStatus({ description, localTime: hhmm });
   }
 
   // ------------------------------------------------------------ files
