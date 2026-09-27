@@ -143,6 +143,144 @@ export type RunCommandResponse = Message<"tank.command.v1.RunCommandResponse"> &
  */
 export declare const RunCommandResponseSchema: GenMessage<RunCommandResponse>;
 /**
+ * A macro: a name that runs a sequence of command lines. "$1", "$2"… in a step
+ * take the words given when the macro runs; "$*" takes them all.
+ *
+ * @generated from message tank.command.v1.Macro
+ */
+export type Macro = Message<"tank.command.v1.Macro"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * "standup"; runs as /standup
+     *
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * "/catchup", "/tldr post", "/later 9:00 tomorrow Standup"
+     *
+     * @generated from field: repeated string steps = 3;
+     */
+    steps: string[];
+    /**
+     * Empty for a personal macro; a workspace macro (admins) is for everyone.
+     *
+     * @generated from field: bool workspace = 4;
+     */
+    workspace: boolean;
+    /**
+     * @generated from field: string created_by = 5;
+     */
+    createdBy: string;
+};
+/**
+ * Describes the message tank.command.v1.Macro.
+ * Use `create(MacroSchema)` to create a new message.
+ */
+export declare const MacroSchema: GenMessage<Macro>;
+/**
+ * @generated from message tank.command.v1.ListMacrosRequest
+ */
+export type ListMacrosRequest = Message<"tank.command.v1.ListMacrosRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.command.v1.ListMacrosRequest.
+ * Use `create(ListMacrosRequestSchema)` to create a new message.
+ */
+export declare const ListMacrosRequestSchema: GenMessage<ListMacrosRequest>;
+/**
+ * @generated from message tank.command.v1.ListMacrosResponse
+ */
+export type ListMacrosResponse = Message<"tank.command.v1.ListMacrosResponse"> & {
+    /**
+     * @generated from field: repeated tank.command.v1.Macro macros = 1;
+     */
+    macros: Macro[];
+};
+/**
+ * Describes the message tank.command.v1.ListMacrosResponse.
+ * Use `create(ListMacrosResponseSchema)` to create a new message.
+ */
+export declare const ListMacrosResponseSchema: GenMessage<ListMacrosResponse>;
+/**
+ * @generated from message tank.command.v1.SaveMacroRequest
+ */
+export type SaveMacroRequest = Message<"tank.command.v1.SaveMacroRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: repeated string steps = 3;
+     */
+    steps: string[];
+    /**
+     * @generated from field: bool workspace = 4;
+     */
+    workspace: boolean;
+};
+/**
+ * Describes the message tank.command.v1.SaveMacroRequest.
+ * Use `create(SaveMacroRequestSchema)` to create a new message.
+ */
+export declare const SaveMacroRequestSchema: GenMessage<SaveMacroRequest>;
+/**
+ * @generated from message tank.command.v1.SaveMacroResponse
+ */
+export type SaveMacroResponse = Message<"tank.command.v1.SaveMacroResponse"> & {
+    /**
+     * @generated from field: tank.command.v1.Macro macro = 1;
+     */
+    macro?: Macro;
+};
+/**
+ * Describes the message tank.command.v1.SaveMacroResponse.
+ * Use `create(SaveMacroResponseSchema)` to create a new message.
+ */
+export declare const SaveMacroResponseSchema: GenMessage<SaveMacroResponse>;
+/**
+ * @generated from message tank.command.v1.DeleteMacroRequest
+ */
+export type DeleteMacroRequest = Message<"tank.command.v1.DeleteMacroRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: bool workspace = 3;
+     */
+    workspace: boolean;
+};
+/**
+ * Describes the message tank.command.v1.DeleteMacroRequest.
+ * Use `create(DeleteMacroRequestSchema)` to create a new message.
+ */
+export declare const DeleteMacroRequestSchema: GenMessage<DeleteMacroRequest>;
+/**
+ * @generated from message tank.command.v1.DeleteMacroResponse
+ */
+export type DeleteMacroResponse = Message<"tank.command.v1.DeleteMacroResponse"> & {};
+/**
+ * Describes the message tank.command.v1.DeleteMacroResponse.
+ * Use `create(DeleteMacroResponseSchema)` to create a new message.
+ */
+export declare const DeleteMacroResponseSchema: GenMessage<DeleteMacroResponse>;
+/**
  * @generated from service tank.command.v1.CommandService
  */
 export declare const CommandService: GenService<{
@@ -161,5 +299,29 @@ export declare const CommandService: GenService<{
         methodKind: "unary";
         input: typeof RunCommandRequestSchema;
         output: typeof RunCommandResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.command.v1.CommandService.ListMacros
+     */
+    listMacros: {
+        methodKind: "unary";
+        input: typeof ListMacrosRequestSchema;
+        output: typeof ListMacrosResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.command.v1.CommandService.SaveMacro
+     */
+    saveMacro: {
+        methodKind: "unary";
+        input: typeof SaveMacroRequestSchema;
+        output: typeof SaveMacroResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.command.v1.CommandService.DeleteMacro
+     */
+    deleteMacro: {
+        methodKind: "unary";
+        input: typeof DeleteMacroRequestSchema;
+        output: typeof DeleteMacroResponseSchema;
     };
 }>;
