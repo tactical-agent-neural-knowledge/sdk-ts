@@ -583,6 +583,127 @@ export type ListWaitingOnResponse = Message<"tank.topo.v1.ListWaitingOnResponse"
  */
 export declare const ListWaitingOnResponseSchema: GenMessage<ListWaitingOnResponse>;
 /**
+ * The Home briefing: what moved while you were away, computed once on the
+ * server so both clients say the same thing.
+ *
+ * @generated from message tank.topo.v1.GetBriefingRequest
+ */
+export type GetBriefingRequest = Message<"tank.topo.v1.GetBriefingRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.topo.v1.GetBriefingRequest.
+ * Use `create(GetBriefingRequestSchema)` to create a new message.
+ */
+export declare const GetBriefingRequestSchema: GenMessage<GetBriefingRequest>;
+/**
+ * @generated from message tank.topo.v1.BriefingTread
+ */
+export type BriefingTread = Message<"tank.topo.v1.BriefingTread"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * Messages since your last read.
+     *
+     * @generated from field: int32 new_messages = 2;
+     */
+    newMessages: number;
+    /**
+     * Who wrote them, newest first, at most five, never you.
+     *
+     * @generated from field: repeated string author_ids = 3;
+     */
+    authorIds: string[];
+    /**
+     * The newest decision on record here since your last read, if any.
+     *
+     * @generated from field: string latest_decision = 4;
+     */
+    latestDecision: string;
+    /**
+     * @generated from field: string latest_decision_id = 5;
+     */
+    latestDecisionId: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_message_at = 6;
+     */
+    lastMessageAt?: Timestamp;
+    /**
+     * Messages in the last six hours: how hot the Tread is right now.
+     *
+     * @generated from field: int32 recent_messages = 7;
+     */
+    recentMessages: number;
+    /**
+     * Your unread mentions here.
+     *
+     * @generated from field: int32 mentions = 8;
+     */
+    mentions: number;
+};
+/**
+ * Describes the message tank.topo.v1.BriefingTread.
+ * Use `create(BriefingTreadSchema)` to create a new message.
+ */
+export declare const BriefingTreadSchema: GenMessage<BriefingTread>;
+/**
+ * Where somebody last posted, so "online" can say what they are on.
+ *
+ * @generated from message tank.topo.v1.BriefingPerson
+ */
+export type BriefingPerson = Message<"tank.topo.v1.BriefingPerson"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 3;
+     */
+    at?: Timestamp;
+};
+/**
+ * Describes the message tank.topo.v1.BriefingPerson.
+ * Use `create(BriefingPersonSchema)` to create a new message.
+ */
+export declare const BriefingPersonSchema: GenMessage<BriefingPerson>;
+/**
+ * @generated from message tank.topo.v1.GetBriefingResponse
+ */
+export type GetBriefingResponse = Message<"tank.topo.v1.GetBriefingResponse"> & {
+    /**
+     * Treads that moved since you last read them, newest first.
+     *
+     * @generated from field: repeated tank.topo.v1.BriefingTread treads = 1;
+     */
+    treads: BriefingTread[];
+    /**
+     * Each member's last post in the past day, in Treads you can see.
+     *
+     * @generated from field: repeated tank.topo.v1.BriefingPerson people = 2;
+     */
+    people: BriefingPerson[];
+    /**
+     * When the workspace last spoke, across the Treads you can see.
+     *
+     * @generated from field: google.protobuf.Timestamp quiet_since = 3;
+     */
+    quietSince?: Timestamp;
+};
+/**
+ * Describes the message tank.topo.v1.GetBriefingResponse.
+ * Use `create(GetBriefingResponseSchema)` to create a new message.
+ */
+export declare const GetBriefingResponseSchema: GenMessage<GetBriefingResponse>;
+/**
  * @generated from enum tank.topo.v1.MarkType
  */
 export declare enum MarkType {
@@ -833,6 +954,16 @@ export declare const TopoService: GenService<{
         methodKind: "unary";
         input: typeof ListWaitingOnRequestSchema;
         output: typeof ListWaitingOnResponseSchema;
+    };
+    /**
+     * Home's "since you were away", with heat and who was talking, per Tread.
+     *
+     * @generated from rpc tank.topo.v1.TopoService.GetBriefing
+     */
+    getBriefing: {
+        methodKind: "unary";
+        input: typeof GetBriefingRequestSchema;
+        output: typeof GetBriefingResponseSchema;
     };
     /**
      * Record something that happened to a channel rather than in it. For the
