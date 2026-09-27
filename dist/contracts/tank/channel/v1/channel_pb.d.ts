@@ -433,6 +433,153 @@ export type SetChannelIconResponse = Message<"tank.channel.v1.SetChannelIconResp
  */
 export declare const SetChannelIconResponseSchema: GenMessage<SetChannelIconResponse>;
 /**
+ * What "a Tread for the Q4 launch with a checklist and a Radar on signups" becomes:
+ * a name, a purpose, a goal header, posts to pin, and optionally a Radar.
+ *
+ * @generated from message tank.channel.v1.TreadPlan
+ */
+export type TreadPlan = Message<"tank.channel.v1.TreadPlan"> & {
+    /**
+     * the slug, lowercase-dashes
+     *
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string purpose = 2;
+     */
+    purpose: string;
+    /**
+     * @generated from field: string goal = 3;
+     */
+    goal: string;
+    /**
+     * @generated from field: repeated tank.channel.v1.PlannedPost pins = 4;
+     */
+    pins: PlannedPost[];
+    /**
+     * @generated from field: bool radar = 5;
+     */
+    radar: boolean;
+    /**
+     * internal metric keys the Radar starts with
+     *
+     * @generated from field: repeated string radar_metrics = 6;
+     */
+    radarMetrics: string[];
+    /**
+     * what it was made from
+     *
+     * @generated from field: string description = 7;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.channel.v1.TreadPlan.
+ * Use `create(TreadPlanSchema)` to create a new message.
+ */
+export declare const TreadPlanSchema: GenMessage<TreadPlan>;
+/**
+ * @generated from message tank.channel.v1.PlannedPost
+ */
+export type PlannedPost = Message<"tank.channel.v1.PlannedPost"> & {
+    /**
+     * @generated from field: string title = 1;
+     */
+    title: string;
+    /**
+     * plain text, may hold a checklist as lines starting with "- [ ] "
+     *
+     * @generated from field: string body = 2;
+     */
+    body: string;
+};
+/**
+ * Describes the message tank.channel.v1.PlannedPost.
+ * Use `create(PlannedPostSchema)` to create a new message.
+ */
+export declare const PlannedPostSchema: GenMessage<PlannedPost>;
+/**
+ * A sentence → a plan to review; nothing is created.
+ *
+ * @generated from message tank.channel.v1.DescribeTreadRequest
+ */
+export type DescribeTreadRequest = Message<"tank.channel.v1.DescribeTreadRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * at most 15 words
+     *
+     * @generated from field: string description = 2;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.channel.v1.DescribeTreadRequest.
+ * Use `create(DescribeTreadRequestSchema)` to create a new message.
+ */
+export declare const DescribeTreadRequestSchema: GenMessage<DescribeTreadRequest>;
+/**
+ * @generated from message tank.channel.v1.DescribeTreadResponse
+ */
+export type DescribeTreadResponse = Message<"tank.channel.v1.DescribeTreadResponse"> & {
+    /**
+     * @generated from field: tank.channel.v1.TreadPlan plan = 1;
+     */
+    plan?: TreadPlan;
+};
+/**
+ * Describes the message tank.channel.v1.DescribeTreadResponse.
+ * Use `create(DescribeTreadResponseSchema)` to create a new message.
+ */
+export declare const DescribeTreadResponseSchema: GenMessage<DescribeTreadResponse>;
+/**
+ * Creates the Tread (and Radar) the plan describes, as the caller.
+ *
+ * @generated from message tank.channel.v1.CreateTreadFromPlanRequest
+ */
+export type CreateTreadFromPlanRequest = Message<"tank.channel.v1.CreateTreadFromPlanRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.channel.v1.TreadPlan plan = 2;
+     */
+    plan?: TreadPlan;
+    /**
+     * @generated from field: bool private = 3;
+     */
+    private: boolean;
+};
+/**
+ * Describes the message tank.channel.v1.CreateTreadFromPlanRequest.
+ * Use `create(CreateTreadFromPlanRequestSchema)` to create a new message.
+ */
+export declare const CreateTreadFromPlanRequestSchema: GenMessage<CreateTreadFromPlanRequest>;
+/**
+ * @generated from message tank.channel.v1.CreateTreadFromPlanResponse
+ */
+export type CreateTreadFromPlanResponse = Message<"tank.channel.v1.CreateTreadFromPlanResponse"> & {
+    /**
+     * @generated from field: tank.channel.v1.Channel channel = 1;
+     */
+    channel?: Channel;
+    /**
+     * unset when the plan had none
+     *
+     * @generated from field: tank.channel.v1.Channel radar = 2;
+     */
+    radar?: Channel;
+};
+/**
+ * Describes the message tank.channel.v1.CreateTreadFromPlanResponse.
+ * Use `create(CreateTreadFromPlanResponseSchema)` to create a new message.
+ */
+export declare const CreateTreadFromPlanResponseSchema: GenMessage<CreateTreadFromPlanResponse>;
+/**
  * @generated from message tank.channel.v1.ListChannelMembersRequest
  */
 export type ListChannelMembersRequest = Message<"tank.channel.v1.ListChannelMembersRequest"> & {
@@ -748,6 +895,22 @@ export declare const ChannelService: GenService<{
         methodKind: "unary";
         input: typeof SetChannelIconRequestSchema;
         output: typeof SetChannelIconResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.channel.v1.ChannelService.DescribeTread
+     */
+    describeTread: {
+        methodKind: "unary";
+        input: typeof DescribeTreadRequestSchema;
+        output: typeof DescribeTreadResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.channel.v1.ChannelService.CreateTreadFromPlan
+     */
+    createTreadFromPlan: {
+        methodKind: "unary";
+        input: typeof CreateTreadFromPlanRequestSchema;
+        output: typeof CreateTreadFromPlanResponseSchema;
     };
     /**
      * @generated from rpc tank.channel.v1.ChannelService.ListChannelMembers

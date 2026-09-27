@@ -786,12 +786,61 @@ export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
      * @generated from field: string digest_voice = 11;
      */
     digestVoice: string;
+    /**
+     * Which notification sounds play; unset means TANK's own set.
+     *
+     * @generated from field: tank.workspace.v1.SoundChoice sounds = 12;
+     */
+    sounds?: SoundChoice;
 };
 /**
  * Describes the message tank.workspace.v1.Preferences.
  * Use `create(PreferencesSchema)` to create a new message.
  */
 export declare const PreferencesSchema: GenMessage<Preferences>;
+/**
+ * A notification sound set, chosen from TANK's packs by a vibe. Each field names
+ * a sound id the clients ship ("arcade-mention"); empty means silent for that event.
+ *
+ * @generated from message tank.workspace.v1.SoundChoice
+ */
+export type SoundChoice = Message<"tank.workspace.v1.SoundChoice"> & {
+    /**
+     * the pack the sounds come from
+     *
+     * @generated from field: string pack = 1;
+     */
+    pack: string;
+    /**
+     * @mentions and DMs addressed to me
+     *
+     * @generated from field: string mention = 2;
+     */
+    mention: string;
+    /**
+     * direct messages
+     *
+     * @generated from field: string dm = 3;
+     */
+    dm: string;
+    /**
+     * an agent finished or needs me
+     *
+     * @generated from field: string agent = 4;
+     */
+    agent: string;
+    /**
+     * the vibe it was picked from
+     *
+     * @generated from field: string description = 5;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.workspace.v1.SoundChoice.
+ * Use `create(SoundChoiceSchema)` to create a new message.
+ */
+export declare const SoundChoiceSchema: GenMessage<SoundChoice>;
 /**
  * The order Home shows its sections in, and which are hidden. Section keys:
  * "online", "moved", "waiting", "agents", "threads", "download".
@@ -1936,6 +1985,95 @@ export type RewriteTextResponse = Message<"tank.workspace.v1.RewriteTextResponse
  */
 export declare const RewriteTextResponseSchema: GenMessage<RewriteTextResponse>;
 /**
+ * "Arcade cabinet, quiet" → a SoundChoice to review; nothing is saved.
+ *
+ * @generated from message tank.workspace.v1.DescribeSoundPackRequest
+ */
+export type DescribeSoundPackRequest = Message<"tank.workspace.v1.DescribeSoundPackRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * at most 15 words
+     *
+     * @generated from field: string description = 2;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.workspace.v1.DescribeSoundPackRequest.
+ * Use `create(DescribeSoundPackRequestSchema)` to create a new message.
+ */
+export declare const DescribeSoundPackRequestSchema: GenMessage<DescribeSoundPackRequest>;
+/**
+ * @generated from message tank.workspace.v1.DescribeSoundPackResponse
+ */
+export type DescribeSoundPackResponse = Message<"tank.workspace.v1.DescribeSoundPackResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.SoundChoice sounds = 1;
+     */
+    sounds?: SoundChoice;
+};
+/**
+ * Describes the message tank.workspace.v1.DescribeSoundPackResponse.
+ * Use `create(DescribeSoundPackResponseSchema)` to create a new message.
+ */
+export declare const DescribeSoundPackResponseSchema: GenMessage<DescribeSoundPackResponse>;
+/**
+ * One pack in TANK's library, so a client can offer them without a model call.
+ *
+ * @generated from message tank.workspace.v1.SoundPack
+ */
+export type SoundPack = Message<"tank.workspace.v1.SoundPack"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string description = 3;
+     */
+    description: string;
+    /**
+     * mention, dm, agent, in that order
+     *
+     * @generated from field: repeated string sound_ids = 4;
+     */
+    soundIds: string[];
+};
+/**
+ * Describes the message tank.workspace.v1.SoundPack.
+ * Use `create(SoundPackSchema)` to create a new message.
+ */
+export declare const SoundPackSchema: GenMessage<SoundPack>;
+/**
+ * @generated from message tank.workspace.v1.ListSoundPacksRequest
+ */
+export type ListSoundPacksRequest = Message<"tank.workspace.v1.ListSoundPacksRequest"> & {};
+/**
+ * Describes the message tank.workspace.v1.ListSoundPacksRequest.
+ * Use `create(ListSoundPacksRequestSchema)` to create a new message.
+ */
+export declare const ListSoundPacksRequestSchema: GenMessage<ListSoundPacksRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListSoundPacksResponse
+ */
+export type ListSoundPacksResponse = Message<"tank.workspace.v1.ListSoundPacksResponse"> & {
+    /**
+     * @generated from field: repeated tank.workspace.v1.SoundPack packs = 1;
+     */
+    packs: SoundPack[];
+};
+/**
+ * Describes the message tank.workspace.v1.ListSoundPacksResponse.
+ * Use `create(ListSoundPacksResponseSchema)` to create a new message.
+ */
+export declare const ListSoundPacksResponseSchema: GenMessage<ListSoundPacksResponse>;
+/**
  * @generated from enum tank.workspace.v1.Role
  */
 export declare enum Role {
@@ -2158,6 +2296,22 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof RewriteTextRequestSchema;
         output: typeof RewriteTextResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.DescribeSoundPack
+     */
+    describeSoundPack: {
+        methodKind: "unary";
+        input: typeof DescribeSoundPackRequestSchema;
+        output: typeof DescribeSoundPackResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListSoundPacks
+     */
+    listSoundPacks: {
+        methodKind: "unary";
+        input: typeof ListSoundPacksRequestSchema;
+        output: typeof ListSoundPacksResponseSchema;
     };
     /**
      * @generated from rpc tank.workspace.v1.WorkspaceService.ListEmoji
