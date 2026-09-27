@@ -593,6 +593,12 @@ export type GetBriefingRequest = Message<"tank.topo.v1.GetBriefingRequest"> & {
      * @generated from field: string workspace_id = 1;
      */
     workspaceId: string;
+    /**
+     * Also write a short "while you were away" in the person's digest voice (costs a model call).
+     *
+     * @generated from field: bool narrate = 2;
+     */
+    narrate: boolean;
 };
 /**
  * Describes the message tank.topo.v1.GetBriefingRequest.
@@ -697,6 +703,12 @@ export type GetBriefingResponse = Message<"tank.topo.v1.GetBriefingResponse"> & 
      * @generated from field: google.protobuf.Timestamp quiet_since = 3;
      */
     quietSince?: Timestamp;
+    /**
+     * A few sentences on what moved, in the person's digest voice; empty unless narrate was set.
+     *
+     * @generated from field: string narrative = 4;
+     */
+    narrative: string;
 };
 /**
  * Describes the message tank.topo.v1.GetBriefingResponse.

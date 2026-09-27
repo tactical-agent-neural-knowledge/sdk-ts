@@ -774,12 +774,49 @@ export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
      * @generated from field: tank.workspace.v1.Theme custom_theme = 9;
      */
     customTheme?: Theme;
+    /**
+     * How Home is arranged, set from a sentence; unset means TANK's order.
+     *
+     * @generated from field: tank.workspace.v1.HomeLayout home = 10;
+     */
+    home?: HomeLayout;
+    /**
+     * One sentence that styles the "while you were away" narrative ("like a naval log"). Empty means TANK's voice.
+     *
+     * @generated from field: string digest_voice = 11;
+     */
+    digestVoice: string;
 };
 /**
  * Describes the message tank.workspace.v1.Preferences.
  * Use `create(PreferencesSchema)` to create a new message.
  */
 export declare const PreferencesSchema: GenMessage<Preferences>;
+/**
+ * The order Home shows its sections in, and which are hidden. Section keys:
+ * "online", "moved", "waiting", "agents", "threads", "download".
+ *
+ * @generated from message tank.workspace.v1.HomeLayout
+ */
+export type HomeLayout = Message<"tank.workspace.v1.HomeLayout"> & {
+    /**
+     * @generated from field: repeated string order = 1;
+     */
+    order: string[];
+    /**
+     * @generated from field: repeated string hidden = 2;
+     */
+    hidden: string[];
+    /**
+     * @generated from field: string description = 3;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.workspace.v1.HomeLayout.
+ * Use `create(HomeLayoutSchema)` to create a new message.
+ */
+export declare const HomeLayoutSchema: GenMessage<HomeLayout>;
 /**
  * Which Topo mark families the strip draws for this person.
  *
@@ -1821,6 +1858,84 @@ export type SetWorkspaceIconResponse = Message<"tank.workspace.v1.SetWorkspaceIc
  */
 export declare const SetWorkspaceIconResponseSchema: GenMessage<SetWorkspaceIconResponse>;
 /**
+ * "Agents first, then treads I own, hide people" → a HomeLayout to review; nothing is saved.
+ *
+ * @generated from message tank.workspace.v1.DescribeHomeLayoutRequest
+ */
+export type DescribeHomeLayoutRequest = Message<"tank.workspace.v1.DescribeHomeLayoutRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * at most 15 words
+     *
+     * @generated from field: string description = 2;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.workspace.v1.DescribeHomeLayoutRequest.
+ * Use `create(DescribeHomeLayoutRequestSchema)` to create a new message.
+ */
+export declare const DescribeHomeLayoutRequestSchema: GenMessage<DescribeHomeLayoutRequest>;
+/**
+ * @generated from message tank.workspace.v1.DescribeHomeLayoutResponse
+ */
+export type DescribeHomeLayoutResponse = Message<"tank.workspace.v1.DescribeHomeLayoutResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.HomeLayout home = 1;
+     */
+    home?: HomeLayout;
+};
+/**
+ * Describes the message tank.workspace.v1.DescribeHomeLayoutResponse.
+ * Use `create(DescribeHomeLayoutResponseSchema)` to create a new message.
+ */
+export declare const DescribeHomeLayoutResponseSchema: GenMessage<DescribeHomeLayoutResponse>;
+/**
+ * Rewrite a draft in the composer: "terser", "friendlier", "as a bulleted decision".
+ *
+ * @generated from message tank.workspace.v1.RewriteTextRequest
+ */
+export type RewriteTextRequest = Message<"tank.workspace.v1.RewriteTextRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * the draft, at most 4000 characters
+     *
+     * @generated from field: string text = 2;
+     */
+    text: string;
+    /**
+     * at most 15 words
+     *
+     * @generated from field: string instruction = 3;
+     */
+    instruction: string;
+};
+/**
+ * Describes the message tank.workspace.v1.RewriteTextRequest.
+ * Use `create(RewriteTextRequestSchema)` to create a new message.
+ */
+export declare const RewriteTextRequestSchema: GenMessage<RewriteTextRequest>;
+/**
+ * @generated from message tank.workspace.v1.RewriteTextResponse
+ */
+export type RewriteTextResponse = Message<"tank.workspace.v1.RewriteTextResponse"> & {
+    /**
+     * @generated from field: string text = 1;
+     */
+    text: string;
+};
+/**
+ * Describes the message tank.workspace.v1.RewriteTextResponse.
+ * Use `create(RewriteTextResponseSchema)` to create a new message.
+ */
+export declare const RewriteTextResponseSchema: GenMessage<RewriteTextResponse>;
+/**
  * @generated from enum tank.workspace.v1.Role
  */
 export declare enum Role {
@@ -2027,6 +2142,22 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceIconRequestSchema;
         output: typeof SetWorkspaceIconResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.DescribeHomeLayout
+     */
+    describeHomeLayout: {
+        methodKind: "unary";
+        input: typeof DescribeHomeLayoutRequestSchema;
+        output: typeof DescribeHomeLayoutResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.RewriteText
+     */
+    rewriteText: {
+        methodKind: "unary";
+        input: typeof RewriteTextRequestSchema;
+        output: typeof RewriteTextResponseSchema;
     };
     /**
      * @generated from rpc tank.workspace.v1.WorkspaceService.ListEmoji
