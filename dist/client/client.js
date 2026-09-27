@@ -6,9 +6,9 @@ import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js
 import { ChannelReadStateSchema, ChannelService, ChannelType, TreadGoalSchema, } from "../contracts/tank/channel/v1/channel_pb.js";
 import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } from "../contracts/tank/message/v1/message_pb.js";
+import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { PresenceSchema, PresenceService, } from "../contracts/tank/presence/v1/presence_pb.js";
-import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import { GetBootstrapResponseSchema, Role, WorkspaceService, } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Backoff } from "./backoff.js";

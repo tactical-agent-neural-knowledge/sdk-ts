@@ -28,6 +28,7 @@ import {
   type PostMessageRequest,
   PostMessageRequestSchema,
 } from "../contracts/tank/message/v1/message_pb.js";
+import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import {
   type Presence,
@@ -35,7 +36,6 @@ import {
   PresenceService,
   type PresenceStatus,
 } from "../contracts/tank/presence/v1/presence_pb.js";
-import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import {
   type GetBootstrapResponse,
