@@ -261,6 +261,8 @@ export declare class TankClient {
     /** Create a channel and put it in the store. Resolves to the server's channel. */
     createChannel(input: CreateChannelInput): Promise<Channel>;
     /** Set a Tread's goal. Optimistic: the channel shows the goal immediately, rolled back on error. */
+    /** Delete a Tread or Radar for everyone. The store drops it at once; `ChannelDeleted` reaches other clients. */
+    deleteChannel(channelId: string): Promise<void>;
     setGoal(channelId: string, goal: SetGoalInput | TreadGoal): Promise<Channel | undefined>;
     /** Invite someone to a workspace by email. Resolves to the invite id. */
     invite(workspaceId: string, email: string, role?: Role | RoleName): Promise<string>;

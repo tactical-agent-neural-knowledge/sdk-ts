@@ -233,6 +233,26 @@ export type ChannelUpdated = Message<"tank.events.v1.ChannelUpdated"> & {
  */
 export declare const ChannelUpdatedSchema: GenMessage<ChannelUpdated>;
 /**
+ * A Tread or Radar was deleted; clients drop it wherever it is shown.
+ *
+ * @generated from message tank.events.v1.ChannelDeleted
+ */
+export type ChannelDeleted = Message<"tank.events.v1.ChannelDeleted"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.events.v1.ChannelDeleted.
+ * Use `create(ChannelDeletedSchema)` to create a new message.
+ */
+export declare const ChannelDeletedSchema: GenMessage<ChannelDeleted>;
+/**
  * @generated from message tank.events.v1.ChannelMembershipChanged
  */
 export type ChannelMembershipChanged = Message<"tank.events.v1.ChannelMembershipChanged"> & {

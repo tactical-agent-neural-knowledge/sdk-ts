@@ -716,6 +716,12 @@ export class TankClient {
   }
 
   /** Set a Tread's goal. Optimistic: the channel shows the goal immediately, rolled back on error. */
+  /** Delete a Tread or Radar for everyone. The store drops it at once; `ChannelDeleted` reaches other clients. */
+  async deleteChannel(channelId: string): Promise<void> {
+    await this.channels.deleteChannel({ channelId });
+    this.store.dispatch({ type: "channels/remove", channelId });
+  }
+
   async setGoal(channelId: string, goal: SetGoalInput | TreadGoal): Promise<Channel | undefined> {
     const state = this.store.getState();
     const prev = state.channels[channelId];
@@ -1144,6 +1150,8 @@ export class TankClient {
       this.store.applyEnvelope(env, this.now());
       const payload = unpackEnvelope(env);
       if (payload?.$typeName === "tank.events.v1.ChannelUpdated") void this.refreshChannel(payload.channelId);
+      if (payload?.$typeName === "tank.events.v1.ChannelDeleted")
+        this.store.dispatch({ type: "channels/remove", channelId: payload.channelId });
       if (payload?.$typeName === "tank.events.v1.TopoMarkUpdated" && payload.mark) {
         for (const fn of this.markListeners) fn(payload.mark);
       }
