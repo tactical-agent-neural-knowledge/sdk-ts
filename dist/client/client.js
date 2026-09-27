@@ -6,6 +6,7 @@ import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js
 import { ChannelReadStateSchema, ChannelService, ChannelType, TreadGoalSchema, } from "../contracts/tank/channel/v1/channel_pb.js";
 import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } from "../contracts/tank/message/v1/message_pb.js";
+import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { PresenceSchema, PresenceService, } from "../contracts/tank/presence/v1/presence_pb.js";
 import { TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
@@ -52,6 +53,8 @@ export class TankClient {
     notifications;
     /** The map of a Tread: the marks that make up its Topo strip. */
     topo;
+    /** Radar: widgets, sources and series. */
+    monitor;
     realtime;
     store;
     storage;
@@ -95,6 +98,7 @@ export class TankClient {
         this.agent = this.agents;
         this.notifications = createClient(NotificationService, this.transport);
         this.topo = createClient(TopoService, this.transport);
+        this.monitor = createClient(MonitorService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
             getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
