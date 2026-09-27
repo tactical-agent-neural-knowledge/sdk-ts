@@ -322,10 +322,17 @@ export function reduce(state, action) {
             return { ...state, workspaces: { ...state.workspaces, ...byId(action.workspaces) } };
         case "members/upsert": {
             const cur = { ...(state.members[action.workspaceId] ?? {}) };
-            for (const mbr of action.members)
-                if (mbr.principal)
-                    cur[mbr.principal.id] = mbr;
-            return { ...state, members: { ...state.members, [action.workspaceId]: cur } };
+            // My own membership carries my principal too: a profile save must not leave
+            // `me` with the old display name until the next bootstrap.
+            let me = state.me;
+            for (const mbr of action.members) {
+                if (!mbr.principal)
+                    continue;
+                cur[mbr.principal.id] = mbr;
+                if (me && mbr.principal.id === me.id)
+                    me = mbr.principal;
+            }
+            return { ...state, me, members: { ...state.members, [action.workspaceId]: cur } };
         }
         case "channels/upsert": {
             if (action.channels.length === 0)
