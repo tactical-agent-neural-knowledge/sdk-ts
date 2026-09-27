@@ -72,6 +72,7 @@ export class TankClient {
     sendBackoff = new Backoff({ minMs: 500, maxMs: 15_000 });
     downloadUrls = new Map();
     markListeners = new Set();
+    widgetListeners = new Set();
     downloadUrlInFlight = new Map();
     constructor(opts) {
         this.opts = opts;
@@ -647,6 +648,13 @@ export class TankClient {
      * Stored marks only: a derived mark has no lifecycle to report, and recomputing one is cheaper
      * than keeping it in step.
      */
+    /** A Radar widget got a new point or health (monitor.widget.updated on a subscribed channel). */
+    onWidgetUpdated(fn) {
+        this.widgetListeners.add(fn);
+        return () => {
+            this.widgetListeners.delete(fn);
+        };
+    }
     onMarkUpdated(fn) {
         this.markListeners.add(fn);
         return () => {
@@ -912,6 +920,10 @@ export class TankClient {
             if (payload?.$typeName === "tank.events.v1.TopoMarkUpdated" && payload.mark) {
                 for (const fn of this.markListeners)
                     fn(payload.mark);
+            }
+            if (payload?.$typeName === "tank.events.v1.MonitorWidgetUpdated" && payload.widget) {
+                for (const fn of this.widgetListeners)
+                    fn(payload.widget);
             }
         });
         rt.on("cursor", ({ workspaceId, cursor }) => {

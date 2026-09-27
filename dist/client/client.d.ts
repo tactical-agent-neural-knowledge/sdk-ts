@@ -5,7 +5,7 @@ import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type Channel, ChannelService, ChannelType, type TreadGoal } from "../contracts/tank/channel/v1/channel_pb.js";
 import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
-import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
+import { MonitorService, type Widget } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
@@ -175,6 +175,7 @@ export declare class TankClient {
     private sendBackoff;
     private downloadUrls;
     private markListeners;
+    private widgetListeners;
     private downloadUrlInFlight;
     constructor(opts: TankClientOptions);
     /** Hydrates from storage, opens the gateway socket and flushes the outbox. */
@@ -301,6 +302,8 @@ export declare class TankClient {
      * Stored marks only: a derived mark has no lifecycle to report, and recomputing one is cheaper
      * than keeping it in step.
      */
+    /** A Radar widget got a new point or health (monitor.widget.updated on a subscribed channel). */
+    onWidgetUpdated(fn: (widget: Widget) => void): () => void;
     onMarkUpdated(fn: (mark: Mark) => void): () => void;
     listMarks(channelId: string, types?: MarkType[]): Promise<{
         marks: Mark[];
