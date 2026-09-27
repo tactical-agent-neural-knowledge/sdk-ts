@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/topo/v1/topo.proto.
  */
 export const file_tank_topo_v1_topo: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL3RvcG8vdjEvdG9wby5wcm90bxIMdGFuay50b3BvLnYxIvsDCgRNYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoCRITCgtjaGFubmVsX3NlcRgEIAEoAxIkCgR0eXBlGAUgASgOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlEiAKBGxhbmUYBiABKA4yEi50YW5rLnRvcG8udjEuTGFuZRIRCgllbGV2YXRpb24YByABKAUSDwoHcHJldmlldxgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgZzdGF0dXMYCiABKA4yGC50YW5rLnRvcG8udjEuTWFya1N0YXR1cxIbChN3YWl0aW5nX29uX3VzZXJfaWRzGAsgAygJEhoKEmNyZWF0ZWRfYnlfdXNlcl9pZBgMIAEoCRIvCgtyZXNvbHZlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV0YWlsGA4gASgJEgsKA3VybBgPIAEoCRIxCg1hcnRpZmFjdF9raW5kGBAgASgOMhoudGFuay50b3BvLnYxLkFydGlmYWN0S2luZBIqCgZzdXJ2ZXkYESABKAsyGi50YW5rLnRvcG8udjEuU3VydmV5T3JpZ2luIlUKDFN1cnZleU9yaWdpbhIRCglleHRyYWN0b3IYASABKAkSDwoHdmVyc2lvbhgCIAEoCRINCgVtb2RlbBgDIAEoCRISCgpjb25maWRlbmNlGAQgASgCIk0KEExpc3RNYXJrc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIlCgV0eXBlcxgCIAMoDjIWLnRhbmsudG9wby52MS5NYXJrVHlwZSJIChFMaXN0TWFya3NSZXNwb25zZRIhCgVtYXJrcxgBIAMoCzISLnRhbmsudG9wby52MS5NYXJrEhAKCGxhc3Rfc2VxGAIgASgDIjwKFEZsYWdXYWl0aW5nT25SZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkSEAoIdXNlcl9pZHMYAiADKAkiOQoVRmxhZ1dhaXRpbmdPblJlc3BvbnNlEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyayI7ChdSZXNvbHZlV2FpdGluZ09uUmVxdWVzdBIPCgdtYXJrX2lkGAEgASgJEg8KB2Rpc21pc3MYAiABKAgiPAoYUmVzb2x2ZVdhaXRpbmdPblJlc3BvbnNlEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyayJ3ChRMaXN0V2FpdGluZ09uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSMQoJZGlyZWN0aW9uGAIgASgOMh4udGFuay50b3BvLnYxLldhaXRpbmdEaXJlY3Rpb24SFgoOaW5jbHVkZV9jbG9zZWQYAyABKAgiXAoNV2FpdGluZ09uSXRlbRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsSKQoHbWVzc2FnZRgCIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIoYDCglCZW5jaG1hcmsSCgoCaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRIRCglzdGF0ZW1lbnQYAyABKAkSDgoGZGV0YWlsGAQgASgJEhoKEnNvdXJjZV9tZXNzYWdlX2lkcxgFIAMoCRIXCg9wYXJ0aWNpcGFudF9pZHMYBiADKAkSKAoGc3RhdHVzGAcgASgOMhgudGFuay50b3BvLnYxLk1hcmtTdGF0dXMSGgoSZGVjaWRlZF9ieV91c2VyX2lkGAggASgJEi4KCmRlY2lkZWRfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhgKEHN1cGVyc2VkZWRfYnlfaWQYCiABKAkSKgoGc3VydmV5GAsgASgLMhoudGFuay50b3BvLnYxLlN1cnZleU9yaWdpbhIuCgpjcmVhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIVCg1zdXBlcnNlZGVzX2lkGA0gASgJIkMKFUxpc3RCZW5jaG1hcmtzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhYKDmluY2x1ZGVfY2xvc2VkGAIgASgIIkUKFkxpc3RCZW5jaG1hcmtzUmVzcG9uc2USKwoKYmVuY2htYXJrcxgBIAMoCzIXLnRhbmsudG9wby52MS5CZW5jaG1hcmsikgIKFkRlY2lkZUJlbmNobWFya1JlcXVlc3QSFAoMYmVuY2htYXJrX2lkGAEgASgJEj8KCGRlY2lzaW9uGAIgASgOMi0udGFuay50b3BvLnYxLkRlY2lkZUJlbmNobWFya1JlcXVlc3QuRGVjaXNpb24SEQoJc3RhdGVtZW50GAMgASgJEg4KBmRldGFpbBgEIAEoCRIaCg1zdXBlcnNlZGVzX2lkGAUgASgJSACIAQEiUAoIRGVjaXNpb24SGAoUREVDSVNJT05fVU5TUEVDSUZJRUQQABIUChBERUNJU0lPTl9DT05GSVJNEAESFAoQREVDSVNJT05fRElTTUlTUxACQhAKDl9zdXBlcnNlZGVzX2lkIkUKF0RlY2lkZUJlbmNobWFya1Jlc3BvbnNlEioKCWJlbmNobWFyaxgBIAEoCzIXLnRhbmsudG9wby52MS5CZW5jaG1hcmsiZwoSUmVjb3JkRXZlbnRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEa2luZBgCIAEoCRIOCgZkZXRhaWwYAyABKAkSCwoDdXJsGAQgASgJEhIKCmRlZHVwZV9rZXkYBSABKAkiNwoTUmVjb3JkRXZlbnRSZXNwb25zZRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsiQwoVTGlzdFdhaXRpbmdPblJlc3BvbnNlEioKBWl0ZW1zGAEgAygLMhsudGFuay50b3BvLnYxLldhaXRpbmdPbkl0ZW0qkAIKCE1hcmtUeXBlEhkKFU1BUktfVFlQRV9VTlNQRUNJRklFRBAAEhUKEU1BUktfVFlQRV9NRU5USU9OEAESGQoVTUFSS19UWVBFX09XTl9NRVNTQUdFEAISGgoWTUFSS19UWVBFX1JFQURfSE9SSVpPThADEhgKFE1BUktfVFlQRV9TRUFSQ0hfSElUEAQSGAoUTUFSS19UWVBFX1dBSVRJTkdfT04QBRIWChJNQVJLX1RZUEVfQVJUSUZBQ1QQBhITCg9NQVJLX1RZUEVfRVZFTlQQBxIhCh1NQVJLX1RZUEVfVU5BTlNXRVJFRF9RVUVTVElPThAIEhcKE01BUktfVFlQRV9CRU5DSE1BUksQCSp1CgxBcnRpZmFjdEtpbmQSHQoZQVJUSUZBQ1RfS0lORF9VTlNQRUNJRklFRBAAEhYKEkFSVElGQUNUX0tJTkRfRklMRRABEhYKEkFSVElGQUNUX0tJTkRfTElOSxACEhYKEkFSVElGQUNUX0tJTkRfQ09ERRADKqoBCgpNYXJrU3RhdHVzEhsKF01BUktfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFAoQTUFSS19TVEFUVVNfT1BFThABEhgKFE1BUktfU1RBVFVTX1JFU09MVkVEEAISGQoVTUFSS19TVEFUVVNfRElTTUlTU0VEEAMSGAoUTUFSS19TVEFUVVNfUFJPUE9TRUQQBBIaChZNQVJLX1NUQVRVU19TVVBFUlNFREVEEAUqVQoETGFuZRIUChBMQU5FX1VOU1BFQ0lGSUVEEAASEgoOTEFORV9TVFJVQ1RVUkUQARIQCgxMQU5FX01FU1NBR0UQAhIRCg1MQU5FX1BFUlNPTkFMEAMqbwoQV2FpdGluZ0RpcmVjdGlvbhIhCh1XQUlUSU5HX0RJUkVDVElPTl9VTlNQRUNJRklFRBAAEhsKF1dBSVRJTkdfRElSRUNUSU9OX09OX01FEAESGwoXV0FJVElOR19ESVJFQ1RJT05fQllfTUUQAjKDBQoLVG9wb1NlcnZpY2USTAoJTGlzdE1hcmtzEh4udGFuay50b3BvLnYxLkxpc3RNYXJrc1JlcXVlc3QaHy50YW5rLnRvcG8udjEuTGlzdE1hcmtzUmVzcG9uc2USWAoNRmxhZ1dhaXRpbmdPbhIiLnRhbmsudG9wby52MS5GbGFnV2FpdGluZ09uUmVxdWVzdBojLnRhbmsudG9wby52MS5GbGFnV2FpdGluZ09uUmVzcG9uc2USYQoQUmVzb2x2ZVdhaXRpbmdPbhIlLnRhbmsudG9wby52MS5SZXNvbHZlV2FpdGluZ09uUmVxdWVzdBomLnRhbmsudG9wby52MS5SZXNvbHZlV2FpdGluZ09uUmVzcG9uc2USWAoNTGlzdFdhaXRpbmdPbhIiLnRhbmsudG9wby52MS5MaXN0V2FpdGluZ09uUmVxdWVzdBojLnRhbmsudG9wby52MS5MaXN0V2FpdGluZ09uUmVzcG9uc2USUgoLUmVjb3JkRXZlbnQSIC50YW5rLnRvcG8udjEuUmVjb3JkRXZlbnRSZXF1ZXN0GiEudGFuay50b3BvLnYxLlJlY29yZEV2ZW50UmVzcG9uc2USWwoOTGlzdEJlbmNobWFya3MSIy50YW5rLnRvcG8udjEuTGlzdEJlbmNobWFya3NSZXF1ZXN0GiQudGFuay50b3BvLnYxLkxpc3RCZW5jaG1hcmtzUmVzcG9uc2USXgoPRGVjaWRlQmVuY2htYXJrEiQudGFuay50b3BvLnYxLkRlY2lkZUJlbmNobWFya1JlcXVlc3QaJS50YW5rLnRvcG8udjEuRGVjaWRlQmVuY2htYXJrUmVzcG9uc2VCwAEKEGNvbS50YW5rLnRvcG8udjFCCVRvcG9Qcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3RvcG8vdjE7dG9wb3YxogIDVFRYqgIMVGFuay5Ub3BvLlYxygIMVGFua1xUb3BvXFYx4gIYVGFua1xUb3BvXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6VG9wbzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
+  fileDesc("Chd0YW5rL3RvcG8vdjEvdG9wby5wcm90bxIMdGFuay50b3BvLnYxIvsDCgRNYXJrEgoKAmlkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKbWVzc2FnZV9pZBgDIAEoCRITCgtjaGFubmVsX3NlcRgEIAEoAxIkCgR0eXBlGAUgASgOMhYudGFuay50b3BvLnYxLk1hcmtUeXBlEiAKBGxhbmUYBiABKA4yEi50YW5rLnRvcG8udjEuTGFuZRIRCgllbGV2YXRpb24YByABKAUSDwoHcHJldmlldxgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgZzdGF0dXMYCiABKA4yGC50YW5rLnRvcG8udjEuTWFya1N0YXR1cxIbChN3YWl0aW5nX29uX3VzZXJfaWRzGAsgAygJEhoKEmNyZWF0ZWRfYnlfdXNlcl9pZBgMIAEoCRIvCgtyZXNvbHZlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV0YWlsGA4gASgJEgsKA3VybBgPIAEoCRIxCg1hcnRpZmFjdF9raW5kGBAgASgOMhoudGFuay50b3BvLnYxLkFydGlmYWN0S2luZBIqCgZzdXJ2ZXkYESABKAsyGi50YW5rLnRvcG8udjEuU3VydmV5T3JpZ2luIlUKDFN1cnZleU9yaWdpbhIRCglleHRyYWN0b3IYASABKAkSDwoHdmVyc2lvbhgCIAEoCRINCgVtb2RlbBgDIAEoCRISCgpjb25maWRlbmNlGAQgASgCIk0KEExpc3RNYXJrc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIlCgV0eXBlcxgCIAMoDjIWLnRhbmsudG9wby52MS5NYXJrVHlwZSJIChFMaXN0TWFya3NSZXNwb25zZRIhCgVtYXJrcxgBIAMoCzISLnRhbmsudG9wby52MS5NYXJrEhAKCGxhc3Rfc2VxGAIgASgDIjwKFEZsYWdXYWl0aW5nT25SZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkSEAoIdXNlcl9pZHMYAiADKAkiOQoVRmxhZ1dhaXRpbmdPblJlc3BvbnNlEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyayI7ChdSZXNvbHZlV2FpdGluZ09uUmVxdWVzdBIPCgdtYXJrX2lkGAEgASgJEg8KB2Rpc21pc3MYAiABKAgiPAoYUmVzb2x2ZVdhaXRpbmdPblJlc3BvbnNlEiAKBG1hcmsYASABKAsyEi50YW5rLnRvcG8udjEuTWFyayJ3ChRMaXN0V2FpdGluZ09uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSMQoJZGlyZWN0aW9uGAIgASgOMh4udGFuay50b3BvLnYxLldhaXRpbmdEaXJlY3Rpb24SFgoOaW5jbHVkZV9jbG9zZWQYAyABKAgiXAoNV2FpdGluZ09uSXRlbRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsSKQoHbWVzc2FnZRgCIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIoYDCglCZW5jaG1hcmsSCgoCaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRIRCglzdGF0ZW1lbnQYAyABKAkSDgoGZGV0YWlsGAQgASgJEhoKEnNvdXJjZV9tZXNzYWdlX2lkcxgFIAMoCRIXCg9wYXJ0aWNpcGFudF9pZHMYBiADKAkSKAoGc3RhdHVzGAcgASgOMhgudGFuay50b3BvLnYxLk1hcmtTdGF0dXMSGgoSZGVjaWRlZF9ieV91c2VyX2lkGAggASgJEi4KCmRlY2lkZWRfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhgKEHN1cGVyc2VkZWRfYnlfaWQYCiABKAkSKgoGc3VydmV5GAsgASgLMhoudGFuay50b3BvLnYxLlN1cnZleU9yaWdpbhIuCgpjcmVhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIVCg1zdXBlcnNlZGVzX2lkGA0gASgJIkMKFUxpc3RCZW5jaG1hcmtzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhYKDmluY2x1ZGVfY2xvc2VkGAIgASgIIkUKFkxpc3RCZW5jaG1hcmtzUmVzcG9uc2USKwoKYmVuY2htYXJrcxgBIAMoCzIXLnRhbmsudG9wby52MS5CZW5jaG1hcmsikgIKFkRlY2lkZUJlbmNobWFya1JlcXVlc3QSFAoMYmVuY2htYXJrX2lkGAEgASgJEj8KCGRlY2lzaW9uGAIgASgOMi0udGFuay50b3BvLnYxLkRlY2lkZUJlbmNobWFya1JlcXVlc3QuRGVjaXNpb24SEQoJc3RhdGVtZW50GAMgASgJEg4KBmRldGFpbBgEIAEoCRIaCg1zdXBlcnNlZGVzX2lkGAUgASgJSACIAQEiUAoIRGVjaXNpb24SGAoUREVDSVNJT05fVU5TUEVDSUZJRUQQABIUChBERUNJU0lPTl9DT05GSVJNEAESFAoQREVDSVNJT05fRElTTUlTUxACQhAKDl9zdXBlcnNlZGVzX2lkIkUKF0RlY2lkZUJlbmNobWFya1Jlc3BvbnNlEioKCWJlbmNobWFyaxgBIAEoCzIXLnRhbmsudG9wby52MS5CZW5jaG1hcmsiZwoSUmVjb3JkRXZlbnRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEa2luZBgCIAEoCRIOCgZkZXRhaWwYAyABKAkSCwoDdXJsGAQgASgJEhIKCmRlZHVwZV9rZXkYBSABKAkiNwoTUmVjb3JkRXZlbnRSZXNwb25zZRIgCgRtYXJrGAEgASgLMhIudGFuay50b3BvLnYxLk1hcmsiQwoVTGlzdFdhaXRpbmdPblJlc3BvbnNlEioKBWl0ZW1zGAEgAygLMhsudGFuay50b3BvLnYxLldhaXRpbmdPbkl0ZW0iKgoSR2V0QnJpZWZpbmdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSLiAQoNQnJpZWZpbmdUcmVhZBISCgpjaGFubmVsX2lkGAEgASgJEhQKDG5ld19tZXNzYWdlcxgCIAEoBRISCgphdXRob3JfaWRzGAMgAygJEhcKD2xhdGVzdF9kZWNpc2lvbhgEIAEoCRIaChJsYXRlc3RfZGVjaXNpb25faWQYBSABKAkSMwoPbGFzdF9tZXNzYWdlX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9yZWNlbnRfbWVzc2FnZXMYByABKAUSEAoIbWVudGlvbnMYCCABKAUiXQoOQnJpZWZpbmdQZXJzb24SDwoHdXNlcl9pZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJEiYKAmF0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCKhAQoTR2V0QnJpZWZpbmdSZXNwb25zZRIrCgZ0cmVhZHMYASADKAsyGy50YW5rLnRvcG8udjEuQnJpZWZpbmdUcmVhZBIsCgZwZW9wbGUYAiADKAsyHC50YW5rLnRvcG8udjEuQnJpZWZpbmdQZXJzb24SLwoLcXVpZXRfc2luY2UYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wKpACCghNYXJrVHlwZRIZChVNQVJLX1RZUEVfVU5TUEVDSUZJRUQQABIVChFNQVJLX1RZUEVfTUVOVElPThABEhkKFU1BUktfVFlQRV9PV05fTUVTU0FHRRACEhoKFk1BUktfVFlQRV9SRUFEX0hPUklaT04QAxIYChRNQVJLX1RZUEVfU0VBUkNIX0hJVBAEEhgKFE1BUktfVFlQRV9XQUlUSU5HX09OEAUSFgoSTUFSS19UWVBFX0FSVElGQUNUEAYSEwoPTUFSS19UWVBFX0VWRU5UEAcSIQodTUFSS19UWVBFX1VOQU5TV0VSRURfUVVFU1RJT04QCBIXChNNQVJLX1RZUEVfQkVOQ0hNQVJLEAkqdQoMQXJ0aWZhY3RLaW5kEh0KGUFSVElGQUNUX0tJTkRfVU5TUEVDSUZJRUQQABIWChJBUlRJRkFDVF9LSU5EX0ZJTEUQARIWChJBUlRJRkFDVF9LSU5EX0xJTksQAhIWChJBUlRJRkFDVF9LSU5EX0NPREUQAyqqAQoKTWFya1N0YXR1cxIbChdNQVJLX1NUQVRVU19VTlNQRUNJRklFRBAAEhQKEE1BUktfU1RBVFVTX09QRU4QARIYChRNQVJLX1NUQVRVU19SRVNPTFZFRBACEhkKFU1BUktfU1RBVFVTX0RJU01JU1NFRBADEhgKFE1BUktfU1RBVFVTX1BST1BPU0VEEAQSGgoWTUFSS19TVEFUVVNfU1VQRVJTRURFRBAFKlUKBExhbmUSFAoQTEFORV9VTlNQRUNJRklFRBAAEhIKDkxBTkVfU1RSVUNUVVJFEAESEAoMTEFORV9NRVNTQUdFEAISEQoNTEFORV9QRVJTT05BTBADKm8KEFdhaXRpbmdEaXJlY3Rpb24SIQodV0FJVElOR19ESVJFQ1RJT05fVU5TUEVDSUZJRUQQABIbChdXQUlUSU5HX0RJUkVDVElPTl9PTl9NRRABEhsKF1dBSVRJTkdfRElSRUNUSU9OX0JZX01FEAIy1wUKC1RvcG9TZXJ2aWNlEkwKCUxpc3RNYXJrcxIeLnRhbmsudG9wby52MS5MaXN0TWFya3NSZXF1ZXN0Gh8udGFuay50b3BvLnYxLkxpc3RNYXJrc1Jlc3BvbnNlElgKDUZsYWdXYWl0aW5nT24SIi50YW5rLnRvcG8udjEuRmxhZ1dhaXRpbmdPblJlcXVlc3QaIy50YW5rLnRvcG8udjEuRmxhZ1dhaXRpbmdPblJlc3BvbnNlEmEKEFJlc29sdmVXYWl0aW5nT24SJS50YW5rLnRvcG8udjEuUmVzb2x2ZVdhaXRpbmdPblJlcXVlc3QaJi50YW5rLnRvcG8udjEuUmVzb2x2ZVdhaXRpbmdPblJlc3BvbnNlElgKDUxpc3RXYWl0aW5nT24SIi50YW5rLnRvcG8udjEuTGlzdFdhaXRpbmdPblJlcXVlc3QaIy50YW5rLnRvcG8udjEuTGlzdFdhaXRpbmdPblJlc3BvbnNlElIKC0dldEJyaWVmaW5nEiAudGFuay50b3BvLnYxLkdldEJyaWVmaW5nUmVxdWVzdBohLnRhbmsudG9wby52MS5HZXRCcmllZmluZ1Jlc3BvbnNlElIKC1JlY29yZEV2ZW50EiAudGFuay50b3BvLnYxLlJlY29yZEV2ZW50UmVxdWVzdBohLnRhbmsudG9wby52MS5SZWNvcmRFdmVudFJlc3BvbnNlElsKDkxpc3RCZW5jaG1hcmtzEiMudGFuay50b3BvLnYxLkxpc3RCZW5jaG1hcmtzUmVxdWVzdBokLnRhbmsudG9wby52MS5MaXN0QmVuY2htYXJrc1Jlc3BvbnNlEl4KD0RlY2lkZUJlbmNobWFyaxIkLnRhbmsudG9wby52MS5EZWNpZGVCZW5jaG1hcmtSZXF1ZXN0GiUudGFuay50b3BvLnYxLkRlY2lkZUJlbmNobWFya1Jlc3BvbnNlQsABChBjb20udGFuay50b3BvLnYxQglUb3BvUHJvdG9QAVpPZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay90b3BvL3YxO3RvcG92MaICA1RUWKoCDFRhbmsuVG9wby5WMcoCDFRhbmtcVG9wb1xWMeICGFRhbmtcVG9wb1xWMVxHUEJNZXRhZGF0YeoCDlRhbms6OlRvcG86OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
 
 /**
  * @generated from message tank.topo.v1.Mark
@@ -699,6 +699,150 @@ export const ListWaitingOnResponseSchema: GenMessage<ListWaitingOnResponse> = /*
   messageDesc(file_tank_topo_v1_topo, 17);
 
 /**
+ * The Home briefing: what moved while you were away, computed once on the
+ * server so both clients say the same thing.
+ *
+ * @generated from message tank.topo.v1.GetBriefingRequest
+ */
+export type GetBriefingRequest = Message<"tank.topo.v1.GetBriefingRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.topo.v1.GetBriefingRequest.
+ * Use `create(GetBriefingRequestSchema)` to create a new message.
+ */
+export const GetBriefingRequestSchema: GenMessage<GetBriefingRequest> = /*@__PURE__*/
+  messageDesc(file_tank_topo_v1_topo, 18);
+
+/**
+ * @generated from message tank.topo.v1.BriefingTread
+ */
+export type BriefingTread = Message<"tank.topo.v1.BriefingTread"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * Messages since your last read.
+   *
+   * @generated from field: int32 new_messages = 2;
+   */
+  newMessages: number;
+
+  /**
+   * Who wrote them, newest first, at most five, never you.
+   *
+   * @generated from field: repeated string author_ids = 3;
+   */
+  authorIds: string[];
+
+  /**
+   * The newest decision on record here since your last read, if any.
+   *
+   * @generated from field: string latest_decision = 4;
+   */
+  latestDecision: string;
+
+  /**
+   * @generated from field: string latest_decision_id = 5;
+   */
+  latestDecisionId: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_message_at = 6;
+   */
+  lastMessageAt?: Timestamp;
+
+  /**
+   * Messages in the last six hours: how hot the Tread is right now.
+   *
+   * @generated from field: int32 recent_messages = 7;
+   */
+  recentMessages: number;
+
+  /**
+   * Your unread mentions here.
+   *
+   * @generated from field: int32 mentions = 8;
+   */
+  mentions: number;
+};
+
+/**
+ * Describes the message tank.topo.v1.BriefingTread.
+ * Use `create(BriefingTreadSchema)` to create a new message.
+ */
+export const BriefingTreadSchema: GenMessage<BriefingTread> = /*@__PURE__*/
+  messageDesc(file_tank_topo_v1_topo, 19);
+
+/**
+ * Where somebody last posted, so "online" can say what they are on.
+ *
+ * @generated from message tank.topo.v1.BriefingPerson
+ */
+export type BriefingPerson = Message<"tank.topo.v1.BriefingPerson"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+
+  /**
+   * @generated from field: string channel_id = 2;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 3;
+   */
+  at?: Timestamp;
+};
+
+/**
+ * Describes the message tank.topo.v1.BriefingPerson.
+ * Use `create(BriefingPersonSchema)` to create a new message.
+ */
+export const BriefingPersonSchema: GenMessage<BriefingPerson> = /*@__PURE__*/
+  messageDesc(file_tank_topo_v1_topo, 20);
+
+/**
+ * @generated from message tank.topo.v1.GetBriefingResponse
+ */
+export type GetBriefingResponse = Message<"tank.topo.v1.GetBriefingResponse"> & {
+  /**
+   * Treads that moved since you last read them, newest first.
+   *
+   * @generated from field: repeated tank.topo.v1.BriefingTread treads = 1;
+   */
+  treads: BriefingTread[];
+
+  /**
+   * Each member's last post in the past day, in Treads you can see.
+   *
+   * @generated from field: repeated tank.topo.v1.BriefingPerson people = 2;
+   */
+  people: BriefingPerson[];
+
+  /**
+   * When the workspace last spoke, across the Treads you can see.
+   *
+   * @generated from field: google.protobuf.Timestamp quiet_since = 3;
+   */
+  quietSince?: Timestamp;
+};
+
+/**
+ * Describes the message tank.topo.v1.GetBriefingResponse.
+ * Use `create(GetBriefingResponseSchema)` to create a new message.
+ */
+export const GetBriefingResponseSchema: GenMessage<GetBriefingResponse> = /*@__PURE__*/
+  messageDesc(file_tank_topo_v1_topo, 21);
+
+/**
  * @generated from enum tank.topo.v1.MarkType
  */
 export enum MarkType {
@@ -986,6 +1130,16 @@ export const TopoService: GenService<{
     methodKind: "unary";
     input: typeof ListWaitingOnRequestSchema;
     output: typeof ListWaitingOnResponseSchema;
+  },
+  /**
+   * Home's "since you were away", with heat and who was talking, per Tread.
+   *
+   * @generated from rpc tank.topo.v1.TopoService.GetBriefing
+   */
+  getBriefing: {
+    methodKind: "unary";
+    input: typeof GetBriefingRequestSchema;
+    output: typeof GetBriefingResponseSchema;
   },
   /**
    * Record something that happened to a channel rather than in it. For the
