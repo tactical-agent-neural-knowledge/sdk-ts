@@ -33,12 +33,73 @@ export type Workspace = Message<"tank.workspace.v1.Workspace"> & {
      * @generated from field: google.protobuf.Timestamp created_at = 5;
      */
     createdAt?: Timestamp;
+    /**
+     * The workspace's look, set by an admin from a description. Unset means TANK's own.
+     *
+     * @generated from field: tank.workspace.v1.Theme theme = 6;
+     */
+    theme?: Theme;
 };
 /**
  * Describes the message tank.workspace.v1.Workspace.
  * Use `create(WorkspaceSchema)` to create a new message.
  */
 export declare const WorkspaceSchema: GenMessage<Workspace>;
+/**
+ * A colour theme made from a few words. Every colour is a #rrggbb hex; the
+ * server checks contrast before it hands one out, so clients apply it as is.
+ *
+ * @generated from message tank.workspace.v1.Theme
+ */
+export type Theme = Message<"tank.workspace.v1.Theme"> & {
+    /**
+     * What the person typed, so it can be shown back and refined.
+     *
+     * @generated from field: string description = 1;
+     */
+    description: string;
+    /**
+     * A short name the model gave it: "Midnight glacier".
+     *
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * "dark" or "light": which base the colours sit on.
+     *
+     * @generated from field: string scheme = 3;
+     */
+    scheme: string;
+    /**
+     * @generated from field: string primary = 4;
+     */
+    primary: string;
+    /**
+     * @generated from field: string secondary = 5;
+     */
+    secondary: string;
+    /**
+     * @generated from field: string background = 6;
+     */
+    background: string;
+    /**
+     * @generated from field: string surface = 7;
+     */
+    surface: string;
+    /**
+     * @generated from field: string on_surface = 8;
+     */
+    onSurface: string;
+    /**
+     * @generated from field: string accent = 9;
+     */
+    accent: string;
+};
+/**
+ * Describes the message tank.workspace.v1.Theme.
+ * Use `create(ThemeSchema)` to create a new message.
+ */
+export declare const ThemeSchema: GenMessage<Theme>;
 /**
  * @generated from message tank.workspace.v1.Member
  */
@@ -701,6 +762,12 @@ export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
      * @generated from field: tank.workspace.v1.TopoPreferences topo = 8;
      */
     topo?: TopoPreferences;
+    /**
+     * A theme made from a description, for this person; wins over the workspace's. Unset means none.
+     *
+     * @generated from field: tank.workspace.v1.Theme custom_theme = 9;
+     */
+    customTheme?: Theme;
 };
 /**
  * Describes the message tank.workspace.v1.Preferences.
@@ -1600,6 +1667,72 @@ export type CancelScheduledResponse = Message<"tank.workspace.v1.CancelScheduled
  */
 export declare const CancelScheduledResponseSchema: GenMessage<CancelScheduledResponse>;
 /**
+ * @generated from message tank.workspace.v1.GenerateThemeRequest
+ */
+export type GenerateThemeRequest = Message<"tank.workspace.v1.GenerateThemeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string description = 2;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.workspace.v1.GenerateThemeRequest.
+ * Use `create(GenerateThemeRequestSchema)` to create a new message.
+ */
+export declare const GenerateThemeRequestSchema: GenMessage<GenerateThemeRequest>;
+/**
+ * @generated from message tank.workspace.v1.GenerateThemeResponse
+ */
+export type GenerateThemeResponse = Message<"tank.workspace.v1.GenerateThemeResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Theme theme = 1;
+     */
+    theme?: Theme;
+};
+/**
+ * Describes the message tank.workspace.v1.GenerateThemeResponse.
+ * Use `create(GenerateThemeResponseSchema)` to create a new message.
+ */
+export declare const GenerateThemeResponseSchema: GenMessage<GenerateThemeResponse>;
+/**
+ * @generated from message tank.workspace.v1.SetWorkspaceThemeRequest
+ */
+export type SetWorkspaceThemeRequest = Message<"tank.workspace.v1.SetWorkspaceThemeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * Unset clears the workspace theme.
+     *
+     * @generated from field: tank.workspace.v1.Theme theme = 2;
+     */
+    theme?: Theme;
+};
+/**
+ * Describes the message tank.workspace.v1.SetWorkspaceThemeRequest.
+ * Use `create(SetWorkspaceThemeRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceThemeRequestSchema: GenMessage<SetWorkspaceThemeRequest>;
+/**
+ * @generated from message tank.workspace.v1.SetWorkspaceThemeResponse
+ */
+export type SetWorkspaceThemeResponse = Message<"tank.workspace.v1.SetWorkspaceThemeResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Workspace workspace = 1;
+     */
+    workspace?: Workspace;
+};
+/**
+ * Describes the message tank.workspace.v1.SetWorkspaceThemeResponse.
+ * Use `create(SetWorkspaceThemeResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceThemeResponseSchema: GenMessage<SetWorkspaceThemeResponse>;
+/**
  * @generated from enum tank.workspace.v1.Role
  */
 export declare enum Role {
@@ -1739,6 +1872,26 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof UpdatePreferencesRequestSchema;
         output: typeof UpdatePreferencesResponseSchema;
+    };
+    /**
+     * Turn up to fifteen words into a theme. Nothing is saved; the caller decides.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.GenerateTheme
+     */
+    generateTheme: {
+        methodKind: "unary";
+        input: typeof GenerateThemeRequestSchema;
+        output: typeof GenerateThemeResponseSchema;
+    };
+    /**
+     * Admins only: the workspace's theme, or a reset when theme is unset.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.SetWorkspaceTheme
+     */
+    setWorkspaceTheme: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceThemeRequestSchema;
+        output: typeof SetWorkspaceThemeResponseSchema;
     };
     /**
      * @generated from rpc tank.workspace.v1.WorkspaceService.ListEmoji
