@@ -105,6 +105,12 @@ export type Channel = Message<"tank.channel.v1.Channel"> & {
      * @generated from field: bool joined = 14;
      */
     joined: boolean;
+    /**
+     * A generated or uploaded picture for the Tread; empty means the # or lock glyph.
+     *
+     * @generated from field: string icon_file_id = 15;
+     */
+    iconFileId: string;
 };
 /**
  * Describes the message tank.channel.v1.Channel.
@@ -392,6 +398,40 @@ export type SetGoalResponse = Message<"tank.channel.v1.SetGoalResponse"> & {
  * Use `create(SetGoalResponseSchema)` to create a new message.
  */
 export declare const SetGoalResponseSchema: GenMessage<SetGoalResponse>;
+/**
+ * Any member of the Tread may set its icon; an empty file_id resets it.
+ *
+ * @generated from message tank.channel.v1.SetChannelIconRequest
+ */
+export type SetChannelIconRequest = Message<"tank.channel.v1.SetChannelIconRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string file_id = 2;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.channel.v1.SetChannelIconRequest.
+ * Use `create(SetChannelIconRequestSchema)` to create a new message.
+ */
+export declare const SetChannelIconRequestSchema: GenMessage<SetChannelIconRequest>;
+/**
+ * @generated from message tank.channel.v1.SetChannelIconResponse
+ */
+export type SetChannelIconResponse = Message<"tank.channel.v1.SetChannelIconResponse"> & {
+    /**
+     * @generated from field: tank.channel.v1.Channel channel = 1;
+     */
+    channel?: Channel;
+};
+/**
+ * Describes the message tank.channel.v1.SetChannelIconResponse.
+ * Use `create(SetChannelIconResponseSchema)` to create a new message.
+ */
+export declare const SetChannelIconResponseSchema: GenMessage<SetChannelIconResponse>;
 /**
  * @generated from message tank.channel.v1.ListChannelMembersRequest
  */
@@ -700,6 +740,14 @@ export declare const ChannelService: GenService<{
         methodKind: "unary";
         input: typeof SetGoalRequestSchema;
         output: typeof SetGoalResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.channel.v1.ChannelService.SetChannelIcon
+     */
+    setChannelIcon: {
+        methodKind: "unary";
+        input: typeof SetChannelIconRequestSchema;
+        output: typeof SetChannelIconResponseSchema;
     };
     /**
      * @generated from rpc tank.channel.v1.ChannelService.ListChannelMembers

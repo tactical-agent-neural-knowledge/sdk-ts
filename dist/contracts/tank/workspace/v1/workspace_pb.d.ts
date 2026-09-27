@@ -39,6 +39,12 @@ export type Workspace = Message<"tank.workspace.v1.Workspace"> & {
      * @generated from field: tank.workspace.v1.Theme theme = 6;
      */
     theme?: Theme;
+    /**
+     * A generated or uploaded picture for the workspace; empty means the TANK mark.
+     *
+     * @generated from field: string icon_file_id = 7;
+     */
+    iconFileId: string;
 };
 /**
  * Describes the message tank.workspace.v1.Workspace.
@@ -1733,6 +1739,88 @@ export type SetWorkspaceThemeResponse = Message<"tank.workspace.v1.SetWorkspaceT
  */
 export declare const SetWorkspaceThemeResponseSchema: GenMessage<SetWorkspaceThemeResponse>;
 /**
+ * "A copper gear with a lightning bolt" → a small SVG, stored as a file the caller owns.
+ *
+ * @generated from message tank.workspace.v1.GenerateArtRequest
+ */
+export type GenerateArtRequest = Message<"tank.workspace.v1.GenerateArtRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.workspace.v1.ArtKind kind = 2;
+     */
+    kind: ArtKind;
+    /**
+     * at most 15 words
+     *
+     * @generated from field: string description = 3;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.workspace.v1.GenerateArtRequest.
+ * Use `create(GenerateArtRequestSchema)` to create a new message.
+ */
+export declare const GenerateArtRequestSchema: GenMessage<GenerateArtRequest>;
+/**
+ * @generated from message tank.workspace.v1.GenerateArtResponse
+ */
+export type GenerateArtResponse = Message<"tank.workspace.v1.GenerateArtResponse"> & {
+    /**
+     * The stored picture; pass its id to SetWorkspaceIcon, SetChannelIcon or CreateEmoji.
+     *
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+    /**
+     * The sanitised SVG, for an instant preview.
+     *
+     * @generated from field: string svg = 2;
+     */
+    svg: string;
+};
+/**
+ * Describes the message tank.workspace.v1.GenerateArtResponse.
+ * Use `create(GenerateArtResponseSchema)` to create a new message.
+ */
+export declare const GenerateArtResponseSchema: GenMessage<GenerateArtResponse>;
+/**
+ * Admins only: the workspace icon, or a reset when file_id is empty.
+ *
+ * @generated from message tank.workspace.v1.SetWorkspaceIconRequest
+ */
+export type SetWorkspaceIconRequest = Message<"tank.workspace.v1.SetWorkspaceIconRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string file_id = 2;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.SetWorkspaceIconRequest.
+ * Use `create(SetWorkspaceIconRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceIconRequestSchema: GenMessage<SetWorkspaceIconRequest>;
+/**
+ * @generated from message tank.workspace.v1.SetWorkspaceIconResponse
+ */
+export type SetWorkspaceIconResponse = Message<"tank.workspace.v1.SetWorkspaceIconResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Workspace workspace = 1;
+     */
+    workspace?: Workspace;
+};
+/**
+ * Describes the message tank.workspace.v1.SetWorkspaceIconResponse.
+ * Use `create(SetWorkspaceIconResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceIconResponseSchema: GenMessage<SetWorkspaceIconResponse>;
+/**
  * @generated from enum tank.workspace.v1.Role
  */
 export declare enum Role {
@@ -1765,6 +1853,33 @@ export declare enum Role {
  * Describes the enum tank.workspace.v1.Role.
  */
 export declare const RoleSchema: GenEnum<Role>;
+/**
+ * What a generated picture is for. It changes the brief, not the pipeline.
+ *
+ * @generated from enum tank.workspace.v1.ArtKind
+ */
+export declare enum ArtKind {
+    /**
+     * @generated from enum value: ART_KIND_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * a Tread or workspace icon
+     *
+     * @generated from enum value: ART_KIND_ICON = 1;
+     */
+    ICON = 1,
+    /**
+     * a custom emoji
+     *
+     * @generated from enum value: ART_KIND_EMOJI = 2;
+     */
+    EMOJI = 2
+}
+/**
+ * Describes the enum tank.workspace.v1.ArtKind.
+ */
+export declare const ArtKindSchema: GenEnum<ArtKind>;
 /**
  * @generated from service tank.workspace.v1.WorkspaceService
  */
@@ -1892,6 +2007,26 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceThemeRequestSchema;
         output: typeof SetWorkspaceThemeResponseSchema;
+    };
+    /**
+     * Turn up to fifteen words into an icon or emoji picture. The file is saved; nothing is applied.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.GenerateArt
+     */
+    generateArt: {
+        methodKind: "unary";
+        input: typeof GenerateArtRequestSchema;
+        output: typeof GenerateArtResponseSchema;
+    };
+    /**
+     * Admins only: the workspace icon, or a reset when file_id is empty.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.SetWorkspaceIcon
+     */
+    setWorkspaceIcon: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceIconRequestSchema;
+        output: typeof SetWorkspaceIconResponseSchema;
     };
     /**
      * @generated from rpc tank.workspace.v1.WorkspaceService.ListEmoji
