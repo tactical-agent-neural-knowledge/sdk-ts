@@ -7,6 +7,7 @@ import type { Channel, ChannelReadState } from "../../channel/v1/channel_pb.js";
 import type { File } from "../../files/v1/files_pb.js";
 import type { Huddle } from "../../huddle/v1/huddle_pb.js";
 import type { Message as Message$1 } from "../../message/v1/message_pb.js";
+import type { Widget } from "../../monitor/v1/monitor_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
 import type { Mark } from "../../topo/v1/topo_pb.js";
 import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
@@ -836,3 +837,20 @@ export type TopoMarkUpdated = Message<"tank.events.v1.TopoMarkUpdated"> & {
  * Use `create(TopoMarkUpdatedSchema)` to create a new message.
  */
 export declare const TopoMarkUpdatedSchema: GenMessage<TopoMarkUpdated>;
+/**
+ * monitor.widget.updated on evt.{ws}.ch.{channel}: a Radar widget has a new
+ * point or a new health. Clients showing the grid redraw that widget.
+ *
+ * @generated from message tank.events.v1.MonitorWidgetUpdated
+ */
+export type MonitorWidgetUpdated = Message<"tank.events.v1.MonitorWidgetUpdated"> & {
+    /**
+     * @generated from field: tank.monitor.v1.Widget widget = 1;
+     */
+    widget?: Widget;
+};
+/**
+ * Describes the message tank.events.v1.MonitorWidgetUpdated.
+ * Use `create(MonitorWidgetUpdatedSchema)` to create a new message.
+ */
+export declare const MonitorWidgetUpdatedSchema: GenMessage<MonitorWidgetUpdated>;

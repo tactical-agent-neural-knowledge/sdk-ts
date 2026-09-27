@@ -600,7 +600,13 @@ export declare enum ChannelType {
     /**
      * @generated from enum value: CHANNEL_TYPE_MPDM = 4;
      */
-    MPDM = 4
+    MPDM = 4,
+    /**
+     * A Radar: a grid of widgets instead of a message list. See tank.monitor.v1.
+     *
+     * @generated from enum value: CHANNEL_TYPE_MONITOR = 5;
+     */
+    MONITOR = 5
 }
 /**
  * Describes the enum tank.channel.v1.ChannelType.

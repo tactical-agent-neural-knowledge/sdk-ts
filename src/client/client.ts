@@ -35,6 +35,7 @@ import {
   PresenceService,
   type PresenceStatus,
 } from "../contracts/tank/presence/v1/presence_pb.js";
+import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import {
   type GetBootstrapResponse,
@@ -246,6 +247,8 @@ export class TankClient {
   readonly notifications: Client<typeof NotificationService>;
   /** The map of a Tread: the marks that make up its Topo strip. */
   readonly topo: Client<typeof TopoService>;
+  /** Radar: widgets, sources and series. */
+  readonly monitor: Client<typeof MonitorService>;
   readonly realtime: RealtimeClient;
   readonly store: TankStore;
   readonly storage: TankStorage;
@@ -291,6 +294,7 @@ export class TankClient {
     this.agent = this.agents;
     this.notifications = createClient(NotificationService, this.transport);
     this.topo = createClient(TopoService, this.transport);
+    this.monitor = createClient(MonitorService, this.transport);
     this.realtime = new RealtimeClient({
       wsUrl: opts.wsUrl,
       getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
