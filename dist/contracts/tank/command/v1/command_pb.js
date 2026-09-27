@@ -5,7 +5,7 @@ import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1
 /**
  * Describes the file tank/command/v1/command.proto.
  */
-export const file_tank_command_v1_command = /*@__PURE__*/ fileDesc("Ch10YW5rL2NvbW1hbmQvdjEvY29tbWFuZC5wcm90bxIPdGFuay5jb21tYW5kLnYxIksKB0NvbW1hbmQSDAoEbmFtZRgBIAEoCRIPCgdzdW1tYXJ5GAIgASgJEg0KBXVzYWdlGAMgASgJEhIKCnRha2VzX3RleHQYBCABKAgiKwoTTGlzdENvbW1hbmRzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiQgoUTGlzdENvbW1hbmRzUmVzcG9uc2USKgoIY29tbWFuZHMYASADKAsyGC50YW5rLmNvbW1hbmQudjEuQ29tbWFuZCKGAQoRUnVuQ29tbWFuZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkSDAoEdGV4dBgEIAEoCRINCgVkcmFmdBgFIAEoCRISCgpsb2NhbF90aW1lGAYgASgJImEKElJ1bkNvbW1hbmRSZXNwb25zZRINCgVyZXBseRgBIAEoCRIMCgRwb3N0GAIgASgJEhUKDXJlcGxhY2VfZHJhZnQYAyABKAkSFwoPb3Blbl9jaGFubmVsX2lkGAQgASgJMsQBCg5Db21tYW5kU2VydmljZRJbCgxMaXN0Q29tbWFuZHMSJC50YW5rLmNvbW1hbmQudjEuTGlzdENvbW1hbmRzUmVxdWVzdBolLnRhbmsuY29tbWFuZC52MS5MaXN0Q29tbWFuZHNSZXNwb25zZRJVCgpSdW5Db21tYW5kEiIudGFuay5jb21tYW5kLnYxLlJ1bkNvbW1hbmRSZXF1ZXN0GiMudGFuay5jb21tYW5kLnYxLlJ1bkNvbW1hbmRSZXNwb25zZULYAQoTY29tLnRhbmsuY29tbWFuZC52MUIMQ29tbWFuZFByb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvY29tbWFuZC92MTtjb21tYW5kdjGiAgNUQ1iqAg9UYW5rLkNvbW1hbmQuVjHKAg9UYW5rXENvbW1hbmRcVjHiAhtUYW5rXENvbW1hbmRcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpDb21tYW5kOjpWMWIGcHJvdG8z");
+export const file_tank_command_v1_command = /*@__PURE__*/ fileDesc("Ch10YW5rL2NvbW1hbmQvdjEvY29tbWFuZC5wcm90bxIPdGFuay5jb21tYW5kLnYxIksKB0NvbW1hbmQSDAoEbmFtZRgBIAEoCRIPCgdzdW1tYXJ5GAIgASgJEg0KBXVzYWdlGAMgASgJEhIKCnRha2VzX3RleHQYBCABKAgiKwoTTGlzdENvbW1hbmRzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiQgoUTGlzdENvbW1hbmRzUmVzcG9uc2USKgoIY29tbWFuZHMYASADKAsyGC50YW5rLmNvbW1hbmQudjEuQ29tbWFuZCKGAQoRUnVuQ29tbWFuZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkSDAoEdGV4dBgEIAEoCRINCgVkcmFmdBgFIAEoCRISCgpsb2NhbF90aW1lGAYgASgJImEKElJ1bkNvbW1hbmRSZXNwb25zZRINCgVyZXBseRgBIAEoCRIMCgRwb3N0GAIgASgJEhUKDXJlcGxhY2VfZHJhZnQYAyABKAkSFwoPb3Blbl9jaGFubmVsX2lkGAQgASgJIlcKBU1hY3JvEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFc3RlcHMYAyADKAkSEQoJd29ya3NwYWNlGAQgASgIEhIKCmNyZWF0ZWRfYnkYBSABKAkiKQoRTGlzdE1hY3Jvc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIjwKEkxpc3RNYWNyb3NSZXNwb25zZRImCgZtYWNyb3MYASADKAsyFi50YW5rLmNvbW1hbmQudjEuTWFjcm8iWAoQU2F2ZU1hY3JvUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgVzdGVwcxgDIAMoCRIRCgl3b3Jrc3BhY2UYBCABKAgiOgoRU2F2ZU1hY3JvUmVzcG9uc2USJQoFbWFjcm8YASABKAsyFi50YW5rLmNvbW1hbmQudjEuTWFjcm8iSwoSRGVsZXRlTWFjcm9SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhEKCXdvcmtzcGFjZRgDIAEoCCIVChNEZWxldGVNYWNyb1Jlc3BvbnNlMskDCg5Db21tYW5kU2VydmljZRJbCgxMaXN0Q29tbWFuZHMSJC50YW5rLmNvbW1hbmQudjEuTGlzdENvbW1hbmRzUmVxdWVzdBolLnRhbmsuY29tbWFuZC52MS5MaXN0Q29tbWFuZHNSZXNwb25zZRJVCgpSdW5Db21tYW5kEiIudGFuay5jb21tYW5kLnYxLlJ1bkNvbW1hbmRSZXF1ZXN0GiMudGFuay5jb21tYW5kLnYxLlJ1bkNvbW1hbmRSZXNwb25zZRJVCgpMaXN0TWFjcm9zEiIudGFuay5jb21tYW5kLnYxLkxpc3RNYWNyb3NSZXF1ZXN0GiMudGFuay5jb21tYW5kLnYxLkxpc3RNYWNyb3NSZXNwb25zZRJSCglTYXZlTWFjcm8SIS50YW5rLmNvbW1hbmQudjEuU2F2ZU1hY3JvUmVxdWVzdBoiLnRhbmsuY29tbWFuZC52MS5TYXZlTWFjcm9SZXNwb25zZRJYCgtEZWxldGVNYWNybxIjLnRhbmsuY29tbWFuZC52MS5EZWxldGVNYWNyb1JlcXVlc3QaJC50YW5rLmNvbW1hbmQudjEuRGVsZXRlTWFjcm9SZXNwb25zZULYAQoTY29tLnRhbmsuY29tbWFuZC52MUIMQ29tbWFuZFByb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvY29tbWFuZC92MTtjb21tYW5kdjGiAgNUQ1iqAg9UYW5rLkNvbW1hbmQuVjHKAg9UYW5rXENvbW1hbmRcVjHiAhtUYW5rXENvbW1hbmRcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpDb21tYW5kOjpWMWIGcHJvdG8z");
 /**
  * Describes the message tank.command.v1.Command.
  * Use `create(CommandSchema)` to create a new message.
@@ -31,6 +31,41 @@ export const RunCommandRequestSchema = /*@__PURE__*/ messageDesc(file_tank_comma
  * Use `create(RunCommandResponseSchema)` to create a new message.
  */
 export const RunCommandResponseSchema = /*@__PURE__*/ messageDesc(file_tank_command_v1_command, 4);
+/**
+ * Describes the message tank.command.v1.Macro.
+ * Use `create(MacroSchema)` to create a new message.
+ */
+export const MacroSchema = /*@__PURE__*/ messageDesc(file_tank_command_v1_command, 5);
+/**
+ * Describes the message tank.command.v1.ListMacrosRequest.
+ * Use `create(ListMacrosRequestSchema)` to create a new message.
+ */
+export const ListMacrosRequestSchema = /*@__PURE__*/ messageDesc(file_tank_command_v1_command, 6);
+/**
+ * Describes the message tank.command.v1.ListMacrosResponse.
+ * Use `create(ListMacrosResponseSchema)` to create a new message.
+ */
+export const ListMacrosResponseSchema = /*@__PURE__*/ messageDesc(file_tank_command_v1_command, 7);
+/**
+ * Describes the message tank.command.v1.SaveMacroRequest.
+ * Use `create(SaveMacroRequestSchema)` to create a new message.
+ */
+export const SaveMacroRequestSchema = /*@__PURE__*/ messageDesc(file_tank_command_v1_command, 8);
+/**
+ * Describes the message tank.command.v1.SaveMacroResponse.
+ * Use `create(SaveMacroResponseSchema)` to create a new message.
+ */
+export const SaveMacroResponseSchema = /*@__PURE__*/ messageDesc(file_tank_command_v1_command, 9);
+/**
+ * Describes the message tank.command.v1.DeleteMacroRequest.
+ * Use `create(DeleteMacroRequestSchema)` to create a new message.
+ */
+export const DeleteMacroRequestSchema = /*@__PURE__*/ messageDesc(file_tank_command_v1_command, 10);
+/**
+ * Describes the message tank.command.v1.DeleteMacroResponse.
+ * Use `create(DeleteMacroResponseSchema)` to create a new message.
+ */
+export const DeleteMacroResponseSchema = /*@__PURE__*/ messageDesc(file_tank_command_v1_command, 11);
 /**
  * @generated from service tank.command.v1.CommandService
  */

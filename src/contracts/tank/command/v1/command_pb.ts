@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/command/v1/command.proto.
  */
 export const file_tank_command_v1_command: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2NvbW1hbmQvdjEvY29tbWFuZC5wcm90bxIPdGFuay5jb21tYW5kLnYxIksKB0NvbW1hbmQSDAoEbmFtZRgBIAEoCRIPCgdzdW1tYXJ5GAIgASgJEg0KBXVzYWdlGAMgASgJEhIKCnRha2VzX3RleHQYBCABKAgiKwoTTGlzdENvbW1hbmRzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiQgoUTGlzdENvbW1hbmRzUmVzcG9uc2USKgoIY29tbWFuZHMYASADKAsyGC50YW5rLmNvbW1hbmQudjEuQ29tbWFuZCKGAQoRUnVuQ29tbWFuZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkSDAoEdGV4dBgEIAEoCRINCgVkcmFmdBgFIAEoCRISCgpsb2NhbF90aW1lGAYgASgJImEKElJ1bkNvbW1hbmRSZXNwb25zZRINCgVyZXBseRgBIAEoCRIMCgRwb3N0GAIgASgJEhUKDXJlcGxhY2VfZHJhZnQYAyABKAkSFwoPb3Blbl9jaGFubmVsX2lkGAQgASgJMsQBCg5Db21tYW5kU2VydmljZRJbCgxMaXN0Q29tbWFuZHMSJC50YW5rLmNvbW1hbmQudjEuTGlzdENvbW1hbmRzUmVxdWVzdBolLnRhbmsuY29tbWFuZC52MS5MaXN0Q29tbWFuZHNSZXNwb25zZRJVCgpSdW5Db21tYW5kEiIudGFuay5jb21tYW5kLnYxLlJ1bkNvbW1hbmRSZXF1ZXN0GiMudGFuay5jb21tYW5kLnYxLlJ1bkNvbW1hbmRSZXNwb25zZULYAQoTY29tLnRhbmsuY29tbWFuZC52MUIMQ29tbWFuZFByb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvY29tbWFuZC92MTtjb21tYW5kdjGiAgNUQ1iqAg9UYW5rLkNvbW1hbmQuVjHKAg9UYW5rXENvbW1hbmRcVjHiAhtUYW5rXENvbW1hbmRcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpDb21tYW5kOjpWMWIGcHJvdG8z");
+  fileDesc("Ch10YW5rL2NvbW1hbmQvdjEvY29tbWFuZC5wcm90bxIPdGFuay5jb21tYW5kLnYxIksKB0NvbW1hbmQSDAoEbmFtZRgBIAEoCRIPCgdzdW1tYXJ5GAIgASgJEg0KBXVzYWdlGAMgASgJEhIKCnRha2VzX3RleHQYBCABKAgiKwoTTGlzdENvbW1hbmRzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiQgoUTGlzdENvbW1hbmRzUmVzcG9uc2USKgoIY29tbWFuZHMYASADKAsyGC50YW5rLmNvbW1hbmQudjEuQ29tbWFuZCKGAQoRUnVuQ29tbWFuZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkSDAoEdGV4dBgEIAEoCRINCgVkcmFmdBgFIAEoCRISCgpsb2NhbF90aW1lGAYgASgJImEKElJ1bkNvbW1hbmRSZXNwb25zZRINCgVyZXBseRgBIAEoCRIMCgRwb3N0GAIgASgJEhUKDXJlcGxhY2VfZHJhZnQYAyABKAkSFwoPb3Blbl9jaGFubmVsX2lkGAQgASgJIlcKBU1hY3JvEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFc3RlcHMYAyADKAkSEQoJd29ya3NwYWNlGAQgASgIEhIKCmNyZWF0ZWRfYnkYBSABKAkiKQoRTGlzdE1hY3Jvc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIjwKEkxpc3RNYWNyb3NSZXNwb25zZRImCgZtYWNyb3MYASADKAsyFi50YW5rLmNvbW1hbmQudjEuTWFjcm8iWAoQU2F2ZU1hY3JvUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgVzdGVwcxgDIAMoCRIRCgl3b3Jrc3BhY2UYBCABKAgiOgoRU2F2ZU1hY3JvUmVzcG9uc2USJQoFbWFjcm8YASABKAsyFi50YW5rLmNvbW1hbmQudjEuTWFjcm8iSwoSRGVsZXRlTWFjcm9SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhEKCXdvcmtzcGFjZRgDIAEoCCIVChNEZWxldGVNYWNyb1Jlc3BvbnNlMskDCg5Db21tYW5kU2VydmljZRJbCgxMaXN0Q29tbWFuZHMSJC50YW5rLmNvbW1hbmQudjEuTGlzdENvbW1hbmRzUmVxdWVzdBolLnRhbmsuY29tbWFuZC52MS5MaXN0Q29tbWFuZHNSZXNwb25zZRJVCgpSdW5Db21tYW5kEiIudGFuay5jb21tYW5kLnYxLlJ1bkNvbW1hbmRSZXF1ZXN0GiMudGFuay5jb21tYW5kLnYxLlJ1bkNvbW1hbmRSZXNwb25zZRJVCgpMaXN0TWFjcm9zEiIudGFuay5jb21tYW5kLnYxLkxpc3RNYWNyb3NSZXF1ZXN0GiMudGFuay5jb21tYW5kLnYxLkxpc3RNYWNyb3NSZXNwb25zZRJSCglTYXZlTWFjcm8SIS50YW5rLmNvbW1hbmQudjEuU2F2ZU1hY3JvUmVxdWVzdBoiLnRhbmsuY29tbWFuZC52MS5TYXZlTWFjcm9SZXNwb25zZRJYCgtEZWxldGVNYWNybxIjLnRhbmsuY29tbWFuZC52MS5EZWxldGVNYWNyb1JlcXVlc3QaJC50YW5rLmNvbW1hbmQudjEuRGVsZXRlTWFjcm9SZXNwb25zZULYAQoTY29tLnRhbmsuY29tbWFuZC52MUIMQ29tbWFuZFByb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvY29tbWFuZC92MTtjb21tYW5kdjGiAgNUQ1iqAg9UYW5rLkNvbW1hbmQuVjHKAg9UYW5rXENvbW1hbmRcVjHiAhtUYW5rXENvbW1hbmRcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpDb21tYW5kOjpWMWIGcHJvdG8z");
 
 /**
  * @generated from message tank.command.v1.Command
@@ -177,6 +177,175 @@ export const RunCommandResponseSchema: GenMessage<RunCommandResponse> = /*@__PUR
   messageDesc(file_tank_command_v1_command, 4);
 
 /**
+ * A macro: a name that runs a sequence of command lines. "$1", "$2"… in a step
+ * take the words given when the macro runs; "$*" takes them all.
+ *
+ * @generated from message tank.command.v1.Macro
+ */
+export type Macro = Message<"tank.command.v1.Macro"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * "standup"; runs as /standup
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * "/catchup", "/tldr post", "/later 9:00 tomorrow Standup"
+   *
+   * @generated from field: repeated string steps = 3;
+   */
+  steps: string[];
+
+  /**
+   * Empty for a personal macro; a workspace macro (admins) is for everyone.
+   *
+   * @generated from field: bool workspace = 4;
+   */
+  workspace: boolean;
+
+  /**
+   * @generated from field: string created_by = 5;
+   */
+  createdBy: string;
+};
+
+/**
+ * Describes the message tank.command.v1.Macro.
+ * Use `create(MacroSchema)` to create a new message.
+ */
+export const MacroSchema: GenMessage<Macro> = /*@__PURE__*/
+  messageDesc(file_tank_command_v1_command, 5);
+
+/**
+ * @generated from message tank.command.v1.ListMacrosRequest
+ */
+export type ListMacrosRequest = Message<"tank.command.v1.ListMacrosRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.command.v1.ListMacrosRequest.
+ * Use `create(ListMacrosRequestSchema)` to create a new message.
+ */
+export const ListMacrosRequestSchema: GenMessage<ListMacrosRequest> = /*@__PURE__*/
+  messageDesc(file_tank_command_v1_command, 6);
+
+/**
+ * @generated from message tank.command.v1.ListMacrosResponse
+ */
+export type ListMacrosResponse = Message<"tank.command.v1.ListMacrosResponse"> & {
+  /**
+   * @generated from field: repeated tank.command.v1.Macro macros = 1;
+   */
+  macros: Macro[];
+};
+
+/**
+ * Describes the message tank.command.v1.ListMacrosResponse.
+ * Use `create(ListMacrosResponseSchema)` to create a new message.
+ */
+export const ListMacrosResponseSchema: GenMessage<ListMacrosResponse> = /*@__PURE__*/
+  messageDesc(file_tank_command_v1_command, 7);
+
+/**
+ * @generated from message tank.command.v1.SaveMacroRequest
+ */
+export type SaveMacroRequest = Message<"tank.command.v1.SaveMacroRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: repeated string steps = 3;
+   */
+  steps: string[];
+
+  /**
+   * @generated from field: bool workspace = 4;
+   */
+  workspace: boolean;
+};
+
+/**
+ * Describes the message tank.command.v1.SaveMacroRequest.
+ * Use `create(SaveMacroRequestSchema)` to create a new message.
+ */
+export const SaveMacroRequestSchema: GenMessage<SaveMacroRequest> = /*@__PURE__*/
+  messageDesc(file_tank_command_v1_command, 8);
+
+/**
+ * @generated from message tank.command.v1.SaveMacroResponse
+ */
+export type SaveMacroResponse = Message<"tank.command.v1.SaveMacroResponse"> & {
+  /**
+   * @generated from field: tank.command.v1.Macro macro = 1;
+   */
+  macro?: Macro;
+};
+
+/**
+ * Describes the message tank.command.v1.SaveMacroResponse.
+ * Use `create(SaveMacroResponseSchema)` to create a new message.
+ */
+export const SaveMacroResponseSchema: GenMessage<SaveMacroResponse> = /*@__PURE__*/
+  messageDesc(file_tank_command_v1_command, 9);
+
+/**
+ * @generated from message tank.command.v1.DeleteMacroRequest
+ */
+export type DeleteMacroRequest = Message<"tank.command.v1.DeleteMacroRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: bool workspace = 3;
+   */
+  workspace: boolean;
+};
+
+/**
+ * Describes the message tank.command.v1.DeleteMacroRequest.
+ * Use `create(DeleteMacroRequestSchema)` to create a new message.
+ */
+export const DeleteMacroRequestSchema: GenMessage<DeleteMacroRequest> = /*@__PURE__*/
+  messageDesc(file_tank_command_v1_command, 10);
+
+/**
+ * @generated from message tank.command.v1.DeleteMacroResponse
+ */
+export type DeleteMacroResponse = Message<"tank.command.v1.DeleteMacroResponse"> & {
+};
+
+/**
+ * Describes the message tank.command.v1.DeleteMacroResponse.
+ * Use `create(DeleteMacroResponseSchema)` to create a new message.
+ */
+export const DeleteMacroResponseSchema: GenMessage<DeleteMacroResponse> = /*@__PURE__*/
+  messageDesc(file_tank_command_v1_command, 11);
+
+/**
  * @generated from service tank.command.v1.CommandService
  */
 export const CommandService: GenService<{
@@ -195,6 +364,30 @@ export const CommandService: GenService<{
     methodKind: "unary";
     input: typeof RunCommandRequestSchema;
     output: typeof RunCommandResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.command.v1.CommandService.ListMacros
+   */
+  listMacros: {
+    methodKind: "unary";
+    input: typeof ListMacrosRequestSchema;
+    output: typeof ListMacrosResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.command.v1.CommandService.SaveMacro
+   */
+  saveMacro: {
+    methodKind: "unary";
+    input: typeof SaveMacroRequestSchema;
+    output: typeof SaveMacroResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.command.v1.CommandService.DeleteMacro
+   */
+  deleteMacro: {
+    methodKind: "unary";
+    input: typeof DeleteMacroRequestSchema;
+    output: typeof DeleteMacroResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_command_v1_command, 0);
