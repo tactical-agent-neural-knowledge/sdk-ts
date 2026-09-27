@@ -9,6 +9,7 @@ import {
   type AgentStatus,
   type AppCommand,
   type CardAction,
+  type ChannelDeleted,
   type ChannelMembershipChanged,
   type ChannelUpdated,
   type Envelope,
@@ -952,6 +953,7 @@ export type KnownEventPayload =
   | ReactionRemoved
   | ReadStateUpdated
   | ChannelUpdated
+  | ChannelDeleted
   | ChannelMembershipChanged
   | CardAction
   | AppCommand

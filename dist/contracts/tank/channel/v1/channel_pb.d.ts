@@ -692,6 +692,32 @@ export type ArchiveChannelResponse = Message<"tank.channel.v1.ArchiveChannelResp
  */
 export declare const ArchiveChannelResponseSchema: GenMessage<ArchiveChannelResponse>;
 /**
+ * Deletes a Tread or Radar for everyone: it leaves every list and cannot be opened again.
+ * Admins, or whoever may archive it. #general cannot be deleted.
+ *
+ * @generated from message tank.channel.v1.DeleteChannelRequest
+ */
+export type DeleteChannelRequest = Message<"tank.channel.v1.DeleteChannelRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.channel.v1.DeleteChannelRequest.
+ * Use `create(DeleteChannelRequestSchema)` to create a new message.
+ */
+export declare const DeleteChannelRequestSchema: GenMessage<DeleteChannelRequest>;
+/**
+ * @generated from message tank.channel.v1.DeleteChannelResponse
+ */
+export type DeleteChannelResponse = Message<"tank.channel.v1.DeleteChannelResponse"> & {};
+/**
+ * Describes the message tank.channel.v1.DeleteChannelResponse.
+ * Use `create(DeleteChannelResponseSchema)` to create a new message.
+ */
+export declare const DeleteChannelResponseSchema: GenMessage<DeleteChannelResponse>;
+/**
  * @generated from message tank.channel.v1.UnarchiveChannelRequest
  */
 export type UnarchiveChannelRequest = Message<"tank.channel.v1.UnarchiveChannelRequest"> & {
@@ -935,6 +961,14 @@ export declare const ChannelService: GenService<{
         methodKind: "unary";
         input: typeof ArchiveChannelRequestSchema;
         output: typeof ArchiveChannelResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.channel.v1.ChannelService.DeleteChannel
+     */
+    deleteChannel: {
+        methodKind: "unary";
+        input: typeof DeleteChannelRequestSchema;
+        output: typeof DeleteChannelResponseSchema;
     };
     /**
      * @generated from rpc tank.channel.v1.ChannelService.UnarchiveChannel
