@@ -162,6 +162,10 @@ export type Widget = Message<"tank.monitor.v1.Widget"> & {
      * @generated from field: google.protobuf.Timestamp updated_at = 13;
      */
     updatedAt?: Timestamp;
+    /**
+     * @generated from field: tank.monitor.v1.WidgetNotify notify = 14;
+     */
+    notify: WidgetNotify;
 };
 /**
  * Describes the message tank.monitor.v1.Widget.
@@ -326,6 +330,10 @@ export type UpsertWidgetRequest = Message<"tank.monitor.v1.UpsertWidgetRequest">
      * @generated from field: tank.monitor.v1.Position position = 9;
      */
     position?: Position;
+    /**
+     * @generated from field: tank.monitor.v1.WidgetNotify notify = 10;
+     */
+    notify: WidgetNotify;
 };
 /**
  * Describes the message tank.monitor.v1.UpsertWidgetRequest.
@@ -689,6 +697,40 @@ export declare enum SourceKind {
  * Describes the enum tank.monitor.v1.SourceKind.
  */
 export declare const SourceKindSchema: GenEnum<SourceKind>;
+/**
+ * When a widget should raise a notification. It is a property of the widget, not
+ * of the person: a Radar is small and everyone on it wants the same alert.
+ *
+ * @generated from enum tank.monitor.v1.WidgetNotify
+ */
+export declare enum WidgetNotify {
+    /**
+     * @generated from enum value: WIDGET_NOTIFY_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * never
+     *
+     * @generated from enum value: WIDGET_NOTIFY_OFF = 1;
+     */
+    OFF = 1,
+    /**
+     * only when it goes critical
+     *
+     * @generated from enum value: WIDGET_NOTIFY_CRIT = 2;
+     */
+    CRIT = 2,
+    /**
+     * when it goes warning or critical
+     *
+     * @generated from enum value: WIDGET_NOTIFY_WARN = 3;
+     */
+    WARN = 3
+}
+/**
+ * Describes the enum tank.monitor.v1.WidgetNotify.
+ */
+export declare const WidgetNotifySchema: GenEnum<WidgetNotify>;
 /**
  * @generated from enum tank.monitor.v1.Health
  */

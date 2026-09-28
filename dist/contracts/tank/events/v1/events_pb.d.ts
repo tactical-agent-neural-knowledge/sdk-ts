@@ -7,7 +7,7 @@ import type { Channel, ChannelReadState } from "../../channel/v1/channel_pb.js";
 import type { File } from "../../files/v1/files_pb.js";
 import type { Huddle } from "../../huddle/v1/huddle_pb.js";
 import type { Message as Message$1 } from "../../message/v1/message_pb.js";
-import type { Widget } from "../../monitor/v1/monitor_pb.js";
+import type { Health, Widget } from "../../monitor/v1/monitor_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
 import type { Mark } from "../../topo/v1/topo_pb.js";
 import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
@@ -874,3 +874,24 @@ export type MonitorWidgetUpdated = Message<"tank.events.v1.MonitorWidgetUpdated"
  * Use `create(MonitorWidgetUpdatedSchema)` to create a new message.
  */
 export declare const MonitorWidgetUpdatedSchema: GenMessage<MonitorWidgetUpdated>;
+/**
+ * A widget crossed into warning or critical and asks to be told about it. Only the
+ * crossing is an event; a widget that stays red does not keep shouting.
+ *
+ * @generated from message tank.events.v1.MonitorWidgetAlert
+ */
+export type MonitorWidgetAlert = Message<"tank.events.v1.MonitorWidgetAlert"> & {
+    /**
+     * @generated from field: tank.monitor.v1.Widget widget = 1;
+     */
+    widget?: Widget;
+    /**
+     * @generated from field: tank.monitor.v1.Health previous = 2;
+     */
+    previous: Health;
+};
+/**
+ * Describes the message tank.events.v1.MonitorWidgetAlert.
+ * Use `create(MonitorWidgetAlertSchema)` to create a new message.
+ */
+export declare const MonitorWidgetAlertSchema: GenMessage<MonitorWidgetAlert>;
