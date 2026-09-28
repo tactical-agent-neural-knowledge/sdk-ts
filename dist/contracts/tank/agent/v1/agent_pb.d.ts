@@ -377,6 +377,203 @@ export type ListAgentsResponse = Message<"tank.agent.v1.ListAgentsResponse"> & {
  */
 export declare const ListAgentsResponseSchema: GenMessage<ListAgentsResponse>;
 /**
+ * What a Tread knows about GitHub: whether the workspace is connected at all, what
+ * that installation can reach, and which repository this Tread works on.
+ *
+ * @generated from message tank.agent.v1.RepoBinding
+ */
+export type RepoBinding = Message<"tank.agent.v1.RepoBinding"> & {
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * default "main"
+     *
+     * @generated from field: string base_branch = 2;
+     */
+    baseBranch: string;
+    /**
+     * node | go | python | expo
+     *
+     * @generated from field: string toolchain = 3;
+     */
+    toolchain: string;
+};
+/**
+ * Describes the message tank.agent.v1.RepoBinding.
+ * Use `create(RepoBindingSchema)` to create a new message.
+ */
+export declare const RepoBindingSchema: GenMessage<RepoBinding>;
+/**
+ * @generated from message tank.agent.v1.RepoConnection
+ */
+export type RepoConnection = Message<"tank.agent.v1.RepoConnection"> & {
+    /**
+     * the workspace has a GitHub installation
+     *
+     * @generated from field: bool connected = 1;
+     */
+    connected: boolean;
+    /**
+     * the org it is installed into
+     *
+     * @generated from field: string account_login = 2;
+     */
+    accountLogin: string;
+    /**
+     * what that installation can reach
+     *
+     * @generated from field: repeated string repos = 3;
+     */
+    repos: string[];
+    /**
+     * this Tread's binding, absent when unbound
+     *
+     * @generated from field: tank.agent.v1.RepoBinding binding = 4;
+     */
+    binding?: RepoBinding;
+    /**
+     * the caller may connect and bind: workspace admins only
+     *
+     * @generated from field: bool can_manage = 5;
+     */
+    canManage: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.RepoConnection.
+ * Use `create(RepoConnectionSchema)` to create a new message.
+ */
+export declare const RepoConnectionSchema: GenMessage<RepoConnection>;
+/**
+ * @generated from message tank.agent.v1.GetRepoConnectionRequest
+ */
+export type GetRepoConnectionRequest = Message<"tank.agent.v1.GetRepoConnectionRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetRepoConnectionRequest.
+ * Use `create(GetRepoConnectionRequestSchema)` to create a new message.
+ */
+export declare const GetRepoConnectionRequestSchema: GenMessage<GetRepoConnectionRequest>;
+/**
+ * @generated from message tank.agent.v1.GetRepoConnectionResponse
+ */
+export type GetRepoConnectionResponse = Message<"tank.agent.v1.GetRepoConnectionResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.RepoConnection connection = 1;
+     */
+    connection?: RepoConnection;
+};
+/**
+ * Describes the message tank.agent.v1.GetRepoConnectionResponse.
+ * Use `create(GetRepoConnectionResponseSchema)` to create a new message.
+ */
+export declare const GetRepoConnectionResponseSchema: GenMessage<GetRepoConnectionResponse>;
+/**
+ * StartGitHubConnect mints the one-time state GitHub carries through an install and
+ * returns where to send somebody. Admins only.
+ *
+ * @generated from message tank.agent.v1.StartGitHubConnectRequest
+ */
+export type StartGitHubConnectRequest = Message<"tank.agent.v1.StartGitHubConnectRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.StartGitHubConnectRequest.
+ * Use `create(StartGitHubConnectRequestSchema)` to create a new message.
+ */
+export declare const StartGitHubConnectRequestSchema: GenMessage<StartGitHubConnectRequest>;
+/**
+ * @generated from message tank.agent.v1.StartGitHubConnectResponse
+ */
+export type StartGitHubConnectResponse = Message<"tank.agent.v1.StartGitHubConnectResponse"> & {
+    /**
+     * @generated from field: string install_url = 1;
+     */
+    installUrl: string;
+};
+/**
+ * Describes the message tank.agent.v1.StartGitHubConnectResponse.
+ * Use `create(StartGitHubConnectResponseSchema)` to create a new message.
+ */
+export declare const StartGitHubConnectResponseSchema: GenMessage<StartGitHubConnectResponse>;
+/**
+ * @generated from message tank.agent.v1.BindRepoRequest
+ */
+export type BindRepoRequest = Message<"tank.agent.v1.BindRepoRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * empty means "main"
+     *
+     * @generated from field: string base_branch = 3;
+     */
+    baseBranch: string;
+    /**
+     * empty means "node"
+     *
+     * @generated from field: string toolchain = 4;
+     */
+    toolchain: string;
+};
+/**
+ * Describes the message tank.agent.v1.BindRepoRequest.
+ * Use `create(BindRepoRequestSchema)` to create a new message.
+ */
+export declare const BindRepoRequestSchema: GenMessage<BindRepoRequest>;
+/**
+ * @generated from message tank.agent.v1.BindRepoResponse
+ */
+export type BindRepoResponse = Message<"tank.agent.v1.BindRepoResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.RepoBinding binding = 1;
+     */
+    binding?: RepoBinding;
+};
+/**
+ * Describes the message tank.agent.v1.BindRepoResponse.
+ * Use `create(BindRepoResponseSchema)` to create a new message.
+ */
+export declare const BindRepoResponseSchema: GenMessage<BindRepoResponse>;
+/**
+ * @generated from message tank.agent.v1.UnbindRepoRequest
+ */
+export type UnbindRepoRequest = Message<"tank.agent.v1.UnbindRepoRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.agent.v1.UnbindRepoRequest.
+ * Use `create(UnbindRepoRequestSchema)` to create a new message.
+ */
+export declare const UnbindRepoRequestSchema: GenMessage<UnbindRepoRequest>;
+/**
+ * @generated from message tank.agent.v1.UnbindRepoResponse
+ */
+export type UnbindRepoResponse = Message<"tank.agent.v1.UnbindRepoResponse"> & {};
+/**
+ * Describes the message tank.agent.v1.UnbindRepoResponse.
+ * Use `create(UnbindRepoResponseSchema)` to create a new message.
+ */
+export declare const UnbindRepoResponseSchema: GenMessage<UnbindRepoResponse>;
+/**
  * @generated from enum tank.agent.v1.RunState
  */
 export declare enum RunState {
@@ -520,5 +717,40 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof ListAgentsRequestSchema;
         output: typeof ListAgentsResponseSchema;
+    };
+    /**
+     * Connecting a Tread to code. A Radar is private and so is this: only workspace
+     * admins may connect an org or bind a repository.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.GetRepoConnection
+     */
+    getRepoConnection: {
+        methodKind: "unary";
+        input: typeof GetRepoConnectionRequestSchema;
+        output: typeof GetRepoConnectionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.StartGitHubConnect
+     */
+    startGitHubConnect: {
+        methodKind: "unary";
+        input: typeof StartGitHubConnectRequestSchema;
+        output: typeof StartGitHubConnectResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.BindRepo
+     */
+    bindRepo: {
+        methodKind: "unary";
+        input: typeof BindRepoRequestSchema;
+        output: typeof BindRepoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.UnbindRepo
+     */
+    unbindRepo: {
+        methodKind: "unary";
+        input: typeof UnbindRepoRequestSchema;
+        output: typeof UnbindRepoResponseSchema;
     };
 }>;
