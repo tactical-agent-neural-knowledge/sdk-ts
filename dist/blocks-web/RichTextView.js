@@ -24,7 +24,7 @@ function styled(node, s) {
         out = _jsx("s", { children: out });
     return out;
 }
-export function ElementView({ element, resolveUser, resolveChannel, }) {
+export function ElementView({ element, resolveUser, resolveChannel, renderEmoji, }) {
     const k = element.kind;
     switch (k.case) {
         case "text":
@@ -37,13 +37,15 @@ export function ElementView({ element, resolveUser, resolveChannel, }) {
             return (_jsxs(Box, { component: "span", "data-mention": "channel", "data-id": k.value.channelId, sx: { color: "primary.main", fontWeight: 600 }, children: ["#", resolveChannel?.(k.value.channelId) ?? k.value.channelId] }));
         case "broadcast":
             return (_jsxs(Box, { component: "span", sx: { color: "tank.warningText", fontWeight: 600 }, children: ["@", k.value.range === 1 ? "here" : k.value.range === 2 ? "channel" : "everyone"] }));
-        case "emoji":
-            return _jsx("span", { "data-emoji": k.value.name, children: k.value.unicode || `:${k.value.name}:` });
+        case "emoji": {
+            const custom = renderEmoji?.({ name: k.value.name, unicode: k.value.unicode });
+            return _jsx("span", { "data-emoji": k.value.name, children: custom ?? (k.value.unicode || `:${k.value.name}:`) });
+        }
         default:
             return null;
     }
 }
-export function RichTextView({ richText, resolveUser, resolveChannel, variant = "body1", }) {
+export function RichTextView({ richText, resolveUser, resolveChannel, renderEmoji, variant = "body1", }) {
     if (!richText)
         return null;
     return (_jsx(_Fragment, { children: richText.blocks.map((b, i) => {
@@ -51,7 +53,7 @@ export function RichTextView({ richText, resolveUser, resolveChannel, variant = 
             const key = `${k.case}-${i}`;
             switch (k.case) {
                 case "section":
-                    return (_jsx(Typography, { variant: variant, component: "p", sx: { m: 0, whiteSpace: "pre-wrap" }, children: k.value.elements.map((e, j) => (_jsx(ElementView, { element: e, resolveUser: resolveUser, resolveChannel: resolveChannel }, j))) }, key));
+                    return (_jsx(Typography, { variant: variant, component: "p", sx: { m: 0, whiteSpace: "pre-wrap" }, children: k.value.elements.map((e, j) => (_jsx(ElementView, { element: e, resolveUser: resolveUser, resolveChannel: resolveChannel, renderEmoji: renderEmoji }, j))) }, key));
                 case "quote":
                     return (_jsx(Typography, { variant: variant, component: "blockquote", sx: {
                             m: 0,
@@ -60,7 +62,7 @@ export function RichTextView({ richText, resolveUser, resolveChannel, variant = 
                             borderColor: "tank.agent",
                             color: "text.secondary",
                             whiteSpace: "pre-wrap",
-                        }, children: k.value.elements.map((e, j) => (_jsx(ElementView, { element: e, resolveUser: resolveUser, resolveChannel: resolveChannel }, j))) }, key));
+                        }, children: k.value.elements.map((e, j) => (_jsx(ElementView, { element: e, resolveUser: resolveUser, resolveChannel: resolveChannel, renderEmoji: renderEmoji }, j))) }, key));
                 case "code":
                     return (_jsx(Box, { component: "pre", "data-language": k.value.language, sx: {
                             m: 0,
@@ -73,7 +75,7 @@ export function RichTextView({ richText, resolveUser, resolveChannel, variant = 
                             lineHeight: 1.5,
                         }, children: _jsx("code", { children: k.value.text }) }, key));
                 case "list":
-                    return (_jsx(Box, { component: k.value.ordered ? "ol" : "ul", sx: { m: 0, pl: 3 + k.value.indent * 2 }, children: k.value.items.map((it, j) => (_jsx(Typography, { component: "li", variant: variant, children: it.elements.map((e, m) => (_jsx(ElementView, { element: e, resolveUser: resolveUser, resolveChannel: resolveChannel }, m))) }, j))) }, key));
+                    return (_jsx(Box, { component: k.value.ordered ? "ol" : "ul", sx: { m: 0, pl: 3 + k.value.indent * 2 }, children: k.value.items.map((it, j) => (_jsx(Typography, { component: "li", variant: variant, children: it.elements.map((e, m) => (_jsx(ElementView, { element: e, resolveUser: resolveUser, resolveChannel: resolveChannel, renderEmoji: renderEmoji }, m))) }, j))) }, key));
                 default:
                     return null;
             }

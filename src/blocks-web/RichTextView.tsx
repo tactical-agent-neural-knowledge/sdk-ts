@@ -11,6 +11,11 @@ export interface RichTextViewProps {
   resolveUser?: (userId: string) => string | undefined;
   /** Resolve a channel id to a Tread name for #mentions. */
   resolveChannel?: (channelId: string) => string | undefined;
+  /**
+   * Draw an emoji element. Custom emoji carry a `name` and no `unicode`; the app supplies
+   * the image. Return `undefined` to fall back to the unicode or `:name:` text.
+   */
+  renderEmoji?: (emoji: { name: string; unicode: string }) => ReactNode | undefined;
   variant?: "body1" | "body2" | "caption";
 }
 
@@ -43,7 +48,8 @@ export function ElementView({
   element,
   resolveUser,
   resolveChannel,
-}: { element: RichTextElement } & Pick<RichTextViewProps, "resolveUser" | "resolveChannel">) {
+  renderEmoji,
+}: { element: RichTextElement } & Pick<RichTextViewProps, "resolveUser" | "resolveChannel" | "renderEmoji">) {
   const k = element.kind;
   switch (k.case) {
     case "text":
@@ -82,8 +88,10 @@ export function ElementView({
           @{k.value.range === 1 ? "here" : k.value.range === 2 ? "channel" : "everyone"}
         </Box>
       );
-    case "emoji":
-      return <span data-emoji={k.value.name}>{k.value.unicode || `:${k.value.name}:`}</span>;
+    case "emoji": {
+      const custom = renderEmoji?.({ name: k.value.name, unicode: k.value.unicode });
+      return <span data-emoji={k.value.name}>{custom ?? (k.value.unicode || `:${k.value.name}:`)}</span>;
+    }
     default:
       return null;
   }
@@ -93,6 +101,7 @@ export function RichTextView({
   richText,
   resolveUser,
   resolveChannel,
+  renderEmoji,
   variant = "body1",
 }: RichTextViewProps) {
   if (!richText) return null;
@@ -111,6 +120,7 @@ export function RichTextView({
                     element={e}
                     resolveUser={resolveUser}
                     resolveChannel={resolveChannel}
+                    renderEmoji={renderEmoji}
                   />
                 ))}
               </Typography>
@@ -136,6 +146,7 @@ export function RichTextView({
                     element={e}
                     resolveUser={resolveUser}
                     resolveChannel={resolveChannel}
+                    renderEmoji={renderEmoji}
                   />
                 ))}
               </Typography>
@@ -175,6 +186,7 @@ export function RichTextView({
                         element={e}
                         resolveUser={resolveUser}
                         resolveChannel={resolveChannel}
+                        renderEmoji={renderEmoji}
                       />
                     ))}
                   </Typography>

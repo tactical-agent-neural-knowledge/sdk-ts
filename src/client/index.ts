@@ -28,6 +28,7 @@ export {
   type WebSocketCtor,
   type WebSocketLike,
 } from "./realtime.js";
+export { expandShortcodes } from "./shortcodes.js";
 export { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";
 export { IndexedDbStorage, type IndexedDbStorageOptions } from "./storage-idb.js";
 export {
