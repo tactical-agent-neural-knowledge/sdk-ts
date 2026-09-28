@@ -3,6 +3,7 @@ export { type CreateChannelInput, createTankClient, type ListRunsInput, type Loa
 export { Emitter, type Handler } from "./emitter.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
 export { browserOnlineSignal, type OnlineSignal, RealtimeClient, type RealtimeEvents, type RealtimeOptions, type RealtimeSession, type WebSocketCtor, type WebSocketLike, } from "./realtime.js";
+export { expandShortcodes } from "./shortcodes.js";
 export { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";
 export { IndexedDbStorage, type IndexedDbStorageOptions } from "./storage-idb.js";
 export { type Action, AGENT_STATUS_TTL_MS, type AgentStatusEntry, type ChannelPaging, type ConnectionState, type EventPayload, envelopeToActions, initialState, type KnownEventPayload, type Listener, type NotificationMode, type NotificationPaging, notificationPagingKey, type PendingMessage, reduce, type TankState, TankStore, type ThreadView, TYPING_TTL_MS, tsMs, typingKey, type UnknownEventPayload, type Unreads, unpackEnvelope, } from "./store.js";

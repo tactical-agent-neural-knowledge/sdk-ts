@@ -3,6 +3,7 @@ export { createTankClient, TankClient, } from "./client.js";
 export { Emitter } from "./emitter.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
 export { browserOnlineSignal, RealtimeClient, } from "./realtime.js";
+export { expandShortcodes } from "./shortcodes.js";
 export { MemoryStorage, storageKeys } from "./storage.js";
 export { IndexedDbStorage } from "./storage-idb.js";
 export { AGENT_STATUS_TTL_MS, envelopeToActions, initialState, notificationPagingKey, reduce, TankStore, TYPING_TTL_MS, tsMs, typingKey, unpackEnvelope, } from "./store.js";
