@@ -18,7 +18,7 @@ export type Point = Message<"tank.monitor.v1.Point"> & {
      */
     value: number;
     /**
-     * for TEXT and STATUS widgets: the reason, the paragraph
+     * for TEXT and STATUS widgets: the reason, the paragraph (supports Markdown)
      *
      * @generated from field: string text = 3;
      */
@@ -29,6 +29,12 @@ export type Point = Message<"tank.monitor.v1.Point"> & {
      * @generated from field: string labels_json = 4;
      */
     labelsJson: string;
+    /**
+     * optional: makes text clickable (for TEXT widgets)
+     *
+     * @generated from field: string url = 5;
+     */
+    url: string;
 };
 /**
  * Describes the message tank.monitor.v1.Point.
