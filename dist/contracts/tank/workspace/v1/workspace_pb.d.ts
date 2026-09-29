@@ -1759,6 +1759,151 @@ export type CancelScheduledResponse = Message<"tank.workspace.v1.CancelScheduled
  */
 export declare const CancelScheduledResponseSchema: GenMessage<CancelScheduledResponse>;
 /**
+ * An agenture is a business TANK stood up and runs itself. Somebody claims one and it
+ * becomes their venture, and it leaves the board — agentures are unique.
+ *
+ * @generated from message tank.workspace.v1.Agenture
+ */
+export type Agenture = Message<"tank.workspace.v1.Agenture"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * its #general purpose: what the business does
+     *
+     * @generated from field: string description = 4;
+     */
+    description: string;
+    /**
+     * an agent is working in it right now
+     *
+     * @generated from field: bool agent_active = 5;
+     */
+    agentActive: boolean;
+    /**
+     * @generated from field: int32 active_runs = 6;
+     */
+    activeRuns: number;
+};
+/**
+ * Describes the message tank.workspace.v1.Agenture.
+ * Use `create(AgentureSchema)` to create a new message.
+ */
+export declare const AgentureSchema: GenMessage<Agenture>;
+/**
+ * @generated from message tank.workspace.v1.ListAgenturesRequest
+ */
+export type ListAgenturesRequest = Message<"tank.workspace.v1.ListAgenturesRequest"> & {
+    /**
+     * Paging, because this grows to thousands. Empty cursor starts at the beginning.
+     *
+     * @generated from field: string cursor = 1;
+     */
+    cursor: string;
+    /**
+     * @generated from field: int32 limit = 2;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.workspace.v1.ListAgenturesRequest.
+ * Use `create(ListAgenturesRequestSchema)` to create a new message.
+ */
+export declare const ListAgenturesRequestSchema: GenMessage<ListAgenturesRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListAgenturesResponse
+ */
+export type ListAgenturesResponse = Message<"tank.workspace.v1.ListAgenturesResponse"> & {
+    /**
+     * @generated from field: repeated tank.workspace.v1.Agenture agentures = 1;
+     */
+    agentures: Agenture[];
+    /**
+     * @generated from field: string next_cursor = 2;
+     */
+    nextCursor: string;
+    /**
+     * @generated from field: int32 total = 3;
+     */
+    total: number;
+};
+/**
+ * Describes the message tank.workspace.v1.ListAgenturesResponse.
+ * Use `create(ListAgenturesResponseSchema)` to create a new message.
+ */
+export declare const ListAgenturesResponseSchema: GenMessage<ListAgenturesResponse>;
+/**
+ * Which workspaces have an agent working right now. Small and cheap on purpose: the
+ * board polls it, the list of agentures itself does not change often.
+ *
+ * @generated from message tank.workspace.v1.AgentActivityRequest
+ */
+export type AgentActivityRequest = Message<"tank.workspace.v1.AgentActivityRequest"> & {};
+/**
+ * Describes the message tank.workspace.v1.AgentActivityRequest.
+ * Use `create(AgentActivityRequestSchema)` to create a new message.
+ */
+export declare const AgentActivityRequestSchema: GenMessage<AgentActivityRequest>;
+/**
+ * @generated from message tank.workspace.v1.AgentActivityResponse
+ */
+export type AgentActivityResponse = Message<"tank.workspace.v1.AgentActivityResponse"> & {
+    /**
+     * workspaces with at least one live run
+     *
+     * @generated from field: repeated string workspace_ids = 1;
+     */
+    workspaceIds: string[];
+};
+/**
+ * Describes the message tank.workspace.v1.AgentActivityResponse.
+ * Use `create(AgentActivityResponseSchema)` to create a new message.
+ */
+export declare const AgentActivityResponseSchema: GenMessage<AgentActivityResponse>;
+/**
+ * @generated from message tank.workspace.v1.ClaimAgentureRequest
+ */
+export type ClaimAgentureRequest = Message<"tank.workspace.v1.ClaimAgentureRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * Or name it by slug, which is what a claim link off the marketing site carries.
+     *
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.workspace.v1.ClaimAgentureRequest.
+ * Use `create(ClaimAgentureRequestSchema)` to create a new message.
+ */
+export declare const ClaimAgentureRequestSchema: GenMessage<ClaimAgentureRequest>;
+/**
+ * @generated from message tank.workspace.v1.ClaimAgentureResponse
+ */
+export type ClaimAgentureResponse = Message<"tank.workspace.v1.ClaimAgentureResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Workspace workspace = 1;
+     */
+    workspace?: Workspace;
+};
+/**
+ * Describes the message tank.workspace.v1.ClaimAgentureResponse.
+ * Use `create(ClaimAgentureResponseSchema)` to create a new message.
+ */
+export declare const ClaimAgentureResponseSchema: GenMessage<ClaimAgentureResponse>;
+/**
  * @generated from message tank.workspace.v1.GenerateThemeRequest
  */
 export type GenerateThemeRequest = Message<"tank.workspace.v1.GenerateThemeRequest"> & {
@@ -2152,6 +2297,32 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof ListWorkspacesRequestSchema;
         output: typeof ListWorkspacesResponseSchema;
+    };
+    /**
+     * The agenture board.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListAgentures
+     */
+    listAgentures: {
+        methodKind: "unary";
+        input: typeof ListAgenturesRequestSchema;
+        output: typeof ListAgenturesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.AgentActivity
+     */
+    agentActivity: {
+        methodKind: "unary";
+        input: typeof AgentActivityRequestSchema;
+        output: typeof AgentActivityResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ClaimAgenture
+     */
+    claimAgenture: {
+        methodKind: "unary";
+        input: typeof ClaimAgentureRequestSchema;
+        output: typeof ClaimAgentureResponseSchema;
     };
     /**
      * @generated from rpc tank.workspace.v1.WorkspaceService.GetBootstrap

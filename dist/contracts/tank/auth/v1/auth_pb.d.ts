@@ -51,6 +51,15 @@ export type StartMagicLinkRequest = Message<"tank.auth.v1.StartMagicLinkRequest"
      * @generated from field: string email = 1;
      */
     email: string;
+    /**
+     * Where to land after the link is opened, as a path on the app's own origin
+     * ("/claim?a=wardbridge"). The mail carries it, because the link is usually opened
+     * in a fresh tab — often on another device — where nothing the sending tab stored
+     * can be read. Anything that is not a same-origin path is ignored.
+     *
+     * @generated from field: string next = 2;
+     */
+    next: string;
 };
 /**
  * Describes the message tank.auth.v1.StartMagicLinkRequest.
