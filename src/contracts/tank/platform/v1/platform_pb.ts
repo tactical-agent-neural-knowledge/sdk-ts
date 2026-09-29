@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/platform/v1/platform.proto.
  */
 export const file_tank_platform_v1_platform: GenFile = /*@__PURE__*/
-  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIvICCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCCJEChRMaXN0QWdlbnR1cmVzUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIOCgZvZmZzZXQYAyABKAUiiQEKFUxpc3RBZ2VudHVyZXNSZXNwb25zZRIwCglhZ2VudHVyZXMYASADKAsyHS50YW5rLnBsYXRmb3JtLnYxLkFnZW50dXJlUm93Eg0KBXRvdGFsGAIgASgFEi8KB3N1bW1hcnkYAyABKAsyHi50YW5rLnBsYXRmb3JtLnYxLkJvYXJkU3VtbWFyeSKoAQoMQm9hcmRTdW1tYXJ5EhEKCWluX2ZsaWdodBgBIAEoBRIWCg5tYXhfY29uY3VycmVudBgCIAEoBRIPCgdlbmFibGVkGAMgASgIEhEKCXVuY2xhaW1lZBgEIAEoBRIZChFhZ2VudF9taW51dGVzXzI0aBgFIAEoAxIVCg1zcGVuZF91c2RfMjRoGAYgASgBEhcKD3NwZW5kX3VzZF90b3RhbBgHIAEoASJeChRTZXRBbGxvY2F0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDwoHZW5hYmxlZBgCIAEoCBIOCgZ3ZWlnaHQYAyABKAUSDwoHcnVuX25vdxgEIAEoCCJIChVTZXRBbGxvY2F0aW9uUmVzcG9uc2USLwoIYWdlbnR1cmUYASABKAsyHS50YW5rLnBsYXRmb3JtLnYxLkFnZW50dXJlUm93IjAKDlN0b3BSdW5SZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCRIOCgZyZWFzb24YAiABKAkiEQoPU3RvcFJ1blJlc3BvbnNlMqUCCg9QbGF0Zm9ybVNlcnZpY2USYAoNTGlzdEFnZW50dXJlcxImLnRhbmsucGxhdGZvcm0udjEuTGlzdEFnZW50dXJlc1JlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXNwb25zZRJgCg1TZXRBbGxvY2F0aW9uEiYudGFuay5wbGF0Zm9ybS52MS5TZXRBbGxvY2F0aW9uUmVxdWVzdBonLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlc3BvbnNlEk4KB1N0b3BSdW4SIC50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXF1ZXN0GiEudGFuay5wbGF0Zm9ybS52MS5TdG9wUnVuUmVzcG9uc2VC4AEKFGNvbS50YW5rLnBsYXRmb3JtLnYxQg1QbGF0Zm9ybVByb3RvUAFaV2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvcGxhdGZvcm0vdjE7cGxhdGZvcm12MaICA1RQWKoCEFRhbmsuUGxhdGZvcm0uVjHKAhBUYW5rXFBsYXRmb3JtXFYx4gIcVGFua1xQbGF0Zm9ybVxWMVxHUEJNZXRhZGF0YeoCElRhbms6OlBsYXRmb3JtOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiqAEKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIRCgl1bmNsYWltZWQYBCABKAUSGQoRYWdlbnRfbWludXRlc18yNGgYBSABKAMSFQoNc3BlbmRfdXNkXzI0aBgGIAEoARIXCg9zcGVuZF91c2RfdG90YWwYByABKAEidAoUU2V0QWxsb2NhdGlvblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB2VuYWJsZWQYAiABKAgSDgoGd2VpZ2h0GAMgASgFEg8KB3J1bl9ub3cYBCABKAgSFAoMYXV0b19hcHByb3ZlGAUgASgIIkgKFVNldEFsbG9jYXRpb25SZXNwb25zZRIvCghhZ2VudHVyZRgBIAEoCzIdLnRhbmsucGxhdGZvcm0udjEuQWdlbnR1cmVSb3ciMQoXU2V0Qm9hcmRTZXR0aW5nc1JlcXVlc3QSFgoObWF4X2NvbmN1cnJlbnQYASABKAUiSwoYU2V0Qm9hcmRTZXR0aW5nc1Jlc3BvbnNlEi8KB3N1bW1hcnkYASABKAsyHi50YW5rLnBsYXRmb3JtLnYxLkJvYXJkU3VtbWFyeSIwCg5TdG9wUnVuUmVxdWVzdBIOCgZydW5faWQYASABKAkSDgoGcmVhc29uGAIgASgJIhEKD1N0b3BSdW5SZXNwb25zZTKQAwoPUGxhdGZvcm1TZXJ2aWNlEmAKDUxpc3RBZ2VudHVyZXMSJi50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXF1ZXN0GicudGFuay5wbGF0Zm9ybS52MS5MaXN0QWdlbnR1cmVzUmVzcG9uc2USYAoNU2V0QWxsb2NhdGlvbhImLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLlNldEFsbG9jYXRpb25SZXNwb25zZRJpChBTZXRCb2FyZFNldHRpbmdzEikudGFuay5wbGF0Zm9ybS52MS5TZXRCb2FyZFNldHRpbmdzUmVxdWVzdBoqLnRhbmsucGxhdGZvcm0udjEuU2V0Qm9hcmRTZXR0aW5nc1Jlc3BvbnNlEk4KB1N0b3BSdW4SIC50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXF1ZXN0GiEudGFuay5wbGF0Zm9ybS52MS5TdG9wUnVuUmVzcG9uc2VC4AEKFGNvbS50YW5rLnBsYXRmb3JtLnYxQg1QbGF0Zm9ybVByb3RvUAFaV2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvcGxhdGZvcm0vdjE7cGxhdGZvcm12MaICA1RQWKoCEFRhbmsuUGxhdGZvcm0uVjHKAhBUYW5rXFBsYXRmb3JtXFYx4gIcVGFua1xQbGF0Zm9ybVxWMVxHUEJNZXRhZGF0YeoCElRhbms6OlBsYXRmb3JtOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
 
 /**
  * AgentureRow is one product on the board as the console sees it.
@@ -121,6 +121,14 @@ export type AgentureRow = Message<"tank.platform.v1.AgentureRow"> & {
    * @generated from field: bool claimed = 16;
    */
   claimed: boolean;
+
+  /**
+   * When set, a plan the agent stops at is approved for it rather than waiting for
+   * somebody who is not coming.
+   *
+   * @generated from field: bool auto_approve = 17;
+   */
+  autoApprove: boolean;
 };
 
 /**
@@ -271,6 +279,11 @@ export type SetAllocationRequest = Message<"tank.platform.v1.SetAllocationReques
    * @generated from field: bool run_now = 4;
    */
   runNow: boolean;
+
+  /**
+   * @generated from field: bool auto_approve = 5;
+   */
+  autoApprove: boolean;
 };
 
 /**
@@ -298,6 +311,44 @@ export const SetAllocationResponseSchema: GenMessage<SetAllocationResponse> = /*
   messageDesc(file_tank_platform_v1_platform, 5);
 
 /**
+ * SetBoardSettings changes how the board as a whole behaves.
+ *
+ * @generated from message tank.platform.v1.SetBoardSettingsRequest
+ */
+export type SetBoardSettingsRequest = Message<"tank.platform.v1.SetBoardSettingsRequest"> & {
+  /**
+   * 0 stops new work without losing anything
+   *
+   * @generated from field: int32 max_concurrent = 1;
+   */
+  maxConcurrent: number;
+};
+
+/**
+ * Describes the message tank.platform.v1.SetBoardSettingsRequest.
+ * Use `create(SetBoardSettingsRequestSchema)` to create a new message.
+ */
+export const SetBoardSettingsRequestSchema: GenMessage<SetBoardSettingsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 6);
+
+/**
+ * @generated from message tank.platform.v1.SetBoardSettingsResponse
+ */
+export type SetBoardSettingsResponse = Message<"tank.platform.v1.SetBoardSettingsResponse"> & {
+  /**
+   * @generated from field: tank.platform.v1.BoardSummary summary = 1;
+   */
+  summary?: BoardSummary;
+};
+
+/**
+ * Describes the message tank.platform.v1.SetBoardSettingsResponse.
+ * Use `create(SetBoardSettingsResponseSchema)` to create a new message.
+ */
+export const SetBoardSettingsResponseSchema: GenMessage<SetBoardSettingsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 7);
+
+/**
  * StopRun stops an agent that is working right now.
  *
  * @generated from message tank.platform.v1.StopRunRequest
@@ -319,7 +370,7 @@ export type StopRunRequest = Message<"tank.platform.v1.StopRunRequest"> & {
  * Use `create(StopRunRequestSchema)` to create a new message.
  */
 export const StopRunRequestSchema: GenMessage<StopRunRequest> = /*@__PURE__*/
-  messageDesc(file_tank_platform_v1_platform, 6);
+  messageDesc(file_tank_platform_v1_platform, 8);
 
 /**
  * @generated from message tank.platform.v1.StopRunResponse
@@ -332,7 +383,7 @@ export type StopRunResponse = Message<"tank.platform.v1.StopRunResponse"> & {
  * Use `create(StopRunResponseSchema)` to create a new message.
  */
 export const StopRunResponseSchema: GenMessage<StopRunResponse> = /*@__PURE__*/
-  messageDesc(file_tank_platform_v1_platform, 7);
+  messageDesc(file_tank_platform_v1_platform, 9);
 
 /**
  * @generated from service tank.platform.v1.PlatformService
@@ -353,6 +404,14 @@ export const PlatformService: GenService<{
     methodKind: "unary";
     input: typeof SetAllocationRequestSchema;
     output: typeof SetAllocationResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.SetBoardSettings
+   */
+  setBoardSettings: {
+    methodKind: "unary";
+    input: typeof SetBoardSettingsRequestSchema;
+    output: typeof SetBoardSettingsResponseSchema;
   },
   /**
    * @generated from rpc tank.platform.v1.PlatformService.StopRun

@@ -97,6 +97,13 @@ export type AgentureRow = Message<"tank.platform.v1.AgentureRow"> & {
      * @generated from field: bool claimed = 16;
      */
     claimed: boolean;
+    /**
+     * When set, a plan the agent stops at is approved for it rather than waiting for
+     * somebody who is not coming.
+     *
+     * @generated from field: bool auto_approve = 17;
+     */
+    autoApprove: boolean;
 };
 /**
  * Describes the message tank.platform.v1.AgentureRow.
@@ -222,6 +229,10 @@ export type SetAllocationRequest = Message<"tank.platform.v1.SetAllocationReques
      * @generated from field: bool run_now = 4;
      */
     runNow: boolean;
+    /**
+     * @generated from field: bool auto_approve = 5;
+     */
+    autoApprove: boolean;
 };
 /**
  * Describes the message tank.platform.v1.SetAllocationRequest.
@@ -242,6 +253,38 @@ export type SetAllocationResponse = Message<"tank.platform.v1.SetAllocationRespo
  * Use `create(SetAllocationResponseSchema)` to create a new message.
  */
 export declare const SetAllocationResponseSchema: GenMessage<SetAllocationResponse>;
+/**
+ * SetBoardSettings changes how the board as a whole behaves.
+ *
+ * @generated from message tank.platform.v1.SetBoardSettingsRequest
+ */
+export type SetBoardSettingsRequest = Message<"tank.platform.v1.SetBoardSettingsRequest"> & {
+    /**
+     * 0 stops new work without losing anything
+     *
+     * @generated from field: int32 max_concurrent = 1;
+     */
+    maxConcurrent: number;
+};
+/**
+ * Describes the message tank.platform.v1.SetBoardSettingsRequest.
+ * Use `create(SetBoardSettingsRequestSchema)` to create a new message.
+ */
+export declare const SetBoardSettingsRequestSchema: GenMessage<SetBoardSettingsRequest>;
+/**
+ * @generated from message tank.platform.v1.SetBoardSettingsResponse
+ */
+export type SetBoardSettingsResponse = Message<"tank.platform.v1.SetBoardSettingsResponse"> & {
+    /**
+     * @generated from field: tank.platform.v1.BoardSummary summary = 1;
+     */
+    summary?: BoardSummary;
+};
+/**
+ * Describes the message tank.platform.v1.SetBoardSettingsResponse.
+ * Use `create(SetBoardSettingsResponseSchema)` to create a new message.
+ */
+export declare const SetBoardSettingsResponseSchema: GenMessage<SetBoardSettingsResponse>;
 /**
  * StopRun stops an agent that is working right now.
  *
@@ -290,6 +333,14 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof SetAllocationRequestSchema;
         output: typeof SetAllocationResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SetBoardSettings
+     */
+    setBoardSettings: {
+        methodKind: "unary";
+        input: typeof SetBoardSettingsRequestSchema;
+        output: typeof SetBoardSettingsResponseSchema;
     };
     /**
      * @generated from rpc tank.platform.v1.PlatformService.StopRun

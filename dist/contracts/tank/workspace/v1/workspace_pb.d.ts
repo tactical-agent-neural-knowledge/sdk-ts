@@ -1793,6 +1793,18 @@ export type Agenture = Message<"tank.workspace.v1.Agenture"> & {
      * @generated from field: int32 active_runs = 6;
      */
     activeRuns: number;
+    /**
+     * the trade it is in, so a bubble says more than a name
+     *
+     * @generated from field: string industry = 7;
+     */
+    industry: string;
+    /**
+     * what it costs to take over today
+     *
+     * @generated from field: int64 price_cents = 8;
+     */
+    priceCents: bigint;
 };
 /**
  * Describes the message tank.workspace.v1.Agenture.
@@ -1869,6 +1881,125 @@ export type AgentActivityResponse = Message<"tank.workspace.v1.AgentActivityResp
  * Use `create(AgentActivityResponseSchema)` to create a new message.
  */
 export declare const AgentActivityResponseSchema: GenMessage<AgentActivityResponse>;
+/**
+ * AgentureWork is one piece of work the agent has done, or is doing now.
+ *
+ * @generated from message tank.workspace.v1.AgentureWork
+ */
+export type AgentureWork = Message<"tank.workspace.v1.AgentureWork"> & {
+    /**
+     * "Sketch the data model"
+     *
+     * @generated from field: string title = 1;
+     */
+    title: string;
+    /**
+     * a line of what it produced
+     *
+     * @generated from field: string summary = 2;
+     */
+    summary: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp asked_at = 3;
+     */
+    askedAt?: Timestamp;
+    /**
+     * unset while it is still working
+     *
+     * @generated from field: google.protobuf.Timestamp delivered_at = 4;
+     */
+    deliveredAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.AgentureWork.
+ * Use `create(AgentureWorkSchema)` to create a new message.
+ */
+export declare const AgentureWorkSchema: GenMessage<AgentureWork>;
+/**
+ * AgentureDetail is everything the claim page shows: what the product is, what
+ * trade it is in, what the agent has built, and what it costs today.
+ *
+ * @generated from message tank.workspace.v1.AgentureDetail
+ */
+export type AgentureDetail = Message<"tank.workspace.v1.AgentureDetail"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: string description = 4;
+     */
+    description: string;
+    /**
+     * @generated from field: string industry = 5;
+     */
+    industry: string;
+    /**
+     * who it is for
+     *
+     * @generated from field: string buyer = 6;
+     */
+    buyer: string;
+    /**
+     * @generated from field: int64 agent_minutes = 7;
+     */
+    agentMinutes: bigint;
+    /**
+     * @generated from field: int64 price_cents = 8;
+     */
+    priceCents: bigint;
+    /**
+     * @generated from field: bool available = 9;
+     */
+    available: boolean;
+    /**
+     * newest first
+     *
+     * @generated from field: repeated tank.workspace.v1.AgentureWork work = 10;
+     */
+    work: AgentureWork[];
+};
+/**
+ * Describes the message tank.workspace.v1.AgentureDetail.
+ * Use `create(AgentureDetailSchema)` to create a new message.
+ */
+export declare const AgentureDetailSchema: GenMessage<AgentureDetail>;
+/**
+ * @generated from message tank.workspace.v1.GetAgentureRequest
+ */
+export type GetAgentureRequest = Message<"tank.workspace.v1.GetAgentureRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.workspace.v1.GetAgentureRequest.
+ * Use `create(GetAgentureRequestSchema)` to create a new message.
+ */
+export declare const GetAgentureRequestSchema: GenMessage<GetAgentureRequest>;
+/**
+ * @generated from message tank.workspace.v1.GetAgentureResponse
+ */
+export type GetAgentureResponse = Message<"tank.workspace.v1.GetAgentureResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.AgentureDetail agenture = 1;
+     */
+    agenture?: AgentureDetail;
+};
+/**
+ * Describes the message tank.workspace.v1.GetAgentureResponse.
+ * Use `create(GetAgentureResponseSchema)` to create a new message.
+ */
+export declare const GetAgentureResponseSchema: GenMessage<GetAgentureResponse>;
 /**
  * @generated from message tank.workspace.v1.ClaimAgentureRequest
  */
@@ -2315,6 +2446,14 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof AgentActivityRequestSchema;
         output: typeof AgentActivityResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.GetAgenture
+     */
+    getAgenture: {
+        methodKind: "unary";
+        input: typeof GetAgentureRequestSchema;
+        output: typeof GetAgentureResponseSchema;
     };
     /**
      * @generated from rpc tank.workspace.v1.WorkspaceService.ClaimAgenture
