@@ -409,6 +409,14 @@ export type RecordProductViewRequest = Message<"tank.catalog.v1.RecordProductVie
      * @generated from field: string slug = 1;
      */
     slug: string;
+    /**
+     * Where the visitor came from, as the browser reports it. Used only to bucket the
+     * visit — assistant, search, social, direct — and never stored against a person.
+     * The server decides the bucket; this is the raw value it decides from.
+     *
+     * @generated from field: string referrer = 2;
+     */
+    referrer: string;
 };
 /**
  * Describes the message tank.catalog.v1.RecordProductViewRequest.
