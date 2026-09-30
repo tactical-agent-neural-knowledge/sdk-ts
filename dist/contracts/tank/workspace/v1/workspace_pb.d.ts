@@ -1974,6 +1974,14 @@ export type AgentureDetail = Message<"tank.workspace.v1.AgentureDetail"> & {
      * @generated from field: repeated tank.workspace.v1.AgentureWork work = 10;
      */
     work: AgentureWork[];
+    /**
+     * The long form: what it is, the problem it solves, who buys it, where it has got
+     * to. Markdown. The one-liner above is what a card shows; this is what somebody
+     * deciding whether to take it over reads.
+     *
+     * @generated from field: string overview = 11;
+     */
+    overview: string;
 };
 /**
  * Describes the message tank.workspace.v1.AgentureDetail.
