@@ -1875,6 +1875,14 @@ export type AgentActivityResponse = Message<"tank.workspace.v1.AgentActivityResp
      * @generated from field: repeated string workspace_ids = 1;
      */
     workspaceIds: string[];
+    /**
+     * The products themselves, so the board can show one that is being worked on even
+     * when it is not in the page of products the board happens to be holding. There
+     * are never many: the whole board runs a bounded number of agents at once.
+     *
+     * @generated from field: repeated tank.workspace.v1.Agenture agentures = 2;
+     */
+    agentures: Agenture[];
 };
 /**
  * Describes the message tank.workspace.v1.AgentActivityResponse.

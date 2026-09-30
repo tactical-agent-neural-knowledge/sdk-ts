@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/platform/v1/platform.proto.
  */
 export const file_tank_platform_v1_platform: GenFile = /*@__PURE__*/
-  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiqAEKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIRCgl1bmNsYWltZWQYBCABKAUSGQoRYWdlbnRfbWludXRlc18yNGgYBSABKAMSFQoNc3BlbmRfdXNkXzI0aBgGIAEoARIXCg9zcGVuZF91c2RfdG90YWwYByABKAEidAoUU2V0QWxsb2NhdGlvblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB2VuYWJsZWQYAiABKAgSDgoGd2VpZ2h0GAMgASgFEg8KB3J1bl9ub3cYBCABKAgSFAoMYXV0b19hcHByb3ZlGAUgASgIIkgKFVNldEFsbG9jYXRpb25SZXNwb25zZRIvCghhZ2VudHVyZRgBIAEoCzIdLnRhbmsucGxhdGZvcm0udjEuQWdlbnR1cmVSb3ciMQoXU2V0Qm9hcmRTZXR0aW5nc1JlcXVlc3QSFgoObWF4X2NvbmN1cnJlbnQYASABKAUiSwoYU2V0Qm9hcmRTZXR0aW5nc1Jlc3BvbnNlEi8KB3N1bW1hcnkYASABKAsyHi50YW5rLnBsYXRmb3JtLnYxLkJvYXJkU3VtbWFyeSIwCg5TdG9wUnVuUmVxdWVzdBIOCgZydW5faWQYASABKAkSDgoGcmVhc29uGAIgASgJIhEKD1N0b3BSdW5SZXNwb25zZTKQAwoPUGxhdGZvcm1TZXJ2aWNlEmAKDUxpc3RBZ2VudHVyZXMSJi50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXF1ZXN0GicudGFuay5wbGF0Zm9ybS52MS5MaXN0QWdlbnR1cmVzUmVzcG9uc2USYAoNU2V0QWxsb2NhdGlvbhImLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLlNldEFsbG9jYXRpb25SZXNwb25zZRJpChBTZXRCb2FyZFNldHRpbmdzEikudGFuay5wbGF0Zm9ybS52MS5TZXRCb2FyZFNldHRpbmdzUmVxdWVzdBoqLnRhbmsucGxhdGZvcm0udjEuU2V0Qm9hcmRTZXR0aW5nc1Jlc3BvbnNlEk4KB1N0b3BSdW4SIC50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXF1ZXN0GiEudGFuay5wbGF0Zm9ybS52MS5TdG9wUnVuUmVzcG9uc2VC4AEKFGNvbS50YW5rLnBsYXRmb3JtLnYxQg1QbGF0Zm9ybVByb3RvUAFaV2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvcGxhdGZvcm0vdjE7cGxhdGZvcm12MaICA1RQWKoCEFRhbmsuUGxhdGZvcm0uVjHKAhBUYW5rXFBsYXRmb3JtXFYx4gIcVGFua1xQbGF0Zm9ybVxWMVxHUEJNZXRhZGF0YeoCElRhbms6OlBsYXRmb3JtOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkinAIKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIOCgZraWxsZWQYCCABKAgSFAoMYXV0b19kZWZhdWx0GAkgASgIEhIKCmhvdXJzX2Zyb20YCiABKAUSEAoIaG91cnNfdG8YCyABKAUSEgoKaG91cnNfem9uZRgMIAEoCRISCgpob3Vyc19kYXlzGA0gAygFEhEKCXVuY2xhaW1lZBgEIAEoBRIZChFhZ2VudF9taW51dGVzXzI0aBgFIAEoAxIVCg1zcGVuZF91c2RfMjRoGAYgASgBEhcKD3NwZW5kX3VzZF90b3RhbBgHIAEoASJ0ChRTZXRBbGxvY2F0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDwoHZW5hYmxlZBgCIAEoCBIOCgZ3ZWlnaHQYAyABKAUSDwoHcnVuX25vdxgEIAEoCBIUCgxhdXRvX2FwcHJvdmUYBSABKAgiSAoVU2V0QWxsb2NhdGlvblJlc3BvbnNlEi8KCGFnZW50dXJlGAEgASgLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdyKlAQoXU2V0Qm9hcmRTZXR0aW5nc1JlcXVlc3QSFgoObWF4X2NvbmN1cnJlbnQYASABKAUSDgoGa2lsbGVkGAIgASgIEhQKDGF1dG9fZGVmYXVsdBgDIAEoCBISCgpob3Vyc19mcm9tGAQgASgFEhAKCGhvdXJzX3RvGAUgASgFEhIKCmhvdXJzX3pvbmUYBiABKAkSEgoKaG91cnNfZGF5cxgHIAMoBSJLChhTZXRCb2FyZFNldHRpbmdzUmVzcG9uc2USLwoHc3VtbWFyeRgBIAEoCzIeLnRhbmsucGxhdGZvcm0udjEuQm9hcmRTdW1tYXJ5IjAKDlN0b3BSdW5SZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCRIOCgZyZWFzb24YAiABKAkiEQoPU3RvcFJ1blJlc3BvbnNlMpADCg9QbGF0Zm9ybVNlcnZpY2USYAoNTGlzdEFnZW50dXJlcxImLnRhbmsucGxhdGZvcm0udjEuTGlzdEFnZW50dXJlc1JlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXNwb25zZRJgCg1TZXRBbGxvY2F0aW9uEiYudGFuay5wbGF0Zm9ybS52MS5TZXRBbGxvY2F0aW9uUmVxdWVzdBonLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlc3BvbnNlEmkKEFNldEJvYXJkU2V0dGluZ3MSKS50YW5rLnBsYXRmb3JtLnYxLlNldEJvYXJkU2V0dGluZ3NSZXF1ZXN0GioudGFuay5wbGF0Zm9ybS52MS5TZXRCb2FyZFNldHRpbmdzUmVzcG9uc2USTgoHU3RvcFJ1bhIgLnRhbmsucGxhdGZvcm0udjEuU3RvcFJ1blJlcXVlc3QaIS50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXNwb25zZULgAQoUY29tLnRhbmsucGxhdGZvcm0udjFCDVBsYXRmb3JtUHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9wbGF0Zm9ybS92MTtwbGF0Zm9ybXYxogIDVFBYqgIQVGFuay5QbGF0Zm9ybS5WMcoCEFRhbmtcUGxhdGZvcm1cVjHiAhxUYW5rXFBsYXRmb3JtXFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UGxhdGZvcm06OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * AgentureRow is one product on the board as the console sees it.
@@ -222,6 +222,45 @@ export type BoardSummary = Message<"tank.platform.v1.BoardSummary"> & {
   enabled: boolean;
 
   /**
+   * Stopped outright: nothing starts and anything running is ended. Not the same as
+   * a cap of zero, which lets what is running finish.
+   *
+   * @generated from field: bool killed = 8;
+   */
+  killed: boolean;
+
+  /**
+   * What a product starts as. Does not reach back and change products that exist.
+   *
+   * @generated from field: bool auto_default = 9;
+   */
+  autoDefault: boolean;
+
+  /**
+   * When agents may work. Minutes past midnight in hours_zone; equal means all day.
+   *
+   * @generated from field: int32 hours_from = 10;
+   */
+  hoursFrom: number;
+
+  /**
+   * @generated from field: int32 hours_to = 11;
+   */
+  hoursTo: number;
+
+  /**
+   * @generated from field: string hours_zone = 12;
+   */
+  hoursZone: string;
+
+  /**
+   * 0 is Sunday; empty means every day
+   *
+   * @generated from field: repeated int32 hours_days = 13;
+   */
+  hoursDays: number[];
+
+  /**
    * @generated from field: int32 unclaimed = 4;
    */
   unclaimed: number;
@@ -322,6 +361,38 @@ export type SetBoardSettingsRequest = Message<"tank.platform.v1.SetBoardSettings
    * @generated from field: int32 max_concurrent = 1;
    */
   maxConcurrent: number;
+
+  /**
+   * stop, and end what is running
+   *
+   * @generated from field: bool killed = 2;
+   */
+  killed: boolean;
+
+  /**
+   * @generated from field: bool auto_default = 3;
+   */
+  autoDefault: boolean;
+
+  /**
+   * @generated from field: int32 hours_from = 4;
+   */
+  hoursFrom: number;
+
+  /**
+   * @generated from field: int32 hours_to = 5;
+   */
+  hoursTo: number;
+
+  /**
+   * @generated from field: string hours_zone = 6;
+   */
+  hoursZone: string;
+
+  /**
+   * @generated from field: repeated int32 hours_days = 7;
+   */
+  hoursDays: number[];
 };
 
 /**

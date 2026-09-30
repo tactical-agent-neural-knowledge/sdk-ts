@@ -181,6 +181,39 @@ export type BoardSummary = Message<"tank.platform.v1.BoardSummary"> & {
      */
     enabled: boolean;
     /**
+     * Stopped outright: nothing starts and anything running is ended. Not the same as
+     * a cap of zero, which lets what is running finish.
+     *
+     * @generated from field: bool killed = 8;
+     */
+    killed: boolean;
+    /**
+     * What a product starts as. Does not reach back and change products that exist.
+     *
+     * @generated from field: bool auto_default = 9;
+     */
+    autoDefault: boolean;
+    /**
+     * When agents may work. Minutes past midnight in hours_zone; equal means all day.
+     *
+     * @generated from field: int32 hours_from = 10;
+     */
+    hoursFrom: number;
+    /**
+     * @generated from field: int32 hours_to = 11;
+     */
+    hoursTo: number;
+    /**
+     * @generated from field: string hours_zone = 12;
+     */
+    hoursZone: string;
+    /**
+     * 0 is Sunday; empty means every day
+     *
+     * @generated from field: repeated int32 hours_days = 13;
+     */
+    hoursDays: number[];
+    /**
      * @generated from field: int32 unclaimed = 4;
      */
     unclaimed: number;
@@ -265,6 +298,32 @@ export type SetBoardSettingsRequest = Message<"tank.platform.v1.SetBoardSettings
      * @generated from field: int32 max_concurrent = 1;
      */
     maxConcurrent: number;
+    /**
+     * stop, and end what is running
+     *
+     * @generated from field: bool killed = 2;
+     */
+    killed: boolean;
+    /**
+     * @generated from field: bool auto_default = 3;
+     */
+    autoDefault: boolean;
+    /**
+     * @generated from field: int32 hours_from = 4;
+     */
+    hoursFrom: number;
+    /**
+     * @generated from field: int32 hours_to = 5;
+     */
+    hoursTo: number;
+    /**
+     * @generated from field: string hours_zone = 6;
+     */
+    hoursZone: string;
+    /**
+     * @generated from field: repeated int32 hours_days = 7;
+     */
+    hoursDays: number[];
 };
 /**
  * Describes the message tank.platform.v1.SetBoardSettingsRequest.
