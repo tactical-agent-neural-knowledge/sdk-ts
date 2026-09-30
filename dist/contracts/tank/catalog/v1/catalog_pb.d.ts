@@ -85,6 +85,13 @@ export type ProductCard = Message<"tank.catalog.v1.ProductCard"> & {
      * @generated from field: bool watched = 14;
      */
     watched: boolean;
+    /**
+     * How many people have looked at this product's page. One per visitor per day, so
+     * it counts interest rather than refreshes.
+     *
+     * @generated from field: int64 view_count = 15;
+     */
+    viewCount: bigint;
 };
 /**
  * Describes the message tank.catalog.v1.ProductCard.
@@ -392,6 +399,39 @@ export type SetPortfolioProductResponse = Message<"tank.catalog.v1.SetPortfolioP
  */
 export declare const SetPortfolioProductResponseSchema: GenMessage<SetPortfolioProductResponse>;
 /**
+ * Recording a view is anonymous and deliberately cheap: the page calls it once when
+ * it opens, and the server decides whether it counts.
+ *
+ * @generated from message tank.catalog.v1.RecordProductViewRequest
+ */
+export type RecordProductViewRequest = Message<"tank.catalog.v1.RecordProductViewRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.catalog.v1.RecordProductViewRequest.
+ * Use `create(RecordProductViewRequestSchema)` to create a new message.
+ */
+export declare const RecordProductViewRequestSchema: GenMessage<RecordProductViewRequest>;
+/**
+ * @generated from message tank.catalog.v1.RecordProductViewResponse
+ */
+export type RecordProductViewResponse = Message<"tank.catalog.v1.RecordProductViewResponse"> & {
+    /**
+     * the total after this call
+     *
+     * @generated from field: int64 view_count = 1;
+     */
+    viewCount: bigint;
+};
+/**
+ * Describes the message tank.catalog.v1.RecordProductViewResponse.
+ * Use `create(RecordProductViewResponseSchema)` to create a new message.
+ */
+export declare const RecordProductViewResponseSchema: GenMessage<RecordProductViewResponse>;
+/**
  * The orders a person actually asks for, named after what they mean rather than the
  * column they sort on, so the client never has to know that "furthest along" is
  * agent minutes.
@@ -418,7 +458,11 @@ export declare enum ProductSort {
     /**
      * @generated from enum value: PRODUCT_SORT_MOST_EXPENSIVE = 4;
      */
-    MOST_EXPENSIVE = 4
+    MOST_EXPENSIVE = 4,
+    /**
+     * @generated from enum value: PRODUCT_SORT_MOST_VIEWED = 5;
+     */
+    MOST_VIEWED = 5
 }
 /**
  * Describes the enum tank.catalog.v1.ProductSort.
@@ -437,6 +481,14 @@ export declare const CatalogService: GenService<{
         methodKind: "unary";
         input: typeof ListProductsRequestSchema;
         output: typeof ListProductsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.catalog.v1.CatalogService.RecordProductView
+     */
+    recordProductView: {
+        methodKind: "unary";
+        input: typeof RecordProductViewRequestSchema;
+        output: typeof RecordProductViewResponseSchema;
     };
     /**
      * Signed in.
