@@ -109,8 +109,8 @@ export type ProductCard = Message<"tank.catalog.v1.ProductCard"> & {
   watched: boolean;
 
   /**
-   * How many people have looked at this product's page. One per visitor per day, so
-   * it counts interest rather than refreshes.
+   * Total visits to this product's page, all time. Every view counts, including
+   * repeat visits and crawlers — it is a hit counter, not a headcount.
    *
    * @generated from field: int64 view_count = 15;
    */
@@ -493,7 +493,7 @@ export const SetPortfolioProductResponseSchema: GenMessage<SetPortfolioProductRe
 
 /**
  * Recording a view is anonymous and deliberately cheap: the page calls it once when
- * it opens, and the server decides whether it counts.
+ * it opens, and every call counts.
  *
  * @generated from message tank.catalog.v1.RecordProductViewRequest
  */
