@@ -231,6 +231,17 @@ export type BoardSummary = Message<"tank.platform.v1.BoardSummary"> & {
      * @generated from field: double spend_usd_total = 7;
      */
     spendUsdTotal: number;
+    /**
+     * The last hour and the last three, for reading a change to the cap or the
+     * policy before the day's figure can show it.
+     *
+     * @generated from field: double spend_usd_1h = 14;
+     */
+    spendUsd1h: number;
+    /**
+     * @generated from field: double spend_usd_3h = 15;
+     */
+    spendUsd3h: number;
 };
 /**
  * Describes the message tank.platform.v1.BoardSummary.

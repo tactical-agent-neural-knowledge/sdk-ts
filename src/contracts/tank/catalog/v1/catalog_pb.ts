@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/catalog/v1/catalog.proto.
  */
 export const file_tank_catalog_v1_catalog: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2NhdGFsb2cvdjEvY2F0YWxvZy5wcm90bxIPdGFuay5jYXRhbG9nLnYxIusCCgtQcm9kdWN0Q2FyZBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhAKCGluZHVzdHJ5GAUgASgJEg0KBWJ1eWVyGAYgASgJEhMKC3ByaWNlX2NlbnRzGAcgASgDEhUKDWFnZW50X21pbnV0ZXMYCCABKAMSFgoOd29ya19kZWxpdmVyZWQYCSABKAUSFAoMYWdlbnRfYWN0aXZlGAogASgIEi4KCmNyZWF0ZWRfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKDmxhc3Rfd29ya2VkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIRCglhdmFpbGFibGUYDSABKAgSDwoHd2F0Y2hlZBgOIAEoCBISCgp2aWV3X2NvdW50GA8gASgDIq0BChNMaXN0UHJvZHVjdHNSZXF1ZXN0EioKBHNvcnQYASABKA4yHC50YW5rLmNhdGFsb2cudjEuUHJvZHVjdFNvcnQSEAoIaW5kdXN0cnkYAiABKAkSDQoFcXVlcnkYAyABKAkSFAoMd2F0Y2hlZF9vbmx5GAQgASgIEhQKDHBvcnRmb2xpb19pZBgFIAEoCRIOCgZjdXJzb3IYBiABKAkSDQoFbGltaXQYByABKAUifgoUTGlzdFByb2R1Y3RzUmVzcG9uc2USLgoIcHJvZHVjdHMYASADKAsyHC50YW5rLmNhdGFsb2cudjEuUHJvZHVjdENhcmQSEwoLbmV4dF9jdXJzb3IYAiABKAkSDQoFdG90YWwYAyABKAUSEgoKaW5kdXN0cmllcxgEIAMoCSI8ChNXYXRjaFByb2R1Y3RSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgd3YXRjaGVkGAIgASgIIkUKFFdhdGNoUHJvZHVjdFJlc3BvbnNlEi0KB3Byb2R1Y3QYASABKAsyHC50YW5rLmNhdGFsb2cudjEuUHJvZHVjdENhcmQijwEKCVBvcnRmb2xpbxIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEgwKBG5vdGUYAyABKAkSFQoNcHJvZHVjdF9jb3VudBgEIAEoBRITCgt2YWx1ZV9jZW50cxgFIAEoAxIuCgpjcmVhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIXChVMaXN0UG9ydGZvbGlvc1JlcXVlc3QiSAoWTGlzdFBvcnRmb2xpb3NSZXNwb25zZRIuCgpwb3J0Zm9saW9zGAEgAygLMhoudGFuay5jYXRhbG9nLnYxLlBvcnRmb2xpbyI0ChZDcmVhdGVQb3J0Zm9saW9SZXF1ZXN0EgwKBG5hbWUYASABKAkSDAoEbm90ZRgCIAEoCSJIChdDcmVhdGVQb3J0Zm9saW9SZXNwb25zZRItCglwb3J0Zm9saW8YASABKAsyGi50YW5rLmNhdGFsb2cudjEuUG9ydGZvbGlvIkAKFlJlbmFtZVBvcnRmb2xpb1JlcXVlc3QSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRub3RlGAMgASgJIkgKF1JlbmFtZVBvcnRmb2xpb1Jlc3BvbnNlEi0KCXBvcnRmb2xpbxgBIAEoCzIaLnRhbmsuY2F0YWxvZy52MS5Qb3J0Zm9saW8iJAoWRGVsZXRlUG9ydGZvbGlvUmVxdWVzdBIKCgJpZBgBIAEoCSIZChdEZWxldGVQb3J0Zm9saW9SZXNwb25zZSJaChpTZXRQb3J0Zm9saW9Qcm9kdWN0UmVxdWVzdBIUCgxwb3J0Zm9saW9faWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEhAKCGluY2x1ZGVkGAMgASgIIkwKG1NldFBvcnRmb2xpb1Byb2R1Y3RSZXNwb25zZRItCglwb3J0Zm9saW8YASABKAsyGi50YW5rLmNhdGFsb2cudjEuUG9ydGZvbGlvIjoKGFJlY29yZFByb2R1Y3RWaWV3UmVxdWVzdBIMCgRzbHVnGAEgASgJEhAKCHJlZmVycmVyGAIgASgJIi8KGVJlY29yZFByb2R1Y3RWaWV3UmVzcG9uc2USEgoKdmlld19jb3VudBgBIAEoAyq/AQoLUHJvZHVjdFNvcnQSHAoYUFJPRFVDVF9TT1JUX1VOU1BFQ0lGSUVEEAASFwoTUFJPRFVDVF9TT1JUX05FV0VTVBABEh8KG1BST0RVQ1RfU09SVF9GVVJUSEVTVF9BTE9ORxACEhkKFVBST0RVQ1RfU09SVF9DSEVBUEVTVBADEh8KG1BST0RVQ1RfU09SVF9NT1NUX0VYUEVOU0lWRRAEEhwKGFBST0RVQ1RfU09SVF9NT1NUX1ZJRVdFRBAFMr0GCg5DYXRhbG9nU2VydmljZRJbCgxMaXN0UHJvZHVjdHMSJC50YW5rLmNhdGFsb2cudjEuTGlzdFByb2R1Y3RzUmVxdWVzdBolLnRhbmsuY2F0YWxvZy52MS5MaXN0UHJvZHVjdHNSZXNwb25zZRJqChFSZWNvcmRQcm9kdWN0VmlldxIpLnRhbmsuY2F0YWxvZy52MS5SZWNvcmRQcm9kdWN0Vmlld1JlcXVlc3QaKi50YW5rLmNhdGFsb2cudjEuUmVjb3JkUHJvZHVjdFZpZXdSZXNwb25zZRJbCgxXYXRjaFByb2R1Y3QSJC50YW5rLmNhdGFsb2cudjEuV2F0Y2hQcm9kdWN0UmVxdWVzdBolLnRhbmsuY2F0YWxvZy52MS5XYXRjaFByb2R1Y3RSZXNwb25zZRJhCg5MaXN0UG9ydGZvbGlvcxImLnRhbmsuY2F0YWxvZy52MS5MaXN0UG9ydGZvbGlvc1JlcXVlc3QaJy50YW5rLmNhdGFsb2cudjEuTGlzdFBvcnRmb2xpb3NSZXNwb25zZRJkCg9DcmVhdGVQb3J0Zm9saW8SJy50YW5rLmNhdGFsb2cudjEuQ3JlYXRlUG9ydGZvbGlvUmVxdWVzdBooLnRhbmsuY2F0YWxvZy52MS5DcmVhdGVQb3J0Zm9saW9SZXNwb25zZRJkCg9SZW5hbWVQb3J0Zm9saW8SJy50YW5rLmNhdGFsb2cudjEuUmVuYW1lUG9ydGZvbGlvUmVxdWVzdBooLnRhbmsuY2F0YWxvZy52MS5SZW5hbWVQb3J0Zm9saW9SZXNwb25zZRJkCg9EZWxldGVQb3J0Zm9saW8SJy50YW5rLmNhdGFsb2cudjEuRGVsZXRlUG9ydGZvbGlvUmVxdWVzdBooLnRhbmsuY2F0YWxvZy52MS5EZWxldGVQb3J0Zm9saW9SZXNwb25zZRJwChNTZXRQb3J0Zm9saW9Qcm9kdWN0EisudGFuay5jYXRhbG9nLnYxLlNldFBvcnRmb2xpb1Byb2R1Y3RSZXF1ZXN0GiwudGFuay5jYXRhbG9nLnYxLlNldFBvcnRmb2xpb1Byb2R1Y3RSZXNwb25zZULYAQoTY29tLnRhbmsuY2F0YWxvZy52MUIMQ2F0YWxvZ1Byb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvY2F0YWxvZy92MTtjYXRhbG9ndjGiAgNUQ1iqAg9UYW5rLkNhdGFsb2cuVjHKAg9UYW5rXENhdGFsb2dcVjHiAhtUYW5rXENhdGFsb2dcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpDYXRhbG9nOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2NhdGFsb2cvdjEvY2F0YWxvZy5wcm90bxIPdGFuay5jYXRhbG9nLnYxIusCCgtQcm9kdWN0Q2FyZBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhAKCGluZHVzdHJ5GAUgASgJEg0KBWJ1eWVyGAYgASgJEhMKC3ByaWNlX2NlbnRzGAcgASgDEhUKDWFnZW50X21pbnV0ZXMYCCABKAMSFgoOd29ya19kZWxpdmVyZWQYCSABKAUSFAoMYWdlbnRfYWN0aXZlGAogASgIEi4KCmNyZWF0ZWRfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKDmxhc3Rfd29ya2VkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIRCglhdmFpbGFibGUYDSABKAgSDwoHd2F0Y2hlZBgOIAEoCBISCgp2aWV3X2NvdW50GA8gASgDIq0BChNMaXN0UHJvZHVjdHNSZXF1ZXN0EioKBHNvcnQYASABKA4yHC50YW5rLmNhdGFsb2cudjEuUHJvZHVjdFNvcnQSEAoIaW5kdXN0cnkYAiABKAkSDQoFcXVlcnkYAyABKAkSFAoMd2F0Y2hlZF9vbmx5GAQgASgIEhQKDHBvcnRmb2xpb19pZBgFIAEoCRIOCgZjdXJzb3IYBiABKAkSDQoFbGltaXQYByABKAUifgoUTGlzdFByb2R1Y3RzUmVzcG9uc2USLgoIcHJvZHVjdHMYASADKAsyHC50YW5rLmNhdGFsb2cudjEuUHJvZHVjdENhcmQSEwoLbmV4dF9jdXJzb3IYAiABKAkSDQoFdG90YWwYAyABKAUSEgoKaW5kdXN0cmllcxgEIAMoCSI8ChNXYXRjaFByb2R1Y3RSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgd3YXRjaGVkGAIgASgIIkUKFFdhdGNoUHJvZHVjdFJlc3BvbnNlEi0KB3Byb2R1Y3QYASABKAsyHC50YW5rLmNhdGFsb2cudjEuUHJvZHVjdENhcmQijwEKCVBvcnRmb2xpbxIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEgwKBG5vdGUYAyABKAkSFQoNcHJvZHVjdF9jb3VudBgEIAEoBRITCgt2YWx1ZV9jZW50cxgFIAEoAxIuCgpjcmVhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIXChVMaXN0UG9ydGZvbGlvc1JlcXVlc3QiSAoWTGlzdFBvcnRmb2xpb3NSZXNwb25zZRIuCgpwb3J0Zm9saW9zGAEgAygLMhoudGFuay5jYXRhbG9nLnYxLlBvcnRmb2xpbyI0ChZDcmVhdGVQb3J0Zm9saW9SZXF1ZXN0EgwKBG5hbWUYASABKAkSDAoEbm90ZRgCIAEoCSJIChdDcmVhdGVQb3J0Zm9saW9SZXNwb25zZRItCglwb3J0Zm9saW8YASABKAsyGi50YW5rLmNhdGFsb2cudjEuUG9ydGZvbGlvIkAKFlJlbmFtZVBvcnRmb2xpb1JlcXVlc3QSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRub3RlGAMgASgJIkgKF1JlbmFtZVBvcnRmb2xpb1Jlc3BvbnNlEi0KCXBvcnRmb2xpbxgBIAEoCzIaLnRhbmsuY2F0YWxvZy52MS5Qb3J0Zm9saW8iJAoWRGVsZXRlUG9ydGZvbGlvUmVxdWVzdBIKCgJpZBgBIAEoCSIZChdEZWxldGVQb3J0Zm9saW9SZXNwb25zZSJaChpTZXRQb3J0Zm9saW9Qcm9kdWN0UmVxdWVzdBIUCgxwb3J0Zm9saW9faWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEhAKCGluY2x1ZGVkGAMgASgIIkwKG1NldFBvcnRmb2xpb1Byb2R1Y3RSZXNwb25zZRItCglwb3J0Zm9saW8YASABKAsyGi50YW5rLmNhdGFsb2cudjEuUG9ydGZvbGlvIjoKGFJlY29yZFByb2R1Y3RWaWV3UmVxdWVzdBIMCgRzbHVnGAEgASgJEhAKCHJlZmVycmVyGAIgASgJIi8KGVJlY29yZFByb2R1Y3RWaWV3UmVzcG9uc2USEgoKdmlld19jb3VudBgBIAEoAyJdCgRTdGF0EgsKA2tleRgBIAEoCRINCgVsYWJlbBgCIAEoCRINCgV2YWx1ZRgDIAEoARIMCgR1bml0GAQgASgJEg4KBnNhbXBsZRgFIAEoAxIMCgRub3RlGAYgASgJIjMKBVRhbGx5EgwKBG5hbWUYASABKAkSDQoFY291bnQYAiABKAMSDQoFc2hhcmUYAyABKAEiEwoRQm9hcmRTdGF0c1JlcXVlc3QiMQoTQm9hcmRIaXN0b3J5UmVxdWVzdBIMCgRrZXlzGAEgAygJEgwKBGRheXMYAiABKAUiPwoUQm9hcmRIaXN0b3J5UmVzcG9uc2USJwoGc2VyaWVzGAEgAygLMhcudGFuay5jYXRhbG9nLnYxLlNlcmllcyI9CgZTZXJpZXMSCwoDa2V5GAEgASgJEiYKBnBvaW50cxgCIAMoCzIWLnRhbmsuY2F0YWxvZy52MS5Qb2ludCI+CgVQb2ludBImCgJhdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFdmFsdWUYAiABKAEioAQKEkJvYXJkU3RhdHNSZXNwb25zZRIvCgtjb21wdXRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASJwoIaGVhZGxpbmUYAiADKAsyFS50YW5rLmNhdGFsb2cudjEuU3RhdBIiCgNhbGwYAyADKAsyFS50YW5rLmNhdGFsb2cudjEuU3RhdBIqCgppbmR1c3RyaWVzGAQgAygLMhYudGFuay5jYXRhbG9nLnYxLlRhbGx5EiYKBnN0YWdlcxgFIAMoCzIWLnRhbmsuY2F0YWxvZy52MS5UYWxseRInCgdzb3VyY2VzGAYgAygLMhYudGFuay5jYXRhbG9nLnYxLlRhbGx5EiYKBnJlY2VudBgHIAMoCzIWLnRhbmsuY2F0YWxvZy52MS5FdmVudBItCgxtb3N0X3Zpc2l0ZWQYCCADKAsyFy50YW5rLmNhdGFsb2cudjEuUmFua2VkEisKBXRvb2xzGAkgAygLMhwudGFuay5jYXRhbG9nLnYxLlRvb2xNZW50aW9uEioKBnByaWNlcxgKIAMoCzIaLnRhbmsuY2F0YWxvZy52MS5QcmljZUJhbmQSLgoMZHJvcHBlZF9saXN0GAsgAygLMhgudGFuay5jYXRhbG9nLnYxLkRyb3BwZWQSLwoLdmVuZG9yX2dhcHMYDCADKAsyGi50YW5rLmNhdGFsb2cudjEuVmVuZG9yR2FwImYKCVByaWNlQmFuZBIQCghpbmR1c3RyeRgBIAEoCRIQCghwcm9kdWN0cxgCIAEoBRISCgptZWRpYW5fdXNkGAMgASgBEg8KB2xvd191c2QYBCABKAESEAoIaGlnaF91c2QYBSABKAEicgoHRHJvcHBlZBIPCgdwcm9kdWN0GAEgASgJEgwKBHNsdWcYAiABKAkSEAoIaW5kdXN0cnkYAyABKAkSDgoGcmVhc29uGAQgASgJEiYKAmF0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJPCglWZW5kb3JHYXASDAoEdG9vbBgBIAEoCRILCgNnYXAYAiABKAkSFAoMZnJvbV9wcm9kdWN0GAMgASgJEhEKCWZyb21fc2x1ZxgEIAEoCSKNAQoLVG9vbE1lbnRpb24SDAoEbmFtZRgBIAEoCRIQCghwcm9kdWN0cxgCIAEoAxIPCgdjb3ZlcmVkGAMgASgIEhAKCGNhdGVnb3J5GAQgASgJEgwKBHNsdWcYBSABKAkSDwoHcHJvZHVjdBgGIAEoCRINCgVzdGFnZRgHIAEoBRINCgV0b3RhbBgIIAEoBSJdCgVFdmVudBIPCgdwcm9kdWN0GAEgASgJEgwKBHNsdWcYAiABKAkSDQoFc3RhZ2UYAyABKAkSJgoCYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIkgKBlJhbmtlZBIPCgdwcm9kdWN0GAEgASgJEgwKBHNsdWcYAiABKAkSDQoFdmFsdWUYAyABKAMSEAoIaW5kdXN0cnkYBCABKAkqvwEKC1Byb2R1Y3RTb3J0EhwKGFBST0RVQ1RfU09SVF9VTlNQRUNJRklFRBAAEhcKE1BST0RVQ1RfU09SVF9ORVdFU1QQARIfChtQUk9EVUNUX1NPUlRfRlVSVEhFU1RfQUxPTkcQAhIZChVQUk9EVUNUX1NPUlRfQ0hFQVBFU1QQAxIfChtQUk9EVUNUX1NPUlRfTU9TVF9FWFBFTlNJVkUQBBIcChhQUk9EVUNUX1NPUlRfTU9TVF9WSUVXRUQQBTLxBwoOQ2F0YWxvZ1NlcnZpY2USVQoKQm9hcmRTdGF0cxIiLnRhbmsuY2F0YWxvZy52MS5Cb2FyZFN0YXRzUmVxdWVzdBojLnRhbmsuY2F0YWxvZy52MS5Cb2FyZFN0YXRzUmVzcG9uc2USWwoMQm9hcmRIaXN0b3J5EiQudGFuay5jYXRhbG9nLnYxLkJvYXJkSGlzdG9yeVJlcXVlc3QaJS50YW5rLmNhdGFsb2cudjEuQm9hcmRIaXN0b3J5UmVzcG9uc2USWwoMTGlzdFByb2R1Y3RzEiQudGFuay5jYXRhbG9nLnYxLkxpc3RQcm9kdWN0c1JlcXVlc3QaJS50YW5rLmNhdGFsb2cudjEuTGlzdFByb2R1Y3RzUmVzcG9uc2USagoRUmVjb3JkUHJvZHVjdFZpZXcSKS50YW5rLmNhdGFsb2cudjEuUmVjb3JkUHJvZHVjdFZpZXdSZXF1ZXN0GioudGFuay5jYXRhbG9nLnYxLlJlY29yZFByb2R1Y3RWaWV3UmVzcG9uc2USWwoMV2F0Y2hQcm9kdWN0EiQudGFuay5jYXRhbG9nLnYxLldhdGNoUHJvZHVjdFJlcXVlc3QaJS50YW5rLmNhdGFsb2cudjEuV2F0Y2hQcm9kdWN0UmVzcG9uc2USYQoOTGlzdFBvcnRmb2xpb3MSJi50YW5rLmNhdGFsb2cudjEuTGlzdFBvcnRmb2xpb3NSZXF1ZXN0GicudGFuay5jYXRhbG9nLnYxLkxpc3RQb3J0Zm9saW9zUmVzcG9uc2USZAoPQ3JlYXRlUG9ydGZvbGlvEicudGFuay5jYXRhbG9nLnYxLkNyZWF0ZVBvcnRmb2xpb1JlcXVlc3QaKC50YW5rLmNhdGFsb2cudjEuQ3JlYXRlUG9ydGZvbGlvUmVzcG9uc2USZAoPUmVuYW1lUG9ydGZvbGlvEicudGFuay5jYXRhbG9nLnYxLlJlbmFtZVBvcnRmb2xpb1JlcXVlc3QaKC50YW5rLmNhdGFsb2cudjEuUmVuYW1lUG9ydGZvbGlvUmVzcG9uc2USZAoPRGVsZXRlUG9ydGZvbGlvEicudGFuay5jYXRhbG9nLnYxLkRlbGV0ZVBvcnRmb2xpb1JlcXVlc3QaKC50YW5rLmNhdGFsb2cudjEuRGVsZXRlUG9ydGZvbGlvUmVzcG9uc2UScAoTU2V0UG9ydGZvbGlvUHJvZHVjdBIrLnRhbmsuY2F0YWxvZy52MS5TZXRQb3J0Zm9saW9Qcm9kdWN0UmVxdWVzdBosLnRhbmsuY2F0YWxvZy52MS5TZXRQb3J0Zm9saW9Qcm9kdWN0UmVzcG9uc2VC2AEKE2NvbS50YW5rLmNhdGFsb2cudjFCDENhdGFsb2dQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2NhdGFsb2cvdjE7Y2F0YWxvZ3YxogIDVENYqgIPVGFuay5DYXRhbG9nLlYxygIPVGFua1xDYXRhbG9nXFYx4gIbVGFua1xDYXRhbG9nXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6Q2F0YWxvZzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * ProductCard is a product as a list shows it. It carries what the card renders and
@@ -540,6 +540,565 @@ export const RecordProductViewResponseSchema: GenMessage<RecordProductViewRespon
   messageDesc(file_tank_catalog_v1_catalog, 17);
 
 /**
+ * A number worth putting on a page, with enough around it to be quoted honestly.
+ *
+ * @generated from message tank.catalog.v1.Stat
+ */
+export type Stat = Message<"tank.catalog.v1.Stat"> & {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: string label = 2;
+   */
+  label: string;
+
+  /**
+   * @generated from field: double value = 3;
+   */
+  value: number;
+
+  /**
+   * "", "usd", "hours", "minutes", "products", "percent"
+   *
+   * @generated from field: string unit = 4;
+   */
+  unit: string;
+
+  /**
+   * How many observations it rests on. Published next to every figure: a percentage
+   * hiding a sample of twelve is how a data page stops being believed.
+   *
+   * @generated from field: int64 sample = 5;
+   */
+  sample: bigint;
+
+  /**
+   * the method, in one line
+   *
+   * @generated from field: string note = 6;
+   */
+  note: string;
+};
+
+/**
+ * Describes the message tank.catalog.v1.Stat.
+ * Use `create(StatSchema)` to create a new message.
+ */
+export const StatSchema: GenMessage<Stat> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 18);
+
+/**
+ * One row of a ranking — a vendor, an industry, a stack choice.
+ *
+ * @generated from message tank.catalog.v1.Tally
+ */
+export type Tally = Message<"tank.catalog.v1.Tally"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: int64 count = 2;
+   */
+  count: bigint;
+
+  /**
+   * 0..1 of the sample
+   *
+   * @generated from field: double share = 3;
+   */
+  share: number;
+};
+
+/**
+ * Describes the message tank.catalog.v1.Tally.
+ * Use `create(TallySchema)` to create a new message.
+ */
+export const TallySchema: GenMessage<Tally> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 19);
+
+/**
+ * @generated from message tank.catalog.v1.BoardStatsRequest
+ */
+export type BoardStatsRequest = Message<"tank.catalog.v1.BoardStatsRequest"> & {
+};
+
+/**
+ * Describes the message tank.catalog.v1.BoardStatsRequest.
+ * Use `create(BoardStatsRequestSchema)` to create a new message.
+ */
+export const BoardStatsRequestSchema: GenMessage<BoardStatsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 20);
+
+/**
+ * The series behind the figures. Published for the same reason the figures are: a
+ * number somebody is invited to quote is worth more when they can see where it came
+ * from, and that it is not being quietly revised.
+ *
+ * @generated from message tank.catalog.v1.BoardHistoryRequest
+ */
+export type BoardHistoryRequest = Message<"tank.catalog.v1.BoardHistoryRequest"> & {
+  /**
+   * empty for every figure
+   *
+   * @generated from field: repeated string keys = 1;
+   */
+  keys: string[];
+
+  /**
+   * default 90, max 400
+   *
+   * @generated from field: int32 days = 2;
+   */
+  days: number;
+};
+
+/**
+ * Describes the message tank.catalog.v1.BoardHistoryRequest.
+ * Use `create(BoardHistoryRequestSchema)` to create a new message.
+ */
+export const BoardHistoryRequestSchema: GenMessage<BoardHistoryRequest> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 21);
+
+/**
+ * @generated from message tank.catalog.v1.BoardHistoryResponse
+ */
+export type BoardHistoryResponse = Message<"tank.catalog.v1.BoardHistoryResponse"> & {
+  /**
+   * @generated from field: repeated tank.catalog.v1.Series series = 1;
+   */
+  series: Series[];
+};
+
+/**
+ * Describes the message tank.catalog.v1.BoardHistoryResponse.
+ * Use `create(BoardHistoryResponseSchema)` to create a new message.
+ */
+export const BoardHistoryResponseSchema: GenMessage<BoardHistoryResponse> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 22);
+
+/**
+ * @generated from message tank.catalog.v1.Series
+ */
+export type Series = Message<"tank.catalog.v1.Series"> & {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: repeated tank.catalog.v1.Point points = 2;
+   */
+  points: Point[];
+};
+
+/**
+ * Describes the message tank.catalog.v1.Series.
+ * Use `create(SeriesSchema)` to create a new message.
+ */
+export const SeriesSchema: GenMessage<Series> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 23);
+
+/**
+ * @generated from message tank.catalog.v1.Point
+ */
+export type Point = Message<"tank.catalog.v1.Point"> & {
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 1;
+   */
+  at?: Timestamp;
+
+  /**
+   * @generated from field: double value = 2;
+   */
+  value: number;
+};
+
+/**
+ * Describes the message tank.catalog.v1.Point.
+ * Use `create(PointSchema)` to create a new message.
+ */
+export const PointSchema: GenMessage<Point> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 24);
+
+/**
+ * @generated from message tank.catalog.v1.BoardStatsResponse
+ */
+export type BoardStatsResponse = Message<"tank.catalog.v1.BoardStatsResponse"> & {
+  /**
+   * @generated from field: google.protobuf.Timestamp computed_at = 1;
+   */
+  computedAt?: Timestamp;
+
+  /**
+   * the figures worth leading with
+   *
+   * @generated from field: repeated tank.catalog.v1.Stat headline = 2;
+   */
+  headline: Stat[];
+
+  /**
+   * everything else
+   *
+   * @generated from field: repeated tank.catalog.v1.Stat all = 3;
+   */
+  all: Stat[];
+
+  /**
+   * products by industry
+   *
+   * @generated from field: repeated tank.catalog.v1.Tally industries = 4;
+   */
+  industries: Tally[];
+
+  /**
+   * which stages agents have completed
+   *
+   * @generated from field: repeated tank.catalog.v1.Tally stages = 5;
+   */
+  stages: Tally[];
+
+  /**
+   * where visits came from
+   *
+   * @generated from field: repeated tank.catalog.v1.Tally sources = 6;
+   */
+  sources: Tally[];
+
+  /**
+   * the last few things that happened, newest first
+   *
+   * @generated from field: repeated tank.catalog.v1.Event recent = 7;
+   */
+  recent: Event[];
+
+  /**
+   * products people actually open
+   *
+   * @generated from field: repeated tank.catalog.v1.Ranked most_visited = 8;
+   */
+  mostVisited: Ranked[];
+
+  /**
+   * software the agents name, and whether TANK does that job
+   *
+   * @generated from field: repeated tank.catalog.v1.ToolMention tools = 9;
+   */
+  tools: ToolMention[];
+
+  /**
+   * what agents say software for each trade should cost
+   *
+   * @generated from field: repeated tank.catalog.v1.PriceBand prices = 10;
+   */
+  prices: PriceBand[];
+
+  /**
+   * ideas the board looked at and declined to build
+   *
+   * @generated from field: repeated tank.catalog.v1.Dropped dropped_list = 11;
+   */
+  droppedList: Dropped[];
+
+  /**
+   * what the agents say each named tool gets wrong
+   *
+   * @generated from field: repeated tank.catalog.v1.VendorGap vendor_gaps = 12;
+   */
+  vendorGaps: VendorGap[];
+};
+
+/**
+ * Describes the message tank.catalog.v1.BoardStatsResponse.
+ * Use `create(BoardStatsResponseSchema)` to create a new message.
+ */
+export const BoardStatsResponseSchema: GenMessage<BoardStatsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 25);
+
+/**
+ * PriceBand is what agents independently decided software for one trade should cost.
+ *
+ * The spread is the interesting half. Many agents priced many products in the same
+ * industry without consulting each other, so how far apart they land is a measurement
+ * of how much two AI agents disagree about the same question.
+ *
+ * @generated from message tank.catalog.v1.PriceBand
+ */
+export type PriceBand = Message<"tank.catalog.v1.PriceBand"> & {
+  /**
+   * @generated from field: string industry = 1;
+   */
+  industry: string;
+
+  /**
+   * how many agents priced something here
+   *
+   * @generated from field: int32 products = 2;
+   */
+  products: number;
+
+  /**
+   * dollars a month
+   *
+   * @generated from field: double median_usd = 3;
+   */
+  medianUsd: number;
+
+  /**
+   * @generated from field: double low_usd = 4;
+   */
+  lowUsd: number;
+
+  /**
+   * @generated from field: double high_usd = 5;
+   */
+  highUsd: number;
+};
+
+/**
+ * Describes the message tank.catalog.v1.PriceBand.
+ * Use `create(PriceBandSchema)` to create a new message.
+ */
+export const PriceBandSchema: GenMessage<PriceBand> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 26);
+
+/**
+ * Dropped is a product the board stopped working on because its own research said to.
+ *
+ * @generated from message tank.catalog.v1.Dropped
+ */
+export type Dropped = Message<"tank.catalog.v1.Dropped"> & {
+  /**
+   * @generated from field: string product = 1;
+   */
+  product: string;
+
+  /**
+   * @generated from field: string slug = 2;
+   */
+  slug: string;
+
+  /**
+   * @generated from field: string industry = 3;
+   */
+  industry: string;
+
+  /**
+   * @generated from field: string reason = 4;
+   */
+  reason: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 5;
+   */
+  at?: Timestamp;
+};
+
+/**
+ * Describes the message tank.catalog.v1.Dropped.
+ * Use `create(DroppedSchema)` to create a new message.
+ */
+export const DroppedSchema: GenMessage<Dropped> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 27);
+
+/**
+ * VendorGap is one thing the agents say a named tool gets wrong, in their own words.
+ *
+ * @generated from message tank.catalog.v1.VendorGap
+ */
+export type VendorGap = Message<"tank.catalog.v1.VendorGap"> & {
+  /**
+   * the tool it is about
+   *
+   * @generated from field: string tool = 1;
+   */
+  tool: string;
+
+  /**
+   * @generated from field: string gap = 2;
+   */
+  gap: string;
+
+  /**
+   * the product whose research found it
+   *
+   * @generated from field: string from_product = 3;
+   */
+  fromProduct: string;
+
+  /**
+   * @generated from field: string from_slug = 4;
+   */
+  fromSlug: string;
+};
+
+/**
+ * Describes the message tank.catalog.v1.VendorGap.
+ * Use `create(VendorGapSchema)` to create a new message.
+ */
+export const VendorGapSchema: GenMessage<VendorGap> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 28);
+
+/**
+ * ToolMention is a third-party tool the agents named while planning businesses, how
+ * many of those businesses named it, and whether a TANK workspace already does that
+ * job today.
+ *
+ * The third field is the point. The first two say what software a business is assumed
+ * to run on; the third says how much of that assumption TANK already answers. Only
+ * what ships today is marked covered — a roadmap in this column would make the whole
+ * page an advertisement, and the page is only worth anything if it is not one.
+ *
+ * @generated from message tank.catalog.v1.ToolMention
+ */
+export type ToolMention = Message<"tank.catalog.v1.ToolMention"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * distinct products whose agents named it
+   *
+   * @generated from field: int64 products = 2;
+   */
+  products: bigint;
+
+  /**
+   * a TANK workspace does this job today
+   *
+   * @generated from field: bool covered = 3;
+   */
+  covered: boolean;
+
+  /**
+   * "where the team talks", "accounting", …
+   *
+   * @generated from field: string category = 4;
+   */
+  category: string;
+
+  /**
+   * A product the board is building to do this job. Empty when there is none.
+   *
+   * Separate from `covered` on purpose: covered means a TANK workspace does this
+   * today, and a product being worked on is a weaker claim that deserves weaker
+   * words. The page shows one as "Yes" and the other as a link and a percentage.
+   *
+   * @generated from field: string slug = 5;
+   */
+  slug: string;
+
+  /**
+   * its name
+   *
+   * @generated from field: string product = 6;
+   */
+  product: string;
+
+  /**
+   * how many stages of its journey are finished
+   *
+   * @generated from field: int32 stage = 7;
+   */
+  stage: number;
+
+  /**
+   * how many there are
+   *
+   * @generated from field: int32 total = 8;
+   */
+  total: number;
+};
+
+/**
+ * Describes the message tank.catalog.v1.ToolMention.
+ * Use `create(ToolMentionSchema)` to create a new message.
+ */
+export const ToolMentionSchema: GenMessage<ToolMention> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 29);
+
+/**
+ * Event is one thing an agent finished, for a page that wants to look alive rather
+ * than merely be accurate. Additive: a client that does not know about it renders
+ * the figures exactly as before.
+ *
+ * @generated from message tank.catalog.v1.Event
+ */
+export type Event = Message<"tank.catalog.v1.Event"> & {
+  /**
+   * the product's name
+   *
+   * @generated from field: string product = 1;
+   */
+  product: string;
+
+  /**
+   * so the ticker can link
+   *
+   * @generated from field: string slug = 2;
+   */
+  slug: string;
+
+  /**
+   * which question it answered
+   *
+   * @generated from field: string stage = 3;
+   */
+  stage: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 4;
+   */
+  at?: Timestamp;
+};
+
+/**
+ * Describes the message tank.catalog.v1.Event.
+ * Use `create(EventSchema)` to create a new message.
+ */
+export const EventSchema: GenMessage<Event> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 30);
+
+/**
+ * Ranked is a product and a number, for a leaderboard.
+ *
+ * @generated from message tank.catalog.v1.Ranked
+ */
+export type Ranked = Message<"tank.catalog.v1.Ranked"> & {
+  /**
+   * @generated from field: string product = 1;
+   */
+  product: string;
+
+  /**
+   * @generated from field: string slug = 2;
+   */
+  slug: string;
+
+  /**
+   * @generated from field: int64 value = 3;
+   */
+  value: bigint;
+
+  /**
+   * @generated from field: string industry = 4;
+   */
+  industry: string;
+};
+
+/**
+ * Describes the message tank.catalog.v1.Ranked.
+ * Use `create(RankedSchema)` to create a new message.
+ */
+export const RankedSchema: GenMessage<Ranked> = /*@__PURE__*/
+  messageDesc(file_tank_catalog_v1_catalog, 31);
+
+/**
  * The orders a person actually asks for, named after what they mean rather than the
  * column they sort on, so the client never has to know that "furthest along" is
  * agent minutes.
@@ -588,6 +1147,26 @@ export const ProductSortSchema: GenEnum<ProductSort> = /*@__PURE__*/
  * @generated from service tank.catalog.v1.CatalogService
  */
 export const CatalogService: GenService<{
+  /**
+   * Aggregate numbers about the board. Counts and sums only: nothing from inside a
+   * workspace, nothing that identifies anybody. Public, because the point is that
+   * other people can quote it.
+   *
+   * @generated from rpc tank.catalog.v1.CatalogService.BoardStats
+   */
+  boardStats: {
+    methodKind: "unary";
+    input: typeof BoardStatsRequestSchema;
+    output: typeof BoardStatsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.catalog.v1.CatalogService.BoardHistory
+   */
+  boardHistory: {
+    methodKind: "unary";
+    input: typeof BoardHistoryRequestSchema;
+    output: typeof BoardHistoryResponseSchema;
+  },
   /**
    * Anonymous.
    *

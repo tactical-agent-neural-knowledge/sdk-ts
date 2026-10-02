@@ -1747,6 +1747,92 @@ export type ListRunEventsResponse = Message<"tank.agentctl.v1.ListRunEventsRespo
  */
 export declare const ListRunEventsResponseSchema: GenMessage<ListRunEventsResponse>;
 /**
+ * @generated from message tank.agentctl.v1.SetProductReplicasRequest
+ */
+export type SetProductReplicasRequest = Message<"tank.agentctl.v1.SetProductReplicasRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * 0 or 1; the database lives in the pod, so never more
+     *
+     * @generated from field: int32 replicas = 2;
+     */
+    replicas: number;
+    /**
+     * "preview", "sale", "idle" — goes in the commit message
+     *
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetProductReplicasRequest.
+ * Use `create(SetProductReplicasRequestSchema)` to create a new message.
+ */
+export declare const SetProductReplicasRequestSchema: GenMessage<SetProductReplicasRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetProductReplicasResponse
+ */
+export type SetProductReplicasResponse = Message<"tank.agentctl.v1.SetProductReplicasResponse"> & {
+    /**
+     * https://<slug>.tank.chat
+     *
+     * @generated from field: string url = 1;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetProductReplicasResponse.
+ * Use `create(SetProductReplicasResponseSchema)` to create a new message.
+ */
+export declare const SetProductReplicasResponseSchema: GenMessage<SetProductReplicasResponse>;
+/**
+ * @generated from message tank.agentctl.v1.CreateProductRepoRequest
+ */
+export type CreateProductRepoRequest = Message<"tank.agentctl.v1.CreateProductRepoRequest"> & {
+    /**
+     * the product
+     *
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * becomes agenture-<slug>
+     *
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * the repo's description on GitHub: name and one line
+     *
+     * @generated from field: string description = 3;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateProductRepoRequest.
+ * Use `create(CreateProductRepoRequestSchema)` to create a new message.
+ */
+export declare const CreateProductRepoRequestSchema: GenMessage<CreateProductRepoRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CreateProductRepoResponse
+ */
+export type CreateProductRepoResponse = Message<"tank.agentctl.v1.CreateProductRepoResponse"> & {
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateProductRepoResponse.
+ * Use `create(CreateProductRepoResponseSchema)` to create a new message.
+ */
+export declare const CreateProductRepoResponseSchema: GenMessage<CreateProductRepoResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -2102,5 +2188,29 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof ListRunEventsRequestSchema;
         output: typeof ListRunEventsResponseSchema;
+    };
+    /**
+     * Creates the repository a product's code lives in, from the product template.
+     * The control plane does it because it holds the GitHub App; api asks at product
+     * birth. Idempotent: asking twice for the same product returns the same repo.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.CreateProductRepo
+     */
+    createProductRepo: {
+        methodKind: "unary";
+        input: typeof CreateProductRepoRequestSchema;
+        output: typeof CreateProductRepoResponseSchema;
+    };
+    /**
+     * Wakes a product (replicas 1) or puts it to sleep (replicas 0). A product is
+     * asleep by default and a new image never wakes it: waking is a decision — a
+     * preview, a sale — made here, and recorded in GitOps like everything else.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.SetProductReplicas
+     */
+    setProductReplicas: {
+        methodKind: "unary";
+        input: typeof SetProductReplicasRequestSchema;
+        output: typeof SetProductReplicasResponseSchema;
     };
 }>;
