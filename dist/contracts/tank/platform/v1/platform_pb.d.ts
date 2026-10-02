@@ -385,6 +385,201 @@ export type StopRunResponse = Message<"tank.platform.v1.StopRunResponse"> & {};
  */
 export declare const StopRunResponseSchema: GenMessage<StopRunResponse>;
 /**
+ * MergeProposal is a twin the daily pass found: one product that should absorb
+ * another. Approving carries it out; nothing is deleted either way.
+ *
+ * @generated from message tank.platform.v1.MergeProposal
+ */
+export type MergeProposal = Message<"tank.platform.v1.MergeProposal"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string absorbed_slug = 2;
+     */
+    absorbedSlug: string;
+    /**
+     * @generated from field: string absorbed_name = 3;
+     */
+    absorbedName: string;
+    /**
+     * @generated from field: string absorbed_summary = 4;
+     */
+    absorbedSummary: string;
+    /**
+     * @generated from field: string survivor_slug = 5;
+     */
+    survivorSlug: string;
+    /**
+     * @generated from field: string survivor_name = 6;
+     */
+    survivorName: string;
+    /**
+     * @generated from field: string survivor_summary = 7;
+     */
+    survivorSummary: string;
+    /**
+     * @generated from field: double similarity = 8;
+     */
+    similarity: number;
+    /**
+     * proposed | rejected | done
+     *
+     * @generated from field: string status = 9;
+     */
+    status: string;
+    /**
+     * the board decided it on its own, beyond doubt
+     *
+     * @generated from field: bool auto = 10;
+     */
+    auto: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp proposed_at = 11;
+     */
+    proposedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp done_at = 12;
+     */
+    doneAt?: Timestamp;
+};
+/**
+ * Describes the message tank.platform.v1.MergeProposal.
+ * Use `create(MergeProposalSchema)` to create a new message.
+ */
+export declare const MergeProposalSchema: GenMessage<MergeProposal>;
+/**
+ * @generated from message tank.platform.v1.ListMergesRequest
+ */
+export type ListMergesRequest = Message<"tank.platform.v1.ListMergesRequest"> & {
+    /**
+     * also what was already merged or kept
+     *
+     * @generated from field: bool include_decided = 1;
+     */
+    includeDecided: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.ListMergesRequest.
+ * Use `create(ListMergesRequestSchema)` to create a new message.
+ */
+export declare const ListMergesRequestSchema: GenMessage<ListMergesRequest>;
+/**
+ * @generated from message tank.platform.v1.ListMergesResponse
+ */
+export type ListMergesResponse = Message<"tank.platform.v1.ListMergesResponse"> & {
+    /**
+     * @generated from field: repeated tank.platform.v1.MergeProposal merges = 1;
+     */
+    merges: MergeProposal[];
+};
+/**
+ * Describes the message tank.platform.v1.ListMergesResponse.
+ * Use `create(ListMergesResponseSchema)` to create a new message.
+ */
+export declare const ListMergesResponseSchema: GenMessage<ListMergesResponse>;
+/**
+ * @generated from message tank.platform.v1.DecideMergeRequest
+ */
+export type DecideMergeRequest = Message<"tank.platform.v1.DecideMergeRequest"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * false keeps both products
+     *
+     * @generated from field: bool approve = 2;
+     */
+    approve: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.DecideMergeRequest.
+ * Use `create(DecideMergeRequestSchema)` to create a new message.
+ */
+export declare const DecideMergeRequestSchema: GenMessage<DecideMergeRequest>;
+/**
+ * @generated from message tank.platform.v1.DecideMergeResponse
+ */
+export type DecideMergeResponse = Message<"tank.platform.v1.DecideMergeResponse"> & {
+    /**
+     * @generated from field: tank.platform.v1.MergeProposal merge = 1;
+     */
+    merge?: MergeProposal;
+};
+/**
+ * Describes the message tank.platform.v1.DecideMergeResponse.
+ * Use `create(DecideMergeResponseSchema)` to create a new message.
+ */
+export declare const DecideMergeResponseSchema: GenMessage<DecideMergeResponse>;
+/**
+ * DropCandidate is a product the drop job would retire today, and why. The job is a
+ * dry run until it is switched on; this list is how it is read meanwhile.
+ *
+ * @generated from message tank.platform.v1.DropCandidate
+ */
+export type DropCandidate = Message<"tank.platform.v1.DropCandidate"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: string industry = 4;
+     */
+    industry: string;
+    /**
+     * @generated from field: int32 score = 5;
+     */
+    score: number;
+    /**
+     * @generated from field: string reasons = 6;
+     */
+    reasons: string;
+};
+/**
+ * Describes the message tank.platform.v1.DropCandidate.
+ * Use `create(DropCandidateSchema)` to create a new message.
+ */
+export declare const DropCandidateSchema: GenMessage<DropCandidate>;
+/**
+ * @generated from message tank.platform.v1.ListDropCandidatesRequest
+ */
+export type ListDropCandidatesRequest = Message<"tank.platform.v1.ListDropCandidatesRequest"> & {};
+/**
+ * Describes the message tank.platform.v1.ListDropCandidatesRequest.
+ * Use `create(ListDropCandidatesRequestSchema)` to create a new message.
+ */
+export declare const ListDropCandidatesRequestSchema: GenMessage<ListDropCandidatesRequest>;
+/**
+ * @generated from message tank.platform.v1.ListDropCandidatesResponse
+ */
+export type ListDropCandidatesResponse = Message<"tank.platform.v1.ListDropCandidatesResponse"> & {
+    /**
+     * @generated from field: repeated tank.platform.v1.DropCandidate candidates = 1;
+     */
+    candidates: DropCandidate[];
+    /**
+     * YYYY-MM-DD the list is for
+     *
+     * @generated from field: string day = 2;
+     */
+    day: string;
+};
+/**
+ * Describes the message tank.platform.v1.ListDropCandidatesResponse.
+ * Use `create(ListDropCandidatesResponseSchema)` to create a new message.
+ */
+export declare const ListDropCandidatesResponseSchema: GenMessage<ListDropCandidatesResponse>;
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export declare const PlatformService: GenService<{
@@ -419,5 +614,29 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof StopRunRequestSchema;
         output: typeof StopRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.ListMerges
+     */
+    listMerges: {
+        methodKind: "unary";
+        input: typeof ListMergesRequestSchema;
+        output: typeof ListMergesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.DecideMerge
+     */
+    decideMerge: {
+        methodKind: "unary";
+        input: typeof DecideMergeRequestSchema;
+        output: typeof DecideMergeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.ListDropCandidates
+     */
+    listDropCandidates: {
+        methodKind: "unary";
+        input: typeof ListDropCandidatesRequestSchema;
+        output: typeof ListDropCandidatesResponseSchema;
     };
 }>;

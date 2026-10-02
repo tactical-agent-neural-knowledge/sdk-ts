@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/platform/v1/platform.proto.
  */
 export const file_tank_platform_v1_platform: GenFile = /*@__PURE__*/
-  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiyAIKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIOCgZraWxsZWQYCCABKAgSFAoMYXV0b19kZWZhdWx0GAkgASgIEhIKCmhvdXJzX2Zyb20YCiABKAUSEAoIaG91cnNfdG8YCyABKAUSEgoKaG91cnNfem9uZRgMIAEoCRISCgpob3Vyc19kYXlzGA0gAygFEhEKCXVuY2xhaW1lZBgEIAEoBRIZChFhZ2VudF9taW51dGVzXzI0aBgFIAEoAxIVCg1zcGVuZF91c2RfMjRoGAYgASgBEhcKD3NwZW5kX3VzZF90b3RhbBgHIAEoARIUCgxzcGVuZF91c2RfMWgYDiABKAESFAoMc3BlbmRfdXNkXzNoGA8gASgBInQKFFNldEFsbG9jYXRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgdlbmFibGVkGAIgASgIEg4KBndlaWdodBgDIAEoBRIPCgdydW5fbm93GAQgASgIEhQKDGF1dG9fYXBwcm92ZRgFIAEoCCJIChVTZXRBbGxvY2F0aW9uUmVzcG9uc2USLwoIYWdlbnR1cmUYASABKAsyHS50YW5rLnBsYXRmb3JtLnYxLkFnZW50dXJlUm93IqUBChdTZXRCb2FyZFNldHRpbmdzUmVxdWVzdBIWCg5tYXhfY29uY3VycmVudBgBIAEoBRIOCgZraWxsZWQYAiABKAgSFAoMYXV0b19kZWZhdWx0GAMgASgIEhIKCmhvdXJzX2Zyb20YBCABKAUSEAoIaG91cnNfdG8YBSABKAUSEgoKaG91cnNfem9uZRgGIAEoCRISCgpob3Vyc19kYXlzGAcgAygFIksKGFNldEJvYXJkU2V0dGluZ3NSZXNwb25zZRIvCgdzdW1tYXJ5GAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiMAoOU3RvcFJ1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJEg4KBnJlYXNvbhgCIAEoCSIRCg9TdG9wUnVuUmVzcG9uc2UykAMKD1BsYXRmb3JtU2VydmljZRJgCg1MaXN0QWdlbnR1cmVzEiYudGFuay5wbGF0Zm9ybS52MS5MaXN0QWdlbnR1cmVzUmVxdWVzdBonLnRhbmsucGxhdGZvcm0udjEuTGlzdEFnZW50dXJlc1Jlc3BvbnNlEmAKDVNldEFsbG9jYXRpb24SJi50YW5rLnBsYXRmb3JtLnYxLlNldEFsbG9jYXRpb25SZXF1ZXN0GicudGFuay5wbGF0Zm9ybS52MS5TZXRBbGxvY2F0aW9uUmVzcG9uc2USaQoQU2V0Qm9hcmRTZXR0aW5ncxIpLnRhbmsucGxhdGZvcm0udjEuU2V0Qm9hcmRTZXR0aW5nc1JlcXVlc3QaKi50YW5rLnBsYXRmb3JtLnYxLlNldEJvYXJkU2V0dGluZ3NSZXNwb25zZRJOCgdTdG9wUnVuEiAudGFuay5wbGF0Zm9ybS52MS5TdG9wUnVuUmVxdWVzdBohLnRhbmsucGxhdGZvcm0udjEuU3RvcFJ1blJlc3BvbnNlQuABChRjb20udGFuay5wbGF0Zm9ybS52MUINUGxhdGZvcm1Qcm90b1ABWldnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3BsYXRmb3JtL3YxO3BsYXRmb3JtdjGiAgNUUFiqAhBUYW5rLlBsYXRmb3JtLlYxygIQVGFua1xQbGF0Zm9ybVxWMeICHFRhbmtcUGxhdGZvcm1cVjFcR1BCTWV0YWRhdGHqAhJUYW5rOjpQbGF0Zm9ybTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiyAIKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIOCgZraWxsZWQYCCABKAgSFAoMYXV0b19kZWZhdWx0GAkgASgIEhIKCmhvdXJzX2Zyb20YCiABKAUSEAoIaG91cnNfdG8YCyABKAUSEgoKaG91cnNfem9uZRgMIAEoCRISCgpob3Vyc19kYXlzGA0gAygFEhEKCXVuY2xhaW1lZBgEIAEoBRIZChFhZ2VudF9taW51dGVzXzI0aBgFIAEoAxIVCg1zcGVuZF91c2RfMjRoGAYgASgBEhcKD3NwZW5kX3VzZF90b3RhbBgHIAEoARIUCgxzcGVuZF91c2RfMWgYDiABKAESFAoMc3BlbmRfdXNkXzNoGA8gASgBInQKFFNldEFsbG9jYXRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgdlbmFibGVkGAIgASgIEg4KBndlaWdodBgDIAEoBRIPCgdydW5fbm93GAQgASgIEhQKDGF1dG9fYXBwcm92ZRgFIAEoCCJIChVTZXRBbGxvY2F0aW9uUmVzcG9uc2USLwoIYWdlbnR1cmUYASABKAsyHS50YW5rLnBsYXRmb3JtLnYxLkFnZW50dXJlUm93IqUBChdTZXRCb2FyZFNldHRpbmdzUmVxdWVzdBIWCg5tYXhfY29uY3VycmVudBgBIAEoBRIOCgZraWxsZWQYAiABKAgSFAoMYXV0b19kZWZhdWx0GAMgASgIEhIKCmhvdXJzX2Zyb20YBCABKAUSEAoIaG91cnNfdG8YBSABKAUSEgoKaG91cnNfem9uZRgGIAEoCRISCgpob3Vyc19kYXlzGAcgAygFIksKGFNldEJvYXJkU2V0dGluZ3NSZXNwb25zZRIvCgdzdW1tYXJ5GAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiMAoOU3RvcFJ1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJEg4KBnJlYXNvbhgCIAEoCSIRCg9TdG9wUnVuUmVzcG9uc2UiuwIKDU1lcmdlUHJvcG9zYWwSCgoCaWQYASABKAkSFQoNYWJzb3JiZWRfc2x1ZxgCIAEoCRIVCg1hYnNvcmJlZF9uYW1lGAMgASgJEhgKEGFic29yYmVkX3N1bW1hcnkYBCABKAkSFQoNc3Vydml2b3Jfc2x1ZxgFIAEoCRIVCg1zdXJ2aXZvcl9uYW1lGAYgASgJEhgKEHN1cnZpdm9yX3N1bW1hcnkYByABKAkSEgoKc2ltaWxhcml0eRgIIAEoARIOCgZzdGF0dXMYCSABKAkSDAoEYXV0bxgKIAEoCBIvCgtwcm9wb3NlZF9hdBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZG9uZV9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLAoRTGlzdE1lcmdlc1JlcXVlc3QSFwoPaW5jbHVkZV9kZWNpZGVkGAEgASgIIkUKEkxpc3RNZXJnZXNSZXNwb25zZRIvCgZtZXJnZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLk1lcmdlUHJvcG9zYWwiMQoSRGVjaWRlTWVyZ2VSZXF1ZXN0EgoKAmlkGAEgASgJEg8KB2FwcHJvdmUYAiABKAgiRQoTRGVjaWRlTWVyZ2VSZXNwb25zZRIuCgVtZXJnZRgBIAEoCzIfLnRhbmsucGxhdGZvcm0udjEuTWVyZ2VQcm9wb3NhbCJzCg1Ecm9wQ2FuZGlkYXRlEhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSEAoIaW5kdXN0cnkYBCABKAkSDQoFc2NvcmUYBSABKAUSDwoHcmVhc29ucxgGIAEoCSIbChlMaXN0RHJvcENhbmRpZGF0ZXNSZXF1ZXN0Il4KGkxpc3REcm9wQ2FuZGlkYXRlc1Jlc3BvbnNlEjMKCmNhbmRpZGF0ZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLkRyb3BDYW5kaWRhdGUSCwoDZGF5GAIgASgJMrYFCg9QbGF0Zm9ybVNlcnZpY2USYAoNTGlzdEFnZW50dXJlcxImLnRhbmsucGxhdGZvcm0udjEuTGlzdEFnZW50dXJlc1JlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXNwb25zZRJgCg1TZXRBbGxvY2F0aW9uEiYudGFuay5wbGF0Zm9ybS52MS5TZXRBbGxvY2F0aW9uUmVxdWVzdBonLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlc3BvbnNlEmkKEFNldEJvYXJkU2V0dGluZ3MSKS50YW5rLnBsYXRmb3JtLnYxLlNldEJvYXJkU2V0dGluZ3NSZXF1ZXN0GioudGFuay5wbGF0Zm9ybS52MS5TZXRCb2FyZFNldHRpbmdzUmVzcG9uc2USTgoHU3RvcFJ1bhIgLnRhbmsucGxhdGZvcm0udjEuU3RvcFJ1blJlcXVlc3QaIS50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXNwb25zZRJXCgpMaXN0TWVyZ2VzEiMudGFuay5wbGF0Zm9ybS52MS5MaXN0TWVyZ2VzUmVxdWVzdBokLnRhbmsucGxhdGZvcm0udjEuTGlzdE1lcmdlc1Jlc3BvbnNlEloKC0RlY2lkZU1lcmdlEiQudGFuay5wbGF0Zm9ybS52MS5EZWNpZGVNZXJnZVJlcXVlc3QaJS50YW5rLnBsYXRmb3JtLnYxLkRlY2lkZU1lcmdlUmVzcG9uc2USbwoSTGlzdERyb3BDYW5kaWRhdGVzEisudGFuay5wbGF0Zm9ybS52MS5MaXN0RHJvcENhbmRpZGF0ZXNSZXF1ZXN0GiwudGFuay5wbGF0Zm9ybS52MS5MaXN0RHJvcENhbmRpZGF0ZXNSZXNwb25zZULgAQoUY29tLnRhbmsucGxhdGZvcm0udjFCDVBsYXRmb3JtUHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9wbGF0Zm9ybS92MTtwbGF0Zm9ybXYxogIDVFBYqgIQVGFuay5QbGF0Zm9ybS5WMcoCEFRhbmtcUGxhdGZvcm1cVjHiAhxUYW5rXFBsYXRmb3JtXFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UGxhdGZvcm06OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * AgentureRow is one product on the board as the console sees it.
@@ -470,6 +470,244 @@ export const StopRunResponseSchema: GenMessage<StopRunResponse> = /*@__PURE__*/
   messageDesc(file_tank_platform_v1_platform, 9);
 
 /**
+ * MergeProposal is a twin the daily pass found: one product that should absorb
+ * another. Approving carries it out; nothing is deleted either way.
+ *
+ * @generated from message tank.platform.v1.MergeProposal
+ */
+export type MergeProposal = Message<"tank.platform.v1.MergeProposal"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string absorbed_slug = 2;
+   */
+  absorbedSlug: string;
+
+  /**
+   * @generated from field: string absorbed_name = 3;
+   */
+  absorbedName: string;
+
+  /**
+   * @generated from field: string absorbed_summary = 4;
+   */
+  absorbedSummary: string;
+
+  /**
+   * @generated from field: string survivor_slug = 5;
+   */
+  survivorSlug: string;
+
+  /**
+   * @generated from field: string survivor_name = 6;
+   */
+  survivorName: string;
+
+  /**
+   * @generated from field: string survivor_summary = 7;
+   */
+  survivorSummary: string;
+
+  /**
+   * @generated from field: double similarity = 8;
+   */
+  similarity: number;
+
+  /**
+   * proposed | rejected | done
+   *
+   * @generated from field: string status = 9;
+   */
+  status: string;
+
+  /**
+   * the board decided it on its own, beyond doubt
+   *
+   * @generated from field: bool auto = 10;
+   */
+  auto: boolean;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp proposed_at = 11;
+   */
+  proposedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp done_at = 12;
+   */
+  doneAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.platform.v1.MergeProposal.
+ * Use `create(MergeProposalSchema)` to create a new message.
+ */
+export const MergeProposalSchema: GenMessage<MergeProposal> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 10);
+
+/**
+ * @generated from message tank.platform.v1.ListMergesRequest
+ */
+export type ListMergesRequest = Message<"tank.platform.v1.ListMergesRequest"> & {
+  /**
+   * also what was already merged or kept
+   *
+   * @generated from field: bool include_decided = 1;
+   */
+  includeDecided: boolean;
+};
+
+/**
+ * Describes the message tank.platform.v1.ListMergesRequest.
+ * Use `create(ListMergesRequestSchema)` to create a new message.
+ */
+export const ListMergesRequestSchema: GenMessage<ListMergesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 11);
+
+/**
+ * @generated from message tank.platform.v1.ListMergesResponse
+ */
+export type ListMergesResponse = Message<"tank.platform.v1.ListMergesResponse"> & {
+  /**
+   * @generated from field: repeated tank.platform.v1.MergeProposal merges = 1;
+   */
+  merges: MergeProposal[];
+};
+
+/**
+ * Describes the message tank.platform.v1.ListMergesResponse.
+ * Use `create(ListMergesResponseSchema)` to create a new message.
+ */
+export const ListMergesResponseSchema: GenMessage<ListMergesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 12);
+
+/**
+ * @generated from message tank.platform.v1.DecideMergeRequest
+ */
+export type DecideMergeRequest = Message<"tank.platform.v1.DecideMergeRequest"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * false keeps both products
+   *
+   * @generated from field: bool approve = 2;
+   */
+  approve: boolean;
+};
+
+/**
+ * Describes the message tank.platform.v1.DecideMergeRequest.
+ * Use `create(DecideMergeRequestSchema)` to create a new message.
+ */
+export const DecideMergeRequestSchema: GenMessage<DecideMergeRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 13);
+
+/**
+ * @generated from message tank.platform.v1.DecideMergeResponse
+ */
+export type DecideMergeResponse = Message<"tank.platform.v1.DecideMergeResponse"> & {
+  /**
+   * @generated from field: tank.platform.v1.MergeProposal merge = 1;
+   */
+  merge?: MergeProposal;
+};
+
+/**
+ * Describes the message tank.platform.v1.DecideMergeResponse.
+ * Use `create(DecideMergeResponseSchema)` to create a new message.
+ */
+export const DecideMergeResponseSchema: GenMessage<DecideMergeResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 14);
+
+/**
+ * DropCandidate is a product the drop job would retire today, and why. The job is a
+ * dry run until it is switched on; this list is how it is read meanwhile.
+ *
+ * @generated from message tank.platform.v1.DropCandidate
+ */
+export type DropCandidate = Message<"tank.platform.v1.DropCandidate"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string slug = 2;
+   */
+  slug: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string industry = 4;
+   */
+  industry: string;
+
+  /**
+   * @generated from field: int32 score = 5;
+   */
+  score: number;
+
+  /**
+   * @generated from field: string reasons = 6;
+   */
+  reasons: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.DropCandidate.
+ * Use `create(DropCandidateSchema)` to create a new message.
+ */
+export const DropCandidateSchema: GenMessage<DropCandidate> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 15);
+
+/**
+ * @generated from message tank.platform.v1.ListDropCandidatesRequest
+ */
+export type ListDropCandidatesRequest = Message<"tank.platform.v1.ListDropCandidatesRequest"> & {
+};
+
+/**
+ * Describes the message tank.platform.v1.ListDropCandidatesRequest.
+ * Use `create(ListDropCandidatesRequestSchema)` to create a new message.
+ */
+export const ListDropCandidatesRequestSchema: GenMessage<ListDropCandidatesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 16);
+
+/**
+ * @generated from message tank.platform.v1.ListDropCandidatesResponse
+ */
+export type ListDropCandidatesResponse = Message<"tank.platform.v1.ListDropCandidatesResponse"> & {
+  /**
+   * @generated from field: repeated tank.platform.v1.DropCandidate candidates = 1;
+   */
+  candidates: DropCandidate[];
+
+  /**
+   * YYYY-MM-DD the list is for
+   *
+   * @generated from field: string day = 2;
+   */
+  day: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.ListDropCandidatesResponse.
+ * Use `create(ListDropCandidatesResponseSchema)` to create a new message.
+ */
+export const ListDropCandidatesResponseSchema: GenMessage<ListDropCandidatesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 17);
+
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export const PlatformService: GenService<{
@@ -504,6 +742,30 @@ export const PlatformService: GenService<{
     methodKind: "unary";
     input: typeof StopRunRequestSchema;
     output: typeof StopRunResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.ListMerges
+   */
+  listMerges: {
+    methodKind: "unary";
+    input: typeof ListMergesRequestSchema;
+    output: typeof ListMergesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.DecideMerge
+   */
+  decideMerge: {
+    methodKind: "unary";
+    input: typeof DecideMergeRequestSchema;
+    output: typeof DecideMergeResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.ListDropCandidates
+   */
+  listDropCandidates: {
+    methodKind: "unary";
+    input: typeof ListDropCandidatesRequestSchema;
+    output: typeof ListDropCandidatesResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_platform_v1_platform, 0);

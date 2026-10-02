@@ -1805,6 +1805,21 @@ export type Agenture = Message<"tank.workspace.v1.Agenture"> & {
      * @generated from field: int64 price_cents = 8;
      */
     priceCents: bigint;
+    /**
+     * How far along it is: stages of its journey done, out of how many, and the one in
+     * progress. The board draws this as a tank filling up.
+     *
+     * @generated from field: int32 stage_done = 9;
+     */
+    stageDone: number;
+    /**
+     * @generated from field: int32 stage_total = 10;
+     */
+    stageTotal: number;
+    /**
+     * @generated from field: string stage_title = 11;
+     */
+    stageTitle: string;
 };
 /**
  * Describes the message tank.workspace.v1.Agenture.
