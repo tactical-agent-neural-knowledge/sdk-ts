@@ -114,8 +114,11 @@ function insertOrdered(ids, id, messages, seqOf) {
     out.splice(lo, 0, id);
     return out;
 }
+// A root, or a reply its author also sent to the channel. Every reply carries a
+// channel sequence number for ordering, so the number alone cannot say; it used to,
+// and every live agent reply showed in the Tread until the next refresh.
 function inChannelTimeline(m) {
-    return m.threadRootId === "" || m.channelSeq > 0n;
+    return m.threadRootId === "" || m.alsoSentToChannel;
 }
 function channelSeq(m) {
     return m.channelSeq;

@@ -157,6 +157,14 @@ export type Message = Message$1<"tank.message.v1.Message"> & {
      * @generated from field: repeated tank.files.v1.File files = 26;
      */
     files: File[];
+    /**
+     * A reply that was also sent to the channel. Clients show a reply in the Tread's
+     * own timeline only when this is set; every reply carries a channel sequence
+     * number for ordering, so that alone cannot say.
+     *
+     * @generated from field: bool also_sent_to_channel = 27;
+     */
+    alsoSentToChannel: boolean;
 };
 /**
  * Describes the message tank.message.v1.Message.

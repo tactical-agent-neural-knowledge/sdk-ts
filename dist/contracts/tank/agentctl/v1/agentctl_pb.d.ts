@@ -295,6 +295,17 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: bool product_run = 23;
      */
     productRun: boolean;
+    /**
+     * The Tread's own purpose and goal, so an agent reading the code knows what the
+     * Tread is for and can offer the first step towards it.
+     *
+     * @generated from field: string channel_purpose = 24;
+     */
+    channelPurpose: string;
+    /**
+     * @generated from field: string channel_goal = 25;
+     */
+    channelGoal: string;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.

@@ -118,10 +118,15 @@ describe("messages", () => {
     expect(t.root?.replyUserIds).toEqual(["u2"]);
     // replies that are not broadcast do not appear in the channel timeline
     expect(store.selectChannelMessages("general").map((m) => m.id)).toEqual(["root"]);
-    // a broadcast reply (channel_seq > 0) appears in both
+    // a reply the author also sent to the channel appears in both
     store.dispatch({
       type: "messages/created",
-      message: msg("r3", 5, { threadRootId: "root", threadSeq: 3n }),
+      message: msg("r3", 5, { threadRootId: "root", threadSeq: 3n, alsoSentToChannel: true }),
+    });
+    // a reply with a channel_seq but no also-sent flag stays in the thread
+    store.dispatch({
+      type: "messages/created",
+      message: msg("r4", 6, { threadRootId: "root", threadSeq: 4n }),
     });
     expect(store.selectChannelMessages("general").map((m) => m.id)).toEqual(["root", "r3"]);
   });
