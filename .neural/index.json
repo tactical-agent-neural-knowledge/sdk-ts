@@ -1,0 +1,279 @@
+{
+  "generated_by": "TANK Neural Knowledge",
+  "commit": "f9489740a406c0802893c029cba70b1644d3c632",
+  "refreshed_at": "2026-10-03T13:26:43.632Z",
+  "areas": {
+    ".": {
+      "neurons": ".neural/neurons/root.md",
+      "hot": [
+        "package.json",
+        "CLAUDE.md",
+        "README.md",
+        "biome.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "files": [
+        "CLAUDE.md",
+        "README.md",
+        "biome.json",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "tsconfig.build.json",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ]
+    },
+    ".github": {
+      "neurons": ".neural/neurons/github.md",
+      "hot": [
+        ".github/workflows/ci.yml"
+      ],
+      "files": [
+        ".github/workflows/ci.yml"
+      ]
+    },
+    "scripts": {
+      "neurons": ".neural/neurons/scripts.md",
+      "hot": [
+        "scripts/sync-contracts.sh"
+      ],
+      "files": [
+        "scripts/sync-contracts.sh"
+      ]
+    },
+    "src": {
+      "neurons": ".neural/neurons/src.md",
+      "hot": [
+        "src/exports.test.ts"
+      ],
+      "files": [
+        "src/exports.test.ts"
+      ]
+    },
+    "src/blocks": {
+      "neurons": ".neural/neurons/src-blocks.md",
+      "hot": [
+        "src/blocks/blocks.test.ts",
+        "src/blocks/builders.ts",
+        "src/blocks/index.ts",
+        "src/blocks/normalize.ts",
+        "src/blocks/richtext.ts",
+        "src/blocks/runTone.test.ts"
+      ],
+      "files": [
+        "src/blocks/blocks.test.ts",
+        "src/blocks/builders.ts",
+        "src/blocks/index.ts",
+        "src/blocks/normalize.ts",
+        "src/blocks/richtext.ts",
+        "src/blocks/runTone.test.ts",
+        "src/blocks/runTone.ts",
+        "src/blocks/types.ts"
+      ]
+    },
+    "src/blocks-native": {
+      "neurons": ".neural/neurons/src-blocks-native.md",
+      "hot": [
+        "src/blocks-native/blocks.tsx",
+        "src/blocks-native/BlocksViewNative.test.tsx",
+        "src/blocks-native/BlocksViewNative.tsx",
+        "src/blocks-native/RichTextViewNative.tsx",
+        "src/blocks-native/__snapshots__/BlocksViewNative.test.tsx.snap",
+        "src/blocks-native/context.ts"
+      ],
+      "files": [
+        "src/blocks-native/BlocksViewNative.test.tsx",
+        "src/blocks-native/BlocksViewNative.tsx",
+        "src/blocks-native/RichTextViewNative.tsx",
+        "src/blocks-native/__snapshots__/BlocksViewNative.test.tsx.snap",
+        "src/blocks-native/blocks.tsx",
+        "src/blocks-native/context.ts",
+        "src/blocks-native/index.ts"
+      ]
+    },
+    "src/blocks-web": {
+      "neurons": ".neural/neurons/src-blocks-web.md",
+      "hot": [
+        "src/blocks-web/BlocksView.tsx",
+        "src/blocks-web/RichTextView.tsx",
+        "src/blocks-web/blocks.tsx",
+        "src/blocks-web/BlocksView.test.tsx",
+        "src/blocks-web/RichTextView.test.tsx",
+        "src/blocks-web/__snapshots__/BlocksView.test.tsx.snap"
+      ],
+      "files": [
+        "src/blocks-web/BlocksView.test.tsx",
+        "src/blocks-web/BlocksView.tsx",
+        "src/blocks-web/RichTextView.test.tsx",
+        "src/blocks-web/RichTextView.tsx",
+        "src/blocks-web/__snapshots__/BlocksView.test.tsx.snap",
+        "src/blocks-web/blocks.tsx",
+        "src/blocks-web/index.ts",
+        "src/blocks-web/theme.ts"
+      ]
+    },
+    "src/client": {
+      "neurons": ".neural/neurons/src-client.md",
+      "hot": [
+        "src/client/client.ts",
+        "src/client/store.ts",
+        "src/client/client.test.ts",
+        "src/client/index.ts",
+        "src/client/store.test.ts",
+        "src/client/transport.ts"
+      ],
+      "files": [
+        "src/client/backoff.ts",
+        "src/client/client.test.ts",
+        "src/client/client.ts",
+        "src/client/emitter.ts",
+        "src/client/helpers.test.ts",
+        "src/client/index.ts",
+        "src/client/me.test.ts",
+        "src/client/paywall.test.ts",
+        "src/client/paywall.ts",
+        "src/client/realtime.test.ts",
+        "src/client/realtime.ts",
+        "src/client/receipts.test.ts",
+        "src/client/shortcodes.test.ts",
+        "src/client/shortcodes.ts",
+        "src/client/storage-idb.ts",
+        "src/client/storage.ts",
+        "src/client/store-notifications-runs-files.test.ts",
+        "src/client/store.test.ts",
+        "src/client/store.ts",
+        "src/client/transport.test.ts",
+        "src/client/transport.ts",
+        "src/client/upload.ts",
+        "src/client/uuidv7.test.ts",
+        "src/client/uuidv7.ts"
+      ]
+    },
+    "src/contracts": {
+      "neurons": ".neural/neurons/src-contracts.md",
+      "hot": [
+        "src/contracts/VERSION",
+        "src/contracts/tank/workspace/v1/workspace_pb.ts",
+        "src/contracts/tank/channel/v1/channel_pb.ts",
+        "src/contracts/tank/events/v1/events_pb.ts",
+        "src/contracts/tank/topo/v1/topo_pb.ts",
+        "src/contracts/tank/catalog/v1/catalog_pb.ts"
+      ],
+      "files": [
+        "src/contracts/VERSION",
+        "src/contracts/admin.ts",
+        "src/contracts/agent.ts",
+        "src/contracts/agentctl.ts",
+        "src/contracts/auth.ts",
+        "src/contracts/billing.ts",
+        "src/contracts/blocks.ts",
+        "src/contracts/catalog.ts",
+        "src/contracts/channel.ts",
+        "src/contracts/command.ts",
+        "src/contracts/events.ts",
+        "src/contracts/files.ts",
+        "src/contracts/huddle.ts",
+        "src/contracts/index.ts",
+        "src/contracts/message.ts",
+        "src/contracts/monitor.ts",
+        "src/contracts/notification.ts",
+        "src/contracts/platform.ts",
+        "src/contracts/presence.ts",
+        "src/contracts/realtime.ts",
+        "src/contracts/richtext.ts",
+        "src/contracts/search.ts",
+        "src/contracts/tank/admin/v1/admin_pb.ts",
+        "src/contracts/tank/agent/v1/agent_pb.ts",
+        "src/contracts/tank/agentctl/v1/agentctl_pb.ts",
+        "src/contracts/tank/auth/v1/auth_pb.ts",
+        "src/contracts/tank/billing/v1/billing_pb.ts",
+        "src/contracts/tank/blocks/v1/blocks_pb.ts",
+        "src/contracts/tank/catalog/v1/catalog_pb.ts",
+        "src/contracts/tank/channel/v1/channel_pb.ts",
+        "src/contracts/tank/command/v1/command_pb.ts",
+        "src/contracts/tank/events/v1/events_pb.ts",
+        "src/contracts/tank/files/v1/files_pb.ts",
+        "src/contracts/tank/huddle/v1/huddle_pb.ts",
+        "src/contracts/tank/message/v1/message_pb.ts",
+        "src/contracts/tank/monitor/v1/monitor_pb.ts",
+        "src/contracts/tank/notification/v1/notification_pb.ts",
+        "src/contracts/tank/platform/v1/platform_pb.ts",
+        "src/contracts/tank/presence/v1/presence_pb.ts",
+        "src/contracts/tank/realtime/v1/realtime_pb.ts",
+        "src/contracts/tank/richtext/v1/richtext_pb.ts",
+        "src/contracts/tank/search/v1/search_pb.ts",
+        "src/contracts/tank/topo/v1/topo_pb.ts",
+        "src/contracts/tank/workspace/v1/workspace_pb.ts",
+        "src/contracts/topo.ts",
+        "src/contracts/workspace.ts"
+      ]
+    },
+    "src/design": {
+      "neurons": ".neural/neurons/src-design.md",
+      "hot": [
+        "src/design/contrast.test.ts",
+        "src/design/contrast.ts",
+        "src/design/fonts.ts",
+        "src/design/index.ts",
+        "src/design/mui.ts",
+        "src/design/paper.ts"
+      ],
+      "files": [
+        "src/design/contrast.test.ts",
+        "src/design/contrast.ts",
+        "src/design/fonts.ts",
+        "src/design/index.ts",
+        "src/design/mui.ts",
+        "src/design/paper.ts",
+        "src/design/tokens.ts"
+      ]
+    },
+    "src/react": {
+      "neurons": ".neural/neurons/src-react.md",
+      "hot": [
+        "src/react/index.tsx",
+        "src/react/hooks.test.tsx",
+        "src/react/index.test.tsx"
+      ],
+      "files": [
+        "src/react/hooks.test.tsx",
+        "src/react/index.test.tsx",
+        "src/react/index.tsx"
+      ]
+    },
+    "src/test": {
+      "neurons": ".neural/neurons/src-test.md",
+      "hot": [
+        "src/test/fake-gateway.ts",
+        "src/test/fixture-defs.ts",
+        "src/test/mocks/react-native-paper.tsx",
+        "src/test/mocks/react-native.tsx"
+      ],
+      "files": [
+        "src/test/fake-gateway.ts",
+        "src/test/fixture-defs.ts",
+        "src/test/mocks/react-native-paper.tsx",
+        "src/test/mocks/react-native.tsx"
+      ]
+    },
+    "src/topo": {
+      "neurons": ".neural/neurons/src-topo.md",
+      "hot": [
+        "src/topo/index.ts",
+        "src/topo/searchMarks.test.ts",
+        "src/topo/searchMarks.ts",
+        "src/topo/visibility.test.ts",
+        "src/topo/visibility.ts"
+      ],
+      "files": [
+        "src/topo/index.ts",
+        "src/topo/searchMarks.test.ts",
+        "src/topo/searchMarks.ts",
+        "src/topo/visibility.test.ts",
+        "src/topo/visibility.ts"
+      ]
+    }
+  }
+}
