@@ -690,6 +690,20 @@ export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
      * @generated from field: double daily_usd = 4;
      */
     dailyUsd: number;
+    /**
+     * What happens to a pull request the agent opens: "review" (default) posts it and
+     * mentions pr_reviewer_ids in the thread; "merge_when_green" has TANK watch the
+     * checks and merge it, so the agent's work keeps flowing without a person.
+     *
+     * @generated from field: string pull_requests = 5;
+     */
+    pullRequests: string;
+    /**
+     * user ids mentioned when a pull request is ready
+     *
+     * @generated from field: repeated string pr_reviewer_ids = 6;
+     */
+    prReviewerIds: string[];
 };
 /**
  * Describes the message tank.agent.v1.TreadSettings.

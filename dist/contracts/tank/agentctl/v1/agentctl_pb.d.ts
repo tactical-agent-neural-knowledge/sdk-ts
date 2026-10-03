@@ -1748,6 +1748,19 @@ export type StartRunRequest = Message<"tank.agentctl.v1.StartRunRequest"> & {
      * @generated from field: string instructions = 6;
      */
     instructions: string;
+    /**
+     * "" for an ordinary run; "neural" for a Neural Knowledge refresh, which
+     * skips planning and works in `repo` regardless of the Tread's binding.
+     *
+     * @generated from field: string mode = 7;
+     */
+    mode: string;
+    /**
+     * owner/name; required for mode "neural"
+     *
+     * @generated from field: string repo = 8;
+     */
+    repo: string;
 };
 /**
  * Describes the message tank.agentctl.v1.StartRunRequest.
@@ -2066,6 +2079,60 @@ export type ListRunEventsResponse = Message<"tank.agentctl.v1.ListRunEventsRespo
  * Use `create(ListRunEventsResponseSchema)` to create a new message.
  */
 export declare const ListRunEventsResponseSchema: GenMessage<ListRunEventsResponse>;
+/**
+ * Refresh a repository's Neural Knowledge: the control plane finds a Tread in the
+ * workspace with access to the repository, keeps one standing thread per repository
+ * for the refreshes, and starts a neural run there. Idempotent while one is active.
+ *
+ * @generated from message tank.agentctl.v1.RefreshNeuralKnowledgeRequest
+ */
+export type RefreshNeuralKnowledgeRequest = Message<"tank.agentctl.v1.RefreshNeuralKnowledgeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * user id; empty means the platform (a push)
+     *
+     * @generated from field: string requested_by = 3;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RefreshNeuralKnowledgeRequest.
+ * Use `create(RefreshNeuralKnowledgeRequestSchema)` to create a new message.
+ */
+export declare const RefreshNeuralKnowledgeRequestSchema: GenMessage<RefreshNeuralKnowledgeRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RefreshNeuralKnowledgeResponse
+ */
+export type RefreshNeuralKnowledgeResponse = Message<"tank.agentctl.v1.RefreshNeuralKnowledgeResponse"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * false when a refresh was already running for this repository
+     *
+     * @generated from field: bool started = 3;
+     */
+    started: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.RefreshNeuralKnowledgeResponse.
+ * Use `create(RefreshNeuralKnowledgeResponseSchema)` to create a new message.
+ */
+export declare const RefreshNeuralKnowledgeResponseSchema: GenMessage<RefreshNeuralKnowledgeResponse>;
 /**
  * @generated from message tank.agentctl.v1.SetProductReplicasRequest
  */
@@ -2543,6 +2610,14 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof StartRunRequestSchema;
         output: typeof StartRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.RefreshNeuralKnowledge
+     */
+    refreshNeuralKnowledge: {
+        methodKind: "unary";
+        input: typeof RefreshNeuralKnowledgeRequestSchema;
+        output: typeof RefreshNeuralKnowledgeResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.GetRun
