@@ -20,7 +20,7 @@ import type { JsonObject, Message as Message$1 } from "@bufbuild/protobuf";
  * Describes the file tank/message/v1/message.proto.
  */
 export const file_tank_message_v1_message: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL21lc3NhZ2UvdjEvbWVzc2FnZS5wcm90bxIPdGFuay5tZXNzYWdlLnYxIksKCFJlYWN0aW9uEg0KBWVtb2ppGAEgASgJEg0KBWNvdW50GAIgASgFEhAKCHVzZXJfaWRzGAMgAygJEg8KB3JlYWN0ZWQYBCABKAginwYKB01lc3NhZ2USCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEhIKCmNoYW5uZWxfaWQYAyABKAkSEwoLY2hhbm5lbF9zZXEYBCABKAMSFgoOdGhyZWFkX3Jvb3RfaWQYBSABKAkSEgoKdGhyZWFkX3NlcRgGIAEoAxIRCglhdXRob3JfaWQYByABKAkSMAoLYXV0aG9yX2tpbmQYCCABKA4yGy50YW5rLmF1dGgudjEuUHJpbmNpcGFsS2luZBIqCgRraW5kGAkgASgOMhwudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2VLaW5kEhUKDWNsaWVudF9tc2dfaWQYCiABKAkSDAoEdGV4dBgLIAEoCRItCglyaWNoX3RleHQYDCABKAsyGi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0EiYKBmJsb2NrcxgNIAEoCzIWLnRhbmsuYmxvY2tzLnYxLkJsb2NrcxITCgttZW50aW9uX2lkcxgOIAMoCRIQCghmaWxlX2lkcxgPIAMoCRIsCglyZWFjdGlvbnMYECADKAsyGS50YW5rLm1lc3NhZ2UudjEuUmVhY3Rpb24SLQoJZWRpdGVkX2F0GBEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpkZWxldGVkX2F0GBIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBITCgtyZXBseV9jb3VudBgTIAEoBRIxCg1sYXN0X3JlcGx5X2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIWCg5yZXBseV91c2VyX2lkcxgVIAMoCRIpCghtZXRhZGF0YRgWIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSLgoKY3JlYXRlZF9hdBgXIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGcGlubmVkGBggASgIEg0KBXNhdmVkGBkgASgIEiIKBWZpbGVzGBogAygLMhMudGFuay5maWxlcy52MS5GaWxlIoYDChJQb3N0TWVzc2FnZVJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRIVCg1jbGllbnRfbXNnX2lkGAMgASgJEgwKBHRleHQYBCABKAkSLQoJcmljaF90ZXh0GAUgASgLMhoudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dBImCgZibG9ja3MYBiABKAsyFi50YW5rLmJsb2Nrcy52MS5CbG9ja3MSEAoIZmlsZV9pZHMYByADKAkSKgoEa2luZBgIIAEoDjIcLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlS2luZBIpCghtZXRhZGF0YRgJIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSHAoUYWxzb19zZW5kX3RvX2NoYW5uZWwYCiABKAgSEQoJZXBoZW1lcmFsGAsgASgIEhkKEWVwaGVtZXJhbF91c2VyX2lkGAwgASgJEhMKC21lbnRpb25faWRzGA0gAygJIkAKE1Bvc3RNZXNzYWdlUmVzcG9uc2USKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIs4BChRVcGRhdGVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJEgwKBHRleHQYAiABKAkSLQoJcmljaF90ZXh0GAMgASgLMhoudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dBImCgZibG9ja3MYBCABKAsyFi50YW5rLmJsb2Nrcy52MS5CbG9ja3MSKQoIbWV0YWRhdGEYBSABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0EhIKCnN0cmVhbV9zZXEYBiABKAMiQgoVVXBkYXRlTWVzc2FnZVJlc3BvbnNlEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSIqChREZWxldGVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIhcKFURlbGV0ZU1lc3NhZ2VSZXNwb25zZSKMAQoTTGlzdE1lc3NhZ2VzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhIKCmJlZm9yZV9zZXEYAiABKAMSEQoJYWZ0ZXJfc2VxGAMgASgDEg0KBWxpbWl0GAQgASgFEisKBWtpbmRzGAUgAygOMhwudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2VLaW5kIlQKFExpc3RNZXNzYWdlc1Jlc3BvbnNlEioKCG1lc3NhZ2VzGAEgAygLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USEAoIaGFzX21vcmUYAiABKAgiUwoQR2V0VGhyZWFkUmVxdWVzdBIWCg50aHJlYWRfcm9vdF9pZBgBIAEoCRIYChBhZnRlcl90aHJlYWRfc2VxGAIgASgDEg0KBWxpbWl0GAMgASgFIngKEUdldFRocmVhZFJlc3BvbnNlEiYKBHJvb3QYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZRIpCgdyZXBsaWVzGAIgAygLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USEAoIaGFzX21vcmUYAyABKAgiJwoRR2V0TWVzc2FnZVJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCSI/ChJHZXRNZXNzYWdlUmVzcG9uc2USKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIl4KD01hcmtSZWFkUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEgsKA3NlcRgCIAEoAxIWCg50aHJlYWRfcm9vdF9pZBgDIAEoCRISCgp0aHJlYWRfc2VxGAQgASgDIhIKEE1hcmtSZWFkUmVzcG9uc2UiNwoSQWRkUmVhY3Rpb25SZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkSDQoFZW1vamkYAiABKAkiFQoTQWRkUmVhY3Rpb25SZXNwb25zZSI6ChVSZW1vdmVSZWFjdGlvblJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCRINCgVlbW9qaRgCIAEoCSIYChZSZW1vdmVSZWFjdGlvblJlc3BvbnNlIkQKFlN1YnNjcmliZVRocmVhZFJlcXVlc3QSFgoOdGhyZWFkX3Jvb3RfaWQYASABKAkSEgoKc3Vic2NyaWJlZBgCIAEoCCIZChdTdWJzY3JpYmVUaHJlYWRSZXNwb25zZSJFChZQb3N0QmxvY2tBY3Rpb25SZXF1ZXN0EisKBmFjdGlvbhgBIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkJsb2NrQWN0aW9uIhkKF1Bvc3RCbG9ja0FjdGlvblJlc3BvbnNlInIKA1BpbhIpCgdtZXNzYWdlGAEgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USEQoJcGlubmVkX2J5GAIgASgJEi0KCXBpbm5lZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiJwoRUGluTWVzc2FnZVJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCSI3ChJQaW5NZXNzYWdlUmVzcG9uc2USIQoDcGluGAEgASgLMhQudGFuay5tZXNzYWdlLnYxLlBpbiIpChNVbnBpbk1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiFgoUVW5waW5NZXNzYWdlUmVzcG9uc2UiRAoPTGlzdFBpbnNSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDgoGY3Vyc29yGAIgASgJEg0KBWxpbWl0GAMgASgFIksKEExpc3RQaW5zUmVzcG9uc2USIgoEcGlucxgBIAMoCzIULnRhbmsubWVzc2FnZS52MS5QaW4SEwoLbmV4dF9jdXJzb3IYAiABKAkiZAoJU2F2ZWRJdGVtEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZRIsCghzYXZlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiKAoSU2F2ZU1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiPwoTU2F2ZU1lc3NhZ2VSZXNwb25zZRIoCgRpdGVtGAEgASgLMhoudGFuay5tZXNzYWdlLnYxLlNhdmVkSXRlbSIqChRVbnNhdmVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIhcKFVVuc2F2ZU1lc3NhZ2VSZXNwb25zZSJHChBMaXN0U2F2ZWRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIOCgZjdXJzb3IYAiABKAkSDQoFbGltaXQYAyABKAUiUwoRTGlzdFNhdmVkUmVzcG9uc2USKQoFaXRlbXMYASADKAsyGi50YW5rLm1lc3NhZ2UudjEuU2F2ZWRJdGVtEhMKC25leHRfY3Vyc29yGAIgASgJKpIBCgtNZXNzYWdlS2luZBIcChhNRVNTQUdFX0tJTkRfVU5TUEVDSUZJRUQQABIYChRNRVNTQUdFX0tJTkRfTUVTU0FHRRABEhcKE01FU1NBR0VfS0lORF9TWVNURU0QAhIcChhNRVNTQUdFX0tJTkRfQUdFTlRfRVZFTlQQAxIUChBNRVNTQUdFX0tJTkRfQk9UEAQynAwKC0NoYXRTZXJ2aWNlElgKC1Bvc3RNZXNzYWdlEiMudGFuay5tZXNzYWdlLnYxLlBvc3RNZXNzYWdlUmVxdWVzdBokLnRhbmsubWVzc2FnZS52MS5Qb3N0TWVzc2FnZVJlc3BvbnNlEl4KDVVwZGF0ZU1lc3NhZ2USJS50YW5rLm1lc3NhZ2UudjEuVXBkYXRlTWVzc2FnZVJlcXVlc3QaJi50YW5rLm1lc3NhZ2UudjEuVXBkYXRlTWVzc2FnZVJlc3BvbnNlEl4KDURlbGV0ZU1lc3NhZ2USJS50YW5rLm1lc3NhZ2UudjEuRGVsZXRlTWVzc2FnZVJlcXVlc3QaJi50YW5rLm1lc3NhZ2UudjEuRGVsZXRlTWVzc2FnZVJlc3BvbnNlElsKDExpc3RNZXNzYWdlcxIkLnRhbmsubWVzc2FnZS52MS5MaXN0TWVzc2FnZXNSZXF1ZXN0GiUudGFuay5tZXNzYWdlLnYxLkxpc3RNZXNzYWdlc1Jlc3BvbnNlElIKCUdldFRocmVhZBIhLnRhbmsubWVzc2FnZS52MS5HZXRUaHJlYWRSZXF1ZXN0GiIudGFuay5tZXNzYWdlLnYxLkdldFRocmVhZFJlc3BvbnNlElUKCkdldE1lc3NhZ2USIi50YW5rLm1lc3NhZ2UudjEuR2V0TWVzc2FnZVJlcXVlc3QaIy50YW5rLm1lc3NhZ2UudjEuR2V0TWVzc2FnZVJlc3BvbnNlEk8KCE1hcmtSZWFkEiAudGFuay5tZXNzYWdlLnYxLk1hcmtSZWFkUmVxdWVzdBohLnRhbmsubWVzc2FnZS52MS5NYXJrUmVhZFJlc3BvbnNlElgKC0FkZFJlYWN0aW9uEiMudGFuay5tZXNzYWdlLnYxLkFkZFJlYWN0aW9uUmVxdWVzdBokLnRhbmsubWVzc2FnZS52MS5BZGRSZWFjdGlvblJlc3BvbnNlEmEKDlJlbW92ZVJlYWN0aW9uEiYudGFuay5tZXNzYWdlLnYxLlJlbW92ZVJlYWN0aW9uUmVxdWVzdBonLnRhbmsubWVzc2FnZS52MS5SZW1vdmVSZWFjdGlvblJlc3BvbnNlEmQKD1N1YnNjcmliZVRocmVhZBInLnRhbmsubWVzc2FnZS52MS5TdWJzY3JpYmVUaHJlYWRSZXF1ZXN0GigudGFuay5tZXNzYWdlLnYxLlN1YnNjcmliZVRocmVhZFJlc3BvbnNlEmQKD1Bvc3RCbG9ja0FjdGlvbhInLnRhbmsubWVzc2FnZS52MS5Qb3N0QmxvY2tBY3Rpb25SZXF1ZXN0GigudGFuay5tZXNzYWdlLnYxLlBvc3RCbG9ja0FjdGlvblJlc3BvbnNlElUKClBpbk1lc3NhZ2USIi50YW5rLm1lc3NhZ2UudjEuUGluTWVzc2FnZVJlcXVlc3QaIy50YW5rLm1lc3NhZ2UudjEuUGluTWVzc2FnZVJlc3BvbnNlElsKDFVucGluTWVzc2FnZRIkLnRhbmsubWVzc2FnZS52MS5VbnBpbk1lc3NhZ2VSZXF1ZXN0GiUudGFuay5tZXNzYWdlLnYxLlVucGluTWVzc2FnZVJlc3BvbnNlEk8KCExpc3RQaW5zEiAudGFuay5tZXNzYWdlLnYxLkxpc3RQaW5zUmVxdWVzdBohLnRhbmsubWVzc2FnZS52MS5MaXN0UGluc1Jlc3BvbnNlElgKC1NhdmVNZXNzYWdlEiMudGFuay5tZXNzYWdlLnYxLlNhdmVNZXNzYWdlUmVxdWVzdBokLnRhbmsubWVzc2FnZS52MS5TYXZlTWVzc2FnZVJlc3BvbnNlEl4KDVVuc2F2ZU1lc3NhZ2USJS50YW5rLm1lc3NhZ2UudjEuVW5zYXZlTWVzc2FnZVJlcXVlc3QaJi50YW5rLm1lc3NhZ2UudjEuVW5zYXZlTWVzc2FnZVJlc3BvbnNlElIKCUxpc3RTYXZlZBIhLnRhbmsubWVzc2FnZS52MS5MaXN0U2F2ZWRSZXF1ZXN0GiIudGFuay5tZXNzYWdlLnYxLkxpc3RTYXZlZFJlc3BvbnNlQtgBChNjb20udGFuay5tZXNzYWdlLnYxQgxNZXNzYWdlUHJvdG9QAVpVZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9tZXNzYWdlL3YxO21lc3NhZ2V2MaICA1RNWKoCD1RhbmsuTWVzc2FnZS5WMcoCD1RhbmtcTWVzc2FnZVxWMeICG1RhbmtcTWVzc2FnZVxWMVxHUEJNZXRhZGF0YeoCEVRhbms6Ok1lc3NhZ2U6OlYxYgZwcm90bzM", [file_google_protobuf_struct, file_google_protobuf_timestamp, file_tank_auth_v1_auth, file_tank_blocks_v1_blocks, file_tank_files_v1_files, file_tank_richtext_v1_richtext]);
+  fileDesc("Ch10YW5rL21lc3NhZ2UvdjEvbWVzc2FnZS5wcm90bxIPdGFuay5tZXNzYWdlLnYxIksKCFJlYWN0aW9uEg0KBWVtb2ppGAEgASgJEg0KBWNvdW50GAIgASgFEhAKCHVzZXJfaWRzGAMgAygJEg8KB3JlYWN0ZWQYBCABKAginwYKB01lc3NhZ2USCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEhIKCmNoYW5uZWxfaWQYAyABKAkSEwoLY2hhbm5lbF9zZXEYBCABKAMSFgoOdGhyZWFkX3Jvb3RfaWQYBSABKAkSEgoKdGhyZWFkX3NlcRgGIAEoAxIRCglhdXRob3JfaWQYByABKAkSMAoLYXV0aG9yX2tpbmQYCCABKA4yGy50YW5rLmF1dGgudjEuUHJpbmNpcGFsS2luZBIqCgRraW5kGAkgASgOMhwudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2VLaW5kEhUKDWNsaWVudF9tc2dfaWQYCiABKAkSDAoEdGV4dBgLIAEoCRItCglyaWNoX3RleHQYDCABKAsyGi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0EiYKBmJsb2NrcxgNIAEoCzIWLnRhbmsuYmxvY2tzLnYxLkJsb2NrcxITCgttZW50aW9uX2lkcxgOIAMoCRIQCghmaWxlX2lkcxgPIAMoCRIsCglyZWFjdGlvbnMYECADKAsyGS50YW5rLm1lc3NhZ2UudjEuUmVhY3Rpb24SLQoJZWRpdGVkX2F0GBEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpkZWxldGVkX2F0GBIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBITCgtyZXBseV9jb3VudBgTIAEoBRIxCg1sYXN0X3JlcGx5X2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIWCg5yZXBseV91c2VyX2lkcxgVIAMoCRIpCghtZXRhZGF0YRgWIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSLgoKY3JlYXRlZF9hdBgXIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGcGlubmVkGBggASgIEg0KBXNhdmVkGBkgASgIEiIKBWZpbGVzGBogAygLMhMudGFuay5maWxlcy52MS5GaWxlIoYDChJQb3N0TWVzc2FnZVJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRIVCg1jbGllbnRfbXNnX2lkGAMgASgJEgwKBHRleHQYBCABKAkSLQoJcmljaF90ZXh0GAUgASgLMhoudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dBImCgZibG9ja3MYBiABKAsyFi50YW5rLmJsb2Nrcy52MS5CbG9ja3MSEAoIZmlsZV9pZHMYByADKAkSKgoEa2luZBgIIAEoDjIcLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlS2luZBIpCghtZXRhZGF0YRgJIAEoCzIXLmdvb2dsZS5wcm90b2J1Zi5TdHJ1Y3QSHAoUYWxzb19zZW5kX3RvX2NoYW5uZWwYCiABKAgSEQoJZXBoZW1lcmFsGAsgASgIEhkKEWVwaGVtZXJhbF91c2VyX2lkGAwgASgJEhMKC21lbnRpb25faWRzGA0gAygJIkAKE1Bvc3RNZXNzYWdlUmVzcG9uc2USKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlIs4BChRVcGRhdGVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJEgwKBHRleHQYAiABKAkSLQoJcmljaF90ZXh0GAMgASgLMhoudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dBImCgZibG9ja3MYBCABKAsyFi50YW5rLmJsb2Nrcy52MS5CbG9ja3MSKQoIbWV0YWRhdGEYBSABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0EhIKCnN0cmVhbV9zZXEYBiABKAMiQgoVVXBkYXRlTWVzc2FnZVJlc3BvbnNlEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSIqChREZWxldGVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIhcKFURlbGV0ZU1lc3NhZ2VSZXNwb25zZSItChNEZWxldGVUaHJlYWRSZXF1ZXN0EhYKDnRocmVhZF9yb290X2lkGAEgASgJIj8KFERlbGV0ZVRocmVhZFJlc3BvbnNlEg8KB2RlbGV0ZWQYASABKAUSFgoOY2FuY2VsbGVkX3J1bnMYAiABKAUijAEKE0xpc3RNZXNzYWdlc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRISCgpiZWZvcmVfc2VxGAIgASgDEhEKCWFmdGVyX3NlcRgDIAEoAxINCgVsaW1pdBgEIAEoBRIrCgVraW5kcxgFIAMoDjIcLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlS2luZCJUChRMaXN0TWVzc2FnZXNSZXNwb25zZRIqCghtZXNzYWdlcxgBIAMoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEhAKCGhhc19tb3JlGAIgASgIIlMKEEdldFRocmVhZFJlcXVlc3QSFgoOdGhyZWFkX3Jvb3RfaWQYASABKAkSGAoQYWZ0ZXJfdGhyZWFkX3NlcRgCIAEoAxINCgVsaW1pdBgDIAEoBSJ4ChFHZXRUaHJlYWRSZXNwb25zZRImCgRyb290GAEgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USKQoHcmVwbGllcxgCIAMoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEhAKCGhhc19tb3JlGAMgASgIIicKEUdldE1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiPwoSR2V0TWVzc2FnZVJlc3BvbnNlEikKB21lc3NhZ2UYASABKAsyGC50YW5rLm1lc3NhZ2UudjEuTWVzc2FnZSJeCg9NYXJrUmVhZFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRILCgNzZXEYAiABKAMSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkSEgoKdGhyZWFkX3NlcRgEIAEoAyISChBNYXJrUmVhZFJlc3BvbnNlIjcKEkFkZFJlYWN0aW9uUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJEg0KBWVtb2ppGAIgASgJIhUKE0FkZFJlYWN0aW9uUmVzcG9uc2UiOgoVUmVtb3ZlUmVhY3Rpb25SZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkSDQoFZW1vamkYAiABKAkiGAoWUmVtb3ZlUmVhY3Rpb25SZXNwb25zZSJEChZTdWJzY3JpYmVUaHJlYWRSZXF1ZXN0EhYKDnRocmVhZF9yb290X2lkGAEgASgJEhIKCnN1YnNjcmliZWQYAiABKAgiGQoXU3Vic2NyaWJlVGhyZWFkUmVzcG9uc2UiRQoWUG9zdEJsb2NrQWN0aW9uUmVxdWVzdBIrCgZhY3Rpb24YASABKAsyGy50YW5rLmJsb2Nrcy52MS5CbG9ja0FjdGlvbiIZChdQb3N0QmxvY2tBY3Rpb25SZXNwb25zZSJyCgNQaW4SKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEhEKCXBpbm5lZF9ieRgCIAEoCRItCglwaW5uZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIicKEVBpbk1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiNwoSUGluTWVzc2FnZVJlc3BvbnNlEiEKA3BpbhgBIAEoCzIULnRhbmsubWVzc2FnZS52MS5QaW4iKQoTVW5waW5NZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIhYKFFVucGluTWVzc2FnZVJlc3BvbnNlIkQKD0xpc3RQaW5zUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEg4KBmN1cnNvchgCIAEoCRINCgVsaW1pdBgDIAEoBSJLChBMaXN0UGluc1Jlc3BvbnNlEiIKBHBpbnMYASADKAsyFC50YW5rLm1lc3NhZ2UudjEuUGluEhMKC25leHRfY3Vyc29yGAIgASgJImQKCVNhdmVkSXRlbRIpCgdtZXNzYWdlGAEgASgLMhgudGFuay5tZXNzYWdlLnYxLk1lc3NhZ2USLAoIc2F2ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIigKElNhdmVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIj8KE1NhdmVNZXNzYWdlUmVzcG9uc2USKAoEaXRlbRgBIAEoCzIaLnRhbmsubWVzc2FnZS52MS5TYXZlZEl0ZW0iKgoUVW5zYXZlTWVzc2FnZVJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCSIXChVVbnNhdmVNZXNzYWdlUmVzcG9uc2UiRwoQTGlzdFNhdmVkUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDgoGY3Vyc29yGAIgASgJEg0KBWxpbWl0GAMgASgFIlMKEUxpc3RTYXZlZFJlc3BvbnNlEikKBWl0ZW1zGAEgAygLMhoudGFuay5tZXNzYWdlLnYxLlNhdmVkSXRlbRITCgtuZXh0X2N1cnNvchgCIAEoCSqSAQoLTWVzc2FnZUtpbmQSHAoYTUVTU0FHRV9LSU5EX1VOU1BFQ0lGSUVEEAASGAoUTUVTU0FHRV9LSU5EX01FU1NBR0UQARIXChNNRVNTQUdFX0tJTkRfU1lTVEVNEAISHAoYTUVTU0FHRV9LSU5EX0FHRU5UX0VWRU5UEAMSFAoQTUVTU0FHRV9LSU5EX0JPVBAEMvkMCgtDaGF0U2VydmljZRJYCgtQb3N0TWVzc2FnZRIjLnRhbmsubWVzc2FnZS52MS5Qb3N0TWVzc2FnZVJlcXVlc3QaJC50YW5rLm1lc3NhZ2UudjEuUG9zdE1lc3NhZ2VSZXNwb25zZRJeCg1VcGRhdGVNZXNzYWdlEiUudGFuay5tZXNzYWdlLnYxLlVwZGF0ZU1lc3NhZ2VSZXF1ZXN0GiYudGFuay5tZXNzYWdlLnYxLlVwZGF0ZU1lc3NhZ2VSZXNwb25zZRJeCg1EZWxldGVNZXNzYWdlEiUudGFuay5tZXNzYWdlLnYxLkRlbGV0ZU1lc3NhZ2VSZXF1ZXN0GiYudGFuay5tZXNzYWdlLnYxLkRlbGV0ZU1lc3NhZ2VSZXNwb25zZRJbCgxEZWxldGVUaHJlYWQSJC50YW5rLm1lc3NhZ2UudjEuRGVsZXRlVGhyZWFkUmVxdWVzdBolLnRhbmsubWVzc2FnZS52MS5EZWxldGVUaHJlYWRSZXNwb25zZRJbCgxMaXN0TWVzc2FnZXMSJC50YW5rLm1lc3NhZ2UudjEuTGlzdE1lc3NhZ2VzUmVxdWVzdBolLnRhbmsubWVzc2FnZS52MS5MaXN0TWVzc2FnZXNSZXNwb25zZRJSCglHZXRUaHJlYWQSIS50YW5rLm1lc3NhZ2UudjEuR2V0VGhyZWFkUmVxdWVzdBoiLnRhbmsubWVzc2FnZS52MS5HZXRUaHJlYWRSZXNwb25zZRJVCgpHZXRNZXNzYWdlEiIudGFuay5tZXNzYWdlLnYxLkdldE1lc3NhZ2VSZXF1ZXN0GiMudGFuay5tZXNzYWdlLnYxLkdldE1lc3NhZ2VSZXNwb25zZRJPCghNYXJrUmVhZBIgLnRhbmsubWVzc2FnZS52MS5NYXJrUmVhZFJlcXVlc3QaIS50YW5rLm1lc3NhZ2UudjEuTWFya1JlYWRSZXNwb25zZRJYCgtBZGRSZWFjdGlvbhIjLnRhbmsubWVzc2FnZS52MS5BZGRSZWFjdGlvblJlcXVlc3QaJC50YW5rLm1lc3NhZ2UudjEuQWRkUmVhY3Rpb25SZXNwb25zZRJhCg5SZW1vdmVSZWFjdGlvbhImLnRhbmsubWVzc2FnZS52MS5SZW1vdmVSZWFjdGlvblJlcXVlc3QaJy50YW5rLm1lc3NhZ2UudjEuUmVtb3ZlUmVhY3Rpb25SZXNwb25zZRJkCg9TdWJzY3JpYmVUaHJlYWQSJy50YW5rLm1lc3NhZ2UudjEuU3Vic2NyaWJlVGhyZWFkUmVxdWVzdBooLnRhbmsubWVzc2FnZS52MS5TdWJzY3JpYmVUaHJlYWRSZXNwb25zZRJkCg9Qb3N0QmxvY2tBY3Rpb24SJy50YW5rLm1lc3NhZ2UudjEuUG9zdEJsb2NrQWN0aW9uUmVxdWVzdBooLnRhbmsubWVzc2FnZS52MS5Qb3N0QmxvY2tBY3Rpb25SZXNwb25zZRJVCgpQaW5NZXNzYWdlEiIudGFuay5tZXNzYWdlLnYxLlBpbk1lc3NhZ2VSZXF1ZXN0GiMudGFuay5tZXNzYWdlLnYxLlBpbk1lc3NhZ2VSZXNwb25zZRJbCgxVbnBpbk1lc3NhZ2USJC50YW5rLm1lc3NhZ2UudjEuVW5waW5NZXNzYWdlUmVxdWVzdBolLnRhbmsubWVzc2FnZS52MS5VbnBpbk1lc3NhZ2VSZXNwb25zZRJPCghMaXN0UGlucxIgLnRhbmsubWVzc2FnZS52MS5MaXN0UGluc1JlcXVlc3QaIS50YW5rLm1lc3NhZ2UudjEuTGlzdFBpbnNSZXNwb25zZRJYCgtTYXZlTWVzc2FnZRIjLnRhbmsubWVzc2FnZS52MS5TYXZlTWVzc2FnZVJlcXVlc3QaJC50YW5rLm1lc3NhZ2UudjEuU2F2ZU1lc3NhZ2VSZXNwb25zZRJeCg1VbnNhdmVNZXNzYWdlEiUudGFuay5tZXNzYWdlLnYxLlVuc2F2ZU1lc3NhZ2VSZXF1ZXN0GiYudGFuay5tZXNzYWdlLnYxLlVuc2F2ZU1lc3NhZ2VSZXNwb25zZRJSCglMaXN0U2F2ZWQSIS50YW5rLm1lc3NhZ2UudjEuTGlzdFNhdmVkUmVxdWVzdBoiLnRhbmsubWVzc2FnZS52MS5MaXN0U2F2ZWRSZXNwb25zZULYAQoTY29tLnRhbmsubWVzc2FnZS52MUIMTWVzc2FnZVByb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvbWVzc2FnZS92MTttZXNzYWdldjGiAgNUTViqAg9UYW5rLk1lc3NhZ2UuVjHKAg9UYW5rXE1lc3NhZ2VcVjHiAhtUYW5rXE1lc3NhZ2VcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpNZXNzYWdlOjpWMWIGcHJvdG8z", [file_google_protobuf_struct, file_google_protobuf_timestamp, file_tank_auth_v1_auth, file_tank_blocks_v1_blocks, file_tank_files_v1_files, file_tank_richtext_v1_richtext]);
 
 /**
  * @generated from message tank.message.v1.Reaction
@@ -403,6 +403,52 @@ export const DeleteMessageResponseSchema: GenMessage<DeleteMessageResponse> = /*
   messageDesc(file_tank_message_v1_message, 7);
 
 /**
+ * DeleteThread removes a thread for everyone: the root, every reply, and any agent run
+ * bound to it, which is cancelled. The root's author or a channel admin may do it.
+ *
+ * @generated from message tank.message.v1.DeleteThreadRequest
+ */
+export type DeleteThreadRequest = Message$1<"tank.message.v1.DeleteThreadRequest"> & {
+  /**
+   * @generated from field: string thread_root_id = 1;
+   */
+  threadRootId: string;
+};
+
+/**
+ * Describes the message tank.message.v1.DeleteThreadRequest.
+ * Use `create(DeleteThreadRequestSchema)` to create a new message.
+ */
+export const DeleteThreadRequestSchema: GenMessage<DeleteThreadRequest> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 8);
+
+/**
+ * @generated from message tank.message.v1.DeleteThreadResponse
+ */
+export type DeleteThreadResponse = Message$1<"tank.message.v1.DeleteThreadResponse"> & {
+  /**
+   * messages removed, the root included
+   *
+   * @generated from field: int32 deleted = 1;
+   */
+  deleted: number;
+
+  /**
+   * agent runs that were still open
+   *
+   * @generated from field: int32 cancelled_runs = 2;
+   */
+  cancelledRuns: number;
+};
+
+/**
+ * Describes the message tank.message.v1.DeleteThreadResponse.
+ * Use `create(DeleteThreadResponseSchema)` to create a new message.
+ */
+export const DeleteThreadResponseSchema: GenMessage<DeleteThreadResponse> = /*@__PURE__*/
+  messageDesc(file_tank_message_v1_message, 9);
+
+/**
  * @generated from message tank.message.v1.ListMessagesRequest
  */
 export type ListMessagesRequest = Message$1<"tank.message.v1.ListMessagesRequest"> & {
@@ -439,7 +485,7 @@ export type ListMessagesRequest = Message$1<"tank.message.v1.ListMessagesRequest
  * Use `create(ListMessagesRequestSchema)` to create a new message.
  */
 export const ListMessagesRequestSchema: GenMessage<ListMessagesRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 8);
+  messageDesc(file_tank_message_v1_message, 10);
 
 /**
  * @generated from message tank.message.v1.ListMessagesResponse
@@ -461,7 +507,7 @@ export type ListMessagesResponse = Message$1<"tank.message.v1.ListMessagesRespon
  * Use `create(ListMessagesResponseSchema)` to create a new message.
  */
 export const ListMessagesResponseSchema: GenMessage<ListMessagesResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 9);
+  messageDesc(file_tank_message_v1_message, 11);
 
 /**
  * @generated from message tank.message.v1.GetThreadRequest
@@ -488,7 +534,7 @@ export type GetThreadRequest = Message$1<"tank.message.v1.GetThreadRequest"> & {
  * Use `create(GetThreadRequestSchema)` to create a new message.
  */
 export const GetThreadRequestSchema: GenMessage<GetThreadRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 10);
+  messageDesc(file_tank_message_v1_message, 12);
 
 /**
  * @generated from message tank.message.v1.GetThreadResponse
@@ -515,7 +561,7 @@ export type GetThreadResponse = Message$1<"tank.message.v1.GetThreadResponse"> &
  * Use `create(GetThreadResponseSchema)` to create a new message.
  */
 export const GetThreadResponseSchema: GenMessage<GetThreadResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 11);
+  messageDesc(file_tank_message_v1_message, 13);
 
 /**
  * @generated from message tank.message.v1.GetMessageRequest
@@ -532,7 +578,7 @@ export type GetMessageRequest = Message$1<"tank.message.v1.GetMessageRequest"> &
  * Use `create(GetMessageRequestSchema)` to create a new message.
  */
 export const GetMessageRequestSchema: GenMessage<GetMessageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 12);
+  messageDesc(file_tank_message_v1_message, 14);
 
 /**
  * @generated from message tank.message.v1.GetMessageResponse
@@ -549,7 +595,7 @@ export type GetMessageResponse = Message$1<"tank.message.v1.GetMessageResponse">
  * Use `create(GetMessageResponseSchema)` to create a new message.
  */
 export const GetMessageResponseSchema: GenMessage<GetMessageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 13);
+  messageDesc(file_tank_message_v1_message, 15);
 
 /**
  * @generated from message tank.message.v1.MarkReadRequest
@@ -581,7 +627,7 @@ export type MarkReadRequest = Message$1<"tank.message.v1.MarkReadRequest"> & {
  * Use `create(MarkReadRequestSchema)` to create a new message.
  */
 export const MarkReadRequestSchema: GenMessage<MarkReadRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 14);
+  messageDesc(file_tank_message_v1_message, 16);
 
 /**
  * @generated from message tank.message.v1.MarkReadResponse
@@ -594,7 +640,7 @@ export type MarkReadResponse = Message$1<"tank.message.v1.MarkReadResponse"> & {
  * Use `create(MarkReadResponseSchema)` to create a new message.
  */
 export const MarkReadResponseSchema: GenMessage<MarkReadResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 15);
+  messageDesc(file_tank_message_v1_message, 17);
 
 /**
  * @generated from message tank.message.v1.AddReactionRequest
@@ -616,7 +662,7 @@ export type AddReactionRequest = Message$1<"tank.message.v1.AddReactionRequest">
  * Use `create(AddReactionRequestSchema)` to create a new message.
  */
 export const AddReactionRequestSchema: GenMessage<AddReactionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 16);
+  messageDesc(file_tank_message_v1_message, 18);
 
 /**
  * @generated from message tank.message.v1.AddReactionResponse
@@ -629,7 +675,7 @@ export type AddReactionResponse = Message$1<"tank.message.v1.AddReactionResponse
  * Use `create(AddReactionResponseSchema)` to create a new message.
  */
 export const AddReactionResponseSchema: GenMessage<AddReactionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 17);
+  messageDesc(file_tank_message_v1_message, 19);
 
 /**
  * @generated from message tank.message.v1.RemoveReactionRequest
@@ -651,7 +697,7 @@ export type RemoveReactionRequest = Message$1<"tank.message.v1.RemoveReactionReq
  * Use `create(RemoveReactionRequestSchema)` to create a new message.
  */
 export const RemoveReactionRequestSchema: GenMessage<RemoveReactionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 18);
+  messageDesc(file_tank_message_v1_message, 20);
 
 /**
  * @generated from message tank.message.v1.RemoveReactionResponse
@@ -664,7 +710,7 @@ export type RemoveReactionResponse = Message$1<"tank.message.v1.RemoveReactionRe
  * Use `create(RemoveReactionResponseSchema)` to create a new message.
  */
 export const RemoveReactionResponseSchema: GenMessage<RemoveReactionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 19);
+  messageDesc(file_tank_message_v1_message, 21);
 
 /**
  * @generated from message tank.message.v1.SubscribeThreadRequest
@@ -686,7 +732,7 @@ export type SubscribeThreadRequest = Message$1<"tank.message.v1.SubscribeThreadR
  * Use `create(SubscribeThreadRequestSchema)` to create a new message.
  */
 export const SubscribeThreadRequestSchema: GenMessage<SubscribeThreadRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 20);
+  messageDesc(file_tank_message_v1_message, 22);
 
 /**
  * @generated from message tank.message.v1.SubscribeThreadResponse
@@ -699,7 +745,7 @@ export type SubscribeThreadResponse = Message$1<"tank.message.v1.SubscribeThread
  * Use `create(SubscribeThreadResponseSchema)` to create a new message.
  */
 export const SubscribeThreadResponseSchema: GenMessage<SubscribeThreadResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 21);
+  messageDesc(file_tank_message_v1_message, 23);
 
 /**
  * @generated from message tank.message.v1.PostBlockActionRequest
@@ -716,7 +762,7 @@ export type PostBlockActionRequest = Message$1<"tank.message.v1.PostBlockActionR
  * Use `create(PostBlockActionRequestSchema)` to create a new message.
  */
 export const PostBlockActionRequestSchema: GenMessage<PostBlockActionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 22);
+  messageDesc(file_tank_message_v1_message, 24);
 
 /**
  * @generated from message tank.message.v1.PostBlockActionResponse
@@ -729,7 +775,7 @@ export type PostBlockActionResponse = Message$1<"tank.message.v1.PostBlockAction
  * Use `create(PostBlockActionResponseSchema)` to create a new message.
  */
 export const PostBlockActionResponseSchema: GenMessage<PostBlockActionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 23);
+  messageDesc(file_tank_message_v1_message, 25);
 
 /**
  * A channel pin. Anyone who can post in the channel may pin or unpin.
@@ -758,7 +804,7 @@ export type Pin = Message$1<"tank.message.v1.Pin"> & {
  * Use `create(PinSchema)` to create a new message.
  */
 export const PinSchema: GenMessage<Pin> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 24);
+  messageDesc(file_tank_message_v1_message, 26);
 
 /**
  * @generated from message tank.message.v1.PinMessageRequest
@@ -775,7 +821,7 @@ export type PinMessageRequest = Message$1<"tank.message.v1.PinMessageRequest"> &
  * Use `create(PinMessageRequestSchema)` to create a new message.
  */
 export const PinMessageRequestSchema: GenMessage<PinMessageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 25);
+  messageDesc(file_tank_message_v1_message, 27);
 
 /**
  * @generated from message tank.message.v1.PinMessageResponse
@@ -792,7 +838,7 @@ export type PinMessageResponse = Message$1<"tank.message.v1.PinMessageResponse">
  * Use `create(PinMessageResponseSchema)` to create a new message.
  */
 export const PinMessageResponseSchema: GenMessage<PinMessageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 26);
+  messageDesc(file_tank_message_v1_message, 28);
 
 /**
  * @generated from message tank.message.v1.UnpinMessageRequest
@@ -809,7 +855,7 @@ export type UnpinMessageRequest = Message$1<"tank.message.v1.UnpinMessageRequest
  * Use `create(UnpinMessageRequestSchema)` to create a new message.
  */
 export const UnpinMessageRequestSchema: GenMessage<UnpinMessageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 27);
+  messageDesc(file_tank_message_v1_message, 29);
 
 /**
  * @generated from message tank.message.v1.UnpinMessageResponse
@@ -822,7 +868,7 @@ export type UnpinMessageResponse = Message$1<"tank.message.v1.UnpinMessageRespon
  * Use `create(UnpinMessageResponseSchema)` to create a new message.
  */
 export const UnpinMessageResponseSchema: GenMessage<UnpinMessageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 28);
+  messageDesc(file_tank_message_v1_message, 30);
 
 /**
  * @generated from message tank.message.v1.ListPinsRequest
@@ -851,7 +897,7 @@ export type ListPinsRequest = Message$1<"tank.message.v1.ListPinsRequest"> & {
  * Use `create(ListPinsRequestSchema)` to create a new message.
  */
 export const ListPinsRequestSchema: GenMessage<ListPinsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 29);
+  messageDesc(file_tank_message_v1_message, 31);
 
 /**
  * @generated from message tank.message.v1.ListPinsResponse
@@ -873,7 +919,7 @@ export type ListPinsResponse = Message$1<"tank.message.v1.ListPinsResponse"> & {
  * Use `create(ListPinsResponseSchema)` to create a new message.
  */
 export const ListPinsResponseSchema: GenMessage<ListPinsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 30);
+  messageDesc(file_tank_message_v1_message, 32);
 
 /**
  * A message saved by the caller ("Saved items"); private to them.
@@ -897,7 +943,7 @@ export type SavedItem = Message$1<"tank.message.v1.SavedItem"> & {
  * Use `create(SavedItemSchema)` to create a new message.
  */
 export const SavedItemSchema: GenMessage<SavedItem> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 31);
+  messageDesc(file_tank_message_v1_message, 33);
 
 /**
  * @generated from message tank.message.v1.SaveMessageRequest
@@ -914,7 +960,7 @@ export type SaveMessageRequest = Message$1<"tank.message.v1.SaveMessageRequest">
  * Use `create(SaveMessageRequestSchema)` to create a new message.
  */
 export const SaveMessageRequestSchema: GenMessage<SaveMessageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 32);
+  messageDesc(file_tank_message_v1_message, 34);
 
 /**
  * @generated from message tank.message.v1.SaveMessageResponse
@@ -931,7 +977,7 @@ export type SaveMessageResponse = Message$1<"tank.message.v1.SaveMessageResponse
  * Use `create(SaveMessageResponseSchema)` to create a new message.
  */
 export const SaveMessageResponseSchema: GenMessage<SaveMessageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 33);
+  messageDesc(file_tank_message_v1_message, 35);
 
 /**
  * @generated from message tank.message.v1.UnsaveMessageRequest
@@ -948,7 +994,7 @@ export type UnsaveMessageRequest = Message$1<"tank.message.v1.UnsaveMessageReque
  * Use `create(UnsaveMessageRequestSchema)` to create a new message.
  */
 export const UnsaveMessageRequestSchema: GenMessage<UnsaveMessageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 34);
+  messageDesc(file_tank_message_v1_message, 36);
 
 /**
  * @generated from message tank.message.v1.UnsaveMessageResponse
@@ -961,7 +1007,7 @@ export type UnsaveMessageResponse = Message$1<"tank.message.v1.UnsaveMessageResp
  * Use `create(UnsaveMessageResponseSchema)` to create a new message.
  */
 export const UnsaveMessageResponseSchema: GenMessage<UnsaveMessageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 35);
+  messageDesc(file_tank_message_v1_message, 37);
 
 /**
  * @generated from message tank.message.v1.ListSavedRequest
@@ -990,7 +1036,7 @@ export type ListSavedRequest = Message$1<"tank.message.v1.ListSavedRequest"> & {
  * Use `create(ListSavedRequestSchema)` to create a new message.
  */
 export const ListSavedRequestSchema: GenMessage<ListSavedRequest> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 36);
+  messageDesc(file_tank_message_v1_message, 38);
 
 /**
  * @generated from message tank.message.v1.ListSavedResponse
@@ -1012,7 +1058,7 @@ export type ListSavedResponse = Message$1<"tank.message.v1.ListSavedResponse"> &
  * Use `create(ListSavedResponseSchema)` to create a new message.
  */
 export const ListSavedResponseSchema: GenMessage<ListSavedResponse> = /*@__PURE__*/
-  messageDesc(file_tank_message_v1_message, 37);
+  messageDesc(file_tank_message_v1_message, 39);
 
 /**
  * @generated from enum tank.message.v1.MessageKind
@@ -1077,6 +1123,14 @@ export const ChatService: GenService<{
     methodKind: "unary";
     input: typeof DeleteMessageRequestSchema;
     output: typeof DeleteMessageResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.message.v1.ChatService.DeleteThread
+   */
+  deleteThread: {
+    methodKind: "unary";
+    input: typeof DeleteThreadRequestSchema;
+    output: typeof DeleteThreadResponseSchema;
   },
   /**
    * @generated from rpc tank.message.v1.ChatService.ListMessages

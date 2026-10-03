@@ -403,6 +403,19 @@ export function reduce(state, action) {
                 return removeMessage(state, m.id, m.channelId, m.threadRootId);
             return upsertMessage(state, m);
         }
+        case "threads/deleted": {
+            // The root and every reply go, unread counts with them; nothing is left to
+            // show as a tombstone.
+            const replies = state.threadIds[action.threadRootId] ?? [];
+            let s = state;
+            for (const id of [...replies, action.threadRootId]) {
+                const gone = s.messages[id];
+                s = removeMessage(s, id, action.channelId, id === action.threadRootId ? "" : action.threadRootId);
+                if (gone)
+                    s = countUnread(s, gone, -1);
+            }
+            return s;
+        }
         case "messages/deleted": {
             const gone = state.messages[action.messageId];
             const s = removeMessage(state, action.messageId, action.channelId, action.threadRootId);
@@ -785,6 +798,8 @@ export function envelopeToActions(env, now) {
                     threadRootId: payload.threadRootId,
                 },
             ];
+        case "tank.events.v1.ThreadDeleted":
+            return [{ type: "threads/deleted", threadRootId: payload.threadRootId, channelId: payload.channelId }];
         case "tank.events.v1.ReactionAdded":
             return [
                 {

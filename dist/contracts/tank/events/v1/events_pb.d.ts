@@ -113,6 +113,36 @@ export type MessageDeleted = Message<"tank.events.v1.MessageDeleted"> & {
  */
 export declare const MessageDeletedSchema: GenMessage<MessageDeleted>;
 /**
+ * A whole thread was deleted: the root and every reply go, and any agent run bound to
+ * it was cancelled. Clients drop the root and its replies rather than showing a
+ * tombstone, which is what makes this different from MessageDeleted on a root.
+ *
+ * @generated from message tank.events.v1.ThreadDeleted
+ */
+export type ThreadDeleted = Message<"tank.events.v1.ThreadDeleted"> & {
+    /**
+     * @generated from field: string thread_root_id = 1;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string actor_id = 3;
+     */
+    actorId: string;
+    /**
+     * @generated from field: int32 cancelled_runs = 4;
+     */
+    cancelledRuns: number;
+};
+/**
+ * Describes the message tank.events.v1.ThreadDeleted.
+ * Use `create(ThreadDeletedSchema)` to create a new message.
+ */
+export declare const ThreadDeletedSchema: GenMessage<ThreadDeleted>;
+/**
  * A file was removed. Sent on every channel it was shared in, so each open
  * Tread drops the chip; the messages are re-sent as MessageUpdated with the id
  * gone, and this exists for clients that keep a files index of their own.

@@ -27,6 +27,7 @@ import {
   type ReactionAdded,
   type ReactionRemoved,
   type ReadStateUpdated,
+  type ThreadDeleted,
   type TopoMarkUpdated,
   type Typing,
 } from "../contracts/tank/events/v1/events_pb.js";
@@ -182,6 +183,7 @@ export type Action =
   | { type: "messages/created"; message: Message }
   | { type: "messages/updated"; message: Message }
   | { type: "messages/deleted"; messageId: string; channelId: string; threadRootId: string }
+  | { type: "threads/deleted"; threadRootId: string; channelId: string }
   | { type: "reactions/added"; messageId: string; userId: string; emoji: string }
   | { type: "reactions/removed"; messageId: string; userId: string; emoji: string }
   | { type: "readStates/upsert"; readStates: ChannelReadState[] }
@@ -610,6 +612,18 @@ export function reduce(state: TankState, action: Action): TankState {
       if (m.deletedAt) return removeMessage(state, m.id, m.channelId, m.threadRootId);
       return upsertMessage(state, m);
     }
+    case "threads/deleted": {
+      // The root and every reply go, unread counts with them; nothing is left to
+      // show as a tombstone.
+      const replies = state.threadIds[action.threadRootId] ?? [];
+      let s = state;
+      for (const id of [...replies, action.threadRootId]) {
+        const gone = s.messages[id];
+        s = removeMessage(s, id, action.channelId, id === action.threadRootId ? "" : action.threadRootId);
+        if (gone) s = countUnread(s, gone, -1);
+      }
+      return s;
+    }
     case "messages/deleted": {
       const gone = state.messages[action.messageId];
       const s = removeMessage(state, action.messageId, action.channelId, action.threadRootId);
@@ -949,6 +963,7 @@ export type KnownEventPayload =
   | MessageCreated
   | MessageUpdated
   | MessageDeleted
+  | ThreadDeleted
   | ReactionAdded
   | ReactionRemoved
   | ReadStateUpdated
@@ -1011,6 +1026,8 @@ export function envelopeToActions(env: Envelope, now: number): Action[] {
           threadRootId: payload.threadRootId,
         },
       ];
+    case "tank.events.v1.ThreadDeleted":
+      return [{ type: "threads/deleted", threadRootId: payload.threadRootId, channelId: payload.channelId }];
     case "tank.events.v1.ReactionAdded":
       return [
         {

@@ -653,6 +653,28 @@ export class TankClient {
     }
   }
 
+  /**
+   * Delete a whole thread: the root, every reply, and any agent run still working in it.
+   * Optimistic: the thread vanishes at once and comes back on error. Returns how many
+   * agent runs the server cancelled, so the caller can say so.
+   */
+  async deleteThread(threadRootId: string): Promise<number> {
+    const st = this.store.getState();
+    const root = st.messages[threadRootId];
+    const replies = (st.threadIds[threadRootId] ?? [])
+      .map((id) => st.messages[id])
+      .filter(Boolean) as Message[];
+    if (root) this.store.dispatch({ type: "threads/deleted", threadRootId, channelId: root.channelId });
+    try {
+      const res = await this.chat.deleteThread({ threadRootId });
+      return res.cancelledRuns;
+    } catch (err) {
+      const back = [root, ...replies].filter(Boolean) as Message[];
+      if (back.length) this.store.dispatch({ type: "messages/upsert", messages: back });
+      throw err;
+    }
+  }
+
   /** Delete a message. Optimistic: removed from every index immediately, restored on error. */
   async deleteMessage(messageId: string): Promise<void> {
     const prev = this.store.getState().messages[messageId];

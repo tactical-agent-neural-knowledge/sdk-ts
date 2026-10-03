@@ -320,6 +320,45 @@ export type DeleteMessageResponse = Message$1<"tank.message.v1.DeleteMessageResp
  */
 export declare const DeleteMessageResponseSchema: GenMessage<DeleteMessageResponse>;
 /**
+ * DeleteThread removes a thread for everyone: the root, every reply, and any agent run
+ * bound to it, which is cancelled. The root's author or a channel admin may do it.
+ *
+ * @generated from message tank.message.v1.DeleteThreadRequest
+ */
+export type DeleteThreadRequest = Message$1<"tank.message.v1.DeleteThreadRequest"> & {
+    /**
+     * @generated from field: string thread_root_id = 1;
+     */
+    threadRootId: string;
+};
+/**
+ * Describes the message tank.message.v1.DeleteThreadRequest.
+ * Use `create(DeleteThreadRequestSchema)` to create a new message.
+ */
+export declare const DeleteThreadRequestSchema: GenMessage<DeleteThreadRequest>;
+/**
+ * @generated from message tank.message.v1.DeleteThreadResponse
+ */
+export type DeleteThreadResponse = Message$1<"tank.message.v1.DeleteThreadResponse"> & {
+    /**
+     * messages removed, the root included
+     *
+     * @generated from field: int32 deleted = 1;
+     */
+    deleted: number;
+    /**
+     * agent runs that were still open
+     *
+     * @generated from field: int32 cancelled_runs = 2;
+     */
+    cancelledRuns: number;
+};
+/**
+ * Describes the message tank.message.v1.DeleteThreadResponse.
+ * Use `create(DeleteThreadResponseSchema)` to create a new message.
+ */
+export declare const DeleteThreadResponseSchema: GenMessage<DeleteThreadResponse>;
+/**
  * @generated from message tank.message.v1.ListMessagesRequest
  */
 export type ListMessagesRequest = Message$1<"tank.message.v1.ListMessagesRequest"> & {
@@ -866,6 +905,14 @@ export declare const ChatService: GenService<{
         methodKind: "unary";
         input: typeof DeleteMessageRequestSchema;
         output: typeof DeleteMessageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.DeleteThread
+     */
+    deleteThread: {
+        methodKind: "unary";
+        input: typeof DeleteThreadRequestSchema;
+        output: typeof DeleteThreadResponseSchema;
     };
     /**
      * @generated from rpc tank.message.v1.ChatService.ListMessages

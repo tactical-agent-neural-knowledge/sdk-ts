@@ -252,6 +252,12 @@ export declare class TankClient {
     }): Promise<void>;
     /** Edit a message. Optimistic: the store shows the new body immediately and rolls back on error. */
     updateMessage(messageId: string, input: UpdateMessageInput): Promise<Message | undefined>;
+    /**
+     * Delete a whole thread: the root, every reply, and any agent run still working in it.
+     * Optimistic: the thread vanishes at once and comes back on error. Returns how many
+     * agent runs the server cancelled, so the caller can say so.
+     */
+    deleteThread(threadRootId: string): Promise<number>;
     /** Delete a message. Optimistic: removed from every index immediately, restored on error. */
     deleteMessage(messageId: string): Promise<void>;
     /**

@@ -711,7 +711,14 @@ export declare const DeleteChannelRequestSchema: GenMessage<DeleteChannelRequest
 /**
  * @generated from message tank.channel.v1.DeleteChannelResponse
  */
-export type DeleteChannelResponse = Message<"tank.channel.v1.DeleteChannelResponse"> & {};
+export type DeleteChannelResponse = Message<"tank.channel.v1.DeleteChannelResponse"> & {
+    /**
+     * agent runs that were still open in it and were cancelled
+     *
+     * @generated from field: int32 cancelled_runs = 1;
+     */
+    cancelledRuns: number;
+};
 /**
  * Describes the message tank.channel.v1.DeleteChannelResponse.
  * Use `create(DeleteChannelResponseSchema)` to create a new message.
