@@ -704,6 +704,13 @@ export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
      * @generated from field: repeated string pr_reviewer_ids = 6;
      */
     prReviewerIds: string[];
+    /**
+     * Whether runs in this Tread read the repository's Neural Knowledge and record what
+     * they learn. On by default; the server always sets it.
+     *
+     * @generated from field: bool read_neural_knowledge = 7;
+     */
+    readNeuralKnowledge: boolean;
 };
 /**
  * Describes the message tank.agent.v1.TreadSettings.

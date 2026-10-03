@@ -306,6 +306,13 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: string channel_goal = 25;
      */
     channelGoal: string;
+    /**
+     * True when this run must not read or write the repository's Neural Knowledge:
+     * the Tread turned it off, or the run is the control half of a measurement.
+     *
+     * @generated from field: bool skip_neural_knowledge = 26;
+     */
+    skipNeuralKnowledge: boolean;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -1761,6 +1768,13 @@ export type StartRunRequest = Message<"tank.agentctl.v1.StartRunRequest"> & {
      * @generated from field: string repo = 8;
      */
     repo: string;
+    /**
+     * Run without reading or writing the repository's Neural Knowledge. For measuring
+     * the layer: the same task with and without it.
+     *
+     * @generated from field: bool skip_neural_knowledge = 9;
+     */
+    skipNeuralKnowledge: boolean;
 };
 /**
  * Describes the message tank.agentctl.v1.StartRunRequest.
@@ -2133,6 +2147,45 @@ export type RefreshNeuralKnowledgeResponse = Message<"tank.agentctl.v1.RefreshNe
  * Use `create(RefreshNeuralKnowledgeResponseSchema)` to create a new message.
  */
 export declare const RefreshNeuralKnowledgeResponseSchema: GenMessage<RefreshNeuralKnowledgeResponse>;
+/**
+ * Opens a thread in a Tread as the workspace's agent and returns its root. Used by
+ * the platform when it needs a thread of its own: a measurement run, a refresh.
+ *
+ * @generated from message tank.agentctl.v1.OpenThreadRequest
+ */
+export type OpenThreadRequest = Message<"tank.agentctl.v1.OpenThreadRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string text = 3;
+     */
+    text: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.OpenThreadRequest.
+ * Use `create(OpenThreadRequestSchema)` to create a new message.
+ */
+export declare const OpenThreadRequestSchema: GenMessage<OpenThreadRequest>;
+/**
+ * @generated from message tank.agentctl.v1.OpenThreadResponse
+ */
+export type OpenThreadResponse = Message<"tank.agentctl.v1.OpenThreadResponse"> & {
+    /**
+     * @generated from field: string thread_root_id = 1;
+     */
+    threadRootId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.OpenThreadResponse.
+ * Use `create(OpenThreadResponseSchema)` to create a new message.
+ */
+export declare const OpenThreadResponseSchema: GenMessage<OpenThreadResponse>;
 /**
  * @generated from message tank.agentctl.v1.SetProductReplicasRequest
  */
@@ -2610,6 +2663,14 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof StartRunRequestSchema;
         output: typeof StartRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.OpenThread
+     */
+    openThread: {
+        methodKind: "unary";
+        input: typeof OpenThreadRequestSchema;
+        output: typeof OpenThreadResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.RefreshNeuralKnowledge
