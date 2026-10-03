@@ -16,7 +16,7 @@ export function BlockView({ block, ...ctxProps }) {
         case "actions":
             return _jsx(ActionsBlock, { value: k.value, ctx: ctx });
         case "planCard":
-            return _jsx(PlanCardBlock, { value: k.value });
+            return _jsx(PlanCardBlock, { value: k.value, ctx: ctx });
         case "diffPreview":
             return _jsx(DiffPreviewBlock, { value: k.value });
         case "ciStatus":

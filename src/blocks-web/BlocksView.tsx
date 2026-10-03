@@ -37,7 +37,7 @@ export function BlockView({ block, ...ctxProps }: { block: Block } & Omit<Blocks
     case "actions":
       return <ActionsBlock value={k.value} ctx={ctx} />;
     case "planCard":
-      return <PlanCardBlock value={k.value} />;
+      return <PlanCardBlock value={k.value} ctx={ctx} />;
     case "diffPreview":
       return <DiffPreviewBlock value={k.value} />;
     case "ciStatus":
