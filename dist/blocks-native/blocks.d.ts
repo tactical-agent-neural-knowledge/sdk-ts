@@ -3,7 +3,6 @@ import { type MD3Theme } from "react-native-paper";
 import type { Actions, ApprovalPrompt, Button as ButtonMsg, CiStatus, Context, DiffPreview, FilePreview, Header, PlanCard, Section, StatusCard, ToolLog } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type BlockContext } from "./context.js";
 export type Accent = "agent" | "ai" | "alert" | "none";
-/** Accent colours from the Paper theme: purple (secondary) = agent execution, cyan (primary) = AI/context, amber (tertiary) = needs a human. */
 export declare function accentColor(theme: MD3Theme, accent: Accent): string;
 /** Semantic colours Paper's palette has no slot for. */
 export declare function semanticColors(theme: MD3Theme): {

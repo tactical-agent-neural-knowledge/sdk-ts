@@ -56,6 +56,14 @@ const mono = {
   minWidth: 0,
 } as const;
 
+/** Approver ids as names where the host can name them; an id nobody can name stays an id. */
+function names(
+  ids: readonly string[],
+  ctx: { resolveUser?: ((id: string) => string | undefined) | undefined },
+): string {
+  return ids.map((id) => ctx.resolveUser?.(id) || id).join(", ");
+}
+
 function tsMs(t: { seconds: bigint; nanos: number } | undefined): number | undefined {
   return t ? Number(t.seconds) * 1000 + Math.floor(t.nanos / 1e6) : undefined;
 }
@@ -263,7 +271,7 @@ const STEP_GLYPH: Record<StepStatusT, { glyph: string; color: string; label: str
   [StepStatus.SKIPPED]: { glyph: "–", color: "text.disabled", label: "skipped" },
 };
 
-export function PlanCardBlock({ value }: { value: PlanCard }) {
+export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockContext }) {
   const done = value.steps.filter((s) => s.status === StepStatus.DONE).length;
   return (
     <Card accent="agent" label={`Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`}>
@@ -321,7 +329,7 @@ export function PlanCardBlock({ value }: { value: PlanCard }) {
       ) : null}
       {value.approverIds.length > 0 ? (
         <Typography variant="caption" color="text.secondary">
-          Approvers: {value.approverIds.join(", ")}
+          Approvers: {names(value.approverIds, ctx)}
         </Typography>
       ) : null}
     </Card>
@@ -506,7 +514,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
       <Typography variant="body1">{value.subject}</Typography>
       <Typography variant="caption" color="text.secondary">
         {value.minApprovals} approval{value.minApprovals === 1 ? "" : "s"} needed
-        {value.approverIds.length ? ` from ${value.approverIds.join(", ")}` : ""}
+        {value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : ""}
         {expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""}
       </Typography>
       {value.decided ? (

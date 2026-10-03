@@ -6,6 +6,10 @@ import { shades } from "../design/tokens.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
 import { RichTextViewNative } from "./RichTextViewNative.js";
 /** Accent colours from the Paper theme: purple (secondary) = agent execution, cyan (primary) = AI/context, amber (tertiary) = needs a human. */
+/** Approver ids as names where the host can name them; an id nobody can name stays an id. */
+function names(ids, ctx) {
+    return ids.map((id) => ctx.resolveUser?.(id) || id).join(", ");
+}
 export function accentColor(theme, accent) {
     switch (accent) {
         case "agent":
@@ -144,7 +148,7 @@ export function PlanCardBlock({ value, ctx }) {
     return (_jsxs(Card, { accent: "agent", label: `Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`, children: [_jsx(Text, { variant: "bodyLarge", children: value.summary }), value.steps.length > 0 ? (_jsxs(View, { style: styles.stack, children: [_jsx(ProgressBar, { progress: done / value.steps.length, color: theme.colors.secondary, style: styles.progress, accessibilityLabel: `${done} of ${value.steps.length} steps done` }), value.steps.map((s) => {
                         const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
                         return (_jsxs(View, { style: styles.step, testID: `step-${g.label}`, children: [_jsx(Text, { style: { color: stepColor(theme, s.status), fontFamily: codeFont, width: 16 }, children: g.glyph }), _jsxs(View, { style: styles.grow, children: [_jsx(Text, { variant: "bodyMedium", children: s.title }), s.files.length > 0 ? (_jsx(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant, fontFamily: codeFont }, children: s.files.join("  ") })) : null] })] }, s.id));
-                    })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: theme.colors.tertiary })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: theme.colors.primary })) : null, value.approverIds.length > 0 ? (_jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: ["Approvers: ", value.approverIds.join(", ")] })) : null] }));
+                    })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: theme.colors.tertiary })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: theme.colors.primary })) : null, value.approverIds.length > 0 ? (_jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }));
 }
 function BulletList({ title, items, color }) {
     return (_jsxs(View, { children: [_jsx(Text, { variant: "labelLarge", style: { color }, children: title }), items.map((r) => (_jsxs(Text, { variant: "bodyMedium", children: ["\u2022 ", r] }, r)))] }));
@@ -200,7 +204,7 @@ export function ApprovalPromptBlock({ value, ctx }) {
     const expires = tsMs(value.expiresAt);
     const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
     const fire = (actionId) => ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
-    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [_jsx(Text, { variant: "bodyLarge", children: value.subject }), _jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${value.approverIds.join(", ")}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] }), value.decided ? (_jsx(ToneChip, { tone: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "muted", label: value.decision || "decided", testID: "approval-decision" })) : (_jsxs(View, { style: styles.wrap, children: [_jsx(Button, { compact: true, mode: "contained", onPress: () => fire("approve"), testID: "action-approve", style: styles.button, children: "Approve" }), _jsx(Button, { compact: true, mode: "outlined", textColor: theme.colors.error, onPress: () => fire("reject"), testID: "action-reject", style: styles.button, children: "Reject" })] }))] }));
+    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [_jsx(Text, { variant: "bodyLarge", children: value.subject }), _jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] }), value.decided ? (_jsx(ToneChip, { tone: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "muted", label: value.decision || "decided", testID: "approval-decision" })) : (_jsxs(View, { style: styles.wrap, children: [_jsx(Button, { compact: true, mode: "contained", onPress: () => fire("approve"), testID: "action-approve", style: styles.button, children: "Approve" }), _jsx(Button, { compact: true, mode: "outlined", textColor: theme.colors.error, onPress: () => fire("reject"), testID: "action-reject", style: styles.button, children: "Reject" })] }))] }));
 }
 export function ToolLogBlock({ value, ctx }) {
     const theme = useTheme();

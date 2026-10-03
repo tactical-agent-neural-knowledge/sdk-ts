@@ -25,6 +25,15 @@ import { RichTextViewNative } from "./RichTextViewNative.js";
 export type Accent = "agent" | "ai" | "alert" | "none";
 
 /** Accent colours from the Paper theme: purple (secondary) = agent execution, cyan (primary) = AI/context, amber (tertiary) = needs a human. */
+
+/** Approver ids as names where the host can name them; an id nobody can name stays an id. */
+function names(
+  ids: readonly string[],
+  ctx: { resolveUser?: ((id: string) => string | undefined) | undefined },
+): string {
+  return ids.map((id) => ctx.resolveUser?.(id) || id).join(", ");
+}
+
 export function accentColor(theme: MD3Theme, accent: Accent): string {
   switch (accent) {
     case "agent":
@@ -317,7 +326,7 @@ export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockConte
       ) : null}
       {value.approverIds.length > 0 ? (
         <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-          Approvers: {value.approverIds.join(", ")}
+          Approvers: {names(value.approverIds, ctx)}
         </Text>
       ) : null}
     </Card>
@@ -476,7 +485,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
       <Text variant="bodyLarge">{value.subject}</Text>
       <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
         {value.minApprovals} approval{value.minApprovals === 1 ? "" : "s"} needed
-        {value.approverIds.length ? ` from ${value.approverIds.join(", ")}` : ""}
+        {value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : ""}
         {expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""}
       </Text>
       {value.decided ? (

@@ -25,6 +25,10 @@ const mono = {
     overflowWrap: "anywhere",
     minWidth: 0,
 };
+/** Approver ids as names where the host can name them; an id nobody can name stays an id. */
+function names(ids, ctx) {
+    return ids.map((id) => ctx.resolveUser?.(id) || id).join(", ");
+}
 function tsMs(t) {
     return t ? Number(t.seconds) * 1000 + Math.floor(t.nanos / 1e6) : undefined;
 }
@@ -96,12 +100,12 @@ const STEP_GLYPH = {
     [StepStatus.FAILED]: { glyph: "✕", color: "error.main", label: "failed" },
     [StepStatus.SKIPPED]: { glyph: "–", color: "text.disabled", label: "skipped" },
 };
-export function PlanCardBlock({ value }) {
+export function PlanCardBlock({ value, ctx }) {
     const done = value.steps.filter((s) => s.status === StepStatus.DONE).length;
     return (_jsxs(Card, { accent: "agent", label: `Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`, children: [_jsx(Typography, { variant: "body1", children: value.summary }), value.steps.length > 0 ? (_jsxs(Box, { children: [_jsx(LinearProgress, { variant: "determinate", color: "secondary", value: (done / value.steps.length) * 100, sx: { mb: 1, height: 4, borderRadius: 2 }, "aria-label": `${done} of ${value.steps.length} steps done` }), _jsx(Box, { component: "ol", sx: { m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.5 }, children: value.steps.map((s) => {
                             const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
                             return (_jsxs(Box, { component: "li", "data-step-status": g.label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-label": g.label, sx: { color: g.color, width: "1em", textAlign: "center", ...mono }, children: g.glyph }), _jsxs(Box, { sx: { minWidth: 0 }, children: [_jsx(Typography, { variant: "body2", component: "span", children: s.title }), s.files.length > 0 ? (_jsx(Typography, { variant: "caption", component: "div", color: "text.secondary", sx: mono, children: s.files.join("  ") })) : null] })] }, s.id));
-                        }) })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: "tank.warningText" })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: "tank.primaryText" })) : null, value.approverIds.length > 0 ? (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: ["Approvers: ", value.approverIds.join(", ")] })) : null] }));
+                        }) })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: "tank.warningText" })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: "tank.primaryText" })) : null, value.approverIds.length > 0 ? (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }));
 }
 function BulletList({ title, items, color }) {
     return (_jsxs(Box, { children: [_jsx(Typography, { variant: "subtitle2", sx: { color }, children: title }), _jsx(Box, { component: "ul", sx: { m: 0, pl: 2.5 }, children: items.map((r) => (_jsx(Typography, { component: "li", variant: "body2", children: r }, r))) })] }));
@@ -166,7 +170,7 @@ const GATE_LABEL = {
 export function ApprovalPromptBlock({ value, ctx }) {
     const expires = tsMs(value.expiresAt);
     const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
-    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [_jsx(Typography, { variant: "body1", children: value.subject }), _jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${value.approverIds.join(", ")}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] }), value.decided ? (_jsx(Chip, { size: "small", label: value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } })) : (_jsxs(Stack, { direction: "row", spacing: 1, children: [_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "approve", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "approve", value: value.gateId }), children: "Approve" }), _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "reject", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "reject", value: value.gateId }), children: "Reject" })] }))] }));
+    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [_jsx(Typography, { variant: "body1", children: value.subject }), _jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] }), value.decided ? (_jsx(Chip, { size: "small", label: value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } })) : (_jsxs(Stack, { direction: "row", spacing: 1, children: [_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "approve", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "approve", value: value.gateId }), children: "Approve" }), _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "reject", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "reject", value: value.gateId }), children: "Reject" })] }))] }));
 }
 export function ToolLogBlock({ value, ctx }) {
     const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString().slice(11, 19));

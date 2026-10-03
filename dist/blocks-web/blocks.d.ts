@@ -40,8 +40,9 @@ export declare function ActionsBlock({ value, ctx }: {
     value: Actions;
     ctx: BlockContext;
 }): import("react").JSX.Element;
-export declare function PlanCardBlock({ value }: {
+export declare function PlanCardBlock({ value, ctx }: {
     value: PlanCard;
+    ctx: BlockContext;
 }): import("react").JSX.Element;
 export declare function DiffPreviewBlock({ value }: {
     value: DiffPreview;
