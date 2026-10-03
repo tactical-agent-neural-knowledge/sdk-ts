@@ -204,6 +204,11 @@ export declare class TankClient {
      * here so the chip goes at once rather than on the next event.
      */
     deleteFile(fileId: string): Promise<void>;
+    /**
+     * Stop an agent run from a client. The server decides who may (the person who asked for it, the
+     * workspace's admins, the agent itself); the returned run replaces the store's copy at once.
+     */
+    stopRun(runId: string, reason?: string): Promise<Run | undefined>;
     /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
     bootstrap(workspaceId: string): Promise<GetBootstrapResponse>;
     /** Pages messages into the store. Resolves to whether more exist in that direction. */

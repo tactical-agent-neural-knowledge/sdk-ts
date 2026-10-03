@@ -2,7 +2,7 @@ import { create, createRegistry } from "@bufbuild/protobuf";
 import { anyUnpack, type Timestamp, timestampFromMs } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
-import type { Channel, ChannelReadState } from "../contracts/tank/channel/v1/channel_pb.js";
+import type { Channel, ChannelReadState, ThreadReadState } from "../contracts/tank/channel/v1/channel_pb.js";
 import { ChannelReadStateSchema } from "../contracts/tank/channel/v1/channel_pb.js";
 import {
   type AgentRunUpdated,
@@ -165,6 +165,8 @@ export type Action =
       me: Member | undefined;
       channels: Channel[];
       readStates: ChannelReadState[];
+      /** `GetBootstrap.thread_read_states`: where this person has read to in the threads they follow. Only ever raises. */
+      threadReadStates?: ThreadReadState[];
       members: Member[];
       /** `GetBootstrap.unread_notification_count`; seeds `unreadNotificationCount[workspace.id]`. */
       unreadNotificationCount?: number;
@@ -511,6 +513,12 @@ export function reduce(state: TankState, action: Action): TankState {
       if (action.me?.principal) membersForWs[action.me.principal.id] = action.me;
       const readStates = { ...state.readStates };
       for (const rs of action.readStates) readStates[rs.channelId] = rs;
+      // Thread positions from the server never lower what this device already marked.
+      const threadReadStates = { ...state.threadReadStates };
+      for (const t of action.threadReadStates ?? []) {
+        if (t.lastReadThreadSeq > (threadReadStates[t.threadRootId] ?? 0n))
+          threadReadStates[t.threadRootId] = t.lastReadThreadSeq;
+      }
       const unreadNotificationCount =
         action.unreadNotificationCount === undefined
           ? state.unreadNotificationCount
@@ -529,6 +537,7 @@ export function reduce(state: TankState, action: Action): TankState {
         channelOrder: { ...state.channelOrder, [action.workspace.id]: orderChannels(all) },
         members: { ...state.members, [action.workspace.id]: membersForWs },
         readStates,
+        threadReadStates,
         unreadNotificationCount,
         entitlements,
       };

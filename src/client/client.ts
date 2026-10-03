@@ -374,6 +374,16 @@ export class TankClient {
     this.store.dispatch({ type: "files/deleted", fileId, messageIds: res.messageIds });
   }
 
+  /**
+   * Stop an agent run from a client. The server decides who may (the person who asked for it, the
+   * workspace's admins, the agent itself); the returned run replaces the store's copy at once.
+   */
+  async stopRun(runId: string, reason = "stopped by a person in the thread"): Promise<Run | undefined> {
+    const res = await this.agents.stopRun({ runId, reason });
+    if (res.run) this.store.dispatch({ type: "runs/upsert", runs: [res.run] });
+    return res.run;
+  }
+
   /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
   async bootstrap(workspaceId: string): Promise<GetBootstrapResponse> {
     const res = await this.workspaces.getBootstrap({ workspaceId });
@@ -384,6 +394,7 @@ export class TankClient {
         me: res.me,
         channels: res.channels,
         readStates: res.readStates,
+        threadReadStates: res.threadReadStates,
         members: res.members,
         unreadNotificationCount: res.unreadNotificationCount,
         entitlements: res.entitlements,
@@ -1310,6 +1321,7 @@ export class TankClient {
             me: res.me,
             channels: res.channels,
             readStates: res.readStates,
+            threadReadStates: res.threadReadStates,
             members: res.members,
             unreadNotificationCount: res.unreadNotificationCount,
             entitlements: res.entitlements,

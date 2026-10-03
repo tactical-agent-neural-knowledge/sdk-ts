@@ -1,7 +1,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Principal } from "../../auth/v1/auth_pb.js";
-import type { Channel, ChannelReadState, NotifyPref } from "../../channel/v1/channel_pb.js";
+import type { Channel, ChannelReadState, NotifyPref, ThreadReadState } from "../../channel/v1/channel_pb.js";
 import type { MarkType } from "../../topo/v1/topo_pb.js";
 import type { RichText } from "../../richtext/v1/richtext_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -264,6 +264,14 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
      * @generated from field: tank.workspace.v1.Entitlements entitlements = 10;
      */
     entitlements?: Entitlements;
+    /**
+     * The viewer's read position in the threads they follow, most recently
+     * active first; capped. Threads not listed are read to wherever the client
+     * last marked them, or unread if it never has.
+     *
+     * @generated from field: repeated tank.channel.v1.ThreadReadState thread_read_states = 11;
+     */
+    threadReadStates: ThreadReadState[];
 };
 /**
  * Describes the message tank.workspace.v1.GetBootstrapResponse.

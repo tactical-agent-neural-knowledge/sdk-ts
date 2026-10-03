@@ -1,7 +1,7 @@
 import { type Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
-import type { Channel, ChannelReadState } from "../contracts/tank/channel/v1/channel_pb.js";
+import type { Channel, ChannelReadState, ThreadReadState } from "../contracts/tank/channel/v1/channel_pb.js";
 import { type AgentRunUpdated, type AgentStatus, type AppCommand, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelUpdated, type Envelope, type FileDeleted, type FileReady, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ThreadDeleted, type TopoMarkUpdated, type Typing } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
@@ -96,6 +96,8 @@ export type Action = {
     me: Member | undefined;
     channels: Channel[];
     readStates: ChannelReadState[];
+    /** `GetBootstrap.thread_read_states`: where this person has read to in the threads they follow. Only ever raises. */
+    threadReadStates?: ThreadReadState[];
     members: Member[];
     /** `GetBootstrap.unread_notification_count`; seeds `unreadNotificationCount[workspace.id]`. */
     unreadNotificationCount?: number;

@@ -295,6 +295,12 @@ export function reduce(state, action) {
             const readStates = { ...state.readStates };
             for (const rs of action.readStates)
                 readStates[rs.channelId] = rs;
+            // Thread positions from the server never lower what this device already marked.
+            const threadReadStates = { ...state.threadReadStates };
+            for (const t of action.threadReadStates ?? []) {
+                if (t.lastReadThreadSeq > (threadReadStates[t.threadRootId] ?? 0n))
+                    threadReadStates[t.threadRootId] = t.lastReadThreadSeq;
+            }
             const unreadNotificationCount = action.unreadNotificationCount === undefined
                 ? state.unreadNotificationCount
                 : {
@@ -312,6 +318,7 @@ export function reduce(state, action) {
                 channelOrder: { ...state.channelOrder, [action.workspace.id]: orderChannels(all) },
                 members: { ...state.members, [action.workspace.id]: membersForWs },
                 readStates,
+                threadReadStates,
                 unreadNotificationCount,
                 entitlements,
             };

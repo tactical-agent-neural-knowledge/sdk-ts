@@ -118,6 +118,27 @@ export type Channel = Message<"tank.channel.v1.Channel"> & {
  */
 export declare const ChannelSchema: GenMessage<Channel>;
 /**
+ * Where the viewer has read to in one thread. Served with the bootstrap so a
+ * second device, or a fresh install, does not count every reply as new.
+ *
+ * @generated from message tank.channel.v1.ThreadReadState
+ */
+export type ThreadReadState = Message<"tank.channel.v1.ThreadReadState"> & {
+    /**
+     * @generated from field: string thread_root_id = 1;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: int64 last_read_thread_seq = 2;
+     */
+    lastReadThreadSeq: bigint;
+};
+/**
+ * Describes the message tank.channel.v1.ThreadReadState.
+ * Use `create(ThreadReadStateSchema)` to create a new message.
+ */
+export declare const ThreadReadStateSchema: GenMessage<ThreadReadState>;
+/**
  * @generated from message tank.channel.v1.ChannelReadState
  */
 export type ChannelReadState = Message<"tank.channel.v1.ChannelReadState"> & {
