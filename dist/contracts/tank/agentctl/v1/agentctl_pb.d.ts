@@ -280,6 +280,21 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: repeated tank.agentctl.v1.Attachment attachments = 21;
      */
     attachments: Attachment[];
+    /**
+     * Further repositories this Tread may reach, and how far; the run's own repo is
+     * always writable in the implementing phase.
+     *
+     * @generated from field: repeated tank.agentctl.v1.RepoAccess repo_access = 22;
+     */
+    repoAccess: RepoAccess[];
+    /**
+     * True for a run inside one of TANK's own board products. The board's tools —
+     * commit_files, set_brand, set_landing, record_finding, board_research — exist only
+     * for those; a customer's run never sees them.
+     *
+     * @generated from field: bool product_run = 23;
+     */
+    productRun: boolean;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -310,6 +325,28 @@ export type GetRunContextResponse = Message<"tank.agentctl.v1.GetRunContextRespo
  */
 export declare const GetRunContextResponseSchema: GenMessage<GetRunContextResponse>;
 /**
+ * @generated from message tank.agentctl.v1.RepoAccess
+ */
+export type RepoAccess = Message<"tank.agentctl.v1.RepoAccess"> & {
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * read | write
+     *
+     * @generated from field: string access = 2;
+     */
+    access: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RepoAccess.
+ * Use `create(RepoAccessSchema)` to create a new message.
+ */
+export declare const RepoAccessSchema: GenMessage<RepoAccess>;
+/**
  * @generated from message tank.agentctl.v1.GetGitCredentialRequest
  */
 export type GetGitCredentialRequest = Message<"tank.agentctl.v1.GetGitCredentialRequest"> & {
@@ -319,6 +356,12 @@ export type GetGitCredentialRequest = Message<"tank.agentctl.v1.GetGitCredential
      * @generated from field: string scope = 1;
      */
     scope: string;
+    /**
+     * owner/name git is asking about; empty means the run's own repository
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
 };
 /**
  * Describes the message tank.agentctl.v1.GetGitCredentialRequest.
@@ -731,6 +774,272 @@ export type ReadThreadResponse = Message<"tank.agentctl.v1.ReadThreadResponse"> 
  * Use `create(ReadThreadResponseSchema)` to create a new message.
  */
 export declare const ReadThreadResponseSchema: GenMessage<ReadThreadResponse>;
+/**
+ * What the board already found, from every product's research: the tools people use,
+ * what each gets right and wrong, prices, verdicts. Asked before fetching the web, so
+ * a trade is researched once and every product in it inherits the finding.
+ *
+ * @generated from message tank.agentctl.v1.BoardResearchRequest
+ */
+export type BoardResearchRequest = Message<"tank.agentctl.v1.BoardResearchRequest"> & {
+    /**
+     * @generated from field: string query = 1;
+     */
+    query: string;
+    /**
+     * @generated from field: int32 limit = 2;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.BoardResearchRequest.
+ * Use `create(BoardResearchRequestSchema)` to create a new message.
+ */
+export declare const BoardResearchRequestSchema: GenMessage<BoardResearchRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ResearchHit
+ */
+export type ResearchHit = Message<"tank.agentctl.v1.ResearchHit"> & {
+    /**
+     * @generated from field: string product = 1;
+     */
+    product: string;
+    /**
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * @generated from field: string url = 3;
+     */
+    url: string;
+    /**
+     * @generated from field: string industry = 4;
+     */
+    industry: string;
+    /**
+     * @generated from field: string stage = 5;
+     */
+    stage: string;
+    /**
+     * @generated from field: string excerpt = 6;
+     */
+    excerpt: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ResearchHit.
+ * Use `create(ResearchHitSchema)` to create a new message.
+ */
+export declare const ResearchHitSchema: GenMessage<ResearchHit>;
+/**
+ * @generated from message tank.agentctl.v1.BoardResearchResponse
+ */
+export type BoardResearchResponse = Message<"tank.agentctl.v1.BoardResearchResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ResearchHit hits = 1;
+     */
+    hits: ResearchHit[];
+};
+/**
+ * Describes the message tank.agentctl.v1.BoardResearchResponse.
+ * Use `create(BoardResearchResponseSchema)` to create a new message.
+ */
+export declare const BoardResearchResponseSchema: GenMessage<BoardResearchResponse>;
+/**
+ * Progress in the repository from every stage, without a sandbox: the control plane
+ * commits the files as the App. Commits skip CI unless build is set, so a page of
+ * writing does not build an image nobody runs.
+ *
+ * @generated from message tank.agentctl.v1.RepoFile
+ */
+export type RepoFile = Message<"tank.agentctl.v1.RepoFile"> & {
+    /**
+     * @generated from field: string path = 1;
+     */
+    path: string;
+    /**
+     * @generated from field: string content = 2;
+     */
+    content: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RepoFile.
+ * Use `create(RepoFileSchema)` to create a new message.
+ */
+export declare const RepoFileSchema: GenMessage<RepoFile>;
+/**
+ * @generated from message tank.agentctl.v1.CommitFilesRequest
+ */
+export type CommitFilesRequest = Message<"tank.agentctl.v1.CommitFilesRequest"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.RepoFile files = 1;
+     */
+    files: RepoFile[];
+    /**
+     * @generated from field: string message = 2;
+     */
+    message: string;
+    /**
+     * @generated from field: bool build = 3;
+     */
+    build: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.CommitFilesRequest.
+ * Use `create(CommitFilesRequestSchema)` to create a new message.
+ */
+export declare const CommitFilesRequestSchema: GenMessage<CommitFilesRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CommitFilesResponse
+ */
+export type CommitFilesResponse = Message<"tank.agentctl.v1.CommitFilesResponse"> & {
+    /**
+     * @generated from field: int32 committed = 1;
+     */
+    committed: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.CommitFilesResponse.
+ * Use `create(CommitFilesResponseSchema)` to create a new message.
+ */
+export declare const CommitFilesResponseSchema: GenMessage<CommitFilesResponse>;
+/**
+ * The product's brand and landing page, through the run's own identity.
+ *
+ * @generated from message tank.agentctl.v1.SetBrandRequest
+ */
+export type SetBrandRequest = Message<"tank.agentctl.v1.SetBrandRequest"> & {
+    /**
+     * @generated from field: string icon_svg = 1;
+     */
+    iconSvg: string;
+    /**
+     * @generated from field: string primary = 2;
+     */
+    primary: string;
+    /**
+     * @generated from field: string secondary = 3;
+     */
+    secondary: string;
+    /**
+     * @generated from field: string background = 4;
+     */
+    background: string;
+    /**
+     * @generated from field: string accent = 5;
+     */
+    accent: string;
+    /**
+     * @generated from field: string tagline = 6;
+     */
+    tagline: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetBrandRequest.
+ * Use `create(SetBrandRequestSchema)` to create a new message.
+ */
+export declare const SetBrandRequestSchema: GenMessage<SetBrandRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetBrandResponse
+ */
+export type SetBrandResponse = Message<"tank.agentctl.v1.SetBrandResponse"> & {
+    /**
+     * @generated from field: string icon_url = 1;
+     */
+    iconUrl: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetBrandResponse.
+ * Use `create(SetBrandResponseSchema)` to create a new message.
+ */
+export declare const SetBrandResponseSchema: GenMessage<SetBrandResponse>;
+/**
+ * @generated from message tank.agentctl.v1.SetLandingRequest
+ */
+export type SetLandingRequest = Message<"tank.agentctl.v1.SetLandingRequest"> & {
+    /**
+     * @generated from field: string html = 1;
+     */
+    html: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetLandingRequest.
+ * Use `create(SetLandingRequestSchema)` to create a new message.
+ */
+export declare const SetLandingRequestSchema: GenMessage<SetLandingRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetLandingResponse
+ */
+export type SetLandingResponse = Message<"tank.agentctl.v1.SetLandingResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.SetLandingResponse.
+ * Use `create(SetLandingResponseSchema)` to create a new message.
+ */
+export declare const SetLandingResponseSchema: GenMessage<SetLandingResponse>;
+/**
+ * RecordFinding writes one structured fact the agent learned about an existing tool
+ * during research: what it costs, what people complain about, what it gets right, who
+ * is leaving it. The board reads these across every product; prose cannot be counted.
+ *
+ * @generated from message tank.agentctl.v1.RecordFindingRequest
+ */
+export type RecordFindingRequest = Message<"tank.agentctl.v1.RecordFindingRequest"> & {
+    /**
+     * the tool's name as people say it: "Jobber", "QuickBooks"
+     *
+     * @generated from field: string tool = 1;
+     */
+    tool: string;
+    /**
+     * price | complaint | strength | gap | switching_cost | segment_leaving | evidence | other
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * the fact in one sentence
+     *
+     * @generated from field: string value = 3;
+     */
+    value: string;
+    /**
+     * a number when the fact is one: a monthly price, a percentage
+     *
+     * @generated from field: double amount = 4;
+     */
+    amount: number;
+    /**
+     * usd_month | usd_year | percent | count | ""
+     *
+     * @generated from field: string unit = 5;
+     */
+    unit: string;
+    /**
+     * the words it rests on, when there are some
+     *
+     * @generated from field: string quote = 6;
+     */
+    quote: string;
+    /**
+     * where they were read, when there is one
+     *
+     * @generated from field: string url = 7;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RecordFindingRequest.
+ * Use `create(RecordFindingRequestSchema)` to create a new message.
+ */
+export declare const RecordFindingRequestSchema: GenMessage<RecordFindingRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RecordFindingResponse
+ */
+export type RecordFindingResponse = Message<"tank.agentctl.v1.RecordFindingResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.RecordFindingResponse.
+ * Use `create(RecordFindingResponseSchema)` to create a new message.
+ */
+export declare const RecordFindingResponseSchema: GenMessage<RecordFindingResponse>;
 /**
  * @generated from message tank.agentctl.v1.OpenPullRequestRequest
  */
@@ -1833,6 +2142,49 @@ export type CreateProductRepoResponse = Message<"tank.agentctl.v1.CreateProductR
  */
 export declare const CreateProductRepoResponseSchema: GenMessage<CreateProductRepoResponse>;
 /**
+ * CommitProductFiles writes files to a product's repository as the App, for the board's
+ * own writing — a stage done without a sandbox still leaves its document behind.
+ *
+ * @generated from message tank.agentctl.v1.CommitProductFilesRequest
+ */
+export type CommitProductFilesRequest = Message<"tank.agentctl.v1.CommitProductFilesRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.RepoFile files = 2;
+     */
+    files: RepoFile[];
+    /**
+     * @generated from field: string message = 3;
+     */
+    message: string;
+    /**
+     * @generated from field: bool build = 4;
+     */
+    build: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.CommitProductFilesRequest.
+ * Use `create(CommitProductFilesRequestSchema)` to create a new message.
+ */
+export declare const CommitProductFilesRequestSchema: GenMessage<CommitProductFilesRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CommitProductFilesResponse
+ */
+export type CommitProductFilesResponse = Message<"tank.agentctl.v1.CommitProductFilesResponse"> & {
+    /**
+     * @generated from field: int32 committed = 1;
+     */
+    committed: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.CommitProductFilesResponse.
+ * Use `create(CommitProductFilesResponseSchema)` to create a new message.
+ */
+export declare const CommitProductFilesResponseSchema: GenMessage<CommitProductFilesResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -2030,6 +2382,46 @@ export declare const RunnerService: GenService<{
         output: typeof ReadThreadResponseSchema;
     };
     /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BoardResearch
+     */
+    boardResearch: {
+        methodKind: "unary";
+        input: typeof BoardResearchRequestSchema;
+        output: typeof BoardResearchResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.CommitFiles
+     */
+    commitFiles: {
+        methodKind: "unary";
+        input: typeof CommitFilesRequestSchema;
+        output: typeof CommitFilesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.SetBrand
+     */
+    setBrand: {
+        methodKind: "unary";
+        input: typeof SetBrandRequestSchema;
+        output: typeof SetBrandResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.SetLanding
+     */
+    setLanding: {
+        methodKind: "unary";
+        input: typeof SetLandingRequestSchema;
+        output: typeof SetLandingResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.RecordFinding
+     */
+    recordFinding: {
+        methodKind: "unary";
+        input: typeof RecordFindingRequestSchema;
+        output: typeof RecordFindingResponseSchema;
+    };
+    /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PollInbox
      */
     pollInbox: {
@@ -2200,6 +2592,14 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof CreateProductRepoRequestSchema;
         output: typeof CreateProductRepoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.CommitProductFiles
+     */
+    commitProductFiles: {
+        methodKind: "unary";
+        input: typeof CommitProductFilesRequestSchema;
+        output: typeof CommitProductFilesResponseSchema;
     };
     /**
      * Wakes a product (replicas 1) or puts it to sleep (replicas 0). A product is

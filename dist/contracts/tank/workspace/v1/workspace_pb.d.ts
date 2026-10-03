@@ -1820,6 +1820,27 @@ export type Agenture = Message<"tank.workspace.v1.Agenture"> & {
      * @generated from field: string stage_title = 11;
      */
     stageTitle: string;
+    /**
+     * Its brand, once it has one: the icon's path on the api, and the theme's primary colour.
+     *
+     * @generated from field: string icon_url = 12;
+     */
+    iconUrl: string;
+    /**
+     * @generated from field: string brand_primary = 13;
+     */
+    brandPrimary: string;
+    /**
+     * Its family — products that share an engine for different customers — so the board
+     * can draw them as a constellation. Empty until the daily pass has placed it.
+     *
+     * @generated from field: string family_id = 14;
+     */
+    familyId: string;
+    /**
+     * @generated from field: int32 family_size = 15;
+     */
+    familySize: number;
 };
 /**
  * Describes the message tank.workspace.v1.Agenture.

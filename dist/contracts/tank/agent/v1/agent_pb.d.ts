@@ -273,6 +273,149 @@ export type SetStatusResponse = Message<"tank.agent.v1.SetStatusResponse"> & {
  */
 export declare const SetStatusResponseSchema: GenMessage<SetStatusResponse>;
 /**
+ * SetProductBrand gives a product its mark and palette, from the run working in it.
+ *
+ * @generated from message tank.agent.v1.SetProductBrandRequest
+ */
+export type SetProductBrandRequest = Message<"tank.agent.v1.SetProductBrandRequest"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * viewBox 0 0 64 64; sanitised on the way in
+     *
+     * @generated from field: string icon_svg = 2;
+     */
+    iconSvg: string;
+    /**
+     * hex colours
+     *
+     * @generated from field: string primary = 3;
+     */
+    primary: string;
+    /**
+     * @generated from field: string secondary = 4;
+     */
+    secondary: string;
+    /**
+     * @generated from field: string background = 5;
+     */
+    background: string;
+    /**
+     * @generated from field: string accent = 6;
+     */
+    accent: string;
+    /**
+     * @generated from field: string tagline = 7;
+     */
+    tagline: string;
+};
+/**
+ * Describes the message tank.agent.v1.SetProductBrandRequest.
+ * Use `create(SetProductBrandRequestSchema)` to create a new message.
+ */
+export declare const SetProductBrandRequestSchema: GenMessage<SetProductBrandRequest>;
+/**
+ * @generated from message tank.agent.v1.SetProductBrandResponse
+ */
+export type SetProductBrandResponse = Message<"tank.agent.v1.SetProductBrandResponse"> & {
+    /**
+     * where the catalogue serves it
+     *
+     * @generated from field: string icon_url = 1;
+     */
+    iconUrl: string;
+};
+/**
+ * Describes the message tank.agent.v1.SetProductBrandResponse.
+ * Use `create(SetProductBrandResponseSchema)` to create a new message.
+ */
+export declare const SetProductBrandResponseSchema: GenMessage<SetProductBrandResponse>;
+/**
+ * SetProductLanding stores the product's landing page, sanitised, for its catalogue page.
+ *
+ * @generated from message tank.agent.v1.SetProductLandingRequest
+ */
+export type SetProductLandingRequest = Message<"tank.agent.v1.SetProductLandingRequest"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * @generated from field: string html = 2;
+     */
+    html: string;
+};
+/**
+ * Describes the message tank.agent.v1.SetProductLandingRequest.
+ * Use `create(SetProductLandingRequestSchema)` to create a new message.
+ */
+export declare const SetProductLandingRequestSchema: GenMessage<SetProductLandingRequest>;
+/**
+ * @generated from message tank.agent.v1.SetProductLandingResponse
+ */
+export type SetProductLandingResponse = Message<"tank.agent.v1.SetProductLandingResponse"> & {};
+/**
+ * Describes the message tank.agent.v1.SetProductLandingResponse.
+ * Use `create(SetProductLandingResponseSchema)` to create a new message.
+ */
+export declare const SetProductLandingResponseSchema: GenMessage<SetProductLandingResponse>;
+/**
+ * RecordProductFinding stores one structured research fact about an existing tool,
+ * from a run on a product of the board. See agentctl.RecordFinding for the fields.
+ *
+ * @generated from message tank.agent.v1.RecordProductFindingRequest
+ */
+export type RecordProductFindingRequest = Message<"tank.agent.v1.RecordProductFindingRequest"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * @generated from field: string tool = 2;
+     */
+    tool: string;
+    /**
+     * @generated from field: string kind = 3;
+     */
+    kind: string;
+    /**
+     * @generated from field: string value = 4;
+     */
+    value: string;
+    /**
+     * @generated from field: double amount = 5;
+     */
+    amount: number;
+    /**
+     * @generated from field: string unit = 6;
+     */
+    unit: string;
+    /**
+     * @generated from field: string quote = 7;
+     */
+    quote: string;
+    /**
+     * @generated from field: string url = 8;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.agent.v1.RecordProductFindingRequest.
+ * Use `create(RecordProductFindingRequestSchema)` to create a new message.
+ */
+export declare const RecordProductFindingRequestSchema: GenMessage<RecordProductFindingRequest>;
+/**
+ * @generated from message tank.agent.v1.RecordProductFindingResponse
+ */
+export type RecordProductFindingResponse = Message<"tank.agent.v1.RecordProductFindingResponse"> & {};
+/**
+ * Describes the message tank.agent.v1.RecordProductFindingResponse.
+ * Use `create(RecordProductFindingResponseSchema)` to create a new message.
+ */
+export declare const RecordProductFindingResponseSchema: GenMessage<RecordProductFindingResponse>;
+/**
  * @generated from message tank.agent.v1.GetRunRequest
  */
 export type GetRunRequest = Message<"tank.agent.v1.GetRunRequest"> & {
@@ -408,6 +551,33 @@ export type RepoBinding = Message<"tank.agent.v1.RepoBinding"> & {
  */
 export declare const RepoBindingSchema: GenMessage<RepoBinding>;
 /**
+ * RepoAccess is one further repository a Tread's agent may reach, and how far. The
+ * primary repository (RepoBinding) is where runs branch and open pull requests and
+ * is always writable; these are the others: "read" to clone and study, "write" to
+ * push branches and open pull requests there too.
+ *
+ * @generated from message tank.agent.v1.RepoAccess
+ */
+export type RepoAccess = Message<"tank.agent.v1.RepoAccess"> & {
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * read | write
+     *
+     * @generated from field: string access = 2;
+     */
+    access: string;
+};
+/**
+ * Describes the message tank.agent.v1.RepoAccess.
+ * Use `create(RepoAccessSchema)` to create a new message.
+ */
+export declare const RepoAccessSchema: GenMessage<RepoAccess>;
+/**
  * @generated from message tank.agent.v1.RepoConnection
  */
 export type RepoConnection = Message<"tank.agent.v1.RepoConnection"> & {
@@ -441,12 +611,235 @@ export type RepoConnection = Message<"tank.agent.v1.RepoConnection"> & {
      * @generated from field: bool can_manage = 5;
      */
     canManage: boolean;
+    /**
+     * the further repositories this Tread may reach
+     *
+     * @generated from field: repeated tank.agent.v1.RepoAccess access = 6;
+     */
+    access: RepoAccess[];
 };
 /**
  * Describes the message tank.agent.v1.RepoConnection.
  * Use `create(RepoConnectionSchema)` to create a new message.
  */
 export declare const RepoConnectionSchema: GenMessage<RepoConnection>;
+/**
+ * SetRepoAccess replaces the Tread's list of further repositories. Admins only; every
+ * repository must be one the workspace's installation can reach, and the primary is
+ * not listed here (it is always writable).
+ *
+ * @generated from message tank.agent.v1.SetRepoAccessRequest
+ */
+export type SetRepoAccessRequest = Message<"tank.agent.v1.SetRepoAccessRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: repeated tank.agent.v1.RepoAccess access = 2;
+     */
+    access: RepoAccess[];
+};
+/**
+ * Describes the message tank.agent.v1.SetRepoAccessRequest.
+ * Use `create(SetRepoAccessRequestSchema)` to create a new message.
+ */
+export declare const SetRepoAccessRequestSchema: GenMessage<SetRepoAccessRequest>;
+/**
+ * @generated from message tank.agent.v1.SetRepoAccessResponse
+ */
+export type SetRepoAccessResponse = Message<"tank.agent.v1.SetRepoAccessResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.RepoAccess access = 1;
+     */
+    access: RepoAccess[];
+};
+/**
+ * Describes the message tank.agent.v1.SetRepoAccessResponse.
+ * Use `create(SetRepoAccessResponseSchema)` to create a new message.
+ */
+export declare const SetRepoAccessResponseSchema: GenMessage<SetRepoAccessResponse>;
+/**
+ * The Tread's switchboard: what its agents cost and did, by the hour, and the knobs a
+ * workspace admin turns. Spend is the workspace's own: the workspace pays for its agents.
+ *
+ * @generated from message tank.agent.v1.TreadSettings
+ */
+export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
+    /**
+     * agents at once in this Tread, 1..5
+     *
+     * @generated from field: int32 concurrent_runs = 1;
+     */
+    concurrentRuns: number;
+    /**
+     * skip the plan gate: the agent goes straight from plan to work
+     *
+     * @generated from field: bool auto_accept_plans = 2;
+     */
+    autoAcceptPlans: boolean;
+    /**
+     * a single run's ceiling; 0 keeps the workspace default
+     *
+     * @generated from field: double max_run_usd = 3;
+     */
+    maxRunUsd: number;
+    /**
+     * this Tread's ceiling for a day; 0 keeps the workspace default
+     *
+     * @generated from field: double daily_usd = 4;
+     */
+    dailyUsd: number;
+};
+/**
+ * Describes the message tank.agent.v1.TreadSettings.
+ * Use `create(TreadSettingsSchema)` to create a new message.
+ */
+export declare const TreadSettingsSchema: GenMessage<TreadSettings>;
+/**
+ * @generated from message tank.agent.v1.HourBucket
+ */
+export type HourBucket = Message<"tank.agent.v1.HourBucket"> & {
+    /**
+     * @generated from field: google.protobuf.Timestamp hour = 1;
+     */
+    hour?: Timestamp;
+    /**
+     * @generated from field: int32 runs = 2;
+     */
+    runs: number;
+    /**
+     * @generated from field: double spend_usd = 3;
+     */
+    spendUsd: number;
+};
+/**
+ * Describes the message tank.agent.v1.HourBucket.
+ * Use `create(HourBucketSchema)` to create a new message.
+ */
+export declare const HourBucketSchema: GenMessage<HourBucket>;
+/**
+ * @generated from message tank.agent.v1.TreadMetrics
+ */
+export type TreadMetrics = Message<"tank.agent.v1.TreadMetrics"> & {
+    /**
+     * @generated from field: double spend_today_usd = 1;
+     */
+    spendTodayUsd: number;
+    /**
+     * @generated from field: double spend_month_usd = 2;
+     */
+    spendMonthUsd: number;
+    /**
+     * @generated from field: int32 runs_today = 3;
+     */
+    runsToday: number;
+    /**
+     * @generated from field: int32 runs_month = 4;
+     */
+    runsMonth: number;
+    /**
+     * 0..1, done or delivered over finished runs
+     *
+     * @generated from field: double success_rate_30d = 5;
+     */
+    successRate30d: number;
+    /**
+     * the last twenty-four hours, oldest first
+     *
+     * @generated from field: repeated tank.agent.v1.HourBucket hours = 6;
+     */
+    hours: HourBucket[];
+    /**
+     * @generated from field: double workspace_spend_today_usd = 7;
+     */
+    workspaceSpendTodayUsd: number;
+    /**
+     * @generated from field: double workspace_spend_month_usd = 8;
+     */
+    workspaceSpendMonthUsd: number;
+    /**
+     * @generated from field: int32 running_now = 9;
+     */
+    runningNow: number;
+    /**
+     * @generated from field: double avg_run_minutes_30d = 10;
+     */
+    avgRunMinutes30d: number;
+};
+/**
+ * Describes the message tank.agent.v1.TreadMetrics.
+ * Use `create(TreadMetricsSchema)` to create a new message.
+ */
+export declare const TreadMetricsSchema: GenMessage<TreadMetrics>;
+/**
+ * @generated from message tank.agent.v1.GetTreadSwitchboardRequest
+ */
+export type GetTreadSwitchboardRequest = Message<"tank.agent.v1.GetTreadSwitchboardRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetTreadSwitchboardRequest.
+ * Use `create(GetTreadSwitchboardRequestSchema)` to create a new message.
+ */
+export declare const GetTreadSwitchboardRequestSchema: GenMessage<GetTreadSwitchboardRequest>;
+/**
+ * @generated from message tank.agent.v1.GetTreadSwitchboardResponse
+ */
+export type GetTreadSwitchboardResponse = Message<"tank.agent.v1.GetTreadSwitchboardResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.TreadMetrics metrics = 1;
+     */
+    metrics?: TreadMetrics;
+    /**
+     * @generated from field: tank.agent.v1.TreadSettings settings = 2;
+     */
+    settings?: TreadSettings;
+    /**
+     * @generated from field: bool can_manage = 3;
+     */
+    canManage: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.GetTreadSwitchboardResponse.
+ * Use `create(GetTreadSwitchboardResponseSchema)` to create a new message.
+ */
+export declare const GetTreadSwitchboardResponseSchema: GenMessage<GetTreadSwitchboardResponse>;
+/**
+ * @generated from message tank.agent.v1.SetTreadSettingsRequest
+ */
+export type SetTreadSettingsRequest = Message<"tank.agent.v1.SetTreadSettingsRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: tank.agent.v1.TreadSettings settings = 2;
+     */
+    settings?: TreadSettings;
+};
+/**
+ * Describes the message tank.agent.v1.SetTreadSettingsRequest.
+ * Use `create(SetTreadSettingsRequestSchema)` to create a new message.
+ */
+export declare const SetTreadSettingsRequestSchema: GenMessage<SetTreadSettingsRequest>;
+/**
+ * @generated from message tank.agent.v1.SetTreadSettingsResponse
+ */
+export type SetTreadSettingsResponse = Message<"tank.agent.v1.SetTreadSettingsResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.TreadSettings settings = 1;
+     */
+    settings?: TreadSettings;
+};
+/**
+ * Describes the message tank.agent.v1.SetTreadSettingsResponse.
+ * Use `create(SetTreadSettingsResponseSchema)` to create a new message.
+ */
+export declare const SetTreadSettingsResponseSchema: GenMessage<SetTreadSettingsResponse>;
 /**
  * @generated from message tank.agent.v1.GetRepoConnectionRequest
  */
@@ -695,6 +1088,32 @@ export declare const AgentService: GenService<{
         output: typeof SetStatusResponseSchema;
     };
     /**
+     * A product's brand and landing page, set by the run working in it (an agenture only).
+     *
+     * @generated from rpc tank.agent.v1.AgentService.SetProductBrand
+     */
+    setProductBrand: {
+        methodKind: "unary";
+        input: typeof SetProductBrandRequestSchema;
+        output: typeof SetProductBrandResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.SetProductLanding
+     */
+    setProductLanding: {
+        methodKind: "unary";
+        input: typeof SetProductLandingRequestSchema;
+        output: typeof SetProductLandingResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.RecordProductFinding
+     */
+    recordProductFinding: {
+        methodKind: "unary";
+        input: typeof RecordProductFindingRequestSchema;
+        output: typeof RecordProductFindingResponseSchema;
+    };
+    /**
      * @generated from rpc tank.agent.v1.AgentService.GetRun
      */
     getRun: {
@@ -752,5 +1171,31 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof UnbindRepoRequestSchema;
         output: typeof UnbindRepoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.SetRepoAccess
+     */
+    setRepoAccess: {
+        methodKind: "unary";
+        input: typeof SetRepoAccessRequestSchema;
+        output: typeof SetRepoAccessResponseSchema;
+    };
+    /**
+     * The Tread's switchboard: metrics for members, settings for admins.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.GetTreadSwitchboard
+     */
+    getTreadSwitchboard: {
+        methodKind: "unary";
+        input: typeof GetTreadSwitchboardRequestSchema;
+        output: typeof GetTreadSwitchboardResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.SetTreadSettings
+     */
+    setTreadSettings: {
+        methodKind: "unary";
+        input: typeof SetTreadSettingsRequestSchema;
+        output: typeof SetTreadSettingsResponseSchema;
     };
 }>;

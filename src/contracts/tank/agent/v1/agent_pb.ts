@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/agent/v1/agent.proto.
  */
 export const file_tank_agent_v1_agent: GenFile = /*@__PURE__*/
-  fileDesc("Chl0YW5rL2FnZW50L3YxL2FnZW50LnByb3RvEg10YW5rLmFnZW50LnYxIl0KBUFnZW50EgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRIUCgxwcmluY2lwYWxfaWQYAyABKAkSDAoEbmFtZRgEIAEoCRIOCgZzY29wZXMYBSADKAki+gIKA1J1bhIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSEgoKY2hhbm5lbF9pZBgDIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIQCghhZ2VudF9pZBgFIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYBiABKAkSJgoFc3RhdGUYByABKA4yFy50YW5rLmFnZW50LnYxLlJ1blN0YXRlEg4KBmJyYW5jaBgIIAEoCRIOCgZwcl91cmwYCSABKAkSEAoIY29zdF91c2QYCiABKAESGQoRc3RhdHVzX21lc3NhZ2VfaWQYCyABKAkSLgoKc3RhcnRlZF9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIZW5kZWRfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCXBsYW5faGFzaBgOIAEoCRIXCg9wZW5kaW5nX2dhdGVfaWQYDyABKAkiZwoPU3RhcnRSdW5SZXF1ZXN0EhYKDnRocmVhZF9yb290X2lkGAEgASgJEhAKCGFnZW50X2lkGAIgASgJEhQKDGluc3RydWN0aW9ucxgDIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYBCABKAkihgEKEFN0YXJ0UnVuUmVzcG9uc2USHwoDcnVuGAEgASgLMhIudGFuay5hZ2VudC52MS5SdW4SGwoTYWdlbnRfc2Vzc2lvbl90b2tlbhgCIAEoCRI0ChB0b2tlbl9leHBpcmVzX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIwCg5TdG9wUnVuUmVxdWVzdBIOCgZydW5faWQYASABKAkSDgoGcmVhc29uGAIgASgJIjIKD1N0b3BSdW5SZXNwb25zZRIfCgNydW4YASABKAsyEi50YW5rLmFnZW50LnYxLlJ1biIiChBIZWFydGJlYXRSZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCSITChFIZWFydGJlYXRSZXNwb25zZSKMAQoQU2V0U3RhdHVzUmVxdWVzdBIOCgZydW5faWQYASABKAkSJgoFc3RhdGUYAiABKA4yFy50YW5rLmFnZW50LnYxLlJ1blN0YXRlEg4KBnN0YXR1cxgDIAEoCRIOCgZicmFuY2gYBCABKAkSDgoGcHJfdXJsGAUgASgJEhAKCGNvc3RfdXNkGAYgASgBIjQKEVNldFN0YXR1c1Jlc3BvbnNlEh8KA3J1bhgBIAEoCzISLnRhbmsuYWdlbnQudjEuUnVuIh8KDUdldFJ1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJIjEKDkdldFJ1blJlc3BvbnNlEh8KA3J1bhgBIAEoCzISLnRhbmsuYWdlbnQudjEuUnVuInIKD0xpc3RSdW5zUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgDIAEoCRIOCgZjdXJzb3IYBCABKAkSDQoFbGltaXQYBSABKAUiSQoQTGlzdFJ1bnNSZXNwb25zZRIgCgRydW5zGAEgAygLMhIudGFuay5hZ2VudC52MS5SdW4SEwoLbmV4dF9jdXJzb3IYAiABKAkiKQoRTGlzdEFnZW50c1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIjoKEkxpc3RBZ2VudHNSZXNwb25zZRIkCgZhZ2VudHMYASADKAsyFC50YW5rLmFnZW50LnYxLkFnZW50IkMKC1JlcG9CaW5kaW5nEgwKBHJlcG8YASABKAkSEwoLYmFzZV9icmFuY2gYAiABKAkSEQoJdG9vbGNoYWluGAMgASgJIooBCg5SZXBvQ29ubmVjdGlvbhIRCgljb25uZWN0ZWQYASABKAgSFQoNYWNjb3VudF9sb2dpbhgCIAEoCRINCgVyZXBvcxgDIAMoCRIrCgdiaW5kaW5nGAQgASgLMhoudGFuay5hZ2VudC52MS5SZXBvQmluZGluZxISCgpjYW5fbWFuYWdlGAUgASgIIi4KGEdldFJlcG9Db25uZWN0aW9uUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJIk4KGUdldFJlcG9Db25uZWN0aW9uUmVzcG9uc2USMQoKY29ubmVjdGlvbhgBIAEoCzIdLnRhbmsuYWdlbnQudjEuUmVwb0Nvbm5lY3Rpb24iMQoZU3RhcnRHaXRIdWJDb25uZWN0UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiMQoaU3RhcnRHaXRIdWJDb25uZWN0UmVzcG9uc2USEwoLaW5zdGFsbF91cmwYASABKAkiWwoPQmluZFJlcG9SZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEcmVwbxgCIAEoCRITCgtiYXNlX2JyYW5jaBgDIAEoCRIRCgl0b29sY2hhaW4YBCABKAkiPwoQQmluZFJlcG9SZXNwb25zZRIrCgdiaW5kaW5nGAEgASgLMhoudGFuay5hZ2VudC52MS5SZXBvQmluZGluZyInChFVbmJpbmRSZXBvUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJIhQKElVuYmluZFJlcG9SZXNwb25zZSqNBAoIUnVuU3RhdGUSGQoVUlVOX1NUQVRFX1VOU1BFQ0lGSUVEEAASFwoTUlVOX1NUQVRFX1JFUVVFU1RFRBABEhYKElJVTl9TVEFURV9BRE1JVFRFRBACEhoKFlJVTl9TVEFURV9QUk9WSVNJT05JTkcQAxIWChJSVU5fU1RBVEVfUExBTk5JTkcQBBIkCiBSVU5fU1RBVEVfQVdBSVRJTkdfUExBTl9BUFBST1ZBTBAFEhoKFlJVTl9TVEFURV9JTVBMRU1FTlRJTkcQBhIUChBSVU5fU1RBVEVfUFVTSEVEEAcSGQoVUlVOX1NUQVRFX0NJX1dBVENISU5HEAgSFQoRUlVOX1NUQVRFX1BSX09QRU4QCRIlCiFSVU5fU1RBVEVfQVdBSVRJTkdfTUVSR0VfQVBQUk9WQUwQChIUChBSVU5fU1RBVEVfTUVSR0VEEAsSHgoaUlVOX1NUQVRFX1ZFUklGWUlOR19ERVBMT1kQDBISCg5SVU5fU1RBVEVfRE9ORRANEhcKE1JVTl9TVEFURV9DQU5DRUxMRUQQDhIUChBSVU5fU1RBVEVfRkFJTEVEEA8SHgoaUlVOX1NUQVRFX0JVREdFVF9FWEhBVVNURUQQEBIXChNSVU5fU1RBVEVfVElNRURfT1VUEBESHgoaUlVOX1NUQVRFX0FQUFJPVkFMX0VYUElSRUQQEjKfBwoMQWdlbnRTZXJ2aWNlEksKCFN0YXJ0UnVuEh4udGFuay5hZ2VudC52MS5TdGFydFJ1blJlcXVlc3QaHy50YW5rLmFnZW50LnYxLlN0YXJ0UnVuUmVzcG9uc2USSAoHU3RvcFJ1bhIdLnRhbmsuYWdlbnQudjEuU3RvcFJ1blJlcXVlc3QaHi50YW5rLmFnZW50LnYxLlN0b3BSdW5SZXNwb25zZRJOCglIZWFydGJlYXQSHy50YW5rLmFnZW50LnYxLkhlYXJ0YmVhdFJlcXVlc3QaIC50YW5rLmFnZW50LnYxLkhlYXJ0YmVhdFJlc3BvbnNlEk4KCVNldFN0YXR1cxIfLnRhbmsuYWdlbnQudjEuU2V0U3RhdHVzUmVxdWVzdBogLnRhbmsuYWdlbnQudjEuU2V0U3RhdHVzUmVzcG9uc2USRQoGR2V0UnVuEhwudGFuay5hZ2VudC52MS5HZXRSdW5SZXF1ZXN0Gh0udGFuay5hZ2VudC52MS5HZXRSdW5SZXNwb25zZRJLCghMaXN0UnVucxIeLnRhbmsuYWdlbnQudjEuTGlzdFJ1bnNSZXF1ZXN0Gh8udGFuay5hZ2VudC52MS5MaXN0UnVuc1Jlc3BvbnNlElEKCkxpc3RBZ2VudHMSIC50YW5rLmFnZW50LnYxLkxpc3RBZ2VudHNSZXF1ZXN0GiEudGFuay5hZ2VudC52MS5MaXN0QWdlbnRzUmVzcG9uc2USZgoRR2V0UmVwb0Nvbm5lY3Rpb24SJy50YW5rLmFnZW50LnYxLkdldFJlcG9Db25uZWN0aW9uUmVxdWVzdBooLnRhbmsuYWdlbnQudjEuR2V0UmVwb0Nvbm5lY3Rpb25SZXNwb25zZRJpChJTdGFydEdpdEh1YkNvbm5lY3QSKC50YW5rLmFnZW50LnYxLlN0YXJ0R2l0SHViQ29ubmVjdFJlcXVlc3QaKS50YW5rLmFnZW50LnYxLlN0YXJ0R2l0SHViQ29ubmVjdFJlc3BvbnNlEksKCEJpbmRSZXBvEh4udGFuay5hZ2VudC52MS5CaW5kUmVwb1JlcXVlc3QaHy50YW5rLmFnZW50LnYxLkJpbmRSZXBvUmVzcG9uc2USUQoKVW5iaW5kUmVwbxIgLnRhbmsuYWdlbnQudjEuVW5iaW5kUmVwb1JlcXVlc3QaIS50YW5rLmFnZW50LnYxLlVuYmluZFJlcG9SZXNwb25zZULIAQoRY29tLnRhbmsuYWdlbnQudjFCCkFnZW50UHJvdG9QAVpRZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9hZ2VudC92MTthZ2VudHYxogIDVEFYqgINVGFuay5BZ2VudC5WMcoCDVRhbmtcQWdlbnRcVjHiAhlUYW5rXEFnZW50XFYxXEdQQk1ldGFkYXRh6gIPVGFuazo6QWdlbnQ6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
+  fileDesc("Chl0YW5rL2FnZW50L3YxL2FnZW50LnByb3RvEg10YW5rLmFnZW50LnYxIl0KBUFnZW50EgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRIUCgxwcmluY2lwYWxfaWQYAyABKAkSDAoEbmFtZRgEIAEoCRIOCgZzY29wZXMYBSADKAki+gIKA1J1bhIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSEgoKY2hhbm5lbF9pZBgDIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIQCghhZ2VudF9pZBgFIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYBiABKAkSJgoFc3RhdGUYByABKA4yFy50YW5rLmFnZW50LnYxLlJ1blN0YXRlEg4KBmJyYW5jaBgIIAEoCRIOCgZwcl91cmwYCSABKAkSEAoIY29zdF91c2QYCiABKAESGQoRc3RhdHVzX21lc3NhZ2VfaWQYCyABKAkSLgoKc3RhcnRlZF9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIZW5kZWRfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCXBsYW5faGFzaBgOIAEoCRIXCg9wZW5kaW5nX2dhdGVfaWQYDyABKAkiZwoPU3RhcnRSdW5SZXF1ZXN0EhYKDnRocmVhZF9yb290X2lkGAEgASgJEhAKCGFnZW50X2lkGAIgASgJEhQKDGluc3RydWN0aW9ucxgDIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYBCABKAkihgEKEFN0YXJ0UnVuUmVzcG9uc2USHwoDcnVuGAEgASgLMhIudGFuay5hZ2VudC52MS5SdW4SGwoTYWdlbnRfc2Vzc2lvbl90b2tlbhgCIAEoCRI0ChB0b2tlbl9leHBpcmVzX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIwCg5TdG9wUnVuUmVxdWVzdBIOCgZydW5faWQYASABKAkSDgoGcmVhc29uGAIgASgJIjIKD1N0b3BSdW5SZXNwb25zZRIfCgNydW4YASABKAsyEi50YW5rLmFnZW50LnYxLlJ1biIiChBIZWFydGJlYXRSZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCSITChFIZWFydGJlYXRSZXNwb25zZSKMAQoQU2V0U3RhdHVzUmVxdWVzdBIOCgZydW5faWQYASABKAkSJgoFc3RhdGUYAiABKA4yFy50YW5rLmFnZW50LnYxLlJ1blN0YXRlEg4KBnN0YXR1cxgDIAEoCRIOCgZicmFuY2gYBCABKAkSDgoGcHJfdXJsGAUgASgJEhAKCGNvc3RfdXNkGAYgASgBIjQKEVNldFN0YXR1c1Jlc3BvbnNlEh8KA3J1bhgBIAEoCzISLnRhbmsuYWdlbnQudjEuUnVuIpMBChZTZXRQcm9kdWN0QnJhbmRSZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCRIQCghpY29uX3N2ZxgCIAEoCRIPCgdwcmltYXJ5GAMgASgJEhEKCXNlY29uZGFyeRgEIAEoCRISCgpiYWNrZ3JvdW5kGAUgASgJEg4KBmFjY2VudBgGIAEoCRIPCgd0YWdsaW5lGAcgASgJIisKF1NldFByb2R1Y3RCcmFuZFJlc3BvbnNlEhAKCGljb25fdXJsGAEgASgJIjgKGFNldFByb2R1Y3RMYW5kaW5nUmVxdWVzdBIOCgZydW5faWQYASABKAkSDAoEaHRtbBgCIAEoCSIbChlTZXRQcm9kdWN0TGFuZGluZ1Jlc3BvbnNlIpIBChtSZWNvcmRQcm9kdWN0RmluZGluZ1JlcXVlc3QSDgoGcnVuX2lkGAEgASgJEgwKBHRvb2wYAiABKAkSDAoEa2luZBgDIAEoCRINCgV2YWx1ZRgEIAEoCRIOCgZhbW91bnQYBSABKAESDAoEdW5pdBgGIAEoCRINCgVxdW90ZRgHIAEoCRILCgN1cmwYCCABKAkiHgocUmVjb3JkUHJvZHVjdEZpbmRpbmdSZXNwb25zZSIfCg1HZXRSdW5SZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCSIxCg5HZXRSdW5SZXNwb25zZRIfCgNydW4YASABKAsyEi50YW5rLmFnZW50LnYxLlJ1biJyCg9MaXN0UnVuc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkSDgoGY3Vyc29yGAQgASgJEg0KBWxpbWl0GAUgASgFIkkKEExpc3RSdW5zUmVzcG9uc2USIAoEcnVucxgBIAMoCzISLnRhbmsuYWdlbnQudjEuUnVuEhMKC25leHRfY3Vyc29yGAIgASgJIikKEUxpc3RBZ2VudHNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI6ChJMaXN0QWdlbnRzUmVzcG9uc2USJAoGYWdlbnRzGAEgAygLMhQudGFuay5hZ2VudC52MS5BZ2VudCJDCgtSZXBvQmluZGluZxIMCgRyZXBvGAEgASgJEhMKC2Jhc2VfYnJhbmNoGAIgASgJEhEKCXRvb2xjaGFpbhgDIAEoCSIqCgpSZXBvQWNjZXNzEgwKBHJlcG8YASABKAkSDgoGYWNjZXNzGAIgASgJIrUBCg5SZXBvQ29ubmVjdGlvbhIRCgljb25uZWN0ZWQYASABKAgSFQoNYWNjb3VudF9sb2dpbhgCIAEoCRINCgVyZXBvcxgDIAMoCRIrCgdiaW5kaW5nGAQgASgLMhoudGFuay5hZ2VudC52MS5SZXBvQmluZGluZxISCgpjYW5fbWFuYWdlGAUgASgIEikKBmFjY2VzcxgGIAMoCzIZLnRhbmsuYWdlbnQudjEuUmVwb0FjY2VzcyJVChRTZXRSZXBvQWNjZXNzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEikKBmFjY2VzcxgCIAMoCzIZLnRhbmsuYWdlbnQudjEuUmVwb0FjY2VzcyJCChVTZXRSZXBvQWNjZXNzUmVzcG9uc2USKQoGYWNjZXNzGAEgAygLMhkudGFuay5hZ2VudC52MS5SZXBvQWNjZXNzImsKDVRyZWFkU2V0dGluZ3MSFwoPY29uY3VycmVudF9ydW5zGAEgASgFEhkKEWF1dG9fYWNjZXB0X3BsYW5zGAIgASgIEhMKC21heF9ydW5fdXNkGAMgASgBEhEKCWRhaWx5X3VzZBgEIAEoASJXCgpIb3VyQnVja2V0EigKBGhvdXIYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEgwKBHJ1bnMYAiABKAUSEQoJc3BlbmRfdXNkGAMgASgBIqQCCgxUcmVhZE1ldHJpY3MSFwoPc3BlbmRfdG9kYXlfdXNkGAEgASgBEhcKD3NwZW5kX21vbnRoX3VzZBgCIAEoARISCgpydW5zX3RvZGF5GAMgASgFEhIKCnJ1bnNfbW9udGgYBCABKAUSGAoQc3VjY2Vzc19yYXRlXzMwZBgFIAEoARIoCgVob3VycxgGIAMoCzIZLnRhbmsuYWdlbnQudjEuSG91ckJ1Y2tldBIhChl3b3Jrc3BhY2Vfc3BlbmRfdG9kYXlfdXNkGAcgASgBEiEKGXdvcmtzcGFjZV9zcGVuZF9tb250aF91c2QYCCABKAESEwoLcnVubmluZ19ub3cYCSABKAUSGwoTYXZnX3J1bl9taW51dGVzXzMwZBgKIAEoASIwChpHZXRUcmVhZFN3aXRjaGJvYXJkUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJIo8BChtHZXRUcmVhZFN3aXRjaGJvYXJkUmVzcG9uc2USLAoHbWV0cmljcxgBIAEoCzIbLnRhbmsuYWdlbnQudjEuVHJlYWRNZXRyaWNzEi4KCHNldHRpbmdzGAIgASgLMhwudGFuay5hZ2VudC52MS5UcmVhZFNldHRpbmdzEhIKCmNhbl9tYW5hZ2UYAyABKAgiXQoXU2V0VHJlYWRTZXR0aW5nc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIuCghzZXR0aW5ncxgCIAEoCzIcLnRhbmsuYWdlbnQudjEuVHJlYWRTZXR0aW5ncyJKChhTZXRUcmVhZFNldHRpbmdzUmVzcG9uc2USLgoIc2V0dGluZ3MYASABKAsyHC50YW5rLmFnZW50LnYxLlRyZWFkU2V0dGluZ3MiLgoYR2V0UmVwb0Nvbm5lY3Rpb25SZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiTgoZR2V0UmVwb0Nvbm5lY3Rpb25SZXNwb25zZRIxCgpjb25uZWN0aW9uGAEgASgLMh0udGFuay5hZ2VudC52MS5SZXBvQ29ubmVjdGlvbiIxChlTdGFydEdpdEh1YkNvbm5lY3RSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSIxChpTdGFydEdpdEh1YkNvbm5lY3RSZXNwb25zZRITCgtpbnN0YWxsX3VybBgBIAEoCSJbCg9CaW5kUmVwb1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIMCgRyZXBvGAIgASgJEhMKC2Jhc2VfYnJhbmNoGAMgASgJEhEKCXRvb2xjaGFpbhgEIAEoCSI/ChBCaW5kUmVwb1Jlc3BvbnNlEisKB2JpbmRpbmcYASABKAsyGi50YW5rLmFnZW50LnYxLlJlcG9CaW5kaW5nIicKEVVuYmluZFJlcG9SZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiFAoSVW5iaW5kUmVwb1Jlc3BvbnNlKo0ECghSdW5TdGF0ZRIZChVSVU5fU1RBVEVfVU5TUEVDSUZJRUQQABIXChNSVU5fU1RBVEVfUkVRVUVTVEVEEAESFgoSUlVOX1NUQVRFX0FETUlUVEVEEAISGgoWUlVOX1NUQVRFX1BST1ZJU0lPTklORxADEhYKElJVTl9TVEFURV9QTEFOTklORxAEEiQKIFJVTl9TVEFURV9BV0FJVElOR19QTEFOX0FQUFJPVkFMEAUSGgoWUlVOX1NUQVRFX0lNUExFTUVOVElORxAGEhQKEFJVTl9TVEFURV9QVVNIRUQQBxIZChVSVU5fU1RBVEVfQ0lfV0FUQ0hJTkcQCBIVChFSVU5fU1RBVEVfUFJfT1BFThAJEiUKIVJVTl9TVEFURV9BV0FJVElOR19NRVJHRV9BUFBST1ZBTBAKEhQKEFJVTl9TVEFURV9NRVJHRUQQCxIeChpSVU5fU1RBVEVfVkVSSUZZSU5HX0RFUExPWRAMEhIKDlJVTl9TVEFURV9ET05FEA0SFwoTUlVOX1NUQVRFX0NBTkNFTExFRBAOEhQKEFJVTl9TVEFURV9GQUlMRUQQDxIeChpSVU5fU1RBVEVfQlVER0VUX0VYSEFVU1RFRBAQEhcKE1JVTl9TVEFURV9USU1FRF9PVVQQERIeChpSVU5fU1RBVEVfQVBQUk9WQUxfRVhQSVJFRBASMokMCgxBZ2VudFNlcnZpY2USSwoIU3RhcnRSdW4SHi50YW5rLmFnZW50LnYxLlN0YXJ0UnVuUmVxdWVzdBofLnRhbmsuYWdlbnQudjEuU3RhcnRSdW5SZXNwb25zZRJICgdTdG9wUnVuEh0udGFuay5hZ2VudC52MS5TdG9wUnVuUmVxdWVzdBoeLnRhbmsuYWdlbnQudjEuU3RvcFJ1blJlc3BvbnNlEk4KCUhlYXJ0YmVhdBIfLnRhbmsuYWdlbnQudjEuSGVhcnRiZWF0UmVxdWVzdBogLnRhbmsuYWdlbnQudjEuSGVhcnRiZWF0UmVzcG9uc2USTgoJU2V0U3RhdHVzEh8udGFuay5hZ2VudC52MS5TZXRTdGF0dXNSZXF1ZXN0GiAudGFuay5hZ2VudC52MS5TZXRTdGF0dXNSZXNwb25zZRJgCg9TZXRQcm9kdWN0QnJhbmQSJS50YW5rLmFnZW50LnYxLlNldFByb2R1Y3RCcmFuZFJlcXVlc3QaJi50YW5rLmFnZW50LnYxLlNldFByb2R1Y3RCcmFuZFJlc3BvbnNlEmYKEVNldFByb2R1Y3RMYW5kaW5nEicudGFuay5hZ2VudC52MS5TZXRQcm9kdWN0TGFuZGluZ1JlcXVlc3QaKC50YW5rLmFnZW50LnYxLlNldFByb2R1Y3RMYW5kaW5nUmVzcG9uc2USbwoUUmVjb3JkUHJvZHVjdEZpbmRpbmcSKi50YW5rLmFnZW50LnYxLlJlY29yZFByb2R1Y3RGaW5kaW5nUmVxdWVzdBorLnRhbmsuYWdlbnQudjEuUmVjb3JkUHJvZHVjdEZpbmRpbmdSZXNwb25zZRJFCgZHZXRSdW4SHC50YW5rLmFnZW50LnYxLkdldFJ1blJlcXVlc3QaHS50YW5rLmFnZW50LnYxLkdldFJ1blJlc3BvbnNlEksKCExpc3RSdW5zEh4udGFuay5hZ2VudC52MS5MaXN0UnVuc1JlcXVlc3QaHy50YW5rLmFnZW50LnYxLkxpc3RSdW5zUmVzcG9uc2USUQoKTGlzdEFnZW50cxIgLnRhbmsuYWdlbnQudjEuTGlzdEFnZW50c1JlcXVlc3QaIS50YW5rLmFnZW50LnYxLkxpc3RBZ2VudHNSZXNwb25zZRJmChFHZXRSZXBvQ29ubmVjdGlvbhInLnRhbmsuYWdlbnQudjEuR2V0UmVwb0Nvbm5lY3Rpb25SZXF1ZXN0GigudGFuay5hZ2VudC52MS5HZXRSZXBvQ29ubmVjdGlvblJlc3BvbnNlEmkKElN0YXJ0R2l0SHViQ29ubmVjdBIoLnRhbmsuYWdlbnQudjEuU3RhcnRHaXRIdWJDb25uZWN0UmVxdWVzdBopLnRhbmsuYWdlbnQudjEuU3RhcnRHaXRIdWJDb25uZWN0UmVzcG9uc2USSwoIQmluZFJlcG8SHi50YW5rLmFnZW50LnYxLkJpbmRSZXBvUmVxdWVzdBofLnRhbmsuYWdlbnQudjEuQmluZFJlcG9SZXNwb25zZRJRCgpVbmJpbmRSZXBvEiAudGFuay5hZ2VudC52MS5VbmJpbmRSZXBvUmVxdWVzdBohLnRhbmsuYWdlbnQudjEuVW5iaW5kUmVwb1Jlc3BvbnNlEloKDVNldFJlcG9BY2Nlc3MSIy50YW5rLmFnZW50LnYxLlNldFJlcG9BY2Nlc3NSZXF1ZXN0GiQudGFuay5hZ2VudC52MS5TZXRSZXBvQWNjZXNzUmVzcG9uc2USbAoTR2V0VHJlYWRTd2l0Y2hib2FyZBIpLnRhbmsuYWdlbnQudjEuR2V0VHJlYWRTd2l0Y2hib2FyZFJlcXVlc3QaKi50YW5rLmFnZW50LnYxLkdldFRyZWFkU3dpdGNoYm9hcmRSZXNwb25zZRJjChBTZXRUcmVhZFNldHRpbmdzEiYudGFuay5hZ2VudC52MS5TZXRUcmVhZFNldHRpbmdzUmVxdWVzdBonLnRhbmsuYWdlbnQudjEuU2V0VHJlYWRTZXR0aW5nc1Jlc3BvbnNlQsgBChFjb20udGFuay5hZ2VudC52MUIKQWdlbnRQcm90b1ABWlFnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FnZW50L3YxO2FnZW50djGiAgNUQViqAg1UYW5rLkFnZW50LlYxygINVGFua1xBZ2VudFxWMeICGVRhbmtcQWdlbnRcVjFcR1BCTWV0YWRhdGHqAg9UYW5rOjpBZ2VudDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.agent.v1.Agent
@@ -342,6 +342,183 @@ export const SetStatusResponseSchema: GenMessage<SetStatusResponse> = /*@__PURE_
   messageDesc(file_tank_agent_v1_agent, 9);
 
 /**
+ * SetProductBrand gives a product its mark and palette, from the run working in it.
+ *
+ * @generated from message tank.agent.v1.SetProductBrandRequest
+ */
+export type SetProductBrandRequest = Message<"tank.agent.v1.SetProductBrandRequest"> & {
+  /**
+   * @generated from field: string run_id = 1;
+   */
+  runId: string;
+
+  /**
+   * viewBox 0 0 64 64; sanitised on the way in
+   *
+   * @generated from field: string icon_svg = 2;
+   */
+  iconSvg: string;
+
+  /**
+   * hex colours
+   *
+   * @generated from field: string primary = 3;
+   */
+  primary: string;
+
+  /**
+   * @generated from field: string secondary = 4;
+   */
+  secondary: string;
+
+  /**
+   * @generated from field: string background = 5;
+   */
+  background: string;
+
+  /**
+   * @generated from field: string accent = 6;
+   */
+  accent: string;
+
+  /**
+   * @generated from field: string tagline = 7;
+   */
+  tagline: string;
+};
+
+/**
+ * Describes the message tank.agent.v1.SetProductBrandRequest.
+ * Use `create(SetProductBrandRequestSchema)` to create a new message.
+ */
+export const SetProductBrandRequestSchema: GenMessage<SetProductBrandRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 10);
+
+/**
+ * @generated from message tank.agent.v1.SetProductBrandResponse
+ */
+export type SetProductBrandResponse = Message<"tank.agent.v1.SetProductBrandResponse"> & {
+  /**
+   * where the catalogue serves it
+   *
+   * @generated from field: string icon_url = 1;
+   */
+  iconUrl: string;
+};
+
+/**
+ * Describes the message tank.agent.v1.SetProductBrandResponse.
+ * Use `create(SetProductBrandResponseSchema)` to create a new message.
+ */
+export const SetProductBrandResponseSchema: GenMessage<SetProductBrandResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 11);
+
+/**
+ * SetProductLanding stores the product's landing page, sanitised, for its catalogue page.
+ *
+ * @generated from message tank.agent.v1.SetProductLandingRequest
+ */
+export type SetProductLandingRequest = Message<"tank.agent.v1.SetProductLandingRequest"> & {
+  /**
+   * @generated from field: string run_id = 1;
+   */
+  runId: string;
+
+  /**
+   * @generated from field: string html = 2;
+   */
+  html: string;
+};
+
+/**
+ * Describes the message tank.agent.v1.SetProductLandingRequest.
+ * Use `create(SetProductLandingRequestSchema)` to create a new message.
+ */
+export const SetProductLandingRequestSchema: GenMessage<SetProductLandingRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 12);
+
+/**
+ * @generated from message tank.agent.v1.SetProductLandingResponse
+ */
+export type SetProductLandingResponse = Message<"tank.agent.v1.SetProductLandingResponse"> & {
+};
+
+/**
+ * Describes the message tank.agent.v1.SetProductLandingResponse.
+ * Use `create(SetProductLandingResponseSchema)` to create a new message.
+ */
+export const SetProductLandingResponseSchema: GenMessage<SetProductLandingResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 13);
+
+/**
+ * RecordProductFinding stores one structured research fact about an existing tool,
+ * from a run on a product of the board. See agentctl.RecordFinding for the fields.
+ *
+ * @generated from message tank.agent.v1.RecordProductFindingRequest
+ */
+export type RecordProductFindingRequest = Message<"tank.agent.v1.RecordProductFindingRequest"> & {
+  /**
+   * @generated from field: string run_id = 1;
+   */
+  runId: string;
+
+  /**
+   * @generated from field: string tool = 2;
+   */
+  tool: string;
+
+  /**
+   * @generated from field: string kind = 3;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: string value = 4;
+   */
+  value: string;
+
+  /**
+   * @generated from field: double amount = 5;
+   */
+  amount: number;
+
+  /**
+   * @generated from field: string unit = 6;
+   */
+  unit: string;
+
+  /**
+   * @generated from field: string quote = 7;
+   */
+  quote: string;
+
+  /**
+   * @generated from field: string url = 8;
+   */
+  url: string;
+};
+
+/**
+ * Describes the message tank.agent.v1.RecordProductFindingRequest.
+ * Use `create(RecordProductFindingRequestSchema)` to create a new message.
+ */
+export const RecordProductFindingRequestSchema: GenMessage<RecordProductFindingRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 14);
+
+/**
+ * @generated from message tank.agent.v1.RecordProductFindingResponse
+ */
+export type RecordProductFindingResponse = Message<"tank.agent.v1.RecordProductFindingResponse"> & {
+};
+
+/**
+ * Describes the message tank.agent.v1.RecordProductFindingResponse.
+ * Use `create(RecordProductFindingResponseSchema)` to create a new message.
+ */
+export const RecordProductFindingResponseSchema: GenMessage<RecordProductFindingResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 15);
+
+/**
  * @generated from message tank.agent.v1.GetRunRequest
  */
 export type GetRunRequest = Message<"tank.agent.v1.GetRunRequest"> & {
@@ -356,7 +533,7 @@ export type GetRunRequest = Message<"tank.agent.v1.GetRunRequest"> & {
  * Use `create(GetRunRequestSchema)` to create a new message.
  */
 export const GetRunRequestSchema: GenMessage<GetRunRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 10);
+  messageDesc(file_tank_agent_v1_agent, 16);
 
 /**
  * @generated from message tank.agent.v1.GetRunResponse
@@ -373,7 +550,7 @@ export type GetRunResponse = Message<"tank.agent.v1.GetRunResponse"> & {
  * Use `create(GetRunResponseSchema)` to create a new message.
  */
 export const GetRunResponseSchema: GenMessage<GetRunResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 11);
+  messageDesc(file_tank_agent_v1_agent, 17);
 
 /**
  * @generated from message tank.agent.v1.ListRunsRequest
@@ -410,7 +587,7 @@ export type ListRunsRequest = Message<"tank.agent.v1.ListRunsRequest"> & {
  * Use `create(ListRunsRequestSchema)` to create a new message.
  */
 export const ListRunsRequestSchema: GenMessage<ListRunsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 12);
+  messageDesc(file_tank_agent_v1_agent, 18);
 
 /**
  * @generated from message tank.agent.v1.ListRunsResponse
@@ -432,7 +609,7 @@ export type ListRunsResponse = Message<"tank.agent.v1.ListRunsResponse"> & {
  * Use `create(ListRunsResponseSchema)` to create a new message.
  */
 export const ListRunsResponseSchema: GenMessage<ListRunsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 13);
+  messageDesc(file_tank_agent_v1_agent, 19);
 
 /**
  * @generated from message tank.agent.v1.ListAgentsRequest
@@ -449,7 +626,7 @@ export type ListAgentsRequest = Message<"tank.agent.v1.ListAgentsRequest"> & {
  * Use `create(ListAgentsRequestSchema)` to create a new message.
  */
 export const ListAgentsRequestSchema: GenMessage<ListAgentsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 14);
+  messageDesc(file_tank_agent_v1_agent, 20);
 
 /**
  * @generated from message tank.agent.v1.ListAgentsResponse
@@ -466,7 +643,7 @@ export type ListAgentsResponse = Message<"tank.agent.v1.ListAgentsResponse"> & {
  * Use `create(ListAgentsResponseSchema)` to create a new message.
  */
 export const ListAgentsResponseSchema: GenMessage<ListAgentsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 15);
+  messageDesc(file_tank_agent_v1_agent, 21);
 
 /**
  * What a Tread knows about GitHub: whether the workspace is connected at all, what
@@ -502,7 +679,38 @@ export type RepoBinding = Message<"tank.agent.v1.RepoBinding"> & {
  * Use `create(RepoBindingSchema)` to create a new message.
  */
 export const RepoBindingSchema: GenMessage<RepoBinding> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 16);
+  messageDesc(file_tank_agent_v1_agent, 22);
+
+/**
+ * RepoAccess is one further repository a Tread's agent may reach, and how far. The
+ * primary repository (RepoBinding) is where runs branch and open pull requests and
+ * is always writable; these are the others: "read" to clone and study, "write" to
+ * push branches and open pull requests there too.
+ *
+ * @generated from message tank.agent.v1.RepoAccess
+ */
+export type RepoAccess = Message<"tank.agent.v1.RepoAccess"> & {
+  /**
+   * owner/name
+   *
+   * @generated from field: string repo = 1;
+   */
+  repo: string;
+
+  /**
+   * read | write
+   *
+   * @generated from field: string access = 2;
+   */
+  access: string;
+};
+
+/**
+ * Describes the message tank.agent.v1.RepoAccess.
+ * Use `create(RepoAccessSchema)` to create a new message.
+ */
+export const RepoAccessSchema: GenMessage<RepoAccess> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 23);
 
 /**
  * @generated from message tank.agent.v1.RepoConnection
@@ -542,6 +750,13 @@ export type RepoConnection = Message<"tank.agent.v1.RepoConnection"> & {
    * @generated from field: bool can_manage = 5;
    */
   canManage: boolean;
+
+  /**
+   * the further repositories this Tread may reach
+   *
+   * @generated from field: repeated tank.agent.v1.RepoAccess access = 6;
+   */
+  access: RepoAccess[];
 };
 
 /**
@@ -549,7 +764,269 @@ export type RepoConnection = Message<"tank.agent.v1.RepoConnection"> & {
  * Use `create(RepoConnectionSchema)` to create a new message.
  */
 export const RepoConnectionSchema: GenMessage<RepoConnection> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 17);
+  messageDesc(file_tank_agent_v1_agent, 24);
+
+/**
+ * SetRepoAccess replaces the Tread's list of further repositories. Admins only; every
+ * repository must be one the workspace's installation can reach, and the primary is
+ * not listed here (it is always writable).
+ *
+ * @generated from message tank.agent.v1.SetRepoAccessRequest
+ */
+export type SetRepoAccessRequest = Message<"tank.agent.v1.SetRepoAccessRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: repeated tank.agent.v1.RepoAccess access = 2;
+   */
+  access: RepoAccess[];
+};
+
+/**
+ * Describes the message tank.agent.v1.SetRepoAccessRequest.
+ * Use `create(SetRepoAccessRequestSchema)` to create a new message.
+ */
+export const SetRepoAccessRequestSchema: GenMessage<SetRepoAccessRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 25);
+
+/**
+ * @generated from message tank.agent.v1.SetRepoAccessResponse
+ */
+export type SetRepoAccessResponse = Message<"tank.agent.v1.SetRepoAccessResponse"> & {
+  /**
+   * @generated from field: repeated tank.agent.v1.RepoAccess access = 1;
+   */
+  access: RepoAccess[];
+};
+
+/**
+ * Describes the message tank.agent.v1.SetRepoAccessResponse.
+ * Use `create(SetRepoAccessResponseSchema)` to create a new message.
+ */
+export const SetRepoAccessResponseSchema: GenMessage<SetRepoAccessResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 26);
+
+/**
+ * The Tread's switchboard: what its agents cost and did, by the hour, and the knobs a
+ * workspace admin turns. Spend is the workspace's own: the workspace pays for its agents.
+ *
+ * @generated from message tank.agent.v1.TreadSettings
+ */
+export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
+  /**
+   * agents at once in this Tread, 1..5
+   *
+   * @generated from field: int32 concurrent_runs = 1;
+   */
+  concurrentRuns: number;
+
+  /**
+   * skip the plan gate: the agent goes straight from plan to work
+   *
+   * @generated from field: bool auto_accept_plans = 2;
+   */
+  autoAcceptPlans: boolean;
+
+  /**
+   * a single run's ceiling; 0 keeps the workspace default
+   *
+   * @generated from field: double max_run_usd = 3;
+   */
+  maxRunUsd: number;
+
+  /**
+   * this Tread's ceiling for a day; 0 keeps the workspace default
+   *
+   * @generated from field: double daily_usd = 4;
+   */
+  dailyUsd: number;
+};
+
+/**
+ * Describes the message tank.agent.v1.TreadSettings.
+ * Use `create(TreadSettingsSchema)` to create a new message.
+ */
+export const TreadSettingsSchema: GenMessage<TreadSettings> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 27);
+
+/**
+ * @generated from message tank.agent.v1.HourBucket
+ */
+export type HourBucket = Message<"tank.agent.v1.HourBucket"> & {
+  /**
+   * @generated from field: google.protobuf.Timestamp hour = 1;
+   */
+  hour?: Timestamp;
+
+  /**
+   * @generated from field: int32 runs = 2;
+   */
+  runs: number;
+
+  /**
+   * @generated from field: double spend_usd = 3;
+   */
+  spendUsd: number;
+};
+
+/**
+ * Describes the message tank.agent.v1.HourBucket.
+ * Use `create(HourBucketSchema)` to create a new message.
+ */
+export const HourBucketSchema: GenMessage<HourBucket> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 28);
+
+/**
+ * @generated from message tank.agent.v1.TreadMetrics
+ */
+export type TreadMetrics = Message<"tank.agent.v1.TreadMetrics"> & {
+  /**
+   * @generated from field: double spend_today_usd = 1;
+   */
+  spendTodayUsd: number;
+
+  /**
+   * @generated from field: double spend_month_usd = 2;
+   */
+  spendMonthUsd: number;
+
+  /**
+   * @generated from field: int32 runs_today = 3;
+   */
+  runsToday: number;
+
+  /**
+   * @generated from field: int32 runs_month = 4;
+   */
+  runsMonth: number;
+
+  /**
+   * 0..1, done or delivered over finished runs
+   *
+   * @generated from field: double success_rate_30d = 5;
+   */
+  successRate30d: number;
+
+  /**
+   * the last twenty-four hours, oldest first
+   *
+   * @generated from field: repeated tank.agent.v1.HourBucket hours = 6;
+   */
+  hours: HourBucket[];
+
+  /**
+   * @generated from field: double workspace_spend_today_usd = 7;
+   */
+  workspaceSpendTodayUsd: number;
+
+  /**
+   * @generated from field: double workspace_spend_month_usd = 8;
+   */
+  workspaceSpendMonthUsd: number;
+
+  /**
+   * @generated from field: int32 running_now = 9;
+   */
+  runningNow: number;
+
+  /**
+   * @generated from field: double avg_run_minutes_30d = 10;
+   */
+  avgRunMinutes30d: number;
+};
+
+/**
+ * Describes the message tank.agent.v1.TreadMetrics.
+ * Use `create(TreadMetricsSchema)` to create a new message.
+ */
+export const TreadMetricsSchema: GenMessage<TreadMetrics> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 29);
+
+/**
+ * @generated from message tank.agent.v1.GetTreadSwitchboardRequest
+ */
+export type GetTreadSwitchboardRequest = Message<"tank.agent.v1.GetTreadSwitchboardRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+};
+
+/**
+ * Describes the message tank.agent.v1.GetTreadSwitchboardRequest.
+ * Use `create(GetTreadSwitchboardRequestSchema)` to create a new message.
+ */
+export const GetTreadSwitchboardRequestSchema: GenMessage<GetTreadSwitchboardRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 30);
+
+/**
+ * @generated from message tank.agent.v1.GetTreadSwitchboardResponse
+ */
+export type GetTreadSwitchboardResponse = Message<"tank.agent.v1.GetTreadSwitchboardResponse"> & {
+  /**
+   * @generated from field: tank.agent.v1.TreadMetrics metrics = 1;
+   */
+  metrics?: TreadMetrics;
+
+  /**
+   * @generated from field: tank.agent.v1.TreadSettings settings = 2;
+   */
+  settings?: TreadSettings;
+
+  /**
+   * @generated from field: bool can_manage = 3;
+   */
+  canManage: boolean;
+};
+
+/**
+ * Describes the message tank.agent.v1.GetTreadSwitchboardResponse.
+ * Use `create(GetTreadSwitchboardResponseSchema)` to create a new message.
+ */
+export const GetTreadSwitchboardResponseSchema: GenMessage<GetTreadSwitchboardResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 31);
+
+/**
+ * @generated from message tank.agent.v1.SetTreadSettingsRequest
+ */
+export type SetTreadSettingsRequest = Message<"tank.agent.v1.SetTreadSettingsRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: tank.agent.v1.TreadSettings settings = 2;
+   */
+  settings?: TreadSettings;
+};
+
+/**
+ * Describes the message tank.agent.v1.SetTreadSettingsRequest.
+ * Use `create(SetTreadSettingsRequestSchema)` to create a new message.
+ */
+export const SetTreadSettingsRequestSchema: GenMessage<SetTreadSettingsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 32);
+
+/**
+ * @generated from message tank.agent.v1.SetTreadSettingsResponse
+ */
+export type SetTreadSettingsResponse = Message<"tank.agent.v1.SetTreadSettingsResponse"> & {
+  /**
+   * @generated from field: tank.agent.v1.TreadSettings settings = 1;
+   */
+  settings?: TreadSettings;
+};
+
+/**
+ * Describes the message tank.agent.v1.SetTreadSettingsResponse.
+ * Use `create(SetTreadSettingsResponseSchema)` to create a new message.
+ */
+export const SetTreadSettingsResponseSchema: GenMessage<SetTreadSettingsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 33);
 
 /**
  * @generated from message tank.agent.v1.GetRepoConnectionRequest
@@ -566,7 +1043,7 @@ export type GetRepoConnectionRequest = Message<"tank.agent.v1.GetRepoConnectionR
  * Use `create(GetRepoConnectionRequestSchema)` to create a new message.
  */
 export const GetRepoConnectionRequestSchema: GenMessage<GetRepoConnectionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 18);
+  messageDesc(file_tank_agent_v1_agent, 34);
 
 /**
  * @generated from message tank.agent.v1.GetRepoConnectionResponse
@@ -583,7 +1060,7 @@ export type GetRepoConnectionResponse = Message<"tank.agent.v1.GetRepoConnection
  * Use `create(GetRepoConnectionResponseSchema)` to create a new message.
  */
 export const GetRepoConnectionResponseSchema: GenMessage<GetRepoConnectionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 19);
+  messageDesc(file_tank_agent_v1_agent, 35);
 
 /**
  * StartGitHubConnect mints the one-time state GitHub carries through an install and
@@ -603,7 +1080,7 @@ export type StartGitHubConnectRequest = Message<"tank.agent.v1.StartGitHubConnec
  * Use `create(StartGitHubConnectRequestSchema)` to create a new message.
  */
 export const StartGitHubConnectRequestSchema: GenMessage<StartGitHubConnectRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 20);
+  messageDesc(file_tank_agent_v1_agent, 36);
 
 /**
  * @generated from message tank.agent.v1.StartGitHubConnectResponse
@@ -620,7 +1097,7 @@ export type StartGitHubConnectResponse = Message<"tank.agent.v1.StartGitHubConne
  * Use `create(StartGitHubConnectResponseSchema)` to create a new message.
  */
 export const StartGitHubConnectResponseSchema: GenMessage<StartGitHubConnectResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 21);
+  messageDesc(file_tank_agent_v1_agent, 37);
 
 /**
  * @generated from message tank.agent.v1.BindRepoRequest
@@ -656,7 +1133,7 @@ export type BindRepoRequest = Message<"tank.agent.v1.BindRepoRequest"> & {
  * Use `create(BindRepoRequestSchema)` to create a new message.
  */
 export const BindRepoRequestSchema: GenMessage<BindRepoRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 22);
+  messageDesc(file_tank_agent_v1_agent, 38);
 
 /**
  * @generated from message tank.agent.v1.BindRepoResponse
@@ -673,7 +1150,7 @@ export type BindRepoResponse = Message<"tank.agent.v1.BindRepoResponse"> & {
  * Use `create(BindRepoResponseSchema)` to create a new message.
  */
 export const BindRepoResponseSchema: GenMessage<BindRepoResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 23);
+  messageDesc(file_tank_agent_v1_agent, 39);
 
 /**
  * @generated from message tank.agent.v1.UnbindRepoRequest
@@ -690,7 +1167,7 @@ export type UnbindRepoRequest = Message<"tank.agent.v1.UnbindRepoRequest"> & {
  * Use `create(UnbindRepoRequestSchema)` to create a new message.
  */
 export const UnbindRepoRequestSchema: GenMessage<UnbindRepoRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 24);
+  messageDesc(file_tank_agent_v1_agent, 40);
 
 /**
  * @generated from message tank.agent.v1.UnbindRepoResponse
@@ -703,7 +1180,7 @@ export type UnbindRepoResponse = Message<"tank.agent.v1.UnbindRepoResponse"> & {
  * Use `create(UnbindRepoResponseSchema)` to create a new message.
  */
 export const UnbindRepoResponseSchema: GenMessage<UnbindRepoResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 25);
+  messageDesc(file_tank_agent_v1_agent, 41);
 
 /**
  * @generated from enum tank.agent.v1.RunState
@@ -848,6 +1325,32 @@ export const AgentService: GenService<{
     output: typeof SetStatusResponseSchema;
   },
   /**
+   * A product's brand and landing page, set by the run working in it (an agenture only).
+   *
+   * @generated from rpc tank.agent.v1.AgentService.SetProductBrand
+   */
+  setProductBrand: {
+    methodKind: "unary";
+    input: typeof SetProductBrandRequestSchema;
+    output: typeof SetProductBrandResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.agent.v1.AgentService.SetProductLanding
+   */
+  setProductLanding: {
+    methodKind: "unary";
+    input: typeof SetProductLandingRequestSchema;
+    output: typeof SetProductLandingResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.agent.v1.AgentService.RecordProductFinding
+   */
+  recordProductFinding: {
+    methodKind: "unary";
+    input: typeof RecordProductFindingRequestSchema;
+    output: typeof RecordProductFindingResponseSchema;
+  },
+  /**
    * @generated from rpc tank.agent.v1.AgentService.GetRun
    */
   getRun: {
@@ -905,6 +1408,32 @@ export const AgentService: GenService<{
     methodKind: "unary";
     input: typeof UnbindRepoRequestSchema;
     output: typeof UnbindRepoResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.agent.v1.AgentService.SetRepoAccess
+   */
+  setRepoAccess: {
+    methodKind: "unary";
+    input: typeof SetRepoAccessRequestSchema;
+    output: typeof SetRepoAccessResponseSchema;
+  },
+  /**
+   * The Tread's switchboard: metrics for members, settings for admins.
+   *
+   * @generated from rpc tank.agent.v1.AgentService.GetTreadSwitchboard
+   */
+  getTreadSwitchboard: {
+    methodKind: "unary";
+    input: typeof GetTreadSwitchboardRequestSchema;
+    output: typeof GetTreadSwitchboardResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.agent.v1.AgentService.SetTreadSettings
+   */
+  setTreadSettings: {
+    methodKind: "unary";
+    input: typeof SetTreadSettingsRequestSchema;
+    output: typeof SetTreadSettingsResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_agent_v1_agent, 0);
