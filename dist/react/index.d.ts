@@ -94,6 +94,10 @@ export declare function useThread(rootId: string, opts?: {
 }): ThreadView;
 /** Channel unreads for a workspace, with thread unreads counted separately in `threads` / `byThread`. */
 export declare function useUnreads(workspaceId: string): Unreads;
+/** Read receipts for a Tread: user id → last read channel_seq. Load with `client.loadReadPositions`. */
+export declare function useReadPositions(channelId: string): Record<string, bigint>;
+/** Read receipts for a thread: user id → last read thread_seq. */
+export declare function useThreadReadPositions(rootId: string): Record<string, bigint>;
 /** Unread replies in one thread (root reply_count minus my last read thread_seq). */
 export declare function useThreadUnread(rootId: string): number;
 /** Presence for a set of users; keeps the gateway presence subscription in sync while mounted. */

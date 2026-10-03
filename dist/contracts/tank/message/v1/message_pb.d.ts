@@ -524,6 +524,60 @@ export type MarkReadResponse = Message$1<"tank.message.v1.MarkReadResponse"> & {
  */
 export declare const MarkReadResponseSchema: GenMessage<MarkReadResponse>;
 /**
+ * Where every member has read to, for read receipts. With thread_root_id empty the
+ * positions are channel sequences; with it set they are thread sequences. Members with
+ * nothing read are listed at 0. Only served for channels with read receipts on.
+ *
+ * @generated from message tank.message.v1.ListReadPositionsRequest
+ */
+export type ListReadPositionsRequest = Message$1<"tank.message.v1.ListReadPositionsRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+};
+/**
+ * Describes the message tank.message.v1.ListReadPositionsRequest.
+ * Use `create(ListReadPositionsRequestSchema)` to create a new message.
+ */
+export declare const ListReadPositionsRequestSchema: GenMessage<ListReadPositionsRequest>;
+/**
+ * @generated from message tank.message.v1.ReadPosition
+ */
+export type ReadPosition = Message$1<"tank.message.v1.ReadPosition"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: int64 seq = 2;
+     */
+    seq: bigint;
+};
+/**
+ * Describes the message tank.message.v1.ReadPosition.
+ * Use `create(ReadPositionSchema)` to create a new message.
+ */
+export declare const ReadPositionSchema: GenMessage<ReadPosition>;
+/**
+ * @generated from message tank.message.v1.ListReadPositionsResponse
+ */
+export type ListReadPositionsResponse = Message$1<"tank.message.v1.ListReadPositionsResponse"> & {
+    /**
+     * @generated from field: repeated tank.message.v1.ReadPosition positions = 1;
+     */
+    positions: ReadPosition[];
+};
+/**
+ * Describes the message tank.message.v1.ListReadPositionsResponse.
+ * Use `create(ListReadPositionsResponseSchema)` to create a new message.
+ */
+export declare const ListReadPositionsResponseSchema: GenMessage<ListReadPositionsResponse>;
+/**
  * @generated from message tank.message.v1.AddReactionRequest
  */
 export type AddReactionRequest = Message$1<"tank.message.v1.AddReactionRequest"> & {
@@ -953,6 +1007,14 @@ export declare const ChatService: GenService<{
         methodKind: "unary";
         input: typeof MarkReadRequestSchema;
         output: typeof MarkReadResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.message.v1.ChatService.ListReadPositions
+     */
+    listReadPositions: {
+        methodKind: "unary";
+        input: typeof ListReadPositionsRequestSchema;
+        output: typeof ListReadPositionsResponseSchema;
     };
     /**
      * @generated from rpc tank.message.v1.ChatService.AddReaction

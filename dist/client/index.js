@@ -6,7 +6,7 @@ export { browserOnlineSignal, RealtimeClient, } from "./realtime.js";
 export { expandShortcodes } from "./shortcodes.js";
 export { MemoryStorage, storageKeys } from "./storage.js";
 export { IndexedDbStorage } from "./storage-idb.js";
-export { AGENT_STATUS_TTL_MS, envelopeToActions, initialState, notificationPagingKey, reduce, TankStore, TYPING_TTL_MS, tsMs, typingKey, unpackEnvelope, } from "./store.js";
+export { AGENT_STATUS_TTL_MS, envelopeToActions, initialState, notificationPagingKey, readReceipt, reduce, TankStore, TYPING_TTL_MS, tsMs, typingKey, unpackEnvelope, } from "./store.js";
 export { createTankTransport } from "./transport.js";
 export { putUpload, UploadError, } from "./upload.js";
 export { cryptoRandomBytes, isUuidv7, uuidv7, uuidv7Time } from "./uuidv7.js";

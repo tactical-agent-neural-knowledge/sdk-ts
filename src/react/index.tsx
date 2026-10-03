@@ -375,6 +375,16 @@ export function useUnreads(workspaceId: string): Unreads {
   return useTankSelector(useCallback((s: TankStore) => s.selectUnreads(workspaceId), [workspaceId]));
 }
 
+/** Read receipts for a Tread: user id → last read channel_seq. Load with `client.loadReadPositions`. */
+export function useReadPositions(channelId: string): Record<string, bigint> {
+  return useTankSelector(useCallback((s: TankStore) => s.selectReadPositions(channelId), [channelId]));
+}
+
+/** Read receipts for a thread: user id → last read thread_seq. */
+export function useThreadReadPositions(rootId: string): Record<string, bigint> {
+  return useTankSelector(useCallback((s: TankStore) => s.selectThreadReadPositions(rootId), [rootId]));
+}
+
 /** Unread replies in one thread (root reply_count minus my last read thread_seq). */
 export function useThreadUnread(rootId: string): number {
   return useTankSelector(useCallback((s: TankStore) => s.selectThreadUnread(rootId), [rootId]));

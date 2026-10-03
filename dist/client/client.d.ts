@@ -209,6 +209,12 @@ export declare class TankClient {
      * workspace's admins, the agent itself); the returned run replaces the store's copy at once.
      */
     stopRun(runId: string, reason?: string): Promise<Run | undefined>;
+    /**
+     * Load where every member has read to in a Tread (or one thread), for read receipts. The
+     * server answers empty when the Tread has receipts off; after this, read_position.updated
+     * events keep the positions moving.
+     */
+    loadReadPositions(channelId: string, threadRootId?: string): Promise<void>;
     /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
     bootstrap(workspaceId: string): Promise<GetBootstrapResponse>;
     /** Pages messages into the store. Resolves to whether more exist in that direction. */

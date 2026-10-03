@@ -111,6 +111,14 @@ export type Channel = Message<"tank.channel.v1.Channel"> & {
      * @generated from field: string icon_file_id = 15;
      */
     iconFileId: string;
+    /**
+     * Whether members see who has read each message here (ticks on their own messages,
+     * "seen by" on any). On by default; a Tread admin can turn it off. The server always
+     * sets it, so a missing value on the wire means off.
+     *
+     * @generated from field: bool read_receipts = 16;
+     */
+    readReceipts: boolean;
 };
 /**
  * Describes the message tank.channel.v1.Channel.
@@ -662,6 +670,10 @@ export type UpdateChannelRequest = Message<"tank.channel.v1.UpdateChannelRequest
      * @generated from field: optional string purpose = 4;
      */
     purpose?: string;
+    /**
+     * @generated from field: optional bool read_receipts = 5;
+     */
+    readReceipts?: boolean;
 };
 /**
  * Describes the message tank.channel.v1.UpdateChannelRequest.

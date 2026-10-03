@@ -46,6 +46,8 @@ export {
   type NotificationPaging,
   notificationPagingKey,
   type PendingMessage,
+  type ReadReceipt,
+  readReceipt,
   reduce,
   type TankState,
   TankStore,

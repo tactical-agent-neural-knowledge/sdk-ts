@@ -4,7 +4,7 @@ import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { Channel, ChannelReadState, ThreadReadState } from "../contracts/tank/channel/v1/channel_pb.js";
 import { type AgentRunUpdated, type AgentStatus, type AppCommand, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelUpdated, type Envelope, type FileDeleted, type FileReady, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ThreadDeleted, type TopoMarkUpdated, type Typing } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
-import type { Message } from "../contracts/tank/message/v1/message_pb.js";
+import type { Message, ReadPosition } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Entitlements, Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
@@ -57,6 +57,10 @@ export interface TankState {
     readStates: Record<string, ChannelReadState>;
     /** thread root id → my last read thread_seq (from ReadStateUpdated events and markRead). */
     threadReadStates: Record<string, bigint>;
+    /** Read receipts: channel id → user id → that member's last read channel_seq. Loaded per Tread, moved by read_position.updated. */
+    readPositions: Record<string, Record<string, bigint>>;
+    /** Read receipts in a thread: root id → user id → last read thread_seq. */
+    threadReadPositions: Record<string, Record<string, bigint>>;
     presence: Record<string, Presence>;
     /** typing key (channelId or channelId/threadRootId) → userId → expiry (ms since epoch). */
     typing: Record<string, Record<string, number>>;
@@ -155,6 +159,17 @@ export type Action = {
 } | {
     type: "readStates/upsert";
     readStates: ChannelReadState[];
+} | {
+    type: "readPositions/upsert";
+    channelId?: string;
+    threadRootId?: string;
+    positions: ReadPosition[];
+} | {
+    type: "readPositions/updated";
+    channelId: string;
+    userId: string;
+    seq: bigint;
+    threadRootId?: string;
 } | {
     type: "readStates/updated";
     channelId: string;
@@ -341,6 +356,10 @@ export declare class TankStore {
      * Unread replies in a thread: the root's reply_count (or the newest loaded
      * reply's thread_seq) minus my last read thread_seq. 0 when the root is unknown.
      */
+    /** Read receipts for a Tread: user id → last read channel_seq. Stable empty object when none are loaded. */
+    selectReadPositions: (channelId: string) => Record<string, bigint>;
+    /** Read receipts for a thread: user id → last read thread_seq. */
+    selectThreadReadPositions: (rootId: string) => Record<string, bigint>;
     selectThreadUnread: (rootId: string) => number;
     /**
      * Channel unreads (total/mentions/byChannel) plus thread unreads counted
@@ -361,3 +380,22 @@ export declare class TankStore {
     selectMessageFiles: (messageId: string) => File[];
     selectPresence: (userIds: readonly string[]) => Record<string, Presence>;
 }
+export interface ReadReceipt {
+    /** Members other than the author who have read past this message, as user ids. */
+    readBy: string[];
+    /** Everyone expected to see it has: every other member of the Tread, or every other participant of the thread. */
+    everyone: boolean;
+}
+/**
+ * Who has read a message, from the positions the server serves. `seq` is the message's
+ * channel_seq (Tread positions) or thread_seq (thread positions). `expected` is how many
+ * other people should see it: the Tread's member count minus the author; for a thread,
+ * everyone with a position minus the author. The server owns the positions; this only
+ * compares them, the same way on web and mobile.
+ */
+export declare function readReceipt(input: {
+    seq: bigint;
+    authorId: string;
+    positions: Record<string, bigint>;
+    expected?: number;
+}): ReadReceipt;

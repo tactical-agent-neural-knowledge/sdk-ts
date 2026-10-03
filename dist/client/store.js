@@ -20,6 +20,8 @@ export function initialState() {
         channelPaging: {},
         readStates: {},
         threadReadStates: {},
+        readPositions: {},
+        threadReadPositions: {},
         presence: {},
         typing: {},
         agentStatus: {},
@@ -438,6 +440,30 @@ export function reduce(state, action) {
             return updateReaction(state, action.messageId, action.userId, action.emoji, true);
         case "reactions/removed":
             return updateReaction(state, action.messageId, action.userId, action.emoji, false);
+        case "readPositions/upsert": {
+            const key = action.threadRootId || action.channelId;
+            if (!key)
+                return state;
+            const field = action.threadRootId ? "threadReadPositions" : "readPositions";
+            const next = { ...(state[field][key] ?? {}) };
+            for (const p of action.positions)
+                if (p.seq > (next[p.userId] ?? 0n))
+                    next[p.userId] = p.seq;
+            return { ...state, [field]: { ...state[field], [key]: next } };
+        }
+        case "readPositions/updated": {
+            const key = action.threadRootId || action.channelId;
+            if (!key || !action.userId)
+                return state;
+            const field = action.threadRootId ? "threadReadPositions" : "readPositions";
+            const cur = state[field][key]?.[action.userId] ?? 0n;
+            if (action.seq <= cur)
+                return state;
+            return {
+                ...state,
+                [field]: { ...state[field], [key]: { ...(state[field][key] ?? {}), [action.userId]: action.seq } },
+            };
+        }
         case "readStates/upsert": {
             const readStates = { ...state.readStates };
             for (const rs of action.readStates)
@@ -829,6 +855,25 @@ export function envelopeToActions(env, now) {
                 },
             ];
         case "tank.events.v1.ReadStateUpdated":
+            if (env.type === "read_position.updated") {
+                // Another member's position, for read receipts; never my own read state.
+                return [
+                    payload.threadRootId
+                        ? {
+                            type: "readPositions/updated",
+                            channelId: payload.channelId,
+                            userId: payload.userId,
+                            seq: payload.lastReadThreadSeq,
+                            threadRootId: payload.threadRootId,
+                        }
+                        : {
+                            type: "readPositions/updated",
+                            channelId: payload.channelId,
+                            userId: payload.userId,
+                            seq: payload.lastReadSeq,
+                        },
+                ];
+            }
             return [
                 {
                     type: "readStates/updated",
@@ -957,6 +1002,10 @@ export class TankStore {
      * Unread replies in a thread: the root's reply_count (or the newest loaded
      * reply's thread_seq) minus my last read thread_seq. 0 when the root is unknown.
      */
+    /** Read receipts for a Tread: user id → last read channel_seq. Stable empty object when none are loaded. */
+    selectReadPositions = (channelId) => this.state.readPositions[channelId] ?? EMPTY_POSITIONS;
+    /** Read receipts for a thread: user id → last read thread_seq. */
+    selectThreadReadPositions = (rootId) => this.state.threadReadPositions[rootId] ?? EMPTY_POSITIONS;
     selectThreadUnread = (rootId) => {
         const s = this.state;
         return threadUnread(s, rootId);
@@ -1098,4 +1147,25 @@ function followedThreads(s, workspaceId) {
         }
     }
     return Array.from(out);
+}
+const EMPTY_POSITIONS = Object.freeze({});
+/**
+ * Who has read a message, from the positions the server serves. `seq` is the message's
+ * channel_seq (Tread positions) or thread_seq (thread positions). `expected` is how many
+ * other people should see it: the Tread's member count minus the author; for a thread,
+ * everyone with a position minus the author. The server owns the positions; this only
+ * compares them, the same way on web and mobile.
+ */
+export function readReceipt(input) {
+    const readBy = [];
+    let others = 0;
+    for (const [userId, pos] of Object.entries(input.positions)) {
+        if (userId === input.authorId)
+            continue;
+        others += 1;
+        if (input.seq > 0n && pos >= input.seq)
+            readBy.push(userId);
+    }
+    const expected = input.expected === undefined ? others : Math.max(0, input.expected - 1);
+    return { readBy, everyone: readBy.length > 0 && readBy.length >= expected };
 }

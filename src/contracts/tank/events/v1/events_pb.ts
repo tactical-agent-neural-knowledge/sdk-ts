@@ -274,6 +274,10 @@ export const ReactionRemovedSchema: GenMessage<ReactionRemoved> = /*@__PURE__*/
   messageDesc(file_tank_events_v1_events, 7);
 
 /**
+ * read_state.updated goes to the reader's own devices. The same shape is also sent as
+ * read_position.updated on the channel subject (and the thread subject for a thread read)
+ * when the channel has read receipts on, so every member's ticks move.
+ *
  * @generated from message tank.events.v1.ReadStateUpdated
  */
 export type ReadStateUpdated = Message<"tank.events.v1.ReadStateUpdated"> & {

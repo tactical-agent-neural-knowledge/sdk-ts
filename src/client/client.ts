@@ -384,6 +384,21 @@ export class TankClient {
     return res.run;
   }
 
+  /**
+   * Load where every member has read to in a Tread (or one thread), for read receipts. The
+   * server answers empty when the Tread has receipts off; after this, read_position.updated
+   * events keep the positions moving.
+   */
+  async loadReadPositions(channelId: string, threadRootId = ""): Promise<void> {
+    const res = await this.chat.listReadPositions({ channelId, threadRootId });
+    this.store.dispatch({
+      type: "readPositions/upsert",
+      channelId,
+      ...(threadRootId ? { threadRootId } : {}),
+      positions: res.positions,
+    });
+  }
+
   /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
   async bootstrap(workspaceId: string): Promise<GetBootstrapResponse> {
     const res = await this.workspaces.getBootstrap({ workspaceId });

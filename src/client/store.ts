@@ -32,7 +32,7 @@ import {
   type Typing,
 } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
-import type { Message, Reaction } from "../contracts/tank/message/v1/message_pb.js";
+import type { Message, Reaction, ReadPosition } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification, NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Entitlements, Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
@@ -93,6 +93,10 @@ export interface TankState {
   readStates: Record<string, ChannelReadState>;
   /** thread root id → my last read thread_seq (from ReadStateUpdated events and markRead). */
   threadReadStates: Record<string, bigint>;
+  /** Read receipts: channel id → user id → that member's last read channel_seq. Loaded per Tread, moved by read_position.updated. */
+  readPositions: Record<string, Record<string, bigint>>;
+  /** Read receipts in a thread: root id → user id → last read thread_seq. */
+  threadReadPositions: Record<string, Record<string, bigint>>;
   presence: Record<string, Presence>;
   /** typing key (channelId or channelId/threadRootId) → userId → expiry (ms since epoch). */
   typing: Record<string, Record<string, number>>;
@@ -140,6 +144,8 @@ export function initialState(): TankState {
     channelPaging: {},
     readStates: {},
     threadReadStates: {},
+    readPositions: {},
+    threadReadPositions: {},
     presence: {},
     typing: {},
     agentStatus: {},
@@ -189,6 +195,8 @@ export type Action =
   | { type: "reactions/added"; messageId: string; userId: string; emoji: string }
   | { type: "reactions/removed"; messageId: string; userId: string; emoji: string }
   | { type: "readStates/upsert"; readStates: ChannelReadState[] }
+  | { type: "readPositions/upsert"; channelId?: string; threadRootId?: string; positions: ReadPosition[] }
+  | { type: "readPositions/updated"; channelId: string; userId: string; seq: bigint; threadRootId?: string }
   | {
       type: "readStates/updated";
       channelId: string;
@@ -648,6 +656,25 @@ export function reduce(state: TankState, action: Action): TankState {
       return updateReaction(state, action.messageId, action.userId, action.emoji, true);
     case "reactions/removed":
       return updateReaction(state, action.messageId, action.userId, action.emoji, false);
+    case "readPositions/upsert": {
+      const key = action.threadRootId || action.channelId;
+      if (!key) return state;
+      const field = action.threadRootId ? "threadReadPositions" : "readPositions";
+      const next = { ...(state[field][key] ?? {}) };
+      for (const p of action.positions) if (p.seq > (next[p.userId] ?? 0n)) next[p.userId] = p.seq;
+      return { ...state, [field]: { ...state[field], [key]: next } };
+    }
+    case "readPositions/updated": {
+      const key = action.threadRootId || action.channelId;
+      if (!key || !action.userId) return state;
+      const field = action.threadRootId ? "threadReadPositions" : "readPositions";
+      const cur = state[field][key]?.[action.userId] ?? 0n;
+      if (action.seq <= cur) return state;
+      return {
+        ...state,
+        [field]: { ...state[field], [key]: { ...(state[field][key] ?? {}), [action.userId]: action.seq } },
+      };
+    }
     case "readStates/upsert": {
       const readStates = { ...state.readStates };
       for (const rs of action.readStates) readStates[rs.channelId] = rs;
@@ -1059,6 +1086,25 @@ export function envelopeToActions(env: Envelope, now: number): Action[] {
         },
       ];
     case "tank.events.v1.ReadStateUpdated":
+      if (env.type === "read_position.updated") {
+        // Another member's position, for read receipts; never my own read state.
+        return [
+          payload.threadRootId
+            ? {
+                type: "readPositions/updated",
+                channelId: payload.channelId,
+                userId: payload.userId,
+                seq: payload.lastReadThreadSeq,
+                threadRootId: payload.threadRootId,
+              }
+            : {
+                type: "readPositions/updated",
+                channelId: payload.channelId,
+                userId: payload.userId,
+                seq: payload.lastReadSeq,
+              },
+        ];
+      }
       return [
         {
           type: "readStates/updated",
@@ -1239,6 +1285,14 @@ export class TankStore {
    * Unread replies in a thread: the root's reply_count (or the newest loaded
    * reply's thread_seq) minus my last read thread_seq. 0 when the root is unknown.
    */
+  /** Read receipts for a Tread: user id → last read channel_seq. Stable empty object when none are loaded. */
+  selectReadPositions = (channelId: string): Record<string, bigint> =>
+    this.state.readPositions[channelId] ?? EMPTY_POSITIONS;
+
+  /** Read receipts for a thread: user id → last read thread_seq. */
+  selectThreadReadPositions = (rootId: string): Record<string, bigint> =>
+    this.state.threadReadPositions[rootId] ?? EMPTY_POSITIONS;
+
   selectThreadUnread = (rootId: string): number => {
     const s = this.state;
     return threadUnread(s, rootId);
@@ -1431,4 +1485,37 @@ function followedThreads(s: TankState, workspaceId: string): string[] {
     }
   }
   return Array.from(out);
+}
+
+const EMPTY_POSITIONS: Record<string, bigint> = Object.freeze({}) as Record<string, bigint>;
+
+export interface ReadReceipt {
+  /** Members other than the author who have read past this message, as user ids. */
+  readBy: string[];
+  /** Everyone expected to see it has: every other member of the Tread, or every other participant of the thread. */
+  everyone: boolean;
+}
+
+/**
+ * Who has read a message, from the positions the server serves. `seq` is the message's
+ * channel_seq (Tread positions) or thread_seq (thread positions). `expected` is how many
+ * other people should see it: the Tread's member count minus the author; for a thread,
+ * everyone with a position minus the author. The server owns the positions; this only
+ * compares them, the same way on web and mobile.
+ */
+export function readReceipt(input: {
+  seq: bigint;
+  authorId: string;
+  positions: Record<string, bigint>;
+  expected?: number;
+}): ReadReceipt {
+  const readBy: string[] = [];
+  let others = 0;
+  for (const [userId, pos] of Object.entries(input.positions)) {
+    if (userId === input.authorId) continue;
+    others += 1;
+    if (input.seq > 0n && pos >= input.seq) readBy.push(userId);
+  }
+  const expected = input.expected === undefined ? others : Math.max(0, input.expected - 1);
+  return { readBy, everyone: readBy.length > 0 && readBy.length >= expected };
 }
