@@ -709,12 +709,94 @@ export type GetBriefingResponse = Message<"tank.topo.v1.GetBriefingResponse"> & 
      * @generated from field: string narrative = 4;
      */
     narrative: string;
+    /**
+     * The last twenty-four hours, oldest first: how much was said and how many agent runs
+     * started in each hour, across the Treads you can see. Home draws the day ring from it.
+     *
+     * @generated from field: repeated tank.topo.v1.BriefingHour hours = 5;
+     */
+    hours: BriefingHour[];
+    /**
+     * What a new workspace has and has not done yet. Home shows the first-week cards until
+     * every one is true or the person hides them.
+     *
+     * @generated from field: tank.topo.v1.BriefingSetup setup = 6;
+     */
+    setup?: BriefingSetup;
 };
 /**
  * Describes the message tank.topo.v1.GetBriefingResponse.
  * Use `create(GetBriefingResponseSchema)` to create a new message.
  */
 export declare const GetBriefingResponseSchema: GenMessage<GetBriefingResponse>;
+/**
+ * @generated from message tank.topo.v1.BriefingHour
+ */
+export type BriefingHour = Message<"tank.topo.v1.BriefingHour"> & {
+    /**
+     * @generated from field: google.protobuf.Timestamp hour = 1;
+     */
+    hour?: Timestamp;
+    /**
+     * @generated from field: int32 messages = 2;
+     */
+    messages: number;
+    /**
+     * @generated from field: int32 runs = 3;
+     */
+    runs: number;
+};
+/**
+ * Describes the message tank.topo.v1.BriefingHour.
+ * Use `create(BriefingHourSchema)` to create a new message.
+ */
+export declare const BriefingHourSchema: GenMessage<BriefingHour>;
+/**
+ * @generated from message tank.topo.v1.BriefingSetup
+ */
+export type BriefingSetup = Message<"tank.topo.v1.BriefingSetup"> & {
+    /**
+     * some Tread has a goal
+     *
+     * @generated from field: bool goal_set = 1;
+     */
+    goalSet: boolean;
+    /**
+     * the workspace has a GitHub installation
+     *
+     * @generated from field: bool github_connected = 2;
+     */
+    githubConnected: boolean;
+    /**
+     * an agent run has ever started here
+     *
+     * @generated from field: bool agent_summoned = 3;
+     */
+    agentSummoned: boolean;
+    /**
+     * more than one member
+     *
+     * @generated from field: bool someone_invited = 4;
+     */
+    someoneInvited: boolean;
+    /**
+     * the person has a picture
+     *
+     * @generated from field: bool avatar_set = 5;
+     */
+    avatarSet: boolean;
+    /**
+     * all of the above
+     *
+     * @generated from field: bool done = 6;
+     */
+    done: boolean;
+};
+/**
+ * Describes the message tank.topo.v1.BriefingSetup.
+ * Use `create(BriefingSetupSchema)` to create a new message.
+ */
+export declare const BriefingSetupSchema: GenMessage<BriefingSetup>;
 /**
  * @generated from enum tank.topo.v1.MarkType
  */

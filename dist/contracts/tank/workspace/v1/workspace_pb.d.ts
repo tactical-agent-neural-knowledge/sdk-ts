@@ -868,6 +868,12 @@ export type HomeLayout = Message<"tank.workspace.v1.HomeLayout"> & {
      * @generated from field: string description = 3;
      */
     description: string;
+    /**
+     * The person hid the first-week setup cards on Home.
+     *
+     * @generated from field: bool setup_hidden = 4;
+     */
+    setupHidden: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.HomeLayout.
