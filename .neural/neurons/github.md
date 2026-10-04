@@ -1,6 +1,6 @@
 # Neurons · .github
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - `.github/workflows/ci.yml` is the only workflow and the only gate: one job, `check`, on pull requests and on pushes to `main`.
 - The job runs, in order: `pnpm install --frozen-lockfile`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build` — the same chain `pnpm check` runs locally, so a green `pnpm check` is a reliable predictor of a green run.

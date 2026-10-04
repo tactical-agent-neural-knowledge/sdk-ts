@@ -1,6 +1,6 @@
 # Neurons · src/blocks-web
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - The MUI half of the card renderer. Entry point is `BlocksView` in `src/blocks-web/BlocksView.tsx`; it must be wrapped in a MUI `ThemeProvider` with `tankTheme`.
 - `BlockView` in the same file is the dispatcher: one `switch (block.kind.case)` over the 12 kinds with `default: return null`, so a card from a newer SDK renders as nothing rather than throwing. Adding a kind means editing this switch *and* its mirror in `src/blocks-native/BlocksViewNative.tsx`.

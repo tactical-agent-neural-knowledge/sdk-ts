@@ -1,6 +1,6 @@
 # Neurons · src/blocks
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - This is the platform-free half of "Threaded Action Cards": types, builders, normalizer, rich-text helpers and `runTone`. It imports no React and no UI toolkit, so web and mobile cannot disagree about what a card means.
 - `src/blocks/types.ts` re-exports the `tank.blocks.v1` and `tank.richtext.v1` message types so consumers never import a generated path; `BLOCK_KINDS` is the 12-kind list, written `as const satisfies readonly BlockKind[]` so a kind added to the proto but forgotten here is a type error.

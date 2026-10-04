@@ -1,6 +1,6 @@
 # Neurons · src/react
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - `src/react/index.tsx` is the whole `./react` subpath: `TankProvider` plus twenty-odd hooks. There is no separate barrel.
 - Every hook reads through `useSyncExternalStore` against the store's memoized selectors (`src/client/store.ts`); that memoization is load-bearing — a selector that returns a new object each call makes React re-render forever.

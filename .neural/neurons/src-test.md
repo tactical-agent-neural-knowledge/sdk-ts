@@ -1,6 +1,6 @@
 # Neurons · src/test
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - Test-only support code, and it is excluded from `tsconfig.build.json` (`src/test/**`), so nothing here can reach `dist/` even if something imports it by accident.
 - `src/test/fake-gateway.ts` is an in-process `tank.realtime.v1` server over the `ws` package: it speaks the real binary `ClientFrame`/`ServerFrame` encoding, so `src/client/realtime.test.ts` exercises the actual wire format rather than a stub.
