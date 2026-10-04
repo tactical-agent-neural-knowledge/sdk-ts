@@ -1041,6 +1041,30 @@ export type TreadDeployment = Message<"tank.agent.v1.TreadDeployment"> & {
      * @generated from field: google.protobuf.Timestamp updated_at = 5;
      */
     updatedAt?: Timestamp;
+    /**
+     * TANK generated the repository; otherwise it is the workspace's own
+     *
+     * @generated from field: bool managed = 6;
+     */
+    managed: boolean;
+    /**
+     * the repository carries .github/workflows/tank.yml on its default branch
+     *
+     * @generated from field: bool workflow_present = 7;
+     */
+    workflowPresent: boolean;
+    /**
+     * empty until the first build on main has landed
+     *
+     * @generated from field: string image_tag = 8;
+     */
+    imageTag: string;
+    /**
+     * the workflow file to add, for a repository the workspace brought
+     *
+     * @generated from field: string workflow_snippet = 9;
+     */
+    workflowSnippet: string;
 };
 /**
  * Describes the message tank.agent.v1.TreadDeployment.

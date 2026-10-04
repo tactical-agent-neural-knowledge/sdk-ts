@@ -2195,6 +2195,106 @@ export type OpenThreadResponse = Message<"tank.agentctl.v1.OpenThreadResponse"> 
  */
 export declare const OpenThreadResponseSchema: GenMessage<OpenThreadResponse>;
 /**
+ * @generated from message tank.agentctl.v1.RegisterDeploymentRequest
+ */
+export type RegisterDeploymentRequest = Message<"tank.agentctl.v1.RegisterDeploymentRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * <slug>.tank.chat
+     *
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * owner/name the images come from
+     *
+     * @generated from field: string repo = 3;
+     */
+    repo: string;
+    /**
+     * @generated from field: string description = 4;
+     */
+    description: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RegisterDeploymentRequest.
+ * Use `create(RegisterDeploymentRequestSchema)` to create a new message.
+ */
+export declare const RegisterDeploymentRequestSchema: GenMessage<RegisterDeploymentRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RegisterDeploymentResponse
+ */
+export type RegisterDeploymentResponse = Message<"tank.agentctl.v1.RegisterDeploymentResponse"> & {
+    /**
+     * @generated from field: string url = 1;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RegisterDeploymentResponse.
+ * Use `create(RegisterDeploymentResponseSchema)` to create a new message.
+ */
+export declare const RegisterDeploymentResponseSchema: GenMessage<RegisterDeploymentResponse>;
+/**
+ * @generated from message tank.agentctl.v1.GetDeploymentRequest
+ */
+export type GetDeploymentRequest = Message<"tank.agentctl.v1.GetDeploymentRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetDeploymentRequest.
+ * Use `create(GetDeploymentRequestSchema)` to create a new message.
+ */
+export declare const GetDeploymentRequestSchema: GenMessage<GetDeploymentRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetDeploymentResponse
+ */
+export type GetDeploymentResponse = Message<"tank.agentctl.v1.GetDeploymentResponse"> & {
+    /**
+     * owner/name recorded for the slug
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * @generated from field: string url = 2;
+     */
+    url: string;
+    /**
+     * empty until a build on main has landed
+     *
+     * @generated from field: string image_tag = 3;
+     */
+    imageTag: string;
+    /**
+     * @generated from field: int32 replicas = 4;
+     */
+    replicas: number;
+    /**
+     * .github/workflows/tank.yml exists on the repository's default branch
+     *
+     * @generated from field: bool workflow_present = 5;
+     */
+    workflowPresent: boolean;
+    /**
+     * TANK generated the repository (agenture-<slug> in TANK's org)
+     *
+     * @generated from field: bool managed = 6;
+     */
+    managed: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetDeploymentResponse.
+ * Use `create(GetDeploymentResponseSchema)` to create a new message.
+ */
+export declare const GetDeploymentResponseSchema: GenMessage<GetDeploymentResponse>;
+/**
  * @generated from message tank.agentctl.v1.SetProductReplicasRequest
  */
 export type SetProductReplicasRequest = Message<"tank.agentctl.v1.SetProductReplicasRequest"> & {
@@ -2767,5 +2867,28 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof SetProductReplicasRequestSchema;
         output: typeof SetProductReplicasResponseSchema;
+    };
+    /**
+     * Hosting for a repository TANK did not generate: writes the slug's deployment file
+     * naming that repository, so its CI may push images for the slug and the app can be
+     * woken like a product. The workspace's own installation must reach the repository.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.RegisterDeployment
+     */
+    registerDeployment: {
+        methodKind: "unary";
+        input: typeof RegisterDeploymentRequestSchema;
+        output: typeof RegisterDeploymentResponseSchema;
+    };
+    /**
+     * What GitOps holds for a slug right now, and whether the repository carries the
+     * deploy workflow yet.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.GetDeployment
+     */
+    getDeployment: {
+        methodKind: "unary";
+        input: typeof GetDeploymentRequestSchema;
+        output: typeof GetDeploymentResponseSchema;
     };
 }>;
