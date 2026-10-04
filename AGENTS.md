@@ -1,4 +1,4 @@
-# Neural Knowledge by TANK · refreshed 2026-10-03 · f9489740a406
+# Neural Knowledge by TANK · refreshed 2026-10-04 · 6a1f2b084d98
 
 This repository is one npm package, `@tactical-agent-neural-knowledge/sdk`: the TypeScript SDK every TANK client
 builds on. It holds typed Connect clients for the API, a binary realtime gateway client, a normalized message store
@@ -11,12 +11,12 @@ ESM only, and `dist/` is committed because consumers install it straight from gi
 - `pnpm install --frozen-lockfile` — install (what CI runs; the lockfile must be committed)
 - `pnpm build` — `rm -rf dist && tsc -p tsconfig.build.json`; commit the result
 - `pnpm test` — `vitest run`
-- `pnpm lint` — `biome check .`
+- `pnpm lint` — `biome check .` (warnings do not fail it; the repo carries one today)
 - `pnpm format` — `biome check --write .`
 - `pnpm typecheck` — `tsc -p tsconfig.json --noEmit`
 - `pnpm check` — everything CI runs: lint, typecheck, test, build, `git diff --exit-code --stat dist/`
 - `pnpm sync-contracts <contracts-sha>` — re-vendor `src/contracts/tank`, `src/contracts/VERSION` and the flat shims
-- `UPDATE_FIXTURES=1 pnpm test` — regenerate the golden block cards in `fixtures/` (edit `src/test/fixture-defs.ts` first)
+- `UPDATE_FIXTURES=1 pnpm test` — regenerate the eight golden block cards in `fixtures/` (edit `src/test/fixture-defs.ts` first)
 - `pnpm vitest run -u src/blocks-web` / `pnpm vitest run -u src/blocks-native` — update renderer snapshots, only for a deliberate visual change
 - `pnpm vitest run src/client` / `src/topo` / `src/design` / `src/blocks/` — one area at a time (the trailing slash on `src/blocks/` matters)
 - `../bin/ci-wait sdk-ts [sha]` — wait for CI
@@ -39,6 +39,12 @@ pass but the jsdom/React renderer suites fail to collect (`React.act is not a fu
 - `src/react` — `TankProvider` and the hooks → `.neural/neurons/src-react.md`
 - `src/test` — fake gateway, fixture definitions, the Vitest react-native stand-ins → `.neural/neurons/src-test.md`
 - `src/topo` — Topo strip mark visibility and search-hit marks → `.neural/neurons/src-topo.md`
+
+Contracts are vendored at sha `3e5911da5826d6dcf885218f6820cab19a81e790` (`src/contracts/VERSION`). The latest
+bumps added the Neural Knowledge wire surface — `TreadSettings.readNeuralKnowledge`, `RunContext` /
+`StartRunRequest.skipNeuralKnowledge`, `ControlService.RefreshNeuralKnowledge` — plus `TreadSettings.pullRequests`
+and `prReviewerIds`, `BriefingHour` / `BriefingSetup`, and `HomeLayout.setupHidden`. Nothing outside
+`src/contracts` reads them yet.
 
 ## Rules
 
@@ -65,8 +71,9 @@ Enforced by config rather than prose: `biome.json` sets `lineWidth` 110 and `sus
 ## Before changing anything
 
 - Run `pnpm check` — it is exactly the CI chain, so a green local run predicts a green PR.
-- If you touched anything under `src/`, run `pnpm build` and commit `dist/` in the same change; CI fails on both a
-  modified and an untracked file under `dist/`.
+- If you touched anything under `src/`, run `pnpm build` and commit `dist/` in the same change; `ci.yml` fails on both
+  a modified and an untracked file under `dist/`.
+- A contracts bump is one commit, `src/contracts/**` and `dist/contracts/**` together, messaged `contracts <sha>: …`.
 - Adding or renaming an export subpath means updating `package.json` `exports` and satisfying `src/exports.test.ts`.
 - Changing a block builder invalidates `fixtures/` (`UPDATE_FIXTURES=1 pnpm test`) and both renderers' snapshots.
 - Changing a design token re-runs `src/design/contrast.test.ts`, which asserts WCAG AA for every text/surface pair.
