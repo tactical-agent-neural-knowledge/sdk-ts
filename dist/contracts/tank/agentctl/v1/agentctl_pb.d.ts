@@ -313,6 +313,14 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: bool skip_neural_knowledge = 26;
      */
     skipNeuralKnowledge: boolean;
+    /**
+     * How the control plane classed the ask: "single_area" (one place in the code, implemented
+     * without a plan stage, on the cheaper model) or "multi_area". Empty on older runs and
+     * special modes.
+     *
+     * @generated from field: string task_class = 27;
+     */
+    taskClass: string;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.

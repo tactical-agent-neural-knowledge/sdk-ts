@@ -617,6 +617,25 @@ export type RepoConnection = Message<"tank.agent.v1.RepoConnection"> & {
      * @generated from field: repeated tank.agent.v1.RepoAccess access = 6;
      */
     access: RepoAccess[];
+    /**
+     * Premium workspaces may ask TANK for a repository and hosting; both are requests an
+     * admin makes, never a side effect of anything else.
+     *
+     * @generated from field: bool premium = 7;
+     */
+    premium: boolean;
+    /**
+     * the platform can create repositories and host them right now
+     *
+     * @generated from field: bool hosting_available = 8;
+     */
+    hostingAvailable: boolean;
+    /**
+     * present once TANK made this Tread's repository
+     *
+     * @generated from field: tank.agent.v1.TreadDeployment deployment = 9;
+     */
+    deployment?: TreadDeployment;
 };
 /**
  * Describes the message tank.agent.v1.RepoConnection.
@@ -988,6 +1007,116 @@ export type UnbindRepoResponse = Message<"tank.agent.v1.UnbindRepoResponse"> & {
  */
 export declare const UnbindRepoResponseSchema: GenMessage<UnbindRepoResponse>;
 /**
+ * A Tread's hosting on TANK's own cluster: the repository TANK generated for it and
+ * whether the app built from it is awake at its URL.
+ *
+ * @generated from message tank.agent.v1.TreadDeployment
+ */
+export type TreadDeployment = Message<"tank.agent.v1.TreadDeployment"> & {
+    /**
+     * <slug>.tank.chat and the repository agenture-<slug>
+     *
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * https://<slug>.tank.chat
+     *
+     * @generated from field: string url = 3;
+     */
+    url: string;
+    /**
+     * running (1 replica) or asleep (0); builds never wake it
+     *
+     * @generated from field: bool awake = 4;
+     */
+    awake: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp updated_at = 5;
+     */
+    updatedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agent.v1.TreadDeployment.
+ * Use `create(TreadDeploymentSchema)` to create a new message.
+ */
+export declare const TreadDeploymentSchema: GenMessage<TreadDeployment>;
+/**
+ * CreateTreadRepo asks TANK to generate a repository for this Tread from its template, in
+ * TANK's organization, and bind it. Premium workspaces, admins only, one per Tread.
+ *
+ * @generated from message tank.agent.v1.CreateTreadRepoRequest
+ */
+export type CreateTreadRepoRequest = Message<"tank.agent.v1.CreateTreadRepoRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.agent.v1.CreateTreadRepoRequest.
+ * Use `create(CreateTreadRepoRequestSchema)` to create a new message.
+ */
+export declare const CreateTreadRepoRequestSchema: GenMessage<CreateTreadRepoRequest>;
+/**
+ * @generated from message tank.agent.v1.CreateTreadRepoResponse
+ */
+export type CreateTreadRepoResponse = Message<"tank.agent.v1.CreateTreadRepoResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.RepoBinding binding = 1;
+     */
+    binding?: RepoBinding;
+    /**
+     * @generated from field: tank.agent.v1.TreadDeployment deployment = 2;
+     */
+    deployment?: TreadDeployment;
+};
+/**
+ * Describes the message tank.agent.v1.CreateTreadRepoResponse.
+ * Use `create(CreateTreadRepoResponseSchema)` to create a new message.
+ */
+export declare const CreateTreadRepoResponseSchema: GenMessage<CreateTreadRepoResponse>;
+/**
+ * SetTreadDeployment wakes the Tread's app on TANK's cluster or puts it to sleep.
+ *
+ * @generated from message tank.agent.v1.SetTreadDeploymentRequest
+ */
+export type SetTreadDeploymentRequest = Message<"tank.agent.v1.SetTreadDeploymentRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: bool awake = 2;
+     */
+    awake: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.SetTreadDeploymentRequest.
+ * Use `create(SetTreadDeploymentRequestSchema)` to create a new message.
+ */
+export declare const SetTreadDeploymentRequestSchema: GenMessage<SetTreadDeploymentRequest>;
+/**
+ * @generated from message tank.agent.v1.SetTreadDeploymentResponse
+ */
+export type SetTreadDeploymentResponse = Message<"tank.agent.v1.SetTreadDeploymentResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.TreadDeployment deployment = 1;
+     */
+    deployment?: TreadDeployment;
+};
+/**
+ * Describes the message tank.agent.v1.SetTreadDeploymentResponse.
+ * Use `create(SetTreadDeploymentResponseSchema)` to create a new message.
+ */
+export declare const SetTreadDeploymentResponseSchema: GenMessage<SetTreadDeploymentResponse>;
+/**
  * @generated from enum tank.agent.v1.RunState
  */
 export declare enum RunState {
@@ -1200,6 +1329,24 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof SetRepoAccessRequestSchema;
         output: typeof SetRepoAccessResponseSchema;
+    };
+    /**
+     * Repositories and hosting on request, for premium workspaces.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.CreateTreadRepo
+     */
+    createTreadRepo: {
+        methodKind: "unary";
+        input: typeof CreateTreadRepoRequestSchema;
+        output: typeof CreateTreadRepoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.SetTreadDeployment
+     */
+    setTreadDeployment: {
+        methodKind: "unary";
+        input: typeof SetTreadDeploymentRequestSchema;
+        output: typeof SetTreadDeploymentResponseSchema;
     };
     /**
      * The Tread's switchboard: metrics for members, settings for admins.
