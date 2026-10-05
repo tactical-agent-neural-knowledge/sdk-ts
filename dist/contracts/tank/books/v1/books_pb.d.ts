@@ -62,6 +62,26 @@ export type Settings = Message<"tank.books.v1.Settings"> & {
      * @generated from field: string payment_instructions = 9;
      */
     paymentInstructions: string;
+    /**
+     * The business's own Stripe secret key, so money goes to the business, not to TANK.
+     * Write-only: set it to store it, send it empty to leave it alone, and read it back
+     * as the last four characters in stripe_key_hint.
+     *
+     * @generated from field: string stripe_secret_key = 10;
+     */
+    stripeSecretKey: string;
+    /**
+     * e.g. "…a4F2"; empty when no key is stored
+     *
+     * @generated from field: string stripe_key_hint = 11;
+     */
+    stripeKeyHint: string;
+    /**
+     * a key is stored, so sent invoices carry a pay link
+     *
+     * @generated from field: bool payments_ready = 12;
+     */
+    paymentsReady: boolean;
 };
 /**
  * Describes the message tank.books.v1.Settings.
@@ -235,6 +255,13 @@ export type Invoice = Message<"tank.books.v1.Invoice"> & {
      * @generated from field: string share_url = 22;
      */
     shareUrl: string;
+    /**
+     * Where the customer pays by card, when the business has connected Stripe. Minted
+     * when the invoice is sent.
+     *
+     * @generated from field: string pay_url = 23;
+     */
+    payUrl: string;
 };
 /**
  * Describes the message tank.books.v1.Invoice.
@@ -1215,6 +1242,122 @@ export type Report = Message<"tank.books.v1.Report"> & {
  */
 export declare const ReportSchema: GenMessage<Report>;
 /**
+ * A receipt, read by the model: what a person would have typed in.
+ *
+ * @generated from message tank.books.v1.ReadReceiptRequest
+ */
+export type ReadReceiptRequest = Message<"tank.books.v1.ReadReceiptRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * an image or PDF already uploaded to this workspace
+     *
+     * @generated from field: string file_id = 2;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.books.v1.ReadReceiptRequest.
+ * Use `create(ReadReceiptRequestSchema)` to create a new message.
+ */
+export declare const ReadReceiptRequestSchema: GenMessage<ReadReceiptRequest>;
+/**
+ * @generated from message tank.books.v1.ReadReceiptResponse
+ */
+export type ReadReceiptResponse = Message<"tank.books.v1.ReadReceiptResponse"> & {
+    /**
+     * @generated from field: string vendor = 1;
+     */
+    vendor: string;
+    /**
+     * @generated from field: string category = 2;
+     */
+    category: string;
+    /**
+     * @generated from field: int64 amount_cents = 3;
+     */
+    amountCents: bigint;
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 4;
+     */
+    at?: Timestamp;
+    /**
+     * 0 to 1; low means ask the person
+     *
+     * @generated from field: double confidence = 5;
+     */
+    confidence: number;
+    /**
+     * what could not be read, in a sentence
+     *
+     * @generated from field: string note = 6;
+     */
+    note: string;
+    /**
+     * as printed on the receipt, when it differs
+     *
+     * @generated from field: string currency = 7;
+     */
+    currency: string;
+};
+/**
+ * Describes the message tank.books.v1.ReadReceiptResponse.
+ * Use `create(ReadReceiptResponseSchema)` to create a new message.
+ */
+export declare const ReadReceiptResponseSchema: GenMessage<ReadReceiptResponse>;
+/**
+ * Everything in the period as a file an accountant can open.
+ *
+ * @generated from message tank.books.v1.ExportRequest
+ */
+export type ExportRequest = Message<"tank.books.v1.ExportRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * as in a report
+     *
+     * @generated from field: string period = 2;
+     */
+    period: string;
+    /**
+     * invoices | expenses | journal
+     *
+     * @generated from field: string kind = 3;
+     */
+    kind: string;
+};
+/**
+ * Describes the message tank.books.v1.ExportRequest.
+ * Use `create(ExportRequestSchema)` to create a new message.
+ */
+export declare const ExportRequestSchema: GenMessage<ExportRequest>;
+/**
+ * @generated from message tank.books.v1.ExportResponse
+ */
+export type ExportResponse = Message<"tank.books.v1.ExportResponse"> & {
+    /**
+     * @generated from field: string filename = 1;
+     */
+    filename: string;
+    /**
+     * @generated from field: string csv = 2;
+     */
+    csv: string;
+    /**
+     * @generated from field: int32 rows = 3;
+     */
+    rows: number;
+};
+/**
+ * Describes the message tank.books.v1.ExportResponse.
+ * Use `create(ExportResponseSchema)` to create a new message.
+ */
+export declare const ExportResponseSchema: GenMessage<ExportResponse>;
+/**
  * @generated from message tank.books.v1.GetReportRequest
  */
 export type GetReportRequest = Message<"tank.books.v1.GetReportRequest"> & {
@@ -1430,5 +1573,21 @@ export declare const BooksService: GenService<{
         methodKind: "unary";
         input: typeof GetReportRequestSchema;
         output: typeof GetReportResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.ReadReceipt
+     */
+    readReceipt: {
+        methodKind: "unary";
+        input: typeof ReadReceiptRequestSchema;
+        output: typeof ReadReceiptResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.Export
+     */
+    export: {
+        methodKind: "unary";
+        input: typeof ExportRequestSchema;
+        output: typeof ExportResponseSchema;
     };
 }>;

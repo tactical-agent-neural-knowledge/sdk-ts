@@ -2,7 +2,7 @@ import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobu
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import type { Blocks, Check, GateKind, PlanStep } from "../../blocks/v1/blocks_pb.js";
-import type { CashSummary, Customer, Expense, Invoice, InvoiceLine } from "../../books/v1/books_pb.js";
+import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/agentctl/v1/agentctl.proto.
@@ -1251,6 +1251,40 @@ export type BooksRecordPaymentResponse = Message<"tank.agentctl.v1.BooksRecordPa
  * Use `create(BooksRecordPaymentResponseSchema)` to create a new message.
  */
 export declare const BooksRecordPaymentResponseSchema: GenMessage<BooksRecordPaymentResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BooksReportRequest
+ */
+export type BooksReportRequest = Message<"tank.agentctl.v1.BooksReportRequest"> & {
+    /**
+     * this_month | last_month | this_quarter | this_year | last_30_days
+     *
+     * @generated from field: string period = 1;
+     */
+    period: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksReportRequest.
+ * Use `create(BooksReportRequestSchema)` to create a new message.
+ */
+export declare const BooksReportRequestSchema: GenMessage<BooksReportRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BooksReportResponse
+ */
+export type BooksReportResponse = Message<"tank.agentctl.v1.BooksReportResponse"> & {
+    /**
+     * @generated from field: bool enabled = 1;
+     */
+    enabled: boolean;
+    /**
+     * @generated from field: tank.books.v1.Report report = 2;
+     */
+    report?: Report;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksReportResponse.
+ * Use `create(BooksReportResponseSchema)` to create a new message.
+ */
+export declare const BooksReportResponseSchema: GenMessage<BooksReportResponse>;
 /**
  * @generated from message tank.agentctl.v1.OpenPullRequestRequest
  */
@@ -2876,6 +2910,14 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof BooksRecordPaymentRequestSchema;
         output: typeof BooksRecordPaymentResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BooksReport
+     */
+    booksReport: {
+        methodKind: "unary";
+        input: typeof BooksReportRequestSchema;
+        output: typeof BooksReportResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PollInbox
