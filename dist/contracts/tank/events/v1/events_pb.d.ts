@@ -3,6 +3,7 @@ import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { AuditEntry, ExportJob, WorkspaceSettings } from "../../admin/v1/admin_pb.js";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import type { BlockAction } from "../../blocks/v1/blocks_pb.js";
+import type { Block, Canvas } from "../../canvas/v1/canvas_pb.js";
 import type { Channel, ChannelReadState } from "../../channel/v1/channel_pb.js";
 import type { File } from "../../files/v1/files_pb.js";
 import type { Huddle } from "../../huddle/v1/huddle_pb.js";
@@ -929,3 +930,94 @@ export type MonitorWidgetAlert = Message<"tank.events.v1.MonitorWidgetAlert"> & 
  * Use `create(MonitorWidgetAlertSchema)` to create a new message.
  */
 export declare const MonitorWidgetAlertSchema: GenMessage<MonitorWidgetAlert>;
+/**
+ * canvas.block.changed on evt.{ws}.canvas.{canvas}: one block of a page was
+ * written, inserted or removed. A client with that page open applies just that
+ * block, which is why two people writing in different paragraphs see each other's
+ * work arrive instead of being told to reload.
+ *
+ * @generated from message tank.events.v1.CanvasBlockChanged
+ */
+export type CanvasBlockChanged = Message<"tank.events.v1.CanvasBlockChanged"> & {
+    /**
+     * @generated from field: string canvas_id = 1;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: tank.canvas.v1.Block block = 2;
+     */
+    block?: Block;
+    /**
+     * @generated from field: string after_block_id = 3;
+     */
+    afterBlockId: string;
+    /**
+     * @generated from field: bool deleted = 4;
+     */
+    deleted: boolean;
+    /**
+     * @generated from field: string actor_id = 5;
+     */
+    actorId: string;
+    /**
+     * the page version after the write
+     *
+     * @generated from field: int32 version = 6;
+     */
+    version: number;
+};
+/**
+ * Describes the message tank.events.v1.CanvasBlockChanged.
+ * Use `create(CanvasBlockChangedSchema)` to create a new message.
+ */
+export declare const CanvasBlockChangedSchema: GenMessage<CanvasBlockChanged>;
+/**
+ * canvas.changed on the same subject: the page's own fields moved (title, icon,
+ * sources, parent). Sent instead of a block change when the write was not a block.
+ *
+ * @generated from message tank.events.v1.CanvasChanged
+ */
+export type CanvasChanged = Message<"tank.events.v1.CanvasChanged"> & {
+    /**
+     * @generated from field: tank.canvas.v1.Canvas canvas = 1;
+     */
+    canvas?: Canvas;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.events.v1.CanvasChanged.
+ * Use `create(CanvasChangedSchema)` to create a new message.
+ */
+export declare const CanvasChangedSchema: GenMessage<CanvasChanged>;
+/**
+ * Ephemeral, on typ.{ws}.canvas.{canvas}: who is in this page and where. Never
+ * stored. An empty block_id means "on the page but not in a block".
+ *
+ * @generated from message tank.events.v1.CanvasEditing
+ */
+export type CanvasEditing = Message<"tank.events.v1.CanvasEditing"> & {
+    /**
+     * @generated from field: string canvas_id = 1;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: string user_id = 2;
+     */
+    userId: string;
+    /**
+     * @generated from field: string block_id = 3;
+     */
+    blockId: string;
+    /**
+     * @generated from field: bool left = 4;
+     */
+    left: boolean;
+};
+/**
+ * Describes the message tank.events.v1.CanvasEditing.
+ * Use `create(CanvasEditingSchema)` to create a new message.
+ */
+export declare const CanvasEditingSchema: GenMessage<CanvasEditing>;

@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { AgentStatus, Envelope, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
+import type { AgentStatus, CanvasEditing, Envelope, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/realtime/v1/realtime.proto.
@@ -66,6 +66,13 @@ export type Subscribe = Message<"tank.realtime.v1.Subscribe"> & {
      * @generated from field: repeated string thread_root_ids = 2;
      */
     threadRootIds: string[];
+    /**
+     * Pages the client has open. Subscribing is what makes another person's edit
+     * arrive; a client that never asks is unaffected.
+     *
+     * @generated from field: repeated string canvas_ids = 3;
+     */
+    canvasIds: string[];
 };
 /**
  * Describes the message tank.realtime.v1.Subscribe.
@@ -84,6 +91,10 @@ export type Unsubscribe = Message<"tank.realtime.v1.Unsubscribe"> & {
      * @generated from field: repeated string thread_root_ids = 2;
      */
     threadRootIds: string[];
+    /**
+     * @generated from field: repeated string canvas_ids = 3;
+     */
+    canvasIds: string[];
 };
 /**
  * Describes the message tank.realtime.v1.Unsubscribe.
@@ -124,6 +135,32 @@ export type TypingFrame = Message<"tank.realtime.v1.TypingFrame"> & {
  * Use `create(TypingFrameSchema)` to create a new message.
  */
 export declare const TypingFrameSchema: GenMessage<TypingFrame>;
+/**
+ * "I am in this page, in this block." Rate-limited like typing and never stored.
+ *
+ * @generated from message tank.realtime.v1.CanvasEditingFrame
+ */
+export type CanvasEditingFrame = Message<"tank.realtime.v1.CanvasEditingFrame"> & {
+    /**
+     * @generated from field: string canvas_id = 1;
+     */
+    canvasId: string;
+    /**
+     * empty: on the page, not in a block
+     *
+     * @generated from field: string block_id = 2;
+     */
+    blockId: string;
+    /**
+     * @generated from field: bool left = 3;
+     */
+    left: boolean;
+};
+/**
+ * Describes the message tank.realtime.v1.CanvasEditingFrame.
+ * Use `create(CanvasEditingFrameSchema)` to create a new message.
+ */
+export declare const CanvasEditingFrameSchema: GenMessage<CanvasEditingFrame>;
 /**
  * @generated from message tank.realtime.v1.Focus
  */
@@ -204,6 +241,12 @@ export type ClientFrame = Message<"tank.realtime.v1.ClientFrame"> & {
          */
         value: Ping;
         case: "ping";
+    } | {
+        /**
+         * @generated from field: tank.realtime.v1.CanvasEditingFrame canvas_editing = 9;
+         */
+        value: CanvasEditingFrame;
+        case: "canvasEditing";
     } | {
         case: undefined;
         value?: undefined;
@@ -382,6 +425,12 @@ export type ServerFrame = Message<"tank.realtime.v1.ServerFrame"> & {
          */
         value: AgentStatus;
         case: "agentStatus";
+    } | {
+        /**
+         * @generated from field: tank.events.v1.CanvasEditing canvas_editing = 10;
+         */
+        value: CanvasEditing;
+        case: "canvasEditing";
     } | {
         case: undefined;
         value?: undefined;

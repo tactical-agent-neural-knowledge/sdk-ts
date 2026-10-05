@@ -210,6 +210,13 @@ export type Block = Message<"tank.canvas.v1.Block"> & {
      * @generated from field: string file_url = 12;
      */
     fileUrl: string;
+    /**
+     * Bumped every time this block is written. Send it back as
+     * UpdateBlockRequest.base_rev and the server can tell an edit from a collision.
+     *
+     * @generated from field: int32 rev = 13;
+     */
+    rev: number;
 };
 /**
  * Describes the message tank.canvas.v1.Block.
@@ -694,6 +701,14 @@ export type UpdateBlockRequest = Message<"tank.canvas.v1.UpdateBlockRequest"> & 
      * @generated from field: string after_block_id = 5;
      */
     afterBlockId: string;
+    /**
+     * The rev the editor started from. When it no longer matches, the write is a
+     * collision on this one block rather than on the page, and the response says so
+     * instead of throwing the typing away. 0 means "do not check".
+     *
+     * @generated from field: int32 base_rev = 6;
+     */
+    baseRev: number;
 };
 /**
  * Describes the message tank.canvas.v1.UpdateBlockRequest.
@@ -708,12 +723,158 @@ export type UpdateBlockResponse = Message<"tank.canvas.v1.UpdateBlockResponse"> 
      * @generated from field: tank.canvas.v1.Canvas canvas = 1;
      */
     canvas?: Canvas;
+    /**
+     * Someone else changed this block while it was being edited. The page comes back
+     * with their version in it; `theirs` is that block and `conflict_note` is what to
+     * tell the writer. Nothing was overwritten.
+     *
+     * @generated from field: bool conflict = 2;
+     */
+    conflict: boolean;
+    /**
+     * @generated from field: tank.canvas.v1.Block theirs = 3;
+     */
+    theirs?: Block;
+    /**
+     * @generated from field: string conflict_note = 4;
+     */
+    conflictNote: string;
 };
 /**
  * Describes the message tank.canvas.v1.UpdateBlockResponse.
  * Use `create(UpdateBlockResponseSchema)` to create a new message.
  */
 export declare const UpdateBlockResponseSchema: GenMessage<UpdateBlockResponse>;
+/**
+ * The decision ledger: every decision block on every page in the workspace, as rows.
+ * "What did we decide about X" is a query, not a search, and a decision that has been
+ * replaced says so and names its replacement.
+ *
+ * @generated from message tank.canvas.v1.DecisionRecord
+ */
+export type DecisionRecord = Message<"tank.canvas.v1.DecisionRecord"> & {
+    /**
+     * @generated from field: string block_id = 1;
+     */
+    blockId: string;
+    /**
+     * @generated from field: string canvas_id = 2;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: string canvas_title = 3;
+     */
+    canvasTitle: string;
+    /**
+     * @generated from field: string canvas_icon = 4;
+     */
+    canvasIcon: string;
+    /**
+     * @generated from field: string what = 5;
+     */
+    what: string;
+    /**
+     * @generated from field: repeated string decided_by = 6;
+     */
+    decidedBy: string[];
+    /**
+     * @generated from field: google.protobuf.Timestamp decided_at = 7;
+     */
+    decidedAt?: Timestamp;
+    /**
+     * @generated from field: string because = 8;
+     */
+    because: string;
+    /**
+     * @generated from field: string supersedes_block_id = 9;
+     */
+    supersedesBlockId: string;
+    /**
+     * @generated from field: string thread_root_id = 10;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: bool needs_revisiting = 11;
+     */
+    needsRevisiting: boolean;
+    /**
+     * @generated from field: string revisit_note = 12;
+     */
+    revisitNote: string;
+    /**
+     * Filled in when a later decision names this one as the one it replaces.
+     *
+     * @generated from field: bool superseded = 13;
+     */
+    superseded: boolean;
+    /**
+     * @generated from field: string superseded_by_block_id = 14;
+     */
+    supersededByBlockId: string;
+    /**
+     * @generated from field: string superseded_by_what = 15;
+     */
+    supersededByWhat: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp superseded_at = 16;
+     */
+    supersededAt?: Timestamp;
+};
+/**
+ * Describes the message tank.canvas.v1.DecisionRecord.
+ * Use `create(DecisionRecordSchema)` to create a new message.
+ */
+export declare const DecisionRecordSchema: GenMessage<DecisionRecord>;
+/**
+ * @generated from message tank.canvas.v1.ListDecisionsRequest
+ */
+export type ListDecisionsRequest = Message<"tank.canvas.v1.ListDecisionsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * free text; empty lists the most recent
+     *
+     * @generated from field: string query = 2;
+     */
+    query: string;
+    /**
+     * default: only what still stands
+     *
+     * @generated from field: bool include_superseded = 3;
+     */
+    includeSuperseded: boolean;
+    /**
+     * one page's decisions; empty is the workspace
+     *
+     * @generated from field: string canvas_id = 4;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: int32 limit = 5;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.canvas.v1.ListDecisionsRequest.
+ * Use `create(ListDecisionsRequestSchema)` to create a new message.
+ */
+export declare const ListDecisionsRequestSchema: GenMessage<ListDecisionsRequest>;
+/**
+ * @generated from message tank.canvas.v1.ListDecisionsResponse
+ */
+export type ListDecisionsResponse = Message<"tank.canvas.v1.ListDecisionsResponse"> & {
+    /**
+     * @generated from field: repeated tank.canvas.v1.DecisionRecord decisions = 1;
+     */
+    decisions: DecisionRecord[];
+};
+/**
+ * Describes the message tank.canvas.v1.ListDecisionsResponse.
+ * Use `create(ListDecisionsResponseSchema)` to create a new message.
+ */
+export declare const ListDecisionsResponseSchema: GenMessage<ListDecisionsResponse>;
 /**
  * @generated from message tank.canvas.v1.Template
  */
@@ -1047,5 +1208,13 @@ export declare const CanvasService: GenService<{
         methodKind: "unary";
         input: typeof ListTemplatesRequestSchema;
         output: typeof ListTemplatesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.canvas.v1.CanvasService.ListDecisions
+     */
+    listDecisions: {
+        methodKind: "unary";
+        input: typeof ListDecisionsRequestSchema;
+        output: typeof ListDecisionsResponseSchema;
     };
 }>;

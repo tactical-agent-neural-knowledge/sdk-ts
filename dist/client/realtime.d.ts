@@ -1,4 +1,4 @@
-import type { AgentStatus, PresenceChanged, Typing } from "../contracts/tank/events/v1/events_pb.js";
+import type { AgentStatus, CanvasEditing, PresenceChanged, Typing } from "../contracts/tank/events/v1/events_pb.js";
 import { type Error as ErrorFrame, type Event, type Pong, type Ready, type Resumed, type ResyncRequired } from "../contracts/tank/realtime/v1/realtime_pb.js";
 import { type BackoffOptions } from "./backoff.js";
 import { Emitter } from "./emitter.js";
@@ -35,6 +35,8 @@ export interface RealtimeEvents {
     typing: Typing;
     presence: PresenceChanged;
     agent_status: AgentStatus;
+    /** Someone else moved around a page this socket has open. */
+    canvas_editing: CanvasEditing;
     pong: Pong;
     error: ErrorFrame;
     /** Socket closed (any reason). `willReconnect` is false after stop(). */
@@ -116,6 +118,7 @@ export declare class RealtimeClient {
     private readonly cursors;
     private readonly subChannels;
     private readonly subThreads;
+    private readonly subCanvases;
     private presenceUsers;
     private focused;
     private offOnline;
@@ -136,14 +139,21 @@ export declare class RealtimeClient {
     subscribe(opts: {
         channelIds?: string[];
         threadRootIds?: string[];
+        canvasIds?: string[];
     }): void;
     unsubscribe(opts: {
         channelIds?: string[];
         threadRootIds?: string[];
+        canvasIds?: string[];
     }): void;
     /** Replaces the presence subscription set (max 500 ids). */
     presenceSubscribe(userIds: string[]): void;
     typing(channelId: string, threadRootId?: string): void;
+    /**
+     * "I am in this page, in this block." Rate-limited server-side like typing, so
+     * calling it on every caret move is fine. `left` clears the avatar.
+     */
+    canvasEditing(canvasId: string, blockId?: string, left?: boolean): void;
     /** The channel the user is looking at; the server suppresses push for it. */
     focus(channelId: string): void;
     ping(): void;

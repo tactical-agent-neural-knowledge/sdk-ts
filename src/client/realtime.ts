@@ -1,5 +1,10 @@
 import { create, fromBinary, toBinary } from "@bufbuild/protobuf";
-import type { AgentStatus, PresenceChanged, Typing } from "../contracts/tank/events/v1/events_pb.js";
+import type {
+  AgentStatus,
+  CanvasEditing,
+  PresenceChanged,
+  Typing,
+} from "../contracts/tank/events/v1/events_pb.js";
 import {
   ClientFrameSchema,
   ErrorCode,
@@ -45,6 +50,8 @@ export interface RealtimeEvents {
   typing: Typing;
   presence: PresenceChanged;
   agent_status: AgentStatus;
+  /** Someone else moved around a page this socket has open. */
+  canvas_editing: CanvasEditing;
   pong: Pong;
   error: ErrorFrame;
   /** Socket closed (any reason). `willReconnect` is false after stop(). */
@@ -137,6 +144,7 @@ export class RealtimeClient {
 
   private readonly subChannels = new Set<string>();
   private readonly subThreads = new Set<string>();
+  private readonly subCanvases = new Set<string>();
   private presenceUsers: string[] = [];
   private focused: string | undefined;
   private offOnline: (() => void) | undefined;
@@ -229,20 +237,23 @@ export class RealtimeClient {
 
   // ------------------------------------------------------------ subscriptions
 
-  subscribe(opts: { channelIds?: string[]; threadRootIds?: string[] }): void {
+  subscribe(opts: { channelIds?: string[]; threadRootIds?: string[]; canvasIds?: string[] }): void {
     const channelIds = (opts.channelIds ?? []).filter((c) => !this.subChannels.has(c));
     const threadRootIds = (opts.threadRootIds ?? []).filter((t) => !this.subThreads.has(t));
+    const canvasIds = (opts.canvasIds ?? []).filter((c) => !this.subCanvases.has(c));
     for (const c of channelIds) this.subChannels.add(c);
     for (const t of threadRootIds) this.subThreads.add(t);
-    if (channelIds.length === 0 && threadRootIds.length === 0) return;
-    this.sendIfReady({ case: "subscribe", value: { channelIds, threadRootIds } });
+    for (const c of canvasIds) this.subCanvases.add(c);
+    if (channelIds.length === 0 && threadRootIds.length === 0 && canvasIds.length === 0) return;
+    this.sendIfReady({ case: "subscribe", value: { channelIds, threadRootIds, canvasIds } });
   }
 
-  unsubscribe(opts: { channelIds?: string[]; threadRootIds?: string[] }): void {
+  unsubscribe(opts: { channelIds?: string[]; threadRootIds?: string[]; canvasIds?: string[] }): void {
     const channelIds = (opts.channelIds ?? []).filter((c) => this.subChannels.delete(c));
     const threadRootIds = (opts.threadRootIds ?? []).filter((t) => this.subThreads.delete(t));
-    if (channelIds.length === 0 && threadRootIds.length === 0) return;
-    this.sendIfReady({ case: "unsubscribe", value: { channelIds, threadRootIds } });
+    const canvasIds = (opts.canvasIds ?? []).filter((c) => this.subCanvases.delete(c));
+    if (channelIds.length === 0 && threadRootIds.length === 0 && canvasIds.length === 0) return;
+    this.sendIfReady({ case: "unsubscribe", value: { channelIds, threadRootIds, canvasIds } });
   }
 
   /** Replaces the presence subscription set (max 500 ids). */
@@ -253,6 +264,14 @@ export class RealtimeClient {
 
   typing(channelId: string, threadRootId = ""): void {
     this.sendIfReady({ case: "typing", value: { channelId, threadRootId } });
+  }
+
+  /**
+   * "I am in this page, in this block." Rate-limited server-side like typing, so
+   * calling it on every caret move is fine. `left` clears the avatar.
+   */
+  canvasEditing(canvasId: string, blockId = "", left = false): void {
+    this.sendIfReady({ case: "canvasEditing", value: { canvasId, blockId, left } });
   }
 
   /** The channel the user is looking at; the server suppresses push for it. */
@@ -415,10 +434,14 @@ export class RealtimeClient {
   }
 
   private resendSubscriptions(): void {
-    if (this.subChannels.size > 0 || this.subThreads.size > 0) {
+    if (this.subChannels.size > 0 || this.subThreads.size > 0 || this.subCanvases.size > 0) {
       this.send({
         case: "subscribe",
-        value: { channelIds: Array.from(this.subChannels), threadRootIds: Array.from(this.subThreads) },
+        value: {
+          channelIds: Array.from(this.subChannels),
+          threadRootIds: Array.from(this.subThreads),
+          canvasIds: Array.from(this.subCanvases),
+        },
       });
     }
     if (this.presenceUsers.length > 0) {
@@ -510,6 +533,9 @@ export class RealtimeClient {
         return;
       case "agentStatus":
         this.events.emit("agent_status", k.value);
+        return;
+      case "canvasEditing":
+        this.events.emit("canvas_editing", k.value);
         return;
       default:
         return;

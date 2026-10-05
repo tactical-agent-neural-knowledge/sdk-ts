@@ -49,6 +49,7 @@ export class RealtimeClient {
     cursors = new Map();
     subChannels = new Set();
     subThreads = new Set();
+    subCanvases = new Set();
     presenceUsers = [];
     focused;
     offOnline;
@@ -140,20 +141,24 @@ export class RealtimeClient {
     subscribe(opts) {
         const channelIds = (opts.channelIds ?? []).filter((c) => !this.subChannels.has(c));
         const threadRootIds = (opts.threadRootIds ?? []).filter((t) => !this.subThreads.has(t));
+        const canvasIds = (opts.canvasIds ?? []).filter((c) => !this.subCanvases.has(c));
         for (const c of channelIds)
             this.subChannels.add(c);
         for (const t of threadRootIds)
             this.subThreads.add(t);
-        if (channelIds.length === 0 && threadRootIds.length === 0)
+        for (const c of canvasIds)
+            this.subCanvases.add(c);
+        if (channelIds.length === 0 && threadRootIds.length === 0 && canvasIds.length === 0)
             return;
-        this.sendIfReady({ case: "subscribe", value: { channelIds, threadRootIds } });
+        this.sendIfReady({ case: "subscribe", value: { channelIds, threadRootIds, canvasIds } });
     }
     unsubscribe(opts) {
         const channelIds = (opts.channelIds ?? []).filter((c) => this.subChannels.delete(c));
         const threadRootIds = (opts.threadRootIds ?? []).filter((t) => this.subThreads.delete(t));
-        if (channelIds.length === 0 && threadRootIds.length === 0)
+        const canvasIds = (opts.canvasIds ?? []).filter((c) => this.subCanvases.delete(c));
+        if (channelIds.length === 0 && threadRootIds.length === 0 && canvasIds.length === 0)
             return;
-        this.sendIfReady({ case: "unsubscribe", value: { channelIds, threadRootIds } });
+        this.sendIfReady({ case: "unsubscribe", value: { channelIds, threadRootIds, canvasIds } });
     }
     /** Replaces the presence subscription set (max 500 ids). */
     presenceSubscribe(userIds) {
@@ -162,6 +167,13 @@ export class RealtimeClient {
     }
     typing(channelId, threadRootId = "") {
         this.sendIfReady({ case: "typing", value: { channelId, threadRootId } });
+    }
+    /**
+     * "I am in this page, in this block." Rate-limited server-side like typing, so
+     * calling it on every caret move is fine. `left` clears the avatar.
+     */
+    canvasEditing(canvasId, blockId = "", left = false) {
+        this.sendIfReady({ case: "canvasEditing", value: { canvasId, blockId, left } });
     }
     /** The channel the user is looking at; the server suppresses push for it. */
     focus(channelId) {
@@ -330,10 +342,14 @@ export class RealtimeClient {
         return this.send(kind);
     }
     resendSubscriptions() {
-        if (this.subChannels.size > 0 || this.subThreads.size > 0) {
+        if (this.subChannels.size > 0 || this.subThreads.size > 0 || this.subCanvases.size > 0) {
             this.send({
                 case: "subscribe",
-                value: { channelIds: Array.from(this.subChannels), threadRootIds: Array.from(this.subThreads) },
+                value: {
+                    channelIds: Array.from(this.subChannels),
+                    threadRootIds: Array.from(this.subThreads),
+                    canvasIds: Array.from(this.subCanvases),
+                },
             });
         }
         if (this.presenceUsers.length > 0) {
@@ -425,6 +441,9 @@ export class RealtimeClient {
                 return;
             case "agentStatus":
                 this.events.emit("agent_status", k.value);
+                return;
+            case "canvasEditing":
+                this.events.emit("canvas_editing", k.value);
                 return;
             default:
                 return;

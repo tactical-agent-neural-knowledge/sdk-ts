@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/canvas/v1/canvas.proto.
  */
 export const file_tank_canvas_v1_canvas: GenFile = /*@__PURE__*/
-  fileDesc("Cht0YW5rL2NhbnZhcy92MS9jYW52YXMucHJvdG8SDnRhbmsuY2FudmFzLnYxIhkKCFRhYmxlUm93Eg0KBWNlbGxzGAEgAygJIkAKBVRhYmxlEg8KB2hlYWRlcnMYASADKAkSJgoEcm93cxgCIAMoCzIYLnRhbmsuY2FudmFzLnYxLlRhYmxlUm93ItIBCghEZWNpc2lvbhIMCgR3aGF0GAEgASgJEhIKCmRlY2lkZWRfYnkYAiADKAkSLgoKZGVjaWRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHYmVjYXVzZRgEIAEoCRIbChNzdXBlcnNlZGVzX2Jsb2NrX2lkGAUgASgJEhYKDnRocmVhZF9yb290X2lkGAYgASgJEhgKEG5lZWRzX3JldmlzaXRpbmcYByABKAgSFAoMcmV2aXNpdF9ub3RlGAggASgJIokBCgRMaXZlEgwKBGtpbmQYASABKAkSCwoDcmVmGAIgASgJEg0KBWxhYmVsGAMgASgJEg0KBXZhbHVlGAQgASgJEg4KBmRldGFpbBgFIAEoCRIpCgVhc19vZhgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFZXJyb3IYByABKAkipQIKBUJsb2NrEgoKAmlkGAEgASgJEicKBGtpbmQYAiABKA4yGS50YW5rLmNhbnZhcy52MS5CbG9ja0tpbmQSDAoEdGV4dBgDIAEoCRINCgVkZXB0aBgEIAEoBRIPCgdjaGVja2VkGAUgASgIEgwKBGxhbmcYBiABKAkSKgoIZGVjaXNpb24YByABKAsyGC50YW5rLmNhbnZhcy52MS5EZWNpc2lvbhIiCgRsaXZlGAggASgLMhQudGFuay5jYW52YXMudjEuTGl2ZRISCgptZXNzYWdlX2lkGAkgASgJEg8KB2ZpbGVfaWQYCiABKAkSJAoFdGFibGUYCyABKAsyFS50YW5rLmNhbnZhcy52MS5UYWJsZRIQCghmaWxlX3VybBgMIAEoCSKGAQoGU291cmNlEgwKBGtpbmQYASABKAkSCwoDcmVmGAIgASgJEg0KBWxhYmVsGAMgASgJEisKB3NlZW5fYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB2NoYW5nZWQYBSABKAgSFAoMY2hhbmdlZF9ub3RlGAYgASgJIt4DCgZDYW52YXMSCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEhIKCmNoYW5uZWxfaWQYAyABKAkSDQoFdGl0bGUYBCABKAkSDAoEaWNvbhgFIAEoCRIlCgZibG9ja3MYBiADKAsyFS50YW5rLmNhbnZhcy52MS5CbG9jaxInCgdzb3VyY2VzGAcgAygLMhYudGFuay5jYW52YXMudjEuU291cmNlEhEKCXN0YWxlbmVzcxgIIAEoBRIWCg5zdGFsZW5lc3Nfbm90ZRgJIAEoCRISCgpjcmVhdGVkX2J5GAogASgJEi4KCmNyZWF0ZWRfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYDCABKAkSLgoKdXBkYXRlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHdmVyc2lvbhgOIAEoBRIYChB3cml0dGVuX2J5X2FnZW50GA8gASgIEg8KB3N1bW1hcnkYECABKAkSEQoJcGFyZW50X2lkGBEgASgJEi8KCGNoaWxkcmVuGBIgAygLMh0udGFuay5jYW52YXMudjEuQ2FudmFzU3VtbWFyeSKhAgoNQ2FudmFzU3VtbWFyeRIKCgJpZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEhIKCmNoYW5uZWxfaWQYBCABKAkSDwoHc3VtbWFyeRgFIAEoCRIRCglzdGFsZW5lc3MYBiABKAUSFgoOc3RhbGVuZXNzX25vdGUYByABKAkSLgoKdXBkYXRlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKdXBkYXRlZF9ieRgJIAEoCRIYChB3cml0dGVuX2J5X2FnZW50GAogASgIEhEKCWRlY2lzaW9ucxgLIAEoBRIRCglwYXJlbnRfaWQYDCABKAkSEwoLY2hpbGRfY291bnQYDSABKAUieQoTTGlzdENhbnZhc2VzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRISCgpzdGFsZV9vbmx5GAMgASgIEhEKCXBhcmVudF9pZBgEIAEoCRIRCgl0b3BfbGV2ZWwYBSABKAgiRwoUTGlzdENhbnZhc2VzUmVzcG9uc2USLwoIY2FudmFzZXMYASADKAsyHS50YW5rLmNhbnZhcy52MS5DYW52YXNTdW1tYXJ5IjQKEEdldENhbnZhc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJIjsKEUdldENhbnZhc1Jlc3BvbnNlEiYKBmNhbnZhcxgBIAEoCzIWLnRhbmsuY2FudmFzLnYxLkNhbnZhcyLRAQoTQ3JlYXRlQ2FudmFzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRINCgV0aXRsZRgDIAEoCRIMCgRpY29uGAQgASgJEiUKBmJsb2NrcxgFIAMoCzIVLnRhbmsuY2FudmFzLnYxLkJsb2NrEicKB3NvdXJjZXMYBiADKAsyFi50YW5rLmNhbnZhcy52MS5Tb3VyY2USEQoJcGFyZW50X2lkGAcgASgJEhAKCHRlbXBsYXRlGAggASgJIj4KFENyZWF0ZUNhbnZhc1Jlc3BvbnNlEiYKBmNhbnZhcxgBIAEoCzIWLnRhbmsuY2FudmFzLnYxLkNhbnZhcyLjAQoTVXBkYXRlQ2FudmFzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSDQoFdGl0bGUYAyABKAkSDAoEaWNvbhgEIAEoCRIlCgZibG9ja3MYBSADKAsyFS50YW5rLmNhbnZhcy52MS5CbG9jaxISCgpzZXRfYmxvY2tzGAYgASgIEicKB3NvdXJjZXMYByADKAsyFi50YW5rLmNhbnZhcy52MS5Tb3VyY2USEwoLc2V0X3NvdXJjZXMYCCABKAgSFAoMYmFzZV92ZXJzaW9uGAkgASgFIj4KFFVwZGF0ZUNhbnZhc1Jlc3BvbnNlEiYKBmNhbnZhcxgBIAEoCzIWLnRhbmsuY2FudmFzLnYxLkNhbnZhcyI3ChNEZWxldGVDYW52YXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSIWChREZWxldGVDYW52YXNSZXNwb25zZSKLAQoSVXBkYXRlQmxvY2tSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIRCgljYW52YXNfaWQYAiABKAkSJAoFYmxvY2sYAyABKAsyFS50YW5rLmNhbnZhcy52MS5CbG9jaxIOCgZkZWxldGUYBCABKAgSFgoOYWZ0ZXJfYmxvY2tfaWQYBSABKAkiPQoTVXBkYXRlQmxvY2tSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMiRAoIVGVtcGxhdGUSDAoEbmFtZRgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEg0KBWFib3V0GAQgASgJIhYKFExpc3RUZW1wbGF0ZXNSZXF1ZXN0IkQKFUxpc3RUZW1wbGF0ZXNSZXNwb25zZRIrCgl0ZW1wbGF0ZXMYASADKAsyGC50YW5rLmNhbnZhcy52MS5UZW1wbGF0ZSJVChZXcml0ZUZyb21UaHJlYWRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRINCgV0aXRsZRgDIAEoCSJBChdXcml0ZUZyb21UaHJlYWRSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMiQwoKQXNrUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEAoIcXVlc3Rpb24YAiABKAkSDQoFbGltaXQYAyABKAUiewoGQW5zd2VyEhEKCWNhbnZhc19pZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEg8KB3Bhc3NhZ2UYBCABKAkSEAoIYmxvY2tfaWQYBSABKAkSDQoFc2NvcmUYBiABKAESDwoHbWF0Y2hlZBgHIAEoCSJZCgtBc2tSZXNwb25zZRInCgdhbnN3ZXJzGAEgAygLMhYudGFuay5jYW52YXMudjEuQW5zd2VyEg8KB3N1bW1hcnkYAiABKAkSEAoIc2VtYW50aWMYAyABKAgqzAIKCUJsb2NrS2luZBIaChZCTE9DS19LSU5EX1VOU1BFQ0lGSUVEEAASFgoSQkxPQ0tfS0lORF9IRUFESU5HEAESEwoPQkxPQ0tfS0lORF9URVhUEAISFQoRQkxPQ0tfS0lORF9CVUxMRVQQAxIVChFCTE9DS19LSU5EX05VTUJFUhAEEhQKEEJMT0NLX0tJTkRfUVVPVEUQBRITCg9CTE9DS19LSU5EX0NPREUQBhIWChJCTE9DS19LSU5EX0RJVklERVIQBxITCg9CTE9DS19LSU5EX1RPRE8QCBIXChNCTE9DS19LSU5EX0RFQ0lTSU9OEAkSEwoPQkxPQ0tfS0lORF9MSVZFEAoSFgoSQkxPQ0tfS0lORF9NRVNTQUdFEAsSFAoQQkxPQ0tfS0lORF9JTUFHRRAMEhQKEEJMT0NLX0tJTkRfVEFCTEUQDTKnBgoNQ2FudmFzU2VydmljZRJZCgxMaXN0Q2FudmFzZXMSIy50YW5rLmNhbnZhcy52MS5MaXN0Q2FudmFzZXNSZXF1ZXN0GiQudGFuay5jYW52YXMudjEuTGlzdENhbnZhc2VzUmVzcG9uc2USUAoJR2V0Q2FudmFzEiAudGFuay5jYW52YXMudjEuR2V0Q2FudmFzUmVxdWVzdBohLnRhbmsuY2FudmFzLnYxLkdldENhbnZhc1Jlc3BvbnNlElkKDENyZWF0ZUNhbnZhcxIjLnRhbmsuY2FudmFzLnYxLkNyZWF0ZUNhbnZhc1JlcXVlc3QaJC50YW5rLmNhbnZhcy52MS5DcmVhdGVDYW52YXNSZXNwb25zZRJZCgxVcGRhdGVDYW52YXMSIy50YW5rLmNhbnZhcy52MS5VcGRhdGVDYW52YXNSZXF1ZXN0GiQudGFuay5jYW52YXMudjEuVXBkYXRlQ2FudmFzUmVzcG9uc2USWQoMRGVsZXRlQ2FudmFzEiMudGFuay5jYW52YXMudjEuRGVsZXRlQ2FudmFzUmVxdWVzdBokLnRhbmsuY2FudmFzLnYxLkRlbGV0ZUNhbnZhc1Jlc3BvbnNlEmIKD1dyaXRlRnJvbVRocmVhZBImLnRhbmsuY2FudmFzLnYxLldyaXRlRnJvbVRocmVhZFJlcXVlc3QaJy50YW5rLmNhbnZhcy52MS5Xcml0ZUZyb21UaHJlYWRSZXNwb25zZRI+CgNBc2sSGi50YW5rLmNhbnZhcy52MS5Bc2tSZXF1ZXN0GhsudGFuay5jYW52YXMudjEuQXNrUmVzcG9uc2USVgoLVXBkYXRlQmxvY2sSIi50YW5rLmNhbnZhcy52MS5VcGRhdGVCbG9ja1JlcXVlc3QaIy50YW5rLmNhbnZhcy52MS5VcGRhdGVCbG9ja1Jlc3BvbnNlElwKDUxpc3RUZW1wbGF0ZXMSJC50YW5rLmNhbnZhcy52MS5MaXN0VGVtcGxhdGVzUmVxdWVzdBolLnRhbmsuY2FudmFzLnYxLkxpc3RUZW1wbGF0ZXNSZXNwb25zZULQAQoSY29tLnRhbmsuY2FudmFzLnYxQgtDYW52YXNQcm90b1ABWlNnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2NhbnZhcy92MTtjYW52YXN2MaICA1RDWKoCDlRhbmsuQ2FudmFzLlYxygIOVGFua1xDYW52YXNcVjHiAhpUYW5rXENhbnZhc1xWMVxHUEJNZXRhZGF0YeoCEFRhbms6OkNhbnZhczo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Cht0YW5rL2NhbnZhcy92MS9jYW52YXMucHJvdG8SDnRhbmsuY2FudmFzLnYxIhkKCFRhYmxlUm93Eg0KBWNlbGxzGAEgAygJIkAKBVRhYmxlEg8KB2hlYWRlcnMYASADKAkSJgoEcm93cxgCIAMoCzIYLnRhbmsuY2FudmFzLnYxLlRhYmxlUm93ItIBCghEZWNpc2lvbhIMCgR3aGF0GAEgASgJEhIKCmRlY2lkZWRfYnkYAiADKAkSLgoKZGVjaWRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHYmVjYXVzZRgEIAEoCRIbChNzdXBlcnNlZGVzX2Jsb2NrX2lkGAUgASgJEhYKDnRocmVhZF9yb290X2lkGAYgASgJEhgKEG5lZWRzX3JldmlzaXRpbmcYByABKAgSFAoMcmV2aXNpdF9ub3RlGAggASgJIokBCgRMaXZlEgwKBGtpbmQYASABKAkSCwoDcmVmGAIgASgJEg0KBWxhYmVsGAMgASgJEg0KBXZhbHVlGAQgASgJEg4KBmRldGFpbBgFIAEoCRIpCgVhc19vZhgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFZXJyb3IYByABKAkisgIKBUJsb2NrEgoKAmlkGAEgASgJEicKBGtpbmQYAiABKA4yGS50YW5rLmNhbnZhcy52MS5CbG9ja0tpbmQSDAoEdGV4dBgDIAEoCRINCgVkZXB0aBgEIAEoBRIPCgdjaGVja2VkGAUgASgIEgwKBGxhbmcYBiABKAkSKgoIZGVjaXNpb24YByABKAsyGC50YW5rLmNhbnZhcy52MS5EZWNpc2lvbhIiCgRsaXZlGAggASgLMhQudGFuay5jYW52YXMudjEuTGl2ZRISCgptZXNzYWdlX2lkGAkgASgJEg8KB2ZpbGVfaWQYCiABKAkSJAoFdGFibGUYCyABKAsyFS50YW5rLmNhbnZhcy52MS5UYWJsZRIQCghmaWxlX3VybBgMIAEoCRILCgNyZXYYDSABKAUihgEKBlNvdXJjZRIMCgRraW5kGAEgASgJEgsKA3JlZhgCIAEoCRINCgVsYWJlbBgDIAEoCRIrCgdzZWVuX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIPCgdjaGFuZ2VkGAUgASgIEhQKDGNoYW5nZWRfbm90ZRgGIAEoCSLeAwoGQ2FudmFzEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJEg0KBXRpdGxlGAQgASgJEgwKBGljb24YBSABKAkSJQoGYmxvY2tzGAYgAygLMhUudGFuay5jYW52YXMudjEuQmxvY2sSJwoHc291cmNlcxgHIAMoCzIWLnRhbmsuY2FudmFzLnYxLlNvdXJjZRIRCglzdGFsZW5lc3MYCCABKAUSFgoOc3RhbGVuZXNzX25vdGUYCSABKAkSEgoKY3JlYXRlZF9ieRgKIAEoCRIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgp1cGRhdGVkX2J5GAwgASgJEi4KCnVwZGF0ZWRfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB3ZlcnNpb24YDiABKAUSGAoQd3JpdHRlbl9ieV9hZ2VudBgPIAEoCBIPCgdzdW1tYXJ5GBAgASgJEhEKCXBhcmVudF9pZBgRIAEoCRIvCghjaGlsZHJlbhgSIAMoCzIdLnRhbmsuY2FudmFzLnYxLkNhbnZhc1N1bW1hcnkioQIKDUNhbnZhc1N1bW1hcnkSCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSDAoEaWNvbhgDIAEoCRISCgpjaGFubmVsX2lkGAQgASgJEg8KB3N1bW1hcnkYBSABKAkSEQoJc3RhbGVuZXNzGAYgASgFEhYKDnN0YWxlbmVzc19ub3RlGAcgASgJEi4KCnVwZGF0ZWRfYXQYCCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYCSABKAkSGAoQd3JpdHRlbl9ieV9hZ2VudBgKIAEoCBIRCglkZWNpc2lvbnMYCyABKAUSEQoJcGFyZW50X2lkGAwgASgJEhMKC2NoaWxkX2NvdW50GA0gASgFInkKE0xpc3RDYW52YXNlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKc3RhbGVfb25seRgDIAEoCBIRCglwYXJlbnRfaWQYBCABKAkSEQoJdG9wX2xldmVsGAUgASgIIkcKFExpc3RDYW52YXNlc1Jlc3BvbnNlEi8KCGNhbnZhc2VzGAEgAygLMh0udGFuay5jYW52YXMudjEuQ2FudmFzU3VtbWFyeSI0ChBHZXRDYW52YXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSI7ChFHZXRDYW52YXNSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMi0QEKE0NyZWF0ZUNhbnZhc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDQoFdGl0bGUYAyABKAkSDAoEaWNvbhgEIAEoCRIlCgZibG9ja3MYBSADKAsyFS50YW5rLmNhbnZhcy52MS5CbG9jaxInCgdzb3VyY2VzGAYgAygLMhYudGFuay5jYW52YXMudjEuU291cmNlEhEKCXBhcmVudF9pZBgHIAEoCRIQCgh0ZW1wbGF0ZRgIIAEoCSI+ChRDcmVhdGVDYW52YXNSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMi4wEKE1VwZGF0ZUNhbnZhc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJEg0KBXRpdGxlGAMgASgJEgwKBGljb24YBCABKAkSJQoGYmxvY2tzGAUgAygLMhUudGFuay5jYW52YXMudjEuQmxvY2sSEgoKc2V0X2Jsb2NrcxgGIAEoCBInCgdzb3VyY2VzGAcgAygLMhYudGFuay5jYW52YXMudjEuU291cmNlEhMKC3NldF9zb3VyY2VzGAggASgIEhQKDGJhc2VfdmVyc2lvbhgJIAEoBSI+ChRVcGRhdGVDYW52YXNSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMiNwoTRGVsZXRlQ2FudmFzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkiFgoURGVsZXRlQ2FudmFzUmVzcG9uc2UinQEKElVwZGF0ZUJsb2NrUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEQoJY2FudmFzX2lkGAIgASgJEiQKBWJsb2NrGAMgASgLMhUudGFuay5jYW52YXMudjEuQmxvY2sSDgoGZGVsZXRlGAQgASgIEhYKDmFmdGVyX2Jsb2NrX2lkGAUgASgJEhAKCGJhc2VfcmV2GAYgASgFIo0BChNVcGRhdGVCbG9ja1Jlc3BvbnNlEiYKBmNhbnZhcxgBIAEoCzIWLnRhbmsuY2FudmFzLnYxLkNhbnZhcxIQCghjb25mbGljdBgCIAEoCBIlCgZ0aGVpcnMYAyABKAsyFS50YW5rLmNhbnZhcy52MS5CbG9jaxIVCg1jb25mbGljdF9ub3RlGAQgASgJIqsDCg5EZWNpc2lvblJlY29yZBIQCghibG9ja19pZBgBIAEoCRIRCgljYW52YXNfaWQYAiABKAkSFAoMY2FudmFzX3RpdGxlGAMgASgJEhMKC2NhbnZhc19pY29uGAQgASgJEgwKBHdoYXQYBSABKAkSEgoKZGVjaWRlZF9ieRgGIAMoCRIuCgpkZWNpZGVkX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIPCgdiZWNhdXNlGAggASgJEhsKE3N1cGVyc2VkZXNfYmxvY2tfaWQYCSABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYCiABKAkSGAoQbmVlZHNfcmV2aXNpdGluZxgLIAEoCBIUCgxyZXZpc2l0X25vdGUYDCABKAkSEgoKc3VwZXJzZWRlZBgNIAEoCBIeChZzdXBlcnNlZGVkX2J5X2Jsb2NrX2lkGA4gASgJEhoKEnN1cGVyc2VkZWRfYnlfd2hhdBgPIAEoCRIxCg1zdXBlcnNlZGVkX2F0GBAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJ5ChRMaXN0RGVjaXNpb25zUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDQoFcXVlcnkYAiABKAkSGgoSaW5jbHVkZV9zdXBlcnNlZGVkGAMgASgIEhEKCWNhbnZhc19pZBgEIAEoCRINCgVsaW1pdBgFIAEoBSJKChVMaXN0RGVjaXNpb25zUmVzcG9uc2USMQoJZGVjaXNpb25zGAEgAygLMh4udGFuay5jYW52YXMudjEuRGVjaXNpb25SZWNvcmQiRAoIVGVtcGxhdGUSDAoEbmFtZRgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEg0KBWFib3V0GAQgASgJIhYKFExpc3RUZW1wbGF0ZXNSZXF1ZXN0IkQKFUxpc3RUZW1wbGF0ZXNSZXNwb25zZRIrCgl0ZW1wbGF0ZXMYASADKAsyGC50YW5rLmNhbnZhcy52MS5UZW1wbGF0ZSJVChZXcml0ZUZyb21UaHJlYWRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRINCgV0aXRsZRgDIAEoCSJBChdXcml0ZUZyb21UaHJlYWRSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMiQwoKQXNrUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEAoIcXVlc3Rpb24YAiABKAkSDQoFbGltaXQYAyABKAUiewoGQW5zd2VyEhEKCWNhbnZhc19pZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEg8KB3Bhc3NhZ2UYBCABKAkSEAoIYmxvY2tfaWQYBSABKAkSDQoFc2NvcmUYBiABKAESDwoHbWF0Y2hlZBgHIAEoCSJZCgtBc2tSZXNwb25zZRInCgdhbnN3ZXJzGAEgAygLMhYudGFuay5jYW52YXMudjEuQW5zd2VyEg8KB3N1bW1hcnkYAiABKAkSEAoIc2VtYW50aWMYAyABKAgqzAIKCUJsb2NrS2luZBIaChZCTE9DS19LSU5EX1VOU1BFQ0lGSUVEEAASFgoSQkxPQ0tfS0lORF9IRUFESU5HEAESEwoPQkxPQ0tfS0lORF9URVhUEAISFQoRQkxPQ0tfS0lORF9CVUxMRVQQAxIVChFCTE9DS19LSU5EX05VTUJFUhAEEhQKEEJMT0NLX0tJTkRfUVVPVEUQBRITCg9CTE9DS19LSU5EX0NPREUQBhIWChJCTE9DS19LSU5EX0RJVklERVIQBxITCg9CTE9DS19LSU5EX1RPRE8QCBIXChNCTE9DS19LSU5EX0RFQ0lTSU9OEAkSEwoPQkxPQ0tfS0lORF9MSVZFEAoSFgoSQkxPQ0tfS0lORF9NRVNTQUdFEAsSFAoQQkxPQ0tfS0lORF9JTUFHRRAMEhQKEEJMT0NLX0tJTkRfVEFCTEUQDTKFBwoNQ2FudmFzU2VydmljZRJZCgxMaXN0Q2FudmFzZXMSIy50YW5rLmNhbnZhcy52MS5MaXN0Q2FudmFzZXNSZXF1ZXN0GiQudGFuay5jYW52YXMudjEuTGlzdENhbnZhc2VzUmVzcG9uc2USUAoJR2V0Q2FudmFzEiAudGFuay5jYW52YXMudjEuR2V0Q2FudmFzUmVxdWVzdBohLnRhbmsuY2FudmFzLnYxLkdldENhbnZhc1Jlc3BvbnNlElkKDENyZWF0ZUNhbnZhcxIjLnRhbmsuY2FudmFzLnYxLkNyZWF0ZUNhbnZhc1JlcXVlc3QaJC50YW5rLmNhbnZhcy52MS5DcmVhdGVDYW52YXNSZXNwb25zZRJZCgxVcGRhdGVDYW52YXMSIy50YW5rLmNhbnZhcy52MS5VcGRhdGVDYW52YXNSZXF1ZXN0GiQudGFuay5jYW52YXMudjEuVXBkYXRlQ2FudmFzUmVzcG9uc2USWQoMRGVsZXRlQ2FudmFzEiMudGFuay5jYW52YXMudjEuRGVsZXRlQ2FudmFzUmVxdWVzdBokLnRhbmsuY2FudmFzLnYxLkRlbGV0ZUNhbnZhc1Jlc3BvbnNlEmIKD1dyaXRlRnJvbVRocmVhZBImLnRhbmsuY2FudmFzLnYxLldyaXRlRnJvbVRocmVhZFJlcXVlc3QaJy50YW5rLmNhbnZhcy52MS5Xcml0ZUZyb21UaHJlYWRSZXNwb25zZRI+CgNBc2sSGi50YW5rLmNhbnZhcy52MS5Bc2tSZXF1ZXN0GhsudGFuay5jYW52YXMudjEuQXNrUmVzcG9uc2USVgoLVXBkYXRlQmxvY2sSIi50YW5rLmNhbnZhcy52MS5VcGRhdGVCbG9ja1JlcXVlc3QaIy50YW5rLmNhbnZhcy52MS5VcGRhdGVCbG9ja1Jlc3BvbnNlElwKDUxpc3RUZW1wbGF0ZXMSJC50YW5rLmNhbnZhcy52MS5MaXN0VGVtcGxhdGVzUmVxdWVzdBolLnRhbmsuY2FudmFzLnYxLkxpc3RUZW1wbGF0ZXNSZXNwb25zZRJcCg1MaXN0RGVjaXNpb25zEiQudGFuay5jYW52YXMudjEuTGlzdERlY2lzaW9uc1JlcXVlc3QaJS50YW5rLmNhbnZhcy52MS5MaXN0RGVjaXNpb25zUmVzcG9uc2VC0AEKEmNvbS50YW5rLmNhbnZhcy52MUILQ2FudmFzUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9jYW52YXMvdjE7Y2FudmFzdjGiAgNUQ1iqAg5UYW5rLkNhbnZhcy5WMcoCDlRhbmtcQ2FudmFzXFYx4gIaVGFua1xDYW52YXNcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpDYW52YXM6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.canvas.v1.TableRow
@@ -256,6 +256,14 @@ export type Block = Message<"tank.canvas.v1.Block"> & {
    * @generated from field: string file_url = 12;
    */
   fileUrl: string;
+
+  /**
+   * Bumped every time this block is written. Send it back as
+   * UpdateBlockRequest.base_rev and the server can tell an edit from a collision.
+   *
+   * @generated from field: int32 rev = 13;
+   */
+  rev: number;
 };
 
 /**
@@ -842,6 +850,15 @@ export type UpdateBlockRequest = Message<"tank.canvas.v1.UpdateBlockRequest"> & 
    * @generated from field: string after_block_id = 5;
    */
   afterBlockId: string;
+
+  /**
+   * The rev the editor started from. When it no longer matches, the write is a
+   * collision on this one block rather than on the page, and the response says so
+   * instead of throwing the typing away. 0 means "do not check".
+   *
+   * @generated from field: int32 base_rev = 6;
+   */
+  baseRev: number;
 };
 
 /**
@@ -859,6 +876,25 @@ export type UpdateBlockResponse = Message<"tank.canvas.v1.UpdateBlockResponse"> 
    * @generated from field: tank.canvas.v1.Canvas canvas = 1;
    */
   canvas?: Canvas;
+
+  /**
+   * Someone else changed this block while it was being edited. The page comes back
+   * with their version in it; `theirs` is that block and `conflict_note` is what to
+   * tell the writer. Nothing was overwritten.
+   *
+   * @generated from field: bool conflict = 2;
+   */
+  conflict: boolean;
+
+  /**
+   * @generated from field: tank.canvas.v1.Block theirs = 3;
+   */
+  theirs?: Block;
+
+  /**
+   * @generated from field: string conflict_note = 4;
+   */
+  conflictNote: string;
 };
 
 /**
@@ -867,6 +903,164 @@ export type UpdateBlockResponse = Message<"tank.canvas.v1.UpdateBlockResponse"> 
  */
 export const UpdateBlockResponseSchema: GenMessage<UpdateBlockResponse> = /*@__PURE__*/
   messageDesc(file_tank_canvas_v1_canvas, 19);
+
+/**
+ * The decision ledger: every decision block on every page in the workspace, as rows.
+ * "What did we decide about X" is a query, not a search, and a decision that has been
+ * replaced says so and names its replacement.
+ *
+ * @generated from message tank.canvas.v1.DecisionRecord
+ */
+export type DecisionRecord = Message<"tank.canvas.v1.DecisionRecord"> & {
+  /**
+   * @generated from field: string block_id = 1;
+   */
+  blockId: string;
+
+  /**
+   * @generated from field: string canvas_id = 2;
+   */
+  canvasId: string;
+
+  /**
+   * @generated from field: string canvas_title = 3;
+   */
+  canvasTitle: string;
+
+  /**
+   * @generated from field: string canvas_icon = 4;
+   */
+  canvasIcon: string;
+
+  /**
+   * @generated from field: string what = 5;
+   */
+  what: string;
+
+  /**
+   * @generated from field: repeated string decided_by = 6;
+   */
+  decidedBy: string[];
+
+  /**
+   * @generated from field: google.protobuf.Timestamp decided_at = 7;
+   */
+  decidedAt?: Timestamp;
+
+  /**
+   * @generated from field: string because = 8;
+   */
+  because: string;
+
+  /**
+   * @generated from field: string supersedes_block_id = 9;
+   */
+  supersedesBlockId: string;
+
+  /**
+   * @generated from field: string thread_root_id = 10;
+   */
+  threadRootId: string;
+
+  /**
+   * @generated from field: bool needs_revisiting = 11;
+   */
+  needsRevisiting: boolean;
+
+  /**
+   * @generated from field: string revisit_note = 12;
+   */
+  revisitNote: string;
+
+  /**
+   * Filled in when a later decision names this one as the one it replaces.
+   *
+   * @generated from field: bool superseded = 13;
+   */
+  superseded: boolean;
+
+  /**
+   * @generated from field: string superseded_by_block_id = 14;
+   */
+  supersededByBlockId: string;
+
+  /**
+   * @generated from field: string superseded_by_what = 15;
+   */
+  supersededByWhat: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp superseded_at = 16;
+   */
+  supersededAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.canvas.v1.DecisionRecord.
+ * Use `create(DecisionRecordSchema)` to create a new message.
+ */
+export const DecisionRecordSchema: GenMessage<DecisionRecord> = /*@__PURE__*/
+  messageDesc(file_tank_canvas_v1_canvas, 20);
+
+/**
+ * @generated from message tank.canvas.v1.ListDecisionsRequest
+ */
+export type ListDecisionsRequest = Message<"tank.canvas.v1.ListDecisionsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * free text; empty lists the most recent
+   *
+   * @generated from field: string query = 2;
+   */
+  query: string;
+
+  /**
+   * default: only what still stands
+   *
+   * @generated from field: bool include_superseded = 3;
+   */
+  includeSuperseded: boolean;
+
+  /**
+   * one page's decisions; empty is the workspace
+   *
+   * @generated from field: string canvas_id = 4;
+   */
+  canvasId: string;
+
+  /**
+   * @generated from field: int32 limit = 5;
+   */
+  limit: number;
+};
+
+/**
+ * Describes the message tank.canvas.v1.ListDecisionsRequest.
+ * Use `create(ListDecisionsRequestSchema)` to create a new message.
+ */
+export const ListDecisionsRequestSchema: GenMessage<ListDecisionsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_canvas_v1_canvas, 21);
+
+/**
+ * @generated from message tank.canvas.v1.ListDecisionsResponse
+ */
+export type ListDecisionsResponse = Message<"tank.canvas.v1.ListDecisionsResponse"> & {
+  /**
+   * @generated from field: repeated tank.canvas.v1.DecisionRecord decisions = 1;
+   */
+  decisions: DecisionRecord[];
+};
+
+/**
+ * Describes the message tank.canvas.v1.ListDecisionsResponse.
+ * Use `create(ListDecisionsResponseSchema)` to create a new message.
+ */
+export const ListDecisionsResponseSchema: GenMessage<ListDecisionsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_canvas_v1_canvas, 22);
 
 /**
  * @generated from message tank.canvas.v1.Template
@@ -902,7 +1096,7 @@ export type Template = Message<"tank.canvas.v1.Template"> & {
  * Use `create(TemplateSchema)` to create a new message.
  */
 export const TemplateSchema: GenMessage<Template> = /*@__PURE__*/
-  messageDesc(file_tank_canvas_v1_canvas, 20);
+  messageDesc(file_tank_canvas_v1_canvas, 23);
 
 /**
  * @generated from message tank.canvas.v1.ListTemplatesRequest
@@ -915,7 +1109,7 @@ export type ListTemplatesRequest = Message<"tank.canvas.v1.ListTemplatesRequest"
  * Use `create(ListTemplatesRequestSchema)` to create a new message.
  */
 export const ListTemplatesRequestSchema: GenMessage<ListTemplatesRequest> = /*@__PURE__*/
-  messageDesc(file_tank_canvas_v1_canvas, 21);
+  messageDesc(file_tank_canvas_v1_canvas, 24);
 
 /**
  * @generated from message tank.canvas.v1.ListTemplatesResponse
@@ -932,7 +1126,7 @@ export type ListTemplatesResponse = Message<"tank.canvas.v1.ListTemplatesRespons
  * Use `create(ListTemplatesResponseSchema)` to create a new message.
  */
 export const ListTemplatesResponseSchema: GenMessage<ListTemplatesResponse> = /*@__PURE__*/
-  messageDesc(file_tank_canvas_v1_canvas, 22);
+  messageDesc(file_tank_canvas_v1_canvas, 25);
 
 /**
  * @generated from message tank.canvas.v1.WriteFromThreadRequest
@@ -961,7 +1155,7 @@ export type WriteFromThreadRequest = Message<"tank.canvas.v1.WriteFromThreadRequ
  * Use `create(WriteFromThreadRequestSchema)` to create a new message.
  */
 export const WriteFromThreadRequestSchema: GenMessage<WriteFromThreadRequest> = /*@__PURE__*/
-  messageDesc(file_tank_canvas_v1_canvas, 23);
+  messageDesc(file_tank_canvas_v1_canvas, 26);
 
 /**
  * @generated from message tank.canvas.v1.WriteFromThreadResponse
@@ -978,7 +1172,7 @@ export type WriteFromThreadResponse = Message<"tank.canvas.v1.WriteFromThreadRes
  * Use `create(WriteFromThreadResponseSchema)` to create a new message.
  */
 export const WriteFromThreadResponseSchema: GenMessage<WriteFromThreadResponse> = /*@__PURE__*/
-  messageDesc(file_tank_canvas_v1_canvas, 24);
+  messageDesc(file_tank_canvas_v1_canvas, 27);
 
 /**
  * Ask the pages a question and get the passage that answers it.
@@ -1007,7 +1201,7 @@ export type AskRequest = Message<"tank.canvas.v1.AskRequest"> & {
  * Use `create(AskRequestSchema)` to create a new message.
  */
 export const AskRequestSchema: GenMessage<AskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_canvas_v1_canvas, 25);
+  messageDesc(file_tank_canvas_v1_canvas, 28);
 
 /**
  * @generated from message tank.canvas.v1.Answer
@@ -1059,7 +1253,7 @@ export type Answer = Message<"tank.canvas.v1.Answer"> & {
  * Use `create(AnswerSchema)` to create a new message.
  */
 export const AnswerSchema: GenMessage<Answer> = /*@__PURE__*/
-  messageDesc(file_tank_canvas_v1_canvas, 26);
+  messageDesc(file_tank_canvas_v1_canvas, 29);
 
 /**
  * @generated from message tank.canvas.v1.AskResponse
@@ -1091,7 +1285,7 @@ export type AskResponse = Message<"tank.canvas.v1.AskResponse"> & {
  * Use `create(AskResponseSchema)` to create a new message.
  */
 export const AskResponseSchema: GenMessage<AskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_canvas_v1_canvas, 27);
+  messageDesc(file_tank_canvas_v1_canvas, 30);
 
 /**
  * @generated from enum tank.canvas.v1.BlockKind
@@ -1257,6 +1451,14 @@ export const CanvasService: GenService<{
     methodKind: "unary";
     input: typeof ListTemplatesRequestSchema;
     output: typeof ListTemplatesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.canvas.v1.CanvasService.ListDecisions
+   */
+  listDecisions: {
+    methodKind: "unary";
+    input: typeof ListDecisionsRequestSchema;
+    output: typeof ListDecisionsResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_canvas_v1_canvas, 0);
