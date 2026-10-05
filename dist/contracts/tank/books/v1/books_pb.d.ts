@@ -49,6 +49,19 @@ export type Settings = Message<"tank.books.v1.Settings"> & {
      * @generated from field: int32 chase_every_days = 7;
      */
     chaseEveryDays: number;
+    /**
+     * Tools this business competes with or replaces, by name as people say them
+     * ("QuickBooks"): the market panel reads TANK's research on them.
+     *
+     * @generated from field: repeated string competes_with = 8;
+     */
+    competesWith: string[];
+    /**
+     * How a customer pays: bank details or instructions, printed on the invoice page.
+     *
+     * @generated from field: string payment_instructions = 9;
+     */
+    paymentInstructions: string;
 };
 /**
  * Describes the message tank.books.v1.Settings.
@@ -215,6 +228,13 @@ export type Invoice = Message<"tank.books.v1.Invoice"> & {
      * @generated from field: int32 chase_count = 21;
      */
     chaseCount: number;
+    /**
+     * A page the customer can open without an account: the invoice, how to pay, and
+     * its state. Set once the invoice is sent.
+     *
+     * @generated from field: string share_url = 22;
+     */
+    shareUrl: string;
 };
 /**
  * Describes the message tank.books.v1.Invoice.

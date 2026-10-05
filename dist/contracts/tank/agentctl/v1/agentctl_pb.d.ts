@@ -2,6 +2,7 @@ import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobu
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import type { Blocks, Check, GateKind, PlanStep } from "../../blocks/v1/blocks_pb.js";
+import type { CashSummary, Customer, Expense, Invoice, InvoiceLine } from "../../books/v1/books_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/agentctl/v1/agentctl.proto.
@@ -1066,6 +1067,190 @@ export type RecordFindingResponse = Message<"tank.agentctl.v1.RecordFindingRespo
  * Use `create(RecordFindingResponseSchema)` to create a new message.
  */
 export declare const RecordFindingResponseSchema: GenMessage<RecordFindingResponse>;
+/**
+ * Neuralbooks, from the thread. The run acts as the workspace's agent: the same
+ * service a person uses from the page, with the same checks.
+ *
+ * @generated from message tank.agentctl.v1.BooksSummaryRequest
+ */
+export type BooksSummaryRequest = Message<"tank.agentctl.v1.BooksSummaryRequest"> & {};
+/**
+ * Describes the message tank.agentctl.v1.BooksSummaryRequest.
+ * Use `create(BooksSummaryRequestSchema)` to create a new message.
+ */
+export declare const BooksSummaryRequestSchema: GenMessage<BooksSummaryRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BooksSummaryResponse
+ */
+export type BooksSummaryResponse = Message<"tank.agentctl.v1.BooksSummaryResponse"> & {
+    /**
+     * false: say so and stop; nothing else is set
+     *
+     * @generated from field: bool enabled = 1;
+     */
+    enabled: boolean;
+    /**
+     * @generated from field: tank.books.v1.CashSummary summary = 2;
+     */
+    summary?: CashSummary;
+    /**
+     * @generated from field: repeated tank.books.v1.Invoice open_invoices = 3;
+     */
+    openInvoices: Invoice[];
+    /**
+     * @generated from field: repeated tank.books.v1.Customer customers = 4;
+     */
+    customers: Customer[];
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksSummaryResponse.
+ * Use `create(BooksSummaryResponseSchema)` to create a new message.
+ */
+export declare const BooksSummaryResponseSchema: GenMessage<BooksSummaryResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BooksCreateInvoiceRequest
+ */
+export type BooksCreateInvoiceRequest = Message<"tank.agentctl.v1.BooksCreateInvoiceRequest"> & {
+    /**
+     * found or created, case-insensitively
+     *
+     * @generated from field: string customer_name = 1;
+     */
+    customerName: string;
+    /**
+     * description, quantity, unit_cents
+     *
+     * @generated from field: repeated tank.books.v1.InvoiceLine lines = 2;
+     */
+    lines: InvoiceLine[];
+    /**
+     * @generated from field: int64 tax_cents = 3;
+     */
+    taxCents: bigint;
+    /**
+     * 0 = the workspace default
+     *
+     * @generated from field: int32 due_days = 4;
+     */
+    dueDays: number;
+    /**
+     * @generated from field: string notes = 5;
+     */
+    notes: string;
+    /**
+     * @generated from field: bool send = 6;
+     */
+    send: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksCreateInvoiceRequest.
+ * Use `create(BooksCreateInvoiceRequestSchema)` to create a new message.
+ */
+export declare const BooksCreateInvoiceRequestSchema: GenMessage<BooksCreateInvoiceRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BooksCreateInvoiceResponse
+ */
+export type BooksCreateInvoiceResponse = Message<"tank.agentctl.v1.BooksCreateInvoiceResponse"> & {
+    /**
+     * @generated from field: tank.books.v1.Invoice invoice = 1;
+     */
+    invoice?: Invoice;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksCreateInvoiceResponse.
+ * Use `create(BooksCreateInvoiceResponseSchema)` to create a new message.
+ */
+export declare const BooksCreateInvoiceResponseSchema: GenMessage<BooksCreateInvoiceResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BooksRecordExpenseRequest
+ */
+export type BooksRecordExpenseRequest = Message<"tank.agentctl.v1.BooksRecordExpenseRequest"> & {
+    /**
+     * @generated from field: string vendor = 1;
+     */
+    vendor: string;
+    /**
+     * @generated from field: string category = 2;
+     */
+    category: string;
+    /**
+     * @generated from field: int64 amount_cents = 3;
+     */
+    amountCents: bigint;
+    /**
+     * @generated from field: string notes = 4;
+     */
+    notes: string;
+    /**
+     * from list_attachments, when it came from a receipt
+     *
+     * @generated from field: string receipt_file_id = 5;
+     */
+    receiptFileId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksRecordExpenseRequest.
+ * Use `create(BooksRecordExpenseRequestSchema)` to create a new message.
+ */
+export declare const BooksRecordExpenseRequestSchema: GenMessage<BooksRecordExpenseRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BooksRecordExpenseResponse
+ */
+export type BooksRecordExpenseResponse = Message<"tank.agentctl.v1.BooksRecordExpenseResponse"> & {
+    /**
+     * @generated from field: tank.books.v1.Expense expense = 1;
+     */
+    expense?: Expense;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksRecordExpenseResponse.
+ * Use `create(BooksRecordExpenseResponseSchema)` to create a new message.
+ */
+export declare const BooksRecordExpenseResponseSchema: GenMessage<BooksRecordExpenseResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BooksRecordPaymentRequest
+ */
+export type BooksRecordPaymentRequest = Message<"tank.agentctl.v1.BooksRecordPaymentRequest"> & {
+    /**
+     * e.g. INV-0007
+     *
+     * @generated from field: string invoice_number = 1;
+     */
+    invoiceNumber: string;
+    /**
+     * 0 = what is still due
+     *
+     * @generated from field: int64 amount_cents = 2;
+     */
+    amountCents: bigint;
+    /**
+     * @generated from field: string method = 3;
+     */
+    method: string;
+    /**
+     * @generated from field: string reference = 4;
+     */
+    reference: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksRecordPaymentRequest.
+ * Use `create(BooksRecordPaymentRequestSchema)` to create a new message.
+ */
+export declare const BooksRecordPaymentRequestSchema: GenMessage<BooksRecordPaymentRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BooksRecordPaymentResponse
+ */
+export type BooksRecordPaymentResponse = Message<"tank.agentctl.v1.BooksRecordPaymentResponse"> & {
+    /**
+     * @generated from field: tank.books.v1.Invoice invoice = 1;
+     */
+    invoice?: Invoice;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksRecordPaymentResponse.
+ * Use `create(BooksRecordPaymentResponseSchema)` to create a new message.
+ */
+export declare const BooksRecordPaymentResponseSchema: GenMessage<BooksRecordPaymentResponse>;
 /**
  * @generated from message tank.agentctl.v1.OpenPullRequestRequest
  */
@@ -2659,6 +2844,38 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof RecordFindingRequestSchema;
         output: typeof RecordFindingResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BooksSummary
+     */
+    booksSummary: {
+        methodKind: "unary";
+        input: typeof BooksSummaryRequestSchema;
+        output: typeof BooksSummaryResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BooksCreateInvoice
+     */
+    booksCreateInvoice: {
+        methodKind: "unary";
+        input: typeof BooksCreateInvoiceRequestSchema;
+        output: typeof BooksCreateInvoiceResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BooksRecordExpense
+     */
+    booksRecordExpense: {
+        methodKind: "unary";
+        input: typeof BooksRecordExpenseRequestSchema;
+        output: typeof BooksRecordExpenseResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BooksRecordPayment
+     */
+    booksRecordPayment: {
+        methodKind: "unary";
+        input: typeof BooksRecordPaymentRequestSchema;
+        output: typeof BooksRecordPaymentResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PollInbox
