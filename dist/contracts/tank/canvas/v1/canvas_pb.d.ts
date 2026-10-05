@@ -6,6 +6,38 @@ import type { Message } from "@bufbuild/protobuf";
  */
 export declare const file_tank_canvas_v1_canvas: GenFile;
 /**
+ * @generated from message tank.canvas.v1.TableRow
+ */
+export type TableRow = Message<"tank.canvas.v1.TableRow"> & {
+    /**
+     * @generated from field: repeated string cells = 1;
+     */
+    cells: string[];
+};
+/**
+ * Describes the message tank.canvas.v1.TableRow.
+ * Use `create(TableRowSchema)` to create a new message.
+ */
+export declare const TableRowSchema: GenMessage<TableRow>;
+/**
+ * @generated from message tank.canvas.v1.Table
+ */
+export type Table = Message<"tank.canvas.v1.Table"> & {
+    /**
+     * @generated from field: repeated string headers = 1;
+     */
+    headers: string[];
+    /**
+     * @generated from field: repeated tank.canvas.v1.TableRow rows = 2;
+     */
+    rows: TableRow[];
+};
+/**
+ * Describes the message tank.canvas.v1.Table.
+ * Use `create(TableSchema)` to create a new message.
+ */
+export declare const TableSchema: GenMessage<Table>;
+/**
  * A decision is answerable: what, who, when, why, and what it replaced.
  *
  * @generated from message tank.canvas.v1.Decision
@@ -168,6 +200,16 @@ export type Block = Message<"tank.canvas.v1.Block"> & {
      * @generated from field: string file_id = 10;
      */
     fileId: string;
+    /**
+     * @generated from field: tank.canvas.v1.Table table = 11;
+     */
+    table?: Table;
+    /**
+     * For an image: where to fetch it, filled in by the server when the page is read.
+     *
+     * @generated from field: string file_url = 12;
+     */
+    fileUrl: string;
 };
 /**
  * Describes the message tank.canvas.v1.Block.
@@ -300,6 +342,18 @@ export type Canvas = Message<"tank.canvas.v1.Canvas"> & {
      * @generated from field: string summary = 16;
      */
     summary: string;
+    /**
+     * The page this one sits under; empty for a page at the top level.
+     *
+     * @generated from field: string parent_id = 17;
+     */
+    parentId: string;
+    /**
+     * Pages directly under this one, for the reader to walk down.
+     *
+     * @generated from field: repeated tank.canvas.v1.CanvasSummary children = 18;
+     */
+    children: CanvasSummary[];
 };
 /**
  * Describes the message tank.canvas.v1.Canvas.
@@ -358,6 +412,14 @@ export type CanvasSummary = Message<"tank.canvas.v1.CanvasSummary"> & {
      * @generated from field: int32 decisions = 11;
      */
     decisions: number;
+    /**
+     * @generated from field: string parent_id = 12;
+     */
+    parentId: string;
+    /**
+     * @generated from field: int32 child_count = 13;
+     */
+    childCount: number;
 };
 /**
  * Describes the message tank.canvas.v1.CanvasSummary.
@@ -382,6 +444,16 @@ export type ListCanvasesRequest = Message<"tank.canvas.v1.ListCanvasesRequest"> 
      * @generated from field: bool stale_only = 3;
      */
     staleOnly: boolean;
+    /**
+     * Only the pages directly under this one. Set top_level to list the roots.
+     *
+     * @generated from field: string parent_id = 4;
+     */
+    parentId: string;
+    /**
+     * @generated from field: bool top_level = 5;
+     */
+    topLevel: boolean;
 };
 /**
  * Describes the message tank.canvas.v1.ListCanvasesRequest.
@@ -462,6 +534,17 @@ export type CreateCanvasRequest = Message<"tank.canvas.v1.CreateCanvasRequest"> 
      * @generated from field: repeated tank.canvas.v1.Source sources = 6;
      */
     sources: Source[];
+    /**
+     * @generated from field: string parent_id = 7;
+     */
+    parentId: string;
+    /**
+     * A starting shape rather than a blank page: see ListTemplates. Ignored when
+     * blocks are given.
+     *
+     * @generated from field: string template = 8;
+     */
+    template: string;
 };
 /**
  * Describes the message tank.canvas.v1.CreateCanvasRequest.
@@ -580,7 +663,111 @@ export declare const DeleteCanvasResponseSchema: GenMessage<DeleteCanvasResponse
 /**
  * Write a page from what was actually said. The thread's decisions and the shape of
  * the conversation become the first draft; a person edits from there.
+ * Editing one block does not touch the rest of the page, so two people writing in
+ * different places both succeed. This is what a page needs far more often than it
+ * needs cursors.
  *
+ * @generated from message tank.canvas.v1.UpdateBlockRequest
+ */
+export type UpdateBlockRequest = Message<"tank.canvas.v1.UpdateBlockRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string canvas_id = 2;
+     */
+    canvasId: string;
+    /**
+     * its id names the block; a new id appends
+     *
+     * @generated from field: tank.canvas.v1.Block block = 3;
+     */
+    block?: Block;
+    /**
+     * @generated from field: bool delete = 4;
+     */
+    delete: boolean;
+    /**
+     * where a new block goes; empty appends
+     *
+     * @generated from field: string after_block_id = 5;
+     */
+    afterBlockId: string;
+};
+/**
+ * Describes the message tank.canvas.v1.UpdateBlockRequest.
+ * Use `create(UpdateBlockRequestSchema)` to create a new message.
+ */
+export declare const UpdateBlockRequestSchema: GenMessage<UpdateBlockRequest>;
+/**
+ * @generated from message tank.canvas.v1.UpdateBlockResponse
+ */
+export type UpdateBlockResponse = Message<"tank.canvas.v1.UpdateBlockResponse"> & {
+    /**
+     * @generated from field: tank.canvas.v1.Canvas canvas = 1;
+     */
+    canvas?: Canvas;
+};
+/**
+ * Describes the message tank.canvas.v1.UpdateBlockResponse.
+ * Use `create(UpdateBlockResponseSchema)` to create a new message.
+ */
+export declare const UpdateBlockResponseSchema: GenMessage<UpdateBlockResponse>;
+/**
+ * @generated from message tank.canvas.v1.Template
+ */
+export type Template = Message<"tank.canvas.v1.Template"> & {
+    /**
+     * what to pass as CreateCanvasRequest.template
+     *
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: string icon = 3;
+     */
+    icon: string;
+    /**
+     * one line: when to reach for it
+     *
+     * @generated from field: string about = 4;
+     */
+    about: string;
+};
+/**
+ * Describes the message tank.canvas.v1.Template.
+ * Use `create(TemplateSchema)` to create a new message.
+ */
+export declare const TemplateSchema: GenMessage<Template>;
+/**
+ * @generated from message tank.canvas.v1.ListTemplatesRequest
+ */
+export type ListTemplatesRequest = Message<"tank.canvas.v1.ListTemplatesRequest"> & {};
+/**
+ * Describes the message tank.canvas.v1.ListTemplatesRequest.
+ * Use `create(ListTemplatesRequestSchema)` to create a new message.
+ */
+export declare const ListTemplatesRequestSchema: GenMessage<ListTemplatesRequest>;
+/**
+ * @generated from message tank.canvas.v1.ListTemplatesResponse
+ */
+export type ListTemplatesResponse = Message<"tank.canvas.v1.ListTemplatesResponse"> & {
+    /**
+     * @generated from field: repeated tank.canvas.v1.Template templates = 1;
+     */
+    templates: Template[];
+};
+/**
+ * Describes the message tank.canvas.v1.ListTemplatesResponse.
+ * Use `create(ListTemplatesResponseSchema)` to create a new message.
+ */
+export declare const ListTemplatesResponseSchema: GenMessage<ListTemplatesResponse>;
+/**
  * @generated from message tank.canvas.v1.WriteFromThreadRequest
  */
 export type WriteFromThreadRequest = Message<"tank.canvas.v1.WriteFromThreadRequest"> & {
@@ -672,6 +859,13 @@ export type Answer = Message<"tank.canvas.v1.Answer"> & {
      * @generated from field: double score = 6;
      */
     score: number;
+    /**
+     * How this page was found: "words", "meaning", or "both". A reader deserves to
+     * know whether the Vault understood the question or merely matched it.
+     *
+     * @generated from field: string matched = 7;
+     */
+    matched: string;
 };
 /**
  * Describes the message tank.canvas.v1.Answer.
@@ -692,6 +886,13 @@ export type AskResponse = Message<"tank.canvas.v1.AskResponse"> & {
      * @generated from field: string summary = 2;
      */
     summary: string;
+    /**
+     * False when the Vault could not be reached and this is words only, so the
+     * caller can say so rather than implying the pages were understood.
+     *
+     * @generated from field: bool semantic = 3;
+     */
+    semantic: boolean;
 };
 /**
  * Describes the message tank.canvas.v1.AskResponse.
@@ -759,7 +960,13 @@ export declare enum BlockKind {
     /**
      * @generated from enum value: BLOCK_KIND_IMAGE = 12;
      */
-    IMAGE = 12
+    IMAGE = 12,
+    /**
+     * Rows and columns, for the things a page is otherwise bad at holding.
+     *
+     * @generated from enum value: BLOCK_KIND_TABLE = 13;
+     */
+    TABLE = 13
 }
 /**
  * Describes the enum tank.canvas.v1.BlockKind.
@@ -824,5 +1031,21 @@ export declare const CanvasService: GenService<{
         methodKind: "unary";
         input: typeof AskRequestSchema;
         output: typeof AskResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.canvas.v1.CanvasService.UpdateBlock
+     */
+    updateBlock: {
+        methodKind: "unary";
+        input: typeof UpdateBlockRequestSchema;
+        output: typeof UpdateBlockResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.canvas.v1.CanvasService.ListTemplates
+     */
+    listTemplates: {
+        methodKind: "unary";
+        input: typeof ListTemplatesRequestSchema;
+        output: typeof ListTemplatesResponseSchema;
     };
 }>;

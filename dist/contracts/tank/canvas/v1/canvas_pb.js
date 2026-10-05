@@ -6,112 +6,147 @@ import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 /**
  * Describes the file tank/canvas/v1/canvas.proto.
  */
-export const file_tank_canvas_v1_canvas = /*@__PURE__*/ fileDesc("Cht0YW5rL2NhbnZhcy92MS9jYW52YXMucHJvdG8SDnRhbmsuY2FudmFzLnYxItIBCghEZWNpc2lvbhIMCgR3aGF0GAEgASgJEhIKCmRlY2lkZWRfYnkYAiADKAkSLgoKZGVjaWRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHYmVjYXVzZRgEIAEoCRIbChNzdXBlcnNlZGVzX2Jsb2NrX2lkGAUgASgJEhYKDnRocmVhZF9yb290X2lkGAYgASgJEhgKEG5lZWRzX3JldmlzaXRpbmcYByABKAgSFAoMcmV2aXNpdF9ub3RlGAggASgJIokBCgRMaXZlEgwKBGtpbmQYASABKAkSCwoDcmVmGAIgASgJEg0KBWxhYmVsGAMgASgJEg0KBXZhbHVlGAQgASgJEg4KBmRldGFpbBgFIAEoCRIpCgVhc19vZhgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFZXJyb3IYByABKAki7QEKBUJsb2NrEgoKAmlkGAEgASgJEicKBGtpbmQYAiABKA4yGS50YW5rLmNhbnZhcy52MS5CbG9ja0tpbmQSDAoEdGV4dBgDIAEoCRINCgVkZXB0aBgEIAEoBRIPCgdjaGVja2VkGAUgASgIEgwKBGxhbmcYBiABKAkSKgoIZGVjaXNpb24YByABKAsyGC50YW5rLmNhbnZhcy52MS5EZWNpc2lvbhIiCgRsaXZlGAggASgLMhQudGFuay5jYW52YXMudjEuTGl2ZRISCgptZXNzYWdlX2lkGAkgASgJEg8KB2ZpbGVfaWQYCiABKAkihgEKBlNvdXJjZRIMCgRraW5kGAEgASgJEgsKA3JlZhgCIAEoCRINCgVsYWJlbBgDIAEoCRIrCgdzZWVuX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIPCgdjaGFuZ2VkGAUgASgIEhQKDGNoYW5nZWRfbm90ZRgGIAEoCSKaAwoGQ2FudmFzEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJEg0KBXRpdGxlGAQgASgJEgwKBGljb24YBSABKAkSJQoGYmxvY2tzGAYgAygLMhUudGFuay5jYW52YXMudjEuQmxvY2sSJwoHc291cmNlcxgHIAMoCzIWLnRhbmsuY2FudmFzLnYxLlNvdXJjZRIRCglzdGFsZW5lc3MYCCABKAUSFgoOc3RhbGVuZXNzX25vdGUYCSABKAkSEgoKY3JlYXRlZF9ieRgKIAEoCRIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgp1cGRhdGVkX2J5GAwgASgJEi4KCnVwZGF0ZWRfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB3ZlcnNpb24YDiABKAUSGAoQd3JpdHRlbl9ieV9hZ2VudBgPIAEoCBIPCgdzdW1tYXJ5GBAgASgJIvkBCg1DYW52YXNTdW1tYXJ5EgoKAmlkGAEgASgJEg0KBXRpdGxlGAIgASgJEgwKBGljb24YAyABKAkSEgoKY2hhbm5lbF9pZBgEIAEoCRIPCgdzdW1tYXJ5GAUgASgJEhEKCXN0YWxlbmVzcxgGIAEoBRIWCg5zdGFsZW5lc3Nfbm90ZRgHIAEoCRIuCgp1cGRhdGVkX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgp1cGRhdGVkX2J5GAkgASgJEhgKEHdyaXR0ZW5fYnlfYWdlbnQYCiABKAgSEQoJZGVjaXNpb25zGAsgASgFIlMKE0xpc3RDYW52YXNlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKc3RhbGVfb25seRgDIAEoCCJHChRMaXN0Q2FudmFzZXNSZXNwb25zZRIvCghjYW52YXNlcxgBIAMoCzIdLnRhbmsuY2FudmFzLnYxLkNhbnZhc1N1bW1hcnkiNAoQR2V0Q2FudmFzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkiOwoRR2V0Q2FudmFzUmVzcG9uc2USJgoGY2FudmFzGAEgASgLMhYudGFuay5jYW52YXMudjEuQ2FudmFzIqwBChNDcmVhdGVDYW52YXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEgwKBGljb24YBCABKAkSJQoGYmxvY2tzGAUgAygLMhUudGFuay5jYW52YXMudjEuQmxvY2sSJwoHc291cmNlcxgGIAMoCzIWLnRhbmsuY2FudmFzLnYxLlNvdXJjZSI+ChRDcmVhdGVDYW52YXNSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMi4wEKE1VwZGF0ZUNhbnZhc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJEg0KBXRpdGxlGAMgASgJEgwKBGljb24YBCABKAkSJQoGYmxvY2tzGAUgAygLMhUudGFuay5jYW52YXMudjEuQmxvY2sSEgoKc2V0X2Jsb2NrcxgGIAEoCBInCgdzb3VyY2VzGAcgAygLMhYudGFuay5jYW52YXMudjEuU291cmNlEhMKC3NldF9zb3VyY2VzGAggASgIEhQKDGJhc2VfdmVyc2lvbhgJIAEoBSI+ChRVcGRhdGVDYW52YXNSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMiNwoTRGVsZXRlQ2FudmFzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkiFgoURGVsZXRlQ2FudmFzUmVzcG9uc2UiVQoWV3JpdGVGcm9tVGhyZWFkUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAiABKAkSDQoFdGl0bGUYAyABKAkiQQoXV3JpdGVGcm9tVGhyZWFkUmVzcG9uc2USJgoGY2FudmFzGAEgASgLMhYudGFuay5jYW52YXMudjEuQ2FudmFzIkMKCkFza1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhAKCHF1ZXN0aW9uGAIgASgJEg0KBWxpbWl0GAMgASgFImoKBkFuc3dlchIRCgljYW52YXNfaWQYASABKAkSDQoFdGl0bGUYAiABKAkSDAoEaWNvbhgDIAEoCRIPCgdwYXNzYWdlGAQgASgJEhAKCGJsb2NrX2lkGAUgASgJEg0KBXNjb3JlGAYgASgBIkcKC0Fza1Jlc3BvbnNlEicKB2Fuc3dlcnMYASADKAsyFi50YW5rLmNhbnZhcy52MS5BbnN3ZXISDwoHc3VtbWFyeRgCIAEoCSq2AgoJQmxvY2tLaW5kEhoKFkJMT0NLX0tJTkRfVU5TUEVDSUZJRUQQABIWChJCTE9DS19LSU5EX0hFQURJTkcQARITCg9CTE9DS19LSU5EX1RFWFQQAhIVChFCTE9DS19LSU5EX0JVTExFVBADEhUKEUJMT0NLX0tJTkRfTlVNQkVSEAQSFAoQQkxPQ0tfS0lORF9RVU9URRAFEhMKD0JMT0NLX0tJTkRfQ09ERRAGEhYKEkJMT0NLX0tJTkRfRElWSURFUhAHEhMKD0JMT0NLX0tJTkRfVE9ETxAIEhcKE0JMT0NLX0tJTkRfREVDSVNJT04QCRITCg9CTE9DS19LSU5EX0xJVkUQChIWChJCTE9DS19LSU5EX01FU1NBR0UQCxIUChBCTE9DS19LSU5EX0lNQUdFEAwy8QQKDUNhbnZhc1NlcnZpY2USWQoMTGlzdENhbnZhc2VzEiMudGFuay5jYW52YXMudjEuTGlzdENhbnZhc2VzUmVxdWVzdBokLnRhbmsuY2FudmFzLnYxLkxpc3RDYW52YXNlc1Jlc3BvbnNlElAKCUdldENhbnZhcxIgLnRhbmsuY2FudmFzLnYxLkdldENhbnZhc1JlcXVlc3QaIS50YW5rLmNhbnZhcy52MS5HZXRDYW52YXNSZXNwb25zZRJZCgxDcmVhdGVDYW52YXMSIy50YW5rLmNhbnZhcy52MS5DcmVhdGVDYW52YXNSZXF1ZXN0GiQudGFuay5jYW52YXMudjEuQ3JlYXRlQ2FudmFzUmVzcG9uc2USWQoMVXBkYXRlQ2FudmFzEiMudGFuay5jYW52YXMudjEuVXBkYXRlQ2FudmFzUmVxdWVzdBokLnRhbmsuY2FudmFzLnYxLlVwZGF0ZUNhbnZhc1Jlc3BvbnNlElkKDERlbGV0ZUNhbnZhcxIjLnRhbmsuY2FudmFzLnYxLkRlbGV0ZUNhbnZhc1JlcXVlc3QaJC50YW5rLmNhbnZhcy52MS5EZWxldGVDYW52YXNSZXNwb25zZRJiCg9Xcml0ZUZyb21UaHJlYWQSJi50YW5rLmNhbnZhcy52MS5Xcml0ZUZyb21UaHJlYWRSZXF1ZXN0GicudGFuay5jYW52YXMudjEuV3JpdGVGcm9tVGhyZWFkUmVzcG9uc2USPgoDQXNrEhoudGFuay5jYW52YXMudjEuQXNrUmVxdWVzdBobLnRhbmsuY2FudmFzLnYxLkFza1Jlc3BvbnNlQtABChJjb20udGFuay5jYW52YXMudjFCC0NhbnZhc1Byb3RvUAFaU2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvY2FudmFzL3YxO2NhbnZhc3YxogIDVENYqgIOVGFuay5DYW52YXMuVjHKAg5UYW5rXENhbnZhc1xWMeICGlRhbmtcQ2FudmFzXFYxXEdQQk1ldGFkYXRh6gIQVGFuazo6Q2FudmFzOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+export const file_tank_canvas_v1_canvas = /*@__PURE__*/ fileDesc("Cht0YW5rL2NhbnZhcy92MS9jYW52YXMucHJvdG8SDnRhbmsuY2FudmFzLnYxIhkKCFRhYmxlUm93Eg0KBWNlbGxzGAEgAygJIkAKBVRhYmxlEg8KB2hlYWRlcnMYASADKAkSJgoEcm93cxgCIAMoCzIYLnRhbmsuY2FudmFzLnYxLlRhYmxlUm93ItIBCghEZWNpc2lvbhIMCgR3aGF0GAEgASgJEhIKCmRlY2lkZWRfYnkYAiADKAkSLgoKZGVjaWRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHYmVjYXVzZRgEIAEoCRIbChNzdXBlcnNlZGVzX2Jsb2NrX2lkGAUgASgJEhYKDnRocmVhZF9yb290X2lkGAYgASgJEhgKEG5lZWRzX3JldmlzaXRpbmcYByABKAgSFAoMcmV2aXNpdF9ub3RlGAggASgJIokBCgRMaXZlEgwKBGtpbmQYASABKAkSCwoDcmVmGAIgASgJEg0KBWxhYmVsGAMgASgJEg0KBXZhbHVlGAQgASgJEg4KBmRldGFpbBgFIAEoCRIpCgVhc19vZhgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFZXJyb3IYByABKAkipQIKBUJsb2NrEgoKAmlkGAEgASgJEicKBGtpbmQYAiABKA4yGS50YW5rLmNhbnZhcy52MS5CbG9ja0tpbmQSDAoEdGV4dBgDIAEoCRINCgVkZXB0aBgEIAEoBRIPCgdjaGVja2VkGAUgASgIEgwKBGxhbmcYBiABKAkSKgoIZGVjaXNpb24YByABKAsyGC50YW5rLmNhbnZhcy52MS5EZWNpc2lvbhIiCgRsaXZlGAggASgLMhQudGFuay5jYW52YXMudjEuTGl2ZRISCgptZXNzYWdlX2lkGAkgASgJEg8KB2ZpbGVfaWQYCiABKAkSJAoFdGFibGUYCyABKAsyFS50YW5rLmNhbnZhcy52MS5UYWJsZRIQCghmaWxlX3VybBgMIAEoCSKGAQoGU291cmNlEgwKBGtpbmQYASABKAkSCwoDcmVmGAIgASgJEg0KBWxhYmVsGAMgASgJEisKB3NlZW5fYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB2NoYW5nZWQYBSABKAgSFAoMY2hhbmdlZF9ub3RlGAYgASgJIt4DCgZDYW52YXMSCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEhIKCmNoYW5uZWxfaWQYAyABKAkSDQoFdGl0bGUYBCABKAkSDAoEaWNvbhgFIAEoCRIlCgZibG9ja3MYBiADKAsyFS50YW5rLmNhbnZhcy52MS5CbG9jaxInCgdzb3VyY2VzGAcgAygLMhYudGFuay5jYW52YXMudjEuU291cmNlEhEKCXN0YWxlbmVzcxgIIAEoBRIWCg5zdGFsZW5lc3Nfbm90ZRgJIAEoCRISCgpjcmVhdGVkX2J5GAogASgJEi4KCmNyZWF0ZWRfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYDCABKAkSLgoKdXBkYXRlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHdmVyc2lvbhgOIAEoBRIYChB3cml0dGVuX2J5X2FnZW50GA8gASgIEg8KB3N1bW1hcnkYECABKAkSEQoJcGFyZW50X2lkGBEgASgJEi8KCGNoaWxkcmVuGBIgAygLMh0udGFuay5jYW52YXMudjEuQ2FudmFzU3VtbWFyeSKhAgoNQ2FudmFzU3VtbWFyeRIKCgJpZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEhIKCmNoYW5uZWxfaWQYBCABKAkSDwoHc3VtbWFyeRgFIAEoCRIRCglzdGFsZW5lc3MYBiABKAUSFgoOc3RhbGVuZXNzX25vdGUYByABKAkSLgoKdXBkYXRlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKdXBkYXRlZF9ieRgJIAEoCRIYChB3cml0dGVuX2J5X2FnZW50GAogASgIEhEKCWRlY2lzaW9ucxgLIAEoBRIRCglwYXJlbnRfaWQYDCABKAkSEwoLY2hpbGRfY291bnQYDSABKAUieQoTTGlzdENhbnZhc2VzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRISCgpzdGFsZV9vbmx5GAMgASgIEhEKCXBhcmVudF9pZBgEIAEoCRIRCgl0b3BfbGV2ZWwYBSABKAgiRwoUTGlzdENhbnZhc2VzUmVzcG9uc2USLwoIY2FudmFzZXMYASADKAsyHS50YW5rLmNhbnZhcy52MS5DYW52YXNTdW1tYXJ5IjQKEEdldENhbnZhc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJIjsKEUdldENhbnZhc1Jlc3BvbnNlEiYKBmNhbnZhcxgBIAEoCzIWLnRhbmsuY2FudmFzLnYxLkNhbnZhcyLRAQoTQ3JlYXRlQ2FudmFzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRINCgV0aXRsZRgDIAEoCRIMCgRpY29uGAQgASgJEiUKBmJsb2NrcxgFIAMoCzIVLnRhbmsuY2FudmFzLnYxLkJsb2NrEicKB3NvdXJjZXMYBiADKAsyFi50YW5rLmNhbnZhcy52MS5Tb3VyY2USEQoJcGFyZW50X2lkGAcgASgJEhAKCHRlbXBsYXRlGAggASgJIj4KFENyZWF0ZUNhbnZhc1Jlc3BvbnNlEiYKBmNhbnZhcxgBIAEoCzIWLnRhbmsuY2FudmFzLnYxLkNhbnZhcyLjAQoTVXBkYXRlQ2FudmFzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSDQoFdGl0bGUYAyABKAkSDAoEaWNvbhgEIAEoCRIlCgZibG9ja3MYBSADKAsyFS50YW5rLmNhbnZhcy52MS5CbG9jaxISCgpzZXRfYmxvY2tzGAYgASgIEicKB3NvdXJjZXMYByADKAsyFi50YW5rLmNhbnZhcy52MS5Tb3VyY2USEwoLc2V0X3NvdXJjZXMYCCABKAgSFAoMYmFzZV92ZXJzaW9uGAkgASgFIj4KFFVwZGF0ZUNhbnZhc1Jlc3BvbnNlEiYKBmNhbnZhcxgBIAEoCzIWLnRhbmsuY2FudmFzLnYxLkNhbnZhcyI3ChNEZWxldGVDYW52YXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSIWChREZWxldGVDYW52YXNSZXNwb25zZSKLAQoSVXBkYXRlQmxvY2tSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIRCgljYW52YXNfaWQYAiABKAkSJAoFYmxvY2sYAyABKAsyFS50YW5rLmNhbnZhcy52MS5CbG9jaxIOCgZkZWxldGUYBCABKAgSFgoOYWZ0ZXJfYmxvY2tfaWQYBSABKAkiPQoTVXBkYXRlQmxvY2tSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMiRAoIVGVtcGxhdGUSDAoEbmFtZRgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEg0KBWFib3V0GAQgASgJIhYKFExpc3RUZW1wbGF0ZXNSZXF1ZXN0IkQKFUxpc3RUZW1wbGF0ZXNSZXNwb25zZRIrCgl0ZW1wbGF0ZXMYASADKAsyGC50YW5rLmNhbnZhcy52MS5UZW1wbGF0ZSJVChZXcml0ZUZyb21UaHJlYWRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCRINCgV0aXRsZRgDIAEoCSJBChdXcml0ZUZyb21UaHJlYWRSZXNwb25zZRImCgZjYW52YXMYASABKAsyFi50YW5rLmNhbnZhcy52MS5DYW52YXMiQwoKQXNrUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEAoIcXVlc3Rpb24YAiABKAkSDQoFbGltaXQYAyABKAUiewoGQW5zd2VyEhEKCWNhbnZhc19pZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEg8KB3Bhc3NhZ2UYBCABKAkSEAoIYmxvY2tfaWQYBSABKAkSDQoFc2NvcmUYBiABKAESDwoHbWF0Y2hlZBgHIAEoCSJZCgtBc2tSZXNwb25zZRInCgdhbnN3ZXJzGAEgAygLMhYudGFuay5jYW52YXMudjEuQW5zd2VyEg8KB3N1bW1hcnkYAiABKAkSEAoIc2VtYW50aWMYAyABKAgqzAIKCUJsb2NrS2luZBIaChZCTE9DS19LSU5EX1VOU1BFQ0lGSUVEEAASFgoSQkxPQ0tfS0lORF9IRUFESU5HEAESEwoPQkxPQ0tfS0lORF9URVhUEAISFQoRQkxPQ0tfS0lORF9CVUxMRVQQAxIVChFCTE9DS19LSU5EX05VTUJFUhAEEhQKEEJMT0NLX0tJTkRfUVVPVEUQBRITCg9CTE9DS19LSU5EX0NPREUQBhIWChJCTE9DS19LSU5EX0RJVklERVIQBxITCg9CTE9DS19LSU5EX1RPRE8QCBIXChNCTE9DS19LSU5EX0RFQ0lTSU9OEAkSEwoPQkxPQ0tfS0lORF9MSVZFEAoSFgoSQkxPQ0tfS0lORF9NRVNTQUdFEAsSFAoQQkxPQ0tfS0lORF9JTUFHRRAMEhQKEEJMT0NLX0tJTkRfVEFCTEUQDTKnBgoNQ2FudmFzU2VydmljZRJZCgxMaXN0Q2FudmFzZXMSIy50YW5rLmNhbnZhcy52MS5MaXN0Q2FudmFzZXNSZXF1ZXN0GiQudGFuay5jYW52YXMudjEuTGlzdENhbnZhc2VzUmVzcG9uc2USUAoJR2V0Q2FudmFzEiAudGFuay5jYW52YXMudjEuR2V0Q2FudmFzUmVxdWVzdBohLnRhbmsuY2FudmFzLnYxLkdldENhbnZhc1Jlc3BvbnNlElkKDENyZWF0ZUNhbnZhcxIjLnRhbmsuY2FudmFzLnYxLkNyZWF0ZUNhbnZhc1JlcXVlc3QaJC50YW5rLmNhbnZhcy52MS5DcmVhdGVDYW52YXNSZXNwb25zZRJZCgxVcGRhdGVDYW52YXMSIy50YW5rLmNhbnZhcy52MS5VcGRhdGVDYW52YXNSZXF1ZXN0GiQudGFuay5jYW52YXMudjEuVXBkYXRlQ2FudmFzUmVzcG9uc2USWQoMRGVsZXRlQ2FudmFzEiMudGFuay5jYW52YXMudjEuRGVsZXRlQ2FudmFzUmVxdWVzdBokLnRhbmsuY2FudmFzLnYxLkRlbGV0ZUNhbnZhc1Jlc3BvbnNlEmIKD1dyaXRlRnJvbVRocmVhZBImLnRhbmsuY2FudmFzLnYxLldyaXRlRnJvbVRocmVhZFJlcXVlc3QaJy50YW5rLmNhbnZhcy52MS5Xcml0ZUZyb21UaHJlYWRSZXNwb25zZRI+CgNBc2sSGi50YW5rLmNhbnZhcy52MS5Bc2tSZXF1ZXN0GhsudGFuay5jYW52YXMudjEuQXNrUmVzcG9uc2USVgoLVXBkYXRlQmxvY2sSIi50YW5rLmNhbnZhcy52MS5VcGRhdGVCbG9ja1JlcXVlc3QaIy50YW5rLmNhbnZhcy52MS5VcGRhdGVCbG9ja1Jlc3BvbnNlElwKDUxpc3RUZW1wbGF0ZXMSJC50YW5rLmNhbnZhcy52MS5MaXN0VGVtcGxhdGVzUmVxdWVzdBolLnRhbmsuY2FudmFzLnYxLkxpc3RUZW1wbGF0ZXNSZXNwb25zZULQAQoSY29tLnRhbmsuY2FudmFzLnYxQgtDYW52YXNQcm90b1ABWlNnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2NhbnZhcy92MTtjYW52YXN2MaICA1RDWKoCDlRhbmsuQ2FudmFzLlYxygIOVGFua1xDYW52YXNcVjHiAhpUYW5rXENhbnZhc1xWMVxHUEJNZXRhZGF0YeoCEFRhbms6OkNhbnZhczo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+/**
+ * Describes the message tank.canvas.v1.TableRow.
+ * Use `create(TableRowSchema)` to create a new message.
+ */
+export const TableRowSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 0);
+/**
+ * Describes the message tank.canvas.v1.Table.
+ * Use `create(TableSchema)` to create a new message.
+ */
+export const TableSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 1);
 /**
  * Describes the message tank.canvas.v1.Decision.
  * Use `create(DecisionSchema)` to create a new message.
  */
-export const DecisionSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 0);
+export const DecisionSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 2);
 /**
  * Describes the message tank.canvas.v1.Live.
  * Use `create(LiveSchema)` to create a new message.
  */
-export const LiveSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 1);
+export const LiveSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 3);
 /**
  * Describes the message tank.canvas.v1.Block.
  * Use `create(BlockSchema)` to create a new message.
  */
-export const BlockSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 2);
+export const BlockSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 4);
 /**
  * Describes the message tank.canvas.v1.Source.
  * Use `create(SourceSchema)` to create a new message.
  */
-export const SourceSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 3);
+export const SourceSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 5);
 /**
  * Describes the message tank.canvas.v1.Canvas.
  * Use `create(CanvasSchema)` to create a new message.
  */
-export const CanvasSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 4);
+export const CanvasSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 6);
 /**
  * Describes the message tank.canvas.v1.CanvasSummary.
  * Use `create(CanvasSummarySchema)` to create a new message.
  */
-export const CanvasSummarySchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 5);
+export const CanvasSummarySchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 7);
 /**
  * Describes the message tank.canvas.v1.ListCanvasesRequest.
  * Use `create(ListCanvasesRequestSchema)` to create a new message.
  */
-export const ListCanvasesRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 6);
+export const ListCanvasesRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 8);
 /**
  * Describes the message tank.canvas.v1.ListCanvasesResponse.
  * Use `create(ListCanvasesResponseSchema)` to create a new message.
  */
-export const ListCanvasesResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 7);
+export const ListCanvasesResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 9);
 /**
  * Describes the message tank.canvas.v1.GetCanvasRequest.
  * Use `create(GetCanvasRequestSchema)` to create a new message.
  */
-export const GetCanvasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 8);
+export const GetCanvasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 10);
 /**
  * Describes the message tank.canvas.v1.GetCanvasResponse.
  * Use `create(GetCanvasResponseSchema)` to create a new message.
  */
-export const GetCanvasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 9);
+export const GetCanvasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 11);
 /**
  * Describes the message tank.canvas.v1.CreateCanvasRequest.
  * Use `create(CreateCanvasRequestSchema)` to create a new message.
  */
-export const CreateCanvasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 10);
+export const CreateCanvasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 12);
 /**
  * Describes the message tank.canvas.v1.CreateCanvasResponse.
  * Use `create(CreateCanvasResponseSchema)` to create a new message.
  */
-export const CreateCanvasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 11);
+export const CreateCanvasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 13);
 /**
  * Describes the message tank.canvas.v1.UpdateCanvasRequest.
  * Use `create(UpdateCanvasRequestSchema)` to create a new message.
  */
-export const UpdateCanvasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 12);
+export const UpdateCanvasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 14);
 /**
  * Describes the message tank.canvas.v1.UpdateCanvasResponse.
  * Use `create(UpdateCanvasResponseSchema)` to create a new message.
  */
-export const UpdateCanvasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 13);
+export const UpdateCanvasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 15);
 /**
  * Describes the message tank.canvas.v1.DeleteCanvasRequest.
  * Use `create(DeleteCanvasRequestSchema)` to create a new message.
  */
-export const DeleteCanvasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 14);
+export const DeleteCanvasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 16);
 /**
  * Describes the message tank.canvas.v1.DeleteCanvasResponse.
  * Use `create(DeleteCanvasResponseSchema)` to create a new message.
  */
-export const DeleteCanvasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 15);
+export const DeleteCanvasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 17);
+/**
+ * Describes the message tank.canvas.v1.UpdateBlockRequest.
+ * Use `create(UpdateBlockRequestSchema)` to create a new message.
+ */
+export const UpdateBlockRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 18);
+/**
+ * Describes the message tank.canvas.v1.UpdateBlockResponse.
+ * Use `create(UpdateBlockResponseSchema)` to create a new message.
+ */
+export const UpdateBlockResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 19);
+/**
+ * Describes the message tank.canvas.v1.Template.
+ * Use `create(TemplateSchema)` to create a new message.
+ */
+export const TemplateSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 20);
+/**
+ * Describes the message tank.canvas.v1.ListTemplatesRequest.
+ * Use `create(ListTemplatesRequestSchema)` to create a new message.
+ */
+export const ListTemplatesRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 21);
+/**
+ * Describes the message tank.canvas.v1.ListTemplatesResponse.
+ * Use `create(ListTemplatesResponseSchema)` to create a new message.
+ */
+export const ListTemplatesResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 22);
 /**
  * Describes the message tank.canvas.v1.WriteFromThreadRequest.
  * Use `create(WriteFromThreadRequestSchema)` to create a new message.
  */
-export const WriteFromThreadRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 16);
+export const WriteFromThreadRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 23);
 /**
  * Describes the message tank.canvas.v1.WriteFromThreadResponse.
  * Use `create(WriteFromThreadResponseSchema)` to create a new message.
  */
-export const WriteFromThreadResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 17);
+export const WriteFromThreadResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 24);
 /**
  * Describes the message tank.canvas.v1.AskRequest.
  * Use `create(AskRequestSchema)` to create a new message.
  */
-export const AskRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 18);
+export const AskRequestSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 25);
 /**
  * Describes the message tank.canvas.v1.Answer.
  * Use `create(AnswerSchema)` to create a new message.
  */
-export const AnswerSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 19);
+export const AnswerSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 26);
 /**
  * Describes the message tank.canvas.v1.AskResponse.
  * Use `create(AskResponseSchema)` to create a new message.
  */
-export const AskResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 20);
+export const AskResponseSchema = /*@__PURE__*/ messageDesc(file_tank_canvas_v1_canvas, 27);
 /**
  * @generated from enum tank.canvas.v1.BlockKind
  */
@@ -175,6 +210,12 @@ export var BlockKind;
      * @generated from enum value: BLOCK_KIND_IMAGE = 12;
      */
     BlockKind[BlockKind["IMAGE"] = 12] = "IMAGE";
+    /**
+     * Rows and columns, for the things a page is otherwise bad at holding.
+     *
+     * @generated from enum value: BLOCK_KIND_TABLE = 13;
+     */
+    BlockKind[BlockKind["TABLE"] = 13] = "TABLE";
 })(BlockKind || (BlockKind = {}));
 /**
  * Describes the enum tank.canvas.v1.BlockKind.

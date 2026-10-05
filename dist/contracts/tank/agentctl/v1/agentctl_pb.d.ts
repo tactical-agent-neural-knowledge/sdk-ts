@@ -3,6 +3,7 @@ import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import type { Blocks, Check, GateKind, PlanStep } from "../../blocks/v1/blocks_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
+import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/agentctl/v1/agentctl.proto.
@@ -1267,6 +1268,114 @@ export type BooksReportRequest = Message<"tank.agentctl.v1.BooksReportRequest"> 
  * Use `create(BooksReportRequestSchema)` to create a new message.
  */
 export declare const BooksReportRequestSchema: GenMessage<BooksReportRequest>;
+/**
+ * Neuralcanvas from the thread: write the page up, read one, ask the pages.
+ *
+ * @generated from message tank.agentctl.v1.WriteUpThreadRequest
+ */
+export type WriteUpThreadRequest = Message<"tank.agentctl.v1.WriteUpThreadRequest"> & {
+    /**
+     * empty lets the server name it from the thread
+     *
+     * @generated from field: string title = 1;
+     */
+    title: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.WriteUpThreadRequest.
+ * Use `create(WriteUpThreadRequestSchema)` to create a new message.
+ */
+export declare const WriteUpThreadRequestSchema: GenMessage<WriteUpThreadRequest>;
+/**
+ * @generated from message tank.agentctl.v1.WriteUpThreadResponse
+ */
+export type WriteUpThreadResponse = Message<"tank.agentctl.v1.WriteUpThreadResponse"> & {
+    /**
+     * @generated from field: string canvas_id = 1;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: int32 blocks = 3;
+     */
+    blocks: number;
+    /**
+     * @generated from field: int32 decisions = 4;
+     */
+    decisions: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.WriteUpThreadResponse.
+ * Use `create(WriteUpThreadResponseSchema)` to create a new message.
+ */
+export declare const WriteUpThreadResponseSchema: GenMessage<WriteUpThreadResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ReadCanvasRequest
+ */
+export type ReadCanvasRequest = Message<"tank.agentctl.v1.ReadCanvasRequest"> & {
+    /**
+     * @generated from field: string canvas_id = 1;
+     */
+    canvasId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadCanvasRequest.
+ * Use `create(ReadCanvasRequestSchema)` to create a new message.
+ */
+export declare const ReadCanvasRequestSchema: GenMessage<ReadCanvasRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ReadCanvasResponse
+ */
+export type ReadCanvasResponse = Message<"tank.agentctl.v1.ReadCanvasResponse"> & {
+    /**
+     * @generated from field: tank.canvas.v1.Canvas canvas = 1;
+     */
+    canvas?: Canvas;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadCanvasResponse.
+ * Use `create(ReadCanvasResponseSchema)` to create a new message.
+ */
+export declare const ReadCanvasResponseSchema: GenMessage<ReadCanvasResponse>;
+/**
+ * @generated from message tank.agentctl.v1.AskCanvasRequest
+ */
+export type AskCanvasRequest = Message<"tank.agentctl.v1.AskCanvasRequest"> & {
+    /**
+     * @generated from field: string question = 1;
+     */
+    question: string;
+    /**
+     * @generated from field: int32 limit = 2;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.AskCanvasRequest.
+ * Use `create(AskCanvasRequestSchema)` to create a new message.
+ */
+export declare const AskCanvasRequestSchema: GenMessage<AskCanvasRequest>;
+/**
+ * @generated from message tank.agentctl.v1.AskCanvasResponse
+ */
+export type AskCanvasResponse = Message<"tank.agentctl.v1.AskCanvasResponse"> & {
+    /**
+     * @generated from field: string summary = 1;
+     */
+    summary: string;
+    /**
+     * @generated from field: repeated tank.canvas.v1.Answer answers = 2;
+     */
+    answers: Answer[];
+};
+/**
+ * Describes the message tank.agentctl.v1.AskCanvasResponse.
+ * Use `create(AskCanvasResponseSchema)` to create a new message.
+ */
+export declare const AskCanvasResponseSchema: GenMessage<AskCanvasResponse>;
 /**
  * @generated from message tank.agentctl.v1.BooksReportResponse
  */
@@ -2918,6 +3027,30 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof BooksReportRequestSchema;
         output: typeof BooksReportResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.WriteUpThread
+     */
+    writeUpThread: {
+        methodKind: "unary";
+        input: typeof WriteUpThreadRequestSchema;
+        output: typeof WriteUpThreadResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ReadCanvas
+     */
+    readCanvas: {
+        methodKind: "unary";
+        input: typeof ReadCanvasRequestSchema;
+        output: typeof ReadCanvasResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.AskCanvas
+     */
+    askCanvas: {
+        methodKind: "unary";
+        input: typeof AskCanvasRequestSchema;
+        output: typeof AskCanvasResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PollInbox
