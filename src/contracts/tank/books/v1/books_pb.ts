@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/books/v1/books.proto.
  */
 export const file_tank_books_v1_books: GenFile = /*@__PURE__*/
-  fileDesc("Chl0YW5rL2Jvb2tzL3YxL2Jvb2tzLnByb3RvEg10YW5rLmJvb2tzLnYxIuIBCghTZXR0aW5ncxIPCgdlbmFibGVkGAEgASgIEhAKCGN1cnJlbmN5GAIgASgJEhUKDWJ1c2luZXNzX25hbWUYAyABKAkSFgoOaW52b2ljZV9wcmVmaXgYBCABKAkSGwoTbmV4dF9pbnZvaWNlX251bWJlchgFIAEoBRIYChBkZWZhdWx0X2R1ZV9kYXlzGAYgASgFEhgKEGNoYXNlX2V2ZXJ5X2RheXMYByABKAUSFQoNY29tcGV0ZXNfd2l0aBgIIAMoCRIcChRwYXltZW50X2luc3RydWN0aW9ucxgJIAEoCSKGAQoIQ3VzdG9tZXISCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgVlbWFpbBgDIAEoCRINCgVub3RlcxgEIAEoCRIuCgpjcmVhdGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpvd2VkX2NlbnRzGAYgASgDIl0KC0ludm9pY2VMaW5lEhMKC2Rlc2NyaXB0aW9uGAEgASgJEhAKCHF1YW50aXR5GAIgASgBEhIKCnVuaXRfY2VudHMYAyABKAMSEwoLdG90YWxfY2VudHMYBCABKAMingUKB0ludm9pY2USCgoCaWQYASABKAkSEwoLY3VzdG9tZXJfaWQYAiABKAkSFQoNY3VzdG9tZXJfbmFtZRgDIAEoCRIOCgZudW1iZXIYBCABKAkSLAoGc3RhdHVzGAUgASgOMhwudGFuay5ib29rcy52MS5JbnZvaWNlU3RhdHVzEikKBWxpbmVzGAYgAygLMhoudGFuay5ib29rcy52MS5JbnZvaWNlTGluZRIWCg5zdWJ0b3RhbF9jZW50cxgHIAEoAxIRCgl0YXhfY2VudHMYCCABKAMSEwoLdG90YWxfY2VudHMYCSABKAMSEgoKcGFpZF9jZW50cxgKIAEoAxIRCglkdWVfY2VudHMYCyABKAMSLQoJaXNzdWVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIqCgZkdWVfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEisKB3NlbnRfYXQYDiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEisKB3BhaWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg0KBW5vdGVzGBAgASgJEhYKDnRocmVhZF9yb290X2lkGBEgASgJEjUKEXByZWRpY3RlZF9wYWlkX2F0GBIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIcChRwcmVkaWN0ZWRfY29uZmlkZW5jZRgTIAEoARIyCg5sYXN0X2NoYXNlZF9hdBgUIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLY2hhc2VfY291bnQYFSABKAUSEQoJc2hhcmVfdXJsGBYgASgJIooBCgdQYXltZW50EgoKAmlkGAEgASgJEhIKCmludm9pY2VfaWQYAiABKAkSFAoMYW1vdW50X2NlbnRzGAMgASgDEiYKAmF0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIOCgZtZXRob2QYBSABKAkSEQoJcmVmZXJlbmNlGAYgASgJIuABCgdFeHBlbnNlEgoKAmlkGAEgASgJEg4KBnZlbmRvchgCIAEoCRIQCghjYXRlZ29yeRgDIAEoCRIUCgxhbW91bnRfY2VudHMYBCABKAMSJgoCYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg0KBW5vdGVzGAYgASgJEhcKD3JlY2VpcHRfZmlsZV9pZBgHIAEoCRIRCglib29rZWRfYnkYCCABKAkSLgoKY3JlYXRlZF9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAikgIKC0Nhc2hTdW1tYXJ5EikKBWFzX29mGAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIQCghjdXJyZW5jeRgCIAEoCRISCgpvd2VkX2NlbnRzGAMgASgDEhUKDW92ZXJkdWVfY2VudHMYBCABKAMSFQoNb3Blbl9pbnZvaWNlcxgFIAEoBRIYChBvdmVyZHVlX2ludm9pY2VzGAYgASgFEhoKEnJlY2VpdmVkXzMwZF9jZW50cxgHIAEoAxIXCg9zcGVudF8zMGRfY2VudHMYCCABKAMSGgoSZXhwZWN0ZWRfMzBkX2NlbnRzGAkgASgDEhkKEWV4cGVjdGVkXzZ3X2NlbnRzGAogASgDIioKEkdldFNldHRpbmdzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiQAoTR2V0U2V0dGluZ3NSZXNwb25zZRIpCghzZXR0aW5ncxgBIAEoCzIXLnRhbmsuYm9va3MudjEuU2V0dGluZ3MiWAoVVXBkYXRlU2V0dGluZ3NSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIpCghzZXR0aW5ncxgCIAEoCzIXLnRhbmsuYm9va3MudjEuU2V0dGluZ3MiQwoWVXBkYXRlU2V0dGluZ3NSZXNwb25zZRIpCghzZXR0aW5ncxgBIAEoCzIXLnRhbmsuYm9va3MudjEuU2V0dGluZ3MiLAoUTGlzdEN1c3RvbWVyc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIkMKFUxpc3RDdXN0b21lcnNSZXNwb25zZRIqCgljdXN0b21lcnMYASADKAsyFy50YW5rLmJvb2tzLnYxLkN1c3RvbWVyImUKFVVwc2VydEN1c3RvbWVyUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSDAoEbmFtZRgDIAEoCRINCgVlbWFpbBgEIAEoCRINCgVub3RlcxgFIAEoCSJDChZVcHNlcnRDdXN0b21lclJlc3BvbnNlEikKCGN1c3RvbWVyGAEgASgLMhcudGFuay5ib29rcy52MS5DdXN0b21lciJuChNMaXN0SW52b2ljZXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIsCgZzdGF0dXMYAiABKA4yHC50YW5rLmJvb2tzLnYxLkludm9pY2VTdGF0dXMSEwoLY3VzdG9tZXJfaWQYAyABKAkiQAoUTGlzdEludm9pY2VzUmVzcG9uc2USKAoIaW52b2ljZXMYASADKAsyFi50YW5rLmJvb2tzLnYxLkludm9pY2UiNQoRR2V0SW52b2ljZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJImcKEkdldEludm9pY2VSZXNwb25zZRInCgdpbnZvaWNlGAEgASgLMhYudGFuay5ib29rcy52MS5JbnZvaWNlEigKCHBheW1lbnRzGAIgAygLMhYudGFuay5ib29rcy52MS5QYXltZW50It0BChRDcmVhdGVJbnZvaWNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEwoLY3VzdG9tZXJfaWQYAiABKAkSFQoNY3VzdG9tZXJfbmFtZRgDIAEoCRIpCgVsaW5lcxgEIAMoCzIaLnRhbmsuYm9va3MudjEuSW52b2ljZUxpbmUSEQoJdGF4X2NlbnRzGAUgASgDEhAKCGR1ZV9kYXlzGAYgASgFEg0KBW5vdGVzGAcgASgJEhYKDnRocmVhZF9yb290X2lkGAggASgJEgwKBHNlbmQYCSABKAgiQAoVQ3JlYXRlSW52b2ljZVJlc3BvbnNlEicKB2ludm9pY2UYASABKAsyFi50YW5rLmJvb2tzLnYxLkludm9pY2UiNgoSU2VuZEludm9pY2VSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSI+ChNTZW5kSW52b2ljZVJlc3BvbnNlEicKB2ludm9pY2UYASABKAsyFi50YW5rLmJvb2tzLnYxLkludm9pY2UioQEKFFJlY29yZFBheW1lbnRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgppbnZvaWNlX2lkGAIgASgJEhQKDGFtb3VudF9jZW50cxgDIAEoAxIOCgZtZXRob2QYBCABKAkSEQoJcmVmZXJlbmNlGAUgASgJEiYKAmF0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJpChVSZWNvcmRQYXltZW50UmVzcG9uc2USJwoHaW52b2ljZRgBIAEoCzIWLnRhbmsuYm9va3MudjEuSW52b2ljZRInCgdwYXltZW50GAIgASgLMhYudGFuay5ib29rcy52MS5QYXltZW50IkYKElZvaWRJbnZvaWNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSDgoGcmVhc29uGAMgASgJIj4KE1ZvaWRJbnZvaWNlUmVzcG9uc2USJwoHaW52b2ljZRgBIAEoCzIWLnRhbmsuYm9va3MudjEuSW52b2ljZSI5ChNMaXN0RXhwZW5zZXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRkYXlzGAIgASgFIkAKFExpc3RFeHBlbnNlc1Jlc3BvbnNlEigKCGV4cGVuc2VzGAEgAygLMhYudGFuay5ib29rcy52MS5FeHBlbnNlIrQBChRSZWNvcmRFeHBlbnNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDgoGdmVuZG9yGAIgASgJEhAKCGNhdGVnb3J5GAMgASgJEhQKDGFtb3VudF9jZW50cxgEIAEoAxImCgJhdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFbm90ZXMYBiABKAkSFwoPcmVjZWlwdF9maWxlX2lkGAcgASgJIkAKFVJlY29yZEV4cGVuc2VSZXNwb25zZRInCgdleHBlbnNlGAEgASgLMhYudGFuay5ib29rcy52MS5FeHBlbnNlIi0KFUdldENhc2hTdW1tYXJ5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiRQoWR2V0Q2FzaFN1bW1hcnlSZXNwb25zZRIrCgdzdW1tYXJ5GAEgASgLMhoudGFuay5ib29rcy52MS5DYXNoU3VtbWFyeSqwAQoNSW52b2ljZVN0YXR1cxIeChpJTlZPSUNFX1NUQVRVU19VTlNQRUNJRklFRBAAEhgKFElOVk9JQ0VfU1RBVFVTX0RSQUZUEAESFwoTSU5WT0lDRV9TVEFUVVNfU0VOVBACEhoKFklOVk9JQ0VfU1RBVFVTX09WRVJEVUUQAxIXChNJTlZPSUNFX1NUQVRVU19QQUlEEAQSFwoTSU5WT0lDRV9TVEFUVVNfVk9JRBAFMqIJCgxCb29rc1NlcnZpY2USVAoLR2V0U2V0dGluZ3MSIS50YW5rLmJvb2tzLnYxLkdldFNldHRpbmdzUmVxdWVzdBoiLnRhbmsuYm9va3MudjEuR2V0U2V0dGluZ3NSZXNwb25zZRJdCg5VcGRhdGVTZXR0aW5ncxIkLnRhbmsuYm9va3MudjEuVXBkYXRlU2V0dGluZ3NSZXF1ZXN0GiUudGFuay5ib29rcy52MS5VcGRhdGVTZXR0aW5nc1Jlc3BvbnNlEloKDUxpc3RDdXN0b21lcnMSIy50YW5rLmJvb2tzLnYxLkxpc3RDdXN0b21lcnNSZXF1ZXN0GiQudGFuay5ib29rcy52MS5MaXN0Q3VzdG9tZXJzUmVzcG9uc2USXQoOVXBzZXJ0Q3VzdG9tZXISJC50YW5rLmJvb2tzLnYxLlVwc2VydEN1c3RvbWVyUmVxdWVzdBolLnRhbmsuYm9va3MudjEuVXBzZXJ0Q3VzdG9tZXJSZXNwb25zZRJXCgxMaXN0SW52b2ljZXMSIi50YW5rLmJvb2tzLnYxLkxpc3RJbnZvaWNlc1JlcXVlc3QaIy50YW5rLmJvb2tzLnYxLkxpc3RJbnZvaWNlc1Jlc3BvbnNlElEKCkdldEludm9pY2USIC50YW5rLmJvb2tzLnYxLkdldEludm9pY2VSZXF1ZXN0GiEudGFuay5ib29rcy52MS5HZXRJbnZvaWNlUmVzcG9uc2USWgoNQ3JlYXRlSW52b2ljZRIjLnRhbmsuYm9va3MudjEuQ3JlYXRlSW52b2ljZVJlcXVlc3QaJC50YW5rLmJvb2tzLnYxLkNyZWF0ZUludm9pY2VSZXNwb25zZRJUCgtTZW5kSW52b2ljZRIhLnRhbmsuYm9va3MudjEuU2VuZEludm9pY2VSZXF1ZXN0GiIudGFuay5ib29rcy52MS5TZW5kSW52b2ljZVJlc3BvbnNlEloKDVJlY29yZFBheW1lbnQSIy50YW5rLmJvb2tzLnYxLlJlY29yZFBheW1lbnRSZXF1ZXN0GiQudGFuay5ib29rcy52MS5SZWNvcmRQYXltZW50UmVzcG9uc2USVAoLVm9pZEludm9pY2USIS50YW5rLmJvb2tzLnYxLlZvaWRJbnZvaWNlUmVxdWVzdBoiLnRhbmsuYm9va3MudjEuVm9pZEludm9pY2VSZXNwb25zZRJXCgxMaXN0RXhwZW5zZXMSIi50YW5rLmJvb2tzLnYxLkxpc3RFeHBlbnNlc1JlcXVlc3QaIy50YW5rLmJvb2tzLnYxLkxpc3RFeHBlbnNlc1Jlc3BvbnNlEloKDVJlY29yZEV4cGVuc2USIy50YW5rLmJvb2tzLnYxLlJlY29yZEV4cGVuc2VSZXF1ZXN0GiQudGFuay5ib29rcy52MS5SZWNvcmRFeHBlbnNlUmVzcG9uc2USXQoOR2V0Q2FzaFN1bW1hcnkSJC50YW5rLmJvb2tzLnYxLkdldENhc2hTdW1tYXJ5UmVxdWVzdBolLnRhbmsuYm9va3MudjEuR2V0Q2FzaFN1bW1hcnlSZXNwb25zZULIAQoRY29tLnRhbmsuYm9va3MudjFCCkJvb2tzUHJvdG9QAVpRZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9ib29rcy92MTtib29rc3YxogIDVEJYqgINVGFuay5Cb29rcy5WMcoCDVRhbmtcQm9va3NcVjHiAhlUYW5rXEJvb2tzXFYxXEdQQk1ldGFkYXRh6gIPVGFuazo6Qm9va3M6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
+  fileDesc("Chl0YW5rL2Jvb2tzL3YxL2Jvb2tzLnByb3RvEg10YW5rLmJvb2tzLnYxIuIBCghTZXR0aW5ncxIPCgdlbmFibGVkGAEgASgIEhAKCGN1cnJlbmN5GAIgASgJEhUKDWJ1c2luZXNzX25hbWUYAyABKAkSFgoOaW52b2ljZV9wcmVmaXgYBCABKAkSGwoTbmV4dF9pbnZvaWNlX251bWJlchgFIAEoBRIYChBkZWZhdWx0X2R1ZV9kYXlzGAYgASgFEhgKEGNoYXNlX2V2ZXJ5X2RheXMYByABKAUSFQoNY29tcGV0ZXNfd2l0aBgIIAMoCRIcChRwYXltZW50X2luc3RydWN0aW9ucxgJIAEoCSKGAQoIQ3VzdG9tZXISCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgVlbWFpbBgDIAEoCRINCgVub3RlcxgEIAEoCRIuCgpjcmVhdGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpvd2VkX2NlbnRzGAYgASgDIl0KC0ludm9pY2VMaW5lEhMKC2Rlc2NyaXB0aW9uGAEgASgJEhAKCHF1YW50aXR5GAIgASgBEhIKCnVuaXRfY2VudHMYAyABKAMSEwoLdG90YWxfY2VudHMYBCABKAMingUKB0ludm9pY2USCgoCaWQYASABKAkSEwoLY3VzdG9tZXJfaWQYAiABKAkSFQoNY3VzdG9tZXJfbmFtZRgDIAEoCRIOCgZudW1iZXIYBCABKAkSLAoGc3RhdHVzGAUgASgOMhwudGFuay5ib29rcy52MS5JbnZvaWNlU3RhdHVzEikKBWxpbmVzGAYgAygLMhoudGFuay5ib29rcy52MS5JbnZvaWNlTGluZRIWCg5zdWJ0b3RhbF9jZW50cxgHIAEoAxIRCgl0YXhfY2VudHMYCCABKAMSEwoLdG90YWxfY2VudHMYCSABKAMSEgoKcGFpZF9jZW50cxgKIAEoAxIRCglkdWVfY2VudHMYCyABKAMSLQoJaXNzdWVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIqCgZkdWVfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEisKB3NlbnRfYXQYDiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEisKB3BhaWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg0KBW5vdGVzGBAgASgJEhYKDnRocmVhZF9yb290X2lkGBEgASgJEjUKEXByZWRpY3RlZF9wYWlkX2F0GBIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIcChRwcmVkaWN0ZWRfY29uZmlkZW5jZRgTIAEoARIyCg5sYXN0X2NoYXNlZF9hdBgUIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLY2hhc2VfY291bnQYFSABKAUSEQoJc2hhcmVfdXJsGBYgASgJIooBCgdQYXltZW50EgoKAmlkGAEgASgJEhIKCmludm9pY2VfaWQYAiABKAkSFAoMYW1vdW50X2NlbnRzGAMgASgDEiYKAmF0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIOCgZtZXRob2QYBSABKAkSEQoJcmVmZXJlbmNlGAYgASgJIuABCgdFeHBlbnNlEgoKAmlkGAEgASgJEg4KBnZlbmRvchgCIAEoCRIQCghjYXRlZ29yeRgDIAEoCRIUCgxhbW91bnRfY2VudHMYBCABKAMSJgoCYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg0KBW5vdGVzGAYgASgJEhcKD3JlY2VpcHRfZmlsZV9pZBgHIAEoCRIRCglib29rZWRfYnkYCCABKAkSLgoKY3JlYXRlZF9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAikgIKC0Nhc2hTdW1tYXJ5EikKBWFzX29mGAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIQCghjdXJyZW5jeRgCIAEoCRISCgpvd2VkX2NlbnRzGAMgASgDEhUKDW92ZXJkdWVfY2VudHMYBCABKAMSFQoNb3Blbl9pbnZvaWNlcxgFIAEoBRIYChBvdmVyZHVlX2ludm9pY2VzGAYgASgFEhoKEnJlY2VpdmVkXzMwZF9jZW50cxgHIAEoAxIXCg9zcGVudF8zMGRfY2VudHMYCCABKAMSGgoSZXhwZWN0ZWRfMzBkX2NlbnRzGAkgASgDEhkKEWV4cGVjdGVkXzZ3X2NlbnRzGAogASgDIioKEkdldFNldHRpbmdzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiQAoTR2V0U2V0dGluZ3NSZXNwb25zZRIpCghzZXR0aW5ncxgBIAEoCzIXLnRhbmsuYm9va3MudjEuU2V0dGluZ3MiWAoVVXBkYXRlU2V0dGluZ3NSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIpCghzZXR0aW5ncxgCIAEoCzIXLnRhbmsuYm9va3MudjEuU2V0dGluZ3MiQwoWVXBkYXRlU2V0dGluZ3NSZXNwb25zZRIpCghzZXR0aW5ncxgBIAEoCzIXLnRhbmsuYm9va3MudjEuU2V0dGluZ3MiLAoUTGlzdEN1c3RvbWVyc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIkMKFUxpc3RDdXN0b21lcnNSZXNwb25zZRIqCgljdXN0b21lcnMYASADKAsyFy50YW5rLmJvb2tzLnYxLkN1c3RvbWVyImUKFVVwc2VydEN1c3RvbWVyUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSDAoEbmFtZRgDIAEoCRINCgVlbWFpbBgEIAEoCRINCgVub3RlcxgFIAEoCSJDChZVcHNlcnRDdXN0b21lclJlc3BvbnNlEikKCGN1c3RvbWVyGAEgASgLMhcudGFuay5ib29rcy52MS5DdXN0b21lciJuChNMaXN0SW52b2ljZXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIsCgZzdGF0dXMYAiABKA4yHC50YW5rLmJvb2tzLnYxLkludm9pY2VTdGF0dXMSEwoLY3VzdG9tZXJfaWQYAyABKAkiQAoUTGlzdEludm9pY2VzUmVzcG9uc2USKAoIaW52b2ljZXMYASADKAsyFi50YW5rLmJvb2tzLnYxLkludm9pY2UiNQoRR2V0SW52b2ljZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJImcKEkdldEludm9pY2VSZXNwb25zZRInCgdpbnZvaWNlGAEgASgLMhYudGFuay5ib29rcy52MS5JbnZvaWNlEigKCHBheW1lbnRzGAIgAygLMhYudGFuay5ib29rcy52MS5QYXltZW50It0BChRDcmVhdGVJbnZvaWNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEwoLY3VzdG9tZXJfaWQYAiABKAkSFQoNY3VzdG9tZXJfbmFtZRgDIAEoCRIpCgVsaW5lcxgEIAMoCzIaLnRhbmsuYm9va3MudjEuSW52b2ljZUxpbmUSEQoJdGF4X2NlbnRzGAUgASgDEhAKCGR1ZV9kYXlzGAYgASgFEg0KBW5vdGVzGAcgASgJEhYKDnRocmVhZF9yb290X2lkGAggASgJEgwKBHNlbmQYCSABKAgiQAoVQ3JlYXRlSW52b2ljZVJlc3BvbnNlEicKB2ludm9pY2UYASABKAsyFi50YW5rLmJvb2tzLnYxLkludm9pY2UiNgoSU2VuZEludm9pY2VSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSI+ChNTZW5kSW52b2ljZVJlc3BvbnNlEicKB2ludm9pY2UYASABKAsyFi50YW5rLmJvb2tzLnYxLkludm9pY2UioQEKFFJlY29yZFBheW1lbnRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgppbnZvaWNlX2lkGAIgASgJEhQKDGFtb3VudF9jZW50cxgDIAEoAxIOCgZtZXRob2QYBCABKAkSEQoJcmVmZXJlbmNlGAUgASgJEiYKAmF0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJpChVSZWNvcmRQYXltZW50UmVzcG9uc2USJwoHaW52b2ljZRgBIAEoCzIWLnRhbmsuYm9va3MudjEuSW52b2ljZRInCgdwYXltZW50GAIgASgLMhYudGFuay5ib29rcy52MS5QYXltZW50IkYKElZvaWRJbnZvaWNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSDgoGcmVhc29uGAMgASgJIj4KE1ZvaWRJbnZvaWNlUmVzcG9uc2USJwoHaW52b2ljZRgBIAEoCzIWLnRhbmsuYm9va3MudjEuSW52b2ljZSI5ChNMaXN0RXhwZW5zZXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRkYXlzGAIgASgFIkAKFExpc3RFeHBlbnNlc1Jlc3BvbnNlEigKCGV4cGVuc2VzGAEgAygLMhYudGFuay5ib29rcy52MS5FeHBlbnNlIrQBChRSZWNvcmRFeHBlbnNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDgoGdmVuZG9yGAIgASgJEhAKCGNhdGVnb3J5GAMgASgJEhQKDGFtb3VudF9jZW50cxgEIAEoAxImCgJhdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFbm90ZXMYBiABKAkSFwoPcmVjZWlwdF9maWxlX2lkGAcgASgJIkAKFVJlY29yZEV4cGVuc2VSZXNwb25zZRInCgdleHBlbnNlGAEgASgLMhYudGFuay5ib29rcy52MS5FeHBlbnNlIi0KFUdldENhc2hTdW1tYXJ5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiRQoWR2V0Q2FzaFN1bW1hcnlSZXNwb25zZRIrCgdzdW1tYXJ5GAEgASgLMhoudGFuay5ib29rcy52MS5DYXNoU3VtbWFyeSK+AgoPQmFua1RyYW5zYWN0aW9uEgoKAmlkGAEgASgJEiYKAmF0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBITCgtkZXNjcmlwdGlvbhgDIAEoCRIUCgxhbW91bnRfY2VudHMYBCABKAMSEQoJcmVmZXJlbmNlGAUgASgJEhQKDG1hdGNoZWRfa2luZBgGIAEoCRISCgptYXRjaGVkX2lkGAcgASgJEhUKDW1hdGNoZWRfbGFiZWwYCCABKAkSEwoLZXhwbGFuYXRpb24YCSABKAkSFgoOc3VnZ2VzdGVkX2tpbmQYCiABKAkSFAoMc3VnZ2VzdGVkX2lkGAsgASgJEhcKD3N1Z2dlc3RlZF9sYWJlbBgMIAEoCRIcChRzdWdnZXN0ZWRfY29uZmlkZW5jZRgNIAEoASJYCh1JbXBvcnRCYW5rVHJhbnNhY3Rpb25zUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCwoDY3N2GAIgASgJEhQKDGFjY291bnRfbmFtZRgDIAEoCSKPAQoeSW1wb3J0QmFua1RyYW5zYWN0aW9uc1Jlc3BvbnNlEhAKCGltcG9ydGVkGAEgASgFEg8KB3NraXBwZWQYAiABKAUSFAoMYXV0b19tYXRjaGVkGAMgASgFEjQKDHRyYW5zYWN0aW9ucxgEIAMoCzIeLnRhbmsuYm9va3MudjEuQmFua1RyYW5zYWN0aW9uIksKG0xpc3RCYW5rVHJhbnNhY3Rpb25zUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSFgoOdW5tYXRjaGVkX29ubHkYAiABKAgiVAocTGlzdEJhbmtUcmFuc2FjdGlvbnNSZXNwb25zZRI0Cgx0cmFuc2FjdGlvbnMYASADKAsyHi50YW5rLmJvb2tzLnYxLkJhbmtUcmFuc2FjdGlvbiKtAQobTWF0Y2hCYW5rVHJhbnNhY3Rpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIWCg50cmFuc2FjdGlvbl9pZBgCIAEoCRISCgppbnZvaWNlX2lkGAMgASgJEhIKCmV4cGVuc2VfaWQYBCABKAkSGgoSbmV3X2V4cGVuc2VfdmVuZG9yGAUgASgJEhwKFG5ld19leHBlbnNlX2NhdGVnb3J5GAYgASgJIlMKHE1hdGNoQmFua1RyYW5zYWN0aW9uUmVzcG9uc2USMwoLdHJhbnNhY3Rpb24YASABKAsyHi50YW5rLmJvb2tzLnYxLkJhbmtUcmFuc2FjdGlvbiqwAQoNSW52b2ljZVN0YXR1cxIeChpJTlZPSUNFX1NUQVRVU19VTlNQRUNJRklFRBAAEhgKFElOVk9JQ0VfU1RBVFVTX0RSQUZUEAESFwoTSU5WT0lDRV9TVEFUVVNfU0VOVBACEhoKFklOVk9JQ0VfU1RBVFVTX09WRVJEVUUQAxIXChNJTlZPSUNFX1NUQVRVU19QQUlEEAQSFwoTSU5WT0lDRV9TVEFUVVNfVk9JRBAFMvsLCgxCb29rc1NlcnZpY2USVAoLR2V0U2V0dGluZ3MSIS50YW5rLmJvb2tzLnYxLkdldFNldHRpbmdzUmVxdWVzdBoiLnRhbmsuYm9va3MudjEuR2V0U2V0dGluZ3NSZXNwb25zZRJdCg5VcGRhdGVTZXR0aW5ncxIkLnRhbmsuYm9va3MudjEuVXBkYXRlU2V0dGluZ3NSZXF1ZXN0GiUudGFuay5ib29rcy52MS5VcGRhdGVTZXR0aW5nc1Jlc3BvbnNlEloKDUxpc3RDdXN0b21lcnMSIy50YW5rLmJvb2tzLnYxLkxpc3RDdXN0b21lcnNSZXF1ZXN0GiQudGFuay5ib29rcy52MS5MaXN0Q3VzdG9tZXJzUmVzcG9uc2USXQoOVXBzZXJ0Q3VzdG9tZXISJC50YW5rLmJvb2tzLnYxLlVwc2VydEN1c3RvbWVyUmVxdWVzdBolLnRhbmsuYm9va3MudjEuVXBzZXJ0Q3VzdG9tZXJSZXNwb25zZRJXCgxMaXN0SW52b2ljZXMSIi50YW5rLmJvb2tzLnYxLkxpc3RJbnZvaWNlc1JlcXVlc3QaIy50YW5rLmJvb2tzLnYxLkxpc3RJbnZvaWNlc1Jlc3BvbnNlElEKCkdldEludm9pY2USIC50YW5rLmJvb2tzLnYxLkdldEludm9pY2VSZXF1ZXN0GiEudGFuay5ib29rcy52MS5HZXRJbnZvaWNlUmVzcG9uc2USWgoNQ3JlYXRlSW52b2ljZRIjLnRhbmsuYm9va3MudjEuQ3JlYXRlSW52b2ljZVJlcXVlc3QaJC50YW5rLmJvb2tzLnYxLkNyZWF0ZUludm9pY2VSZXNwb25zZRJUCgtTZW5kSW52b2ljZRIhLnRhbmsuYm9va3MudjEuU2VuZEludm9pY2VSZXF1ZXN0GiIudGFuay5ib29rcy52MS5TZW5kSW52b2ljZVJlc3BvbnNlEloKDVJlY29yZFBheW1lbnQSIy50YW5rLmJvb2tzLnYxLlJlY29yZFBheW1lbnRSZXF1ZXN0GiQudGFuay5ib29rcy52MS5SZWNvcmRQYXltZW50UmVzcG9uc2USVAoLVm9pZEludm9pY2USIS50YW5rLmJvb2tzLnYxLlZvaWRJbnZvaWNlUmVxdWVzdBoiLnRhbmsuYm9va3MudjEuVm9pZEludm9pY2VSZXNwb25zZRJXCgxMaXN0RXhwZW5zZXMSIi50YW5rLmJvb2tzLnYxLkxpc3RFeHBlbnNlc1JlcXVlc3QaIy50YW5rLmJvb2tzLnYxLkxpc3RFeHBlbnNlc1Jlc3BvbnNlEloKDVJlY29yZEV4cGVuc2USIy50YW5rLmJvb2tzLnYxLlJlY29yZEV4cGVuc2VSZXF1ZXN0GiQudGFuay5ib29rcy52MS5SZWNvcmRFeHBlbnNlUmVzcG9uc2USXQoOR2V0Q2FzaFN1bW1hcnkSJC50YW5rLmJvb2tzLnYxLkdldENhc2hTdW1tYXJ5UmVxdWVzdBolLnRhbmsuYm9va3MudjEuR2V0Q2FzaFN1bW1hcnlSZXNwb25zZRJ1ChZJbXBvcnRCYW5rVHJhbnNhY3Rpb25zEiwudGFuay5ib29rcy52MS5JbXBvcnRCYW5rVHJhbnNhY3Rpb25zUmVxdWVzdBotLnRhbmsuYm9va3MudjEuSW1wb3J0QmFua1RyYW5zYWN0aW9uc1Jlc3BvbnNlEm8KFExpc3RCYW5rVHJhbnNhY3Rpb25zEioudGFuay5ib29rcy52MS5MaXN0QmFua1RyYW5zYWN0aW9uc1JlcXVlc3QaKy50YW5rLmJvb2tzLnYxLkxpc3RCYW5rVHJhbnNhY3Rpb25zUmVzcG9uc2USbwoUTWF0Y2hCYW5rVHJhbnNhY3Rpb24SKi50YW5rLmJvb2tzLnYxLk1hdGNoQmFua1RyYW5zYWN0aW9uUmVxdWVzdBorLnRhbmsuYm9va3MudjEuTWF0Y2hCYW5rVHJhbnNhY3Rpb25SZXNwb25zZULIAQoRY29tLnRhbmsuYm9va3MudjFCCkJvb2tzUHJvdG9QAVpRZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9ib29rcy92MTtib29rc3YxogIDVEJYqgINVGFuay5Cb29rcy5WMcoCDVRhbmtcQm9va3NcVjHiAhlUYW5rXEJvb2tzXFYxXEdQQk1ldGFkYXRh6gIPVGFuazo6Qm9va3M6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.books.v1.Settings
@@ -1104,6 +1104,268 @@ export const GetCashSummaryResponseSchema: GenMessage<GetCashSummaryResponse> = 
   messageDesc(file_tank_books_v1_books, 32);
 
 /**
+ * The bank feed, as a file first. A line is money in (positive) or out (negative);
+ * reconciliation is matching each line to an invoice or an expense, and the match
+ * always says why in a sentence.
+ *
+ * @generated from message tank.books.v1.BankTransaction
+ */
+export type BankTransaction = Message<"tank.books.v1.BankTransaction"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 2;
+   */
+  at?: Timestamp;
+
+  /**
+   * @generated from field: string description = 3;
+   */
+  description: string;
+
+  /**
+   * positive in, negative out
+   *
+   * @generated from field: int64 amount_cents = 4;
+   */
+  amountCents: bigint;
+
+  /**
+   * @generated from field: string reference = 5;
+   */
+  reference: string;
+
+  /**
+   * "" | invoice | expense
+   *
+   * @generated from field: string matched_kind = 6;
+   */
+  matchedKind: string;
+
+  /**
+   * @generated from field: string matched_id = 7;
+   */
+  matchedId: string;
+
+  /**
+   * e.g. "INV-0007 · Acme" or "AWS · hosting"
+   *
+   * @generated from field: string matched_label = 8;
+   */
+  matchedLabel: string;
+
+  /**
+   * why it matched, or why it is suggested
+   *
+   * @generated from field: string explanation = 9;
+   */
+  explanation: string;
+
+  /**
+   * The best guess for an unmatched line, when there is one.
+   *
+   * invoice | expense | new_expense
+   *
+   * @generated from field: string suggested_kind = 10;
+   */
+  suggestedKind: string;
+
+  /**
+   * @generated from field: string suggested_id = 11;
+   */
+  suggestedId: string;
+
+  /**
+   * @generated from field: string suggested_label = 12;
+   */
+  suggestedLabel: string;
+
+  /**
+   * @generated from field: double suggested_confidence = 13;
+   */
+  suggestedConfidence: number;
+};
+
+/**
+ * Describes the message tank.books.v1.BankTransaction.
+ * Use `create(BankTransactionSchema)` to create a new message.
+ */
+export const BankTransactionSchema: GenMessage<BankTransaction> = /*@__PURE__*/
+  messageDesc(file_tank_books_v1_books, 33);
+
+/**
+ * @generated from message tank.books.v1.ImportBankTransactionsRequest
+ */
+export type ImportBankTransactionsRequest = Message<"tank.books.v1.ImportBankTransactionsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * a bank export: date, description, amount (or debit/credit), reference
+   *
+   * @generated from field: string csv = 2;
+   */
+  csv: string;
+
+  /**
+   * @generated from field: string account_name = 3;
+   */
+  accountName: string;
+};
+
+/**
+ * Describes the message tank.books.v1.ImportBankTransactionsRequest.
+ * Use `create(ImportBankTransactionsRequestSchema)` to create a new message.
+ */
+export const ImportBankTransactionsRequestSchema: GenMessage<ImportBankTransactionsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_books_v1_books, 34);
+
+/**
+ * @generated from message tank.books.v1.ImportBankTransactionsResponse
+ */
+export type ImportBankTransactionsResponse = Message<"tank.books.v1.ImportBankTransactionsResponse"> & {
+  /**
+   * @generated from field: int32 imported = 1;
+   */
+  imported: number;
+
+  /**
+   * already known
+   *
+   * @generated from field: int32 skipped = 2;
+   */
+  skipped: number;
+
+  /**
+   * matched on the spot, with an explanation
+   *
+   * @generated from field: int32 auto_matched = 3;
+   */
+  autoMatched: number;
+
+  /**
+   * @generated from field: repeated tank.books.v1.BankTransaction transactions = 4;
+   */
+  transactions: BankTransaction[];
+};
+
+/**
+ * Describes the message tank.books.v1.ImportBankTransactionsResponse.
+ * Use `create(ImportBankTransactionsResponseSchema)` to create a new message.
+ */
+export const ImportBankTransactionsResponseSchema: GenMessage<ImportBankTransactionsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_books_v1_books, 35);
+
+/**
+ * @generated from message tank.books.v1.ListBankTransactionsRequest
+ */
+export type ListBankTransactionsRequest = Message<"tank.books.v1.ListBankTransactionsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: bool unmatched_only = 2;
+   */
+  unmatchedOnly: boolean;
+};
+
+/**
+ * Describes the message tank.books.v1.ListBankTransactionsRequest.
+ * Use `create(ListBankTransactionsRequestSchema)` to create a new message.
+ */
+export const ListBankTransactionsRequestSchema: GenMessage<ListBankTransactionsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_books_v1_books, 36);
+
+/**
+ * @generated from message tank.books.v1.ListBankTransactionsResponse
+ */
+export type ListBankTransactionsResponse = Message<"tank.books.v1.ListBankTransactionsResponse"> & {
+  /**
+   * @generated from field: repeated tank.books.v1.BankTransaction transactions = 1;
+   */
+  transactions: BankTransaction[];
+};
+
+/**
+ * Describes the message tank.books.v1.ListBankTransactionsResponse.
+ * Use `create(ListBankTransactionsResponseSchema)` to create a new message.
+ */
+export const ListBankTransactionsResponseSchema: GenMessage<ListBankTransactionsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_books_v1_books, 37);
+
+/**
+ * @generated from message tank.books.v1.MatchBankTransactionRequest
+ */
+export type MatchBankTransactionRequest = Message<"tank.books.v1.MatchBankTransactionRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string transaction_id = 2;
+   */
+  transactionId: string;
+
+  /**
+   * money in: records a payment on it
+   *
+   * @generated from field: string invoice_id = 3;
+   */
+  invoiceId: string;
+
+  /**
+   * money out: ties to an expense already booked
+   *
+   * @generated from field: string expense_id = 4;
+   */
+  expenseId: string;
+
+  /**
+   * money out: books a new expense with this vendor
+   *
+   * @generated from field: string new_expense_vendor = 5;
+   */
+  newExpenseVendor: string;
+
+  /**
+   * @generated from field: string new_expense_category = 6;
+   */
+  newExpenseCategory: string;
+};
+
+/**
+ * Describes the message tank.books.v1.MatchBankTransactionRequest.
+ * Use `create(MatchBankTransactionRequestSchema)` to create a new message.
+ */
+export const MatchBankTransactionRequestSchema: GenMessage<MatchBankTransactionRequest> = /*@__PURE__*/
+  messageDesc(file_tank_books_v1_books, 38);
+
+/**
+ * @generated from message tank.books.v1.MatchBankTransactionResponse
+ */
+export type MatchBankTransactionResponse = Message<"tank.books.v1.MatchBankTransactionResponse"> & {
+  /**
+   * @generated from field: tank.books.v1.BankTransaction transaction = 1;
+   */
+  transaction?: BankTransaction;
+};
+
+/**
+ * Describes the message tank.books.v1.MatchBankTransactionResponse.
+ * Use `create(MatchBankTransactionResponseSchema)` to create a new message.
+ */
+export const MatchBankTransactionResponseSchema: GenMessage<MatchBankTransactionResponse> = /*@__PURE__*/
+  messageDesc(file_tank_books_v1_books, 39);
+
+/**
  * @generated from enum tank.books.v1.InvoiceStatus
  */
 export enum InvoiceStatus {
@@ -1261,6 +1523,30 @@ export const BooksService: GenService<{
     methodKind: "unary";
     input: typeof GetCashSummaryRequestSchema;
     output: typeof GetCashSummaryResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.books.v1.BooksService.ImportBankTransactions
+   */
+  importBankTransactions: {
+    methodKind: "unary";
+    input: typeof ImportBankTransactionsRequestSchema;
+    output: typeof ImportBankTransactionsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.books.v1.BooksService.ListBankTransactions
+   */
+  listBankTransactions: {
+    methodKind: "unary";
+    input: typeof ListBankTransactionsRequestSchema;
+    output: typeof ListBankTransactionsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.books.v1.BooksService.MatchBankTransaction
+   */
+  matchBankTransaction: {
+    methodKind: "unary";
+    input: typeof MatchBankTransactionRequestSchema;
+    output: typeof MatchBankTransactionResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_books_v1_books, 0);

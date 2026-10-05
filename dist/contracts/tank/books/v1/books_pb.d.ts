@@ -904,6 +904,224 @@ export type GetCashSummaryResponse = Message<"tank.books.v1.GetCashSummaryRespon
  */
 export declare const GetCashSummaryResponseSchema: GenMessage<GetCashSummaryResponse>;
 /**
+ * The bank feed, as a file first. A line is money in (positive) or out (negative);
+ * reconciliation is matching each line to an invoice or an expense, and the match
+ * always says why in a sentence.
+ *
+ * @generated from message tank.books.v1.BankTransaction
+ */
+export type BankTransaction = Message<"tank.books.v1.BankTransaction"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 2;
+     */
+    at?: Timestamp;
+    /**
+     * @generated from field: string description = 3;
+     */
+    description: string;
+    /**
+     * positive in, negative out
+     *
+     * @generated from field: int64 amount_cents = 4;
+     */
+    amountCents: bigint;
+    /**
+     * @generated from field: string reference = 5;
+     */
+    reference: string;
+    /**
+     * "" | invoice | expense
+     *
+     * @generated from field: string matched_kind = 6;
+     */
+    matchedKind: string;
+    /**
+     * @generated from field: string matched_id = 7;
+     */
+    matchedId: string;
+    /**
+     * e.g. "INV-0007 · Acme" or "AWS · hosting"
+     *
+     * @generated from field: string matched_label = 8;
+     */
+    matchedLabel: string;
+    /**
+     * why it matched, or why it is suggested
+     *
+     * @generated from field: string explanation = 9;
+     */
+    explanation: string;
+    /**
+     * The best guess for an unmatched line, when there is one.
+     *
+     * invoice | expense | new_expense
+     *
+     * @generated from field: string suggested_kind = 10;
+     */
+    suggestedKind: string;
+    /**
+     * @generated from field: string suggested_id = 11;
+     */
+    suggestedId: string;
+    /**
+     * @generated from field: string suggested_label = 12;
+     */
+    suggestedLabel: string;
+    /**
+     * @generated from field: double suggested_confidence = 13;
+     */
+    suggestedConfidence: number;
+};
+/**
+ * Describes the message tank.books.v1.BankTransaction.
+ * Use `create(BankTransactionSchema)` to create a new message.
+ */
+export declare const BankTransactionSchema: GenMessage<BankTransaction>;
+/**
+ * @generated from message tank.books.v1.ImportBankTransactionsRequest
+ */
+export type ImportBankTransactionsRequest = Message<"tank.books.v1.ImportBankTransactionsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * a bank export: date, description, amount (or debit/credit), reference
+     *
+     * @generated from field: string csv = 2;
+     */
+    csv: string;
+    /**
+     * @generated from field: string account_name = 3;
+     */
+    accountName: string;
+};
+/**
+ * Describes the message tank.books.v1.ImportBankTransactionsRequest.
+ * Use `create(ImportBankTransactionsRequestSchema)` to create a new message.
+ */
+export declare const ImportBankTransactionsRequestSchema: GenMessage<ImportBankTransactionsRequest>;
+/**
+ * @generated from message tank.books.v1.ImportBankTransactionsResponse
+ */
+export type ImportBankTransactionsResponse = Message<"tank.books.v1.ImportBankTransactionsResponse"> & {
+    /**
+     * @generated from field: int32 imported = 1;
+     */
+    imported: number;
+    /**
+     * already known
+     *
+     * @generated from field: int32 skipped = 2;
+     */
+    skipped: number;
+    /**
+     * matched on the spot, with an explanation
+     *
+     * @generated from field: int32 auto_matched = 3;
+     */
+    autoMatched: number;
+    /**
+     * @generated from field: repeated tank.books.v1.BankTransaction transactions = 4;
+     */
+    transactions: BankTransaction[];
+};
+/**
+ * Describes the message tank.books.v1.ImportBankTransactionsResponse.
+ * Use `create(ImportBankTransactionsResponseSchema)` to create a new message.
+ */
+export declare const ImportBankTransactionsResponseSchema: GenMessage<ImportBankTransactionsResponse>;
+/**
+ * @generated from message tank.books.v1.ListBankTransactionsRequest
+ */
+export type ListBankTransactionsRequest = Message<"tank.books.v1.ListBankTransactionsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: bool unmatched_only = 2;
+     */
+    unmatchedOnly: boolean;
+};
+/**
+ * Describes the message tank.books.v1.ListBankTransactionsRequest.
+ * Use `create(ListBankTransactionsRequestSchema)` to create a new message.
+ */
+export declare const ListBankTransactionsRequestSchema: GenMessage<ListBankTransactionsRequest>;
+/**
+ * @generated from message tank.books.v1.ListBankTransactionsResponse
+ */
+export type ListBankTransactionsResponse = Message<"tank.books.v1.ListBankTransactionsResponse"> & {
+    /**
+     * @generated from field: repeated tank.books.v1.BankTransaction transactions = 1;
+     */
+    transactions: BankTransaction[];
+};
+/**
+ * Describes the message tank.books.v1.ListBankTransactionsResponse.
+ * Use `create(ListBankTransactionsResponseSchema)` to create a new message.
+ */
+export declare const ListBankTransactionsResponseSchema: GenMessage<ListBankTransactionsResponse>;
+/**
+ * @generated from message tank.books.v1.MatchBankTransactionRequest
+ */
+export type MatchBankTransactionRequest = Message<"tank.books.v1.MatchBankTransactionRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string transaction_id = 2;
+     */
+    transactionId: string;
+    /**
+     * money in: records a payment on it
+     *
+     * @generated from field: string invoice_id = 3;
+     */
+    invoiceId: string;
+    /**
+     * money out: ties to an expense already booked
+     *
+     * @generated from field: string expense_id = 4;
+     */
+    expenseId: string;
+    /**
+     * money out: books a new expense with this vendor
+     *
+     * @generated from field: string new_expense_vendor = 5;
+     */
+    newExpenseVendor: string;
+    /**
+     * @generated from field: string new_expense_category = 6;
+     */
+    newExpenseCategory: string;
+};
+/**
+ * Describes the message tank.books.v1.MatchBankTransactionRequest.
+ * Use `create(MatchBankTransactionRequestSchema)` to create a new message.
+ */
+export declare const MatchBankTransactionRequestSchema: GenMessage<MatchBankTransactionRequest>;
+/**
+ * @generated from message tank.books.v1.MatchBankTransactionResponse
+ */
+export type MatchBankTransactionResponse = Message<"tank.books.v1.MatchBankTransactionResponse"> & {
+    /**
+     * @generated from field: tank.books.v1.BankTransaction transaction = 1;
+     */
+    transaction?: BankTransaction;
+};
+/**
+ * Describes the message tank.books.v1.MatchBankTransactionResponse.
+ * Use `create(MatchBankTransactionResponseSchema)` to create a new message.
+ */
+export declare const MatchBankTransactionResponseSchema: GenMessage<MatchBankTransactionResponse>;
+/**
  * @generated from enum tank.books.v1.InvoiceStatus
  */
 export declare enum InvoiceStatus {
@@ -1053,5 +1271,29 @@ export declare const BooksService: GenService<{
         methodKind: "unary";
         input: typeof GetCashSummaryRequestSchema;
         output: typeof GetCashSummaryResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.ImportBankTransactions
+     */
+    importBankTransactions: {
+        methodKind: "unary";
+        input: typeof ImportBankTransactionsRequestSchema;
+        output: typeof ImportBankTransactionsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.ListBankTransactions
+     */
+    listBankTransactions: {
+        methodKind: "unary";
+        input: typeof ListBankTransactionsRequestSchema;
+        output: typeof ListBankTransactionsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.MatchBankTransaction
+     */
+    matchBankTransaction: {
+        methodKind: "unary";
+        input: typeof MatchBankTransactionRequestSchema;
+        output: typeof MatchBankTransactionResponseSchema;
     };
 }>;
