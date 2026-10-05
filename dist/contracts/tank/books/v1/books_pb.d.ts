@@ -1122,6 +1122,133 @@ export type MatchBankTransactionResponse = Message<"tank.books.v1.MatchBankTrans
  */
 export declare const MatchBankTransactionResponseSchema: GenMessage<MatchBankTransactionResponse>;
 /**
+ * A report is an answer: how the period went, from the journal, in the words a person
+ * asks with. Profit is revenue less expenses; cash is what the journal says is in hand.
+ *
+ * @generated from message tank.books.v1.ReportLine
+ */
+export type ReportLine = Message<"tank.books.v1.ReportLine"> & {
+    /**
+     * e.g. "hosting", or a customer's name
+     *
+     * @generated from field: string label = 1;
+     */
+    label: string;
+    /**
+     * @generated from field: int64 cents = 2;
+     */
+    cents: bigint;
+};
+/**
+ * Describes the message tank.books.v1.ReportLine.
+ * Use `create(ReportLineSchema)` to create a new message.
+ */
+export declare const ReportLineSchema: GenMessage<ReportLine>;
+/**
+ * @generated from message tank.books.v1.Report
+ */
+export type Report = Message<"tank.books.v1.Report"> & {
+    /**
+     * @generated from field: google.protobuf.Timestamp from = 1;
+     */
+    from?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp to = 2;
+     */
+    to?: Timestamp;
+    /**
+     * @generated from field: string currency = 3;
+     */
+    currency: string;
+    /**
+     * invoiced in the period
+     *
+     * @generated from field: int64 revenue_cents = 4;
+     */
+    revenueCents: bigint;
+    /**
+     * @generated from field: int64 expenses_cents = 5;
+     */
+    expensesCents: bigint;
+    /**
+     * revenue − expenses
+     *
+     * @generated from field: int64 profit_cents = 6;
+     */
+    profitCents: bigint;
+    /**
+     * payments that arrived
+     *
+     * @generated from field: int64 received_cents = 7;
+     */
+    receivedCents: bigint;
+    /**
+     * cash account balance, all time
+     *
+     * @generated from field: int64 cash_cents = 8;
+     */
+    cashCents: bigint;
+    /**
+     * still owed, all time
+     *
+     * @generated from field: int64 receivable_cents = 9;
+     */
+    receivableCents: bigint;
+    /**
+     * @generated from field: repeated tank.books.v1.ReportLine expenses_by_category = 10;
+     */
+    expensesByCategory: ReportLine[];
+    /**
+     * @generated from field: repeated tank.books.v1.ReportLine revenue_by_customer = 11;
+     */
+    revenueByCustomer: ReportLine[];
+    /**
+     * the report in one sentence
+     *
+     * @generated from field: string sentence = 12;
+     */
+    sentence: string;
+};
+/**
+ * Describes the message tank.books.v1.Report.
+ * Use `create(ReportSchema)` to create a new message.
+ */
+export declare const ReportSchema: GenMessage<Report>;
+/**
+ * @generated from message tank.books.v1.GetReportRequest
+ */
+export type GetReportRequest = Message<"tank.books.v1.GetReportRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * this_month | last_month | this_quarter | this_year | last_30_days (default)
+     *
+     * @generated from field: string period = 2;
+     */
+    period: string;
+};
+/**
+ * Describes the message tank.books.v1.GetReportRequest.
+ * Use `create(GetReportRequestSchema)` to create a new message.
+ */
+export declare const GetReportRequestSchema: GenMessage<GetReportRequest>;
+/**
+ * @generated from message tank.books.v1.GetReportResponse
+ */
+export type GetReportResponse = Message<"tank.books.v1.GetReportResponse"> & {
+    /**
+     * @generated from field: tank.books.v1.Report report = 1;
+     */
+    report?: Report;
+};
+/**
+ * Describes the message tank.books.v1.GetReportResponse.
+ * Use `create(GetReportResponseSchema)` to create a new message.
+ */
+export declare const GetReportResponseSchema: GenMessage<GetReportResponse>;
+/**
  * @generated from enum tank.books.v1.InvoiceStatus
  */
 export declare enum InvoiceStatus {
@@ -1295,5 +1422,13 @@ export declare const BooksService: GenService<{
         methodKind: "unary";
         input: typeof MatchBankTransactionRequestSchema;
         output: typeof MatchBankTransactionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.GetReport
+     */
+    getReport: {
+        methodKind: "unary";
+        input: typeof GetReportRequestSchema;
+        output: typeof GetReportResponseSchema;
     };
 }>;
