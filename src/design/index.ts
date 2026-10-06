@@ -9,6 +9,16 @@ export {
 } from "./fonts.js";
 export { muiThemeOptions, type TankMuiThemeOptions } from "./mui.js";
 export {
+  boardFills,
+  boardFonts,
+  boardStrokes,
+  boardTextSizes,
+  hexFor,
+  type Swatch,
+  stickyFills,
+  tokenFor,
+} from "./palette.js";
+export {
   type PaperColors,
   type PaperTheme,
   paperDarkTheme,
