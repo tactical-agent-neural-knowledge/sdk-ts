@@ -1,6 +1,6 @@
 # Neurons · src/blocks-native
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - The react-native-paper half of the card renderer, and **the only directory in the package allowed to import `react-native` or `react-native-paper`** — `src/exports.test.ts` scans both `src/` and `dist/` and fails any other file that does.
 - Entry point is `BlocksViewNative` in `src/blocks-native/BlocksViewNative.tsx`; it mirrors the web `switch` over the same 12 kinds with `default: return null`, so the two renderers must be changed together.

@@ -1,4 +1,4 @@
-# Neural Knowledge by TANK · refreshed 2026-10-03 · f9489740a406
+# Neural Knowledge by TANK · refreshed 2026-10-04 · 5378a111dd9c
 
 This repository is one npm package, `@tactical-agent-neural-knowledge/sdk`: the TypeScript SDK every TANK client
 builds on. It holds typed Connect clients for the API, a binary realtime gateway client, a normalized message store

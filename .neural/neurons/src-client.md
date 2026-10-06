@@ -1,6 +1,6 @@
 # Neurons · src/client
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - `createTankClient` in `src/client/client.ts` is the single entry point; the `TankClient` it returns owns the typed Connect clients (`auth, workspaces, channels, chat, presence, files, agents`/`agent`, `notifications, topo, monitor, command`) plus `realtime`, `store`, `storage` and `events`.
 - `client.start()` has a fixed order: hydrate from storage → `realtime.setWorkspaceIds` → `realtime.start()` → a 1 s interval dispatching `typing/expire` and `agentStatus/expire` → the persist subscription. Calling realtime before hydration loses the resume cursors.

@@ -1,6 +1,6 @@
 # Neurons · src/design
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - One token source feeds both platforms: `src/design/tokens.ts` → `muiThemeOptions` (`mui.ts`) for web and `paperDarkTheme`/`paperLightTheme` (`paper.ts`) for mobile. Never hand-pick a hex in a renderer.
 - The upstream source of truth for the palette is `docs/brand/COLOR_PALETTE.json` in the `docs` repo; `tokens.ts` is the vendored projection of it.

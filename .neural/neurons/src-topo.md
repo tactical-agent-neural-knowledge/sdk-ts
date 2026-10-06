@@ -1,6 +1,6 @@
 # Neurons · src/topo
 
-refreshed 2026-10-03 · f9489740a406
+refreshed 2026-10-04 · 5378a111dd9c
 
 - Client-side logic for the Topo strip (the minimap beside a Tread): which mark families to draw, and how to turn search results into marks. Shared by web and mobile so a mark cannot mean one thing on each.
 - `src/topo/visibility.ts` `visibleMarkTypes(prefs)` is the entry point for "what does this person see"; `isMarkVisible(type, prefs)` is the per-mark form.
