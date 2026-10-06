@@ -84,6 +84,18 @@ export type Style = Message<"tank.board.v1.Style"> & {
      * @generated from field: string align = 9;
      */
     align: string;
+    /**
+     * "0 2 8 #00000055" — offset x, offset y, blur, colour. Empty for none.
+     *
+     * @generated from field: string shadow = 10;
+     */
+    shadow: string;
+    /**
+     * Gaussian blur radius on the object itself.
+     *
+     * @generated from field: double blur = 11;
+     */
+    blur: number;
 };
 /**
  * Describes the message tank.board.v1.Style.
@@ -235,6 +247,19 @@ export type BoardObject = Message<"tank.board.v1.BoardObject"> & {
      * @generated from field: bool locked = 15;
      */
     locked: boolean;
+    /**
+     * Relationships a renderer does not need but an editor does: which component this
+     * is an instance of, the named style it follows, how a frame lays its children out,
+     * how a child is pinned when its parent resizes, whether it is hidden.
+     *
+     * One opaque string rather than a field per idea, because these are the editor's
+     * own vocabulary and will keep growing; geometry and colour stay in their real
+     * fields so a renderer that knows nothing about any of this still draws the board
+     * correctly. Clients that do not understand a record leave it alone.
+     *
+     * @generated from field: string meta = 18;
+     */
+    meta: string;
     /**
      * @generated from field: string created_by = 16;
      */
@@ -485,6 +510,17 @@ export type UpdateBoardRequest = Message<"tank.board.v1.UpdateBoardRequest"> & {
      * @generated from field: string icon = 4;
      */
     icon: string;
+    /**
+     * Which Tread the board belongs to. A board with no Tread has nowhere for a change
+     * request to be discussed, and without this there was no way out of that state.
+     *
+     * @generated from field: string channel_id = 5;
+     */
+    channelId: string;
+    /**
+     * @generated from field: bool set_channel = 6;
+     */
+    setChannel: boolean;
 };
 /**
  * Describes the message tank.board.v1.UpdateBoardRequest.

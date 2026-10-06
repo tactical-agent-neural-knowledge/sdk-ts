@@ -2,6 +2,7 @@ import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobu
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import type { Blocks, Check, GateKind, PlanStep } from "../../blocks/v1/blocks_pb.js";
+import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
 import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
@@ -1394,6 +1395,295 @@ export type BooksReportResponse = Message<"tank.agentctl.v1.BooksReportResponse"
  * Use `create(BooksReportResponseSchema)` to create a new message.
  */
 export declare const BooksReportResponseSchema: GenMessage<BooksReportResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListBoardsRequest
+ */
+export type ListBoardsRequest = Message<"tank.agentctl.v1.ListBoardsRequest"> & {
+    /**
+     * 0 takes the server's default
+     *
+     * @generated from field: int32 limit = 1;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListBoardsRequest.
+ * Use `create(ListBoardsRequestSchema)` to create a new message.
+ */
+export declare const ListBoardsRequestSchema: GenMessage<ListBoardsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BoardListing
+ */
+export type BoardListing = Message<"tank.agentctl.v1.BoardListing"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: int32 objects = 3;
+     */
+    objects: number;
+    /**
+     * frames holding a running application
+     *
+     * @generated from field: int32 app_frames = 4;
+     */
+    appFrames: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.BoardListing.
+ * Use `create(BoardListingSchema)` to create a new message.
+ */
+export declare const BoardListingSchema: GenMessage<BoardListing>;
+/**
+ * @generated from message tank.agentctl.v1.ListBoardsResponse
+ */
+export type ListBoardsResponse = Message<"tank.agentctl.v1.ListBoardsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.BoardListing boards = 1;
+     */
+    boards: BoardListing[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListBoardsResponse.
+ * Use `create(ListBoardsResponseSchema)` to create a new message.
+ */
+export declare const ListBoardsResponseSchema: GenMessage<ListBoardsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ReadBoardRequest
+ */
+export type ReadBoardRequest = Message<"tank.agentctl.v1.ReadBoardRequest"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadBoardRequest.
+ * Use `create(ReadBoardRequestSchema)` to create a new message.
+ */
+export declare const ReadBoardRequestSchema: GenMessage<ReadBoardRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ReadBoardResponse
+ */
+export type ReadBoardResponse = Message<"tank.agentctl.v1.ReadBoardResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.Board board = 1;
+     */
+    board?: Board;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadBoardResponse.
+ * Use `create(ReadBoardResponseSchema)` to create a new message.
+ */
+export declare const ReadBoardResponseSchema: GenMessage<ReadBoardResponse>;
+/**
+ * One thing to draw. Compact on purpose: the model says what and where, and the
+ * control plane fills in the rest of the object — paint order, revision, the style a
+ * sticky note is expected to have.
+ *
+ * @generated from message tank.agentctl.v1.BoardShape
+ */
+export type BoardShape = Message<"tank.agentctl.v1.BoardShape"> & {
+    /**
+     * empty draws a new one; an id from read_board changes that one
+     *
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * frame | rect | ellipse | line | arrow | text | sticky | connector
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * @generated from field: double x = 3;
+     */
+    x: number;
+    /**
+     * @generated from field: double y = 4;
+     */
+    y: number;
+    /**
+     * @generated from field: double w = 5;
+     */
+    w: number;
+    /**
+     * @generated from field: double h = 6;
+     */
+    h: number;
+    /**
+     * @generated from field: string text = 7;
+     */
+    text: string;
+    /**
+     * #rrggbb; empty takes the kind's default
+     *
+     * @generated from field: string fill = 8;
+     */
+    fill: string;
+    /**
+     * the frame it sits inside
+     *
+     * @generated from field: string parent_id = 9;
+     */
+    parentId: string;
+    /**
+     * connector: what it comes from
+     *
+     * @generated from field: string from_id = 10;
+     */
+    fromId: string;
+    /**
+     * connector: what it goes to
+     *
+     * @generated from field: string to_id = 11;
+     */
+    toId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BoardShape.
+ * Use `create(BoardShapeSchema)` to create a new message.
+ */
+export declare const BoardShapeSchema: GenMessage<BoardShape>;
+/**
+ * @generated from message tank.agentctl.v1.DrawOnBoardRequest
+ */
+export type DrawOnBoardRequest = Message<"tank.agentctl.v1.DrawOnBoardRequest"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.BoardShape shapes = 2;
+     */
+    shapes: BoardShape[];
+    /**
+     * @generated from field: repeated string delete_ids = 3;
+     */
+    deleteIds: string[];
+    /**
+     * The revisions the agent last read, keyed by object id, so a shape a person moved
+     * since is reported rather than overwritten.
+     *
+     * @generated from field: map<string, int32> base_revs = 4;
+     */
+    baseRevs: {
+        [key: string]: number;
+    };
+};
+/**
+ * Describes the message tank.agentctl.v1.DrawOnBoardRequest.
+ * Use `create(DrawOnBoardRequestSchema)` to create a new message.
+ */
+export declare const DrawOnBoardRequestSchema: GenMessage<DrawOnBoardRequest>;
+/**
+ * @generated from message tank.agentctl.v1.DrawOnBoardResponse
+ */
+export type DrawOnBoardResponse = Message<"tank.agentctl.v1.DrawOnBoardResponse"> & {
+    /**
+     * what was written, in the order asked
+     *
+     * @generated from field: repeated string object_ids = 1;
+     */
+    objectIds: string[];
+    /**
+     * how many are on the board now
+     *
+     * @generated from field: int32 objects = 2;
+     */
+    objects: number;
+    /**
+     * left alone because somebody else had moved them
+     *
+     * @generated from field: repeated string conflict_ids = 3;
+     */
+    conflictIds: string[];
+    /**
+     * @generated from field: string conflict_note = 4;
+     */
+    conflictNote: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.DrawOnBoardResponse.
+ * Use `create(DrawOnBoardResponseSchema)` to create a new message.
+ */
+export declare const DrawOnBoardResponseSchema: GenMessage<DrawOnBoardResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ArrangeBoardRequest
+ */
+export type ArrangeBoardRequest = Message<"tank.agentctl.v1.ArrangeBoardRequest"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+    /**
+     * @generated from field: repeated string object_ids = 2;
+     */
+    objectIds: string[];
+    /**
+     * row | column | grid
+     *
+     * @generated from field: string layout = 3;
+     */
+    layout: string;
+    /**
+     * 0 takes the default
+     *
+     * @generated from field: double gap = 4;
+     */
+    gap: number;
+    /**
+     * grid only; 0 picks a near-square
+     *
+     * @generated from field: int32 columns = 5;
+     */
+    columns: number;
+    /**
+     * @generated from field: map<string, int32> base_revs = 6;
+     */
+    baseRevs: {
+        [key: string]: number;
+    };
+};
+/**
+ * Describes the message tank.agentctl.v1.ArrangeBoardRequest.
+ * Use `create(ArrangeBoardRequestSchema)` to create a new message.
+ */
+export declare const ArrangeBoardRequestSchema: GenMessage<ArrangeBoardRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ArrangeBoardResponse
+ */
+export type ArrangeBoardResponse = Message<"tank.agentctl.v1.ArrangeBoardResponse"> & {
+    /**
+     * @generated from field: int32 moved = 1;
+     */
+    moved: number;
+    /**
+     * what the result looks like, in a sentence
+     *
+     * @generated from field: string note = 2;
+     */
+    note: string;
+    /**
+     * @generated from field: repeated string conflict_ids = 3;
+     */
+    conflictIds: string[];
+    /**
+     * @generated from field: string conflict_note = 4;
+     */
+    conflictNote: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ArrangeBoardResponse.
+ * Use `create(ArrangeBoardResponseSchema)` to create a new message.
+ */
+export declare const ArrangeBoardResponseSchema: GenMessage<ArrangeBoardResponse>;
 /**
  * @generated from message tank.agentctl.v1.OpenPullRequestRequest
  */
@@ -3051,6 +3341,38 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof AskCanvasRequestSchema;
         output: typeof AskCanvasResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ListBoards
+     */
+    listBoards: {
+        methodKind: "unary";
+        input: typeof ListBoardsRequestSchema;
+        output: typeof ListBoardsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ReadBoard
+     */
+    readBoard: {
+        methodKind: "unary";
+        input: typeof ReadBoardRequestSchema;
+        output: typeof ReadBoardResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.DrawOnBoard
+     */
+    drawOnBoard: {
+        methodKind: "unary";
+        input: typeof DrawOnBoardRequestSchema;
+        output: typeof DrawOnBoardResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ArrangeBoard
+     */
+    arrangeBoard: {
+        methodKind: "unary";
+        input: typeof ArrangeBoardRequestSchema;
+        output: typeof ArrangeBoardResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PollInbox
