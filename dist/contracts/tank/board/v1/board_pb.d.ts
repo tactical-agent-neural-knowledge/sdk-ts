@@ -161,6 +161,29 @@ export type AppFrame = Message<"tank.board.v1.AppFrame"> & {
      * @generated from field: string note = 9;
      */
     note: string;
+    /**
+     * The commit this frame was drawn from. Set when somebody draws or refreshes it;
+     * comparing it with what is deployed now is how a board learns it has gone stale.
+     *
+     * @generated from field: string drawn_from_sha = 10;
+     */
+    drawnFromSha: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp drawn_at = 11;
+     */
+    drawnAt?: Timestamp;
+    /**
+     * Server-filled: the app has moved on since this frame was drawn.
+     *
+     * @generated from field: bool moved_on = 12;
+     */
+    movedOn: boolean;
+    /**
+     * "the app has moved 23 commits since this was drawn"
+     *
+     * @generated from field: string moved_note = 13;
+     */
+    movedNote: string;
 };
 /**
  * Describes the message tank.board.v1.AppFrame.
@@ -327,6 +350,19 @@ export type Board = Message<"tank.board.v1.Board"> & {
      * @generated from field: google.protobuf.Timestamp updated_at = 11;
      */
     updatedAt?: Timestamp;
+    /**
+     * 0 is current; 100 is nothing it was drawn from is still as it was. The same idea
+     * as a Neuralcanvas page: a board nobody can trust is a board nobody opens.
+     *
+     * @generated from field: int32 staleness = 12;
+     */
+    staleness: number;
+    /**
+     * What has moved, in a sentence. Empty when the board still matches the product.
+     *
+     * @generated from field: string staleness_note = 13;
+     */
+    stalenessNote: string;
 };
 /**
  * Describes the message tank.board.v1.Board.
@@ -365,6 +401,14 @@ export type BoardSummary = Message<"tank.board.v1.BoardSummary"> & {
      * @generated from field: string channel_id = 7;
      */
     channelId: string;
+    /**
+     * @generated from field: int32 staleness = 8;
+     */
+    staleness: number;
+    /**
+     * @generated from field: string staleness_note = 9;
+     */
+    stalenessNote: string;
 };
 /**
  * Describes the message tank.board.v1.BoardSummary.
