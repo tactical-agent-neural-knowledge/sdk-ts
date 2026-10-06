@@ -50,6 +50,7 @@ export class RealtimeClient {
     subChannels = new Set();
     subThreads = new Set();
     subCanvases = new Set();
+    subBoards = new Set();
     presenceUsers = [];
     focused;
     offOnline;
@@ -142,23 +143,33 @@ export class RealtimeClient {
         const channelIds = (opts.channelIds ?? []).filter((c) => !this.subChannels.has(c));
         const threadRootIds = (opts.threadRootIds ?? []).filter((t) => !this.subThreads.has(t));
         const canvasIds = (opts.canvasIds ?? []).filter((c) => !this.subCanvases.has(c));
+        const boardIds = (opts.boardIds ?? []).filter((b) => !this.subBoards.has(b));
         for (const c of channelIds)
             this.subChannels.add(c);
         for (const t of threadRootIds)
             this.subThreads.add(t);
         for (const c of canvasIds)
             this.subCanvases.add(c);
-        if (channelIds.length === 0 && threadRootIds.length === 0 && canvasIds.length === 0)
+        for (const b of boardIds)
+            this.subBoards.add(b);
+        if (channelIds.length === 0 &&
+            threadRootIds.length === 0 &&
+            canvasIds.length === 0 &&
+            boardIds.length === 0)
             return;
-        this.sendIfReady({ case: "subscribe", value: { channelIds, threadRootIds, canvasIds } });
+        this.sendIfReady({ case: "subscribe", value: { channelIds, threadRootIds, canvasIds, boardIds } });
     }
     unsubscribe(opts) {
         const channelIds = (opts.channelIds ?? []).filter((c) => this.subChannels.delete(c));
         const threadRootIds = (opts.threadRootIds ?? []).filter((t) => this.subThreads.delete(t));
         const canvasIds = (opts.canvasIds ?? []).filter((c) => this.subCanvases.delete(c));
-        if (channelIds.length === 0 && threadRootIds.length === 0 && canvasIds.length === 0)
+        const boardIds = (opts.boardIds ?? []).filter((b) => this.subBoards.delete(b));
+        if (channelIds.length === 0 &&
+            threadRootIds.length === 0 &&
+            canvasIds.length === 0 &&
+            boardIds.length === 0)
             return;
-        this.sendIfReady({ case: "unsubscribe", value: { channelIds, threadRootIds, canvasIds } });
+        this.sendIfReady({ case: "unsubscribe", value: { channelIds, threadRootIds, canvasIds, boardIds } });
     }
     /** Replaces the presence subscription set (max 500 ids). */
     presenceSubscribe(userIds) {
@@ -174,6 +185,13 @@ export class RealtimeClient {
      */
     canvasEditing(canvasId, blockId = "", left = false) {
         this.sendIfReady({ case: "canvasEditing", value: { canvasId, blockId, left } });
+    }
+    /**
+     * "My pointer is here, and this is what I have selected." Throttled server-side, so
+     * calling it on every mouse move is fine.
+     */
+    boardPointer(boardId, x, y, selectedIds = [], left = false) {
+        this.sendIfReady({ case: "boardPointer", value: { boardId, x, y, selectedIds, left } });
     }
     /** The channel the user is looking at; the server suppresses push for it. */
     focus(channelId) {
@@ -342,13 +360,17 @@ export class RealtimeClient {
         return this.send(kind);
     }
     resendSubscriptions() {
-        if (this.subChannels.size > 0 || this.subThreads.size > 0 || this.subCanvases.size > 0) {
+        if (this.subChannels.size > 0 ||
+            this.subThreads.size > 0 ||
+            this.subCanvases.size > 0 ||
+            this.subBoards.size > 0) {
             this.send({
                 case: "subscribe",
                 value: {
                     channelIds: Array.from(this.subChannels),
                     threadRootIds: Array.from(this.subThreads),
                     canvasIds: Array.from(this.subCanvases),
+                    boardIds: Array.from(this.subBoards),
                 },
             });
         }
@@ -444,6 +466,9 @@ export class RealtimeClient {
                 return;
             case "canvasEditing":
                 this.events.emit("canvas_editing", k.value);
+                return;
+            case "boardPointer":
+                this.events.emit("board_pointer", k.value);
                 return;
             default:
                 return;

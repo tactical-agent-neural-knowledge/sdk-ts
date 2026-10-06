@@ -1,6 +1,7 @@
 import { create, fromBinary, toBinary } from "@bufbuild/protobuf";
 import type {
   AgentStatus,
+  BoardPointer,
   CanvasEditing,
   PresenceChanged,
   Typing,
@@ -52,6 +53,8 @@ export interface RealtimeEvents {
   agent_status: AgentStatus;
   /** Someone else moved around a page this socket has open. */
   canvas_editing: CanvasEditing;
+  /** Someone else moved their pointer on a board this socket has open. */
+  board_pointer: BoardPointer;
   pong: Pong;
   error: ErrorFrame;
   /** Socket closed (any reason). `willReconnect` is false after stop(). */
@@ -145,6 +148,7 @@ export class RealtimeClient {
   private readonly subChannels = new Set<string>();
   private readonly subThreads = new Set<string>();
   private readonly subCanvases = new Set<string>();
+  private readonly subBoards = new Set<string>();
   private presenceUsers: string[] = [];
   private focused: string | undefined;
   private offOnline: (() => void) | undefined;
@@ -237,23 +241,48 @@ export class RealtimeClient {
 
   // ------------------------------------------------------------ subscriptions
 
-  subscribe(opts: { channelIds?: string[]; threadRootIds?: string[]; canvasIds?: string[] }): void {
+  subscribe(opts: {
+    channelIds?: string[];
+    threadRootIds?: string[];
+    canvasIds?: string[];
+    boardIds?: string[];
+  }): void {
     const channelIds = (opts.channelIds ?? []).filter((c) => !this.subChannels.has(c));
     const threadRootIds = (opts.threadRootIds ?? []).filter((t) => !this.subThreads.has(t));
     const canvasIds = (opts.canvasIds ?? []).filter((c) => !this.subCanvases.has(c));
+    const boardIds = (opts.boardIds ?? []).filter((b) => !this.subBoards.has(b));
     for (const c of channelIds) this.subChannels.add(c);
     for (const t of threadRootIds) this.subThreads.add(t);
     for (const c of canvasIds) this.subCanvases.add(c);
-    if (channelIds.length === 0 && threadRootIds.length === 0 && canvasIds.length === 0) return;
-    this.sendIfReady({ case: "subscribe", value: { channelIds, threadRootIds, canvasIds } });
+    for (const b of boardIds) this.subBoards.add(b);
+    if (
+      channelIds.length === 0 &&
+      threadRootIds.length === 0 &&
+      canvasIds.length === 0 &&
+      boardIds.length === 0
+    )
+      return;
+    this.sendIfReady({ case: "subscribe", value: { channelIds, threadRootIds, canvasIds, boardIds } });
   }
 
-  unsubscribe(opts: { channelIds?: string[]; threadRootIds?: string[]; canvasIds?: string[] }): void {
+  unsubscribe(opts: {
+    channelIds?: string[];
+    threadRootIds?: string[];
+    canvasIds?: string[];
+    boardIds?: string[];
+  }): void {
     const channelIds = (opts.channelIds ?? []).filter((c) => this.subChannels.delete(c));
     const threadRootIds = (opts.threadRootIds ?? []).filter((t) => this.subThreads.delete(t));
     const canvasIds = (opts.canvasIds ?? []).filter((c) => this.subCanvases.delete(c));
-    if (channelIds.length === 0 && threadRootIds.length === 0 && canvasIds.length === 0) return;
-    this.sendIfReady({ case: "unsubscribe", value: { channelIds, threadRootIds, canvasIds } });
+    const boardIds = (opts.boardIds ?? []).filter((b) => this.subBoards.delete(b));
+    if (
+      channelIds.length === 0 &&
+      threadRootIds.length === 0 &&
+      canvasIds.length === 0 &&
+      boardIds.length === 0
+    )
+      return;
+    this.sendIfReady({ case: "unsubscribe", value: { channelIds, threadRootIds, canvasIds, boardIds } });
   }
 
   /** Replaces the presence subscription set (max 500 ids). */
@@ -272,6 +301,14 @@ export class RealtimeClient {
    */
   canvasEditing(canvasId: string, blockId = "", left = false): void {
     this.sendIfReady({ case: "canvasEditing", value: { canvasId, blockId, left } });
+  }
+
+  /**
+   * "My pointer is here, and this is what I have selected." Throttled server-side, so
+   * calling it on every mouse move is fine.
+   */
+  boardPointer(boardId: string, x: number, y: number, selectedIds: string[] = [], left = false): void {
+    this.sendIfReady({ case: "boardPointer", value: { boardId, x, y, selectedIds, left } });
   }
 
   /** The channel the user is looking at; the server suppresses push for it. */
@@ -434,13 +471,19 @@ export class RealtimeClient {
   }
 
   private resendSubscriptions(): void {
-    if (this.subChannels.size > 0 || this.subThreads.size > 0 || this.subCanvases.size > 0) {
+    if (
+      this.subChannels.size > 0 ||
+      this.subThreads.size > 0 ||
+      this.subCanvases.size > 0 ||
+      this.subBoards.size > 0
+    ) {
       this.send({
         case: "subscribe",
         value: {
           channelIds: Array.from(this.subChannels),
           threadRootIds: Array.from(this.subThreads),
           canvasIds: Array.from(this.subCanvases),
+          boardIds: Array.from(this.subBoards),
         },
       });
     }
@@ -536,6 +579,9 @@ export class RealtimeClient {
         return;
       case "canvasEditing":
         this.events.emit("canvas_editing", k.value);
+        return;
+      case "boardPointer":
+        this.events.emit("board_pointer", k.value);
         return;
       default:
         return;

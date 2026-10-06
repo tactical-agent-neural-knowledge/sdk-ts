@@ -6,7 +6,7 @@ import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1"
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { AgentStatus, CanvasEditing, Envelope, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
+import type { AgentStatus, BoardPointer, CanvasEditing, Envelope, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
 import { file_tank_events_v1_events } from "../../events/v1/events_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/realtime/v1/realtime.proto.
  */
 export const file_tank_realtime_v1_realtime: GenFile = /*@__PURE__*/
-  fileDesc("Ch90YW5rL3JlYWx0aW1lL3YxL3JlYWx0aW1lLnByb3RvEhB0YW5rLnJlYWx0aW1lLnYxIkoKBUhlbGxvEhQKDGFjY2Vzc190b2tlbhgBIAEoCRIVCg13b3Jrc3BhY2VfaWRzGAIgAygJEhQKDGNhcGFiaWxpdGllcxgDIAMoCSKaAQoGUmVzdW1lEhIKCnNlc3Npb25faWQYASABKAkSFAoMcmVzdW1lX3Rva2VuGAIgASgJEjYKB2N1cnNvcnMYAyADKAsyJS50YW5rLnJlYWx0aW1lLnYxLlJlc3VtZS5DdXJzb3JzRW50cnkaLgoMQ3Vyc29yc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoAzoCOAEiTQoJU3Vic2NyaWJlEhMKC2NoYW5uZWxfaWRzGAEgAygJEhcKD3RocmVhZF9yb290X2lkcxgCIAMoCRISCgpjYW52YXNfaWRzGAMgAygJIk8KC1Vuc3Vic2NyaWJlEhMKC2NoYW5uZWxfaWRzGAEgAygJEhcKD3RocmVhZF9yb290X2lkcxgCIAMoCRISCgpjYW52YXNfaWRzGAMgAygJIiUKEVByZXNlbmNlU3Vic2NyaWJlEhAKCHVzZXJfaWRzGAEgAygJIjkKC1R5cGluZ0ZyYW1lEhIKCmNoYW5uZWxfaWQYASABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAiABKAkiRwoSQ2FudmFzRWRpdGluZ0ZyYW1lEhEKCWNhbnZhc19pZBgBIAEoCRIQCghibG9ja19pZBgCIAEoCRIMCgRsZWZ0GAMgASgIIhsKBUZvY3VzEhIKCmNoYW5uZWxfaWQYASABKAkiBgoEUGluZyLZAwoLQ2xpZW50RnJhbWUSKAoFaGVsbG8YASABKAsyFy50YW5rLnJlYWx0aW1lLnYxLkhlbGxvSAASKgoGcmVzdW1lGAIgASgLMhgudGFuay5yZWFsdGltZS52MS5SZXN1bWVIABIwCglzdWJzY3JpYmUYAyABKAsyGy50YW5rLnJlYWx0aW1lLnYxLlN1YnNjcmliZUgAEjQKC3Vuc3Vic2NyaWJlGAQgASgLMh0udGFuay5yZWFsdGltZS52MS5VbnN1YnNjcmliZUgAEkEKEnByZXNlbmNlX3N1YnNjcmliZRgFIAEoCzIjLnRhbmsucmVhbHRpbWUudjEuUHJlc2VuY2VTdWJzY3JpYmVIABIvCgZ0eXBpbmcYBiABKAsyHS50YW5rLnJlYWx0aW1lLnYxLlR5cGluZ0ZyYW1lSAASKAoFZm9jdXMYByABKAsyFy50YW5rLnJlYWx0aW1lLnYxLkZvY3VzSAASJgoEcGluZxgIIAEoCzIWLnRhbmsucmVhbHRpbWUudjEuUGluZ0gAEj4KDmNhbnZhc19lZGl0aW5nGAkgASgLMiQudGFuay5yZWFsdGltZS52MS5DYW52YXNFZGl0aW5nRnJhbWVIAEIGCgRraW5kIoEBCgVSZWFkeRISCgpzZXNzaW9uX2lkGAEgASgJEhQKDHJlc3VtZV90b2tlbhgCIAEoCRIdChVoZWFydGJlYXRfaW50ZXJ2YWxfbXMYAyABKAUSLwoLc2VydmVyX3RpbWUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIhsKB1Jlc3VtZWQSEAoIcmVwbGF5ZWQYASABKAUiNgoOUmVzeW5jUmVxdWlyZWQSDgoGcmVhc29uGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCSJDCgVFdmVudBIOCgZjdXJzb3IYASABKAMSKgoIZW52ZWxvcGUYAiABKAsyGC50YW5rLmV2ZW50cy52MS5FbnZlbG9wZSIGCgRQb25nIkMKBUVycm9yEikKBGNvZGUYASABKA4yGy50YW5rLnJlYWx0aW1lLnYxLkVycm9yQ29kZRIPCgdtZXNzYWdlGAIgASgJIvMDCgtTZXJ2ZXJGcmFtZRIoCgVyZWFkeRgBIAEoCzIXLnRhbmsucmVhbHRpbWUudjEuUmVhZHlIABIsCgdyZXN1bWVkGAIgASgLMhkudGFuay5yZWFsdGltZS52MS5SZXN1bWVkSAASOwoPcmVzeW5jX3JlcXVpcmVkGAMgASgLMiAudGFuay5yZWFsdGltZS52MS5SZXN5bmNSZXF1aXJlZEgAEigKBWV2ZW50GAQgASgLMhcudGFuay5yZWFsdGltZS52MS5FdmVudEgAEiYKBHBvbmcYBSABKAsyFi50YW5rLnJlYWx0aW1lLnYxLlBvbmdIABIoCgVlcnJvchgGIAEoCzIXLnRhbmsucmVhbHRpbWUudjEuRXJyb3JIABIoCgZ0eXBpbmcYByABKAsyFi50YW5rLmV2ZW50cy52MS5UeXBpbmdIABIzCghwcmVzZW5jZRgIIAEoCzIfLnRhbmsuZXZlbnRzLnYxLlByZXNlbmNlQ2hhbmdlZEgAEjMKDGFnZW50X3N0YXR1cxgJIAEoCzIbLnRhbmsuZXZlbnRzLnYxLkFnZW50U3RhdHVzSAASNwoOY2FudmFzX2VkaXRpbmcYCiABKAsyHS50YW5rLmV2ZW50cy52MS5DYW52YXNFZGl0aW5nSABCBgoEa2luZCqcAQoJRXJyb3JDb2RlEhoKFkVSUk9SX0NPREVfVU5TUEVDSUZJRUQQABIeChpFUlJPUl9DT0RFX1VOQVVUSEVOVElDQVRFRBABEhwKGEVSUk9SX0NPREVfU0xPV19DT05TVU1FUhACEhgKFEVSUk9SX0NPREVfQkFEX0ZSQU1FEAMSGwoXRVJST1JfQ09ERV9SQVRFX0xJTUlURUQQBELgAQoUY29tLnRhbmsucmVhbHRpbWUudjFCDVJlYWx0aW1lUHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9yZWFsdGltZS92MTtyZWFsdGltZXYxogIDVFJYqgIQVGFuay5SZWFsdGltZS5WMcoCEFRhbmtcUmVhbHRpbWVcVjHiAhxUYW5rXFJlYWx0aW1lXFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UmVhbHRpbWU6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_events_v1_events]);
+  fileDesc("Ch90YW5rL3JlYWx0aW1lL3YxL3JlYWx0aW1lLnByb3RvEhB0YW5rLnJlYWx0aW1lLnYxIkoKBUhlbGxvEhQKDGFjY2Vzc190b2tlbhgBIAEoCRIVCg13b3Jrc3BhY2VfaWRzGAIgAygJEhQKDGNhcGFiaWxpdGllcxgDIAMoCSKaAQoGUmVzdW1lEhIKCnNlc3Npb25faWQYASABKAkSFAoMcmVzdW1lX3Rva2VuGAIgASgJEjYKB2N1cnNvcnMYAyADKAsyJS50YW5rLnJlYWx0aW1lLnYxLlJlc3VtZS5DdXJzb3JzRW50cnkaLgoMQ3Vyc29yc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoAzoCOAEiYAoJU3Vic2NyaWJlEhMKC2NoYW5uZWxfaWRzGAEgAygJEhcKD3RocmVhZF9yb290X2lkcxgCIAMoCRISCgpjYW52YXNfaWRzGAMgAygJEhEKCWJvYXJkX2lkcxgEIAMoCSJiCgtVbnN1YnNjcmliZRITCgtjaGFubmVsX2lkcxgBIAMoCRIXCg90aHJlYWRfcm9vdF9pZHMYAiADKAkSEgoKY2FudmFzX2lkcxgDIAMoCRIRCglib2FyZF9pZHMYBCADKAkiJQoRUHJlc2VuY2VTdWJzY3JpYmUSEAoIdXNlcl9pZHMYASADKAkiOQoLVHlwaW5nRnJhbWUSEgoKY2hhbm5lbF9pZBgBIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgCIAEoCSJHChJDYW52YXNFZGl0aW5nRnJhbWUSEQoJY2FudmFzX2lkGAEgASgJEhAKCGJsb2NrX2lkGAIgASgJEgwKBGxlZnQYAyABKAgiXwoRQm9hcmRQb2ludGVyRnJhbWUSEAoIYm9hcmRfaWQYASABKAkSCQoBeBgCIAEoARIJCgF5GAMgASgBEhQKDHNlbGVjdGVkX2lkcxgEIAMoCRIMCgRsZWZ0GAUgASgIIhsKBUZvY3VzEhIKCmNoYW5uZWxfaWQYASABKAkiBgoEUGluZyKXBAoLQ2xpZW50RnJhbWUSKAoFaGVsbG8YASABKAsyFy50YW5rLnJlYWx0aW1lLnYxLkhlbGxvSAASKgoGcmVzdW1lGAIgASgLMhgudGFuay5yZWFsdGltZS52MS5SZXN1bWVIABIwCglzdWJzY3JpYmUYAyABKAsyGy50YW5rLnJlYWx0aW1lLnYxLlN1YnNjcmliZUgAEjQKC3Vuc3Vic2NyaWJlGAQgASgLMh0udGFuay5yZWFsdGltZS52MS5VbnN1YnNjcmliZUgAEkEKEnByZXNlbmNlX3N1YnNjcmliZRgFIAEoCzIjLnRhbmsucmVhbHRpbWUudjEuUHJlc2VuY2VTdWJzY3JpYmVIABIvCgZ0eXBpbmcYBiABKAsyHS50YW5rLnJlYWx0aW1lLnYxLlR5cGluZ0ZyYW1lSAASKAoFZm9jdXMYByABKAsyFy50YW5rLnJlYWx0aW1lLnYxLkZvY3VzSAASJgoEcGluZxgIIAEoCzIWLnRhbmsucmVhbHRpbWUudjEuUGluZ0gAEj4KDmNhbnZhc19lZGl0aW5nGAkgASgLMiQudGFuay5yZWFsdGltZS52MS5DYW52YXNFZGl0aW5nRnJhbWVIABI8Cg1ib2FyZF9wb2ludGVyGAogASgLMiMudGFuay5yZWFsdGltZS52MS5Cb2FyZFBvaW50ZXJGcmFtZUgAQgYKBGtpbmQigQEKBVJlYWR5EhIKCnNlc3Npb25faWQYASABKAkSFAoMcmVzdW1lX3Rva2VuGAIgASgJEh0KFWhlYXJ0YmVhdF9pbnRlcnZhbF9tcxgDIAEoBRIvCgtzZXJ2ZXJfdGltZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiGwoHUmVzdW1lZBIQCghyZXBsYXllZBgBIAEoBSI2Cg5SZXN5bmNSZXF1aXJlZBIOCgZyZWFzb24YASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJIkMKBUV2ZW50Eg4KBmN1cnNvchgBIAEoAxIqCghlbnZlbG9wZRgCIAEoCzIYLnRhbmsuZXZlbnRzLnYxLkVudmVsb3BlIgYKBFBvbmciQwoFRXJyb3ISKQoEY29kZRgBIAEoDjIbLnRhbmsucmVhbHRpbWUudjEuRXJyb3JDb2RlEg8KB21lc3NhZ2UYAiABKAkiqgQKC1NlcnZlckZyYW1lEigKBXJlYWR5GAEgASgLMhcudGFuay5yZWFsdGltZS52MS5SZWFkeUgAEiwKB3Jlc3VtZWQYAiABKAsyGS50YW5rLnJlYWx0aW1lLnYxLlJlc3VtZWRIABI7Cg9yZXN5bmNfcmVxdWlyZWQYAyABKAsyIC50YW5rLnJlYWx0aW1lLnYxLlJlc3luY1JlcXVpcmVkSAASKAoFZXZlbnQYBCABKAsyFy50YW5rLnJlYWx0aW1lLnYxLkV2ZW50SAASJgoEcG9uZxgFIAEoCzIWLnRhbmsucmVhbHRpbWUudjEuUG9uZ0gAEigKBWVycm9yGAYgASgLMhcudGFuay5yZWFsdGltZS52MS5FcnJvckgAEigKBnR5cGluZxgHIAEoCzIWLnRhbmsuZXZlbnRzLnYxLlR5cGluZ0gAEjMKCHByZXNlbmNlGAggASgLMh8udGFuay5ldmVudHMudjEuUHJlc2VuY2VDaGFuZ2VkSAASMwoMYWdlbnRfc3RhdHVzGAkgASgLMhsudGFuay5ldmVudHMudjEuQWdlbnRTdGF0dXNIABI3Cg5jYW52YXNfZWRpdGluZxgKIAEoCzIdLnRhbmsuZXZlbnRzLnYxLkNhbnZhc0VkaXRpbmdIABI1Cg1ib2FyZF9wb2ludGVyGAsgASgLMhwudGFuay5ldmVudHMudjEuQm9hcmRQb2ludGVySABCBgoEa2luZCqcAQoJRXJyb3JDb2RlEhoKFkVSUk9SX0NPREVfVU5TUEVDSUZJRUQQABIeChpFUlJPUl9DT0RFX1VOQVVUSEVOVElDQVRFRBABEhwKGEVSUk9SX0NPREVfU0xPV19DT05TVU1FUhACEhgKFEVSUk9SX0NPREVfQkFEX0ZSQU1FEAMSGwoXRVJST1JfQ09ERV9SQVRFX0xJTUlURUQQBELgAQoUY29tLnRhbmsucmVhbHRpbWUudjFCDVJlYWx0aW1lUHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9yZWFsdGltZS92MTtyZWFsdGltZXYxogIDVFJYqgIQVGFuay5SZWFsdGltZS5WMcoCEFRhbmtcUmVhbHRpbWVcVjHiAhxUYW5rXFJlYWx0aW1lXFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UmVhbHRpbWU6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_events_v1_events]);
 
 /**
  * @generated from message tank.realtime.v1.Hello
@@ -93,6 +93,13 @@ export type Subscribe = Message<"tank.realtime.v1.Subscribe"> & {
    * @generated from field: repeated string canvas_ids = 3;
    */
   canvasIds: string[];
+
+  /**
+   * Boards the client has open.
+   *
+   * @generated from field: repeated string board_ids = 4;
+   */
+  boardIds: string[];
 };
 
 /**
@@ -120,6 +127,11 @@ export type Unsubscribe = Message<"tank.realtime.v1.Unsubscribe"> & {
    * @generated from field: repeated string canvas_ids = 3;
    */
   canvasIds: string[];
+
+  /**
+   * @generated from field: repeated string board_ids = 4;
+   */
+  boardIds: string[];
 };
 
 /**
@@ -202,6 +214,45 @@ export const CanvasEditingFrameSchema: GenMessage<CanvasEditingFrame> = /*@__PUR
   messageDesc(file_tank_realtime_v1_realtime, 6);
 
 /**
+ * "My pointer is here, and this is what I have selected." Rate-limited like typing.
+ *
+ * @generated from message tank.realtime.v1.BoardPointerFrame
+ */
+export type BoardPointerFrame = Message<"tank.realtime.v1.BoardPointerFrame"> & {
+  /**
+   * @generated from field: string board_id = 1;
+   */
+  boardId: string;
+
+  /**
+   * @generated from field: double x = 2;
+   */
+  x: number;
+
+  /**
+   * @generated from field: double y = 3;
+   */
+  y: number;
+
+  /**
+   * @generated from field: repeated string selected_ids = 4;
+   */
+  selectedIds: string[];
+
+  /**
+   * @generated from field: bool left = 5;
+   */
+  left: boolean;
+};
+
+/**
+ * Describes the message tank.realtime.v1.BoardPointerFrame.
+ * Use `create(BoardPointerFrameSchema)` to create a new message.
+ */
+export const BoardPointerFrameSchema: GenMessage<BoardPointerFrame> = /*@__PURE__*/
+  messageDesc(file_tank_realtime_v1_realtime, 7);
+
+/**
  * @generated from message tank.realtime.v1.Focus
  */
 export type Focus = Message<"tank.realtime.v1.Focus"> & {
@@ -218,7 +269,7 @@ export type Focus = Message<"tank.realtime.v1.Focus"> & {
  * Use `create(FocusSchema)` to create a new message.
  */
 export const FocusSchema: GenMessage<Focus> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 7);
+  messageDesc(file_tank_realtime_v1_realtime, 8);
 
 /**
  * @generated from message tank.realtime.v1.Ping
@@ -231,7 +282,7 @@ export type Ping = Message<"tank.realtime.v1.Ping"> & {
  * Use `create(PingSchema)` to create a new message.
  */
 export const PingSchema: GenMessage<Ping> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 8);
+  messageDesc(file_tank_realtime_v1_realtime, 9);
 
 /**
  * @generated from message tank.realtime.v1.ClientFrame
@@ -294,6 +345,12 @@ export type ClientFrame = Message<"tank.realtime.v1.ClientFrame"> & {
      */
     value: CanvasEditingFrame;
     case: "canvasEditing";
+  } | {
+    /**
+     * @generated from field: tank.realtime.v1.BoardPointerFrame board_pointer = 10;
+     */
+    value: BoardPointerFrame;
+    case: "boardPointer";
   } | { case: undefined; value?: undefined };
 };
 
@@ -302,7 +359,7 @@ export type ClientFrame = Message<"tank.realtime.v1.ClientFrame"> & {
  * Use `create(ClientFrameSchema)` to create a new message.
  */
 export const ClientFrameSchema: GenMessage<ClientFrame> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 9);
+  messageDesc(file_tank_realtime_v1_realtime, 10);
 
 /**
  * @generated from message tank.realtime.v1.Ready
@@ -334,7 +391,7 @@ export type Ready = Message<"tank.realtime.v1.Ready"> & {
  * Use `create(ReadySchema)` to create a new message.
  */
 export const ReadySchema: GenMessage<Ready> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 10);
+  messageDesc(file_tank_realtime_v1_realtime, 11);
 
 /**
  * @generated from message tank.realtime.v1.Resumed
@@ -351,7 +408,7 @@ export type Resumed = Message<"tank.realtime.v1.Resumed"> & {
  * Use `create(ResumedSchema)` to create a new message.
  */
 export const ResumedSchema: GenMessage<Resumed> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 11);
+  messageDesc(file_tank_realtime_v1_realtime, 12);
 
 /**
  * @generated from message tank.realtime.v1.ResyncRequired
@@ -375,7 +432,7 @@ export type ResyncRequired = Message<"tank.realtime.v1.ResyncRequired"> & {
  * Use `create(ResyncRequiredSchema)` to create a new message.
  */
 export const ResyncRequiredSchema: GenMessage<ResyncRequired> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 12);
+  messageDesc(file_tank_realtime_v1_realtime, 13);
 
 /**
  * @generated from message tank.realtime.v1.Event
@@ -399,7 +456,7 @@ export type Event = Message<"tank.realtime.v1.Event"> & {
  * Use `create(EventSchema)` to create a new message.
  */
 export const EventSchema: GenMessage<Event> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 13);
+  messageDesc(file_tank_realtime_v1_realtime, 14);
 
 /**
  * @generated from message tank.realtime.v1.Pong
@@ -412,7 +469,7 @@ export type Pong = Message<"tank.realtime.v1.Pong"> & {
  * Use `create(PongSchema)` to create a new message.
  */
 export const PongSchema: GenMessage<Pong> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 14);
+  messageDesc(file_tank_realtime_v1_realtime, 15);
 
 /**
  * @generated from message tank.realtime.v1.Error
@@ -434,7 +491,7 @@ export type Error = Message<"tank.realtime.v1.Error"> & {
  * Use `create(ErrorSchema)` to create a new message.
  */
 export const ErrorSchema: GenMessage<Error> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 15);
+  messageDesc(file_tank_realtime_v1_realtime, 16);
 
 /**
  * @generated from message tank.realtime.v1.ServerFrame
@@ -503,6 +560,12 @@ export type ServerFrame = Message<"tank.realtime.v1.ServerFrame"> & {
      */
     value: CanvasEditing;
     case: "canvasEditing";
+  } | {
+    /**
+     * @generated from field: tank.events.v1.BoardPointer board_pointer = 11;
+     */
+    value: BoardPointer;
+    case: "boardPointer";
   } | { case: undefined; value?: undefined };
 };
 
@@ -511,7 +574,7 @@ export type ServerFrame = Message<"tank.realtime.v1.ServerFrame"> & {
  * Use `create(ServerFrameSchema)` to create a new message.
  */
 export const ServerFrameSchema: GenMessage<ServerFrame> = /*@__PURE__*/
-  messageDesc(file_tank_realtime_v1_realtime, 16);
+  messageDesc(file_tank_realtime_v1_realtime, 17);
 
 /**
  * @generated from enum tank.realtime.v1.ErrorCode

@@ -8,6 +8,8 @@ import {
   type AgentRunUpdated,
   type AgentStatus,
   type AppCommand,
+  type BoardChanged,
+  type BoardObjectsChanged,
   type CanvasBlockChanged,
   type CanvasChanged,
   type CardAction,
@@ -1025,7 +1027,9 @@ export type KnownEventPayload =
   | TopoMarkUpdated
   | MonitorWidgetUpdated
   | CanvasBlockChanged
-  | CanvasChanged;
+  | CanvasChanged
+  | BoardObjectsChanged
+  | BoardChanged;
 
 /**
  * A payload whose type is not in the vendored contracts (a newer event than this SDK build). The

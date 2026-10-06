@@ -3,6 +3,7 @@ import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { AuditEntry, ExportJob, WorkspaceSettings } from "../../admin/v1/admin_pb.js";
 import type { Run } from "../../agent/v1/agent_pb.js";
 import type { BlockAction } from "../../blocks/v1/blocks_pb.js";
+import type { Board, BoardObject } from "../../board/v1/board_pb.js";
 import type { Block, Canvas } from "../../canvas/v1/canvas_pb.js";
 import type { Channel, ChannelReadState } from "../../channel/v1/channel_pb.js";
 import type { File } from "../../files/v1/files_pb.js";
@@ -1021,3 +1022,101 @@ export type CanvasEditing = Message<"tank.events.v1.CanvasEditing"> & {
  * Use `create(CanvasEditingSchema)` to create a new message.
  */
 export declare const CanvasEditingSchema: GenMessage<CanvasEditing>;
+/**
+ * board.objects.changed on evt.{ws}.board.{board}: objects were written or removed on
+ * a board. A client with it open applies just those, which is why two people dragging
+ * different shapes see each other rather than fighting over a whole document.
+ *
+ * @generated from message tank.events.v1.BoardObjectsChanged
+ */
+export type BoardObjectsChanged = Message<"tank.events.v1.BoardObjectsChanged"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+    /**
+     * @generated from field: repeated tank.board.v1.BoardObject objects = 2;
+     */
+    objects: BoardObject[];
+    /**
+     * @generated from field: repeated string deleted_ids = 3;
+     */
+    deletedIds: string[];
+    /**
+     * @generated from field: string actor_id = 4;
+     */
+    actorId: string;
+    /**
+     * @generated from field: int32 version = 5;
+     */
+    version: number;
+};
+/**
+ * Describes the message tank.events.v1.BoardObjectsChanged.
+ * Use `create(BoardObjectsChangedSchema)` to create a new message.
+ */
+export declare const BoardObjectsChangedSchema: GenMessage<BoardObjectsChanged>;
+/**
+ * board.changed on the same subject: the board's own fields moved (title, icon).
+ *
+ * @generated from message tank.events.v1.BoardChanged
+ */
+export type BoardChanged = Message<"tank.events.v1.BoardChanged"> & {
+    /**
+     * @generated from field: tank.board.v1.Board board = 1;
+     */
+    board?: Board;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.events.v1.BoardChanged.
+ * Use `create(BoardChangedSchema)` to create a new message.
+ */
+export declare const BoardChangedSchema: GenMessage<BoardChanged>;
+/**
+ * Ephemeral, on typ.{ws}.board.{board}: a pointer moving across the board, and what
+ * that person has selected. Never stored. This is what makes the agent visible in the
+ * board beside the people.
+ *
+ * @generated from message tank.events.v1.BoardPointer
+ */
+export type BoardPointer = Message<"tank.events.v1.BoardPointer"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+    /**
+     * @generated from field: string user_id = 2;
+     */
+    userId: string;
+    /**
+     * @generated from field: double x = 3;
+     */
+    x: number;
+    /**
+     * @generated from field: double y = 4;
+     */
+    y: number;
+    /**
+     * @generated from field: repeated string selected_ids = 5;
+     */
+    selectedIds: string[];
+    /**
+     * @generated from field: bool left = 6;
+     */
+    left: boolean;
+    /**
+     * "user" | "agent", so the agent's cursor can be drawn as its own thing.
+     *
+     * @generated from field: string kind = 7;
+     */
+    kind: string;
+};
+/**
+ * Describes the message tank.events.v1.BoardPointer.
+ * Use `create(BoardPointerSchema)` to create a new message.
+ */
+export declare const BoardPointerSchema: GenMessage<BoardPointer>;

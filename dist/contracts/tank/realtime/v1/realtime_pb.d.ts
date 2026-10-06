@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { AgentStatus, CanvasEditing, Envelope, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
+import type { AgentStatus, BoardPointer, CanvasEditing, Envelope, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/realtime/v1/realtime.proto.
@@ -73,6 +73,12 @@ export type Subscribe = Message<"tank.realtime.v1.Subscribe"> & {
      * @generated from field: repeated string canvas_ids = 3;
      */
     canvasIds: string[];
+    /**
+     * Boards the client has open.
+     *
+     * @generated from field: repeated string board_ids = 4;
+     */
+    boardIds: string[];
 };
 /**
  * Describes the message tank.realtime.v1.Subscribe.
@@ -95,6 +101,10 @@ export type Unsubscribe = Message<"tank.realtime.v1.Unsubscribe"> & {
      * @generated from field: repeated string canvas_ids = 3;
      */
     canvasIds: string[];
+    /**
+     * @generated from field: repeated string board_ids = 4;
+     */
+    boardIds: string[];
 };
 /**
  * Describes the message tank.realtime.v1.Unsubscribe.
@@ -161,6 +171,38 @@ export type CanvasEditingFrame = Message<"tank.realtime.v1.CanvasEditingFrame"> 
  * Use `create(CanvasEditingFrameSchema)` to create a new message.
  */
 export declare const CanvasEditingFrameSchema: GenMessage<CanvasEditingFrame>;
+/**
+ * "My pointer is here, and this is what I have selected." Rate-limited like typing.
+ *
+ * @generated from message tank.realtime.v1.BoardPointerFrame
+ */
+export type BoardPointerFrame = Message<"tank.realtime.v1.BoardPointerFrame"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+    /**
+     * @generated from field: double x = 2;
+     */
+    x: number;
+    /**
+     * @generated from field: double y = 3;
+     */
+    y: number;
+    /**
+     * @generated from field: repeated string selected_ids = 4;
+     */
+    selectedIds: string[];
+    /**
+     * @generated from field: bool left = 5;
+     */
+    left: boolean;
+};
+/**
+ * Describes the message tank.realtime.v1.BoardPointerFrame.
+ * Use `create(BoardPointerFrameSchema)` to create a new message.
+ */
+export declare const BoardPointerFrameSchema: GenMessage<BoardPointerFrame>;
 /**
  * @generated from message tank.realtime.v1.Focus
  */
@@ -247,6 +289,12 @@ export type ClientFrame = Message<"tank.realtime.v1.ClientFrame"> & {
          */
         value: CanvasEditingFrame;
         case: "canvasEditing";
+    } | {
+        /**
+         * @generated from field: tank.realtime.v1.BoardPointerFrame board_pointer = 10;
+         */
+        value: BoardPointerFrame;
+        case: "boardPointer";
     } | {
         case: undefined;
         value?: undefined;
@@ -431,6 +479,12 @@ export type ServerFrame = Message<"tank.realtime.v1.ServerFrame"> & {
          */
         value: CanvasEditing;
         case: "canvasEditing";
+    } | {
+        /**
+         * @generated from field: tank.events.v1.BoardPointer board_pointer = 11;
+         */
+        value: BoardPointer;
+        case: "boardPointer";
     } | {
         case: undefined;
         value?: undefined;
