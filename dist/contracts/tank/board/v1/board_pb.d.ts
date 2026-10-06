@@ -438,6 +438,13 @@ export type CreateBoardRequest = Message<"tank.board.v1.CreateBoardRequest"> & {
      * @generated from field: repeated tank.board.v1.BoardObject objects = 5;
      */
     objects: BoardObject[];
+    /**
+     * A starting shape, from ListTemplates. Nobody opens a blank infinite canvas and
+     * feels invited; a flowchart that already has three boxes and two arrows does.
+     *
+     * @generated from field: string template = 6;
+     */
+    template: string;
 };
 /**
  * Describes the message tank.board.v1.CreateBoardRequest.
@@ -592,6 +599,342 @@ export type PutObjectsResponse = Message<"tank.board.v1.PutObjectsResponse"> & {
  */
 export declare const PutObjectsResponseSchema: GenMessage<PutObjectsResponse>;
 /**
+ * What was clicked inside a running frame: the element, and where it came from in
+ * the source. The browser inside the frame reports this; it is the whole reason the
+ * preview build stamps elements with their origin.
+ *
+ * @generated from message tank.board.v1.Element
+ */
+export type Element = Message<"tank.board.v1.Element"> & {
+    /**
+     * "src/features/shell/Logo.tsx:8:5"
+     *
+     * @generated from field: string source = 1;
+     */
+    source: string;
+    /**
+     * "button"
+     *
+     * @generated from field: string tag = 2;
+     */
+    tag: string;
+    /**
+     * what it says, for a human to recognise it by
+     *
+     * @generated from field: string text = 3;
+     */
+    text: string;
+    /**
+     * @generated from field: string test_id = 4;
+     */
+    testId: string;
+    /**
+     * where it sits inside the frame
+     *
+     * @generated from field: tank.board.v1.Rect at = 5;
+     */
+    at?: Rect;
+    /**
+     * @generated from field: repeated string classes = 6;
+     */
+    classes: string[];
+};
+/**
+ * Describes the message tank.board.v1.Element.
+ * Use `create(ElementSchema)` to create a new message.
+ */
+export declare const ElementSchema: GenMessage<Element>;
+/**
+ * Ask for a change to something in a running frame. This is the product's point: the
+ * design and the code stop being two places.
+ *
+ * @generated from message tank.board.v1.RequestChangeRequest
+ */
+export type RequestChangeRequest = Message<"tank.board.v1.RequestChangeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * the frame it was asked of
+     *
+     * @generated from field: string object_id = 3;
+     */
+    objectId: string;
+    /**
+     * @generated from field: tank.board.v1.Element element = 4;
+     */
+    element?: Element;
+    /**
+     * "make this the same blue as the header"
+     *
+     * @generated from field: string ask = 5;
+     */
+    ask: string;
+};
+/**
+ * Describes the message tank.board.v1.RequestChangeRequest.
+ * Use `create(RequestChangeRequestSchema)` to create a new message.
+ */
+export declare const RequestChangeRequestSchema: GenMessage<RequestChangeRequest>;
+/**
+ * @generated from message tank.board.v1.RequestChangeResponse
+ */
+export type RequestChangeResponse = Message<"tank.board.v1.RequestChangeResponse"> & {
+    /**
+     * Where the work is being discussed and watched: a thread in the Tread the board
+     * belongs to, which is where the agent posts its plan and its cards.
+     *
+     * @generated from field: string thread_root_id = 6;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string channel_id = 7;
+     */
+    channelId: string;
+    /**
+     * What was asked, as it was sent to the agent, so the board can show it back.
+     *
+     * @generated from field: string prompt = 8;
+     */
+    prompt: string;
+};
+/**
+ * Describes the message tank.board.v1.RequestChangeResponse.
+ * Use `create(RequestChangeResponseSchema)` to create a new message.
+ */
+export declare const RequestChangeResponseSchema: GenMessage<RequestChangeResponse>;
+/**
+ * @generated from message tank.board.v1.BoardTemplate
+ */
+export type BoardTemplate = Message<"tank.board.v1.BoardTemplate"> & {
+    /**
+     * what to pass as CreateBoardRequest.template
+     *
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: string icon = 3;
+     */
+    icon: string;
+    /**
+     * one line: what it is for
+     *
+     * @generated from field: string about = 4;
+     */
+    about: string;
+    /**
+     * "Diagram" | "Design" | "Together" | "From your code"
+     *
+     * @generated from field: string group = 5;
+     */
+    group: string;
+};
+/**
+ * Describes the message tank.board.v1.BoardTemplate.
+ * Use `create(BoardTemplateSchema)` to create a new message.
+ */
+export declare const BoardTemplateSchema: GenMessage<BoardTemplate>;
+/**
+ * @generated from message tank.board.v1.ListTemplatesRequest
+ */
+export type ListTemplatesRequest = Message<"tank.board.v1.ListTemplatesRequest"> & {};
+/**
+ * Describes the message tank.board.v1.ListTemplatesRequest.
+ * Use `create(ListTemplatesRequestSchema)` to create a new message.
+ */
+export declare const ListTemplatesRequestSchema: GenMessage<ListTemplatesRequest>;
+/**
+ * @generated from message tank.board.v1.ListTemplatesResponse
+ */
+export type ListTemplatesResponse = Message<"tank.board.v1.ListTemplatesResponse"> & {
+    /**
+     * @generated from field: repeated tank.board.v1.BoardTemplate templates = 1;
+     */
+    templates: BoardTemplate[];
+};
+/**
+ * Describes the message tank.board.v1.ListTemplatesResponse.
+ * Use `create(ListTemplatesResponseSchema)` to create a new message.
+ */
+export declare const ListTemplatesResponseSchema: GenMessage<ListTemplatesResponse>;
+/**
+ * Export a board, or part of one, as a file somebody can send to a person who does
+ * not have a TANK account.
+ *
+ * @generated from message tank.board.v1.ExportBoardRequest
+ */
+export type ExportBoardRequest = Message<"tank.board.v1.ExportBoardRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+    /**
+     * "svg"
+     *
+     * @generated from field: string format = 3;
+     */
+    format: string;
+    /**
+     * empty exports everything
+     *
+     * @generated from field: repeated string object_ids = 4;
+     */
+    objectIds: string[];
+    /**
+     * @generated from field: bool transparent = 5;
+     */
+    transparent: boolean;
+};
+/**
+ * Describes the message tank.board.v1.ExportBoardRequest.
+ * Use `create(ExportBoardRequestSchema)` to create a new message.
+ */
+export declare const ExportBoardRequestSchema: GenMessage<ExportBoardRequest>;
+/**
+ * @generated from message tank.board.v1.ExportBoardResponse
+ */
+export type ExportBoardResponse = Message<"tank.board.v1.ExportBoardResponse"> & {
+    /**
+     * @generated from field: string filename = 1;
+     */
+    filename: string;
+    /**
+     * @generated from field: string content_type = 2;
+     */
+    contentType: string;
+    /**
+     * @generated from field: bytes body = 3;
+     */
+    body: Uint8Array;
+};
+/**
+ * Describes the message tank.board.v1.ExportBoardResponse.
+ * Use `create(ExportBoardResponseSchema)` to create a new message.
+ */
+export declare const ExportBoardResponseSchema: GenMessage<ExportBoardResponse>;
+/**
+ * One thing somebody did while clicking through a running frame.
+ *
+ * @generated from message tank.board.v1.FlowStep
+ */
+export type FlowStep = Message<"tank.board.v1.FlowStep"> & {
+    /**
+     * @generated from field: tank.board.v1.Element element = 1;
+     */
+    element?: Element;
+    /**
+     * "click" | "fill" | "press" | "expect" | "goto"
+     *
+     * @generated from field: string action = 2;
+     */
+    action: string;
+    /**
+     * what was typed, the key, or the text expected
+     *
+     * @generated from field: string value = 3;
+     */
+    value: string;
+    /**
+     * what the person said about this step
+     *
+     * @generated from field: string note = 4;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.board.v1.FlowStep.
+ * Use `create(FlowStepSchema)` to create a new message.
+ */
+export declare const FlowStepSchema: GenMessage<FlowStep>;
+/**
+ * Turn a journey through the running app into a test. Clicking through a flow to
+ * check it works and writing the test that checks it works are the same activity
+ * done twice; this makes the second one fall out of the first.
+ *
+ * @generated from message tank.board.v1.GenerateTestRequest
+ */
+export type GenerateTestRequest = Message<"tank.board.v1.GenerateTestRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * the frame the flow was recorded in
+     *
+     * @generated from field: string object_id = 3;
+     */
+    objectId: string;
+    /**
+     * "a customer pays an invoice"
+     *
+     * @generated from field: string name = 4;
+     */
+    name: string;
+    /**
+     * @generated from field: repeated tank.board.v1.FlowStep steps = 5;
+     */
+    steps: FlowStep[];
+};
+/**
+ * Describes the message tank.board.v1.GenerateTestRequest.
+ * Use `create(GenerateTestRequestSchema)` to create a new message.
+ */
+export declare const GenerateTestRequestSchema: GenMessage<GenerateTestRequest>;
+/**
+ * @generated from message tank.board.v1.GenerateTestResponse
+ */
+export type GenerateTestResponse = Message<"tank.board.v1.GenerateTestResponse"> & {
+    /**
+     * e2e/<name>.spec.ts
+     *
+     * @generated from field: string playwright_path = 1;
+     */
+    playwrightPath: string;
+    /**
+     * @generated from field: string playwright = 2;
+     */
+    playwright: string;
+    /**
+     * mobile/.maestro/<name>.yaml
+     *
+     * @generated from field: string maestro_path = 3;
+     */
+    maestroPath: string;
+    /**
+     * @generated from field: string maestro = 4;
+     */
+    maestro: string;
+    /**
+     * Steps the recorder could not turn into an assertion anybody should trust.
+     *
+     * @generated from field: repeated string skipped = 5;
+     */
+    skipped: string[];
+};
+/**
+ * Describes the message tank.board.v1.GenerateTestResponse.
+ * Use `create(GenerateTestResponseSchema)` to create a new message.
+ */
+export declare const GenerateTestResponseSchema: GenMessage<GenerateTestResponse>;
+/**
  * @generated from enum tank.board.v1.ObjectKind
  */
 export declare enum ObjectKind {
@@ -703,5 +1046,37 @@ export declare const BoardService: GenService<{
         methodKind: "unary";
         input: typeof PutObjectsRequestSchema;
         output: typeof PutObjectsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.RequestChange
+     */
+    requestChange: {
+        methodKind: "unary";
+        input: typeof RequestChangeRequestSchema;
+        output: typeof RequestChangeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ListTemplates
+     */
+    listTemplates: {
+        methodKind: "unary";
+        input: typeof ListTemplatesRequestSchema;
+        output: typeof ListTemplatesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ExportBoard
+     */
+    exportBoard: {
+        methodKind: "unary";
+        input: typeof ExportBoardRequestSchema;
+        output: typeof ExportBoardResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.GenerateTest
+     */
+    generateTest: {
+        methodKind: "unary";
+        input: typeof GenerateTestRequestSchema;
+        output: typeof GenerateTestResponseSchema;
     };
 }>;
