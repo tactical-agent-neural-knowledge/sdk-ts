@@ -1,6 +1,6 @@
 # Neurons · src
 
-refreshed 2026-10-04 · 5378a111dd9c
+refreshed 2026-10-07 · d3746781a46d
 
 - `src/` has no `index.ts` of its own: every published subpath points at a directory barrel (`src/client/index.ts`, `src/react/index.tsx`, `src/design/index.ts`, `src/blocks/index.ts`, `src/blocks-web/index.ts`, `src/blocks-native/index.ts`, `src/contracts/index.ts`, `src/topo/index.ts`) mapped in `package.json` `exports`.
 - `src/exports.test.ts` is the only file directly in `src/` and it is the packaging guard — it fails the build when an `exports` entry drifts, not at install time in a consumer.
@@ -9,6 +9,7 @@ refreshed 2026-10-04 · 5378a111dd9c
 - Its `react-native isolation` test walks **both `src/` and `dist/`**, excluding only `/blocks-native/` and `/test/mocks/`, and fails any file matching `/from\s+["']react-native(-paper)?["']/`; an RN import added to `src/design` or `src/blocks` is caught here, and so is one that only survives in a stale `dist/`.
 - Layer direction is one-way: `contracts` → `design`/`blocks` → `client` → `react`/`blocks-web`/`blocks-native`. `src/blocks` holds the shared card model, the two renderer directories hold only presentation.
 - Nothing outside `src/contracts` imports a generated path directly in public API terms — `src/blocks/types.ts` re-exports the block and rich-text message types so consumers never reach into `contracts/tank/...`.
+- Two features landed ahead of their consumers: `src/client/realtime.ts`/`store.ts` already carry `Board*`/`Canvas*` subscriptions and event types straight from `contracts/tank/events/v1/events_pb.ts` (board pointer, canvas editing presence), and `src/design/palette.ts` already exposes board colour swatches — but `src/react` has no hooks and `src/blocks`/the renderers have no components for either yet. Don't assume an export's existence means something in the app uses it.
 - `src/test/**` is excluded from `tsconfig.build.json`, so anything imported from there is test-only by construction and cannot leak into `dist/`.
 - Every relative import ends in `.js` (NodeNext + `verbatimModuleSyntax`), and type-only imports must use `import type` or the build fails.
 - Area suites can be run alone: `pnpm vitest run src/client`, `src/topo`, `src/design`, `src/blocks/` — note the trailing slash on `src/blocks/`, without it the pattern also pulls in `src/blocks-web` and `src/blocks-native`.

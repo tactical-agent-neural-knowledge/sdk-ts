@@ -1,17 +1,16 @@
 # Neurons · src/design
 
-refreshed 2026-10-04 · 5378a111dd9c
+refreshed 2026-10-07 · d3746781a46d
 
-- One token source feeds both platforms: `src/design/tokens.ts` → `muiThemeOptions` (`mui.ts`) for web and `paperDarkTheme`/`paperLightTheme` (`paper.ts`) for mobile. Never hand-pick a hex in a renderer.
-- The upstream source of truth for the palette is `docs/brand/COLOR_PALETTE.json` in the `docs` repo; `tokens.ts` is the vendored projection of it.
-- `tokens.ts` exports both brand hexes *and* text-safe `shades` per scheme, because several brand fills are unreadable as text — `contrast.test.ts` pins this with an explicit case: Cybernetic Purple on Deep Abyss Black is below AA, which is why `shades.purple.text` exists.
-- `src/design/mui.ts` adds a `tank` namespace to the MUI palette (`panel`, `overlay`, `primaryText`, `secondaryText`, `warningText`, plus the three accents `agent` = secondary/purple, `ai` = primary/cyan, `alert` = warning/amber); consumers read `theme.palette.tank.*` and need the module augmentation that `src/blocks-web/theme.ts` provides.
-- `src/design/paper.ts` exports **plain data** shaped like MD3 `colors` and imports nothing from react-native — mobile spreads it over `MD3DarkTheme`/`MD3LightTheme` itself. That is what keeps `react-native` out of this directory and out of `src/exports.test.ts`'s scan.
-- `src/design/contrast.ts` is the WCAG 2.x maths: `hexToRgb` (3- or 6-digit, throws on anything else), `relativeLuminance`, `contrastRatio` (argument order irrelevant), the `WCAG` thresholds `AA_TEXT 4.5` / `AA_LARGE 3` / `AAA_TEXT 7`, and `meetsAA`.
-- `src/design/contrast.test.ts` is a guard, not a unit test: it enumerates every text/surface pair in both schemes and asserts ≥ 4.5:1. Changing a token colour without updating its text shade fails here first (66 cases).
-- `src/design/fonts.ts` ships font *names and sources only* — Google Fonts URLs for web, `@expo-google-fonts/*` package names for mobile. No binaries are committed; `fonts.code.expoFonts[400]` is what `src/blocks-native/context.ts` reads for `DEFAULT_CODE_FONT`.
-- `src/design/index.ts` is the `./design` subpath barrel: tokens, `muiThemeOptions`, the Paper themes, contrast helpers, `fonts` / `googleFontsUrl` / `expoGoogleFontsPackages`.
-- `@mui/material` is only a type/dev import here — the subpath itself is importable from Node, which is why the peers are all optional.
+- `tokens.ts` is the single source of brand values (sourced from `docs/brand/COLOR_PALETTE.json`); `mui.ts` and `paper.ts` each project those tokens onto one platform's theme shape — never hand-pick colours in a component, add a token here instead.
+- New this refresh: `palette.ts` projects the same tokens into a board-oriented swatch system — `Swatch { token, label, hex, meaning?, ink }`, `boardFills` (11 entries), `stickyFills` (a filtered subset of `boardFills`), `boardStrokes` (6 quieter entries), `boardTextSizes` (a 5-step type scale), `boardFonts`, plus `hexFor(token)` and `tokenFor(hex)` lookups. The doc comment states the reason directly: "a board that stored `#6200EA` could never be told the token changed, and one that stored `color-accent-purple` can" — Neuralboards shapes must store the token, never the raw hex.
+- `palette.test.ts` is the guard for that contract: round-trips every swatch through `hexFor`/`tokenFor` (case/whitespace-insensitive on the reverse lookup), requires a `meaning` on the brand-identity tokens (cyan/purple/amber mains), and asserts every `boardFills`/`stickyFills` swatch's `ink` clears `WCAG.AA_LARGE` against its own `hex` — a swatch that fails this is a sticky note nobody can read.
+- `index.ts` re-exports `palette.ts` alongside the existing modules — `boardFills`, `boardFonts`, `boardStrokes`, `boardTextSizes`, `hexFor`, `stickyFills`, `tokenFor`, `type Swatch` are now public API via the `./design` subpath, even though nothing in `src/blocks`/`src/react`/the renderers consumes them yet (see `src.md`).
+- `mui.ts` adds a custom `tank` palette namespace (`panel`, `overlay`, `primaryText`, `secondaryText`, `warningText`, plus `agent`/`ai`/`alert` accents) that requires a module-augmentation declaration — `src/blocks-web/theme.ts` is where that augmentation lives; importing `mui.ts`'s theme without it loses type access to `theme.tank.*`.
+- `paper.ts` is plain data describing an MD3 theme shape — it imports nothing from `react-native` or `react-native-paper`, which is what lets `src/design` stay outside the `react-native` isolation boundary enforced by `src/exports.test.ts`.
+- `contrast.ts` implements the WCAG math directly (`hexToRgb`, `relativeLuminance`, `contrastRatio`, the `WCAG` threshold constants, `meetsAA`) — `contrast.test.ts` is a 66-case guard pinning specific brand pairs (e.g. Cybernetic Purple on Deep Abyss Black) to a passing ratio, not a unit test of the math itself.
+- `fonts.ts` holds font **names and sources** only (Google Fonts / Expo font identifiers) — no binary font files in this package; `fonts.code.expoFonts[400]` is what `src/blocks-native/context.ts` consumes to register the monospace face on native.
+- `@mui/material` is imported only in dev-time type positions in `mui.ts`, keeping it an optional peer — a runtime import here would force every Node/Expo consumer of the `.` or `./design` subpath to install MUI.
 
 ## Verified
 
