@@ -31,8 +31,3 @@ jobs:
           if [ -n "$(git status --porcelain dist/)" ]; then
             echo "::error::dist/ has untracked files. Run 'pnpm build' and commit the result."; git status --porcelain dist/; exit 1
           fi
-  secrets-scan:
-    uses: tactical-agent-neural-knowledge/workflows/.github/workflows/secret-scan.yml@main
-
-  deps-scan:
-    uses: tactical-agent-neural-knowledge/workflows/.github/workflows/deps-scan.yml@main

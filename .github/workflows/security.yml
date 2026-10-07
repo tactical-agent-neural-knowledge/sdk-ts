@@ -1,0 +1,27 @@
+name: security
+
+# Its own file rather than a job appended to ci.yml, following infra/security.yml. Two
+# reasons: ci.yml in several repos carries path filters, and a scanning gate that can be
+# skipped by editing the right file is not a gate; and appending a reusable-workflow call
+# to an existing ci.yml was rejected by GitHub before any job was scheduled.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # Monday 06:17 UTC: the weekly run walks the whole git history for secrets, because a
+    # credential committed and reverted is still a credential that leaked.
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    uses: tactical-agent-neural-knowledge/workflows/.github/workflows/secret-scan.yml@main
+    with:
+      history: ${{ github.event_name == 'schedule' }}
+
+  deps:
+    uses: tactical-agent-neural-knowledge/workflows/.github/workflows/deps-scan.yml@main
