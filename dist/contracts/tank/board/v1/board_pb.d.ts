@@ -294,6 +294,13 @@ export type BoardObject = Message<"tank.board.v1.BoardObject"> & {
      * @generated from field: int32 rev = 17;
      */
     rev: number;
+    /**
+     * Frame only: what this diagram was drawn from, when it was drawn from something
+     * rather than by hand. The same idea as AppFrame.drawn_from_sha one level up.
+     *
+     * @generated from field: tank.board.v1.Derivation derived = 19;
+     */
+    derived?: Derivation;
 };
 /**
  * Describes the message tank.board.v1.BoardObject.
@@ -431,6 +438,13 @@ export type ListBoardsRequest = Message<"tank.board.v1.ListBoardsRequest"> & {
      * @generated from field: int32 limit = 3;
      */
     limit: number;
+    /**
+     * Only the boards the product has moved past. The same filter ListCanvases has,
+     * for the same reason: finding what needs a look should not mean reading the lot.
+     *
+     * @generated from field: bool stale_only = 4;
+     */
+    staleOnly: boolean;
 };
 /**
  * Describes the message tank.board.v1.ListBoardsRequest.
@@ -818,6 +832,40 @@ export type BoardTemplate = Message<"tank.board.v1.BoardTemplate"> & {
      * @generated from field: string group = 5;
      */
     group: string;
+    /**
+     * What it actually looks like. A card with a name and an emoji on it tells nobody
+     * what they are about to get; a client that can draw a board can draw these.
+     *
+     * @generated from field: repeated tank.board.v1.BoardObject objects = 6;
+     */
+    objects: BoardObject[];
+    /**
+     * The box the objects sit in, so a client can fit them to a card without measuring.
+     *
+     * @generated from field: tank.board.v1.Rect viewbox = 7;
+     */
+    viewbox?: Rect;
+    /**
+     * The same picture the server would export, for a client that would rather not draw
+     * it a second time. Filled only when ListTemplatesRequest asked.
+     *
+     * @generated from field: string thumbnail_svg = 8;
+     */
+    thumbnailSvg: string;
+    /**
+     * One this workspace saved rather than one TANK ships. Only these can be deleted.
+     *
+     * @generated from field: bool custom = 9;
+     */
+    custom: boolean;
+    /**
+     * @generated from field: string created_by = 10;
+     */
+    createdBy: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 11;
+     */
+    createdAt?: Timestamp;
 };
 /**
  * Describes the message tank.board.v1.BoardTemplate.
@@ -827,7 +875,22 @@ export declare const BoardTemplateSchema: GenMessage<BoardTemplate>;
 /**
  * @generated from message tank.board.v1.ListTemplatesRequest
  */
-export type ListTemplatesRequest = Message<"tank.board.v1.ListTemplatesRequest"> & {};
+export type ListTemplatesRequest = Message<"tank.board.v1.ListTemplatesRequest"> & {
+    /**
+     * Whose saved templates to include alongside the ones TANK ships. Empty lists only
+     * TANK's, which is what an unauthenticated gallery wants.
+     *
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * Render each one as well. A few kilobytes apiece, so it is asked for rather than
+     * always sent.
+     *
+     * @generated from field: bool thumbnails = 2;
+     */
+    thumbnails: boolean;
+};
 /**
  * Describes the message tank.board.v1.ListTemplatesRequest.
  * Use `create(ListTemplatesRequestSchema)` to create a new message.
@@ -848,6 +911,135 @@ export type ListTemplatesResponse = Message<"tank.board.v1.ListTemplatesResponse
  */
 export declare const ListTemplatesResponseSchema: GenMessage<ListTemplatesResponse>;
 /**
+ * Save the board somebody is looking at as a template the rest of the workspace can
+ * start from.
+ *
+ * `CreateBoardRequest.template` is a name the server resolves, so until there was an
+ * RPC to register one this could not be done from a client at all — a team could make
+ * the same board by hand every week and never turn it into a starting point.
+ *
+ * @generated from message tank.board.v1.SaveBoardTemplateRequest
+ */
+export type SaveBoardTemplateRequest = Message<"tank.board.v1.SaveBoardTemplateRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * What CreateBoardRequest.template will carry. Made from the title when empty.
+     *
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: string title = 4;
+     */
+    title: string;
+    /**
+     * @generated from field: string icon = 5;
+     */
+    icon: string;
+    /**
+     * @generated from field: string about = 6;
+     */
+    about: string;
+    /**
+     * @generated from field: string group = 7;
+     */
+    group: string;
+    /**
+     * Empty saves the whole board. A selection saves those objects, which is how a
+     * corner of a board becomes a template without the rest of it coming too.
+     *
+     * @generated from field: repeated string object_ids = 8;
+     */
+    objectIds: string[];
+    /**
+     * Overwrite one of this workspace's own by that name. Without it a clash is a
+     * refusal, because quietly replacing somebody else's template is not a save.
+     *
+     * @generated from field: bool replace = 9;
+     */
+    replace: boolean;
+};
+/**
+ * Describes the message tank.board.v1.SaveBoardTemplateRequest.
+ * Use `create(SaveBoardTemplateRequestSchema)` to create a new message.
+ */
+export declare const SaveBoardTemplateRequestSchema: GenMessage<SaveBoardTemplateRequest>;
+/**
+ * @generated from message tank.board.v1.SaveBoardTemplateResponse
+ */
+export type SaveBoardTemplateResponse = Message<"tank.board.v1.SaveBoardTemplateResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.BoardTemplate template = 1;
+     */
+    template?: BoardTemplate;
+};
+/**
+ * Describes the message tank.board.v1.SaveBoardTemplateResponse.
+ * Use `create(SaveBoardTemplateResponseSchema)` to create a new message.
+ */
+export declare const SaveBoardTemplateResponseSchema: GenMessage<SaveBoardTemplateResponse>;
+/**
+ * @generated from message tank.board.v1.DeleteBoardTemplateRequest
+ */
+export type DeleteBoardTemplateRequest = Message<"tank.board.v1.DeleteBoardTemplateRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.board.v1.DeleteBoardTemplateRequest.
+ * Use `create(DeleteBoardTemplateRequestSchema)` to create a new message.
+ */
+export declare const DeleteBoardTemplateRequestSchema: GenMessage<DeleteBoardTemplateRequest>;
+/**
+ * @generated from message tank.board.v1.DeleteBoardTemplateResponse
+ */
+export type DeleteBoardTemplateResponse = Message<"tank.board.v1.DeleteBoardTemplateResponse"> & {};
+/**
+ * Describes the message tank.board.v1.DeleteBoardTemplateResponse.
+ * Use `create(DeleteBoardTemplateResponseSchema)` to create a new message.
+ */
+export declare const DeleteBoardTemplateResponseSchema: GenMessage<DeleteBoardTemplateResponse>;
+/**
+ * A named region of a board that exports on its own: the "slice" every design tool
+ * has. A slice is an ordinary object carrying a record saying it is one, for the same
+ * reason a flowchart's decision is a rectangle that says it is drawn as a diamond —
+ * moving, resizing, snapping and layout all keep working on the box they already know.
+ *
+ * @generated from message tank.board.v1.BoardSlice
+ */
+export type BoardSlice = Message<"tank.board.v1.BoardSlice"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: tank.board.v1.Rect at = 2;
+     */
+    at?: Rect;
+    /**
+     * @generated from field: string object_id = 3;
+     */
+    objectId: string;
+};
+/**
+ * Describes the message tank.board.v1.BoardSlice.
+ * Use `create(BoardSliceSchema)` to create a new message.
+ */
+export declare const BoardSliceSchema: GenMessage<BoardSlice>;
+/**
  * Export a board, or part of one, as a file somebody can send to a person who does
  * not have a TANK account.
  *
@@ -863,7 +1055,7 @@ export type ExportBoardRequest = Message<"tank.board.v1.ExportBoardRequest"> & {
      */
     id: string;
     /**
-     * "svg"
+     * "svg" | "png" | "jpg" | "pdf". Empty is svg.
      *
      * @generated from field: string format = 3;
      */
@@ -878,6 +1070,26 @@ export type ExportBoardRequest = Message<"tank.board.v1.ExportBoardRequest"> & {
      * @generated from field: bool transparent = 5;
      */
     transparent: boolean;
+    /**
+     * 1, 2 or 3 — the @1x/@2x/@3x a handoff asks for. Raster only: a vector file is
+     * already every scale. 0 means 1.
+     *
+     * @generated from field: int32 scale = 6;
+     */
+    scale: number;
+    /**
+     * Export one named region instead of the whole board or a selection. A slice wins
+     * over object_ids, because naming a region is the more specific ask.
+     *
+     * @generated from field: string slice = 7;
+     */
+    slice: string;
+    /**
+     * jpg only: 1..100. 0 means 82.
+     *
+     * @generated from field: int32 quality = 8;
+     */
+    quality: number;
 };
 /**
  * Describes the message tank.board.v1.ExportBoardRequest.
@@ -900,12 +1112,138 @@ export type ExportBoardResponse = Message<"tank.board.v1.ExportBoardResponse"> &
      * @generated from field: bytes body = 3;
      */
     body: Uint8Array;
+    /**
+     * The pixels in the file. Zero for a vector format, which has none.
+     *
+     * @generated from field: int32 width = 4;
+     */
+    width: number;
+    /**
+     * @generated from field: int32 height = 5;
+     */
+    height: number;
+    /**
+     * What this file could not carry, in sentences somebody can act on: an effect the
+     * format has no way to draw, or a count of the prototyping hotspots left out of it.
+     * Empty means the file carries everything the board has.
+     *
+     * @generated from field: repeated string notes = 6;
+     */
+    notes: string[];
 };
 /**
  * Describes the message tank.board.v1.ExportBoardResponse.
  * Use `create(ExportBoardResponseSchema)` to create a new message.
  */
 export declare const ExportBoardResponseSchema: GenMessage<ExportBoardResponse>;
+/**
+ * @generated from message tank.board.v1.ListBoardSlicesRequest
+ */
+export type ListBoardSlicesRequest = Message<"tank.board.v1.ListBoardSlicesRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+};
+/**
+ * Describes the message tank.board.v1.ListBoardSlicesRequest.
+ * Use `create(ListBoardSlicesRequestSchema)` to create a new message.
+ */
+export declare const ListBoardSlicesRequestSchema: GenMessage<ListBoardSlicesRequest>;
+/**
+ * @generated from message tank.board.v1.ListBoardSlicesResponse
+ */
+export type ListBoardSlicesResponse = Message<"tank.board.v1.ListBoardSlicesResponse"> & {
+    /**
+     * @generated from field: repeated tank.board.v1.BoardSlice slices = 1;
+     */
+    slices: BoardSlice[];
+};
+/**
+ * Describes the message tank.board.v1.ListBoardSlicesResponse.
+ * Use `create(ListBoardSlicesResponseSchema)` to create a new message.
+ */
+export declare const ListBoardSlicesResponseSchema: GenMessage<ListBoardSlicesResponse>;
+/**
+ * An embed link: the board, or one slice of it, as a URL somebody with no TANK
+ * account can put in a page.
+ *
+ * The link is the credential, the way an invoice's share link is, so it is readable
+ * back to anyone who may read the board and rotating it is how it is taken away.
+ *
+ * @generated from message tank.board.v1.BoardEmbedRequest
+ */
+export type BoardEmbedRequest = Message<"tank.board.v1.BoardEmbedRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+    /**
+     * @generated from field: string slice = 3;
+     */
+    slice: string;
+    /**
+     * mint a new link, which stops the old one working
+     *
+     * @generated from field: bool rotate = 4;
+     */
+    rotate: boolean;
+    /**
+     * stop the board being embeddable at all
+     *
+     * @generated from field: bool revoke = 5;
+     */
+    revoke: boolean;
+};
+/**
+ * Describes the message tank.board.v1.BoardEmbedRequest.
+ * Use `create(BoardEmbedRequestSchema)` to create a new message.
+ */
+export declare const BoardEmbedRequestSchema: GenMessage<BoardEmbedRequest>;
+/**
+ * @generated from message tank.board.v1.BoardEmbedResponse
+ */
+export type BoardEmbedResponse = Message<"tank.board.v1.BoardEmbedResponse"> & {
+    /**
+     * a page to put in an iframe
+     *
+     * @generated from field: string page_url = 1;
+     */
+    pageUrl: string;
+    /**
+     * the picture on its own, for a README or an <img>
+     *
+     * @generated from field: string image_url = 2;
+     */
+    imageUrl: string;
+    /**
+     * false once revoked
+     *
+     * @generated from field: bool embedded = 3;
+     */
+    embedded: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 4;
+     */
+    createdAt?: Timestamp;
+    /**
+     * @generated from field: string created_by = 5;
+     */
+    createdBy: string;
+};
+/**
+ * Describes the message tank.board.v1.BoardEmbedResponse.
+ * Use `create(BoardEmbedResponseSchema)` to create a new message.
+ */
+export declare const BoardEmbedResponseSchema: GenMessage<BoardEmbedResponse>;
 /**
  * One thing somebody did while clicking through a running frame.
  *
@@ -1014,6 +1352,531 @@ export type GenerateTestResponse = Message<"tank.board.v1.GenerateTestResponse">
  * Use `create(GenerateTestResponseSchema)` to create a new message.
  */
 export declare const GenerateTestResponseSchema: GenMessage<GenerateTestResponse>;
+/**
+ * A preview somebody else's CI published.
+ *
+ * TANK serves previews of the applications it builds, which is no use to a workspace
+ * that builds its own. Rather than make every customer hand TANK their pipeline, a
+ * workspace's CI tells TANK where it has already put the build, and a frame points at
+ * that. The workspace keeps its own CI; TANK keeps the board.
+ *
+ * @generated from message tank.board.v1.ReportPreviewRequest
+ */
+export type ReportPreviewRequest = Message<"tank.board.v1.ReportPreviewRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * owner/name, as the frame names it
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * the branch this build is of; "main" is allowed
+     *
+     * @generated from field: string ref = 3;
+     */
+    ref: string;
+    /**
+     * the commit it was built from
+     *
+     * @generated from field: string sha = 4;
+     */
+    sha: string;
+    /**
+     * where it is served, e.g. https://preview.example.com/abc123
+     *
+     * @generated from field: string url = 5;
+     */
+    url: string;
+    /**
+     * How long to trust it. The publisher knows its own retention; TANK will not claim
+     * a build is there after this. Zero means the workspace's default.
+     *
+     * @generated from field: int32 retain_days = 6;
+     */
+    retainDays: number;
+};
+/**
+ * Describes the message tank.board.v1.ReportPreviewRequest.
+ * Use `create(ReportPreviewRequestSchema)` to create a new message.
+ */
+export declare const ReportPreviewRequestSchema: GenMessage<ReportPreviewRequest>;
+/**
+ * @generated from message tank.board.v1.ReportPreviewResponse
+ */
+export type ReportPreviewResponse = Message<"tank.board.v1.ReportPreviewResponse"> & {
+    /**
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * @generated from field: string ref = 2;
+     */
+    ref: string;
+    /**
+     * @generated from field: string sha = 3;
+     */
+    sha: string;
+    /**
+     * @generated from field: string url = 4;
+     */
+    url: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp built_at = 5;
+     */
+    builtAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 6;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.board.v1.ReportPreviewResponse.
+ * Use `create(ReportPreviewResponseSchema)` to create a new message.
+ */
+export declare const ReportPreviewResponseSchema: GenMessage<ReportPreviewResponse>;
+/**
+ * @generated from message tank.board.v1.ListPreviewsRequest
+ */
+export type ListPreviewsRequest = Message<"tank.board.v1.ListPreviewsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * empty lists every repo the workspace has reported
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * @generated from field: int32 limit = 3;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.board.v1.ListPreviewsRequest.
+ * Use `create(ListPreviewsRequestSchema)` to create a new message.
+ */
+export declare const ListPreviewsRequestSchema: GenMessage<ListPreviewsRequest>;
+/**
+ * @generated from message tank.board.v1.ListPreviewsResponse
+ */
+export type ListPreviewsResponse = Message<"tank.board.v1.ListPreviewsResponse"> & {
+    /**
+     * @generated from field: repeated tank.board.v1.ReportPreviewResponse previews = 1;
+     */
+    previews: ReportPreviewResponse[];
+};
+/**
+ * Describes the message tank.board.v1.ListPreviewsResponse.
+ * Use `create(ListPreviewsResponseSchema)` to create a new message.
+ */
+export declare const ListPreviewsResponseSchema: GenMessage<ListPreviewsResponse>;
+/**
+ * Stop trusting one. A build that has been taken down should stop being offered the
+ * moment its publisher says so, rather than when TANK's clock runs out.
+ *
+ * @generated from message tank.board.v1.ForgetPreviewRequest
+ */
+export type ForgetPreviewRequest = Message<"tank.board.v1.ForgetPreviewRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * empty forgets every ref of that repo
+     *
+     * @generated from field: string ref = 3;
+     */
+    ref: string;
+};
+/**
+ * Describes the message tank.board.v1.ForgetPreviewRequest.
+ * Use `create(ForgetPreviewRequestSchema)` to create a new message.
+ */
+export declare const ForgetPreviewRequestSchema: GenMessage<ForgetPreviewRequest>;
+/**
+ * @generated from message tank.board.v1.ForgetPreviewResponse
+ */
+export type ForgetPreviewResponse = Message<"tank.board.v1.ForgetPreviewResponse"> & {
+    /**
+     * @generated from field: int32 forgotten = 1;
+     */
+    forgotten: number;
+};
+/**
+ * Describes the message tank.board.v1.ForgetPreviewResponse.
+ * Use `create(ForgetPreviewResponseSchema)` to create a new message.
+ */
+export declare const ForgetPreviewResponseSchema: GenMessage<ForgetPreviewResponse>;
+/**
+ * A column in a table somebody reported the schema of.
+ *
+ * @generated from message tank.board.v1.SchemaColumn
+ */
+export type SchemaColumn = Message<"tank.board.v1.SchemaColumn"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string type = 2;
+     */
+    type: string;
+    /**
+     * @generated from field: bool primary_key = 3;
+     */
+    primaryKey: boolean;
+    /**
+     * @generated from field: bool nullable = 4;
+     */
+    nullable: boolean;
+    /**
+     * "orders.id": the column this one points at, when it points at one.
+     *
+     * @generated from field: string references = 5;
+     */
+    references: string;
+};
+/**
+ * Describes the message tank.board.v1.SchemaColumn.
+ * Use `create(SchemaColumnSchema)` to create a new message.
+ */
+export declare const SchemaColumnSchema: GenMessage<SchemaColumn>;
+/**
+ * @generated from message tank.board.v1.SchemaTable
+ */
+export type SchemaTable = Message<"tank.board.v1.SchemaTable"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * "public"
+     *
+     * @generated from field: string schema = 2;
+     */
+    schema: string;
+    /**
+     * @generated from field: repeated tank.board.v1.SchemaColumn columns = 3;
+     */
+    columns: SchemaColumn[];
+};
+/**
+ * Describes the message tank.board.v1.SchemaTable.
+ * Use `create(SchemaTableSchema)` to create a new message.
+ */
+export declare const SchemaTableSchema: GenMessage<SchemaTable>;
+/**
+ * One file of infrastructure-as-code, as the repository holds it.
+ *
+ * @generated from message tank.board.v1.InfraFile
+ */
+export type InfraFile = Message<"tank.board.v1.InfraFile"> & {
+    /**
+     * @generated from field: string path = 1;
+     */
+    path: string;
+    /**
+     * @generated from field: string body = 2;
+     */
+    body: string;
+};
+/**
+ * Describes the message tank.board.v1.InfraFile.
+ * Use `create(InfraFileSchema)` to create a new message.
+ */
+export declare const InfraFileSchema: GenMessage<InfraFile>;
+/**
+ * Tell TANK what a database's schema is, or what is in a repository's `infra/`, so a
+ * diagram can be drawn from the real thing instead of from somebody's memory of it.
+ *
+ * Deliberately the same shape as ReportPreview, and for the same reason. TANK holding
+ * a connection string and reaching into somebody's network to read their database
+ * would be a credential to store, to rotate and to lose, a route into their VPC, and
+ * one more thing that can be breached — and the migration job that has just changed
+ * the schema knows it better than any poller of ours would. So the workspace's own CI
+ * says what it already knows, with a token whose only scope is board:preview, exactly
+ * as it already does for previews.
+ *
+ * @generated from message tank.board.v1.ReportBoardSourceRequest
+ */
+export type ReportBoardSourceRequest = Message<"tank.board.v1.ReportBoardSourceRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * "erd" | "architecture"
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * What to call it on a board: a database name, or owner/name for a repository.
+     *
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * the branch; "main" when it does not apply
+     *
+     * @generated from field: string ref = 4;
+     */
+    ref: string;
+    /**
+     * the commit, or the migration version, it was read at
+     *
+     * @generated from field: string sha = 5;
+     */
+    sha: string;
+    /**
+     * kind = "erd"
+     *
+     * @generated from field: repeated tank.board.v1.SchemaTable tables = 6;
+     */
+    tables: SchemaTable[];
+    /**
+     * kind = "architecture"
+     *
+     * @generated from field: repeated tank.board.v1.InfraFile files = 7;
+     */
+    files: InfraFile[];
+    /**
+     * @generated from field: int32 retain_days = 8;
+     */
+    retainDays: number;
+};
+/**
+ * Describes the message tank.board.v1.ReportBoardSourceRequest.
+ * Use `create(ReportBoardSourceRequestSchema)` to create a new message.
+ */
+export declare const ReportBoardSourceRequestSchema: GenMessage<ReportBoardSourceRequest>;
+/**
+ * @generated from message tank.board.v1.BoardSource
+ */
+export type BoardSource = Message<"tank.board.v1.BoardSource"> & {
+    /**
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string ref = 3;
+     */
+    ref: string;
+    /**
+     * @generated from field: string sha = 4;
+     */
+    sha: string;
+    /**
+     * tables, or files
+     *
+     * @generated from field: int32 items = 5;
+     */
+    items: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp reported_at = 6;
+     */
+    reportedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 7;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.board.v1.BoardSource.
+ * Use `create(BoardSourceSchema)` to create a new message.
+ */
+export declare const BoardSourceSchema: GenMessage<BoardSource>;
+/**
+ * @generated from message tank.board.v1.ReportBoardSourceResponse
+ */
+export type ReportBoardSourceResponse = Message<"tank.board.v1.ReportBoardSourceResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.BoardSource source = 1;
+     */
+    source?: BoardSource;
+};
+/**
+ * Describes the message tank.board.v1.ReportBoardSourceResponse.
+ * Use `create(ReportBoardSourceResponseSchema)` to create a new message.
+ */
+export declare const ReportBoardSourceResponseSchema: GenMessage<ReportBoardSourceResponse>;
+/**
+ * @generated from message tank.board.v1.ListBoardSourcesRequest
+ */
+export type ListBoardSourcesRequest = Message<"tank.board.v1.ListBoardSourcesRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * empty lists every kind
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+};
+/**
+ * Describes the message tank.board.v1.ListBoardSourcesRequest.
+ * Use `create(ListBoardSourcesRequestSchema)` to create a new message.
+ */
+export declare const ListBoardSourcesRequestSchema: GenMessage<ListBoardSourcesRequest>;
+/**
+ * @generated from message tank.board.v1.ListBoardSourcesResponse
+ */
+export type ListBoardSourcesResponse = Message<"tank.board.v1.ListBoardSourcesResponse"> & {
+    /**
+     * @generated from field: repeated tank.board.v1.BoardSource sources = 1;
+     */
+    sources: BoardSource[];
+};
+/**
+ * Describes the message tank.board.v1.ListBoardSourcesResponse.
+ * Use `create(ListBoardSourcesResponseSchema)` to create a new message.
+ */
+export declare const ListBoardSourcesResponseSchema: GenMessage<ListBoardSourcesResponse>;
+/**
+ * What a derived diagram was drawn from.
+ *
+ * The same idea as AppFrame.drawn_from_sha, applied to a drawing rather than to a
+ * running app: a diagram that records what it rests on can say when that has moved,
+ * and can be drawn again from the new thing instead of by hand. This is what makes
+ * "the diagram re-derives itself when the code moves" a mechanism rather than a wish.
+ *
+ * @generated from message tank.board.v1.Derivation
+ */
+export type Derivation = Message<"tank.board.v1.Derivation"> & {
+    /**
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: string source = 2;
+     */
+    source: string;
+    /**
+     * @generated from field: string ref = 3;
+     */
+    ref: string;
+    /**
+     * @generated from field: string sha = 4;
+     */
+    sha: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp derived_at = 5;
+     */
+    derivedAt?: Timestamp;
+    /**
+     * Server-filled: something newer has been reported since this was drawn.
+     *
+     * @generated from field: bool moved_on = 6;
+     */
+    movedOn: boolean;
+    /**
+     * @generated from field: string moved_note = 7;
+     */
+    movedNote: string;
+    /**
+     * @generated from field: string moved_to_sha = 8;
+     */
+    movedToSha: string;
+};
+/**
+ * Describes the message tank.board.v1.Derivation.
+ * Use `create(DerivationSchema)` to create a new message.
+ */
+export declare const DerivationSchema: GenMessage<Derivation>;
+/**
+ * @generated from message tank.board.v1.DeriveDiagramRequest
+ */
+export type DeriveDiagramRequest = Message<"tank.board.v1.DeriveDiagramRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * "erd" | "architecture"
+     *
+     * @generated from field: string kind = 3;
+     */
+    kind: string;
+    /**
+     * which reported source to draw
+     *
+     * @generated from field: string source = 4;
+     */
+    source: string;
+    /**
+     * @generated from field: string ref = 5;
+     */
+    ref: string;
+    /**
+     * Redraw a frame derived earlier rather than drawing a second one. With this set,
+     * kind, source and ref come from the frame itself and need not be repeated.
+     *
+     * @generated from field: string frame_id = 6;
+     */
+    frameId: string;
+    /**
+     * @generated from field: double x = 7;
+     */
+    x: number;
+    /**
+     * @generated from field: double y = 8;
+     */
+    y: number;
+};
+/**
+ * Describes the message tank.board.v1.DeriveDiagramRequest.
+ * Use `create(DeriveDiagramRequestSchema)` to create a new message.
+ */
+export declare const DeriveDiagramRequestSchema: GenMessage<DeriveDiagramRequest>;
+/**
+ * @generated from message tank.board.v1.DeriveDiagramResponse
+ */
+export type DeriveDiagramResponse = Message<"tank.board.v1.DeriveDiagramResponse"> & {
+    /**
+     * @generated from field: string frame_id = 1;
+     */
+    frameId: string;
+    /**
+     * @generated from field: tank.board.v1.Board board = 2;
+     */
+    board?: Board;
+    /**
+     * @generated from field: tank.board.v1.Derivation derivation = 3;
+     */
+    derivation?: Derivation;
+    /**
+     * What the source did not say: a foreign key with no table to point at, a resource
+     * nothing could be told about.
+     *
+     * @generated from field: repeated string notes = 4;
+     */
+    notes: string[];
+};
+/**
+ * Describes the message tank.board.v1.DeriveDiagramResponse.
+ * Use `create(DeriveDiagramResponseSchema)` to create a new message.
+ */
+export declare const DeriveDiagramResponseSchema: GenMessage<DeriveDiagramResponse>;
 /**
  * @generated from enum tank.board.v1.ObjectKind
  */
@@ -1144,6 +2007,22 @@ export declare const BoardService: GenService<{
         output: typeof ListTemplatesResponseSchema;
     };
     /**
+     * @generated from rpc tank.board.v1.BoardService.SaveBoardTemplate
+     */
+    saveBoardTemplate: {
+        methodKind: "unary";
+        input: typeof SaveBoardTemplateRequestSchema;
+        output: typeof SaveBoardTemplateResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.DeleteBoardTemplate
+     */
+    deleteBoardTemplate: {
+        methodKind: "unary";
+        input: typeof DeleteBoardTemplateRequestSchema;
+        output: typeof DeleteBoardTemplateResponseSchema;
+    };
+    /**
      * @generated from rpc tank.board.v1.BoardService.ExportBoard
      */
     exportBoard: {
@@ -1152,11 +2031,75 @@ export declare const BoardService: GenService<{
         output: typeof ExportBoardResponseSchema;
     };
     /**
+     * @generated from rpc tank.board.v1.BoardService.ListBoardSlices
+     */
+    listBoardSlices: {
+        methodKind: "unary";
+        input: typeof ListBoardSlicesRequestSchema;
+        output: typeof ListBoardSlicesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.BoardEmbed
+     */
+    boardEmbed: {
+        methodKind: "unary";
+        input: typeof BoardEmbedRequestSchema;
+        output: typeof BoardEmbedResponseSchema;
+    };
+    /**
      * @generated from rpc tank.board.v1.BoardService.GenerateTest
      */
     generateTest: {
         methodKind: "unary";
         input: typeof GenerateTestRequestSchema;
         output: typeof GenerateTestResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ReportPreview
+     */
+    reportPreview: {
+        methodKind: "unary";
+        input: typeof ReportPreviewRequestSchema;
+        output: typeof ReportPreviewResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ListPreviews
+     */
+    listPreviews: {
+        methodKind: "unary";
+        input: typeof ListPreviewsRequestSchema;
+        output: typeof ListPreviewsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ForgetPreview
+     */
+    forgetPreview: {
+        methodKind: "unary";
+        input: typeof ForgetPreviewRequestSchema;
+        output: typeof ForgetPreviewResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ReportBoardSource
+     */
+    reportBoardSource: {
+        methodKind: "unary";
+        input: typeof ReportBoardSourceRequestSchema;
+        output: typeof ReportBoardSourceResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ListBoardSources
+     */
+    listBoardSources: {
+        methodKind: "unary";
+        input: typeof ListBoardSourcesRequestSchema;
+        output: typeof ListBoardSourcesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.DeriveDiagram
+     */
+    deriveDiagram: {
+        methodKind: "unary";
+        input: typeof DeriveDiagramRequestSchema;
+        output: typeof DeriveDiagramResponseSchema;
     };
 }>;

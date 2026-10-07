@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/board/v1/board.proto.
  */
 export const file_tank_board_v1_board: GenFile = /*@__PURE__*/
-  fileDesc("Chl0YW5rL2JvYXJkL3YxL2JvYXJkLnByb3RvEg10YW5rLmJvYXJkLnYxIjIKBFJlY3QSCQoBeBgBIAEoARIJCgF5GAIgASgBEgkKAXcYAyABKAESCQoBaBgEIAEoASLGAQoFU3R5bGUSDAoEZmlsbBgBIAEoCRIOCgZzdHJva2UYAiABKAkSFAoMc3Ryb2tlX3dpZHRoGAMgASgBEg8KB29wYWNpdHkYBCABKAESFQoNY29ybmVyX3JhZGl1cxgFIAEoARIMCgRkYXNoGAYgASgJEhEKCWZvbnRfc2l6ZRgHIAEoBRITCgtmb250X3dlaWdodBgIIAEoCRINCgVhbGlnbhgJIAEoCRIOCgZzaGFkb3cYCiABKAkSDAoEYmx1chgLIAEoASKVAgoIQXBwRnJhbWUSDAoEcmVwbxgBIAEoCRILCgNyZWYYAiABKAkSDAoEcGF0aBgDIAEoCRIQCghwbGF0Zm9ybRgEIAEoCRIWCg52aWV3cG9ydF93aWR0aBgFIAEoBRIXCg92aWV3cG9ydF9oZWlnaHQYBiABKAUSEwoLcHJldmlld191cmwYByABKAkSDgoGc3RhdHVzGAggASgJEgwKBG5vdGUYCSABKAkSFgoOZHJhd25fZnJvbV9zaGEYCiABKAkSLAoIZHJhd25fYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhAKCG1vdmVkX29uGAwgASgIEhIKCm1vdmVkX25vdGUYDSABKAki/gIKC0JvYXJkT2JqZWN0EgoKAmlkGAEgASgJEicKBGtpbmQYAiABKA4yGS50YW5rLmJvYXJkLnYxLk9iamVjdEtpbmQSHwoCYXQYAyABKAsyEy50YW5rLmJvYXJkLnYxLlJlY3QSIwoFc3R5bGUYBCABKAsyFC50YW5rLmJvYXJkLnYxLlN0eWxlEgwKBHRleHQYBSABKAkSEAoIcm90YXRpb24YBiABKAESCQoBehgHIAEoBRIRCglwYXJlbnRfaWQYCCABKAkSDwoHZnJvbV9pZBgJIAEoCRINCgV0b19pZBgKIAEoCRIOCgZwb2ludHMYCyADKAESDwoHZmlsZV9pZBgMIAEoCRIQCghmaWxlX3VybBgNIAEoCRIkCgNhcHAYDiABKAsyFy50YW5rLmJvYXJkLnYxLkFwcEZyYW1lEg4KBmxvY2tlZBgPIAEoCBIMCgRtZXRhGBIgASgJEhIKCmNyZWF0ZWRfYnkYECABKAkSCwoDcmV2GBEgASgFIssCCgVCb2FyZBIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSEgoKY2hhbm5lbF9pZBgDIAEoCRINCgV0aXRsZRgEIAEoCRIMCgRpY29uGAUgASgJEisKB29iamVjdHMYBiADKAsyGi50YW5rLmJvYXJkLnYxLkJvYXJkT2JqZWN0Eg8KB3ZlcnNpb24YByABKAUSEgoKY3JlYXRlZF9ieRgIIAEoCRIuCgpjcmVhdGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgp1cGRhdGVkX2J5GAogASgJEi4KCnVwZGF0ZWRfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCXN0YWxlbmVzcxgMIAEoBRIWCg5zdGFsZW5lc3Nfbm90ZRgNIAEoCSLLAQoMQm9hcmRTdW1tYXJ5EgoKAmlkGAEgASgJEg0KBXRpdGxlGAIgASgJEgwKBGljb24YAyABKAkSDwoHb2JqZWN0cxgEIAEoBRISCgphcHBfZnJhbWVzGAUgASgFEi4KCnVwZGF0ZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmNoYW5uZWxfaWQYByABKAkSEQoJc3RhbGVuZXNzGAggASgFEhYKDnN0YWxlbmVzc19ub3RlGAkgASgJIkwKEUxpc3RCb2FyZHNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJEg0KBWxpbWl0GAMgASgFIkEKEkxpc3RCb2FyZHNSZXNwb25zZRIrCgZib2FyZHMYASADKAsyGy50YW5rLmJvYXJkLnYxLkJvYXJkU3VtbWFyeSIzCg9HZXRCb2FyZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJIjcKEEdldEJvYXJkUmVzcG9uc2USIwoFYm9hcmQYASABKAsyFC50YW5rLmJvYXJkLnYxLkJvYXJkIpoBChJDcmVhdGVCb2FyZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDQoFdGl0bGUYAyABKAkSDAoEaWNvbhgEIAEoCRIrCgdvYmplY3RzGAUgAygLMhoudGFuay5ib2FyZC52MS5Cb2FyZE9iamVjdBIQCgh0ZW1wbGF0ZRgGIAEoCSI6ChNDcmVhdGVCb2FyZFJlc3BvbnNlEiMKBWJvYXJkGAEgASgLMhQudGFuay5ib2FyZC52MS5Cb2FyZCJ8ChJVcGRhdGVCb2FyZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJEg0KBXRpdGxlGAMgASgJEgwKBGljb24YBCABKAkSEgoKY2hhbm5lbF9pZBgFIAEoCRITCgtzZXRfY2hhbm5lbBgGIAEoCCI6ChNVcGRhdGVCb2FyZFJlc3BvbnNlEiMKBWJvYXJkGAEgASgLMhQudGFuay5ib2FyZC52MS5Cb2FyZCI2ChJEZWxldGVCb2FyZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJIhUKE0RlbGV0ZUJvYXJkUmVzcG9uc2Ui8AEKEVB1dE9iamVjdHNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIQCghib2FyZF9pZBgCIAEoCRIrCgdvYmplY3RzGAMgAygLMhoudGFuay5ib2FyZC52MS5Cb2FyZE9iamVjdBISCgpkZWxldGVfaWRzGAQgAygJEkEKCWJhc2VfcmV2cxgFIAMoCzIuLnRhbmsuYm9hcmQudjEuUHV0T2JqZWN0c1JlcXVlc3QuQmFzZVJldnNFbnRyeRovCg1CYXNlUmV2c0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoBToCOAEifwoSUHV0T2JqZWN0c1Jlc3BvbnNlEiMKBWJvYXJkGAEgASgLMhQudGFuay5ib2FyZC52MS5Cb2FyZBItCgljb25mbGljdHMYAiADKAsyGi50YW5rLmJvYXJkLnYxLkJvYXJkT2JqZWN0EhUKDWNvbmZsaWN0X25vdGUYAyABKAkidwoHRWxlbWVudBIOCgZzb3VyY2UYASABKAkSCwoDdGFnGAIgASgJEgwKBHRleHQYAyABKAkSDwoHdGVzdF9pZBgEIAEoCRIfCgJhdBgFIAEoCzITLnRhbmsuYm9hcmQudjEuUmVjdBIPCgdjbGFzc2VzGAYgAygJIocBChRSZXF1ZXN0Q2hhbmdlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEAoIYm9hcmRfaWQYAiABKAkSEQoJb2JqZWN0X2lkGAMgASgJEicKB2VsZW1lbnQYBCABKAsyFi50YW5rLmJvYXJkLnYxLkVsZW1lbnQSCwoDYXNrGAUgASgJIlMKFVJlcXVlc3RDaGFuZ2VSZXNwb25zZRIWCg50aHJlYWRfcm9vdF9pZBgGIAEoCRISCgpjaGFubmVsX2lkGAcgASgJEg4KBnByb21wdBgIIAEoCSJYCg1Cb2FyZFRlbXBsYXRlEgwKBG5hbWUYASABKAkSDQoFdGl0bGUYAiABKAkSDAoEaWNvbhgDIAEoCRINCgVhYm91dBgEIAEoCRINCgVncm91cBgFIAEoCSIWChRMaXN0VGVtcGxhdGVzUmVxdWVzdCJIChVMaXN0VGVtcGxhdGVzUmVzcG9uc2USLwoJdGVtcGxhdGVzGAEgAygLMhwudGFuay5ib2FyZC52MS5Cb2FyZFRlbXBsYXRlIm8KEkV4cG9ydEJvYXJkUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSDgoGZm9ybWF0GAMgASgJEhIKCm9iamVjdF9pZHMYBCADKAkSEwoLdHJhbnNwYXJlbnQYBSABKAgiSwoTRXhwb3J0Qm9hcmRSZXNwb25zZRIQCghmaWxlbmFtZRgBIAEoCRIUCgxjb250ZW50X3R5cGUYAiABKAkSDAoEYm9keRgDIAEoDCJgCghGbG93U3RlcBInCgdlbGVtZW50GAEgASgLMhYudGFuay5ib2FyZC52MS5FbGVtZW50Eg4KBmFjdGlvbhgCIAEoCRINCgV2YWx1ZRgDIAEoCRIMCgRub3RlGAQgASgJIoYBChNHZW5lcmF0ZVRlc3RSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIQCghib2FyZF9pZBgCIAEoCRIRCglvYmplY3RfaWQYAyABKAkSDAoEbmFtZRgEIAEoCRImCgVzdGVwcxgFIAMoCzIXLnRhbmsuYm9hcmQudjEuRmxvd1N0ZXAiewoUR2VuZXJhdGVUZXN0UmVzcG9uc2USFwoPcGxheXdyaWdodF9wYXRoGAEgASgJEhIKCnBsYXl3cmlnaHQYAiABKAkSFAoMbWFlc3Ryb19wYXRoGAMgASgJEg8KB21hZXN0cm8YBCABKAkSDwoHc2tpcHBlZBgFIAMoCSqSAgoKT2JqZWN0S2luZBIbChdPQkpFQ1RfS0lORF9VTlNQRUNJRklFRBAAEhUKEU9CSkVDVF9LSU5EX0ZSQU1FEAESFAoQT0JKRUNUX0tJTkRfUkVDVBACEhcKE09CSkVDVF9LSU5EX0VMTElQU0UQAxIUChBPQkpFQ1RfS0lORF9MSU5FEAQSFQoRT0JKRUNUX0tJTkRfQVJST1cQBRIUChBPQkpFQ1RfS0lORF9URVhUEAYSFgoST0JKRUNUX0tJTkRfU1RJQ0tZEAcSFQoRT0JKRUNUX0tJTkRfSU1BR0UQCBIZChVPQkpFQ1RfS0lORF9DT05ORUNUT1IQCRIUChBPQkpFQ1RfS0lORF9EUkFXEAoy6gYKDEJvYXJkU2VydmljZRJRCgpMaXN0Qm9hcmRzEiAudGFuay5ib2FyZC52MS5MaXN0Qm9hcmRzUmVxdWVzdBohLnRhbmsuYm9hcmQudjEuTGlzdEJvYXJkc1Jlc3BvbnNlEksKCEdldEJvYXJkEh4udGFuay5ib2FyZC52MS5HZXRCb2FyZFJlcXVlc3QaHy50YW5rLmJvYXJkLnYxLkdldEJvYXJkUmVzcG9uc2USVAoLQ3JlYXRlQm9hcmQSIS50YW5rLmJvYXJkLnYxLkNyZWF0ZUJvYXJkUmVxdWVzdBoiLnRhbmsuYm9hcmQudjEuQ3JlYXRlQm9hcmRSZXNwb25zZRJUCgtVcGRhdGVCb2FyZBIhLnRhbmsuYm9hcmQudjEuVXBkYXRlQm9hcmRSZXF1ZXN0GiIudGFuay5ib2FyZC52MS5VcGRhdGVCb2FyZFJlc3BvbnNlElQKC0RlbGV0ZUJvYXJkEiEudGFuay5ib2FyZC52MS5EZWxldGVCb2FyZFJlcXVlc3QaIi50YW5rLmJvYXJkLnYxLkRlbGV0ZUJvYXJkUmVzcG9uc2USUQoKUHV0T2JqZWN0cxIgLnRhbmsuYm9hcmQudjEuUHV0T2JqZWN0c1JlcXVlc3QaIS50YW5rLmJvYXJkLnYxLlB1dE9iamVjdHNSZXNwb25zZRJaCg1SZXF1ZXN0Q2hhbmdlEiMudGFuay5ib2FyZC52MS5SZXF1ZXN0Q2hhbmdlUmVxdWVzdBokLnRhbmsuYm9hcmQudjEuUmVxdWVzdENoYW5nZVJlc3BvbnNlEloKDUxpc3RUZW1wbGF0ZXMSIy50YW5rLmJvYXJkLnYxLkxpc3RUZW1wbGF0ZXNSZXF1ZXN0GiQudGFuay5ib2FyZC52MS5MaXN0VGVtcGxhdGVzUmVzcG9uc2USVAoLRXhwb3J0Qm9hcmQSIS50YW5rLmJvYXJkLnYxLkV4cG9ydEJvYXJkUmVxdWVzdBoiLnRhbmsuYm9hcmQudjEuRXhwb3J0Qm9hcmRSZXNwb25zZRJXCgxHZW5lcmF0ZVRlc3QSIi50YW5rLmJvYXJkLnYxLkdlbmVyYXRlVGVzdFJlcXVlc3QaIy50YW5rLmJvYXJkLnYxLkdlbmVyYXRlVGVzdFJlc3BvbnNlQsgBChFjb20udGFuay5ib2FyZC52MUIKQm9hcmRQcm90b1ABWlFnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2JvYXJkL3YxO2JvYXJkdjGiAgNUQliqAg1UYW5rLkJvYXJkLlYxygINVGFua1xCb2FyZFxWMeICGVRhbmtcQm9hcmRcVjFcR1BCTWV0YWRhdGHqAg9UYW5rOjpCb2FyZDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Chl0YW5rL2JvYXJkL3YxL2JvYXJkLnByb3RvEg10YW5rLmJvYXJkLnYxIjIKBFJlY3QSCQoBeBgBIAEoARIJCgF5GAIgASgBEgkKAXcYAyABKAESCQoBaBgEIAEoASLGAQoFU3R5bGUSDAoEZmlsbBgBIAEoCRIOCgZzdHJva2UYAiABKAkSFAoMc3Ryb2tlX3dpZHRoGAMgASgBEg8KB29wYWNpdHkYBCABKAESFQoNY29ybmVyX3JhZGl1cxgFIAEoARIMCgRkYXNoGAYgASgJEhEKCWZvbnRfc2l6ZRgHIAEoBRITCgtmb250X3dlaWdodBgIIAEoCRINCgVhbGlnbhgJIAEoCRIOCgZzaGFkb3cYCiABKAkSDAoEYmx1chgLIAEoASKVAgoIQXBwRnJhbWUSDAoEcmVwbxgBIAEoCRILCgNyZWYYAiABKAkSDAoEcGF0aBgDIAEoCRIQCghwbGF0Zm9ybRgEIAEoCRIWCg52aWV3cG9ydF93aWR0aBgFIAEoBRIXCg92aWV3cG9ydF9oZWlnaHQYBiABKAUSEwoLcHJldmlld191cmwYByABKAkSDgoGc3RhdHVzGAggASgJEgwKBG5vdGUYCSABKAkSFgoOZHJhd25fZnJvbV9zaGEYCiABKAkSLAoIZHJhd25fYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhAKCG1vdmVkX29uGAwgASgIEhIKCm1vdmVkX25vdGUYDSABKAkiqgMKC0JvYXJkT2JqZWN0EgoKAmlkGAEgASgJEicKBGtpbmQYAiABKA4yGS50YW5rLmJvYXJkLnYxLk9iamVjdEtpbmQSHwoCYXQYAyABKAsyEy50YW5rLmJvYXJkLnYxLlJlY3QSIwoFc3R5bGUYBCABKAsyFC50YW5rLmJvYXJkLnYxLlN0eWxlEgwKBHRleHQYBSABKAkSEAoIcm90YXRpb24YBiABKAESCQoBehgHIAEoBRIRCglwYXJlbnRfaWQYCCABKAkSDwoHZnJvbV9pZBgJIAEoCRINCgV0b19pZBgKIAEoCRIOCgZwb2ludHMYCyADKAESDwoHZmlsZV9pZBgMIAEoCRIQCghmaWxlX3VybBgNIAEoCRIkCgNhcHAYDiABKAsyFy50YW5rLmJvYXJkLnYxLkFwcEZyYW1lEg4KBmxvY2tlZBgPIAEoCBIMCgRtZXRhGBIgASgJEhIKCmNyZWF0ZWRfYnkYECABKAkSCwoDcmV2GBEgASgFEioKB2Rlcml2ZWQYEyABKAsyGS50YW5rLmJvYXJkLnYxLkRlcml2YXRpb24iywIKBUJvYXJkEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJEg0KBXRpdGxlGAQgASgJEgwKBGljb24YBSABKAkSKwoHb2JqZWN0cxgGIAMoCzIaLnRhbmsuYm9hcmQudjEuQm9hcmRPYmplY3QSDwoHdmVyc2lvbhgHIAEoBRISCgpjcmVhdGVkX2J5GAggASgJEi4KCmNyZWF0ZWRfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYCiABKAkSLgoKdXBkYXRlZF9hdBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEQoJc3RhbGVuZXNzGAwgASgFEhYKDnN0YWxlbmVzc19ub3RlGA0gASgJIssBCgxCb2FyZFN1bW1hcnkSCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSDAoEaWNvbhgDIAEoCRIPCgdvYmplY3RzGAQgASgFEhIKCmFwcF9mcmFtZXMYBSABKAUSLgoKdXBkYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKY2hhbm5lbF9pZBgHIAEoCRIRCglzdGFsZW5lc3MYCCABKAUSFgoOc3RhbGVuZXNzX25vdGUYCSABKAkiYAoRTGlzdEJvYXJkc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDQoFbGltaXQYAyABKAUSEgoKc3RhbGVfb25seRgEIAEoCCJBChJMaXN0Qm9hcmRzUmVzcG9uc2USKwoGYm9hcmRzGAEgAygLMhsudGFuay5ib2FyZC52MS5Cb2FyZFN1bW1hcnkiMwoPR2V0Qm9hcmRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSI3ChBHZXRCb2FyZFJlc3BvbnNlEiMKBWJvYXJkGAEgASgLMhQudGFuay5ib2FyZC52MS5Cb2FyZCKaAQoSQ3JlYXRlQm9hcmRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEgwKBGljb24YBCABKAkSKwoHb2JqZWN0cxgFIAMoCzIaLnRhbmsuYm9hcmQudjEuQm9hcmRPYmplY3QSEAoIdGVtcGxhdGUYBiABKAkiOgoTQ3JlYXRlQm9hcmRSZXNwb25zZRIjCgVib2FyZBgBIAEoCzIULnRhbmsuYm9hcmQudjEuQm9hcmQifAoSVXBkYXRlQm9hcmRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCRINCgV0aXRsZRgDIAEoCRIMCgRpY29uGAQgASgJEhIKCmNoYW5uZWxfaWQYBSABKAkSEwoLc2V0X2NoYW5uZWwYBiABKAgiOgoTVXBkYXRlQm9hcmRSZXNwb25zZRIjCgVib2FyZBgBIAEoCzIULnRhbmsuYm9hcmQudjEuQm9hcmQiNgoSRGVsZXRlQm9hcmRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSIVChNEZWxldGVCb2FyZFJlc3BvbnNlIvABChFQdXRPYmplY3RzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEAoIYm9hcmRfaWQYAiABKAkSKwoHb2JqZWN0cxgDIAMoCzIaLnRhbmsuYm9hcmQudjEuQm9hcmRPYmplY3QSEgoKZGVsZXRlX2lkcxgEIAMoCRJBCgliYXNlX3JldnMYBSADKAsyLi50YW5rLmJvYXJkLnYxLlB1dE9iamVjdHNSZXF1ZXN0LkJhc2VSZXZzRW50cnkaLwoNQmFzZVJldnNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAU6AjgBIn8KElB1dE9iamVjdHNSZXNwb25zZRIjCgVib2FyZBgBIAEoCzIULnRhbmsuYm9hcmQudjEuQm9hcmQSLQoJY29uZmxpY3RzGAIgAygLMhoudGFuay5ib2FyZC52MS5Cb2FyZE9iamVjdBIVCg1jb25mbGljdF9ub3RlGAMgASgJIncKB0VsZW1lbnQSDgoGc291cmNlGAEgASgJEgsKA3RhZxgCIAEoCRIMCgR0ZXh0GAMgASgJEg8KB3Rlc3RfaWQYBCABKAkSHwoCYXQYBSABKAsyEy50YW5rLmJvYXJkLnYxLlJlY3QSDwoHY2xhc3NlcxgGIAMoCSKHAQoUUmVxdWVzdENoYW5nZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhAKCGJvYXJkX2lkGAIgASgJEhEKCW9iamVjdF9pZBgDIAEoCRInCgdlbGVtZW50GAQgASgLMhYudGFuay5ib2FyZC52MS5FbGVtZW50EgsKA2FzaxgFIAEoCSJTChVSZXF1ZXN0Q2hhbmdlUmVzcG9uc2USFgoOdGhyZWFkX3Jvb3RfaWQYBiABKAkSEgoKY2hhbm5lbF9pZBgHIAEoCRIOCgZwcm9tcHQYCCABKAkilgIKDUJvYXJkVGVtcGxhdGUSDAoEbmFtZRgBIAEoCRINCgV0aXRsZRgCIAEoCRIMCgRpY29uGAMgASgJEg0KBWFib3V0GAQgASgJEg0KBWdyb3VwGAUgASgJEisKB29iamVjdHMYBiADKAsyGi50YW5rLmJvYXJkLnYxLkJvYXJkT2JqZWN0EiQKB3ZpZXdib3gYByABKAsyEy50YW5rLmJvYXJkLnYxLlJlY3QSFQoNdGh1bWJuYWlsX3N2ZxgIIAEoCRIOCgZjdXN0b20YCSABKAgSEgoKY3JlYXRlZF9ieRgKIAEoCRIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJAChRMaXN0VGVtcGxhdGVzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKdGh1bWJuYWlscxgCIAEoCCJIChVMaXN0VGVtcGxhdGVzUmVzcG9uc2USLwoJdGVtcGxhdGVzGAEgAygLMhwudGFuay5ib2FyZC52MS5Cb2FyZFRlbXBsYXRlIrABChhTYXZlQm9hcmRUZW1wbGF0ZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhAKCGJvYXJkX2lkGAIgASgJEgwKBG5hbWUYAyABKAkSDQoFdGl0bGUYBCABKAkSDAoEaWNvbhgFIAEoCRINCgVhYm91dBgGIAEoCRINCgVncm91cBgHIAEoCRISCgpvYmplY3RfaWRzGAggAygJEg8KB3JlcGxhY2UYCSABKAgiSwoZU2F2ZUJvYXJkVGVtcGxhdGVSZXNwb25zZRIuCgh0ZW1wbGF0ZRgBIAEoCzIcLnRhbmsuYm9hcmQudjEuQm9hcmRUZW1wbGF0ZSJAChpEZWxldGVCb2FyZFRlbXBsYXRlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCSIdChtEZWxldGVCb2FyZFRlbXBsYXRlUmVzcG9uc2UiTgoKQm9hcmRTbGljZRIMCgRuYW1lGAEgASgJEh8KAmF0GAIgASgLMhMudGFuay5ib2FyZC52MS5SZWN0EhEKCW9iamVjdF9pZBgDIAEoCSKeAQoSRXhwb3J0Qm9hcmRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCRIOCgZmb3JtYXQYAyABKAkSEgoKb2JqZWN0X2lkcxgEIAMoCRITCgt0cmFuc3BhcmVudBgFIAEoCBINCgVzY2FsZRgGIAEoBRINCgVzbGljZRgHIAEoCRIPCgdxdWFsaXR5GAggASgFInkKE0V4cG9ydEJvYXJkUmVzcG9uc2USEAoIZmlsZW5hbWUYASABKAkSFAoMY29udGVudF90eXBlGAIgASgJEgwKBGJvZHkYAyABKAwSDQoFd2lkdGgYBCABKAUSDgoGaGVpZ2h0GAUgASgFEg0KBW5vdGVzGAYgAygJIjoKFkxpc3RCb2FyZFNsaWNlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJIkQKF0xpc3RCb2FyZFNsaWNlc1Jlc3BvbnNlEikKBnNsaWNlcxgBIAMoCzIZLnRhbmsuYm9hcmQudjEuQm9hcmRTbGljZSJkChFCb2FyZEVtYmVkUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSDQoFc2xpY2UYAyABKAkSDgoGcm90YXRlGAQgASgIEg4KBnJldm9rZRgFIAEoCCKPAQoSQm9hcmRFbWJlZFJlc3BvbnNlEhAKCHBhZ2VfdXJsGAEgASgJEhEKCWltYWdlX3VybBgCIAEoCRIQCghlbWJlZGRlZBgDIAEoCBIuCgpjcmVhdGVkX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpjcmVhdGVkX2J5GAUgASgJImAKCEZsb3dTdGVwEicKB2VsZW1lbnQYASABKAsyFi50YW5rLmJvYXJkLnYxLkVsZW1lbnQSDgoGYWN0aW9uGAIgASgJEg0KBXZhbHVlGAMgASgJEgwKBG5vdGUYBCABKAkihgEKE0dlbmVyYXRlVGVzdFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhAKCGJvYXJkX2lkGAIgASgJEhEKCW9iamVjdF9pZBgDIAEoCRIMCgRuYW1lGAQgASgJEiYKBXN0ZXBzGAUgAygLMhcudGFuay5ib2FyZC52MS5GbG93U3RlcCJ7ChRHZW5lcmF0ZVRlc3RSZXNwb25zZRIXCg9wbGF5d3JpZ2h0X3BhdGgYASABKAkSEgoKcGxheXdyaWdodBgCIAEoCRIUCgxtYWVzdHJvX3BhdGgYAyABKAkSDwoHbWFlc3RybxgEIAEoCRIPCgdza2lwcGVkGAUgAygJInYKFFJlcG9ydFByZXZpZXdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRyZXBvGAIgASgJEgsKA3JlZhgDIAEoCRILCgNzaGEYBCABKAkSCwoDdXJsGAUgASgJEhMKC3JldGFpbl9kYXlzGAYgASgFIqoBChVSZXBvcnRQcmV2aWV3UmVzcG9uc2USDAoEcmVwbxgBIAEoCRILCgNyZWYYAiABKAkSCwoDc2hhGAMgASgJEgsKA3VybBgEIAEoCRIsCghidWlsdF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKZXhwaXJlc19hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiSAoTTGlzdFByZXZpZXdzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEcmVwbxgCIAEoCRINCgVsaW1pdBgDIAEoBSJOChRMaXN0UHJldmlld3NSZXNwb25zZRI2CghwcmV2aWV3cxgBIAMoCzIkLnRhbmsuYm9hcmQudjEuUmVwb3J0UHJldmlld1Jlc3BvbnNlIkcKFEZvcmdldFByZXZpZXdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRyZXBvGAIgASgJEgsKA3JlZhgDIAEoCSIqChVGb3JnZXRQcmV2aWV3UmVzcG9uc2USEQoJZm9yZ290dGVuGAEgASgFImUKDFNjaGVtYUNvbHVtbhIMCgRuYW1lGAEgASgJEgwKBHR5cGUYAiABKAkSEwoLcHJpbWFyeV9rZXkYAyABKAgSEAoIbnVsbGFibGUYBCABKAgSEgoKcmVmZXJlbmNlcxgFIAEoCSJZCgtTY2hlbWFUYWJsZRIMCgRuYW1lGAEgASgJEg4KBnNjaGVtYRgCIAEoCRIsCgdjb2x1bW5zGAMgAygLMhsudGFuay5ib2FyZC52MS5TY2hlbWFDb2x1bW4iJwoJSW5mcmFGaWxlEgwKBHBhdGgYASABKAkSDAoEYm9keRgCIAEoCSLQAQoYUmVwb3J0Qm9hcmRTb3VyY2VSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRraW5kGAIgASgJEgwKBG5hbWUYAyABKAkSCwoDcmVmGAQgASgJEgsKA3NoYRgFIAEoCRIqCgZ0YWJsZXMYBiADKAsyGi50YW5rLmJvYXJkLnYxLlNjaGVtYVRhYmxlEicKBWZpbGVzGAcgAygLMhgudGFuay5ib2FyZC52MS5JbmZyYUZpbGUSEwoLcmV0YWluX2RheXMYCCABKAUiswEKC0JvYXJkU291cmNlEgwKBGtpbmQYASABKAkSDAoEbmFtZRgCIAEoCRILCgNyZWYYAyABKAkSCwoDc2hhGAQgASgJEg0KBWl0ZW1zGAUgASgFEi8KC3JlcG9ydGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpleHBpcmVzX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJHChlSZXBvcnRCb2FyZFNvdXJjZVJlc3BvbnNlEioKBnNvdXJjZRgBIAEoCzIaLnRhbmsuYm9hcmQudjEuQm9hcmRTb3VyY2UiPQoXTGlzdEJvYXJkU291cmNlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBGtpbmQYAiABKAkiRwoYTGlzdEJvYXJkU291cmNlc1Jlc3BvbnNlEisKB3NvdXJjZXMYASADKAsyGi50YW5rLmJvYXJkLnYxLkJvYXJkU291cmNlIrABCgpEZXJpdmF0aW9uEgwKBGtpbmQYASABKAkSDgoGc291cmNlGAIgASgJEgsKA3JlZhgDIAEoCRILCgNzaGEYBCABKAkSLgoKZGVyaXZlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEAoIbW92ZWRfb24YBiABKAgSEgoKbW92ZWRfbm90ZRgHIAEoCRIUCgxtb3ZlZF90b19zaGEYCCABKAkikQEKFERlcml2ZURpYWdyYW1SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIQCghib2FyZF9pZBgCIAEoCRIMCgRraW5kGAMgASgJEg4KBnNvdXJjZRgEIAEoCRILCgNyZWYYBSABKAkSEAoIZnJhbWVfaWQYBiABKAkSCQoBeBgHIAEoARIJCgF5GAggASgBIowBChVEZXJpdmVEaWFncmFtUmVzcG9uc2USEAoIZnJhbWVfaWQYASABKAkSIwoFYm9hcmQYAiABKAsyFC50YW5rLmJvYXJkLnYxLkJvYXJkEi0KCmRlcml2YXRpb24YAyABKAsyGS50YW5rLmJvYXJkLnYxLkRlcml2YXRpb24SDQoFbm90ZXMYBCADKAkqkgIKCk9iamVjdEtpbmQSGwoXT0JKRUNUX0tJTkRfVU5TUEVDSUZJRUQQABIVChFPQkpFQ1RfS0lORF9GUkFNRRABEhQKEE9CSkVDVF9LSU5EX1JFQ1QQAhIXChNPQkpFQ1RfS0lORF9FTExJUFNFEAMSFAoQT0JKRUNUX0tJTkRfTElORRAEEhUKEU9CSkVDVF9LSU5EX0FSUk9XEAUSFAoQT0JKRUNUX0tJTkRfVEVYVBAGEhYKEk9CSkVDVF9LSU5EX1NUSUNLWRAHEhUKEU9CSkVDVF9LSU5EX0lNQUdFEAgSGQoVT0JKRUNUX0tJTkRfQ09OTkVDVE9SEAkSFAoQT0JKRUNUX0tJTkRfRFJBVxAKMq8OCgxCb2FyZFNlcnZpY2USUQoKTGlzdEJvYXJkcxIgLnRhbmsuYm9hcmQudjEuTGlzdEJvYXJkc1JlcXVlc3QaIS50YW5rLmJvYXJkLnYxLkxpc3RCb2FyZHNSZXNwb25zZRJLCghHZXRCb2FyZBIeLnRhbmsuYm9hcmQudjEuR2V0Qm9hcmRSZXF1ZXN0Gh8udGFuay5ib2FyZC52MS5HZXRCb2FyZFJlc3BvbnNlElQKC0NyZWF0ZUJvYXJkEiEudGFuay5ib2FyZC52MS5DcmVhdGVCb2FyZFJlcXVlc3QaIi50YW5rLmJvYXJkLnYxLkNyZWF0ZUJvYXJkUmVzcG9uc2USVAoLVXBkYXRlQm9hcmQSIS50YW5rLmJvYXJkLnYxLlVwZGF0ZUJvYXJkUmVxdWVzdBoiLnRhbmsuYm9hcmQudjEuVXBkYXRlQm9hcmRSZXNwb25zZRJUCgtEZWxldGVCb2FyZBIhLnRhbmsuYm9hcmQudjEuRGVsZXRlQm9hcmRSZXF1ZXN0GiIudGFuay5ib2FyZC52MS5EZWxldGVCb2FyZFJlc3BvbnNlElEKClB1dE9iamVjdHMSIC50YW5rLmJvYXJkLnYxLlB1dE9iamVjdHNSZXF1ZXN0GiEudGFuay5ib2FyZC52MS5QdXRPYmplY3RzUmVzcG9uc2USWgoNUmVxdWVzdENoYW5nZRIjLnRhbmsuYm9hcmQudjEuUmVxdWVzdENoYW5nZVJlcXVlc3QaJC50YW5rLmJvYXJkLnYxLlJlcXVlc3RDaGFuZ2VSZXNwb25zZRJaCg1MaXN0VGVtcGxhdGVzEiMudGFuay5ib2FyZC52MS5MaXN0VGVtcGxhdGVzUmVxdWVzdBokLnRhbmsuYm9hcmQudjEuTGlzdFRlbXBsYXRlc1Jlc3BvbnNlEmYKEVNhdmVCb2FyZFRlbXBsYXRlEicudGFuay5ib2FyZC52MS5TYXZlQm9hcmRUZW1wbGF0ZVJlcXVlc3QaKC50YW5rLmJvYXJkLnYxLlNhdmVCb2FyZFRlbXBsYXRlUmVzcG9uc2USbAoTRGVsZXRlQm9hcmRUZW1wbGF0ZRIpLnRhbmsuYm9hcmQudjEuRGVsZXRlQm9hcmRUZW1wbGF0ZVJlcXVlc3QaKi50YW5rLmJvYXJkLnYxLkRlbGV0ZUJvYXJkVGVtcGxhdGVSZXNwb25zZRJUCgtFeHBvcnRCb2FyZBIhLnRhbmsuYm9hcmQudjEuRXhwb3J0Qm9hcmRSZXF1ZXN0GiIudGFuay5ib2FyZC52MS5FeHBvcnRCb2FyZFJlc3BvbnNlEmAKD0xpc3RCb2FyZFNsaWNlcxIlLnRhbmsuYm9hcmQudjEuTGlzdEJvYXJkU2xpY2VzUmVxdWVzdBomLnRhbmsuYm9hcmQudjEuTGlzdEJvYXJkU2xpY2VzUmVzcG9uc2USUQoKQm9hcmRFbWJlZBIgLnRhbmsuYm9hcmQudjEuQm9hcmRFbWJlZFJlcXVlc3QaIS50YW5rLmJvYXJkLnYxLkJvYXJkRW1iZWRSZXNwb25zZRJXCgxHZW5lcmF0ZVRlc3QSIi50YW5rLmJvYXJkLnYxLkdlbmVyYXRlVGVzdFJlcXVlc3QaIy50YW5rLmJvYXJkLnYxLkdlbmVyYXRlVGVzdFJlc3BvbnNlEloKDVJlcG9ydFByZXZpZXcSIy50YW5rLmJvYXJkLnYxLlJlcG9ydFByZXZpZXdSZXF1ZXN0GiQudGFuay5ib2FyZC52MS5SZXBvcnRQcmV2aWV3UmVzcG9uc2USVwoMTGlzdFByZXZpZXdzEiIudGFuay5ib2FyZC52MS5MaXN0UHJldmlld3NSZXF1ZXN0GiMudGFuay5ib2FyZC52MS5MaXN0UHJldmlld3NSZXNwb25zZRJaCg1Gb3JnZXRQcmV2aWV3EiMudGFuay5ib2FyZC52MS5Gb3JnZXRQcmV2aWV3UmVxdWVzdBokLnRhbmsuYm9hcmQudjEuRm9yZ2V0UHJldmlld1Jlc3BvbnNlEmYKEVJlcG9ydEJvYXJkU291cmNlEicudGFuay5ib2FyZC52MS5SZXBvcnRCb2FyZFNvdXJjZVJlcXVlc3QaKC50YW5rLmJvYXJkLnYxLlJlcG9ydEJvYXJkU291cmNlUmVzcG9uc2USYwoQTGlzdEJvYXJkU291cmNlcxImLnRhbmsuYm9hcmQudjEuTGlzdEJvYXJkU291cmNlc1JlcXVlc3QaJy50YW5rLmJvYXJkLnYxLkxpc3RCb2FyZFNvdXJjZXNSZXNwb25zZRJaCg1EZXJpdmVEaWFncmFtEiMudGFuay5ib2FyZC52MS5EZXJpdmVEaWFncmFtUmVxdWVzdBokLnRhbmsuYm9hcmQudjEuRGVyaXZlRGlhZ3JhbVJlc3BvbnNlQsgBChFjb20udGFuay5ib2FyZC52MUIKQm9hcmRQcm90b1ABWlFnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2JvYXJkL3YxO2JvYXJkdjGiAgNUQliqAg1UYW5rLkJvYXJkLlYxygINVGFua1xCb2FyZFxWMeICGVRhbmtcQm9hcmRcVjFcR1BCTWV0YWRhdGHqAg9UYW5rOjpCb2FyZDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * Where a thing sits. Boards are infinite, so these are board coordinates, not pixels
@@ -354,6 +354,14 @@ export type BoardObject = Message<"tank.board.v1.BoardObject"> & {
    * @generated from field: int32 rev = 17;
    */
   rev: number;
+
+  /**
+   * Frame only: what this diagram was drawn from, when it was drawn from something
+   * rather than by hand. The same idea as AppFrame.drawn_from_sha one level up.
+   *
+   * @generated from field: tank.board.v1.Derivation derived = 19;
+   */
+  derived?: Derivation;
 };
 
 /**
@@ -522,6 +530,14 @@ export type ListBoardsRequest = Message<"tank.board.v1.ListBoardsRequest"> & {
    * @generated from field: int32 limit = 3;
    */
   limit: number;
+
+  /**
+   * Only the boards the product has moved past. The same filter ListCanvases has,
+   * for the same reason: finding what needs a look should not mean reading the lot.
+   *
+   * @generated from field: bool stale_only = 4;
+   */
+  staleOnly: boolean;
 };
 
 /**
@@ -986,6 +1002,46 @@ export type BoardTemplate = Message<"tank.board.v1.BoardTemplate"> & {
    * @generated from field: string group = 5;
    */
   group: string;
+
+  /**
+   * What it actually looks like. A card with a name and an emoji on it tells nobody
+   * what they are about to get; a client that can draw a board can draw these.
+   *
+   * @generated from field: repeated tank.board.v1.BoardObject objects = 6;
+   */
+  objects: BoardObject[];
+
+  /**
+   * The box the objects sit in, so a client can fit them to a card without measuring.
+   *
+   * @generated from field: tank.board.v1.Rect viewbox = 7;
+   */
+  viewbox?: Rect;
+
+  /**
+   * The same picture the server would export, for a client that would rather not draw
+   * it a second time. Filled only when ListTemplatesRequest asked.
+   *
+   * @generated from field: string thumbnail_svg = 8;
+   */
+  thumbnailSvg: string;
+
+  /**
+   * One this workspace saved rather than one TANK ships. Only these can be deleted.
+   *
+   * @generated from field: bool custom = 9;
+   */
+  custom: boolean;
+
+  /**
+   * @generated from field: string created_by = 10;
+   */
+  createdBy: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 11;
+   */
+  createdAt?: Timestamp;
 };
 
 /**
@@ -999,6 +1055,21 @@ export const BoardTemplateSchema: GenMessage<BoardTemplate> = /*@__PURE__*/
  * @generated from message tank.board.v1.ListTemplatesRequest
  */
 export type ListTemplatesRequest = Message<"tank.board.v1.ListTemplatesRequest"> & {
+  /**
+   * Whose saved templates to include alongside the ones TANK ships. Empty lists only
+   * TANK's, which is what an unauthenticated gallery wants.
+   *
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * Render each one as well. A few kilobytes apiece, so it is asked for rather than
+   * always sent.
+   *
+   * @generated from field: bool thumbnails = 2;
+   */
+  thumbnails: boolean;
 };
 
 /**
@@ -1026,6 +1097,162 @@ export const ListTemplatesResponseSchema: GenMessage<ListTemplatesResponse> = /*
   messageDesc(file_tank_board_v1_board, 23);
 
 /**
+ * Save the board somebody is looking at as a template the rest of the workspace can
+ * start from.
+ *
+ * `CreateBoardRequest.template` is a name the server resolves, so until there was an
+ * RPC to register one this could not be done from a client at all — a team could make
+ * the same board by hand every week and never turn it into a starting point.
+ *
+ * @generated from message tank.board.v1.SaveBoardTemplateRequest
+ */
+export type SaveBoardTemplateRequest = Message<"tank.board.v1.SaveBoardTemplateRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string board_id = 2;
+   */
+  boardId: string;
+
+  /**
+   * What CreateBoardRequest.template will carry. Made from the title when empty.
+   *
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string title = 4;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string icon = 5;
+   */
+  icon: string;
+
+  /**
+   * @generated from field: string about = 6;
+   */
+  about: string;
+
+  /**
+   * @generated from field: string group = 7;
+   */
+  group: string;
+
+  /**
+   * Empty saves the whole board. A selection saves those objects, which is how a
+   * corner of a board becomes a template without the rest of it coming too.
+   *
+   * @generated from field: repeated string object_ids = 8;
+   */
+  objectIds: string[];
+
+  /**
+   * Overwrite one of this workspace's own by that name. Without it a clash is a
+   * refusal, because quietly replacing somebody else's template is not a save.
+   *
+   * @generated from field: bool replace = 9;
+   */
+  replace: boolean;
+};
+
+/**
+ * Describes the message tank.board.v1.SaveBoardTemplateRequest.
+ * Use `create(SaveBoardTemplateRequestSchema)` to create a new message.
+ */
+export const SaveBoardTemplateRequestSchema: GenMessage<SaveBoardTemplateRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 24);
+
+/**
+ * @generated from message tank.board.v1.SaveBoardTemplateResponse
+ */
+export type SaveBoardTemplateResponse = Message<"tank.board.v1.SaveBoardTemplateResponse"> & {
+  /**
+   * @generated from field: tank.board.v1.BoardTemplate template = 1;
+   */
+  template?: BoardTemplate;
+};
+
+/**
+ * Describes the message tank.board.v1.SaveBoardTemplateResponse.
+ * Use `create(SaveBoardTemplateResponseSchema)` to create a new message.
+ */
+export const SaveBoardTemplateResponseSchema: GenMessage<SaveBoardTemplateResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 25);
+
+/**
+ * @generated from message tank.board.v1.DeleteBoardTemplateRequest
+ */
+export type DeleteBoardTemplateRequest = Message<"tank.board.v1.DeleteBoardTemplateRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+};
+
+/**
+ * Describes the message tank.board.v1.DeleteBoardTemplateRequest.
+ * Use `create(DeleteBoardTemplateRequestSchema)` to create a new message.
+ */
+export const DeleteBoardTemplateRequestSchema: GenMessage<DeleteBoardTemplateRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 26);
+
+/**
+ * @generated from message tank.board.v1.DeleteBoardTemplateResponse
+ */
+export type DeleteBoardTemplateResponse = Message<"tank.board.v1.DeleteBoardTemplateResponse"> & {
+};
+
+/**
+ * Describes the message tank.board.v1.DeleteBoardTemplateResponse.
+ * Use `create(DeleteBoardTemplateResponseSchema)` to create a new message.
+ */
+export const DeleteBoardTemplateResponseSchema: GenMessage<DeleteBoardTemplateResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 27);
+
+/**
+ * A named region of a board that exports on its own: the "slice" every design tool
+ * has. A slice is an ordinary object carrying a record saying it is one, for the same
+ * reason a flowchart's decision is a rectangle that says it is drawn as a diamond —
+ * moving, resizing, snapping and layout all keep working on the box they already know.
+ *
+ * @generated from message tank.board.v1.BoardSlice
+ */
+export type BoardSlice = Message<"tank.board.v1.BoardSlice"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: tank.board.v1.Rect at = 2;
+   */
+  at?: Rect;
+
+  /**
+   * @generated from field: string object_id = 3;
+   */
+  objectId: string;
+};
+
+/**
+ * Describes the message tank.board.v1.BoardSlice.
+ * Use `create(BoardSliceSchema)` to create a new message.
+ */
+export const BoardSliceSchema: GenMessage<BoardSlice> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 28);
+
+/**
  * Export a board, or part of one, as a file somebody can send to a person who does
  * not have a TANK account.
  *
@@ -1043,7 +1270,7 @@ export type ExportBoardRequest = Message<"tank.board.v1.ExportBoardRequest"> & {
   id: string;
 
   /**
-   * "svg"
+   * "svg" | "png" | "jpg" | "pdf". Empty is svg.
    *
    * @generated from field: string format = 3;
    */
@@ -1060,6 +1287,29 @@ export type ExportBoardRequest = Message<"tank.board.v1.ExportBoardRequest"> & {
    * @generated from field: bool transparent = 5;
    */
   transparent: boolean;
+
+  /**
+   * 1, 2 or 3 — the @1x/@2x/@3x a handoff asks for. Raster only: a vector file is
+   * already every scale. 0 means 1.
+   *
+   * @generated from field: int32 scale = 6;
+   */
+  scale: number;
+
+  /**
+   * Export one named region instead of the whole board or a selection. A slice wins
+   * over object_ids, because naming a region is the more specific ask.
+   *
+   * @generated from field: string slice = 7;
+   */
+  slice: string;
+
+  /**
+   * jpg only: 1..100. 0 means 82.
+   *
+   * @generated from field: int32 quality = 8;
+   */
+  quality: number;
 };
 
 /**
@@ -1067,7 +1317,7 @@ export type ExportBoardRequest = Message<"tank.board.v1.ExportBoardRequest"> & {
  * Use `create(ExportBoardRequestSchema)` to create a new message.
  */
 export const ExportBoardRequestSchema: GenMessage<ExportBoardRequest> = /*@__PURE__*/
-  messageDesc(file_tank_board_v1_board, 24);
+  messageDesc(file_tank_board_v1_board, 29);
 
 /**
  * @generated from message tank.board.v1.ExportBoardResponse
@@ -1087,6 +1337,27 @@ export type ExportBoardResponse = Message<"tank.board.v1.ExportBoardResponse"> &
    * @generated from field: bytes body = 3;
    */
   body: Uint8Array;
+
+  /**
+   * The pixels in the file. Zero for a vector format, which has none.
+   *
+   * @generated from field: int32 width = 4;
+   */
+  width: number;
+
+  /**
+   * @generated from field: int32 height = 5;
+   */
+  height: number;
+
+  /**
+   * What this file could not carry, in sentences somebody can act on: an effect the
+   * format has no way to draw, or a count of the prototyping hotspots left out of it.
+   * Empty means the file carries everything the board has.
+   *
+   * @generated from field: repeated string notes = 6;
+   */
+  notes: string[];
 };
 
 /**
@@ -1094,7 +1365,136 @@ export type ExportBoardResponse = Message<"tank.board.v1.ExportBoardResponse"> &
  * Use `create(ExportBoardResponseSchema)` to create a new message.
  */
 export const ExportBoardResponseSchema: GenMessage<ExportBoardResponse> = /*@__PURE__*/
-  messageDesc(file_tank_board_v1_board, 25);
+  messageDesc(file_tank_board_v1_board, 30);
+
+/**
+ * @generated from message tank.board.v1.ListBoardSlicesRequest
+ */
+export type ListBoardSlicesRequest = Message<"tank.board.v1.ListBoardSlicesRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string id = 2;
+   */
+  id: string;
+};
+
+/**
+ * Describes the message tank.board.v1.ListBoardSlicesRequest.
+ * Use `create(ListBoardSlicesRequestSchema)` to create a new message.
+ */
+export const ListBoardSlicesRequestSchema: GenMessage<ListBoardSlicesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 31);
+
+/**
+ * @generated from message tank.board.v1.ListBoardSlicesResponse
+ */
+export type ListBoardSlicesResponse = Message<"tank.board.v1.ListBoardSlicesResponse"> & {
+  /**
+   * @generated from field: repeated tank.board.v1.BoardSlice slices = 1;
+   */
+  slices: BoardSlice[];
+};
+
+/**
+ * Describes the message tank.board.v1.ListBoardSlicesResponse.
+ * Use `create(ListBoardSlicesResponseSchema)` to create a new message.
+ */
+export const ListBoardSlicesResponseSchema: GenMessage<ListBoardSlicesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 32);
+
+/**
+ * An embed link: the board, or one slice of it, as a URL somebody with no TANK
+ * account can put in a page.
+ *
+ * The link is the credential, the way an invoice's share link is, so it is readable
+ * back to anyone who may read the board and rotating it is how it is taken away.
+ *
+ * @generated from message tank.board.v1.BoardEmbedRequest
+ */
+export type BoardEmbedRequest = Message<"tank.board.v1.BoardEmbedRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string id = 2;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string slice = 3;
+   */
+  slice: string;
+
+  /**
+   * mint a new link, which stops the old one working
+   *
+   * @generated from field: bool rotate = 4;
+   */
+  rotate: boolean;
+
+  /**
+   * stop the board being embeddable at all
+   *
+   * @generated from field: bool revoke = 5;
+   */
+  revoke: boolean;
+};
+
+/**
+ * Describes the message tank.board.v1.BoardEmbedRequest.
+ * Use `create(BoardEmbedRequestSchema)` to create a new message.
+ */
+export const BoardEmbedRequestSchema: GenMessage<BoardEmbedRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 33);
+
+/**
+ * @generated from message tank.board.v1.BoardEmbedResponse
+ */
+export type BoardEmbedResponse = Message<"tank.board.v1.BoardEmbedResponse"> & {
+  /**
+   * a page to put in an iframe
+   *
+   * @generated from field: string page_url = 1;
+   */
+  pageUrl: string;
+
+  /**
+   * the picture on its own, for a README or an <img>
+   *
+   * @generated from field: string image_url = 2;
+   */
+  imageUrl: string;
+
+  /**
+   * false once revoked
+   *
+   * @generated from field: bool embedded = 3;
+   */
+  embedded: boolean;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 4;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * @generated from field: string created_by = 5;
+   */
+  createdBy: string;
+};
+
+/**
+ * Describes the message tank.board.v1.BoardEmbedResponse.
+ * Use `create(BoardEmbedResponseSchema)` to create a new message.
+ */
+export const BoardEmbedResponseSchema: GenMessage<BoardEmbedResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 34);
 
 /**
  * One thing somebody did while clicking through a running frame.
@@ -1134,7 +1534,7 @@ export type FlowStep = Message<"tank.board.v1.FlowStep"> & {
  * Use `create(FlowStepSchema)` to create a new message.
  */
 export const FlowStepSchema: GenMessage<FlowStep> = /*@__PURE__*/
-  messageDesc(file_tank_board_v1_board, 26);
+  messageDesc(file_tank_board_v1_board, 35);
 
 /**
  * Turn a journey through the running app into a test. Clicking through a flow to
@@ -1179,7 +1579,7 @@ export type GenerateTestRequest = Message<"tank.board.v1.GenerateTestRequest"> &
  * Use `create(GenerateTestRequestSchema)` to create a new message.
  */
 export const GenerateTestRequestSchema: GenMessage<GenerateTestRequest> = /*@__PURE__*/
-  messageDesc(file_tank_board_v1_board, 27);
+  messageDesc(file_tank_board_v1_board, 36);
 
 /**
  * @generated from message tank.board.v1.GenerateTestResponse
@@ -1222,7 +1622,635 @@ export type GenerateTestResponse = Message<"tank.board.v1.GenerateTestResponse">
  * Use `create(GenerateTestResponseSchema)` to create a new message.
  */
 export const GenerateTestResponseSchema: GenMessage<GenerateTestResponse> = /*@__PURE__*/
-  messageDesc(file_tank_board_v1_board, 28);
+  messageDesc(file_tank_board_v1_board, 37);
+
+/**
+ * A preview somebody else's CI published.
+ *
+ * TANK serves previews of the applications it builds, which is no use to a workspace
+ * that builds its own. Rather than make every customer hand TANK their pipeline, a
+ * workspace's CI tells TANK where it has already put the build, and a frame points at
+ * that. The workspace keeps its own CI; TANK keeps the board.
+ *
+ * @generated from message tank.board.v1.ReportPreviewRequest
+ */
+export type ReportPreviewRequest = Message<"tank.board.v1.ReportPreviewRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * owner/name, as the frame names it
+   *
+   * @generated from field: string repo = 2;
+   */
+  repo: string;
+
+  /**
+   * the branch this build is of; "main" is allowed
+   *
+   * @generated from field: string ref = 3;
+   */
+  ref: string;
+
+  /**
+   * the commit it was built from
+   *
+   * @generated from field: string sha = 4;
+   */
+  sha: string;
+
+  /**
+   * where it is served, e.g. https://preview.example.com/abc123
+   *
+   * @generated from field: string url = 5;
+   */
+  url: string;
+
+  /**
+   * How long to trust it. The publisher knows its own retention; TANK will not claim
+   * a build is there after this. Zero means the workspace's default.
+   *
+   * @generated from field: int32 retain_days = 6;
+   */
+  retainDays: number;
+};
+
+/**
+ * Describes the message tank.board.v1.ReportPreviewRequest.
+ * Use `create(ReportPreviewRequestSchema)` to create a new message.
+ */
+export const ReportPreviewRequestSchema: GenMessage<ReportPreviewRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 38);
+
+/**
+ * @generated from message tank.board.v1.ReportPreviewResponse
+ */
+export type ReportPreviewResponse = Message<"tank.board.v1.ReportPreviewResponse"> & {
+  /**
+   * @generated from field: string repo = 1;
+   */
+  repo: string;
+
+  /**
+   * @generated from field: string ref = 2;
+   */
+  ref: string;
+
+  /**
+   * @generated from field: string sha = 3;
+   */
+  sha: string;
+
+  /**
+   * @generated from field: string url = 4;
+   */
+  url: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp built_at = 5;
+   */
+  builtAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp expires_at = 6;
+   */
+  expiresAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.board.v1.ReportPreviewResponse.
+ * Use `create(ReportPreviewResponseSchema)` to create a new message.
+ */
+export const ReportPreviewResponseSchema: GenMessage<ReportPreviewResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 39);
+
+/**
+ * @generated from message tank.board.v1.ListPreviewsRequest
+ */
+export type ListPreviewsRequest = Message<"tank.board.v1.ListPreviewsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * empty lists every repo the workspace has reported
+   *
+   * @generated from field: string repo = 2;
+   */
+  repo: string;
+
+  /**
+   * @generated from field: int32 limit = 3;
+   */
+  limit: number;
+};
+
+/**
+ * Describes the message tank.board.v1.ListPreviewsRequest.
+ * Use `create(ListPreviewsRequestSchema)` to create a new message.
+ */
+export const ListPreviewsRequestSchema: GenMessage<ListPreviewsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 40);
+
+/**
+ * @generated from message tank.board.v1.ListPreviewsResponse
+ */
+export type ListPreviewsResponse = Message<"tank.board.v1.ListPreviewsResponse"> & {
+  /**
+   * @generated from field: repeated tank.board.v1.ReportPreviewResponse previews = 1;
+   */
+  previews: ReportPreviewResponse[];
+};
+
+/**
+ * Describes the message tank.board.v1.ListPreviewsResponse.
+ * Use `create(ListPreviewsResponseSchema)` to create a new message.
+ */
+export const ListPreviewsResponseSchema: GenMessage<ListPreviewsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 41);
+
+/**
+ * Stop trusting one. A build that has been taken down should stop being offered the
+ * moment its publisher says so, rather than when TANK's clock runs out.
+ *
+ * @generated from message tank.board.v1.ForgetPreviewRequest
+ */
+export type ForgetPreviewRequest = Message<"tank.board.v1.ForgetPreviewRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string repo = 2;
+   */
+  repo: string;
+
+  /**
+   * empty forgets every ref of that repo
+   *
+   * @generated from field: string ref = 3;
+   */
+  ref: string;
+};
+
+/**
+ * Describes the message tank.board.v1.ForgetPreviewRequest.
+ * Use `create(ForgetPreviewRequestSchema)` to create a new message.
+ */
+export const ForgetPreviewRequestSchema: GenMessage<ForgetPreviewRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 42);
+
+/**
+ * @generated from message tank.board.v1.ForgetPreviewResponse
+ */
+export type ForgetPreviewResponse = Message<"tank.board.v1.ForgetPreviewResponse"> & {
+  /**
+   * @generated from field: int32 forgotten = 1;
+   */
+  forgotten: number;
+};
+
+/**
+ * Describes the message tank.board.v1.ForgetPreviewResponse.
+ * Use `create(ForgetPreviewResponseSchema)` to create a new message.
+ */
+export const ForgetPreviewResponseSchema: GenMessage<ForgetPreviewResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 43);
+
+/**
+ * A column in a table somebody reported the schema of.
+ *
+ * @generated from message tank.board.v1.SchemaColumn
+ */
+export type SchemaColumn = Message<"tank.board.v1.SchemaColumn"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string type = 2;
+   */
+  type: string;
+
+  /**
+   * @generated from field: bool primary_key = 3;
+   */
+  primaryKey: boolean;
+
+  /**
+   * @generated from field: bool nullable = 4;
+   */
+  nullable: boolean;
+
+  /**
+   * "orders.id": the column this one points at, when it points at one.
+   *
+   * @generated from field: string references = 5;
+   */
+  references: string;
+};
+
+/**
+ * Describes the message tank.board.v1.SchemaColumn.
+ * Use `create(SchemaColumnSchema)` to create a new message.
+ */
+export const SchemaColumnSchema: GenMessage<SchemaColumn> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 44);
+
+/**
+ * @generated from message tank.board.v1.SchemaTable
+ */
+export type SchemaTable = Message<"tank.board.v1.SchemaTable"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * "public"
+   *
+   * @generated from field: string schema = 2;
+   */
+  schema: string;
+
+  /**
+   * @generated from field: repeated tank.board.v1.SchemaColumn columns = 3;
+   */
+  columns: SchemaColumn[];
+};
+
+/**
+ * Describes the message tank.board.v1.SchemaTable.
+ * Use `create(SchemaTableSchema)` to create a new message.
+ */
+export const SchemaTableSchema: GenMessage<SchemaTable> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 45);
+
+/**
+ * One file of infrastructure-as-code, as the repository holds it.
+ *
+ * @generated from message tank.board.v1.InfraFile
+ */
+export type InfraFile = Message<"tank.board.v1.InfraFile"> & {
+  /**
+   * @generated from field: string path = 1;
+   */
+  path: string;
+
+  /**
+   * @generated from field: string body = 2;
+   */
+  body: string;
+};
+
+/**
+ * Describes the message tank.board.v1.InfraFile.
+ * Use `create(InfraFileSchema)` to create a new message.
+ */
+export const InfraFileSchema: GenMessage<InfraFile> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 46);
+
+/**
+ * Tell TANK what a database's schema is, or what is in a repository's `infra/`, so a
+ * diagram can be drawn from the real thing instead of from somebody's memory of it.
+ *
+ * Deliberately the same shape as ReportPreview, and for the same reason. TANK holding
+ * a connection string and reaching into somebody's network to read their database
+ * would be a credential to store, to rotate and to lose, a route into their VPC, and
+ * one more thing that can be breached — and the migration job that has just changed
+ * the schema knows it better than any poller of ours would. So the workspace's own CI
+ * says what it already knows, with a token whose only scope is board:preview, exactly
+ * as it already does for previews.
+ *
+ * @generated from message tank.board.v1.ReportBoardSourceRequest
+ */
+export type ReportBoardSourceRequest = Message<"tank.board.v1.ReportBoardSourceRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * "erd" | "architecture"
+   *
+   * @generated from field: string kind = 2;
+   */
+  kind: string;
+
+  /**
+   * What to call it on a board: a database name, or owner/name for a repository.
+   *
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * the branch; "main" when it does not apply
+   *
+   * @generated from field: string ref = 4;
+   */
+  ref: string;
+
+  /**
+   * the commit, or the migration version, it was read at
+   *
+   * @generated from field: string sha = 5;
+   */
+  sha: string;
+
+  /**
+   * kind = "erd"
+   *
+   * @generated from field: repeated tank.board.v1.SchemaTable tables = 6;
+   */
+  tables: SchemaTable[];
+
+  /**
+   * kind = "architecture"
+   *
+   * @generated from field: repeated tank.board.v1.InfraFile files = 7;
+   */
+  files: InfraFile[];
+
+  /**
+   * @generated from field: int32 retain_days = 8;
+   */
+  retainDays: number;
+};
+
+/**
+ * Describes the message tank.board.v1.ReportBoardSourceRequest.
+ * Use `create(ReportBoardSourceRequestSchema)` to create a new message.
+ */
+export const ReportBoardSourceRequestSchema: GenMessage<ReportBoardSourceRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 47);
+
+/**
+ * @generated from message tank.board.v1.BoardSource
+ */
+export type BoardSource = Message<"tank.board.v1.BoardSource"> & {
+  /**
+   * @generated from field: string kind = 1;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string ref = 3;
+   */
+  ref: string;
+
+  /**
+   * @generated from field: string sha = 4;
+   */
+  sha: string;
+
+  /**
+   * tables, or files
+   *
+   * @generated from field: int32 items = 5;
+   */
+  items: number;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp reported_at = 6;
+   */
+  reportedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp expires_at = 7;
+   */
+  expiresAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.board.v1.BoardSource.
+ * Use `create(BoardSourceSchema)` to create a new message.
+ */
+export const BoardSourceSchema: GenMessage<BoardSource> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 48);
+
+/**
+ * @generated from message tank.board.v1.ReportBoardSourceResponse
+ */
+export type ReportBoardSourceResponse = Message<"tank.board.v1.ReportBoardSourceResponse"> & {
+  /**
+   * @generated from field: tank.board.v1.BoardSource source = 1;
+   */
+  source?: BoardSource;
+};
+
+/**
+ * Describes the message tank.board.v1.ReportBoardSourceResponse.
+ * Use `create(ReportBoardSourceResponseSchema)` to create a new message.
+ */
+export const ReportBoardSourceResponseSchema: GenMessage<ReportBoardSourceResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 49);
+
+/**
+ * @generated from message tank.board.v1.ListBoardSourcesRequest
+ */
+export type ListBoardSourcesRequest = Message<"tank.board.v1.ListBoardSourcesRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * empty lists every kind
+   *
+   * @generated from field: string kind = 2;
+   */
+  kind: string;
+};
+
+/**
+ * Describes the message tank.board.v1.ListBoardSourcesRequest.
+ * Use `create(ListBoardSourcesRequestSchema)` to create a new message.
+ */
+export const ListBoardSourcesRequestSchema: GenMessage<ListBoardSourcesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 50);
+
+/**
+ * @generated from message tank.board.v1.ListBoardSourcesResponse
+ */
+export type ListBoardSourcesResponse = Message<"tank.board.v1.ListBoardSourcesResponse"> & {
+  /**
+   * @generated from field: repeated tank.board.v1.BoardSource sources = 1;
+   */
+  sources: BoardSource[];
+};
+
+/**
+ * Describes the message tank.board.v1.ListBoardSourcesResponse.
+ * Use `create(ListBoardSourcesResponseSchema)` to create a new message.
+ */
+export const ListBoardSourcesResponseSchema: GenMessage<ListBoardSourcesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 51);
+
+/**
+ * What a derived diagram was drawn from.
+ *
+ * The same idea as AppFrame.drawn_from_sha, applied to a drawing rather than to a
+ * running app: a diagram that records what it rests on can say when that has moved,
+ * and can be drawn again from the new thing instead of by hand. This is what makes
+ * "the diagram re-derives itself when the code moves" a mechanism rather than a wish.
+ *
+ * @generated from message tank.board.v1.Derivation
+ */
+export type Derivation = Message<"tank.board.v1.Derivation"> & {
+  /**
+   * @generated from field: string kind = 1;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: string source = 2;
+   */
+  source: string;
+
+  /**
+   * @generated from field: string ref = 3;
+   */
+  ref: string;
+
+  /**
+   * @generated from field: string sha = 4;
+   */
+  sha: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp derived_at = 5;
+   */
+  derivedAt?: Timestamp;
+
+  /**
+   * Server-filled: something newer has been reported since this was drawn.
+   *
+   * @generated from field: bool moved_on = 6;
+   */
+  movedOn: boolean;
+
+  /**
+   * @generated from field: string moved_note = 7;
+   */
+  movedNote: string;
+
+  /**
+   * @generated from field: string moved_to_sha = 8;
+   */
+  movedToSha: string;
+};
+
+/**
+ * Describes the message tank.board.v1.Derivation.
+ * Use `create(DerivationSchema)` to create a new message.
+ */
+export const DerivationSchema: GenMessage<Derivation> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 52);
+
+/**
+ * @generated from message tank.board.v1.DeriveDiagramRequest
+ */
+export type DeriveDiagramRequest = Message<"tank.board.v1.DeriveDiagramRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string board_id = 2;
+   */
+  boardId: string;
+
+  /**
+   * "erd" | "architecture"
+   *
+   * @generated from field: string kind = 3;
+   */
+  kind: string;
+
+  /**
+   * which reported source to draw
+   *
+   * @generated from field: string source = 4;
+   */
+  source: string;
+
+  /**
+   * @generated from field: string ref = 5;
+   */
+  ref: string;
+
+  /**
+   * Redraw a frame derived earlier rather than drawing a second one. With this set,
+   * kind, source and ref come from the frame itself and need not be repeated.
+   *
+   * @generated from field: string frame_id = 6;
+   */
+  frameId: string;
+
+  /**
+   * @generated from field: double x = 7;
+   */
+  x: number;
+
+  /**
+   * @generated from field: double y = 8;
+   */
+  y: number;
+};
+
+/**
+ * Describes the message tank.board.v1.DeriveDiagramRequest.
+ * Use `create(DeriveDiagramRequestSchema)` to create a new message.
+ */
+export const DeriveDiagramRequestSchema: GenMessage<DeriveDiagramRequest> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 53);
+
+/**
+ * @generated from message tank.board.v1.DeriveDiagramResponse
+ */
+export type DeriveDiagramResponse = Message<"tank.board.v1.DeriveDiagramResponse"> & {
+  /**
+   * @generated from field: string frame_id = 1;
+   */
+  frameId: string;
+
+  /**
+   * @generated from field: tank.board.v1.Board board = 2;
+   */
+  board?: Board;
+
+  /**
+   * @generated from field: tank.board.v1.Derivation derivation = 3;
+   */
+  derivation?: Derivation;
+
+  /**
+   * What the source did not say: a foreign key with no table to point at, a resource
+   * nothing could be told about.
+   *
+   * @generated from field: repeated string notes = 4;
+   */
+  notes: string[];
+};
+
+/**
+ * Describes the message tank.board.v1.DeriveDiagramResponse.
+ * Use `create(DeriveDiagramResponseSchema)` to create a new message.
+ */
+export const DeriveDiagramResponseSchema: GenMessage<DeriveDiagramResponse> = /*@__PURE__*/
+  messageDesc(file_tank_board_v1_board, 54);
 
 /**
  * @generated from enum tank.board.v1.ObjectKind
@@ -1367,6 +2395,22 @@ export const BoardService: GenService<{
     output: typeof ListTemplatesResponseSchema;
   },
   /**
+   * @generated from rpc tank.board.v1.BoardService.SaveBoardTemplate
+   */
+  saveBoardTemplate: {
+    methodKind: "unary";
+    input: typeof SaveBoardTemplateRequestSchema;
+    output: typeof SaveBoardTemplateResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.board.v1.BoardService.DeleteBoardTemplate
+   */
+  deleteBoardTemplate: {
+    methodKind: "unary";
+    input: typeof DeleteBoardTemplateRequestSchema;
+    output: typeof DeleteBoardTemplateResponseSchema;
+  },
+  /**
    * @generated from rpc tank.board.v1.BoardService.ExportBoard
    */
   exportBoard: {
@@ -1375,12 +2419,76 @@ export const BoardService: GenService<{
     output: typeof ExportBoardResponseSchema;
   },
   /**
+   * @generated from rpc tank.board.v1.BoardService.ListBoardSlices
+   */
+  listBoardSlices: {
+    methodKind: "unary";
+    input: typeof ListBoardSlicesRequestSchema;
+    output: typeof ListBoardSlicesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.board.v1.BoardService.BoardEmbed
+   */
+  boardEmbed: {
+    methodKind: "unary";
+    input: typeof BoardEmbedRequestSchema;
+    output: typeof BoardEmbedResponseSchema;
+  },
+  /**
    * @generated from rpc tank.board.v1.BoardService.GenerateTest
    */
   generateTest: {
     methodKind: "unary";
     input: typeof GenerateTestRequestSchema;
     output: typeof GenerateTestResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.board.v1.BoardService.ReportPreview
+   */
+  reportPreview: {
+    methodKind: "unary";
+    input: typeof ReportPreviewRequestSchema;
+    output: typeof ReportPreviewResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.board.v1.BoardService.ListPreviews
+   */
+  listPreviews: {
+    methodKind: "unary";
+    input: typeof ListPreviewsRequestSchema;
+    output: typeof ListPreviewsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.board.v1.BoardService.ForgetPreview
+   */
+  forgetPreview: {
+    methodKind: "unary";
+    input: typeof ForgetPreviewRequestSchema;
+    output: typeof ForgetPreviewResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.board.v1.BoardService.ReportBoardSource
+   */
+  reportBoardSource: {
+    methodKind: "unary";
+    input: typeof ReportBoardSourceRequestSchema;
+    output: typeof ReportBoardSourceResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.board.v1.BoardService.ListBoardSources
+   */
+  listBoardSources: {
+    methodKind: "unary";
+    input: typeof ListBoardSourcesRequestSchema;
+    output: typeof ListBoardSourcesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.board.v1.BoardService.DeriveDiagram
+   */
+  deriveDiagram: {
+    methodKind: "unary";
+    input: typeof DeriveDiagramRequestSchema;
+    output: typeof DeriveDiagramResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_board_v1_board, 0);

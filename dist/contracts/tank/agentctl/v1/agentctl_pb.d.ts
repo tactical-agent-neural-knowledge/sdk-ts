@@ -2813,6 +2813,111 @@ export type OpenThreadResponse = Message<"tank.agentctl.v1.OpenThreadResponse"> 
  */
 export declare const OpenThreadResponseSchema: GenMessage<OpenThreadResponse>;
 /**
+ * The control plane composes the workflow file itself: only it can see the repository,
+ * so only it knows which workflows the file should run after and what the default
+ * branch is called. api passes the things only api knows — where TANK answers, which
+ * workspace is reporting, and the name of the secret holding the token.
+ *
+ * @generated from message tank.agentctl.v1.SetUpPreviewWorkflowRequest
+ */
+export type SetUpPreviewWorkflowRequest = Message<"tank.agentctl.v1.SetUpPreviewWorkflowRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * owner/name each
+     *
+     * @generated from field: repeated string repos = 2;
+     */
+    repos: string[];
+    /**
+     * empty = each repository's own default branch
+     *
+     * @generated from field: string base_branch = 3;
+     */
+    baseBranch: string;
+    /**
+     * the TANK origin their CI posts to, e.g. https://api.tank.chat
+     *
+     * @generated from field: string api_url = 4;
+     */
+    apiUrl: string;
+    /**
+     * the repository secret holding the TANK token
+     *
+     * @generated from field: string secret_name = 5;
+     */
+    secretName: string;
+    /**
+     * head branch to push to; empty = tank/preview-reporting
+     *
+     * @generated from field: string branch = 6;
+     */
+    branch: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetUpPreviewWorkflowRequest.
+ * Use `create(SetUpPreviewWorkflowRequestSchema)` to create a new message.
+ */
+export declare const SetUpPreviewWorkflowRequestSchema: GenMessage<SetUpPreviewWorkflowRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PreviewWorkflowResult
+ */
+export type PreviewWorkflowResult = Message<"tank.agentctl.v1.PreviewWorkflowResult"> & {
+    /**
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * opened | already_open | refused
+     *
+     * @generated from field: string status = 2;
+     */
+    status: string;
+    /**
+     * @generated from field: string pull_request_url = 3;
+     */
+    pullRequestUrl: string;
+    /**
+     * @generated from field: string branch = 4;
+     */
+    branch: string;
+    /**
+     * @generated from field: string base_branch = 5;
+     */
+    baseBranch: string;
+    /**
+     * @generated from field: string workflow_path = 6;
+     */
+    workflowPath: string;
+    /**
+     * why it was refused, in a sentence; empty otherwise
+     *
+     * @generated from field: string reason = 7;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.PreviewWorkflowResult.
+ * Use `create(PreviewWorkflowResultSchema)` to create a new message.
+ */
+export declare const PreviewWorkflowResultSchema: GenMessage<PreviewWorkflowResult>;
+/**
+ * @generated from message tank.agentctl.v1.SetUpPreviewWorkflowResponse
+ */
+export type SetUpPreviewWorkflowResponse = Message<"tank.agentctl.v1.SetUpPreviewWorkflowResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.PreviewWorkflowResult results = 1;
+     */
+    results: PreviewWorkflowResult[];
+};
+/**
+ * Describes the message tank.agentctl.v1.SetUpPreviewWorkflowResponse.
+ * Use `create(SetUpPreviewWorkflowResponseSchema)` to create a new message.
+ */
+export declare const SetUpPreviewWorkflowResponseSchema: GenMessage<SetUpPreviewWorkflowResponse>;
+/**
  * @generated from message tank.agentctl.v1.RegisterDeploymentRequest
  */
 export type RegisterDeploymentRequest = Message<"tank.agentctl.v1.RegisterDeploymentRequest"> & {
@@ -3604,5 +3709,19 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof GetDeploymentRequestSchema;
         output: typeof GetDeploymentResponseSchema;
+    };
+    /**
+     * Adds the preview-reporting workflow to repositories the workspace's own
+     * installation reaches, each as a pull request: branch, file, pull request. Nothing
+     * is merged and nothing is written to a default branch — TANK proposes, the
+     * workspace decides. Idempotent per repository, and one repository's refusal never
+     * stops the others.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.SetUpPreviewWorkflow
+     */
+    setUpPreviewWorkflow: {
+        methodKind: "unary";
+        input: typeof SetUpPreviewWorkflowRequestSchema;
+        output: typeof SetUpPreviewWorkflowResponseSchema;
     };
 }>;

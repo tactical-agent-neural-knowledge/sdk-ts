@@ -679,6 +679,181 @@ export type SetRepoAccessResponse = Message<"tank.agent.v1.SetRepoAccessResponse
  */
 export declare const SetRepoAccessResponseSchema: GenMessage<SetRepoAccessResponse>;
 /**
+ * Previews for repositories the workspace has already connected.
+ *
+ * TANK serves previews of the applications it builds; a workspace that builds its own
+ * tells TANK where it put each build (BoardService.ReportPreview) and a frame points
+ * at that. Handing somebody a snippet and wishing them luck is the weak half of that
+ * trade: if the workspace has connected GitHub and TANK can reach the repository, TANK
+ * can open the pull request itself.
+ *
+ * It is a pull request and never a push: a workflow file in somebody else's repository
+ * is their decision. Several repositories at once, because a workspace that connects a
+ * front end and an API wants a frame of each, and one failing must not stop the rest.
+ *
+ * @generated from message tank.agent.v1.SetUpRepoPreviewsRequest
+ */
+export type SetUpRepoPreviewsRequest = Message<"tank.agent.v1.SetUpRepoPreviewsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * owner/name each; one pull request per repository
+     *
+     * @generated from field: repeated string repos = 2;
+     */
+    repos: string[];
+    /**
+     * The branch each pull request targets. Empty means each repository's own default,
+     * which is nearly always the right answer and the only one TANK can work out.
+     *
+     * @generated from field: string base_branch = 3;
+     */
+    baseBranch: string;
+    /**
+     * Issue a new token and revoke the one before it. The token is shown once and is
+     * not readable afterwards, so rotating is the only way back from losing it.
+     *
+     * @generated from field: bool rotate_token = 4;
+     */
+    rotateToken: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.SetUpRepoPreviewsRequest.
+ * Use `create(SetUpRepoPreviewsRequestSchema)` to create a new message.
+ */
+export declare const SetUpRepoPreviewsRequestSchema: GenMessage<SetUpRepoPreviewsRequest>;
+/**
+ * What happened for one repository. A repository that could not be set up carries its
+ * own sentence saying why; the others are unaffected by it.
+ *
+ * @generated from message tank.agent.v1.RepoPreviewSetup
+ */
+export type RepoPreviewSetup = Message<"tank.agent.v1.RepoPreviewSetup"> & {
+    /**
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * opened | already_open | refused. "already_open" is the idempotent answer: the
+     * pull request was there from an earlier ask and no second one was opened.
+     *
+     * @generated from field: string status = 2;
+     */
+    status: string;
+    /**
+     * @generated from field: string pull_request_url = 3;
+     */
+    pullRequestUrl: string;
+    /**
+     * the head branch TANK pushed the workflow to
+     *
+     * @generated from field: string branch = 4;
+     */
+    branch: string;
+    /**
+     * where the file sits in the pull request
+     *
+     * @generated from field: string workflow_path = 5;
+     */
+    workflowPath: string;
+    /**
+     * why it was refused, in a sentence; empty otherwise
+     *
+     * @generated from field: string reason = 6;
+     */
+    reason: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp requested_at = 7;
+     */
+    requestedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agent.v1.RepoPreviewSetup.
+ * Use `create(RepoPreviewSetupSchema)` to create a new message.
+ */
+export declare const RepoPreviewSetupSchema: GenMessage<RepoPreviewSetup>;
+/**
+ * @generated from message tank.agent.v1.SetUpRepoPreviewsResponse
+ */
+export type SetUpRepoPreviewsResponse = Message<"tank.agent.v1.SetUpRepoPreviewsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.RepoPreviewSetup results = 1;
+     */
+    results: RepoPreviewSetup[];
+    /**
+     * The token the repositories' CI authenticates with, returned exactly once and
+     * never readable again. Empty when a token had already been issued and
+     * rotate_token was not set. One token for the workspace, not one per repository:
+     * the same secret name goes in every repository.
+     *
+     * @generated from field: string token = 2;
+     */
+    token: string;
+    /**
+     * @generated from field: string secret_name = 3;
+     */
+    secretName: string;
+    /**
+     * a token exists, whether or not it is in this response
+     *
+     * @generated from field: bool token_issued = 4;
+     */
+    tokenIssued: boolean;
+    /**
+     * What the workspace still has to do by hand, in plain words, so a client can show
+     * it without knowing any of this.
+     *
+     * @generated from field: repeated string next_steps = 5;
+     */
+    nextSteps: string[];
+};
+/**
+ * Describes the message tank.agent.v1.SetUpRepoPreviewsResponse.
+ * Use `create(SetUpRepoPreviewsResponseSchema)` to create a new message.
+ */
+export declare const SetUpRepoPreviewsResponseSchema: GenMessage<SetUpRepoPreviewsResponse>;
+/**
+ * What has been set up already, so a board's settings can show it without asking TANK
+ * to open anything.
+ *
+ * @generated from message tank.agent.v1.ListRepoPreviewSetupsRequest
+ */
+export type ListRepoPreviewSetupsRequest = Message<"tank.agent.v1.ListRepoPreviewSetupsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.ListRepoPreviewSetupsRequest.
+ * Use `create(ListRepoPreviewSetupsRequestSchema)` to create a new message.
+ */
+export declare const ListRepoPreviewSetupsRequestSchema: GenMessage<ListRepoPreviewSetupsRequest>;
+/**
+ * @generated from message tank.agent.v1.ListRepoPreviewSetupsResponse
+ */
+export type ListRepoPreviewSetupsResponse = Message<"tank.agent.v1.ListRepoPreviewSetupsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.RepoPreviewSetup setups = 1;
+     */
+    setups: RepoPreviewSetup[];
+    /**
+     * @generated from field: string secret_name = 2;
+     */
+    secretName: string;
+    /**
+     * @generated from field: bool token_issued = 3;
+     */
+    tokenIssued: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.ListRepoPreviewSetupsResponse.
+ * Use `create(ListRepoPreviewSetupsResponseSchema)` to create a new message.
+ */
+export declare const ListRepoPreviewSetupsResponseSchema: GenMessage<ListRepoPreviewSetupsResponse>;
+/**
  * The Tread's switchboard: what its agents cost and did, by the hour, and the knobs a
  * workspace admin turns. Spend is the workspace's own: the workspace pays for its agents.
  *
@@ -1371,6 +1546,26 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof SetTreadDeploymentRequestSchema;
         output: typeof SetTreadDeploymentResponseSchema;
+    };
+    /**
+     * Previews for repositories the workspace has already connected: TANK opens a pull
+     * request in each one adding the workflow that reports its builds, and hands back the
+     * token that CI will need. Admins only, premium only, never a side effect.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.SetUpRepoPreviews
+     */
+    setUpRepoPreviews: {
+        methodKind: "unary";
+        input: typeof SetUpRepoPreviewsRequestSchema;
+        output: typeof SetUpRepoPreviewsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.ListRepoPreviewSetups
+     */
+    listRepoPreviewSetups: {
+        methodKind: "unary";
+        input: typeof ListRepoPreviewSetupsRequestSchema;
+        output: typeof ListRepoPreviewSetupsResponseSchema;
     };
     /**
      * The Tread's switchboard: metrics for members, settings for admins.

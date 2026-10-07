@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/agent/v1/agent.proto.
  */
 export const file_tank_agent_v1_agent: GenFile = /*@__PURE__*/
-  fileDesc("Chl0YW5rL2FnZW50L3YxL2FnZW50LnByb3RvEg10YW5rLmFnZW50LnYxIl0KBUFnZW50EgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRIUCgxwcmluY2lwYWxfaWQYAyABKAkSDAoEbmFtZRgEIAEoCRIOCgZzY29wZXMYBSADKAki+gIKA1J1bhIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSEgoKY2hhbm5lbF9pZBgDIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIQCghhZ2VudF9pZBgFIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYBiABKAkSJgoFc3RhdGUYByABKA4yFy50YW5rLmFnZW50LnYxLlJ1blN0YXRlEg4KBmJyYW5jaBgIIAEoCRIOCgZwcl91cmwYCSABKAkSEAoIY29zdF91c2QYCiABKAESGQoRc3RhdHVzX21lc3NhZ2VfaWQYCyABKAkSLgoKc3RhcnRlZF9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIZW5kZWRfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCXBsYW5faGFzaBgOIAEoCRIXCg9wZW5kaW5nX2dhdGVfaWQYDyABKAkiZwoPU3RhcnRSdW5SZXF1ZXN0EhYKDnRocmVhZF9yb290X2lkGAEgASgJEhAKCGFnZW50X2lkGAIgASgJEhQKDGluc3RydWN0aW9ucxgDIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYBCABKAkihgEKEFN0YXJ0UnVuUmVzcG9uc2USHwoDcnVuGAEgASgLMhIudGFuay5hZ2VudC52MS5SdW4SGwoTYWdlbnRfc2Vzc2lvbl90b2tlbhgCIAEoCRI0ChB0b2tlbl9leHBpcmVzX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIwCg5TdG9wUnVuUmVxdWVzdBIOCgZydW5faWQYASABKAkSDgoGcmVhc29uGAIgASgJIjIKD1N0b3BSdW5SZXNwb25zZRIfCgNydW4YASABKAsyEi50YW5rLmFnZW50LnYxLlJ1biIiChBIZWFydGJlYXRSZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCSITChFIZWFydGJlYXRSZXNwb25zZSKMAQoQU2V0U3RhdHVzUmVxdWVzdBIOCgZydW5faWQYASABKAkSJgoFc3RhdGUYAiABKA4yFy50YW5rLmFnZW50LnYxLlJ1blN0YXRlEg4KBnN0YXR1cxgDIAEoCRIOCgZicmFuY2gYBCABKAkSDgoGcHJfdXJsGAUgASgJEhAKCGNvc3RfdXNkGAYgASgBIjQKEVNldFN0YXR1c1Jlc3BvbnNlEh8KA3J1bhgBIAEoCzISLnRhbmsuYWdlbnQudjEuUnVuIpMBChZTZXRQcm9kdWN0QnJhbmRSZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCRIQCghpY29uX3N2ZxgCIAEoCRIPCgdwcmltYXJ5GAMgASgJEhEKCXNlY29uZGFyeRgEIAEoCRISCgpiYWNrZ3JvdW5kGAUgASgJEg4KBmFjY2VudBgGIAEoCRIPCgd0YWdsaW5lGAcgASgJIisKF1NldFByb2R1Y3RCcmFuZFJlc3BvbnNlEhAKCGljb25fdXJsGAEgASgJIjgKGFNldFByb2R1Y3RMYW5kaW5nUmVxdWVzdBIOCgZydW5faWQYASABKAkSDAoEaHRtbBgCIAEoCSIbChlTZXRQcm9kdWN0TGFuZGluZ1Jlc3BvbnNlIpIBChtSZWNvcmRQcm9kdWN0RmluZGluZ1JlcXVlc3QSDgoGcnVuX2lkGAEgASgJEgwKBHRvb2wYAiABKAkSDAoEa2luZBgDIAEoCRINCgV2YWx1ZRgEIAEoCRIOCgZhbW91bnQYBSABKAESDAoEdW5pdBgGIAEoCRINCgVxdW90ZRgHIAEoCRILCgN1cmwYCCABKAkiHgocUmVjb3JkUHJvZHVjdEZpbmRpbmdSZXNwb25zZSIfCg1HZXRSdW5SZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCSIxCg5HZXRSdW5SZXNwb25zZRIfCgNydW4YASABKAsyEi50YW5rLmFnZW50LnYxLlJ1biJyCg9MaXN0UnVuc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkSDgoGY3Vyc29yGAQgASgJEg0KBWxpbWl0GAUgASgFIkkKEExpc3RSdW5zUmVzcG9uc2USIAoEcnVucxgBIAMoCzISLnRhbmsuYWdlbnQudjEuUnVuEhMKC25leHRfY3Vyc29yGAIgASgJIikKEUxpc3RBZ2VudHNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI6ChJMaXN0QWdlbnRzUmVzcG9uc2USJAoGYWdlbnRzGAEgAygLMhQudGFuay5hZ2VudC52MS5BZ2VudCJDCgtSZXBvQmluZGluZxIMCgRyZXBvGAEgASgJEhMKC2Jhc2VfYnJhbmNoGAIgASgJEhEKCXRvb2xjaGFpbhgDIAEoCSIqCgpSZXBvQWNjZXNzEgwKBHJlcG8YASABKAkSDgoGYWNjZXNzGAIgASgJIpUCCg5SZXBvQ29ubmVjdGlvbhIRCgljb25uZWN0ZWQYASABKAgSFQoNYWNjb3VudF9sb2dpbhgCIAEoCRINCgVyZXBvcxgDIAMoCRIrCgdiaW5kaW5nGAQgASgLMhoudGFuay5hZ2VudC52MS5SZXBvQmluZGluZxISCgpjYW5fbWFuYWdlGAUgASgIEikKBmFjY2VzcxgGIAMoCzIZLnRhbmsuYWdlbnQudjEuUmVwb0FjY2VzcxIPCgdwcmVtaXVtGAcgASgIEhkKEWhvc3RpbmdfYXZhaWxhYmxlGAggASgIEjIKCmRlcGxveW1lbnQYCSABKAsyHi50YW5rLmFnZW50LnYxLlRyZWFkRGVwbG95bWVudCJVChRTZXRSZXBvQWNjZXNzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEikKBmFjY2VzcxgCIAMoCzIZLnRhbmsuYWdlbnQudjEuUmVwb0FjY2VzcyJCChVTZXRSZXBvQWNjZXNzUmVzcG9uc2USKQoGYWNjZXNzGAEgAygLMhkudGFuay5hZ2VudC52MS5SZXBvQWNjZXNzIroBCg1UcmVhZFNldHRpbmdzEhcKD2NvbmN1cnJlbnRfcnVucxgBIAEoBRIZChFhdXRvX2FjY2VwdF9wbGFucxgCIAEoCBITCgttYXhfcnVuX3VzZBgDIAEoARIRCglkYWlseV91c2QYBCABKAESFQoNcHVsbF9yZXF1ZXN0cxgFIAEoCRIXCg9wcl9yZXZpZXdlcl9pZHMYBiADKAkSHQoVcmVhZF9uZXVyYWxfa25vd2xlZGdlGAcgASgIIlcKCkhvdXJCdWNrZXQSKAoEaG91chgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgCIAEoBRIRCglzcGVuZF91c2QYAyABKAEipAIKDFRyZWFkTWV0cmljcxIXCg9zcGVuZF90b2RheV91c2QYASABKAESFwoPc3BlbmRfbW9udGhfdXNkGAIgASgBEhIKCnJ1bnNfdG9kYXkYAyABKAUSEgoKcnVuc19tb250aBgEIAEoBRIYChBzdWNjZXNzX3JhdGVfMzBkGAUgASgBEigKBWhvdXJzGAYgAygLMhkudGFuay5hZ2VudC52MS5Ib3VyQnVja2V0EiEKGXdvcmtzcGFjZV9zcGVuZF90b2RheV91c2QYByABKAESIQoZd29ya3NwYWNlX3NwZW5kX21vbnRoX3VzZBgIIAEoARITCgtydW5uaW5nX25vdxgJIAEoBRIbChNhdmdfcnVuX21pbnV0ZXNfMzBkGAogASgBIjAKGkdldFRyZWFkU3dpdGNoYm9hcmRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkijwEKG0dldFRyZWFkU3dpdGNoYm9hcmRSZXNwb25zZRIsCgdtZXRyaWNzGAEgASgLMhsudGFuay5hZ2VudC52MS5UcmVhZE1ldHJpY3MSLgoIc2V0dGluZ3MYAiABKAsyHC50YW5rLmFnZW50LnYxLlRyZWFkU2V0dGluZ3MSEgoKY2FuX21hbmFnZRgDIAEoCCJdChdTZXRUcmVhZFNldHRpbmdzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEi4KCHNldHRpbmdzGAIgASgLMhwudGFuay5hZ2VudC52MS5UcmVhZFNldHRpbmdzIkoKGFNldFRyZWFkU2V0dGluZ3NSZXNwb25zZRIuCghzZXR0aW5ncxgBIAEoCzIcLnRhbmsuYWdlbnQudjEuVHJlYWRTZXR0aW5ncyIuChhHZXRSZXBvQ29ubmVjdGlvblJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJOChlHZXRSZXBvQ29ubmVjdGlvblJlc3BvbnNlEjEKCmNvbm5lY3Rpb24YASABKAsyHS50YW5rLmFnZW50LnYxLlJlcG9Db25uZWN0aW9uIjEKGVN0YXJ0R2l0SHViQ29ubmVjdFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIjEKGlN0YXJ0R2l0SHViQ29ubmVjdFJlc3BvbnNlEhMKC2luc3RhbGxfdXJsGAEgASgJIlsKD0JpbmRSZXBvUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEgwKBHJlcG8YAiABKAkSEwoLYmFzZV9icmFuY2gYAyABKAkSEQoJdG9vbGNoYWluGAQgASgJIj8KEEJpbmRSZXBvUmVzcG9uc2USKwoHYmluZGluZxgBIAEoCzIaLnRhbmsuYWdlbnQudjEuUmVwb0JpbmRpbmciJwoRVW5iaW5kUmVwb1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSIUChJVbmJpbmRSZXBvUmVzcG9uc2Ui0QEKD1RyZWFkRGVwbG95bWVudBIMCgRzbHVnGAEgASgJEgwKBHJlcG8YAiABKAkSCwoDdXJsGAMgASgJEg0KBWF3YWtlGAQgASgIEi4KCnVwZGF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB21hbmFnZWQYBiABKAgSGAoQd29ya2Zsb3dfcHJlc2VudBgHIAEoCBIRCglpbWFnZV90YWcYCCABKAkSGAoQd29ya2Zsb3dfc25pcHBldBgJIAEoCSIsChZDcmVhdGVUcmVhZFJlcG9SZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiegoXQ3JlYXRlVHJlYWRSZXBvUmVzcG9uc2USKwoHYmluZGluZxgBIAEoCzIaLnRhbmsuYWdlbnQudjEuUmVwb0JpbmRpbmcSMgoKZGVwbG95bWVudBgCIAEoCzIeLnRhbmsuYWdlbnQudjEuVHJlYWREZXBsb3ltZW50Ij4KGVNldFRyZWFkRGVwbG95bWVudFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRINCgVhd2FrZRgCIAEoCCJQChpTZXRUcmVhZERlcGxveW1lbnRSZXNwb25zZRIyCgpkZXBsb3ltZW50GAEgASgLMh4udGFuay5hZ2VudC52MS5UcmVhZERlcGxveW1lbnQqjQQKCFJ1blN0YXRlEhkKFVJVTl9TVEFURV9VTlNQRUNJRklFRBAAEhcKE1JVTl9TVEFURV9SRVFVRVNURUQQARIWChJSVU5fU1RBVEVfQURNSVRURUQQAhIaChZSVU5fU1RBVEVfUFJPVklTSU9OSU5HEAMSFgoSUlVOX1NUQVRFX1BMQU5OSU5HEAQSJAogUlVOX1NUQVRFX0FXQUlUSU5HX1BMQU5fQVBQUk9WQUwQBRIaChZSVU5fU1RBVEVfSU1QTEVNRU5USU5HEAYSFAoQUlVOX1NUQVRFX1BVU0hFRBAHEhkKFVJVTl9TVEFURV9DSV9XQVRDSElORxAIEhUKEVJVTl9TVEFURV9QUl9PUEVOEAkSJQohUlVOX1NUQVRFX0FXQUlUSU5HX01FUkdFX0FQUFJPVkFMEAoSFAoQUlVOX1NUQVRFX01FUkdFRBALEh4KGlJVTl9TVEFURV9WRVJJRllJTkdfREVQTE9ZEAwSEgoOUlVOX1NUQVRFX0RPTkUQDRIXChNSVU5fU1RBVEVfQ0FOQ0VMTEVEEA4SFAoQUlVOX1NUQVRFX0ZBSUxFRBAPEh4KGlJVTl9TVEFURV9CVURHRVRfRVhIQVVTVEVEEBASFwoTUlVOX1NUQVRFX1RJTUVEX09VVBAREh4KGlJVTl9TVEFURV9BUFBST1ZBTF9FWFBJUkVEEBIy1g0KDEFnZW50U2VydmljZRJLCghTdGFydFJ1bhIeLnRhbmsuYWdlbnQudjEuU3RhcnRSdW5SZXF1ZXN0Gh8udGFuay5hZ2VudC52MS5TdGFydFJ1blJlc3BvbnNlEkgKB1N0b3BSdW4SHS50YW5rLmFnZW50LnYxLlN0b3BSdW5SZXF1ZXN0Gh4udGFuay5hZ2VudC52MS5TdG9wUnVuUmVzcG9uc2USTgoJSGVhcnRiZWF0Eh8udGFuay5hZ2VudC52MS5IZWFydGJlYXRSZXF1ZXN0GiAudGFuay5hZ2VudC52MS5IZWFydGJlYXRSZXNwb25zZRJOCglTZXRTdGF0dXMSHy50YW5rLmFnZW50LnYxLlNldFN0YXR1c1JlcXVlc3QaIC50YW5rLmFnZW50LnYxLlNldFN0YXR1c1Jlc3BvbnNlEmAKD1NldFByb2R1Y3RCcmFuZBIlLnRhbmsuYWdlbnQudjEuU2V0UHJvZHVjdEJyYW5kUmVxdWVzdBomLnRhbmsuYWdlbnQudjEuU2V0UHJvZHVjdEJyYW5kUmVzcG9uc2USZgoRU2V0UHJvZHVjdExhbmRpbmcSJy50YW5rLmFnZW50LnYxLlNldFByb2R1Y3RMYW5kaW5nUmVxdWVzdBooLnRhbmsuYWdlbnQudjEuU2V0UHJvZHVjdExhbmRpbmdSZXNwb25zZRJvChRSZWNvcmRQcm9kdWN0RmluZGluZxIqLnRhbmsuYWdlbnQudjEuUmVjb3JkUHJvZHVjdEZpbmRpbmdSZXF1ZXN0GisudGFuay5hZ2VudC52MS5SZWNvcmRQcm9kdWN0RmluZGluZ1Jlc3BvbnNlEkUKBkdldFJ1bhIcLnRhbmsuYWdlbnQudjEuR2V0UnVuUmVxdWVzdBodLnRhbmsuYWdlbnQudjEuR2V0UnVuUmVzcG9uc2USSwoITGlzdFJ1bnMSHi50YW5rLmFnZW50LnYxLkxpc3RSdW5zUmVxdWVzdBofLnRhbmsuYWdlbnQudjEuTGlzdFJ1bnNSZXNwb25zZRJRCgpMaXN0QWdlbnRzEiAudGFuay5hZ2VudC52MS5MaXN0QWdlbnRzUmVxdWVzdBohLnRhbmsuYWdlbnQudjEuTGlzdEFnZW50c1Jlc3BvbnNlEmYKEUdldFJlcG9Db25uZWN0aW9uEicudGFuay5hZ2VudC52MS5HZXRSZXBvQ29ubmVjdGlvblJlcXVlc3QaKC50YW5rLmFnZW50LnYxLkdldFJlcG9Db25uZWN0aW9uUmVzcG9uc2USaQoSU3RhcnRHaXRIdWJDb25uZWN0EigudGFuay5hZ2VudC52MS5TdGFydEdpdEh1YkNvbm5lY3RSZXF1ZXN0GikudGFuay5hZ2VudC52MS5TdGFydEdpdEh1YkNvbm5lY3RSZXNwb25zZRJLCghCaW5kUmVwbxIeLnRhbmsuYWdlbnQudjEuQmluZFJlcG9SZXF1ZXN0Gh8udGFuay5hZ2VudC52MS5CaW5kUmVwb1Jlc3BvbnNlElEKClVuYmluZFJlcG8SIC50YW5rLmFnZW50LnYxLlVuYmluZFJlcG9SZXF1ZXN0GiEudGFuay5hZ2VudC52MS5VbmJpbmRSZXBvUmVzcG9uc2USWgoNU2V0UmVwb0FjY2VzcxIjLnRhbmsuYWdlbnQudjEuU2V0UmVwb0FjY2Vzc1JlcXVlc3QaJC50YW5rLmFnZW50LnYxLlNldFJlcG9BY2Nlc3NSZXNwb25zZRJgCg9DcmVhdGVUcmVhZFJlcG8SJS50YW5rLmFnZW50LnYxLkNyZWF0ZVRyZWFkUmVwb1JlcXVlc3QaJi50YW5rLmFnZW50LnYxLkNyZWF0ZVRyZWFkUmVwb1Jlc3BvbnNlEmkKElNldFRyZWFkRGVwbG95bWVudBIoLnRhbmsuYWdlbnQudjEuU2V0VHJlYWREZXBsb3ltZW50UmVxdWVzdBopLnRhbmsuYWdlbnQudjEuU2V0VHJlYWREZXBsb3ltZW50UmVzcG9uc2USbAoTR2V0VHJlYWRTd2l0Y2hib2FyZBIpLnRhbmsuYWdlbnQudjEuR2V0VHJlYWRTd2l0Y2hib2FyZFJlcXVlc3QaKi50YW5rLmFnZW50LnYxLkdldFRyZWFkU3dpdGNoYm9hcmRSZXNwb25zZRJjChBTZXRUcmVhZFNldHRpbmdzEiYudGFuay5hZ2VudC52MS5TZXRUcmVhZFNldHRpbmdzUmVxdWVzdBonLnRhbmsuYWdlbnQudjEuU2V0VHJlYWRTZXR0aW5nc1Jlc3BvbnNlQsgBChFjb20udGFuay5hZ2VudC52MUIKQWdlbnRQcm90b1ABWlFnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FnZW50L3YxO2FnZW50djGiAgNUQViqAg1UYW5rLkFnZW50LlYxygINVGFua1xBZ2VudFxWMeICGVRhbmtcQWdlbnRcVjFcR1BCTWV0YWRhdGHqAg9UYW5rOjpBZ2VudDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Chl0YW5rL2FnZW50L3YxL2FnZW50LnByb3RvEg10YW5rLmFnZW50LnYxIl0KBUFnZW50EgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRIUCgxwcmluY2lwYWxfaWQYAyABKAkSDAoEbmFtZRgEIAEoCRIOCgZzY29wZXMYBSADKAki+gIKA1J1bhIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSEgoKY2hhbm5lbF9pZBgDIAEoCRIWCg50aHJlYWRfcm9vdF9pZBgEIAEoCRIQCghhZ2VudF9pZBgFIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYBiABKAkSJgoFc3RhdGUYByABKA4yFy50YW5rLmFnZW50LnYxLlJ1blN0YXRlEg4KBmJyYW5jaBgIIAEoCRIOCgZwcl91cmwYCSABKAkSEAoIY29zdF91c2QYCiABKAESGQoRc3RhdHVzX21lc3NhZ2VfaWQYCyABKAkSLgoKc3RhcnRlZF9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIZW5kZWRfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCXBsYW5faGFzaBgOIAEoCRIXCg9wZW5kaW5nX2dhdGVfaWQYDyABKAkiZwoPU3RhcnRSdW5SZXF1ZXN0EhYKDnRocmVhZF9yb290X2lkGAEgASgJEhAKCGFnZW50X2lkGAIgASgJEhQKDGluc3RydWN0aW9ucxgDIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYBCABKAkihgEKEFN0YXJ0UnVuUmVzcG9uc2USHwoDcnVuGAEgASgLMhIudGFuay5hZ2VudC52MS5SdW4SGwoTYWdlbnRfc2Vzc2lvbl90b2tlbhgCIAEoCRI0ChB0b2tlbl9leHBpcmVzX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIwCg5TdG9wUnVuUmVxdWVzdBIOCgZydW5faWQYASABKAkSDgoGcmVhc29uGAIgASgJIjIKD1N0b3BSdW5SZXNwb25zZRIfCgNydW4YASABKAsyEi50YW5rLmFnZW50LnYxLlJ1biIiChBIZWFydGJlYXRSZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCSITChFIZWFydGJlYXRSZXNwb25zZSKMAQoQU2V0U3RhdHVzUmVxdWVzdBIOCgZydW5faWQYASABKAkSJgoFc3RhdGUYAiABKA4yFy50YW5rLmFnZW50LnYxLlJ1blN0YXRlEg4KBnN0YXR1cxgDIAEoCRIOCgZicmFuY2gYBCABKAkSDgoGcHJfdXJsGAUgASgJEhAKCGNvc3RfdXNkGAYgASgBIjQKEVNldFN0YXR1c1Jlc3BvbnNlEh8KA3J1bhgBIAEoCzISLnRhbmsuYWdlbnQudjEuUnVuIpMBChZTZXRQcm9kdWN0QnJhbmRSZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCRIQCghpY29uX3N2ZxgCIAEoCRIPCgdwcmltYXJ5GAMgASgJEhEKCXNlY29uZGFyeRgEIAEoCRISCgpiYWNrZ3JvdW5kGAUgASgJEg4KBmFjY2VudBgGIAEoCRIPCgd0YWdsaW5lGAcgASgJIisKF1NldFByb2R1Y3RCcmFuZFJlc3BvbnNlEhAKCGljb25fdXJsGAEgASgJIjgKGFNldFByb2R1Y3RMYW5kaW5nUmVxdWVzdBIOCgZydW5faWQYASABKAkSDAoEaHRtbBgCIAEoCSIbChlTZXRQcm9kdWN0TGFuZGluZ1Jlc3BvbnNlIpIBChtSZWNvcmRQcm9kdWN0RmluZGluZ1JlcXVlc3QSDgoGcnVuX2lkGAEgASgJEgwKBHRvb2wYAiABKAkSDAoEa2luZBgDIAEoCRINCgV2YWx1ZRgEIAEoCRIOCgZhbW91bnQYBSABKAESDAoEdW5pdBgGIAEoCRINCgVxdW90ZRgHIAEoCRILCgN1cmwYCCABKAkiHgocUmVjb3JkUHJvZHVjdEZpbmRpbmdSZXNwb25zZSIfCg1HZXRSdW5SZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCSIxCg5HZXRSdW5SZXNwb25zZRIfCgNydW4YASABKAsyEi50YW5rLmFnZW50LnYxLlJ1biJyCg9MaXN0UnVuc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSFgoOdGhyZWFkX3Jvb3RfaWQYAyABKAkSDgoGY3Vyc29yGAQgASgJEg0KBWxpbWl0GAUgASgFIkkKEExpc3RSdW5zUmVzcG9uc2USIAoEcnVucxgBIAMoCzISLnRhbmsuYWdlbnQudjEuUnVuEhMKC25leHRfY3Vyc29yGAIgASgJIikKEUxpc3RBZ2VudHNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI6ChJMaXN0QWdlbnRzUmVzcG9uc2USJAoGYWdlbnRzGAEgAygLMhQudGFuay5hZ2VudC52MS5BZ2VudCJDCgtSZXBvQmluZGluZxIMCgRyZXBvGAEgASgJEhMKC2Jhc2VfYnJhbmNoGAIgASgJEhEKCXRvb2xjaGFpbhgDIAEoCSIqCgpSZXBvQWNjZXNzEgwKBHJlcG8YASABKAkSDgoGYWNjZXNzGAIgASgJIpUCCg5SZXBvQ29ubmVjdGlvbhIRCgljb25uZWN0ZWQYASABKAgSFQoNYWNjb3VudF9sb2dpbhgCIAEoCRINCgVyZXBvcxgDIAMoCRIrCgdiaW5kaW5nGAQgASgLMhoudGFuay5hZ2VudC52MS5SZXBvQmluZGluZxISCgpjYW5fbWFuYWdlGAUgASgIEikKBmFjY2VzcxgGIAMoCzIZLnRhbmsuYWdlbnQudjEuUmVwb0FjY2VzcxIPCgdwcmVtaXVtGAcgASgIEhkKEWhvc3RpbmdfYXZhaWxhYmxlGAggASgIEjIKCmRlcGxveW1lbnQYCSABKAsyHi50YW5rLmFnZW50LnYxLlRyZWFkRGVwbG95bWVudCJVChRTZXRSZXBvQWNjZXNzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEikKBmFjY2VzcxgCIAMoCzIZLnRhbmsuYWdlbnQudjEuUmVwb0FjY2VzcyJCChVTZXRSZXBvQWNjZXNzUmVzcG9uc2USKQoGYWNjZXNzGAEgAygLMhkudGFuay5hZ2VudC52MS5SZXBvQWNjZXNzImoKGFNldFVwUmVwb1ByZXZpZXdzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDQoFcmVwb3MYAiADKAkSEwoLYmFzZV9icmFuY2gYAyABKAkSFAoMcm90YXRlX3Rva2VuGAQgASgIIrMBChBSZXBvUHJldmlld1NldHVwEgwKBHJlcG8YASABKAkSDgoGc3RhdHVzGAIgASgJEhgKEHB1bGxfcmVxdWVzdF91cmwYAyABKAkSDgoGYnJhbmNoGAQgASgJEhUKDXdvcmtmbG93X3BhdGgYBSABKAkSDgoGcmVhc29uGAYgASgJEjAKDHJlcXVlc3RlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAimwEKGVNldFVwUmVwb1ByZXZpZXdzUmVzcG9uc2USMAoHcmVzdWx0cxgBIAMoCzIfLnRhbmsuYWdlbnQudjEuUmVwb1ByZXZpZXdTZXR1cBINCgV0b2tlbhgCIAEoCRITCgtzZWNyZXRfbmFtZRgDIAEoCRIUCgx0b2tlbl9pc3N1ZWQYBCABKAgSEgoKbmV4dF9zdGVwcxgFIAMoCSI0ChxMaXN0UmVwb1ByZXZpZXdTZXR1cHNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJ7Ch1MaXN0UmVwb1ByZXZpZXdTZXR1cHNSZXNwb25zZRIvCgZzZXR1cHMYASADKAsyHy50YW5rLmFnZW50LnYxLlJlcG9QcmV2aWV3U2V0dXASEwoLc2VjcmV0X25hbWUYAiABKAkSFAoMdG9rZW5faXNzdWVkGAMgASgIIroBCg1UcmVhZFNldHRpbmdzEhcKD2NvbmN1cnJlbnRfcnVucxgBIAEoBRIZChFhdXRvX2FjY2VwdF9wbGFucxgCIAEoCBITCgttYXhfcnVuX3VzZBgDIAEoARIRCglkYWlseV91c2QYBCABKAESFQoNcHVsbF9yZXF1ZXN0cxgFIAEoCRIXCg9wcl9yZXZpZXdlcl9pZHMYBiADKAkSHQoVcmVhZF9uZXVyYWxfa25vd2xlZGdlGAcgASgIIlcKCkhvdXJCdWNrZXQSKAoEaG91chgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgCIAEoBRIRCglzcGVuZF91c2QYAyABKAEipAIKDFRyZWFkTWV0cmljcxIXCg9zcGVuZF90b2RheV91c2QYASABKAESFwoPc3BlbmRfbW9udGhfdXNkGAIgASgBEhIKCnJ1bnNfdG9kYXkYAyABKAUSEgoKcnVuc19tb250aBgEIAEoBRIYChBzdWNjZXNzX3JhdGVfMzBkGAUgASgBEigKBWhvdXJzGAYgAygLMhkudGFuay5hZ2VudC52MS5Ib3VyQnVja2V0EiEKGXdvcmtzcGFjZV9zcGVuZF90b2RheV91c2QYByABKAESIQoZd29ya3NwYWNlX3NwZW5kX21vbnRoX3VzZBgIIAEoARITCgtydW5uaW5nX25vdxgJIAEoBRIbChNhdmdfcnVuX21pbnV0ZXNfMzBkGAogASgBIjAKGkdldFRyZWFkU3dpdGNoYm9hcmRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkijwEKG0dldFRyZWFkU3dpdGNoYm9hcmRSZXNwb25zZRIsCgdtZXRyaWNzGAEgASgLMhsudGFuay5hZ2VudC52MS5UcmVhZE1ldHJpY3MSLgoIc2V0dGluZ3MYAiABKAsyHC50YW5rLmFnZW50LnYxLlRyZWFkU2V0dGluZ3MSEgoKY2FuX21hbmFnZRgDIAEoCCJdChdTZXRUcmVhZFNldHRpbmdzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEi4KCHNldHRpbmdzGAIgASgLMhwudGFuay5hZ2VudC52MS5UcmVhZFNldHRpbmdzIkoKGFNldFRyZWFkU2V0dGluZ3NSZXNwb25zZRIuCghzZXR0aW5ncxgBIAEoCzIcLnRhbmsuYWdlbnQudjEuVHJlYWRTZXR0aW5ncyIuChhHZXRSZXBvQ29ubmVjdGlvblJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSJOChlHZXRSZXBvQ29ubmVjdGlvblJlc3BvbnNlEjEKCmNvbm5lY3Rpb24YASABKAsyHS50YW5rLmFnZW50LnYxLlJlcG9Db25uZWN0aW9uIjEKGVN0YXJ0R2l0SHViQ29ubmVjdFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIjEKGlN0YXJ0R2l0SHViQ29ubmVjdFJlc3BvbnNlEhMKC2luc3RhbGxfdXJsGAEgASgJIlsKD0JpbmRSZXBvUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEgwKBHJlcG8YAiABKAkSEwoLYmFzZV9icmFuY2gYAyABKAkSEQoJdG9vbGNoYWluGAQgASgJIj8KEEJpbmRSZXBvUmVzcG9uc2USKwoHYmluZGluZxgBIAEoCzIaLnRhbmsuYWdlbnQudjEuUmVwb0JpbmRpbmciJwoRVW5iaW5kUmVwb1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSIUChJVbmJpbmRSZXBvUmVzcG9uc2Ui0QEKD1RyZWFkRGVwbG95bWVudBIMCgRzbHVnGAEgASgJEgwKBHJlcG8YAiABKAkSCwoDdXJsGAMgASgJEg0KBWF3YWtlGAQgASgIEi4KCnVwZGF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB21hbmFnZWQYBiABKAgSGAoQd29ya2Zsb3dfcHJlc2VudBgHIAEoCBIRCglpbWFnZV90YWcYCCABKAkSGAoQd29ya2Zsb3dfc25pcHBldBgJIAEoCSIsChZDcmVhdGVUcmVhZFJlcG9SZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiegoXQ3JlYXRlVHJlYWRSZXBvUmVzcG9uc2USKwoHYmluZGluZxgBIAEoCzIaLnRhbmsuYWdlbnQudjEuUmVwb0JpbmRpbmcSMgoKZGVwbG95bWVudBgCIAEoCzIeLnRhbmsuYWdlbnQudjEuVHJlYWREZXBsb3ltZW50Ij4KGVNldFRyZWFkRGVwbG95bWVudFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRINCgVhd2FrZRgCIAEoCCJQChpTZXRUcmVhZERlcGxveW1lbnRSZXNwb25zZRIyCgpkZXBsb3ltZW50GAEgASgLMh4udGFuay5hZ2VudC52MS5UcmVhZERlcGxveW1lbnQqjQQKCFJ1blN0YXRlEhkKFVJVTl9TVEFURV9VTlNQRUNJRklFRBAAEhcKE1JVTl9TVEFURV9SRVFVRVNURUQQARIWChJSVU5fU1RBVEVfQURNSVRURUQQAhIaChZSVU5fU1RBVEVfUFJPVklTSU9OSU5HEAMSFgoSUlVOX1NUQVRFX1BMQU5OSU5HEAQSJAogUlVOX1NUQVRFX0FXQUlUSU5HX1BMQU5fQVBQUk9WQUwQBRIaChZSVU5fU1RBVEVfSU1QTEVNRU5USU5HEAYSFAoQUlVOX1NUQVRFX1BVU0hFRBAHEhkKFVJVTl9TVEFURV9DSV9XQVRDSElORxAIEhUKEVJVTl9TVEFURV9QUl9PUEVOEAkSJQohUlVOX1NUQVRFX0FXQUlUSU5HX01FUkdFX0FQUFJPVkFMEAoSFAoQUlVOX1NUQVRFX01FUkdFRBALEh4KGlJVTl9TVEFURV9WRVJJRllJTkdfREVQTE9ZEAwSEgoOUlVOX1NUQVRFX0RPTkUQDRIXChNSVU5fU1RBVEVfQ0FOQ0VMTEVEEA4SFAoQUlVOX1NUQVRFX0ZBSUxFRBAPEh4KGlJVTl9TVEFURV9CVURHRVRfRVhIQVVTVEVEEBASFwoTUlVOX1NUQVRFX1RJTUVEX09VVBAREh4KGlJVTl9TVEFURV9BUFBST1ZBTF9FWFBJUkVEEBIysg8KDEFnZW50U2VydmljZRJLCghTdGFydFJ1bhIeLnRhbmsuYWdlbnQudjEuU3RhcnRSdW5SZXF1ZXN0Gh8udGFuay5hZ2VudC52MS5TdGFydFJ1blJlc3BvbnNlEkgKB1N0b3BSdW4SHS50YW5rLmFnZW50LnYxLlN0b3BSdW5SZXF1ZXN0Gh4udGFuay5hZ2VudC52MS5TdG9wUnVuUmVzcG9uc2USTgoJSGVhcnRiZWF0Eh8udGFuay5hZ2VudC52MS5IZWFydGJlYXRSZXF1ZXN0GiAudGFuay5hZ2VudC52MS5IZWFydGJlYXRSZXNwb25zZRJOCglTZXRTdGF0dXMSHy50YW5rLmFnZW50LnYxLlNldFN0YXR1c1JlcXVlc3QaIC50YW5rLmFnZW50LnYxLlNldFN0YXR1c1Jlc3BvbnNlEmAKD1NldFByb2R1Y3RCcmFuZBIlLnRhbmsuYWdlbnQudjEuU2V0UHJvZHVjdEJyYW5kUmVxdWVzdBomLnRhbmsuYWdlbnQudjEuU2V0UHJvZHVjdEJyYW5kUmVzcG9uc2USZgoRU2V0UHJvZHVjdExhbmRpbmcSJy50YW5rLmFnZW50LnYxLlNldFByb2R1Y3RMYW5kaW5nUmVxdWVzdBooLnRhbmsuYWdlbnQudjEuU2V0UHJvZHVjdExhbmRpbmdSZXNwb25zZRJvChRSZWNvcmRQcm9kdWN0RmluZGluZxIqLnRhbmsuYWdlbnQudjEuUmVjb3JkUHJvZHVjdEZpbmRpbmdSZXF1ZXN0GisudGFuay5hZ2VudC52MS5SZWNvcmRQcm9kdWN0RmluZGluZ1Jlc3BvbnNlEkUKBkdldFJ1bhIcLnRhbmsuYWdlbnQudjEuR2V0UnVuUmVxdWVzdBodLnRhbmsuYWdlbnQudjEuR2V0UnVuUmVzcG9uc2USSwoITGlzdFJ1bnMSHi50YW5rLmFnZW50LnYxLkxpc3RSdW5zUmVxdWVzdBofLnRhbmsuYWdlbnQudjEuTGlzdFJ1bnNSZXNwb25zZRJRCgpMaXN0QWdlbnRzEiAudGFuay5hZ2VudC52MS5MaXN0QWdlbnRzUmVxdWVzdBohLnRhbmsuYWdlbnQudjEuTGlzdEFnZW50c1Jlc3BvbnNlEmYKEUdldFJlcG9Db25uZWN0aW9uEicudGFuay5hZ2VudC52MS5HZXRSZXBvQ29ubmVjdGlvblJlcXVlc3QaKC50YW5rLmFnZW50LnYxLkdldFJlcG9Db25uZWN0aW9uUmVzcG9uc2USaQoSU3RhcnRHaXRIdWJDb25uZWN0EigudGFuay5hZ2VudC52MS5TdGFydEdpdEh1YkNvbm5lY3RSZXF1ZXN0GikudGFuay5hZ2VudC52MS5TdGFydEdpdEh1YkNvbm5lY3RSZXNwb25zZRJLCghCaW5kUmVwbxIeLnRhbmsuYWdlbnQudjEuQmluZFJlcG9SZXF1ZXN0Gh8udGFuay5hZ2VudC52MS5CaW5kUmVwb1Jlc3BvbnNlElEKClVuYmluZFJlcG8SIC50YW5rLmFnZW50LnYxLlVuYmluZFJlcG9SZXF1ZXN0GiEudGFuay5hZ2VudC52MS5VbmJpbmRSZXBvUmVzcG9uc2USWgoNU2V0UmVwb0FjY2VzcxIjLnRhbmsuYWdlbnQudjEuU2V0UmVwb0FjY2Vzc1JlcXVlc3QaJC50YW5rLmFnZW50LnYxLlNldFJlcG9BY2Nlc3NSZXNwb25zZRJgCg9DcmVhdGVUcmVhZFJlcG8SJS50YW5rLmFnZW50LnYxLkNyZWF0ZVRyZWFkUmVwb1JlcXVlc3QaJi50YW5rLmFnZW50LnYxLkNyZWF0ZVRyZWFkUmVwb1Jlc3BvbnNlEmkKElNldFRyZWFkRGVwbG95bWVudBIoLnRhbmsuYWdlbnQudjEuU2V0VHJlYWREZXBsb3ltZW50UmVxdWVzdBopLnRhbmsuYWdlbnQudjEuU2V0VHJlYWREZXBsb3ltZW50UmVzcG9uc2USZgoRU2V0VXBSZXBvUHJldmlld3MSJy50YW5rLmFnZW50LnYxLlNldFVwUmVwb1ByZXZpZXdzUmVxdWVzdBooLnRhbmsuYWdlbnQudjEuU2V0VXBSZXBvUHJldmlld3NSZXNwb25zZRJyChVMaXN0UmVwb1ByZXZpZXdTZXR1cHMSKy50YW5rLmFnZW50LnYxLkxpc3RSZXBvUHJldmlld1NldHVwc1JlcXVlc3QaLC50YW5rLmFnZW50LnYxLkxpc3RSZXBvUHJldmlld1NldHVwc1Jlc3BvbnNlEmwKE0dldFRyZWFkU3dpdGNoYm9hcmQSKS50YW5rLmFnZW50LnYxLkdldFRyZWFkU3dpdGNoYm9hcmRSZXF1ZXN0GioudGFuay5hZ2VudC52MS5HZXRUcmVhZFN3aXRjaGJvYXJkUmVzcG9uc2USYwoQU2V0VHJlYWRTZXR0aW5ncxImLnRhbmsuYWdlbnQudjEuU2V0VHJlYWRTZXR0aW5nc1JlcXVlc3QaJy50YW5rLmFnZW50LnYxLlNldFRyZWFkU2V0dGluZ3NSZXNwb25zZULIAQoRY29tLnRhbmsuYWdlbnQudjFCCkFnZW50UHJvdG9QAVpRZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9hZ2VudC92MTthZ2VudHYxogIDVEFYqgINVGFuay5BZ2VudC5WMcoCDVRhbmtcQWdlbnRcVjHiAhlUYW5rXEFnZW50XFYxXEdQQk1ldGFkYXRh6gIPVGFuazo6QWdlbnQ6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.agent.v1.Agent
@@ -832,6 +832,211 @@ export const SetRepoAccessResponseSchema: GenMessage<SetRepoAccessResponse> = /*
   messageDesc(file_tank_agent_v1_agent, 26);
 
 /**
+ * Previews for repositories the workspace has already connected.
+ *
+ * TANK serves previews of the applications it builds; a workspace that builds its own
+ * tells TANK where it put each build (BoardService.ReportPreview) and a frame points
+ * at that. Handing somebody a snippet and wishing them luck is the weak half of that
+ * trade: if the workspace has connected GitHub and TANK can reach the repository, TANK
+ * can open the pull request itself.
+ *
+ * It is a pull request and never a push: a workflow file in somebody else's repository
+ * is their decision. Several repositories at once, because a workspace that connects a
+ * front end and an API wants a frame of each, and one failing must not stop the rest.
+ *
+ * @generated from message tank.agent.v1.SetUpRepoPreviewsRequest
+ */
+export type SetUpRepoPreviewsRequest = Message<"tank.agent.v1.SetUpRepoPreviewsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * owner/name each; one pull request per repository
+   *
+   * @generated from field: repeated string repos = 2;
+   */
+  repos: string[];
+
+  /**
+   * The branch each pull request targets. Empty means each repository's own default,
+   * which is nearly always the right answer and the only one TANK can work out.
+   *
+   * @generated from field: string base_branch = 3;
+   */
+  baseBranch: string;
+
+  /**
+   * Issue a new token and revoke the one before it. The token is shown once and is
+   * not readable afterwards, so rotating is the only way back from losing it.
+   *
+   * @generated from field: bool rotate_token = 4;
+   */
+  rotateToken: boolean;
+};
+
+/**
+ * Describes the message tank.agent.v1.SetUpRepoPreviewsRequest.
+ * Use `create(SetUpRepoPreviewsRequestSchema)` to create a new message.
+ */
+export const SetUpRepoPreviewsRequestSchema: GenMessage<SetUpRepoPreviewsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 27);
+
+/**
+ * What happened for one repository. A repository that could not be set up carries its
+ * own sentence saying why; the others are unaffected by it.
+ *
+ * @generated from message tank.agent.v1.RepoPreviewSetup
+ */
+export type RepoPreviewSetup = Message<"tank.agent.v1.RepoPreviewSetup"> & {
+  /**
+   * @generated from field: string repo = 1;
+   */
+  repo: string;
+
+  /**
+   * opened | already_open | refused. "already_open" is the idempotent answer: the
+   * pull request was there from an earlier ask and no second one was opened.
+   *
+   * @generated from field: string status = 2;
+   */
+  status: string;
+
+  /**
+   * @generated from field: string pull_request_url = 3;
+   */
+  pullRequestUrl: string;
+
+  /**
+   * the head branch TANK pushed the workflow to
+   *
+   * @generated from field: string branch = 4;
+   */
+  branch: string;
+
+  /**
+   * where the file sits in the pull request
+   *
+   * @generated from field: string workflow_path = 5;
+   */
+  workflowPath: string;
+
+  /**
+   * why it was refused, in a sentence; empty otherwise
+   *
+   * @generated from field: string reason = 6;
+   */
+  reason: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp requested_at = 7;
+   */
+  requestedAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.agent.v1.RepoPreviewSetup.
+ * Use `create(RepoPreviewSetupSchema)` to create a new message.
+ */
+export const RepoPreviewSetupSchema: GenMessage<RepoPreviewSetup> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 28);
+
+/**
+ * @generated from message tank.agent.v1.SetUpRepoPreviewsResponse
+ */
+export type SetUpRepoPreviewsResponse = Message<"tank.agent.v1.SetUpRepoPreviewsResponse"> & {
+  /**
+   * @generated from field: repeated tank.agent.v1.RepoPreviewSetup results = 1;
+   */
+  results: RepoPreviewSetup[];
+
+  /**
+   * The token the repositories' CI authenticates with, returned exactly once and
+   * never readable again. Empty when a token had already been issued and
+   * rotate_token was not set. One token for the workspace, not one per repository:
+   * the same secret name goes in every repository.
+   *
+   * @generated from field: string token = 2;
+   */
+  token: string;
+
+  /**
+   * @generated from field: string secret_name = 3;
+   */
+  secretName: string;
+
+  /**
+   * a token exists, whether or not it is in this response
+   *
+   * @generated from field: bool token_issued = 4;
+   */
+  tokenIssued: boolean;
+
+  /**
+   * What the workspace still has to do by hand, in plain words, so a client can show
+   * it without knowing any of this.
+   *
+   * @generated from field: repeated string next_steps = 5;
+   */
+  nextSteps: string[];
+};
+
+/**
+ * Describes the message tank.agent.v1.SetUpRepoPreviewsResponse.
+ * Use `create(SetUpRepoPreviewsResponseSchema)` to create a new message.
+ */
+export const SetUpRepoPreviewsResponseSchema: GenMessage<SetUpRepoPreviewsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 29);
+
+/**
+ * What has been set up already, so a board's settings can show it without asking TANK
+ * to open anything.
+ *
+ * @generated from message tank.agent.v1.ListRepoPreviewSetupsRequest
+ */
+export type ListRepoPreviewSetupsRequest = Message<"tank.agent.v1.ListRepoPreviewSetupsRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.agent.v1.ListRepoPreviewSetupsRequest.
+ * Use `create(ListRepoPreviewSetupsRequestSchema)` to create a new message.
+ */
+export const ListRepoPreviewSetupsRequestSchema: GenMessage<ListRepoPreviewSetupsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 30);
+
+/**
+ * @generated from message tank.agent.v1.ListRepoPreviewSetupsResponse
+ */
+export type ListRepoPreviewSetupsResponse = Message<"tank.agent.v1.ListRepoPreviewSetupsResponse"> & {
+  /**
+   * @generated from field: repeated tank.agent.v1.RepoPreviewSetup setups = 1;
+   */
+  setups: RepoPreviewSetup[];
+
+  /**
+   * @generated from field: string secret_name = 2;
+   */
+  secretName: string;
+
+  /**
+   * @generated from field: bool token_issued = 3;
+   */
+  tokenIssued: boolean;
+};
+
+/**
+ * Describes the message tank.agent.v1.ListRepoPreviewSetupsResponse.
+ * Use `create(ListRepoPreviewSetupsResponseSchema)` to create a new message.
+ */
+export const ListRepoPreviewSetupsResponseSchema: GenMessage<ListRepoPreviewSetupsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agent_v1_agent, 31);
+
+/**
  * The Tread's switchboard: what its agents cost and did, by the hour, and the knobs a
  * workspace admin turns. Spend is the workspace's own: the workspace pays for its agents.
  *
@@ -896,7 +1101,7 @@ export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
  * Use `create(TreadSettingsSchema)` to create a new message.
  */
 export const TreadSettingsSchema: GenMessage<TreadSettings> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 27);
+  messageDesc(file_tank_agent_v1_agent, 32);
 
 /**
  * @generated from message tank.agent.v1.HourBucket
@@ -923,7 +1128,7 @@ export type HourBucket = Message<"tank.agent.v1.HourBucket"> & {
  * Use `create(HourBucketSchema)` to create a new message.
  */
 export const HourBucketSchema: GenMessage<HourBucket> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 28);
+  messageDesc(file_tank_agent_v1_agent, 33);
 
 /**
  * @generated from message tank.agent.v1.TreadMetrics
@@ -989,7 +1194,7 @@ export type TreadMetrics = Message<"tank.agent.v1.TreadMetrics"> & {
  * Use `create(TreadMetricsSchema)` to create a new message.
  */
 export const TreadMetricsSchema: GenMessage<TreadMetrics> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 29);
+  messageDesc(file_tank_agent_v1_agent, 34);
 
 /**
  * @generated from message tank.agent.v1.GetTreadSwitchboardRequest
@@ -1006,7 +1211,7 @@ export type GetTreadSwitchboardRequest = Message<"tank.agent.v1.GetTreadSwitchbo
  * Use `create(GetTreadSwitchboardRequestSchema)` to create a new message.
  */
 export const GetTreadSwitchboardRequestSchema: GenMessage<GetTreadSwitchboardRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 30);
+  messageDesc(file_tank_agent_v1_agent, 35);
 
 /**
  * @generated from message tank.agent.v1.GetTreadSwitchboardResponse
@@ -1033,7 +1238,7 @@ export type GetTreadSwitchboardResponse = Message<"tank.agent.v1.GetTreadSwitchb
  * Use `create(GetTreadSwitchboardResponseSchema)` to create a new message.
  */
 export const GetTreadSwitchboardResponseSchema: GenMessage<GetTreadSwitchboardResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 31);
+  messageDesc(file_tank_agent_v1_agent, 36);
 
 /**
  * @generated from message tank.agent.v1.SetTreadSettingsRequest
@@ -1055,7 +1260,7 @@ export type SetTreadSettingsRequest = Message<"tank.agent.v1.SetTreadSettingsReq
  * Use `create(SetTreadSettingsRequestSchema)` to create a new message.
  */
 export const SetTreadSettingsRequestSchema: GenMessage<SetTreadSettingsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 32);
+  messageDesc(file_tank_agent_v1_agent, 37);
 
 /**
  * @generated from message tank.agent.v1.SetTreadSettingsResponse
@@ -1072,7 +1277,7 @@ export type SetTreadSettingsResponse = Message<"tank.agent.v1.SetTreadSettingsRe
  * Use `create(SetTreadSettingsResponseSchema)` to create a new message.
  */
 export const SetTreadSettingsResponseSchema: GenMessage<SetTreadSettingsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 33);
+  messageDesc(file_tank_agent_v1_agent, 38);
 
 /**
  * @generated from message tank.agent.v1.GetRepoConnectionRequest
@@ -1089,7 +1294,7 @@ export type GetRepoConnectionRequest = Message<"tank.agent.v1.GetRepoConnectionR
  * Use `create(GetRepoConnectionRequestSchema)` to create a new message.
  */
 export const GetRepoConnectionRequestSchema: GenMessage<GetRepoConnectionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 34);
+  messageDesc(file_tank_agent_v1_agent, 39);
 
 /**
  * @generated from message tank.agent.v1.GetRepoConnectionResponse
@@ -1106,7 +1311,7 @@ export type GetRepoConnectionResponse = Message<"tank.agent.v1.GetRepoConnection
  * Use `create(GetRepoConnectionResponseSchema)` to create a new message.
  */
 export const GetRepoConnectionResponseSchema: GenMessage<GetRepoConnectionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 35);
+  messageDesc(file_tank_agent_v1_agent, 40);
 
 /**
  * StartGitHubConnect mints the one-time state GitHub carries through an install and
@@ -1126,7 +1331,7 @@ export type StartGitHubConnectRequest = Message<"tank.agent.v1.StartGitHubConnec
  * Use `create(StartGitHubConnectRequestSchema)` to create a new message.
  */
 export const StartGitHubConnectRequestSchema: GenMessage<StartGitHubConnectRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 36);
+  messageDesc(file_tank_agent_v1_agent, 41);
 
 /**
  * @generated from message tank.agent.v1.StartGitHubConnectResponse
@@ -1143,7 +1348,7 @@ export type StartGitHubConnectResponse = Message<"tank.agent.v1.StartGitHubConne
  * Use `create(StartGitHubConnectResponseSchema)` to create a new message.
  */
 export const StartGitHubConnectResponseSchema: GenMessage<StartGitHubConnectResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 37);
+  messageDesc(file_tank_agent_v1_agent, 42);
 
 /**
  * @generated from message tank.agent.v1.BindRepoRequest
@@ -1179,7 +1384,7 @@ export type BindRepoRequest = Message<"tank.agent.v1.BindRepoRequest"> & {
  * Use `create(BindRepoRequestSchema)` to create a new message.
  */
 export const BindRepoRequestSchema: GenMessage<BindRepoRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 38);
+  messageDesc(file_tank_agent_v1_agent, 43);
 
 /**
  * @generated from message tank.agent.v1.BindRepoResponse
@@ -1196,7 +1401,7 @@ export type BindRepoResponse = Message<"tank.agent.v1.BindRepoResponse"> & {
  * Use `create(BindRepoResponseSchema)` to create a new message.
  */
 export const BindRepoResponseSchema: GenMessage<BindRepoResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 39);
+  messageDesc(file_tank_agent_v1_agent, 44);
 
 /**
  * @generated from message tank.agent.v1.UnbindRepoRequest
@@ -1213,7 +1418,7 @@ export type UnbindRepoRequest = Message<"tank.agent.v1.UnbindRepoRequest"> & {
  * Use `create(UnbindRepoRequestSchema)` to create a new message.
  */
 export const UnbindRepoRequestSchema: GenMessage<UnbindRepoRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 40);
+  messageDesc(file_tank_agent_v1_agent, 45);
 
 /**
  * @generated from message tank.agent.v1.UnbindRepoResponse
@@ -1226,7 +1431,7 @@ export type UnbindRepoResponse = Message<"tank.agent.v1.UnbindRepoResponse"> & {
  * Use `create(UnbindRepoResponseSchema)` to create a new message.
  */
 export const UnbindRepoResponseSchema: GenMessage<UnbindRepoResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 41);
+  messageDesc(file_tank_agent_v1_agent, 46);
 
 /**
  * A Tread's hosting on TANK's own cluster: the repository TANK generated for it and
@@ -1302,7 +1507,7 @@ export type TreadDeployment = Message<"tank.agent.v1.TreadDeployment"> & {
  * Use `create(TreadDeploymentSchema)` to create a new message.
  */
 export const TreadDeploymentSchema: GenMessage<TreadDeployment> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 42);
+  messageDesc(file_tank_agent_v1_agent, 47);
 
 /**
  * CreateTreadRepo asks TANK to generate a repository for this Tread from its template, in
@@ -1322,7 +1527,7 @@ export type CreateTreadRepoRequest = Message<"tank.agent.v1.CreateTreadRepoReque
  * Use `create(CreateTreadRepoRequestSchema)` to create a new message.
  */
 export const CreateTreadRepoRequestSchema: GenMessage<CreateTreadRepoRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 43);
+  messageDesc(file_tank_agent_v1_agent, 48);
 
 /**
  * @generated from message tank.agent.v1.CreateTreadRepoResponse
@@ -1344,7 +1549,7 @@ export type CreateTreadRepoResponse = Message<"tank.agent.v1.CreateTreadRepoResp
  * Use `create(CreateTreadRepoResponseSchema)` to create a new message.
  */
 export const CreateTreadRepoResponseSchema: GenMessage<CreateTreadRepoResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 44);
+  messageDesc(file_tank_agent_v1_agent, 49);
 
 /**
  * SetTreadDeployment wakes the Tread's app on TANK's cluster or puts it to sleep.
@@ -1368,7 +1573,7 @@ export type SetTreadDeploymentRequest = Message<"tank.agent.v1.SetTreadDeploymen
  * Use `create(SetTreadDeploymentRequestSchema)` to create a new message.
  */
 export const SetTreadDeploymentRequestSchema: GenMessage<SetTreadDeploymentRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 45);
+  messageDesc(file_tank_agent_v1_agent, 50);
 
 /**
  * @generated from message tank.agent.v1.SetTreadDeploymentResponse
@@ -1385,7 +1590,7 @@ export type SetTreadDeploymentResponse = Message<"tank.agent.v1.SetTreadDeployme
  * Use `create(SetTreadDeploymentResponseSchema)` to create a new message.
  */
 export const SetTreadDeploymentResponseSchema: GenMessage<SetTreadDeploymentResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agent_v1_agent, 46);
+  messageDesc(file_tank_agent_v1_agent, 51);
 
 /**
  * @generated from enum tank.agent.v1.RunState
@@ -1639,6 +1844,26 @@ export const AgentService: GenService<{
     methodKind: "unary";
     input: typeof SetTreadDeploymentRequestSchema;
     output: typeof SetTreadDeploymentResponseSchema;
+  },
+  /**
+   * Previews for repositories the workspace has already connected: TANK opens a pull
+   * request in each one adding the workflow that reports its builds, and hands back the
+   * token that CI will need. Admins only, premium only, never a side effect.
+   *
+   * @generated from rpc tank.agent.v1.AgentService.SetUpRepoPreviews
+   */
+  setUpRepoPreviews: {
+    methodKind: "unary";
+    input: typeof SetUpRepoPreviewsRequestSchema;
+    output: typeof SetUpRepoPreviewsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.agent.v1.AgentService.ListRepoPreviewSetups
+   */
+  listRepoPreviewSetups: {
+    methodKind: "unary";
+    input: typeof ListRepoPreviewSetupsRequestSchema;
+    output: typeof ListRepoPreviewSetupsResponseSchema;
   },
   /**
    * The Tread's switchboard: metrics for members, settings for admins.
