@@ -1,16 +1,27 @@
 name: security
 
-# Its own file rather than a job appended to ci.yml, following infra/security.yml. Two
-# reasons: ci.yml in several repos carries path filters, and a scanning gate that can be
-# skipped by editing the right file is not a gate; and appending a reusable-workflow call
-# to an existing ci.yml was rejected by GitHub before any job was scheduled.
+# INLINED ON PURPOSE, AND THIS IS THE ONE THING TO KNOW ABOUT THIS FILE.
+#
+# Every other repository calls `tactical-agent-neural-knowledge/workflows` for these two
+# jobs. This repository is **public** and that one is **private**, and GitHub does not let
+# a public repository call a reusable workflow from a private one — the run fails at file
+# level with no jobs scheduled, which is exactly what happened when it was tried.
+#
+# Keeping `workflows` private is Robby's decision (2026-10-07). The alternative to this
+# duplication was leaving one of our two public repositories unscanned for secrets, which
+# is the worst place to skip it.
+#
+# So: this is a copy, it will drift, and the mitigation is that you now know. When the
+# shared workflows change, change this too — `workflows/.github/workflows/secret-scan.yml`
+# and `deps-scan.yml` are the originals. `contracts` carries the same copy for the same
+# reason.
 on:
   pull_request:
   push:
     branches: [main]
   schedule:
-    # Monday 06:17 UTC: the weekly run walks the whole git history for secrets, because a
-    # credential committed and reverted is still a credential that leaked.
+    # Monday 06:17 UTC. The weekly run walks the whole git history: a credential that was
+    # committed and reverted is still a credential that leaked.
     - cron: "17 6 * * 1"
   workflow_dispatch:
 
@@ -19,9 +30,110 @@ permissions:
 
 jobs:
   secrets:
-    uses: tactical-agent-neural-knowledge/workflows/.github/workflows/secret-scan.yml@main
-    with:
-      history: ${{ github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # A history scan needs every commit; a tree scan needs none of them.
+          fetch-depth: ${{ github.event_name == 'schedule' && 0 || 1 }}
+      - name: install gitleaks
+        env:
+          V: "8.30.1"
+        run: |
+          set -euo pipefail
+          curl -fsSL -o gitleaks.tar.gz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${V}/gitleaks_${V}_linux_x64.tar.gz"
+          tar -xzf gitleaks.tar.gz gitleaks
+          ./gitleaks version
+      - name: scan
+        env:
+          HISTORY: ${{ github.event_name == 'schedule' }}
+        run: |
+          set -uo pipefail
+          # --exit-code 0: gitleaks reports, the next step decides. Letting the scanner set
+          # the job's fate swallows a crash as a pass. Findings are redacted because a run
+          # log is readable by everyone who can read the repo, and printing the secret to
+          # prove it exists leaks it a second time.
+          args=(--redact --no-banner --report-format sarif --report-path gitleaks.sarif --exit-code 0)
+          if [ "$HISTORY" = "true" ]; then ./gitleaks git . "${args[@]}"; else ./gitleaks dir . "${args[@]}"; fi
+      - name: report
+        if: always()
+        run: |
+          set -uo pipefail
+          if [ ! -f gitleaks.sarif ]; then
+            echo "::error::gitleaks produced no report — an unknown result is a failure, never a pass"
+            exit 1
+          fi
+          n=$(jq '[.runs[].results[]] | length' gitleaks.sarif)
+          {
+            echo "### secret-scan"
+            if [ "$n" = "0" ]; then echo "No secrets found."; else
+              echo "**$n finding(s).** Values are redacted here and in the log on purpose."
+              echo
+              echo "A real secret is rotated first and removed from history second. A false"
+              echo "positive gets a dated line in \`.gitleaksignore\`, never a dropped check."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$n" != "0" ]; then echo "::error::gitleaks found $n secret(s)"; exit 1; fi
+      - name: upload sarif
+        if: always() && hashFiles('gitleaks.sarif') != ''
+        uses: actions/upload-artifact@v4
+        with: { name: gitleaks-sarif, path: gitleaks.sarif, retention-days: 30 }
 
   deps:
-    uses: tactical-agent-neural-knowledge/workflows/.github/workflows/deps-scan.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install trivy
+        env:
+          V: "0.75.0"
+        run: |
+          set -euo pipefail
+          curl -fsSL -o trivy.tar.gz \
+            "https://github.com/aquasecurity/trivy/releases/download/v${V}/trivy_${V}_Linux-64bit.tar.gz"
+          tar -xzf trivy.tar.gz trivy
+          ./trivy --version
+      - name: scan dependencies
+        run: |
+          set -uo pipefail
+          # Two database mirrors, because an anonymous pull of the vulnerability database
+          # is rate-limited often enough to redden every repo at once.
+          ./trivy fs . --scanners vuln --format json --output trivy-deps.json \
+            --exit-code 0 --no-progress --ignore-unfixed \
+            --db-repository ghcr.io/aquasecurity/trivy-db:2,public.ecr.aws/aquasecurity/trivy-db:2
+      - name: judge against the threshold
+        if: always()
+        env:
+          BLOCKING: "CRITICAL,HIGH"
+        run: |
+          set -uo pipefail
+          if [ ! -f trivy-deps.json ]; then
+            echo "::error::trivy produced no report — an unknown result is a failure, never a pass"
+            exit 1
+          fi
+          # A stale or empty database would otherwise read as "no vulnerabilities".
+          jq -e '.Results != null or .Metadata != null' trivy-deps.json >/dev/null \
+            || { echo "::error::trivy report is not a scan result"; exit 1; }
+          blocking=$(jq --arg bl "$BLOCKING" \
+            '[.Results[]?.Vulnerabilities[]? | select(.Severity as $s | ($bl | split(",")) | index($s))] | length' \
+            trivy-deps.json)
+          {
+            echo "### deps-scan"
+            echo
+            echo "Threshold: **$BLOCKING** with a fix available. SLA: CRITICAL 7 days ·"
+            echo "HIGH 30 days · MEDIUM 90 days · LOW next routine bump, counted from the"
+            echo "day a fix exists upstream."
+            if [ "$blocking" != "0" ]; then
+              echo
+              echo '```'
+              jq -r --arg bl "$BLOCKING" \
+                '.Results[]?.Vulnerabilities[]? | select(.Severity as $s | ($bl | split(",")) | index($s))
+                 | "\(.Severity)\t\(.VulnerabilityID)\t\(.PkgName) \(.InstalledVersion) -> \(.FixedVersion // "no fix")"' \
+                trivy-deps.json | sort -u | head -50
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$blocking" != "0" ]; then
+            echo "::error::$blocking dependency vulnerability(ies) at or above the threshold"
+            exit 1
+          fi
