@@ -1,17 +1,17 @@
 # Neurons · src/design
 
-refreshed 2026-10-04 · 5378a111dd9c
+refreshed 2026-10-08 · 83a77f18cf88
 
-- One token source feeds both platforms: `src/design/tokens.ts` → `muiThemeOptions` (`mui.ts`) for web and `paperDarkTheme`/`paperLightTheme` (`paper.ts`) for mobile. Never hand-pick a hex in a renderer.
-- The upstream source of truth for the palette is `docs/brand/COLOR_PALETTE.json` in the `docs` repo; `tokens.ts` is the vendored projection of it.
-- `tokens.ts` exports both brand hexes *and* text-safe `shades` per scheme, because several brand fills are unreadable as text — `contrast.test.ts` pins this with an explicit case: Cybernetic Purple on Deep Abyss Black is below AA, which is why `shades.purple.text` exists.
-- `src/design/mui.ts` adds a `tank` namespace to the MUI palette (`panel`, `overlay`, `primaryText`, `secondaryText`, `warningText`, plus the three accents `agent` = secondary/purple, `ai` = primary/cyan, `alert` = warning/amber); consumers read `theme.palette.tank.*` and need the module augmentation that `src/blocks-web/theme.ts` provides.
-- `src/design/paper.ts` exports **plain data** shaped like MD3 `colors` and imports nothing from react-native — mobile spreads it over `MD3DarkTheme`/`MD3LightTheme` itself. That is what keeps `react-native` out of this directory and out of `src/exports.test.ts`'s scan.
-- `src/design/contrast.ts` is the WCAG 2.x maths: `hexToRgb` (3- or 6-digit, throws on anything else), `relativeLuminance`, `contrastRatio` (argument order irrelevant), the `WCAG` thresholds `AA_TEXT 4.5` / `AA_LARGE 3` / `AAA_TEXT 7`, and `meetsAA`.
-- `src/design/contrast.test.ts` is a guard, not a unit test: it enumerates every text/surface pair in both schemes and asserts ≥ 4.5:1. Changing a token colour without updating its text shade fails here first (66 cases).
-- `src/design/fonts.ts` ships font *names and sources only* — Google Fonts URLs for web, `@expo-google-fonts/*` package names for mobile. No binaries are committed; `fonts.code.expoFonts[400]` is what `src/blocks-native/context.ts` reads for `DEFAULT_CODE_FONT`.
-- `src/design/index.ts` is the `./design` subpath barrel: tokens, `muiThemeOptions`, the Paper themes, contrast helpers, `fonts` / `googleFontsUrl` / `expoGoogleFontsPackages`.
-- `@mui/material` is only a type/dev import here — the subpath itself is importable from Node, which is why the peers are all optional.
+- One token source feeds both platforms: `mui.ts` (web) and `paper.ts` (mobile) both derive from the same palette/spacing/typography tokens rather than maintaining two theme definitions.
+- The upstream color source of truth is `docs/brand/COLOR_PALETTE.json` in the `docs` repo — palette changes land there first and get pulled into `src/design`, they are not authored directly here.
+- Text-safe shades exist as a distinct set from the raw brand palette because several brand colors fail WCAG contrast against both white and black at body-text size; `contrast.ts` is what enforces this rather than trusting the palette by eye.
+- `mui.ts` extends the MUI `Theme` with a `tank` namespace for values MUI has no slot for (e.g. tone colors), rather than overloading existing theme keys.
+- `paper.ts` is plain data — no `react-native` or `react-native-paper` import — so it can be imported from `src/blocks` and tested under Vitest without the RN stand-ins; only `src/blocks-native` wires it into an actual Paper `Theme`.
+- `contrast.ts` exposes the WCAG contrast-ratio math directly (not hidden behind a boolean pass/fail helper only), so callers can report the actual ratio, not just a yes/no.
+- `contrast.test.ts` is a 66-case table test over every token pair that can appear as text-on-background; a new palette entry that fails contrast fails this file, not a visual review.
+- `fonts.ts` holds font **names** plus their Google Fonts / Expo Google Fonts source identifiers only — no binary font files live in this repo; consumers load the actual font assets themselves.
+- `src/design/index.ts`'s barrel is the only supported import surface for this area; reaching into `src/design/mui.ts` etc. directly from outside the package is not part of the contract.
+- The `@mui/material` import in this area is `import type` only — `src/design` never pulls in the MUI runtime, keeping the subpath usable without the `@mui/material` peer actually installed.
 
 ## Verified
 
