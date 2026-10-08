@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { Run } from "../../agent/v1/agent_pb.js";
+import type { Run, TreadSettings } from "../../agent/v1/agent_pb.js";
 import type { Blocks, Check, GateKind, PlanStep } from "../../blocks/v1/blocks_pb.js";
 import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
@@ -129,6 +129,19 @@ export type PolicySummary = Message<"tank.agentctl.v1.PolicySummary"> & {
      * @generated from field: repeated string rules = 8;
      */
     rules: string[];
+    /**
+     * policy's tools.gate.destructive_tool: the patterns that must open a
+     * destructive_tool gate instead of running.
+     *
+     * This field was absent until 2026-10-07, and its absence was not a weak
+     * control but no control at all. The patterns were in every workspace's
+     * policy, the control plane evaluated them, and nothing inside a sandbox was
+     * ever told about them — so the gate the policy promised could not open and
+     * the command simply ran. A deny list the runner cannot see denies nothing.
+     *
+     * @generated from field: repeated string tools_gate_destructive = 9;
+     */
+    toolsGateDestructive: string[];
 };
 /**
  * Describes the message tank.agentctl.v1.PolicySummary.
@@ -3147,6 +3160,329 @@ export type CommitProductFilesResponse = Message<"tank.agentctl.v1.CommitProduct
  */
 export declare const CommitProductFilesResponseSchema: GenMessage<CommitProductFilesResponse>;
 /**
+ * @generated from message tank.agentctl.v1.BindChannelRepoRequest
+ */
+export type BindChannelRepoRequest = Message<"tank.agentctl.v1.BindChannelRepoRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 3;
+     */
+    repo: string;
+    /**
+     * empty = main
+     *
+     * @generated from field: string base_branch = 4;
+     */
+    baseBranch: string;
+    /**
+     * node | go | python | expo; empty = node
+     *
+     * @generated from field: string toolchain = 5;
+     */
+    toolchain: string;
+    /**
+     * Set when the repository is one TANK generated for this workspace's hosting.
+     * Such a repository lives under TANK's own installation rather than the
+     * workspace's, so the reachability check is a different one.
+     *
+     * @generated from field: bool hosted = 6;
+     */
+    hosted: boolean;
+    /**
+     * user id, for the record
+     *
+     * @generated from field: string requested_by = 7;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BindChannelRepoRequest.
+ * Use `create(BindChannelRepoRequestSchema)` to create a new message.
+ */
+export declare const BindChannelRepoRequestSchema: GenMessage<BindChannelRepoRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BindChannelRepoResponse
+ */
+export type BindChannelRepoResponse = Message<"tank.agentctl.v1.BindChannelRepoResponse"> & {
+    /**
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * @generated from field: string base_branch = 2;
+     */
+    baseBranch: string;
+    /**
+     * @generated from field: string toolchain = 3;
+     */
+    toolchain: string;
+    /**
+     * What was bound before, so the caller can offer a catch-up only when the
+     * binding actually changed.
+     *
+     * @generated from field: string previous_repo = 4;
+     */
+    previousRepo: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BindChannelRepoResponse.
+ * Use `create(BindChannelRepoResponseSchema)` to create a new message.
+ */
+export declare const BindChannelRepoResponseSchema: GenMessage<BindChannelRepoResponse>;
+/**
+ * @generated from message tank.agentctl.v1.UnbindChannelRepoRequest
+ */
+export type UnbindChannelRepoRequest = Message<"tank.agentctl.v1.UnbindChannelRepoRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string requested_by = 3;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.UnbindChannelRepoRequest.
+ * Use `create(UnbindChannelRepoRequestSchema)` to create a new message.
+ */
+export declare const UnbindChannelRepoRequestSchema: GenMessage<UnbindChannelRepoRequest>;
+/**
+ * @generated from message tank.agentctl.v1.UnbindChannelRepoResponse
+ */
+export type UnbindChannelRepoResponse = Message<"tank.agentctl.v1.UnbindChannelRepoResponse"> & {
+    /**
+     * @generated from field: bool removed = 1;
+     */
+    removed: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.UnbindChannelRepoResponse.
+ * Use `create(UnbindChannelRepoResponseSchema)` to create a new message.
+ */
+export declare const UnbindChannelRepoResponseSchema: GenMessage<UnbindChannelRepoResponse>;
+/**
+ * @generated from message tank.agentctl.v1.RepoAccessEntry
+ */
+export type RepoAccessEntry = Message<"tank.agentctl.v1.RepoAccessEntry"> & {
+    /**
+     * owner/name, or "*" for every repository the installation covers
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * read | write
+     *
+     * @generated from field: string access = 2;
+     */
+    access: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RepoAccessEntry.
+ * Use `create(RepoAccessEntrySchema)` to create a new message.
+ */
+export declare const RepoAccessEntrySchema: GenMessage<RepoAccessEntry>;
+/**
+ * Replaces a Tread's whole access list in one call. Replacing rather than
+ * patching is deliberate: a diff applied by two callers at once leaves a set
+ * nobody asked for, and the set is small enough to send whole.
+ *
+ * @generated from message tank.agentctl.v1.SetChannelRepoAccessRequest
+ */
+export type SetChannelRepoAccessRequest = Message<"tank.agentctl.v1.SetChannelRepoAccessRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.RepoAccessEntry entries = 3;
+     */
+    entries: RepoAccessEntry[];
+    /**
+     * @generated from field: string requested_by = 4;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetChannelRepoAccessRequest.
+ * Use `create(SetChannelRepoAccessRequestSchema)` to create a new message.
+ */
+export declare const SetChannelRepoAccessRequestSchema: GenMessage<SetChannelRepoAccessRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetChannelRepoAccessResponse
+ */
+export type SetChannelRepoAccessResponse = Message<"tank.agentctl.v1.SetChannelRepoAccessResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.RepoAccessEntry entries = 1;
+     */
+    entries: RepoAccessEntry[];
+    /**
+     * Repositories that were not in the list before, so the caller can offer a
+     * catch-up for exactly those.
+     *
+     * @generated from field: repeated string added = 2;
+     */
+    added: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.SetChannelRepoAccessResponse.
+ * Use `create(SetChannelRepoAccessResponseSchema)` to create a new message.
+ */
+export declare const SetChannelRepoAccessResponseSchema: GenMessage<SetChannelRepoAccessResponse>;
+/**
+ * The one-time state GitHub carries through an installation, which is what ties
+ * the installation it reports back to the workspace that asked.
+ *
+ * @generated from message tank.agentctl.v1.CreateGitHubConnectStateRequest
+ */
+export type CreateGitHubConnectStateRequest = Message<"tank.agentctl.v1.CreateGitHubConnectStateRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string created_by = 2;
+     */
+    createdBy: string;
+    /**
+     * empty = the control plane's own default
+     *
+     * @generated from field: int32 ttl_seconds = 3;
+     */
+    ttlSeconds: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateGitHubConnectStateRequest.
+ * Use `create(CreateGitHubConnectStateRequestSchema)` to create a new message.
+ */
+export declare const CreateGitHubConnectStateRequestSchema: GenMessage<CreateGitHubConnectStateRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CreateGitHubConnectStateResponse
+ */
+export type CreateGitHubConnectStateResponse = Message<"tank.agentctl.v1.CreateGitHubConnectStateResponse"> & {
+    /**
+     * @generated from field: string state_token = 1;
+     */
+    stateToken: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 2;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateGitHubConnectStateResponse.
+ * Use `create(CreateGitHubConnectStateResponseSchema)` to create a new message.
+ */
+export declare const CreateGitHubConnectStateResponseSchema: GenMessage<CreateGitHubConnectStateResponse>;
+/**
+ * A Tread's agent settings, as the switchboard screen sets them. Typed rather
+ * than a policy document on purpose: the messaging core does not author policy,
+ * it asks for five things to be true, and the control plane decides whether its
+ * own document can say that.
+ *
+ * @generated from message tank.agentctl.v1.SetChannelAgentSettingsRequest
+ */
+export type SetChannelAgentSettingsRequest = Message<"tank.agentctl.v1.SetChannelAgentSettingsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: tank.agent.v1.TreadSettings settings = 3;
+     */
+    settings?: TreadSettings;
+    /**
+     * @generated from field: string requested_by = 4;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetChannelAgentSettingsRequest.
+ * Use `create(SetChannelAgentSettingsRequestSchema)` to create a new message.
+ */
+export declare const SetChannelAgentSettingsRequestSchema: GenMessage<SetChannelAgentSettingsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetChannelAgentSettingsResponse
+ */
+export type SetChannelAgentSettingsResponse = Message<"tank.agentctl.v1.SetChannelAgentSettingsResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.TreadSettings settings = 1;
+     */
+    settings?: TreadSettings;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetChannelAgentSettingsResponse.
+ * Use `create(SetChannelAgentSettingsResponseSchema)` to create a new message.
+ */
+export declare const SetChannelAgentSettingsResponseSchema: GenMessage<SetChannelAgentSettingsResponse>;
+/**
+ * A whole policy.v1 document at workspace scope, for the one caller that has
+ * one: the board, which narrows every product it stands up to the same figures.
+ * The control plane parses it and refuses a document that widens the default
+ * rather than narrowing it, so this is not a back door to the typed call above.
+ *
+ * @generated from message tank.agentctl.v1.SetWorkspaceAgentPolicyRequest
+ */
+export type SetWorkspaceAgentPolicyRequest = Message<"tank.agentctl.v1.SetWorkspaceAgentPolicyRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * policy.v1 JSON
+     *
+     * @generated from field: bytes policy = 2;
+     */
+    policy: Uint8Array;
+    /**
+     * @generated from field: string requested_by = 3;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetWorkspaceAgentPolicyRequest.
+ * Use `create(SetWorkspaceAgentPolicyRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAgentPolicyRequestSchema: GenMessage<SetWorkspaceAgentPolicyRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetWorkspaceAgentPolicyResponse
+ */
+export type SetWorkspaceAgentPolicyResponse = Message<"tank.agentctl.v1.SetWorkspaceAgentPolicyResponse"> & {
+    /**
+     * what was stored, after narrowing
+     *
+     * @generated from field: bytes policy = 1;
+     */
+    policy: Uint8Array;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetWorkspaceAgentPolicyResponse.
+ * Use `create(SetWorkspaceAgentPolicyResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAgentPolicyResponseSchema: GenMessage<SetWorkspaceAgentPolicyResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -3723,5 +4059,58 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof SetUpPreviewWorkflowRequestSchema;
         output: typeof SetUpPreviewWorkflowResponseSchema;
+    };
+    /**
+     * Writes into schema `agent`, which belongs to the control plane. The
+     * messaging core may read that schema and may not write it, so each of these
+     * is a thing it needs done rather than a statement it issues. See the block
+     * of messages below for why this is a call and not a wider grant.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.BindChannelRepo
+     */
+    bindChannelRepo: {
+        methodKind: "unary";
+        input: typeof BindChannelRepoRequestSchema;
+        output: typeof BindChannelRepoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.UnbindChannelRepo
+     */
+    unbindChannelRepo: {
+        methodKind: "unary";
+        input: typeof UnbindChannelRepoRequestSchema;
+        output: typeof UnbindChannelRepoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.SetChannelRepoAccess
+     */
+    setChannelRepoAccess: {
+        methodKind: "unary";
+        input: typeof SetChannelRepoAccessRequestSchema;
+        output: typeof SetChannelRepoAccessResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.CreateGitHubConnectState
+     */
+    createGitHubConnectState: {
+        methodKind: "unary";
+        input: typeof CreateGitHubConnectStateRequestSchema;
+        output: typeof CreateGitHubConnectStateResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.SetChannelAgentSettings
+     */
+    setChannelAgentSettings: {
+        methodKind: "unary";
+        input: typeof SetChannelAgentSettingsRequestSchema;
+        output: typeof SetChannelAgentSettingsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.SetWorkspaceAgentPolicy
+     */
+    setWorkspaceAgentPolicy: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceAgentPolicyRequestSchema;
+        output: typeof SetWorkspaceAgentPolicyResponseSchema;
     };
 }>;

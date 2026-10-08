@@ -604,6 +604,20 @@ export type GetInvoiceRequest = Message<"tank.books.v1.GetInvoiceRequest"> & {
      * @generated from field: string id = 2;
      */
     id: string;
+    /**
+     * Mint a new share link and stop the old one working.
+     *
+     * The share token is stored as a hash, so an ordinary read returns an empty
+     * share_url: the link exists once, when the invoice is created or sent, and cannot
+     * be read back afterwards by anyone including TANK. That is right for a credential
+     * and it leaves one hole — a business that loses the link has no way to get another,
+     * and an unpaid invoice nobody can open is a billing problem rather than a security
+     * one. This is that way out. Admin only, and the old link dies the moment the new
+     * one is issued, because a rotation that leaves both working is not a rotation.
+     *
+     * @generated from field: bool rotate = 3;
+     */
+    rotate: boolean;
 };
 /**
  * Describes the message tank.books.v1.GetInvoiceRequest.

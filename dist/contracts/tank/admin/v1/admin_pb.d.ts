@@ -206,6 +206,49 @@ export type RemoveMemberResponse = Message<"tank.admin.v1.RemoveMemberResponse">
  */
 export declare const RemoveMemberResponseSchema: GenMessage<RemoveMemberResponse>;
 /**
+ * End every session a member holds, leaving their membership alone.
+ *
+ * The action an admin wants when a laptop goes missing, as opposed to when a person
+ * leaves: removal ends sessions only once it takes the person's last membership, and
+ * before this the only way to sign somebody out was to remove them and add them back.
+ * It ends sessions and nothing else — not the member's API or bot tokens, because a
+ * bot token belonging to a person is not the device that was lost.
+ *
+ * @generated from message tank.admin.v1.EndMemberSessionsRequest
+ */
+export type EndMemberSessionsRequest = Message<"tank.admin.v1.EndMemberSessionsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string user_id = 2;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.admin.v1.EndMemberSessionsRequest.
+ * Use `create(EndMemberSessionsRequestSchema)` to create a new message.
+ */
+export declare const EndMemberSessionsRequestSchema: GenMessage<EndMemberSessionsRequest>;
+/**
+ * @generated from message tank.admin.v1.EndMemberSessionsResponse
+ */
+export type EndMemberSessionsResponse = Message<"tank.admin.v1.EndMemberSessionsResponse"> & {
+    /**
+     * How many sessions were ended, so the admin can tell "it worked" from "there
+     * were none" — the second is the common case and reads as failure otherwise.
+     *
+     * @generated from field: int32 sessions_ended = 1;
+     */
+    sessionsEnded: number;
+};
+/**
+ * Describes the message tank.admin.v1.EndMemberSessionsResponse.
+ * Use `create(EndMemberSessionsResponseSchema)` to create a new message.
+ */
+export declare const EndMemberSessionsResponseSchema: GenMessage<EndMemberSessionsResponse>;
+/**
  * @generated from message tank.admin.v1.Invite
  */
 export type Invite = Message<"tank.admin.v1.Invite"> & {
@@ -1487,6 +1530,14 @@ export declare const AdminService: GenService<{
         methodKind: "unary";
         input: typeof RemoveMemberRequestSchema;
         output: typeof RemoveMemberResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.admin.v1.AdminService.EndMemberSessions
+     */
+    endMemberSessions: {
+        methodKind: "unary";
+        input: typeof EndMemberSessionsRequestSchema;
+        output: typeof EndMemberSessionsResponseSchema;
     };
     /**
      * @generated from rpc tank.admin.v1.AdminService.ListInvites
