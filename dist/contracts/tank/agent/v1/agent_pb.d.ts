@@ -1316,6 +1316,247 @@ export type SetTreadDeploymentResponse = Message<"tank.agent.v1.SetTreadDeployme
  */
 export declare const SetTreadDeploymentResponseSchema: GenMessage<SetTreadDeploymentResponse>;
 /**
+ * Crew: a workspace's standing swarm of specialized agents, configured once per
+ * workspace rather than per Tread the way TreadSettings is. Whoever can manage a
+ * workspace's Switchboard can also shape its crew: which roles are on it and how
+ * its resources split across the business right now.
+ *
+ * @generated from message tank.agent.v1.CrewMember
+ */
+export type CrewMember = Message<"tank.agent.v1.CrewMember"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * bookkeeping | boards | scheduling | code | comms | ... ; an open set
+     *
+     * @generated from field: string role = 3;
+     */
+    role: string;
+    /**
+     * a human name for this member, e.g. "Books"
+     *
+     * @generated from field: string label = 4;
+     */
+    label: string;
+    /**
+     * @generated from field: bool enabled = 5;
+     */
+    enabled: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp added_at = 6;
+     */
+    addedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agent.v1.CrewMember.
+ * Use `create(CrewMemberSchema)` to create a new message.
+ */
+export declare const CrewMemberSchema: GenMessage<CrewMember>;
+/**
+ * One business area's share of the crew's resources. Areas are open strings, not
+ * an enum, because they are whatever the workspace calls its own parts of the
+ * business; weights across all areas sum to 100.
+ *
+ * @generated from message tank.agent.v1.CrewAllocation
+ */
+export type CrewAllocation = Message<"tank.agent.v1.CrewAllocation"> & {
+    /**
+     * @generated from field: string area = 1;
+     */
+    area: string;
+    /**
+     * 0..100
+     *
+     * @generated from field: int32 weight = 2;
+     */
+    weight: number;
+};
+/**
+ * Describes the message tank.agent.v1.CrewAllocation.
+ * Use `create(CrewAllocationSchema)` to create a new message.
+ */
+export declare const CrewAllocationSchema: GenMessage<CrewAllocation>;
+/**
+ * @generated from message tank.agent.v1.CrewSettings
+ */
+export type CrewSettings = Message<"tank.agent.v1.CrewSettings"> & {
+    /**
+     * how resources split across the business right now
+     *
+     * @generated from field: repeated tank.agent.v1.CrewAllocation allocation = 1;
+     */
+    allocation: CrewAllocation[];
+    /**
+     * crew-wide concurrency cap; 0 keeps the workspace default
+     *
+     * @generated from field: int32 concurrent_runs = 2;
+     */
+    concurrentRuns: number;
+    /**
+     * crew-wide daily ceiling; 0 keeps the workspace default
+     *
+     * @generated from field: double daily_usd = 3;
+     */
+    dailyUsd: number;
+    /**
+     * @generated from field: bool auto_accept_plans = 4;
+     */
+    autoAcceptPlans: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.CrewSettings.
+ * Use `create(CrewSettingsSchema)` to create a new message.
+ */
+export declare const CrewSettingsSchema: GenMessage<CrewSettings>;
+/**
+ * @generated from message tank.agent.v1.GetWorkspaceCrewRequest
+ */
+export type GetWorkspaceCrewRequest = Message<"tank.agent.v1.GetWorkspaceCrewRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetWorkspaceCrewRequest.
+ * Use `create(GetWorkspaceCrewRequestSchema)` to create a new message.
+ */
+export declare const GetWorkspaceCrewRequestSchema: GenMessage<GetWorkspaceCrewRequest>;
+/**
+ * @generated from message tank.agent.v1.GetWorkspaceCrewResponse
+ */
+export type GetWorkspaceCrewResponse = Message<"tank.agent.v1.GetWorkspaceCrewResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.CrewMember members = 1;
+     */
+    members: CrewMember[];
+    /**
+     * @generated from field: tank.agent.v1.CrewSettings settings = 2;
+     */
+    settings?: CrewSettings;
+    /**
+     * same shape as the Switchboard's: spend and runs, workspace-wide
+     *
+     * @generated from field: tank.agent.v1.TreadMetrics metrics = 3;
+     */
+    metrics?: TreadMetrics;
+    /**
+     * @generated from field: bool can_manage = 4;
+     */
+    canManage: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.GetWorkspaceCrewResponse.
+ * Use `create(GetWorkspaceCrewResponseSchema)` to create a new message.
+ */
+export declare const GetWorkspaceCrewResponseSchema: GenMessage<GetWorkspaceCrewResponse>;
+/**
+ * AddCrewMember brings one more specialized agent onto the workspace's crew.
+ *
+ * @generated from message tank.agent.v1.AddCrewMemberRequest
+ */
+export type AddCrewMemberRequest = Message<"tank.agent.v1.AddCrewMemberRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string role = 2;
+     */
+    role: string;
+    /**
+     * @generated from field: string label = 3;
+     */
+    label: string;
+};
+/**
+ * Describes the message tank.agent.v1.AddCrewMemberRequest.
+ * Use `create(AddCrewMemberRequestSchema)` to create a new message.
+ */
+export declare const AddCrewMemberRequestSchema: GenMessage<AddCrewMemberRequest>;
+/**
+ * @generated from message tank.agent.v1.AddCrewMemberResponse
+ */
+export type AddCrewMemberResponse = Message<"tank.agent.v1.AddCrewMemberResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.CrewMember member = 1;
+     */
+    member?: CrewMember;
+};
+/**
+ * Describes the message tank.agent.v1.AddCrewMemberResponse.
+ * Use `create(AddCrewMemberResponseSchema)` to create a new message.
+ */
+export declare const AddCrewMemberResponseSchema: GenMessage<AddCrewMemberResponse>;
+/**
+ * RemoveCrewMember takes one off. The run machinery underneath is unaffected:
+ * this only changes who is standing by to be summoned.
+ *
+ * @generated from message tank.agent.v1.RemoveCrewMemberRequest
+ */
+export type RemoveCrewMemberRequest = Message<"tank.agent.v1.RemoveCrewMemberRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string member_id = 2;
+     */
+    memberId: string;
+};
+/**
+ * Describes the message tank.agent.v1.RemoveCrewMemberRequest.
+ * Use `create(RemoveCrewMemberRequestSchema)` to create a new message.
+ */
+export declare const RemoveCrewMemberRequestSchema: GenMessage<RemoveCrewMemberRequest>;
+/**
+ * @generated from message tank.agent.v1.RemoveCrewMemberResponse
+ */
+export type RemoveCrewMemberResponse = Message<"tank.agent.v1.RemoveCrewMemberResponse"> & {};
+/**
+ * Describes the message tank.agent.v1.RemoveCrewMemberResponse.
+ * Use `create(RemoveCrewMemberResponseSchema)` to create a new message.
+ */
+export declare const RemoveCrewMemberResponseSchema: GenMessage<RemoveCrewMemberResponse>;
+/**
+ * @generated from message tank.agent.v1.SetCrewSettingsRequest
+ */
+export type SetCrewSettingsRequest = Message<"tank.agent.v1.SetCrewSettingsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.agent.v1.CrewSettings settings = 2;
+     */
+    settings?: CrewSettings;
+};
+/**
+ * Describes the message tank.agent.v1.SetCrewSettingsRequest.
+ * Use `create(SetCrewSettingsRequestSchema)` to create a new message.
+ */
+export declare const SetCrewSettingsRequestSchema: GenMessage<SetCrewSettingsRequest>;
+/**
+ * @generated from message tank.agent.v1.SetCrewSettingsResponse
+ */
+export type SetCrewSettingsResponse = Message<"tank.agent.v1.SetCrewSettingsResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.CrewSettings settings = 1;
+     */
+    settings?: CrewSettings;
+};
+/**
+ * Describes the message tank.agent.v1.SetCrewSettingsResponse.
+ * Use `create(SetCrewSettingsResponseSchema)` to create a new message.
+ */
+export declare const SetCrewSettingsResponseSchema: GenMessage<SetCrewSettingsResponse>;
+/**
  * @generated from enum tank.agent.v1.RunState
  */
 export declare enum RunState {
@@ -1584,5 +1825,41 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof SetTreadSettingsRequestSchema;
         output: typeof SetTreadSettingsResponseSchema;
+    };
+    /**
+     * The workspace's crew: one swarm per workspace, reachable from any Tread with
+     * @crew. Unlike the switchboard above, membership and resource allocation are
+     * workspace-wide, not per-Tread.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.GetWorkspaceCrew
+     */
+    getWorkspaceCrew: {
+        methodKind: "unary";
+        input: typeof GetWorkspaceCrewRequestSchema;
+        output: typeof GetWorkspaceCrewResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.AddCrewMember
+     */
+    addCrewMember: {
+        methodKind: "unary";
+        input: typeof AddCrewMemberRequestSchema;
+        output: typeof AddCrewMemberResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.RemoveCrewMember
+     */
+    removeCrewMember: {
+        methodKind: "unary";
+        input: typeof RemoveCrewMemberRequestSchema;
+        output: typeof RemoveCrewMemberResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.SetCrewSettings
+     */
+    setCrewSettings: {
+        methodKind: "unary";
+        input: typeof SetCrewSettingsRequestSchema;
+        output: typeof SetCrewSettingsResponseSchema;
     };
 }>;
