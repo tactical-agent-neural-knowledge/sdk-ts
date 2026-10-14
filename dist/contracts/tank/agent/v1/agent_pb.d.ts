@@ -905,6 +905,23 @@ export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
      * @generated from field: bool read_neural_knowledge = 7;
      */
     readNeuralKnowledge: boolean;
+    /**
+     * Whether TANK may approve and merge the pull requests it opens in this Tread's
+     * repositories. Off, a pull request is a proposal and a person merges it; on, the
+     * Tread decides how: pull_requests "merge_when_green" merges once the checks pass,
+     * "review" asks for an approval in the thread and merges on it.
+     *
+     * @generated from field: bool merge_allowed = 8;
+     */
+    mergeAllowed: boolean;
+    /**
+     * When a pull request waits on a person (merge_allowed off, or pull_requests
+     * "review"): mention pr_reviewer_ids, or the person who asked for the run when the
+     * list is empty, so somebody hears about it. Off, the card is posted and waits.
+     *
+     * @generated from field: bool notify_reviewers = 9;
+     */
+    notifyReviewers: boolean;
 };
 /**
  * Describes the message tank.agent.v1.TreadSettings.
