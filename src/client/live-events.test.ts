@@ -29,7 +29,7 @@ describe("live events the store reduces itself", () => {
   });
 
   it("a member's profile change replaces the member row", () => {
-    const m = create(MemberSchema, { userId: "u2", displayName: "Ada", timezone: "Europe/London" });
+    const m = create(MemberSchema, { title: "Ada", timezone: "Europe/London" });
     const env = create(EnvelopeSchema, {
       workspaceId: "ws1",
       type: "member.updated",
