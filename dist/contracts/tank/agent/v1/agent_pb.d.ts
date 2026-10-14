@@ -1182,6 +1182,92 @@ export type UnbindRepoResponse = Message<"tank.agent.v1.UnbindRepoResponse"> & {
  */
 export declare const UnbindRepoResponseSchema: GenMessage<UnbindRepoResponse>;
 /**
+ * What neuralsecurity last found on the code a Tread is connected to: the newest finished
+ * scan of a push to the repository, as the Home screen shows it beside the Tread. One row
+ * per Tread that has a repository bound; a Tread with none is not listed.
+ *
+ * @generated from message tank.agent.v1.TreadSecurity
+ */
+export type TreadSecurity = Message<"tank.agent.v1.TreadSecurity"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * clean      the last scan finished with no secret and no fixable critical or high advisory
+     * findings   it finished and found some (the counts below say what)
+     * scanning   a scan is queued or running and none has finished yet
+     * failed     the last scan could not run (the Tread has the card saying why)
+     * unscanned  nothing has been pushed since the Tread was bound
+     *
+     * @generated from field: string state = 3;
+     */
+    state: string;
+    /**
+     * @generated from field: int32 secrets = 4;
+     */
+    secrets: number;
+    /**
+     * @generated from field: int32 vulns_critical = 5;
+     */
+    vulnsCritical: number;
+    /**
+     * @generated from field: int32 vulns_high = 6;
+     */
+    vulnsHigh: number;
+    /**
+     * the commit the counts are about
+     *
+     * @generated from field: string sha = 7;
+     */
+    sha: string;
+    /**
+     * when that scan finished
+     *
+     * @generated from field: google.protobuf.Timestamp scanned_at = 8;
+     */
+    scannedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agent.v1.TreadSecurity.
+ * Use `create(TreadSecuritySchema)` to create a new message.
+ */
+export declare const TreadSecuritySchema: GenMessage<TreadSecurity>;
+/**
+ * @generated from message tank.agent.v1.ListTreadSecurityRequest
+ */
+export type ListTreadSecurityRequest = Message<"tank.agent.v1.ListTreadSecurityRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.ListTreadSecurityRequest.
+ * Use `create(ListTreadSecurityRequestSchema)` to create a new message.
+ */
+export declare const ListTreadSecurityRequestSchema: GenMessage<ListTreadSecurityRequest>;
+/**
+ * @generated from message tank.agent.v1.ListTreadSecurityResponse
+ */
+export type ListTreadSecurityResponse = Message<"tank.agent.v1.ListTreadSecurityResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.TreadSecurity treads = 1;
+     */
+    treads: TreadSecurity[];
+};
+/**
+ * Describes the message tank.agent.v1.ListTreadSecurityResponse.
+ * Use `create(ListTreadSecurityResponseSchema)` to create a new message.
+ */
+export declare const ListTreadSecurityResponseSchema: GenMessage<ListTreadSecurityResponse>;
+/**
  * A Tread's hosting on TANK's own cluster: the repository TANK generated for it and
  * whether the app built from it is awake at its URL.
  *
@@ -1584,5 +1670,15 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof SetTreadSettingsRequestSchema;
         output: typeof SetTreadSettingsResponseSchema;
+    };
+    /**
+     * The security state of every Tread in the workspace that is connected to a repository.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.ListTreadSecurity
+     */
+    listTreadSecurity: {
+        methodKind: "unary";
+        input: typeof ListTreadSecurityRequestSchema;
+        output: typeof ListTreadSecurityResponseSchema;
     };
 }>;
