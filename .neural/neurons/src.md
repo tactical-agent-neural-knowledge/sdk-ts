@@ -1,6 +1,6 @@
 # Neurons · src
 
-refreshed 2026-10-04 · 5378a111dd9c
+refreshed 2026-10-14T19:15:56Z · 8eebea37f816
 
 - `src/` has no `index.ts` of its own: every published subpath points at a directory barrel (`src/client/index.ts`, `src/react/index.tsx`, `src/design/index.ts`, `src/blocks/index.ts`, `src/blocks-web/index.ts`, `src/blocks-native/index.ts`, `src/contracts/index.ts`, `src/topo/index.ts`) mapped in `package.json` `exports`.
 - `src/exports.test.ts` is the only file directly in `src/` and it is the packaging guard — it fails the build when an `exports` entry drifts, not at install time in a consumer.
@@ -12,7 +12,8 @@ refreshed 2026-10-04 · 5378a111dd9c
 - `src/test/**` is excluded from `tsconfig.build.json`, so anything imported from there is test-only by construction and cannot leak into `dist/`.
 - Every relative import ends in `.js` (NodeNext + `verbatimModuleSyntax`), and type-only imports must use `import type` or the build fails.
 - Area suites can be run alone: `pnpm vitest run src/client`, `src/topo`, `src/design`, `src/blocks/` — note the trailing slash on `src/blocks/`, without it the pattern also pulls in `src/blocks-web` and `src/blocks-native`.
+- New vendored proto packages (`board`, `books`, `canvas`, `remediation`, `security`) arrived as flat shims under `src/contracts/` but most of their event types are only partly wired into `src/client/store.ts` — a `KnownEventPayload` member with no `case` in `envelopeToActions` decodes cleanly but produces no store action yet; check `store.ts`'s switch before assuming a new event type does something.
 
 ## Verified
 
-`pnpm lint`, `pnpm typecheck`, `pnpm vitest run src/exports.test.ts`
+(none — this sandbox has no network access and no `node_modules`; `pnpm install` fails with `ENETUNREACH`/`ETIMEDOUT`, so lint/typecheck/test could not be run here)
