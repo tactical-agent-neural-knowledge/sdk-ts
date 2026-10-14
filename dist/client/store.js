@@ -894,6 +894,14 @@ export function envelopeToActions(env, now) {
                     joined: payload.joined,
                 },
             ];
+        case "tank.events.v1.ChannelPreferenceUpdated":
+            // My own notify preference, mute or star on a Tread, changed from another device.
+            return payload.readState ? [{ type: "readStates/upsert", readStates: [payload.readState] }] : [];
+        case "tank.events.v1.MemberUpdated":
+            // A member's profile, status or timezone; the member row is the store's already.
+            return payload.member
+                ? [{ type: "members/upsert", workspaceId: env.workspaceId, members: [payload.member] }]
+                : [];
         case "tank.events.v1.PresenceChanged":
             return payload.presence ? [{ type: "presence/changed", presence: payload.presence }] : [];
         case "tank.events.v1.Typing":

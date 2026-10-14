@@ -14,7 +14,19 @@ import {
   type CanvasChanged,
   type CardAction,
   type ChannelDeleted,
+  type BookmarkChanged,
   type ChannelMembershipChanged,
+  type ChannelPreferenceUpdated,
+  type DraftUpdated,
+  type EmojiChanged,
+  type HuddleEnded,
+  type HuddleParticipantsChanged,
+  type HuddleStarted,
+  type MemberUpdated,
+  type PinChanged,
+  type PreferencesUpdated,
+  type ScheduledMessageSent,
+  type UserGroupUpdated,
   type ChannelUpdated,
   type Envelope,
   type FileDeleted,
@@ -1013,6 +1025,18 @@ export type KnownEventPayload =
   | ChannelUpdated
   | ChannelDeleted
   | ChannelMembershipChanged
+  | ChannelPreferenceUpdated
+  | MemberUpdated
+  | PinChanged
+  | BookmarkChanged
+  | DraftUpdated
+  | EmojiChanged
+  | PreferencesUpdated
+  | ScheduledMessageSent
+  | UserGroupUpdated
+  | HuddleStarted
+  | HuddleParticipantsChanged
+  | HuddleEnded
   | CardAction
   | AppCommand
   | PresenceChanged
@@ -1133,6 +1157,14 @@ export function envelopeToActions(env: Envelope, now: number): Action[] {
           joined: payload.joined,
         },
       ];
+    case "tank.events.v1.ChannelPreferenceUpdated":
+      // My own notify preference, mute or star on a Tread, changed from another device.
+      return payload.readState ? [{ type: "readStates/upsert", readStates: [payload.readState] }] : [];
+    case "tank.events.v1.MemberUpdated":
+      // A member's profile, status or timezone; the member row is the store's already.
+      return payload.member
+        ? [{ type: "members/upsert", workspaceId: env.workspaceId, members: [payload.member] }]
+        : [];
     case "tank.events.v1.PresenceChanged":
       return payload.presence ? [{ type: "presence/changed", presence: payload.presence }] : [];
     case "tank.events.v1.Typing":
