@@ -12,7 +12,8 @@ export function recentOwn(messages: readonly Message[], meId: string | undefined
   const out: Message[] = [];
   for (let i = messages.length - 1; i >= 0 && out.length < limit; i--) {
     const m = messages[i];
-    if (!m || m.authorId !== meId || m.kind !== MessageKind.MESSAGE || m.deletedAt || !m.text.trim()) continue;
+    if (!m || m.authorId !== meId || m.kind !== MessageKind.MESSAGE || m.deletedAt || !m.text.trim())
+      continue;
     if (out[out.length - 1]?.text === m.text) continue;
     out.push(m);
   }
