@@ -6,6 +6,7 @@ import {
   RUN_TONE_PAPER_COLOR,
   type RunTone,
   runStateLabel,
+  runStatusPhrase,
   runTone,
 } from "./index.js";
 
@@ -63,5 +64,16 @@ describe("runTone", () => {
     expect(isTerminalRunState(RunState.CANCELLED)).toBe(true);
     expect(isTerminalRunState(RunState.PR_OPEN)).toBe(false);
     expect(isTerminalRunState(RunState.AWAITING_MERGE_APPROVAL)).toBe(false);
+  });
+});
+
+describe("runStatusPhrase", () => {
+  it("says what the run is doing in a person's words, for every state", () => {
+    expect(runStatusPhrase(RunState.AWAITING_MERGE_APPROVAL)).toBe("Waiting for your go to merge");
+    expect(runStatusPhrase(RunState.CI_WATCHING)).toBe("Watching the checks");
+    expect(runStatusPhrase(RunState.FAILED)).toBe("Failed");
+    for (const v of Object.values(RunState)) {
+      if (typeof v === "number") expect(runStatusPhrase(v)).not.toBe("");
+    }
   });
 });

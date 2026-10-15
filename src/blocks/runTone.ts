@@ -81,3 +81,33 @@ export const RUN_TONE_PAPER_COLOR: Record<
   failed: "error",
   cancelled: "outline",
 };
+
+const RUN_STATE_PHRASE: Record<RunState, string> = {
+  [RunState.UNSPECIFIED]: "Starting up",
+  [RunState.REQUESTED]: "Starting up",
+  [RunState.ADMITTED]: "Starting up",
+  [RunState.PROVISIONING]: "Starting up",
+  [RunState.PLANNING]: "Reading the code and writing a plan",
+  [RunState.AWAITING_PLAN_APPROVAL]: "Waiting for your go on the plan",
+  [RunState.IMPLEMENTING]: "Working on it",
+  [RunState.PUSHED]: "Pushed, waiting for the checks",
+  [RunState.CI_WATCHING]: "Watching the checks",
+  [RunState.PR_OPEN]: "Pull request open",
+  [RunState.AWAITING_MERGE_APPROVAL]: "Waiting for your go to merge",
+  [RunState.MERGED]: "Merged, verifying the deploy",
+  [RunState.VERIFYING_DEPLOY]: "Verifying the deploy",
+  [RunState.DONE]: "Done",
+  [RunState.CANCELLED]: "Stopped",
+  [RunState.FAILED]: "Failed",
+  [RunState.BUDGET_EXHAUSTED]: "Stopped: the budget is used up",
+  [RunState.TIMED_OUT]: "Timed out",
+  [RunState.APPROVAL_EXPIRED]: "The approval expired",
+};
+
+/**
+ * What the run is doing, as a sentence for the strip above the composer: the state's
+ * meaning in a person's words rather than its name ("Waiting for your go to merge").
+ */
+export function runStatusPhrase(state: RunState): string {
+  return RUN_STATE_PHRASE[state] ?? "Starting up";
+}

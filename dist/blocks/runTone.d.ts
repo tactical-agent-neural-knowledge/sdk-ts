@@ -14,3 +14,8 @@ export declare function runStateLabel(state: RunState): string;
 export declare const RUN_TONE_MUI_COLOR: Record<RunTone, "secondary" | "warning" | "success" | "error" | "default">;
 /** react-native-paper `MD3Colors` slot per tone (`secondary` = purple, `tertiary` = amber); `cancelled` uses the outline. */
 export declare const RUN_TONE_PAPER_COLOR: Record<RunTone, "secondary" | "tertiary" | "success" | "error" | "outline">;
+/**
+ * What the run is doing, as a sentence for the strip above the composer: the state's
+ * meaning in a person's words rather than its name ("Waiting for your go to merge").
+ */
+export declare function runStatusPhrase(state: RunState): string;

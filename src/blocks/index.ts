@@ -22,6 +22,7 @@ export {
   RUN_TONE_PAPER_COLOR,
   type RunTone,
   runStateLabel,
+  runStatusPhrase,
   runTone,
 } from "./runTone.js";
 export * from "./types.js";
