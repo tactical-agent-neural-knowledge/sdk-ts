@@ -18,3 +18,38 @@ export function recentOwn(messages: readonly Message[], meId: string | undefined
   }
   return out;
 }
+
+/** Where the composer is in its history: -1 is "typing fresh", otherwise an index into recentOwn. */
+export interface Recall {
+  index: number;
+  /** The text the composer was given at that index, to tell "unchanged" from "edited". */
+  text: string;
+}
+export const noRecall: Recall = { index: -1, text: "" };
+
+export type RecallStep =
+  | { kind: "ignore" }
+  | { kind: "hold" }
+  | { kind: "clear"; state: Recall }
+  | { kind: "show"; message: Message; state: Recall };
+
+/**
+ * What ↑ (dir 1) or ↓ (dir -1) does, given the history and what the composer holds now.
+ * Only an empty composer, or one still showing a recalled message unchanged, moves through
+ * history; typed text keeps the arrow keys for the caret. ↓ past the newest clears the box.
+ * "hold" means the key is spent with nothing to do, so the caret does not jump.
+ */
+export function recallStep(
+  state: Recall,
+  dir: 1 | -1,
+  list: readonly Message[],
+  current: string,
+): RecallStep {
+  const atRecalled = state.index >= 0 && current === state.text;
+  if (current.trim() !== "" && !atRecalled) return { kind: "ignore" };
+  const next = state.index + dir;
+  if (next >= list.length) return state.index >= 0 ? { kind: "hold" } : { kind: "ignore" };
+  if (next < 0) return state.index < 0 ? { kind: "ignore" } : { kind: "clear", state: noRecall };
+  const message = list[next];
+  return { kind: "show", message, state: { index: next, text: message.text } };
+}

@@ -6,6 +6,7 @@ import { notificationPagingKey, } from "../client/store.js";
 import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { visibleMarkTypes } from "../topo/visibility.js";
 import { recentOwn } from "./history.js";
+export { noRecall, recallStep, recentOwn } from "./history.js";
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
 class PresenceRegistry {
     client;

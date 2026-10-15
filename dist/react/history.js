@@ -20,3 +20,22 @@ export function recentOwn(messages, meId, limit = 20) {
     }
     return out;
 }
+export const noRecall = { index: -1, text: "" };
+/**
+ * What ↑ (dir 1) or ↓ (dir -1) does, given the history and what the composer holds now.
+ * Only an empty composer, or one still showing a recalled message unchanged, moves through
+ * history; typed text keeps the arrow keys for the caret. ↓ past the newest clears the box.
+ * "hold" means the key is spent with nothing to do, so the caret does not jump.
+ */
+export function recallStep(state, dir, list, current) {
+    const atRecalled = state.index >= 0 && current === state.text;
+    if (current.trim() !== "" && !atRecalled)
+        return { kind: "ignore" };
+    const next = state.index + dir;
+    if (next >= list.length)
+        return state.index >= 0 ? { kind: "hold" } : { kind: "ignore" };
+    if (next < 0)
+        return state.index < 0 ? { kind: "ignore" } : { kind: "clear", state: noRecall };
+    const message = list[next];
+    return { kind: "show", message, state: { index: next, text: message.text } };
+}

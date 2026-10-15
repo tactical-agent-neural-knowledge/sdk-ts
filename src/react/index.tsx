@@ -35,6 +35,8 @@ import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/work
 import { visibleMarkTypes } from "../topo/visibility.js";
 import { recentOwn } from "./history.js";
 
+export { noRecall, type Recall, type RecallStep, recallStep, recentOwn } from "./history.js";
+
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
 class PresenceRegistry {
   private counts = new Map<string, number>();

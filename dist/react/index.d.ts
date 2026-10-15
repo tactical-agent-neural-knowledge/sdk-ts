@@ -10,6 +10,7 @@ import type { Notification } from "../contracts/tank/notification/v1/notificatio
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Mark, MarkType, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+export { noRecall, type Recall, type RecallStep, recallStep, recentOwn } from "./history.js";
 export interface TankProviderProps {
     client: TankClient;
     /** Call client.start() on mount and stop() on unmount. Default true. */
