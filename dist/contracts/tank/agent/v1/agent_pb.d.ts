@@ -922,6 +922,15 @@ export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
      * @generated from field: bool notify_reviewers = 9;
      */
     notifyReviewers: boolean;
+    /**
+     * Run this Tread's code on the strongest model (Opus) from the start. Off, a run
+     * starts on Sonnet and is moved up only after its checks have failed twice; most
+     * work never needs the move, and the strongest model costs two and a half times as
+     * much on every token.
+     *
+     * @generated from field: bool strongest_model = 10;
+     */
+    strongestModel: boolean;
 };
 /**
  * Describes the message tank.agent.v1.TreadSettings.
