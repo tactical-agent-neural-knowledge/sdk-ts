@@ -87,8 +87,8 @@ describe("interactions", () => {
     fireEvent.click(screen.getByRole("button", { name: "Approve" }));
     fireEvent.click(screen.getByRole("button", { name: "Reject" }));
     expect(seen).toEqual([
-      { blockId: "b3", actionId: "approve", value: "gate_01J8ZX" },
-      { blockId: "b3", actionId: "reject", value: "gate_01J8ZX" },
+      { blockId: "b3", actionId: "gate.approve", value: "gate_01J8ZX" },
+      { blockId: "b3", actionId: "gate.request_changes", value: "gate_01J8ZX" },
     ]);
   });
 

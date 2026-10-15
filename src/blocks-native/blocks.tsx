@@ -478,7 +478,10 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
   const theme = useTheme();
   const expires = tsMs(value.expiresAt);
   const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
-  const fire = (actionId: "approve" | "reject") =>
+  // The ids the control plane answers to (agent-control/internal/cards: gate.approve,
+  // gate.request_changes). These sent "approve" / "reject" until 2026-10-15 and were
+  // ignored, which is why every approval card carried a second pair of buttons.
+  const fire = (actionId: "gate.approve" | "gate.request_changes") =>
     ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
   return (
     <Card accent="alert" label={GATE_LABEL[value.kind] ?? "approval"}>
@@ -499,7 +502,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
           <Button
             compact
             mode="contained"
-            onPress={() => fire("approve")}
+            onPress={() => fire("gate.approve")}
             testID="action-approve"
             style={styles.button}
           >
@@ -509,7 +512,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
             compact
             mode="outlined"
             textColor={theme.colors.error}
-            onPress={() => fire("reject")}
+            onPress={() => fire("gate.request_changes")}
             testID="action-reject"
             style={styles.button}
           >

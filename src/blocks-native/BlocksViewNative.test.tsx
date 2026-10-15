@@ -93,8 +93,8 @@ describe("interactions", () => {
     press(byTestId(r.root, "action-approve"));
     press(byTestId(r.root, "action-reject"));
     expect(seen).toEqual([
-      { blockId: "b3", actionId: "approve", value: "gate_01J8ZX" },
-      { blockId: "b3", actionId: "reject", value: "gate_01J8ZX" },
+      { blockId: "b3", actionId: "gate.approve", value: "gate_01J8ZX" },
+      { blockId: "b3", actionId: "gate.request_changes", value: "gate_01J8ZX" },
     ]);
   });
 

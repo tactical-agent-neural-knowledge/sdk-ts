@@ -532,8 +532,10 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
             size="small"
             variant="contained"
             color="primary"
-            data-action-id="approve"
-            onClick={() => ctx.onAction?.({ blockId: ctx.blockId, actionId: "approve", value: value.gateId })}
+            data-action-id="gate.approve"
+            onClick={() =>
+              ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.approve", value: value.gateId })
+            }
           >
             Approve
           </Button>
@@ -541,8 +543,10 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
             size="small"
             variant="outlined"
             color="error"
-            data-action-id="reject"
-            onClick={() => ctx.onAction?.({ blockId: ctx.blockId, actionId: "reject", value: value.gateId })}
+            data-action-id="gate.request_changes"
+            onClick={() =>
+              ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.request_changes", value: value.gateId })
+            }
           >
             Reject
           </Button>
