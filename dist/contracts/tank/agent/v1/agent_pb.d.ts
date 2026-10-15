@@ -1257,6 +1257,59 @@ export type TreadSecurity = Message<"tank.agent.v1.TreadSecurity"> & {
  */
 export declare const TreadSecuritySchema: GenMessage<TreadSecurity>;
 /**
+ * Every app the workspace hosts on TANK, with the Tread it belongs to: the list the
+ * workspace settings show, so an address is found without opening each Tread.
+ *
+ * @generated from message tank.agent.v1.WorkspaceDeployment
+ */
+export type WorkspaceDeployment = Message<"tank.agent.v1.WorkspaceDeployment"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string channel_name = 2;
+     */
+    channelName: string;
+    /**
+     * @generated from field: tank.agent.v1.TreadDeployment deployment = 3;
+     */
+    deployment?: TreadDeployment;
+};
+/**
+ * Describes the message tank.agent.v1.WorkspaceDeployment.
+ * Use `create(WorkspaceDeploymentSchema)` to create a new message.
+ */
+export declare const WorkspaceDeploymentSchema: GenMessage<WorkspaceDeployment>;
+/**
+ * @generated from message tank.agent.v1.ListWorkspaceDeploymentsRequest
+ */
+export type ListWorkspaceDeploymentsRequest = Message<"tank.agent.v1.ListWorkspaceDeploymentsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.ListWorkspaceDeploymentsRequest.
+ * Use `create(ListWorkspaceDeploymentsRequestSchema)` to create a new message.
+ */
+export declare const ListWorkspaceDeploymentsRequestSchema: GenMessage<ListWorkspaceDeploymentsRequest>;
+/**
+ * @generated from message tank.agent.v1.ListWorkspaceDeploymentsResponse
+ */
+export type ListWorkspaceDeploymentsResponse = Message<"tank.agent.v1.ListWorkspaceDeploymentsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.WorkspaceDeployment deployments = 1;
+     */
+    deployments: WorkspaceDeployment[];
+};
+/**
+ * Describes the message tank.agent.v1.ListWorkspaceDeploymentsResponse.
+ * Use `create(ListWorkspaceDeploymentsResponseSchema)` to create a new message.
+ */
+export declare const ListWorkspaceDeploymentsResponseSchema: GenMessage<ListWorkspaceDeploymentsResponse>;
+/**
  * @generated from message tank.agent.v1.ListTreadSecurityRequest
  */
 export type ListTreadSecurityRequest = Message<"tank.agent.v1.ListTreadSecurityRequest"> & {
@@ -1697,5 +1750,15 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof ListTreadSecurityRequestSchema;
         output: typeof ListTreadSecurityResponseSchema;
+    };
+    /**
+     * Every app the workspace hosts on TANK, for the Treads the caller is in.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.ListWorkspaceDeployments
+     */
+    listWorkspaceDeployments: {
+        methodKind: "unary";
+        input: typeof ListWorkspaceDeploymentsRequestSchema;
+        output: typeof ListWorkspaceDeploymentsResponseSchema;
     };
 }>;
