@@ -12,8 +12,8 @@ export function recentOwn(messages: readonly Message[], meId: string | undefined
   const out: Message[] = [];
   for (let i = messages.length - 1; i >= 0 && out.length < limit; i--) {
     const m = messages[i];
-    if (m.authorId !== meId || m.kind !== MessageKind.MESSAGE || m.deletedAt || !m.text.trim()) continue;
-    if (out.length > 0 && out[out.length - 1].text === m.text) continue;
+    if (!m || m.authorId !== meId || m.kind !== MessageKind.MESSAGE || m.deletedAt || !m.text.trim()) continue;
+    if (out[out.length - 1]?.text === m.text) continue;
     out.push(m);
   }
   return out;
@@ -51,5 +51,6 @@ export function recallStep(
   if (next >= list.length) return state.index >= 0 ? { kind: "hold" } : { kind: "ignore" };
   if (next < 0) return state.index < 0 ? { kind: "ignore" } : { kind: "clear", state: noRecall };
   const message = list[next];
+  if (!message) return { kind: "ignore" };
   return { kind: "show", message, state: { index: next, text: message.text } };
 }
