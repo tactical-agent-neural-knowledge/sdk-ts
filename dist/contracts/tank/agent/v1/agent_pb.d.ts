@@ -953,6 +953,15 @@ export type HourBucket = Message<"tank.agent.v1.HourBucket"> & {
      * @generated from field: double spend_usd = 3;
      */
     spendUsd: number;
+    /**
+     * What Neural Knowledge saved on this hour's runs: for each run, the per-run cost of
+     * the same class of work on the same model in the earlier half of the last thirty
+     * days, less what the run cost, when the comparison exists. An estimate against a
+     * baseline, not a measurement with a control; zero while nothing is comparable.
+     *
+     * @generated from field: double neural_saved_usd = 4;
+     */
+    neuralSavedUsd: number;
 };
 /**
  * Describes the message tank.agent.v1.HourBucket.
@@ -1007,6 +1016,19 @@ export type TreadMetrics = Message<"tank.agent.v1.TreadMetrics"> & {
      * @generated from field: double avg_run_minutes_30d = 10;
      */
     avgRunMinutes30d: number;
+    /**
+     * the same estimate, over this month's runs
+     *
+     * @generated from field: double neural_saved_month_usd = 11;
+     */
+    neuralSavedMonthUsd: number;
+    /**
+     * Whether any of this month's runs had a baseline to compare against. False reads
+     * "measuring", never zero saved: after a model change nothing is comparable for a while.
+     *
+     * @generated from field: bool neural_measured = 12;
+     */
+    neuralMeasured: boolean;
 };
 /**
  * Describes the message tank.agent.v1.TreadMetrics.
