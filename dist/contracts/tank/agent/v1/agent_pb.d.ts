@@ -31,6 +31,16 @@ export type Agent = Message<"tank.agent.v1.Agent"> & {
      * @generated from field: repeated string scopes = 5;
      */
     scopes: string[];
+    /**
+     * A Crew member's title and skill (tank.crew.v1); empty for the workspace agent.
+     *
+     * @generated from field: string title = 6;
+     */
+    title: string;
+    /**
+     * @generated from field: string skill = 7;
+     */
+    skill: string;
 };
 /**
  * Describes the message tank.agent.v1.Agent.

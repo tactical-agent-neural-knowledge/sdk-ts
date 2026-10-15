@@ -324,6 +324,17 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      */
     channelGoal: string;
     /**
+     * A Crew member's title and skill: who this agent is and what it does, from the
+     * switchboard; empty for the workspace agent.
+     *
+     * @generated from field: string agent_title = 28;
+     */
+    agentTitle: string;
+    /**
+     * @generated from field: string agent_skill = 29;
+     */
+    agentSkill: string;
+    /**
      * True when this run must not read or write the repository's Neural Knowledge:
      * the Tread turned it off, or the run is the control half of a measurement.
      *
@@ -455,6 +466,12 @@ export type PostToThreadRequest = Message<"tank.agentctl.v1.PostToThreadRequest"
      * @generated from field: string client_msg_id = 2;
      */
     clientMsgId: string;
+    /**
+     * the message shows in the Tread too, not only in the thread
+     *
+     * @generated from field: bool also_send_to_tread = 3;
+     */
+    alsoSendToTread: boolean;
 };
 /**
  * Describes the message tank.agentctl.v1.PostToThreadRequest.
