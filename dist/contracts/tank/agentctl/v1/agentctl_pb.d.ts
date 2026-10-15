@@ -5,6 +5,7 @@ import type { Blocks, Check, GateKind, PlanStep } from "../../blocks/v1/blocks_p
 import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
 import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
+import type { Account, Platform, Post } from "../../social/v1/social_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/agentctl/v1/agentctl.proto.
@@ -1282,6 +1283,120 @@ export type BooksReportRequest = Message<"tank.agentctl.v1.BooksReportRequest"> 
  * Use `create(BooksReportRequestSchema)` to create a new message.
  */
 export declare const BooksReportRequestSchema: GenMessage<BooksReportRequest>;
+/**
+ * Flare from the thread. The run posts as the workspace: the same service a
+ * person uses from the settings page, with the same checks.
+ *
+ * @generated from message tank.agentctl.v1.SocialAccountsRequest
+ */
+export type SocialAccountsRequest = Message<"tank.agentctl.v1.SocialAccountsRequest"> & {};
+/**
+ * Describes the message tank.agentctl.v1.SocialAccountsRequest.
+ * Use `create(SocialAccountsRequestSchema)` to create a new message.
+ */
+export declare const SocialAccountsRequestSchema: GenMessage<SocialAccountsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SocialAccountsResponse
+ */
+export type SocialAccountsResponse = Message<"tank.agentctl.v1.SocialAccountsResponse"> & {
+    /**
+     * false: say so and stop; nothing else is set
+     *
+     * @generated from field: bool enabled = 1;
+     */
+    enabled: boolean;
+    /**
+     * true: the post is a draft; ask for a go, then social_publish
+     *
+     * @generated from field: bool review_required = 2;
+     */
+    reviewRequired: boolean;
+    /**
+     * @generated from field: repeated tank.social.v1.Account accounts = 3;
+     */
+    accounts: Account[];
+    /**
+     * @generated from field: string voice = 4;
+     */
+    voice: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SocialAccountsResponse.
+ * Use `create(SocialAccountsResponseSchema)` to create a new message.
+ */
+export declare const SocialAccountsResponseSchema: GenMessage<SocialAccountsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.SocialCreatePostRequest
+ */
+export type SocialCreatePostRequest = Message<"tank.agentctl.v1.SocialCreatePostRequest"> & {
+    /**
+     * @generated from field: tank.social.v1.Platform platform = 1;
+     */
+    platform: Platform;
+    /**
+     * @generated from field: string text = 2;
+     */
+    text: string;
+    /**
+     * from list_attachments; Instagram needs one
+     *
+     * @generated from field: repeated string file_ids = 3;
+     */
+    fileIds: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.SocialCreatePostRequest.
+ * Use `create(SocialCreatePostRequestSchema)` to create a new message.
+ */
+export declare const SocialCreatePostRequestSchema: GenMessage<SocialCreatePostRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SocialCreatePostResponse
+ */
+export type SocialCreatePostResponse = Message<"tank.agentctl.v1.SocialCreatePostResponse"> & {
+    /**
+     * @generated from field: tank.social.v1.Post post = 1;
+     */
+    post?: Post;
+    /**
+     * the post is a draft until social_publish
+     *
+     * @generated from field: bool needs_review = 2;
+     */
+    needsReview: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.SocialCreatePostResponse.
+ * Use `create(SocialCreatePostResponseSchema)` to create a new message.
+ */
+export declare const SocialCreatePostResponseSchema: GenMessage<SocialCreatePostResponse>;
+/**
+ * @generated from message tank.agentctl.v1.SocialPublishPostRequest
+ */
+export type SocialPublishPostRequest = Message<"tank.agentctl.v1.SocialPublishPostRequest"> & {
+    /**
+     * @generated from field: string post_id = 1;
+     */
+    postId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SocialPublishPostRequest.
+ * Use `create(SocialPublishPostRequestSchema)` to create a new message.
+ */
+export declare const SocialPublishPostRequestSchema: GenMessage<SocialPublishPostRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SocialPublishPostResponse
+ */
+export type SocialPublishPostResponse = Message<"tank.agentctl.v1.SocialPublishPostResponse"> & {
+    /**
+     * @generated from field: tank.social.v1.Post post = 1;
+     */
+    post?: Post;
+};
+/**
+ * Describes the message tank.agentctl.v1.SocialPublishPostResponse.
+ * Use `create(SocialPublishPostResponseSchema)` to create a new message.
+ */
+export declare const SocialPublishPostResponseSchema: GenMessage<SocialPublishPostResponse>;
 /**
  * Neuralcanvas from the thread: write the page up, read one, ask the pages.
  *
@@ -3758,6 +3873,30 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof BooksReportRequestSchema;
         output: typeof BooksReportResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.SocialAccounts
+     */
+    socialAccounts: {
+        methodKind: "unary";
+        input: typeof SocialAccountsRequestSchema;
+        output: typeof SocialAccountsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.SocialCreatePost
+     */
+    socialCreatePost: {
+        methodKind: "unary";
+        input: typeof SocialCreatePostRequestSchema;
+        output: typeof SocialCreatePostResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.SocialPublishPost
+     */
+    socialPublishPost: {
+        methodKind: "unary";
+        input: typeof SocialPublishPostRequestSchema;
+        output: typeof SocialPublishPostResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.WriteUpThread
