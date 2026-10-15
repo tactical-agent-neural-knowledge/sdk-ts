@@ -5,6 +5,7 @@ import { isTerminalRunState } from "../blocks/runTone.js";
 import { notificationPagingKey, } from "../client/store.js";
 import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { visibleMarkTypes } from "../topo/visibility.js";
+import { recentOwn } from "./history.js";
 /** Ref-counted union of every usePresence() set, so one gateway subscription covers all visible lists. */
 class PresenceRegistry {
     client;
@@ -248,6 +249,16 @@ export function useMessages(channelId, opts = {}) {
         hasMoreBefore: paging?.loaded ? paging.hasMoreBefore : false,
         loadOlder,
     };
+}
+/**
+ * Your own recent messages where you are typing, newest first: what the composer puts
+ * back on ↑ so a message can be sent again. In a thread that is your replies there; in
+ * a Tread, your messages in it. See recentOwn for what counts.
+ */
+export function useMyRecentMessages(channelId, threadRootId) {
+    const me = useTankSelector(useCallback((s) => s.getState().me, []));
+    const list = useTankSelector(useCallback((s) => threadRootId ? s.selectThread(threadRootId).replies : s.selectChannelMessages(channelId), [channelId, threadRootId]));
+    return useMemo(() => recentOwn(list, me?.id), [list, me?.id]);
 }
 /** A thread's root and replies; subscribes and loads on mount. */
 export function useThread(rootId, opts = {}) {

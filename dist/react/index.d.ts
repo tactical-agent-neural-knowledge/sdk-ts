@@ -88,6 +88,12 @@ export interface UseMessagesOptions {
 }
 /** Messages for a channel in channel_seq order (optimistic sends trail), with paging. */
 export declare function useMessages(channelId: string, opts?: UseMessagesOptions): UseMessagesResult;
+/**
+ * Your own recent messages where you are typing, newest first: what the composer puts
+ * back on ↑ so a message can be sent again. In a thread that is your replies there; in
+ * a Tread, your messages in it. See recentOwn for what counts.
+ */
+export declare function useMyRecentMessages(channelId: string, threadRootId?: string): Message[];
 /** A thread's root and replies; subscribes and loads on mount. */
 export declare function useThread(rootId: string, opts?: {
     view?: boolean;
