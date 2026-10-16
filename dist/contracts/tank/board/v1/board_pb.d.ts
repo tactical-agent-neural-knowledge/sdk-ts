@@ -370,6 +370,13 @@ export type Board = Message<"tank.board.v1.Board"> & {
      * @generated from field: string staleness_note = 13;
      */
     stalenessNote: string;
+    /**
+     * The thread this board is the Workbench of: the agent's live board, pinned in the
+     * thread while it works. Empty for every other board. One per thread.
+     *
+     * @generated from field: string thread_root_id = 14;
+     */
+    threadRootId: string;
 };
 /**
  * Describes the message tank.board.v1.Board.
@@ -416,6 +423,12 @@ export type BoardSummary = Message<"tank.board.v1.BoardSummary"> & {
      * @generated from field: string staleness_note = 9;
      */
     stalenessNote: string;
+    /**
+     * set when the board is a thread's Workbench
+     *
+     * @generated from field: string thread_root_id = 10;
+     */
+    threadRootId: string;
 };
 /**
  * Describes the message tank.board.v1.BoardSummary.
@@ -445,6 +458,12 @@ export type ListBoardsRequest = Message<"tank.board.v1.ListBoardsRequest"> & {
      * @generated from field: bool stale_only = 4;
      */
     staleOnly: boolean;
+    /**
+     * Only the Workbench of this thread (at most one board).
+     *
+     * @generated from field: string thread_root_id = 5;
+     */
+    threadRootId: string;
 };
 /**
  * Describes the message tank.board.v1.ListBoardsRequest.
@@ -528,6 +547,13 @@ export type CreateBoardRequest = Message<"tank.board.v1.CreateBoardRequest"> & {
      * @generated from field: string template = 6;
      */
     template: string;
+    /**
+     * Make this board the thread's Workbench. The caller must be a member of the thread's
+     * Tread (channel_id); a thread has at most one, and a second request returns it.
+     *
+     * @generated from field: string thread_root_id = 7;
+     */
+    threadRootId: string;
 };
 /**
  * Describes the message tank.board.v1.CreateBoardRequest.

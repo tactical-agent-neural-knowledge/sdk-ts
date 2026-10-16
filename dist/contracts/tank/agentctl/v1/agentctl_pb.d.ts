@@ -349,6 +349,13 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: string task_class = 27;
      */
     taskClass: string;
+    /**
+     * The thread's Workbench: the board the agent lays its steps and its work on while
+     * people watch in the thread. Empty for runs nobody watches (neural, recon, remediation).
+     *
+     * @generated from field: string workbench_board_id = 30;
+     */
+    workbenchBoardId: string;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -1690,12 +1697,193 @@ export type BoardShape = Message<"tank.agentctl.v1.BoardShape"> & {
      * @generated from field: string to_id = 11;
      */
     toId: string;
+    /**
+     * kind "image": one of this run's own artifacts (attach_preview returns the id).
+     *
+     * @generated from field: string file_id = 12;
+     */
+    fileId: string;
+    /**
+     * Step frames on a Workbench: pending | running | done | failed; the fill follows.
+     *
+     * @generated from field: string status = 13;
+     */
+    status: string;
+    /**
+     * kind "frame": the frame shows a running app; the server resolves where it is served.
+     *
+     * @generated from field: tank.agentctl.v1.AppFrameSpec app = 14;
+     */
+    app?: AppFrameSpec;
 };
 /**
  * Describes the message tank.agentctl.v1.BoardShape.
  * Use `create(BoardShapeSchema)` to create a new message.
  */
 export declare const BoardShapeSchema: GenMessage<BoardShape>;
+/**
+ * @generated from message tank.agentctl.v1.AppFrameSpec
+ */
+export type AppFrameSpec = Message<"tank.agentctl.v1.AppFrameSpec"> & {
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * branch or sha
+     *
+     * @generated from field: string ref = 2;
+     */
+    ref: string;
+    /**
+     * route inside the app
+     *
+     * @generated from field: string path = 3;
+     */
+    path: string;
+    /**
+     * 0 takes 1280
+     *
+     * @generated from field: int32 viewport_width = 4;
+     */
+    viewportWidth: number;
+    /**
+     * 0 takes 800
+     *
+     * @generated from field: int32 viewport_height = 5;
+     */
+    viewportHeight: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.AppFrameSpec.
+ * Use `create(AppFrameSpecSchema)` to create a new message.
+ */
+export declare const AppFrameSpecSchema: GenMessage<AppFrameSpec>;
+/**
+ * The Workbench: the process row across the top of the thread's board, and the stage
+ * below it. The control plane does the layout so the model never computes coordinates.
+ *
+ * @generated from message tank.agentctl.v1.WorkbenchStep
+ */
+export type WorkbenchStep = Message<"tank.agentctl.v1.WorkbenchStep"> & {
+    /**
+     * stable across calls, e.g. "plan", "tests", "deploy"
+     *
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * pending | running | done | failed
+     *
+     * @generated from field: string status = 3;
+     */
+    status: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.WorkbenchStep.
+ * Use `create(WorkbenchStepSchema)` to create a new message.
+ */
+export declare const WorkbenchStepSchema: GenMessage<WorkbenchStep>;
+/**
+ * @generated from message tank.agentctl.v1.WorkbenchStepsRequest
+ */
+export type WorkbenchStepsRequest = Message<"tank.agentctl.v1.WorkbenchStepsRequest"> & {
+    /**
+     * the whole row, in order; a step left out is removed
+     *
+     * @generated from field: repeated tank.agentctl.v1.WorkbenchStep steps = 1;
+     */
+    steps: WorkbenchStep[];
+};
+/**
+ * Describes the message tank.agentctl.v1.WorkbenchStepsRequest.
+ * Use `create(WorkbenchStepsRequestSchema)` to create a new message.
+ */
+export declare const WorkbenchStepsRequestSchema: GenMessage<WorkbenchStepsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.WorkbenchStepsResponse
+ */
+export type WorkbenchStepsResponse = Message<"tank.agentctl.v1.WorkbenchStepsResponse"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.WorkbenchStepsResponse.
+ * Use `create(WorkbenchStepsResponseSchema)` to create a new message.
+ */
+export declare const WorkbenchStepsResponseSchema: GenMessage<WorkbenchStepsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.WorkbenchShowRequest
+ */
+export type WorkbenchShowRequest = Message<"tank.agentctl.v1.WorkbenchShowRequest"> & {
+    /**
+     * slides | screen | diagram | note | image
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * slides, image, screen (a screenshot): this run's artifacts, in order
+     *
+     * @generated from field: repeated string file_ids = 2;
+     */
+    fileIds: string[];
+    /**
+     * screen: a running build the platform serves
+     *
+     * @generated from field: tank.agentctl.v1.AppFrameSpec app = 3;
+     */
+    app?: AppFrameSpec;
+    /**
+     * note: what the sticky says; also the caption under a stage
+     *
+     * @generated from field: string text = 4;
+     */
+    text: string;
+    /**
+     * diagram: erd | architecture, drawn by the server from the repository
+     *
+     * @generated from field: string diagram = 5;
+     */
+    diagram: string;
+    /**
+     * the stage's heading
+     *
+     * @generated from field: string title = 6;
+     */
+    title: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.WorkbenchShowRequest.
+ * Use `create(WorkbenchShowRequestSchema)` to create a new message.
+ */
+export declare const WorkbenchShowRequestSchema: GenMessage<WorkbenchShowRequest>;
+/**
+ * @generated from message tank.agentctl.v1.WorkbenchShowResponse
+ */
+export type WorkbenchShowResponse = Message<"tank.agentctl.v1.WorkbenchShowResponse"> & {
+    /**
+     * @generated from field: string board_id = 1;
+     */
+    boardId: string;
+    /**
+     * @generated from field: repeated string object_ids = 2;
+     */
+    objectIds: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.WorkbenchShowResponse.
+ * Use `create(WorkbenchShowResponseSchema)` to create a new message.
+ */
+export declare const WorkbenchShowResponseSchema: GenMessage<WorkbenchShowResponse>;
 /**
  * @generated from message tank.agentctl.v1.DrawOnBoardRequest
  */
@@ -3970,6 +4158,22 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof ArrangeBoardRequestSchema;
         output: typeof ArrangeBoardResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.WorkbenchSteps
+     */
+    workbenchSteps: {
+        methodKind: "unary";
+        input: typeof WorkbenchStepsRequestSchema;
+        output: typeof WorkbenchStepsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.WorkbenchShow
+     */
+    workbenchShow: {
+        methodKind: "unary";
+        input: typeof WorkbenchShowRequestSchema;
+        output: typeof WorkbenchShowResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PollInbox
