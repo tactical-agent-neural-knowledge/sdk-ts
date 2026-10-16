@@ -1115,29 +1115,35 @@ export class TankClient {
     return result;
   }
 
-  /** A pre-signed download URL for a file, memoized for 10 minutes (or the server's expiry, if sooner). */
-  getDownloadUrl(fileId: string): Promise<string> {
-    const hit = this.downloadUrls.get(fileId);
+  /**
+   * A pre-signed download URL for a file, memoized for 10 minutes (or the server's expiry, if sooner).
+   * `inline` asks for a URL the browser displays rather than saves; the server grants it only for
+   * types it is safe to render (see `previewable`) and the two kinds are memoized apart.
+   */
+  getDownloadUrl(fileId: string, opts: { inline?: boolean } = {}): Promise<string> {
+    const inline = opts.inline === true;
+    const key = inline ? `${fileId}#inline` : fileId;
+    const hit = this.downloadUrls.get(key);
     if (hit && hit.expiresAt > this.now()) return Promise.resolve(hit.url);
-    const inFlight = this.downloadUrlInFlight.get(fileId);
+    const inFlight = this.downloadUrlInFlight.get(key);
     if (inFlight) return inFlight;
     const p = (async () => {
       try {
-        const res = await this.files.getDownloadUrl({ fileId });
+        const res = await this.files.getDownloadUrl({ fileId, inline });
         const now = this.now();
         const serverExpiry = res.expiresAt
           ? Number(res.expiresAt.seconds) * 1000 + Math.floor(res.expiresAt.nanos / 1e6)
           : Number.POSITIVE_INFINITY;
-        this.downloadUrls.set(fileId, {
+        this.downloadUrls.set(key, {
           url: res.url,
           expiresAt: Math.min(now + DOWNLOAD_URL_TTL_MS, serverExpiry),
         });
         return res.url;
       } finally {
-        this.downloadUrlInFlight.delete(fileId);
+        this.downloadUrlInFlight.delete(key);
       }
     })();
-    this.downloadUrlInFlight.set(fileId, p);
+    this.downloadUrlInFlight.set(key, p);
     return p;
   }
 

@@ -18,6 +18,7 @@ export {
 } from "./client.js";
 export { Emitter, type Handler } from "./emitter.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
+export { previewable } from "./previewable.js";
 export {
   browserOnlineSignal,
   type OnlineSignal,

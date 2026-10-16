@@ -185,6 +185,14 @@ export type GetDownloadUrlRequest = Message<"tank.files.v1.GetDownloadUrlRequest
      * @generated from field: string file_id = 1;
      */
     fileId: string;
+    /**
+     * Ask for a URL that displays in the browser rather than saving: the server grants it
+     * only for types it is safe to render (PDF, images, audio, video, plain text, office
+     * documents) and keeps everything else as a download, whatever was asked.
+     *
+     * @generated from field: bool inline = 2;
+     */
+    inline: boolean;
 };
 /**
  * Describes the message tank.files.v1.GetDownloadUrlRequest.

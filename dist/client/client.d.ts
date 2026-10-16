@@ -361,8 +361,14 @@ export declare class TankClient {
      * `file` is a Blob/File on web and node, or `{ uri, name, mime, size }` on React Native.
      */
     uploadFile(file: UploadInput, opts: UploadFileOptions): Promise<File>;
-    /** A pre-signed download URL for a file, memoized for 10 minutes (or the server's expiry, if sooner). */
-    getDownloadUrl(fileId: string): Promise<string>;
+    /**
+     * A pre-signed download URL for a file, memoized for 10 minutes (or the server's expiry, if sooner).
+     * `inline` asks for a URL the browser displays rather than saves; the server grants it only for
+     * types it is safe to render (see `previewable`) and the two kinds are memoized apart.
+     */
+    getDownloadUrl(fileId: string, opts?: {
+        inline?: boolean;
+    }): Promise<string>;
     private flushOutbox;
     private flushOne;
     private persistOutboxEntry;
