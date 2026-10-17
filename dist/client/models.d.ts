@@ -16,6 +16,8 @@ export interface ModelChoice {
     relativeCost: number;
 }
 export declare const TANK_NEURAL = "tank-neural-1";
+/** The candidate being built and measured against the stable name; a Tread may run it on purpose. */
+export declare const TANK_NEURAL_NEXT = "tank-neural-next";
 export declare const MODEL_CHOICES: readonly ModelChoice[];
 /** The label for a model id, or the id itself for one the list does not know. */
 export declare function modelLabel(id: string): string;

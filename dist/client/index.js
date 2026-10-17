@@ -1,7 +1,7 @@
 export { Backoff } from "./backoff.js";
 export { createTankClient, TankClient, } from "./client.js";
 export { Emitter } from "./emitter.js";
-export { MODEL_CHOICES, modelLabel, TANK_NEURAL } from "./models.js";
+export { MODEL_CHOICES, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
 export { previewable } from "./previewable.js";
 export { browserOnlineSignal, RealtimeClient, } from "./realtime.js";

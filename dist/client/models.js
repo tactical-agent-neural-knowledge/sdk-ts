@@ -1,4 +1,6 @@
 export const TANK_NEURAL = "tank-neural-1";
+/** The candidate being built and measured against the stable name; a Tread may run it on purpose. */
+export const TANK_NEURAL_NEXT = "tank-neural-next";
 export const MODEL_CHOICES = [
     {
         id: "",
@@ -10,6 +12,12 @@ export const MODEL_CHOICES = [
         id: TANK_NEURAL,
         label: "TANK Neural 1.0",
         note: "TANK's own model, trained on consenting workspaces' runs. Preview: answers from its base model until the first training lands.",
+        relativeCost: 0.5,
+    },
+    {
+        id: TANK_NEURAL_NEXT,
+        label: "TANK Neural next",
+        note: "The candidate for the next TANK Neural, measured against the stable one. Pick it to help prove it.",
         relativeCost: 0.5,
     },
     {
