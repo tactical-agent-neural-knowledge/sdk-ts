@@ -67,6 +67,8 @@ export interface PendingMessage {
 
 export interface ChannelPaging {
   loading: boolean;
+  /** When `loading` was set, so a fetch that never came back cannot hold the channel forever. */
+  loadingSince?: number;
   /** True once at least one page has been fetched for this channel in this session. */
   loaded: boolean;
   hasMoreBefore: boolean;

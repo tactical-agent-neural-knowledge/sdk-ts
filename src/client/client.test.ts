@@ -34,6 +34,8 @@ async function until(pred: () => boolean, timeoutMs = 4000): Promise<void> {
 }
 
 interface FakeApi {
+  /** When set, ListMessages never answers: a request that died under the app. */
+  hangList?: boolean;
   posts: PostMessageRequest[];
   failNext: { code: Code; times: number } | undefined;
   /** When true, PostMessage echoes the event through the gateway before responding. */
@@ -178,6 +180,7 @@ function fakeTransport() {
         return { message };
       },
       listMessages: (req) => {
+        if (api.hangList) return new Promise(() => undefined);
         const all = api.messages
           .filter((m) => m.channelId === req.channelId)
           .sort((a, b) => Number(a.channelSeq - b.channelSeq));
@@ -681,6 +684,32 @@ describe("TankClient", () => {
       value: { channelId: "general", threadRootId: "root", runId: "r1", status: "running tests" },
     });
     await until(() => c.store.getState().agentStatus.root?.status === "running tests");
+  });
+});
+
+describe("a page that never comes back", () => {
+  // A phone's request can die in the background without rejecting. The `loading` flag it
+  // left behind used to make every later open of the Tread return early and paint nothing.
+  it("stops holding the channel after the stale window and fetches again", async () => {
+    api.messages.push(fakeMessage({ id: "m1", channelId: "general", channelSeq: 1n }));
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    api.hangList = true;
+    void c.loadChannel("general");
+    await sleep(5);
+    expect(c.store.getState().channelPaging.general?.loading).toBe(true);
+    // While the window is open a second ask is folded into the first.
+    expect(await c.loadChannel("general")).toBe(true);
+    expect(c.store.selectChannelMessages("general")).toHaveLength(0);
+    api.hangList = false;
+    const now = Date.now;
+    Date.now = () => now() + 31_000;
+    try {
+      expect(await c.loadChannel("general")).toBe(false);
+    } finally {
+      Date.now = now;
+    }
+    expect(c.store.selectChannelMessages("general").map((m) => m.id)).toEqual(["m1"]);
   });
 });
 

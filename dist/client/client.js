@@ -40,6 +40,10 @@ const MAX_SEND_ATTEMPTS = 6;
  * for every service, the realtime gateway client, the normalized store, an
  * optimistic outbox, and persistence through `TankStorage`.
  */
+/** A timeline page that takes longer than this is treated as failed, not pending. */
+const LIST_TIMEOUT_MS = 20_000;
+/** A `loading` flag older than this is a fetch that never came back. */
+const STALE_LOAD_MS = 30_000;
 export class TankClient {
     transport;
     auth;
@@ -227,7 +231,11 @@ export class TankClient {
         const state = this.store.getState();
         const loaded = this.store.selectChannelMessages(channelId).filter((m) => m.channelSeq > 0n);
         const paging = state.channelPaging[channelId];
-        if (paging?.loading)
+        // A page fetch that never resolved (a phone's request dying in the background, a
+        // socket that went away under fetch) used to leave `loading` true for the life of the
+        // process: every later open of the Tread returned here and painted nothing. A load
+        // older than the window is treated as gone and tried again.
+        if (paging?.loading && Date.now() - (paging.loadingSince ?? 0) < STALE_LOAD_MS)
             return direction === "before" ? (paging.hasMoreBefore ?? true) : (paging.hasMoreAfter ?? false);
         if (direction === "before" && paging && !paging.hasMoreBefore && loaded.length > 0)
             return false;
@@ -240,7 +248,11 @@ export class TankClient {
         }
         const oldest = loaded[0]?.channelSeq ?? 0n;
         const newest = loaded[loaded.length - 1]?.channelSeq ?? 0n;
-        this.store.dispatch({ type: "paging/set", channelId, paging: { loading: true } });
+        this.store.dispatch({
+            type: "paging/set",
+            channelId,
+            paging: { loading: true, loadingSince: Date.now() },
+        });
         try {
             const res = await this.chat.listMessages({
                 channelId,
@@ -248,7 +260,7 @@ export class TankClient {
                 afterSeq: direction === "after" ? newest : 0n,
                 limit,
                 kinds: opts.kinds ?? [],
-            });
+            }, { timeoutMs: LIST_TIMEOUT_MS });
             this.store.dispatch({ type: "messages/upsert", messages: res.messages });
             const seqs = res.messages.map((m) => m.channelSeq).filter((s) => s > 0n);
             const min = seqs.length ? seqs.reduce((a, b) => (a < b ? a : b)) : oldest;
@@ -275,9 +287,13 @@ export class TankClient {
      * an offline open still paints. Resolves to whether older messages exist.
      */
     async loadChannelTail(channelId, limit, kinds) {
-        this.store.dispatch({ type: "paging/set", channelId, paging: { loading: true } });
+        this.store.dispatch({
+            type: "paging/set",
+            channelId,
+            paging: { loading: true, loadingSince: Date.now() },
+        });
         try {
-            const res = await this.chat.listMessages({ channelId, beforeSeq: 0n, afterSeq: 0n, limit, kinds });
+            const res = await this.chat.listMessages({ channelId, beforeSeq: 0n, afterSeq: 0n, limit, kinds }, { timeoutMs: LIST_TIMEOUT_MS });
             this.store.dispatch({ type: "messages/resetChannel", channelId, messages: res.messages });
             const seqs = res.messages.map((m) => m.channelSeq).filter((x) => x > 0n);
             const oldestSeq = seqs.length ? seqs.reduce((a, b) => (a < b ? a : b)) : 0n;

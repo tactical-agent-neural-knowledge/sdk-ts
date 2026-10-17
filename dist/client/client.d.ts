@@ -140,11 +140,6 @@ export interface TankClientEvents {
         error: string;
     };
 }
-/**
- * Everything a TANK client app needs, wired together: typed Connect clients
- * for every service, the realtime gateway client, the normalized store, an
- * optimistic outbox, and persistence through `TankStorage`.
- */
 export declare class TankClient {
     readonly transport: Transport;
     readonly auth: Client<typeof AuthService>;
