@@ -941,6 +941,16 @@ export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
      * @generated from field: bool strongest_model = 10;
      */
     strongestModel: boolean;
+    /**
+     * The model this Tread's runs use, by name, chosen on the switchboard: "" lets TANK
+     * decide per run (the default), "tank-neural-1" is TANK's own model, and the Claude
+     * names are routed as they are. A name the gateway does not know is refused at save.
+     * Supersedes strongest_model, which stays for older clients: picking claude-opus-5
+     * is what that switch meant.
+     *
+     * @generated from field: string model = 11;
+     */
+    model: string;
 };
 /**
  * Describes the message tank.agent.v1.TreadSettings.

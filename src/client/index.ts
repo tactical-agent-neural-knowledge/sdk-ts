@@ -17,6 +17,7 @@ export {
   type UploadFileOptions,
 } from "./client.js";
 export { Emitter, type Handler } from "./emitter.js";
+export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
 export { previewable } from "./previewable.js";
 export {
