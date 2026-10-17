@@ -1,20 +1,16 @@
 # Neurons · .
+refreshed 2026-10-17 · 6b360350cf49
 
-refreshed 2026-10-04 · 5378a111dd9c
-
-- The repo root *is* the npm package `@tactical-agent-neural-knowledge/sdk` — there is no `packages/` and `pnpm-workspace.yaml` exists only to whitelist `esbuild`'s install script (`allowBuilds`), not to declare a workspace.
-- `dist/` is committed. `package.json` `check` ends with `git diff --exit-code --stat dist/`, so any source change that is not followed by `pnpm build` fails CI; never hand-edit `dist/`.
-- One command reproduces CI: `pnpm check` = `lint && typecheck && test && build && git diff --exit-code --stat dist/` (`package.json`).
-- `package.json` `exports` has nine code subpaths plus `./contracts/*` and `./fixtures/*`; each code entry carries exactly `types`/`import`/`default` and `default === import` — `src/exports.test.ts` asserts the shape and resolves every subpath through both `require.resolve` and `import.meta.resolve`.
-- `./topo` is a real export subpath in `package.json` but is missing from the subpath list in `CLAUDE.md`; trust `package.json`.
-- All seven peer dependencies (react, react-dom, @mui/material, @emotion/*, react-native, react-native-paper) are `optional: true` in `peerDependenciesMeta`, so installing the client subpath in Node or Expo drags in nothing; adding a non-optional peer is a listed prohibition.
-- `biome.json` is the only linter/formatter config (no ESLint, no Prettier): `lineWidth` 110, 2-space indent, `suspicious.noExplicitAny: "error"`, `style.noNonNullAssertion: "off"`; `src/contracts/tank` and `dist` are excluded, and `noArrayIndexKey` is turned off for `src/blocks-web/**` and `src/blocks-native/**`.
-- `tsconfig.json` is strict *plus* `noUncheckedIndexedAccess`, `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`, `noImplicitOverride`, `verbatimModuleSyntax`, `isolatedModules`, `NodeNext` — relative imports must end in `.js` even from `.ts` sources.
-- `tsconfig.build.json` ships only runtime code: `rootDir: src`, `types: []`, and it excludes `*.test.ts(x)`, `__tests__` and all of `src/test/**`, which is why the Vitest stand-ins never reach `dist/`.
-- `engines.node` is `>=24` and `packageManager` is `pnpm@11.9.0`; on Node 22 lint, typecheck and the non-React suites still pass but the jsdom/React renderer suites fail with `React.act is not a function` / `fileURLToPath is not a function`.
-- `fixtures/*.json` are golden block cards published as a subpath (`./fixtures/*`) and regenerated with `UPDATE_FIXTURES=1 pnpm test` after editing `src/test/fixture-defs.ts`.
-- `CLAUDE.md` holds the binding rules: the hard prohibitions list and a "Decided — do not re-litigate" section; read it before proposing an architectural change.
+- `package.json` root IS the published package `@tactical-agent-neural-knowledge/sdk`; no `packages/` subdir, no monorepo. `pnpm-workspace.yaml` gates `esbuild` allowBuilds and pins `tinypool`/`shell-quote` overrides, not a workspace.
+- `dist/` is committed; consumers install via `github:tactical-agent-neural-knowledge/sdk-ts#<sha>` with no registry token. Never hand-edit `dist/`; run `pnpm build`.
+- `pnpm check` = `pnpm lint && pnpm typecheck && pnpm test && pnpm build && git diff --exit-code --stat dist/` — this is the exact CI gate, run it before opening a PR.
+- Nine code subpaths in `exports`: `.` (client), `./react`, `./topo`, `./design`, `./blocks`, `./blocks-web`, `./blocks-native`, `./contracts`, `./contracts/*`. Each code entry has exactly `types`/`import`/`default` with `default === import`.
+- `pnpm-lock.yaml` must be committed alongside any dep change; CI uses `--frozen-lockfile` and fails before running any check if it drifts.
+- Runtime deps: `@bufbuild/protobuf`, `@connectrpc/connect(-web)`, `idb`. All peers optional (React 19, MUI 7, Emotion, react-native, react-native-paper 5).
+- `biome.json` controls lint/format (Biome 2, not ESLint+Prettier). `pnpm lint` = `biome check .`.
+- Node 24 required (`engines.node >= 24`); pnpm 11 required (`packageManager` field).
+- Contracts vendored from `tactical-agent-neural-knowledge/contracts` at the SHA in `src/contracts/VERSION` by `scripts/sync-contracts.sh`; never edit `src/contracts/tank/` by hand.
+- `UPDATE_FIXTURES=1 pnpm test` regenerates golden JSON in `fixtures/`; `pnpm vitest run -u src/blocks-web` updates renderer snapshots.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`, `pnpm vitest run src/exports.test.ts`
+pnpm lint

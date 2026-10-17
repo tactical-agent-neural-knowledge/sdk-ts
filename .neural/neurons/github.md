@@ -1,16 +1,13 @@
 # Neurons · .github
+refreshed 2026-10-17 · 6b360350cf49
 
-refreshed 2026-10-04 · 5378a111dd9c
-
-- `.github/workflows/ci.yml` is the only workflow and the only gate: one job, `check`, on pull requests and on pushes to `main`.
-- The job runs, in order: `pnpm install --frozen-lockfile`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build` — the same chain `pnpm check` runs locally, so a green `pnpm check` is a reliable predictor of a green run.
-- After the build the workflow has a dedicated "dist/ is current" step that fails both on `git diff --exit-code --stat dist/` **and** on untracked output (`git status --porcelain dist/`); a new file under `dist/` that was never `git add`ed fails just as loudly as a modified one.
-- `--frozen-lockfile` means `pnpm-lock.yaml` must be committed alongside any `package.json` dependency change or install fails before a single check runs.
-- There is no deploy workflow and no publish step: the artifact is a green `main` sha, and consumers (`web`, `mobile`, `agent-runner`) bump `github:tactical-agent-neural-knowledge/sdk-ts#<sha>` in their own `package.json`.
-- Because there is no registry publish, nothing in CI needs an npm token; the workflow holds no deploy credential at all.
-- `../bin/ci-wait sdk-ts [sha]` is the sanctioned way to wait on a run (`CLAUDE.md` command vocabulary); `gh` is scoped with `--repo` because this repo has no cloud identity.
-- Node and pnpm versions in the workflow must track `engines.node` (`>=24`) and `packageManager` (`pnpm@11.9.0`) in `package.json`; the React/jsdom suites are the part that actually breaks on an older Node.
+- Two workflow files, two gates on PRs and pushes to `main`: `ci.yml` (job `check`) and `security.yml` (jobs `secrets`, `deps`).
+- `ci.yml` runs in order: `pnpm install --frozen-lockfile` → `pnpm lint` → `pnpm typecheck` → `pnpm test` → `pnpm build`. A green local `pnpm check` is a reliable predictor of green CI.
+- After build, `ci.yml` has a dedicated "dist/ is current" step: fails on `git diff --exit-code --stat dist/` AND on `git status --porcelain dist/` (untracked new files are caught too, not just modified ones).
+- `security.yml` is hand-maintained (not a call to `tactical-agent-neural-knowledge/workflows`) because this repo is **public** and that one is **private**; GitHub prevents public repos from calling reusable workflows in private repos. When the shared workflows change, update this file too — originals are `workflows/.github/workflows/secret-scan.yml` and `deps-scan.yml`.
+- `security.yml` runs: gitleaks (secrets scan, redacted output, SARIF artifact) and trivy (dep vuln scan, CRITICAL+HIGH block the job).
+- Security scan runs on PR, push to main, and weekly schedule (Monday 06:17 UTC); the weekly run uses `fetch-depth: 0` to walk full git history.
+- `ci.yml` uses concurrency group `ci-${{ github.ref }}` with `cancel-in-progress: true` so stacked pushes don't queue.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`
+(no commands run for .github — workflow files are YAML only)

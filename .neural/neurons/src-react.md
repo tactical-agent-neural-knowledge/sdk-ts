@@ -1,20 +1,14 @@
 # Neurons · src/react
+refreshed 2026-10-17 · 6b360350cf49
 
-refreshed 2026-10-04 · 5378a111dd9c
-
-- `src/react/index.tsx` is the whole `./react` subpath: `TankProvider` plus twenty-odd hooks. There is no separate barrel.
-- Every hook reads through `useSyncExternalStore` against the store's memoized selectors (`src/client/store.ts`); that memoization is load-bearing — a selector that returns a new object each call makes React re-render forever.
-- Hooks never mutate state directly: they call the client's optimistic helpers, which roll back on error. Apps are not expected to dispatch store actions at all.
-- Presence is ref-counted: `PresenceRegistry` in this file unions every `usePresence()` set and flushes once per tick, so one gateway subscription covers every visible list instead of one per component.
-- `useTopoVisibility` writes are read-modify-write on purpose — `UpdatePreferences` replaces the whole `Preferences` message, so sending only the Topo part would quietly reset somebody's notification and theme settings.
-- `useTopoMarks` refetches when `lastSeq` moves and drops stale responses from a channel the user has already left; without the staleness check a slow response repaints marks for the wrong Tread.
-- `useWaitingOn` invalidates on *any* mark change — deliberately coarse, because the alternative is reconciling mark deltas client-side.
-- `useThreadRun` seeds from `ListRuns` once and `useRun` from `GetRun`; `useAgentStatus` expires on the store's `AGENT_STATUS_TTL_MS` (30 s), so a dead agent's "thinking" indicator clears itself.
-- Notification hooks page per mode and load the first page once; the unread badge follows the bootstrap count and then live events, not local arithmetic.
-- `isTerminalRunState` from `src/blocks/runTone.js` is imported here to decide when to stop polling a run — the tone mapping is shared with the renderers rather than duplicated.
-- `react` and `react-dom` are optional peers at `^19`; this directory must never import `react-native` (`src/exports.test.ts` enforces it).
-- `src/react/hooks.test.tsx` and `index.test.tsx` need a DOM-capable React 19 runtime; on a sandbox below `engines.node >=24` they fail with `React.act is not a function`, which is the environment rather than the hooks.
+- React 19 provider and hooks. Entry: `src/react/index.tsx`.
+- `TankProvider` wraps the app; takes `client: TankClient`, `autoStart?: boolean` (default true — calls `client.start()` on mount, `stop()` on unmount), `children`.
+- `useTank()` returns the `TankClient`. `useTankSelector(select)` subscribes to a memoized slice via `useSyncExternalStore`; `select` must return a stable reference for unchanged input (use `useCallback`).
+- Core hooks: `useConnectionState`, `useWorkspace`, `useChannels`, `useChannel`, `usePresence`, `useMe`, `useMembers`, `useMember`, `useMessages`, `useThreadMessages`, `useReadState`, `useUnreads`, `useRun`, `useAgentStatus`, `useNotifications`, `useFile`.
+- `useTopoVisibility(workspaceId)` — the person's Topo preferences (which mark families, time axis). Every write is read-modify-write via `UpdatePreferences` to avoid silently resetting notification/theme settings.
+- `PresenceRegistry` is an internal ref-counted union of all `usePresence()` sets so one gateway subscription covers all visible lists; batches subscribes via a 0 ms timer.
+- `history.ts` — `recentOwn(messages, meId)` returns the person's own recent non-deleted non-system messages for composer ↑ recall; `recallStep(state, dir, list, current)` drives the recall state machine. Exported from the index so callers get `noRecall`, `Recall`, `RecallStep`, `recallStep`, `recentOwn`.
+- `isTerminalRunState` re-exported from `../blocks/runTone.js` so React consumers don't need a separate import from `./blocks`.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`
+pnpm vitest run src/react
