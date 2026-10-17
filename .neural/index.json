@@ -1,17 +1,17 @@
 {
   "generated_by": "TANK Neural Knowledge",
-  "commit": "5378a111dd9cacfbb71599559b1de6e3abebfdf2",
-  "refreshed_at": "2026-10-04T21:34:14.127Z",
+  "commit": "83a77f18cf8849b95ffd79f20c1b479a60a495bc",
+  "refreshed_at": "2026-10-08T22:32:52.274Z",
   "areas": {
     ".": {
       "neurons": ".neural/neurons/root.md",
       "hot": [
         "AGENTS.md",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
         "CLAUDE.md",
         "README.md",
-        "biome.json",
-        "package.json",
-        "pnpm-lock.yaml"
+        "biome.json"
       ],
       "files": [
         "AGENTS.md",
@@ -29,10 +29,12 @@
     ".github": {
       "neurons": ".neural/neurons/github.md",
       "hot": [
-        ".github/workflows/ci.yml"
+        ".github/workflows/ci.yml",
+        ".github/workflows/security.yml"
       ],
       "files": [
-        ".github/workflows/ci.yml"
+        ".github/workflows/ci.yml",
+        ".github/workflows/security.yml"
       ]
     },
     "scripts": {
@@ -118,12 +120,12 @@
     "src/client": {
       "neurons": ".neural/neurons/src-client.md",
       "hot": [
-        "src/client/client.ts",
         "src/client/store.ts",
-        "src/client/client.test.ts",
+        "src/client/client.ts",
         "src/client/index.ts",
+        "src/client/realtime.ts",
         "src/client/store.test.ts",
-        "src/client/storage.ts"
+        "src/client/backoff.ts"
       ],
       "files": [
         "src/client/backoff.ts",
@@ -156,11 +158,11 @@
       "neurons": ".neural/neurons/src-contracts.md",
       "hot": [
         "src/contracts/VERSION",
-        "src/contracts/tank/workspace/v1/workspace_pb.ts",
-        "src/contracts/tank/channel/v1/channel_pb.ts",
         "src/contracts/tank/agentctl/v1/agentctl_pb.ts",
-        "src/contracts/tank/events/v1/events_pb.ts",
-        "src/contracts/tank/agent/v1/agent_pb.ts"
+        "src/contracts/tank/workspace/v1/workspace_pb.ts",
+        "src/contracts/tank/agent/v1/agent_pb.ts",
+        "src/contracts/tank/books/v1/books_pb.ts",
+        "src/contracts/tank/events/v1/events_pb.ts"
       ],
       "files": [
         "src/contracts/VERSION",
@@ -170,6 +172,9 @@
         "src/contracts/auth.ts",
         "src/contracts/billing.ts",
         "src/contracts/blocks.ts",
+        "src/contracts/board.ts",
+        "src/contracts/books.ts",
+        "src/contracts/canvas.ts",
         "src/contracts/catalog.ts",
         "src/contracts/channel.ts",
         "src/contracts/command.ts",
@@ -183,14 +188,19 @@
         "src/contracts/platform.ts",
         "src/contracts/presence.ts",
         "src/contracts/realtime.ts",
+        "src/contracts/remediation.ts",
         "src/contracts/richtext.ts",
         "src/contracts/search.ts",
+        "src/contracts/security.ts",
         "src/contracts/tank/admin/v1/admin_pb.ts",
         "src/contracts/tank/agent/v1/agent_pb.ts",
         "src/contracts/tank/agentctl/v1/agentctl_pb.ts",
         "src/contracts/tank/auth/v1/auth_pb.ts",
         "src/contracts/tank/billing/v1/billing_pb.ts",
         "src/contracts/tank/blocks/v1/blocks_pb.ts",
+        "src/contracts/tank/board/v1/board_pb.ts",
+        "src/contracts/tank/books/v1/books_pb.ts",
+        "src/contracts/tank/canvas/v1/canvas_pb.ts",
         "src/contracts/tank/catalog/v1/catalog_pb.ts",
         "src/contracts/tank/channel/v1/channel_pb.ts",
         "src/contracts/tank/command/v1/command_pb.ts",
@@ -203,8 +213,10 @@
         "src/contracts/tank/platform/v1/platform_pb.ts",
         "src/contracts/tank/presence/v1/presence_pb.ts",
         "src/contracts/tank/realtime/v1/realtime_pb.ts",
+        "src/contracts/tank/remediation/v1/remediation_pb.ts",
         "src/contracts/tank/richtext/v1/richtext_pb.ts",
         "src/contracts/tank/search/v1/search_pb.ts",
+        "src/contracts/tank/security/v1/security_pb.ts",
         "src/contracts/tank/topo/v1/topo_pb.ts",
         "src/contracts/tank/workspace/v1/workspace_pb.ts",
         "src/contracts/topo.ts",
@@ -214,12 +226,12 @@
     "src/design": {
       "neurons": ".neural/neurons/src-design.md",
       "hot": [
+        "src/design/index.ts",
         "src/design/contrast.test.ts",
         "src/design/contrast.ts",
         "src/design/fonts.ts",
-        "src/design/index.ts",
         "src/design/mui.ts",
-        "src/design/paper.ts"
+        "src/design/palette.test.ts"
       ],
       "files": [
         "src/design/contrast.test.ts",
@@ -227,6 +239,8 @@
         "src/design/fonts.ts",
         "src/design/index.ts",
         "src/design/mui.ts",
+        "src/design/palette.test.ts",
+        "src/design/palette.ts",
         "src/design/paper.ts",
         "src/design/tokens.ts"
       ]

@@ -1,4 +1,4 @@
-# Neural Knowledge by TANK · refreshed 2026-10-04 · 5378a111dd9c
+# Neural Knowledge by TANK · refreshed 2026-10-08 · 83a77f18cf88
 
 This repository is one npm package, `@tactical-agent-neural-knowledge/sdk`: the TypeScript SDK every TANK client
 builds on. It holds typed Connect clients for the API, a binary realtime gateway client, a normalized message store
@@ -27,7 +27,7 @@ pass but the jsdom/React renderer suites fail to collect (`React.act is not a fu
 ## Areas
 
 - `.` — package manifest, tsconfigs, Biome config, Vitest config, committed `dist/`, golden `fixtures/` → `.neural/neurons/root.md`
-- `.github` — the single `ci.yml` check workflow; there is no deploy → `.neural/neurons/github.md`
+- `.github` — `ci.yml` (lint/typecheck/test/build/dist-freshness) and `security.yml` (gitleaks + trivy gates); no deploy → `.neural/neurons/github.md`
 - `scripts` — `sync-contracts.sh`, the only way to change vendored contracts → `.neural/neurons/scripts.md`
 - `src` — layering and the `src/exports.test.ts` packaging guard → `.neural/neurons/src.md`
 - `src/blocks` — platform-free card model: types, builders, normalizer, `runTone` → `.neural/neurons/src-blocks.md`
