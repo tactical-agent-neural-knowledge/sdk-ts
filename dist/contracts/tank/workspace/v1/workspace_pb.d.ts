@@ -2416,6 +2416,147 @@ export type ListSoundPacksResponse = Message<"tank.workspace.v1.ListSoundPacksRe
  */
 export declare const ListSoundPacksResponseSchema: GenMessage<ListSoundPacksResponse>;
 /**
+ * A model TANK has introduced, announced to every workspace once.
+ *
+ * @generated from message tank.workspace.v1.ModelNotice
+ */
+export type ModelNotice = Message<"tank.workspace.v1.ModelNotice"> & {
+    /**
+     * the gateway's name, e.g. "tank-neural-1"
+     *
+     * @generated from field: string model = 1;
+     */
+    model: string;
+    /**
+     * "TANK Neural 1.0 is here"
+     *
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * one or two sentences
+     *
+     * @generated from field: string body = 3;
+     */
+    body: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp introduced_at = 4;
+     */
+    introducedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.workspace.v1.ModelNotice.
+ * Use `create(ModelNoticeSchema)` to create a new message.
+ */
+export declare const ModelNoticeSchema: GenMessage<ModelNotice>;
+/**
+ * @generated from message tank.workspace.v1.GetModelNoticeRequest
+ */
+export type GetModelNoticeRequest = Message<"tank.workspace.v1.GetModelNoticeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.GetModelNoticeRequest.
+ * Use `create(GetModelNoticeRequestSchema)` to create a new message.
+ */
+export declare const GetModelNoticeRequestSchema: GenMessage<GetModelNoticeRequest>;
+/**
+ * @generated from message tank.workspace.v1.GetModelNoticeResponse
+ */
+export type GetModelNoticeResponse = Message<"tank.workspace.v1.GetModelNoticeResponse"> & {
+    /**
+     * unset when nothing is pending for this person
+     *
+     * @generated from field: tank.workspace.v1.ModelNotice notice = 1;
+     */
+    notice?: ModelNotice;
+    /**
+     * owner or admin: may answer the data question
+     *
+     * @generated from field: bool can_decide = 2;
+     */
+    canDecide: boolean;
+    /**
+     * the workspace's standing answer
+     *
+     * @generated from field: bool training_allowed = 3;
+     */
+    trainingAllowed: boolean;
+};
+/**
+ * Describes the message tank.workspace.v1.GetModelNoticeResponse.
+ * Use `create(GetModelNoticeResponseSchema)` to create a new message.
+ */
+export declare const GetModelNoticeResponseSchema: GenMessage<GetModelNoticeResponse>;
+/**
+ * @generated from message tank.workspace.v1.DismissModelNoticeRequest
+ */
+export type DismissModelNoticeRequest = Message<"tank.workspace.v1.DismissModelNoticeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string model = 2;
+     */
+    model: string;
+};
+/**
+ * Describes the message tank.workspace.v1.DismissModelNoticeRequest.
+ * Use `create(DismissModelNoticeRequestSchema)` to create a new message.
+ */
+export declare const DismissModelNoticeRequestSchema: GenMessage<DismissModelNoticeRequest>;
+/**
+ * @generated from message tank.workspace.v1.DismissModelNoticeResponse
+ */
+export type DismissModelNoticeResponse = Message<"tank.workspace.v1.DismissModelNoticeResponse"> & {};
+/**
+ * Describes the message tank.workspace.v1.DismissModelNoticeResponse.
+ * Use `create(DismissModelNoticeResponseSchema)` to create a new message.
+ */
+export declare const DismissModelNoticeResponseSchema: GenMessage<DismissModelNoticeResponse>;
+/**
+ * @generated from message tank.workspace.v1.SetTrainingConsentRequest
+ */
+export type SetTrainingConsentRequest = Message<"tank.workspace.v1.SetTrainingConsentRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: bool allow = 2;
+     */
+    allow: boolean;
+    /**
+     * the notice this answers, for the audit record
+     *
+     * @generated from field: string model = 3;
+     */
+    model: string;
+};
+/**
+ * Describes the message tank.workspace.v1.SetTrainingConsentRequest.
+ * Use `create(SetTrainingConsentRequestSchema)` to create a new message.
+ */
+export declare const SetTrainingConsentRequestSchema: GenMessage<SetTrainingConsentRequest>;
+/**
+ * @generated from message tank.workspace.v1.SetTrainingConsentResponse
+ */
+export type SetTrainingConsentResponse = Message<"tank.workspace.v1.SetTrainingConsentResponse"> & {
+    /**
+     * @generated from field: bool training_allowed = 1;
+     */
+    trainingAllowed: boolean;
+};
+/**
+ * Describes the message tank.workspace.v1.SetTrainingConsentResponse.
+ * Use `create(SetTrainingConsentResponseSchema)` to create a new message.
+ */
+export declare const SetTrainingConsentResponseSchema: GenMessage<SetTrainingConsentResponse>;
+/**
  * @generated from enum tank.workspace.v1.Role
  */
 export declare enum Role {
@@ -2616,6 +2757,33 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof UpdatePreferencesRequestSchema;
         output: typeof UpdatePreferencesResponseSchema;
+    };
+    /**
+     * A new model's notice, shown once per person at the top of the workspace until they
+     * dismiss it; owners and admins answer the data question for the workspace in place.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.GetModelNotice
+     */
+    getModelNotice: {
+        methodKind: "unary";
+        input: typeof GetModelNoticeRequestSchema;
+        output: typeof GetModelNoticeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.DismissModelNotice
+     */
+    dismissModelNotice: {
+        methodKind: "unary";
+        input: typeof DismissModelNoticeRequestSchema;
+        output: typeof DismissModelNoticeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.workspace.v1.WorkspaceService.SetTrainingConsent
+     */
+    setTrainingConsent: {
+        methodKind: "unary";
+        input: typeof SetTrainingConsentRequestSchema;
+        output: typeof SetTrainingConsentResponseSchema;
     };
     /**
      * Turn up to fifteen words into a theme. Nothing is saved; the caller decides.
