@@ -356,6 +356,42 @@ export type VerifyAppleTransactionResponse = Message<"tank.billing.v1.VerifyAppl
  */
 export declare const VerifyAppleTransactionResponseSchema: GenMessage<VerifyAppleTransactionResponse>;
 /**
+ * SetAgentCap is the owner raising or lowering the month's agent usage cap. A run that
+ * would go past it is refused with the sentence saying so; the default is in
+ * docs/pricing/CLAIMS.md.
+ *
+ * @generated from message tank.billing.v1.SetAgentCapRequest
+ */
+export type SetAgentCapRequest = Message<"tank.billing.v1.SetAgentCapRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: int64 agent_cap_cents = 2;
+     */
+    agentCapCents: bigint;
+};
+/**
+ * Describes the message tank.billing.v1.SetAgentCapRequest.
+ * Use `create(SetAgentCapRequestSchema)` to create a new message.
+ */
+export declare const SetAgentCapRequestSchema: GenMessage<SetAgentCapRequest>;
+/**
+ * @generated from message tank.billing.v1.SetAgentCapResponse
+ */
+export type SetAgentCapResponse = Message<"tank.billing.v1.SetAgentCapResponse"> & {
+    /**
+     * @generated from field: int64 agent_cap_cents = 1;
+     */
+    agentCapCents: bigint;
+};
+/**
+ * Describes the message tank.billing.v1.SetAgentCapResponse.
+ * Use `create(SetAgentCapResponseSchema)` to create a new message.
+ */
+export declare const SetAgentCapResponseSchema: GenMessage<SetAgentCapResponse>;
+/**
  * @generated from service tank.billing.v1.BillingService
  */
 export declare const BillingService: GenService<{
@@ -406,5 +442,13 @@ export declare const BillingService: GenService<{
         methodKind: "unary";
         input: typeof VerifyAppleTransactionRequestSchema;
         output: typeof VerifyAppleTransactionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.billing.v1.BillingService.SetAgentCap
+     */
+    setAgentCap: {
+        methodKind: "unary";
+        input: typeof SetAgentCapRequestSchema;
+        output: typeof SetAgentCapResponseSchema;
     };
 }>;
