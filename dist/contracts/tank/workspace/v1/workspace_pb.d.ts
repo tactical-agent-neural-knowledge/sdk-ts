@@ -330,6 +330,14 @@ export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
      * @generated from field: bool conditional_sends = 9;
      */
     conditionalSends: boolean;
+    /**
+     * The add-ons this workspace has on: "shield", "books", "blueprint", "atlas". Each is
+     * bought per workspace on premium; a surface for one that is off is shown grayed with
+     * an upgrade button, and every call behind it is refused by the server regardless.
+     *
+     * @generated from field: repeated string addons = 10;
+     */
+    addons: string[];
 };
 /**
  * Describes the message tank.workspace.v1.Entitlements.
