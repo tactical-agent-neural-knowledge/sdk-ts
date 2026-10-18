@@ -1,81 +1,65 @@
-# Neural Knowledge by TANK · refreshed 2026-10-08 · 83a77f18cf88
+# Neural Knowledge by TANK · refreshed 2026-10-18 · d7c882a75bba
 
-This repository is one npm package, `@tactical-agent-neural-knowledge/sdk`: the TypeScript SDK every TANK client
-builds on. It holds typed Connect clients for the API, a binary realtime gateway client, a normalized message store
-with an optimistic outbox, React hooks, the brand design tokens projected into MUI and React Native Paper themes,
-and the "Threaded Action Cards" block model with a renderer for each platform. The repo root *is* the package, it is
-ESM only, and `dist/` is committed because consumers install it straight from git by sha — no registry, no token.
+`@tactical-agent-neural-knowledge/sdk` is the TypeScript SDK for TANK: a single npm package containing Connect transport, a realtime WebSocket client, a normalized Zustand-free store, React hooks, design tokens, and a cross-platform "Threaded Action Card" renderer. Consumers install it as a git dependency (`github:tactical-agent-neural-knowledge/sdk-ts#<sha>`) — there is no npm registry token. `dist/` is committed and gated by CI so a green `main` sha is the installable artifact.
 
 ## Commands
 
-- `pnpm install --frozen-lockfile` — install (what CI runs; the lockfile must be committed)
-- `pnpm build` — `rm -rf dist && tsc -p tsconfig.build.json`; commit the result
-- `pnpm test` — `vitest run`
-- `pnpm lint` — `biome check .`
-- `pnpm format` — `biome check --write .`
-- `pnpm typecheck` — `tsc -p tsconfig.json --noEmit`
-- `pnpm check` — everything CI runs: lint, typecheck, test, build, `git diff --exit-code --stat dist/`
-- `pnpm sync-contracts <contracts-sha>` — re-vendor `src/contracts/tank`, `src/contracts/VERSION` and the flat shims
-- `UPDATE_FIXTURES=1 pnpm test` — regenerate the golden block cards in `fixtures/` (edit `src/test/fixture-defs.ts` first)
-- `pnpm vitest run -u src/blocks-web` / `pnpm vitest run -u src/blocks-native` — update renderer snapshots, only for a deliberate visual change
-- `pnpm vitest run src/client` / `src/topo` / `src/design` / `src/blocks/` — one area at a time (the trailing slash on `src/blocks/` matters)
-- `../bin/ci-wait sdk-ts [sha]` — wait for CI
-
-Node must be `>=24` and pnpm is pinned to `11.9.0`. Below Node 24, lint, typecheck and the non-React suites still
-pass but the jsdom/React renderer suites fail to collect (`React.act is not a function`).
+```
+pnpm check          # everything CI runs: lint + typecheck + test + build + diff dist/
+pnpm build          # rm -rf dist && tsc -p tsconfig.build.json  (must commit result)
+pnpm test           # vitest run
+pnpm lint           # biome check .
+pnpm typecheck      # tsc -p tsconfig.json --noEmit
+pnpm vitest run src/client          # area suite
+pnpm vitest run src/blocks/         # trailing slash required (else also matches -web/-native)
+pnpm vitest run src/exports.test.ts # packaging guard
+UPDATE_FIXTURES=1 pnpm test         # regenerate fixture goldens after editing fixture-defs.ts
+pnpm vitest run -u src/blocks-web   # update renderer snapshots (deliberate visual change only)
+pnpm vitest run -u src/blocks-native
+pnpm sync-contracts <sha>           # re-vendor src/contracts/tank/ from the contracts repo
+```
 
 ## Areas
 
-- `.` — package manifest, tsconfigs, Biome config, Vitest config, committed `dist/`, golden `fixtures/` → `.neural/neurons/root.md`
-- `.github` — `ci.yml` (lint/typecheck/test/build/dist-freshness) and `security.yml` (gitleaks + trivy gates); no deploy → `.neural/neurons/github.md`
-- `scripts` — `sync-contracts.sh`, the only way to change vendored contracts → `.neural/neurons/scripts.md`
-- `src` — layering and the `src/exports.test.ts` packaging guard → `.neural/neurons/src.md`
-- `src/blocks` — platform-free card model: types, builders, normalizer, `runTone` → `.neural/neurons/src-blocks.md`
-- `src/blocks-native` — react-native-paper renderers; the only place RN may be imported → `.neural/neurons/src-blocks-native.md`
-- `src/blocks-web` — MUI renderers and `tankTheme` → `.neural/neurons/src-blocks-web.md`
-- `src/client` — transport, `RealtimeClient`, `TankStore`, outbox, storage adapters, upload → `.neural/neurons/src-client.md`
-- `src/contracts` — vendored generated protobuf/Connect code and the hand-written namespaced barrel → `.neural/neurons/src-contracts.md`
-- `src/design` — brand tokens, fonts, MUI options, Paper theme, WCAG contrast guards → `.neural/neurons/src-design.md`
-- `src/react` — `TankProvider` and the hooks → `.neural/neurons/src-react.md`
-- `src/test` — fake gateway, fixture definitions, the Vitest react-native stand-ins → `.neural/neurons/src-test.md`
-- `src/topo` — Topo strip mark visibility and search-hit marks → `.neural/neurons/src-topo.md`
+- `.` → repo root, package.json, tsconfig, biome.json, pnpm-workspace.yaml — `.neural/neurons/root.md`
+- `.github` → ci.yml (check) and security.yml (secret + dep scan) — `.neural/neurons/github.md`
+- `scripts` → sync-contracts.sh — `.neural/neurons/scripts.md`
+- `src` → packaging guard test (exports.test.ts), layer rules — `.neural/neurons/src.md`
+- `src/blocks` → platform-free card types, builders, normalizer, runTone, richtext — `.neural/neurons/src-blocks.md`
+- `src/blocks-native` → react-native-paper renderer; **only place react-native may be imported** — `.neural/neurons/src-blocks-native.md`
+- `src/blocks-web` → MUI renderer, BlocksView, theme — `.neural/neurons/src-blocks-web.md`
+- `src/client` → TankClient, TankStore, RealtimeClient, transports, upload, models — `.neural/neurons/src-client.md`
+- `src/contracts` → vendored protobuf-es types, namespaced barrel, flat shims — `.neural/neurons/src-contracts.md`
+- `src/design` → tokens, fonts, MUI options, Paper theme, contrast — `.neural/neurons/src-design.md`
+- `src/react` → TankProvider, hooks (useTankSelector, useMessages, useNotifications, …) — `.neural/neurons/src-react.md`
+- `src/test` → fake gateway, fixture defs, react-native/paper Vitest stand-ins — `.neural/neurons/src-test.md`
+- `src/topo` → mark search and visibility helpers — `.neural/neurons/src-topo.md`
 
 ## Rules
 
-From `CLAUDE.md`, "Hard prohibitions" — quoted:
+From `CLAUDE.md` hard prohibitions — do not break these:
+- Never edit `dist/` by hand; run `pnpm build` and commit the result.
+- Never edit `src/contracts/tank/` by hand; run `pnpm sync-contracts <sha>`.
+- Never import `react-native` or `react-native-paper` outside `src/blocks-native/`.
+- Never use `link:` or `file:` deps in a PR.
+- Never push without committing the rebuilt `dist/`.
+- Never add a non-optional peer that the client subpath would drag into node or mobile.
+- Never log message body `text` anywhere (message bodies stay in the store only).
+- `src/exports.test.ts` scans both `src/` and `dist/` for react-native imports — a stale dist/ fails the test.
 
-> Editing `dist/` by hand (run `pnpm build`); editing `src/contracts/tank/` by hand (run the sync script); importing
-> `react-native` / `react-native-paper` outside `src/blocks-native` (`src/exports.test.ts` scans `src/` and `dist/`);
-> `link:`/`file:` deps in a PR; pushing without committing the rebuilt `dist/`; adding a non-optional peer that the
-> client subpath would drag into node/mobile; message bodies anywhere but the store (no logging of `text`).
+From `biome.json`:
+- `lineWidth: 110`, 2-space indent, `noExplicitAny: "error"`, `noNonNullAssertion: "off"`.
+- `src/contracts/tank` and `dist/` are excluded from linting.
 
-Also from `CLAUDE.md`: "No cloud identity: this repo touches no AWS account, cluster or store. CI only (`gh` with
-`--repo`)." And: "There is no deploy: a green `main` sha is the artifact. Consumers bump the sha in their
-`package.json`."
-
-`CLAUDE.md` has a "Decided — do not re-litigate" section covering, among others: one package with subpaths (not a
-pnpm workspace); exports carrying `types`/`import`/`default`; `dist/` committed and gated in CI; contracts vendored
-by sha; `@bufbuild/protobuf` v2 shapes as the store's message types (no parallel DTOs); Biome not ESLint+Prettier;
-Vitest not Jest. Read it before proposing an architectural change.
-
-Enforced by config rather than prose: `biome.json` sets `lineWidth` 110 and `suspicious.noExplicitAny: "error"`;
-`tsconfig.json` adds `noUncheckedIndexedAccess`, `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`,
-`noImplicitOverride`, `verbatimModuleSyntax` and `NodeNext`, so relative imports must end in `.js`.
+From `tsconfig.json`:
+- `NodeNext` module resolution — relative imports must end in `.js` even from `.ts` sources.
+- `verbatimModuleSyntax` — type-only imports require `import type`.
+- `noUncheckedIndexedAccess`, `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`.
 
 ## Before changing anything
 
-- Run `pnpm check` — it is exactly the CI chain, so a green local run predicts a green PR.
-- If you touched anything under `src/`, run `pnpm build` and commit `dist/` in the same change; CI fails on both a
-  modified and an untracked file under `dist/`.
-- Adding or renaming an export subpath means updating `package.json` `exports` and satisfying `src/exports.test.ts`.
-- Changing a block builder invalidates `fixtures/` (`UPDATE_FIXTURES=1 pnpm test`) and both renderers' snapshots.
-- Changing a design token re-runs `src/design/contrast.test.ts`, which asserts WCAG AA for every text/surface pair.
-- Ship through a pull request against `main`; there is nothing to deploy, and consumers pick the change up by sha.
+Run `pnpm check` to reproduce CI locally. The check includes a `git diff --exit-code --stat dist/` step, so `pnpm build` and staging the rebuilt `dist/` is required before the check passes. Renderer suites (`src/blocks-web`, `src/blocks-native`) need Node ≥ 24; on Node 22 treat lint + typecheck green as the local bar and let CI own the renderer tests. If contracts change, run `pnpm sync-contracts <sha>` first, then build and commit `dist/`. Adding or renaming a kind in blocks means updating the dispatcher switch in *both* `BlocksView.tsx` and `BlocksViewNative.tsx`, rebuilding, and regenerating snapshots (`pnpm vitest run -u src/blocks-web` and `src/blocks-native`).
 
 ## Neural Knowledge
 
-This layer is generated by TANK. It lives in `.neural/` — `map.yaml` and `index.json` are the deterministic map of
-areas, commands, entry points and hot files, and `.neural/neurons/*.md` holds the per-area facts that only reading
-the code produces. It is refreshed on every push to the default branch, and this `AGENTS.md` is written from it, so
-hand edits to either are overwritten on the next refresh; change the code or the rules files instead and let the
-refresh pick them up.
+This file and `.neural/neurons/*.md` are generated by TANK's Neural Knowledge system. They live in `.neural/` and are refreshed automatically on every push to the default branch (`main`). Edits by hand will be overwritten on the next refresh. The neuron files hold the dense facts an agent needs to work here without re-reading the source; this file is the entry-point index. See `.neural/map.yaml` for the full area map and hot-file list.

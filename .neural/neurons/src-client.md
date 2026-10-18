@@ -1,6 +1,6 @@
 # Neurons · src/client
 
-refreshed 2026-10-08 · 83a77f18cf88
+refreshed 2026-10-18 · d7c882a75bba
 
 - `createTankClient` (`src/client/client.ts`) is the single entry point; `client.start()` must run before any send/subscribe call — it opens the realtime socket, replays the outbox, and primes the store from `GetBootstrap` in that order.
 - Optimistic helpers (`updateMessage`, `deleteMessage`, `joinChannel`, `leaveChannel`, `createChannel`, `setGoal`, `invite`, `markThreadRead`) are the only sanctioned way to mutate state — each applies to the store immediately and rolls back on RPC error, so apps must never dispatch a raw store action directly.
@@ -15,6 +15,7 @@ refreshed 2026-10-08 · 83a77f18cf88
 - `TankStorage` is string key/value only; three implementations exist (IndexedDB web, SQLite mobile, memory in tests) behind the same interface, keyed with a namespace prefix to avoid collisions across workspaces.
 - `uuidv7.ts` generates `client_msg_id` via `crypto.getRandomValues` by default but accepts an injected `randomBytes`, which is what makes outbox ordering deterministic in tests.
 - `upload.ts`'s `uploadFile` runs CreateUpload → PUT (XHR for progress, fetch fallback, multipart parts when the server returns them) → CompleteUpload; skipping CompleteUpload leaves an orphaned pending upload server-side.
+- `models.ts` exports `MODEL_CHOICES` (six entries: "", `tank-neural-1`, `tank-neural-next`, `claude-sonnet-5`, `claude-opus-5`, `claude-haiku-4-5`), `TANK_NEURAL = "tank-neural-1"`, `TANK_NEURAL_NEXT = "tank-neural-next"`, and `modelLabel(id)` — these are the names the gateway accepts on `TreadSettings.model`; a name not in this list is refused at save.
 
 ## Verified
 
