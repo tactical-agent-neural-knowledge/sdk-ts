@@ -170,6 +170,35 @@ export type Subscription = Message<"tank.billing.v1.Subscription"> & {
      * @generated from field: bool has_agents = 9;
      */
     hasAgents: boolean;
+    /**
+     * The add-ons on for the workspace: shield, books, blueprint, atlas.
+     *
+     * @generated from field: repeated string addons = 10;
+     */
+    addons: string[];
+    /**
+     * Agent usage this calendar month at the metered price, and the cap an owner set.
+     *
+     * @generated from field: int64 agent_usage_cents_this_month = 11;
+     */
+    agentUsageCentsThisMonth: bigint;
+    /**
+     * @generated from field: int64 agent_cap_cents = 12;
+     */
+    agentCapCents: bigint;
+    /**
+     * Who sold the subscription: "stripe", "apple", "manual", or "" for none. "fake" in
+     * a build with no provider, which the clients read as "write to us instead".
+     *
+     * @generated from field: string provider = 13;
+     */
+    provider: string;
+    /**
+     * How many seats premium covers; the first ten are the flat price.
+     *
+     * @generated from field: int32 seats = 14;
+     */
+    seats: number;
 };
 /**
  * Describes the message tank.billing.v1.Subscription.
@@ -205,7 +234,9 @@ export type GetSubscriptionResponse = Message<"tank.billing.v1.GetSubscriptionRe
  */
 export declare const GetSubscriptionResponseSchema: GenMessage<GetSubscriptionResponse>;
 /**
- * StartUpgradeCheckout turns a free venture into one that can have agents.
+ * StartUpgradeCheckout starts a subscription on the web: premium (the workspace's seat
+ * count is the quantity), an add-on, or the bundle. The phone buys through the App
+ * Store instead and reports the purchase with VerifyAppleTransaction.
  *
  * @generated from message tank.billing.v1.StartUpgradeCheckoutRequest
  */
@@ -222,6 +253,12 @@ export type StartUpgradeCheckoutRequest = Message<"tank.billing.v1.StartUpgradeC
      * @generated from field: string cancel_path = 3;
      */
     cancelPath: string;
+    /**
+     * premium | shield | books | blueprint | atlas | bundle. Empty means premium.
+     *
+     * @generated from field: string product = 4;
+     */
+    product: string;
 };
 /**
  * Describes the message tank.billing.v1.StartUpgradeCheckoutRequest.
@@ -277,6 +314,48 @@ export type OpenBillingPortalResponse = Message<"tank.billing.v1.OpenBillingPort
  */
 export declare const OpenBillingPortalResponseSchema: GenMessage<OpenBillingPortalResponse>;
 /**
+ * VerifyAppleTransaction hands the api a signed StoreKit transaction so the purchase
+ * counts here the same way a Stripe checkout does. Apple's own server notifications
+ * keep it current afterwards.
+ *
+ * @generated from message tank.billing.v1.VerifyAppleTransactionRequest
+ */
+export type VerifyAppleTransactionRequest = Message<"tank.billing.v1.VerifyAppleTransactionRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * The JWS of the transaction, as StoreKit 2 gives it to the app.
+     *
+     * @generated from field: string signed_transaction = 2;
+     */
+    signedTransaction: string;
+};
+/**
+ * Describes the message tank.billing.v1.VerifyAppleTransactionRequest.
+ * Use `create(VerifyAppleTransactionRequestSchema)` to create a new message.
+ */
+export declare const VerifyAppleTransactionRequestSchema: GenMessage<VerifyAppleTransactionRequest>;
+/**
+ * @generated from message tank.billing.v1.VerifyAppleTransactionResponse
+ */
+export type VerifyAppleTransactionResponse = Message<"tank.billing.v1.VerifyAppleTransactionResponse"> & {
+    /**
+     * @generated from field: string product = 1;
+     */
+    product: string;
+    /**
+     * @generated from field: string status = 2;
+     */
+    status: string;
+};
+/**
+ * Describes the message tank.billing.v1.VerifyAppleTransactionResponse.
+ * Use `create(VerifyAppleTransactionResponseSchema)` to create a new message.
+ */
+export declare const VerifyAppleTransactionResponseSchema: GenMessage<VerifyAppleTransactionResponse>;
+/**
  * @generated from service tank.billing.v1.BillingService
  */
 export declare const BillingService: GenService<{
@@ -319,5 +398,13 @@ export declare const BillingService: GenService<{
         methodKind: "unary";
         input: typeof OpenBillingPortalRequestSchema;
         output: typeof OpenBillingPortalResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.billing.v1.BillingService.VerifyAppleTransaction
+     */
+    verifyAppleTransaction: {
+        methodKind: "unary";
+        input: typeof VerifyAppleTransactionRequestSchema;
+        output: typeof VerifyAppleTransactionResponseSchema;
     };
 }>;

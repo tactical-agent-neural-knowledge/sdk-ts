@@ -10,6 +10,7 @@ import {
 } from "@connectrpc/connect";
 import { AgentService, type Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
+import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import {
   type Channel,
@@ -260,6 +261,8 @@ export class TankClient {
   readonly monitor: Client<typeof MonitorService>;
   /** Slash commands: what the composer offers and what happens when one is sent. */
   readonly command: Client<typeof CommandService>;
+  /** Subscriptions, checkouts and the billing portal; the phone reports App Store purchases here. */
+  readonly billing: Client<typeof BillingService>;
   readonly realtime: RealtimeClient;
   readonly store: TankStore;
   readonly storage: TankStorage;
@@ -308,6 +311,7 @@ export class TankClient {
     this.topo = createClient(TopoService, this.transport);
     this.monitor = createClient(MonitorService, this.transport);
     this.command = createClient(CommandService, this.transport);
+    this.billing = createClient(BillingService, this.transport);
     this.realtime = new RealtimeClient({
       wsUrl: opts.wsUrl,
       getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,

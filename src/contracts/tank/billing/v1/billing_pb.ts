@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/billing/v1/billing.proto.
  */
 export const file_tank_billing_v1_billing: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2JpbGxpbmcvdjEvYmlsbGluZy5wcm90bxIPdGFuay5iaWxsaW5nLnYxIncKBVByaWNlEgwKBHNsdWcYASABKAkSDAoEbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIVCg1hZ2VudF9taW51dGVzGAQgASgDEhMKC3ByaWNlX2NlbnRzGAUgASgDEhEKCWF2YWlsYWJsZRgGIAEoCCIfCg9HZXRQcmljZVJlcXVlc3QSDAoEc2x1ZxgBIAEoCSI5ChBHZXRQcmljZVJlc3BvbnNlEiUKBXByaWNlGAEgASgLMhYudGFuay5iaWxsaW5nLnYxLlByaWNlIlQKGVN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QSDAoEc2x1ZxgBIAEoCRIUCgxzdWNjZXNzX3BhdGgYAiABKAkSEwoLY2FuY2VsX3BhdGgYAyABKAkiYgoaU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJEi4KCmhlbGRfdW50aWwYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIoICCgxTdWJzY3JpcHRpb24SFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHBsYW4YAiABKAkSDgoGc3RhdHVzGAMgASgJEhUKDW1vbnRobHlfY2VudHMYBCABKAMSGgoSYWdlbnRfbWludXRlX2NlbnRzGAUgASgDEiEKGWFnZW50X21pbnV0ZXNfdGhpc19wZXJpb2QYBiABKAMSJAocYWdlbnRfZmVlc19jZW50c190aGlzX3BlcmlvZBgHIAEoAxIuCgpwZXJpb2RfZW5kGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpoYXNfYWdlbnRzGAkgASgIIi4KFkdldFN1YnNjcmlwdGlvblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIk4KF0dldFN1YnNjcmlwdGlvblJlc3BvbnNlEjMKDHN1YnNjcmlwdGlvbhgBIAEoCzIdLnRhbmsuYmlsbGluZy52MS5TdWJzY3JpcHRpb24iXgobU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIUCgxzdWNjZXNzX3BhdGgYAiABKAkSEwoLY2FuY2VsX3BhdGgYAyABKAkiNAocU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRIUCgxjaGVja291dF91cmwYASABKAkiRQoYT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRITCgtyZXR1cm5fcGF0aBgCIAEoCSIoChlPcGVuQmlsbGluZ1BvcnRhbFJlc3BvbnNlEgsKA3VybBgBIAEoCTKXBAoOQmlsbGluZ1NlcnZpY2USTwoIR2V0UHJpY2USIC50YW5rLmJpbGxpbmcudjEuR2V0UHJpY2VSZXF1ZXN0GiEudGFuay5iaWxsaW5nLnYxLkdldFByaWNlUmVzcG9uc2USbQoSU3RhcnRDbGFpbUNoZWNrb3V0EioudGFuay5iaWxsaW5nLnYxLlN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QaKy50YW5rLmJpbGxpbmcudjEuU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USZAoPR2V0U3Vic2NyaXB0aW9uEicudGFuay5iaWxsaW5nLnYxLkdldFN1YnNjcmlwdGlvblJlcXVlc3QaKC50YW5rLmJpbGxpbmcudjEuR2V0U3Vic2NyaXB0aW9uUmVzcG9uc2UScwoUU3RhcnRVcGdyYWRlQ2hlY2tvdXQSLC50YW5rLmJpbGxpbmcudjEuU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXF1ZXN0Gi0udGFuay5iaWxsaW5nLnYxLlN0YXJ0VXBncmFkZUNoZWNrb3V0UmVzcG9uc2USagoRT3BlbkJpbGxpbmdQb3J0YWwSKS50YW5rLmJpbGxpbmcudjEuT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0GioudGFuay5iaWxsaW5nLnYxLk9wZW5CaWxsaW5nUG9ydGFsUmVzcG9uc2VC2AEKE2NvbS50YW5rLmJpbGxpbmcudjFCDEJpbGxpbmdQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2JpbGxpbmcvdjE7YmlsbGluZ3YxogIDVEJYqgIPVGFuay5CaWxsaW5nLlYxygIPVGFua1xCaWxsaW5nXFYx4gIbVGFua1xCaWxsaW5nXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6QmlsbGluZzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2JpbGxpbmcvdjEvYmlsbGluZy5wcm90bxIPdGFuay5iaWxsaW5nLnYxIncKBVByaWNlEgwKBHNsdWcYASABKAkSDAoEbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIVCg1hZ2VudF9taW51dGVzGAQgASgDEhMKC3ByaWNlX2NlbnRzGAUgASgDEhEKCWF2YWlsYWJsZRgGIAEoCCIfCg9HZXRQcmljZVJlcXVlc3QSDAoEc2x1ZxgBIAEoCSI5ChBHZXRQcmljZVJlc3BvbnNlEiUKBXByaWNlGAEgASgLMhYudGFuay5iaWxsaW5nLnYxLlByaWNlIlQKGVN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QSDAoEc2x1ZxgBIAEoCRIUCgxzdWNjZXNzX3BhdGgYAiABKAkSEwoLY2FuY2VsX3BhdGgYAyABKAkiYgoaU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJEi4KCmhlbGRfdW50aWwYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIvICCgxTdWJzY3JpcHRpb24SFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHBsYW4YAiABKAkSDgoGc3RhdHVzGAMgASgJEhUKDW1vbnRobHlfY2VudHMYBCABKAMSGgoSYWdlbnRfbWludXRlX2NlbnRzGAUgASgDEiEKGWFnZW50X21pbnV0ZXNfdGhpc19wZXJpb2QYBiABKAMSJAocYWdlbnRfZmVlc19jZW50c190aGlzX3BlcmlvZBgHIAEoAxIuCgpwZXJpb2RfZW5kGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpoYXNfYWdlbnRzGAkgASgIEg4KBmFkZG9ucxgKIAMoCRIkChxhZ2VudF91c2FnZV9jZW50c190aGlzX21vbnRoGAsgASgDEhcKD2FnZW50X2NhcF9jZW50cxgMIAEoAxIQCghwcm92aWRlchgNIAEoCRINCgVzZWF0cxgOIAEoBSIuChZHZXRTdWJzY3JpcHRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJOChdHZXRTdWJzY3JpcHRpb25SZXNwb25zZRIzCgxzdWJzY3JpcHRpb24YASABKAsyHS50YW5rLmJpbGxpbmcudjEuU3Vic2NyaXB0aW9uIm8KG1N0YXJ0VXBncmFkZUNoZWNrb3V0UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSFAoMc3VjY2Vzc19wYXRoGAIgASgJEhMKC2NhbmNlbF9wYXRoGAMgASgJEg8KB3Byb2R1Y3QYBCABKAkiNAocU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRIUCgxjaGVja291dF91cmwYASABKAkiRQoYT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRITCgtyZXR1cm5fcGF0aBgCIAEoCSIoChlPcGVuQmlsbGluZ1BvcnRhbFJlc3BvbnNlEgsKA3VybBgBIAEoCSJRCh1WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSGgoSc2lnbmVkX3RyYW5zYWN0aW9uGAIgASgJIkEKHlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXNwb25zZRIPCgdwcm9kdWN0GAEgASgJEg4KBnN0YXR1cxgCIAEoCTKSBQoOQmlsbGluZ1NlcnZpY2USTwoIR2V0UHJpY2USIC50YW5rLmJpbGxpbmcudjEuR2V0UHJpY2VSZXF1ZXN0GiEudGFuay5iaWxsaW5nLnYxLkdldFByaWNlUmVzcG9uc2USbQoSU3RhcnRDbGFpbUNoZWNrb3V0EioudGFuay5iaWxsaW5nLnYxLlN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QaKy50YW5rLmJpbGxpbmcudjEuU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USZAoPR2V0U3Vic2NyaXB0aW9uEicudGFuay5iaWxsaW5nLnYxLkdldFN1YnNjcmlwdGlvblJlcXVlc3QaKC50YW5rLmJpbGxpbmcudjEuR2V0U3Vic2NyaXB0aW9uUmVzcG9uc2UScwoUU3RhcnRVcGdyYWRlQ2hlY2tvdXQSLC50YW5rLmJpbGxpbmcudjEuU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXF1ZXN0Gi0udGFuay5iaWxsaW5nLnYxLlN0YXJ0VXBncmFkZUNoZWNrb3V0UmVzcG9uc2USagoRT3BlbkJpbGxpbmdQb3J0YWwSKS50YW5rLmJpbGxpbmcudjEuT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0GioudGFuay5iaWxsaW5nLnYxLk9wZW5CaWxsaW5nUG9ydGFsUmVzcG9uc2USeQoWVmVyaWZ5QXBwbGVUcmFuc2FjdGlvbhIuLnRhbmsuYmlsbGluZy52MS5WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVxdWVzdBovLnRhbmsuYmlsbGluZy52MS5WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVzcG9uc2VC2AEKE2NvbS50YW5rLmJpbGxpbmcudjFCDEJpbGxpbmdQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2JpbGxpbmcvdjE7YmlsbGluZ3YxogIDVEJYqgIPVGFuay5CaWxsaW5nLlYxygIPVGFua1xCaWxsaW5nXFYx4gIbVGFua1xCaWxsaW5nXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6QmlsbGluZzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * Price is what a product costs to take over right now, and why.
@@ -210,6 +210,40 @@ export type Subscription = Message<"tank.billing.v1.Subscription"> & {
    * @generated from field: bool has_agents = 9;
    */
   hasAgents: boolean;
+
+  /**
+   * The add-ons on for the workspace: shield, books, blueprint, atlas.
+   *
+   * @generated from field: repeated string addons = 10;
+   */
+  addons: string[];
+
+  /**
+   * Agent usage this calendar month at the metered price, and the cap an owner set.
+   *
+   * @generated from field: int64 agent_usage_cents_this_month = 11;
+   */
+  agentUsageCentsThisMonth: bigint;
+
+  /**
+   * @generated from field: int64 agent_cap_cents = 12;
+   */
+  agentCapCents: bigint;
+
+  /**
+   * Who sold the subscription: "stripe", "apple", "manual", or "" for none. "fake" in
+   * a build with no provider, which the clients read as "write to us instead".
+   *
+   * @generated from field: string provider = 13;
+   */
+  provider: string;
+
+  /**
+   * How many seats premium covers; the first ten are the flat price.
+   *
+   * @generated from field: int32 seats = 14;
+   */
+  seats: number;
 };
 
 /**
@@ -254,7 +288,9 @@ export const GetSubscriptionResponseSchema: GenMessage<GetSubscriptionResponse> 
   messageDesc(file_tank_billing_v1_billing, 7);
 
 /**
- * StartUpgradeCheckout turns a free venture into one that can have agents.
+ * StartUpgradeCheckout starts a subscription on the web: premium (the workspace's seat
+ * count is the quantity), an add-on, or the bundle. The phone buys through the App
+ * Store instead and reports the purchase with VerifyAppleTransaction.
  *
  * @generated from message tank.billing.v1.StartUpgradeCheckoutRequest
  */
@@ -273,6 +309,13 @@ export type StartUpgradeCheckoutRequest = Message<"tank.billing.v1.StartUpgradeC
    * @generated from field: string cancel_path = 3;
    */
   cancelPath: string;
+
+  /**
+   * premium | shield | books | blueprint | atlas | bundle. Empty means premium.
+   *
+   * @generated from field: string product = 4;
+   */
+  product: string;
 };
 
 /**
@@ -341,6 +384,56 @@ export const OpenBillingPortalResponseSchema: GenMessage<OpenBillingPortalRespon
   messageDesc(file_tank_billing_v1_billing, 11);
 
 /**
+ * VerifyAppleTransaction hands the api a signed StoreKit transaction so the purchase
+ * counts here the same way a Stripe checkout does. Apple's own server notifications
+ * keep it current afterwards.
+ *
+ * @generated from message tank.billing.v1.VerifyAppleTransactionRequest
+ */
+export type VerifyAppleTransactionRequest = Message<"tank.billing.v1.VerifyAppleTransactionRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * The JWS of the transaction, as StoreKit 2 gives it to the app.
+   *
+   * @generated from field: string signed_transaction = 2;
+   */
+  signedTransaction: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.VerifyAppleTransactionRequest.
+ * Use `create(VerifyAppleTransactionRequestSchema)` to create a new message.
+ */
+export const VerifyAppleTransactionRequestSchema: GenMessage<VerifyAppleTransactionRequest> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 12);
+
+/**
+ * @generated from message tank.billing.v1.VerifyAppleTransactionResponse
+ */
+export type VerifyAppleTransactionResponse = Message<"tank.billing.v1.VerifyAppleTransactionResponse"> & {
+  /**
+   * @generated from field: string product = 1;
+   */
+  product: string;
+
+  /**
+   * @generated from field: string status = 2;
+   */
+  status: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.VerifyAppleTransactionResponse.
+ * Use `create(VerifyAppleTransactionResponseSchema)` to create a new message.
+ */
+export const VerifyAppleTransactionResponseSchema: GenMessage<VerifyAppleTransactionResponse> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 13);
+
+/**
  * @generated from service tank.billing.v1.BillingService
  */
 export const BillingService: GenService<{
@@ -383,6 +476,14 @@ export const BillingService: GenService<{
     methodKind: "unary";
     input: typeof OpenBillingPortalRequestSchema;
     output: typeof OpenBillingPortalResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.billing.v1.BillingService.VerifyAppleTransaction
+   */
+  verifyAppleTransaction: {
+    methodKind: "unary";
+    input: typeof VerifyAppleTransactionRequestSchema;
+    output: typeof VerifyAppleTransactionResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_billing_v1_billing, 0);

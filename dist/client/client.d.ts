@@ -1,6 +1,7 @@
 import { type Client, type Interceptor, type Transport } from "@connectrpc/connect";
 import { AgentService, type Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AuthService } from "../contracts/tank/auth/v1/auth_pb.js";
+import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type Channel, ChannelService, ChannelType, type TreadGoal } from "../contracts/tank/channel/v1/channel_pb.js";
 import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
@@ -158,6 +159,8 @@ export declare class TankClient {
     readonly monitor: Client<typeof MonitorService>;
     /** Slash commands: what the composer offers and what happens when one is sent. */
     readonly command: Client<typeof CommandService>;
+    /** Subscriptions, checkouts and the billing portal; the phone reports App Store purchases here. */
+    readonly billing: Client<typeof BillingService>;
     readonly realtime: RealtimeClient;
     readonly store: TankStore;
     readonly storage: TankStorage;

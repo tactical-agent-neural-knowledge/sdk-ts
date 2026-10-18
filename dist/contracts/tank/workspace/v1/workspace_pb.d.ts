@@ -338,6 +338,17 @@ export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
      * @generated from field: repeated string addons = 10;
      */
     addons: string[];
+    /**
+     * Agent usage this calendar month at the metered price, and the workspace's cap: a
+     * meter on Home, and the sentence a refused run carries.
+     *
+     * @generated from field: int64 agent_usage_cents = 11;
+     */
+    agentUsageCents: bigint;
+    /**
+     * @generated from field: int64 agent_cap_cents = 12;
+     */
+    agentCapCents: bigint;
 };
 /**
  * Describes the message tank.workspace.v1.Entitlements.

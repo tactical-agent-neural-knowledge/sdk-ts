@@ -3,6 +3,7 @@ import { timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { Code, ConnectError, createClient, } from "@connectrpc/connect";
 import { AgentService } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
+import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import { ChannelReadStateSchema, ChannelService, ChannelType, TreadGoalSchema, } from "../contracts/tank/channel/v1/channel_pb.js";
 import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
@@ -62,6 +63,8 @@ export class TankClient {
     monitor;
     /** Slash commands: what the composer offers and what happens when one is sent. */
     command;
+    /** Subscriptions, checkouts and the billing portal; the phone reports App Store purchases here. */
+    billing;
     realtime;
     store;
     storage;
@@ -108,6 +111,7 @@ export class TankClient {
         this.topo = createClient(TopoService, this.transport);
         this.monitor = createClient(MonitorService, this.transport);
         this.command = createClient(CommandService, this.transport);
+        this.billing = createClient(BillingService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
             getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
