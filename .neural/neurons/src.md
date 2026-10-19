@@ -1,6 +1,6 @@
 # Neurons · src
 
-refreshed 2026-10-18 · d7c882a75bba
+refreshed 2026-10-19 · a22dd59ccea3
 
 - `src/` has no `index.ts` of its own: every published subpath points at a directory barrel (`src/client/index.ts`, `src/react/index.tsx`, `src/design/index.ts`, `src/blocks/index.ts`, `src/blocks-web/index.ts`, `src/blocks-native/index.ts`, `src/contracts/index.ts`, `src/topo/index.ts`) mapped in `package.json` `exports`.
 - `src/exports.test.ts` is the only file directly in `src/` and it is the packaging guard — it fails the build when an `exports` entry drifts, not at install time in a consumer.

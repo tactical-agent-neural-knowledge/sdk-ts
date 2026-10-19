@@ -1,7 +1,7 @@
 {
   "generated_by": "TANK Neural Knowledge",
-  "commit": "d7c882a75bba7d3640da9215cb9baf9667ecd916",
-  "refreshed_at": "2026-10-18T22:24:38.059Z",
+  "commit": "a22dd59ccea3a247f34373271c0a5b46331a1345",
+  "refreshed_at": "2026-10-19T19:53:53.392Z",
   "areas": {
     ".": {
       "neurons": ".neural/neurons/root.md",
@@ -121,8 +121,8 @@
       "neurons": ".neural/neurons/src-client.md",
       "hot": [
         "src/client/store.ts",
-        "src/client/index.ts",
         "src/client/client.ts",
+        "src/client/index.ts",
         "src/client/realtime.ts",
         "src/client/client.test.ts",
         "src/client/live-events.test.ts"
@@ -173,6 +173,7 @@
         "src/contracts/admin.ts",
         "src/contracts/agent.ts",
         "src/contracts/agentctl.ts",
+        "src/contracts/ai.ts",
         "src/contracts/auth.ts",
         "src/contracts/billing.ts",
         "src/contracts/blocks.ts",
@@ -201,6 +202,7 @@
         "src/contracts/tank/admin/v1/admin_pb.ts",
         "src/contracts/tank/agent/v1/agent_pb.ts",
         "src/contracts/tank/agentctl/v1/agentctl_pb.ts",
+        "src/contracts/tank/ai/v1/ai_pb.ts",
         "src/contracts/tank/auth/v1/auth_pb.ts",
         "src/contracts/tank/billing/v1/billing_pb.ts",
         "src/contracts/tank/blocks/v1/blocks_pb.ts",
@@ -226,9 +228,7 @@
         "src/contracts/tank/security/v1/security_pb.ts",
         "src/contracts/tank/social/v1/social_pb.ts",
         "src/contracts/tank/topo/v1/topo_pb.ts",
-        "src/contracts/tank/workspace/v1/workspace_pb.ts",
-        "src/contracts/topo.ts",
-        "src/contracts/workspace.ts"
+        "src/contracts/tank/workspace/v1/workspace_pb.ts"
       ]
     },
     "src/design": {
