@@ -467,6 +467,17 @@ export type Settings = Message$1<"tank.ai.v1.Settings"> & {
      * @generated from field: string model_label = 2;
      */
     modelLabel: string;
+    /**
+     * Whether TANK's own model is serving. False means the page says it is coming and
+     * counts down to launch_at; nothing answers in its place.
+     *
+     * @generated from field: bool available = 3;
+     */
+    available: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp launch_at = 4;
+     */
+    launchAt?: Timestamp;
 };
 /**
  * Describes the message tank.ai.v1.Settings.
