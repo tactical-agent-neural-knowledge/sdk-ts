@@ -502,6 +502,143 @@ export type UpdateSettingsResponse = Message$1<"tank.ai.v1.UpdateSettingsRespons
  */
 export declare const UpdateSettingsResponseSchema: GenMessage<UpdateSettingsResponse>;
 /**
+ * GetUsage is what the person's chats have used: per day for the last `days`, in total,
+ * and by conversation. Cost is in millionths of a dollar so nothing here is a float.
+ *
+ * @generated from message tank.ai.v1.GetUsageRequest
+ */
+export type GetUsageRequest = Message$1<"tank.ai.v1.GetUsageRequest"> & {
+    /**
+     * @generated from field: int32 days = 1;
+     */
+    days: number;
+};
+/**
+ * Describes the message tank.ai.v1.GetUsageRequest.
+ * Use `create(GetUsageRequestSchema)` to create a new message.
+ */
+export declare const GetUsageRequestSchema: GenMessage<GetUsageRequest>;
+/**
+ * @generated from message tank.ai.v1.UsageDay
+ */
+export type UsageDay = Message$1<"tank.ai.v1.UsageDay"> & {
+    /**
+     * YYYY-MM-DD, in UTC
+     *
+     * @generated from field: string date = 1;
+     */
+    date: string;
+    /**
+     * @generated from field: int32 messages = 2;
+     */
+    messages: number;
+    /**
+     * @generated from field: int64 input_tokens = 3;
+     */
+    inputTokens: bigint;
+    /**
+     * @generated from field: int64 output_tokens = 4;
+     */
+    outputTokens: bigint;
+    /**
+     * @generated from field: int64 cost_micro_usd = 5;
+     */
+    costMicroUsd: bigint;
+};
+/**
+ * Describes the message tank.ai.v1.UsageDay.
+ * Use `create(UsageDaySchema)` to create a new message.
+ */
+export declare const UsageDaySchema: GenMessage<UsageDay>;
+/**
+ * @generated from message tank.ai.v1.ConversationUsage
+ */
+export type ConversationUsage = Message$1<"tank.ai.v1.ConversationUsage"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: int32 messages = 3;
+     */
+    messages: number;
+    /**
+     * @generated from field: int64 input_tokens = 4;
+     */
+    inputTokens: bigint;
+    /**
+     * @generated from field: int64 output_tokens = 5;
+     */
+    outputTokens: bigint;
+    /**
+     * @generated from field: int64 cost_micro_usd = 6;
+     */
+    costMicroUsd: bigint;
+};
+/**
+ * Describes the message tank.ai.v1.ConversationUsage.
+ * Use `create(ConversationUsageSchema)` to create a new message.
+ */
+export declare const ConversationUsageSchema: GenMessage<ConversationUsage>;
+/**
+ * @generated from message tank.ai.v1.GetUsageResponse
+ */
+export type GetUsageResponse = Message$1<"tank.ai.v1.GetUsageResponse"> & {
+    /**
+     * @generated from field: repeated tank.ai.v1.UsageDay days = 1;
+     */
+    days: UsageDay[];
+    /**
+     * Totals over the same window.
+     *
+     * @generated from field: int32 messages = 2;
+     */
+    messages: number;
+    /**
+     * @generated from field: int64 input_tokens = 3;
+     */
+    inputTokens: bigint;
+    /**
+     * @generated from field: int64 output_tokens = 4;
+     */
+    outputTokens: bigint;
+    /**
+     * @generated from field: int64 cost_micro_usd = 5;
+     */
+    costMicroUsd: bigint;
+    /**
+     * Today and this calendar month, whatever the window.
+     *
+     * @generated from field: int32 today_messages = 6;
+     */
+    todayMessages: number;
+    /**
+     * @generated from field: int64 month_cost_micro_usd = 7;
+     */
+    monthCostMicroUsd: bigint;
+    /**
+     * @generated from field: int64 all_time_messages = 8;
+     */
+    allTimeMessages: bigint;
+    /**
+     * @generated from field: repeated tank.ai.v1.ConversationUsage conversations = 9;
+     */
+    conversations: ConversationUsage[];
+    /**
+     * @generated from field: string model_label = 10;
+     */
+    modelLabel: string;
+};
+/**
+ * Describes the message tank.ai.v1.GetUsageResponse.
+ * Use `create(GetUsageResponseSchema)` to create a new message.
+ */
+export declare const GetUsageResponseSchema: GenMessage<GetUsageResponse>;
+/**
  * @generated from enum tank.ai.v1.Role
  */
 export declare enum Role {
@@ -597,5 +734,13 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof UpdateSettingsRequestSchema;
         output: typeof UpdateSettingsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.GetUsage
+     */
+    getUsage: {
+        methodKind: "unary";
+        input: typeof GetUsageRequestSchema;
+        output: typeof GetUsageResponseSchema;
     };
 }>;
