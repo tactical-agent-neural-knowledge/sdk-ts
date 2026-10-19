@@ -9,6 +9,7 @@ import {
   type Transport,
 } from "@connectrpc/connect";
 import { AgentService, type Run } from "../contracts/tank/agent/v1/agent_pb.js";
+import { AiService } from "../contracts/tank/ai/v1/ai_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
 import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
@@ -263,6 +264,8 @@ export class TankClient {
   readonly command: Client<typeof CommandService>;
   /** Subscriptions, checkouts and the billing portal; the phone reports App Store purchases here. */
   readonly billing: Client<typeof BillingService>;
+  /** The chat with TANK's own model at /ai: conversations, the streamed reply, settings. */
+  readonly ai: Client<typeof AiService>;
   readonly realtime: RealtimeClient;
   readonly store: TankStore;
   readonly storage: TankStorage;
@@ -312,6 +315,7 @@ export class TankClient {
     this.monitor = createClient(MonitorService, this.transport);
     this.command = createClient(CommandService, this.transport);
     this.billing = createClient(BillingService, this.transport);
+    this.ai = createClient(AiService, this.transport);
     this.realtime = new RealtimeClient({
       wsUrl: opts.wsUrl,
       getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
