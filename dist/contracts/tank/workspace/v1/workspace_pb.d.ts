@@ -2051,6 +2051,18 @@ export type AgentureDetail = Message<"tank.workspace.v1.AgentureDetail"> & {
      * @generated from field: string overview = 11;
      */
     overview: string;
+    /**
+     * A service (graded by the world, subscribed to) rather than a product for take-over.
+     * For a service price_cents is 0 and available is false; environment_slug names the
+     * environment it competes in, which is where its scores and public conversation live.
+     *
+     * @generated from field: bool service = 12;
+     */
+    service: boolean;
+    /**
+     * @generated from field: string environment_slug = 13;
+     */
+    environmentSlug: string;
 };
 /**
  * Describes the message tank.workspace.v1.AgentureDetail.
