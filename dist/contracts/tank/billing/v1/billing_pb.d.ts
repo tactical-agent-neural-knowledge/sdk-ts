@@ -392,6 +392,170 @@ export type SetAgentCapResponse = Message<"tank.billing.v1.SetAgentCapResponse">
  */
 export declare const SetAgentCapResponseSchema: GenMessage<SetAgentCapResponse>;
 /**
+ * @generated from message tank.billing.v1.ServiceSubscription
+ */
+export type ServiceSubscription = Message<"tank.billing.v1.ServiceSubscription"> & {
+    /**
+     * @generated from field: string product_workspace_id = 1;
+     */
+    productWorkspaceId: string;
+    /**
+     * @generated from field: string product_slug = 2;
+     */
+    productSlug: string;
+    /**
+     * @generated from field: string product_name = 3;
+     */
+    productName: string;
+    /**
+     * active, past_due, canceled
+     *
+     * @generated from field: string status = 4;
+     */
+    status: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp current_period_end = 5;
+     */
+    currentPeriodEnd?: Timestamp;
+    /**
+     * @generated from field: int64 price_cents = 6;
+     */
+    priceCents: bigint;
+    /**
+     * @generated from field: bool has_api_key = 7;
+     */
+    hasApiKey: boolean;
+    /**
+     * the last six characters
+     *
+     * @generated from field: string api_key_hint = 8;
+     */
+    apiKeyHint: string;
+};
+/**
+ * Describes the message tank.billing.v1.ServiceSubscription.
+ * Use `create(ServiceSubscriptionSchema)` to create a new message.
+ */
+export declare const ServiceSubscriptionSchema: GenMessage<ServiceSubscription>;
+/**
+ * @generated from message tank.billing.v1.StartServiceCheckoutRequest
+ */
+export type StartServiceCheckoutRequest = Message<"tank.billing.v1.StartServiceCheckoutRequest"> & {
+    /**
+     * @generated from field: string product_slug = 1;
+     */
+    productSlug: string;
+    /**
+     * @generated from field: string return_path = 2;
+     */
+    returnPath: string;
+};
+/**
+ * Describes the message tank.billing.v1.StartServiceCheckoutRequest.
+ * Use `create(StartServiceCheckoutRequestSchema)` to create a new message.
+ */
+export declare const StartServiceCheckoutRequestSchema: GenMessage<StartServiceCheckoutRequest>;
+/**
+ * @generated from message tank.billing.v1.StartServiceCheckoutResponse
+ */
+export type StartServiceCheckoutResponse = Message<"tank.billing.v1.StartServiceCheckoutResponse"> & {
+    /**
+     * @generated from field: string checkout_url = 1;
+     */
+    checkoutUrl: string;
+};
+/**
+ * Describes the message tank.billing.v1.StartServiceCheckoutResponse.
+ * Use `create(StartServiceCheckoutResponseSchema)` to create a new message.
+ */
+export declare const StartServiceCheckoutResponseSchema: GenMessage<StartServiceCheckoutResponse>;
+/**
+ * @generated from message tank.billing.v1.ListServiceSubscriptionsRequest
+ */
+export type ListServiceSubscriptionsRequest = Message<"tank.billing.v1.ListServiceSubscriptionsRequest"> & {};
+/**
+ * Describes the message tank.billing.v1.ListServiceSubscriptionsRequest.
+ * Use `create(ListServiceSubscriptionsRequestSchema)` to create a new message.
+ */
+export declare const ListServiceSubscriptionsRequestSchema: GenMessage<ListServiceSubscriptionsRequest>;
+/**
+ * @generated from message tank.billing.v1.ListServiceSubscriptionsResponse
+ */
+export type ListServiceSubscriptionsResponse = Message<"tank.billing.v1.ListServiceSubscriptionsResponse"> & {
+    /**
+     * @generated from field: repeated tank.billing.v1.ServiceSubscription subscriptions = 1;
+     */
+    subscriptions: ServiceSubscription[];
+    /**
+     * what one service costs a month
+     *
+     * @generated from field: int64 price_cents = 2;
+     */
+    priceCents: bigint;
+};
+/**
+ * Describes the message tank.billing.v1.ListServiceSubscriptionsResponse.
+ * Use `create(ListServiceSubscriptionsResponseSchema)` to create a new message.
+ */
+export declare const ListServiceSubscriptionsResponseSchema: GenMessage<ListServiceSubscriptionsResponse>;
+/**
+ * @generated from message tank.billing.v1.OpenServicePortalRequest
+ */
+export type OpenServicePortalRequest = Message<"tank.billing.v1.OpenServicePortalRequest"> & {
+    /**
+     * @generated from field: string return_path = 1;
+     */
+    returnPath: string;
+};
+/**
+ * Describes the message tank.billing.v1.OpenServicePortalRequest.
+ * Use `create(OpenServicePortalRequestSchema)` to create a new message.
+ */
+export declare const OpenServicePortalRequestSchema: GenMessage<OpenServicePortalRequest>;
+/**
+ * @generated from message tank.billing.v1.OpenServicePortalResponse
+ */
+export type OpenServicePortalResponse = Message<"tank.billing.v1.OpenServicePortalResponse"> & {
+    /**
+     * @generated from field: string portal_url = 1;
+     */
+    portalUrl: string;
+};
+/**
+ * Describes the message tank.billing.v1.OpenServicePortalResponse.
+ * Use `create(OpenServicePortalResponseSchema)` to create a new message.
+ */
+export declare const OpenServicePortalResponseSchema: GenMessage<OpenServicePortalResponse>;
+/**
+ * @generated from message tank.billing.v1.CreateServiceApiKeyRequest
+ */
+export type CreateServiceApiKeyRequest = Message<"tank.billing.v1.CreateServiceApiKeyRequest"> & {};
+/**
+ * Describes the message tank.billing.v1.CreateServiceApiKeyRequest.
+ * Use `create(CreateServiceApiKeyRequestSchema)` to create a new message.
+ */
+export declare const CreateServiceApiKeyRequestSchema: GenMessage<CreateServiceApiKeyRequest>;
+/**
+ * @generated from message tank.billing.v1.CreateServiceApiKeyResponse
+ */
+export type CreateServiceApiKeyResponse = Message<"tank.billing.v1.CreateServiceApiKeyResponse"> & {
+    /**
+     * shown once
+     *
+     * @generated from field: string key = 1;
+     */
+    key: string;
+    /**
+     * @generated from field: string hint = 2;
+     */
+    hint: string;
+};
+/**
+ * Describes the message tank.billing.v1.CreateServiceApiKeyResponse.
+ * Use `create(CreateServiceApiKeyResponseSchema)` to create a new message.
+ */
+export declare const CreateServiceApiKeyResponseSchema: GenMessage<CreateServiceApiKeyResponse>;
+/**
  * @generated from service tank.billing.v1.BillingService
  */
 export declare const BillingService: GenService<{
@@ -450,5 +614,42 @@ export declare const BillingService: GenService<{
         methodKind: "unary";
         input: typeof SetAgentCapRequestSchema;
         output: typeof SetAgentCapResponseSchema;
+    };
+    /**
+     * Services (2026-10-20): a person subscribes to one service product, monthly. It
+     * unlocks that product's upcoming predictions in the apps and through an API key.
+     *
+     * @generated from rpc tank.billing.v1.BillingService.StartServiceCheckout
+     */
+    startServiceCheckout: {
+        methodKind: "unary";
+        input: typeof StartServiceCheckoutRequestSchema;
+        output: typeof StartServiceCheckoutResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.billing.v1.BillingService.ListServiceSubscriptions
+     */
+    listServiceSubscriptions: {
+        methodKind: "unary";
+        input: typeof ListServiceSubscriptionsRequestSchema;
+        output: typeof ListServiceSubscriptionsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.billing.v1.BillingService.OpenServicePortal
+     */
+    openServicePortal: {
+        methodKind: "unary";
+        input: typeof OpenServicePortalRequestSchema;
+        output: typeof OpenServicePortalResponseSchema;
+    };
+    /**
+     * A new key replaces the old one; the key is shown once and stored as a hash.
+     *
+     * @generated from rpc tank.billing.v1.BillingService.CreateServiceApiKey
+     */
+    createServiceApiKey: {
+        methodKind: "unary";
+        input: typeof CreateServiceApiKeyRequestSchema;
+        output: typeof CreateServiceApiKeyResponseSchema;
     };
 }>;

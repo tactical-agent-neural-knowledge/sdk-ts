@@ -3803,6 +3803,76 @@ export type SetWorkspaceAgentPolicyResponse = Message<"tank.agentctl.v1.SetWorks
  */
 export declare const SetWorkspaceAgentPolicyResponseSchema: GenMessage<SetWorkspaceAgentPolicyResponse>;
 /**
+ * @generated from message tank.agentctl.v1.ArenaTurnRequest
+ */
+export type ArenaTurnRequest = Message<"tank.agentctl.v1.ArenaTurnRequest"> & {
+    /**
+     * @generated from field: string environment_id = 1;
+     */
+    environmentId: string;
+    /**
+     * @generated from field: string round_id = 2;
+     */
+    roundId: string;
+    /**
+     * @generated from field: string product_workspace_id = 3;
+     */
+    productWorkspaceId: string;
+    /**
+     * @generated from field: string system = 4;
+     */
+    system: string;
+    /**
+     * @generated from field: string user = 5;
+     */
+    user: string;
+    /**
+     * 0 = the control plane's default
+     *
+     * @generated from field: int32 max_tokens = 6;
+     */
+    maxTokens: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ArenaTurnRequest.
+ * Use `create(ArenaTurnRequestSchema)` to create a new message.
+ */
+export declare const ArenaTurnRequestSchema: GenMessage<ArenaTurnRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ArenaTurnResponse
+ */
+export type ArenaTurnResponse = Message<"tank.agentctl.v1.ArenaTurnResponse"> & {
+    /**
+     * @generated from field: string text = 1;
+     */
+    text: string;
+    /**
+     * the model that answered, resolved, never the alias
+     *
+     * @generated from field: string model = 2;
+     */
+    model: string;
+    /**
+     * sha256 of system + user
+     *
+     * @generated from field: string prompt_hash = 3;
+     */
+    promptHash: string;
+    /**
+     * @generated from field: int32 input_tokens = 4;
+     */
+    inputTokens: number;
+    /**
+     * @generated from field: int32 output_tokens = 5;
+     */
+    outputTokens: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ArenaTurnResponse.
+ * Use `create(ArenaTurnResponseSchema)` to create a new message.
+ */
+export declare const ArenaTurnResponseSchema: GenMessage<ArenaTurnResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -4279,6 +4349,18 @@ export declare const RunnerService: GenService<{
  * @generated from service tank.agentctl.v1.ControlService
  */
 export declare const ControlService: GenService<{
+    /**
+     * ArenaTurn writes one turn of a service's public conversation on TANK's own model,
+     * text only, with no tools and no sandbox, so it can only be answered by TANK's
+     * weights. Refused when tank-neural is not served by TANK's own model server.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ArenaTurn
+     */
+    arenaTurn: {
+        methodKind: "unary";
+        input: typeof ArenaTurnRequestSchema;
+        output: typeof ArenaTurnResponseSchema;
+    };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.StartRun
      */

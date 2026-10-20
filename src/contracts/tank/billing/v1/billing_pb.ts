@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/billing/v1/billing.proto.
  */
 export const file_tank_billing_v1_billing: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2JpbGxpbmcvdjEvYmlsbGluZy5wcm90bxIPdGFuay5iaWxsaW5nLnYxIncKBVByaWNlEgwKBHNsdWcYASABKAkSDAoEbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIVCg1hZ2VudF9taW51dGVzGAQgASgDEhMKC3ByaWNlX2NlbnRzGAUgASgDEhEKCWF2YWlsYWJsZRgGIAEoCCIfCg9HZXRQcmljZVJlcXVlc3QSDAoEc2x1ZxgBIAEoCSI5ChBHZXRQcmljZVJlc3BvbnNlEiUKBXByaWNlGAEgASgLMhYudGFuay5iaWxsaW5nLnYxLlByaWNlIlQKGVN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QSDAoEc2x1ZxgBIAEoCRIUCgxzdWNjZXNzX3BhdGgYAiABKAkSEwoLY2FuY2VsX3BhdGgYAyABKAkiYgoaU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJEi4KCmhlbGRfdW50aWwYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIvICCgxTdWJzY3JpcHRpb24SFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHBsYW4YAiABKAkSDgoGc3RhdHVzGAMgASgJEhUKDW1vbnRobHlfY2VudHMYBCABKAMSGgoSYWdlbnRfbWludXRlX2NlbnRzGAUgASgDEiEKGWFnZW50X21pbnV0ZXNfdGhpc19wZXJpb2QYBiABKAMSJAocYWdlbnRfZmVlc19jZW50c190aGlzX3BlcmlvZBgHIAEoAxIuCgpwZXJpb2RfZW5kGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpoYXNfYWdlbnRzGAkgASgIEg4KBmFkZG9ucxgKIAMoCRIkChxhZ2VudF91c2FnZV9jZW50c190aGlzX21vbnRoGAsgASgDEhcKD2FnZW50X2NhcF9jZW50cxgMIAEoAxIQCghwcm92aWRlchgNIAEoCRINCgVzZWF0cxgOIAEoBSIuChZHZXRTdWJzY3JpcHRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJOChdHZXRTdWJzY3JpcHRpb25SZXNwb25zZRIzCgxzdWJzY3JpcHRpb24YASABKAsyHS50YW5rLmJpbGxpbmcudjEuU3Vic2NyaXB0aW9uIm8KG1N0YXJ0VXBncmFkZUNoZWNrb3V0UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSFAoMc3VjY2Vzc19wYXRoGAIgASgJEhMKC2NhbmNlbF9wYXRoGAMgASgJEg8KB3Byb2R1Y3QYBCABKAkiNAocU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRIUCgxjaGVja291dF91cmwYASABKAkiRQoYT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRITCgtyZXR1cm5fcGF0aBgCIAEoCSIoChlPcGVuQmlsbGluZ1BvcnRhbFJlc3BvbnNlEgsKA3VybBgBIAEoCSJRCh1WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSGgoSc2lnbmVkX3RyYW5zYWN0aW9uGAIgASgJIkEKHlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXNwb25zZRIPCgdwcm9kdWN0GAEgASgJEg4KBnN0YXR1cxgCIAEoCSJDChJTZXRBZ2VudENhcFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhcKD2FnZW50X2NhcF9jZW50cxgCIAEoAyIuChNTZXRBZ2VudENhcFJlc3BvbnNlEhcKD2FnZW50X2NhcF9jZW50cxgBIAEoAzLsBQoOQmlsbGluZ1NlcnZpY2USTwoIR2V0UHJpY2USIC50YW5rLmJpbGxpbmcudjEuR2V0UHJpY2VSZXF1ZXN0GiEudGFuay5iaWxsaW5nLnYxLkdldFByaWNlUmVzcG9uc2USbQoSU3RhcnRDbGFpbUNoZWNrb3V0EioudGFuay5iaWxsaW5nLnYxLlN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QaKy50YW5rLmJpbGxpbmcudjEuU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USZAoPR2V0U3Vic2NyaXB0aW9uEicudGFuay5iaWxsaW5nLnYxLkdldFN1YnNjcmlwdGlvblJlcXVlc3QaKC50YW5rLmJpbGxpbmcudjEuR2V0U3Vic2NyaXB0aW9uUmVzcG9uc2UScwoUU3RhcnRVcGdyYWRlQ2hlY2tvdXQSLC50YW5rLmJpbGxpbmcudjEuU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXF1ZXN0Gi0udGFuay5iaWxsaW5nLnYxLlN0YXJ0VXBncmFkZUNoZWNrb3V0UmVzcG9uc2USagoRT3BlbkJpbGxpbmdQb3J0YWwSKS50YW5rLmJpbGxpbmcudjEuT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0GioudGFuay5iaWxsaW5nLnYxLk9wZW5CaWxsaW5nUG9ydGFsUmVzcG9uc2USeQoWVmVyaWZ5QXBwbGVUcmFuc2FjdGlvbhIuLnRhbmsuYmlsbGluZy52MS5WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVxdWVzdBovLnRhbmsuYmlsbGluZy52MS5WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVzcG9uc2USWAoLU2V0QWdlbnRDYXASIy50YW5rLmJpbGxpbmcudjEuU2V0QWdlbnRDYXBSZXF1ZXN0GiQudGFuay5iaWxsaW5nLnYxLlNldEFnZW50Q2FwUmVzcG9uc2VC2AEKE2NvbS50YW5rLmJpbGxpbmcudjFCDEJpbGxpbmdQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2JpbGxpbmcvdjE7YmlsbGluZ3YxogIDVEJYqgIPVGFuay5CaWxsaW5nLlYxygIPVGFua1xCaWxsaW5nXFYx4gIbVGFua1xCaWxsaW5nXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6QmlsbGluZzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2JpbGxpbmcvdjEvYmlsbGluZy5wcm90bxIPdGFuay5iaWxsaW5nLnYxIncKBVByaWNlEgwKBHNsdWcYASABKAkSDAoEbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIVCg1hZ2VudF9taW51dGVzGAQgASgDEhMKC3ByaWNlX2NlbnRzGAUgASgDEhEKCWF2YWlsYWJsZRgGIAEoCCIfCg9HZXRQcmljZVJlcXVlc3QSDAoEc2x1ZxgBIAEoCSI5ChBHZXRQcmljZVJlc3BvbnNlEiUKBXByaWNlGAEgASgLMhYudGFuay5iaWxsaW5nLnYxLlByaWNlIlQKGVN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QSDAoEc2x1ZxgBIAEoCRIUCgxzdWNjZXNzX3BhdGgYAiABKAkSEwoLY2FuY2VsX3BhdGgYAyABKAkiYgoaU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJEi4KCmhlbGRfdW50aWwYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIvICCgxTdWJzY3JpcHRpb24SFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHBsYW4YAiABKAkSDgoGc3RhdHVzGAMgASgJEhUKDW1vbnRobHlfY2VudHMYBCABKAMSGgoSYWdlbnRfbWludXRlX2NlbnRzGAUgASgDEiEKGWFnZW50X21pbnV0ZXNfdGhpc19wZXJpb2QYBiABKAMSJAocYWdlbnRfZmVlc19jZW50c190aGlzX3BlcmlvZBgHIAEoAxIuCgpwZXJpb2RfZW5kGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpoYXNfYWdlbnRzGAkgASgIEg4KBmFkZG9ucxgKIAMoCRIkChxhZ2VudF91c2FnZV9jZW50c190aGlzX21vbnRoGAsgASgDEhcKD2FnZW50X2NhcF9jZW50cxgMIAEoAxIQCghwcm92aWRlchgNIAEoCRINCgVzZWF0cxgOIAEoBSIuChZHZXRTdWJzY3JpcHRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJOChdHZXRTdWJzY3JpcHRpb25SZXNwb25zZRIzCgxzdWJzY3JpcHRpb24YASABKAsyHS50YW5rLmJpbGxpbmcudjEuU3Vic2NyaXB0aW9uIm8KG1N0YXJ0VXBncmFkZUNoZWNrb3V0UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSFAoMc3VjY2Vzc19wYXRoGAIgASgJEhMKC2NhbmNlbF9wYXRoGAMgASgJEg8KB3Byb2R1Y3QYBCABKAkiNAocU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRIUCgxjaGVja291dF91cmwYASABKAkiRQoYT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRITCgtyZXR1cm5fcGF0aBgCIAEoCSIoChlPcGVuQmlsbGluZ1BvcnRhbFJlc3BvbnNlEgsKA3VybBgBIAEoCSJRCh1WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSGgoSc2lnbmVkX3RyYW5zYWN0aW9uGAIgASgJIkEKHlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXNwb25zZRIPCgdwcm9kdWN0GAEgASgJEg4KBnN0YXR1cxgCIAEoCSJDChJTZXRBZ2VudENhcFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhcKD2FnZW50X2NhcF9jZW50cxgCIAEoAyIuChNTZXRBZ2VudENhcFJlc3BvbnNlEhcKD2FnZW50X2NhcF9jZW50cxgBIAEoAyLnAQoTU2VydmljZVN1YnNjcmlwdGlvbhIcChRwcm9kdWN0X3dvcmtzcGFjZV9pZBgBIAEoCRIUCgxwcm9kdWN0X3NsdWcYAiABKAkSFAoMcHJvZHVjdF9uYW1lGAMgASgJEg4KBnN0YXR1cxgEIAEoCRI2ChJjdXJyZW50X3BlcmlvZF9lbmQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC3ByaWNlX2NlbnRzGAYgASgDEhMKC2hhc19hcGlfa2V5GAcgASgIEhQKDGFwaV9rZXlfaGludBgIIAEoCSJIChtTdGFydFNlcnZpY2VDaGVja291dFJlcXVlc3QSFAoMcHJvZHVjdF9zbHVnGAEgASgJEhMKC3JldHVybl9wYXRoGAIgASgJIjQKHFN0YXJ0U2VydmljZUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJIiEKH0xpc3RTZXJ2aWNlU3Vic2NyaXB0aW9uc1JlcXVlc3QidAogTGlzdFNlcnZpY2VTdWJzY3JpcHRpb25zUmVzcG9uc2USOwoNc3Vic2NyaXB0aW9ucxgBIAMoCzIkLnRhbmsuYmlsbGluZy52MS5TZXJ2aWNlU3Vic2NyaXB0aW9uEhMKC3ByaWNlX2NlbnRzGAIgASgDIi8KGE9wZW5TZXJ2aWNlUG9ydGFsUmVxdWVzdBITCgtyZXR1cm5fcGF0aBgBIAEoCSIvChlPcGVuU2VydmljZVBvcnRhbFJlc3BvbnNlEhIKCnBvcnRhbF91cmwYASABKAkiHAoaQ3JlYXRlU2VydmljZUFwaUtleVJlcXVlc3QiOAobQ3JlYXRlU2VydmljZUFwaUtleVJlc3BvbnNlEgsKA2tleRgBIAEoCRIMCgRoaW50GAIgASgJMsAJCg5CaWxsaW5nU2VydmljZRJPCghHZXRQcmljZRIgLnRhbmsuYmlsbGluZy52MS5HZXRQcmljZVJlcXVlc3QaIS50YW5rLmJpbGxpbmcudjEuR2V0UHJpY2VSZXNwb25zZRJtChJTdGFydENsYWltQ2hlY2tvdXQSKi50YW5rLmJpbGxpbmcudjEuU3RhcnRDbGFpbUNoZWNrb3V0UmVxdWVzdBorLnRhbmsuYmlsbGluZy52MS5TdGFydENsYWltQ2hlY2tvdXRSZXNwb25zZRJkCg9HZXRTdWJzY3JpcHRpb24SJy50YW5rLmJpbGxpbmcudjEuR2V0U3Vic2NyaXB0aW9uUmVxdWVzdBooLnRhbmsuYmlsbGluZy52MS5HZXRTdWJzY3JpcHRpb25SZXNwb25zZRJzChRTdGFydFVwZ3JhZGVDaGVja291dBIsLnRhbmsuYmlsbGluZy52MS5TdGFydFVwZ3JhZGVDaGVja291dFJlcXVlc3QaLS50YW5rLmJpbGxpbmcudjEuU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRJqChFPcGVuQmlsbGluZ1BvcnRhbBIpLnRhbmsuYmlsbGluZy52MS5PcGVuQmlsbGluZ1BvcnRhbFJlcXVlc3QaKi50YW5rLmJpbGxpbmcudjEuT3BlbkJpbGxpbmdQb3J0YWxSZXNwb25zZRJ5ChZWZXJpZnlBcHBsZVRyYW5zYWN0aW9uEi4udGFuay5iaWxsaW5nLnYxLlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXF1ZXN0Gi8udGFuay5iaWxsaW5nLnYxLlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXNwb25zZRJYCgtTZXRBZ2VudENhcBIjLnRhbmsuYmlsbGluZy52MS5TZXRBZ2VudENhcFJlcXVlc3QaJC50YW5rLmJpbGxpbmcudjEuU2V0QWdlbnRDYXBSZXNwb25zZRJzChRTdGFydFNlcnZpY2VDaGVja291dBIsLnRhbmsuYmlsbGluZy52MS5TdGFydFNlcnZpY2VDaGVja291dFJlcXVlc3QaLS50YW5rLmJpbGxpbmcudjEuU3RhcnRTZXJ2aWNlQ2hlY2tvdXRSZXNwb25zZRJ/ChhMaXN0U2VydmljZVN1YnNjcmlwdGlvbnMSMC50YW5rLmJpbGxpbmcudjEuTGlzdFNlcnZpY2VTdWJzY3JpcHRpb25zUmVxdWVzdBoxLnRhbmsuYmlsbGluZy52MS5MaXN0U2VydmljZVN1YnNjcmlwdGlvbnNSZXNwb25zZRJqChFPcGVuU2VydmljZVBvcnRhbBIpLnRhbmsuYmlsbGluZy52MS5PcGVuU2VydmljZVBvcnRhbFJlcXVlc3QaKi50YW5rLmJpbGxpbmcudjEuT3BlblNlcnZpY2VQb3J0YWxSZXNwb25zZRJwChNDcmVhdGVTZXJ2aWNlQXBpS2V5EisudGFuay5iaWxsaW5nLnYxLkNyZWF0ZVNlcnZpY2VBcGlLZXlSZXF1ZXN0GiwudGFuay5iaWxsaW5nLnYxLkNyZWF0ZVNlcnZpY2VBcGlLZXlSZXNwb25zZULYAQoTY29tLnRhbmsuYmlsbGluZy52MUIMQmlsbGluZ1Byb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvYmlsbGluZy92MTtiaWxsaW5ndjGiAgNUQliqAg9UYW5rLkJpbGxpbmcuVjHKAg9UYW5rXEJpbGxpbmdcVjHiAhtUYW5rXEJpbGxpbmdcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpCaWxsaW5nOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
 
 /**
  * Price is what a product costs to take over right now, and why.
@@ -477,6 +477,209 @@ export const SetAgentCapResponseSchema: GenMessage<SetAgentCapResponse> = /*@__P
   messageDesc(file_tank_billing_v1_billing, 15);
 
 /**
+ * @generated from message tank.billing.v1.ServiceSubscription
+ */
+export type ServiceSubscription = Message<"tank.billing.v1.ServiceSubscription"> & {
+  /**
+   * @generated from field: string product_workspace_id = 1;
+   */
+  productWorkspaceId: string;
+
+  /**
+   * @generated from field: string product_slug = 2;
+   */
+  productSlug: string;
+
+  /**
+   * @generated from field: string product_name = 3;
+   */
+  productName: string;
+
+  /**
+   * active, past_due, canceled
+   *
+   * @generated from field: string status = 4;
+   */
+  status: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp current_period_end = 5;
+   */
+  currentPeriodEnd?: Timestamp;
+
+  /**
+   * @generated from field: int64 price_cents = 6;
+   */
+  priceCents: bigint;
+
+  /**
+   * @generated from field: bool has_api_key = 7;
+   */
+  hasApiKey: boolean;
+
+  /**
+   * the last six characters
+   *
+   * @generated from field: string api_key_hint = 8;
+   */
+  apiKeyHint: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.ServiceSubscription.
+ * Use `create(ServiceSubscriptionSchema)` to create a new message.
+ */
+export const ServiceSubscriptionSchema: GenMessage<ServiceSubscription> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 16);
+
+/**
+ * @generated from message tank.billing.v1.StartServiceCheckoutRequest
+ */
+export type StartServiceCheckoutRequest = Message<"tank.billing.v1.StartServiceCheckoutRequest"> & {
+  /**
+   * @generated from field: string product_slug = 1;
+   */
+  productSlug: string;
+
+  /**
+   * @generated from field: string return_path = 2;
+   */
+  returnPath: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.StartServiceCheckoutRequest.
+ * Use `create(StartServiceCheckoutRequestSchema)` to create a new message.
+ */
+export const StartServiceCheckoutRequestSchema: GenMessage<StartServiceCheckoutRequest> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 17);
+
+/**
+ * @generated from message tank.billing.v1.StartServiceCheckoutResponse
+ */
+export type StartServiceCheckoutResponse = Message<"tank.billing.v1.StartServiceCheckoutResponse"> & {
+  /**
+   * @generated from field: string checkout_url = 1;
+   */
+  checkoutUrl: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.StartServiceCheckoutResponse.
+ * Use `create(StartServiceCheckoutResponseSchema)` to create a new message.
+ */
+export const StartServiceCheckoutResponseSchema: GenMessage<StartServiceCheckoutResponse> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 18);
+
+/**
+ * @generated from message tank.billing.v1.ListServiceSubscriptionsRequest
+ */
+export type ListServiceSubscriptionsRequest = Message<"tank.billing.v1.ListServiceSubscriptionsRequest"> & {
+};
+
+/**
+ * Describes the message tank.billing.v1.ListServiceSubscriptionsRequest.
+ * Use `create(ListServiceSubscriptionsRequestSchema)` to create a new message.
+ */
+export const ListServiceSubscriptionsRequestSchema: GenMessage<ListServiceSubscriptionsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 19);
+
+/**
+ * @generated from message tank.billing.v1.ListServiceSubscriptionsResponse
+ */
+export type ListServiceSubscriptionsResponse = Message<"tank.billing.v1.ListServiceSubscriptionsResponse"> & {
+  /**
+   * @generated from field: repeated tank.billing.v1.ServiceSubscription subscriptions = 1;
+   */
+  subscriptions: ServiceSubscription[];
+
+  /**
+   * what one service costs a month
+   *
+   * @generated from field: int64 price_cents = 2;
+   */
+  priceCents: bigint;
+};
+
+/**
+ * Describes the message tank.billing.v1.ListServiceSubscriptionsResponse.
+ * Use `create(ListServiceSubscriptionsResponseSchema)` to create a new message.
+ */
+export const ListServiceSubscriptionsResponseSchema: GenMessage<ListServiceSubscriptionsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 20);
+
+/**
+ * @generated from message tank.billing.v1.OpenServicePortalRequest
+ */
+export type OpenServicePortalRequest = Message<"tank.billing.v1.OpenServicePortalRequest"> & {
+  /**
+   * @generated from field: string return_path = 1;
+   */
+  returnPath: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.OpenServicePortalRequest.
+ * Use `create(OpenServicePortalRequestSchema)` to create a new message.
+ */
+export const OpenServicePortalRequestSchema: GenMessage<OpenServicePortalRequest> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 21);
+
+/**
+ * @generated from message tank.billing.v1.OpenServicePortalResponse
+ */
+export type OpenServicePortalResponse = Message<"tank.billing.v1.OpenServicePortalResponse"> & {
+  /**
+   * @generated from field: string portal_url = 1;
+   */
+  portalUrl: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.OpenServicePortalResponse.
+ * Use `create(OpenServicePortalResponseSchema)` to create a new message.
+ */
+export const OpenServicePortalResponseSchema: GenMessage<OpenServicePortalResponse> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 22);
+
+/**
+ * @generated from message tank.billing.v1.CreateServiceApiKeyRequest
+ */
+export type CreateServiceApiKeyRequest = Message<"tank.billing.v1.CreateServiceApiKeyRequest"> & {
+};
+
+/**
+ * Describes the message tank.billing.v1.CreateServiceApiKeyRequest.
+ * Use `create(CreateServiceApiKeyRequestSchema)` to create a new message.
+ */
+export const CreateServiceApiKeyRequestSchema: GenMessage<CreateServiceApiKeyRequest> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 23);
+
+/**
+ * @generated from message tank.billing.v1.CreateServiceApiKeyResponse
+ */
+export type CreateServiceApiKeyResponse = Message<"tank.billing.v1.CreateServiceApiKeyResponse"> & {
+  /**
+   * shown once
+   *
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: string hint = 2;
+   */
+  hint: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.CreateServiceApiKeyResponse.
+ * Use `create(CreateServiceApiKeyResponseSchema)` to create a new message.
+ */
+export const CreateServiceApiKeyResponseSchema: GenMessage<CreateServiceApiKeyResponse> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 24);
+
+/**
  * @generated from service tank.billing.v1.BillingService
  */
 export const BillingService: GenService<{
@@ -535,6 +738,43 @@ export const BillingService: GenService<{
     methodKind: "unary";
     input: typeof SetAgentCapRequestSchema;
     output: typeof SetAgentCapResponseSchema;
+  },
+  /**
+   * Services (2026-10-20): a person subscribes to one service product, monthly. It
+   * unlocks that product's upcoming predictions in the apps and through an API key.
+   *
+   * @generated from rpc tank.billing.v1.BillingService.StartServiceCheckout
+   */
+  startServiceCheckout: {
+    methodKind: "unary";
+    input: typeof StartServiceCheckoutRequestSchema;
+    output: typeof StartServiceCheckoutResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.billing.v1.BillingService.ListServiceSubscriptions
+   */
+  listServiceSubscriptions: {
+    methodKind: "unary";
+    input: typeof ListServiceSubscriptionsRequestSchema;
+    output: typeof ListServiceSubscriptionsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.billing.v1.BillingService.OpenServicePortal
+   */
+  openServicePortal: {
+    methodKind: "unary";
+    input: typeof OpenServicePortalRequestSchema;
+    output: typeof OpenServicePortalResponseSchema;
+  },
+  /**
+   * A new key replaces the old one; the key is shown once and stored as a hash.
+   *
+   * @generated from rpc tank.billing.v1.BillingService.CreateServiceApiKey
+   */
+  createServiceApiKey: {
+    methodKind: "unary";
+    input: typeof CreateServiceApiKeyRequestSchema;
+    output: typeof CreateServiceApiKeyResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_billing_v1_billing, 0);
