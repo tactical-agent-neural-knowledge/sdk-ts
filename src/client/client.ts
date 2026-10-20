@@ -10,7 +10,6 @@ import {
 } from "@connectrpc/connect";
 import { AgentService, type Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AiService } from "../contracts/tank/ai/v1/ai_pb.js";
-import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
 import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
@@ -23,6 +22,7 @@ import {
   TreadGoalSchema,
 } from "../contracts/tank/channel/v1/channel_pb.js";
 import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
+import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
 import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import {
   ChatService,
