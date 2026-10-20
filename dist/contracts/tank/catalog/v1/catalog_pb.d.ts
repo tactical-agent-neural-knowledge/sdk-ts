@@ -92,6 +92,32 @@ export type ProductCard = Message<"tank.catalog.v1.ProductCard"> & {
      * @generated from field: int64 view_count = 15;
      */
     viewCount: bigint;
+    /**
+     * What kind of thing this is. A service is subscribed to, never taken over, and is
+     * listed above everything else; price_cents is 0 and available is false for one.
+     *
+     * @generated from field: tank.catalog.v1.ProductTier tier = 16;
+     */
+    tier: ProductTier;
+    /**
+     * the caller subscribes to this service
+     *
+     * @generated from field: bool subscribed = 17;
+     */
+    subscribed: boolean;
+    /**
+     * the environment a service competes in
+     *
+     * @generated from field: string environment_slug = 18;
+     */
+    environmentSlug: string;
+    /**
+     * One line about how it is doing against the truth, e.g. "18% better than NOAA's
+     * prediction this week". Empty until a window is scored.
+     *
+     * @generated from field: string score_line = 19;
+     */
+    scoreLine: string;
 };
 /**
  * Describes the message tank.catalog.v1.ProductCard.
@@ -138,6 +164,12 @@ export type ListProductsRequest = Message<"tank.catalog.v1.ListProductsRequest">
      * @generated from field: int32 limit = 7;
      */
     limit: number;
+    /**
+     * unspecified for every tier
+     *
+     * @generated from field: tank.catalog.v1.ProductTier tier = 8;
+     */
+    tier: ProductTier;
 };
 /**
  * Describes the message tank.catalog.v1.ListProductsRequest.
@@ -910,6 +942,31 @@ export type Ranked = Message<"tank.catalog.v1.Ranked"> & {
  * Use `create(RankedSchema)` to create a new message.
  */
 export declare const RankedSchema: GenMessage<Ranked>;
+/**
+ * @generated from enum tank.catalog.v1.ProductTier
+ */
+export declare enum ProductTier {
+    /**
+     * @generated from enum value: PRODUCT_TIER_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * built on the board, sold to one buyer
+     *
+     * @generated from enum value: PRODUCT_TIER_TAKEOVER = 1;
+     */
+    TAKEOVER = 1,
+    /**
+     * graded by the world, subscribed to
+     *
+     * @generated from enum value: PRODUCT_TIER_SERVICE = 2;
+     */
+    SERVICE = 2
+}
+/**
+ * Describes the enum tank.catalog.v1.ProductTier.
+ */
+export declare const ProductTierSchema: GenEnum<ProductTier>;
 /**
  * The orders a person actually asks for, named after what they mean rather than the
  * column they sort on, so the client never has to know that "furthest along" is

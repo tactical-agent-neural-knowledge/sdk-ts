@@ -1,6 +1,7 @@
 import { type Client, type Interceptor, type Transport } from "@connectrpc/connect";
 import { AgentService, type Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AiService } from "../contracts/tank/ai/v1/ai_pb.js";
+import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
 import { AuthService } from "../contracts/tank/auth/v1/auth_pb.js";
 import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
@@ -164,6 +165,8 @@ export declare class TankClient {
     readonly billing: Client<typeof BillingService>;
     /** The chat with TANK's own model at /ai: conversations, the streamed reply, settings. */
     readonly ai: Client<typeof AiService>;
+    /** Services graded by the world: environments, scores, the public conversation. Readable signed out. */
+    readonly environment: Client<typeof EnvironmentService>;
     readonly realtime: RealtimeClient;
     readonly store: TankStore;
     readonly storage: TankStorage;

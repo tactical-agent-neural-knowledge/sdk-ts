@@ -3,6 +3,7 @@ import { timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { Code, ConnectError, createClient, } from "@connectrpc/connect";
 import { AgentService } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AiService } from "../contracts/tank/ai/v1/ai_pb.js";
+import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
 import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import { ChannelReadStateSchema, ChannelService, ChannelType, TreadGoalSchema, } from "../contracts/tank/channel/v1/channel_pb.js";
@@ -68,6 +69,8 @@ export class TankClient {
     billing;
     /** The chat with TANK's own model at /ai: conversations, the streamed reply, settings. */
     ai;
+    /** Services graded by the world: environments, scores, the public conversation. Readable signed out. */
+    environment;
     realtime;
     store;
     storage;
@@ -116,6 +119,7 @@ export class TankClient {
         this.command = createClient(CommandService, this.transport);
         this.billing = createClient(BillingService, this.transport);
         this.ai = createClient(AiService, this.transport);
+        this.environment = createClient(EnvironmentService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
             getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
