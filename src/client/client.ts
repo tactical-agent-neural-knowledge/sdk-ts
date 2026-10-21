@@ -603,8 +603,12 @@ export class TankClient {
     const entry: OutboxEntry = { request, createdAt: this.now(), attempts: 0 };
     this.outbox.set(clientMsgId, entry);
     this.store.dispatch({ type: "pending/add", message: optimistic, now: this.now() });
-    await this.persistOutboxEntry(clientMsgId, entry);
+    // Post first, persist beside it. Local storage is what lets a message survive a reload; it
+    // must never be what a send waits on. When an IndexedDB write stalled (2026-10-21), the
+    // message sat on "Sending…", the composer kept its text, and it only went out when the
+    // socket reconnected and flushed the outbox.
     void this.flushOne(clientMsgId);
+    void this.persistOutboxEntry(clientMsgId, entry).catch(() => undefined);
     return { clientMsgId };
   }
 
@@ -1201,22 +1205,22 @@ export class TankClient {
       const res = await this.chat.postMessage(entry.request);
       this.outbox.delete(clientMsgId);
       if (res.message) this.store.dispatch({ type: "pending/resolve", clientMsgId, message: res.message });
-      await this.storage.delete(storageKeys.outbox(clientMsgId));
       this.sendBackoff.reset();
+      void this.storage.delete(storageKeys.outbox(clientMsgId)).catch(() => undefined);
     } catch (err) {
       entry.inFlight = false;
       const code = err instanceof ConnectError ? err.code : Code.Unavailable;
       const message = err instanceof Error ? err.message : String(err);
       const retryable = RETRYABLE.has(code) && entry.attempts < MAX_SEND_ATTEMPTS;
       if (retryable) {
-        await this.persistOutboxEntry(clientMsgId, entry);
+        void this.persistOutboxEntry(clientMsgId, entry).catch(() => undefined);
         const delay = this.sendBackoff.next();
         setTimeout(() => void this.flushOne(clientMsgId), delay);
         return;
       }
       this.store.dispatch({ type: "pending/failed", clientMsgId, error: message });
-      await this.persistOutboxEntry(clientMsgId, entry);
       this.events.emit("sendFailed", { clientMsgId, error: message });
+      void this.persistOutboxEntry(clientMsgId, entry).catch(() => undefined);
     }
   }
 

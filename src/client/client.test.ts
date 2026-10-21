@@ -1,7 +1,7 @@
 import { create } from "@bufbuild/protobuf";
 import { timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { Code, ConnectError, createRouterTransport } from "@connectrpc/connect";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import WebSocket from "ws";
 import { AuthService, PrincipalSchema } from "../contracts/tank/auth/v1/auth_pb.js";
 import { ChannelSchema, ChannelService, ChannelType } from "../contracts/tank/channel/v1/channel_pb.js";
@@ -776,5 +776,25 @@ describe("searchMembers", () => {
     const before = api.calls.filter((x) => x.rpc === "listMembers").length;
     expect(await c.searchMembers("ws1", "   ")).toEqual([]);
     expect(api.calls.filter((x) => x.rpc === "listMembers").length).toBe(before);
+  });
+});
+
+// 2026-10-21: an IndexedDB write that stalled held a message on "Sending…", kept the text in
+// the composer, and let it out only when the socket reconnected. A send must never wait on
+// local storage: it posts, and resolves, while the write is still hanging.
+describe("a stalled storage write", () => {
+  it("does not hold a message back", async () => {
+    class StalledWrites extends MemoryStorage {
+      override put(): Promise<void> {
+        return new Promise(() => {}); // never answers
+      }
+    }
+    const c = makeClient(new StalledWrites());
+    const sent = await Promise.race([
+      c.sendMessage({ channelId: "1", text: "goes out anyway" }).then(() => "resolved"),
+      new Promise((r) => setTimeout(() => r("hung"), 1000)),
+    ]);
+    expect(sent).toBe("resolved");
+    await vi.waitFor(() => expect(api.posts.map((p) => p.text)).toContain("goes out anyway"));
   });
 });
