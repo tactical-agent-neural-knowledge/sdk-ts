@@ -22,6 +22,8 @@ import { type TankAuth } from "./transport.js";
 import { type UploadInput, type XhrCtor } from "./upload.js";
 import { type RandomBytes } from "./uuidv7.js";
 export interface TankClientOptions {
+    /** How long one attempt at posting a message may take before it is retried. Default 15 s. */
+    sendTimeoutMs?: number;
     /** API origin, e.g. `https://api.tank.chat`. */
     baseUrl: string;
     /** Gateway origin, e.g. `wss://gw.tank.chat`. */

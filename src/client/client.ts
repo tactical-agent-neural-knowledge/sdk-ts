@@ -70,6 +70,8 @@ import {
 import { cryptoRandomBytes, type RandomBytes, uuidv7 } from "./uuidv7.js";
 
 export interface TankClientOptions {
+  /** How long one attempt at posting a message may take before it is retried. Default 15 s. */
+  sendTimeoutMs?: number;
   /** API origin, e.g. `https://api.tank.chat`. */
   baseUrl: string;
   /** Gateway origin, e.g. `wss://gw.tank.chat`. */
@@ -234,6 +236,8 @@ const RETRYABLE = new Set<Code>([
   Code.Unknown,
 ]);
 const MAX_SEND_ATTEMPTS = 6;
+/** How long one attempt at posting a message may take before it is retried. */
+const SEND_TIMEOUT_MS = 15_000;
 
 /**
  * Everything a TANK client app needs, wired together: typed Connect clients
@@ -1202,7 +1206,12 @@ export class TankClient {
     entry.inFlight = true;
     entry.attempts += 1;
     try {
-      const res = await this.chat.postMessage(entry.request);
+      // Bounded: a reply lost on a flaky network would otherwise hold the message on
+      // "Sending…" forever. Past the limit it is DeadlineExceeded, which retries with
+      // backoff, and the server answers a retried client_msg_id with the original message.
+      const res = await this.chat.postMessage(entry.request, {
+        timeoutMs: this.opts.sendTimeoutMs ?? SEND_TIMEOUT_MS,
+      });
       this.outbox.delete(clientMsgId);
       if (res.message) this.store.dispatch({ type: "pending/resolve", clientMsgId, message: res.message });
       this.sendBackoff.reset();

@@ -37,6 +37,8 @@ interface FakeApi {
   /** When set, ListMessages never answers: a request that died under the app. */
   hangList?: boolean;
   posts: PostMessageRequest[];
+  /** Hang this many PostMessage calls until the caller gives up on them. */
+  hangNext?: number;
   failNext: { code: Code; times: number } | undefined;
   /** When true, PostMessage echoes the event through the gateway before responding. */
   echoFirst: boolean;
@@ -157,8 +159,15 @@ function fakeTransport() {
       },
     });
     service(ChatService, {
-      postMessage: async (req) => {
+      postMessage: async (req, ctx) => {
         api.posts.push(req);
+        if (api.hangNext && api.hangNext > 0) {
+          api.hangNext -= 1;
+          // A reply that never comes back: only the caller's deadline ends it.
+          await new Promise((_, reject) =>
+            ctx.signal.addEventListener("abort", () => reject(ctx.signal.reason)),
+          );
+        }
         if (api.failNext && api.failNext.times > 0) {
           api.failNext.times -= 1;
           throw new ConnectError("nope", api.failNext.code);
@@ -306,7 +315,8 @@ describe("TankClient", () => {
     const { clientMsgId } = await c.sendMessage({ channelId: "general", text: "flaky" });
     await until(() => c.store.getState().pending[clientMsgId] === undefined, 8000);
     expect(api.posts).toHaveLength(3);
-    expect(api.posts.every((p) => p.clientMsgId === clientMsgId)).toBe(true);
+    console.log("POSTS", JSON.stringify(api.posts.map((p) => [p.clientMsgId, p.text])), clientMsgId);
+    expect(api.posts.map((p) => p.clientMsgId)).toEqual(api.posts.map(() => clientMsgId));
 
     api.failNext = { code: Code.PermissionDenied, times: 1 };
     const failed: string[] = [];
@@ -796,5 +806,37 @@ describe("a stalled storage write", () => {
     ]);
     expect(sent).toBe("resolved");
     await vi.waitFor(() => expect(api.posts.map((p) => p.text)).toContain("goes out anyway"));
+  });
+});
+
+// A reply lost on a flaky network must not hold a message on "Sending…" forever: the
+// attempt times out, is retried with the same client_msg_id, and the message lands.
+describe("a reply that never comes back", () => {
+  it("is retried and the message lands", async () => {
+    api.hangNext = 1;
+    const c = createTankClient({
+      baseUrl: "http://unused",
+      wsUrl: gw.url,
+      auth: "cookie",
+      storage: new MemoryStorage(),
+      transport: fakeTransport(),
+      WebSocket: WebSocket as unknown as WebSocketCtor,
+      sendTimeoutMs: 50,
+      realtime: {
+        heartbeatMs: 60_000,
+        gapBufferMs: 60,
+        backoff: { minMs: 10, maxMs: 40 },
+        listenOnline: false,
+      },
+    });
+    clients.push(c);
+    const { clientMsgId } = await c.sendMessage({ channelId: "1", text: "through the flaky bit" });
+    // Only this message: a client from an earlier test may still be retrying its own.
+    const mine = () => api.posts.filter((p) => p.text === "through the flaky bit");
+    await vi.waitFor(() => expect(mine().length).toBeGreaterThanOrEqual(2), { timeout: 5000 });
+    expect(mine().every((p) => p.clientMsgId === clientMsgId)).toBe(true);
+    await vi.waitFor(() => expect(c.store.getState().pending[clientMsgId]).toBeUndefined(), {
+      timeout: 5000,
+    });
   });
 });
