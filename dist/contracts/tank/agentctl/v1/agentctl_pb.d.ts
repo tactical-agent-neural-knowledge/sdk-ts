@@ -3873,6 +3873,90 @@ export type ArenaTurnResponse = Message<"tank.agentctl.v1.ArenaTurnResponse"> & 
  */
 export declare const ArenaTurnResponseSchema: GenMessage<ArenaTurnResponse>;
 /**
+ * @generated from message tank.agentctl.v1.ReadRepoRequest
+ */
+export type ReadRepoRequest = Message<"tank.agentctl.v1.ReadRepoRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * branch or commit; empty = the default branch
+     *
+     * @generated from field: string ref = 3;
+     */
+    ref: string;
+    /**
+     * a file; empty with tree = the whole repository
+     *
+     * @generated from field: string path = 4;
+     */
+    path: string;
+    /**
+     * list file paths under path instead of reading one
+     *
+     * @generated from field: bool tree = 5;
+     */
+    tree: boolean;
+    /**
+     * cap on content; 0 = 256 KiB
+     *
+     * @generated from field: int32 max_bytes = 6;
+     */
+    maxBytes: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadRepoRequest.
+ * Use `create(ReadRepoRequestSchema)` to create a new message.
+ */
+export declare const ReadRepoRequestSchema: GenMessage<ReadRepoRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ReadRepoResponse
+ */
+export type ReadRepoResponse = Message<"tank.agentctl.v1.ReadRepoResponse"> & {
+    /**
+     * the commit read
+     *
+     * @generated from field: string sha = 1;
+     */
+    sha: string;
+    /**
+     * @generated from field: bytes content = 2;
+     */
+    content: Uint8Array;
+    /**
+     * with tree: file paths, capped
+     *
+     * @generated from field: repeated string paths = 3;
+     */
+    paths: string[];
+    /**
+     * "ok" | "missing" | "denied" | "too_large"
+     *
+     * @generated from field: string status = 4;
+     */
+    status: string;
+    /**
+     * @generated from field: string reason = 5;
+     */
+    reason: string;
+    /**
+     * @generated from field: bool truncated = 6;
+     */
+    truncated: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadRepoResponse.
+ * Use `create(ReadRepoResponseSchema)` to create a new message.
+ */
+export declare const ReadRepoResponseSchema: GenMessage<ReadRepoResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -4501,6 +4585,19 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof SetUpPreviewWorkflowRequestSchema;
         output: typeof SetUpPreviewWorkflowResponseSchema;
+    };
+    /**
+     * Reads a repository the workspace's own installation reaches, at a ref: one file's
+     * content, or the list of file paths. For a board's route list and code frames. api
+     * asks only after its own grant check; this refuses a repository the installation
+     * does not reach, so a workspace can never read through TANK's own installation.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ReadRepo
+     */
+    readRepo: {
+        methodKind: "unary";
+        input: typeof ReadRepoRequestSchema;
+        output: typeof ReadRepoResponseSchema;
     };
     /**
      * Writes into schema `agent`, which belongs to the control plane. The

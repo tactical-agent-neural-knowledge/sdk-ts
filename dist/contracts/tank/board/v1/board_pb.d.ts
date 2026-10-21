@@ -184,6 +184,22 @@ export type AppFrame = Message<"tank.board.v1.AppFrame"> & {
      * @generated from field: string moved_note = 13;
      */
     movedNote: string;
+    /**
+     * A named environment of this repository (RepoEnvironment.name), e.g. "production":
+     * the frame shows that address plus `path` instead of a build of `ref`. Empty means a
+     * build of `ref`, as before. Resolved only for a verified environment of a repository
+     * this workspace was granted.
+     *
+     * @generated from field: string environment = 14;
+     */
+    environment: string;
+    /**
+     * Mobile: the screen to open, as a deep link path in the app (e.g. "/settings/billing").
+     * `path` stays the web route.
+     *
+     * @generated from field: string screen = 15;
+     */
+    screen: string;
 };
 /**
  * Describes the message tank.board.v1.AppFrame.
@@ -301,12 +317,89 @@ export type BoardObject = Message<"tank.board.v1.BoardObject"> & {
      * @generated from field: tank.board.v1.Derivation derived = 19;
      */
     derived?: Derivation;
+    /**
+     * Frame only: a file, or a range of one, from a repository this workspace was granted.
+     *
+     * @generated from field: tank.board.v1.CodeFrame code = 20;
+     */
+    code?: CodeFrame;
 };
 /**
  * Describes the message tank.board.v1.BoardObject.
  * Use `create(BoardObjectSchema)` to create a new message.
  */
 export declare const BoardObjectSchema: GenMessage<BoardObject>;
+/**
+ * A frame holding source: read by TANK through the workspace's own GitHub connection at
+ * a branch or commit, never through a URL the client supplies.
+ *
+ * @generated from message tank.board.v1.CodeFrame
+ */
+export type CodeFrame = Message<"tank.board.v1.CodeFrame"> & {
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * branch or commit
+     *
+     * @generated from field: string ref = 2;
+     */
+    ref: string;
+    /**
+     * file in the repository
+     *
+     * @generated from field: string path = 3;
+     */
+    path: string;
+    /**
+     * 0 = the whole file
+     *
+     * @generated from field: int32 start_line = 4;
+     */
+    startLine: number;
+    /**
+     * @generated from field: int32 end_line = 5;
+     */
+    endLine: number;
+    /**
+     * Server-filled on read.
+     *
+     * the lines asked for, capped
+     *
+     * @generated from field: string content = 6;
+     */
+    content: string;
+    /**
+     * for highlighting, from the extension
+     *
+     * @generated from field: string language = 7;
+     */
+    language: string;
+    /**
+     * the commit the content was read at
+     *
+     * @generated from field: string sha = 8;
+     */
+    sha: string;
+    /**
+     * "ok" | "missing" | "denied" | "too_large"
+     *
+     * @generated from field: string status = 9;
+     */
+    status: string;
+    /**
+     * @generated from field: string note = 10;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.board.v1.CodeFrame.
+ * Use `create(CodeFrameSchema)` to create a new message.
+ */
+export declare const CodeFrameSchema: GenMessage<CodeFrame>;
 /**
  * @generated from message tank.board.v1.Board
  */
@@ -1904,6 +1997,309 @@ export type DeriveDiagramResponse = Message<"tank.board.v1.DeriveDiagramResponse
  */
 export declare const DeriveDiagramResponseSchema: GenMessage<DeriveDiagramResponse>;
 /**
+ * Where a repository runs, named by the company: production, staging, anything with an
+ * address. TANK shows it in a frame once the company has proved the domain is theirs.
+ *
+ * @generated from message tank.board.v1.RepoEnvironment
+ */
+export type RepoEnvironment = Message<"tank.board.v1.RepoEnvironment"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * owner/name, granted to the workspace
+     *
+     * @generated from field: string repo = 3;
+     */
+    repo: string;
+    /**
+     * "production", "staging"
+     *
+     * @generated from field: string name = 4;
+     */
+    name: string;
+    /**
+     * https origin, e.g. https://app.cache7.com
+     *
+     * @generated from field: string url = 5;
+     */
+    url: string;
+    /**
+     * "web" | "ios" | "android"
+     *
+     * @generated from field: string platform = 6;
+     */
+    platform: string;
+    /**
+     * Domain proof: a TXT record `_tank-verify.<host>` with this value, or the value served
+     * at https://<host>/.well-known/tank-verify.txt.
+     *
+     * @generated from field: string verify_token = 7;
+     */
+    verifyToken: string;
+    /**
+     * @generated from field: bool verified = 8;
+     */
+    verified: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp verified_at = 9;
+     */
+    verifiedAt?: Timestamp;
+    /**
+     * Whether the site lets app.tank.chat embed it: "allowed" | "refused" | "unknown".
+     *
+     * @generated from field: string embed = 10;
+     */
+    embed: string;
+    /**
+     * the header to change when refused
+     *
+     * @generated from field: string embed_note = 11;
+     */
+    embedNote: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp checked_at = 12;
+     */
+    checkedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.board.v1.RepoEnvironment.
+ * Use `create(RepoEnvironmentSchema)` to create a new message.
+ */
+export declare const RepoEnvironmentSchema: GenMessage<RepoEnvironment>;
+/**
+ * @generated from message tank.board.v1.ListRepoEnvironmentsRequest
+ */
+export type ListRepoEnvironmentsRequest = Message<"tank.board.v1.ListRepoEnvironmentsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * empty for every repository
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+};
+/**
+ * Describes the message tank.board.v1.ListRepoEnvironmentsRequest.
+ * Use `create(ListRepoEnvironmentsRequestSchema)` to create a new message.
+ */
+export declare const ListRepoEnvironmentsRequestSchema: GenMessage<ListRepoEnvironmentsRequest>;
+/**
+ * @generated from message tank.board.v1.ListRepoEnvironmentsResponse
+ */
+export type ListRepoEnvironmentsResponse = Message<"tank.board.v1.ListRepoEnvironmentsResponse"> & {
+    /**
+     * @generated from field: repeated tank.board.v1.RepoEnvironment environments = 1;
+     */
+    environments: RepoEnvironment[];
+};
+/**
+ * Describes the message tank.board.v1.ListRepoEnvironmentsResponse.
+ * Use `create(ListRepoEnvironmentsResponseSchema)` to create a new message.
+ */
+export declare const ListRepoEnvironmentsResponseSchema: GenMessage<ListRepoEnvironmentsResponse>;
+/**
+ * Admins only. Creates or replaces the environment of that name for that repository.
+ *
+ * @generated from message tank.board.v1.SetRepoEnvironmentRequest
+ */
+export type SetRepoEnvironmentRequest = Message<"tank.board.v1.SetRepoEnvironmentRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: string url = 4;
+     */
+    url: string;
+    /**
+     * @generated from field: string platform = 5;
+     */
+    platform: string;
+};
+/**
+ * Describes the message tank.board.v1.SetRepoEnvironmentRequest.
+ * Use `create(SetRepoEnvironmentRequestSchema)` to create a new message.
+ */
+export declare const SetRepoEnvironmentRequestSchema: GenMessage<SetRepoEnvironmentRequest>;
+/**
+ * @generated from message tank.board.v1.SetRepoEnvironmentResponse
+ */
+export type SetRepoEnvironmentResponse = Message<"tank.board.v1.SetRepoEnvironmentResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.RepoEnvironment environment = 1;
+     */
+    environment?: RepoEnvironment;
+};
+/**
+ * Describes the message tank.board.v1.SetRepoEnvironmentResponse.
+ * Use `create(SetRepoEnvironmentResponseSchema)` to create a new message.
+ */
+export declare const SetRepoEnvironmentResponseSchema: GenMessage<SetRepoEnvironmentResponse>;
+/**
+ * Admins only. Checks the domain proof and whether the site can be embedded, now.
+ *
+ * @generated from message tank.board.v1.VerifyRepoEnvironmentRequest
+ */
+export type VerifyRepoEnvironmentRequest = Message<"tank.board.v1.VerifyRepoEnvironmentRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+};
+/**
+ * Describes the message tank.board.v1.VerifyRepoEnvironmentRequest.
+ * Use `create(VerifyRepoEnvironmentRequestSchema)` to create a new message.
+ */
+export declare const VerifyRepoEnvironmentRequestSchema: GenMessage<VerifyRepoEnvironmentRequest>;
+/**
+ * @generated from message tank.board.v1.VerifyRepoEnvironmentResponse
+ */
+export type VerifyRepoEnvironmentResponse = Message<"tank.board.v1.VerifyRepoEnvironmentResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.RepoEnvironment environment = 1;
+     */
+    environment?: RepoEnvironment;
+};
+/**
+ * Describes the message tank.board.v1.VerifyRepoEnvironmentResponse.
+ * Use `create(VerifyRepoEnvironmentResponseSchema)` to create a new message.
+ */
+export declare const VerifyRepoEnvironmentResponseSchema: GenMessage<VerifyRepoEnvironmentResponse>;
+/**
+ * @generated from message tank.board.v1.DeleteRepoEnvironmentRequest
+ */
+export type DeleteRepoEnvironmentRequest = Message<"tank.board.v1.DeleteRepoEnvironmentRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+};
+/**
+ * Describes the message tank.board.v1.DeleteRepoEnvironmentRequest.
+ * Use `create(DeleteRepoEnvironmentRequestSchema)` to create a new message.
+ */
+export declare const DeleteRepoEnvironmentRequestSchema: GenMessage<DeleteRepoEnvironmentRequest>;
+/**
+ * @generated from message tank.board.v1.DeleteRepoEnvironmentResponse
+ */
+export type DeleteRepoEnvironmentResponse = Message<"tank.board.v1.DeleteRepoEnvironmentResponse"> & {};
+/**
+ * Describes the message tank.board.v1.DeleteRepoEnvironmentResponse.
+ * Use `create(DeleteRepoEnvironmentResponseSchema)` to create a new message.
+ */
+export declare const DeleteRepoEnvironmentResponseSchema: GenMessage<DeleteRepoEnvironmentResponse>;
+/**
+ * The pages or screens of a granted repository, read from its source at a ref.
+ *
+ * @generated from message tank.board.v1.ListRepoRoutesRequest
+ */
+export type ListRepoRoutesRequest = Message<"tank.board.v1.ListRepoRoutesRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * empty = the default branch
+     *
+     * @generated from field: string ref = 3;
+     */
+    ref: string;
+};
+/**
+ * Describes the message tank.board.v1.ListRepoRoutesRequest.
+ * Use `create(ListRepoRoutesRequestSchema)` to create a new message.
+ */
+export declare const ListRepoRoutesRequestSchema: GenMessage<ListRepoRoutesRequest>;
+/**
+ * @generated from message tank.board.v1.RepoRoute
+ */
+export type RepoRoute = Message<"tank.board.v1.RepoRoute"> & {
+    /**
+     * "/settings/billing", "/w/[ws]/c/[channel]"
+     *
+     * @generated from field: string path = 1;
+     */
+    path: string;
+    /**
+     * the source file that defines it
+     *
+     * @generated from field: string file = 2;
+     */
+    file: string;
+    /**
+     * "web" | "mobile"
+     *
+     * @generated from field: string platform = 3;
+     */
+    platform: string;
+    /**
+     * has [params] a person fills in
+     *
+     * @generated from field: bool dynamic = 4;
+     */
+    dynamic: boolean;
+};
+/**
+ * Describes the message tank.board.v1.RepoRoute.
+ * Use `create(RepoRouteSchema)` to create a new message.
+ */
+export declare const RepoRouteSchema: GenMessage<RepoRoute>;
+/**
+ * @generated from message tank.board.v1.ListRepoRoutesResponse
+ */
+export type ListRepoRoutesResponse = Message<"tank.board.v1.ListRepoRoutesResponse"> & {
+    /**
+     * @generated from field: repeated tank.board.v1.RepoRoute routes = 1;
+     */
+    routes: RepoRoute[];
+    /**
+     * "next-app" | "next-pages" | "expo-router" | "react-router" | "astro" | ""
+     *
+     * @generated from field: string framework = 2;
+     */
+    framework: string;
+    /**
+     * why the list is empty or partial
+     *
+     * @generated from field: string note = 3;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.board.v1.ListRepoRoutesResponse.
+ * Use `create(ListRepoRoutesResponseSchema)` to create a new message.
+ */
+export declare const ListRepoRoutesResponseSchema: GenMessage<ListRepoRoutesResponse>;
+/**
  * @generated from enum tank.board.v1.ObjectKind
  */
 export declare enum ObjectKind {
@@ -2127,5 +2523,45 @@ export declare const BoardService: GenService<{
         methodKind: "unary";
         input: typeof DeriveDiagramRequestSchema;
         output: typeof DeriveDiagramResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ListRepoEnvironments
+     */
+    listRepoEnvironments: {
+        methodKind: "unary";
+        input: typeof ListRepoEnvironmentsRequestSchema;
+        output: typeof ListRepoEnvironmentsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.SetRepoEnvironment
+     */
+    setRepoEnvironment: {
+        methodKind: "unary";
+        input: typeof SetRepoEnvironmentRequestSchema;
+        output: typeof SetRepoEnvironmentResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.VerifyRepoEnvironment
+     */
+    verifyRepoEnvironment: {
+        methodKind: "unary";
+        input: typeof VerifyRepoEnvironmentRequestSchema;
+        output: typeof VerifyRepoEnvironmentResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.DeleteRepoEnvironment
+     */
+    deleteRepoEnvironment: {
+        methodKind: "unary";
+        input: typeof DeleteRepoEnvironmentRequestSchema;
+        output: typeof DeleteRepoEnvironmentResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ListRepoRoutes
+     */
+    listRepoRoutes: {
+        methodKind: "unary";
+        input: typeof ListRepoRoutesRequestSchema;
+        output: typeof ListRepoRoutesResponseSchema;
     };
 }>;
