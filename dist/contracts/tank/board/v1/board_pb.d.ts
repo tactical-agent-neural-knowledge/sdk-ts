@@ -2300,6 +2300,183 @@ export type ListRepoRoutesResponse = Message<"tank.board.v1.ListRepoRoutesRespon
  */
 export declare const ListRepoRoutesResponseSchema: GenMessage<ListRepoRoutesResponse>;
 /**
+ * Remote viewing (2026-10-21): a link that opens one TANK-built branch preview for somebody
+ * outside the workspace, until it expires or is stopped. A TANK-built preview is otherwise
+ * private to the workspace; members open it from a frame. THREATS.md §3.9.
+ *
+ * @generated from message tank.board.v1.RemoteView
+ */
+export type RemoteView = Message<"tank.board.v1.RemoteView"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * the frame it was made from
+     *
+     * @generated from field: string object_id = 3;
+     */
+    objectId: string;
+    /**
+     * @generated from field: string repo = 4;
+     */
+    repo: string;
+    /**
+     * @generated from field: string ref = 5;
+     */
+    ref: string;
+    /**
+     * The link, present only in the response that made it: it is a credential and is
+     * never stored or read back.
+     *
+     * @generated from field: string url = 6;
+     */
+    url: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 7;
+     */
+    createdAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 8;
+     */
+    expiresAt?: Timestamp;
+    /**
+     * user id
+     *
+     * @generated from field: string created_by = 9;
+     */
+    createdBy: string;
+    /**
+     * stopped by somebody before it expired
+     *
+     * @generated from field: bool stopped = 10;
+     */
+    stopped: boolean;
+};
+/**
+ * Describes the message tank.board.v1.RemoteView.
+ * Use `create(RemoteViewSchema)` to create a new message.
+ */
+export declare const RemoteViewSchema: GenMessage<RemoteView>;
+/**
+ * @generated from message tank.board.v1.CreateRemoteViewRequest
+ */
+export type CreateRemoteViewRequest = Message<"tank.board.v1.CreateRemoteViewRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * a frame showing a TANK-built preview
+     *
+     * @generated from field: string object_id = 3;
+     */
+    objectId: string;
+    /**
+     * 1 to 720 (30 days); 0 = 24
+     *
+     * @generated from field: int32 hours = 4;
+     */
+    hours: number;
+};
+/**
+ * Describes the message tank.board.v1.CreateRemoteViewRequest.
+ * Use `create(CreateRemoteViewRequestSchema)` to create a new message.
+ */
+export declare const CreateRemoteViewRequestSchema: GenMessage<CreateRemoteViewRequest>;
+/**
+ * @generated from message tank.board.v1.CreateRemoteViewResponse
+ */
+export type CreateRemoteViewResponse = Message<"tank.board.v1.CreateRemoteViewResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.RemoteView view = 1;
+     */
+    view?: RemoteView;
+};
+/**
+ * Describes the message tank.board.v1.CreateRemoteViewResponse.
+ * Use `create(CreateRemoteViewResponseSchema)` to create a new message.
+ */
+export declare const CreateRemoteViewResponseSchema: GenMessage<CreateRemoteViewResponse>;
+/**
+ * @generated from message tank.board.v1.ListRemoteViewsRequest
+ */
+export type ListRemoteViewsRequest = Message<"tank.board.v1.ListRemoteViewsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+};
+/**
+ * Describes the message tank.board.v1.ListRemoteViewsRequest.
+ * Use `create(ListRemoteViewsRequestSchema)` to create a new message.
+ */
+export declare const ListRemoteViewsRequestSchema: GenMessage<ListRemoteViewsRequest>;
+/**
+ * @generated from message tank.board.v1.ListRemoteViewsResponse
+ */
+export type ListRemoteViewsResponse = Message<"tank.board.v1.ListRemoteViewsResponse"> & {
+    /**
+     * @generated from field: repeated tank.board.v1.RemoteView views = 1;
+     */
+    views: RemoteView[];
+};
+/**
+ * Describes the message tank.board.v1.ListRemoteViewsResponse.
+ * Use `create(ListRemoteViewsResponseSchema)` to create a new message.
+ */
+export declare const ListRemoteViewsResponseSchema: GenMessage<ListRemoteViewsResponse>;
+/**
+ * Stops every Remote viewing link to the build the frame shows. Members' frames keep working.
+ *
+ * @generated from message tank.board.v1.StopRemoteViewsRequest
+ */
+export type StopRemoteViewsRequest = Message<"tank.board.v1.StopRemoteViewsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * @generated from field: string object_id = 3;
+     */
+    objectId: string;
+};
+/**
+ * Describes the message tank.board.v1.StopRemoteViewsRequest.
+ * Use `create(StopRemoteViewsRequestSchema)` to create a new message.
+ */
+export declare const StopRemoteViewsRequestSchema: GenMessage<StopRemoteViewsRequest>;
+/**
+ * @generated from message tank.board.v1.StopRemoteViewsResponse
+ */
+export type StopRemoteViewsResponse = Message<"tank.board.v1.StopRemoteViewsResponse"> & {
+    /**
+     * @generated from field: int32 stopped = 1;
+     */
+    stopped: number;
+};
+/**
+ * Describes the message tank.board.v1.StopRemoteViewsResponse.
+ * Use `create(StopRemoteViewsResponseSchema)` to create a new message.
+ */
+export declare const StopRemoteViewsResponseSchema: GenMessage<StopRemoteViewsResponse>;
+/**
  * @generated from enum tank.board.v1.ObjectKind
  */
 export declare enum ObjectKind {
@@ -2563,5 +2740,29 @@ export declare const BoardService: GenService<{
         methodKind: "unary";
         input: typeof ListRepoRoutesRequestSchema;
         output: typeof ListRepoRoutesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.CreateRemoteView
+     */
+    createRemoteView: {
+        methodKind: "unary";
+        input: typeof CreateRemoteViewRequestSchema;
+        output: typeof CreateRemoteViewResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ListRemoteViews
+     */
+    listRemoteViews: {
+        methodKind: "unary";
+        input: typeof ListRemoteViewsRequestSchema;
+        output: typeof ListRemoteViewsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.StopRemoteViews
+     */
+    stopRemoteViews: {
+        methodKind: "unary";
+        input: typeof StopRemoteViewsRequestSchema;
+        output: typeof StopRemoteViewsResponseSchema;
     };
 }>;

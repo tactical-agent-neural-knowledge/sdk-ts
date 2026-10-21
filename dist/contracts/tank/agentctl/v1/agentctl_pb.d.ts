@@ -3957,6 +3957,70 @@ export type ReadRepoResponse = Message<"tank.agentctl.v1.ReadRepoResponse"> & {
  */
 export declare const ReadRepoResponseSchema: GenMessage<ReadRepoResponse>;
 /**
+ * @generated from message tank.agentctl.v1.BuildPreviewRequest
+ */
+export type BuildPreviewRequest = Message<"tank.agentctl.v1.BuildPreviewRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * branch; empty = the default branch
+     *
+     * @generated from field: string ref = 3;
+     */
+    ref: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BuildPreviewRequest.
+ * Use `create(BuildPreviewRequestSchema)` to create a new message.
+ */
+export declare const BuildPreviewRequestSchema: GenMessage<BuildPreviewRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BuildPreviewResponse
+ */
+export type BuildPreviewResponse = Message<"tank.agentctl.v1.BuildPreviewResponse"> & {
+    /**
+     * "queued" | "building" | "done" | "failed" | "refused"
+     *
+     * @generated from field: string state = 1;
+     */
+    state: string;
+    /**
+     * when done
+     *
+     * @generated from field: string url = 2;
+     */
+    url: string;
+    /**
+     * the commit being or been built
+     *
+     * @generated from field: string sha = 3;
+     */
+    sha: string;
+    /**
+     * when failed or refused, in a sentence
+     *
+     * @generated from field: string reason = 4;
+     */
+    reason: string;
+    /**
+     * @generated from field: string framework = 5;
+     */
+    framework: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BuildPreviewResponse.
+ * Use `create(BuildPreviewResponseSchema)` to create a new message.
+ */
+export declare const BuildPreviewResponseSchema: GenMessage<BuildPreviewResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -4598,6 +4662,19 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof ReadRepoRequestSchema;
         output: typeof ReadRepoResponseSchema;
+    };
+    /**
+     * Builds a branch of a repository the workspace's own installation reaches into a
+     * static site served at https://<build_id>.preview.<domain>, for board frames. Queues
+     * once per commit; answers with the newest build's state for that commit. Refused for
+     * a repository outside the installation and past the workspace's daily build cap.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.BuildPreview
+     */
+    buildPreview: {
+        methodKind: "unary";
+        input: typeof BuildPreviewRequestSchema;
+        output: typeof BuildPreviewResponseSchema;
     };
     /**
      * Writes into schema `agent`, which belongs to the control plane. The
