@@ -1,15 +1,16 @@
 # Neurons · src/client
 
-refreshed 2026-10-20 · d78c6876be81
+refreshed 2026-10-21 · 9a5847392f7a
 
 - `createTankClient` (`src/client/client.ts`) is the single entry point; `client.start()` must run before any send/subscribe call — it opens the realtime socket, replays the outbox, and primes the store from `GetBootstrap` in that order.
 - Optimistic helpers (`updateMessage`, `deleteMessage`, `joinChannel`, `leaveChannel`, `createChannel`, `setGoal`, `invite`, `markThreadRead`) are the only sanctioned way to mutate state — each applies to the store immediately and rolls back on RPC error, so apps must never dispatch a raw store action directly.
+- **Send ordering change (2026-10-21):** `sendMessage` fires the RPC (`flushOne`) before persisting the outbox entry, and all storage writes in the send path are now fire-and-forget (`void...catch(() => undefined)`). A stalled IndexedDB write can no longer block a message from going out; persistence is a durability aid across reloads, not a gate on the network call (`src/client/client.ts` lines 606–614, 1205–1222).
 - Send retries are narrow by design: only a fixed `RETRYABLE` status set is retried, capped at `MAX_SEND_ATTEMPTS = 6`, backed off per `backoff.ts` — anything else (e.g. validation errors) surfaces immediately instead of retrying into a wall.
 - `store.ts` is the single state owner (~1500 lines, ~30 state keys, ~50-action reducer) covering messages, channels, threads, notifications, agent runs and files — web/mobile keep no side stores; selectors are memoized so re-render cost tracks subscriptions, not store size.
-- `TankClient` exposes typed service clients for every backend service: `auth`, `workspaces`, `channels`, `chat`, `presence`, `files`, `agents`/`agent`, `notifications`, `topo`, `monitor`, `command`, `billing`, `ai`, and `environment` (added commit d78c687).
-- `client.environment` (`EnvironmentService`) surfaces the arena grading system: `ListEnvironments`, `GetEnvironment`, `ListScores`, `ListObservations`, `ListPredictions`, `ListRounds`, `ListComments`, `PostComment` — readable signed out; `Environment` carries subjects, products, scoring metadata and prediction series.
+- `TankClient` exposes typed service clients for every backend service: `auth`, `workspaces`, `channels`, `chat`, `presence`, `files`, `agents`/`agent`, `notifications`, `topo`, `monitor`, `command`, `billing`, `ai`, and `environment`.
+- `client.environment` (`EnvironmentService`) surfaces the arena grading system: `ListEnvironments`, `GetEnvironment`, `ListScores`, `ListObservations`, `ListPredictions`, `ListRounds`, `ListComments`, `PostComment` — readable signed out.
 - `client.ai.sendMessage` is a **server-side streaming RPC** — the response is an `AsyncIterable<SendMessageResponse>` that emits `started`, `delta`, `done` and `title` event variants; callers must iterate to completion or cancel, not just await.
-- `client.billing` includes `VerifyAppleTransaction` (mobile In-App Purchase receipt verification) and `SetAgentCap` (workspace agent spend cap).
+- `client.billing` includes `VerifyAppleTransaction` (mobile In-App Purchase receipt verification), `SetAgentCap` (workspace agent spend cap), and `ListServiceSubscriptions` (which services a workspace has subscribed to).
 - `paywall.ts` exports `paywallMessage(err)` and `isPaywall(err)` — the single place that recognises a `FailedPrecondition` with `"premium subscription"` text as an upsell; other `FailedPrecondition` errors (archived Tread, deleted thread) must not open an upgrade prompt.
 - Timeline trap: `inChannelTimeline` filters by channel *and* excludes thread-only replies — a message that looks "in the channel" in the data can still be absent from the rendered timeline if it's a thread reply.
 - Unread-count trap: the server's count always wins over any local recomputation on reconnect; client-side increment/decrement is a display optimization only, never the source of truth.

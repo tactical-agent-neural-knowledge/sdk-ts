@@ -1,4 +1,4 @@
-# Neural Knowledge by TANK · refreshed 2026-10-20 · d78c6876be81
+# Neural Knowledge by TANK · refreshed 2026-10-21 · 9a5847392f7a
 
 `@tactical-agent-neural-knowledge/sdk` is the single npm package that all TANK client apps depend on. It ships typed Connect clients for every backend service, a normalised Redux-style store, a realtime gateway client with gap-buffer/Resume reconnection, React hooks, design tokens, and block renderers for web (MUI) and React Native (Paper). Consumers install it as a git dependency pinned to a sha — there is no registry; a green `main` sha is the artifact.
 
