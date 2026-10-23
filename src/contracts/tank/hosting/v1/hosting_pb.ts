@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/hosting/v1/hosting.proto.
  */
 export const file_tank_hosting_v1_hosting: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2hvc3RpbmcvdjEvaG9zdGluZy5wcm90bxIPdGFuay5ob3N0aW5nLnYxIjsKEUdldFByb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEgoKdGFpbF9saW5lcxgCIAEoBSJ8ChJHZXRQcm9kdWN0UmVzcG9uc2USKQoHcHJvZHVjdBgBIAEoCzIYLnRhbmsuaG9zdGluZy52MS5Qcm9kdWN0EgwKBGxvZ3MYAiABKAkSLQoGZXZlbnRzGAMgAygLMh0udGFuay5ob3N0aW5nLnYxLlByb2R1Y3RFdmVudCLSAgoHUHJvZHVjdBIMCgRzbHVnGAEgASgJEgwKBHJlcG8YAiABKAkSCwoDdXJsGAMgASgJEg0KBWF3YWtlGAQgASgIEg4KBnN0YXR1cxgFIAEoCRIRCglpbWFnZV90YWcYBiABKAkSEAoIcmVzdGFydHMYByABKAUSGAoQbGFzdF9leGl0X3JlYXNvbhgIIAEoCRIuCgpzdGFydGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIRCgljcHVfbGltaXQYCiABKAkSFAoMbWVtb3J5X2xpbWl0GAsgASgJEhIKCmRpc2tfYnl0ZXMYDCABKAMSEgoKY2FuX21hbmFnZRgNIAEoCBIPCgdtYW5hZ2VkGA4gASgIEi4KCnVwZGF0ZWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImUKDFByb2R1Y3RFdmVudBImCgJhdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEdHlwZRgCIAEoCRIOCgZyZWFzb24YAyABKAkSDwoHbWVzc2FnZRgEIAEoCSI3ChNDaGVja1Byb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEcGF0aBgCIAEoCSJBChRDaGVja1Byb2R1Y3RSZXNwb25zZRIpCgVjaGVjaxgBIAEoCzIaLnRhbmsuaG9zdGluZy52MS5MaXZlQ2hlY2sixQEKCUxpdmVDaGVjaxILCgN1cmwYASABKAkSDgoGc3RhdHVzGAIgASgFEhEKCWJ1aWxkX3NoYRgDIAEoCRINCgV0aXRsZRgEIAEoCRITCgt0ZXh0X2xlbmd0aBgFIAEoBRIOCgZlcnJvcnMYBiADKAkSFgoOc2NyZWVuc2hvdF9wbmcYByABKAwSLgoKY2hlY2tlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEbm90ZRgJIAEoCTLEAQoOSG9zdGluZ1NlcnZpY2USVQoKR2V0UHJvZHVjdBIiLnRhbmsuaG9zdGluZy52MS5HZXRQcm9kdWN0UmVxdWVzdBojLnRhbmsuaG9zdGluZy52MS5HZXRQcm9kdWN0UmVzcG9uc2USWwoMQ2hlY2tQcm9kdWN0EiQudGFuay5ob3N0aW5nLnYxLkNoZWNrUHJvZHVjdFJlcXVlc3QaJS50YW5rLmhvc3RpbmcudjEuQ2hlY2tQcm9kdWN0UmVzcG9uc2VC2AEKE2NvbS50YW5rLmhvc3RpbmcudjFCDEhvc3RpbmdQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2hvc3RpbmcvdjE7aG9zdGluZ3YxogIDVEhYqgIPVGFuay5Ib3N0aW5nLlYxygIPVGFua1xIb3N0aW5nXFYx4gIbVGFua1xIb3N0aW5nXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6SG9zdGluZzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2hvc3RpbmcvdjEvaG9zdGluZy5wcm90bxIPdGFuay5ob3N0aW5nLnYxIjsKEUdldFByb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEgoKdGFpbF9saW5lcxgCIAEoBSJ8ChJHZXRQcm9kdWN0UmVzcG9uc2USKQoHcHJvZHVjdBgBIAEoCzIYLnRhbmsuaG9zdGluZy52MS5Qcm9kdWN0EgwKBGxvZ3MYAiABKAkSLQoGZXZlbnRzGAMgAygLMh0udGFuay5ob3N0aW5nLnYxLlByb2R1Y3RFdmVudCLSAgoHUHJvZHVjdBIMCgRzbHVnGAEgASgJEgwKBHJlcG8YAiABKAkSCwoDdXJsGAMgASgJEg0KBWF3YWtlGAQgASgIEg4KBnN0YXR1cxgFIAEoCRIRCglpbWFnZV90YWcYBiABKAkSEAoIcmVzdGFydHMYByABKAUSGAoQbGFzdF9leGl0X3JlYXNvbhgIIAEoCRIuCgpzdGFydGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIRCgljcHVfbGltaXQYCiABKAkSFAoMbWVtb3J5X2xpbWl0GAsgASgJEhIKCmRpc2tfYnl0ZXMYDCABKAMSEgoKY2FuX21hbmFnZRgNIAEoCBIPCgdtYW5hZ2VkGA4gASgIEi4KCnVwZGF0ZWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImUKDFByb2R1Y3RFdmVudBImCgJhdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEdHlwZRgCIAEoCRIOCgZyZWFzb24YAyABKAkSDwoHbWVzc2FnZRgEIAEoCSI3ChNDaGVja1Byb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEcGF0aBgCIAEoCSJBChRDaGVja1Byb2R1Y3RSZXNwb25zZRIpCgVjaGVjaxgBIAEoCzIaLnRhbmsuaG9zdGluZy52MS5MaXZlQ2hlY2sixQEKCUxpdmVDaGVjaxILCgN1cmwYASABKAkSDgoGc3RhdHVzGAIgASgFEhEKCWJ1aWxkX3NoYRgDIAEoCRINCgV0aXRsZRgEIAEoCRITCgt0ZXh0X2xlbmd0aBgFIAEoBRIOCgZlcnJvcnMYBiADKAkSFgoOc2NyZWVuc2hvdF9wbmcYByABKAwSLgoKY2hlY2tlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEbm90ZRgJIAEoCSKwAgoIUmVzb3VyY2USDAoEbmFtZRgBIAEoCRIMCgRraW5kGAIgASgJEgwKBHNpemUYAyABKAkSCwoDY3B1GAQgASgJEg4KBm1lbW9yeRgFIAEoCRIOCgZwdWJsaWMYBiABKAgSCwoDbWluGAcgASgFEgsKA21heBgIIAEoBRIQCghzY2hlZHVsZRgJIAEoCRIXCg90aW1lb3V0X3NlY29uZHMYCiABKAUSDgoGdm9sdW1lGAsgASgJEg0KBXJlYWR5GAwgASgFEg8KB2Rlc2lyZWQYDSABKAUSDgoGcGF1c2VkGA4gASgIEi8KC2xhc3RfcnVuX2F0GA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9sYXN0X3J1bl9yZXN1bHQYECABKAkiVQoEQ29zdBISCgpiYXNlX2NlbnRzGAEgASgDEhUKDW92ZXJhZ2VfY2VudHMYAiABKAMSEwoLdG90YWxfY2VudHMYAyABKAMSDQoFbGluZXMYBCADKAkiowEKDFBlbmRpbmdCdWlsZBILCgNzaGEYASABKAkSDgoGcmVhc29uGAIgASgJEhAKCHByb2JsZW1zGAMgAygJEicKCGVzdGltYXRlGAQgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSJgoCYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC2Nhbl9hcHByb3ZlGAYgASgIIikKE0dldFJlc291cmNlc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSLCAQoUR2V0UmVzb3VyY2VzUmVzcG9uc2USLAoJcmVzb3VyY2VzGAEgAygLMhkudGFuay5ob3N0aW5nLnYxLlJlc291cmNlEicKCGVzdGltYXRlGAIgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSLgoHcGVuZGluZxgDIAEoCzIdLnRhbmsuaG9zdGluZy52MS5QZW5kaW5nQnVpbGQSDwoHc2VjcmV0cxgEIAMoCRISCgpjYW5fbWFuYWdlGAUgASgIIjYKE0FwcHJvdmVCdWlsZFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRILCgNzaGEYAiABKAkiFgoUQXBwcm92ZUJ1aWxkUmVzcG9uc2UiRQoOT3BlcmF0ZVJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIOCgZhY3Rpb24YAiABKAkSDwoHcHJvY2VzcxgDIAEoCSIRCg9PcGVyYXRlUmVzcG9uc2UiTgoGQ2hhbmdlEgsKA3NoYRgBIAEoCRIPCgdtZXNzYWdlGAIgASgJEiYKAmF0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI3ChJMaXN0Q2hhbmdlc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRINCgVsaW1pdBgCIAEoBSI/ChNMaXN0Q2hhbmdlc1Jlc3BvbnNlEigKB2NoYW5nZXMYASADKAsyFy50YW5rLmhvc3RpbmcudjEuQ2hhbmdlIjIKD1JvbGxiYWNrUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEgsKA3NoYRgCIAEoCSJuChBSb2xsYmFja1Jlc3BvbnNlEg8KB2FwcGxpZWQYASABKAgSDgoGcmVhc29uGAIgASgJEhAKCHByb2JsZW1zGAMgAygJEicKCGVzdGltYXRlGAQgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QicwoVVXBkYXRlUmVzb3VyY2VSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRzaXplGAMgASgJEgsKA21pbhgEIAEoBRILCgNtYXgYBSABKAUSEAoIc2NoZWR1bGUYBiABKAkiQQoWVXBkYXRlUmVzb3VyY2VSZXNwb25zZRInCghlc3RpbWF0ZRgBIAEoCzIVLnRhbmsuaG9zdGluZy52MS5Db3N0MtoFCg5Ib3N0aW5nU2VydmljZRJVCgpHZXRQcm9kdWN0EiIudGFuay5ob3N0aW5nLnYxLkdldFByb2R1Y3RSZXF1ZXN0GiMudGFuay5ob3N0aW5nLnYxLkdldFByb2R1Y3RSZXNwb25zZRJbCgxDaGVja1Byb2R1Y3QSJC50YW5rLmhvc3RpbmcudjEuQ2hlY2tQcm9kdWN0UmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5DaGVja1Byb2R1Y3RSZXNwb25zZRJbCgxHZXRSZXNvdXJjZXMSJC50YW5rLmhvc3RpbmcudjEuR2V0UmVzb3VyY2VzUmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5HZXRSZXNvdXJjZXNSZXNwb25zZRJbCgxBcHByb3ZlQnVpbGQSJC50YW5rLmhvc3RpbmcudjEuQXBwcm92ZUJ1aWxkUmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5BcHByb3ZlQnVpbGRSZXNwb25zZRJMCgdPcGVyYXRlEh8udGFuay5ob3N0aW5nLnYxLk9wZXJhdGVSZXF1ZXN0GiAudGFuay5ob3N0aW5nLnYxLk9wZXJhdGVSZXNwb25zZRJYCgtMaXN0Q2hhbmdlcxIjLnRhbmsuaG9zdGluZy52MS5MaXN0Q2hhbmdlc1JlcXVlc3QaJC50YW5rLmhvc3RpbmcudjEuTGlzdENoYW5nZXNSZXNwb25zZRJPCghSb2xsYmFjaxIgLnRhbmsuaG9zdGluZy52MS5Sb2xsYmFja1JlcXVlc3QaIS50YW5rLmhvc3RpbmcudjEuUm9sbGJhY2tSZXNwb25zZRJhCg5VcGRhdGVSZXNvdXJjZRImLnRhbmsuaG9zdGluZy52MS5VcGRhdGVSZXNvdXJjZVJlcXVlc3QaJy50YW5rLmhvc3RpbmcudjEuVXBkYXRlUmVzb3VyY2VSZXNwb25zZULYAQoTY29tLnRhbmsuaG9zdGluZy52MUIMSG9zdGluZ1Byb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvaG9zdGluZy92MTtob3N0aW5ndjGiAgNUSFiqAg9UYW5rLkhvc3RpbmcuVjHKAg9UYW5rXEhvc3RpbmdcVjHiAhtUYW5rXEhvc3RpbmdcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpIb3N0aW5nOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.hosting.v1.GetProductRequest
@@ -313,6 +313,504 @@ export const LiveCheckSchema: GenMessage<LiveCheck> = /*@__PURE__*/
   messageDesc(file_tank_hosting_v1_hosting, 6);
 
 /**
+ * One process of the product, with what the cluster says about it.
+ *
+ * @generated from message tank.hosting.v1.Resource
+ */
+export type Resource = Message<"tank.hosting.v1.Resource"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * service | worker | cron | job
+   *
+   * @generated from field: string kind = 2;
+   */
+  kind: string;
+
+  /**
+   * s | m | l | xl | 2xl
+   *
+   * @generated from field: string size = 3;
+   */
+  size: string;
+
+  /**
+   * @generated from field: string cpu = 4;
+   */
+  cpu: string;
+
+  /**
+   * @generated from field: string memory = 5;
+   */
+  memory: string;
+
+  /**
+   * @generated from field: bool public = 6;
+   */
+  public: boolean;
+
+  /**
+   * @generated from field: int32 min = 7;
+   */
+  min: number;
+
+  /**
+   * @generated from field: int32 max = 8;
+   */
+  max: number;
+
+  /**
+   * @generated from field: string schedule = 9;
+   */
+  schedule: string;
+
+  /**
+   * @generated from field: int32 timeout_seconds = 10;
+   */
+  timeoutSeconds: number;
+
+  /**
+   * @generated from field: string volume = 11;
+   */
+  volume: string;
+
+  /**
+   * From the cluster:
+   *
+   * @generated from field: int32 ready = 12;
+   */
+  ready: number;
+
+  /**
+   * @generated from field: int32 desired = 13;
+   */
+  desired: number;
+
+  /**
+   * @generated from field: bool paused = 14;
+   */
+  paused: boolean;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_run_at = 15;
+   */
+  lastRunAt?: Timestamp;
+
+  /**
+   * succeeded | failed | running
+   *
+   * @generated from field: string last_run_result = 16;
+   */
+  lastRunResult: string;
+};
+
+/**
+ * Describes the message tank.hosting.v1.Resource.
+ * Use `create(ResourceSchema)` to create a new message.
+ */
+export const ResourceSchema: GenMessage<Resource> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 7);
+
+/**
+ * @generated from message tank.hosting.v1.Cost
+ */
+export type Cost = Message<"tank.hosting.v1.Cost"> & {
+  /**
+   * @generated from field: int64 base_cents = 1;
+   */
+  baseCents: bigint;
+
+  /**
+   * @generated from field: int64 overage_cents = 2;
+   */
+  overageCents: bigint;
+
+  /**
+   * @generated from field: int64 total_cents = 3;
+   */
+  totalCents: bigint;
+
+  /**
+   * @generated from field: repeated string lines = 4;
+   */
+  lines: string[];
+};
+
+/**
+ * Describes the message tank.hosting.v1.Cost.
+ * Use `create(CostSchema)` to create a new message.
+ */
+export const CostSchema: GenMessage<Cost> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 8);
+
+/**
+ * @generated from message tank.hosting.v1.PendingBuild
+ */
+export type PendingBuild = Message<"tank.hosting.v1.PendingBuild"> & {
+  /**
+   * @generated from field: string sha = 1;
+   */
+  sha: string;
+
+  /**
+   * spec | cost
+   *
+   * @generated from field: string reason = 2;
+   */
+  reason: string;
+
+  /**
+   * @generated from field: repeated string problems = 3;
+   */
+  problems: string[];
+
+  /**
+   * @generated from field: tank.hosting.v1.Cost estimate = 4;
+   */
+  estimate?: Cost;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 5;
+   */
+  at?: Timestamp;
+
+  /**
+   * the caller is an owner or billing admin
+   *
+   * @generated from field: bool can_approve = 6;
+   */
+  canApprove: boolean;
+};
+
+/**
+ * Describes the message tank.hosting.v1.PendingBuild.
+ * Use `create(PendingBuildSchema)` to create a new message.
+ */
+export const PendingBuildSchema: GenMessage<PendingBuild> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 9);
+
+/**
+ * @generated from message tank.hosting.v1.GetResourcesRequest
+ */
+export type GetResourcesRequest = Message<"tank.hosting.v1.GetResourcesRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+};
+
+/**
+ * Describes the message tank.hosting.v1.GetResourcesRequest.
+ * Use `create(GetResourcesRequestSchema)` to create a new message.
+ */
+export const GetResourcesRequestSchema: GenMessage<GetResourcesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 10);
+
+/**
+ * @generated from message tank.hosting.v1.GetResourcesResponse
+ */
+export type GetResourcesResponse = Message<"tank.hosting.v1.GetResourcesResponse"> & {
+  /**
+   * @generated from field: repeated tank.hosting.v1.Resource resources = 1;
+   */
+  resources: Resource[];
+
+  /**
+   * what the running build costs a month
+   *
+   * @generated from field: tank.hosting.v1.Cost estimate = 2;
+   */
+  estimate?: Cost;
+
+  /**
+   * @generated from field: tank.hosting.v1.PendingBuild pending = 3;
+   */
+  pending?: PendingBuild;
+
+  /**
+   * names only, never values
+   *
+   * @generated from field: repeated string secrets = 4;
+   */
+  secrets: string[];
+
+  /**
+   * admins: operate, change, roll back
+   *
+   * @generated from field: bool can_manage = 5;
+   */
+  canManage: boolean;
+};
+
+/**
+ * Describes the message tank.hosting.v1.GetResourcesResponse.
+ * Use `create(GetResourcesResponseSchema)` to create a new message.
+ */
+export const GetResourcesResponseSchema: GenMessage<GetResourcesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 11);
+
+/**
+ * @generated from message tank.hosting.v1.ApproveBuildRequest
+ */
+export type ApproveBuildRequest = Message<"tank.hosting.v1.ApproveBuildRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string sha = 2;
+   */
+  sha: string;
+};
+
+/**
+ * Describes the message tank.hosting.v1.ApproveBuildRequest.
+ * Use `create(ApproveBuildRequestSchema)` to create a new message.
+ */
+export const ApproveBuildRequestSchema: GenMessage<ApproveBuildRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 12);
+
+/**
+ * @generated from message tank.hosting.v1.ApproveBuildResponse
+ */
+export type ApproveBuildResponse = Message<"tank.hosting.v1.ApproveBuildResponse"> & {
+};
+
+/**
+ * Describes the message tank.hosting.v1.ApproveBuildResponse.
+ * Use `create(ApproveBuildResponseSchema)` to create a new message.
+ */
+export const ApproveBuildResponseSchema: GenMessage<ApproveBuildResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 13);
+
+/**
+ * @generated from message tank.hosting.v1.OperateRequest
+ */
+export type OperateRequest = Message<"tank.hosting.v1.OperateRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * restart | pause | resume | run
+   *
+   * @generated from field: string action = 2;
+   */
+  action: string;
+
+  /**
+   * @generated from field: string process = 3;
+   */
+  process: string;
+};
+
+/**
+ * Describes the message tank.hosting.v1.OperateRequest.
+ * Use `create(OperateRequestSchema)` to create a new message.
+ */
+export const OperateRequestSchema: GenMessage<OperateRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 14);
+
+/**
+ * @generated from message tank.hosting.v1.OperateResponse
+ */
+export type OperateResponse = Message<"tank.hosting.v1.OperateResponse"> & {
+};
+
+/**
+ * Describes the message tank.hosting.v1.OperateResponse.
+ * Use `create(OperateResponseSchema)` to create a new message.
+ */
+export const OperateResponseSchema: GenMessage<OperateResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 15);
+
+/**
+ * @generated from message tank.hosting.v1.Change
+ */
+export type Change = Message<"tank.hosting.v1.Change"> & {
+  /**
+   * @generated from field: string sha = 1;
+   */
+  sha: string;
+
+  /**
+   * @generated from field: string message = 2;
+   */
+  message: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 3;
+   */
+  at?: Timestamp;
+};
+
+/**
+ * Describes the message tank.hosting.v1.Change.
+ * Use `create(ChangeSchema)` to create a new message.
+ */
+export const ChangeSchema: GenMessage<Change> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 16);
+
+/**
+ * @generated from message tank.hosting.v1.ListChangesRequest
+ */
+export type ListChangesRequest = Message<"tank.hosting.v1.ListChangesRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: int32 limit = 2;
+   */
+  limit: number;
+};
+
+/**
+ * Describes the message tank.hosting.v1.ListChangesRequest.
+ * Use `create(ListChangesRequestSchema)` to create a new message.
+ */
+export const ListChangesRequestSchema: GenMessage<ListChangesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 17);
+
+/**
+ * @generated from message tank.hosting.v1.ListChangesResponse
+ */
+export type ListChangesResponse = Message<"tank.hosting.v1.ListChangesResponse"> & {
+  /**
+   * @generated from field: repeated tank.hosting.v1.Change changes = 1;
+   */
+  changes: Change[];
+};
+
+/**
+ * Describes the message tank.hosting.v1.ListChangesResponse.
+ * Use `create(ListChangesResponseSchema)` to create a new message.
+ */
+export const ListChangesResponseSchema: GenMessage<ListChangesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 18);
+
+/**
+ * @generated from message tank.hosting.v1.RollbackRequest
+ */
+export type RollbackRequest = Message<"tank.hosting.v1.RollbackRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * the product repository commit whose build to put back
+   *
+   * @generated from field: string sha = 2;
+   */
+  sha: string;
+};
+
+/**
+ * Describes the message tank.hosting.v1.RollbackRequest.
+ * Use `create(RollbackRequestSchema)` to create a new message.
+ */
+export const RollbackRequestSchema: GenMessage<RollbackRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 19);
+
+/**
+ * @generated from message tank.hosting.v1.RollbackResponse
+ */
+export type RollbackResponse = Message<"tank.hosting.v1.RollbackResponse"> & {
+  /**
+   * @generated from field: bool applied = 1;
+   */
+  applied: boolean;
+
+  /**
+   * @generated from field: string reason = 2;
+   */
+  reason: string;
+
+  /**
+   * @generated from field: repeated string problems = 3;
+   */
+  problems: string[];
+
+  /**
+   * @generated from field: tank.hosting.v1.Cost estimate = 4;
+   */
+  estimate?: Cost;
+};
+
+/**
+ * Describes the message tank.hosting.v1.RollbackResponse.
+ * Use `create(RollbackResponseSchema)` to create a new message.
+ */
+export const RollbackResponseSchema: GenMessage<RollbackResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 20);
+
+/**
+ * @generated from message tank.hosting.v1.UpdateResourceRequest
+ */
+export type UpdateResourceRequest = Message<"tank.hosting.v1.UpdateResourceRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string size = 3;
+   */
+  size: string;
+
+  /**
+   * @generated from field: int32 min = 4;
+   */
+  min: number;
+
+  /**
+   * @generated from field: int32 max = 5;
+   */
+  max: number;
+
+  /**
+   * @generated from field: string schedule = 6;
+   */
+  schedule: string;
+};
+
+/**
+ * Describes the message tank.hosting.v1.UpdateResourceRequest.
+ * Use `create(UpdateResourceRequestSchema)` to create a new message.
+ */
+export const UpdateResourceRequestSchema: GenMessage<UpdateResourceRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 21);
+
+/**
+ * @generated from message tank.hosting.v1.UpdateResourceResponse
+ */
+export type UpdateResourceResponse = Message<"tank.hosting.v1.UpdateResourceResponse"> & {
+  /**
+   * @generated from field: tank.hosting.v1.Cost estimate = 1;
+   */
+  estimate?: Cost;
+};
+
+/**
+ * Describes the message tank.hosting.v1.UpdateResourceResponse.
+ * Use `create(UpdateResourceResponseSchema)` to create a new message.
+ */
+export const UpdateResourceResponseSchema: GenMessage<UpdateResourceResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 22);
+
+/**
  * HostingService is the Infrastructure page: what a product TANK runs for a Tread is,
  * how it is doing, what it costs and what people may change about it. Every request
  * names the Tread (channel_id); members of the Tread may read, and what each role may
@@ -340,6 +838,67 @@ export const HostingService: GenService<{
     methodKind: "unary";
     input: typeof CheckProductRequestSchema;
     output: typeof CheckProductResponseSchema;
+  },
+  /**
+   * What the product is made of (from its tank.yaml), what it costs, and a build waiting
+   * to land. Members read it.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.GetResources
+   */
+  getResources: {
+    methodKind: "unary";
+    input: typeof GetResourcesRequestSchema;
+    output: typeof GetResourcesResponseSchema;
+  },
+  /**
+   * Owners and billing admins approve a build that costs more than the product was approved for.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.ApproveBuild
+   */
+  approveBuild: {
+    methodKind: "unary";
+    input: typeof ApproveBuildRequestSchema;
+    output: typeof ApproveBuildResponseSchema;
+  },
+  /**
+   * Admins: restart, pause or resume a schedule, run a job.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.Operate
+   */
+  operate: {
+    methodKind: "unary";
+    input: typeof OperateRequestSchema;
+    output: typeof OperateResponseSchema;
+  },
+  /**
+   * Every deploy, hold, approval and operation, newest first. Members read it.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.ListChanges
+   */
+  listChanges: {
+    methodKind: "unary";
+    input: typeof ListChangesRequestSchema;
+    output: typeof ListChangesResponseSchema;
+  },
+  /**
+   * Admins put an earlier build back; one that costs more waits for an owner like any build.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.Rollback
+   */
+  rollback: {
+    methodKind: "unary";
+    input: typeof RollbackRequestSchema;
+    output: typeof RollbackResponseSchema;
+  },
+  /**
+   * Admins change a process's size, scale or schedule: a commit to tank.yaml in their name.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.UpdateResource
+   */
+  updateResource: {
+    methodKind: "unary";
+    input: typeof UpdateResourceRequestSchema;
+    output: typeof UpdateResourceResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_hosting_v1_hosting, 0);

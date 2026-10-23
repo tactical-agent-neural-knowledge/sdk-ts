@@ -3482,6 +3482,561 @@ export type GetDeploymentRequest = Message<"tank.agentctl.v1.GetDeploymentReques
  */
 export declare const GetDeploymentRequestSchema: GenMessage<GetDeploymentRequest>;
 /**
+ * One process of a product: a service, a worker, a schedule or a job.
+ *
+ * @generated from message tank.agentctl.v1.ProductProcess
+ */
+export type ProductProcess = Message<"tank.agentctl.v1.ProductProcess"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * service | worker | cron | job
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * s | m | l | xl | 2xl
+     *
+     * @generated from field: string size = 3;
+     */
+    size: string;
+    /**
+     * @generated from field: string cpu = 4;
+     */
+    cpu: string;
+    /**
+     * @generated from field: string memory = 5;
+     */
+    memory: string;
+    /**
+     * @generated from field: int32 port = 6;
+     */
+    port: number;
+    /**
+     * served at <slug>.tank.chat (web)
+     *
+     * @generated from field: bool public = 7;
+     */
+    public: boolean;
+    /**
+     * @generated from field: int32 min = 8;
+     */
+    min: number;
+    /**
+     * @generated from field: int32 max = 9;
+     */
+    max: number;
+    /**
+     * @generated from field: string schedule = 10;
+     */
+    schedule: string;
+    /**
+     * @generated from field: int32 timeout_seconds = 11;
+     */
+    timeoutSeconds: number;
+    /**
+     * @generated from field: repeated string command = 12;
+     */
+    command: string[];
+    /**
+     * web's data volume, "20Gi"
+     *
+     * @generated from field: string volume = 13;
+     */
+    volume: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductProcess.
+ * Use `create(ProductProcessSchema)` to create a new message.
+ */
+export declare const ProductProcessSchema: GenMessage<ProductProcess>;
+/**
+ * @generated from message tank.agentctl.v1.ProductCost
+ */
+export type ProductCost = Message<"tank.agentctl.v1.ProductCost"> & {
+    /**
+     * @generated from field: int64 base_cents = 1;
+     */
+    baseCents: bigint;
+    /**
+     * @generated from field: int64 overage_cents = 2;
+     */
+    overageCents: bigint;
+    /**
+     * @generated from field: repeated string lines = 3;
+     */
+    lines: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductCost.
+ * Use `create(ProductCostSchema)` to create a new message.
+ */
+export declare const ProductCostSchema: GenMessage<ProductCost>;
+/**
+ * @generated from message tank.agentctl.v1.PendingBuild
+ */
+export type PendingBuild = Message<"tank.agentctl.v1.PendingBuild"> & {
+    /**
+     * @generated from field: string sha = 1;
+     */
+    sha: string;
+    /**
+     * spec | cost
+     *
+     * @generated from field: string reason = 2;
+     */
+    reason: string;
+    /**
+     * @generated from field: repeated string problems = 3;
+     */
+    problems: string[];
+    /**
+     * @generated from field: tank.agentctl.v1.ProductCost estimate = 4;
+     */
+    estimate?: ProductCost;
+    /**
+     * RFC 3339
+     *
+     * @generated from field: string at = 5;
+     */
+    at: string;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ProductProcess processes = 6;
+     */
+    processes: ProductProcess[];
+};
+/**
+ * Describes the message tank.agentctl.v1.PendingBuild.
+ * Use `create(PendingBuildSchema)` to create a new message.
+ */
+export declare const PendingBuildSchema: GenMessage<PendingBuild>;
+/**
+ * @generated from message tank.agentctl.v1.ProcessState
+ */
+export type ProcessState = Message<"tank.agentctl.v1.ProcessState"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * @generated from field: int32 desired = 3;
+     */
+    desired: number;
+    /**
+     * @generated from field: int32 ready = 4;
+     */
+    ready: number;
+    /**
+     * a paused schedule
+     *
+     * @generated from field: bool suspended = 5;
+     */
+    suspended: boolean;
+    /**
+     * RFC 3339, schedules and jobs
+     *
+     * @generated from field: string last_run_at = 6;
+     */
+    lastRunAt: string;
+    /**
+     * succeeded | failed | running
+     *
+     * @generated from field: string last_run_result = 7;
+     */
+    lastRunResult: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ProcessState.
+ * Use `create(ProcessStateSchema)` to create a new message.
+ */
+export declare const ProcessStateSchema: GenMessage<ProcessState>;
+/**
+ * @generated from message tank.agentctl.v1.JobRun
+ */
+export type JobRun = Message<"tank.agentctl.v1.JobRun"> & {
+    /**
+     * @generated from field: string job = 1;
+     */
+    job: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.JobRun.
+ * Use `create(JobRunSchema)` to create a new message.
+ */
+export declare const JobRunSchema: GenMessage<JobRun>;
+/**
+ * @generated from message tank.agentctl.v1.ProductChange
+ */
+export type ProductChange = Message<"tank.agentctl.v1.ProductChange"> & {
+    /**
+     * the GitOps commit
+     *
+     * @generated from field: string sha = 1;
+     */
+    sha: string;
+    /**
+     * @generated from field: string message = 2;
+     */
+    message: string;
+    /**
+     * RFC 3339
+     *
+     * @generated from field: string at = 3;
+     */
+    at: string;
+    /**
+     * the build the product ran after it, when it changed
+     *
+     * @generated from field: string image_tag = 4;
+     */
+    imageTag: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductChange.
+ * Use `create(ProductChangeSchema)` to create a new message.
+ */
+export declare const ProductChangeSchema: GenMessage<ProductChange>;
+/**
+ * @generated from message tank.agentctl.v1.ValidateSpecRequest
+ */
+export type ValidateSpecRequest = Message<"tank.agentctl.v1.ValidateSpecRequest"> & {
+    /**
+     * @generated from field: string tank_yaml = 1;
+     */
+    tankYaml: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ValidateSpecRequest.
+ * Use `create(ValidateSpecRequestSchema)` to create a new message.
+ */
+export declare const ValidateSpecRequestSchema: GenMessage<ValidateSpecRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ValidateSpecResponse
+ */
+export type ValidateSpecResponse = Message<"tank.agentctl.v1.ValidateSpecResponse"> & {
+    /**
+     * @generated from field: bool ok = 1;
+     */
+    ok: boolean;
+    /**
+     * @generated from field: repeated string problems = 2;
+     */
+    problems: string[];
+    /**
+     * @generated from field: tank.agentctl.v1.ProductCost estimate = 3;
+     */
+    estimate?: ProductCost;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ProductProcess processes = 4;
+     */
+    processes: ProductProcess[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ValidateSpecResponse.
+ * Use `create(ValidateSpecResponseSchema)` to create a new message.
+ */
+export declare const ValidateSpecResponseSchema: GenMessage<ValidateSpecResponse>;
+/**
+ * @generated from message tank.agentctl.v1.GetProductSpecRequest
+ */
+export type GetProductSpecRequest = Message<"tank.agentctl.v1.GetProductSpecRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetProductSpecRequest.
+ * Use `create(GetProductSpecRequestSchema)` to create a new message.
+ */
+export declare const GetProductSpecRequestSchema: GenMessage<GetProductSpecRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetProductSpecResponse
+ */
+export type GetProductSpecResponse = Message<"tank.agentctl.v1.GetProductSpecResponse"> & {
+    /**
+     * empty: the single web process of a product with no tank.yaml
+     *
+     * @generated from field: repeated tank.agentctl.v1.ProductProcess processes = 1;
+     */
+    processes: ProductProcess[];
+    /**
+     * @generated from field: tank.agentctl.v1.ProductCost estimate = 2;
+     */
+    estimate?: ProductCost;
+    /**
+     * @generated from field: tank.agentctl.v1.PendingBuild pending = 3;
+     */
+    pending?: PendingBuild;
+    /**
+     * @generated from field: string restarted_at = 4;
+     */
+    restartedAt: string;
+    /**
+     * @generated from field: repeated string paused = 5;
+     */
+    paused: string[];
+    /**
+     * @generated from field: repeated tank.agentctl.v1.JobRun runs = 6;
+     */
+    runs: JobRun[];
+    /**
+     * @generated from field: repeated string env_keys = 7;
+     */
+    envKeys: string[];
+    /**
+     * @generated from field: repeated string secrets = 8;
+     */
+    secrets: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.GetProductSpecResponse.
+ * Use `create(GetProductSpecResponseSchema)` to create a new message.
+ */
+export declare const GetProductSpecResponseSchema: GenMessage<GetProductSpecResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ApproveProductBuildRequest
+ */
+export type ApproveProductBuildRequest = Message<"tank.agentctl.v1.ApproveProductBuildRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * @generated from field: string sha = 2;
+     */
+    sha: string;
+    /**
+     * who, for the commit message
+     *
+     * @generated from field: string by = 3;
+     */
+    by: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ApproveProductBuildRequest.
+ * Use `create(ApproveProductBuildRequestSchema)` to create a new message.
+ */
+export declare const ApproveProductBuildRequestSchema: GenMessage<ApproveProductBuildRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ApproveProductBuildResponse
+ */
+export type ApproveProductBuildResponse = Message<"tank.agentctl.v1.ApproveProductBuildResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ApproveProductBuildResponse.
+ * Use `create(ApproveProductBuildResponseSchema)` to create a new message.
+ */
+export declare const ApproveProductBuildResponseSchema: GenMessage<ApproveProductBuildResponse>;
+/**
+ * @generated from message tank.agentctl.v1.OperateProductRequest
+ */
+export type OperateProductRequest = Message<"tank.agentctl.v1.OperateProductRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * restart | pause | resume | run
+     *
+     * @generated from field: string action = 2;
+     */
+    action: string;
+    /**
+     * the schedule or job; empty for restart
+     *
+     * @generated from field: string process = 3;
+     */
+    process: string;
+    /**
+     * @generated from field: string by = 4;
+     */
+    by: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.OperateProductRequest.
+ * Use `create(OperateProductRequestSchema)` to create a new message.
+ */
+export declare const OperateProductRequestSchema: GenMessage<OperateProductRequest>;
+/**
+ * @generated from message tank.agentctl.v1.OperateProductResponse
+ */
+export type OperateProductResponse = Message<"tank.agentctl.v1.OperateProductResponse"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.OperateProductResponse.
+ * Use `create(OperateProductResponseSchema)` to create a new message.
+ */
+export declare const OperateProductResponseSchema: GenMessage<OperateProductResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListProductChangesRequest
+ */
+export type ListProductChangesRequest = Message<"tank.agentctl.v1.ListProductChangesRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * 0 = 30, at most 100
+     *
+     * @generated from field: int32 limit = 2;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListProductChangesRequest.
+ * Use `create(ListProductChangesRequestSchema)` to create a new message.
+ */
+export declare const ListProductChangesRequestSchema: GenMessage<ListProductChangesRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListProductChangesResponse
+ */
+export type ListProductChangesResponse = Message<"tank.agentctl.v1.ListProductChangesResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ProductChange changes = 1;
+     */
+    changes: ProductChange[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListProductChangesResponse.
+ * Use `create(ListProductChangesResponseSchema)` to create a new message.
+ */
+export declare const ListProductChangesResponseSchema: GenMessage<ListProductChangesResponse>;
+/**
+ * @generated from message tank.agentctl.v1.RollbackProductRequest
+ */
+export type RollbackProductRequest = Message<"tank.agentctl.v1.RollbackProductRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * the build (product repository commit) to put back
+     *
+     * @generated from field: string sha = 2;
+     */
+    sha: string;
+    /**
+     * @generated from field: string by = 3;
+     */
+    by: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RollbackProductRequest.
+ * Use `create(RollbackProductRequestSchema)` to create a new message.
+ */
+export declare const RollbackProductRequestSchema: GenMessage<RollbackProductRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RollbackProductResponse
+ */
+export type RollbackProductResponse = Message<"tank.agentctl.v1.RollbackProductResponse"> & {
+    /**
+     * @generated from field: bool applied = 1;
+     */
+    applied: boolean;
+    /**
+     * spec | cost when it waits instead
+     *
+     * @generated from field: string reason = 2;
+     */
+    reason: string;
+    /**
+     * @generated from field: repeated string problems = 3;
+     */
+    problems: string[];
+    /**
+     * @generated from field: tank.agentctl.v1.ProductCost estimate = 4;
+     */
+    estimate?: ProductCost;
+};
+/**
+ * Describes the message tank.agentctl.v1.RollbackProductResponse.
+ * Use `create(RollbackProductResponseSchema)` to create a new message.
+ */
+export declare const RollbackProductResponseSchema: GenMessage<RollbackProductResponse>;
+/**
+ * @generated from message tank.agentctl.v1.UpdateProductSpecRequest
+ */
+export type UpdateProductSpecRequest = Message<"tank.agentctl.v1.UpdateProductSpecRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * @generated from field: string process = 2;
+     */
+    process: string;
+    /**
+     * empty leaves it
+     *
+     * @generated from field: string size = 3;
+     */
+    size: string;
+    /**
+     * 0 leaves it
+     *
+     * @generated from field: int32 min = 4;
+     */
+    min: number;
+    /**
+     * @generated from field: int32 max = 5;
+     */
+    max: number;
+    /**
+     * empty leaves it
+     *
+     * @generated from field: string schedule = 6;
+     */
+    schedule: string;
+    /**
+     * @generated from field: string author_name = 7;
+     */
+    authorName: string;
+    /**
+     * @generated from field: string author_email = 8;
+     */
+    authorEmail: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.UpdateProductSpecRequest.
+ * Use `create(UpdateProductSpecRequestSchema)` to create a new message.
+ */
+export declare const UpdateProductSpecRequestSchema: GenMessage<UpdateProductSpecRequest>;
+/**
+ * @generated from message tank.agentctl.v1.UpdateProductSpecResponse
+ */
+export type UpdateProductSpecResponse = Message<"tank.agentctl.v1.UpdateProductSpecResponse"> & {
+    /**
+     * @generated from field: string commit_sha = 1;
+     */
+    commitSha: string;
+    /**
+     * what the product will cost once the build lands
+     *
+     * @generated from field: tank.agentctl.v1.ProductCost estimate = 2;
+     */
+    estimate?: ProductCost;
+};
+/**
+ * Describes the message tank.agentctl.v1.UpdateProductSpecResponse.
+ * Use `create(UpdateProductSpecResponseSchema)` to create a new message.
+ */
+export declare const UpdateProductSpecResponseSchema: GenMessage<UpdateProductSpecResponse>;
+/**
  * What the cluster says about a running product.
  *
  * @generated from message tank.agentctl.v1.ProductState
@@ -3555,6 +4110,10 @@ export type ProductState = Message<"tank.agentctl.v1.ProductState"> & {
      * @generated from field: repeated tank.agentctl.v1.ProductEvent events = 12;
      */
     events: ProductEvent[];
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ProcessState processes = 13;
+     */
+    processes: ProcessState[];
 };
 /**
  * Describes the message tank.agentctl.v1.ProductState.
@@ -4796,6 +5355,16 @@ export declare const RunnerService: GenService<{
         output: typeof ReadProductResponseSchema;
     };
     /**
+     * Checks a tank.yaml the way a deploy will and prices it, before anything is built.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.ValidateSpec
+     */
+    validateSpec: {
+        methodKind: "unary";
+        input: typeof ValidateSpecRequestSchema;
+        output: typeof ValidateSpecResponseSchema;
+    };
+    /**
      * @generated from rpc tank.agentctl.v1.RunnerService.ReadThread
      */
     readThread: {
@@ -5242,6 +5811,67 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof CheckProductPageRequestSchema;
         output: typeof CheckProductPageResponseSchema;
+    };
+    /**
+     * A product's compiled spec, its cost, a build waiting to land, and the operations taken.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.GetProductSpec
+     */
+    getProductSpec: {
+        methodKind: "unary";
+        input: typeof GetProductSpecRequestSchema;
+        output: typeof GetProductSpecResponseSchema;
+    };
+    /**
+     * Lands a build that waits on a cost approval. The sha must be the waiting build's.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ApproveProductBuild
+     */
+    approveProductBuild: {
+        methodKind: "unary";
+        input: typeof ApproveProductBuildRequestSchema;
+        output: typeof ApproveProductBuildResponseSchema;
+    };
+    /**
+     * Restart, pause or resume a schedule, run a job: recorded in GitOps like everything else.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.OperateProduct
+     */
+    operateProduct: {
+        methodKind: "unary";
+        input: typeof OperateProductRequestSchema;
+        output: typeof OperateProductResponseSchema;
+    };
+    /**
+     * The product's history: every deploy, hold, approval and operation, newest first.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ListProductChanges
+     */
+    listProductChanges: {
+        methodKind: "unary";
+        input: typeof ListProductChangesRequestSchema;
+        output: typeof ListProductChangesResponseSchema;
+    };
+    /**
+     * Puts an earlier build back, with the tank.yaml it was built from.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.RollbackProduct
+     */
+    rollbackProduct: {
+        methodKind: "unary";
+        input: typeof RollbackProductRequestSchema;
+        output: typeof RollbackProductResponseSchema;
+    };
+    /**
+     * Changes one process's size, scale or schedule as a commit to the product's tank.yaml,
+     * authored as the person who asked; the build that follows deploys it.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.UpdateProductSpec
+     */
+    updateProductSpec: {
+        methodKind: "unary";
+        input: typeof UpdateProductSpecRequestSchema;
+        output: typeof UpdateProductSpecResponseSchema;
     };
     /**
      * Adds the preview-reporting workflow to repositories the workspace's own

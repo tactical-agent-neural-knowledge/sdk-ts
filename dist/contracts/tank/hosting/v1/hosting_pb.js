@@ -6,7 +6,7 @@ import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 /**
  * Describes the file tank/hosting/v1/hosting.proto.
  */
-export const file_tank_hosting_v1_hosting = /*@__PURE__*/ fileDesc("Ch10YW5rL2hvc3RpbmcvdjEvaG9zdGluZy5wcm90bxIPdGFuay5ob3N0aW5nLnYxIjsKEUdldFByb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEgoKdGFpbF9saW5lcxgCIAEoBSJ8ChJHZXRQcm9kdWN0UmVzcG9uc2USKQoHcHJvZHVjdBgBIAEoCzIYLnRhbmsuaG9zdGluZy52MS5Qcm9kdWN0EgwKBGxvZ3MYAiABKAkSLQoGZXZlbnRzGAMgAygLMh0udGFuay5ob3N0aW5nLnYxLlByb2R1Y3RFdmVudCLSAgoHUHJvZHVjdBIMCgRzbHVnGAEgASgJEgwKBHJlcG8YAiABKAkSCwoDdXJsGAMgASgJEg0KBWF3YWtlGAQgASgIEg4KBnN0YXR1cxgFIAEoCRIRCglpbWFnZV90YWcYBiABKAkSEAoIcmVzdGFydHMYByABKAUSGAoQbGFzdF9leGl0X3JlYXNvbhgIIAEoCRIuCgpzdGFydGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIRCgljcHVfbGltaXQYCiABKAkSFAoMbWVtb3J5X2xpbWl0GAsgASgJEhIKCmRpc2tfYnl0ZXMYDCABKAMSEgoKY2FuX21hbmFnZRgNIAEoCBIPCgdtYW5hZ2VkGA4gASgIEi4KCnVwZGF0ZWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImUKDFByb2R1Y3RFdmVudBImCgJhdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEdHlwZRgCIAEoCRIOCgZyZWFzb24YAyABKAkSDwoHbWVzc2FnZRgEIAEoCSI3ChNDaGVja1Byb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEcGF0aBgCIAEoCSJBChRDaGVja1Byb2R1Y3RSZXNwb25zZRIpCgVjaGVjaxgBIAEoCzIaLnRhbmsuaG9zdGluZy52MS5MaXZlQ2hlY2sixQEKCUxpdmVDaGVjaxILCgN1cmwYASABKAkSDgoGc3RhdHVzGAIgASgFEhEKCWJ1aWxkX3NoYRgDIAEoCRINCgV0aXRsZRgEIAEoCRITCgt0ZXh0X2xlbmd0aBgFIAEoBRIOCgZlcnJvcnMYBiADKAkSFgoOc2NyZWVuc2hvdF9wbmcYByABKAwSLgoKY2hlY2tlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEbm90ZRgJIAEoCTLEAQoOSG9zdGluZ1NlcnZpY2USVQoKR2V0UHJvZHVjdBIiLnRhbmsuaG9zdGluZy52MS5HZXRQcm9kdWN0UmVxdWVzdBojLnRhbmsuaG9zdGluZy52MS5HZXRQcm9kdWN0UmVzcG9uc2USWwoMQ2hlY2tQcm9kdWN0EiQudGFuay5ob3N0aW5nLnYxLkNoZWNrUHJvZHVjdFJlcXVlc3QaJS50YW5rLmhvc3RpbmcudjEuQ2hlY2tQcm9kdWN0UmVzcG9uc2VC2AEKE2NvbS50YW5rLmhvc3RpbmcudjFCDEhvc3RpbmdQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2hvc3RpbmcvdjE7aG9zdGluZ3YxogIDVEhYqgIPVGFuay5Ib3N0aW5nLlYxygIPVGFua1xIb3N0aW5nXFYx4gIbVGFua1xIb3N0aW5nXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6SG9zdGluZzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+export const file_tank_hosting_v1_hosting = /*@__PURE__*/ fileDesc("Ch10YW5rL2hvc3RpbmcvdjEvaG9zdGluZy5wcm90bxIPdGFuay5ob3N0aW5nLnYxIjsKEUdldFByb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEgoKdGFpbF9saW5lcxgCIAEoBSJ8ChJHZXRQcm9kdWN0UmVzcG9uc2USKQoHcHJvZHVjdBgBIAEoCzIYLnRhbmsuaG9zdGluZy52MS5Qcm9kdWN0EgwKBGxvZ3MYAiABKAkSLQoGZXZlbnRzGAMgAygLMh0udGFuay5ob3N0aW5nLnYxLlByb2R1Y3RFdmVudCLSAgoHUHJvZHVjdBIMCgRzbHVnGAEgASgJEgwKBHJlcG8YAiABKAkSCwoDdXJsGAMgASgJEg0KBWF3YWtlGAQgASgIEg4KBnN0YXR1cxgFIAEoCRIRCglpbWFnZV90YWcYBiABKAkSEAoIcmVzdGFydHMYByABKAUSGAoQbGFzdF9leGl0X3JlYXNvbhgIIAEoCRIuCgpzdGFydGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIRCgljcHVfbGltaXQYCiABKAkSFAoMbWVtb3J5X2xpbWl0GAsgASgJEhIKCmRpc2tfYnl0ZXMYDCABKAMSEgoKY2FuX21hbmFnZRgNIAEoCBIPCgdtYW5hZ2VkGA4gASgIEi4KCnVwZGF0ZWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImUKDFByb2R1Y3RFdmVudBImCgJhdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEdHlwZRgCIAEoCRIOCgZyZWFzb24YAyABKAkSDwoHbWVzc2FnZRgEIAEoCSI3ChNDaGVja1Byb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEcGF0aBgCIAEoCSJBChRDaGVja1Byb2R1Y3RSZXNwb25zZRIpCgVjaGVjaxgBIAEoCzIaLnRhbmsuaG9zdGluZy52MS5MaXZlQ2hlY2sixQEKCUxpdmVDaGVjaxILCgN1cmwYASABKAkSDgoGc3RhdHVzGAIgASgFEhEKCWJ1aWxkX3NoYRgDIAEoCRINCgV0aXRsZRgEIAEoCRITCgt0ZXh0X2xlbmd0aBgFIAEoBRIOCgZlcnJvcnMYBiADKAkSFgoOc2NyZWVuc2hvdF9wbmcYByABKAwSLgoKY2hlY2tlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEbm90ZRgJIAEoCSKwAgoIUmVzb3VyY2USDAoEbmFtZRgBIAEoCRIMCgRraW5kGAIgASgJEgwKBHNpemUYAyABKAkSCwoDY3B1GAQgASgJEg4KBm1lbW9yeRgFIAEoCRIOCgZwdWJsaWMYBiABKAgSCwoDbWluGAcgASgFEgsKA21heBgIIAEoBRIQCghzY2hlZHVsZRgJIAEoCRIXCg90aW1lb3V0X3NlY29uZHMYCiABKAUSDgoGdm9sdW1lGAsgASgJEg0KBXJlYWR5GAwgASgFEg8KB2Rlc2lyZWQYDSABKAUSDgoGcGF1c2VkGA4gASgIEi8KC2xhc3RfcnVuX2F0GA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9sYXN0X3J1bl9yZXN1bHQYECABKAkiVQoEQ29zdBISCgpiYXNlX2NlbnRzGAEgASgDEhUKDW92ZXJhZ2VfY2VudHMYAiABKAMSEwoLdG90YWxfY2VudHMYAyABKAMSDQoFbGluZXMYBCADKAkiowEKDFBlbmRpbmdCdWlsZBILCgNzaGEYASABKAkSDgoGcmVhc29uGAIgASgJEhAKCHByb2JsZW1zGAMgAygJEicKCGVzdGltYXRlGAQgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSJgoCYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC2Nhbl9hcHByb3ZlGAYgASgIIikKE0dldFJlc291cmNlc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSLCAQoUR2V0UmVzb3VyY2VzUmVzcG9uc2USLAoJcmVzb3VyY2VzGAEgAygLMhkudGFuay5ob3N0aW5nLnYxLlJlc291cmNlEicKCGVzdGltYXRlGAIgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSLgoHcGVuZGluZxgDIAEoCzIdLnRhbmsuaG9zdGluZy52MS5QZW5kaW5nQnVpbGQSDwoHc2VjcmV0cxgEIAMoCRISCgpjYW5fbWFuYWdlGAUgASgIIjYKE0FwcHJvdmVCdWlsZFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRILCgNzaGEYAiABKAkiFgoUQXBwcm92ZUJ1aWxkUmVzcG9uc2UiRQoOT3BlcmF0ZVJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIOCgZhY3Rpb24YAiABKAkSDwoHcHJvY2VzcxgDIAEoCSIRCg9PcGVyYXRlUmVzcG9uc2UiTgoGQ2hhbmdlEgsKA3NoYRgBIAEoCRIPCgdtZXNzYWdlGAIgASgJEiYKAmF0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI3ChJMaXN0Q2hhbmdlc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRINCgVsaW1pdBgCIAEoBSI/ChNMaXN0Q2hhbmdlc1Jlc3BvbnNlEigKB2NoYW5nZXMYASADKAsyFy50YW5rLmhvc3RpbmcudjEuQ2hhbmdlIjIKD1JvbGxiYWNrUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEgsKA3NoYRgCIAEoCSJuChBSb2xsYmFja1Jlc3BvbnNlEg8KB2FwcGxpZWQYASABKAgSDgoGcmVhc29uGAIgASgJEhAKCHByb2JsZW1zGAMgAygJEicKCGVzdGltYXRlGAQgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QicwoVVXBkYXRlUmVzb3VyY2VSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRzaXplGAMgASgJEgsKA21pbhgEIAEoBRILCgNtYXgYBSABKAUSEAoIc2NoZWR1bGUYBiABKAkiQQoWVXBkYXRlUmVzb3VyY2VSZXNwb25zZRInCghlc3RpbWF0ZRgBIAEoCzIVLnRhbmsuaG9zdGluZy52MS5Db3N0MtoFCg5Ib3N0aW5nU2VydmljZRJVCgpHZXRQcm9kdWN0EiIudGFuay5ob3N0aW5nLnYxLkdldFByb2R1Y3RSZXF1ZXN0GiMudGFuay5ob3N0aW5nLnYxLkdldFByb2R1Y3RSZXNwb25zZRJbCgxDaGVja1Byb2R1Y3QSJC50YW5rLmhvc3RpbmcudjEuQ2hlY2tQcm9kdWN0UmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5DaGVja1Byb2R1Y3RSZXNwb25zZRJbCgxHZXRSZXNvdXJjZXMSJC50YW5rLmhvc3RpbmcudjEuR2V0UmVzb3VyY2VzUmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5HZXRSZXNvdXJjZXNSZXNwb25zZRJbCgxBcHByb3ZlQnVpbGQSJC50YW5rLmhvc3RpbmcudjEuQXBwcm92ZUJ1aWxkUmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5BcHByb3ZlQnVpbGRSZXNwb25zZRJMCgdPcGVyYXRlEh8udGFuay5ob3N0aW5nLnYxLk9wZXJhdGVSZXF1ZXN0GiAudGFuay5ob3N0aW5nLnYxLk9wZXJhdGVSZXNwb25zZRJYCgtMaXN0Q2hhbmdlcxIjLnRhbmsuaG9zdGluZy52MS5MaXN0Q2hhbmdlc1JlcXVlc3QaJC50YW5rLmhvc3RpbmcudjEuTGlzdENoYW5nZXNSZXNwb25zZRJPCghSb2xsYmFjaxIgLnRhbmsuaG9zdGluZy52MS5Sb2xsYmFja1JlcXVlc3QaIS50YW5rLmhvc3RpbmcudjEuUm9sbGJhY2tSZXNwb25zZRJhCg5VcGRhdGVSZXNvdXJjZRImLnRhbmsuaG9zdGluZy52MS5VcGRhdGVSZXNvdXJjZVJlcXVlc3QaJy50YW5rLmhvc3RpbmcudjEuVXBkYXRlUmVzb3VyY2VSZXNwb25zZULYAQoTY29tLnRhbmsuaG9zdGluZy52MUIMSG9zdGluZ1Byb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvaG9zdGluZy92MTtob3N0aW5ndjGiAgNUSFiqAg9UYW5rLkhvc3RpbmcuVjHKAg9UYW5rXEhvc3RpbmdcVjHiAhtUYW5rXEhvc3RpbmdcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpIb3N0aW5nOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
 /**
  * Describes the message tank.hosting.v1.GetProductRequest.
  * Use `create(GetProductRequestSchema)` to create a new message.
@@ -42,6 +42,86 @@ export const CheckProductResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ho
  * Use `create(LiveCheckSchema)` to create a new message.
  */
 export const LiveCheckSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 6);
+/**
+ * Describes the message tank.hosting.v1.Resource.
+ * Use `create(ResourceSchema)` to create a new message.
+ */
+export const ResourceSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 7);
+/**
+ * Describes the message tank.hosting.v1.Cost.
+ * Use `create(CostSchema)` to create a new message.
+ */
+export const CostSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 8);
+/**
+ * Describes the message tank.hosting.v1.PendingBuild.
+ * Use `create(PendingBuildSchema)` to create a new message.
+ */
+export const PendingBuildSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 9);
+/**
+ * Describes the message tank.hosting.v1.GetResourcesRequest.
+ * Use `create(GetResourcesRequestSchema)` to create a new message.
+ */
+export const GetResourcesRequestSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 10);
+/**
+ * Describes the message tank.hosting.v1.GetResourcesResponse.
+ * Use `create(GetResourcesResponseSchema)` to create a new message.
+ */
+export const GetResourcesResponseSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 11);
+/**
+ * Describes the message tank.hosting.v1.ApproveBuildRequest.
+ * Use `create(ApproveBuildRequestSchema)` to create a new message.
+ */
+export const ApproveBuildRequestSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 12);
+/**
+ * Describes the message tank.hosting.v1.ApproveBuildResponse.
+ * Use `create(ApproveBuildResponseSchema)` to create a new message.
+ */
+export const ApproveBuildResponseSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 13);
+/**
+ * Describes the message tank.hosting.v1.OperateRequest.
+ * Use `create(OperateRequestSchema)` to create a new message.
+ */
+export const OperateRequestSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 14);
+/**
+ * Describes the message tank.hosting.v1.OperateResponse.
+ * Use `create(OperateResponseSchema)` to create a new message.
+ */
+export const OperateResponseSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 15);
+/**
+ * Describes the message tank.hosting.v1.Change.
+ * Use `create(ChangeSchema)` to create a new message.
+ */
+export const ChangeSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 16);
+/**
+ * Describes the message tank.hosting.v1.ListChangesRequest.
+ * Use `create(ListChangesRequestSchema)` to create a new message.
+ */
+export const ListChangesRequestSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 17);
+/**
+ * Describes the message tank.hosting.v1.ListChangesResponse.
+ * Use `create(ListChangesResponseSchema)` to create a new message.
+ */
+export const ListChangesResponseSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 18);
+/**
+ * Describes the message tank.hosting.v1.RollbackRequest.
+ * Use `create(RollbackRequestSchema)` to create a new message.
+ */
+export const RollbackRequestSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 19);
+/**
+ * Describes the message tank.hosting.v1.RollbackResponse.
+ * Use `create(RollbackResponseSchema)` to create a new message.
+ */
+export const RollbackResponseSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 20);
+/**
+ * Describes the message tank.hosting.v1.UpdateResourceRequest.
+ * Use `create(UpdateResourceRequestSchema)` to create a new message.
+ */
+export const UpdateResourceRequestSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 21);
+/**
+ * Describes the message tank.hosting.v1.UpdateResourceResponse.
+ * Use `create(UpdateResourceResponseSchema)` to create a new message.
+ */
+export const UpdateResourceResponseSchema = /*@__PURE__*/ messageDesc(file_tank_hosting_v1_hosting, 22);
 /**
  * HostingService is the Infrastructure page: what a product TANK runs for a Tread is,
  * how it is doing, what it costs and what people may change about it. Every request
