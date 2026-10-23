@@ -4015,6 +4015,40 @@ export type RollbackProductResponse = Message<"tank.agentctl.v1.RollbackProductR
  */
 export declare const RollbackProductResponseSchema: GenMessage<RollbackProductResponse>;
 /**
+ * @generated from message tank.agentctl.v1.ExportProductRequest
+ */
+export type ExportProductRequest = Message<"tank.agentctl.v1.ExportProductRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ExportProductRequest.
+ * Use `create(ExportProductRequestSchema)` to create a new message.
+ */
+export declare const ExportProductRequestSchema: GenMessage<ExportProductRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ExportProductResponse
+ */
+export type ExportProductResponse = Message<"tank.agentctl.v1.ExportProductResponse"> & {
+    /**
+     * @generated from field: string compose_yaml = 1;
+     */
+    composeYaml: string;
+    /**
+     * the image it names, for the buyer to pull or rebuild
+     *
+     * @generated from field: string image = 2;
+     */
+    image: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ExportProductResponse.
+ * Use `create(ExportProductResponseSchema)` to create a new message.
+ */
+export declare const ExportProductResponseSchema: GenMessage<ExportProductResponse>;
+/**
  * @generated from message tank.agentctl.v1.UpdateProductSpecRequest
  */
 export type UpdateProductSpecRequest = Message<"tank.agentctl.v1.UpdateProductSpecRequest"> & {
@@ -5918,6 +5952,16 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof UpdateProductSpecRequestSchema;
         output: typeof UpdateProductSpecResponseSchema;
+    };
+    /**
+     * The running product as a docker-compose file anybody can run without TANK.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ExportProduct
+     */
+    exportProduct: {
+        methodKind: "unary";
+        input: typeof ExportProductRequestSchema;
+        output: typeof ExportProductResponseSchema;
     };
     /**
      * Adds the preview-reporting workflow to repositories the workspace's own

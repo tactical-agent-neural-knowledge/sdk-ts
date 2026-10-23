@@ -864,6 +864,40 @@ export type SetAllowanceResponse = Message<"tank.hosting.v1.SetAllowanceResponse
  */
 export declare const SetAllowanceResponseSchema: GenMessage<SetAllowanceResponse>;
 /**
+ * @generated from message tank.hosting.v1.ExportProductRequest
+ */
+export type ExportProductRequest = Message<"tank.hosting.v1.ExportProductRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.hosting.v1.ExportProductRequest.
+ * Use `create(ExportProductRequestSchema)` to create a new message.
+ */
+export declare const ExportProductRequestSchema: GenMessage<ExportProductRequest>;
+/**
+ * @generated from message tank.hosting.v1.ExportProductResponse
+ */
+export type ExportProductResponse = Message<"tank.hosting.v1.ExportProductResponse"> & {
+    /**
+     * docker-compose.yml
+     *
+     * @generated from field: string filename = 1;
+     */
+    filename: string;
+    /**
+     * @generated from field: string content = 2;
+     */
+    content: string;
+};
+/**
+ * Describes the message tank.hosting.v1.ExportProductResponse.
+ * Use `create(ExportProductResponseSchema)` to create a new message.
+ */
+export declare const ExportProductResponseSchema: GenMessage<ExportProductResponse>;
+/**
  * HostingService is the Infrastructure page: what a product TANK runs for a Tread is,
  * how it is doing, what it costs and what people may change about it. Every request
  * names the Tread (channel_id); members of the Tread may read, and what each role may
@@ -985,5 +1019,15 @@ export declare const HostingService: GenService<{
         methodKind: "unary";
         input: typeof SetAllowanceRequestSchema;
         output: typeof SetAllowanceResponseSchema;
+    };
+    /**
+     * Admins take the product with them: a docker-compose file that runs it without TANK.
+     *
+     * @generated from rpc tank.hosting.v1.HostingService.ExportProduct
+     */
+    exportProduct: {
+        methodKind: "unary";
+        input: typeof ExportProductRequestSchema;
+        output: typeof ExportProductResponseSchema;
     };
 }>;
