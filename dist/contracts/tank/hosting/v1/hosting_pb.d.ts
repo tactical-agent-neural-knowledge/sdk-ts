@@ -445,6 +445,30 @@ export type GetResourcesResponse = Message<"tank.hosting.v1.GetResourcesResponse
      * @generated from field: bool can_manage = 5;
      */
     canManage: boolean;
+    /**
+     * hosting so far this month: the base for the hours it ran, plus use beyond the bundle
+     *
+     * @generated from field: int64 month_cents = 6;
+     */
+    monthCents: bigint;
+    /**
+     * the monthly cap; 0 is none
+     *
+     * @generated from field: int64 cap_cents = 7;
+     */
+    capCents: bigint;
+    /**
+     * at the cap now: workers and schedules paused
+     *
+     * @generated from field: bool capped = 8;
+     */
+    capped: boolean;
+    /**
+     * the caller is an owner
+     *
+     * @generated from field: bool can_set_cap = 9;
+     */
+    canSetCap: boolean;
 };
 /**
  * Describes the message tank.hosting.v1.GetResourcesResponse.
@@ -660,6 +684,150 @@ export type UpdateResourceResponse = Message<"tank.hosting.v1.UpdateResourceResp
  */
 export declare const UpdateResourceResponseSchema: GenMessage<UpdateResourceResponse>;
 /**
+ * @generated from message tank.hosting.v1.SetCapRequest
+ */
+export type SetCapRequest = Message<"tank.hosting.v1.SetCapRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * 0 removes the cap
+     *
+     * @generated from field: int64 cap_cents = 2;
+     */
+    capCents: bigint;
+};
+/**
+ * Describes the message tank.hosting.v1.SetCapRequest.
+ * Use `create(SetCapRequestSchema)` to create a new message.
+ */
+export declare const SetCapRequestSchema: GenMessage<SetCapRequest>;
+/**
+ * @generated from message tank.hosting.v1.SetCapResponse
+ */
+export type SetCapResponse = Message<"tank.hosting.v1.SetCapResponse"> & {};
+/**
+ * Describes the message tank.hosting.v1.SetCapResponse.
+ * Use `create(SetCapResponseSchema)` to create a new message.
+ */
+export declare const SetCapResponseSchema: GenMessage<SetCapResponse>;
+/**
+ * @generated from message tank.hosting.v1.HostedProduct
+ */
+export type HostedProduct = Message<"tank.hosting.v1.HostedProduct"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string channel_name = 2;
+     */
+    channelName: string;
+    /**
+     * @generated from field: string slug = 3;
+     */
+    slug: string;
+    /**
+     * @generated from field: string url = 4;
+     */
+    url: string;
+    /**
+     * @generated from field: bool awake = 5;
+     */
+    awake: boolean;
+    /**
+     * @generated from field: int64 month_cents = 6;
+     */
+    monthCents: bigint;
+    /**
+     * @generated from field: int64 cap_cents = 7;
+     */
+    capCents: bigint;
+    /**
+     * @generated from field: bool capped = 8;
+     */
+    capped: boolean;
+};
+/**
+ * Describes the message tank.hosting.v1.HostedProduct.
+ * Use `create(HostedProductSchema)` to create a new message.
+ */
+export declare const HostedProductSchema: GenMessage<HostedProduct>;
+/**
+ * @generated from message tank.hosting.v1.ListHostingRequest
+ */
+export type ListHostingRequest = Message<"tank.hosting.v1.ListHostingRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.hosting.v1.ListHostingRequest.
+ * Use `create(ListHostingRequestSchema)` to create a new message.
+ */
+export declare const ListHostingRequestSchema: GenMessage<ListHostingRequest>;
+/**
+ * @generated from message tank.hosting.v1.ListHostingResponse
+ */
+export type ListHostingResponse = Message<"tank.hosting.v1.ListHostingResponse"> & {
+    /**
+     * the Treads the caller is in
+     *
+     * @generated from field: repeated tank.hosting.v1.HostedProduct products = 1;
+     */
+    products: HostedProduct[];
+    /**
+     * all of them
+     *
+     * @generated from field: int64 month_cents = 2;
+     */
+    monthCents: bigint;
+    /**
+     * @generated from field: int64 allowance_cents = 3;
+     */
+    allowanceCents: bigint;
+    /**
+     * the caller is an owner
+     *
+     * @generated from field: bool can_set = 4;
+     */
+    canSet: boolean;
+};
+/**
+ * Describes the message tank.hosting.v1.ListHostingResponse.
+ * Use `create(ListHostingResponseSchema)` to create a new message.
+ */
+export declare const ListHostingResponseSchema: GenMessage<ListHostingResponse>;
+/**
+ * @generated from message tank.hosting.v1.SetAllowanceRequest
+ */
+export type SetAllowanceRequest = Message<"tank.hosting.v1.SetAllowanceRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: int64 allowance_cents = 2;
+     */
+    allowanceCents: bigint;
+};
+/**
+ * Describes the message tank.hosting.v1.SetAllowanceRequest.
+ * Use `create(SetAllowanceRequestSchema)` to create a new message.
+ */
+export declare const SetAllowanceRequestSchema: GenMessage<SetAllowanceRequest>;
+/**
+ * @generated from message tank.hosting.v1.SetAllowanceResponse
+ */
+export type SetAllowanceResponse = Message<"tank.hosting.v1.SetAllowanceResponse"> & {};
+/**
+ * Describes the message tank.hosting.v1.SetAllowanceResponse.
+ * Use `create(SetAllowanceResponseSchema)` to create a new message.
+ */
+export declare const SetAllowanceResponseSchema: GenMessage<SetAllowanceResponse>;
+/**
  * HostingService is the Infrastructure page: what a product TANK runs for a Tread is,
  * how it is doing, what it costs and what people may change about it. Every request
  * names the Tread (channel_id); members of the Tread may read, and what each role may
@@ -748,5 +916,38 @@ export declare const HostingService: GenService<{
         methodKind: "unary";
         input: typeof UpdateResourceRequestSchema;
         output: typeof UpdateResourceResponseSchema;
+    };
+    /**
+     * Owners set a product's monthly hosting cap (0: none). At 80% the owners are told; at
+     * the cap its workers and schedules pause until the 1st or a higher cap, and the site
+     * stays up.
+     *
+     * @generated from rpc tank.hosting.v1.HostingService.SetCap
+     */
+    setCap: {
+        methodKind: "unary";
+        input: typeof SetCapRequestSchema;
+        output: typeof SetCapResponseSchema;
+    };
+    /**
+     * Every product the workspace hosts, for Settings, Billing, Hosting: what each cost so
+     * far this month, its cap, and the workspace's allowance. Members of the workspace read.
+     *
+     * @generated from rpc tank.hosting.v1.HostingService.ListHosting
+     */
+    listHosting: {
+        methodKind: "unary";
+        input: typeof ListHostingRequestSchema;
+        output: typeof ListHostingResponseSchema;
+    };
+    /**
+     * Owners set how much more a month a new build may cost before it waits for them.
+     *
+     * @generated from rpc tank.hosting.v1.HostingService.SetAllowance
+     */
+    setAllowance: {
+        methodKind: "unary";
+        input: typeof SetAllowanceRequestSchema;
+        output: typeof SetAllowanceResponseSchema;
     };
 }>;
