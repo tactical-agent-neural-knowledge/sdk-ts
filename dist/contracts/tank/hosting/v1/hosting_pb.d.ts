@@ -469,12 +469,48 @@ export type GetResourcesResponse = Message<"tank.hosting.v1.GetResourcesResponse
      * @generated from field: bool can_set_cap = 9;
      */
     canSetCap: boolean;
+    /**
+     * open pull requests running the whole product
+     *
+     * @generated from field: repeated tank.hosting.v1.Preview previews = 10;
+     */
+    previews: Preview[];
 };
 /**
  * Describes the message tank.hosting.v1.GetResourcesResponse.
  * Use `create(GetResourcesResponseSchema)` to create a new message.
  */
 export declare const GetResourcesResponseSchema: GenMessage<GetResourcesResponse>;
+/**
+ * @generated from message tank.hosting.v1.Preview
+ */
+export type Preview = Message<"tank.hosting.v1.Preview"> & {
+    /**
+     * @generated from field: int32 pull_request = 1;
+     */
+    pullRequest: number;
+    /**
+     * https://<slug>--pr<n>.tank.chat
+     *
+     * @generated from field: string url = 2;
+     */
+    url: string;
+    /**
+     * the commit it runs
+     *
+     * @generated from field: string build = 3;
+     */
+    build: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 4;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.hosting.v1.Preview.
+ * Use `create(PreviewSchema)` to create a new message.
+ */
+export declare const PreviewSchema: GenMessage<Preview>;
 /**
  * @generated from message tank.hosting.v1.ApproveBuildRequest
  */

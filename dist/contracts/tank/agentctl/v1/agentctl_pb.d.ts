@@ -856,6 +856,12 @@ export type ReadProductRequest = Message<"tank.agentctl.v1.ReadProductRequest"> 
      * @generated from field: int32 tail_lines = 1;
      */
     tailLines: number;
+    /**
+     * read that pull request's preview instead of the live product
+     *
+     * @generated from field: int32 pull_request = 2;
+     */
+    pullRequest: number;
 };
 /**
  * Describes the message tank.agentctl.v1.ReadProductRequest.
@@ -918,6 +924,12 @@ export type CheckLiveRequest = Message<"tank.agentctl.v1.CheckLiveRequest"> & {
      * @generated from field: string expect_sha = 4;
      */
     expectSha: string;
+    /**
+     * open that pull request's preview (<slug>--pr<n>) instead of the live product
+     *
+     * @generated from field: int32 pull_request = 5;
+     */
+    pullRequest: number;
 };
 /**
  * Describes the message tank.agentctl.v1.CheckLiveRequest.
@@ -3799,12 +3811,46 @@ export type GetProductSpecResponse = Message<"tank.agentctl.v1.GetProductSpecRes
      * @generated from field: repeated string secrets = 8;
      */
     secrets: string[];
+    /**
+     * open pull requests' previews
+     *
+     * @generated from field: repeated tank.agentctl.v1.ProductPreview previews = 9;
+     */
+    previews: ProductPreview[];
 };
 /**
  * Describes the message tank.agentctl.v1.GetProductSpecResponse.
  * Use `create(GetProductSpecResponseSchema)` to create a new message.
  */
 export declare const GetProductSpecResponseSchema: GenMessage<GetProductSpecResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ProductPreview
+ */
+export type ProductPreview = Message<"tank.agentctl.v1.ProductPreview"> & {
+    /**
+     * @generated from field: int32 pull_request = 1;
+     */
+    pullRequest: number;
+    /**
+     * @generated from field: string url = 2;
+     */
+    url: string;
+    /**
+     * @generated from field: string image_tag = 3;
+     */
+    imageTag: string;
+    /**
+     * RFC 3339
+     *
+     * @generated from field: string expires_at = 4;
+     */
+    expiresAt: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductPreview.
+ * Use `create(ProductPreviewSchema)` to create a new message.
+ */
+export declare const ProductPreviewSchema: GenMessage<ProductPreview>;
 /**
  * @generated from message tank.agentctl.v1.ApproveProductBuildRequest
  */
