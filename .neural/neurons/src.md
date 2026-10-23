@@ -1,6 +1,6 @@
 # Neurons · src
 
-refreshed 2026-10-23 · 516e642632b1
+refreshed 2026-10-23 · f3cdb0af2c34
 
 - `src/` has no `index.ts` of its own: every published subpath points at a directory barrel (`src/client/index.ts`, `src/react/index.tsx`, `src/design/index.ts`, `src/blocks/index.ts`, `src/blocks-web/index.ts`, `src/blocks-native/index.ts`, `src/contracts/index.ts`, `src/topo/index.ts`) mapped in `package.json` `exports`.
 - `src/exports.test.ts` is the only file directly in `src/` and it is the packaging guard — it fails the build when an `exports` entry drifts, not at install time in a consumer.
@@ -12,6 +12,7 @@ refreshed 2026-10-23 · 516e642632b1
 - `src/test/**` is excluded from `tsconfig.build.json`, so anything imported from there is test-only by construction and cannot leak into `dist/`.
 - Every relative import ends in `.js` (NodeNext + `verbatimModuleSyntax`), and type-only imports must use `import type` or the build fails.
 - Area suites can be run alone: `pnpm vitest run src/client`, `src/topo`, `src/design`, `src/blocks/` — note the trailing slash on `src/blocks/`, without it the pattern also pulls in `src/blocks-web` and `src/blocks-native`.
+- `src/contracts/hosting.ts` is a two-line shim added in commit f3cdb0a — a new `./contracts/hosting` wildcard entry reachable as `import * from ".../sdk/contracts/hosting"` but not included in the namespaced barrel in `src/contracts/index.ts`.
 
 ## Verified
 

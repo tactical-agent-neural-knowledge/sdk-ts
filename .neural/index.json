@@ -1,7 +1,7 @@
 {
   "generated_by": "TANK Neural Knowledge",
-  "commit": "516e642632b10e6d231d41ea350fedafc3a8fc85",
-  "refreshed_at": "2026-10-23T13:22:14.076Z",
+  "commit": "f3cdb0af2c349f3aaefc213e602ba857df1322b1",
+  "refreshed_at": "2026-10-23T21:32:39.661Z",
   "areas": {
     ".": {
       "neurons": ".neural/neurons/root.md",
@@ -187,6 +187,7 @@
         "src/contracts/environment.ts",
         "src/contracts/events.ts",
         "src/contracts/files.ts",
+        "src/contracts/hosting.ts",
         "src/contracts/huddle.ts",
         "src/contracts/index.ts",
         "src/contracts/message.ts",
@@ -217,6 +218,7 @@
         "src/contracts/tank/environment/v1/environment_pb.ts",
         "src/contracts/tank/events/v1/events_pb.ts",
         "src/contracts/tank/files/v1/files_pb.ts",
+        "src/contracts/tank/hosting/v1/hosting_pb.ts",
         "src/contracts/tank/huddle/v1/huddle_pb.ts",
         "src/contracts/tank/message/v1/message_pb.ts",
         "src/contracts/tank/monitor/v1/monitor_pb.ts",
@@ -226,9 +228,7 @@
         "src/contracts/tank/realtime/v1/realtime_pb.ts",
         "src/contracts/tank/remediation/v1/remediation_pb.ts",
         "src/contracts/tank/richtext/v1/richtext_pb.ts",
-        "src/contracts/tank/search/v1/search_pb.ts",
-        "src/contracts/tank/security/v1/security_pb.ts",
-        "src/contracts/tank/social/v1/social_pb.ts"
+        "src/contracts/tank/search/v1/search_pb.ts"
       ]
     },
     "src/design": {
