@@ -1,4 +1,4 @@
-# Neural Knowledge by TANK · refreshed 2026-10-21 · e42fdf15b240
+# Neural Knowledge by TANK · refreshed 2026-10-23 · 516e642632b1
 
 This repository is the single npm package `@tactical-agent-neural-knowledge/sdk` — the TypeScript SDK for TANK. It ships Connect transport clients for every backend service, a realtime gateway client with cursor/gap-buffer/Resume logic, a fully normalized Redux-style store, React hooks, design tokens, and MUI/React Native Paper block renderers. Consumers install it as a git dependency (`github:tactical-agent-neural-knowledge/sdk-ts#<sha>`) — there is no registry publish; a green `main` sha is the artifact.
 

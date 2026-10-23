@@ -1,6 +1,6 @@
 # Neurons · .
 
-refreshed 2026-10-21 · e42fdf15b240
+refreshed 2026-10-23 · 516e642632b1
 
 - The repo root *is* the npm package `@tactical-agent-neural-knowledge/sdk` — there is no `packages/` and `pnpm-workspace.yaml` exists only to whitelist `esbuild`'s install script (`allowBuilds`) and pin `tinypool`/`shell-quote` overrides, not to declare a workspace.
 - `dist/` is committed. `package.json` `check` ends with `git diff --exit-code --stat dist/`, so any source change that is not followed by `pnpm build` fails CI; never hand-edit `dist/`.
