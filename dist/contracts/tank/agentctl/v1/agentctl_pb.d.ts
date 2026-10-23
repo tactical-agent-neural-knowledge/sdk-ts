@@ -810,6 +810,179 @@ export type ReportStatusResponse = Message<"tank.agentctl.v1.ReportStatusRespons
  */
 export declare const ReportStatusResponseSchema: GenMessage<ReportStatusResponse>;
 /**
+ * @generated from message tank.agentctl.v1.ReportCompletionRequest
+ */
+export type ReportCompletionRequest = Message<"tank.agentctl.v1.ReportCompletionRequest"> & {
+    /**
+     * parts of the ask finished and pushed
+     *
+     * @generated from field: repeated string done = 1;
+     */
+    done: string[];
+    /**
+     * parts not started or not finished, in order
+     *
+     * @generated from field: repeated string remaining = 2;
+     */
+    remaining: string[];
+    /**
+     * parts that need a person: a decision, access, money
+     *
+     * @generated from field: repeated string blocked = 3;
+     */
+    blocked: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ReportCompletionRequest.
+ * Use `create(ReportCompletionRequestSchema)` to create a new message.
+ */
+export declare const ReportCompletionRequestSchema: GenMessage<ReportCompletionRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ReportCompletionResponse
+ */
+export type ReportCompletionResponse = Message<"tank.agentctl.v1.ReportCompletionResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ReportCompletionResponse.
+ * Use `create(ReportCompletionResponseSchema)` to create a new message.
+ */
+export declare const ReportCompletionResponseSchema: GenMessage<ReportCompletionResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ReadProductRequest
+ */
+export type ReadProductRequest = Message<"tank.agentctl.v1.ReadProductRequest"> & {
+    /**
+     * 0 = 200, at most 2000
+     *
+     * @generated from field: int32 tail_lines = 1;
+     */
+    tailLines: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadProductRequest.
+ * Use `create(ReadProductRequestSchema)` to create a new message.
+ */
+export declare const ReadProductRequestSchema: GenMessage<ReadProductRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ReadProductResponse
+ */
+export type ReadProductResponse = Message<"tank.agentctl.v1.ReadProductResponse"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * @generated from field: tank.agentctl.v1.ProductState state = 2;
+     */
+    state?: ProductState;
+    /**
+     * @generated from field: string logs = 3;
+     */
+    logs: string;
+    /**
+     * why nothing could be read (no product for this repository)
+     *
+     * @generated from field: string note = 4;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadProductResponse.
+ * Use `create(ReadProductResponseSchema)` to create a new message.
+ */
+export declare const ReadProductResponseSchema: GenMessage<ReadProductResponse>;
+/**
+ * @generated from message tank.agentctl.v1.CheckLiveRequest
+ */
+export type CheckLiveRequest = Message<"tank.agentctl.v1.CheckLiveRequest"> & {
+    /**
+     * "/map"; the host is the product TANK runs for this repository
+     *
+     * @generated from field: string path = 1;
+     */
+    path: string;
+    /**
+     * 0 = 1440
+     *
+     * @generated from field: int32 viewport_width = 2;
+     */
+    viewportWidth: number;
+    /**
+     * 0 = 900
+     *
+     * @generated from field: int32 viewport_height = 3;
+     */
+    viewportHeight: number;
+    /**
+     * wait (up to ten minutes) until the live build is this commit
+     *
+     * @generated from field: string expect_sha = 4;
+     */
+    expectSha: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.CheckLiveRequest.
+ * Use `create(CheckLiveRequestSchema)` to create a new message.
+ */
+export declare const CheckLiveRequestSchema: GenMessage<CheckLiveRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CheckLiveResponse
+ */
+export type CheckLiveResponse = Message<"tank.agentctl.v1.CheckLiveResponse"> & {
+    /**
+     * @generated from field: string url = 1;
+     */
+    url: string;
+    /**
+     * the page's HTTP status; 0 when it did not load
+     *
+     * @generated from field: int32 status = 2;
+     */
+    status: number;
+    /**
+     * what the live product says it is (/healthz X-Build-Sha)
+     *
+     * @generated from field: string build_sha = 3;
+     */
+    buildSha: string;
+    /**
+     * build_sha matches expect_sha (or none was asked for)
+     *
+     * @generated from field: bool deployed = 4;
+     */
+    deployed: boolean;
+    /**
+     * @generated from field: string title = 5;
+     */
+    title: string;
+    /**
+     * characters of visible text; near zero is a blank page
+     *
+     * @generated from field: int32 text_length = 6;
+     */
+    textLength: number;
+    /**
+     * console errors and failed loads
+     *
+     * @generated from field: repeated string errors = 7;
+     */
+    errors: string[];
+    /**
+     * @generated from field: bytes screenshot_png = 8;
+     */
+    screenshotPng: Uint8Array;
+    /**
+     * why nothing could be checked
+     *
+     * @generated from field: string note = 9;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.CheckLiveResponse.
+ * Use `create(CheckLiveResponseSchema)` to create a new message.
+ */
+export declare const CheckLiveResponseSchema: GenMessage<CheckLiveResponse>;
+/**
  * @generated from message tank.agentctl.v1.ReadThreadRequest
  */
 export type ReadThreadRequest = Message<"tank.agentctl.v1.ReadThreadRequest"> & {
@@ -3309,6 +3482,190 @@ export type GetDeploymentRequest = Message<"tank.agentctl.v1.GetDeploymentReques
  */
 export declare const GetDeploymentRequestSchema: GenMessage<GetDeploymentRequest>;
 /**
+ * What the cluster says about a running product.
+ *
+ * @generated from message tank.agentctl.v1.ProductState
+ */
+export type ProductState = Message<"tank.agentctl.v1.ProductState"> & {
+    /**
+     * not_deployed | asleep | starting | running | failing
+     *
+     * @generated from field: string phase = 1;
+     */
+    phase: string;
+    /**
+     * what the workload runs
+     *
+     * @generated from field: string image_tag = 2;
+     */
+    imageTag: string;
+    /**
+     * wanted
+     *
+     * @generated from field: int32 replicas = 3;
+     */
+    replicas: number;
+    /**
+     * serving
+     *
+     * @generated from field: int32 ready = 4;
+     */
+    ready: number;
+    /**
+     * since the pod started
+     *
+     * @generated from field: int32 restarts = 5;
+     */
+    restarts: number;
+    /**
+     * "Error", "OOMKilled", … of the last crash
+     *
+     * @generated from field: string last_exit_reason = 6;
+     */
+    lastExitReason: string;
+    /**
+     * @generated from field: int32 last_exit_code = 7;
+     */
+    lastExitCode: number;
+    /**
+     * RFC 3339, when the current pod started
+     *
+     * @generated from field: string started_at = 8;
+     */
+    startedAt: string;
+    /**
+     * capacity of the product's data volume
+     *
+     * @generated from field: int64 disk_bytes = 9;
+     */
+    diskBytes: bigint;
+    /**
+     * "1"
+     *
+     * @generated from field: string cpu_limit = 10;
+     */
+    cpuLimit: string;
+    /**
+     * "2Gi"
+     *
+     * @generated from field: string memory_limit = 11;
+     */
+    memoryLimit: string;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ProductEvent events = 12;
+     */
+    events: ProductEvent[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductState.
+ * Use `create(ProductStateSchema)` to create a new message.
+ */
+export declare const ProductStateSchema: GenMessage<ProductState>;
+/**
+ * @generated from message tank.agentctl.v1.ProductEvent
+ */
+export type ProductEvent = Message<"tank.agentctl.v1.ProductEvent"> & {
+    /**
+     * RFC 3339
+     *
+     * @generated from field: string at = 1;
+     */
+    at: string;
+    /**
+     * Normal | Warning
+     *
+     * @generated from field: string type = 2;
+     */
+    type: string;
+    /**
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+    /**
+     * @generated from field: string message = 4;
+     */
+    message: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductEvent.
+ * Use `create(ProductEventSchema)` to create a new message.
+ */
+export declare const ProductEventSchema: GenMessage<ProductEvent>;
+/**
+ * @generated from message tank.agentctl.v1.CheckProductPageRequest
+ */
+export type CheckProductPageRequest = Message<"tank.agentctl.v1.CheckProductPageRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * "/" when empty
+     *
+     * @generated from field: string path = 2;
+     */
+    path: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.CheckProductPageRequest.
+ * Use `create(CheckProductPageRequestSchema)` to create a new message.
+ */
+export declare const CheckProductPageRequestSchema: GenMessage<CheckProductPageRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CheckProductPageResponse
+ */
+export type CheckProductPageResponse = Message<"tank.agentctl.v1.CheckProductPageResponse"> & {
+    /**
+     * @generated from field: tank.agentctl.v1.CheckLiveResponse check = 1;
+     */
+    check?: CheckLiveResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.CheckProductPageResponse.
+ * Use `create(CheckProductPageResponseSchema)` to create a new message.
+ */
+export declare const CheckProductPageResponseSchema: GenMessage<CheckProductPageResponse>;
+/**
+ * @generated from message tank.agentctl.v1.GetProductStateRequest
+ */
+export type GetProductStateRequest = Message<"tank.agentctl.v1.GetProductStateRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * 0 = 200, at most 2000
+     *
+     * @generated from field: int32 tail_lines = 2;
+     */
+    tailLines: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetProductStateRequest.
+ * Use `create(GetProductStateRequestSchema)` to create a new message.
+ */
+export declare const GetProductStateRequestSchema: GenMessage<GetProductStateRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetProductStateResponse
+ */
+export type GetProductStateResponse = Message<"tank.agentctl.v1.GetProductStateResponse"> & {
+    /**
+     * @generated from field: tank.agentctl.v1.ProductState state = 1;
+     */
+    state?: ProductState;
+    /**
+     * the app's log tail; the previous container's when it crashed
+     *
+     * @generated from field: string logs = 2;
+     */
+    logs: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetProductStateResponse.
+ * Use `create(GetProductStateResponseSchema)` to create a new message.
+ */
+export declare const GetProductStateResponseSchema: GenMessage<GetProductStateResponse>;
+/**
  * @generated from message tank.agentctl.v1.GetDeploymentResponse
  */
 export type GetDeploymentResponse = Message<"tank.agentctl.v1.GetDeploymentResponse"> & {
@@ -4405,6 +4762,40 @@ export declare const RunnerService: GenService<{
         output: typeof ReportStatusResponseSchema;
     };
     /**
+     * How far the run got against the whole ask (2026-10-23): what is done, what is left,
+     * and what needs a person. Items left with nothing blocked start a continuation run.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.ReportCompletion
+     */
+    reportCompletion: {
+        methodKind: "unary";
+        input: typeof ReportCompletionRequestSchema;
+        output: typeof ReportCompletionResponseSchema;
+    };
+    /**
+     * Opens a page of the product TANK hosts for this run's repository, as a visitor would,
+     * once it serves the expected build: status, errors, how much it shows, a screenshot.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.CheckLive
+     */
+    checkLive: {
+        methodKind: "unary";
+        input: typeof CheckLiveRequestSchema;
+        output: typeof CheckLiveResponseSchema;
+    };
+    /**
+     * The product TANK runs for this run's repository, as its operator sees it: whether it
+     * is up, how often it has restarted and why, recent cluster events and its log. So an
+     * agent can see the product it built fail instead of hearing about it from a person.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.ReadProduct
+     */
+    readProduct: {
+        methodKind: "unary";
+        input: typeof ReadProductRequestSchema;
+        output: typeof ReadProductResponseSchema;
+    };
+    /**
      * @generated from rpc tank.agentctl.v1.RunnerService.ReadThread
      */
     readThread: {
@@ -4830,6 +5221,27 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof GetDeploymentRequestSchema;
         output: typeof GetDeploymentResponseSchema;
+    };
+    /**
+     * The running state of a slug read from the cluster, with its log tail: what the
+     * Infrastructure page shows. Read only.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.GetProductState
+     */
+    getProductState: {
+        methodKind: "unary";
+        input: typeof GetProductStateRequestSchema;
+        output: typeof GetProductStateResponseSchema;
+    };
+    /**
+     * Opens a page of a slug's product through the headless reader, as a visitor would.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.CheckProductPage
+     */
+    checkProductPage: {
+        methodKind: "unary";
+        input: typeof CheckProductPageRequestSchema;
+        output: typeof CheckProductPageResponseSchema;
     };
     /**
      * Adds the preview-reporting workflow to repositories the workspace's own

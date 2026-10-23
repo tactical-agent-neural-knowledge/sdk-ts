@@ -9,6 +9,7 @@ import { ChannelReadStateSchema, ChannelService, ChannelType, TreadGoalSchema, }
 import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
 import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
+import { HostingService } from "../contracts/tank/hosting/v1/hosting_pb.js";
 import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } from "../contracts/tank/message/v1/message_pb.js";
 import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
@@ -73,6 +74,8 @@ export class TankClient {
     ai;
     /** Services graded by the world: environments, scores, the public conversation. Readable signed out. */
     environment;
+    /** The Infrastructure page: a Tread's product, its state, log and live check. */
+    hosting;
     realtime;
     store;
     storage;
@@ -122,6 +125,7 @@ export class TankClient {
         this.billing = createClient(BillingService, this.transport);
         this.ai = createClient(AiService, this.transport);
         this.environment = createClient(EnvironmentService, this.transport);
+        this.hosting = createClient(HostingService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
             getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,

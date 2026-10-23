@@ -8,6 +8,7 @@ import { type Channel, ChannelService, ChannelType, type TreadGoal } from "../co
 import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
 import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js";
+import { HostingService } from "../contracts/tank/hosting/v1/hosting_pb.js";
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
 import { MonitorService, type Widget } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
@@ -169,6 +170,8 @@ export declare class TankClient {
     readonly ai: Client<typeof AiService>;
     /** Services graded by the world: environments, scores, the public conversation. Readable signed out. */
     readonly environment: Client<typeof EnvironmentService>;
+    /** The Infrastructure page: a Tread's product, its state, log and live check. */
+    readonly hosting: Client<typeof HostingService>;
     readonly realtime: RealtimeClient;
     readonly store: TankStore;
     readonly storage: TankStorage;
