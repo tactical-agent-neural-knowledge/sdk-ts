@@ -4021,6 +4021,201 @@ export type BuildPreviewResponse = Message<"tank.agentctl.v1.BuildPreviewRespons
  */
 export declare const BuildPreviewResponseSchema: GenMessage<BuildPreviewResponse>;
 /**
+ * @generated from message tank.agentctl.v1.OpenSetupPullRequestRequest
+ */
+export type OpenSetupPullRequestRequest = Message<"tank.agentctl.v1.OpenSetupPullRequestRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * owner/name, granted to the workspace
+     *
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * "tank-verify=…", written to .well-known/tank-verify.txt
+     *
+     * @generated from field: string verify_token = 3;
+     */
+    verifyToken: string;
+    /**
+     * the exact <script> tag, pinned by its hash
+     *
+     * @generated from field: string bridge_tag = 4;
+     */
+    bridgeTag: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.OpenSetupPullRequestRequest.
+ * Use `create(OpenSetupPullRequestRequestSchema)` to create a new message.
+ */
+export declare const OpenSetupPullRequestRequestSchema: GenMessage<OpenSetupPullRequestRequest>;
+/**
+ * @generated from message tank.agentctl.v1.OpenSetupPullRequestResponse
+ */
+export type OpenSetupPullRequestResponse = Message<"tank.agentctl.v1.OpenSetupPullRequestResponse"> & {
+    /**
+     * @generated from field: string url = 1;
+     */
+    url: string;
+    /**
+     * "open" | "merged" | "closed"
+     *
+     * @generated from field: string state = 2;
+     */
+    state: string;
+    /**
+     * @generated from field: string framework = 3;
+     */
+    framework: string;
+    /**
+     * Files the pull request changes, and what it could not place (then the person adds the
+     * tag by hand; the note says where).
+     *
+     * @generated from field: repeated string files = 4;
+     */
+    files: string[];
+    /**
+     * @generated from field: string note = 5;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.OpenSetupPullRequestResponse.
+ * Use `create(OpenSetupPullRequestResponseSchema)` to create a new message.
+ */
+export declare const OpenSetupPullRequestResponseSchema: GenMessage<OpenSetupPullRequestResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ReadElementAtRequest
+ */
+export type ReadElementAtRequest = Message<"tank.agentctl.v1.ReadElementAtRequest"> & {
+    /**
+     * https, public; checked again on TANK's side
+     *
+     * @generated from field: string url = 1;
+     */
+    url: string;
+    /**
+     * @generated from field: int32 viewport_width = 2;
+     */
+    viewportWidth: number;
+    /**
+     * @generated from field: int32 viewport_height = 3;
+     */
+    viewportHeight: number;
+    /**
+     * @generated from field: double x = 4;
+     */
+    x: number;
+    /**
+     * @generated from field: double y = 5;
+     */
+    y: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadElementAtRequest.
+ * Use `create(ReadElementAtRequestSchema)` to create a new message.
+ */
+export declare const ReadElementAtRequestSchema: GenMessage<ReadElementAtRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ReadElementAtResponse
+ */
+export type ReadElementAtResponse = Message<"tank.agentctl.v1.ReadElementAtResponse"> & {
+    /**
+     * @generated from field: string tag = 1;
+     */
+    tag: string;
+    /**
+     * @generated from field: string text = 2;
+     */
+    text: string;
+    /**
+     * @generated from field: string test_id = 3;
+     */
+    testId: string;
+    /**
+     * @generated from field: repeated string classes = 4;
+     */
+    classes: string[];
+    /**
+     * @generated from field: string selector = 5;
+     */
+    selector: string;
+    /**
+     * @generated from field: double x = 6;
+     */
+    x: number;
+    /**
+     * @generated from field: double y = 7;
+     */
+    y: number;
+    /**
+     * @generated from field: double w = 8;
+     */
+    w: number;
+    /**
+     * @generated from field: double h = 9;
+     */
+    h: number;
+    /**
+     * why nothing was read
+     *
+     * @generated from field: string note = 10;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReadElementAtResponse.
+ * Use `create(ReadElementAtResponseSchema)` to create a new message.
+ */
+export declare const ReadElementAtResponseSchema: GenMessage<ReadElementAtResponse>;
+/**
+ * @generated from message tank.agentctl.v1.MergeChangeRequest
+ */
+export type MergeChangeRequest = Message<"tank.agentctl.v1.MergeChangeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string sha = 3;
+     */
+    sha: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.MergeChangeRequest.
+ * Use `create(MergeChangeRequestSchema)` to create a new message.
+ */
+export declare const MergeChangeRequestSchema: GenMessage<MergeChangeRequest>;
+/**
+ * @generated from message tank.agentctl.v1.MergeChangeResponse
+ */
+export type MergeChangeResponse = Message<"tank.agentctl.v1.MergeChangeResponse"> & {
+    /**
+     * @generated from field: bool merged = 1;
+     */
+    merged: boolean;
+    /**
+     * @generated from field: string pull_request_url = 2;
+     */
+    pullRequestUrl: string;
+    /**
+     * @generated from field: string note = 3;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.MergeChangeResponse.
+ * Use `create(MergeChangeResponseSchema)` to create a new message.
+ */
+export declare const MergeChangeResponseSchema: GenMessage<MergeChangeResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -4675,6 +4870,38 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof BuildPreviewRequestSchema;
         output: typeof BuildPreviewResponseSchema;
+    };
+    /**
+     * Opens (or finds) the one pull request that connects a repository's app to boards: the
+     * domain proof file and TANK's board bridge, placed for the repository's framework.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.OpenSetupPullRequest
+     */
+    openSetupPullRequest: {
+        methodKind: "unary";
+        input: typeof OpenSetupPullRequestRequestSchema;
+        output: typeof OpenSetupPullRequestResponseSchema;
+    };
+    /**
+     * What a page shows at a point, read by a headless browser on TANK's side.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ReadElementAt
+     */
+    readElementAt: {
+        methodKind: "unary";
+        input: typeof ReadElementAtRequestSchema;
+        output: typeof ReadElementAtResponseSchema;
+    };
+    /**
+     * Merges the pull request of the newest run in a thread, only when its head is exactly
+     * sha (the commit a person saw previewed). api asks after its own checks.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.MergeChange
+     */
+    mergeChange: {
+        methodKind: "unary";
+        input: typeof MergeChangeRequestSchema;
+        output: typeof MergeChangeResponseSchema;
     };
     /**
      * Writes into schema `agent`, which belongs to the control plane. The

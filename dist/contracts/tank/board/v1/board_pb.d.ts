@@ -200,6 +200,17 @@ export type AppFrame = Message<"tank.board.v1.AppFrame"> & {
      * @generated from field: string screen = 15;
      */
     screen: string;
+    /**
+     * The change loop (2026-10-22): a frame placed beside the one a change was asked of,
+     * showing the agent's branch for that change. Server-filled ref while it works.
+     *
+     * @generated from field: string change_id = 16;
+     */
+    changeId: string;
+    /**
+     * @generated from field: bool change_approved = 17;
+     */
+    changeApproved: boolean;
 };
 /**
  * Describes the message tank.board.v1.AppFrame.
@@ -851,6 +862,18 @@ export type Element = Message<"tank.board.v1.Element"> & {
      * @generated from field: repeated string classes = 6;
      */
     classes: string[];
+    /**
+     * the page inside the frame when it was clicked: "/pricing?plan=pro"
+     *
+     * @generated from field: string page = 7;
+     */
+    page: string;
+    /**
+     * a CSS selector that finds it again, when TANK read it from outside
+     *
+     * @generated from field: string selector = 8;
+     */
+    selector: string;
 };
 /**
  * Describes the message tank.board.v1.Element.
@@ -888,6 +911,13 @@ export type RequestChangeRequest = Message<"tank.board.v1.RequestChangeRequest">
      * @generated from field: string ask = 5;
      */
     ask: string;
+    /**
+     * The Tread the work happens in, for a board that is not in one yet: the board moves
+     * into it. Ignored when the board already has a Tread.
+     *
+     * @generated from field: string channel_id = 6;
+     */
+    channelId: string;
 };
 /**
  * Describes the message tank.board.v1.RequestChangeRequest.
@@ -915,12 +945,71 @@ export type RequestChangeResponse = Message<"tank.board.v1.RequestChangeResponse
      * @generated from field: string prompt = 8;
      */
     prompt: string;
+    /**
+     * The After frame placed beside the frame, showing the agent's branch once pushed.
+     * Empty when the ask was made of an After frame: that continues the same change.
+     *
+     * @generated from field: string after_object_id = 9;
+     */
+    afterObjectId: string;
 };
 /**
  * Describes the message tank.board.v1.RequestChangeResponse.
  * Use `create(RequestChangeResponseSchema)` to create a new message.
  */
 export declare const RequestChangeResponseSchema: GenMessage<RequestChangeResponse>;
+/**
+ * Approve a change shown in an After frame: TANK merges the change's pull request at
+ * exactly the commit the frame showed, and only that. A change from a board never reaches
+ * production without a preview somebody looked at.
+ *
+ * @generated from message tank.board.v1.ApproveChangeRequest
+ */
+export type ApproveChangeRequest = Message<"tank.board.v1.ApproveChangeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * the After frame
+     *
+     * @generated from field: string object_id = 3;
+     */
+    objectId: string;
+};
+/**
+ * Describes the message tank.board.v1.ApproveChangeRequest.
+ * Use `create(ApproveChangeRequestSchema)` to create a new message.
+ */
+export declare const ApproveChangeRequestSchema: GenMessage<ApproveChangeRequest>;
+/**
+ * @generated from message tank.board.v1.ApproveChangeResponse
+ */
+export type ApproveChangeResponse = Message<"tank.board.v1.ApproveChangeResponse"> & {
+    /**
+     * @generated from field: bool merged = 1;
+     */
+    merged: boolean;
+    /**
+     * @generated from field: string pull_request_url = 2;
+     */
+    pullRequestUrl: string;
+    /**
+     * why not, when not
+     *
+     * @generated from field: string note = 3;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.board.v1.ApproveChangeResponse.
+ * Use `create(ApproveChangeResponseSchema)` to create a new message.
+ */
+export declare const ApproveChangeResponseSchema: GenMessage<ApproveChangeResponse>;
 /**
  * @generated from message tank.board.v1.BoardTemplate
  */
@@ -2477,6 +2566,204 @@ export type StopRemoteViewsResponse = Message<"tank.board.v1.StopRemoteViewsResp
  */
 export declare const StopRemoteViewsResponseSchema: GenMessage<StopRemoteViewsResponse>;
 /**
+ * What sits under a click in a frame whose app does not carry TANK's board bridge: TANK
+ * opens the same page at the frame's size on its own side and reads the element there.
+ *
+ * @generated from message tank.board.v1.ReadElementRequest
+ */
+export type ReadElementRequest = Message<"tank.board.v1.ReadElementRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * @generated from field: string object_id = 3;
+     */
+    objectId: string;
+    /**
+     * in the frame's own CSS pixels
+     *
+     * @generated from field: double x = 4;
+     */
+    x: number;
+    /**
+     * @generated from field: double y = 5;
+     */
+    y: number;
+};
+/**
+ * Describes the message tank.board.v1.ReadElementRequest.
+ * Use `create(ReadElementRequestSchema)` to create a new message.
+ */
+export declare const ReadElementRequestSchema: GenMessage<ReadElementRequest>;
+/**
+ * @generated from message tank.board.v1.ReadElementResponse
+ */
+export type ReadElementResponse = Message<"tank.board.v1.ReadElementResponse"> & {
+    /**
+     * empty when nothing could be read
+     *
+     * @generated from field: tank.board.v1.Element element = 1;
+     */
+    element?: Element;
+    /**
+     * why, when empty
+     *
+     * @generated from field: string note = 2;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.board.v1.ReadElementResponse.
+ * Use `create(ReadElementResponseSchema)` to create a new message.
+ */
+export declare const ReadElementResponseSchema: GenMessage<ReadElementResponse>;
+/**
+ * Connecting a repository's running app to boards (2026-10-22): how it runs, where, whether
+ * TANK can name what is clicked in it, and the one pull request that sets that up.
+ *
+ * @generated from message tank.board.v1.AppSetup
+ */
+export type AppSetup = Message<"tank.board.v1.AppSetup"> & {
+    /**
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * "tank_hosted": TANK runs it; "tank_built": TANK builds its branches; "elsewhere": the
+     * company hosts it and named where; "unknown": nobody has said where it runs yet.
+     *
+     * @generated from field: string hosting = 2;
+     */
+    hosting: string;
+    /**
+     * "next-app" | "vite" | "astro" | … | ""
+     *
+     * @generated from field: string framework = 3;
+     */
+    framework: string;
+    /**
+     * @generated from field: repeated tank.board.v1.RepoEnvironment environments = 4;
+     */
+    environments: RepoEnvironment[];
+    /**
+     * TANK's board bridge in the running app: "present" | "missing" | "not_needed" | "unknown".
+     *
+     * @generated from field: string bridge = 5;
+     */
+    bridge: string;
+    /**
+     * the setup pull request, once asked for
+     *
+     * @generated from field: string pull_request_url = 6;
+     */
+    pullRequestUrl: string;
+    /**
+     * "open" | "merged" | "closed" | ""
+     *
+     * @generated from field: string pull_request_state = 7;
+     */
+    pullRequestState: string;
+    /**
+     * @generated from field: string note = 8;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.board.v1.AppSetup.
+ * Use `create(AppSetupSchema)` to create a new message.
+ */
+export declare const AppSetupSchema: GenMessage<AppSetup>;
+/**
+ * @generated from message tank.board.v1.GetAppSetupRequest
+ */
+export type GetAppSetupRequest = Message<"tank.board.v1.GetAppSetupRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+};
+/**
+ * Describes the message tank.board.v1.GetAppSetupRequest.
+ * Use `create(GetAppSetupRequestSchema)` to create a new message.
+ */
+export declare const GetAppSetupRequestSchema: GenMessage<GetAppSetupRequest>;
+/**
+ * @generated from message tank.board.v1.GetAppSetupResponse
+ */
+export type GetAppSetupResponse = Message<"tank.board.v1.GetAppSetupResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.AppSetup setup = 1;
+     */
+    setup?: AppSetup;
+};
+/**
+ * Describes the message tank.board.v1.GetAppSetupResponse.
+ * Use `create(GetAppSetupResponseSchema)` to create a new message.
+ */
+export declare const GetAppSetupResponseSchema: GenMessage<GetAppSetupResponse>;
+/**
+ * Name where the app runs and, with the person's permission, have TANK open one pull request
+ * in the repository adding the domain proof and the board bridge.
+ *
+ * @generated from message tank.board.v1.ConnectAppRequest
+ */
+export type ConnectAppRequest = Message<"tank.board.v1.ConnectAppRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * https origin where it runs, e.g. https://cache7.com
+     *
+     * @generated from field: string url = 3;
+     */
+    url: string;
+    /**
+     * "production" when empty
+     *
+     * @generated from field: string name = 4;
+     */
+    name: string;
+    /**
+     * the person said yes to TANK opening it
+     *
+     * @generated from field: bool open_pull_request = 5;
+     */
+    openPullRequest: boolean;
+};
+/**
+ * Describes the message tank.board.v1.ConnectAppRequest.
+ * Use `create(ConnectAppRequestSchema)` to create a new message.
+ */
+export declare const ConnectAppRequestSchema: GenMessage<ConnectAppRequest>;
+/**
+ * @generated from message tank.board.v1.ConnectAppResponse
+ */
+export type ConnectAppResponse = Message<"tank.board.v1.ConnectAppResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.AppSetup setup = 1;
+     */
+    setup?: AppSetup;
+};
+/**
+ * Describes the message tank.board.v1.ConnectAppResponse.
+ * Use `create(ConnectAppResponseSchema)` to create a new message.
+ */
+export declare const ConnectAppResponseSchema: GenMessage<ConnectAppResponse>;
+/**
  * @generated from enum tank.board.v1.ObjectKind
  */
 export declare enum ObjectKind {
@@ -2764,5 +3051,37 @@ export declare const BoardService: GenService<{
         methodKind: "unary";
         input: typeof StopRemoteViewsRequestSchema;
         output: typeof StopRemoteViewsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ReadElement
+     */
+    readElement: {
+        methodKind: "unary";
+        input: typeof ReadElementRequestSchema;
+        output: typeof ReadElementResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.GetAppSetup
+     */
+    getAppSetup: {
+        methodKind: "unary";
+        input: typeof GetAppSetupRequestSchema;
+        output: typeof GetAppSetupResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ConnectApp
+     */
+    connectApp: {
+        methodKind: "unary";
+        input: typeof ConnectAppRequestSchema;
+        output: typeof ConnectAppResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.BoardService.ApproveChange
+     */
+    approveChange: {
+        methodKind: "unary";
+        input: typeof ApproveChangeRequestSchema;
+        output: typeof ApproveChangeResponseSchema;
     };
 }>;
