@@ -1,7 +1,7 @@
 {
   "generated_by": "TANK Neural Knowledge",
-  "commit": "e42fdf15b240351d5b38b610dd599f50f43587dd",
-  "refreshed_at": "2026-10-21T22:07:36.813Z",
+  "commit": "516e642632b10e6d231d41ea350fedafc3a8fc85",
+  "refreshed_at": "2026-10-23T13:22:14.076Z",
   "areas": {
     ".": {
       "neurons": ".neural/neurons/root.md",
@@ -234,10 +234,10 @@
     "src/design": {
       "neurons": ".neural/neurons/src-design.md",
       "hot": [
-        "src/design/index.ts",
         "src/design/contrast.test.ts",
         "src/design/contrast.ts",
         "src/design/fonts.ts",
+        "src/design/index.ts",
         "src/design/mui.ts",
         "src/design/palette.test.ts"
       ],
