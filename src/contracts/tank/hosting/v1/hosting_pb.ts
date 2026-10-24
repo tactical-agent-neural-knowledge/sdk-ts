@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/hosting/v1/hosting.proto.
  */
 export const file_tank_hosting_v1_hosting: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2hvc3RpbmcvdjEvaG9zdGluZy5wcm90bxIPdGFuay5ob3N0aW5nLnYxIjsKEUdldFByb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEgoKdGFpbF9saW5lcxgCIAEoBSJ8ChJHZXRQcm9kdWN0UmVzcG9uc2USKQoHcHJvZHVjdBgBIAEoCzIYLnRhbmsuaG9zdGluZy52MS5Qcm9kdWN0EgwKBGxvZ3MYAiABKAkSLQoGZXZlbnRzGAMgAygLMh0udGFuay5ob3N0aW5nLnYxLlByb2R1Y3RFdmVudCLSAgoHUHJvZHVjdBIMCgRzbHVnGAEgASgJEgwKBHJlcG8YAiABKAkSCwoDdXJsGAMgASgJEg0KBWF3YWtlGAQgASgIEg4KBnN0YXR1cxgFIAEoCRIRCglpbWFnZV90YWcYBiABKAkSEAoIcmVzdGFydHMYByABKAUSGAoQbGFzdF9leGl0X3JlYXNvbhgIIAEoCRIuCgpzdGFydGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIRCgljcHVfbGltaXQYCiABKAkSFAoMbWVtb3J5X2xpbWl0GAsgASgJEhIKCmRpc2tfYnl0ZXMYDCABKAMSEgoKY2FuX21hbmFnZRgNIAEoCBIPCgdtYW5hZ2VkGA4gASgIEi4KCnVwZGF0ZWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImUKDFByb2R1Y3RFdmVudBImCgJhdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEdHlwZRgCIAEoCRIOCgZyZWFzb24YAyABKAkSDwoHbWVzc2FnZRgEIAEoCSI3ChNDaGVja1Byb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEcGF0aBgCIAEoCSJBChRDaGVja1Byb2R1Y3RSZXNwb25zZRIpCgVjaGVjaxgBIAEoCzIaLnRhbmsuaG9zdGluZy52MS5MaXZlQ2hlY2sixQEKCUxpdmVDaGVjaxILCgN1cmwYASABKAkSDgoGc3RhdHVzGAIgASgFEhEKCWJ1aWxkX3NoYRgDIAEoCRINCgV0aXRsZRgEIAEoCRITCgt0ZXh0X2xlbmd0aBgFIAEoBRIOCgZlcnJvcnMYBiADKAkSFgoOc2NyZWVuc2hvdF9wbmcYByABKAwSLgoKY2hlY2tlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEbm90ZRgJIAEoCSKwAgoIUmVzb3VyY2USDAoEbmFtZRgBIAEoCRIMCgRraW5kGAIgASgJEgwKBHNpemUYAyABKAkSCwoDY3B1GAQgASgJEg4KBm1lbW9yeRgFIAEoCRIOCgZwdWJsaWMYBiABKAgSCwoDbWluGAcgASgFEgsKA21heBgIIAEoBRIQCghzY2hlZHVsZRgJIAEoCRIXCg90aW1lb3V0X3NlY29uZHMYCiABKAUSDgoGdm9sdW1lGAsgASgJEg0KBXJlYWR5GAwgASgFEg8KB2Rlc2lyZWQYDSABKAUSDgoGcGF1c2VkGA4gASgIEi8KC2xhc3RfcnVuX2F0GA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9sYXN0X3J1bl9yZXN1bHQYECABKAkiVQoEQ29zdBISCgpiYXNlX2NlbnRzGAEgASgDEhUKDW92ZXJhZ2VfY2VudHMYAiABKAMSEwoLdG90YWxfY2VudHMYAyABKAMSDQoFbGluZXMYBCADKAkiowEKDFBlbmRpbmdCdWlsZBILCgNzaGEYASABKAkSDgoGcmVhc29uGAIgASgJEhAKCHByb2JsZW1zGAMgAygJEicKCGVzdGltYXRlGAQgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSJgoCYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC2Nhbl9hcHByb3ZlGAYgASgIIikKE0dldFJlc291cmNlc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSLQAgoUR2V0UmVzb3VyY2VzUmVzcG9uc2USLAoJcmVzb3VyY2VzGAEgAygLMhkudGFuay5ob3N0aW5nLnYxLlJlc291cmNlEicKCGVzdGltYXRlGAIgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSLgoHcGVuZGluZxgDIAEoCzIdLnRhbmsuaG9zdGluZy52MS5QZW5kaW5nQnVpbGQSDwoHc2VjcmV0cxgEIAMoCRISCgpjYW5fbWFuYWdlGAUgASgIEhMKC21vbnRoX2NlbnRzGAYgASgDEhEKCWNhcF9jZW50cxgHIAEoAxIOCgZjYXBwZWQYCCABKAgSEwoLY2FuX3NldF9jYXAYCSABKAgSKgoIcHJldmlld3MYCiADKAsyGC50YW5rLmhvc3RpbmcudjEuUHJldmlldxITCgtzZWNyZXRzX3NldBgLIAMoCSJrCgdQcmV2aWV3EhQKDHB1bGxfcmVxdWVzdBgBIAEoBRILCgN1cmwYAiABKAkSDQoFYnVpbGQYAyABKAkSLgoKZXhwaXJlc19hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiNgoTQXBwcm92ZUJ1aWxkUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEgsKA3NoYRgCIAEoCSIWChRBcHByb3ZlQnVpbGRSZXNwb25zZSJFCg5PcGVyYXRlUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEg4KBmFjdGlvbhgCIAEoCRIPCgdwcm9jZXNzGAMgASgJIhEKD09wZXJhdGVSZXNwb25zZSJOCgZDaGFuZ2USCwoDc2hhGAEgASgJEg8KB21lc3NhZ2UYAiABKAkSJgoCYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIjcKEkxpc3RDaGFuZ2VzUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEg0KBWxpbWl0GAIgASgFIj8KE0xpc3RDaGFuZ2VzUmVzcG9uc2USKAoHY2hhbmdlcxgBIAMoCzIXLnRhbmsuaG9zdGluZy52MS5DaGFuZ2UiMgoPUm9sbGJhY2tSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSCwoDc2hhGAIgASgJIm4KEFJvbGxiYWNrUmVzcG9uc2USDwoHYXBwbGllZBgBIAEoCBIOCgZyZWFzb24YAiABKAkSEAoIcHJvYmxlbXMYAyADKAkSJwoIZXN0aW1hdGUYBCABKAsyFS50YW5rLmhvc3RpbmcudjEuQ29zdCJzChVVcGRhdGVSZXNvdXJjZVJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEgwKBHNpemUYAyABKAkSCwoDbWluGAQgASgFEgsKA21heBgFIAEoBRIQCghzY2hlZHVsZRgGIAEoCSJBChZVcGRhdGVSZXNvdXJjZVJlc3BvbnNlEicKCGVzdGltYXRlGAEgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QiNgoNU2V0Q2FwUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEhEKCWNhcF9jZW50cxgCIAEoAyIQCg5TZXRDYXBSZXNwb25zZSKbAQoNSG9zdGVkUHJvZHVjdBISCgpjaGFubmVsX2lkGAEgASgJEhQKDGNoYW5uZWxfbmFtZRgCIAEoCRIMCgRzbHVnGAMgASgJEgsKA3VybBgEIAEoCRINCgVhd2FrZRgFIAEoCBITCgttb250aF9jZW50cxgGIAEoAxIRCgljYXBfY2VudHMYByABKAMSDgoGY2FwcGVkGAggASgIIioKEkxpc3RIb3N0aW5nUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkihgEKE0xpc3RIb3N0aW5nUmVzcG9uc2USMAoIcHJvZHVjdHMYASADKAsyHi50YW5rLmhvc3RpbmcudjEuSG9zdGVkUHJvZHVjdBITCgttb250aF9jZW50cxgCIAEoAxIXCg9hbGxvd2FuY2VfY2VudHMYAyABKAMSDwoHY2FuX3NldBgEIAEoCCJEChNTZXRBbGxvd2FuY2VSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIXCg9hbGxvd2FuY2VfY2VudHMYAiABKAMiFgoUU2V0QWxsb3dhbmNlUmVzcG9uc2UiKgoURXhwb3J0UHJvZHVjdFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSI6ChVFeHBvcnRQcm9kdWN0UmVzcG9uc2USEAoIZmlsZW5hbWUYASABKAkSDwoHY29udGVudBgCIAEoCSJDChBTZXRTZWNyZXRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgV2YWx1ZRgDIAEoCSITChFTZXRTZWNyZXRSZXNwb25zZTKQCQoOSG9zdGluZ1NlcnZpY2USVQoKR2V0UHJvZHVjdBIiLnRhbmsuaG9zdGluZy52MS5HZXRQcm9kdWN0UmVxdWVzdBojLnRhbmsuaG9zdGluZy52MS5HZXRQcm9kdWN0UmVzcG9uc2USWwoMQ2hlY2tQcm9kdWN0EiQudGFuay5ob3N0aW5nLnYxLkNoZWNrUHJvZHVjdFJlcXVlc3QaJS50YW5rLmhvc3RpbmcudjEuQ2hlY2tQcm9kdWN0UmVzcG9uc2USWwoMR2V0UmVzb3VyY2VzEiQudGFuay5ob3N0aW5nLnYxLkdldFJlc291cmNlc1JlcXVlc3QaJS50YW5rLmhvc3RpbmcudjEuR2V0UmVzb3VyY2VzUmVzcG9uc2USWwoMQXBwcm92ZUJ1aWxkEiQudGFuay5ob3N0aW5nLnYxLkFwcHJvdmVCdWlsZFJlcXVlc3QaJS50YW5rLmhvc3RpbmcudjEuQXBwcm92ZUJ1aWxkUmVzcG9uc2USTAoHT3BlcmF0ZRIfLnRhbmsuaG9zdGluZy52MS5PcGVyYXRlUmVxdWVzdBogLnRhbmsuaG9zdGluZy52MS5PcGVyYXRlUmVzcG9uc2USWAoLTGlzdENoYW5nZXMSIy50YW5rLmhvc3RpbmcudjEuTGlzdENoYW5nZXNSZXF1ZXN0GiQudGFuay5ob3N0aW5nLnYxLkxpc3RDaGFuZ2VzUmVzcG9uc2USTwoIUm9sbGJhY2sSIC50YW5rLmhvc3RpbmcudjEuUm9sbGJhY2tSZXF1ZXN0GiEudGFuay5ob3N0aW5nLnYxLlJvbGxiYWNrUmVzcG9uc2USYQoOVXBkYXRlUmVzb3VyY2USJi50YW5rLmhvc3RpbmcudjEuVXBkYXRlUmVzb3VyY2VSZXF1ZXN0GicudGFuay5ob3N0aW5nLnYxLlVwZGF0ZVJlc291cmNlUmVzcG9uc2USSQoGU2V0Q2FwEh4udGFuay5ob3N0aW5nLnYxLlNldENhcFJlcXVlc3QaHy50YW5rLmhvc3RpbmcudjEuU2V0Q2FwUmVzcG9uc2USWAoLTGlzdEhvc3RpbmcSIy50YW5rLmhvc3RpbmcudjEuTGlzdEhvc3RpbmdSZXF1ZXN0GiQudGFuay5ob3N0aW5nLnYxLkxpc3RIb3N0aW5nUmVzcG9uc2USWwoMU2V0QWxsb3dhbmNlEiQudGFuay5ob3N0aW5nLnYxLlNldEFsbG93YW5jZVJlcXVlc3QaJS50YW5rLmhvc3RpbmcudjEuU2V0QWxsb3dhbmNlUmVzcG9uc2USXgoNRXhwb3J0UHJvZHVjdBIlLnRhbmsuaG9zdGluZy52MS5FeHBvcnRQcm9kdWN0UmVxdWVzdBomLnRhbmsuaG9zdGluZy52MS5FeHBvcnRQcm9kdWN0UmVzcG9uc2USUgoJU2V0U2VjcmV0EiEudGFuay5ob3N0aW5nLnYxLlNldFNlY3JldFJlcXVlc3QaIi50YW5rLmhvc3RpbmcudjEuU2V0U2VjcmV0UmVzcG9uc2VC2AEKE2NvbS50YW5rLmhvc3RpbmcudjFCDEhvc3RpbmdQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2hvc3RpbmcvdjE7aG9zdGluZ3YxogIDVEhYqgIPVGFuay5Ib3N0aW5nLlYxygIPVGFua1xIb3N0aW5nXFYx4gIbVGFua1xIb3N0aW5nXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6SG9zdGluZzo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2hvc3RpbmcvdjEvaG9zdGluZy5wcm90bxIPdGFuay5ob3N0aW5nLnYxIjsKEUdldFByb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEgoKdGFpbF9saW5lcxgCIAEoBSJ8ChJHZXRQcm9kdWN0UmVzcG9uc2USKQoHcHJvZHVjdBgBIAEoCzIYLnRhbmsuaG9zdGluZy52MS5Qcm9kdWN0EgwKBGxvZ3MYAiABKAkSLQoGZXZlbnRzGAMgAygLMh0udGFuay5ob3N0aW5nLnYxLlByb2R1Y3RFdmVudCLSAgoHUHJvZHVjdBIMCgRzbHVnGAEgASgJEgwKBHJlcG8YAiABKAkSCwoDdXJsGAMgASgJEg0KBWF3YWtlGAQgASgIEg4KBnN0YXR1cxgFIAEoCRIRCglpbWFnZV90YWcYBiABKAkSEAoIcmVzdGFydHMYByABKAUSGAoQbGFzdF9leGl0X3JlYXNvbhgIIAEoCRIuCgpzdGFydGVkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIRCgljcHVfbGltaXQYCiABKAkSFAoMbWVtb3J5X2xpbWl0GAsgASgJEhIKCmRpc2tfYnl0ZXMYDCABKAMSEgoKY2FuX21hbmFnZRgNIAEoCBIPCgdtYW5hZ2VkGA4gASgIEi4KCnVwZGF0ZWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImUKDFByb2R1Y3RFdmVudBImCgJhdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEdHlwZRgCIAEoCRIOCgZyZWFzb24YAyABKAkSDwoHbWVzc2FnZRgEIAEoCSI3ChNDaGVja1Byb2R1Y3RSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDAoEcGF0aBgCIAEoCSJBChRDaGVja1Byb2R1Y3RSZXNwb25zZRIpCgVjaGVjaxgBIAEoCzIaLnRhbmsuaG9zdGluZy52MS5MaXZlQ2hlY2sixQEKCUxpdmVDaGVjaxILCgN1cmwYASABKAkSDgoGc3RhdHVzGAIgASgFEhEKCWJ1aWxkX3NoYRgDIAEoCRINCgV0aXRsZRgEIAEoCRITCgt0ZXh0X2xlbmd0aBgFIAEoBRIOCgZlcnJvcnMYBiADKAkSFgoOc2NyZWVuc2hvdF9wbmcYByABKAwSLgoKY2hlY2tlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEbm90ZRgJIAEoCSLpAgoIUmVzb3VyY2USDAoEbmFtZRgBIAEoCRIMCgRraW5kGAIgASgJEgwKBHNpemUYAyABKAkSCwoDY3B1GAQgASgJEg4KBm1lbW9yeRgFIAEoCRIOCgZwdWJsaWMYBiABKAgSCwoDbWluGAcgASgFEgsKA21heBgIIAEoBRIQCghzY2hlZHVsZRgJIAEoCRIXCg90aW1lb3V0X3NlY29uZHMYCiABKAUSDgoGdm9sdW1lGAsgASgJEg0KBXJlYWR5GAwgASgFEg8KB2Rlc2lyZWQYDSABKAUSDgoGcGF1c2VkGA4gASgIEi8KC2xhc3RfcnVuX2F0GA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9sYXN0X3J1bl9yZXN1bHQYECABKAkSDwoHc3RvcmFnZRgRIAEoCRISCgpleHRlbnNpb25zGBIgAygJEhIKCnNjcmF0Y2hfZ2kYEyABKAUiVQoEQ29zdBISCgpiYXNlX2NlbnRzGAEgASgDEhUKDW92ZXJhZ2VfY2VudHMYAiABKAMSEwoLdG90YWxfY2VudHMYAyABKAMSDQoFbGluZXMYBCADKAkiowEKDFBlbmRpbmdCdWlsZBILCgNzaGEYASABKAkSDgoGcmVhc29uGAIgASgJEhAKCHByb2JsZW1zGAMgAygJEicKCGVzdGltYXRlGAQgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSJgoCYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC2Nhbl9hcHByb3ZlGAYgASgIIikKE0dldFJlc291cmNlc1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCSLzAgoUR2V0UmVzb3VyY2VzUmVzcG9uc2USLAoJcmVzb3VyY2VzGAEgAygLMhkudGFuay5ob3N0aW5nLnYxLlJlc291cmNlEicKCGVzdGltYXRlGAIgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSLgoHcGVuZGluZxgDIAEoCzIdLnRhbmsuaG9zdGluZy52MS5QZW5kaW5nQnVpbGQSDwoHc2VjcmV0cxgEIAMoCRISCgpjYW5fbWFuYWdlGAUgASgIEhMKC21vbnRoX2NlbnRzGAYgASgDEhEKCWNhcF9jZW50cxgHIAEoAxIOCgZjYXBwZWQYCCABKAgSEwoLY2FuX3NldF9jYXAYCSABKAgSKgoIcHJldmlld3MYCiADKAsyGC50YW5rLmhvc3RpbmcudjEuUHJldmlldxITCgtzZWNyZXRzX3NldBgLIAMoCRIPCgdsaWJyYXJ5GAwgAygJEhAKCGVudl9rZXlzGA0gAygJImsKB1ByZXZpZXcSFAoMcHVsbF9yZXF1ZXN0GAEgASgFEgsKA3VybBgCIAEoCRINCgVidWlsZBgDIAEoCRIuCgpleHBpcmVzX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI2ChNBcHByb3ZlQnVpbGRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSCwoDc2hhGAIgASgJIhYKFEFwcHJvdmVCdWlsZFJlc3BvbnNlIkUKDk9wZXJhdGVSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDgoGYWN0aW9uGAIgASgJEg8KB3Byb2Nlc3MYAyABKAkiEQoPT3BlcmF0ZVJlc3BvbnNlIk4KBkNoYW5nZRILCgNzaGEYASABKAkSDwoHbWVzc2FnZRgCIAEoCRImCgJhdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiNwoSTGlzdENoYW5nZXNSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSDQoFbGltaXQYAiABKAUiPwoTTGlzdENoYW5nZXNSZXNwb25zZRIoCgdjaGFuZ2VzGAEgAygLMhcudGFuay5ob3N0aW5nLnYxLkNoYW5nZSIyCg9Sb2xsYmFja1JlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRILCgNzaGEYAiABKAkibgoQUm9sbGJhY2tSZXNwb25zZRIPCgdhcHBsaWVkGAEgASgIEg4KBnJlYXNvbhgCIAEoCRIQCghwcm9ibGVtcxgDIAMoCRInCghlc3RpbWF0ZRgEIAEoCzIVLnRhbmsuaG9zdGluZy52MS5Db3N0InMKFVVwZGF0ZVJlc291cmNlUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEgwKBG5hbWUYAiABKAkSDAoEc2l6ZRgDIAEoCRILCgNtaW4YBCABKAUSCwoDbWF4GAUgASgFEhAKCHNjaGVkdWxlGAYgASgJIkEKFlVwZGF0ZVJlc291cmNlUmVzcG9uc2USJwoIZXN0aW1hdGUYASABKAsyFS50YW5rLmhvc3RpbmcudjEuQ29zdCI2Cg1TZXRDYXBSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkSEQoJY2FwX2NlbnRzGAIgASgDIhAKDlNldENhcFJlc3BvbnNlIpsBCg1Ib3N0ZWRQcm9kdWN0EhIKCmNoYW5uZWxfaWQYASABKAkSFAoMY2hhbm5lbF9uYW1lGAIgASgJEgwKBHNsdWcYAyABKAkSCwoDdXJsGAQgASgJEg0KBWF3YWtlGAUgASgIEhMKC21vbnRoX2NlbnRzGAYgASgDEhEKCWNhcF9jZW50cxgHIAEoAxIOCgZjYXBwZWQYCCABKAgiKgoSTGlzdEhvc3RpbmdSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSKGAQoTTGlzdEhvc3RpbmdSZXNwb25zZRIwCghwcm9kdWN0cxgBIAMoCzIeLnRhbmsuaG9zdGluZy52MS5Ib3N0ZWRQcm9kdWN0EhMKC21vbnRoX2NlbnRzGAIgASgDEhcKD2FsbG93YW5jZV9jZW50cxgDIAEoAxIPCgdjYW5fc2V0GAQgASgIIkQKE1NldEFsbG93YW5jZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhcKD2FsbG93YW5jZV9jZW50cxgCIAEoAyIWChRTZXRBbGxvd2FuY2VSZXNwb25zZSIqChRFeHBvcnRQcm9kdWN0UmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJIjoKFUV4cG9ydFByb2R1Y3RSZXNwb25zZRIQCghmaWxlbmFtZRgBIAEoCRIPCgdjb250ZW50GAIgASgJIkMKEFNldFNlY3JldFJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEg0KBXZhbHVlGAMgASgJIhMKEVNldFNlY3JldFJlc3BvbnNlIt0BCg5SZXNvdXJjZUNoYW5nZRIMCgRraW5kGAEgASgJEgwKBG5hbWUYAiABKAkSDgoGcmVtb3ZlGAMgASgIEgwKBHNpemUYBCABKAkSCwoDbWluGAUgASgFEgsKA21heBgGIAEoBRIQCghzY2hlZHVsZRgHIAEoCRIPCgdzdG9yYWdlGAggASgJEhIKCmV4dGVuc2lvbnMYCSADKAkSDwoHY29tbWFuZBgKIAMoCRIPCgdzY3JhdGNoGAsgASgJEg8KB3RpbWVvdXQYDCABKAkSDQoFdmFsdWUYDSABKAkidQoUUHJldmlld0NoYW5nZVJlcXVlc3QSEgoKY2hhbm5lbF9pZBgBIAEoCRIxCgZjaGFuZ2UYAiABKAsyHy50YW5rLmhvc3RpbmcudjEuUmVzb3VyY2VDaGFuZ2VIABIOCgR0ZXh0GAMgASgJSABCBgoEZWRpdCKsAQoVUHJldmlld0NoYW5nZVJlc3BvbnNlEgwKBHRleHQYASABKAkSJQoGYmVmb3JlGAIgASgLMhUudGFuay5ob3N0aW5nLnYxLkNvc3QSJAoFYWZ0ZXIYAyABKAsyFS50YW5rLmhvc3RpbmcudjEuQ29zdBIQCghwcm9ibGVtcxgEIAMoCRITCgtuZWVkc19vd25lchgFIAEoCBIRCgljYW5fYXBwbHkYBiABKAgikQEKEkFwcGx5Q2hhbmdlUmVxdWVzdBISCgpjaGFubmVsX2lkGAEgASgJEjEKBmNoYW5nZRgCIAEoCzIfLnRhbmsuaG9zdGluZy52MS5SZXNvdXJjZUNoYW5nZUgAEg4KBHRleHQYAyABKAlIABIcChRhY2NlcHRlZF90b3RhbF9jZW50cxgEIAEoA0IGCgRlZGl0ImAKE0FwcGx5Q2hhbmdlUmVzcG9uc2USEgoKY29tbWl0X3NoYRgBIAEoCRInCghlc3RpbWF0ZRgCIAEoCzIVLnRhbmsuaG9zdGluZy52MS5Db3N0EgwKBGxpdmUYAyABKAgiKAoSR2V0U3BlY1RleHRSZXF1ZXN0EhIKCmNoYW5uZWxfaWQYASABKAkiNQoTR2V0U3BlY1RleHRSZXNwb25zZRIMCgR0ZXh0GAEgASgJEhAKCGNhbl9lZGl0GAIgASgIMqQLCg5Ib3N0aW5nU2VydmljZRJVCgpHZXRQcm9kdWN0EiIudGFuay5ob3N0aW5nLnYxLkdldFByb2R1Y3RSZXF1ZXN0GiMudGFuay5ob3N0aW5nLnYxLkdldFByb2R1Y3RSZXNwb25zZRJbCgxDaGVja1Byb2R1Y3QSJC50YW5rLmhvc3RpbmcudjEuQ2hlY2tQcm9kdWN0UmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5DaGVja1Byb2R1Y3RSZXNwb25zZRJbCgxHZXRSZXNvdXJjZXMSJC50YW5rLmhvc3RpbmcudjEuR2V0UmVzb3VyY2VzUmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5HZXRSZXNvdXJjZXNSZXNwb25zZRJbCgxBcHByb3ZlQnVpbGQSJC50YW5rLmhvc3RpbmcudjEuQXBwcm92ZUJ1aWxkUmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5BcHByb3ZlQnVpbGRSZXNwb25zZRJMCgdPcGVyYXRlEh8udGFuay5ob3N0aW5nLnYxLk9wZXJhdGVSZXF1ZXN0GiAudGFuay5ob3N0aW5nLnYxLk9wZXJhdGVSZXNwb25zZRJYCgtMaXN0Q2hhbmdlcxIjLnRhbmsuaG9zdGluZy52MS5MaXN0Q2hhbmdlc1JlcXVlc3QaJC50YW5rLmhvc3RpbmcudjEuTGlzdENoYW5nZXNSZXNwb25zZRJPCghSb2xsYmFjaxIgLnRhbmsuaG9zdGluZy52MS5Sb2xsYmFja1JlcXVlc3QaIS50YW5rLmhvc3RpbmcudjEuUm9sbGJhY2tSZXNwb25zZRJhCg5VcGRhdGVSZXNvdXJjZRImLnRhbmsuaG9zdGluZy52MS5VcGRhdGVSZXNvdXJjZVJlcXVlc3QaJy50YW5rLmhvc3RpbmcudjEuVXBkYXRlUmVzb3VyY2VSZXNwb25zZRJJCgZTZXRDYXASHi50YW5rLmhvc3RpbmcudjEuU2V0Q2FwUmVxdWVzdBofLnRhbmsuaG9zdGluZy52MS5TZXRDYXBSZXNwb25zZRJYCgtMaXN0SG9zdGluZxIjLnRhbmsuaG9zdGluZy52MS5MaXN0SG9zdGluZ1JlcXVlc3QaJC50YW5rLmhvc3RpbmcudjEuTGlzdEhvc3RpbmdSZXNwb25zZRJbCgxTZXRBbGxvd2FuY2USJC50YW5rLmhvc3RpbmcudjEuU2V0QWxsb3dhbmNlUmVxdWVzdBolLnRhbmsuaG9zdGluZy52MS5TZXRBbGxvd2FuY2VSZXNwb25zZRJeCg1FeHBvcnRQcm9kdWN0EiUudGFuay5ob3N0aW5nLnYxLkV4cG9ydFByb2R1Y3RSZXF1ZXN0GiYudGFuay5ob3N0aW5nLnYxLkV4cG9ydFByb2R1Y3RSZXNwb25zZRJSCglTZXRTZWNyZXQSIS50YW5rLmhvc3RpbmcudjEuU2V0U2VjcmV0UmVxdWVzdBoiLnRhbmsuaG9zdGluZy52MS5TZXRTZWNyZXRSZXNwb25zZRJeCg1QcmV2aWV3Q2hhbmdlEiUudGFuay5ob3N0aW5nLnYxLlByZXZpZXdDaGFuZ2VSZXF1ZXN0GiYudGFuay5ob3N0aW5nLnYxLlByZXZpZXdDaGFuZ2VSZXNwb25zZRJYCgtBcHBseUNoYW5nZRIjLnRhbmsuaG9zdGluZy52MS5BcHBseUNoYW5nZVJlcXVlc3QaJC50YW5rLmhvc3RpbmcudjEuQXBwbHlDaGFuZ2VSZXNwb25zZRJYCgtHZXRTcGVjVGV4dBIjLnRhbmsuaG9zdGluZy52MS5HZXRTcGVjVGV4dFJlcXVlc3QaJC50YW5rLmhvc3RpbmcudjEuR2V0U3BlY1RleHRSZXNwb25zZULYAQoTY29tLnRhbmsuaG9zdGluZy52MUIMSG9zdGluZ1Byb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvaG9zdGluZy92MTtob3N0aW5ndjGiAgNUSFiqAg9UYW5rLkhvc3RpbmcuVjHKAg9UYW5rXEhvc3RpbmdcVjHiAhtUYW5rXEhvc3RpbmdcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpIb3N0aW5nOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.hosting.v1.GetProductRequest
@@ -405,6 +405,27 @@ export type Resource = Message<"tank.hosting.v1.Resource"> & {
    * @generated from field: string last_run_result = 16;
    */
   lastRunResult: string;
+
+  /**
+   * database: "40Gi"
+   *
+   * @generated from field: string storage = 17;
+   */
+  storage: string;
+
+  /**
+   * database: postgis, vector
+   *
+   * @generated from field: repeated string extensions = 18;
+   */
+  extensions: string[];
+
+  /**
+   * worker, schedule or job: working disk at /scratch
+   *
+   * @generated from field: int32 scratch_gi = 19;
+   */
+  scratchGi: number;
 };
 
 /**
@@ -585,6 +606,20 @@ export type GetResourcesResponse = Message<"tank.hosting.v1.GetResourcesResponse
    * @generated from field: repeated string secrets_set = 11;
    */
   secretsSet: string[];
+
+  /**
+   * datasets TANK's library offers
+   *
+   * @generated from field: repeated string library = 12;
+   */
+  library: string[];
+
+  /**
+   * plain environment names set in tank.yaml
+   *
+   * @generated from field: repeated string env_keys = 13;
+   */
+  envKeys: string[];
 };
 
 /**
@@ -1151,6 +1186,273 @@ export const SetSecretResponseSchema: GenMessage<SetSecretResponse> = /*@__PURE_
   messageDesc(file_tank_hosting_v1_hosting, 34);
 
 /**
+ * One change from hosting settings. kind: service | worker | cron | job | database | cache
+ * | bucket | dataset | env; name is empty for the cache.
+ *
+ * @generated from message tank.hosting.v1.ResourceChange
+ */
+export type ResourceChange = Message<"tank.hosting.v1.ResourceChange"> & {
+  /**
+   * @generated from field: string kind = 1;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: bool remove = 3;
+   */
+  remove: boolean;
+
+  /**
+   * @generated from field: string size = 4;
+   */
+  size: string;
+
+  /**
+   * @generated from field: int32 min = 5;
+   */
+  min: number;
+
+  /**
+   * @generated from field: int32 max = 6;
+   */
+  max: number;
+
+  /**
+   * @generated from field: string schedule = 7;
+   */
+  schedule: string;
+
+  /**
+   * @generated from field: string storage = 8;
+   */
+  storage: string;
+
+  /**
+   * @generated from field: repeated string extensions = 9;
+   */
+  extensions: string[];
+
+  /**
+   * @generated from field: repeated string command = 10;
+   */
+  command: string[];
+
+  /**
+   * @generated from field: string scratch = 11;
+   */
+  scratch: string;
+
+  /**
+   * @generated from field: string timeout = 12;
+   */
+  timeout: string;
+
+  /**
+   * @generated from field: string value = 13;
+   */
+  value: string;
+};
+
+/**
+ * Describes the message tank.hosting.v1.ResourceChange.
+ * Use `create(ResourceChangeSchema)` to create a new message.
+ */
+export const ResourceChangeSchema: GenMessage<ResourceChange> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 35);
+
+/**
+ * @generated from message tank.hosting.v1.PreviewChangeRequest
+ */
+export type PreviewChangeRequest = Message<"tank.hosting.v1.PreviewChangeRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from oneof tank.hosting.v1.PreviewChangeRequest.edit
+   */
+  edit: {
+    /**
+     * @generated from field: tank.hosting.v1.ResourceChange change = 2;
+     */
+    value: ResourceChange;
+    case: "change";
+  } | {
+    /**
+     * @generated from field: string text = 3;
+     */
+    value: string;
+    case: "text";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message tank.hosting.v1.PreviewChangeRequest.
+ * Use `create(PreviewChangeRequestSchema)` to create a new message.
+ */
+export const PreviewChangeRequestSchema: GenMessage<PreviewChangeRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 36);
+
+/**
+ * @generated from message tank.hosting.v1.PreviewChangeResponse
+ */
+export type PreviewChangeResponse = Message<"tank.hosting.v1.PreviewChangeResponse"> & {
+  /**
+   * @generated from field: string text = 1;
+   */
+  text: string;
+
+  /**
+   * @generated from field: tank.hosting.v1.Cost before = 2;
+   */
+  before?: Cost;
+
+  /**
+   * @generated from field: tank.hosting.v1.Cost after = 3;
+   */
+  after?: Cost;
+
+  /**
+   * @generated from field: repeated string problems = 4;
+   */
+  problems: string[];
+
+  /**
+   * it costs more: only an owner can buy it
+   *
+   * @generated from field: bool needs_owner = 5;
+   */
+  needsOwner: boolean;
+
+  /**
+   * the caller may make this change
+   *
+   * @generated from field: bool can_apply = 6;
+   */
+  canApply: boolean;
+};
+
+/**
+ * Describes the message tank.hosting.v1.PreviewChangeResponse.
+ * Use `create(PreviewChangeResponseSchema)` to create a new message.
+ */
+export const PreviewChangeResponseSchema: GenMessage<PreviewChangeResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 37);
+
+/**
+ * @generated from message tank.hosting.v1.ApplyChangeRequest
+ */
+export type ApplyChangeRequest = Message<"tank.hosting.v1.ApplyChangeRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+
+  /**
+   * @generated from oneof tank.hosting.v1.ApplyChangeRequest.edit
+   */
+  edit: {
+    /**
+     * @generated from field: tank.hosting.v1.ResourceChange change = 2;
+     */
+    value: ResourceChange;
+    case: "change";
+  } | {
+    /**
+     * @generated from field: string text = 3;
+     */
+    value: string;
+    case: "text";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * the monthly total the owner was shown, for a change that costs more
+   *
+   * @generated from field: int64 accepted_total_cents = 4;
+   */
+  acceptedTotalCents: bigint;
+};
+
+/**
+ * Describes the message tank.hosting.v1.ApplyChangeRequest.
+ * Use `create(ApplyChangeRequestSchema)` to create a new message.
+ */
+export const ApplyChangeRequestSchema: GenMessage<ApplyChangeRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 38);
+
+/**
+ * @generated from message tank.hosting.v1.ApplyChangeResponse
+ */
+export type ApplyChangeResponse = Message<"tank.hosting.v1.ApplyChangeResponse"> & {
+  /**
+   * @generated from field: string commit_sha = 1;
+   */
+  commitSha: string;
+
+  /**
+   * @generated from field: tank.hosting.v1.Cost estimate = 2;
+   */
+  estimate?: Cost;
+
+  /**
+   * @generated from field: bool live = 3;
+   */
+  live: boolean;
+};
+
+/**
+ * Describes the message tank.hosting.v1.ApplyChangeResponse.
+ * Use `create(ApplyChangeResponseSchema)` to create a new message.
+ */
+export const ApplyChangeResponseSchema: GenMessage<ApplyChangeResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 39);
+
+/**
+ * @generated from message tank.hosting.v1.GetSpecTextRequest
+ */
+export type GetSpecTextRequest = Message<"tank.hosting.v1.GetSpecTextRequest"> & {
+  /**
+   * @generated from field: string channel_id = 1;
+   */
+  channelId: string;
+};
+
+/**
+ * Describes the message tank.hosting.v1.GetSpecTextRequest.
+ * Use `create(GetSpecTextRequestSchema)` to create a new message.
+ */
+export const GetSpecTextRequestSchema: GenMessage<GetSpecTextRequest> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 40);
+
+/**
+ * @generated from message tank.hosting.v1.GetSpecTextResponse
+ */
+export type GetSpecTextResponse = Message<"tank.hosting.v1.GetSpecTextResponse"> & {
+  /**
+   * @generated from field: string text = 1;
+   */
+  text: string;
+
+  /**
+   * @generated from field: bool can_edit = 2;
+   */
+  canEdit: boolean;
+};
+
+/**
+ * Describes the message tank.hosting.v1.GetSpecTextResponse.
+ * Use `create(GetSpecTextResponseSchema)` to create a new message.
+ */
+export const GetSpecTextResponseSchema: GenMessage<GetSpecTextResponse> = /*@__PURE__*/
+  messageDesc(file_tank_hosting_v1_hosting, 41);
+
+/**
  * HostingService is the Infrastructure page: what a product TANK runs for a Tread is,
  * how it is doing, what it costs and what people may change about it. Every request
  * names the Tread (channel_id); members of the Tread may read, and what each role may
@@ -1292,6 +1594,37 @@ export const HostingService: GenService<{
     methodKind: "unary";
     input: typeof SetSecretRequestSchema;
     output: typeof SetSecretResponseSchema;
+  },
+  /**
+   * Hosting settings: what a change would cost before anybody commits to it. Members read.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.PreviewChange
+   */
+  previewChange: {
+    methodKind: "unary";
+    input: typeof PreviewChangeRequestSchema;
+    output: typeof PreviewChangeResponseSchema;
+  },
+  /**
+   * Makes a change: admins for one that costs the same or less; a change that costs more
+   * is a purchase, so it takes an owner and the exact monthly price they were shown.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.ApplyChange
+   */
+  applyChange: {
+    methodKind: "unary";
+    input: typeof ApplyChangeRequestSchema;
+    output: typeof ApplyChangeResponseSchema;
+  },
+  /**
+   * tank.yaml as it is, for the editor. Members read.
+   *
+   * @generated from rpc tank.hosting.v1.HostingService.GetSpecText
+   */
+  getSpecText: {
+    methodKind: "unary";
+    input: typeof GetSpecTextRequestSchema;
+    output: typeof GetSpecTextResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_hosting_v1_hosting, 0);

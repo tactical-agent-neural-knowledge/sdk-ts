@@ -331,6 +331,24 @@ export type Resource = Message<"tank.hosting.v1.Resource"> & {
      * @generated from field: string last_run_result = 16;
      */
     lastRunResult: string;
+    /**
+     * database: "40Gi"
+     *
+     * @generated from field: string storage = 17;
+     */
+    storage: string;
+    /**
+     * database: postgis, vector
+     *
+     * @generated from field: repeated string extensions = 18;
+     */
+    extensions: string[];
+    /**
+     * worker, schedule or job: working disk at /scratch
+     *
+     * @generated from field: int32 scratch_gi = 19;
+     */
+    scratchGi: number;
 };
 /**
  * Describes the message tank.hosting.v1.Resource.
@@ -481,6 +499,18 @@ export type GetResourcesResponse = Message<"tank.hosting.v1.GetResourcesResponse
      * @generated from field: repeated string secrets_set = 11;
      */
     secretsSet: string[];
+    /**
+     * datasets TANK's library offers
+     *
+     * @generated from field: repeated string library = 12;
+     */
+    library: string[];
+    /**
+     * plain environment names set in tank.yaml
+     *
+     * @generated from field: repeated string env_keys = 13;
+     */
+    envKeys: string[];
 };
 /**
  * Describes the message tank.hosting.v1.GetResourcesResponse.
@@ -937,6 +967,235 @@ export type SetSecretResponse = Message<"tank.hosting.v1.SetSecretResponse"> & {
  */
 export declare const SetSecretResponseSchema: GenMessage<SetSecretResponse>;
 /**
+ * One change from hosting settings. kind: service | worker | cron | job | database | cache
+ * | bucket | dataset | env; name is empty for the cache.
+ *
+ * @generated from message tank.hosting.v1.ResourceChange
+ */
+export type ResourceChange = Message<"tank.hosting.v1.ResourceChange"> & {
+    /**
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: bool remove = 3;
+     */
+    remove: boolean;
+    /**
+     * @generated from field: string size = 4;
+     */
+    size: string;
+    /**
+     * @generated from field: int32 min = 5;
+     */
+    min: number;
+    /**
+     * @generated from field: int32 max = 6;
+     */
+    max: number;
+    /**
+     * @generated from field: string schedule = 7;
+     */
+    schedule: string;
+    /**
+     * @generated from field: string storage = 8;
+     */
+    storage: string;
+    /**
+     * @generated from field: repeated string extensions = 9;
+     */
+    extensions: string[];
+    /**
+     * @generated from field: repeated string command = 10;
+     */
+    command: string[];
+    /**
+     * @generated from field: string scratch = 11;
+     */
+    scratch: string;
+    /**
+     * @generated from field: string timeout = 12;
+     */
+    timeout: string;
+    /**
+     * @generated from field: string value = 13;
+     */
+    value: string;
+};
+/**
+ * Describes the message tank.hosting.v1.ResourceChange.
+ * Use `create(ResourceChangeSchema)` to create a new message.
+ */
+export declare const ResourceChangeSchema: GenMessage<ResourceChange>;
+/**
+ * @generated from message tank.hosting.v1.PreviewChangeRequest
+ */
+export type PreviewChangeRequest = Message<"tank.hosting.v1.PreviewChangeRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from oneof tank.hosting.v1.PreviewChangeRequest.edit
+     */
+    edit: {
+        /**
+         * @generated from field: tank.hosting.v1.ResourceChange change = 2;
+         */
+        value: ResourceChange;
+        case: "change";
+    } | {
+        /**
+         * @generated from field: string text = 3;
+         */
+        value: string;
+        case: "text";
+    } | {
+        case: undefined;
+        value?: undefined;
+    };
+};
+/**
+ * Describes the message tank.hosting.v1.PreviewChangeRequest.
+ * Use `create(PreviewChangeRequestSchema)` to create a new message.
+ */
+export declare const PreviewChangeRequestSchema: GenMessage<PreviewChangeRequest>;
+/**
+ * @generated from message tank.hosting.v1.PreviewChangeResponse
+ */
+export type PreviewChangeResponse = Message<"tank.hosting.v1.PreviewChangeResponse"> & {
+    /**
+     * @generated from field: string text = 1;
+     */
+    text: string;
+    /**
+     * @generated from field: tank.hosting.v1.Cost before = 2;
+     */
+    before?: Cost;
+    /**
+     * @generated from field: tank.hosting.v1.Cost after = 3;
+     */
+    after?: Cost;
+    /**
+     * @generated from field: repeated string problems = 4;
+     */
+    problems: string[];
+    /**
+     * it costs more: only an owner can buy it
+     *
+     * @generated from field: bool needs_owner = 5;
+     */
+    needsOwner: boolean;
+    /**
+     * the caller may make this change
+     *
+     * @generated from field: bool can_apply = 6;
+     */
+    canApply: boolean;
+};
+/**
+ * Describes the message tank.hosting.v1.PreviewChangeResponse.
+ * Use `create(PreviewChangeResponseSchema)` to create a new message.
+ */
+export declare const PreviewChangeResponseSchema: GenMessage<PreviewChangeResponse>;
+/**
+ * @generated from message tank.hosting.v1.ApplyChangeRequest
+ */
+export type ApplyChangeRequest = Message<"tank.hosting.v1.ApplyChangeRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from oneof tank.hosting.v1.ApplyChangeRequest.edit
+     */
+    edit: {
+        /**
+         * @generated from field: tank.hosting.v1.ResourceChange change = 2;
+         */
+        value: ResourceChange;
+        case: "change";
+    } | {
+        /**
+         * @generated from field: string text = 3;
+         */
+        value: string;
+        case: "text";
+    } | {
+        case: undefined;
+        value?: undefined;
+    };
+    /**
+     * the monthly total the owner was shown, for a change that costs more
+     *
+     * @generated from field: int64 accepted_total_cents = 4;
+     */
+    acceptedTotalCents: bigint;
+};
+/**
+ * Describes the message tank.hosting.v1.ApplyChangeRequest.
+ * Use `create(ApplyChangeRequestSchema)` to create a new message.
+ */
+export declare const ApplyChangeRequestSchema: GenMessage<ApplyChangeRequest>;
+/**
+ * @generated from message tank.hosting.v1.ApplyChangeResponse
+ */
+export type ApplyChangeResponse = Message<"tank.hosting.v1.ApplyChangeResponse"> & {
+    /**
+     * @generated from field: string commit_sha = 1;
+     */
+    commitSha: string;
+    /**
+     * @generated from field: tank.hosting.v1.Cost estimate = 2;
+     */
+    estimate?: Cost;
+    /**
+     * @generated from field: bool live = 3;
+     */
+    live: boolean;
+};
+/**
+ * Describes the message tank.hosting.v1.ApplyChangeResponse.
+ * Use `create(ApplyChangeResponseSchema)` to create a new message.
+ */
+export declare const ApplyChangeResponseSchema: GenMessage<ApplyChangeResponse>;
+/**
+ * @generated from message tank.hosting.v1.GetSpecTextRequest
+ */
+export type GetSpecTextRequest = Message<"tank.hosting.v1.GetSpecTextRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.hosting.v1.GetSpecTextRequest.
+ * Use `create(GetSpecTextRequestSchema)` to create a new message.
+ */
+export declare const GetSpecTextRequestSchema: GenMessage<GetSpecTextRequest>;
+/**
+ * @generated from message tank.hosting.v1.GetSpecTextResponse
+ */
+export type GetSpecTextResponse = Message<"tank.hosting.v1.GetSpecTextResponse"> & {
+    /**
+     * @generated from field: string text = 1;
+     */
+    text: string;
+    /**
+     * @generated from field: bool can_edit = 2;
+     */
+    canEdit: boolean;
+};
+/**
+ * Describes the message tank.hosting.v1.GetSpecTextResponse.
+ * Use `create(GetSpecTextResponseSchema)` to create a new message.
+ */
+export declare const GetSpecTextResponseSchema: GenMessage<GetSpecTextResponse>;
+/**
  * HostingService is the Infrastructure page: what a product TANK runs for a Tread is,
  * how it is doing, what it costs and what people may change about it. Every request
  * names the Tread (channel_id); members of the Tread may read, and what each role may
@@ -1078,5 +1337,36 @@ export declare const HostingService: GenService<{
         methodKind: "unary";
         input: typeof SetSecretRequestSchema;
         output: typeof SetSecretResponseSchema;
+    };
+    /**
+     * Hosting settings: what a change would cost before anybody commits to it. Members read.
+     *
+     * @generated from rpc tank.hosting.v1.HostingService.PreviewChange
+     */
+    previewChange: {
+        methodKind: "unary";
+        input: typeof PreviewChangeRequestSchema;
+        output: typeof PreviewChangeResponseSchema;
+    };
+    /**
+     * Makes a change: admins for one that costs the same or less; a change that costs more
+     * is a purchase, so it takes an owner and the exact monthly price they were shown.
+     *
+     * @generated from rpc tank.hosting.v1.HostingService.ApplyChange
+     */
+    applyChange: {
+        methodKind: "unary";
+        input: typeof ApplyChangeRequestSchema;
+        output: typeof ApplyChangeResponseSchema;
+    };
+    /**
+     * tank.yaml as it is, for the editor. Members read.
+     *
+     * @generated from rpc tank.hosting.v1.HostingService.GetSpecText
+     */
+    getSpecText: {
+        methodKind: "unary";
+        input: typeof GetSpecTextRequestSchema;
+        output: typeof GetSpecTextResponseSchema;
     };
 }>;

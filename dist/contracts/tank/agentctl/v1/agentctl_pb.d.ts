@@ -3559,12 +3559,333 @@ export type ProductProcess = Message<"tank.agentctl.v1.ProductProcess"> & {
      * @generated from field: string volume = 13;
      */
     volume: string;
+    /**
+     * working disk at /scratch for a worker, schedule or job
+     *
+     * @generated from field: int32 scratch_gi = 14;
+     */
+    scratchGi: number;
 };
 /**
  * Describes the message tank.agentctl.v1.ProductProcess.
  * Use `create(ProductProcessSchema)` to create a new message.
  */
 export declare const ProductProcessSchema: GenMessage<ProductProcess>;
+/**
+ * What else a product is made of besides its processes.
+ *
+ * @generated from message tank.agentctl.v1.ProductParts
+ */
+export type ProductParts = Message<"tank.agentctl.v1.ProductParts"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ProductDatabase databases = 1;
+     */
+    databases: ProductDatabase[];
+    /**
+     * empty: no cache
+     *
+     * @generated from field: string cache_size = 2;
+     */
+    cacheSize: string;
+    /**
+     * @generated from field: repeated string buckets = 3;
+     */
+    buckets: string[];
+    /**
+     * @generated from field: repeated string datasets = 4;
+     */
+    datasets: string[];
+    /**
+     * every dataset TANK's library offers
+     *
+     * @generated from field: repeated string library = 5;
+     */
+    library: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductParts.
+ * Use `create(ProductPartsSchema)` to create a new message.
+ */
+export declare const ProductPartsSchema: GenMessage<ProductParts>;
+/**
+ * @generated from message tank.agentctl.v1.ProductDatabase
+ */
+export type ProductDatabase = Message<"tank.agentctl.v1.ProductDatabase"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string size = 2;
+     */
+    size: string;
+    /**
+     * "20Gi"
+     *
+     * @generated from field: string storage = 3;
+     */
+    storage: string;
+    /**
+     * @generated from field: repeated string extensions = 4;
+     */
+    extensions: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductDatabase.
+ * Use `create(ProductDatabaseSchema)` to create a new message.
+ */
+export declare const ProductDatabaseSchema: GenMessage<ProductDatabase>;
+/**
+ * One change to tank.yaml from hosting settings. kind and name say what it is about.
+ *
+ * @generated from message tank.agentctl.v1.ProductSpecChange
+ */
+export type ProductSpecChange = Message<"tank.agentctl.v1.ProductSpecChange"> & {
+    /**
+     * service | worker | cron | job | database | cache | bucket | dataset | env
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * empty for cache
+     *
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: bool remove = 3;
+     */
+    remove: boolean;
+    /**
+     * empty leaves it
+     *
+     * @generated from field: string size = 4;
+     */
+    size: string;
+    /**
+     * 0 leaves it
+     *
+     * @generated from field: int32 min = 5;
+     */
+    min: number;
+    /**
+     * @generated from field: int32 max = 6;
+     */
+    max: number;
+    /**
+     * @generated from field: string schedule = 7;
+     */
+    schedule: string;
+    /**
+     * a database's storage, or web's /data volume: "40Gi"
+     *
+     * @generated from field: string storage = 8;
+     */
+    storage: string;
+    /**
+     * @generated from field: repeated string extensions = 9;
+     */
+    extensions: string[];
+    /**
+     * @generated from field: repeated string command = 10;
+     */
+    command: string[];
+    /**
+     * "50Gi"; "0" removes it
+     *
+     * @generated from field: string scratch = 11;
+     */
+    scratch: string;
+    /**
+     * @generated from field: string timeout = 12;
+     */
+    timeout: string;
+    /**
+     * env
+     *
+     * @generated from field: string value = 13;
+     */
+    value: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ProductSpecChange.
+ * Use `create(ProductSpecChangeSchema)` to create a new message.
+ */
+export declare const ProductSpecChangeSchema: GenMessage<ProductSpecChange>;
+/**
+ * @generated from message tank.agentctl.v1.PreviewProductSpecRequest
+ */
+export type PreviewProductSpecRequest = Message<"tank.agentctl.v1.PreviewProductSpecRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * @generated from oneof tank.agentctl.v1.PreviewProductSpecRequest.edit
+     */
+    edit: {
+        /**
+         * @generated from field: tank.agentctl.v1.ProductSpecChange change = 2;
+         */
+        value: ProductSpecChange;
+        case: "change";
+    } | {
+        /**
+         * the whole tank.yaml
+         *
+         * @generated from field: string text = 3;
+         */
+        value: string;
+        case: "text";
+    } | {
+        case: undefined;
+        value?: undefined;
+    };
+};
+/**
+ * Describes the message tank.agentctl.v1.PreviewProductSpecRequest.
+ * Use `create(PreviewProductSpecRequestSchema)` to create a new message.
+ */
+export declare const PreviewProductSpecRequestSchema: GenMessage<PreviewProductSpecRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PreviewProductSpecResponse
+ */
+export type PreviewProductSpecResponse = Message<"tank.agentctl.v1.PreviewProductSpecResponse"> & {
+    /**
+     * tank.yaml as it would be
+     *
+     * @generated from field: string text = 1;
+     */
+    text: string;
+    /**
+     * what the running build costs
+     *
+     * @generated from field: tank.agentctl.v1.ProductCost before = 2;
+     */
+    before?: ProductCost;
+    /**
+     * @generated from field: tank.agentctl.v1.ProductCost after = 3;
+     */
+    after?: ProductCost;
+    /**
+     * non-empty: the change cannot be made as it is
+     *
+     * @generated from field: repeated string problems = 4;
+     */
+    problems: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.PreviewProductSpecResponse.
+ * Use `create(PreviewProductSpecResponseSchema)` to create a new message.
+ */
+export declare const PreviewProductSpecResponseSchema: GenMessage<PreviewProductSpecResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ApplyProductSpecRequest
+ */
+export type ApplyProductSpecRequest = Message<"tank.agentctl.v1.ApplyProductSpecRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * @generated from oneof tank.agentctl.v1.ApplyProductSpecRequest.edit
+     */
+    edit: {
+        /**
+         * @generated from field: tank.agentctl.v1.ProductSpecChange change = 2;
+         */
+        value: ProductSpecChange;
+        case: "change";
+    } | {
+        /**
+         * @generated from field: string text = 3;
+         */
+        value: string;
+        case: "text";
+    } | {
+        case: undefined;
+        value?: undefined;
+    };
+    /**
+     * @generated from field: string author_name = 4;
+     */
+    authorName: string;
+    /**
+     * @generated from field: string author_email = 5;
+     */
+    authorEmail: string;
+    /**
+     * The monthly total an owner saw and accepted. A change that costs more lands at once
+     * when this equals its estimate; otherwise it waits for an owner like any build.
+     *
+     * @generated from field: int64 accepted_total_cents = 6;
+     */
+    acceptedTotalCents: bigint;
+    /**
+     * @generated from field: string accepted_by = 7;
+     */
+    acceptedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ApplyProductSpecRequest.
+ * Use `create(ApplyProductSpecRequestSchema)` to create a new message.
+ */
+export declare const ApplyProductSpecRequestSchema: GenMessage<ApplyProductSpecRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ApplyProductSpecResponse
+ */
+export type ApplyProductSpecResponse = Message<"tank.agentctl.v1.ApplyProductSpecResponse"> & {
+    /**
+     * @generated from field: string commit_sha = 1;
+     */
+    commitSha: string;
+    /**
+     * @generated from field: tank.agentctl.v1.ProductCost estimate = 2;
+     */
+    estimate?: ProductCost;
+    /**
+     * false: held, see GetProductSpec's pending
+     *
+     * @generated from field: bool live = 3;
+     */
+    live: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.ApplyProductSpecResponse.
+ * Use `create(ApplyProductSpecResponseSchema)` to create a new message.
+ */
+export declare const ApplyProductSpecResponseSchema: GenMessage<ApplyProductSpecResponse>;
+/**
+ * @generated from message tank.agentctl.v1.GetProductSpecTextRequest
+ */
+export type GetProductSpecTextRequest = Message<"tank.agentctl.v1.GetProductSpecTextRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetProductSpecTextRequest.
+ * Use `create(GetProductSpecTextRequestSchema)` to create a new message.
+ */
+export declare const GetProductSpecTextRequestSchema: GenMessage<GetProductSpecTextRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetProductSpecTextResponse
+ */
+export type GetProductSpecTextResponse = Message<"tank.agentctl.v1.GetProductSpecTextResponse"> & {
+    /**
+     * empty: the product has no tank.yaml yet
+     *
+     * @generated from field: string text = 1;
+     */
+    text: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetProductSpecTextResponse.
+ * Use `create(GetProductSpecTextResponseSchema)` to create a new message.
+ */
+export declare const GetProductSpecTextResponseSchema: GenMessage<GetProductSpecTextResponse>;
 /**
  * @generated from message tank.agentctl.v1.ProductCost
  */
@@ -3823,6 +4144,10 @@ export type GetProductSpecResponse = Message<"tank.agentctl.v1.GetProductSpecRes
      * @generated from field: repeated string secrets_set = 10;
      */
     secretsSet: string[];
+    /**
+     * @generated from field: tank.agentctl.v1.ProductParts parts = 11;
+     */
+    parts?: ProductParts;
 };
 /**
  * Describes the message tank.agentctl.v1.GetProductSpecResponse.
@@ -5993,6 +6318,35 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof UpdateProductSpecRequestSchema;
         output: typeof UpdateProductSpecResponseSchema;
+    };
+    /**
+     * What a change to tank.yaml would cost and whether it compiles, without making it.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.PreviewProductSpec
+     */
+    previewProductSpec: {
+        methodKind: "unary";
+        input: typeof PreviewProductSpecRequestSchema;
+        output: typeof PreviewProductSpecResponseSchema;
+    };
+    /**
+     * Makes the change: a commit to tank.yaml in the person's name, deployed on the running
+     * build; one that costs more lands at once only with an owner's accepted price.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ApplyProductSpec
+     */
+    applyProductSpec: {
+        methodKind: "unary";
+        input: typeof ApplyProductSpecRequestSchema;
+        output: typeof ApplyProductSpecResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.GetProductSpecText
+     */
+    getProductSpecText: {
+        methodKind: "unary";
+        input: typeof GetProductSpecTextRequestSchema;
+        output: typeof GetProductSpecTextResponseSchema;
     };
     /**
      * The running product as a docker-compose file anybody can run without TANK.
