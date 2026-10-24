@@ -1,17 +1,17 @@
 {
   "generated_by": "TANK Neural Knowledge",
-  "commit": "516e642632b10e6d231d41ea350fedafc3a8fc85",
-  "refreshed_at": "2026-10-23T13:22:14.076Z",
+  "commit": "178b798fa808eaf651a52e5da6d198104e1214b2",
+  "refreshed_at": "2026-10-24T12:27:49.178Z",
   "areas": {
     ".": {
       "neurons": ".neural/neurons/root.md",
       "hot": [
         "AGENTS.md",
-        "pnpm-lock.yaml",
-        "pnpm-workspace.yaml",
         "CLAUDE.md",
         "README.md",
-        "biome.json"
+        "biome.json",
+        "package.json",
+        "pnpm-lock.yaml"
       ],
       "files": [
         "AGENTS.md",
@@ -164,9 +164,9 @@
         "src/contracts/VERSION",
         "src/contracts/tank/agentctl/v1/agentctl_pb.ts",
         "src/contracts/tank/agent/v1/agent_pb.ts",
+        "src/contracts/tank/hosting/v1/hosting_pb.ts",
         "src/contracts/tank/board/v1/board_pb.ts",
-        "src/contracts/tank/workspace/v1/workspace_pb.ts",
-        "src/contracts/tank/billing/v1/billing_pb.ts"
+        "src/contracts/tank/workspace/v1/workspace_pb.ts"
       ],
       "files": [
         "src/contracts/VERSION",
@@ -187,6 +187,7 @@
         "src/contracts/environment.ts",
         "src/contracts/events.ts",
         "src/contracts/files.ts",
+        "src/contracts/hosting.ts",
         "src/contracts/huddle.ts",
         "src/contracts/index.ts",
         "src/contracts/message.ts",
@@ -217,6 +218,7 @@
         "src/contracts/tank/environment/v1/environment_pb.ts",
         "src/contracts/tank/events/v1/events_pb.ts",
         "src/contracts/tank/files/v1/files_pb.ts",
+        "src/contracts/tank/hosting/v1/hosting_pb.ts",
         "src/contracts/tank/huddle/v1/huddle_pb.ts",
         "src/contracts/tank/message/v1/message_pb.ts",
         "src/contracts/tank/monitor/v1/monitor_pb.ts",
@@ -226,9 +228,7 @@
         "src/contracts/tank/realtime/v1/realtime_pb.ts",
         "src/contracts/tank/remediation/v1/remediation_pb.ts",
         "src/contracts/tank/richtext/v1/richtext_pb.ts",
-        "src/contracts/tank/search/v1/search_pb.ts",
-        "src/contracts/tank/security/v1/security_pb.ts",
-        "src/contracts/tank/social/v1/social_pb.ts"
+        "src/contracts/tank/search/v1/search_pb.ts"
       ]
     },
     "src/design": {
