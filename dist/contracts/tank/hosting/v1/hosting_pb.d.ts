@@ -475,6 +475,12 @@ export type GetResourcesResponse = Message<"tank.hosting.v1.GetResourcesResponse
      * @generated from field: repeated tank.hosting.v1.Preview previews = 10;
      */
     previews: Preview[];
+    /**
+     * the secrets that have a value
+     *
+     * @generated from field: repeated string secrets_set = 11;
+     */
+    secretsSet: string[];
 };
 /**
  * Describes the message tank.hosting.v1.GetResourcesResponse.
@@ -898,6 +904,39 @@ export type ExportProductResponse = Message<"tank.hosting.v1.ExportProductRespon
  */
 export declare const ExportProductResponseSchema: GenMessage<ExportProductResponse>;
 /**
+ * @generated from message tank.hosting.v1.SetSecretRequest
+ */
+export type SetSecretRequest = Message<"tank.hosting.v1.SetSecretRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * empty clears it
+     *
+     * @generated from field: string value = 3;
+     */
+    value: string;
+};
+/**
+ * Describes the message tank.hosting.v1.SetSecretRequest.
+ * Use `create(SetSecretRequestSchema)` to create a new message.
+ */
+export declare const SetSecretRequestSchema: GenMessage<SetSecretRequest>;
+/**
+ * @generated from message tank.hosting.v1.SetSecretResponse
+ */
+export type SetSecretResponse = Message<"tank.hosting.v1.SetSecretResponse"> & {};
+/**
+ * Describes the message tank.hosting.v1.SetSecretResponse.
+ * Use `create(SetSecretResponseSchema)` to create a new message.
+ */
+export declare const SetSecretResponseSchema: GenMessage<SetSecretResponse>;
+/**
  * HostingService is the Infrastructure page: what a product TANK runs for a Tread is,
  * how it is doing, what it costs and what people may change about it. Every request
  * names the Tread (channel_id); members of the Tread may read, and what each role may
@@ -1029,5 +1068,15 @@ export declare const HostingService: GenService<{
         methodKind: "unary";
         input: typeof ExportProductRequestSchema;
         output: typeof ExportProductResponseSchema;
+    };
+    /**
+     * Admins set a declared secret's value. Never returned; the product restarts with it.
+     *
+     * @generated from rpc tank.hosting.v1.HostingService.SetSecret
+     */
+    setSecret: {
+        methodKind: "unary";
+        input: typeof SetSecretRequestSchema;
+        output: typeof SetSecretResponseSchema;
     };
 }>;

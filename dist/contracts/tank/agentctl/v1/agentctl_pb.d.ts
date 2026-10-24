@@ -3817,6 +3817,12 @@ export type GetProductSpecResponse = Message<"tank.agentctl.v1.GetProductSpecRes
      * @generated from field: repeated tank.agentctl.v1.ProductPreview previews = 9;
      */
     previews: ProductPreview[];
+    /**
+     * the declared secrets that have a value
+     *
+     * @generated from field: repeated string secrets_set = 10;
+     */
+    secretsSet: string[];
 };
 /**
  * Describes the message tank.agentctl.v1.GetProductSpecResponse.
@@ -4014,6 +4020,41 @@ export type RollbackProductResponse = Message<"tank.agentctl.v1.RollbackProductR
  * Use `create(RollbackProductResponseSchema)` to create a new message.
  */
 export declare const RollbackProductResponseSchema: GenMessage<RollbackProductResponse>;
+/**
+ * @generated from message tank.agentctl.v1.SetProductSecretRequest
+ */
+export type SetProductSecretRequest = Message<"tank.agentctl.v1.SetProductSecretRequest"> & {
+    /**
+     * @generated from field: string slug = 1;
+     */
+    slug: string;
+    /**
+     * one of the names its tank.yaml declares
+     *
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * empty clears it
+     *
+     * @generated from field: string value = 3;
+     */
+    value: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetProductSecretRequest.
+ * Use `create(SetProductSecretRequestSchema)` to create a new message.
+ */
+export declare const SetProductSecretRequestSchema: GenMessage<SetProductSecretRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetProductSecretResponse
+ */
+export type SetProductSecretResponse = Message<"tank.agentctl.v1.SetProductSecretResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.SetProductSecretResponse.
+ * Use `create(SetProductSecretResponseSchema)` to create a new message.
+ */
+export declare const SetProductSecretResponseSchema: GenMessage<SetProductSecretResponse>;
 /**
  * @generated from message tank.agentctl.v1.ExportProductRequest
  */
@@ -5962,6 +6003,16 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof ExportProductRequestSchema;
         output: typeof ExportProductResponseSchema;
+    };
+    /**
+     * Sets one of a product's declared secrets. The value is stored and never returned.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.SetProductSecret
+     */
+    setProductSecret: {
+        methodKind: "unary";
+        input: typeof SetProductSecretRequestSchema;
+        output: typeof SetProductSecretResponseSchema;
     };
     /**
      * Adds the preview-reporting workflow to repositories the workspace's own
