@@ -368,6 +368,15 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
         value: string;
         case: "title";
     } | {
+        /**
+         * The model was asleep and is starting: the reply follows in a few minutes. The
+         * sentence to show, from the server.
+         *
+         * @generated from field: string warming = 5;
+         */
+        value: string;
+        case: "warming";
+    } | {
         case: undefined;
         value?: undefined;
     };
