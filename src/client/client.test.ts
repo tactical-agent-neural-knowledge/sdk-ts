@@ -202,7 +202,9 @@ function fakeTransport() {
       },
       getThread: (req) => ({
         root: api.messages.find((m) => m.id === req.threadRootId),
-        replies: api.messages.filter((m) => m.threadRootId === req.threadRootId),
+        replies: api.messages.filter(
+          (m) => m.threadRootId === req.threadRootId && m.threadSeq > req.afterThreadSeq,
+        ),
         hasMore: false,
       }),
       markRead: (req) => {
@@ -464,6 +466,26 @@ describe("TankClient", () => {
       threadRootId: "",
       threadSeq: 0n,
     });
+  });
+
+  it("a thread fills the gap below a reply that arrived live", async () => {
+    api.messages.push(fakeMessage({ id: "h1", channelId: "general", channelSeq: 1n, replyCount: 2 }));
+    for (let i = 1; i <= 2; i++)
+      api.messages.push(
+        fakeMessage({
+          id: `r${i}`,
+          channelId: "general",
+          channelSeq: 0n,
+          threadRootId: "h1",
+          threadSeq: BigInt(i),
+        }),
+      );
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    // Someone else's reply came in live; mine (r1, from another device) never did.
+    c.store.dispatch({ type: "messages/upsert", messages: [api.messages[0]!, api.messages[2]!] });
+    await c.loadThread("h1");
+    expect(c.store.selectThread("h1").replies.map((m) => m.id)).toEqual(["r1", "r2"]);
   });
 
   it("thread reads send the root + thread seq (not the channel seq) and track threadReadStates", async () => {

@@ -330,8 +330,17 @@ export class TankClient {
     }
     /** Loads a thread's root and replies (paging with after_thread_seq). Resolves to whether more exist. */
     async loadThread(rootId, opts = {}) {
+        // From the first reply missing here, not the newest one held: a reply that arrived
+        // live (someone else's) can sit above one this device never saw (this person's own,
+        // sent from another device), and asking only for what follows the newest left that
+        // gap forever (2026-10-24).
         const view = this.store.selectThread(rootId);
-        const after = view.replies.length ? view.replies[view.replies.length - 1].threadSeq : 0n;
+        let after = 0n;
+        for (const r of [...view.replies].sort((a, b) => a.threadSeq < b.threadSeq ? -1 : a.threadSeq > b.threadSeq ? 1 : 0)) {
+            if (r.threadSeq !== after + 1n)
+                break;
+            after = r.threadSeq;
+        }
         const res = await this.chat.getThread({
             threadRootId: rootId,
             afterThreadSeq: after,
