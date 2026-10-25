@@ -64,3 +64,43 @@ describe("RichTextView emoji", () => {
     expect(screen.getByText(":tank:")).toBeTruthy();
   });
 });
+
+// Robby, 2026-10-25: @people is every person in the Tread, @tread is everyone in it.
+describe("RichTextView Tread-wide mentions", () => {
+  it("writes each range as the word people type", () => {
+    const words = [1, 2, 3].map((range) => {
+      const rt: RichText = {
+        $typeName: "tank.richtext.v1.RichText",
+        blocks: [
+          {
+            $typeName: "tank.richtext.v1.RichTextBlock",
+            kind: {
+              case: "section",
+              value: {
+                $typeName: "tank.richtext.v1.RichTextSection",
+                elements: [
+                  {
+                    $typeName: "tank.richtext.v1.RichTextElement",
+                    kind: {
+                      case: "broadcast",
+                      value: { $typeName: "tank.richtext.v1.BroadcastMention", range },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      };
+      const { container, unmount } = render(
+        <ThemeProvider theme={tankTheme}>
+          <RichTextView richText={rt} />
+        </ThemeProvider>,
+      );
+      const text = container.textContent;
+      unmount();
+      return text;
+    });
+    expect(words).toEqual(["@here", "@people", "@tread"]);
+  });
+});

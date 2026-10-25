@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Linking, StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
+import { broadcastWord } from "../blocks/richtext.js";
 import type { RichText, RichTextElement, Style } from "../contracts/tank/richtext/v1/richtext_pb.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
 
@@ -74,7 +75,7 @@ export function ElementViewNative({ element, ...p }: { element: RichTextElement 
     case "broadcast":
       return (
         <Text style={{ color: theme.colors.tertiary, fontWeight: "600" }}>
-          @{k.value.range === 1 ? "here" : k.value.range === 2 ? "channel" : "everyone"}
+          @{broadcastWord(k.value.range)}
         </Text>
       );
     case "emoji":

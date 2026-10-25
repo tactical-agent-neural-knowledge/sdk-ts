@@ -112,7 +112,7 @@ export function elementToPlain(e: RichTextElement): string {
     case "channel":
       return `#${k.value.channelId}`;
     case "broadcast":
-      return "@here";
+      return `@${broadcastWord(k.value.range)}`;
     case "emoji":
       return k.value.unicode || `:${k.value.name}:`;
     default:
@@ -121,3 +121,28 @@ export function elementToPlain(e: RichTextElement): string {
 }
 
 export type { ElementInit };
+
+/**
+ * The word a Tread-wide mention is written as. Robby, 2026-10-25: @people is every person in
+ * the Tread, @tread is everyone in it (the people, and the crew agents allowed there, who
+ * answer). Older words still parse: @channel is @people, @everyone is @tread, @here is the
+ * people who are around.
+ */
+export function broadcastWord(range: number): "here" | "people" | "tread" {
+  return range === 1 ? "here" : range === 2 ? "people" : "tread";
+}
+
+/** The range a typed word mentions (tank.richtext.v1.Broadcast), or 0 when it is not one. */
+export function broadcastRange(word: string): 0 | 1 | 2 | 3 {
+  switch (word.toLowerCase()) {
+    case "here":
+      return 1;
+    case "people":
+    case "channel":
+      return 2;
+    case "tread":
+    case "everyone":
+      return 3;
+  }
+  return 0;
+}

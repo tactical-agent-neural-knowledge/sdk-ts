@@ -1,6 +1,7 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { Linking, StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
+import { broadcastWord } from "../blocks/richtext.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
 function styledSpan(node, s, codeFont, panel) {
     if (!s)
@@ -35,7 +36,7 @@ export function ElementViewNative({ element, ...p }) {
         case "channel":
             return (_jsxs(Text, { style: { color: theme.colors.primary, fontWeight: "600" }, testID: `mention-channel-${k.value.channelId}`, children: ["#", p.resolveChannel?.(k.value.channelId) ?? k.value.channelId] }));
         case "broadcast":
-            return (_jsxs(Text, { style: { color: theme.colors.tertiary, fontWeight: "600" }, children: ["@", k.value.range === 1 ? "here" : k.value.range === 2 ? "channel" : "everyone"] }));
+            return (_jsxs(Text, { style: { color: theme.colors.tertiary, fontWeight: "600" }, children: ["@", broadcastWord(k.value.range)] }));
         case "emoji":
             return _jsx(Text, { testID: `emoji-${k.value.name}`, children: k.value.unicode || `:${k.value.name}:` });
         default:

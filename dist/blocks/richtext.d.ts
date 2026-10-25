@@ -25,3 +25,12 @@ export declare function codeBlock(text: string, language?: string): RichText;
 export declare function richTextToPlain(r: RichText | undefined): string;
 export declare function elementToPlain(e: RichTextElement): string;
 export type { ElementInit };
+/**
+ * The word a Tread-wide mention is written as. Robby, 2026-10-25: @people is every person in
+ * the Tread, @tread is everyone in it (the people, and the crew agents allowed there, who
+ * answer). Older words still parse: @channel is @people, @everyone is @tread, @here is the
+ * people who are around.
+ */
+export declare function broadcastWord(range: number): "here" | "people" | "tread";
+/** The range a typed word mentions (tank.richtext.v1.Broadcast), or 0 when it is not one. */
+export declare function broadcastRange(word: string): 0 | 1 | 2 | 3;

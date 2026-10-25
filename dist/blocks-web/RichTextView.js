@@ -2,6 +2,7 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-run
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import { broadcastWord } from "../blocks/richtext.js";
 import { typography } from "../design/tokens.js";
 function styled(node, s) {
     if (!s)
@@ -36,7 +37,7 @@ export function ElementView({ element, resolveUser, resolveChannel, renderEmoji,
         case "channel":
             return (_jsxs(Box, { component: "span", "data-mention": "channel", "data-id": k.value.channelId, sx: { color: "primary.main", fontWeight: 600 }, children: ["#", resolveChannel?.(k.value.channelId) ?? k.value.channelId] }));
         case "broadcast":
-            return (_jsxs(Box, { component: "span", sx: { color: "tank.warningText", fontWeight: 600 }, children: ["@", k.value.range === 1 ? "here" : k.value.range === 2 ? "channel" : "everyone"] }));
+            return (_jsxs(Box, { component: "span", sx: { color: "tank.warningText", fontWeight: 600 }, children: ["@", broadcastWord(k.value.range)] }));
         case "emoji": {
             const custom = renderEmoji?.({ name: k.value.name, unicode: k.value.unicode });
             return _jsx("span", { "data-emoji": k.value.name, children: custom ?? (k.value.unicode || `:${k.value.name}:`) });

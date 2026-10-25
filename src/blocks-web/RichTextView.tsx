@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import type { ReactNode } from "react";
+import { broadcastWord } from "../blocks/richtext.js";
 import type { RichText, RichTextElement, Style } from "../contracts/tank/richtext/v1/richtext_pb.js";
 import { typography } from "../design/tokens.js";
 
@@ -85,7 +86,7 @@ export function ElementView({
     case "broadcast":
       return (
         <Box component="span" sx={{ color: "tank.warningText", fontWeight: 600 }}>
-          @{k.value.range === 1 ? "here" : k.value.range === 2 ? "channel" : "everyone"}
+          @{broadcastWord(k.value.range)}
         </Box>
       );
     case "emoji": {

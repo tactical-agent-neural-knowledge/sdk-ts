@@ -8,6 +8,8 @@ export {
   validateBlocks,
 } from "./normalize.js";
 export {
+  broadcastRange,
+  broadcastWord,
   codeBlock,
   elementToPlain,
   type RichTextInput,
