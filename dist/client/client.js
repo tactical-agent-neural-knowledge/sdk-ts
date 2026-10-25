@@ -85,6 +85,8 @@ export class TankClient {
     randomBytes;
     outbox = new Map();
     recentChannels = [];
+    /** Treads being fetched because an event named one the store does not have. */
+    fetchingChannels = new Set();
     started = false;
     hydrated;
     typingSweep;
@@ -1042,6 +1044,23 @@ export class TankClient {
                 return;
             this.store.applyEnvelope(env, this.now());
             const payload = unpackEnvelope(env);
+            // A Tread the store has never seen: being invited to one, a new DM, a message in a
+            // Tread joined on another device. The event is about a Tread this person now belongs
+            // to, so fetch it; until 2026-10-25 the store dropped the event and an invited Tread
+            // stayed off the Home screen until the app restarted (demo-premium, #sales-strategy).
+            const me = this.store.getState().me?.id;
+            if (payload?.$typeName === "tank.events.v1.ChannelMembershipChanged" &&
+                payload.joined &&
+                me &&
+                payload.userId === me) {
+                // Fetched even when listed: an unjoined public Tread has no read state yet.
+                void this.refreshChannel(payload.channelId);
+            }
+            else {
+                const ch = channelOfSubject(env.subject);
+                if (ch)
+                    this.ensureChannel(ch);
+            }
             if (payload?.$typeName === "tank.events.v1.ChannelUpdated")
                 void this.refreshChannel(payload.channelId);
             if (payload?.$typeName === "tank.events.v1.ChannelDeleted")
@@ -1072,6 +1091,13 @@ export class TankClient {
         });
         rt.on("agent_status", (s) => this.store.dispatch({ type: "agentStatus", status: s, now: this.now() }));
         rt.on("resync", () => void this.resync());
+    }
+    /** Fetches a Tread the store does not have yet, once at a time. */
+    ensureChannel(channelId) {
+        if (!channelId || this.store.getState().channels[channelId] || this.fetchingChannels.has(channelId))
+            return;
+        this.fetchingChannels.add(channelId);
+        void this.refreshChannel(channelId).finally(() => this.fetchingChannels.delete(channelId));
     }
     async refreshChannel(channelId) {
         try {
@@ -1279,4 +1305,9 @@ export class TankClient {
 }
 export function createTankClient(opts) {
     return new TankClient(opts);
+}
+/** The channel a realtime subject is about (evt.<ws>.ch.<id>), or "". */
+export function channelOfSubject(subject) {
+    const parts = subject.split(".");
+    return (parts.length === 4 && parts[2] === "ch" && parts[3]) || "";
 }

@@ -102,11 +102,13 @@ function fakeTransport() {
     });
     service(ChannelService, {
       getChannel: (req) => ({
+        // As the api answers a member: joined (GetChannel sets it from the caller's read state).
         channel: create(ChannelSchema, {
           id: req.channelId,
           workspaceId: "ws1",
           name: "renamed",
           type: ChannelType.PUBLIC,
+          joined: true,
         }),
       }),
       joinChannel: (req) => {
@@ -716,6 +718,69 @@ describe("TankClient", () => {
       value: { channelId: "general", threadRootId: "root", runId: "r1", status: "running tests" },
     });
     await until(() => c.store.getState().agentStatus.root?.status === "running tests");
+  });
+});
+
+// demo-premium, 2026-10-25: Robby was added to #sales-strategy and it never reached his Home
+// screen. The event arrived; the store dropped it because it did not know the Tread.
+describe("a Tread I was just added to", () => {
+  it("is fetched and listed when the membership event arrives", async () => {
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    await c.start();
+    await until(() => c.store.getState().connection === "ready");
+    expect(c.store.getState().channels["sales-strategy"]).toBeUndefined();
+    const { create: mk } = await import("@bufbuild/protobuf");
+    const { anyPack } = await import("@bufbuild/protobuf/wkt");
+    const ev = await import("../contracts/tank/events/v1/events_pb.js");
+    const env = gw.envelope(
+      "ws1",
+      "channel.membership.changed",
+      anyPack(
+        ev.ChannelMembershipChangedSchema,
+        mk(ev.ChannelMembershipChangedSchema, { channelId: "sales-strategy", userId: "me", joined: true }),
+      ),
+    );
+    env.subject = "evt.ws1.user.me";
+    gw.emit("ws1", env);
+    await until(() => c.store.getState().channels["sales-strategy"] !== undefined);
+  });
+
+  it("a public Tread already listed as joinable becomes joined", async () => {
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    await c.start();
+    await until(() => c.store.getState().connection === "ready");
+    expect(c.store.getState().channels.general).toBeDefined();
+    c.store.dispatch({
+      type: "channels/upsert",
+      channels: [{ ...c.store.getState().channels.general!, joined: false }],
+    });
+    const { create: mk } = await import("@bufbuild/protobuf");
+    const { anyPack } = await import("@bufbuild/protobuf/wkt");
+    const ev = await import("../contracts/tank/events/v1/events_pb.js");
+    const env = gw.envelope(
+      "ws1",
+      "channel.membership.changed",
+      anyPack(
+        ev.ChannelMembershipChangedSchema,
+        mk(ev.ChannelMembershipChangedSchema, { channelId: "general", userId: "me", joined: true }),
+      ),
+    );
+    env.subject = "evt.ws1.user.me";
+    gw.emit("ws1", env);
+    await until(() => c.store.getState().channels.general?.joined === true);
+  });
+
+  it("is fetched when any event arrives for it, a new DM's first message included", async () => {
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    await c.start();
+    await until(() => c.store.getState().connection === "ready");
+    const env = gw.messageCreated(fakeMessage({ id: "dm1", channelId: "dm-ada", channelSeq: 1n }));
+    env.subject = "evt.ws1.ch.dm-ada";
+    gw.emit("ws1", env);
+    await until(() => c.store.getState().channels["dm-ada"] !== undefined);
   });
 });
 

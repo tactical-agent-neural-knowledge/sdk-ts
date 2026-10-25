@@ -181,6 +181,8 @@ export declare class TankClient {
     private readonly randomBytes;
     private readonly outbox;
     private readonly recentChannels;
+    /** Treads being fetched because an event named one the store does not have. */
+    private readonly fetchingChannels;
     private started;
     private hydrated;
     private typingSweep;
@@ -382,6 +384,8 @@ export declare class TankClient {
     private flushOne;
     private persistOutboxEntry;
     private wireRealtime;
+    /** Fetches a Tread the store does not have yet, once at a time. */
+    private ensureChannel;
     private refreshChannel;
     private resync;
     private touchRecent;
@@ -401,3 +405,5 @@ export declare class TankClient {
     private hydrateOnce;
 }
 export declare function createTankClient(opts: TankClientOptions): TankClient;
+/** The channel a realtime subject is about (evt.<ws>.ch.<id>), or "". */
+export declare function channelOfSubject(subject: string): string;

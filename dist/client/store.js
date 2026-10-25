@@ -509,7 +509,10 @@ export function reduce(state, action) {
                     : [...ch.memberIds, action.userId]
                 : ch.memberIds.filter((u) => u !== action.userId);
             const memberCount = Math.max(0, ch.memberCount + (action.joined ? 1 : -1));
-            const next = { ...ch, memberIds, memberCount };
+            // My own membership is what "joined" means: a public Tread listed as one I could join
+            // becomes one I am in, or the Home screen keeps it hidden (demo-premium, 2026-10-25).
+            const mine = state.me !== undefined && action.userId === state.me.id;
+            const next = { ...ch, memberIds, memberCount, ...(mine ? { joined: action.joined } : {}) };
             let s = { ...state, channels: { ...state.channels, [ch.id]: next } };
             if (state.me && action.userId === state.me.id && !action.joined) {
                 s = reduce(s, { type: "channels/remove", channelId: ch.id });
