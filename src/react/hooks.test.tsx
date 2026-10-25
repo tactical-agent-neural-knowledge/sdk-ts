@@ -5,9 +5,10 @@ import { createRouterTransport } from "@connectrpc/connect";
 import { act, cleanup, renderHook } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it } from "vitest";
+import { planProgress } from "../blocks/plan.js";
 import { createTankClient, type TankClient } from "../client/client.js";
 import type { WebSocketCtor, WebSocketLike } from "../client/realtime.js";
-import { AgentService, RunSchema, RunState } from "../contracts/tank/agent/v1/agent_pb.js";
+import { AgentService, RunSchema, RunState, TreadPlanSchema } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AuthService, PrincipalSchema } from "../contracts/tank/auth/v1/auth_pb.js";
 import {
   AgentStatusSchema,
@@ -33,6 +34,7 @@ import {
   useNotifications,
   useRun,
   useThreadRun,
+  useTreadPlan,
   useUnreadNotificationCount,
 } from "./index.js";
 
@@ -51,6 +53,7 @@ const T0 = 1_700_000_000_000;
 const lists: ListNotificationsRequest[] = [];
 let listRunsCalls = 0;
 let getRunCalls = 0;
+let planCalls = 0;
 
 function makeClient(): TankClient {
   const transport = createRouterTransport(({ service }) => {
@@ -96,6 +99,24 @@ function makeClient(): TankClient {
           ],
           nextCursor: "",
         };
+      },
+      getTreadPlan: (req) => {
+        planCalls++;
+        return req.channelId === "c-plan"
+          ? {
+              plan: create(TreadPlanSchema, {
+                title: "Datum Master Build Plan",
+                firstTotal: 3,
+                version: 2,
+                items: [
+                  { key: "places", title: "Real places", status: 3 },
+                  { key: "weather", title: "Weather", status: 2 },
+                  { key: "trademark", title: "Trademark search", status: 4 },
+                  { key: "imagery", title: "Imagery", status: 1 },
+                ],
+              }),
+            }
+          : {};
       },
       getRun: (req) => {
         getRunCalls++;
@@ -219,5 +240,40 @@ describe("file hooks", () => {
       }),
     );
     expect(result.current?.name).toBe("a.png");
+  });
+});
+
+// Robby, 2026-10-25: the Tread's plan as a progress bar under the goal.
+describe("useTreadPlan", () => {
+  it("reads the Tread's plan, says where it stands, and re-reads when a run there changes", async () => {
+    const client = makeClient();
+    const { result } = renderHook(() => useTreadPlan("c-plan"), { wrapper: wrap(client) });
+    await flush();
+    expect(result.current.plan?.title).toBe("Datum Master Build Plan");
+    const p = planProgress(result.current.plan?.items ?? [], result.current.plan?.firstTotal);
+    expect([p.done, p.doing, p.needsPerson, p.total, p.changed]).toEqual([1, 1, 1, 4, true]);
+    const before = planCalls;
+    act(() => {
+      client.store.dispatch({
+        type: "runs/upsert",
+        runs: [
+          create(RunSchema, {
+            id: "r9",
+            workspaceId: "ws1",
+            channelId: "c-plan",
+            state: RunState.IMPLEMENTING,
+          }),
+        ],
+      });
+    });
+    await flush();
+    expect(planCalls).toBeGreaterThan(before);
+  });
+
+  it("has no plan for a Tread without one", async () => {
+    const { result } = renderHook(() => useTreadPlan("c-none"), { wrapper: wrap(makeClient()) });
+    await flush();
+    expect(result.current.plan).toBeUndefined();
+    expect(result.current.loading).toBe(false);
   });
 });

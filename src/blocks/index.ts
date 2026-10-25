@@ -7,7 +7,7 @@ export {
   truncate,
   validateBlocks,
 } from "./normalize.js";
-export { planGlance, stepEmoji } from "./plan.js";
+export { planGlance, planItemEmoji, planProgress, stepEmoji } from "./plan.js";
 export {
   broadcastRange,
   broadcastWord,

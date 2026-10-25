@@ -30,3 +30,39 @@ export function planGlance(steps) {
         emoji = "🔄";
     return { emoji, done, total: steps.length };
 }
+/** A Tread plan ledger item's status (tank.agent.v1.PlanItemStatus) as an emoji. */
+export function planItemEmoji(status) {
+    switch (status) {
+        case 2:
+            return "🔄";
+        case 3:
+            return "✅";
+        case 4:
+            return "✋";
+        case 5:
+            return "⏭️";
+        default:
+            return "⬜";
+    }
+}
+/**
+ * Where a Tread's plan stands, for the bar under the goal (Robby, 2026-10-25: "a progress bar
+ * based on the original plan, current plan if it changed, and what is complete"). Dropped
+ * items are out of the plan and out of the count; firstTotal is the size it started at.
+ */
+export function planProgress(items, firstTotal = 0) {
+    const live = items.filter((i) => i.status !== 5);
+    const done = live.filter((i) => i.status === 3).length;
+    const doing = live.filter((i) => i.status === 2).length;
+    const needsPerson = live.filter((i) => i.status === 4).length;
+    return {
+        done,
+        doing,
+        needsPerson,
+        total: live.length,
+        dropped: items.length - live.length,
+        firstTotal,
+        changed: firstTotal > 0 && firstTotal !== live.length,
+        fraction: live.length ? done / live.length : 0,
+    };
+}

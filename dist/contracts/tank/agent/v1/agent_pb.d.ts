@@ -1523,6 +1523,118 @@ export type SetTreadDeploymentResponse = Message<"tank.agent.v1.SetTreadDeployme
  */
 export declare const SetTreadDeploymentResponseSchema: GenMessage<SetTreadDeploymentResponse>;
 /**
+ * @generated from message tank.agent.v1.TreadPlanItem
+ */
+export type TreadPlanItem = Message<"tank.agent.v1.TreadPlanItem"> & {
+    /**
+     * stable across versions, e.g. "data.osm-places"
+     *
+     * @generated from field: string key = 1;
+     */
+    key: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: tank.agent.v1.PlanItemStatus status = 3;
+     */
+    status: PlanItemStatus;
+    /**
+     * the section or phase of the plan it belongs to
+     *
+     * @generated from field: string phase = 4;
+     */
+    phase: string;
+    /**
+     * one line: what is left, or why it waits
+     *
+     * @generated from field: string note = 5;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agent.v1.TreadPlanItem.
+ * Use `create(TreadPlanItemSchema)` to create a new message.
+ */
+export declare const TreadPlanItemSchema: GenMessage<TreadPlanItem>;
+/**
+ * @generated from message tank.agent.v1.TreadPlan
+ */
+export type TreadPlan = Message<"tank.agent.v1.TreadPlan"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * what the plan is, e.g. "Datum Master Build Plan"
+     *
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * the document it was drawn from, when there is one
+     *
+     * @generated from field: string source = 3;
+     */
+    source: string;
+    /**
+     * @generated from field: repeated tank.agent.v1.TreadPlanItem items = 4;
+     */
+    items: TreadPlanItem[];
+    /**
+     * grows when items are added or dropped
+     *
+     * @generated from field: int32 version = 5;
+     */
+    version: number;
+    /**
+     * how many items the first version had
+     *
+     * @generated from field: int32 first_total = 6;
+     */
+    firstTotal: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp updated_at = 7;
+     */
+    updatedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agent.v1.TreadPlan.
+ * Use `create(TreadPlanSchema)` to create a new message.
+ */
+export declare const TreadPlanSchema: GenMessage<TreadPlan>;
+/**
+ * @generated from message tank.agent.v1.GetTreadPlanRequest
+ */
+export type GetTreadPlanRequest = Message<"tank.agent.v1.GetTreadPlanRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetTreadPlanRequest.
+ * Use `create(GetTreadPlanRequestSchema)` to create a new message.
+ */
+export declare const GetTreadPlanRequestSchema: GenMessage<GetTreadPlanRequest>;
+/**
+ * @generated from message tank.agent.v1.GetTreadPlanResponse
+ */
+export type GetTreadPlanResponse = Message<"tank.agent.v1.GetTreadPlanResponse"> & {
+    /**
+     * unset when the Tread has none
+     *
+     * @generated from field: tank.agent.v1.TreadPlan plan = 1;
+     */
+    plan?: TreadPlan;
+};
+/**
+ * Describes the message tank.agent.v1.GetTreadPlanResponse.
+ * Use `create(GetTreadPlanResponseSchema)` to create a new message.
+ */
+export declare const GetTreadPlanResponseSchema: GenMessage<GetTreadPlanResponse>;
+/**
  * @generated from enum tank.agent.v1.RunState
  */
 export declare enum RunState {
@@ -1608,6 +1720,51 @@ export declare enum RunState {
  */
 export declare const RunStateSchema: GenEnum<RunState>;
 /**
+ * A Tread's plan ledger: the whole of what the Tread set out to build (a document like a
+ * master build plan, or the first approved plan), item by item, with where each stands.
+ * Runs keep it current; people read it as one progress bar under the goal and tap for the
+ * list (Robby, 2026-10-25: "I don't know where we are at"). The first version's size is kept,
+ * so a plan that grew says so.
+ *
+ * @generated from enum tank.agent.v1.PlanItemStatus
+ */
+export declare enum PlanItemStatus {
+    /**
+     * @generated from enum value: PLAN_ITEM_STATUS_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: PLAN_ITEM_STATUS_TODO = 1;
+     */
+    TODO = 1,
+    /**
+     * @generated from enum value: PLAN_ITEM_STATUS_DOING = 2;
+     */
+    DOING = 2,
+    /**
+     * seen working by a run, never assumed
+     *
+     * @generated from enum value: PLAN_ITEM_STATUS_DONE = 3;
+     */
+    DONE = 3,
+    /**
+     * a trademark search, a domain to buy, a decision
+     *
+     * @generated from enum value: PLAN_ITEM_STATUS_NEEDS_PERSON = 4;
+     */
+    NEEDS_PERSON = 4,
+    /**
+     * taken out of the plan on purpose
+     *
+     * @generated from enum value: PLAN_ITEM_STATUS_DROPPED = 5;
+     */
+    DROPPED = 5
+}
+/**
+ * Describes the enum tank.agent.v1.PlanItemStatus.
+ */
+export declare const PlanItemStatusSchema: GenEnum<PlanItemStatus>;
+/**
  * @generated from service tank.agent.v1.AgentService
  */
 export declare const AgentService: GenService<{
@@ -1618,6 +1775,14 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof StartRunRequestSchema;
         output: typeof StartRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.GetTreadPlan
+     */
+    getTreadPlan: {
+        methodKind: "unary";
+        input: typeof GetTreadPlanRequestSchema;
+        output: typeof GetTreadPlanResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.StopRun

@@ -1,7 +1,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { Run, TreadSettings } from "../../agent/v1/agent_pb.js";
-import type { Blocks, Check, GateKind, PlanStep } from "../../blocks/v1/blocks_pb.js";
+import type { Run, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
+import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks/v1/blocks_pb.js";
 import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
 import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
@@ -356,6 +356,23 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: string workbench_board_id = 30;
      */
     workbenchBoardId: string;
+    /**
+     * Everything the Tread holds, as one brief the control plane writes: its settings, what
+     * TANK hosts for it and anything waiting on an owner, recent runs, boards and pages, the
+     * latest messages with who wrote them (the agent's own notices included), and what the
+     * Neural Vault knows about the ask. The same brief the agent's thread replies are written
+     * from, so a run and a reply never disagree about the Tread.
+     *
+     * @generated from field: string tread_brief = 31;
+     */
+    treadBrief: string;
+    /**
+     * The Tread's plan ledger as it stands, so the run works against the whole plan and keeps
+     * it current with UpdateTreadPlan. Unset when the Tread has none yet.
+     *
+     * @generated from field: tank.agent.v1.TreadPlan tread_plan = 32;
+     */
+    treadPlan?: TreadPlan;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -809,6 +826,102 @@ export type ReportStatusResponse = Message<"tank.agentctl.v1.ReportStatusRespons
  * Use `create(ReportStatusResponseSchema)` to create a new message.
  */
 export declare const ReportStatusResponseSchema: GenMessage<ReportStatusResponse>;
+/**
+ * Progress through the approved plan, shown on the plan card as it moves: a step is
+ * running when the run starts it and done when it is proven. Steps are named by the id
+ * they were posted with, or by their 1-based position ("3"). A continuation run updates
+ * the plan card of the thread's approved plan, whichever run posted it.
+ * Keeps the Tread's plan ledger. Items are matched by key: a new key adds an item, a known
+ * key updates its title, status, phase or note. replace_all sets the whole list (a new
+ * version; keys left out are dropped), for creating the ledger or when the scope changes.
+ *
+ * @generated from message tank.agentctl.v1.UpdateTreadPlanRequest
+ */
+export type UpdateTreadPlanRequest = Message<"tank.agentctl.v1.UpdateTreadPlanRequest"> & {
+    /**
+     * @generated from field: string title = 1;
+     */
+    title: string;
+    /**
+     * @generated from field: string source = 2;
+     */
+    source: string;
+    /**
+     * @generated from field: repeated tank.agent.v1.TreadPlanItem items = 3;
+     */
+    items: TreadPlanItem[];
+    /**
+     * @generated from field: bool replace_all = 4;
+     */
+    replaceAll: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.UpdateTreadPlanRequest.
+ * Use `create(UpdateTreadPlanRequestSchema)` to create a new message.
+ */
+export declare const UpdateTreadPlanRequestSchema: GenMessage<UpdateTreadPlanRequest>;
+/**
+ * @generated from message tank.agentctl.v1.UpdateTreadPlanResponse
+ */
+export type UpdateTreadPlanResponse = Message<"tank.agentctl.v1.UpdateTreadPlanResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.TreadPlan plan = 1;
+     */
+    plan?: TreadPlan;
+};
+/**
+ * Describes the message tank.agentctl.v1.UpdateTreadPlanResponse.
+ * Use `create(UpdateTreadPlanResponseSchema)` to create a new message.
+ */
+export declare const UpdateTreadPlanResponseSchema: GenMessage<UpdateTreadPlanResponse>;
+/**
+ * @generated from message tank.agentctl.v1.UpdatePlanStepsRequest
+ */
+export type UpdatePlanStepsRequest = Message<"tank.agentctl.v1.UpdatePlanStepsRequest"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.PlanStepUpdate steps = 1;
+     */
+    steps: PlanStepUpdate[];
+};
+/**
+ * Describes the message tank.agentctl.v1.UpdatePlanStepsRequest.
+ * Use `create(UpdatePlanStepsRequestSchema)` to create a new message.
+ */
+export declare const UpdatePlanStepsRequestSchema: GenMessage<UpdatePlanStepsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PlanStepUpdate
+ */
+export type PlanStepUpdate = Message<"tank.agentctl.v1.PlanStepUpdate"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: tank.blocks.v1.StepStatus status = 2;
+     */
+    status: StepStatus;
+};
+/**
+ * Describes the message tank.agentctl.v1.PlanStepUpdate.
+ * Use `create(PlanStepUpdateSchema)` to create a new message.
+ */
+export declare const PlanStepUpdateSchema: GenMessage<PlanStepUpdate>;
+/**
+ * @generated from message tank.agentctl.v1.UpdatePlanStepsResponse
+ */
+export type UpdatePlanStepsResponse = Message<"tank.agentctl.v1.UpdatePlanStepsResponse"> & {
+    /**
+     * ids that matched no step on the card
+     *
+     * @generated from field: repeated string unknown_ids = 1;
+     */
+    unknownIds: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.UpdatePlanStepsResponse.
+ * Use `create(UpdatePlanStepsResponseSchema)` to create a new message.
+ */
+export declare const UpdatePlanStepsResponseSchema: GenMessage<UpdatePlanStepsResponse>;
 /**
  * @generated from message tank.agentctl.v1.ReportCompletionRequest
  */
@@ -5765,6 +5878,22 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof ReportStatusRequestSchema;
         output: typeof ReportStatusResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.UpdatePlanSteps
+     */
+    updatePlanSteps: {
+        methodKind: "unary";
+        input: typeof UpdatePlanStepsRequestSchema;
+        output: typeof UpdatePlanStepsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.UpdateTreadPlan
+     */
+    updateTreadPlan: {
+        methodKind: "unary";
+        input: typeof UpdateTreadPlanRequestSchema;
+        output: typeof UpdateTreadPlanResponseSchema;
     };
     /**
      * How far the run got against the whole ask (2026-10-23): what is done, what is left,

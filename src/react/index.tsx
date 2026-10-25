@@ -22,7 +22,7 @@ import {
   type ThreadView,
   type Unreads,
 } from "../client/store.js";
-import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
+import type { Run, TreadPlan } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Channel } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { AgentStatus } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
@@ -556,6 +556,74 @@ export function useThreadRun(rootId: string, opts: { load?: boolean } = {}): Run
     return () => clearInterval(id);
   }, [client, rootId, load, live]);
   return run;
+}
+
+export interface TreadPlanState {
+  plan: TreadPlan | undefined;
+  loading: boolean;
+  reload: () => void;
+}
+
+/** How often a Tread's plan is re-read while a run in it is working: runs update it mid-run. */
+const PLAN_REFRESH_MS = 60_000;
+
+/**
+ * The Tread's plan ledger, for the progress bar under the goal (Robby, 2026-10-25). Re-read
+ * when a run in the Tread changes, and every minute while one is working; a Tread with no
+ * plan has `plan` undefined.
+ */
+export function useTreadPlan(channelId: string): TreadPlanState {
+  const client = useTank();
+  const runs = useTankSelector(
+    useCallback(
+      (s: TankStore) =>
+        Object.values(s.getState().runsById)
+          .filter((r) => r.channelId === channelId)
+          .map((r) => `${r.id}:${r.state}`)
+          .sort()
+          .join(","),
+      [channelId],
+    ),
+  );
+  const working = useTankSelector(
+    useCallback(
+      (s: TankStore) =>
+        Object.values(s.getState().runsById).some(
+          (r) => r.channelId === channelId && !isTerminalRunState(r.state),
+        ),
+      [channelId],
+    ),
+  );
+  const [plan, setPlan] = useState<TreadPlan | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+  const [tick, setTick] = useState(0);
+  const reload = useCallback(() => setTick((t) => t + 1), []);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: `runs` and `tick` are refetch triggers
+  useEffect(() => {
+    if (!channelId) return;
+    let live = true;
+    client.agent
+      .getTreadPlan({ channelId })
+      .then((r) => {
+        if (live) {
+          setPlan(r.plan);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        // The bar is an aid; a Tread still reads without it.
+        if (live) setLoading(false);
+      });
+    return () => {
+      live = false;
+    };
+  }, [client, channelId, runs, tick]);
+  useEffect(() => {
+    if (!working) return;
+    const t = setInterval(reload, PLAN_REFRESH_MS);
+    return () => clearInterval(t);
+  }, [working, reload]);
+  return { plan, loading, reload };
 }
 
 /** How often a live run is re-fetched when no event has corrected it. */

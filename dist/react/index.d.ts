@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import type { TankClient } from "../client/client.js";
 import { type ChannelPaging, type ConnectionState, type NotificationPaging, type PendingMessage, type TankState, type TankStore, type ThreadView, type Unreads } from "../client/store.js";
-import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
+import type { Run, TreadPlan } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Channel } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { AgentStatus } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
@@ -148,6 +148,17 @@ export declare function useRun(runId: string, opts?: {
 export declare function useThreadRun(rootId: string, opts?: {
     load?: boolean;
 }): Run | undefined;
+export interface TreadPlanState {
+    plan: TreadPlan | undefined;
+    loading: boolean;
+    reload: () => void;
+}
+/**
+ * The Tread's plan ledger, for the progress bar under the goal (Robby, 2026-10-25). Re-read
+ * when a run in the Tread changes, and every minute while one is working; a Tread with no
+ * plan has `plan` undefined.
+ */
+export declare function useTreadPlan(channelId: string): TreadPlanState;
 /** Runs in a workspace, newest first (whatever `ListRuns` pages and events have put in the store). */
 export declare function useRuns(workspaceId: string): Run[];
 /** The whole thread root id → run map (stable reference); message lists index it per row. */
