@@ -12,6 +12,7 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type ReactNode, useState } from "react";
+import { planGlance, stepEmoji } from "../blocks/plan.js";
 import type {
   Actions,
   ApprovalPrompt,
@@ -272,66 +273,161 @@ const STEP_GLYPH: Record<StepStatusT, { glyph: string; color: string; label: str
 };
 
 export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockContext }) {
+  // At a glance by default: an emoji and a line per step. Tapping the text shows the whole
+  // plan and tapping it again goes back; no button (Robby, 2026-10-25). A plan with no steps
+  // has nothing to glance at and is shown whole.
+  const [detail, setDetail] = useState(false);
+  if (value.steps.length > 0 && !detail) {
+    const g = planGlance(value.steps);
+    return (
+      <Card accent="agent" label={`${g.emoji} ${g.done}/${g.total}`}>
+        <Box
+          component="ol"
+          role="button"
+          tabIndex={0}
+          aria-expanded={false}
+          aria-label="Show the whole plan"
+          data-testid="plan-glance"
+          onClick={() => setDetail(true)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setDetail(true);
+            }
+          }}
+          sx={{
+            m: 0,
+            p: 0,
+            listStyle: "none",
+            display: "flex",
+            flexDirection: "column",
+            gap: 0.5,
+            cursor: "pointer",
+          }}
+        >
+          {value.steps.map((s, i) => (
+            <Box
+              component="li"
+              key={s.id || i}
+              data-step-status={(STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label}
+              sx={{ display: "flex", gap: 1, alignItems: "baseline" }}
+            >
+              <Box component="span" aria-hidden sx={{ width: "1.4em", flexShrink: 0 }}>
+                {stepEmoji(s.status)}
+              </Box>
+              <Typography variant="body2" component="span" sx={{ minWidth: 0 }}>
+                {s.title}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Card>
+    );
+  }
+  return (
+    <PlanCardDetail
+      value={value}
+      ctx={ctx}
+      onToggle={value.steps.length > 0 ? () => setDetail(false) : undefined}
+    />
+  );
+}
+
+function PlanCardDetail({
+  value,
+  ctx,
+  onToggle,
+}: {
+  value: PlanCard;
+  ctx: BlockContext;
+  onToggle?: () => void;
+}) {
   const done = value.steps.filter((s) => s.status === StepStatus.DONE).length;
+  // Selecting text to copy a file path must not fold the plan away.
+  const toggle = onToggle
+    ? () => {
+        if (typeof window !== "undefined" && window.getSelection?.()?.toString()) return;
+        onToggle();
+      }
+    : undefined;
   return (
     <Card accent="agent" label={`Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`}>
-      <Typography variant="body1">{value.summary}</Typography>
-      {value.steps.length > 0 ? (
-        <Box>
-          <LinearProgress
-            variant="determinate"
-            color="secondary"
-            value={(done / value.steps.length) * 100}
-            sx={{ mb: 1, height: 4, borderRadius: 2 }}
-            aria-label={`${done} of ${value.steps.length} steps done`}
-          />
-          <Box
-            component="ol"
-            sx={{ m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.5 }}
-          >
-            {value.steps.map((s) => {
-              const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
-              return (
-                <Box
-                  component="li"
-                  key={s.id}
-                  data-step-status={g.label}
-                  sx={{ display: "flex", gap: 1, alignItems: "baseline" }}
-                >
+      <Box
+        role={toggle ? "button" : undefined}
+        tabIndex={toggle ? 0 : undefined}
+        aria-expanded={toggle ? true : undefined}
+        data-testid="plan-detail"
+        onClick={toggle}
+        onKeyDown={
+          toggle
+            ? (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  toggle();
+                }
+              }
+            : undefined
+        }
+        sx={{ display: "flex", flexDirection: "column", gap: 1.5, cursor: toggle ? "pointer" : undefined }}
+      >
+        <Typography variant="body1">{value.summary}</Typography>
+        {value.steps.length > 0 ? (
+          <Box>
+            <LinearProgress
+              variant="determinate"
+              color="secondary"
+              value={(done / value.steps.length) * 100}
+              sx={{ mb: 1, height: 4, borderRadius: 2 }}
+              aria-label={`${done} of ${value.steps.length} steps done`}
+            />
+            <Box
+              component="ol"
+              sx={{ m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.5 }}
+            >
+              {value.steps.map((s) => {
+                const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
+                return (
                   <Box
-                    component="span"
-                    aria-label={g.label}
-                    sx={{ color: g.color, width: "1em", textAlign: "center", ...mono }}
+                    component="li"
+                    key={s.id}
+                    data-step-status={g.label}
+                    sx={{ display: "flex", gap: 1, alignItems: "baseline" }}
                   >
-                    {g.glyph}
-                  </Box>
-                  <Box sx={{ minWidth: 0 }}>
-                    <Typography variant="body2" component="span">
-                      {s.title}
-                    </Typography>
-                    {s.files.length > 0 ? (
-                      <Typography variant="caption" component="div" color="text.secondary" sx={mono}>
-                        {s.files.join("  ")}
+                    <Box
+                      component="span"
+                      aria-label={g.label}
+                      sx={{ color: g.color, width: "1em", textAlign: "center", ...mono }}
+                    >
+                      {g.glyph}
+                    </Box>
+                    <Box sx={{ minWidth: 0 }}>
+                      <Typography variant="body2" component="span">
+                        {s.title}
                       </Typography>
-                    ) : null}
+                      {s.files.length > 0 ? (
+                        <Typography variant="caption" component="div" color="text.secondary" sx={mono}>
+                          {s.files.join("  ")}
+                        </Typography>
+                      ) : null}
+                    </Box>
                   </Box>
-                </Box>
-              );
-            })}
+                );
+              })}
+            </Box>
           </Box>
-        </Box>
-      ) : null}
-      {value.risks.length > 0 ? (
-        <BulletList title="Risks" items={value.risks} color="tank.warningText" />
-      ) : null}
-      {value.questions.length > 0 ? (
-        <BulletList title="Questions" items={value.questions} color="tank.primaryText" />
-      ) : null}
-      {value.approverIds.length > 0 ? (
-        <Typography variant="caption" color="text.secondary">
-          Approvers: {names(value.approverIds, ctx)}
-        </Typography>
-      ) : null}
+        ) : null}
+        {value.risks.length > 0 ? (
+          <BulletList title="Risks" items={value.risks} color="tank.warningText" />
+        ) : null}
+        {value.questions.length > 0 ? (
+          <BulletList title="Questions" items={value.questions} color="tank.primaryText" />
+        ) : null}
+        {value.approverIds.length > 0 ? (
+          <Typography variant="caption" color="text.secondary">
+            Approvers: {names(value.approverIds, ctx)}
+          </Typography>
+        ) : null}
+      </Box>
     </Card>
   );
 }

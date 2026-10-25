@@ -137,3 +137,19 @@ describe("interactions", () => {
     expect(empty.toJSON()).toBeNull();
   });
 });
+
+// Robby, 2026-10-25: the same glance and tap-to-toggle on the phone.
+describe("plan card at a glance (native)", () => {
+  it("shows a to-do list with emojis, and toggles to the whole plan and back on a press", () => {
+    const r = render(<BlocksViewNative blocks={load("plan")} />);
+    const all = () => textOf(r.root);
+    expect(textOf(byTestId(r.root, "plan-glance"))).toContain("✅Add limiter middleware");
+    expect(all()).toContain("🔄 1/4");
+    expect(all()).not.toContain("token-bucket limiter");
+    press(byTestId(r.root, "plan-glance"));
+    expect(all()).toContain("token-bucket limiter");
+    expect(all()).toContain("Should bots get a separate, higher budget?");
+    press(byTestId(r.root, "plan-detail"));
+    expect(all()).not.toContain("token-bucket limiter");
+  });
+});

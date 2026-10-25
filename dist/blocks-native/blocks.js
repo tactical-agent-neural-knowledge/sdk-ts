@@ -1,6 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Alert, Image, Linking, StyleSheet, View } from "react-native";
+import { useState } from "react";
+import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native";
 import { Button, Chip, Divider, ProgressBar, Text, useTheme } from "react-native-paper";
+import { planGlance, stepEmoji } from "../blocks/plan.js";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { shades } from "../design/tokens.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
@@ -142,13 +144,24 @@ function stepColor(theme, status) {
     }
 }
 export function PlanCardBlock({ value, ctx }) {
+    // At a glance by default: an emoji and a line per step. Tapping the text shows the whole
+    // plan and tapping it again goes back; no button (Robby, 2026-10-25). A plan with no steps
+    // has nothing to glance at and is shown whole.
+    const [detail, setDetail] = useState(false);
+    if (value.steps.length > 0 && !detail) {
+        const g = planGlance(value.steps);
+        return (_jsx(Card, { accent: "agent", label: `${g.emoji} ${g.done}/${g.total}`, children: _jsx(Pressable, { onPress: () => setDetail(true), accessibilityRole: "button", accessibilityLabel: "Show the whole plan", accessibilityState: { expanded: false }, testID: "plan-glance", style: styles.stack, children: value.steps.map((s, i) => (_jsxs(View, { style: styles.step, testID: `step-${(STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label}`, children: [_jsx(Text, { style: { width: 22 }, children: stepEmoji(s.status) }), _jsx(Text, { variant: "bodyMedium", style: styles.grow, children: s.title })] }, s.id || i))) }) }));
+    }
+    return (_jsx(PlanCardDetail, { value: value, ctx: ctx, onToggle: value.steps.length > 0 ? () => setDetail(false) : undefined }));
+}
+function PlanCardDetail({ value, ctx, onToggle, }) {
     const theme = useTheme();
     const codeFont = ctx.codeFontFamily ?? DEFAULT_CODE_FONT;
     const done = value.steps.filter((s) => s.status === StepStatus.DONE).length;
-    return (_jsxs(Card, { accent: "agent", label: `Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`, children: [_jsx(Text, { variant: "bodyLarge", children: value.summary }), value.steps.length > 0 ? (_jsxs(View, { style: styles.stack, children: [_jsx(ProgressBar, { progress: done / value.steps.length, color: theme.colors.secondary, style: styles.progress, accessibilityLabel: `${done} of ${value.steps.length} steps done` }), value.steps.map((s) => {
-                        const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
-                        return (_jsxs(View, { style: styles.step, testID: `step-${g.label}`, children: [_jsx(Text, { style: { color: stepColor(theme, s.status), fontFamily: codeFont, width: 16 }, children: g.glyph }), _jsxs(View, { style: styles.grow, children: [_jsx(Text, { variant: "bodyMedium", children: s.title }), s.files.length > 0 ? (_jsx(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant, fontFamily: codeFont }, children: s.files.join("  ") })) : null] })] }, s.id));
-                    })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: theme.colors.tertiary })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: theme.colors.primary })) : null, value.approverIds.length > 0 ? (_jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }));
+    return (_jsx(Card, { accent: "agent", label: `Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`, children: _jsxs(Pressable, { onPress: onToggle, disabled: !onToggle, accessibilityRole: onToggle ? "button" : undefined, accessibilityState: onToggle ? { expanded: true } : undefined, testID: "plan-detail", style: styles.stack, children: [_jsx(Text, { variant: "bodyLarge", children: value.summary }), value.steps.length > 0 ? (_jsxs(View, { style: styles.stack, children: [_jsx(ProgressBar, { progress: done / value.steps.length, color: theme.colors.secondary, style: styles.progress, accessibilityLabel: `${done} of ${value.steps.length} steps done` }), value.steps.map((s) => {
+                            const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
+                            return (_jsxs(View, { style: styles.step, testID: `step-${g.label}`, children: [_jsx(Text, { style: { color: stepColor(theme, s.status), fontFamily: codeFont, width: 16 }, children: g.glyph }), _jsxs(View, { style: styles.grow, children: [_jsx(Text, { variant: "bodyMedium", children: s.title }), s.files.length > 0 ? (_jsx(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant, fontFamily: codeFont }, children: s.files.join("  ") })) : null] })] }, s.id));
+                        })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: theme.colors.tertiary })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: theme.colors.primary })) : null, value.approverIds.length > 0 ? (_jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }) }));
 }
 function BulletList({ title, items, color }) {
     return (_jsxs(View, { children: [_jsx(Text, { variant: "labelLarge", style: { color }, children: title }), items.map((r) => (_jsxs(Text, { variant: "bodyMedium", children: ["\u2022 ", r] }, r)))] }));

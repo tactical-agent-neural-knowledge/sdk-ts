@@ -115,3 +115,31 @@ describe("interactions", () => {
     expect(container.innerHTML).toBe("");
   });
 });
+
+// Robby, 2026-10-25: a plan reads as emojis and a to-do list; tapping the text shows the
+// whole plan and tapping again goes back, no button.
+describe("plan card at a glance", () => {
+  it("shows a to-do list with emojis, and toggles to the whole plan and back on a tap", () => {
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView blocks={load("plan")} />
+      </ThemeProvider>,
+    );
+    const glance = screen.getByTestId("plan-glance");
+    expect(glance.textContent).toContain("✅Add limiter middleware");
+    expect(glance.textContent).toContain("🔄Wire per-route budgets");
+    expect(glance.textContent).toContain("⬜Emit tank_gateway_ratelimited_total");
+    expect(screen.getByText("🔄 1/4")).toBeTruthy();
+    expect(screen.queryByText(/token-bucket limiter/)).toBeNull();
+    expect(screen.queryByText("internal/gateway/limit.go")).toBeNull();
+    expect(screen.queryByRole("button", { name: /show more|details/i })).toBeNull();
+
+    fireEvent.click(glance);
+    expect(screen.getByText(/token-bucket limiter/)).toBeTruthy();
+    expect(screen.getByText("Should bots get a separate, higher budget?")).toBeTruthy();
+
+    fireEvent.click(screen.getByTestId("plan-detail"));
+    expect(screen.getByTestId("plan-glance")).toBeTruthy();
+    expect(screen.queryByText(/token-bucket limiter/)).toBeNull();
+  });
+});

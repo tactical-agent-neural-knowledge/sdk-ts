@@ -1614,32 +1614,24 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
         }
         variant="labelSmall"
       >
-        Plan · v2 · 9f3c1d2e
+        🔄 1/4
       </Text>
-      <Text
-        variant="bodyLarge"
-      >
-        Introduce a token-bucket limiter in the gateway, keyed by principal, with a 429 + Retry-After response and a metric per route.
-      </Text>
-      <View
+      <Pressable
+        accessibilityLabel="Show the whole plan"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "expanded": false,
+          }
+        }
+        onPress={[Function]}
         style={
           {
             "gap": 4,
           }
         }
+        testID="plan-glance"
       >
-        <ProgressBar
-          accessibilityLabel="1 of 4 steps done"
-          color="#6200EA"
-          progress={0.25}
-          style={
-            {
-              "borderRadius": 2,
-              "height": 4,
-              "marginBottom": 4,
-            }
-          }
-        />
         <View
           style={
             {
@@ -1653,15 +1645,13 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
           <Text
             style={
               {
-                "color": "#00E676",
-                "fontFamily": "JetBrainsMono_400Regular",
-                "width": 16,
+                "width": 22,
               }
             }
           >
-            ●
+            ✅
           </Text>
-          <View
+          <Text
             style={
               {
                 "flex": 1,
@@ -1669,24 +1659,10 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
                 "minWidth": 0,
               }
             }
+            variant="bodyMedium"
           >
-            <Text
-              variant="bodyMedium"
-            >
-              Add limiter middleware in internal/gateway/limit.go
-            </Text>
-            <Text
-              style={
-                {
-                  "color": "#9FB0BF",
-                  "fontFamily": "JetBrainsMono_400Regular",
-                }
-              }
-              variant="bodySmall"
-            >
-              internal/gateway/limit.go
-            </Text>
-          </View>
+            Add limiter middleware in internal/gateway/limit.go
+          </Text>
         </View>
         <View
           style={
@@ -1701,15 +1677,13 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
           <Text
             style={
               {
-                "color": "#6200EA",
-                "fontFamily": "JetBrainsMono_400Regular",
-                "width": 16,
+                "width": 22,
               }
             }
           >
-            ◐
+            🔄
           </Text>
-          <View
+          <Text
             style={
               {
                 "flex": 1,
@@ -1717,24 +1691,10 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
                 "minWidth": 0,
               }
             }
+            variant="bodyMedium"
           >
-            <Text
-              variant="bodyMedium"
-            >
-              Wire per-route budgets from config
-            </Text>
-            <Text
-              style={
-                {
-                  "color": "#9FB0BF",
-                  "fontFamily": "JetBrainsMono_400Regular",
-                }
-              }
-              variant="bodySmall"
-            >
-              internal/config/config.go  deploy/values.yaml
-            </Text>
-          </View>
+            Wire per-route budgets from config
+          </Text>
         </View>
         <View
           style={
@@ -1749,15 +1709,13 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
           <Text
             style={
               {
-                "color": "rgba(230, 237, 243, 0.38)",
-                "fontFamily": "JetBrainsMono_400Regular",
-                "width": 16,
+                "width": 22,
               }
             }
           >
-            ○
+            ⬜
           </Text>
-          <View
+          <Text
             style={
               {
                 "flex": 1,
@@ -1765,13 +1723,10 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
                 "minWidth": 0,
               }
             }
+            variant="bodyMedium"
           >
-            <Text
-              variant="bodyMedium"
-            >
-              Emit tank_gateway_ratelimited_total
-            </Text>
-          </View>
+            Emit tank_gateway_ratelimited_total
+          </Text>
         </View>
         <View
           style={
@@ -1786,15 +1741,13 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
           <Text
             style={
               {
-                "color": "rgba(230, 237, 243, 0.38)",
-                "fontFamily": "JetBrainsMono_400Regular",
-                "width": 16,
+                "width": 22,
               }
             }
           >
-            ○
+            ⬜
           </Text>
-          <View
+          <Text
             style={
               {
                 "flex": 1,
@@ -1802,79 +1755,12 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
                 "minWidth": 0,
               }
             }
+            variant="bodyMedium"
           >
-            <Text
-              variant="bodyMedium"
-            >
-              Integration test: burst then recover
-            </Text>
-            <Text
-              style={
-                {
-                  "color": "#9FB0BF",
-                  "fontFamily": "JetBrainsMono_400Regular",
-                }
-              }
-              variant="bodySmall"
-            >
-              internal/gateway/limit_test.go
-            </Text>
-          </View>
+            Integration test: burst then recover
+          </Text>
         </View>
-      </View>
-      <View>
-        <Text
-          style={
-            {
-              "color": "#FFC107",
-            }
-          }
-          variant="labelLarge"
-        >
-          Risks
-        </Text>
-        <Text
-          variant="bodyMedium"
-        >
-          • 
-          Shared Valkey hop adds ~1ms p99 to every message post
-        </Text>
-        <Text
-          variant="bodyMedium"
-        >
-          • 
-          Bots with legit bursts (CI notifiers) may trip the limit
-        </Text>
-      </View>
-      <View>
-        <Text
-          style={
-            {
-              "color": "#00E5FF",
-            }
-          }
-          variant="labelLarge"
-        >
-          Questions
-        </Text>
-        <Text
-          variant="bodyMedium"
-        >
-          • 
-          Should bots get a separate, higher budget?
-        </Text>
-      </View>
-      <Text
-        style={
-          {
-            "color": "#9FB0BF",
-          }
-        }
-        variant="bodySmall"
-      >
-        Approvers: 
-        u_robby
-      </Text>
+      </Pressable>
     </View>
   </View>
   <View

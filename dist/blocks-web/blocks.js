@@ -13,6 +13,7 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { planGlance, stepEmoji } from "../blocks/plan.js";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { typography } from "../design/tokens.js";
 import { RichTextView } from "./RichTextView.js";
@@ -101,11 +102,50 @@ const STEP_GLYPH = {
     [StepStatus.SKIPPED]: { glyph: "–", color: "text.disabled", label: "skipped" },
 };
 export function PlanCardBlock({ value, ctx }) {
+    // At a glance by default: an emoji and a line per step. Tapping the text shows the whole
+    // plan and tapping it again goes back; no button (Robby, 2026-10-25). A plan with no steps
+    // has nothing to glance at and is shown whole.
+    const [detail, setDetail] = useState(false);
+    if (value.steps.length > 0 && !detail) {
+        const g = planGlance(value.steps);
+        return (_jsx(Card, { accent: "agent", label: `${g.emoji} ${g.done}/${g.total}`, children: _jsx(Box, { component: "ol", role: "button", tabIndex: 0, "aria-expanded": false, "aria-label": "Show the whole plan", "data-testid": "plan-glance", onClick: () => setDetail(true), onKeyDown: (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setDetail(true);
+                    }
+                }, sx: {
+                    m: 0,
+                    p: 0,
+                    listStyle: "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 0.5,
+                    cursor: "pointer",
+                }, children: value.steps.map((s, i) => (_jsxs(Box, { component: "li", "data-step-status": (STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-hidden": true, sx: { width: "1.4em", flexShrink: 0 }, children: stepEmoji(s.status) }), _jsx(Typography, { variant: "body2", component: "span", sx: { minWidth: 0 }, children: s.title })] }, s.id || i))) }) }));
+    }
+    return (_jsx(PlanCardDetail, { value: value, ctx: ctx, onToggle: value.steps.length > 0 ? () => setDetail(false) : undefined }));
+}
+function PlanCardDetail({ value, ctx, onToggle, }) {
     const done = value.steps.filter((s) => s.status === StepStatus.DONE).length;
-    return (_jsxs(Card, { accent: "agent", label: `Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`, children: [_jsx(Typography, { variant: "body1", children: value.summary }), value.steps.length > 0 ? (_jsxs(Box, { children: [_jsx(LinearProgress, { variant: "determinate", color: "secondary", value: (done / value.steps.length) * 100, sx: { mb: 1, height: 4, borderRadius: 2 }, "aria-label": `${done} of ${value.steps.length} steps done` }), _jsx(Box, { component: "ol", sx: { m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.5 }, children: value.steps.map((s) => {
-                            const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
-                            return (_jsxs(Box, { component: "li", "data-step-status": g.label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-label": g.label, sx: { color: g.color, width: "1em", textAlign: "center", ...mono }, children: g.glyph }), _jsxs(Box, { sx: { minWidth: 0 }, children: [_jsx(Typography, { variant: "body2", component: "span", children: s.title }), s.files.length > 0 ? (_jsx(Typography, { variant: "caption", component: "div", color: "text.secondary", sx: mono, children: s.files.join("  ") })) : null] })] }, s.id));
-                        }) })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: "tank.warningText" })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: "tank.primaryText" })) : null, value.approverIds.length > 0 ? (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }));
+    // Selecting text to copy a file path must not fold the plan away.
+    const toggle = onToggle
+        ? () => {
+            if (typeof window !== "undefined" && window.getSelection?.()?.toString())
+                return;
+            onToggle();
+        }
+        : undefined;
+    return (_jsx(Card, { accent: "agent", label: `Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`, children: _jsxs(Box, { role: toggle ? "button" : undefined, tabIndex: toggle ? 0 : undefined, "aria-expanded": toggle ? true : undefined, "data-testid": "plan-detail", onClick: toggle, onKeyDown: toggle
+                ? (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        toggle();
+                    }
+                }
+                : undefined, sx: { display: "flex", flexDirection: "column", gap: 1.5, cursor: toggle ? "pointer" : undefined }, children: [_jsx(Typography, { variant: "body1", children: value.summary }), value.steps.length > 0 ? (_jsxs(Box, { children: [_jsx(LinearProgress, { variant: "determinate", color: "secondary", value: (done / value.steps.length) * 100, sx: { mb: 1, height: 4, borderRadius: 2 }, "aria-label": `${done} of ${value.steps.length} steps done` }), _jsx(Box, { component: "ol", sx: { m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.5 }, children: value.steps.map((s) => {
+                                const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
+                                return (_jsxs(Box, { component: "li", "data-step-status": g.label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-label": g.label, sx: { color: g.color, width: "1em", textAlign: "center", ...mono }, children: g.glyph }), _jsxs(Box, { sx: { minWidth: 0 }, children: [_jsx(Typography, { variant: "body2", component: "span", children: s.title }), s.files.length > 0 ? (_jsx(Typography, { variant: "caption", component: "div", color: "text.secondary", sx: mono, children: s.files.join("  ") })) : null] })] }, s.id));
+                            }) })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: "tank.warningText" })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: "tank.primaryText" })) : null, value.approverIds.length > 0 ? (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }) }));
 }
 function BulletList({ title, items, color }) {
     return (_jsxs(Box, { children: [_jsx(Typography, { variant: "subtitle2", sx: { color }, children: title }), _jsx(Box, { component: "ul", sx: { m: 0, pl: 2.5 }, children: items.map((r) => (_jsx(Typography, { component: "li", variant: "body2", children: r }, r))) })] }));

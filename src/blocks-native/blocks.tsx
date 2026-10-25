@@ -1,6 +1,7 @@
-import type { ReactNode } from "react";
-import { Alert, Image, Linking, StyleSheet, View } from "react-native";
+import { type ReactNode, useState } from "react";
+import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native";
 import { Button, Chip, Divider, type MD3Theme, ProgressBar, Text, useTheme } from "react-native-paper";
+import { planGlance, stepEmoji } from "../blocks/plan.js";
 import type {
   Actions,
   ApprovalPrompt,
@@ -281,54 +282,113 @@ function stepColor(theme: MD3Theme, status: StepStatusT): string {
 }
 
 export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockContext }) {
+  // At a glance by default: an emoji and a line per step. Tapping the text shows the whole
+  // plan and tapping it again goes back; no button (Robby, 2026-10-25). A plan with no steps
+  // has nothing to glance at and is shown whole.
+  const [detail, setDetail] = useState(false);
+  if (value.steps.length > 0 && !detail) {
+    const g = planGlance(value.steps);
+    return (
+      <Card accent="agent" label={`${g.emoji} ${g.done}/${g.total}`}>
+        <Pressable
+          onPress={() => setDetail(true)}
+          accessibilityRole="button"
+          accessibilityLabel="Show the whole plan"
+          accessibilityState={{ expanded: false }}
+          testID="plan-glance"
+          style={styles.stack}
+        >
+          {value.steps.map((s, i) => (
+            <View
+              key={s.id || i}
+              style={styles.step}
+              testID={`step-${(STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label}`}
+            >
+              <Text style={{ width: 22 }}>{stepEmoji(s.status)}</Text>
+              <Text variant="bodyMedium" style={styles.grow}>
+                {s.title}
+              </Text>
+            </View>
+          ))}
+        </Pressable>
+      </Card>
+    );
+  }
+  return (
+    <PlanCardDetail
+      value={value}
+      ctx={ctx}
+      onToggle={value.steps.length > 0 ? () => setDetail(false) : undefined}
+    />
+  );
+}
+
+function PlanCardDetail({
+  value,
+  ctx,
+  onToggle,
+}: {
+  value: PlanCard;
+  ctx: BlockContext;
+  onToggle?: () => void;
+}) {
   const theme = useTheme();
   const codeFont = ctx.codeFontFamily ?? DEFAULT_CODE_FONT;
   const done = value.steps.filter((s) => s.status === StepStatus.DONE).length;
   return (
     <Card accent="agent" label={`Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`}>
-      <Text variant="bodyLarge">{value.summary}</Text>
-      {value.steps.length > 0 ? (
-        <View style={styles.stack}>
-          <ProgressBar
-            progress={done / value.steps.length}
-            color={theme.colors.secondary}
-            style={styles.progress}
-            accessibilityLabel={`${done} of ${value.steps.length} steps done`}
-          />
-          {value.steps.map((s) => {
-            const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
-            return (
-              <View key={s.id} style={styles.step} testID={`step-${g.label}`}>
-                <Text style={{ color: stepColor(theme, s.status), fontFamily: codeFont, width: 16 }}>
-                  {g.glyph}
-                </Text>
-                <View style={styles.grow}>
-                  <Text variant="bodyMedium">{s.title}</Text>
-                  {s.files.length > 0 ? (
-                    <Text
-                      variant="bodySmall"
-                      style={{ color: theme.colors.onSurfaceVariant, fontFamily: codeFont }}
-                    >
-                      {s.files.join("  ")}
-                    </Text>
-                  ) : null}
+      <Pressable
+        onPress={onToggle}
+        disabled={!onToggle}
+        accessibilityRole={onToggle ? "button" : undefined}
+        accessibilityState={onToggle ? { expanded: true } : undefined}
+        testID="plan-detail"
+        style={styles.stack}
+      >
+        <Text variant="bodyLarge">{value.summary}</Text>
+        {value.steps.length > 0 ? (
+          <View style={styles.stack}>
+            <ProgressBar
+              progress={done / value.steps.length}
+              color={theme.colors.secondary}
+              style={styles.progress}
+              accessibilityLabel={`${done} of ${value.steps.length} steps done`}
+            />
+            {value.steps.map((s) => {
+              const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
+              return (
+                <View key={s.id} style={styles.step} testID={`step-${g.label}`}>
+                  <Text style={{ color: stepColor(theme, s.status), fontFamily: codeFont, width: 16 }}>
+                    {g.glyph}
+                  </Text>
+                  <View style={styles.grow}>
+                    <Text variant="bodyMedium">{s.title}</Text>
+                    {s.files.length > 0 ? (
+                      <Text
+                        variant="bodySmall"
+                        style={{ color: theme.colors.onSurfaceVariant, fontFamily: codeFont }}
+                      >
+                        {s.files.join("  ")}
+                      </Text>
+                    ) : null}
+                  </View>
                 </View>
-              </View>
-            );
-          })}
-        </View>
-      ) : null}
-      {value.risks.length > 0 ? (
-        <BulletList title="Risks" items={value.risks} color={theme.colors.tertiary} />
-      ) : null}
-      {value.questions.length > 0 ? (
-        <BulletList title="Questions" items={value.questions} color={theme.colors.primary} />
-      ) : null}
-      {value.approverIds.length > 0 ? (
-        <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-          Approvers: {names(value.approverIds, ctx)}
-        </Text>
-      ) : null}
+              );
+            })}
+          </View>
+        ) : null}
+        {value.risks.length > 0 ? (
+          <BulletList title="Risks" items={value.risks} color={theme.colors.tertiary} />
+        ) : null}
+        {value.questions.length > 0 ? (
+          <BulletList title="Questions" items={value.questions} color={theme.colors.primary} />
+        ) : null}
+        {value.approverIds.length > 0 ? (
+          <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+            Approvers: {names(value.approverIds, ctx)}
+          </Text>
+        ) : null}
+      </Pressable>
     </Card>
   );
 }
