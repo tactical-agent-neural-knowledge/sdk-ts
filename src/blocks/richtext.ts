@@ -123,13 +123,13 @@ export function elementToPlain(e: RichTextElement): string {
 export type { ElementInit };
 
 /**
- * The word a Tread-wide mention is written as. Robby, 2026-10-25: @people is every person in
- * the Tread, @tread is everyone in it (the people, and the crew agents allowed there, who
- * answer). Older words still parse: @channel is @people, @everyone is @tread, @here is the
- * people who are around.
+ * The word a Tread-wide mention is written as. Robby, 2026-10-26: @everyone is every person in
+ * the Tread, @tread is all the people and the agents in it (the crew allowed there answers),
+ * and @crew, which is not a broadcast, is the agents alone. Older words still parse: @people
+ * and @channel are @everyone, @here is the people who are around.
  */
-export function broadcastWord(range: number): "here" | "people" | "tread" {
-  return range === 1 ? "here" : range === 2 ? "people" : "tread";
+export function broadcastWord(range: number): "here" | "everyone" | "tread" {
+  return range === 1 ? "here" : range === 2 ? "everyone" : "tread";
 }
 
 /** The range a typed word mentions (tank.richtext.v1.Broadcast), or 0 when it is not one. */
@@ -137,11 +137,11 @@ export function broadcastRange(word: string): 0 | 1 | 2 | 3 {
   switch (word.toLowerCase()) {
     case "here":
       return 1;
+    case "everyone":
     case "people":
     case "channel":
       return 2;
     case "tread":
-    case "everyone":
       return 3;
   }
   return 0;

@@ -138,8 +138,9 @@ describe("Tread-wide mention words", () => {
   it("reads the words people type, old ones included, and writes the new ones", async () => {
     const { broadcastRange, broadcastWord } = await import("./richtext.js");
     expect(["people", "tread", "here", "channel", "everyone", "Tread", "crew"].map(broadcastRange)).toEqual([
-      2, 3, 1, 2, 3, 3, 0,
+      2, 3, 1, 2, 2, 3, 0,
     ]);
-    expect([1, 2, 3].map(broadcastWord)).toEqual(["here", "people", "tread"]);
+    // Robby, 2026-10-26: @everyone is all the people; @tread is the people and the agents.
+    expect([1, 2, 3].map(broadcastWord)).toEqual(["here", "everyone", "tread"]);
   });
 });

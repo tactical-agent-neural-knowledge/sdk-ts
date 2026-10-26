@@ -65,7 +65,7 @@ describe("RichTextView emoji", () => {
   });
 });
 
-// Robby, 2026-10-25: @people is every person in the Tread, @tread is everyone in it.
+// Robby, 2026-10-26: @everyone is every person in the Tread, @tread is the people and the agents.
 describe("RichTextView Tread-wide mentions", () => {
   it("writes each range as the word people type", () => {
     const words = [1, 2, 3].map((range) => {
@@ -101,6 +101,6 @@ describe("RichTextView Tread-wide mentions", () => {
       unmount();
       return text;
     });
-    expect(words).toEqual(["@here", "@people", "@tread"]);
+    expect(words).toEqual(["@here", "@everyone", "@tread"]);
   });
 });
