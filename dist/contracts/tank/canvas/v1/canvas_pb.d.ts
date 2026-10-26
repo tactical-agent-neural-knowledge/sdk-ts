@@ -620,6 +620,17 @@ export type UpdateCanvasRequest = Message<"tank.canvas.v1.UpdateCanvasRequest"> 
      * @generated from field: int32 base_version = 9;
      */
     baseVersion: number;
+    /**
+     * Attach the page to a Tread (or, empty, make it workspace-wide) when set_channel is
+     * true: the Tread then offers it beside its composer. The caller must be in that Tread.
+     *
+     * @generated from field: string channel_id = 10;
+     */
+    channelId: string;
+    /**
+     * @generated from field: bool set_channel = 11;
+     */
+    setChannel: boolean;
 };
 /**
  * Describes the message tank.canvas.v1.UpdateCanvasRequest.
