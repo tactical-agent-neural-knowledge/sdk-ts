@@ -827,6 +827,13 @@ export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
      * @generated from field: tank.workspace.v1.SoundChoice sounds = 12;
      */
     sounds?: SoundChoice;
+    /**
+     * "Use my location": the profile's time zone follows the device's, kept in step by the
+     * client each time it opens. TANK reads the device's time-zone setting, never its position.
+     *
+     * @generated from field: bool timezone_from_device = 13;
+     */
+    timezoneFromDevice: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.Preferences.
