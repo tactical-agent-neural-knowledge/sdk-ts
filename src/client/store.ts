@@ -1252,6 +1252,7 @@ function shallowEqualArrays<T>(a: readonly T[], b: readonly T[]): boolean {
 export class TankStore {
   private state: TankState;
   private listeners = new Set<Listener>();
+  private actionListeners = new Set<(action: Action) => void>();
   private memo = new Map<string, { deps: unknown[]; value: unknown }>();
 
   constructor(state: TankState = initialState()) {
@@ -1267,11 +1268,20 @@ export class TankStore {
     };
   };
 
+  /** Called with every action the store applied, after its listeners. */
+  onAction = (listener: (action: Action) => void): (() => void) => {
+    this.actionListeners.add(listener);
+    return () => {
+      this.actionListeners.delete(listener);
+    };
+  };
+
   dispatch(action: Action): void {
     const next = reduce(this.state, action);
     if (next === this.state) return;
     this.state = next;
     for (const l of Array.from(this.listeners)) l();
+    for (const l of Array.from(this.actionListeners)) l(action);
   }
 
   applyEnvelope(env: Envelope, now = Date.now()): void {

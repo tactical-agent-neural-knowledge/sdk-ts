@@ -183,6 +183,10 @@ export declare class TankClient {
     private readonly recentChannels;
     /** Treads being fetched because an event named one the store does not have. */
     private readonly fetchingChannels;
+    /** Member ids already asked for, per workspace, so an id that is no member is asked once. */
+    private readonly askedMembers;
+    private readonly memberQueue;
+    private memberTimer;
     private started;
     private hydrated;
     private typingSweep;
@@ -384,6 +388,14 @@ export declare class TankClient {
     private flushOne;
     private persistOutboxEntry;
     private wireRealtime;
+    /**
+     * Loads the members a message names that the store has never loaded: its author and the
+     * people it mentions. Bootstrap loads 200 members, and a member added since (a crew agent
+     * made a minute ago, 2026-10-25) was shown by number, "@2114522309032153088". Asked in one
+     * batch per workspace, each id once.
+     */
+    private namePeopleIn;
+    private loadQueuedMembers;
     /** Fetches a Tread the store does not have yet, once at a time. */
     private ensureChannel;
     private refreshChannel;

@@ -381,6 +381,14 @@ export type ListMembersRequest = Message<"tank.workspace.v1.ListMembersRequest">
      * @generated from field: string query = 4;
      */
     query: string;
+    /**
+     * These members only, whatever the page: a client meets an id it has never loaded (a
+     * crew agent made a minute ago, a member past the first 200) and asks for that one.
+     * Ids that are not active members of the workspace are left out. At most 100.
+     *
+     * @generated from field: repeated string user_ids = 5;
+     */
+    userIds: string[];
 };
 /**
  * Describes the message tank.workspace.v1.ListMembersRequest.

@@ -343,10 +343,13 @@ export interface ThreadView {
 export declare class TankStore {
     private state;
     private listeners;
+    private actionListeners;
     private memo;
     constructor(state?: TankState);
     getState: () => TankState;
     subscribe: (listener: Listener) => (() => void);
+    /** Called with every action the store applied, after its listeners. */
+    onAction: (listener: (action: Action) => void) => (() => void);
     dispatch(action: Action): void;
     applyEnvelope(env: Envelope, now?: number): void;
     /** Cache keyed by name+args; recomputes only when `deps` change; keeps the old array when contents are identical. */

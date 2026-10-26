@@ -87,6 +87,10 @@ export class TankClient {
     recentChannels = [];
     /** Treads being fetched because an event named one the store does not have. */
     fetchingChannels = new Set();
+    /** Member ids already asked for, per workspace, so an id that is no member is asked once. */
+    askedMembers = new Set();
+    memberQueue = new Map();
+    memberTimer;
     started = false;
     hydrated;
     typingSweep;
@@ -103,6 +107,7 @@ export class TankClient {
         this.randomBytes = opts.randomBytes ?? cryptoRandomBytes;
         this.storage = opts.storage ?? new MemoryStorage();
         this.store = new TankStore();
+        this.store.onAction((a) => this.namePeopleIn(a));
         this.transport =
             opts.transport ??
                 createTankTransport({
@@ -1092,6 +1097,67 @@ export class TankClient {
         rt.on("agent_status", (s) => this.store.dispatch({ type: "agentStatus", status: s, now: this.now() }));
         rt.on("resync", () => void this.resync());
     }
+    /**
+     * Loads the members a message names that the store has never loaded: its author and the
+     * people it mentions. Bootstrap loads 200 members, and a member added since (a crew agent
+     * made a minute ago, 2026-10-25) was shown by number, "@2114522309032153088". Asked in one
+     * batch per workspace, each id once.
+     */
+    namePeopleIn(a) {
+        let msgs;
+        switch (a.type) {
+            case "messages/upsert":
+            case "messages/resetChannel":
+                msgs = a.messages;
+                break;
+            case "messages/created":
+            case "messages/updated":
+                msgs = [a.message];
+                break;
+            default:
+                return;
+        }
+        const st = this.store.getState();
+        for (const m of msgs) {
+            const ws = st.channels[m.channelId]?.workspaceId;
+            if (!ws)
+                continue;
+            const known = st.members[ws] ?? {};
+            for (const id of [m.authorId, ...m.mentionIds, ...userIdsIn(m.richText)]) {
+                if (!id || id === "0" || known[id] || this.askedMembers.has(`${ws}:${id}`))
+                    continue;
+                this.askedMembers.add(`${ws}:${id}`);
+                const q = this.memberQueue.get(ws) ?? new Set();
+                this.memberQueue.set(ws, q);
+                q.add(id);
+            }
+        }
+        if (this.memberQueue.size && !this.memberTimer)
+            this.memberTimer = setTimeout(() => void this.loadQueuedMembers(), 50);
+    }
+    async loadQueuedMembers() {
+        this.memberTimer = undefined;
+        const queued = Array.from(this.memberQueue.entries());
+        this.memberQueue.clear();
+        await Promise.allSettled(queued.flatMap(([workspaceId, set]) => {
+            const all = Array.from(set);
+            const batches = [];
+            for (let i = 0; i < all.length; i += 100)
+                batches.push(all.slice(i, i + 100));
+            return batches.map(async (userIds) => {
+                try {
+                    const res = await this.workspaces.listMembers({ workspaceId, userIds });
+                    if (res.members.length)
+                        this.store.dispatch({ type: "members/upsert", workspaceId, members: res.members });
+                }
+                catch {
+                    // transient: let the next message naming them ask again
+                    for (const id of userIds)
+                        this.askedMembers.delete(`${workspaceId}:${id}`);
+                }
+            });
+        }));
+    }
     /** Fetches a Tread the store does not have yet, once at a time. */
     ensureChannel(channelId) {
         if (!channelId || this.store.getState().channels[channelId] || this.fetchingChannels.has(channelId))
@@ -1310,4 +1376,21 @@ export function createTankClient(opts) {
 export function channelOfSubject(subject) {
     const parts = subject.split(".");
     return (parts.length === 4 && parts[2] === "ch" && parts[3]) || "";
+}
+/** Every user id a rich text mentions, at any depth (sections, lists, quotes). */
+function userIdsIn(node, out = []) {
+    if (Array.isArray(node)) {
+        for (const n of node)
+            userIdsIn(n, out);
+    }
+    else if (node && typeof node === "object") {
+        const o = node;
+        if (o.case === "user" && typeof o.value?.userId === "string")
+            out.push(o.value.userId);
+        else
+            for (const v of Object.values(node))
+                if (v && typeof v === "object")
+                    userIdsIn(v, out);
+    }
+    return out;
 }

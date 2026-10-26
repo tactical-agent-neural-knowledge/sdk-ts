@@ -69,7 +69,7 @@ export function ElementView({
           data-id={k.value.userId}
           sx={{ color: "primary.main", fontWeight: 600 }}
         >
-          @{resolveUser?.(k.value.userId) ?? k.value.userId}
+          @{resolveUser?.(k.value.userId) ?? "…"}
         </Box>
       );
     case "channel":

@@ -957,6 +957,7 @@ function shallowEqualArrays(a, b) {
 export class TankStore {
     state;
     listeners = new Set();
+    actionListeners = new Set();
     memo = new Map();
     constructor(state = initialState()) {
         this.state = state;
@@ -968,6 +969,13 @@ export class TankStore {
             this.listeners.delete(listener);
         };
     };
+    /** Called with every action the store applied, after its listeners. */
+    onAction = (listener) => {
+        this.actionListeners.add(listener);
+        return () => {
+            this.actionListeners.delete(listener);
+        };
+    };
     dispatch(action) {
         const next = reduce(this.state, action);
         if (next === this.state)
@@ -975,6 +983,8 @@ export class TankStore {
         this.state = next;
         for (const l of Array.from(this.listeners))
             l();
+        for (const l of Array.from(this.actionListeners))
+            l(action);
     }
     applyEnvelope(env, now = Date.now()) {
         for (const a of envelopeToActions(env, now))

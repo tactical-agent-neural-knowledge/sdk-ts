@@ -60,7 +60,7 @@ export function ElementViewNative({ element, ...p }: { element: RichTextElement 
           style={{ color: theme.colors.primary, fontWeight: "600" }}
           testID={`mention-user-${k.value.userId}`}
         >
-          @{p.resolveUser?.(k.value.userId) ?? k.value.userId}
+          @{p.resolveUser?.(k.value.userId) ?? "…"}
         </Text>
       );
     case "channel":

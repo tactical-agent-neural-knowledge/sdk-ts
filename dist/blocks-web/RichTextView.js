@@ -33,7 +33,7 @@ export function ElementView({ element, resolveUser, resolveChannel, renderEmoji,
         case "link":
             return (_jsx(Link, { href: k.value.url, target: "_blank", rel: "noopener noreferrer", color: "primary", children: styled(k.value.text || k.value.url, k.value.style) }));
         case "user":
-            return (_jsxs(Box, { component: "span", "data-mention": "user", "data-id": k.value.userId, sx: { color: "primary.main", fontWeight: 600 }, children: ["@", resolveUser?.(k.value.userId) ?? k.value.userId] }));
+            return (_jsxs(Box, { component: "span", "data-mention": "user", "data-id": k.value.userId, sx: { color: "primary.main", fontWeight: 600 }, children: ["@", resolveUser?.(k.value.userId) ?? "…"] }));
         case "channel":
             return (_jsxs(Box, { component: "span", "data-mention": "channel", "data-id": k.value.channelId, sx: { color: "primary.main", fontWeight: 600 }, children: ["#", resolveChannel?.(k.value.channelId) ?? k.value.channelId] }));
         case "broadcast":

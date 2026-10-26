@@ -57,7 +57,7 @@ import { Backoff } from "./backoff.js";
 import { Emitter } from "./emitter.js";
 import { RealtimeClient, type RealtimeOptions, type WebSocketCtor } from "./realtime.js";
 import { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";
-import { type NotificationMode, TankStore, unpackEnvelope } from "./store.js";
+import { type Action, type NotificationMode, TankStore, unpackEnvelope } from "./store.js";
 import { createTankTransport, type TankAuth } from "./transport.js";
 import {
   inputMime,
@@ -288,6 +288,10 @@ export class TankClient {
   private readonly recentChannels: string[] = [];
   /** Treads being fetched because an event named one the store does not have. */
   private readonly fetchingChannels = new Set<string>();
+  /** Member ids already asked for, per workspace, so an id that is no member is asked once. */
+  private readonly askedMembers = new Set<string>();
+  private readonly memberQueue = new Map<string, Set<string>>();
+  private memberTimer: ReturnType<typeof setTimeout> | undefined;
   private started = false;
   private hydrated: Promise<void> | undefined;
   private typingSweep: ReturnType<typeof setInterval> | undefined;
@@ -305,6 +309,7 @@ export class TankClient {
     this.randomBytes = opts.randomBytes ?? cryptoRandomBytes;
     this.storage = opts.storage ?? new MemoryStorage();
     this.store = new TankStore();
+    this.store.onAction((a) => this.namePeopleIn(a));
     this.transport =
       opts.transport ??
       createTankTransport({
@@ -1314,6 +1319,66 @@ export class TankClient {
     rt.on("resync", () => void this.resync());
   }
 
+  /**
+   * Loads the members a message names that the store has never loaded: its author and the
+   * people it mentions. Bootstrap loads 200 members, and a member added since (a crew agent
+   * made a minute ago, 2026-10-25) was shown by number, "@2114522309032153088". Asked in one
+   * batch per workspace, each id once.
+   */
+  private namePeopleIn(a: Action): void {
+    let msgs: Message[];
+    switch (a.type) {
+      case "messages/upsert":
+      case "messages/resetChannel":
+        msgs = a.messages;
+        break;
+      case "messages/created":
+      case "messages/updated":
+        msgs = [a.message];
+        break;
+      default:
+        return;
+    }
+    const st = this.store.getState();
+    for (const m of msgs) {
+      const ws = st.channels[m.channelId]?.workspaceId;
+      if (!ws) continue;
+      const known = st.members[ws] ?? {};
+      for (const id of [m.authorId, ...m.mentionIds, ...userIdsIn(m.richText)]) {
+        if (!id || id === "0" || known[id] || this.askedMembers.has(`${ws}:${id}`)) continue;
+        this.askedMembers.add(`${ws}:${id}`);
+        const q = this.memberQueue.get(ws) ?? new Set<string>();
+        this.memberQueue.set(ws, q);
+        q.add(id);
+      }
+    }
+    if (this.memberQueue.size && !this.memberTimer)
+      this.memberTimer = setTimeout(() => void this.loadQueuedMembers(), 50);
+  }
+
+  private async loadQueuedMembers(): Promise<void> {
+    this.memberTimer = undefined;
+    const queued = Array.from(this.memberQueue.entries());
+    this.memberQueue.clear();
+    await Promise.allSettled(
+      queued.flatMap(([workspaceId, set]) => {
+        const all = Array.from(set);
+        const batches: string[][] = [];
+        for (let i = 0; i < all.length; i += 100) batches.push(all.slice(i, i + 100));
+        return batches.map(async (userIds) => {
+          try {
+            const res = await this.workspaces.listMembers({ workspaceId, userIds });
+            if (res.members.length)
+              this.store.dispatch({ type: "members/upsert", workspaceId, members: res.members });
+          } catch {
+            // transient: let the next message naming them ask again
+            for (const id of userIds) this.askedMembers.delete(`${workspaceId}:${id}`);
+          }
+        });
+      }),
+    );
+  }
+
   /** Fetches a Tread the store does not have yet, once at a time. */
   private ensureChannel(channelId: string): void {
     if (!channelId || this.store.getState().channels[channelId] || this.fetchingChannels.has(channelId))
@@ -1540,4 +1605,16 @@ export function createTankClient(opts: TankClientOptions): TankClient {
 export function channelOfSubject(subject: string): string {
   const parts = subject.split(".");
   return (parts.length === 4 && parts[2] === "ch" && parts[3]) || "";
+}
+
+/** Every user id a rich text mentions, at any depth (sections, lists, quotes). */
+function userIdsIn(node: unknown, out: string[] = []): string[] {
+  if (Array.isArray(node)) {
+    for (const n of node) userIdsIn(n, out);
+  } else if (node && typeof node === "object") {
+    const o = node as { case?: unknown; value?: { userId?: unknown } };
+    if (o.case === "user" && typeof o.value?.userId === "string") out.push(o.value.userId);
+    else for (const v of Object.values(node)) if (v && typeof v === "object") userIdsIn(v, out);
+  }
+  return out;
 }

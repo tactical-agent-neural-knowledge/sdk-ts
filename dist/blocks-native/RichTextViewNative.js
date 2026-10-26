@@ -32,7 +32,7 @@ export function ElementViewNative({ element, ...p }) {
             return (_jsx(Text, { style: { color: theme.colors.primary, textDecorationLine: "underline" }, onPress: () => open(url), accessibilityRole: "link", children: styledSpan(k.value.text || url, k.value.style, codeFont, theme.colors.surfaceVariant) }));
         }
         case "user":
-            return (_jsxs(Text, { style: { color: theme.colors.primary, fontWeight: "600" }, testID: `mention-user-${k.value.userId}`, children: ["@", p.resolveUser?.(k.value.userId) ?? k.value.userId] }));
+            return (_jsxs(Text, { style: { color: theme.colors.primary, fontWeight: "600" }, testID: `mention-user-${k.value.userId}`, children: ["@", p.resolveUser?.(k.value.userId) ?? "…"] }));
         case "channel":
             return (_jsxs(Text, { style: { color: theme.colors.primary, fontWeight: "600" }, testID: `mention-channel-${k.value.channelId}`, children: ["#", p.resolveChannel?.(k.value.channelId) ?? k.value.channelId] }));
         case "broadcast":
