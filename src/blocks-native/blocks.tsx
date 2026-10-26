@@ -1,7 +1,8 @@
 import { type ReactNode, useState } from "react";
 import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native";
 import { Button, Chip, Divider, type MD3Theme, ProgressBar, Text, useTheme } from "react-native-paper";
-import { planGlance, stepEmoji } from "../blocks/plan.js";
+import { MARKS, planMark, stepMark } from "../blocks/marks.js";
+import { planGlance } from "../blocks/plan.js";
 import type {
   Actions,
   ApprovalPrompt,
@@ -21,6 +22,7 @@ import type {
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { shades } from "../design/tokens.js";
 import { type BlockContext, DEFAULT_CODE_FONT } from "./context.js";
+import { Mark } from "./Mark.js";
 import { RichTextViewNative } from "./RichTextViewNative.js";
 
 export type Accent = "agent" | "ai" | "alert" | "none";
@@ -120,7 +122,18 @@ function LinkText({ url, children, ctx }: { url: string; children: ReactNode; ct
 }
 
 /** Accent stripe card: purple = agent execution, cyan = AI/context, amber = needs a human. */
-export function Card({ accent, children, label }: { accent: Accent; label?: string; children: ReactNode }) {
+export function Card({
+  accent,
+  children,
+  label,
+  icon,
+}: {
+  accent: Accent;
+  label?: string;
+  /** Drawn before the label: a TANK mark, never an emoji. */
+  icon?: ReactNode;
+  children: ReactNode;
+}) {
   const theme = useTheme();
   const color = accentColor(theme, accent);
   return (
@@ -137,15 +150,18 @@ export function Card({ accent, children, label }: { accent: Accent; label?: stri
       ]}
     >
       {label ? (
-        <Text
-          variant="labelSmall"
-          style={{
-            color: accent === "none" ? theme.colors.onSurfaceVariant : color,
-            textTransform: "uppercase",
-          }}
-        >
-          {label}
-        </Text>
+        <View style={styles.labelRow}>
+          {icon}
+          <Text
+            variant="labelSmall"
+            style={{
+              color: accent === "none" ? theme.colors.onSurfaceVariant : color,
+              textTransform: "uppercase",
+            }}
+          >
+            {label}
+          </Text>
+        </View>
       ) : null}
       {children}
     </View>
@@ -289,7 +305,11 @@ export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockConte
   if (value.steps.length > 0 && !detail) {
     const g = planGlance(value.steps);
     return (
-      <Card accent="agent" label={`${g.emoji} ${g.done}/${g.total}`}>
+      <Card
+        accent="agent"
+        label={`${g.done}/${g.total}`}
+        icon={<Mark kind={planMark(value.steps)} size={16} />}
+      >
         <Pressable
           onPress={() => setDetail(true)}
           accessibilityRole="button"
@@ -304,7 +324,9 @@ export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockConte
               style={styles.step}
               testID={`step-${(STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label}`}
             >
-              <Text style={{ width: 22 }}>{stepEmoji(s.status)}</Text>
+              <View style={styles.mark}>
+                <Mark kind={stepMark(s.status)} title={MARKS[stepMark(s.status)].label} />
+              </View>
               <Text variant="bodyMedium" style={styles.grow}>
                 {s.title}
               </Text>
@@ -712,6 +734,8 @@ const styles = StyleSheet.create({
   row: { flexDirection: "row", alignItems: "center", gap: 8 },
   wrap: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 8 },
   stack: { gap: 4 },
+  labelRow: { flexDirection: "row", alignItems: "center", gap: 6 },
+  mark: { width: 22, paddingTop: 2 },
   grow: { flex: 1, minWidth: 0, gap: 4 },
   fields: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
   field: { minWidth: 140, flexGrow: 1 },

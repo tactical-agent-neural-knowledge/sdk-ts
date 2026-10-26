@@ -140,11 +140,18 @@ describe("interactions", () => {
 
 // Robby, 2026-10-25: the same glance and tap-to-toggle on the phone.
 describe("plan card at a glance (native)", () => {
-  it("shows a to-do list with emojis, and toggles to the whole plan and back on a press", () => {
+  it("shows a to-do list with TANK marks, and toggles to the whole plan and back on a press", () => {
     const r = render(<BlocksViewNative blocks={load("plan")} />);
     const all = () => textOf(r.root);
-    expect(textOf(byTestId(r.root, "plan-glance"))).toContain("✅Add limiter middleware");
-    expect(all()).toContain("🔄 1/4");
+    expect(textOf(byTestId(r.root, "plan-glance"))).toContain("Add limiter middleware");
+    expect(
+      r.root.findAll((n) => n.props.testID === "mark-done" && typeof n.type === "string").length,
+    ).toBeGreaterThan(0);
+    expect(
+      r.root.findAll((n) => n.props.testID === "mark-doing" && typeof n.type === "string").length,
+    ).toBeGreaterThan(0);
+    expect(all()).not.toMatch(/[\u2705\u{1F504}\u2B1C\u274C]/u);
+    expect(all()).toContain("1/4");
     expect(all()).not.toContain("token-bucket limiter");
     press(byTestId(r.root, "plan-glance"));
     expect(all()).toContain("token-bucket limiter");

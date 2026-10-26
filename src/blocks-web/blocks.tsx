@@ -12,7 +12,8 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type ReactNode, useState } from "react";
-import { planGlance, stepEmoji } from "../blocks/plan.js";
+import { MARKS, planMark, stepMark } from "../blocks/marks.js";
+import { planGlance } from "../blocks/plan.js";
 import type {
   Actions,
   ApprovalPrompt,
@@ -31,6 +32,7 @@ import type {
 } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { typography } from "../design/tokens.js";
+import { Mark } from "./Mark.js";
 import { RichTextView, type RichTextViewProps } from "./RichTextView.js";
 
 /** Posted when a user interacts with a block; pair with `TankClient.postBlockAction`. */
@@ -74,9 +76,12 @@ export function Card({
   accent,
   children,
   label,
+  icon,
 }: {
   accent: "agent" | "ai" | "alert" | "none";
   label?: string;
+  /** Drawn before the label: a TANK mark, never an emoji. */
+  icon?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -101,12 +106,15 @@ export function Card({
       }}
     >
       {label ? (
-        <Typography
-          variant="overline"
-          sx={{ color: accent === "none" ? "text.secondary" : `tank.${accent}`, lineHeight: 1.5 }}
-        >
-          {label}
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+          {icon}
+          <Typography
+            variant="overline"
+            sx={{ color: accent === "none" ? "text.secondary" : `tank.${accent}`, lineHeight: 1.5 }}
+          >
+            {label}
+          </Typography>
+        </Box>
       ) : null}
       {children}
     </Box>
@@ -280,7 +288,11 @@ export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockConte
   if (value.steps.length > 0 && !detail) {
     const g = planGlance(value.steps);
     return (
-      <Card accent="agent" label={`${g.emoji} ${g.done}/${g.total}`}>
+      <Card
+        accent="agent"
+        label={`${g.done}/${g.total}`}
+        icon={<Mark kind={planMark(value.steps)} size={16} />}
+      >
         <Box
           component="ol"
           role="button"
@@ -312,8 +324,8 @@ export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockConte
               data-step-status={(STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label}
               sx={{ display: "flex", gap: 1, alignItems: "baseline" }}
             >
-              <Box component="span" aria-hidden sx={{ width: "1.4em", flexShrink: 0 }}>
-                {stepEmoji(s.status)}
+              <Box component="span" sx={{ width: "1.4em", flexShrink: 0, alignSelf: "flex-start", pt: 0.25 }}>
+                <Mark kind={stepMark(s.status)} title={MARKS[stepMark(s.status)].label} />
               </Box>
               <Typography variant="body2" component="span" sx={{ minWidth: 0 }}>
                 {s.title}

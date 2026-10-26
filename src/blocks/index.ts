@@ -1,5 +1,15 @@
 export * from "./builders.js";
 export {
+  MARK_HEX,
+  MARKS,
+  type MarkKind,
+  type MarkSpec,
+  planItemMark,
+  planMark,
+  progressMark,
+  stepMark,
+} from "./marks.js";
+export {
   type BlockIssue,
   LIMITS,
   normalizeBlocks,

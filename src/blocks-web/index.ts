@@ -17,5 +17,6 @@ export {
   StatusCardBlock,
   ToolLogBlock,
 } from "./blocks.js";
+export { Mark } from "./Mark.js";
 export { ElementView, RichTextView, type RichTextViewProps } from "./RichTextView.js";
 export { muiThemeOptions, tankTheme } from "./theme.js";

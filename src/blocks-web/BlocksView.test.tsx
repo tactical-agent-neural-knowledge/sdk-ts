@@ -116,20 +116,26 @@ describe("interactions", () => {
   });
 });
 
-// Robby, 2026-10-25: a plan reads as emojis and a to-do list; tapping the text shows the
-// whole plan and tapping again goes back, no button.
+// Robby, 2026-10-25: a plan reads as marks and a to-do list; tapping the text shows the
+// whole plan and tapping again goes back, no button. 2026-10-26: TANK's own marks, never emoji.
 describe("plan card at a glance", () => {
-  it("shows a to-do list with emojis, and toggles to the whole plan and back on a tap", () => {
+  it("shows a to-do list with TANK marks, and toggles to the whole plan and back on a tap", () => {
     render(
       <ThemeProvider theme={tankTheme}>
         <BlocksView blocks={load("plan")} />
       </ThemeProvider>,
     );
     const glance = screen.getByTestId("plan-glance");
-    expect(glance.textContent).toContain("✅Add limiter middleware");
-    expect(glance.textContent).toContain("🔄Wire per-route budgets");
-    expect(glance.textContent).toContain("⬜Emit tank_gateway_ratelimited_total");
-    expect(screen.getByText("🔄 1/4")).toBeTruthy();
+    const marks = Array.from(glance.querySelectorAll("li")).map((li) => [
+      li.querySelector("svg")?.getAttribute("data-mark"),
+      li.textContent,
+    ]);
+    const markOf = (title: string) => marks.find(([, text]) => text?.startsWith(title))?.[0];
+    expect(markOf("Add limiter middleware")).toBe("done");
+    expect(markOf("Wire per-route budgets")).toBe("doing");
+    expect(markOf("Emit tank_gateway_ratelimited_total")).toBe("todo");
+    expect(glance.textContent).not.toMatch(/[\u2705\u{1F504}\u2B1C\u274C]/u);
+    expect(screen.getByText("1/4")).toBeTruthy();
     expect(screen.queryByText(/token-bucket limiter/)).toBeNull();
     expect(screen.queryByText("internal/gateway/limit.go")).toBeNull();
     expect(screen.queryByRole("button", { name: /show more|details/i })).toBeNull();

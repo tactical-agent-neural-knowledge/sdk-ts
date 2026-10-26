@@ -140,17 +140,27 @@ exports[`BlocksViewNative fixtures > renders approval and matches its snapshot 1
       }
       testID="card-alert"
     >
-      <Text
+      <View
         style={
           {
-            "color": "#FFC107",
-            "textTransform": "uppercase",
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
           }
         }
-        variant="labelSmall"
       >
-        deploy approval
-      </Text>
+        <Text
+          style={
+            {
+              "color": "#FFC107",
+              "textTransform": "uppercase",
+            }
+          }
+          variant="labelSmall"
+        >
+          deploy approval
+        </Text>
+      </View>
       <Text
         variant="bodyLarge"
       >
@@ -246,17 +256,27 @@ exports[`BlocksViewNative fixtures > renders ci-green and matches its snapshot 1
       }
       testID="card-agent"
     >
-      <Text
+      <View
         style={
           {
-            "color": "#6200EA",
-            "textTransform": "uppercase",
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
           }
         }
-        variant="labelSmall"
       >
-        CI green · a1b2c3d
-      </Text>
+        <Text
+          style={
+            {
+              "color": "#6200EA",
+              "textTransform": "uppercase",
+            }
+          }
+          variant="labelSmall"
+        >
+          CI green · a1b2c3d
+        </Text>
+      </View>
       <Text
         accessibilityRole="link"
         onPress={[Function]}
@@ -517,17 +537,27 @@ exports[`BlocksViewNative fixtures > renders ci-red and matches its snapshot 1`]
       }
       testID="card-alert"
     >
-      <Text
+      <View
         style={
           {
-            "color": "#FFC107",
-            "textTransform": "uppercase",
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
           }
         }
-        variant="labelSmall"
       >
-        CI red · f6e5d4c
-      </Text>
+        <Text
+          style={
+            {
+              "color": "#FFC107",
+              "textTransform": "uppercase",
+            }
+          }
+          variant="labelSmall"
+        >
+          CI red · f6e5d4c
+        </Text>
+      </View>
       <Text
         accessibilityRole="link"
         onPress={[Function]}
@@ -865,17 +895,27 @@ exports[`BlocksViewNative fixtures > renders diff and matches its snapshot 1`] =
       }
       testID="card-agent"
     >
-      <Text
+      <View
         style={
           {
-            "color": "#6200EA",
-            "textTransform": "uppercase",
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
           }
         }
-        variant="labelSmall"
       >
-        Diff · a1b2c3d
-      </Text>
+        <Text
+          style={
+            {
+              "color": "#6200EA",
+              "textTransform": "uppercase",
+            }
+          }
+          variant="labelSmall"
+        >
+          Diff · a1b2c3d
+        </Text>
+      </View>
       <View
         style={
           {
@@ -1605,17 +1645,50 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
       }
       testID="card-agent"
     >
-      <Text
+      <View
         style={
           {
-            "color": "#6200EA",
-            "textTransform": "uppercase",
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
           }
         }
-        variant="labelSmall"
       >
-        🔄 1/4
-      </Text>
+        <Svg
+          height={16}
+          opacity={1}
+          testID="mark-doing"
+          viewBox="0 0 24 24"
+          width={16}
+        >
+          <Path
+            d="M12 2.2 L20.5 7.1 V16.9 L12 21.8 L3.5 16.9 V7.1 Z"
+            fill="#6200EA"
+            stroke="#6200EA"
+            strokeLinejoin="round"
+            strokeWidth={1.6}
+          />
+          <Path
+            d="M8.2 14.2 L12 10.4 L15.8 14.2"
+            fill="none"
+            stroke="#00E5FF"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2.2}
+          />
+        </Svg>
+        <Text
+          style={
+            {
+              "color": "#6200EA",
+              "textTransform": "uppercase",
+            }
+          }
+          variant="labelSmall"
+        >
+          1/4
+        </Text>
+      </View>
       <Pressable
         accessibilityLabel="Show the whole plan"
         accessibilityRole="button"
@@ -1642,15 +1715,39 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
           }
           testID="step-done"
         >
-          <Text
+          <View
             style={
               {
+                "paddingTop": 2,
                 "width": 22,
               }
             }
           >
-            ✅
-          </Text>
+            <Svg
+              accessibilityLabel="Done"
+              height={18}
+              opacity={1}
+              testID="mark-done"
+              viewBox="0 0 24 24"
+              width={18}
+            >
+              <Path
+                d="M12 2.2 L20.5 7.1 V16.9 L12 21.8 L3.5 16.9 V7.1 Z"
+                fill="#00E5FF"
+                stroke="#00E5FF"
+                strokeLinejoin="round"
+                strokeWidth={1.6}
+              />
+              <Path
+                d="M7.6 12.3 L10.6 15.2 L16.4 9.2"
+                fill="none"
+                stroke="#0D1117"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.2}
+              />
+            </Svg>
+          </View>
           <Text
             style={
               {
@@ -1674,15 +1771,39 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
           }
           testID="step-running"
         >
-          <Text
+          <View
             style={
               {
+                "paddingTop": 2,
                 "width": 22,
               }
             }
           >
-            🔄
-          </Text>
+            <Svg
+              accessibilityLabel="Working on it"
+              height={18}
+              opacity={1}
+              testID="mark-doing"
+              viewBox="0 0 24 24"
+              width={18}
+            >
+              <Path
+                d="M12 2.2 L20.5 7.1 V16.9 L12 21.8 L3.5 16.9 V7.1 Z"
+                fill="#6200EA"
+                stroke="#6200EA"
+                strokeLinejoin="round"
+                strokeWidth={1.6}
+              />
+              <Path
+                d="M8.2 14.2 L12 10.4 L15.8 14.2"
+                fill="none"
+                stroke="#00E5FF"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.2}
+              />
+            </Svg>
+          </View>
           <Text
             style={
               {
@@ -1706,15 +1827,31 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
           }
           testID="step-pending"
         >
-          <Text
+          <View
             style={
               {
+                "paddingTop": 2,
                 "width": 22,
               }
             }
           >
-            ⬜
-          </Text>
+            <Svg
+              accessibilityLabel="To do"
+              height={18}
+              opacity={1}
+              testID="mark-todo"
+              viewBox="0 0 24 24"
+              width={18}
+            >
+              <Path
+                d="M12 2.2 L20.5 7.1 V16.9 L12 21.8 L3.5 16.9 V7.1 Z"
+                fill="none"
+                stroke="#5C6B73"
+                strokeLinejoin="round"
+                strokeWidth={1.6}
+              />
+            </Svg>
+          </View>
           <Text
             style={
               {
@@ -1738,15 +1875,31 @@ exports[`BlocksViewNative fixtures > renders plan and matches its snapshot 1`] =
           }
           testID="step-pending"
         >
-          <Text
+          <View
             style={
               {
+                "paddingTop": 2,
                 "width": 22,
               }
             }
           >
-            ⬜
-          </Text>
+            <Svg
+              accessibilityLabel="To do"
+              height={18}
+              opacity={1}
+              testID="mark-todo"
+              viewBox="0 0 24 24"
+              width={18}
+            >
+              <Path
+                d="M12 2.2 L20.5 7.1 V16.9 L12 21.8 L3.5 16.9 V7.1 Z"
+                fill="none"
+                stroke="#5C6B73"
+                strokeLinejoin="round"
+                strokeWidth={1.6}
+              />
+            </Svg>
+          </View>
           <Text
             style={
               {
@@ -1895,17 +2048,27 @@ exports[`BlocksViewNative fixtures > renders status and matches its snapshot 1`]
       }
       testID="card-agent"
     >
-      <Text
+      <View
         style={
           {
-            "color": "#6200EA",
-            "textTransform": "uppercase",
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
           }
         }
-        variant="labelSmall"
       >
-        Run · run_01J8
-      </Text>
+        <Text
+          style={
+            {
+              "color": "#6200EA",
+              "textTransform": "uppercase",
+            }
+          }
+          variant="labelSmall"
+        >
+          Run · run_01J8
+        </Text>
+      </View>
       <View
         style={
           {
@@ -2135,17 +2298,27 @@ exports[`BlocksViewNative fixtures > renders tool-log and matches its snapshot 1
       }
       testID="card-agent"
     >
-      <Text
+      <View
         style={
           {
-            "color": "#6200EA",
-            "textTransform": "uppercase",
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
           }
         }
-        variant="labelSmall"
       >
-        Agent · implementing
-      </Text>
+        <Text
+          style={
+            {
+              "color": "#6200EA",
+              "textTransform": "uppercase",
+            }
+          }
+          variant="labelSmall"
+        >
+          Agent · implementing
+        </Text>
+      </View>
       <Text
         style={
           {

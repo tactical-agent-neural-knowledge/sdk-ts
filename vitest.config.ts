@@ -7,7 +7,11 @@ export default defineConfig({
   resolve: {
     // src/blocks-native renders against these stand-ins (host elements + the SDK's Paper theme);
     // the real packages are dev-only for types and never ship in dist/.
-    alias: { "react-native": mock("react-native"), "react-native-paper": mock("react-native-paper") },
+    alias: {
+      "react-native": mock("react-native"),
+      "react-native-paper": mock("react-native-paper"),
+      "react-native-svg": mock("react-native-svg"),
+    },
   },
   test: {
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],

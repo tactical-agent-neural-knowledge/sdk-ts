@@ -81,7 +81,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-native": ">=0.76",
-    "react-native-paper": "^5.0.0"
+    "react-native-paper": "^5.0.0",
+    "react-native-svg": ">=15.0.0"
   },
   "peerDependenciesMeta": {
     "@emotion/react": {
@@ -103,6 +104,9 @@
       "optional": true
     },
     "react-native-paper": {
+      "optional": true
+    },
+    "react-native-svg": {
       "optional": true
     }
   },
@@ -132,6 +136,7 @@
     "react-test-renderer": "19.1.0",
     "typescript": "~5.9.0",
     "vitest": "^3.2.0",
-    "ws": "^8.18.0"
+    "ws": "^8.18.0",
+    "react-native-svg": "15.12.1"
   }
 }

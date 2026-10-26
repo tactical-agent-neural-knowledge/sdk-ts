@@ -14,9 +14,11 @@ export interface BlockContext extends Pick<RichTextViewProps, "resolveUser" | "r
     formatTime?: (ms: number) => string;
 }
 /** Accent stripe for agent cards: purple = agent execution, cyan = AI/context, amber = needs a human. */
-export declare function Card({ accent, children, label, }: {
+export declare function Card({ accent, children, label, icon, }: {
     accent: "agent" | "ai" | "alert" | "none";
     label?: string;
+    /** Drawn before the label: a TANK mark, never an emoji. */
+    icon?: ReactNode;
     children: ReactNode;
 }): import("react").JSX.Element;
 export declare function HeaderBlock({ value }: {

@@ -2,10 +2,12 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native";
 import { Button, Chip, Divider, ProgressBar, Text, useTheme } from "react-native-paper";
-import { planGlance, stepEmoji } from "../blocks/plan.js";
+import { MARKS, planMark, stepMark } from "../blocks/marks.js";
+import { planGlance } from "../blocks/plan.js";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { shades } from "../design/tokens.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
+import { Mark } from "./Mark.js";
 import { RichTextViewNative } from "./RichTextViewNative.js";
 /** Accent colours from the Paper theme: purple (secondary) = agent execution, cyan (primary) = AI/context, amber (tertiary) = needs a human. */
 /** Approver ids as names where the host can name them; an id nobody can name stays an id. */
@@ -68,7 +70,7 @@ function LinkText({ url, children, ctx }) {
     return (_jsx(Text, { variant: "bodyMedium", style: { color: theme.colors.primary, textDecorationLine: "underline" }, onPress: () => open(url), accessibilityRole: "link", testID: `link-${url}`, children: children }));
 }
 /** Accent stripe card: purple = agent execution, cyan = AI/context, amber = needs a human. */
-export function Card({ accent, children, label }) {
+export function Card({ accent, children, label, icon, }) {
     const theme = useTheme();
     const color = accentColor(theme, accent);
     return (_jsxs(View, { testID: `card-${accent}`, style: [
@@ -79,10 +81,10 @@ export function Card({ accent, children, label }) {
                 borderLeftColor: color,
                 borderRadius: theme.roundness * 2,
             },
-        ], children: [label ? (_jsx(Text, { variant: "labelSmall", style: {
-                    color: accent === "none" ? theme.colors.onSurfaceVariant : color,
-                    textTransform: "uppercase",
-                }, children: label })) : null, children] }));
+        ], children: [label ? (_jsxs(View, { style: styles.labelRow, children: [icon, _jsx(Text, { variant: "labelSmall", style: {
+                            color: accent === "none" ? theme.colors.onSurfaceVariant : color,
+                            textTransform: "uppercase",
+                        }, children: label })] })) : null, children] }));
 }
 // ------------------------------------------------------------------ simple blocks
 export function HeaderBlock({ value }) {
@@ -150,7 +152,7 @@ export function PlanCardBlock({ value, ctx }) {
     const [detail, setDetail] = useState(false);
     if (value.steps.length > 0 && !detail) {
         const g = planGlance(value.steps);
-        return (_jsx(Card, { accent: "agent", label: `${g.emoji} ${g.done}/${g.total}`, children: _jsx(Pressable, { onPress: () => setDetail(true), accessibilityRole: "button", accessibilityLabel: "Show the whole plan", accessibilityState: { expanded: false }, testID: "plan-glance", style: styles.stack, children: value.steps.map((s, i) => (_jsxs(View, { style: styles.step, testID: `step-${(STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label}`, children: [_jsx(Text, { style: { width: 22 }, children: stepEmoji(s.status) }), _jsx(Text, { variant: "bodyMedium", style: styles.grow, children: s.title })] }, s.id || i))) }) }));
+        return (_jsx(Card, { accent: "agent", label: `${g.done}/${g.total}`, icon: _jsx(Mark, { kind: planMark(value.steps), size: 16 }), children: _jsx(Pressable, { onPress: () => setDetail(true), accessibilityRole: "button", accessibilityLabel: "Show the whole plan", accessibilityState: { expanded: false }, testID: "plan-glance", style: styles.stack, children: value.steps.map((s, i) => (_jsxs(View, { style: styles.step, testID: `step-${(STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label}`, children: [_jsx(View, { style: styles.mark, children: _jsx(Mark, { kind: stepMark(s.status), title: MARKS[stepMark(s.status)].label }) }), _jsx(Text, { variant: "bodyMedium", style: styles.grow, children: s.title })] }, s.id || i))) }) }));
     }
     return (_jsx(PlanCardDetail, { value: value, ctx: ctx, onToggle: value.steps.length > 0 ? () => setDetail(false) : undefined }));
 }
@@ -262,6 +264,8 @@ const styles = StyleSheet.create({
     row: { flexDirection: "row", alignItems: "center", gap: 8 },
     wrap: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 8 },
     stack: { gap: 4 },
+    labelRow: { flexDirection: "row", alignItems: "center", gap: 6 },
+    mark: { width: 22, paddingTop: 2 },
     grow: { flex: 1, minWidth: 0, gap: 4 },
     fields: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
     field: { minWidth: 140, flexGrow: 1 },

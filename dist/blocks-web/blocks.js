@@ -13,9 +13,11 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import { planGlance, stepEmoji } from "../blocks/plan.js";
+import { MARKS, planMark, stepMark } from "../blocks/marks.js";
+import { planGlance } from "../blocks/plan.js";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { typography } from "../design/tokens.js";
+import { Mark } from "./Mark.js";
 import { RichTextView } from "./RichTextView.js";
 // Branch names, run ids and diagnostic codes are single unbroken tokens that
 // are wider than a phone. Without this they push the card sideways and the
@@ -34,7 +36,7 @@ function tsMs(t) {
     return t ? Number(t.seconds) * 1000 + Math.floor(t.nanos / 1e6) : undefined;
 }
 /** Accent stripe for agent cards: purple = agent execution, cyan = AI/context, amber = needs a human. */
-export function Card({ accent, children, label, }) {
+export function Card({ accent, children, label, icon, }) {
     return (_jsxs(Box, { "data-accent": accent, sx: {
             borderLeft: 3,
             borderColor: accent === "none" ? "divider" : `tank.${accent}`,
@@ -51,7 +53,7 @@ export function Card({ accent, children, label, }) {
             minWidth: 0,
             maxWidth: "100%",
             overflowWrap: "anywhere",
-        }, children: [label ? (_jsx(Typography, { variant: "overline", sx: { color: accent === "none" ? "text.secondary" : `tank.${accent}`, lineHeight: 1.5 }, children: label })) : null, children] }));
+        }, children: [label ? (_jsxs(Box, { sx: { display: "flex", alignItems: "center", gap: 0.75 }, children: [icon, _jsx(Typography, { variant: "overline", sx: { color: accent === "none" ? "text.secondary" : `tank.${accent}`, lineHeight: 1.5 }, children: label })] })) : null, children] }));
 }
 // ------------------------------------------------------------------ simple blocks
 export function HeaderBlock({ value }) {
@@ -108,7 +110,7 @@ export function PlanCardBlock({ value, ctx }) {
     const [detail, setDetail] = useState(false);
     if (value.steps.length > 0 && !detail) {
         const g = planGlance(value.steps);
-        return (_jsx(Card, { accent: "agent", label: `${g.emoji} ${g.done}/${g.total}`, children: _jsx(Box, { component: "ol", role: "button", tabIndex: 0, "aria-expanded": false, "aria-label": "Show the whole plan", "data-testid": "plan-glance", onClick: () => setDetail(true), onKeyDown: (e) => {
+        return (_jsx(Card, { accent: "agent", label: `${g.done}/${g.total}`, icon: _jsx(Mark, { kind: planMark(value.steps), size: 16 }), children: _jsx(Box, { component: "ol", role: "button", tabIndex: 0, "aria-expanded": false, "aria-label": "Show the whole plan", "data-testid": "plan-glance", onClick: () => setDetail(true), onKeyDown: (e) => {
                     if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         setDetail(true);
@@ -121,7 +123,7 @@ export function PlanCardBlock({ value, ctx }) {
                     flexDirection: "column",
                     gap: 0.5,
                     cursor: "pointer",
-                }, children: value.steps.map((s, i) => (_jsxs(Box, { component: "li", "data-step-status": (STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-hidden": true, sx: { width: "1.4em", flexShrink: 0 }, children: stepEmoji(s.status) }), _jsx(Typography, { variant: "body2", component: "span", sx: { minWidth: 0 }, children: s.title })] }, s.id || i))) }) }));
+                }, children: value.steps.map((s, i) => (_jsxs(Box, { component: "li", "data-step-status": (STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", sx: { width: "1.4em", flexShrink: 0, alignSelf: "flex-start", pt: 0.25 }, children: _jsx(Mark, { kind: stepMark(s.status), title: MARKS[stepMark(s.status)].label }) }), _jsx(Typography, { variant: "body2", component: "span", sx: { minWidth: 0 }, children: s.title })] }, s.id || i))) }) }));
     }
     return (_jsx(PlanCardDetail, { value: value, ctx: ctx, onToggle: value.steps.length > 0 ? () => setDetail(false) : undefined }));
 }

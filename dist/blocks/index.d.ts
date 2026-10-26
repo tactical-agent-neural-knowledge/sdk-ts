@@ -1,4 +1,5 @@
 export * from "./builders.js";
+export { MARK_HEX, MARKS, type MarkKind, type MarkSpec, planItemMark, planMark, progressMark, stepMark, } from "./marks.js";
 export { type BlockIssue, LIMITS, normalizeBlocks, normalizeRichText, truncate, validateBlocks, } from "./normalize.js";
 export { planGlance, planItemEmoji, planProgress, stepEmoji } from "./plan.js";
 export { broadcastRange, broadcastWord, codeBlock, elementToPlain, type RichTextInput, richText, richTextToPlain, rt, type TextStyle, } from "./richtext.js";

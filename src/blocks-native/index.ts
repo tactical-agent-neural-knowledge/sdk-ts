@@ -29,4 +29,5 @@ export {
   DEFAULT_CODE_FONT,
   useBlocksOptions,
 } from "./context.js";
+export { Mark } from "./Mark.js";
 export { ElementViewNative, RichTextViewNative, type RichTextViewNativeProps } from "./RichTextViewNative.js";
