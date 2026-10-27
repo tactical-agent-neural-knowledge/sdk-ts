@@ -1,5 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Grant, Invite, Role } from "../../access/v1/access_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/canvas/v1/canvas.proto.
@@ -361,6 +362,12 @@ export type Canvas = Message<"tank.canvas.v1.Canvas"> & {
      * @generated from field: repeated tank.canvas.v1.CanvasSummary children = 18;
      */
     children: CanvasSummary[];
+    /**
+     * What the caller may do here, so a client can open it read-only.
+     *
+     * @generated from field: tank.access.v1.Role my_role = 19;
+     */
+    myRole: Role;
 };
 /**
  * Describes the message tank.canvas.v1.Canvas.
@@ -427,6 +434,10 @@ export type CanvasSummary = Message<"tank.canvas.v1.CanvasSummary"> & {
      * @generated from field: int32 child_count = 13;
      */
     childCount: number;
+    /**
+     * @generated from field: tank.access.v1.Role my_role = 14;
+     */
+    myRole: Role;
 };
 /**
  * Describes the message tank.canvas.v1.CanvasSummary.
@@ -552,6 +563,12 @@ export type CreateCanvasRequest = Message<"tank.canvas.v1.CreateCanvasRequest"> 
      * @generated from field: string template = 8;
      */
     template: string;
+    /**
+     * People invited with it, beyond its Tread. Each must be in the workspace.
+     *
+     * @generated from field: repeated tank.access.v1.Invite invites = 9;
+     */
+    invites: Invite[];
 };
 /**
  * Describes the message tank.canvas.v1.CreateCanvasRequest.
@@ -1072,6 +1089,120 @@ export type AskResponse = Message<"tank.canvas.v1.AskResponse"> & {
  */
 export declare const AskResponseSchema: GenMessage<AskResponse>;
 /**
+ * @generated from message tank.canvas.v1.ListCanvasAccessRequest
+ */
+export type ListCanvasAccessRequest = Message<"tank.canvas.v1.ListCanvasAccessRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string canvas_id = 2;
+     */
+    canvasId: string;
+};
+/**
+ * Describes the message tank.canvas.v1.ListCanvasAccessRequest.
+ * Use `create(ListCanvasAccessRequestSchema)` to create a new message.
+ */
+export declare const ListCanvasAccessRequestSchema: GenMessage<ListCanvasAccessRequest>;
+/**
+ * @generated from message tank.canvas.v1.ListCanvasAccessResponse
+ */
+export type ListCanvasAccessResponse = Message<"tank.canvas.v1.ListCanvasAccessResponse"> & {
+    /**
+     * @generated from field: repeated tank.access.v1.Grant grants = 1;
+     */
+    grants: Grant[];
+    /**
+     * The Tread whose members have it, for the "Everyone in #tread" line; empty when none.
+     *
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.canvas.v1.ListCanvasAccessResponse.
+ * Use `create(ListCanvasAccessResponseSchema)` to create a new message.
+ */
+export declare const ListCanvasAccessResponseSchema: GenMessage<ListCanvasAccessResponse>;
+/**
+ * @generated from message tank.canvas.v1.SetCanvasAccessRequest
+ */
+export type SetCanvasAccessRequest = Message<"tank.canvas.v1.SetCanvasAccessRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string canvas_id = 2;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: string user_id = 3;
+     */
+    userId: string;
+    /**
+     * @generated from field: tank.access.v1.Role role = 4;
+     */
+    role: Role;
+};
+/**
+ * Describes the message tank.canvas.v1.SetCanvasAccessRequest.
+ * Use `create(SetCanvasAccessRequestSchema)` to create a new message.
+ */
+export declare const SetCanvasAccessRequestSchema: GenMessage<SetCanvasAccessRequest>;
+/**
+ * @generated from message tank.canvas.v1.SetCanvasAccessResponse
+ */
+export type SetCanvasAccessResponse = Message<"tank.canvas.v1.SetCanvasAccessResponse"> & {
+    /**
+     * @generated from field: repeated tank.access.v1.Grant grants = 1;
+     */
+    grants: Grant[];
+};
+/**
+ * Describes the message tank.canvas.v1.SetCanvasAccessResponse.
+ * Use `create(SetCanvasAccessResponseSchema)` to create a new message.
+ */
+export declare const SetCanvasAccessResponseSchema: GenMessage<SetCanvasAccessResponse>;
+/**
+ * @generated from message tank.canvas.v1.RemoveCanvasAccessRequest
+ */
+export type RemoveCanvasAccessRequest = Message<"tank.canvas.v1.RemoveCanvasAccessRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string canvas_id = 2;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: string user_id = 3;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.canvas.v1.RemoveCanvasAccessRequest.
+ * Use `create(RemoveCanvasAccessRequestSchema)` to create a new message.
+ */
+export declare const RemoveCanvasAccessRequestSchema: GenMessage<RemoveCanvasAccessRequest>;
+/**
+ * @generated from message tank.canvas.v1.RemoveCanvasAccessResponse
+ */
+export type RemoveCanvasAccessResponse = Message<"tank.canvas.v1.RemoveCanvasAccessResponse"> & {
+    /**
+     * @generated from field: repeated tank.access.v1.Grant grants = 1;
+     */
+    grants: Grant[];
+};
+/**
+ * Describes the message tank.canvas.v1.RemoveCanvasAccessResponse.
+ * Use `create(RemoveCanvasAccessResponseSchema)` to create a new message.
+ */
+export declare const RemoveCanvasAccessResponseSchema: GenMessage<RemoveCanvasAccessResponse>;
+/**
  * @generated from enum tank.canvas.v1.BlockKind
  */
 export declare enum BlockKind {
@@ -1227,5 +1358,35 @@ export declare const CanvasService: GenService<{
         methodKind: "unary";
         input: typeof ListDecisionsRequestSchema;
         output: typeof ListDecisionsResponseSchema;
+    };
+    /**
+     * Who has access and why. Anyone who can open it may ask.
+     *
+     * @generated from rpc tank.canvas.v1.CanvasService.ListCanvasAccess
+     */
+    listCanvasAccess: {
+        methodKind: "unary";
+        input: typeof ListCanvasAccessRequestSchema;
+        output: typeof ListCanvasAccessResponseSchema;
+    };
+    /**
+     * Invite somebody or change their role. Managers only.
+     *
+     * @generated from rpc tank.canvas.v1.CanvasService.SetCanvasAccess
+     */
+    setCanvasAccess: {
+        methodKind: "unary";
+        input: typeof SetCanvasAccessRequestSchema;
+        output: typeof SetCanvasAccessResponseSchema;
+    };
+    /**
+     * Take an invited person off. The owner, admins and Tread members cannot be removed.
+     *
+     * @generated from rpc tank.canvas.v1.CanvasService.RemoveCanvasAccess
+     */
+    removeCanvasAccess: {
+        methodKind: "unary";
+        input: typeof RemoveCanvasAccessRequestSchema;
+        output: typeof RemoveCanvasAccessResponseSchema;
     };
 }>;

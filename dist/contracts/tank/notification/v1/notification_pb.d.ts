@@ -8,7 +8,7 @@ export declare const file_tank_notification_v1_notification: GenFile;
 /**
  * A notification is written by the core's notify worker from bus events and
  * read back here. kind: mention | dm | thread_reply | reaction |
- * channel_invite | agent_needs_input.
+ * channel_invite | agent_needs_input | shared.
  *
  * @generated from message tank.notification.v1.Notification
  */
@@ -49,6 +49,20 @@ export type Notification = Message<"tank.notification.v1.Notification"> & {
      * @generated from field: google.protobuf.Timestamp created_at = 9;
      */
     createdAt?: Timestamp;
+    /**
+     * kind shared: what was shared with the person. item_kind is canvas | board.
+     *
+     * @generated from field: string item_kind = 10;
+     */
+    itemKind: string;
+    /**
+     * @generated from field: string item_id = 11;
+     */
+    itemId: string;
+    /**
+     * @generated from field: string item_title = 12;
+     */
+    itemTitle: string;
 };
 /**
  * Describes the message tank.notification.v1.Notification.

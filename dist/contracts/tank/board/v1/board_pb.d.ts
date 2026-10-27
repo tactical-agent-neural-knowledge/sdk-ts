@@ -1,5 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Grant, Invite, Role } from "../../access/v1/access_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/board/v1/board.proto.
@@ -481,6 +482,12 @@ export type Board = Message<"tank.board.v1.Board"> & {
      * @generated from field: string thread_root_id = 14;
      */
     threadRootId: string;
+    /**
+     * What the caller may do here, so a client can open it read-only.
+     *
+     * @generated from field: tank.access.v1.Role my_role = 15;
+     */
+    myRole: Role;
 };
 /**
  * Describes the message tank.board.v1.Board.
@@ -533,6 +540,10 @@ export type BoardSummary = Message<"tank.board.v1.BoardSummary"> & {
      * @generated from field: string thread_root_id = 10;
      */
     threadRootId: string;
+    /**
+     * @generated from field: tank.access.v1.Role my_role = 11;
+     */
+    myRole: Role;
 };
 /**
  * Describes the message tank.board.v1.BoardSummary.
@@ -658,6 +669,12 @@ export type CreateBoardRequest = Message<"tank.board.v1.CreateBoardRequest"> & {
      * @generated from field: string thread_root_id = 7;
      */
     threadRootId: string;
+    /**
+     * People invited with it, beyond its Tread. Each must be in the workspace.
+     *
+     * @generated from field: repeated tank.access.v1.Invite invites = 8;
+     */
+    invites: Invite[];
 };
 /**
  * Describes the message tank.board.v1.CreateBoardRequest.
@@ -2764,6 +2781,120 @@ export type ConnectAppResponse = Message<"tank.board.v1.ConnectAppResponse"> & {
  */
 export declare const ConnectAppResponseSchema: GenMessage<ConnectAppResponse>;
 /**
+ * @generated from message tank.board.v1.ListBoardAccessRequest
+ */
+export type ListBoardAccessRequest = Message<"tank.board.v1.ListBoardAccessRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+};
+/**
+ * Describes the message tank.board.v1.ListBoardAccessRequest.
+ * Use `create(ListBoardAccessRequestSchema)` to create a new message.
+ */
+export declare const ListBoardAccessRequestSchema: GenMessage<ListBoardAccessRequest>;
+/**
+ * @generated from message tank.board.v1.ListBoardAccessResponse
+ */
+export type ListBoardAccessResponse = Message<"tank.board.v1.ListBoardAccessResponse"> & {
+    /**
+     * @generated from field: repeated tank.access.v1.Grant grants = 1;
+     */
+    grants: Grant[];
+    /**
+     * The Tread whose members have it, for the "Everyone in #tread" line; empty when none.
+     *
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.board.v1.ListBoardAccessResponse.
+ * Use `create(ListBoardAccessResponseSchema)` to create a new message.
+ */
+export declare const ListBoardAccessResponseSchema: GenMessage<ListBoardAccessResponse>;
+/**
+ * @generated from message tank.board.v1.SetBoardAccessRequest
+ */
+export type SetBoardAccessRequest = Message<"tank.board.v1.SetBoardAccessRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * @generated from field: string user_id = 3;
+     */
+    userId: string;
+    /**
+     * @generated from field: tank.access.v1.Role role = 4;
+     */
+    role: Role;
+};
+/**
+ * Describes the message tank.board.v1.SetBoardAccessRequest.
+ * Use `create(SetBoardAccessRequestSchema)` to create a new message.
+ */
+export declare const SetBoardAccessRequestSchema: GenMessage<SetBoardAccessRequest>;
+/**
+ * @generated from message tank.board.v1.SetBoardAccessResponse
+ */
+export type SetBoardAccessResponse = Message<"tank.board.v1.SetBoardAccessResponse"> & {
+    /**
+     * @generated from field: repeated tank.access.v1.Grant grants = 1;
+     */
+    grants: Grant[];
+};
+/**
+ * Describes the message tank.board.v1.SetBoardAccessResponse.
+ * Use `create(SetBoardAccessResponseSchema)` to create a new message.
+ */
+export declare const SetBoardAccessResponseSchema: GenMessage<SetBoardAccessResponse>;
+/**
+ * @generated from message tank.board.v1.RemoveBoardAccessRequest
+ */
+export type RemoveBoardAccessRequest = Message<"tank.board.v1.RemoveBoardAccessRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * @generated from field: string user_id = 3;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.board.v1.RemoveBoardAccessRequest.
+ * Use `create(RemoveBoardAccessRequestSchema)` to create a new message.
+ */
+export declare const RemoveBoardAccessRequestSchema: GenMessage<RemoveBoardAccessRequest>;
+/**
+ * @generated from message tank.board.v1.RemoveBoardAccessResponse
+ */
+export type RemoveBoardAccessResponse = Message<"tank.board.v1.RemoveBoardAccessResponse"> & {
+    /**
+     * @generated from field: repeated tank.access.v1.Grant grants = 1;
+     */
+    grants: Grant[];
+};
+/**
+ * Describes the message tank.board.v1.RemoveBoardAccessResponse.
+ * Use `create(RemoveBoardAccessResponseSchema)` to create a new message.
+ */
+export declare const RemoveBoardAccessResponseSchema: GenMessage<RemoveBoardAccessResponse>;
+/**
  * @generated from enum tank.board.v1.ObjectKind
  */
 export declare enum ObjectKind {
@@ -3075,6 +3206,36 @@ export declare const BoardService: GenService<{
         methodKind: "unary";
         input: typeof ConnectAppRequestSchema;
         output: typeof ConnectAppResponseSchema;
+    };
+    /**
+     * Who has access and why. Anyone who can open it may ask.
+     *
+     * @generated from rpc tank.board.v1.BoardService.ListBoardAccess
+     */
+    listBoardAccess: {
+        methodKind: "unary";
+        input: typeof ListBoardAccessRequestSchema;
+        output: typeof ListBoardAccessResponseSchema;
+    };
+    /**
+     * Invite somebody or change their role. Managers only.
+     *
+     * @generated from rpc tank.board.v1.BoardService.SetBoardAccess
+     */
+    setBoardAccess: {
+        methodKind: "unary";
+        input: typeof SetBoardAccessRequestSchema;
+        output: typeof SetBoardAccessResponseSchema;
+    };
+    /**
+     * Take an invited person off. The owner, admins and Tread members cannot be removed.
+     *
+     * @generated from rpc tank.board.v1.BoardService.RemoveBoardAccess
+     */
+    removeBoardAccess: {
+        methodKind: "unary";
+        input: typeof RemoveBoardAccessRequestSchema;
+        output: typeof RemoveBoardAccessResponseSchema;
     };
     /**
      * @generated from rpc tank.board.v1.BoardService.ApproveChange
