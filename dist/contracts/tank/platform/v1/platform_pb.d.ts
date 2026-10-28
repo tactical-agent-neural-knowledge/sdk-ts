@@ -580,6 +580,899 @@ export type ListDropCandidatesResponse = Message<"tank.platform.v1.ListDropCandi
  */
 export declare const ListDropCandidatesResponseSchema: GenMessage<ListDropCandidatesResponse>;
 /**
+ * UserRow is one account as the directory lists it.
+ *
+ * @generated from message tank.platform.v1.UserRow
+ */
+export type UserRow = Message<"tank.platform.v1.UserRow"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string display_name = 2;
+     */
+    displayName: string;
+    /**
+     * @generated from field: string email = 3;
+     */
+    email: string;
+    /**
+     * user | bot | agent
+     *
+     * @generated from field: string kind = 4;
+     */
+    kind: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 5;
+     */
+    createdAt?: Timestamp;
+    /**
+     * the last time a session was opened
+     *
+     * @generated from field: google.protobuf.Timestamp last_login_at = 6;
+     */
+    lastLoginAt?: Timestamp;
+    /**
+     * latest across the workspaces they are in
+     *
+     * @generated from field: google.protobuf.Timestamp last_active_at = 7;
+     */
+    lastActiveAt?: Timestamp;
+    /**
+     * @generated from field: int32 workspaces = 8;
+     */
+    workspaces: number;
+    /**
+     * @generated from field: bool super_admin = 9;
+     */
+    superAdmin: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.UserRow.
+ * Use `create(UserRowSchema)` to create a new message.
+ */
+export declare const UserRowSchema: GenMessage<UserRow>;
+/**
+ * @generated from message tank.platform.v1.SearchUsersRequest
+ */
+export type SearchUsersRequest = Message<"tank.platform.v1.SearchUsersRequest"> & {
+    /**
+     * name or email
+     *
+     * @generated from field: string query = 1;
+     */
+    query: string;
+    /**
+     * @generated from field: int32 limit = 2;
+     */
+    limit: number;
+    /**
+     * @generated from field: int32 offset = 3;
+     */
+    offset: number;
+    /**
+     * bots and agents as well as people
+     *
+     * @generated from field: bool include_machines = 4;
+     */
+    includeMachines: boolean;
+    /**
+     * newest (default) | active | login | name
+     *
+     * @generated from field: string sort = 5;
+     */
+    sort: string;
+};
+/**
+ * Describes the message tank.platform.v1.SearchUsersRequest.
+ * Use `create(SearchUsersRequestSchema)` to create a new message.
+ */
+export declare const SearchUsersRequestSchema: GenMessage<SearchUsersRequest>;
+/**
+ * @generated from message tank.platform.v1.SearchUsersResponse
+ */
+export type SearchUsersResponse = Message<"tank.platform.v1.SearchUsersResponse"> & {
+    /**
+     * @generated from field: repeated tank.platform.v1.UserRow users = 1;
+     */
+    users: UserRow[];
+    /**
+     * @generated from field: int32 total = 2;
+     */
+    total: number;
+};
+/**
+ * Describes the message tank.platform.v1.SearchUsersResponse.
+ * Use `create(SearchUsersResponseSchema)` to create a new message.
+ */
+export declare const SearchUsersResponseSchema: GenMessage<SearchUsersResponse>;
+/**
+ * Membership is one workspace somebody is in, and how recently they used it.
+ *
+ * @generated from message tank.platform.v1.Membership
+ */
+export type Membership = Message<"tank.platform.v1.Membership"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: string role = 4;
+     */
+    role: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp joined_at = 5;
+     */
+    joinedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_active_at = 6;
+     */
+    lastActiveAt?: Timestamp;
+    /**
+     * @generated from field: bool deactivated = 7;
+     */
+    deactivated: boolean;
+    /**
+     * @generated from field: string plan = 8;
+     */
+    plan: string;
+};
+/**
+ * Describes the message tank.platform.v1.Membership.
+ * Use `create(MembershipSchema)` to create a new message.
+ */
+export declare const MembershipSchema: GenMessage<Membership>;
+/**
+ * LoginRow is one session: when it was opened and from what.
+ *
+ * @generated from message tank.platform.v1.LoginRow
+ */
+export type LoginRow = Message<"tank.platform.v1.LoginRow"> & {
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 1;
+     */
+    at?: Timestamp;
+    /**
+     * web | mobile_refresh
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * the user agent, shortened
+     *
+     * @generated from field: string client = 3;
+     */
+    client: string;
+    /**
+     * not yet expired
+     *
+     * @generated from field: bool live = 4;
+     */
+    live: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.LoginRow.
+ * Use `create(LoginRowSchema)` to create a new message.
+ */
+export declare const LoginRowSchema: GenMessage<LoginRow>;
+/**
+ * @generated from message tank.platform.v1.GetUserRequest
+ */
+export type GetUserRequest = Message<"tank.platform.v1.GetUserRequest"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.platform.v1.GetUserRequest.
+ * Use `create(GetUserRequestSchema)` to create a new message.
+ */
+export declare const GetUserRequestSchema: GenMessage<GetUserRequest>;
+/**
+ * @generated from message tank.platform.v1.GetUserResponse
+ */
+export type GetUserResponse = Message<"tank.platform.v1.GetUserResponse"> & {
+    /**
+     * @generated from field: tank.platform.v1.UserRow user = 1;
+     */
+    user?: UserRow;
+    /**
+     * @generated from field: repeated tank.platform.v1.Membership memberships = 2;
+     */
+    memberships: Membership[];
+    /**
+     * newest first
+     *
+     * @generated from field: repeated tank.platform.v1.LoginRow logins = 3;
+     */
+    logins: LoginRow[];
+};
+/**
+ * Describes the message tank.platform.v1.GetUserResponse.
+ * Use `create(GetUserResponseSchema)` to create a new message.
+ */
+export declare const GetUserResponseSchema: GenMessage<GetUserResponse>;
+/**
+ * WorkspaceRow is one workspace as the directory lists it.
+ *
+ * @generated from message tank.platform.v1.WorkspaceRow
+ */
+export type WorkspaceRow = Message<"tank.platform.v1.WorkspaceRow"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * venture | agenture | service | environment
+     *
+     * @generated from field: string kind = 4;
+     */
+    kind: string;
+    /**
+     * @generated from field: string plan = 5;
+     */
+    plan: string;
+    /**
+     * @generated from field: repeated string addons = 6;
+     */
+    addons: string[];
+    /**
+     * active human members
+     *
+     * @generated from field: int32 people = 7;
+     */
+    people: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 8;
+     */
+    createdAt?: Timestamp;
+    /**
+     * the latest of its members
+     *
+     * @generated from field: google.protobuf.Timestamp last_active_at = 9;
+     */
+    lastActiveAt?: Timestamp;
+    /**
+     * @generated from field: string owner_email = 10;
+     */
+    ownerEmail: string;
+    /**
+     * @generated from field: int32 agent_runs_30d = 11;
+     */
+    agentRuns30d: number;
+    /**
+     * what its agents cost us
+     *
+     * @generated from field: double agent_cost_usd_30d = 12;
+     */
+    agentCostUsd30d: number;
+    /**
+     * what it is charged this month
+     *
+     * @generated from field: int64 agent_billed_cents_month = 13;
+     */
+    agentBilledCentsMonth: bigint;
+};
+/**
+ * Describes the message tank.platform.v1.WorkspaceRow.
+ * Use `create(WorkspaceRowSchema)` to create a new message.
+ */
+export declare const WorkspaceRowSchema: GenMessage<WorkspaceRow>;
+/**
+ * @generated from message tank.platform.v1.SearchWorkspacesRequest
+ */
+export type SearchWorkspacesRequest = Message<"tank.platform.v1.SearchWorkspacesRequest"> & {
+    /**
+     * name, slug or a member's email
+     *
+     * @generated from field: string query = 1;
+     */
+    query: string;
+    /**
+     * @generated from field: int32 limit = 2;
+     */
+    limit: number;
+    /**
+     * @generated from field: int32 offset = 3;
+     */
+    offset: number;
+    /**
+     * newest (default) | active | usage | name
+     *
+     * @generated from field: string sort = 4;
+     */
+    sort: string;
+    /**
+     * empty is every kind
+     *
+     * @generated from field: string kind = 5;
+     */
+    kind: string;
+    /**
+     * empty is every plan
+     *
+     * @generated from field: string plan = 6;
+     */
+    plan: string;
+};
+/**
+ * Describes the message tank.platform.v1.SearchWorkspacesRequest.
+ * Use `create(SearchWorkspacesRequestSchema)` to create a new message.
+ */
+export declare const SearchWorkspacesRequestSchema: GenMessage<SearchWorkspacesRequest>;
+/**
+ * @generated from message tank.platform.v1.SearchWorkspacesResponse
+ */
+export type SearchWorkspacesResponse = Message<"tank.platform.v1.SearchWorkspacesResponse"> & {
+    /**
+     * @generated from field: repeated tank.platform.v1.WorkspaceRow workspaces = 1;
+     */
+    workspaces: WorkspaceRow[];
+    /**
+     * @generated from field: int32 total = 2;
+     */
+    total: number;
+};
+/**
+ * Describes the message tank.platform.v1.SearchWorkspacesResponse.
+ * Use `create(SearchWorkspacesResponseSchema)` to create a new message.
+ */
+export declare const SearchWorkspacesResponseSchema: GenMessage<SearchWorkspacesResponse>;
+/**
+ * MemberRow is one person in a workspace.
+ *
+ * @generated from message tank.platform.v1.MemberRow
+ */
+export type MemberRow = Message<"tank.platform.v1.MemberRow"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string display_name = 2;
+     */
+    displayName: string;
+    /**
+     * @generated from field: string email = 3;
+     */
+    email: string;
+    /**
+     * @generated from field: string kind = 4;
+     */
+    kind: string;
+    /**
+     * @generated from field: string role = 5;
+     */
+    role: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp joined_at = 6;
+     */
+    joinedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_login_at = 7;
+     */
+    lastLoginAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_active_at = 8;
+     */
+    lastActiveAt?: Timestamp;
+    /**
+     * @generated from field: bool deactivated = 9;
+     */
+    deactivated: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.MemberRow.
+ * Use `create(MemberRowSchema)` to create a new message.
+ */
+export declare const MemberRowSchema: GenMessage<MemberRow>;
+/**
+ * Feature is one thing a workspace can use, and whether it can.
+ *
+ * @generated from message tank.platform.v1.Feature
+ */
+export type Feature = Message<"tank.platform.v1.Feature"> & {
+    /**
+     * premium | agent | shield | books | blueprint | atlas
+     *
+     * @generated from field: string key = 1;
+     */
+    key: string;
+    /**
+     * @generated from field: string label = 2;
+     */
+    label: string;
+    /**
+     * @generated from field: bool on = 3;
+     */
+    on: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp since = 4;
+     */
+    since?: Timestamp;
+};
+/**
+ * Describes the message tank.platform.v1.Feature.
+ * Use `create(FeatureSchema)` to create a new message.
+ */
+export declare const FeatureSchema: GenMessage<Feature>;
+/**
+ * @generated from message tank.platform.v1.Subscription
+ */
+export type Subscription = Message<"tank.platform.v1.Subscription"> & {
+    /**
+     * @generated from field: string product = 1;
+     */
+    product: string;
+    /**
+     * @generated from field: string provider = 2;
+     */
+    provider: string;
+    /**
+     * @generated from field: string status = 3;
+     */
+    status: string;
+    /**
+     * @generated from field: int32 seats = 4;
+     */
+    seats: number;
+    /**
+     * @generated from field: string period_end = 5;
+     */
+    periodEnd: string;
+};
+/**
+ * Describes the message tank.platform.v1.Subscription.
+ * Use `create(SubscriptionSchema)` to create a new message.
+ */
+export declare const SubscriptionSchema: GenMessage<Subscription>;
+/**
+ * DailyCount is one day of activity. Counts only.
+ *
+ * @generated from message tank.platform.v1.DailyCount
+ */
+export type DailyCount = Message<"tank.platform.v1.DailyCount"> & {
+    /**
+     * YYYY-MM-DD, UTC
+     *
+     * @generated from field: string day = 1;
+     */
+    day: string;
+    /**
+     * @generated from field: int32 messages = 2;
+     */
+    messages: number;
+    /**
+     * distinct people who posted
+     *
+     * @generated from field: int32 active_people = 3;
+     */
+    activePeople: number;
+    /**
+     * @generated from field: int32 agent_runs = 4;
+     */
+    agentRuns: number;
+    /**
+     * @generated from field: double agent_cost_usd = 5;
+     */
+    agentCostUsd: number;
+    /**
+     * overview only
+     *
+     * @generated from field: int32 new_people = 6;
+     */
+    newPeople: number;
+    /**
+     * overview only
+     *
+     * @generated from field: int32 new_workspaces = 7;
+     */
+    newWorkspaces: number;
+};
+/**
+ * Describes the message tank.platform.v1.DailyCount.
+ * Use `create(DailyCountSchema)` to create a new message.
+ */
+export declare const DailyCountSchema: GenMessage<DailyCount>;
+/**
+ * AgentRunRow is one run without its ask: what an agent was asked is the
+ * workspace's content and stays in the workspace.
+ *
+ * @generated from message tank.platform.v1.AgentRunRow
+ */
+export type AgentRunRow = Message<"tank.platform.v1.AgentRunRow"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string agent_name = 2;
+     */
+    agentName: string;
+    /**
+     * @generated from field: string state = 3;
+     */
+    state: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp started_at = 4;
+     */
+    startedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp ended_at = 5;
+     */
+    endedAt?: Timestamp;
+    /**
+     * @generated from field: int64 minutes = 6;
+     */
+    minutes: bigint;
+    /**
+     * @generated from field: double cost_usd = 7;
+     */
+    costUsd: number;
+};
+/**
+ * Describes the message tank.platform.v1.AgentRunRow.
+ * Use `create(AgentRunRowSchema)` to create a new message.
+ */
+export declare const AgentRunRowSchema: GenMessage<AgentRunRow>;
+/**
+ * @generated from message tank.platform.v1.AgentUsage
+ */
+export type AgentUsage = Message<"tank.platform.v1.AgentUsage"> & {
+    /**
+     * @generated from field: int32 runs_30d = 1;
+     */
+    runs30d: number;
+    /**
+     * @generated from field: int32 failed_30d = 2;
+     */
+    failed30d: number;
+    /**
+     * @generated from field: int64 minutes_30d = 3;
+     */
+    minutes30d: bigint;
+    /**
+     * @generated from field: double cost_usd_30d = 4;
+     */
+    costUsd30d: number;
+    /**
+     * @generated from field: double cost_usd_month = 5;
+     */
+    costUsdMonth: number;
+    /**
+     * @generated from field: int64 billed_cents_month = 6;
+     */
+    billedCentsMonth: bigint;
+    /**
+     * 0 is no cap
+     *
+     * @generated from field: int64 cap_cents = 7;
+     */
+    capCents: bigint;
+    /**
+     * @generated from field: repeated tank.platform.v1.AgentRunRow recent = 8;
+     */
+    recent: AgentRunRow[];
+    /**
+     * the agents it has, by name
+     *
+     * @generated from field: repeated string agents = 9;
+     */
+    agents: string[];
+};
+/**
+ * Describes the message tank.platform.v1.AgentUsage.
+ * Use `create(AgentUsageSchema)` to create a new message.
+ */
+export declare const AgentUsageSchema: GenMessage<AgentUsage>;
+/**
+ * @generated from message tank.platform.v1.WorkspaceCounts
+ */
+export type WorkspaceCounts = Message<"tank.platform.v1.WorkspaceCounts"> & {
+    /**
+     * @generated from field: int32 treads = 1;
+     */
+    treads: number;
+    /**
+     * @generated from field: int64 messages = 2;
+     */
+    messages: bigint;
+    /**
+     * @generated from field: int32 files = 3;
+     */
+    files: number;
+    /**
+     * @generated from field: int32 boards = 4;
+     */
+    boards: number;
+    /**
+     * @generated from field: int32 pages = 5;
+     */
+    pages: number;
+};
+/**
+ * Describes the message tank.platform.v1.WorkspaceCounts.
+ * Use `create(WorkspaceCountsSchema)` to create a new message.
+ */
+export declare const WorkspaceCountsSchema: GenMessage<WorkspaceCounts>;
+/**
+ * @generated from message tank.platform.v1.GetWorkspaceRequest
+ */
+export type GetWorkspaceRequest = Message<"tank.platform.v1.GetWorkspaceRequest"> & {
+    /**
+     * or
+     *
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.platform.v1.GetWorkspaceRequest.
+ * Use `create(GetWorkspaceRequestSchema)` to create a new message.
+ */
+export declare const GetWorkspaceRequestSchema: GenMessage<GetWorkspaceRequest>;
+/**
+ * @generated from message tank.platform.v1.GetWorkspaceResponse
+ */
+export type GetWorkspaceResponse = Message<"tank.platform.v1.GetWorkspaceResponse"> & {
+    /**
+     * @generated from field: tank.platform.v1.WorkspaceRow workspace = 1;
+     */
+    workspace?: WorkspaceRow;
+    /**
+     * @generated from field: repeated tank.platform.v1.MemberRow members = 2;
+     */
+    members: MemberRow[];
+    /**
+     * @generated from field: repeated tank.platform.v1.Feature features = 3;
+     */
+    features: Feature[];
+    /**
+     * @generated from field: repeated tank.platform.v1.Subscription subscriptions = 4;
+     */
+    subscriptions: Subscription[];
+    /**
+     * @generated from field: tank.platform.v1.AgentUsage agent_usage = 5;
+     */
+    agentUsage?: AgentUsage;
+    /**
+     * the last 30, oldest first
+     *
+     * @generated from field: repeated tank.platform.v1.DailyCount days = 6;
+     */
+    days: DailyCount[];
+    /**
+     * @generated from field: tank.platform.v1.WorkspaceCounts counts = 7;
+     */
+    counts?: WorkspaceCounts;
+};
+/**
+ * Describes the message tank.platform.v1.GetWorkspaceResponse.
+ * Use `create(GetWorkspaceResponseSchema)` to create a new message.
+ */
+export declare const GetWorkspaceResponseSchema: GenMessage<GetWorkspaceResponse>;
+/**
+ * @generated from message tank.platform.v1.GetOverviewRequest
+ */
+export type GetOverviewRequest = Message<"tank.platform.v1.GetOverviewRequest"> & {};
+/**
+ * Describes the message tank.platform.v1.GetOverviewRequest.
+ * Use `create(GetOverviewRequestSchema)` to create a new message.
+ */
+export declare const GetOverviewRequestSchema: GenMessage<GetOverviewRequest>;
+/**
+ * @generated from message tank.platform.v1.GetOverviewResponse
+ */
+export type GetOverviewResponse = Message<"tank.platform.v1.GetOverviewResponse"> & {
+    /**
+     * @generated from field: int32 people = 1;
+     */
+    people: number;
+    /**
+     * @generated from field: int32 people_new_7d = 2;
+     */
+    peopleNew7d: number;
+    /**
+     * @generated from field: int32 people_active_1d = 3;
+     */
+    peopleActive1d: number;
+    /**
+     * @generated from field: int32 people_active_7d = 4;
+     */
+    peopleActive7d: number;
+    /**
+     * @generated from field: int32 workspaces = 5;
+     */
+    workspaces: number;
+    /**
+     * @generated from field: int32 workspaces_new_7d = 6;
+     */
+    workspacesNew7d: number;
+    /**
+     * @generated from field: int32 premium = 7;
+     */
+    premium: number;
+    /**
+     * @generated from field: double agent_cost_usd_month = 8;
+     */
+    agentCostUsdMonth: number;
+    /**
+     * @generated from field: int32 agent_runs_30d = 9;
+     */
+    agentRuns30d: number;
+    /**
+     * the last 30, oldest first
+     *
+     * @generated from field: repeated tank.platform.v1.DailyCount days = 10;
+     */
+    days: DailyCount[];
+    /**
+     * may add and remove super admins
+     *
+     * @generated from field: bool caller_is_root = 11;
+     */
+    callerIsRoot: boolean;
+    /**
+     * the top few by last 7 days of messages
+     *
+     * @generated from field: repeated tank.platform.v1.WorkspaceRow most_active = 12;
+     */
+    mostActive: WorkspaceRow[];
+};
+/**
+ * Describes the message tank.platform.v1.GetOverviewResponse.
+ * Use `create(GetOverviewResponseSchema)` to create a new message.
+ */
+export declare const GetOverviewResponseSchema: GenMessage<GetOverviewResponse>;
+/**
+ * SuperAdminRow is one person who may use this console.
+ *
+ * @generated from message tank.platform.v1.SuperAdminRow
+ */
+export type SuperAdminRow = Message<"tank.platform.v1.SuperAdminRow"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string email = 2;
+     */
+    email: string;
+    /**
+     * @generated from field: string display_name = 3;
+     */
+    displayName: string;
+    /**
+     * named in the deployment; not removable here
+     *
+     * @generated from field: bool root = 4;
+     */
+    root: boolean;
+    /**
+     * @generated from field: string added_by_email = 5;
+     */
+    addedByEmail: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp added_at = 6;
+     */
+    addedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.platform.v1.SuperAdminRow.
+ * Use `create(SuperAdminRowSchema)` to create a new message.
+ */
+export declare const SuperAdminRowSchema: GenMessage<SuperAdminRow>;
+/**
+ * @generated from message tank.platform.v1.ListSuperAdminsRequest
+ */
+export type ListSuperAdminsRequest = Message<"tank.platform.v1.ListSuperAdminsRequest"> & {};
+/**
+ * Describes the message tank.platform.v1.ListSuperAdminsRequest.
+ * Use `create(ListSuperAdminsRequestSchema)` to create a new message.
+ */
+export declare const ListSuperAdminsRequestSchema: GenMessage<ListSuperAdminsRequest>;
+/**
+ * @generated from message tank.platform.v1.ListSuperAdminsResponse
+ */
+export type ListSuperAdminsResponse = Message<"tank.platform.v1.ListSuperAdminsResponse"> & {
+    /**
+     * @generated from field: repeated tank.platform.v1.SuperAdminRow admins = 1;
+     */
+    admins: SuperAdminRow[];
+    /**
+     * @generated from field: bool caller_is_root = 2;
+     */
+    callerIsRoot: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.ListSuperAdminsResponse.
+ * Use `create(ListSuperAdminsResponseSchema)` to create a new message.
+ */
+export declare const ListSuperAdminsResponseSchema: GenMessage<ListSuperAdminsResponse>;
+/**
+ * AddSuperAdmin names an existing account. Root only.
+ *
+ * @generated from message tank.platform.v1.AddSuperAdminRequest
+ */
+export type AddSuperAdminRequest = Message<"tank.platform.v1.AddSuperAdminRequest"> & {
+    /**
+     * @generated from field: string email = 1;
+     */
+    email: string;
+};
+/**
+ * Describes the message tank.platform.v1.AddSuperAdminRequest.
+ * Use `create(AddSuperAdminRequestSchema)` to create a new message.
+ */
+export declare const AddSuperAdminRequestSchema: GenMessage<AddSuperAdminRequest>;
+/**
+ * @generated from message tank.platform.v1.AddSuperAdminResponse
+ */
+export type AddSuperAdminResponse = Message<"tank.platform.v1.AddSuperAdminResponse"> & {
+    /**
+     * @generated from field: repeated tank.platform.v1.SuperAdminRow admins = 1;
+     */
+    admins: SuperAdminRow[];
+};
+/**
+ * Describes the message tank.platform.v1.AddSuperAdminResponse.
+ * Use `create(AddSuperAdminResponseSchema)` to create a new message.
+ */
+export declare const AddSuperAdminResponseSchema: GenMessage<AddSuperAdminResponse>;
+/**
+ * RemoveSuperAdmin removes one added in the console. Root only; a root is not removable.
+ *
+ * @generated from message tank.platform.v1.RemoveSuperAdminRequest
+ */
+export type RemoveSuperAdminRequest = Message<"tank.platform.v1.RemoveSuperAdminRequest"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.platform.v1.RemoveSuperAdminRequest.
+ * Use `create(RemoveSuperAdminRequestSchema)` to create a new message.
+ */
+export declare const RemoveSuperAdminRequestSchema: GenMessage<RemoveSuperAdminRequest>;
+/**
+ * @generated from message tank.platform.v1.RemoveSuperAdminResponse
+ */
+export type RemoveSuperAdminResponse = Message<"tank.platform.v1.RemoveSuperAdminResponse"> & {
+    /**
+     * @generated from field: repeated tank.platform.v1.SuperAdminRow admins = 1;
+     */
+    admins: SuperAdminRow[];
+};
+/**
+ * Describes the message tank.platform.v1.RemoveSuperAdminResponse.
+ * Use `create(RemoveSuperAdminResponseSchema)` to create a new message.
+ */
+export declare const RemoveSuperAdminResponseSchema: GenMessage<RemoveSuperAdminResponse>;
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export declare const PlatformService: GenService<{
@@ -638,5 +1531,69 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof ListDropCandidatesRequestSchema;
         output: typeof ListDropCandidatesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.GetOverview
+     */
+    getOverview: {
+        methodKind: "unary";
+        input: typeof GetOverviewRequestSchema;
+        output: typeof GetOverviewResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SearchUsers
+     */
+    searchUsers: {
+        methodKind: "unary";
+        input: typeof SearchUsersRequestSchema;
+        output: typeof SearchUsersResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.GetUser
+     */
+    getUser: {
+        methodKind: "unary";
+        input: typeof GetUserRequestSchema;
+        output: typeof GetUserResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SearchWorkspaces
+     */
+    searchWorkspaces: {
+        methodKind: "unary";
+        input: typeof SearchWorkspacesRequestSchema;
+        output: typeof SearchWorkspacesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.GetWorkspace
+     */
+    getWorkspace: {
+        methodKind: "unary";
+        input: typeof GetWorkspaceRequestSchema;
+        output: typeof GetWorkspaceResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.ListSuperAdmins
+     */
+    listSuperAdmins: {
+        methodKind: "unary";
+        input: typeof ListSuperAdminsRequestSchema;
+        output: typeof ListSuperAdminsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.AddSuperAdmin
+     */
+    addSuperAdmin: {
+        methodKind: "unary";
+        input: typeof AddSuperAdminRequestSchema;
+        output: typeof AddSuperAdminResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.RemoveSuperAdmin
+     */
+    removeSuperAdmin: {
+        methodKind: "unary";
+        input: typeof RemoveSuperAdminRequestSchema;
+        output: typeof RemoveSuperAdminResponseSchema;
     };
 }>;

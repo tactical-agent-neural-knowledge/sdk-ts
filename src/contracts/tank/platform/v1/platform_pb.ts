@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/platform/v1/platform.proto.
  */
 export const file_tank_platform_v1_platform: GenFile = /*@__PURE__*/
-  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiyAIKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIOCgZraWxsZWQYCCABKAgSFAoMYXV0b19kZWZhdWx0GAkgASgIEhIKCmhvdXJzX2Zyb20YCiABKAUSEAoIaG91cnNfdG8YCyABKAUSEgoKaG91cnNfem9uZRgMIAEoCRISCgpob3Vyc19kYXlzGA0gAygFEhEKCXVuY2xhaW1lZBgEIAEoBRIZChFhZ2VudF9taW51dGVzXzI0aBgFIAEoAxIVCg1zcGVuZF91c2RfMjRoGAYgASgBEhcKD3NwZW5kX3VzZF90b3RhbBgHIAEoARIUCgxzcGVuZF91c2RfMWgYDiABKAESFAoMc3BlbmRfdXNkXzNoGA8gASgBInQKFFNldEFsbG9jYXRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgdlbmFibGVkGAIgASgIEg4KBndlaWdodBgDIAEoBRIPCgdydW5fbm93GAQgASgIEhQKDGF1dG9fYXBwcm92ZRgFIAEoCCJIChVTZXRBbGxvY2F0aW9uUmVzcG9uc2USLwoIYWdlbnR1cmUYASABKAsyHS50YW5rLnBsYXRmb3JtLnYxLkFnZW50dXJlUm93IqUBChdTZXRCb2FyZFNldHRpbmdzUmVxdWVzdBIWCg5tYXhfY29uY3VycmVudBgBIAEoBRIOCgZraWxsZWQYAiABKAgSFAoMYXV0b19kZWZhdWx0GAMgASgIEhIKCmhvdXJzX2Zyb20YBCABKAUSEAoIaG91cnNfdG8YBSABKAUSEgoKaG91cnNfem9uZRgGIAEoCRISCgpob3Vyc19kYXlzGAcgAygFIksKGFNldEJvYXJkU2V0dGluZ3NSZXNwb25zZRIvCgdzdW1tYXJ5GAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiMAoOU3RvcFJ1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJEg4KBnJlYXNvbhgCIAEoCSIRCg9TdG9wUnVuUmVzcG9uc2UiuwIKDU1lcmdlUHJvcG9zYWwSCgoCaWQYASABKAkSFQoNYWJzb3JiZWRfc2x1ZxgCIAEoCRIVCg1hYnNvcmJlZF9uYW1lGAMgASgJEhgKEGFic29yYmVkX3N1bW1hcnkYBCABKAkSFQoNc3Vydml2b3Jfc2x1ZxgFIAEoCRIVCg1zdXJ2aXZvcl9uYW1lGAYgASgJEhgKEHN1cnZpdm9yX3N1bW1hcnkYByABKAkSEgoKc2ltaWxhcml0eRgIIAEoARIOCgZzdGF0dXMYCSABKAkSDAoEYXV0bxgKIAEoCBIvCgtwcm9wb3NlZF9hdBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZG9uZV9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLAoRTGlzdE1lcmdlc1JlcXVlc3QSFwoPaW5jbHVkZV9kZWNpZGVkGAEgASgIIkUKEkxpc3RNZXJnZXNSZXNwb25zZRIvCgZtZXJnZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLk1lcmdlUHJvcG9zYWwiMQoSRGVjaWRlTWVyZ2VSZXF1ZXN0EgoKAmlkGAEgASgJEg8KB2FwcHJvdmUYAiABKAgiRQoTRGVjaWRlTWVyZ2VSZXNwb25zZRIuCgVtZXJnZRgBIAEoCzIfLnRhbmsucGxhdGZvcm0udjEuTWVyZ2VQcm9wb3NhbCJzCg1Ecm9wQ2FuZGlkYXRlEhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSEAoIaW5kdXN0cnkYBCABKAkSDQoFc2NvcmUYBSABKAUSDwoHcmVhc29ucxgGIAEoCSIbChlMaXN0RHJvcENhbmRpZGF0ZXNSZXF1ZXN0Il4KGkxpc3REcm9wQ2FuZGlkYXRlc1Jlc3BvbnNlEjMKCmNhbmRpZGF0ZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLkRyb3BDYW5kaWRhdGUSCwoDZGF5GAIgASgJMrYFCg9QbGF0Zm9ybVNlcnZpY2USYAoNTGlzdEFnZW50dXJlcxImLnRhbmsucGxhdGZvcm0udjEuTGlzdEFnZW50dXJlc1JlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXNwb25zZRJgCg1TZXRBbGxvY2F0aW9uEiYudGFuay5wbGF0Zm9ybS52MS5TZXRBbGxvY2F0aW9uUmVxdWVzdBonLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlc3BvbnNlEmkKEFNldEJvYXJkU2V0dGluZ3MSKS50YW5rLnBsYXRmb3JtLnYxLlNldEJvYXJkU2V0dGluZ3NSZXF1ZXN0GioudGFuay5wbGF0Zm9ybS52MS5TZXRCb2FyZFNldHRpbmdzUmVzcG9uc2USTgoHU3RvcFJ1bhIgLnRhbmsucGxhdGZvcm0udjEuU3RvcFJ1blJlcXVlc3QaIS50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXNwb25zZRJXCgpMaXN0TWVyZ2VzEiMudGFuay5wbGF0Zm9ybS52MS5MaXN0TWVyZ2VzUmVxdWVzdBokLnRhbmsucGxhdGZvcm0udjEuTGlzdE1lcmdlc1Jlc3BvbnNlEloKC0RlY2lkZU1lcmdlEiQudGFuay5wbGF0Zm9ybS52MS5EZWNpZGVNZXJnZVJlcXVlc3QaJS50YW5rLnBsYXRmb3JtLnYxLkRlY2lkZU1lcmdlUmVzcG9uc2USbwoSTGlzdERyb3BDYW5kaWRhdGVzEisudGFuay5wbGF0Zm9ybS52MS5MaXN0RHJvcENhbmRpZGF0ZXNSZXF1ZXN0GiwudGFuay5wbGF0Zm9ybS52MS5MaXN0RHJvcENhbmRpZGF0ZXNSZXNwb25zZULgAQoUY29tLnRhbmsucGxhdGZvcm0udjFCDVBsYXRmb3JtUHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9wbGF0Zm9ybS92MTtwbGF0Zm9ybXYxogIDVFBYqgIQVGFuay5QbGF0Zm9ybS5WMcoCEFRhbmtcUGxhdGZvcm1cVjHiAhxUYW5rXFBsYXRmb3JtXFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UGxhdGZvcm06OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
+  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiyAIKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIOCgZraWxsZWQYCCABKAgSFAoMYXV0b19kZWZhdWx0GAkgASgIEhIKCmhvdXJzX2Zyb20YCiABKAUSEAoIaG91cnNfdG8YCyABKAUSEgoKaG91cnNfem9uZRgMIAEoCRISCgpob3Vyc19kYXlzGA0gAygFEhEKCXVuY2xhaW1lZBgEIAEoBRIZChFhZ2VudF9taW51dGVzXzI0aBgFIAEoAxIVCg1zcGVuZF91c2RfMjRoGAYgASgBEhcKD3NwZW5kX3VzZF90b3RhbBgHIAEoARIUCgxzcGVuZF91c2RfMWgYDiABKAESFAoMc3BlbmRfdXNkXzNoGA8gASgBInQKFFNldEFsbG9jYXRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgdlbmFibGVkGAIgASgIEg4KBndlaWdodBgDIAEoBRIPCgdydW5fbm93GAQgASgIEhQKDGF1dG9fYXBwcm92ZRgFIAEoCCJIChVTZXRBbGxvY2F0aW9uUmVzcG9uc2USLwoIYWdlbnR1cmUYASABKAsyHS50YW5rLnBsYXRmb3JtLnYxLkFnZW50dXJlUm93IqUBChdTZXRCb2FyZFNldHRpbmdzUmVxdWVzdBIWCg5tYXhfY29uY3VycmVudBgBIAEoBRIOCgZraWxsZWQYAiABKAgSFAoMYXV0b19kZWZhdWx0GAMgASgIEhIKCmhvdXJzX2Zyb20YBCABKAUSEAoIaG91cnNfdG8YBSABKAUSEgoKaG91cnNfem9uZRgGIAEoCRISCgpob3Vyc19kYXlzGAcgAygFIksKGFNldEJvYXJkU2V0dGluZ3NSZXNwb25zZRIvCgdzdW1tYXJ5GAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiMAoOU3RvcFJ1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJEg4KBnJlYXNvbhgCIAEoCSIRCg9TdG9wUnVuUmVzcG9uc2UiuwIKDU1lcmdlUHJvcG9zYWwSCgoCaWQYASABKAkSFQoNYWJzb3JiZWRfc2x1ZxgCIAEoCRIVCg1hYnNvcmJlZF9uYW1lGAMgASgJEhgKEGFic29yYmVkX3N1bW1hcnkYBCABKAkSFQoNc3Vydml2b3Jfc2x1ZxgFIAEoCRIVCg1zdXJ2aXZvcl9uYW1lGAYgASgJEhgKEHN1cnZpdm9yX3N1bW1hcnkYByABKAkSEgoKc2ltaWxhcml0eRgIIAEoARIOCgZzdGF0dXMYCSABKAkSDAoEYXV0bxgKIAEoCBIvCgtwcm9wb3NlZF9hdBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZG9uZV9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLAoRTGlzdE1lcmdlc1JlcXVlc3QSFwoPaW5jbHVkZV9kZWNpZGVkGAEgASgIIkUKEkxpc3RNZXJnZXNSZXNwb25zZRIvCgZtZXJnZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLk1lcmdlUHJvcG9zYWwiMQoSRGVjaWRlTWVyZ2VSZXF1ZXN0EgoKAmlkGAEgASgJEg8KB2FwcHJvdmUYAiABKAgiRQoTRGVjaWRlTWVyZ2VSZXNwb25zZRIuCgVtZXJnZRgBIAEoCzIfLnRhbmsucGxhdGZvcm0udjEuTWVyZ2VQcm9wb3NhbCJzCg1Ecm9wQ2FuZGlkYXRlEhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSEAoIaW5kdXN0cnkYBCABKAkSDQoFc2NvcmUYBSABKAUSDwoHcmVhc29ucxgGIAEoCSIbChlMaXN0RHJvcENhbmRpZGF0ZXNSZXF1ZXN0Il4KGkxpc3REcm9wQ2FuZGlkYXRlc1Jlc3BvbnNlEjMKCmNhbmRpZGF0ZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLkRyb3BDYW5kaWRhdGUSCwoDZGF5GAIgASgJIogCCgdVc2VyUm93EgoKAmlkGAEgASgJEhQKDGRpc3BsYXlfbmFtZRgCIAEoCRINCgVlbWFpbBgDIAEoCRIMCgRraW5kGAQgASgJEi4KCmNyZWF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDWxhc3RfbG9naW5fYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKDmxhc3RfYWN0aXZlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgp3b3Jrc3BhY2VzGAggASgFEhMKC3N1cGVyX2FkbWluGAkgASgIImoKElNlYXJjaFVzZXJzUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIOCgZvZmZzZXQYAyABKAUSGAoQaW5jbHVkZV9tYWNoaW5lcxgEIAEoCBIMCgRzb3J0GAUgASgJIk4KE1NlYXJjaFVzZXJzUmVzcG9uc2USKAoFdXNlcnMYASADKAsyGS50YW5rLnBsYXRmb3JtLnYxLlVzZXJSb3cSDQoFdG90YWwYAiABKAUi0gEKCk1lbWJlcnNoaXASFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHNsdWcYAiABKAkSDAoEbmFtZRgDIAEoCRIMCgRyb2xlGAQgASgJEi0KCWpvaW5lZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMgoObGFzdF9hY3RpdmVfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC2RlYWN0aXZhdGVkGAcgASgIEgwKBHBsYW4YCCABKAkiXgoITG9naW5Sb3cSJgoCYXQYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEgwKBGtpbmQYAiABKAkSDgoGY2xpZW50GAMgASgJEgwKBGxpdmUYBCABKAgiIQoOR2V0VXNlclJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCSKZAQoPR2V0VXNlclJlc3BvbnNlEicKBHVzZXIYASABKAsyGS50YW5rLnBsYXRmb3JtLnYxLlVzZXJSb3cSMQoLbWVtYmVyc2hpcHMYAiADKAsyHC50YW5rLnBsYXRmb3JtLnYxLk1lbWJlcnNoaXASKgoGbG9naW5zGAMgAygLMhoudGFuay5wbGF0Zm9ybS52MS5Mb2dpblJvdyLBAgoMV29ya3NwYWNlUm93EgoKAmlkGAEgASgJEgwKBHNsdWcYAiABKAkSDAoEbmFtZRgDIAEoCRIMCgRraW5kGAQgASgJEgwKBHBsYW4YBSABKAkSDgoGYWRkb25zGAYgAygJEg4KBnBlb3BsZRgHIAEoBRIuCgpjcmVhdGVkX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIyCg5sYXN0X2FjdGl2ZV9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLb3duZXJfZW1haWwYCiABKAkSFgoOYWdlbnRfcnVuc18zMGQYCyABKAUSGgoSYWdlbnRfY29zdF91c2RfMzBkGAwgASgBEiAKGGFnZW50X2JpbGxlZF9jZW50c19tb250aBgNIAEoAyJxChdTZWFyY2hXb3Jrc3BhY2VzUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIOCgZvZmZzZXQYAyABKAUSDAoEc29ydBgEIAEoCRIMCgRraW5kGAUgASgJEgwKBHBsYW4YBiABKAkiXQoYU2VhcmNoV29ya3NwYWNlc1Jlc3BvbnNlEjIKCndvcmtzcGFjZXMYASADKAsyHi50YW5rLnBsYXRmb3JtLnYxLldvcmtzcGFjZVJvdxINCgV0b3RhbBgCIAEoBSKIAgoJTWVtYmVyUm93Eg8KB3VzZXJfaWQYASABKAkSFAoMZGlzcGxheV9uYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEgwKBGtpbmQYBCABKAkSDAoEcm9sZRgFIAEoCRItCglqb2luZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDWxhc3RfbG9naW5fYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKDmxhc3RfYWN0aXZlX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBITCgtkZWFjdGl2YXRlZBgJIAEoCCJcCgdGZWF0dXJlEgsKA2tleRgBIAEoCRINCgVsYWJlbBgCIAEoCRIKCgJvbhgDIAEoCBIpCgVzaW5jZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiZAoMU3Vic2NyaXB0aW9uEg8KB3Byb2R1Y3QYASABKAkSEAoIcHJvdmlkZXIYAiABKAkSDgoGc3RhdHVzGAMgASgJEg0KBXNlYXRzGAQgASgFEhIKCnBlcmlvZF9lbmQYBSABKAkimgEKCkRhaWx5Q291bnQSCwoDZGF5GAEgASgJEhAKCG1lc3NhZ2VzGAIgASgFEhUKDWFjdGl2ZV9wZW9wbGUYAyABKAUSEgoKYWdlbnRfcnVucxgEIAEoBRIWCg5hZ2VudF9jb3N0X3VzZBgFIAEoARISCgpuZXdfcGVvcGxlGAYgASgFEhYKDm5ld193b3Jrc3BhY2VzGAcgASgFIr0BCgtBZ2VudFJ1blJvdxIKCgJpZBgBIAEoCRISCgphZ2VudF9uYW1lGAIgASgJEg0KBXN0YXRlGAMgASgJEi4KCnN0YXJ0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIPCgdtaW51dGVzGAYgASgDEhAKCGNvc3RfdXNkGAcgASgBIuMBCgpBZ2VudFVzYWdlEhAKCHJ1bnNfMzBkGAEgASgFEhIKCmZhaWxlZF8zMGQYAiABKAUSEwoLbWludXRlc18zMGQYAyABKAMSFAoMY29zdF91c2RfMzBkGAQgASgBEhYKDmNvc3RfdXNkX21vbnRoGAUgASgBEhoKEmJpbGxlZF9jZW50c19tb250aBgGIAEoAxIRCgljYXBfY2VudHMYByABKAMSLQoGcmVjZW50GAggAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudFJ1blJvdxIOCgZhZ2VudHMYCSADKAkiYQoPV29ya3NwYWNlQ291bnRzEg4KBnRyZWFkcxgBIAEoBRIQCghtZXNzYWdlcxgCIAEoAxINCgVmaWxlcxgDIAEoBRIOCgZib2FyZHMYBCABKAUSDQoFcGFnZXMYBSABKAUiOQoTR2V0V29ya3NwYWNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCSLtAgoUR2V0V29ya3NwYWNlUmVzcG9uc2USMQoJd29ya3NwYWNlGAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Xb3Jrc3BhY2VSb3cSLAoHbWVtYmVycxgCIAMoCzIbLnRhbmsucGxhdGZvcm0udjEuTWVtYmVyUm93EisKCGZlYXR1cmVzGAMgAygLMhkudGFuay5wbGF0Zm9ybS52MS5GZWF0dXJlEjUKDXN1YnNjcmlwdGlvbnMYBCADKAsyHi50YW5rLnBsYXRmb3JtLnYxLlN1YnNjcmlwdGlvbhIxCgthZ2VudF91c2FnZRgFIAEoCzIcLnRhbmsucGxhdGZvcm0udjEuQWdlbnRVc2FnZRIqCgRkYXlzGAYgAygLMhwudGFuay5wbGF0Zm9ybS52MS5EYWlseUNvdW50EjEKBmNvdW50cxgHIAEoCzIhLnRhbmsucGxhdGZvcm0udjEuV29ya3NwYWNlQ291bnRzIhQKEkdldE92ZXJ2aWV3UmVxdWVzdCLfAgoTR2V0T3ZlcnZpZXdSZXNwb25zZRIOCgZwZW9wbGUYASABKAUSFQoNcGVvcGxlX25ld183ZBgCIAEoBRIYChBwZW9wbGVfYWN0aXZlXzFkGAMgASgFEhgKEHBlb3BsZV9hY3RpdmVfN2QYBCABKAUSEgoKd29ya3NwYWNlcxgFIAEoBRIZChF3b3Jrc3BhY2VzX25ld183ZBgGIAEoBRIPCgdwcmVtaXVtGAcgASgFEhwKFGFnZW50X2Nvc3RfdXNkX21vbnRoGAggASgBEhYKDmFnZW50X3J1bnNfMzBkGAkgASgFEioKBGRheXMYCiADKAsyHC50YW5rLnBsYXRmb3JtLnYxLkRhaWx5Q291bnQSFgoOY2FsbGVyX2lzX3Jvb3QYCyABKAgSMwoLbW9zdF9hY3RpdmUYDCADKAsyHi50YW5rLnBsYXRmb3JtLnYxLldvcmtzcGFjZVJvdyKZAQoNU3VwZXJBZG1pblJvdxIPCgd1c2VyX2lkGAEgASgJEg0KBWVtYWlsGAIgASgJEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRIMCgRyb290GAQgASgIEhYKDmFkZGVkX2J5X2VtYWlsGAUgASgJEiwKCGFkZGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIYChZMaXN0U3VwZXJBZG1pbnNSZXF1ZXN0ImIKF0xpc3RTdXBlckFkbWluc1Jlc3BvbnNlEi8KBmFkbWlucxgBIAMoCzIfLnRhbmsucGxhdGZvcm0udjEuU3VwZXJBZG1pblJvdxIWCg5jYWxsZXJfaXNfcm9vdBgCIAEoCCIlChRBZGRTdXBlckFkbWluUmVxdWVzdBINCgVlbWFpbBgBIAEoCSJIChVBZGRTdXBlckFkbWluUmVzcG9uc2USLwoGYWRtaW5zGAEgAygLMh8udGFuay5wbGF0Zm9ybS52MS5TdXBlckFkbWluUm93IioKF1JlbW92ZVN1cGVyQWRtaW5SZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkiSwoYUmVtb3ZlU3VwZXJBZG1pblJlc3BvbnNlEi8KBmFkbWlucxgBIAMoCzIfLnRhbmsucGxhdGZvcm0udjEuU3VwZXJBZG1pblJvdzK9CwoPUGxhdGZvcm1TZXJ2aWNlEmAKDUxpc3RBZ2VudHVyZXMSJi50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXF1ZXN0GicudGFuay5wbGF0Zm9ybS52MS5MaXN0QWdlbnR1cmVzUmVzcG9uc2USYAoNU2V0QWxsb2NhdGlvbhImLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLlNldEFsbG9jYXRpb25SZXNwb25zZRJpChBTZXRCb2FyZFNldHRpbmdzEikudGFuay5wbGF0Zm9ybS52MS5TZXRCb2FyZFNldHRpbmdzUmVxdWVzdBoqLnRhbmsucGxhdGZvcm0udjEuU2V0Qm9hcmRTZXR0aW5nc1Jlc3BvbnNlEk4KB1N0b3BSdW4SIC50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXF1ZXN0GiEudGFuay5wbGF0Zm9ybS52MS5TdG9wUnVuUmVzcG9uc2USVwoKTGlzdE1lcmdlcxIjLnRhbmsucGxhdGZvcm0udjEuTGlzdE1lcmdlc1JlcXVlc3QaJC50YW5rLnBsYXRmb3JtLnYxLkxpc3RNZXJnZXNSZXNwb25zZRJaCgtEZWNpZGVNZXJnZRIkLnRhbmsucGxhdGZvcm0udjEuRGVjaWRlTWVyZ2VSZXF1ZXN0GiUudGFuay5wbGF0Zm9ybS52MS5EZWNpZGVNZXJnZVJlc3BvbnNlEm8KEkxpc3REcm9wQ2FuZGlkYXRlcxIrLnRhbmsucGxhdGZvcm0udjEuTGlzdERyb3BDYW5kaWRhdGVzUmVxdWVzdBosLnRhbmsucGxhdGZvcm0udjEuTGlzdERyb3BDYW5kaWRhdGVzUmVzcG9uc2USWgoLR2V0T3ZlcnZpZXcSJC50YW5rLnBsYXRmb3JtLnYxLkdldE92ZXJ2aWV3UmVxdWVzdBolLnRhbmsucGxhdGZvcm0udjEuR2V0T3ZlcnZpZXdSZXNwb25zZRJaCgtTZWFyY2hVc2VycxIkLnRhbmsucGxhdGZvcm0udjEuU2VhcmNoVXNlcnNSZXF1ZXN0GiUudGFuay5wbGF0Zm9ybS52MS5TZWFyY2hVc2Vyc1Jlc3BvbnNlEk4KB0dldFVzZXISIC50YW5rLnBsYXRmb3JtLnYxLkdldFVzZXJSZXF1ZXN0GiEudGFuay5wbGF0Zm9ybS52MS5HZXRVc2VyUmVzcG9uc2USaQoQU2VhcmNoV29ya3NwYWNlcxIpLnRhbmsucGxhdGZvcm0udjEuU2VhcmNoV29ya3NwYWNlc1JlcXVlc3QaKi50YW5rLnBsYXRmb3JtLnYxLlNlYXJjaFdvcmtzcGFjZXNSZXNwb25zZRJdCgxHZXRXb3Jrc3BhY2USJS50YW5rLnBsYXRmb3JtLnYxLkdldFdvcmtzcGFjZVJlcXVlc3QaJi50YW5rLnBsYXRmb3JtLnYxLkdldFdvcmtzcGFjZVJlc3BvbnNlEmYKD0xpc3RTdXBlckFkbWlucxIoLnRhbmsucGxhdGZvcm0udjEuTGlzdFN1cGVyQWRtaW5zUmVxdWVzdBopLnRhbmsucGxhdGZvcm0udjEuTGlzdFN1cGVyQWRtaW5zUmVzcG9uc2USYAoNQWRkU3VwZXJBZG1pbhImLnRhbmsucGxhdGZvcm0udjEuQWRkU3VwZXJBZG1pblJlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLkFkZFN1cGVyQWRtaW5SZXNwb25zZRJpChBSZW1vdmVTdXBlckFkbWluEikudGFuay5wbGF0Zm9ybS52MS5SZW1vdmVTdXBlckFkbWluUmVxdWVzdBoqLnRhbmsucGxhdGZvcm0udjEuUmVtb3ZlU3VwZXJBZG1pblJlc3BvbnNlQuABChRjb20udGFuay5wbGF0Zm9ybS52MUINUGxhdGZvcm1Qcm90b1ABWldnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3BsYXRmb3JtL3YxO3BsYXRmb3JtdjGiAgNUUFiqAhBUYW5rLlBsYXRmb3JtLlYxygIQVGFua1xQbGF0Zm9ybVxWMeICHFRhbmtcUGxhdGZvcm1cVjFcR1BCTWV0YWRhdGHqAhJUYW5rOjpQbGF0Zm9ybTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * AgentureRow is one product on the board as the console sees it.
@@ -708,6 +708,1091 @@ export const ListDropCandidatesResponseSchema: GenMessage<ListDropCandidatesResp
   messageDesc(file_tank_platform_v1_platform, 17);
 
 /**
+ * UserRow is one account as the directory lists it.
+ *
+ * @generated from message tank.platform.v1.UserRow
+ */
+export type UserRow = Message<"tank.platform.v1.UserRow"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string display_name = 2;
+   */
+  displayName: string;
+
+  /**
+   * @generated from field: string email = 3;
+   */
+  email: string;
+
+  /**
+   * user | bot | agent
+   *
+   * @generated from field: string kind = 4;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 5;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * the last time a session was opened
+   *
+   * @generated from field: google.protobuf.Timestamp last_login_at = 6;
+   */
+  lastLoginAt?: Timestamp;
+
+  /**
+   * latest across the workspaces they are in
+   *
+   * @generated from field: google.protobuf.Timestamp last_active_at = 7;
+   */
+  lastActiveAt?: Timestamp;
+
+  /**
+   * @generated from field: int32 workspaces = 8;
+   */
+  workspaces: number;
+
+  /**
+   * @generated from field: bool super_admin = 9;
+   */
+  superAdmin: boolean;
+};
+
+/**
+ * Describes the message tank.platform.v1.UserRow.
+ * Use `create(UserRowSchema)` to create a new message.
+ */
+export const UserRowSchema: GenMessage<UserRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 18);
+
+/**
+ * @generated from message tank.platform.v1.SearchUsersRequest
+ */
+export type SearchUsersRequest = Message<"tank.platform.v1.SearchUsersRequest"> & {
+  /**
+   * name or email
+   *
+   * @generated from field: string query = 1;
+   */
+  query: string;
+
+  /**
+   * @generated from field: int32 limit = 2;
+   */
+  limit: number;
+
+  /**
+   * @generated from field: int32 offset = 3;
+   */
+  offset: number;
+
+  /**
+   * bots and agents as well as people
+   *
+   * @generated from field: bool include_machines = 4;
+   */
+  includeMachines: boolean;
+
+  /**
+   * newest (default) | active | login | name
+   *
+   * @generated from field: string sort = 5;
+   */
+  sort: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.SearchUsersRequest.
+ * Use `create(SearchUsersRequestSchema)` to create a new message.
+ */
+export const SearchUsersRequestSchema: GenMessage<SearchUsersRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 19);
+
+/**
+ * @generated from message tank.platform.v1.SearchUsersResponse
+ */
+export type SearchUsersResponse = Message<"tank.platform.v1.SearchUsersResponse"> & {
+  /**
+   * @generated from field: repeated tank.platform.v1.UserRow users = 1;
+   */
+  users: UserRow[];
+
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total: number;
+};
+
+/**
+ * Describes the message tank.platform.v1.SearchUsersResponse.
+ * Use `create(SearchUsersResponseSchema)` to create a new message.
+ */
+export const SearchUsersResponseSchema: GenMessage<SearchUsersResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 20);
+
+/**
+ * Membership is one workspace somebody is in, and how recently they used it.
+ *
+ * @generated from message tank.platform.v1.Membership
+ */
+export type Membership = Message<"tank.platform.v1.Membership"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string slug = 2;
+   */
+  slug: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string role = 4;
+   */
+  role: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp joined_at = 5;
+   */
+  joinedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_active_at = 6;
+   */
+  lastActiveAt?: Timestamp;
+
+  /**
+   * @generated from field: bool deactivated = 7;
+   */
+  deactivated: boolean;
+
+  /**
+   * @generated from field: string plan = 8;
+   */
+  plan: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.Membership.
+ * Use `create(MembershipSchema)` to create a new message.
+ */
+export const MembershipSchema: GenMessage<Membership> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 21);
+
+/**
+ * LoginRow is one session: when it was opened and from what.
+ *
+ * @generated from message tank.platform.v1.LoginRow
+ */
+export type LoginRow = Message<"tank.platform.v1.LoginRow"> & {
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 1;
+   */
+  at?: Timestamp;
+
+  /**
+   * web | mobile_refresh
+   *
+   * @generated from field: string kind = 2;
+   */
+  kind: string;
+
+  /**
+   * the user agent, shortened
+   *
+   * @generated from field: string client = 3;
+   */
+  client: string;
+
+  /**
+   * not yet expired
+   *
+   * @generated from field: bool live = 4;
+   */
+  live: boolean;
+};
+
+/**
+ * Describes the message tank.platform.v1.LoginRow.
+ * Use `create(LoginRowSchema)` to create a new message.
+ */
+export const LoginRowSchema: GenMessage<LoginRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 22);
+
+/**
+ * @generated from message tank.platform.v1.GetUserRequest
+ */
+export type GetUserRequest = Message<"tank.platform.v1.GetUserRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.GetUserRequest.
+ * Use `create(GetUserRequestSchema)` to create a new message.
+ */
+export const GetUserRequestSchema: GenMessage<GetUserRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 23);
+
+/**
+ * @generated from message tank.platform.v1.GetUserResponse
+ */
+export type GetUserResponse = Message<"tank.platform.v1.GetUserResponse"> & {
+  /**
+   * @generated from field: tank.platform.v1.UserRow user = 1;
+   */
+  user?: UserRow;
+
+  /**
+   * @generated from field: repeated tank.platform.v1.Membership memberships = 2;
+   */
+  memberships: Membership[];
+
+  /**
+   * newest first
+   *
+   * @generated from field: repeated tank.platform.v1.LoginRow logins = 3;
+   */
+  logins: LoginRow[];
+};
+
+/**
+ * Describes the message tank.platform.v1.GetUserResponse.
+ * Use `create(GetUserResponseSchema)` to create a new message.
+ */
+export const GetUserResponseSchema: GenMessage<GetUserResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 24);
+
+/**
+ * WorkspaceRow is one workspace as the directory lists it.
+ *
+ * @generated from message tank.platform.v1.WorkspaceRow
+ */
+export type WorkspaceRow = Message<"tank.platform.v1.WorkspaceRow"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string slug = 2;
+   */
+  slug: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * venture | agenture | service | environment
+   *
+   * @generated from field: string kind = 4;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: string plan = 5;
+   */
+  plan: string;
+
+  /**
+   * @generated from field: repeated string addons = 6;
+   */
+  addons: string[];
+
+  /**
+   * active human members
+   *
+   * @generated from field: int32 people = 7;
+   */
+  people: number;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 8;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * the latest of its members
+   *
+   * @generated from field: google.protobuf.Timestamp last_active_at = 9;
+   */
+  lastActiveAt?: Timestamp;
+
+  /**
+   * @generated from field: string owner_email = 10;
+   */
+  ownerEmail: string;
+
+  /**
+   * @generated from field: int32 agent_runs_30d = 11;
+   */
+  agentRuns30d: number;
+
+  /**
+   * what its agents cost us
+   *
+   * @generated from field: double agent_cost_usd_30d = 12;
+   */
+  agentCostUsd30d: number;
+
+  /**
+   * what it is charged this month
+   *
+   * @generated from field: int64 agent_billed_cents_month = 13;
+   */
+  agentBilledCentsMonth: bigint;
+};
+
+/**
+ * Describes the message tank.platform.v1.WorkspaceRow.
+ * Use `create(WorkspaceRowSchema)` to create a new message.
+ */
+export const WorkspaceRowSchema: GenMessage<WorkspaceRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 25);
+
+/**
+ * @generated from message tank.platform.v1.SearchWorkspacesRequest
+ */
+export type SearchWorkspacesRequest = Message<"tank.platform.v1.SearchWorkspacesRequest"> & {
+  /**
+   * name, slug or a member's email
+   *
+   * @generated from field: string query = 1;
+   */
+  query: string;
+
+  /**
+   * @generated from field: int32 limit = 2;
+   */
+  limit: number;
+
+  /**
+   * @generated from field: int32 offset = 3;
+   */
+  offset: number;
+
+  /**
+   * newest (default) | active | usage | name
+   *
+   * @generated from field: string sort = 4;
+   */
+  sort: string;
+
+  /**
+   * empty is every kind
+   *
+   * @generated from field: string kind = 5;
+   */
+  kind: string;
+
+  /**
+   * empty is every plan
+   *
+   * @generated from field: string plan = 6;
+   */
+  plan: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.SearchWorkspacesRequest.
+ * Use `create(SearchWorkspacesRequestSchema)` to create a new message.
+ */
+export const SearchWorkspacesRequestSchema: GenMessage<SearchWorkspacesRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 26);
+
+/**
+ * @generated from message tank.platform.v1.SearchWorkspacesResponse
+ */
+export type SearchWorkspacesResponse = Message<"tank.platform.v1.SearchWorkspacesResponse"> & {
+  /**
+   * @generated from field: repeated tank.platform.v1.WorkspaceRow workspaces = 1;
+   */
+  workspaces: WorkspaceRow[];
+
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total: number;
+};
+
+/**
+ * Describes the message tank.platform.v1.SearchWorkspacesResponse.
+ * Use `create(SearchWorkspacesResponseSchema)` to create a new message.
+ */
+export const SearchWorkspacesResponseSchema: GenMessage<SearchWorkspacesResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 27);
+
+/**
+ * MemberRow is one person in a workspace.
+ *
+ * @generated from message tank.platform.v1.MemberRow
+ */
+export type MemberRow = Message<"tank.platform.v1.MemberRow"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+
+  /**
+   * @generated from field: string display_name = 2;
+   */
+  displayName: string;
+
+  /**
+   * @generated from field: string email = 3;
+   */
+  email: string;
+
+  /**
+   * @generated from field: string kind = 4;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: string role = 5;
+   */
+  role: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp joined_at = 6;
+   */
+  joinedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_login_at = 7;
+   */
+  lastLoginAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_active_at = 8;
+   */
+  lastActiveAt?: Timestamp;
+
+  /**
+   * @generated from field: bool deactivated = 9;
+   */
+  deactivated: boolean;
+};
+
+/**
+ * Describes the message tank.platform.v1.MemberRow.
+ * Use `create(MemberRowSchema)` to create a new message.
+ */
+export const MemberRowSchema: GenMessage<MemberRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 28);
+
+/**
+ * Feature is one thing a workspace can use, and whether it can.
+ *
+ * @generated from message tank.platform.v1.Feature
+ */
+export type Feature = Message<"tank.platform.v1.Feature"> & {
+  /**
+   * premium | agent | shield | books | blueprint | atlas
+   *
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: string label = 2;
+   */
+  label: string;
+
+  /**
+   * @generated from field: bool on = 3;
+   */
+  on: boolean;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp since = 4;
+   */
+  since?: Timestamp;
+};
+
+/**
+ * Describes the message tank.platform.v1.Feature.
+ * Use `create(FeatureSchema)` to create a new message.
+ */
+export const FeatureSchema: GenMessage<Feature> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 29);
+
+/**
+ * @generated from message tank.platform.v1.Subscription
+ */
+export type Subscription = Message<"tank.platform.v1.Subscription"> & {
+  /**
+   * @generated from field: string product = 1;
+   */
+  product: string;
+
+  /**
+   * @generated from field: string provider = 2;
+   */
+  provider: string;
+
+  /**
+   * @generated from field: string status = 3;
+   */
+  status: string;
+
+  /**
+   * @generated from field: int32 seats = 4;
+   */
+  seats: number;
+
+  /**
+   * @generated from field: string period_end = 5;
+   */
+  periodEnd: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.Subscription.
+ * Use `create(SubscriptionSchema)` to create a new message.
+ */
+export const SubscriptionSchema: GenMessage<Subscription> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 30);
+
+/**
+ * DailyCount is one day of activity. Counts only.
+ *
+ * @generated from message tank.platform.v1.DailyCount
+ */
+export type DailyCount = Message<"tank.platform.v1.DailyCount"> & {
+  /**
+   * YYYY-MM-DD, UTC
+   *
+   * @generated from field: string day = 1;
+   */
+  day: string;
+
+  /**
+   * @generated from field: int32 messages = 2;
+   */
+  messages: number;
+
+  /**
+   * distinct people who posted
+   *
+   * @generated from field: int32 active_people = 3;
+   */
+  activePeople: number;
+
+  /**
+   * @generated from field: int32 agent_runs = 4;
+   */
+  agentRuns: number;
+
+  /**
+   * @generated from field: double agent_cost_usd = 5;
+   */
+  agentCostUsd: number;
+
+  /**
+   * overview only
+   *
+   * @generated from field: int32 new_people = 6;
+   */
+  newPeople: number;
+
+  /**
+   * overview only
+   *
+   * @generated from field: int32 new_workspaces = 7;
+   */
+  newWorkspaces: number;
+};
+
+/**
+ * Describes the message tank.platform.v1.DailyCount.
+ * Use `create(DailyCountSchema)` to create a new message.
+ */
+export const DailyCountSchema: GenMessage<DailyCount> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 31);
+
+/**
+ * AgentRunRow is one run without its ask: what an agent was asked is the
+ * workspace's content and stays in the workspace.
+ *
+ * @generated from message tank.platform.v1.AgentRunRow
+ */
+export type AgentRunRow = Message<"tank.platform.v1.AgentRunRow"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string agent_name = 2;
+   */
+  agentName: string;
+
+  /**
+   * @generated from field: string state = 3;
+   */
+  state: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp started_at = 4;
+   */
+  startedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp ended_at = 5;
+   */
+  endedAt?: Timestamp;
+
+  /**
+   * @generated from field: int64 minutes = 6;
+   */
+  minutes: bigint;
+
+  /**
+   * @generated from field: double cost_usd = 7;
+   */
+  costUsd: number;
+};
+
+/**
+ * Describes the message tank.platform.v1.AgentRunRow.
+ * Use `create(AgentRunRowSchema)` to create a new message.
+ */
+export const AgentRunRowSchema: GenMessage<AgentRunRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 32);
+
+/**
+ * @generated from message tank.platform.v1.AgentUsage
+ */
+export type AgentUsage = Message<"tank.platform.v1.AgentUsage"> & {
+  /**
+   * @generated from field: int32 runs_30d = 1;
+   */
+  runs30d: number;
+
+  /**
+   * @generated from field: int32 failed_30d = 2;
+   */
+  failed30d: number;
+
+  /**
+   * @generated from field: int64 minutes_30d = 3;
+   */
+  minutes30d: bigint;
+
+  /**
+   * @generated from field: double cost_usd_30d = 4;
+   */
+  costUsd30d: number;
+
+  /**
+   * @generated from field: double cost_usd_month = 5;
+   */
+  costUsdMonth: number;
+
+  /**
+   * @generated from field: int64 billed_cents_month = 6;
+   */
+  billedCentsMonth: bigint;
+
+  /**
+   * 0 is no cap
+   *
+   * @generated from field: int64 cap_cents = 7;
+   */
+  capCents: bigint;
+
+  /**
+   * @generated from field: repeated tank.platform.v1.AgentRunRow recent = 8;
+   */
+  recent: AgentRunRow[];
+
+  /**
+   * the agents it has, by name
+   *
+   * @generated from field: repeated string agents = 9;
+   */
+  agents: string[];
+};
+
+/**
+ * Describes the message tank.platform.v1.AgentUsage.
+ * Use `create(AgentUsageSchema)` to create a new message.
+ */
+export const AgentUsageSchema: GenMessage<AgentUsage> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 33);
+
+/**
+ * @generated from message tank.platform.v1.WorkspaceCounts
+ */
+export type WorkspaceCounts = Message<"tank.platform.v1.WorkspaceCounts"> & {
+  /**
+   * @generated from field: int32 treads = 1;
+   */
+  treads: number;
+
+  /**
+   * @generated from field: int64 messages = 2;
+   */
+  messages: bigint;
+
+  /**
+   * @generated from field: int32 files = 3;
+   */
+  files: number;
+
+  /**
+   * @generated from field: int32 boards = 4;
+   */
+  boards: number;
+
+  /**
+   * @generated from field: int32 pages = 5;
+   */
+  pages: number;
+};
+
+/**
+ * Describes the message tank.platform.v1.WorkspaceCounts.
+ * Use `create(WorkspaceCountsSchema)` to create a new message.
+ */
+export const WorkspaceCountsSchema: GenMessage<WorkspaceCounts> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 34);
+
+/**
+ * @generated from message tank.platform.v1.GetWorkspaceRequest
+ */
+export type GetWorkspaceRequest = Message<"tank.platform.v1.GetWorkspaceRequest"> & {
+  /**
+   * or
+   *
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string slug = 2;
+   */
+  slug: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.GetWorkspaceRequest.
+ * Use `create(GetWorkspaceRequestSchema)` to create a new message.
+ */
+export const GetWorkspaceRequestSchema: GenMessage<GetWorkspaceRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 35);
+
+/**
+ * @generated from message tank.platform.v1.GetWorkspaceResponse
+ */
+export type GetWorkspaceResponse = Message<"tank.platform.v1.GetWorkspaceResponse"> & {
+  /**
+   * @generated from field: tank.platform.v1.WorkspaceRow workspace = 1;
+   */
+  workspace?: WorkspaceRow;
+
+  /**
+   * @generated from field: repeated tank.platform.v1.MemberRow members = 2;
+   */
+  members: MemberRow[];
+
+  /**
+   * @generated from field: repeated tank.platform.v1.Feature features = 3;
+   */
+  features: Feature[];
+
+  /**
+   * @generated from field: repeated tank.platform.v1.Subscription subscriptions = 4;
+   */
+  subscriptions: Subscription[];
+
+  /**
+   * @generated from field: tank.platform.v1.AgentUsage agent_usage = 5;
+   */
+  agentUsage?: AgentUsage;
+
+  /**
+   * the last 30, oldest first
+   *
+   * @generated from field: repeated tank.platform.v1.DailyCount days = 6;
+   */
+  days: DailyCount[];
+
+  /**
+   * @generated from field: tank.platform.v1.WorkspaceCounts counts = 7;
+   */
+  counts?: WorkspaceCounts;
+};
+
+/**
+ * Describes the message tank.platform.v1.GetWorkspaceResponse.
+ * Use `create(GetWorkspaceResponseSchema)` to create a new message.
+ */
+export const GetWorkspaceResponseSchema: GenMessage<GetWorkspaceResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 36);
+
+/**
+ * @generated from message tank.platform.v1.GetOverviewRequest
+ */
+export type GetOverviewRequest = Message<"tank.platform.v1.GetOverviewRequest"> & {
+};
+
+/**
+ * Describes the message tank.platform.v1.GetOverviewRequest.
+ * Use `create(GetOverviewRequestSchema)` to create a new message.
+ */
+export const GetOverviewRequestSchema: GenMessage<GetOverviewRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 37);
+
+/**
+ * @generated from message tank.platform.v1.GetOverviewResponse
+ */
+export type GetOverviewResponse = Message<"tank.platform.v1.GetOverviewResponse"> & {
+  /**
+   * @generated from field: int32 people = 1;
+   */
+  people: number;
+
+  /**
+   * @generated from field: int32 people_new_7d = 2;
+   */
+  peopleNew7d: number;
+
+  /**
+   * @generated from field: int32 people_active_1d = 3;
+   */
+  peopleActive1d: number;
+
+  /**
+   * @generated from field: int32 people_active_7d = 4;
+   */
+  peopleActive7d: number;
+
+  /**
+   * @generated from field: int32 workspaces = 5;
+   */
+  workspaces: number;
+
+  /**
+   * @generated from field: int32 workspaces_new_7d = 6;
+   */
+  workspacesNew7d: number;
+
+  /**
+   * @generated from field: int32 premium = 7;
+   */
+  premium: number;
+
+  /**
+   * @generated from field: double agent_cost_usd_month = 8;
+   */
+  agentCostUsdMonth: number;
+
+  /**
+   * @generated from field: int32 agent_runs_30d = 9;
+   */
+  agentRuns30d: number;
+
+  /**
+   * the last 30, oldest first
+   *
+   * @generated from field: repeated tank.platform.v1.DailyCount days = 10;
+   */
+  days: DailyCount[];
+
+  /**
+   * may add and remove super admins
+   *
+   * @generated from field: bool caller_is_root = 11;
+   */
+  callerIsRoot: boolean;
+
+  /**
+   * the top few by last 7 days of messages
+   *
+   * @generated from field: repeated tank.platform.v1.WorkspaceRow most_active = 12;
+   */
+  mostActive: WorkspaceRow[];
+};
+
+/**
+ * Describes the message tank.platform.v1.GetOverviewResponse.
+ * Use `create(GetOverviewResponseSchema)` to create a new message.
+ */
+export const GetOverviewResponseSchema: GenMessage<GetOverviewResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 38);
+
+/**
+ * SuperAdminRow is one person who may use this console.
+ *
+ * @generated from message tank.platform.v1.SuperAdminRow
+ */
+export type SuperAdminRow = Message<"tank.platform.v1.SuperAdminRow"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+
+  /**
+   * @generated from field: string email = 2;
+   */
+  email: string;
+
+  /**
+   * @generated from field: string display_name = 3;
+   */
+  displayName: string;
+
+  /**
+   * named in the deployment; not removable here
+   *
+   * @generated from field: bool root = 4;
+   */
+  root: boolean;
+
+  /**
+   * @generated from field: string added_by_email = 5;
+   */
+  addedByEmail: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp added_at = 6;
+   */
+  addedAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.platform.v1.SuperAdminRow.
+ * Use `create(SuperAdminRowSchema)` to create a new message.
+ */
+export const SuperAdminRowSchema: GenMessage<SuperAdminRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 39);
+
+/**
+ * @generated from message tank.platform.v1.ListSuperAdminsRequest
+ */
+export type ListSuperAdminsRequest = Message<"tank.platform.v1.ListSuperAdminsRequest"> & {
+};
+
+/**
+ * Describes the message tank.platform.v1.ListSuperAdminsRequest.
+ * Use `create(ListSuperAdminsRequestSchema)` to create a new message.
+ */
+export const ListSuperAdminsRequestSchema: GenMessage<ListSuperAdminsRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 40);
+
+/**
+ * @generated from message tank.platform.v1.ListSuperAdminsResponse
+ */
+export type ListSuperAdminsResponse = Message<"tank.platform.v1.ListSuperAdminsResponse"> & {
+  /**
+   * @generated from field: repeated tank.platform.v1.SuperAdminRow admins = 1;
+   */
+  admins: SuperAdminRow[];
+
+  /**
+   * @generated from field: bool caller_is_root = 2;
+   */
+  callerIsRoot: boolean;
+};
+
+/**
+ * Describes the message tank.platform.v1.ListSuperAdminsResponse.
+ * Use `create(ListSuperAdminsResponseSchema)` to create a new message.
+ */
+export const ListSuperAdminsResponseSchema: GenMessage<ListSuperAdminsResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 41);
+
+/**
+ * AddSuperAdmin names an existing account. Root only.
+ *
+ * @generated from message tank.platform.v1.AddSuperAdminRequest
+ */
+export type AddSuperAdminRequest = Message<"tank.platform.v1.AddSuperAdminRequest"> & {
+  /**
+   * @generated from field: string email = 1;
+   */
+  email: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.AddSuperAdminRequest.
+ * Use `create(AddSuperAdminRequestSchema)` to create a new message.
+ */
+export const AddSuperAdminRequestSchema: GenMessage<AddSuperAdminRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 42);
+
+/**
+ * @generated from message tank.platform.v1.AddSuperAdminResponse
+ */
+export type AddSuperAdminResponse = Message<"tank.platform.v1.AddSuperAdminResponse"> & {
+  /**
+   * @generated from field: repeated tank.platform.v1.SuperAdminRow admins = 1;
+   */
+  admins: SuperAdminRow[];
+};
+
+/**
+ * Describes the message tank.platform.v1.AddSuperAdminResponse.
+ * Use `create(AddSuperAdminResponseSchema)` to create a new message.
+ */
+export const AddSuperAdminResponseSchema: GenMessage<AddSuperAdminResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 43);
+
+/**
+ * RemoveSuperAdmin removes one added in the console. Root only; a root is not removable.
+ *
+ * @generated from message tank.platform.v1.RemoveSuperAdminRequest
+ */
+export type RemoveSuperAdminRequest = Message<"tank.platform.v1.RemoveSuperAdminRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.RemoveSuperAdminRequest.
+ * Use `create(RemoveSuperAdminRequestSchema)` to create a new message.
+ */
+export const RemoveSuperAdminRequestSchema: GenMessage<RemoveSuperAdminRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 44);
+
+/**
+ * @generated from message tank.platform.v1.RemoveSuperAdminResponse
+ */
+export type RemoveSuperAdminResponse = Message<"tank.platform.v1.RemoveSuperAdminResponse"> & {
+  /**
+   * @generated from field: repeated tank.platform.v1.SuperAdminRow admins = 1;
+   */
+  admins: SuperAdminRow[];
+};
+
+/**
+ * Describes the message tank.platform.v1.RemoveSuperAdminResponse.
+ * Use `create(RemoveSuperAdminResponseSchema)` to create a new message.
+ */
+export const RemoveSuperAdminResponseSchema: GenMessage<RemoveSuperAdminResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 45);
+
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export const PlatformService: GenService<{
@@ -766,6 +1851,70 @@ export const PlatformService: GenService<{
     methodKind: "unary";
     input: typeof ListDropCandidatesRequestSchema;
     output: typeof ListDropCandidatesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.GetOverview
+   */
+  getOverview: {
+    methodKind: "unary";
+    input: typeof GetOverviewRequestSchema;
+    output: typeof GetOverviewResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.SearchUsers
+   */
+  searchUsers: {
+    methodKind: "unary";
+    input: typeof SearchUsersRequestSchema;
+    output: typeof SearchUsersResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.GetUser
+   */
+  getUser: {
+    methodKind: "unary";
+    input: typeof GetUserRequestSchema;
+    output: typeof GetUserResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.SearchWorkspaces
+   */
+  searchWorkspaces: {
+    methodKind: "unary";
+    input: typeof SearchWorkspacesRequestSchema;
+    output: typeof SearchWorkspacesResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.GetWorkspace
+   */
+  getWorkspace: {
+    methodKind: "unary";
+    input: typeof GetWorkspaceRequestSchema;
+    output: typeof GetWorkspaceResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.ListSuperAdmins
+   */
+  listSuperAdmins: {
+    methodKind: "unary";
+    input: typeof ListSuperAdminsRequestSchema;
+    output: typeof ListSuperAdminsResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.AddSuperAdmin
+   */
+  addSuperAdmin: {
+    methodKind: "unary";
+    input: typeof AddSuperAdminRequestSchema;
+    output: typeof AddSuperAdminResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.RemoveSuperAdmin
+   */
+  removeSuperAdmin: {
+    methodKind: "unary";
+    input: typeof RemoveSuperAdminRequestSchema;
+    output: typeof RemoveSuperAdminResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_platform_v1_platform, 0);
