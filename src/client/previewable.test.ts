@@ -50,6 +50,8 @@ describe("framesAsPage", () => {
     ])
       expect(framesAsPage(m)).toBe(true);
     expect(framesAsPage("text/plain", "README.md")).toBe(true);
+    for (const name of ["q3.csv", "main.go", "analysis.ipynb", "flow.mmd"])
+      expect(framesAsPage("application/octet-stream", name)).toBe(true);
     expect(framesAsPage("application/zip", "a.zip")).toBe(false);
   });
 });

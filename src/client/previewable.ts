@@ -34,14 +34,51 @@ export function opensAsPage(mime: string | undefined): boolean {
   return m === "text/html" || m === "application/xhtml+xml" || m === "image/svg+xml";
 }
 
+/** Source files shown highlighted, by extension (api internal/files/pagewrap.go `codeExt`). */
+const CODE_EXT = new Set([
+  ".go",
+  ".ts",
+  ".tsx",
+  ".js",
+  ".jsx",
+  ".py",
+  ".rb",
+  ".rs",
+  ".java",
+  ".kt",
+  ".swift",
+  ".c",
+  ".h",
+  ".cc",
+  ".cpp",
+  ".cs",
+  ".php",
+  ".sh",
+  ".sql",
+  ".yaml",
+  ".yml",
+  ".toml",
+  ".json",
+  ".css",
+  ".scss",
+  ".tf",
+  ".proto",
+  ".lua",
+  ".dart",
+  ".scala",
+]);
+
 /**
  * Whether a file of this type runs as a live frame in Blueprint: a web page or a drawing as
- * it is, and a PDF, a video, a recording or Markdown inside a page the server writes around
- * it. Ask `getDownloadUrl(id, { page: true })` for its address. Mirrors the server's
- * `PageKind` (api internal/files/pagewrap.go).
+ * it is; a PDF, a video, a recording, Markdown, a CSV, source code, a Jupyter notebook or a
+ * Mermaid diagram inside a page the server writes around it. Ask
+ * `getDownloadUrl(id, { page: true })` for its address. Mirrors the server's `PageKind`
+ * (api internal/files/pagewrap.go).
  */
 export function framesAsPage(mime: string | undefined, name = ""): boolean {
   const m = (mime ?? "").split(";")[0]?.trim().toLowerCase() ?? "";
+  const dot = name.lastIndexOf(".");
+  const ext = dot >= 0 ? name.slice(dot).toLowerCase() : "";
   return (
     opensAsPage(m) ||
     m === "application/pdf" ||
@@ -49,6 +86,8 @@ export function framesAsPage(mime: string | undefined, name = ""): boolean {
     m.startsWith("audio/") ||
     m === "text/markdown" ||
     m === "text/x-markdown" ||
-    name.toLowerCase().endsWith(".md")
+    m === "text/csv" ||
+    [".md", ".csv", ".tsv", ".ipynb", ".mmd", ".mermaid"].includes(ext) ||
+    CODE_EXT.has(ext)
   );
 }
