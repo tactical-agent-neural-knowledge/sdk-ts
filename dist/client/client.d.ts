@@ -383,6 +383,7 @@ export declare class TankClient {
      */
     getDownloadUrl(fileId: string, opts?: {
         inline?: boolean;
+        page?: boolean;
     }): Promise<string>;
     private flushOutbox;
     private flushOne;

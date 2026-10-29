@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { opensAsPage, previewable } from "./previewable.js";
+import { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 
 describe("previewable", () => {
   it("names what a browser shows and refuses what would run", () => {
@@ -35,5 +35,21 @@ describe("opensAsPage", () => {
     expect(opensAsPage("application/pdf")).toBe(false);
     expect(opensAsPage("text/xml")).toBe(false);
     expect(opensAsPage(undefined)).toBe(false);
+  });
+});
+
+describe("framesAsPage", () => {
+  it("runs pages, PDFs, media and Markdown in a Blueprint frame, and not archives", () => {
+    for (const m of [
+      "text/html",
+      "image/svg+xml",
+      "application/pdf",
+      "video/mp4",
+      "audio/mpeg",
+      "text/markdown",
+    ])
+      expect(framesAsPage(m)).toBe(true);
+    expect(framesAsPage("text/plain", "README.md")).toBe(true);
+    expect(framesAsPage("application/zip", "a.zip")).toBe(false);
   });
 });

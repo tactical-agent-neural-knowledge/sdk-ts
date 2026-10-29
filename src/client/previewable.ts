@@ -33,3 +33,22 @@ export function opensAsPage(mime: string | undefined): boolean {
   const m = (mime ?? "").split(";")[0]?.trim().toLowerCase() ?? "";
   return m === "text/html" || m === "application/xhtml+xml" || m === "image/svg+xml";
 }
+
+/**
+ * Whether a file of this type runs as a live frame in Blueprint: a web page or a drawing as
+ * it is, and a PDF, a video, a recording or Markdown inside a page the server writes around
+ * it. Ask `getDownloadUrl(id, { page: true })` for its address. Mirrors the server's
+ * `PageKind` (api internal/files/pagewrap.go).
+ */
+export function framesAsPage(mime: string | undefined, name = ""): boolean {
+  const m = (mime ?? "").split(";")[0]?.trim().toLowerCase() ?? "";
+  return (
+    opensAsPage(m) ||
+    m === "application/pdf" ||
+    m.startsWith("video/") ||
+    m.startsWith("audio/") ||
+    m === "text/markdown" ||
+    m === "text/x-markdown" ||
+    name.toLowerCase().endsWith(".md")
+  );
+}

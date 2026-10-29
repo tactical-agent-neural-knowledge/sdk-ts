@@ -12,3 +12,10 @@ export declare function previewable(mime: string | undefined): boolean;
  * the server has no preview host the same request answers with a download instead.
  */
 export declare function opensAsPage(mime: string | undefined): boolean;
+/**
+ * Whether a file of this type runs as a live frame in Blueprint: a web page or a drawing as
+ * it is, and a PDF, a video, a recording or Markdown inside a page the server writes around
+ * it. Ask `getDownloadUrl(id, { page: true })` for its address. Mirrors the server's
+ * `PageKind` (api internal/files/pagewrap.go).
+ */
+export declare function framesAsPage(mime: string | undefined, name?: string): boolean;
