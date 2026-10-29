@@ -375,7 +375,8 @@ function orderChannels(channels: Channel[]): string[] {
     .map((c) => c.id);
 }
 
-function upsertMessage(state: TankState, m: Message): TankState {
+function upsertMessage(state: TankState, given: Message): TankState {
+  const m = withHeldReplies(state, given);
   const prev = state.messages[m.id];
   const messages = { ...state.messages, [m.id]: m };
   let messageIdsByChannel = state.messageIdsByChannel;
@@ -395,6 +396,31 @@ function upsertMessage(state: TankState, m: Message): TankState {
     threadIds = { ...threadIds, [m.threadRootId]: insertOrdered(list, m.id, messages, threadSeq) };
   }
   return { ...state, messages, messageIdsByChannel, threadIds };
+}
+
+/**
+ * A root never counts fewer replies than the store already holds for it. A reply can
+ * arrive before its root: TANK answers a message within milliseconds, so the reply's event
+ * reaches the sender while the root is still the optimistic row under its client_msg_id,
+ * and the root the server then returns was counted before the reply existed. Without this
+ * the sender's own Tread showed no "1 reply" under it (Robby, 2026-10-29). A deleted reply
+ * leaves `threadIds`, so a count the server lowers still goes down.
+ */
+function withHeldReplies(state: TankState, m: Message): Message {
+  if (m.threadRootId !== "") return m;
+  const held = (state.threadIds[m.id] ?? []).map((id) => state.messages[id]).filter((r) => r !== undefined);
+  if (held.length === 0) return m;
+  const replyCount = Math.max(m.replyCount, ...held.map((r) => Number(r.threadSeq)));
+  const missing = held
+    .map((r) => r.authorId)
+    .filter((a, i, all) => !m.replyUserIds.includes(a) && all.indexOf(a) === i);
+  if (replyCount === m.replyCount && missing.length === 0) return m;
+  const newest = held.reduce((a, b) => (b.threadSeq > a.threadSeq ? b : a));
+  const lastReplyAt =
+    m.lastReplyAt && newest.createdAt && m.lastReplyAt.seconds >= newest.createdAt.seconds
+      ? m.lastReplyAt
+      : (newest.createdAt ?? m.lastReplyAt);
+  return { ...m, replyCount, replyUserIds: [...m.replyUserIds, ...missing], lastReplyAt };
 }
 
 function ids(map: Record<string, string[]>, key: string): string[] {

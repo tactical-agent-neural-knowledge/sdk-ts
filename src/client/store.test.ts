@@ -157,6 +157,37 @@ describe("messages", () => {
 });
 
 describe("outbox reconciliation", () => {
+  // Robby, 2026-10-29: TANK answered a file he sent within milliseconds, the answer's event
+  // beat the root's, and the web Tread never showed "1 reply" under his message.
+  it("a reply that arrives before its root is still counted on the root", () => {
+    const store = bootstrapped();
+    const clientMsgId = uuidv7();
+    store.dispatch({
+      type: "pending/add",
+      message: msg(clientMsgId, 0, { clientMsgId, authorId: "me", text: "vision.html" }),
+      now: Date.now(),
+    });
+    store.dispatch({
+      type: "messages/created",
+      message: msg("offer", 9, { threadRootId: "root", threadSeq: 1n, authorId: "tank" }),
+    });
+    // The root as the server saved it, before the reply existed.
+    store.dispatch({
+      type: "pending/resolve",
+      clientMsgId,
+      message: msg("root", 8, { clientMsgId, authorId: "me", text: "vision.html", replyCount: 0 }),
+    });
+    const root = store.getState().messages.root;
+    expect(root?.replyCount).toBe(1);
+    expect(root?.replyUserIds).toEqual(["tank"]);
+    // Its echo, also counted before the reply, does not take the count back.
+    store.dispatch({
+      type: "messages/created",
+      message: msg("root", 8, { authorId: "me", text: "vision.html", replyCount: 0 }),
+    });
+    expect(store.getState().messages.root?.replyCount).toBe(1);
+  });
+
   it("optimistic rows trail real ones and are replaced by the echoed event", () => {
     const store = bootstrapped();
     store.dispatch({ type: "messages/created", message: msg("m5", 5) });
