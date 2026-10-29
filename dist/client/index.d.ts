@@ -3,7 +3,7 @@ export { type CreateChannelInput, createTankClient, type ListRunsInput, type Loa
 export { Emitter, type Handler } from "./emitter.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
-export { opensAsPage, previewable } from "./previewable.js";
+export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 export { browserOnlineSignal, type OnlineSignal, RealtimeClient, type RealtimeEvents, type RealtimeOptions, type RealtimeSession, type WebSocketCtor, type WebSocketLike, } from "./realtime.js";
 export { expandShortcodes } from "./shortcodes.js";
 export { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";

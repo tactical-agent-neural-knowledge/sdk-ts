@@ -1184,16 +1184,19 @@ export class TankClient {
    * `inline` asks for a URL the browser displays rather than saves; the server grants it only for
    * types it is safe to render (see `previewable`) and the two kinds are memoized apart.
    */
-  getDownloadUrl(fileId: string, opts: { inline?: boolean } = {}): Promise<string> {
+  getDownloadUrl(fileId: string, opts: { inline?: boolean; page?: boolean } = {}): Promise<string> {
     const inline = opts.inline === true;
-    const key = inline ? `${fileId}#inline` : fileId;
+    // A page (a Blueprint frame): the file on its own sandboxed preview host, wrapped when it
+    // is a PDF, a video, a recording or Markdown. Cached apart from the other two kinds.
+    const page = opts.page === true;
+    const key = page ? `${fileId}#page` : inline ? `${fileId}#inline` : fileId;
     const hit = this.downloadUrls.get(key);
     if (hit && hit.expiresAt > this.now()) return Promise.resolve(hit.url);
     const inFlight = this.downloadUrlInFlight.get(key);
     if (inFlight) return inFlight;
     const p = (async () => {
       try {
-        const res = await this.files.getDownloadUrl({ fileId, inline });
+        const res = await this.files.getDownloadUrl({ fileId, inline, page });
         const now = this.now();
         const serverExpiry = res.expiresAt
           ? Number(res.expiresAt.seconds) * 1000 + Math.floor(res.expiresAt.nanos / 1e6)

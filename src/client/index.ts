@@ -19,7 +19,7 @@ export {
 export { Emitter, type Handler } from "./emitter.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
-export { opensAsPage, previewable } from "./previewable.js";
+export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 export {
   browserOnlineSignal,
   type OnlineSignal,

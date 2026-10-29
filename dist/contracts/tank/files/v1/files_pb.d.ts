@@ -193,6 +193,15 @@ export type GetDownloadUrlRequest = Message<"tank.files.v1.GetDownloadUrlRequest
      * @generated from field: bool inline = 2;
      */
     inline: boolean;
+    /**
+     * Ask for the file as a page on its own sandboxed preview host, the way a Blueprint frame
+     * shows it (2026-10-29): a web page or a drawing as it is; a PDF, a video, a recording or
+     * Markdown inside a page TANK writes around it. A type that cannot be shown that way
+     * answers as `inline` would.
+     *
+     * @generated from field: bool page = 3;
+     */
+    page: boolean;
 };
 /**
  * Describes the message tank.files.v1.GetDownloadUrlRequest.
