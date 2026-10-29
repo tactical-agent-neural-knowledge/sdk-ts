@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { previewable } from "./previewable.js";
+import { opensAsPage, previewable } from "./previewable.js";
 
 describe("previewable", () => {
   it("names what a browser shows and refuses what would run", () => {
@@ -24,5 +24,16 @@ describe("previewable", () => {
     ]) {
       expect(previewable(m), String(m)).toBe(false);
     }
+  });
+});
+
+describe("opensAsPage", () => {
+  it("opens web pages and drawings as pages, and nothing else", () => {
+    expect(opensAsPage("text/html; charset=utf-8")).toBe(true);
+    expect(opensAsPage("application/xhtml+xml")).toBe(true);
+    expect(opensAsPage("image/svg+xml")).toBe(true);
+    expect(opensAsPage("application/pdf")).toBe(false);
+    expect(opensAsPage("text/xml")).toBe(false);
+    expect(opensAsPage(undefined)).toBe(false);
   });
 });
