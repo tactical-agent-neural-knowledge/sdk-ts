@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/platform/v1/platform.proto.
  */
 export const file_tank_platform_v1_platform: GenFile = /*@__PURE__*/
-  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiyAIKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIOCgZraWxsZWQYCCABKAgSFAoMYXV0b19kZWZhdWx0GAkgASgIEhIKCmhvdXJzX2Zyb20YCiABKAUSEAoIaG91cnNfdG8YCyABKAUSEgoKaG91cnNfem9uZRgMIAEoCRISCgpob3Vyc19kYXlzGA0gAygFEhEKCXVuY2xhaW1lZBgEIAEoBRIZChFhZ2VudF9taW51dGVzXzI0aBgFIAEoAxIVCg1zcGVuZF91c2RfMjRoGAYgASgBEhcKD3NwZW5kX3VzZF90b3RhbBgHIAEoARIUCgxzcGVuZF91c2RfMWgYDiABKAESFAoMc3BlbmRfdXNkXzNoGA8gASgBInQKFFNldEFsbG9jYXRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgdlbmFibGVkGAIgASgIEg4KBndlaWdodBgDIAEoBRIPCgdydW5fbm93GAQgASgIEhQKDGF1dG9fYXBwcm92ZRgFIAEoCCJIChVTZXRBbGxvY2F0aW9uUmVzcG9uc2USLwoIYWdlbnR1cmUYASABKAsyHS50YW5rLnBsYXRmb3JtLnYxLkFnZW50dXJlUm93IqUBChdTZXRCb2FyZFNldHRpbmdzUmVxdWVzdBIWCg5tYXhfY29uY3VycmVudBgBIAEoBRIOCgZraWxsZWQYAiABKAgSFAoMYXV0b19kZWZhdWx0GAMgASgIEhIKCmhvdXJzX2Zyb20YBCABKAUSEAoIaG91cnNfdG8YBSABKAUSEgoKaG91cnNfem9uZRgGIAEoCRISCgpob3Vyc19kYXlzGAcgAygFIksKGFNldEJvYXJkU2V0dGluZ3NSZXNwb25zZRIvCgdzdW1tYXJ5GAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiMAoOU3RvcFJ1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJEg4KBnJlYXNvbhgCIAEoCSIRCg9TdG9wUnVuUmVzcG9uc2UiuwIKDU1lcmdlUHJvcG9zYWwSCgoCaWQYASABKAkSFQoNYWJzb3JiZWRfc2x1ZxgCIAEoCRIVCg1hYnNvcmJlZF9uYW1lGAMgASgJEhgKEGFic29yYmVkX3N1bW1hcnkYBCABKAkSFQoNc3Vydml2b3Jfc2x1ZxgFIAEoCRIVCg1zdXJ2aXZvcl9uYW1lGAYgASgJEhgKEHN1cnZpdm9yX3N1bW1hcnkYByABKAkSEgoKc2ltaWxhcml0eRgIIAEoARIOCgZzdGF0dXMYCSABKAkSDAoEYXV0bxgKIAEoCBIvCgtwcm9wb3NlZF9hdBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZG9uZV9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLAoRTGlzdE1lcmdlc1JlcXVlc3QSFwoPaW5jbHVkZV9kZWNpZGVkGAEgASgIIkUKEkxpc3RNZXJnZXNSZXNwb25zZRIvCgZtZXJnZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLk1lcmdlUHJvcG9zYWwiMQoSRGVjaWRlTWVyZ2VSZXF1ZXN0EgoKAmlkGAEgASgJEg8KB2FwcHJvdmUYAiABKAgiRQoTRGVjaWRlTWVyZ2VSZXNwb25zZRIuCgVtZXJnZRgBIAEoCzIfLnRhbmsucGxhdGZvcm0udjEuTWVyZ2VQcm9wb3NhbCJzCg1Ecm9wQ2FuZGlkYXRlEhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSEAoIaW5kdXN0cnkYBCABKAkSDQoFc2NvcmUYBSABKAUSDwoHcmVhc29ucxgGIAEoCSIbChlMaXN0RHJvcENhbmRpZGF0ZXNSZXF1ZXN0Il4KGkxpc3REcm9wQ2FuZGlkYXRlc1Jlc3BvbnNlEjMKCmNhbmRpZGF0ZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLkRyb3BDYW5kaWRhdGUSCwoDZGF5GAIgASgJIogCCgdVc2VyUm93EgoKAmlkGAEgASgJEhQKDGRpc3BsYXlfbmFtZRgCIAEoCRINCgVlbWFpbBgDIAEoCRIMCgRraW5kGAQgASgJEi4KCmNyZWF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDWxhc3RfbG9naW5fYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKDmxhc3RfYWN0aXZlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgp3b3Jrc3BhY2VzGAggASgFEhMKC3N1cGVyX2FkbWluGAkgASgIImoKElNlYXJjaFVzZXJzUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIOCgZvZmZzZXQYAyABKAUSGAoQaW5jbHVkZV9tYWNoaW5lcxgEIAEoCBIMCgRzb3J0GAUgASgJIk4KE1NlYXJjaFVzZXJzUmVzcG9uc2USKAoFdXNlcnMYASADKAsyGS50YW5rLnBsYXRmb3JtLnYxLlVzZXJSb3cSDQoFdG90YWwYAiABKAUi0gEKCk1lbWJlcnNoaXASFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHNsdWcYAiABKAkSDAoEbmFtZRgDIAEoCRIMCgRyb2xlGAQgASgJEi0KCWpvaW5lZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMgoObGFzdF9hY3RpdmVfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC2RlYWN0aXZhdGVkGAcgASgIEgwKBHBsYW4YCCABKAkiXgoITG9naW5Sb3cSJgoCYXQYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEgwKBGtpbmQYAiABKAkSDgoGY2xpZW50GAMgASgJEgwKBGxpdmUYBCABKAgiIQoOR2V0VXNlclJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCSKZAQoPR2V0VXNlclJlc3BvbnNlEicKBHVzZXIYASABKAsyGS50YW5rLnBsYXRmb3JtLnYxLlVzZXJSb3cSMQoLbWVtYmVyc2hpcHMYAiADKAsyHC50YW5rLnBsYXRmb3JtLnYxLk1lbWJlcnNoaXASKgoGbG9naW5zGAMgAygLMhoudGFuay5wbGF0Zm9ybS52MS5Mb2dpblJvdyLBAgoMV29ya3NwYWNlUm93EgoKAmlkGAEgASgJEgwKBHNsdWcYAiABKAkSDAoEbmFtZRgDIAEoCRIMCgRraW5kGAQgASgJEgwKBHBsYW4YBSABKAkSDgoGYWRkb25zGAYgAygJEg4KBnBlb3BsZRgHIAEoBRIuCgpjcmVhdGVkX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIyCg5sYXN0X2FjdGl2ZV9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLb3duZXJfZW1haWwYCiABKAkSFgoOYWdlbnRfcnVuc18zMGQYCyABKAUSGgoSYWdlbnRfY29zdF91c2RfMzBkGAwgASgBEiAKGGFnZW50X2JpbGxlZF9jZW50c19tb250aBgNIAEoAyJxChdTZWFyY2hXb3Jrc3BhY2VzUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIOCgZvZmZzZXQYAyABKAUSDAoEc29ydBgEIAEoCRIMCgRraW5kGAUgASgJEgwKBHBsYW4YBiABKAkiXQoYU2VhcmNoV29ya3NwYWNlc1Jlc3BvbnNlEjIKCndvcmtzcGFjZXMYASADKAsyHi50YW5rLnBsYXRmb3JtLnYxLldvcmtzcGFjZVJvdxINCgV0b3RhbBgCIAEoBSKIAgoJTWVtYmVyUm93Eg8KB3VzZXJfaWQYASABKAkSFAoMZGlzcGxheV9uYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEgwKBGtpbmQYBCABKAkSDAoEcm9sZRgFIAEoCRItCglqb2luZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDWxhc3RfbG9naW5fYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKDmxhc3RfYWN0aXZlX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBITCgtkZWFjdGl2YXRlZBgJIAEoCCJcCgdGZWF0dXJlEgsKA2tleRgBIAEoCRINCgVsYWJlbBgCIAEoCRIKCgJvbhgDIAEoCBIpCgVzaW5jZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiZAoMU3Vic2NyaXB0aW9uEg8KB3Byb2R1Y3QYASABKAkSEAoIcHJvdmlkZXIYAiABKAkSDgoGc3RhdHVzGAMgASgJEg0KBXNlYXRzGAQgASgFEhIKCnBlcmlvZF9lbmQYBSABKAkimgEKCkRhaWx5Q291bnQSCwoDZGF5GAEgASgJEhAKCG1lc3NhZ2VzGAIgASgFEhUKDWFjdGl2ZV9wZW9wbGUYAyABKAUSEgoKYWdlbnRfcnVucxgEIAEoBRIWCg5hZ2VudF9jb3N0X3VzZBgFIAEoARISCgpuZXdfcGVvcGxlGAYgASgFEhYKDm5ld193b3Jrc3BhY2VzGAcgASgFIr0BCgtBZ2VudFJ1blJvdxIKCgJpZBgBIAEoCRISCgphZ2VudF9uYW1lGAIgASgJEg0KBXN0YXRlGAMgASgJEi4KCnN0YXJ0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIPCgdtaW51dGVzGAYgASgDEhAKCGNvc3RfdXNkGAcgASgBIuMBCgpBZ2VudFVzYWdlEhAKCHJ1bnNfMzBkGAEgASgFEhIKCmZhaWxlZF8zMGQYAiABKAUSEwoLbWludXRlc18zMGQYAyABKAMSFAoMY29zdF91c2RfMzBkGAQgASgBEhYKDmNvc3RfdXNkX21vbnRoGAUgASgBEhoKEmJpbGxlZF9jZW50c19tb250aBgGIAEoAxIRCgljYXBfY2VudHMYByABKAMSLQoGcmVjZW50GAggAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudFJ1blJvdxIOCgZhZ2VudHMYCSADKAkiYQoPV29ya3NwYWNlQ291bnRzEg4KBnRyZWFkcxgBIAEoBRIQCghtZXNzYWdlcxgCIAEoAxINCgVmaWxlcxgDIAEoBRIOCgZib2FyZHMYBCABKAUSDQoFcGFnZXMYBSABKAUiOQoTR2V0V29ya3NwYWNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCSLtAgoUR2V0V29ya3NwYWNlUmVzcG9uc2USMQoJd29ya3NwYWNlGAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Xb3Jrc3BhY2VSb3cSLAoHbWVtYmVycxgCIAMoCzIbLnRhbmsucGxhdGZvcm0udjEuTWVtYmVyUm93EisKCGZlYXR1cmVzGAMgAygLMhkudGFuay5wbGF0Zm9ybS52MS5GZWF0dXJlEjUKDXN1YnNjcmlwdGlvbnMYBCADKAsyHi50YW5rLnBsYXRmb3JtLnYxLlN1YnNjcmlwdGlvbhIxCgthZ2VudF91c2FnZRgFIAEoCzIcLnRhbmsucGxhdGZvcm0udjEuQWdlbnRVc2FnZRIqCgRkYXlzGAYgAygLMhwudGFuay5wbGF0Zm9ybS52MS5EYWlseUNvdW50EjEKBmNvdW50cxgHIAEoCzIhLnRhbmsucGxhdGZvcm0udjEuV29ya3NwYWNlQ291bnRzIhQKEkdldE92ZXJ2aWV3UmVxdWVzdCLfAgoTR2V0T3ZlcnZpZXdSZXNwb25zZRIOCgZwZW9wbGUYASABKAUSFQoNcGVvcGxlX25ld183ZBgCIAEoBRIYChBwZW9wbGVfYWN0aXZlXzFkGAMgASgFEhgKEHBlb3BsZV9hY3RpdmVfN2QYBCABKAUSEgoKd29ya3NwYWNlcxgFIAEoBRIZChF3b3Jrc3BhY2VzX25ld183ZBgGIAEoBRIPCgdwcmVtaXVtGAcgASgFEhwKFGFnZW50X2Nvc3RfdXNkX21vbnRoGAggASgBEhYKDmFnZW50X3J1bnNfMzBkGAkgASgFEioKBGRheXMYCiADKAsyHC50YW5rLnBsYXRmb3JtLnYxLkRhaWx5Q291bnQSFgoOY2FsbGVyX2lzX3Jvb3QYCyABKAgSMwoLbW9zdF9hY3RpdmUYDCADKAsyHi50YW5rLnBsYXRmb3JtLnYxLldvcmtzcGFjZVJvdyKZAQoNU3VwZXJBZG1pblJvdxIPCgd1c2VyX2lkGAEgASgJEg0KBWVtYWlsGAIgASgJEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRIMCgRyb290GAQgASgIEhYKDmFkZGVkX2J5X2VtYWlsGAUgASgJEiwKCGFkZGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIYChZMaXN0U3VwZXJBZG1pbnNSZXF1ZXN0ImIKF0xpc3RTdXBlckFkbWluc1Jlc3BvbnNlEi8KBmFkbWlucxgBIAMoCzIfLnRhbmsucGxhdGZvcm0udjEuU3VwZXJBZG1pblJvdxIWCg5jYWxsZXJfaXNfcm9vdBgCIAEoCCIlChRBZGRTdXBlckFkbWluUmVxdWVzdBINCgVlbWFpbBgBIAEoCSJIChVBZGRTdXBlckFkbWluUmVzcG9uc2USLwoGYWRtaW5zGAEgAygLMh8udGFuay5wbGF0Zm9ybS52MS5TdXBlckFkbWluUm93IioKF1JlbW92ZVN1cGVyQWRtaW5SZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkiSwoYUmVtb3ZlU3VwZXJBZG1pblJlc3BvbnNlEi8KBmFkbWlucxgBIAMoCzIfLnRhbmsucGxhdGZvcm0udjEuU3VwZXJBZG1pblJvdzK9CwoPUGxhdGZvcm1TZXJ2aWNlEmAKDUxpc3RBZ2VudHVyZXMSJi50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXF1ZXN0GicudGFuay5wbGF0Zm9ybS52MS5MaXN0QWdlbnR1cmVzUmVzcG9uc2USYAoNU2V0QWxsb2NhdGlvbhImLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLlNldEFsbG9jYXRpb25SZXNwb25zZRJpChBTZXRCb2FyZFNldHRpbmdzEikudGFuay5wbGF0Zm9ybS52MS5TZXRCb2FyZFNldHRpbmdzUmVxdWVzdBoqLnRhbmsucGxhdGZvcm0udjEuU2V0Qm9hcmRTZXR0aW5nc1Jlc3BvbnNlEk4KB1N0b3BSdW4SIC50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXF1ZXN0GiEudGFuay5wbGF0Zm9ybS52MS5TdG9wUnVuUmVzcG9uc2USVwoKTGlzdE1lcmdlcxIjLnRhbmsucGxhdGZvcm0udjEuTGlzdE1lcmdlc1JlcXVlc3QaJC50YW5rLnBsYXRmb3JtLnYxLkxpc3RNZXJnZXNSZXNwb25zZRJaCgtEZWNpZGVNZXJnZRIkLnRhbmsucGxhdGZvcm0udjEuRGVjaWRlTWVyZ2VSZXF1ZXN0GiUudGFuay5wbGF0Zm9ybS52MS5EZWNpZGVNZXJnZVJlc3BvbnNlEm8KEkxpc3REcm9wQ2FuZGlkYXRlcxIrLnRhbmsucGxhdGZvcm0udjEuTGlzdERyb3BDYW5kaWRhdGVzUmVxdWVzdBosLnRhbmsucGxhdGZvcm0udjEuTGlzdERyb3BDYW5kaWRhdGVzUmVzcG9uc2USWgoLR2V0T3ZlcnZpZXcSJC50YW5rLnBsYXRmb3JtLnYxLkdldE92ZXJ2aWV3UmVxdWVzdBolLnRhbmsucGxhdGZvcm0udjEuR2V0T3ZlcnZpZXdSZXNwb25zZRJaCgtTZWFyY2hVc2VycxIkLnRhbmsucGxhdGZvcm0udjEuU2VhcmNoVXNlcnNSZXF1ZXN0GiUudGFuay5wbGF0Zm9ybS52MS5TZWFyY2hVc2Vyc1Jlc3BvbnNlEk4KB0dldFVzZXISIC50YW5rLnBsYXRmb3JtLnYxLkdldFVzZXJSZXF1ZXN0GiEudGFuay5wbGF0Zm9ybS52MS5HZXRVc2VyUmVzcG9uc2USaQoQU2VhcmNoV29ya3NwYWNlcxIpLnRhbmsucGxhdGZvcm0udjEuU2VhcmNoV29ya3NwYWNlc1JlcXVlc3QaKi50YW5rLnBsYXRmb3JtLnYxLlNlYXJjaFdvcmtzcGFjZXNSZXNwb25zZRJdCgxHZXRXb3Jrc3BhY2USJS50YW5rLnBsYXRmb3JtLnYxLkdldFdvcmtzcGFjZVJlcXVlc3QaJi50YW5rLnBsYXRmb3JtLnYxLkdldFdvcmtzcGFjZVJlc3BvbnNlEmYKD0xpc3RTdXBlckFkbWlucxIoLnRhbmsucGxhdGZvcm0udjEuTGlzdFN1cGVyQWRtaW5zUmVxdWVzdBopLnRhbmsucGxhdGZvcm0udjEuTGlzdFN1cGVyQWRtaW5zUmVzcG9uc2USYAoNQWRkU3VwZXJBZG1pbhImLnRhbmsucGxhdGZvcm0udjEuQWRkU3VwZXJBZG1pblJlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLkFkZFN1cGVyQWRtaW5SZXNwb25zZRJpChBSZW1vdmVTdXBlckFkbWluEikudGFuay5wbGF0Zm9ybS52MS5SZW1vdmVTdXBlckFkbWluUmVxdWVzdBoqLnRhbmsucGxhdGZvcm0udjEuUmVtb3ZlU3VwZXJBZG1pblJlc3BvbnNlQuABChRjb20udGFuay5wbGF0Zm9ybS52MUINUGxhdGZvcm1Qcm90b1ABWldnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3BsYXRmb3JtL3YxO3BsYXRmb3JtdjGiAgNUUFiqAhBUYW5rLlBsYXRmb3JtLlYxygIQVGFua1xQbGF0Zm9ybVxWMeICHFRhbmtcUGxhdGZvcm1cVjFcR1BCTWV0YWRhdGHqAhJUYW5rOjpQbGF0Zm9ybTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Ch90YW5rL3BsYXRmb3JtL3YxL3BsYXRmb3JtLnByb3RvEhB0YW5rLnBsYXRmb3JtLnYxIogDCgtBZ2VudHVyZVJvdxIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEg8KB2VuYWJsZWQYBSABKAgSDgoGd2VpZ2h0GAYgASgFEi8KC25leHRfZHVlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgtsYXN0X3J1bl9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEcnVucxgJIAEoBRISCgpsYXN0X2Vycm9yGAogASgJEhUKDWFnZW50X21pbnV0ZXMYCyABKAMSEwoLbGl2ZV9ydW5faWQYDCABKAkSEgoKbGl2ZV9zdGF0ZRgNIAEoCRIRCglzcGVuZF91c2QYDiABKAESEwoLcHJpY2VfY2VudHMYDyABKAMSDwoHY2xhaW1lZBgQIAEoCBIUCgxhdXRvX2FwcHJvdmUYESABKAgiRAoUTGlzdEFnZW50dXJlc1JlcXVlc3QSDQoFcXVlcnkYASABKAkSDQoFbGltaXQYAiABKAUSDgoGb2Zmc2V0GAMgASgFIokBChVMaXN0QWdlbnR1cmVzUmVzcG9uc2USMAoJYWdlbnR1cmVzGAEgAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudHVyZVJvdxINCgV0b3RhbBgCIAEoBRIvCgdzdW1tYXJ5GAMgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiyAIKDEJvYXJkU3VtbWFyeRIRCglpbl9mbGlnaHQYASABKAUSFgoObWF4X2NvbmN1cnJlbnQYAiABKAUSDwoHZW5hYmxlZBgDIAEoCBIOCgZraWxsZWQYCCABKAgSFAoMYXV0b19kZWZhdWx0GAkgASgIEhIKCmhvdXJzX2Zyb20YCiABKAUSEAoIaG91cnNfdG8YCyABKAUSEgoKaG91cnNfem9uZRgMIAEoCRISCgpob3Vyc19kYXlzGA0gAygFEhEKCXVuY2xhaW1lZBgEIAEoBRIZChFhZ2VudF9taW51dGVzXzI0aBgFIAEoAxIVCg1zcGVuZF91c2RfMjRoGAYgASgBEhcKD3NwZW5kX3VzZF90b3RhbBgHIAEoARIUCgxzcGVuZF91c2RfMWgYDiABKAESFAoMc3BlbmRfdXNkXzNoGA8gASgBInQKFFNldEFsbG9jYXRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgdlbmFibGVkGAIgASgIEg4KBndlaWdodBgDIAEoBRIPCgdydW5fbm93GAQgASgIEhQKDGF1dG9fYXBwcm92ZRgFIAEoCCJIChVTZXRBbGxvY2F0aW9uUmVzcG9uc2USLwoIYWdlbnR1cmUYASABKAsyHS50YW5rLnBsYXRmb3JtLnYxLkFnZW50dXJlUm93IqUBChdTZXRCb2FyZFNldHRpbmdzUmVxdWVzdBIWCg5tYXhfY29uY3VycmVudBgBIAEoBRIOCgZraWxsZWQYAiABKAgSFAoMYXV0b19kZWZhdWx0GAMgASgIEhIKCmhvdXJzX2Zyb20YBCABKAUSEAoIaG91cnNfdG8YBSABKAUSEgoKaG91cnNfem9uZRgGIAEoCRISCgpob3Vyc19kYXlzGAcgAygFIksKGFNldEJvYXJkU2V0dGluZ3NSZXNwb25zZRIvCgdzdW1tYXJ5GAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Cb2FyZFN1bW1hcnkiMAoOU3RvcFJ1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJEg4KBnJlYXNvbhgCIAEoCSIRCg9TdG9wUnVuUmVzcG9uc2UiuwIKDU1lcmdlUHJvcG9zYWwSCgoCaWQYASABKAkSFQoNYWJzb3JiZWRfc2x1ZxgCIAEoCRIVCg1hYnNvcmJlZF9uYW1lGAMgASgJEhgKEGFic29yYmVkX3N1bW1hcnkYBCABKAkSFQoNc3Vydml2b3Jfc2x1ZxgFIAEoCRIVCg1zdXJ2aXZvcl9uYW1lGAYgASgJEhgKEHN1cnZpdm9yX3N1bW1hcnkYByABKAkSEgoKc2ltaWxhcml0eRgIIAEoARIOCgZzdGF0dXMYCSABKAkSDAoEYXV0bxgKIAEoCBIvCgtwcm9wb3NlZF9hdBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZG9uZV9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLAoRTGlzdE1lcmdlc1JlcXVlc3QSFwoPaW5jbHVkZV9kZWNpZGVkGAEgASgIIkUKEkxpc3RNZXJnZXNSZXNwb25zZRIvCgZtZXJnZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLk1lcmdlUHJvcG9zYWwiMQoSRGVjaWRlTWVyZ2VSZXF1ZXN0EgoKAmlkGAEgASgJEg8KB2FwcHJvdmUYAiABKAgiRQoTRGVjaWRlTWVyZ2VSZXNwb25zZRIuCgVtZXJnZRgBIAEoCzIfLnRhbmsucGxhdGZvcm0udjEuTWVyZ2VQcm9wb3NhbCJzCg1Ecm9wQ2FuZGlkYXRlEhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRzbHVnGAIgASgJEgwKBG5hbWUYAyABKAkSEAoIaW5kdXN0cnkYBCABKAkSDQoFc2NvcmUYBSABKAUSDwoHcmVhc29ucxgGIAEoCSIbChlMaXN0RHJvcENhbmRpZGF0ZXNSZXF1ZXN0Il4KGkxpc3REcm9wQ2FuZGlkYXRlc1Jlc3BvbnNlEjMKCmNhbmRpZGF0ZXMYASADKAsyHy50YW5rLnBsYXRmb3JtLnYxLkRyb3BDYW5kaWRhdGUSCwoDZGF5GAIgASgJIogCCgdVc2VyUm93EgoKAmlkGAEgASgJEhQKDGRpc3BsYXlfbmFtZRgCIAEoCRINCgVlbWFpbBgDIAEoCRIMCgRraW5kGAQgASgJEi4KCmNyZWF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDWxhc3RfbG9naW5fYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKDmxhc3RfYWN0aXZlX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgp3b3Jrc3BhY2VzGAggASgFEhMKC3N1cGVyX2FkbWluGAkgASgIImoKElNlYXJjaFVzZXJzUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIOCgZvZmZzZXQYAyABKAUSGAoQaW5jbHVkZV9tYWNoaW5lcxgEIAEoCBIMCgRzb3J0GAUgASgJIk4KE1NlYXJjaFVzZXJzUmVzcG9uc2USKAoFdXNlcnMYASADKAsyGS50YW5rLnBsYXRmb3JtLnYxLlVzZXJSb3cSDQoFdG90YWwYAiABKAUi0gEKCk1lbWJlcnNoaXASFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHNsdWcYAiABKAkSDAoEbmFtZRgDIAEoCRIMCgRyb2xlGAQgASgJEi0KCWpvaW5lZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMgoObGFzdF9hY3RpdmVfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC2RlYWN0aXZhdGVkGAcgASgIEgwKBHBsYW4YCCABKAkiXgoITG9naW5Sb3cSJgoCYXQYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEgwKBGtpbmQYAiABKAkSDgoGY2xpZW50GAMgASgJEgwKBGxpdmUYBCABKAgiIQoOR2V0VXNlclJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCSKZAQoPR2V0VXNlclJlc3BvbnNlEicKBHVzZXIYASABKAsyGS50YW5rLnBsYXRmb3JtLnYxLlVzZXJSb3cSMQoLbWVtYmVyc2hpcHMYAiADKAsyHC50YW5rLnBsYXRmb3JtLnYxLk1lbWJlcnNoaXASKgoGbG9naW5zGAMgAygLMhoudGFuay5wbGF0Zm9ybS52MS5Mb2dpblJvdyLBAgoMV29ya3NwYWNlUm93EgoKAmlkGAEgASgJEgwKBHNsdWcYAiABKAkSDAoEbmFtZRgDIAEoCRIMCgRraW5kGAQgASgJEgwKBHBsYW4YBSABKAkSDgoGYWRkb25zGAYgAygJEg4KBnBlb3BsZRgHIAEoBRIuCgpjcmVhdGVkX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIyCg5sYXN0X2FjdGl2ZV9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLb3duZXJfZW1haWwYCiABKAkSFgoOYWdlbnRfcnVuc18zMGQYCyABKAUSGgoSYWdlbnRfY29zdF91c2RfMzBkGAwgASgBEiAKGGFnZW50X2JpbGxlZF9jZW50c19tb250aBgNIAEoAyJxChdTZWFyY2hXb3Jrc3BhY2VzUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIOCgZvZmZzZXQYAyABKAUSDAoEc29ydBgEIAEoCRIMCgRraW5kGAUgASgJEgwKBHBsYW4YBiABKAkiXQoYU2VhcmNoV29ya3NwYWNlc1Jlc3BvbnNlEjIKCndvcmtzcGFjZXMYASADKAsyHi50YW5rLnBsYXRmb3JtLnYxLldvcmtzcGFjZVJvdxINCgV0b3RhbBgCIAEoBSKIAgoJTWVtYmVyUm93Eg8KB3VzZXJfaWQYASABKAkSFAoMZGlzcGxheV9uYW1lGAIgASgJEg0KBWVtYWlsGAMgASgJEgwKBGtpbmQYBCABKAkSDAoEcm9sZRgFIAEoCRItCglqb2luZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDWxhc3RfbG9naW5fYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjIKDmxhc3RfYWN0aXZlX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBITCgtkZWFjdGl2YXRlZBgJIAEoCCJcCgdGZWF0dXJlEgsKA2tleRgBIAEoCRINCgVsYWJlbBgCIAEoCRIKCgJvbhgDIAEoCBIpCgVzaW5jZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiZAoMU3Vic2NyaXB0aW9uEg8KB3Byb2R1Y3QYASABKAkSEAoIcHJvdmlkZXIYAiABKAkSDgoGc3RhdHVzGAMgASgJEg0KBXNlYXRzGAQgASgFEhIKCnBlcmlvZF9lbmQYBSABKAkimgEKCkRhaWx5Q291bnQSCwoDZGF5GAEgASgJEhAKCG1lc3NhZ2VzGAIgASgFEhUKDWFjdGl2ZV9wZW9wbGUYAyABKAUSEgoKYWdlbnRfcnVucxgEIAEoBRIWCg5hZ2VudF9jb3N0X3VzZBgFIAEoARISCgpuZXdfcGVvcGxlGAYgASgFEhYKDm5ld193b3Jrc3BhY2VzGAcgASgFIr0BCgtBZ2VudFJ1blJvdxIKCgJpZBgBIAEoCRISCgphZ2VudF9uYW1lGAIgASgJEg0KBXN0YXRlGAMgASgJEi4KCnN0YXJ0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIPCgdtaW51dGVzGAYgASgDEhAKCGNvc3RfdXNkGAcgASgBIuMBCgpBZ2VudFVzYWdlEhAKCHJ1bnNfMzBkGAEgASgFEhIKCmZhaWxlZF8zMGQYAiABKAUSEwoLbWludXRlc18zMGQYAyABKAMSFAoMY29zdF91c2RfMzBkGAQgASgBEhYKDmNvc3RfdXNkX21vbnRoGAUgASgBEhoKEmJpbGxlZF9jZW50c19tb250aBgGIAEoAxIRCgljYXBfY2VudHMYByABKAMSLQoGcmVjZW50GAggAygLMh0udGFuay5wbGF0Zm9ybS52MS5BZ2VudFJ1blJvdxIOCgZhZ2VudHMYCSADKAkiYQoPV29ya3NwYWNlQ291bnRzEg4KBnRyZWFkcxgBIAEoBRIQCghtZXNzYWdlcxgCIAEoAxINCgVmaWxlcxgDIAEoBRIOCgZib2FyZHMYBCABKAUSDQoFcGFnZXMYBSABKAUiOQoTR2V0V29ya3NwYWNlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCSLtAgoUR2V0V29ya3NwYWNlUmVzcG9uc2USMQoJd29ya3NwYWNlGAEgASgLMh4udGFuay5wbGF0Zm9ybS52MS5Xb3Jrc3BhY2VSb3cSLAoHbWVtYmVycxgCIAMoCzIbLnRhbmsucGxhdGZvcm0udjEuTWVtYmVyUm93EisKCGZlYXR1cmVzGAMgAygLMhkudGFuay5wbGF0Zm9ybS52MS5GZWF0dXJlEjUKDXN1YnNjcmlwdGlvbnMYBCADKAsyHi50YW5rLnBsYXRmb3JtLnYxLlN1YnNjcmlwdGlvbhIxCgthZ2VudF91c2FnZRgFIAEoCzIcLnRhbmsucGxhdGZvcm0udjEuQWdlbnRVc2FnZRIqCgRkYXlzGAYgAygLMhwudGFuay5wbGF0Zm9ybS52MS5EYWlseUNvdW50EjEKBmNvdW50cxgHIAEoCzIhLnRhbmsucGxhdGZvcm0udjEuV29ya3NwYWNlQ291bnRzIhQKEkdldE92ZXJ2aWV3UmVxdWVzdCLfAgoTR2V0T3ZlcnZpZXdSZXNwb25zZRIOCgZwZW9wbGUYASABKAUSFQoNcGVvcGxlX25ld183ZBgCIAEoBRIYChBwZW9wbGVfYWN0aXZlXzFkGAMgASgFEhgKEHBlb3BsZV9hY3RpdmVfN2QYBCABKAUSEgoKd29ya3NwYWNlcxgFIAEoBRIZChF3b3Jrc3BhY2VzX25ld183ZBgGIAEoBRIPCgdwcmVtaXVtGAcgASgFEhwKFGFnZW50X2Nvc3RfdXNkX21vbnRoGAggASgBEhYKDmFnZW50X3J1bnNfMzBkGAkgASgFEioKBGRheXMYCiADKAsyHC50YW5rLnBsYXRmb3JtLnYxLkRhaWx5Q291bnQSFgoOY2FsbGVyX2lzX3Jvb3QYCyABKAgSMwoLbW9zdF9hY3RpdmUYDCADKAsyHi50YW5rLnBsYXRmb3JtLnYxLldvcmtzcGFjZVJvdyKZAQoNU3VwZXJBZG1pblJvdxIPCgd1c2VyX2lkGAEgASgJEg0KBWVtYWlsGAIgASgJEhQKDGRpc3BsYXlfbmFtZRgDIAEoCRIMCgRyb290GAQgASgIEhYKDmFkZGVkX2J5X2VtYWlsGAUgASgJEiwKCGFkZGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIYChZMaXN0U3VwZXJBZG1pbnNSZXF1ZXN0ImIKF0xpc3RTdXBlckFkbWluc1Jlc3BvbnNlEi8KBmFkbWlucxgBIAMoCzIfLnRhbmsucGxhdGZvcm0udjEuU3VwZXJBZG1pblJvdxIWCg5jYWxsZXJfaXNfcm9vdBgCIAEoCCIlChRBZGRTdXBlckFkbWluUmVxdWVzdBINCgVlbWFpbBgBIAEoCSJIChVBZGRTdXBlckFkbWluUmVzcG9uc2USLwoGYWRtaW5zGAEgAygLMh8udGFuay5wbGF0Zm9ybS52MS5TdXBlckFkbWluUm93IioKF1JlbW92ZVN1cGVyQWRtaW5SZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkiSwoYUmVtb3ZlU3VwZXJBZG1pblJlc3BvbnNlEi8KBmFkbWlucxgBIAMoCzIfLnRhbmsucGxhdGZvcm0udjEuU3VwZXJBZG1pblJvdyLnAgoJTmV1cm9uUm93EgwKBG5hbWUYASABKAkSDwoHdmVyc2lvbhgCIAEoCRIMCgRraW5kGAMgASgJEhQKDHdvcmtzcGFjZV9pZBgEIAEoCRIWCg53b3Jrc3BhY2Vfc2x1ZxgFIAEoCRINCgVmaWVsZBgGIAEoCRINCgVzdGF0ZRgHIAEoCRISCgpldmFsX3Njb3JlGAggASgBEhEKCWV2YWxfbm90ZRgJIAEoCRIuCgp0cmFpbmVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIvCgthcHByb3ZlZF9hdBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGbG9hZGVkGAwgASgIEhMKC2Fuc3dlcnNfMzBkGA0gASgFEjQKEGxhc3RfYW5zd2VyZWRfYXQYDiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wInkKD05ldXJvbldvcmtzcGFjZRIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEc2x1ZxgCIAEoCRIMCgRuYW1lGAMgASgJEg8KB2RpYWxvZ3MYBCABKAUSDQoFZmxvb3IYBSABKAUSFAoMbmV1cm9uX3N0YXRlGAYgASgJIkAKCEZpZWxkUm93Eg0KBWZpZWxkGAEgASgJEhUKDXF1ZXN0aW9uc18zMGQYAiABKAUSDgoGbmV1cm9uGAMgASgJInwKB0ZlZWRSb3cSCwoDdXJsGAEgASgJEgwKBGtpbmQYAiABKAkSDQoFZm91bmQYAyABKAMSMwoPbGFzdF9mZXRjaGVkX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpsYXN0X2Vycm9yGAUgASgJImgKB0hvc3RSb3cSDAoEaG9zdBgBIAEoCRIPCgdmZXRjaGVkGAIgASgDEg8KB3JlZnVzZWQYAyABKAMSFQoNcm9ib3RzX3N0YXR1cxgEIAEoBRIWCg5jcmF3bF9kZWxheV9tcxgFIAEoBSI/CgtTb3VyY2VDb3VudBIOCgZzb3VyY2UYASABKAkSDQoFcGFnZXMYAiABKAMSEQoJcGFnZXNfMjRoGAMgASgDIrwCCghXZWJJbmRleBINCgVwYWdlcxgBIAEoAxINCgVob3N0cxgCIAEoBRINCgVmZWVkcxgDIAEoBRIOCgZxdWV1ZWQYBCABKAMSEgoKcXVldWVkX2R1ZRgFIAEoAxIuCgpvbGRlc3RfZHVlGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIQCghwYWdlc18xaBgHIAEoAxIRCglwYWdlc18yNGgYCCABKAMSLgoHc291cmNlcxgJIAMoCzIdLnRhbmsucGxhdGZvcm0udjEuU291cmNlQ291bnQSLAoJZmVlZF9yb3dzGAogAygLMhkudGFuay5wbGF0Zm9ybS52MS5GZWVkUm93EiwKCWhvc3Rfcm93cxgLIAMoCzIZLnRhbmsucGxhdGZvcm0udjEuSG9zdFJvdyLRAQoJTmV1cmFsRGF5EgsKA2RheRgBIAEoCRIPCgdhbnN3ZXJzGAIgASgFEg4KBnBlb3BsZRgDIAEoBRIPCgdsb29rdXBzGAQgASgFEhwKFGxvb2t1cHNfd2l0aF9zb3VyY2VzGAUgASgFEhQKDGlucHV0X3Rva2VucxgGIAEoAxIVCg1vdXRwdXRfdG9rZW5zGAcgASgDEhAKCGNvc3RfdXNkGAggASgBEhIKCnBhZ2VzX3JlYWQYCSABKAMSFAoMYWdlbnRfdG9rZW5zGAogASgDIsYCCgtOZXVyYWxVc2FnZRITCgthbnN3ZXJzXzMwZBgBIAEoBRISCgpwZW9wbGVfMzBkGAIgASgFEhMKC2xvb2t1cHNfMzBkGAMgASgFEiAKGGxvb2t1cHNfd2l0aF9zb3VyY2VzXzMwZBgEIAEoBRITCgtjaGFuZ2VkXzMwZBgFIAEoBRIVCg1sb29rdXBfbXNfYXZnGAYgASgDEhgKEGlucHV0X3Rva2Vuc18zMGQYByABKAMSGQoRb3V0cHV0X3Rva2Vuc18zMGQYCCABKAMSFAoMY29zdF91c2RfMzBkGAkgASgBEhYKDmFnZW50X3J1bnNfMzBkGAogASgFEhgKEGFnZW50X3Rva2Vuc18zMGQYCyABKAMSFQoNdGh1bWJzX3VwXzMwZBgMIAEoBRIXCg90aHVtYnNfZG93bl8zMGQYDSABKAUiEgoQR2V0TmV1cmFsUmVxdWVzdCLkAgoRR2V0TmV1cmFsUmVzcG9uc2USEgoKYmFzZV9tb2RlbBgBIAEoCRIRCglzZXJ2ZXJfdXAYAiABKAgSDgoGbG9hZGVkGAMgAygJEiwKB25ldXJvbnMYBCADKAsyGy50YW5rLnBsYXRmb3JtLnYxLk5ldXJvblJvdxI8ChFuZXVyb25fd29ya3NwYWNlcxgFIAMoCzIhLnRhbmsucGxhdGZvcm0udjEuTmV1cm9uV29ya3NwYWNlEioKBmZpZWxkcxgGIAMoCzIaLnRhbmsucGxhdGZvcm0udjEuRmllbGRSb3cSJwoDd2ViGAcgASgLMhoudGFuay5wbGF0Zm9ybS52MS5XZWJJbmRleBIsCgV1c2FnZRgIIAEoCzIdLnRhbmsucGxhdGZvcm0udjEuTmV1cmFsVXNhZ2USKQoEZGF5cxgJIAMoCzIbLnRhbmsucGxhdGZvcm0udjEuTmV1cmFsRGF5MpMMCg9QbGF0Zm9ybVNlcnZpY2USYAoNTGlzdEFnZW50dXJlcxImLnRhbmsucGxhdGZvcm0udjEuTGlzdEFnZW50dXJlc1JlcXVlc3QaJy50YW5rLnBsYXRmb3JtLnYxLkxpc3RBZ2VudHVyZXNSZXNwb25zZRJgCg1TZXRBbGxvY2F0aW9uEiYudGFuay5wbGF0Zm9ybS52MS5TZXRBbGxvY2F0aW9uUmVxdWVzdBonLnRhbmsucGxhdGZvcm0udjEuU2V0QWxsb2NhdGlvblJlc3BvbnNlEmkKEFNldEJvYXJkU2V0dGluZ3MSKS50YW5rLnBsYXRmb3JtLnYxLlNldEJvYXJkU2V0dGluZ3NSZXF1ZXN0GioudGFuay5wbGF0Zm9ybS52MS5TZXRCb2FyZFNldHRpbmdzUmVzcG9uc2USTgoHU3RvcFJ1bhIgLnRhbmsucGxhdGZvcm0udjEuU3RvcFJ1blJlcXVlc3QaIS50YW5rLnBsYXRmb3JtLnYxLlN0b3BSdW5SZXNwb25zZRJXCgpMaXN0TWVyZ2VzEiMudGFuay5wbGF0Zm9ybS52MS5MaXN0TWVyZ2VzUmVxdWVzdBokLnRhbmsucGxhdGZvcm0udjEuTGlzdE1lcmdlc1Jlc3BvbnNlEloKC0RlY2lkZU1lcmdlEiQudGFuay5wbGF0Zm9ybS52MS5EZWNpZGVNZXJnZVJlcXVlc3QaJS50YW5rLnBsYXRmb3JtLnYxLkRlY2lkZU1lcmdlUmVzcG9uc2USbwoSTGlzdERyb3BDYW5kaWRhdGVzEisudGFuay5wbGF0Zm9ybS52MS5MaXN0RHJvcENhbmRpZGF0ZXNSZXF1ZXN0GiwudGFuay5wbGF0Zm9ybS52MS5MaXN0RHJvcENhbmRpZGF0ZXNSZXNwb25zZRJaCgtHZXRPdmVydmlldxIkLnRhbmsucGxhdGZvcm0udjEuR2V0T3ZlcnZpZXdSZXF1ZXN0GiUudGFuay5wbGF0Zm9ybS52MS5HZXRPdmVydmlld1Jlc3BvbnNlEloKC1NlYXJjaFVzZXJzEiQudGFuay5wbGF0Zm9ybS52MS5TZWFyY2hVc2Vyc1JlcXVlc3QaJS50YW5rLnBsYXRmb3JtLnYxLlNlYXJjaFVzZXJzUmVzcG9uc2USTgoHR2V0VXNlchIgLnRhbmsucGxhdGZvcm0udjEuR2V0VXNlclJlcXVlc3QaIS50YW5rLnBsYXRmb3JtLnYxLkdldFVzZXJSZXNwb25zZRJpChBTZWFyY2hXb3Jrc3BhY2VzEikudGFuay5wbGF0Zm9ybS52MS5TZWFyY2hXb3Jrc3BhY2VzUmVxdWVzdBoqLnRhbmsucGxhdGZvcm0udjEuU2VhcmNoV29ya3NwYWNlc1Jlc3BvbnNlEl0KDEdldFdvcmtzcGFjZRIlLnRhbmsucGxhdGZvcm0udjEuR2V0V29ya3NwYWNlUmVxdWVzdBomLnRhbmsucGxhdGZvcm0udjEuR2V0V29ya3NwYWNlUmVzcG9uc2USZgoPTGlzdFN1cGVyQWRtaW5zEigudGFuay5wbGF0Zm9ybS52MS5MaXN0U3VwZXJBZG1pbnNSZXF1ZXN0GikudGFuay5wbGF0Zm9ybS52MS5MaXN0U3VwZXJBZG1pbnNSZXNwb25zZRJgCg1BZGRTdXBlckFkbWluEiYudGFuay5wbGF0Zm9ybS52MS5BZGRTdXBlckFkbWluUmVxdWVzdBonLnRhbmsucGxhdGZvcm0udjEuQWRkU3VwZXJBZG1pblJlc3BvbnNlEmkKEFJlbW92ZVN1cGVyQWRtaW4SKS50YW5rLnBsYXRmb3JtLnYxLlJlbW92ZVN1cGVyQWRtaW5SZXF1ZXN0GioudGFuay5wbGF0Zm9ybS52MS5SZW1vdmVTdXBlckFkbWluUmVzcG9uc2USVAoJR2V0TmV1cmFsEiIudGFuay5wbGF0Zm9ybS52MS5HZXROZXVyYWxSZXF1ZXN0GiMudGFuay5wbGF0Zm9ybS52MS5HZXROZXVyYWxSZXNwb25zZULgAQoUY29tLnRhbmsucGxhdGZvcm0udjFCDVBsYXRmb3JtUHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9wbGF0Zm9ybS92MTtwbGF0Zm9ybXYxogIDVFBYqgIQVGFuay5QbGF0Zm9ybS5WMcoCEFRhbmtcUGxhdGZvcm1cVjHiAhxUYW5rXFBsYXRmb3JtXFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UGxhdGZvcm06OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * AgentureRow is one product on the board as the console sees it.
@@ -1793,6 +1793,595 @@ export const RemoveSuperAdminResponseSchema: GenMessage<RemoveSuperAdminResponse
   messageDesc(file_tank_platform_v1_platform, 45);
 
 /**
+ * NeuronRow is one Neuron as the registry holds it: a LoRA adapter on the base model.
+ *
+ * @generated from message tank.platform.v1.NeuronRow
+ */
+export type NeuronRow = Message<"tank.platform.v1.NeuronRow"> & {
+  /**
+   * code | environments | books | chat | ws-<workspace id>
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * the training job that made it
+   *
+   * @generated from field: string version = 2;
+   */
+  version: string;
+
+  /**
+   * specialist | workspace
+   *
+   * @generated from field: string kind = 3;
+   */
+  kind: string;
+
+  /**
+   * workspace Neurons only
+   *
+   * @generated from field: string workspace_id = 4;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string workspace_slug = 5;
+   */
+  workspaceSlug: string;
+
+  /**
+   * the sorter's field a specialist answers
+   *
+   * @generated from field: string field = 6;
+   */
+  field: string;
+
+  /**
+   * candidate | approved | retired
+   *
+   * @generated from field: string state = 7;
+   */
+  state: string;
+
+  /**
+   * held-out improvement over the base; 0 when unscored
+   *
+   * @generated from field: double eval_score = 8;
+   */
+  evalScore: number;
+
+  /**
+   * @generated from field: string eval_note = 9;
+   */
+  evalNote: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp trained_at = 10;
+   */
+  trainedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp approved_at = 11;
+   */
+  approvedAt?: Timestamp;
+
+  /**
+   * on the model server now
+   *
+   * @generated from field: bool loaded = 12;
+   */
+  loaded: boolean;
+
+  /**
+   * /ai replies it gave
+   *
+   * @generated from field: int32 answers_30d = 13;
+   */
+  answers30d: number;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_answered_at = 14;
+   */
+  lastAnsweredAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.platform.v1.NeuronRow.
+ * Use `create(NeuronRowSchema)` to create a new message.
+ */
+export const NeuronRowSchema: GenMessage<NeuronRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 46);
+
+/**
+ * NeuronWorkspace is a workspace with the Private Neuron add-on and how close it is to
+ * its first Neuron: the nightly trainer needs `floor` dialogs before it trains one.
+ *
+ * @generated from message tank.platform.v1.NeuronWorkspace
+ */
+export type NeuronWorkspace = Message<"tank.platform.v1.NeuronWorkspace"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string slug = 2;
+   */
+  slug: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * @generated from field: int32 dialogs = 4;
+   */
+  dialogs: number;
+
+  /**
+   * @generated from field: int32 floor = 5;
+   */
+  floor: number;
+
+  /**
+   * none | candidate | approved
+   *
+   * @generated from field: string neuron_state = 6;
+   */
+  neuronState: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.NeuronWorkspace.
+ * Use `create(NeuronWorkspaceSchema)` to create a new message.
+ */
+export const NeuronWorkspaceSchema: GenMessage<NeuronWorkspace> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 47);
+
+/**
+ * FieldRow is one field the /ai sorter names and which Neuron answers it.
+ *
+ * @generated from message tank.platform.v1.FieldRow
+ */
+export type FieldRow = Message<"tank.platform.v1.FieldRow"> & {
+  /**
+   * @generated from field: string field = 1;
+   */
+  field: string;
+
+  /**
+   * @generated from field: int32 questions_30d = 2;
+   */
+  questions30d: number;
+
+  /**
+   * the approved specialist; "" when the base answers
+   *
+   * @generated from field: string neuron = 3;
+   */
+  neuron: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.FieldRow.
+ * Use `create(FieldRowSchema)` to create a new message.
+ */
+export const FieldRowSchema: GenMessage<FieldRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 48);
+
+/**
+ * @generated from message tank.platform.v1.FeedRow
+ */
+export type FeedRow = Message<"tank.platform.v1.FeedRow"> & {
+  /**
+   * @generated from field: string url = 1;
+   */
+  url: string;
+
+  /**
+   * rss | sitemap
+   *
+   * @generated from field: string kind = 2;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: int64 found = 3;
+   */
+  found: bigint;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_fetched_at = 4;
+   */
+  lastFetchedAt?: Timestamp;
+
+  /**
+   * @generated from field: string last_error = 5;
+   */
+  lastError: string;
+};
+
+/**
+ * Describes the message tank.platform.v1.FeedRow.
+ * Use `create(FeedRowSchema)` to create a new message.
+ */
+export const FeedRowSchema: GenMessage<FeedRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 49);
+
+/**
+ * @generated from message tank.platform.v1.HostRow
+ */
+export type HostRow = Message<"tank.platform.v1.HostRow"> & {
+  /**
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * @generated from field: int64 fetched = 2;
+   */
+  fetched: bigint;
+
+  /**
+   * @generated from field: int64 refused = 3;
+   */
+  refused: bigint;
+
+  /**
+   * @generated from field: int32 robots_status = 4;
+   */
+  robotsStatus: number;
+
+  /**
+   * @generated from field: int32 crawl_delay_ms = 5;
+   */
+  crawlDelayMs: number;
+};
+
+/**
+ * Describes the message tank.platform.v1.HostRow.
+ * Use `create(HostRowSchema)` to create a new message.
+ */
+export const HostRowSchema: GenMessage<HostRow> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 50);
+
+/**
+ * @generated from message tank.platform.v1.SourceCount
+ */
+export type SourceCount = Message<"tank.platform.v1.SourceCount"> & {
+  /**
+   * wikipedia | news | asked | list
+   *
+   * @generated from field: string source = 1;
+   */
+  source: string;
+
+  /**
+   * @generated from field: int64 pages = 2;
+   */
+  pages: bigint;
+
+  /**
+   * @generated from field: int64 pages_24h = 3;
+   */
+  pages24h: bigint;
+};
+
+/**
+ * Describes the message tank.platform.v1.SourceCount.
+ * Use `create(SourceCountSchema)` to create a new message.
+ */
+export const SourceCountSchema: GenMessage<SourceCount> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 51);
+
+/**
+ * WebIndex is the crawl as it stands: what is held, what is queued, what is flowing.
+ *
+ * @generated from message tank.platform.v1.WebIndex
+ */
+export type WebIndex = Message<"tank.platform.v1.WebIndex"> & {
+  /**
+   * @generated from field: int64 pages = 1;
+   */
+  pages: bigint;
+
+  /**
+   * @generated from field: int32 hosts = 2;
+   */
+  hosts: number;
+
+  /**
+   * @generated from field: int32 feeds = 3;
+   */
+  feeds: number;
+
+  /**
+   * @generated from field: int64 queued = 4;
+   */
+  queued: bigint;
+
+  /**
+   * due now and not claimed
+   *
+   * @generated from field: int64 queued_due = 5;
+   */
+  queuedDue: bigint;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp oldest_due = 6;
+   */
+  oldestDue?: Timestamp;
+
+  /**
+   * fetched or re-read
+   *
+   * @generated from field: int64 pages_1h = 7;
+   */
+  pages1h: bigint;
+
+  /**
+   * @generated from field: int64 pages_24h = 8;
+   */
+  pages24h: bigint;
+
+  /**
+   * @generated from field: repeated tank.platform.v1.SourceCount sources = 9;
+   */
+  sources: SourceCount[];
+
+  /**
+   * @generated from field: repeated tank.platform.v1.FeedRow feed_rows = 10;
+   */
+  feedRows: FeedRow[];
+
+  /**
+   * the busiest
+   *
+   * @generated from field: repeated tank.platform.v1.HostRow host_rows = 11;
+   */
+  hostRows: HostRow[];
+};
+
+/**
+ * Describes the message tank.platform.v1.WebIndex.
+ * Use `create(WebIndexSchema)` to create a new message.
+ */
+export const WebIndexSchema: GenMessage<WebIndex> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 52);
+
+/**
+ * @generated from message tank.platform.v1.NeuralDay
+ */
+export type NeuralDay = Message<"tank.platform.v1.NeuralDay"> & {
+  /**
+   * YYYY-MM-DD, UTC
+   *
+   * @generated from field: string day = 1;
+   */
+  day: string;
+
+  /**
+   * /ai replies
+   *
+   * @generated from field: int32 answers = 2;
+   */
+  answers: number;
+
+  /**
+   * distinct people asking
+   *
+   * @generated from field: int32 people = 3;
+   */
+  people: number;
+
+  /**
+   * @generated from field: int32 lookups = 4;
+   */
+  lookups: number;
+
+  /**
+   * @generated from field: int32 lookups_with_sources = 5;
+   */
+  lookupsWithSources: number;
+
+  /**
+   * @generated from field: int64 input_tokens = 6;
+   */
+  inputTokens: bigint;
+
+  /**
+   * @generated from field: int64 output_tokens = 7;
+   */
+  outputTokens: bigint;
+
+  /**
+   * @generated from field: double cost_usd = 8;
+   */
+  costUsd: number;
+
+  /**
+   * pages the index fetched or re-read
+   *
+   * @generated from field: int64 pages_read = 9;
+   */
+  pagesRead: bigint;
+
+  /**
+   * tokens agents spent on TANK Neural
+   *
+   * @generated from field: int64 agent_tokens = 10;
+   */
+  agentTokens: bigint;
+};
+
+/**
+ * Describes the message tank.platform.v1.NeuralDay.
+ * Use `create(NeuralDaySchema)` to create a new message.
+ */
+export const NeuralDaySchema: GenMessage<NeuralDay> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 53);
+
+/**
+ * @generated from message tank.platform.v1.NeuralUsage
+ */
+export type NeuralUsage = Message<"tank.platform.v1.NeuralUsage"> & {
+  /**
+   * @generated from field: int32 answers_30d = 1;
+   */
+  answers30d: number;
+
+  /**
+   * @generated from field: int32 people_30d = 2;
+   */
+  people30d: number;
+
+  /**
+   * @generated from field: int32 lookups_30d = 3;
+   */
+  lookups30d: number;
+
+  /**
+   * @generated from field: int32 lookups_with_sources_30d = 4;
+   */
+  lookupsWithSources30d: number;
+
+  /**
+   * follow-ups that found the answer out of date
+   *
+   * @generated from field: int32 changed_30d = 5;
+   */
+  changed30d: number;
+
+  /**
+   * @generated from field: int64 lookup_ms_avg = 6;
+   */
+  lookupMsAvg: bigint;
+
+  /**
+   * @generated from field: int64 input_tokens_30d = 7;
+   */
+  inputTokens30d: bigint;
+
+  /**
+   * @generated from field: int64 output_tokens_30d = 8;
+   */
+  outputTokens30d: bigint;
+
+  /**
+   * @generated from field: double cost_usd_30d = 9;
+   */
+  costUsd30d: number;
+
+  /**
+   * runs that used TANK Neural
+   *
+   * @generated from field: int32 agent_runs_30d = 10;
+   */
+  agentRuns30d: number;
+
+  /**
+   * @generated from field: int64 agent_tokens_30d = 11;
+   */
+  agentTokens30d: bigint;
+
+  /**
+   * @generated from field: int32 thumbs_up_30d = 12;
+   */
+  thumbsUp30d: number;
+
+  /**
+   * @generated from field: int32 thumbs_down_30d = 13;
+   */
+  thumbsDown30d: number;
+};
+
+/**
+ * Describes the message tank.platform.v1.NeuralUsage.
+ * Use `create(NeuralUsageSchema)` to create a new message.
+ */
+export const NeuralUsageSchema: GenMessage<NeuralUsage> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 54);
+
+/**
+ * @generated from message tank.platform.v1.GetNeuralRequest
+ */
+export type GetNeuralRequest = Message<"tank.platform.v1.GetNeuralRequest"> & {
+};
+
+/**
+ * Describes the message tank.platform.v1.GetNeuralRequest.
+ * Use `create(GetNeuralRequestSchema)` to create a new message.
+ */
+export const GetNeuralRequestSchema: GenMessage<GetNeuralRequest> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 55);
+
+/**
+ * @generated from message tank.platform.v1.GetNeuralResponse
+ */
+export type GetNeuralResponse = Message<"tank.platform.v1.GetNeuralResponse"> & {
+  /**
+   * what the server calls the base
+   *
+   * @generated from field: string base_model = 1;
+   */
+  baseModel: string;
+
+  /**
+   * @generated from field: bool server_up = 2;
+   */
+  serverUp: boolean;
+
+  /**
+   * adapters the server holds now, by served name
+   *
+   * @generated from field: repeated string loaded = 3;
+   */
+  loaded: string[];
+
+  /**
+   * @generated from field: repeated tank.platform.v1.NeuronRow neurons = 4;
+   */
+  neurons: NeuronRow[];
+
+  /**
+   * @generated from field: repeated tank.platform.v1.NeuronWorkspace neuron_workspaces = 5;
+   */
+  neuronWorkspaces: NeuronWorkspace[];
+
+  /**
+   * @generated from field: repeated tank.platform.v1.FieldRow fields = 6;
+   */
+  fields: FieldRow[];
+
+  /**
+   * @generated from field: tank.platform.v1.WebIndex web = 7;
+   */
+  web?: WebIndex;
+
+  /**
+   * @generated from field: tank.platform.v1.NeuralUsage usage = 8;
+   */
+  usage?: NeuralUsage;
+
+  /**
+   * the last 30, oldest first
+   *
+   * @generated from field: repeated tank.platform.v1.NeuralDay days = 9;
+   */
+  days: NeuralDay[];
+};
+
+/**
+ * Describes the message tank.platform.v1.GetNeuralResponse.
+ * Use `create(GetNeuralResponseSchema)` to create a new message.
+ */
+export const GetNeuralResponseSchema: GenMessage<GetNeuralResponse> = /*@__PURE__*/
+  messageDesc(file_tank_platform_v1_platform, 56);
+
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export const PlatformService: GenService<{
@@ -1915,6 +2504,14 @@ export const PlatformService: GenService<{
     methodKind: "unary";
     input: typeof RemoveSuperAdminRequestSchema;
     output: typeof RemoveSuperAdminResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.platform.v1.PlatformService.GetNeural
+   */
+  getNeural: {
+    methodKind: "unary";
+    input: typeof GetNeuralRequestSchema;
+    output: typeof GetNeuralResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_platform_v1_platform, 0);

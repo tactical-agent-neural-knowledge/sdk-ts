@@ -1473,6 +1473,492 @@ export type RemoveSuperAdminResponse = Message<"tank.platform.v1.RemoveSuperAdmi
  */
 export declare const RemoveSuperAdminResponseSchema: GenMessage<RemoveSuperAdminResponse>;
 /**
+ * NeuronRow is one Neuron as the registry holds it: a LoRA adapter on the base model.
+ *
+ * @generated from message tank.platform.v1.NeuronRow
+ */
+export type NeuronRow = Message<"tank.platform.v1.NeuronRow"> & {
+    /**
+     * code | environments | books | chat | ws-<workspace id>
+     *
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * the training job that made it
+     *
+     * @generated from field: string version = 2;
+     */
+    version: string;
+    /**
+     * specialist | workspace
+     *
+     * @generated from field: string kind = 3;
+     */
+    kind: string;
+    /**
+     * workspace Neurons only
+     *
+     * @generated from field: string workspace_id = 4;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string workspace_slug = 5;
+     */
+    workspaceSlug: string;
+    /**
+     * the sorter's field a specialist answers
+     *
+     * @generated from field: string field = 6;
+     */
+    field: string;
+    /**
+     * candidate | approved | retired
+     *
+     * @generated from field: string state = 7;
+     */
+    state: string;
+    /**
+     * held-out improvement over the base; 0 when unscored
+     *
+     * @generated from field: double eval_score = 8;
+     */
+    evalScore: number;
+    /**
+     * @generated from field: string eval_note = 9;
+     */
+    evalNote: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp trained_at = 10;
+     */
+    trainedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp approved_at = 11;
+     */
+    approvedAt?: Timestamp;
+    /**
+     * on the model server now
+     *
+     * @generated from field: bool loaded = 12;
+     */
+    loaded: boolean;
+    /**
+     * /ai replies it gave
+     *
+     * @generated from field: int32 answers_30d = 13;
+     */
+    answers30d: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_answered_at = 14;
+     */
+    lastAnsweredAt?: Timestamp;
+};
+/**
+ * Describes the message tank.platform.v1.NeuronRow.
+ * Use `create(NeuronRowSchema)` to create a new message.
+ */
+export declare const NeuronRowSchema: GenMessage<NeuronRow>;
+/**
+ * NeuronWorkspace is a workspace with the Private Neuron add-on and how close it is to
+ * its first Neuron: the nightly trainer needs `floor` dialogs before it trains one.
+ *
+ * @generated from message tank.platform.v1.NeuronWorkspace
+ */
+export type NeuronWorkspace = Message<"tank.platform.v1.NeuronWorkspace"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: int32 dialogs = 4;
+     */
+    dialogs: number;
+    /**
+     * @generated from field: int32 floor = 5;
+     */
+    floor: number;
+    /**
+     * none | candidate | approved
+     *
+     * @generated from field: string neuron_state = 6;
+     */
+    neuronState: string;
+};
+/**
+ * Describes the message tank.platform.v1.NeuronWorkspace.
+ * Use `create(NeuronWorkspaceSchema)` to create a new message.
+ */
+export declare const NeuronWorkspaceSchema: GenMessage<NeuronWorkspace>;
+/**
+ * FieldRow is one field the /ai sorter names and which Neuron answers it.
+ *
+ * @generated from message tank.platform.v1.FieldRow
+ */
+export type FieldRow = Message<"tank.platform.v1.FieldRow"> & {
+    /**
+     * @generated from field: string field = 1;
+     */
+    field: string;
+    /**
+     * @generated from field: int32 questions_30d = 2;
+     */
+    questions30d: number;
+    /**
+     * the approved specialist; "" when the base answers
+     *
+     * @generated from field: string neuron = 3;
+     */
+    neuron: string;
+};
+/**
+ * Describes the message tank.platform.v1.FieldRow.
+ * Use `create(FieldRowSchema)` to create a new message.
+ */
+export declare const FieldRowSchema: GenMessage<FieldRow>;
+/**
+ * @generated from message tank.platform.v1.FeedRow
+ */
+export type FeedRow = Message<"tank.platform.v1.FeedRow"> & {
+    /**
+     * @generated from field: string url = 1;
+     */
+    url: string;
+    /**
+     * rss | sitemap
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * @generated from field: int64 found = 3;
+     */
+    found: bigint;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_fetched_at = 4;
+     */
+    lastFetchedAt?: Timestamp;
+    /**
+     * @generated from field: string last_error = 5;
+     */
+    lastError: string;
+};
+/**
+ * Describes the message tank.platform.v1.FeedRow.
+ * Use `create(FeedRowSchema)` to create a new message.
+ */
+export declare const FeedRowSchema: GenMessage<FeedRow>;
+/**
+ * @generated from message tank.platform.v1.HostRow
+ */
+export type HostRow = Message<"tank.platform.v1.HostRow"> & {
+    /**
+     * @generated from field: string host = 1;
+     */
+    host: string;
+    /**
+     * @generated from field: int64 fetched = 2;
+     */
+    fetched: bigint;
+    /**
+     * @generated from field: int64 refused = 3;
+     */
+    refused: bigint;
+    /**
+     * @generated from field: int32 robots_status = 4;
+     */
+    robotsStatus: number;
+    /**
+     * @generated from field: int32 crawl_delay_ms = 5;
+     */
+    crawlDelayMs: number;
+};
+/**
+ * Describes the message tank.platform.v1.HostRow.
+ * Use `create(HostRowSchema)` to create a new message.
+ */
+export declare const HostRowSchema: GenMessage<HostRow>;
+/**
+ * @generated from message tank.platform.v1.SourceCount
+ */
+export type SourceCount = Message<"tank.platform.v1.SourceCount"> & {
+    /**
+     * wikipedia | news | asked | list
+     *
+     * @generated from field: string source = 1;
+     */
+    source: string;
+    /**
+     * @generated from field: int64 pages = 2;
+     */
+    pages: bigint;
+    /**
+     * @generated from field: int64 pages_24h = 3;
+     */
+    pages24h: bigint;
+};
+/**
+ * Describes the message tank.platform.v1.SourceCount.
+ * Use `create(SourceCountSchema)` to create a new message.
+ */
+export declare const SourceCountSchema: GenMessage<SourceCount>;
+/**
+ * WebIndex is the crawl as it stands: what is held, what is queued, what is flowing.
+ *
+ * @generated from message tank.platform.v1.WebIndex
+ */
+export type WebIndex = Message<"tank.platform.v1.WebIndex"> & {
+    /**
+     * @generated from field: int64 pages = 1;
+     */
+    pages: bigint;
+    /**
+     * @generated from field: int32 hosts = 2;
+     */
+    hosts: number;
+    /**
+     * @generated from field: int32 feeds = 3;
+     */
+    feeds: number;
+    /**
+     * @generated from field: int64 queued = 4;
+     */
+    queued: bigint;
+    /**
+     * due now and not claimed
+     *
+     * @generated from field: int64 queued_due = 5;
+     */
+    queuedDue: bigint;
+    /**
+     * @generated from field: google.protobuf.Timestamp oldest_due = 6;
+     */
+    oldestDue?: Timestamp;
+    /**
+     * fetched or re-read
+     *
+     * @generated from field: int64 pages_1h = 7;
+     */
+    pages1h: bigint;
+    /**
+     * @generated from field: int64 pages_24h = 8;
+     */
+    pages24h: bigint;
+    /**
+     * @generated from field: repeated tank.platform.v1.SourceCount sources = 9;
+     */
+    sources: SourceCount[];
+    /**
+     * @generated from field: repeated tank.platform.v1.FeedRow feed_rows = 10;
+     */
+    feedRows: FeedRow[];
+    /**
+     * the busiest
+     *
+     * @generated from field: repeated tank.platform.v1.HostRow host_rows = 11;
+     */
+    hostRows: HostRow[];
+};
+/**
+ * Describes the message tank.platform.v1.WebIndex.
+ * Use `create(WebIndexSchema)` to create a new message.
+ */
+export declare const WebIndexSchema: GenMessage<WebIndex>;
+/**
+ * @generated from message tank.platform.v1.NeuralDay
+ */
+export type NeuralDay = Message<"tank.platform.v1.NeuralDay"> & {
+    /**
+     * YYYY-MM-DD, UTC
+     *
+     * @generated from field: string day = 1;
+     */
+    day: string;
+    /**
+     * /ai replies
+     *
+     * @generated from field: int32 answers = 2;
+     */
+    answers: number;
+    /**
+     * distinct people asking
+     *
+     * @generated from field: int32 people = 3;
+     */
+    people: number;
+    /**
+     * @generated from field: int32 lookups = 4;
+     */
+    lookups: number;
+    /**
+     * @generated from field: int32 lookups_with_sources = 5;
+     */
+    lookupsWithSources: number;
+    /**
+     * @generated from field: int64 input_tokens = 6;
+     */
+    inputTokens: bigint;
+    /**
+     * @generated from field: int64 output_tokens = 7;
+     */
+    outputTokens: bigint;
+    /**
+     * @generated from field: double cost_usd = 8;
+     */
+    costUsd: number;
+    /**
+     * pages the index fetched or re-read
+     *
+     * @generated from field: int64 pages_read = 9;
+     */
+    pagesRead: bigint;
+    /**
+     * tokens agents spent on TANK Neural
+     *
+     * @generated from field: int64 agent_tokens = 10;
+     */
+    agentTokens: bigint;
+};
+/**
+ * Describes the message tank.platform.v1.NeuralDay.
+ * Use `create(NeuralDaySchema)` to create a new message.
+ */
+export declare const NeuralDaySchema: GenMessage<NeuralDay>;
+/**
+ * @generated from message tank.platform.v1.NeuralUsage
+ */
+export type NeuralUsage = Message<"tank.platform.v1.NeuralUsage"> & {
+    /**
+     * @generated from field: int32 answers_30d = 1;
+     */
+    answers30d: number;
+    /**
+     * @generated from field: int32 people_30d = 2;
+     */
+    people30d: number;
+    /**
+     * @generated from field: int32 lookups_30d = 3;
+     */
+    lookups30d: number;
+    /**
+     * @generated from field: int32 lookups_with_sources_30d = 4;
+     */
+    lookupsWithSources30d: number;
+    /**
+     * follow-ups that found the answer out of date
+     *
+     * @generated from field: int32 changed_30d = 5;
+     */
+    changed30d: number;
+    /**
+     * @generated from field: int64 lookup_ms_avg = 6;
+     */
+    lookupMsAvg: bigint;
+    /**
+     * @generated from field: int64 input_tokens_30d = 7;
+     */
+    inputTokens30d: bigint;
+    /**
+     * @generated from field: int64 output_tokens_30d = 8;
+     */
+    outputTokens30d: bigint;
+    /**
+     * @generated from field: double cost_usd_30d = 9;
+     */
+    costUsd30d: number;
+    /**
+     * runs that used TANK Neural
+     *
+     * @generated from field: int32 agent_runs_30d = 10;
+     */
+    agentRuns30d: number;
+    /**
+     * @generated from field: int64 agent_tokens_30d = 11;
+     */
+    agentTokens30d: bigint;
+    /**
+     * @generated from field: int32 thumbs_up_30d = 12;
+     */
+    thumbsUp30d: number;
+    /**
+     * @generated from field: int32 thumbs_down_30d = 13;
+     */
+    thumbsDown30d: number;
+};
+/**
+ * Describes the message tank.platform.v1.NeuralUsage.
+ * Use `create(NeuralUsageSchema)` to create a new message.
+ */
+export declare const NeuralUsageSchema: GenMessage<NeuralUsage>;
+/**
+ * @generated from message tank.platform.v1.GetNeuralRequest
+ */
+export type GetNeuralRequest = Message<"tank.platform.v1.GetNeuralRequest"> & {};
+/**
+ * Describes the message tank.platform.v1.GetNeuralRequest.
+ * Use `create(GetNeuralRequestSchema)` to create a new message.
+ */
+export declare const GetNeuralRequestSchema: GenMessage<GetNeuralRequest>;
+/**
+ * @generated from message tank.platform.v1.GetNeuralResponse
+ */
+export type GetNeuralResponse = Message<"tank.platform.v1.GetNeuralResponse"> & {
+    /**
+     * what the server calls the base
+     *
+     * @generated from field: string base_model = 1;
+     */
+    baseModel: string;
+    /**
+     * @generated from field: bool server_up = 2;
+     */
+    serverUp: boolean;
+    /**
+     * adapters the server holds now, by served name
+     *
+     * @generated from field: repeated string loaded = 3;
+     */
+    loaded: string[];
+    /**
+     * @generated from field: repeated tank.platform.v1.NeuronRow neurons = 4;
+     */
+    neurons: NeuronRow[];
+    /**
+     * @generated from field: repeated tank.platform.v1.NeuronWorkspace neuron_workspaces = 5;
+     */
+    neuronWorkspaces: NeuronWorkspace[];
+    /**
+     * @generated from field: repeated tank.platform.v1.FieldRow fields = 6;
+     */
+    fields: FieldRow[];
+    /**
+     * @generated from field: tank.platform.v1.WebIndex web = 7;
+     */
+    web?: WebIndex;
+    /**
+     * @generated from field: tank.platform.v1.NeuralUsage usage = 8;
+     */
+    usage?: NeuralUsage;
+    /**
+     * the last 30, oldest first
+     *
+     * @generated from field: repeated tank.platform.v1.NeuralDay days = 9;
+     */
+    days: NeuralDay[];
+};
+/**
+ * Describes the message tank.platform.v1.GetNeuralResponse.
+ * Use `create(GetNeuralResponseSchema)` to create a new message.
+ */
+export declare const GetNeuralResponseSchema: GenMessage<GetNeuralResponse>;
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export declare const PlatformService: GenService<{
@@ -1595,5 +2081,13 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof RemoveSuperAdminRequestSchema;
         output: typeof RemoveSuperAdminResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.GetNeural
+     */
+    getNeural: {
+        methodKind: "unary";
+        input: typeof GetNeuralRequestSchema;
+        output: typeof GetNeuralResponseSchema;
     };
 }>;
