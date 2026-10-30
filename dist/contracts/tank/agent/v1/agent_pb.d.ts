@@ -1049,12 +1049,104 @@ export type TreadMetrics = Message<"tank.agent.v1.TreadMetrics"> & {
      * @generated from field: bool neural_measured = 12;
      */
     neuralMeasured: boolean;
+    /**
+     * Who asked for this Tread's runs this month, most spend first.
+     *
+     * @generated from field: repeated tank.agent.v1.SpendByPerson people = 13;
+     */
+    people: SpendByPerson[];
+    /**
+     * Every Tread in the workspace with a run this month, most spend first, each with the
+     * people who asked for its runs. A member sees the Treads they belong to and the
+     * public ones; a workspace admin sees them all. The workspace totals above count
+     * every Tread either way.
+     *
+     * @generated from field: repeated tank.agent.v1.SpendByTread treads = 14;
+     */
+    treads: SpendByTread[];
 };
 /**
  * Describes the message tank.agent.v1.TreadMetrics.
  * Use `create(TreadMetricsSchema)` to create a new message.
  */
 export declare const TreadMetricsSchema: GenMessage<TreadMetrics>;
+/**
+ * What one person's asks cost: the runs they requested, this month and today. Dollars
+ * are marked up like everything else on the switchboard.
+ *
+ * @generated from message tank.agent.v1.SpendByPerson
+ */
+export type SpendByPerson = Message<"tank.agent.v1.SpendByPerson"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string display_name = 2;
+     */
+    displayName: string;
+    /**
+     * @generated from field: int32 runs_month = 3;
+     */
+    runsMonth: number;
+    /**
+     * @generated from field: double spend_month_usd = 4;
+     */
+    spendMonthUsd: number;
+    /**
+     * @generated from field: int32 runs_today = 5;
+     */
+    runsToday: number;
+    /**
+     * @generated from field: double spend_today_usd = 6;
+     */
+    spendTodayUsd: number;
+};
+/**
+ * Describes the message tank.agent.v1.SpendByPerson.
+ * Use `create(SpendByPersonSchema)` to create a new message.
+ */
+export declare const SpendByPersonSchema: GenMessage<SpendByPerson>;
+/**
+ * What one Tread's runs cost, and who asked for them.
+ *
+ * @generated from message tank.agent.v1.SpendByTread
+ */
+export type SpendByTread = Message<"tank.agent.v1.SpendByTread"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: int32 runs_month = 3;
+     */
+    runsMonth: number;
+    /**
+     * @generated from field: double spend_month_usd = 4;
+     */
+    spendMonthUsd: number;
+    /**
+     * @generated from field: int32 runs_today = 5;
+     */
+    runsToday: number;
+    /**
+     * @generated from field: double spend_today_usd = 6;
+     */
+    spendTodayUsd: number;
+    /**
+     * @generated from field: repeated tank.agent.v1.SpendByPerson people = 7;
+     */
+    people: SpendByPerson[];
+};
+/**
+ * Describes the message tank.agent.v1.SpendByTread.
+ * Use `create(SpendByTreadSchema)` to create a new message.
+ */
+export declare const SpendByTreadSchema: GenMessage<SpendByTread>;
 /**
  * @generated from message tank.agent.v1.GetTreadSwitchboardRequest
  */
