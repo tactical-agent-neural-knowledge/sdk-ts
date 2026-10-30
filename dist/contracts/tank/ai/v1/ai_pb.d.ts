@@ -35,6 +35,14 @@ export type Conversation = Message$1<"tank.ai.v1.Conversation"> & {
      * @generated from field: bool pinned = 6;
      */
     pinned: boolean;
+    /**
+     * The workspace this conversation acts in, or empty for a personal one. In a
+     * workspace, the person's own Neuron for it and its Vault join the answer; the
+     * person must be a member, and a conversation keeps its workspace for life.
+     *
+     * @generated from field: string workspace_id = 7;
+     */
+    workspaceId: string;
 };
 /**
  * Describes the message tank.ai.v1.Conversation.
@@ -199,7 +207,14 @@ export declare const GetConversationResponseSchema: GenMessage<GetConversationRe
 /**
  * @generated from message tank.ai.v1.CreateConversationRequest
  */
-export type CreateConversationRequest = Message$1<"tank.ai.v1.CreateConversationRequest"> & {};
+export type CreateConversationRequest = Message$1<"tank.ai.v1.CreateConversationRequest"> & {
+    /**
+     * Empty for a personal conversation (see Conversation.workspace_id).
+     *
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
 /**
  * Describes the message tank.ai.v1.CreateConversationRequest.
  * Use `create(CreateConversationRequestSchema)` to create a new message.
@@ -322,6 +337,13 @@ export type SendMessageRequest = Message$1<"tank.ai.v1.SendMessageRequest"> & {
      * @generated from field: string replace_message_id = 5;
      */
     replaceMessageId: string;
+    /**
+     * For a message that creates the conversation (empty conversation_id): the
+     * workspace it acts in, or empty for a personal one. Ignored otherwise.
+     *
+     * @generated from field: string workspace_id = 6;
+     */
+    workspaceId: string;
 };
 /**
  * Describes the message tank.ai.v1.SendMessageRequest.
