@@ -1,18 +1,14 @@
 # Neurons · src/test
 
-refreshed 2026-10-04 · 5378a111dd9c
+refreshed 2026-10-31 · bf59edafde49
 
-- Test-only support code, and it is excluded from `tsconfig.build.json` (`src/test/**`), so nothing here can reach `dist/` even if something imports it by accident.
-- `src/test/fake-gateway.ts` is an in-process `tank.realtime.v1` server over the `ws` package: it speaks the real binary `ClientFrame`/`ServerFrame` encoding, so `src/client/realtime.test.ts` exercises the actual wire format rather than a stub.
-- `FakeConn` records what the client sent (`received`), what it subscribed to (`channels`, `threads`, `presence`, `focused`) and the per-workspace `resumeCursors` from Resume — assert against those rather than against internal client state.
-- `FakeGatewayOptions` is how reconnection paths are driven: `acceptToken` to reject a Hello, `heartbeatIntervalMs` to override the server-advertised heartbeat, and `rejectResumeFor` (a set of session ids) to force a `ResyncRequired`.
-- `src/test/fixture-defs.ts` defines the eight golden cards in asserted order — `plan, diff, ci-green, ci-red, approval, tool-log, status, file`. Edit this file, then run `UPDATE_FIXTURES=1 pnpm test` to rewrite `fixtures/*.json`.
-- Fixtures are authored **without** block ids and must normalize to themselves; `T0 = Date.UTC(2026, 8, 18, 12, 0, 0)` is pinned so timestamps do not churn the goldens.
-- `src/test/mocks/react-native.tsx` and `react-native-paper.tsx` are the stand-ins Vitest aliases both RN packages to (`vitest.config.ts`); `src/blocks-native` renders against these, and the real packages are dev dependencies for types only.
-- In the stand-ins `StyleSheet.create` is the identity function, so a snapshot shows the style object literally; `useTheme()` returns `paperDarkTheme` from `src/design`.
-- The exported `alerts` and `opened` arrays in the mocks record `Alert.alert` and `Linking.openURL` calls — that is how the confirm-button and link tests assert, since there is no real native bridge.
-- `src/exports.test.ts`'s react-native scan excludes `/test/mocks/`, which is the only reason these two files are allowed to import the RN package names.
+- `src/test/` is excluded from `tsconfig.build.json` entirely; nothing here reaches `dist/`; all imports from `src/test/` are test-only by construction.
+- `src/test/fake-gateway.ts` exports `FakeGateway` and `FakeConn`. `FakeGateway.start(opts)` spins up an in-process `ws` WebSocketServer on a random port; `FakeConn` records every `ClientFrame` the client sends and tracks per-workspace Resume cursors in `resumeCursors: Record<string, bigint>`. `FakeGatewayOptions` lets tests control which tokens are accepted and which session ids trigger `ResyncRequired`.
+- `FakeGateway` maintains a per-workspace event log (`log: Map<string, Array<{cursor, envelope}>>`) so Resume can replay missed envelopes; used in `src/client/client.test.ts` to test gap-buffer and resume logic.
+- `src/test/fixture-defs.ts` exports `fixtureDefs: Record<string, () => Blocks>` — the eight golden block card factories (plan, statusCard, ciStatus, diffPreview, toolLog, approvalPrompt, context, actions). Edit here, then run `UPDATE_FIXTURES=1 pnpm test` to regenerate `fixtures/*.json`.
+- `src/test/mocks/react-native.tsx` is a partial stub of `react-native` for Vitest; `react-native-paper.tsx` stubs the Paper components `blocks-native` uses; `react-native-svg.tsx` stubs SVG primitives. All three are aliased in `vitest.config.ts` and must not be imported in production code.
+- `vitest.config.ts` sets up the module name mapper for the three RN stubs, configures jsdom for `src/blocks-web/**` and `src/react/**` tests, and sets `TEST_TRANSPORT` for `src/client/` integration tests.
 
 ## Verified
 
-`pnpm lint`, `pnpm typecheck`, `pnpm vitest run src/client`
+`pnpm lint`, `pnpm typecheck`

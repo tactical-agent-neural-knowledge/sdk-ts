@@ -1,19 +1,17 @@
 # Neurons · src/blocks
 
-refreshed 2026-10-18 · d7c882a75bba
+refreshed 2026-10-31 · bf59edafde49
 
-- This is the platform-free half of "Threaded Action Cards": types, builders, normalizer, rich-text helpers and `runTone`. It imports no React and no UI toolkit, so web and mobile cannot disagree about what a card means.
-- `src/blocks/types.ts` re-exports the `tank.blocks.v1` and `tank.richtext.v1` message types so consumers never import a generated path; `BLOCK_KINDS` is the 12-kind list, written `as const satisfies readonly BlockKind[]` so a kind added to the proto but forgotten here is a type error.
-- `src/blocks/builders.ts` is the authoring entry point — `blocks(...)` wraps items into the `Blocks` message that `Message.blocks` holds, and every per-kind builder goes through one private `block(kind, blockId = "")`, leaving the id empty for the normalizer to fill.
-- `src/blocks/normalize.ts` `normalizeBlocks` fills missing ids as `b1`, `b2`, …, de-duplicates collisions with `_2`/`_3` suffixes, drops blocks with no `kind`, and is idempotent — normalizing twice is a no-op, which is what the fixture round-trip relies on.
-- `LIMITS` in `normalize.ts` is the single cap table (~35 entries: `blocks: 50`, `headerText: 150`, `buttons: 10`, `textElement: 3000`, …); `truncate` cuts to the cap and appends `…`, so over-long input is clipped rather than rejected.
-- `validateBlocks` returns `BlockIssue[]` with dotted paths like `blocks[2].actions.buttons[0].action_id` — use it for authoring feedback; `normalizeBlocks` is what you call before sending.
-- `src/blocks/runTone.ts` maps `RunState` to five tones (`running`/`awaiting`/`done`/`failed`/`cancelled`); `awaiting` is the two approval states, `failed` folds in `BUDGET_EXHAUSTED`, `TIMED_OUT` and `APPROVAL_EXPIRED`. `isTerminalRunState` is derived from the tone, so a new terminal state only needs the switch updated once.
-- `RUN_TONE_MUI_COLOR` maps tones to MUI palette keys (`secondary`=purple, `warning`=amber, `success`, `error`, `default`); `RUN_TONE_PAPER_COLOR` maps to Paper MD3 slots (`secondary`, `tertiary`, `success`, `error`, `outline`). Both are shared here so web and native chips stay consistent.
-- `src/blocks/richtext.ts` exposes the `rt.*` inline element builders and the `richText()` helper; elements are constructed as plain `$typeName`-tagged literals, not via `create()`, so they stay cheap.
-- Golden fixtures live in `fixtures/*.json` and are driven by `src/test/fixture-defs.ts`; `src/blocks/blocks.test.ts` asserts the eight in order (`plan, diff, ci-green, ci-red, approval, tool-log, status, file`) and that each fixture normalizes to itself.
-- Changing a builder's output means regenerating goldens with `UPDATE_FIXTURES=1 pnpm test` — and that also invalidates the web and native renderer snapshots.
-- Area check: `pnpm vitest run src/blocks/` (the trailing slash matters — `src/blocks` also matches `src/blocks-web` and `src/blocks-native`).
+- `src/blocks/index.ts` is the barrel for `./blocks`; it re-exports from `builders.ts`, `marks.ts`, `normalize.ts`, `plan.ts`, `richtext.ts`, `runTone.ts`, and `types.ts`.
+- `src/blocks/runTone.ts` maps `RunState` → `RunTone` (`"running" | "awaiting" | "done" | "failed" | "cancelled"`): `AWAITING_PLAN_APPROVAL` and `AWAITING_MERGE_APPROVAL` → `"awaiting"`; `DONE` → `"done"`; `FAILED`, `BUDGET_EXHAUSTED`, `TIMED_OUT`, `APPROVAL_EXPIRED` → `"failed"`; `CANCELLED`/`UNSPECIFIED` → `"cancelled"`; all others → `"running"`. Also exports `isTerminalRunState`, `RUN_TONE_MUI_COLOR`, `RUN_TONE_PAPER_COLOR`, `runStateLabel`, and `runStatusPhrase`.
+- `isTerminalRunState(state)` returns `true` when `runTone` returns `"done"`, `"failed"`, or `"cancelled"` — both renderers use this to stop polling.
+- `src/blocks/builders.ts` exports typed block constructors: `blocks()`, `header()`, `section()`, `field()`, `divider()`, `context()`, `actions()`, `ciStatus()`, `statusCard()`, `planCard()`, `diffPreview()`, `filePreview()`, `toolLog()`, `approvalPrompt()`. All return `Block` or `Blocks` protobuf messages created with `@bufbuild/protobuf` `create()`.
+- `src/blocks/richtext.ts` exports `richText(input)` (builds a `RichText` protobuf from a string, nested array, or template), `rt` (template-literal alias), `richTextToPlain`, `elementToPlain`, `broadcastRange`, `broadcastWord`, `codeBlock`, and `TextStyle`.
+- `src/blocks/normalize.ts` exports `normalizeBlocks`, `normalizeRichText`, `validateBlocks`, `truncate`, `LIMITS`, and `BlockIssue` — the normalizer the server runs before storing; clients call it before sending to avoid a round-trip rejection.
+- `src/blocks/types.ts` re-exports `Block`, `Blocks`, `Button`, `Check`, `Confirm`, `DiffFile`, `Field`, `GateKind`, `PlanStep`, `StepStatus`, `ToolLogEntry` from `contracts/tank/blocks` and `RichText` from `contracts/tank/richtext` — consumers import from `./blocks`, never from the deep contracts path.
+- `src/blocks/marks.ts` exports `MarkKind`, `MarkSpec`, `MARKS`, `MARK_HEX`, `planMark`, `planItemMark`, `stepMark`, `progressMark` — the mark type registry for the Topo strip.
+- `src/blocks/plan.ts` exports `planGlance`, `planProgress`, `planItemEmoji`, `stepEmoji` — helpers for summarising a `TreadPlan` into a status line or an emoji.
+- `runTone` lives in `./blocks` (not `./blocks-web` or `./blocks-native`) so both renderers share one state-to-colour mapping without a circular dependency.
 
 ## Verified
 

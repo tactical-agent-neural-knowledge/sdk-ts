@@ -1,25 +1,20 @@
 # Neurons · src/client
 
-refreshed 2026-10-24 · 178b798fa808
+refreshed 2026-10-31 · bf59edafde49
 
-- `createTankClient` (`src/client/client.ts`) is the single entry point; `client.start()` must run before any send/subscribe call — it opens the realtime socket, replays the outbox, and primes the store from `GetBootstrap` in that order.
-- Optimistic helpers (`updateMessage`, `deleteMessage`, `joinChannel`, `leaveChannel`, `createChannel`, `setGoal`, `invite`, `markThreadRead`) are the only sanctioned way to mutate state — each applies to the store immediately and rolls back on RPC error, so apps must never dispatch a raw store action directly.
-- **Send is fire-and-forget on storage**: `sendMessage` calls `void this.persistOutboxEntry(...)` and `void this.flushOne(...)` without awaiting — storage is for crash-recovery only, never a gate on send. Storage failures are swallowed with `.catch(() => undefined)`.
-- **Send has a hard per-attempt timeout**: `SEND_TIMEOUT_MS = 15_000` (15 s); configurable via `TankClientOptions.sendTimeoutMs`. A timed-out `postMessage` yields `DeadlineExceeded`, which is in `RETRYABLE` so the message backs off and retries; the server deduplicates by `client_msg_id`.
-- Send retries are narrow by design: only a fixed `RETRYABLE` status set is retried, capped at `MAX_SEND_ATTEMPTS = 6`, backed off per `backoff.ts` — anything else (e.g. validation errors) surfaces immediately instead of retrying into a wall.
-- `store.ts` is the single state owner (~1500 lines, ~30 state keys, ~50-action reducer) covering messages, channels, threads, notifications, agent runs and files — web/mobile keep no side stores; selectors are memoized so re-render cost tracks subscriptions, not store size.
-- `TankClient` exposes typed service clients for every backend service: `auth`, `workspaces`, `channels`, `chat`, `presence`, `files`, `agents`/`agent`, `notifications`, `topo`, `monitor`, `command`, `billing`, `ai`, `environment`, and `hosting`.
-- `client.hosting` (`HostingService`) manages deployed products: `GetProduct`, `CheckProduct`, `GetResources`, `ApproveBuildn`, `Operate`, `ListChanges`, `Rollback`, `UpdateResource`, `SetCap`, `ListHosting`, `SetAllowance`, `ExportProduct`, `SetSecret`, `PreviewChange`, `ApplyChange`, `GetSpecText`.
-- `PreviewChange` and `ApplyChange` are the two sides of the tank.yaml settings workflow: `PreviewChange` returns a cost estimate and validation before `ApplyChange` commits it; `GetSpecText`/`ApplyChange(text:)` handle raw-text edits.
-- `client.environment` (`EnvironmentService`) surfaces the arena grading system: `ListEnvironments`, `GetEnvironment`, `ListScores`, `ListObservations`, `ListPredictions`, `ListRounds`, `ListComments`, `PostComment` — readable signed out.
-- `client.ai.sendMessage` is a **server-side streaming RPC** — the response is an `AsyncIterable<SendMessageResponse>` that emits `started`, `delta`, `done` and `title` event variants; callers must iterate to completion or cancel, not just await.
-- `client.billing` includes `VerifyAppleTransaction` (mobile In-App Purchase receipt verification) and `SetAgentCap` (workspace agent spend cap).
-- `paywall.ts` exports `paywallMessage(err)` and `isPaywall(err)` — the single place that recognises a `FailedPrecondition` with `"premium subscription"` text as an upsell; other `FailedPrecondition` errors (archived Tread, deleted thread) must not open an upgrade prompt.
-- Timeline trap: `inChannelTimeline` filters by channel *and* excludes thread-only replies — a message that looks "in the channel" in the data can still be absent from the rendered timeline if it's a thread reply.
-- `models.ts` exports `MODEL_CHOICES` (six entries: `""`, `tank-neural-1`, `tank-neural-next`, `claude-sonnet-5`, `claude-opus-5`, `claude-haiku-4-5`), `TANK_NEURAL = "tank-neural-1"`, `TANK_NEURAL_NEXT = "tank-neural-next"`, and `modelLabel(id)` — these are the names the gateway accepts on `TreadSettings.model`; a name not in this list is refused at save.
-- `upload.ts`'s `uploadFile` runs CreateUpload → PUT (XHR for progress, fetch fallback, multipart parts when the server returns them) → CompleteUpload; skipping CompleteUpload leaves an orphaned pending upload server-side.
-- `uuidv7.ts` generates `client_msg_id` via `crypto.getRandomValues` by default but accepts an injected `randomBytes`, which is what makes outbox ordering deterministic in tests.
+- `src/client/client.ts` exports `TankClient` (the main class) and `createTankClient` (factory). `TankClient` holds typed Connect clients for every service as named properties: `auth`, `workspaces`, `channels`, `chat`, `presence`, `files`, `agents`/`agent` (same `AgentService` client), `notifications`, `topo`, `monitor`, `command`, `billing`, `ai`, `environment`, `hosting`.
+- `agentops`, `agentctl`, and `crew` contracts are vendored but no `CrewService`/`AgentOpsService`/`AgentCtlService` clients are wired into `TankClient` yet; they are in `src/contracts/tank/` only.
+- `src/client/store.ts` is the single Redux-style reducer for all realtime state. Key `TankState` maps: `messages`, `channels`, `members`, `readStates` (channel-level, `ChannelReadState`), `threadReadStates` (thread-level, `bigint` per root id), `readPositions` (channel → user → seq), `threadReadPositions` (root → user → thread_seq), `notifications`, `runsById`, `runsByThread`, `agentStatusByThread`, `filesById`.
+- `AGENT_STATUS_TTL_MS = 30_000` — `agentStatusByThread` entries older than this are pruned on an `agentStatus/expire` action; `TYPING_TTL_MS = 5_000` for the same pattern on `typing`.
+- `EventPayload` is a discriminated union: `KnownEventPayload` (one case per `tank.events.v1` message type, `$typeName` is a string literal) | `UnknownEventPayload` (`$typeName: string`, `typeUrl`, `value`). Using an open `$typeName: string` member would break `switch` narrowing — the closed literal union is deliberate.
+- `src/client/models.ts` exports `TANK_NEURAL = "tank-neural-1"`, `TANK_NEURAL_NEXT = "tank-neural-next"`, and `MODEL_CHOICES` (readonly array of `ModelChoice` with `id/label/note/relativeCost`). These are the only model ids the gateway accepts.
+- `src/client/previewable.ts` exports `previewable(mime)`, `opensAsPage(mime)`, and `framesAsPage(mime)` — mirrors server logic for choosing "open" vs "download" before requesting the server; HTML/SVG/XML are intentionally excluded from `previewable` to prevent script execution on the files origin.
+- `src/client/upload.ts` implements `putUpload`: calls `CreateUpload`, then PUT (XHR for progress, fetch fallback, multipart parts when returned), then `CompleteUpload`. XHR progress is via injected `XhrCtor`; `UploadError` is the typed failure class.
+- `src/client/uuidv7.ts` exports `uuidv7()` (generates a sortable id using `randomBytes`), `uuidv7Time()`, `isUuidv7()`, `cryptoRandomBytes`, and the `RandomBytes` type. All outbox entries are keyed by UUIDv7 `client_msg_id`.
+- Optimistic helpers (`updateMessage`, `deleteMessage`, `joinChannel`, `leaveChannel`, `createChannel`, `setGoal`, `invite`, `markThreadRead`) update the store immediately and roll back on error — apps never dispatch raw actions.
+- `src/client/realtime.ts` exports `RealtimeClient`; its `onlineSignal` option is injectable (defaults to `browserOnlineSignal`) so React Native and tests can supply their own; `realtime.presenceSubscribe` is called via a ref-counted `PresenceRegistry` in the React provider.
+- The `TankStorage` interface is string key/value: `IndexedDbStorage` on web, SQLite in mobile, `MemoryStorage` in tests; it persists cursors, the outbox, recent channel caches, and read states across sessions.
 
 ## Verified
 
-`pnpm lint`, `pnpm typecheck`, `pnpm vitest run src/client`
+`pnpm lint`, `pnpm typecheck`, `pnpm vitest run src/client/`
