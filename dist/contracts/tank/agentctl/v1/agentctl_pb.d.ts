@@ -2998,6 +2998,26 @@ export type OpenPullRequestRequest = Message<"tank.agentctl.v1.OpenPullRequestRe
      * @generated from field: bool draft = 4;
      */
     draft: boolean;
+    /**
+     * A Tread works in more than one repository (Robby, 2026-10-31): the pull request
+     * may be opened in any repository the run may write to. Empty: the run's primary
+     * repository and branch. base_branch empty: that repository's default branch.
+     *
+     * owner/name
+     *
+     * @generated from field: string repo = 5;
+     */
+    repo: string;
+    /**
+     * the head branch the runner pushed there
+     *
+     * @generated from field: string branch = 6;
+     */
+    branch: string;
+    /**
+     * @generated from field: string base_branch = 7;
+     */
+    baseBranch: string;
 };
 /**
  * Describes the message tank.agentctl.v1.OpenPullRequestRequest.

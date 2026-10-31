@@ -525,6 +525,42 @@ export type GetCanvasResponse = Message<"tank.canvas.v1.GetCanvasResponse"> & {
  */
 export declare const GetCanvasResponseSchema: GenMessage<GetCanvasResponse>;
 /**
+ * @generated from message tank.canvas.v1.CreateCanvasFromFileRequest
+ */
+export type CreateCanvasFromFileRequest = Message<"tank.canvas.v1.CreateCanvasFromFileRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string file_id = 3;
+     */
+    fileId: string;
+};
+/**
+ * Describes the message tank.canvas.v1.CreateCanvasFromFileRequest.
+ * Use `create(CreateCanvasFromFileRequestSchema)` to create a new message.
+ */
+export declare const CreateCanvasFromFileRequestSchema: GenMessage<CreateCanvasFromFileRequest>;
+/**
+ * @generated from message tank.canvas.v1.CreateCanvasFromFileResponse
+ */
+export type CreateCanvasFromFileResponse = Message<"tank.canvas.v1.CreateCanvasFromFileResponse"> & {
+    /**
+     * @generated from field: tank.canvas.v1.Canvas canvas = 1;
+     */
+    canvas?: Canvas;
+};
+/**
+ * Describes the message tank.canvas.v1.CreateCanvasFromFileResponse.
+ * Use `create(CreateCanvasFromFileResponseSchema)` to create a new message.
+ */
+export declare const CreateCanvasFromFileResponseSchema: GenMessage<CreateCanvasFromFileResponse>;
+/**
  * @generated from message tank.canvas.v1.CreateCanvasRequest
  */
 export type CreateCanvasRequest = Message<"tank.canvas.v1.CreateCanvasRequest"> & {
@@ -1302,6 +1338,19 @@ export declare const CanvasService: GenService<{
         methodKind: "unary";
         input: typeof CreateCanvasRequestSchema;
         output: typeof CreateCanvasResponseSchema;
+    };
+    /**
+     * A page made from a markdown file somebody sent to the Tread (Robby, 2026-10-31:
+     * "when someone uploads a markdown it should offer to add to Atlas for this Tread").
+     * The caller must be in the Tread and able to read the file; the page is attached
+     * to the Tread and titled from the file's first heading, else its name.
+     *
+     * @generated from rpc tank.canvas.v1.CanvasService.CreateCanvasFromFile
+     */
+    createCanvasFromFile: {
+        methodKind: "unary";
+        input: typeof CreateCanvasFromFileRequestSchema;
+        output: typeof CreateCanvasFromFileResponseSchema;
     };
     /**
      * @generated from rpc tank.canvas.v1.CanvasService.UpdateCanvas
