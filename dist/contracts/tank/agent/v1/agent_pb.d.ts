@@ -244,6 +244,91 @@ export type OpenThreadResponse = Message<"tank.agent.v1.OpenThreadResponse"> & {
  */
 export declare const OpenThreadResponseSchema: GenMessage<OpenThreadResponse>;
 /**
+ * Workspace-level agent settings, admins only. Off by default.
+ *
+ * @generated from message tank.agent.v1.WorkspaceAgentSettings
+ */
+export type WorkspaceAgentSettings = Message<"tank.agent.v1.WorkspaceAgentSettings"> & {
+    /**
+     * An organization grant ('*') made in any Tread counts for every Tread in the
+     * workspace, present and future. Off: access is per Tread, as granted.
+     *
+     * @generated from field: bool org_access_everywhere = 1;
+     */
+    orgAccessEverywhere: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.WorkspaceAgentSettings.
+ * Use `create(WorkspaceAgentSettingsSchema)` to create a new message.
+ */
+export declare const WorkspaceAgentSettingsSchema: GenMessage<WorkspaceAgentSettings>;
+/**
+ * @generated from message tank.agent.v1.GetWorkspaceAgentSettingsRequest
+ */
+export type GetWorkspaceAgentSettingsRequest = Message<"tank.agent.v1.GetWorkspaceAgentSettingsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetWorkspaceAgentSettingsRequest.
+ * Use `create(GetWorkspaceAgentSettingsRequestSchema)` to create a new message.
+ */
+export declare const GetWorkspaceAgentSettingsRequestSchema: GenMessage<GetWorkspaceAgentSettingsRequest>;
+/**
+ * @generated from message tank.agent.v1.GetWorkspaceAgentSettingsResponse
+ */
+export type GetWorkspaceAgentSettingsResponse = Message<"tank.agent.v1.GetWorkspaceAgentSettingsResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.WorkspaceAgentSettings settings = 1;
+     */
+    settings?: WorkspaceAgentSettings;
+    /**
+     * the caller is an admin or owner
+     *
+     * @generated from field: bool can_manage = 2;
+     */
+    canManage: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.GetWorkspaceAgentSettingsResponse.
+ * Use `create(GetWorkspaceAgentSettingsResponseSchema)` to create a new message.
+ */
+export declare const GetWorkspaceAgentSettingsResponseSchema: GenMessage<GetWorkspaceAgentSettingsResponse>;
+/**
+ * @generated from message tank.agent.v1.SetWorkspaceAgentSettingsRequest
+ */
+export type SetWorkspaceAgentSettingsRequest = Message<"tank.agent.v1.SetWorkspaceAgentSettingsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.agent.v1.WorkspaceAgentSettings settings = 2;
+     */
+    settings?: WorkspaceAgentSettings;
+};
+/**
+ * Describes the message tank.agent.v1.SetWorkspaceAgentSettingsRequest.
+ * Use `create(SetWorkspaceAgentSettingsRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAgentSettingsRequestSchema: GenMessage<SetWorkspaceAgentSettingsRequest>;
+/**
+ * @generated from message tank.agent.v1.SetWorkspaceAgentSettingsResponse
+ */
+export type SetWorkspaceAgentSettingsResponse = Message<"tank.agent.v1.SetWorkspaceAgentSettingsResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.WorkspaceAgentSettings settings = 1;
+     */
+    settings?: WorkspaceAgentSettings;
+};
+/**
+ * Describes the message tank.agent.v1.SetWorkspaceAgentSettingsResponse.
+ * Use `create(SetWorkspaceAgentSettingsResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAgentSettingsResponseSchema: GenMessage<SetWorkspaceAgentSettingsResponse>;
+/**
  * @generated from message tank.agent.v1.StopRunRequest
  */
 export type StopRunRequest = Message<"tank.agent.v1.StopRunRequest"> & {
@@ -2141,6 +2226,22 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof OpenThreadRequestSchema;
         output: typeof OpenThreadResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.GetWorkspaceAgentSettings
+     */
+    getWorkspaceAgentSettings: {
+        methodKind: "unary";
+        input: typeof GetWorkspaceAgentSettingsRequestSchema;
+        output: typeof GetWorkspaceAgentSettingsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.SetWorkspaceAgentSettings
+     */
+    setWorkspaceAgentSettings: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceAgentSettingsRequestSchema;
+        output: typeof SetWorkspaceAgentSettingsResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.GetTreadPlan
