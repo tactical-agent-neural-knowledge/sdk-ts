@@ -148,12 +148,99 @@ export type Member = Message<"tank.agentops.v1.Member"> & {
      * @generated from field: int32 running_now = 18;
      */
     runningNow: number;
+    /**
+     * A person's seat: their user id; the handle is theirs; no agent, no prompt.
+     *
+     * @generated from field: string user_id = 19;
+     */
+    userId: string;
+    /**
+     * The evidence: what this member actually finished, by kind of ask, so the
+     * coordinator routes by record rather than by the roster's claims.
+     *
+     * @generated from field: tank.agentops.v1.MemberRecord record = 20;
+     */
+    record?: MemberRecord;
 };
 /**
  * Describes the message tank.agentops.v1.Member.
  * Use `create(MemberSchema)` to create a new message.
  */
 export declare const MemberSchema: GenMessage<Member>;
+/**
+ * What a member has actually done over thirty days.
+ *
+ * @generated from message tank.agentops.v1.MemberRecord
+ */
+export type MemberRecord = Message<"tank.agentops.v1.MemberRecord"> & {
+    /**
+     * @generated from field: int32 finished = 1;
+     */
+    finished: number;
+    /**
+     * @generated from field: int32 failed = 2;
+     */
+    failed: number;
+    /**
+     * hand-offs the coordinator accepted
+     *
+     * @generated from field: int32 accepted = 3;
+     */
+    accepted: number;
+    /**
+     * @generated from field: int32 rejected = 4;
+     */
+    rejected: number;
+    /**
+     * @generated from field: double avg_cost_usd = 5;
+     */
+    avgCostUsd: number;
+    /**
+     * @generated from field: double avg_minutes = 6;
+     */
+    avgMinutes: number;
+    /**
+     * @generated from field: repeated tank.agentops.v1.KindRecord kinds = 7;
+     */
+    kinds: KindRecord[];
+};
+/**
+ * Describes the message tank.agentops.v1.MemberRecord.
+ * Use `create(MemberRecordSchema)` to create a new message.
+ */
+export declare const MemberRecordSchema: GenMessage<MemberRecord>;
+/**
+ * @generated from message tank.agentops.v1.KindRecord
+ */
+export type KindRecord = Message<"tank.agentops.v1.KindRecord"> & {
+    /**
+     * the trigger the ask matched, else the run's task class
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: int32 finished = 2;
+     */
+    finished: number;
+    /**
+     * @generated from field: int32 failed = 3;
+     */
+    failed: number;
+    /**
+     * @generated from field: int32 accepted = 4;
+     */
+    accepted: number;
+    /**
+     * @generated from field: int32 rejected = 5;
+     */
+    rejected: number;
+};
+/**
+ * Describes the message tank.agentops.v1.KindRecord.
+ * Use `create(KindRecordSchema)` to create a new message.
+ */
+export declare const KindRecordSchema: GenMessage<KindRecord>;
 /**
  * @generated from message tank.agentops.v1.Team
  */
@@ -836,7 +923,13 @@ export declare enum Seat {
      *
      * @generated from enum value: SEAT_SPECIALIST = 2;
      */
-    SPECIALIST = 2
+    SPECIALIST = 2,
+    /**
+     * a person on the team: a hand-off to them is a question with a deadline
+     *
+     * @generated from enum value: SEAT_PERSON = 3;
+     */
+    PERSON = 3
 }
 /**
  * Describes the enum tank.agentops.v1.Seat.

@@ -710,6 +710,24 @@ export type TeamMember = Message<"tank.agentctl.v1.TeamMember"> & {
      * @generated from field: bool is_me = 11;
      */
     isMe: boolean;
+    /**
+     * A person on the team (seat person): a hand-off to them is a question in a new
+     * thread with a deadline; their reply is the result.
+     *
+     * @generated from field: bool person = 12;
+     */
+    person: boolean;
+    /**
+     * @generated from field: string user_id = 13;
+     */
+    userId: string;
+    /**
+     * The member's record, as a line the coordinator reads: "12 done, 1 failed; 9 of 10
+     * hand-offs accepted; ~$1.80 and 6 min each; best at: tests, review".
+     *
+     * @generated from field: string record = 14;
+     */
+    record: string;
 };
 /**
  * Describes the message tank.agentctl.v1.TeamMember.
@@ -841,6 +859,23 @@ export type HandoffStatus = Message<"tank.agentctl.v1.HandoffStatus"> & {
      * @generated from field: string verdict_note = 12;
      */
     verdictNote: string;
+    /**
+     * The other hand-off this one was paired with for a quorum, if any.
+     *
+     * @generated from field: string quorum_with = 13;
+     */
+    quorumWith: string;
+    /**
+     * A hand-off to a person: their user id and the deadline; state is "waiting" until
+     * they reply or the deadline passes ("done" with their reply, "timed_out" without).
+     *
+     * @generated from field: string person_user_id = 14;
+     */
+    personUserId: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp deadline = 15;
+     */
+    deadline?: Timestamp;
 };
 /**
  * Describes the message tank.agentctl.v1.HandoffStatus.
@@ -877,6 +912,20 @@ export type DelegateRequest = Message<"tank.agentctl.v1.DelegateRequest"> & {
      * @generated from field: tank.agentctl.v1.Envelope envelope = 5;
      */
     envelope?: Envelope;
+    /**
+     * Quorum: the same ask goes to this second member too; both results come back and
+     * the coordinator accepts the one that passes the check (or both, or neither).
+     *
+     * @generated from field: string quorum_handle = 6;
+     */
+    quorumHandle: string;
+    /**
+     * For a hand-off to a person: how long to wait for their reply before carrying on
+     * without it (0 = a day).
+     *
+     * @generated from field: int32 deadline_minutes = 7;
+     */
+    deadlineMinutes: number;
 };
 /**
  * Describes the message tank.agentctl.v1.DelegateRequest.
@@ -907,6 +956,18 @@ export type DelegateResponse = Message<"tank.agentctl.v1.DelegateResponse"> & {
      * @generated from field: tank.agentctl.v1.Envelope envelope_left = 4;
      */
     envelopeLeft?: Envelope;
+    /**
+     * the second hand-off, for a quorum
+     *
+     * @generated from field: string quorum_child_run_id = 5;
+     */
+    quorumChildRunId: string;
+    /**
+     * Hand-offs the control plane refused as already in hand: who is on it and where.
+     *
+     * @generated from field: string already = 6;
+     */
+    already: string;
 };
 /**
  * Describes the message tank.agentctl.v1.DelegateResponse.
