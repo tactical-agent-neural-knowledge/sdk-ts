@@ -467,6 +467,13 @@ export type TeamContext = Message<"tank.agentctl.v1.TeamContext"> & {
      * @generated from field: string cap_note = 10;
      */
     capNote: string;
+    /**
+     * What the team learned, newest last, from its hand-offs' reports and what members
+     * chose to remember.
+     *
+     * @generated from field: repeated string memory = 11;
+     */
+    memory: string[];
 };
 /**
  * Describes the message tank.agentctl.v1.TeamContext.
@@ -3694,6 +3701,12 @@ export type StartRunRequest = Message<"tank.agentctl.v1.StartRunRequest"> & {
      * @generated from field: bool skip_neural_knowledge = 9;
      */
     skipNeuralKnowledge: boolean;
+    /**
+     * For a run the platform starts on a team's behalf (a shift): the envelope in dollars.
+     *
+     * @generated from field: double envelope_usd = 10;
+     */
+    envelopeUsd: number;
 };
 /**
  * Describes the message tank.agentctl.v1.StartRunRequest.
