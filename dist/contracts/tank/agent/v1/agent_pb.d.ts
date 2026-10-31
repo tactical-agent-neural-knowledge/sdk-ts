@@ -186,6 +186,64 @@ export type StartRunResponse = Message<"tank.agent.v1.StartRunResponse"> & {
  */
 export declare const StartRunResponseSchema: GenMessage<StartRunResponse>;
 /**
+ * Open a new thread in a Tread as one of the workspace's agents: the root of an Ops
+ * hand-off or of a shift. Only a bot (the control plane) may call it; the person named
+ * in requested_by must be a member of the Tread, as for StartRun, and the agent is
+ * seated there if it is not yet. A run's own token cannot open a thread: it is bound to
+ * the one it works in, which is the point of it.
+ *
+ * @generated from message tank.agent.v1.OpenThreadRequest
+ */
+export type OpenThreadRequest = Message<"tank.agent.v1.OpenThreadRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string agent_id = 2;
+     */
+    agentId: string;
+    /**
+     * @generated from field: string requested_by = 3;
+     */
+    requestedBy: string;
+    /**
+     * @generated from field: string text = 4;
+     */
+    text: string;
+    /**
+     * The run this thread is opened for (a hand-off's parent), recorded on the root.
+     *
+     * @generated from field: string parent_run_id = 5;
+     */
+    parentRunId: string;
+    /**
+     * What the thread is: "handoff" | "shift" | "" (a plain thread).
+     *
+     * @generated from field: string kind = 6;
+     */
+    kind: string;
+};
+/**
+ * Describes the message tank.agent.v1.OpenThreadRequest.
+ * Use `create(OpenThreadRequestSchema)` to create a new message.
+ */
+export declare const OpenThreadRequestSchema: GenMessage<OpenThreadRequest>;
+/**
+ * @generated from message tank.agent.v1.OpenThreadResponse
+ */
+export type OpenThreadResponse = Message<"tank.agent.v1.OpenThreadResponse"> & {
+    /**
+     * @generated from field: string thread_root_id = 1;
+     */
+    threadRootId: string;
+};
+/**
+ * Describes the message tank.agent.v1.OpenThreadResponse.
+ * Use `create(OpenThreadResponseSchema)` to create a new message.
+ */
+export declare const OpenThreadResponseSchema: GenMessage<OpenThreadResponse>;
+/**
  * @generated from message tank.agent.v1.StopRunRequest
  */
 export type StopRunRequest = Message<"tank.agent.v1.StopRunRequest"> & {
@@ -2075,6 +2133,14 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof StartRunRequestSchema;
         output: typeof StartRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.OpenThread
+     */
+    openThread: {
+        methodKind: "unary";
+        input: typeof OpenThreadRequestSchema;
+        output: typeof OpenThreadResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.GetTreadPlan
