@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/agentops/v1/agentops.proto.
  */
 export const file_tank_agentops_v1_agentops: GenFile = /*@__PURE__*/
-  fileDesc("Ch90YW5rL2FnZW50b3BzL3YxL2FnZW50b3BzLnByb3RvEhB0YW5rLmFnZW50b3BzLnYxIikKClRvb2xQb2xpY3kSDQoFYWxsb3cYASADKAkSDAoEZGVueRgCIAMoCSI3CghFbnZlbG9wZRILCgN1c2QYASABKAESDQoFdHVybnMYAiABKAUSDwoHbWludXRlcxgDIAEoBSLiAwoGTWVtYmVyEgoKAmlkGAEgASgJEhAKCGFnZW50X2lkGAIgASgJEhQKDHByaW5jaXBhbF9pZBgDIAEoCRIkCgRzZWF0GAQgASgOMhYudGFuay5hZ2VudG9wcy52MS5TZWF0Eg0KBXRpdGxlGAUgASgJEg4KBmhhbmRsZRgGIAEoCRIOCgZwcm9tcHQYByABKAkSDgoGbW9kZWxzGAggAygJEisKBXRvb2xzGAkgASgLMhwudGFuay5hZ2VudG9wcy52MS5Ub29sUG9saWN5EhAKCGRlbGVnYXRlGAogASgIEhMKC2RlbGVnYXRlX3RvGAsgAygJEhAKCHRyaWdnZXJzGAwgAygJEiwKCGVudmVsb3BlGA0gASgLMhoudGFuay5hZ2VudG9wcy52MS5FbnZlbG9wZRIPCgdlbmFibGVkGA4gASgIEhcKD3NwZW5kX3RvZGF5X3VzZBgPIAEoARIXCg9zcGVuZF9tb250aF91c2QYECABKAESEgoKcnVuc190b2RheRgRIAEoBRITCgtydW5uaW5nX25vdxgSIAEoBRIPCgd1c2VyX2lkGBMgASgJEi4KBnJlY29yZBgUIAEoCzIeLnRhbmsuYWdlbnRvcHMudjEuTWVtYmVyUmVjb3JkIqwBCgxNZW1iZXJSZWNvcmQSEAoIZmluaXNoZWQYASABKAUSDgoGZmFpbGVkGAIgASgFEhAKCGFjY2VwdGVkGAMgASgFEhAKCHJlamVjdGVkGAQgASgFEhQKDGF2Z19jb3N0X3VzZBgFIAEoARITCgthdmdfbWludXRlcxgGIAEoARIrCgVraW5kcxgHIAMoCzIcLnRhbmsuYWdlbnRvcHMudjEuS2luZFJlY29yZCJgCgpLaW5kUmVjb3JkEgwKBGtpbmQYASABKAkSEAoIZmluaXNoZWQYAiABKAUSDgoGZmFpbGVkGAMgASgFEhAKCGFjY2VwdGVkGAQgASgFEhAKCHJlamVjdGVkGAUgASgFIrYECgRUZWFtEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRIMCgRuYW1lGAMgASgJEg4KBmhhbmRsZRgEIAEoCRIPCgdwdXJwb3NlGAUgASgJEikKB21lbWJlcnMYBiADKAsyGC50YW5rLmFnZW50b3BzLnYxLk1lbWJlchITCgtjaGFubmVsX2lkcxgHIAMoCRIVCg1kYWlseV9jYXBfdXNkGAggASgBEhYKDmNvbmN1cnJlbnRfY2FwGAkgASgFEiwKCGVudmVsb3BlGAogASgLMhoudGFuay5hZ2VudG9wcy52MS5FbnZlbG9wZRIXCg9zcGVuZF90b2RheV91c2QYCyABKAESFwoPc3BlbmRfbW9udGhfdXNkGAwgASgBEhIKCnJ1bnNfdG9kYXkYDSABKAUSEwoLcnVubmluZ19ub3cYDiABKAUSLgoKY3JlYXRlZF9hdBgPIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKY3JlYXRlZF9ieRgRIAEoCRIQCghib2FyZF9pZBgSIAEoCRIOCgZwYXVzZWQYEyABKAgSJwoGY2xhaW1zGBQgAygLMhcudGFuay5hZ2VudG9wcy52MS5DbGFpbRImCgNzbG8YFSABKAsyGS50YW5rLmFnZW50b3BzLnYxLlRlYW1TbG8ieQoFQ2xhaW0SDAoEa2luZBgBIAEoCRILCgNrZXkYAiABKAkSDgoGcnVuX2lkGAMgASgJEg0KBXRpdGxlGAQgASgJEgsKA2FzaxgFIAEoCRIpCgVzaW5jZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAisAEKB1RlYW1TbG8SIAoYZmlyc3RfcmVzdWx0X21pbnV0ZXNfcDUwGAEgASgBEhcKD3J1bl9taW51dGVzX3A5NRgCIAEoARIUCgxmaW5pc2hlZF8zMGQYAyABKAUSEgoKZmFpbGVkXzMwZBgEIAEoBRITCgtzdGFsbGVkX25vdxgFIAEoBRIZChFhY2NlcHRlZF9yYXRlXzMwZBgGIAEoARIQCghuZWFyX2NhcBgHIAEoCCJMChNTZXRUZWFtUGF1c2VSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgd0ZWFtX2lkGAIgASgJEg4KBnBhdXNlZBgDIAEoCCI8ChRTZXRUZWFtUGF1c2VSZXNwb25zZRIkCgR0ZWFtGAEgASgLMhYudGFuay5hZ2VudG9wcy52MS5UZWFtIkgKD1N0b3BUZWFtUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDwoHdGVhbV9pZBgCIAEoCRIOCgZyZWFzb24YAyABKAkiSQoQU3RvcFRlYW1SZXNwb25zZRIkCgR0ZWFtGAEgASgLMhYudGFuay5hZ2VudG9wcy52MS5UZWFtEg8KB3N0b3BwZWQYAiABKAUiXAoIVGVtcGxhdGUSCwoDa2V5GAEgASgJEgwKBG5hbWUYAiABKAkSDwoHc3VtbWFyeRgDIAEoCRIkCgR0ZWFtGAQgASgLMhYudGFuay5hZ2VudG9wcy52MS5UZWFtIjwKEExpc3RUZWFtc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkifQoRTGlzdFRlYW1zUmVzcG9uc2USJQoFdGVhbXMYASADKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0SLQoJdGVtcGxhdGVzGAIgAygLMhoudGFuay5hZ2VudG9wcy52MS5UZW1wbGF0ZRISCgpjYW5fbWFuYWdlGAMgASgIIjcKDkdldFRlYW1SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgd0ZWFtX2lkGAIgASgJIjcKD0dldFRlYW1SZXNwb25zZRIkCgR0ZWFtGAEgASgLMhYudGFuay5hZ2VudG9wcy52MS5UZWFtIq0BChFDcmVhdGVUZWFtUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIOCgZoYW5kbGUYAyABKAkSDwoHcHVycG9zZRgEIAEoCRIUCgx0ZW1wbGF0ZV9rZXkYBSABKAkSKQoHbWVtYmVycxgGIAMoCzIYLnRhbmsuYWdlbnRvcHMudjEuTWVtYmVyEhIKCmNoYW5uZWxfaWQYByABKAkiOgoSQ3JlYXRlVGVhbVJlc3BvbnNlEiQKBHRlYW0YASABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0iTwoRVXBkYXRlVGVhbVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEiQKBHRlYW0YAiABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0iOgoSVXBkYXRlVGVhbVJlc3BvbnNlEiQKBHRlYW0YASABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0iOgoRRGVsZXRlVGVhbVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3RlYW1faWQYAiABKAkiFAoSRGVsZXRlVGVhbVJlc3BvbnNlIk4KEUF0dGFjaFRlYW1SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgd0ZWFtX2lkGAIgASgJEhIKCmNoYW5uZWxfaWQYAyABKAkiOgoSQXR0YWNoVGVhbVJlc3BvbnNlEiQKBHRlYW0YASABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0iTgoRRGV0YWNoVGVhbVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3RlYW1faWQYAiABKAkSEgoKY2hhbm5lbF9pZBgDIAEoCSI6ChJEZXRhY2hUZWFtUmVzcG9uc2USJAoEdGVhbRgBIAEoCzIWLnRhbmsuYWdlbnRvcHMudjEuVGVhbSI6ChFFeHBvcnRUZWFtUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDwoHdGVhbV9pZBgCIAEoCSIiChJFeHBvcnRUZWFtUmVzcG9uc2USDAoEeWFtbBgBIAEoCSJLChFJbXBvcnRUZWFtUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEeWFtbBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJIjoKEkltcG9ydFRlYW1SZXNwb25zZRIkCgR0ZWFtGAEgASgLMhYudGFuay5hZ2VudG9wcy52MS5UZWFtKlgKBFNlYXQSFAoQU0VBVF9VTlNQRUNJRklFRBAAEhQKEFNFQVRfQ09PUkRJTkFUT1IQARITCg9TRUFUX1NQRUNJQUxJU1QQAhIPCgtTRUFUX1BFUlNPThADMtMHCgpPcHNTZXJ2aWNlElQKCUxpc3RUZWFtcxIiLnRhbmsuYWdlbnRvcHMudjEuTGlzdFRlYW1zUmVxdWVzdBojLnRhbmsuYWdlbnRvcHMudjEuTGlzdFRlYW1zUmVzcG9uc2USTgoHR2V0VGVhbRIgLnRhbmsuYWdlbnRvcHMudjEuR2V0VGVhbVJlcXVlc3QaIS50YW5rLmFnZW50b3BzLnYxLkdldFRlYW1SZXNwb25zZRJXCgpDcmVhdGVUZWFtEiMudGFuay5hZ2VudG9wcy52MS5DcmVhdGVUZWFtUmVxdWVzdBokLnRhbmsuYWdlbnRvcHMudjEuQ3JlYXRlVGVhbVJlc3BvbnNlElcKClVwZGF0ZVRlYW0SIy50YW5rLmFnZW50b3BzLnYxLlVwZGF0ZVRlYW1SZXF1ZXN0GiQudGFuay5hZ2VudG9wcy52MS5VcGRhdGVUZWFtUmVzcG9uc2USVwoKRGVsZXRlVGVhbRIjLnRhbmsuYWdlbnRvcHMudjEuRGVsZXRlVGVhbVJlcXVlc3QaJC50YW5rLmFnZW50b3BzLnYxLkRlbGV0ZVRlYW1SZXNwb25zZRJXCgpBdHRhY2hUZWFtEiMudGFuay5hZ2VudG9wcy52MS5BdHRhY2hUZWFtUmVxdWVzdBokLnRhbmsuYWdlbnRvcHMudjEuQXR0YWNoVGVhbVJlc3BvbnNlElcKCkRldGFjaFRlYW0SIy50YW5rLmFnZW50b3BzLnYxLkRldGFjaFRlYW1SZXF1ZXN0GiQudGFuay5hZ2VudG9wcy52MS5EZXRhY2hUZWFtUmVzcG9uc2USVwoKRXhwb3J0VGVhbRIjLnRhbmsuYWdlbnRvcHMudjEuRXhwb3J0VGVhbVJlcXVlc3QaJC50YW5rLmFnZW50b3BzLnYxLkV4cG9ydFRlYW1SZXNwb25zZRJXCgpJbXBvcnRUZWFtEiMudGFuay5hZ2VudG9wcy52MS5JbXBvcnRUZWFtUmVxdWVzdBokLnRhbmsuYWdlbnRvcHMudjEuSW1wb3J0VGVhbVJlc3BvbnNlEl0KDFNldFRlYW1QYXVzZRIlLnRhbmsuYWdlbnRvcHMudjEuU2V0VGVhbVBhdXNlUmVxdWVzdBomLnRhbmsuYWdlbnRvcHMudjEuU2V0VGVhbVBhdXNlUmVzcG9uc2USUQoIU3RvcFRlYW0SIS50YW5rLmFnZW50b3BzLnYxLlN0b3BUZWFtUmVxdWVzdBoiLnRhbmsuYWdlbnRvcHMudjEuU3RvcFRlYW1SZXNwb25zZULgAQoUY29tLnRhbmsuYWdlbnRvcHMudjFCDUFnZW50b3BzUHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9hZ2VudG9wcy92MTthZ2VudG9wc3YxogIDVEFYqgIQVGFuay5BZ2VudG9wcy5WMcoCEFRhbmtcQWdlbnRvcHNcVjHiAhxUYW5rXEFnZW50b3BzXFYxXEdQQk1ldGFkYXRh6gISVGFuazo6QWdlbnRvcHM6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
+  fileDesc("Ch90YW5rL2FnZW50b3BzL3YxL2FnZW50b3BzLnByb3RvEhB0YW5rLmFnZW50b3BzLnYxIikKClRvb2xQb2xpY3kSDQoFYWxsb3cYASADKAkSDAoEZGVueRgCIAMoCSI3CghFbnZlbG9wZRILCgN1c2QYASABKAESDQoFdHVybnMYAiABKAUSDwoHbWludXRlcxgDIAEoBSLiAwoGTWVtYmVyEgoKAmlkGAEgASgJEhAKCGFnZW50X2lkGAIgASgJEhQKDHByaW5jaXBhbF9pZBgDIAEoCRIkCgRzZWF0GAQgASgOMhYudGFuay5hZ2VudG9wcy52MS5TZWF0Eg0KBXRpdGxlGAUgASgJEg4KBmhhbmRsZRgGIAEoCRIOCgZwcm9tcHQYByABKAkSDgoGbW9kZWxzGAggAygJEisKBXRvb2xzGAkgASgLMhwudGFuay5hZ2VudG9wcy52MS5Ub29sUG9saWN5EhAKCGRlbGVnYXRlGAogASgIEhMKC2RlbGVnYXRlX3RvGAsgAygJEhAKCHRyaWdnZXJzGAwgAygJEiwKCGVudmVsb3BlGA0gASgLMhoudGFuay5hZ2VudG9wcy52MS5FbnZlbG9wZRIPCgdlbmFibGVkGA4gASgIEhcKD3NwZW5kX3RvZGF5X3VzZBgPIAEoARIXCg9zcGVuZF9tb250aF91c2QYECABKAESEgoKcnVuc190b2RheRgRIAEoBRITCgtydW5uaW5nX25vdxgSIAEoBRIPCgd1c2VyX2lkGBMgASgJEi4KBnJlY29yZBgUIAEoCzIeLnRhbmsuYWdlbnRvcHMudjEuTWVtYmVyUmVjb3JkIqwBCgxNZW1iZXJSZWNvcmQSEAoIZmluaXNoZWQYASABKAUSDgoGZmFpbGVkGAIgASgFEhAKCGFjY2VwdGVkGAMgASgFEhAKCHJlamVjdGVkGAQgASgFEhQKDGF2Z19jb3N0X3VzZBgFIAEoARITCgthdmdfbWludXRlcxgGIAEoARIrCgVraW5kcxgHIAMoCzIcLnRhbmsuYWdlbnRvcHMudjEuS2luZFJlY29yZCJgCgpLaW5kUmVjb3JkEgwKBGtpbmQYASABKAkSEAoIZmluaXNoZWQYAiABKAUSDgoGZmFpbGVkGAMgASgFEhAKCGFjY2VwdGVkGAQgASgFEhAKCHJlamVjdGVkGAUgASgFIu4ECgRUZWFtEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRIMCgRuYW1lGAMgASgJEg4KBmhhbmRsZRgEIAEoCRIPCgdwdXJwb3NlGAUgASgJEikKB21lbWJlcnMYBiADKAsyGC50YW5rLmFnZW50b3BzLnYxLk1lbWJlchITCgtjaGFubmVsX2lkcxgHIAMoCRIVCg1kYWlseV9jYXBfdXNkGAggASgBEhYKDmNvbmN1cnJlbnRfY2FwGAkgASgFEiwKCGVudmVsb3BlGAogASgLMhoudGFuay5hZ2VudG9wcy52MS5FbnZlbG9wZRIXCg9zcGVuZF90b2RheV91c2QYCyABKAESFwoPc3BlbmRfbW9udGhfdXNkGAwgASgBEhIKCnJ1bnNfdG9kYXkYDSABKAUSEwoLcnVubmluZ19ub3cYDiABKAUSLgoKY3JlYXRlZF9hdBgPIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKY3JlYXRlZF9ieRgRIAEoCRIQCghib2FyZF9pZBgSIAEoCRIOCgZwYXVzZWQYEyABKAgSJwoGY2xhaW1zGBQgAygLMhcudGFuay5hZ2VudG9wcy52MS5DbGFpbRImCgNzbG8YFSABKAsyGS50YW5rLmFnZW50b3BzLnYxLlRlYW1TbG8SJgoFc2hpZnQYFiABKAsyFy50YW5rLmFnZW50b3BzLnYxLlNoaWZ0Eg4KBm1lbW9yeRgXIAMoCSLVAQoFU2hpZnQSDwoHZW5hYmxlZBgBIAEoCBIWCg5zdGFydF9ob3VyX3V0YxgCIAEoBRINCgVob3VycxgDIAEoBRILCgN1c2QYBCABKAESCwoDYXNrGAUgASgJEhIKCmNoYW5uZWxfaWQYBiABKAkSMwoPbGFzdF9zdGFydGVkX2F0GAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIxCg1sYXN0X2JyaWVmX2F0GAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJkChNTZXRUZWFtU2hpZnRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgd0ZWFtX2lkGAIgASgJEiYKBXNoaWZ0GAMgASgLMhcudGFuay5hZ2VudG9wcy52MS5TaGlmdCI8ChRTZXRUZWFtU2hpZnRSZXNwb25zZRIkCgR0ZWFtGAEgASgLMhYudGFuay5hZ2VudG9wcy52MS5UZWFtIokDCglSZXBsYXlSdW4SDgoGcnVuX2lkGAEgASgJEhUKDXBhcmVudF9ydW5faWQYAiABKAkSEQoJbWVtYmVyX2lkGAMgASgJEg0KBXRpdGxlGAQgASgJEg4KBmhhbmRsZRgFIAEoCRILCgNhc2sYBiABKAkSDQoFc3RhdGUYByABKAkSLgoKc3RhcnRlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIZW5kZWRfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhAKCGNvc3RfdXNkGAogASgBEhUKDXRyZWVfY29zdF91c2QYCyABKAESDwoHdmVyZGljdBgMIAEoCRISCgpjaGFubmVsX2lkGA0gASgJEhYKDnRocmVhZF9yb290X2lkGA4gASgJEg4KBnByX3VybBgPIAEoCRINCgVkZXB0aBgQIAEoBRIOCgZwZXJzb24YESABKAgSFAoMcmVxdWVzdGVkX2J5GBIgASgJIpMBChRHZXRUZWFtUmVwbGF5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDwoHdGVhbV9pZBgCIAEoCRIpCgVzaW5jZRgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKQoFdW50aWwYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIlUKFUdldFRlYW1SZXBsYXlSZXNwb25zZRIpCgRydW5zGAEgAygLMhsudGFuay5hZ2VudG9wcy52MS5SZXBsYXlSdW4SEQoJdG90YWxfdXNkGAIgASgBInAKFlB1Ymxpc2hUZW1wbGF0ZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3RlYW1faWQYAiABKAkSDAoEbmFtZRgDIAEoCRIPCgdzdW1tYXJ5GAQgASgJEhAKCGV2ZXJ5b25lGAUgASgIIkcKF1B1Ymxpc2hUZW1wbGF0ZVJlc3BvbnNlEiwKCHRlbXBsYXRlGAEgASgLMhoudGFuay5hZ2VudG9wcy52MS5UZW1wbGF0ZSJ5CgVDbGFpbRIMCgRraW5kGAEgASgJEgsKA2tleRgCIAEoCRIOCgZydW5faWQYAyABKAkSDQoFdGl0bGUYBCABKAkSCwoDYXNrGAUgASgJEikKBXNpbmNlGAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCKwAQoHVGVhbVNsbxIgChhmaXJzdF9yZXN1bHRfbWludXRlc19wNTAYASABKAESFwoPcnVuX21pbnV0ZXNfcDk1GAIgASgBEhQKDGZpbmlzaGVkXzMwZBgDIAEoBRISCgpmYWlsZWRfMzBkGAQgASgFEhMKC3N0YWxsZWRfbm93GAUgASgFEhkKEWFjY2VwdGVkX3JhdGVfMzBkGAYgASgBEhAKCG5lYXJfY2FwGAcgASgIIkwKE1NldFRlYW1QYXVzZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3RlYW1faWQYAiABKAkSDgoGcGF1c2VkGAMgASgIIjwKFFNldFRlYW1QYXVzZVJlc3BvbnNlEiQKBHRlYW0YASABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0iSAoPU3RvcFRlYW1SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgd0ZWFtX2lkGAIgASgJEg4KBnJlYXNvbhgDIAEoCSJJChBTdG9wVGVhbVJlc3BvbnNlEiQKBHRlYW0YASABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0SDwoHc3RvcHBlZBgCIAEoBSJ9CghUZW1wbGF0ZRILCgNrZXkYASABKAkSDAoEbmFtZRgCIAEoCRIPCgdzdW1tYXJ5GAMgASgJEiQKBHRlYW0YBCABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0SEQoJc2hhcmVkX2J5GAUgASgJEgwKBG1pbmUYBiABKAgiPAoQTGlzdFRlYW1zUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCSJ9ChFMaXN0VGVhbXNSZXNwb25zZRIlCgV0ZWFtcxgBIAMoCzIWLnRhbmsuYWdlbnRvcHMudjEuVGVhbRItCgl0ZW1wbGF0ZXMYAiADKAsyGi50YW5rLmFnZW50b3BzLnYxLlRlbXBsYXRlEhIKCmNhbl9tYW5hZ2UYAyABKAgiNwoOR2V0VGVhbVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3RlYW1faWQYAiABKAkiNwoPR2V0VGVhbVJlc3BvbnNlEiQKBHRlYW0YASABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0irQEKEUNyZWF0ZVRlYW1SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEg4KBmhhbmRsZRgDIAEoCRIPCgdwdXJwb3NlGAQgASgJEhQKDHRlbXBsYXRlX2tleRgFIAEoCRIpCgdtZW1iZXJzGAYgAygLMhgudGFuay5hZ2VudG9wcy52MS5NZW1iZXISEgoKY2hhbm5lbF9pZBgHIAEoCSI6ChJDcmVhdGVUZWFtUmVzcG9uc2USJAoEdGVhbRgBIAEoCzIWLnRhbmsuYWdlbnRvcHMudjEuVGVhbSJPChFVcGRhdGVUZWFtUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSJAoEdGVhbRgCIAEoCzIWLnRhbmsuYWdlbnRvcHMudjEuVGVhbSI6ChJVcGRhdGVUZWFtUmVzcG9uc2USJAoEdGVhbRgBIAEoCzIWLnRhbmsuYWdlbnRvcHMudjEuVGVhbSI6ChFEZWxldGVUZWFtUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDwoHdGVhbV9pZBgCIAEoCSIUChJEZWxldGVUZWFtUmVzcG9uc2UiTgoRQXR0YWNoVGVhbVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg8KB3RlYW1faWQYAiABKAkSEgoKY2hhbm5lbF9pZBgDIAEoCSI6ChJBdHRhY2hUZWFtUmVzcG9uc2USJAoEdGVhbRgBIAEoCzIWLnRhbmsuYWdlbnRvcHMudjEuVGVhbSJOChFEZXRhY2hUZWFtUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDwoHdGVhbV9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJIjoKEkRldGFjaFRlYW1SZXNwb25zZRIkCgR0ZWFtGAEgASgLMhYudGFuay5hZ2VudG9wcy52MS5UZWFtIjoKEUV4cG9ydFRlYW1SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIPCgd0ZWFtX2lkGAIgASgJIiIKEkV4cG9ydFRlYW1SZXNwb25zZRIMCgR5YW1sGAEgASgJIksKEUltcG9ydFRlYW1SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgR5YW1sGAIgASgJEhIKCmNoYW5uZWxfaWQYAyABKAkiOgoSSW1wb3J0VGVhbVJlc3BvbnNlEiQKBHRlYW0YASABKAsyFi50YW5rLmFnZW50b3BzLnYxLlRlYW0qWAoEU2VhdBIUChBTRUFUX1VOU1BFQ0lGSUVEEAASFAoQU0VBVF9DT09SRElOQVRPUhABEhMKD1NFQVRfU1BFQ0lBTElTVBACEg8KC1NFQVRfUEVSU09OEAMy/AkKCk9wc1NlcnZpY2USVAoJTGlzdFRlYW1zEiIudGFuay5hZ2VudG9wcy52MS5MaXN0VGVhbXNSZXF1ZXN0GiMudGFuay5hZ2VudG9wcy52MS5MaXN0VGVhbXNSZXNwb25zZRJOCgdHZXRUZWFtEiAudGFuay5hZ2VudG9wcy52MS5HZXRUZWFtUmVxdWVzdBohLnRhbmsuYWdlbnRvcHMudjEuR2V0VGVhbVJlc3BvbnNlElcKCkNyZWF0ZVRlYW0SIy50YW5rLmFnZW50b3BzLnYxLkNyZWF0ZVRlYW1SZXF1ZXN0GiQudGFuay5hZ2VudG9wcy52MS5DcmVhdGVUZWFtUmVzcG9uc2USVwoKVXBkYXRlVGVhbRIjLnRhbmsuYWdlbnRvcHMudjEuVXBkYXRlVGVhbVJlcXVlc3QaJC50YW5rLmFnZW50b3BzLnYxLlVwZGF0ZVRlYW1SZXNwb25zZRJXCgpEZWxldGVUZWFtEiMudGFuay5hZ2VudG9wcy52MS5EZWxldGVUZWFtUmVxdWVzdBokLnRhbmsuYWdlbnRvcHMudjEuRGVsZXRlVGVhbVJlc3BvbnNlElcKCkF0dGFjaFRlYW0SIy50YW5rLmFnZW50b3BzLnYxLkF0dGFjaFRlYW1SZXF1ZXN0GiQudGFuay5hZ2VudG9wcy52MS5BdHRhY2hUZWFtUmVzcG9uc2USVwoKRGV0YWNoVGVhbRIjLnRhbmsuYWdlbnRvcHMudjEuRGV0YWNoVGVhbVJlcXVlc3QaJC50YW5rLmFnZW50b3BzLnYxLkRldGFjaFRlYW1SZXNwb25zZRJXCgpFeHBvcnRUZWFtEiMudGFuay5hZ2VudG9wcy52MS5FeHBvcnRUZWFtUmVxdWVzdBokLnRhbmsuYWdlbnRvcHMudjEuRXhwb3J0VGVhbVJlc3BvbnNlElcKCkltcG9ydFRlYW0SIy50YW5rLmFnZW50b3BzLnYxLkltcG9ydFRlYW1SZXF1ZXN0GiQudGFuay5hZ2VudG9wcy52MS5JbXBvcnRUZWFtUmVzcG9uc2USXQoMU2V0VGVhbVBhdXNlEiUudGFuay5hZ2VudG9wcy52MS5TZXRUZWFtUGF1c2VSZXF1ZXN0GiYudGFuay5hZ2VudG9wcy52MS5TZXRUZWFtUGF1c2VSZXNwb25zZRJRCghTdG9wVGVhbRIhLnRhbmsuYWdlbnRvcHMudjEuU3RvcFRlYW1SZXF1ZXN0GiIudGFuay5hZ2VudG9wcy52MS5TdG9wVGVhbVJlc3BvbnNlEl0KDFNldFRlYW1TaGlmdBIlLnRhbmsuYWdlbnRvcHMudjEuU2V0VGVhbVNoaWZ0UmVxdWVzdBomLnRhbmsuYWdlbnRvcHMudjEuU2V0VGVhbVNoaWZ0UmVzcG9uc2USYAoNR2V0VGVhbVJlcGxheRImLnRhbmsuYWdlbnRvcHMudjEuR2V0VGVhbVJlcGxheVJlcXVlc3QaJy50YW5rLmFnZW50b3BzLnYxLkdldFRlYW1SZXBsYXlSZXNwb25zZRJmCg9QdWJsaXNoVGVtcGxhdGUSKC50YW5rLmFnZW50b3BzLnYxLlB1Ymxpc2hUZW1wbGF0ZVJlcXVlc3QaKS50YW5rLmFnZW50b3BzLnYxLlB1Ymxpc2hUZW1wbGF0ZVJlc3BvbnNlQuABChRjb20udGFuay5hZ2VudG9wcy52MUINQWdlbnRvcHNQcm90b1ABWldnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FnZW50b3BzL3YxO2FnZW50b3BzdjGiAgNUQViqAhBUYW5rLkFnZW50b3BzLlYxygIQVGFua1xBZ2VudG9wc1xWMeICHFRhbmtcQWdlbnRvcHNcVjFcR1BCTWV0YWRhdGHqAhJUYW5rOjpBZ2VudG9wczo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * Which tools a member may use, by tool name as the runner knows them (Bash, Edit,
@@ -427,6 +427,22 @@ export type Team = Message<"tank.agentops.v1.Team"> & {
    * @generated from field: tank.agentops.v1.TeamSlo slo = 21;
    */
   slo?: TeamSlo;
+
+  /**
+   * A shift: the team works a backlog on its own at a time of day, inside an envelope,
+   * and posts a brief when the shift ends.
+   *
+   * @generated from field: tank.agentops.v1.Shift shift = 22;
+   */
+  shift?: Shift;
+
+  /**
+   * What the team learned, newest last: lines its hand-offs reported done and what
+   * members chose to remember. Every member's run reads them.
+   *
+   * @generated from field: repeated string memory = 23;
+   */
+  memory: string[];
 };
 
 /**
@@ -435,6 +451,343 @@ export type Team = Message<"tank.agentops.v1.Team"> & {
  */
 export const TeamSchema: GenMessage<Team> = /*@__PURE__*/
   messageDesc(file_tank_agentops_v1_agentops, 5);
+
+/**
+ * @generated from message tank.agentops.v1.Shift
+ */
+export type Shift = Message<"tank.agentops.v1.Shift"> & {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * 0..23
+   *
+   * @generated from field: int32 start_hour_utc = 2;
+   */
+  startHourUtc: number;
+
+  /**
+   * how long the shift runs; the brief posts at the end
+   *
+   * @generated from field: int32 hours = 3;
+   */
+  hours: number;
+
+  /**
+   * the shift's envelope
+   *
+   * @generated from field: double usd = 4;
+   */
+  usd: number;
+
+  /**
+   * what to work on: "the backlog in #eng", a list, a goal
+   *
+   * @generated from field: string ask = 5;
+   */
+  ask: string;
+
+  /**
+   * the Tread the shift runs in (one the team is attached to)
+   *
+   * @generated from field: string channel_id = 6;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_started_at = 7;
+   */
+  lastStartedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_brief_at = 8;
+   */
+  lastBriefAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.agentops.v1.Shift.
+ * Use `create(ShiftSchema)` to create a new message.
+ */
+export const ShiftSchema: GenMessage<Shift> = /*@__PURE__*/
+  messageDesc(file_tank_agentops_v1_agentops, 6);
+
+/**
+ * @generated from message tank.agentops.v1.SetTeamShiftRequest
+ */
+export type SetTeamShiftRequest = Message<"tank.agentops.v1.SetTeamShiftRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string team_id = 2;
+   */
+  teamId: string;
+
+  /**
+   * @generated from field: tank.agentops.v1.Shift shift = 3;
+   */
+  shift?: Shift;
+};
+
+/**
+ * Describes the message tank.agentops.v1.SetTeamShiftRequest.
+ * Use `create(SetTeamShiftRequestSchema)` to create a new message.
+ */
+export const SetTeamShiftRequestSchema: GenMessage<SetTeamShiftRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agentops_v1_agentops, 7);
+
+/**
+ * @generated from message tank.agentops.v1.SetTeamShiftResponse
+ */
+export type SetTeamShiftResponse = Message<"tank.agentops.v1.SetTeamShiftResponse"> & {
+  /**
+   * @generated from field: tank.agentops.v1.Team team = 1;
+   */
+  team?: Team;
+};
+
+/**
+ * Describes the message tank.agentops.v1.SetTeamShiftResponse.
+ * Use `create(SetTeamShiftResponseSchema)` to create a new message.
+ */
+export const SetTeamShiftResponseSchema: GenMessage<SetTeamShiftResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agentops_v1_agentops, 8);
+
+/**
+ * Replay: the team's runs and hand-offs over a window, as a tree with cost on every
+ * node, so "why did this cost $40" has an answer per branch.
+ *
+ * @generated from message tank.agentops.v1.ReplayRun
+ */
+export type ReplayRun = Message<"tank.agentops.v1.ReplayRun"> & {
+  /**
+   * @generated from field: string run_id = 1;
+   */
+  runId: string;
+
+  /**
+   * @generated from field: string parent_run_id = 2;
+   */
+  parentRunId: string;
+
+  /**
+   * @generated from field: string member_id = 3;
+   */
+  memberId: string;
+
+  /**
+   * who ran it
+   *
+   * @generated from field: string title = 4;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string handle = 5;
+   */
+  handle: string;
+
+  /**
+   * @generated from field: string ask = 6;
+   */
+  ask: string;
+
+  /**
+   * @generated from field: string state = 7;
+   */
+  state: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp started_at = 8;
+   */
+  startedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp ended_at = 9;
+   */
+  endedAt?: Timestamp;
+
+  /**
+   * this run alone, at the Tread rate
+   *
+   * @generated from field: double cost_usd = 10;
+   */
+  costUsd: number;
+
+  /**
+   * this run and every hand-off under it
+   *
+   * @generated from field: double tree_cost_usd = 11;
+   */
+  treeCostUsd: number;
+
+  /**
+   * accepted | rejected | "" for a hand-off
+   *
+   * @generated from field: string verdict = 12;
+   */
+  verdict: string;
+
+  /**
+   * @generated from field: string channel_id = 13;
+   */
+  channelId: string;
+
+  /**
+   * @generated from field: string thread_root_id = 14;
+   */
+  threadRootId: string;
+
+  /**
+   * @generated from field: string pr_url = 15;
+   */
+  prUrl: string;
+
+  /**
+   * @generated from field: int32 depth = 16;
+   */
+  depth: number;
+
+  /**
+   * a hand-off to a person (state waiting | done | timed_out)
+   *
+   * @generated from field: bool person = 17;
+   */
+  person: boolean;
+
+  /**
+   * @generated from field: string requested_by = 18;
+   */
+  requestedBy: string;
+};
+
+/**
+ * Describes the message tank.agentops.v1.ReplayRun.
+ * Use `create(ReplayRunSchema)` to create a new message.
+ */
+export const ReplayRunSchema: GenMessage<ReplayRun> = /*@__PURE__*/
+  messageDesc(file_tank_agentops_v1_agentops, 9);
+
+/**
+ * @generated from message tank.agentops.v1.GetTeamReplayRequest
+ */
+export type GetTeamReplayRequest = Message<"tank.agentops.v1.GetTeamReplayRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string team_id = 2;
+   */
+  teamId: string;
+
+  /**
+   * default: seven days
+   *
+   * @generated from field: google.protobuf.Timestamp since = 3;
+   */
+  since?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp until = 4;
+   */
+  until?: Timestamp;
+};
+
+/**
+ * Describes the message tank.agentops.v1.GetTeamReplayRequest.
+ * Use `create(GetTeamReplayRequestSchema)` to create a new message.
+ */
+export const GetTeamReplayRequestSchema: GenMessage<GetTeamReplayRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agentops_v1_agentops, 10);
+
+/**
+ * @generated from message tank.agentops.v1.GetTeamReplayResponse
+ */
+export type GetTeamReplayResponse = Message<"tank.agentops.v1.GetTeamReplayResponse"> & {
+  /**
+   * oldest first, parents before their hand-offs
+   *
+   * @generated from field: repeated tank.agentops.v1.ReplayRun runs = 1;
+   */
+  runs: ReplayRun[];
+
+  /**
+   * @generated from field: double total_usd = 2;
+   */
+  totalUsd: number;
+};
+
+/**
+ * Describes the message tank.agentops.v1.GetTeamReplayResponse.
+ * Use `create(GetTeamReplayResponseSchema)` to create a new message.
+ */
+export const GetTeamReplayResponseSchema: GenMessage<GetTeamReplayResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agentops_v1_agentops, 11);
+
+/**
+ * Publish the team as a template others start from: the workspace's own, or everyone's.
+ *
+ * @generated from message tank.agentops.v1.PublishTemplateRequest
+ */
+export type PublishTemplateRequest = Message<"tank.agentops.v1.PublishTemplateRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string team_id = 2;
+   */
+  teamId: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string summary = 4;
+   */
+  summary: string;
+
+  /**
+   * share across every workspace; false keeps it in this one
+   *
+   * @generated from field: bool everyone = 5;
+   */
+  everyone: boolean;
+};
+
+/**
+ * Describes the message tank.agentops.v1.PublishTemplateRequest.
+ * Use `create(PublishTemplateRequestSchema)` to create a new message.
+ */
+export const PublishTemplateRequestSchema: GenMessage<PublishTemplateRequest> = /*@__PURE__*/
+  messageDesc(file_tank_agentops_v1_agentops, 12);
+
+/**
+ * @generated from message tank.agentops.v1.PublishTemplateResponse
+ */
+export type PublishTemplateResponse = Message<"tank.agentops.v1.PublishTemplateResponse"> & {
+  /**
+   * @generated from field: tank.agentops.v1.Template template = 1;
+   */
+  template?: Template;
+};
+
+/**
+ * Describes the message tank.agentops.v1.PublishTemplateResponse.
+ * Use `create(PublishTemplateResponseSchema)` to create a new message.
+ */
+export const PublishTemplateResponseSchema: GenMessage<PublishTemplateResponse> = /*@__PURE__*/
+  messageDesc(file_tank_agentops_v1_agentops, 13);
 
 /**
  * A claim: one run holds one thing for its duration. A second run wanting it waits
@@ -485,7 +838,7 @@ export type Claim = Message<"tank.agentops.v1.Claim"> & {
  * Use `create(ClaimSchema)` to create a new message.
  */
 export const ClaimSchema: GenMessage<Claim> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 6);
+  messageDesc(file_tank_agentops_v1_agentops, 14);
 
 /**
  * How the team is doing, over the last thirty days and right now.
@@ -542,7 +895,7 @@ export type TeamSlo = Message<"tank.agentops.v1.TeamSlo"> & {
  * Use `create(TeamSloSchema)` to create a new message.
  */
 export const TeamSloSchema: GenMessage<TeamSlo> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 7);
+  messageDesc(file_tank_agentops_v1_agentops, 15);
 
 /**
  * Drain (paused = true): nothing new starts, what runs finishes. Resume with false.
@@ -571,7 +924,7 @@ export type SetTeamPauseRequest = Message<"tank.agentops.v1.SetTeamPauseRequest"
  * Use `create(SetTeamPauseRequestSchema)` to create a new message.
  */
 export const SetTeamPauseRequestSchema: GenMessage<SetTeamPauseRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 8);
+  messageDesc(file_tank_agentops_v1_agentops, 16);
 
 /**
  * @generated from message tank.agentops.v1.SetTeamPauseResponse
@@ -588,7 +941,7 @@ export type SetTeamPauseResponse = Message<"tank.agentops.v1.SetTeamPauseRespons
  * Use `create(SetTeamPauseResponseSchema)` to create a new message.
  */
 export const SetTeamPauseResponseSchema: GenMessage<SetTeamPauseResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 9);
+  messageDesc(file_tank_agentops_v1_agentops, 17);
 
 /**
  * Stop everything the team is doing now, hand-offs included, and drain.
@@ -617,7 +970,7 @@ export type StopTeamRequest = Message<"tank.agentops.v1.StopTeamRequest"> & {
  * Use `create(StopTeamRequestSchema)` to create a new message.
  */
 export const StopTeamRequestSchema: GenMessage<StopTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 10);
+  messageDesc(file_tank_agentops_v1_agentops, 18);
 
 /**
  * @generated from message tank.agentops.v1.StopTeamResponse
@@ -641,7 +994,7 @@ export type StopTeamResponse = Message<"tank.agentops.v1.StopTeamResponse"> & {
  * Use `create(StopTeamResponseSchema)` to create a new message.
  */
 export const StopTeamResponseSchema: GenMessage<StopTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 11);
+  messageDesc(file_tank_agentops_v1_agentops, 19);
 
 /**
  * A roster ready to start from; the members are a starting point, editable.
@@ -672,6 +1025,21 @@ export type Template = Message<"tank.agentops.v1.Template"> & {
    * @generated from field: tank.agentops.v1.Team team = 4;
    */
   team?: Team;
+
+  /**
+   * Who shared it: "" for one TANK ships, the workspace's name for its own, or the
+   * sharing workspace's name for one shared with everyone.
+   *
+   * @generated from field: string shared_by = 5;
+   */
+  sharedBy: string;
+
+  /**
+   * this workspace published it (so it can be withdrawn)
+   *
+   * @generated from field: bool mine = 6;
+   */
+  mine: boolean;
 };
 
 /**
@@ -679,7 +1047,7 @@ export type Template = Message<"tank.agentops.v1.Template"> & {
  * Use `create(TemplateSchema)` to create a new message.
  */
 export const TemplateSchema: GenMessage<Template> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 12);
+  messageDesc(file_tank_agentops_v1_agentops, 20);
 
 /**
  * @generated from message tank.agentops.v1.ListTeamsRequest
@@ -703,7 +1071,7 @@ export type ListTeamsRequest = Message<"tank.agentops.v1.ListTeamsRequest"> & {
  * Use `create(ListTeamsRequestSchema)` to create a new message.
  */
 export const ListTeamsRequestSchema: GenMessage<ListTeamsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 13);
+  messageDesc(file_tank_agentops_v1_agentops, 21);
 
 /**
  * @generated from message tank.agentops.v1.ListTeamsResponse
@@ -730,7 +1098,7 @@ export type ListTeamsResponse = Message<"tank.agentops.v1.ListTeamsResponse"> & 
  * Use `create(ListTeamsResponseSchema)` to create a new message.
  */
 export const ListTeamsResponseSchema: GenMessage<ListTeamsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 14);
+  messageDesc(file_tank_agentops_v1_agentops, 22);
 
 /**
  * @generated from message tank.agentops.v1.GetTeamRequest
@@ -752,7 +1120,7 @@ export type GetTeamRequest = Message<"tank.agentops.v1.GetTeamRequest"> & {
  * Use `create(GetTeamRequestSchema)` to create a new message.
  */
 export const GetTeamRequestSchema: GenMessage<GetTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 15);
+  messageDesc(file_tank_agentops_v1_agentops, 23);
 
 /**
  * @generated from message tank.agentops.v1.GetTeamResponse
@@ -769,7 +1137,7 @@ export type GetTeamResponse = Message<"tank.agentops.v1.GetTeamResponse"> & {
  * Use `create(GetTeamResponseSchema)` to create a new message.
  */
 export const GetTeamResponseSchema: GenMessage<GetTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 16);
+  messageDesc(file_tank_agentops_v1_agentops, 24);
 
 /**
  * Makes a team and provisions an agent principal per member. A template key brings
@@ -820,7 +1188,7 @@ export type CreateTeamRequest = Message<"tank.agentops.v1.CreateTeamRequest"> & 
  * Use `create(CreateTeamRequestSchema)` to create a new message.
  */
 export const CreateTeamRequestSchema: GenMessage<CreateTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 17);
+  messageDesc(file_tank_agentops_v1_agentops, 25);
 
 /**
  * @generated from message tank.agentops.v1.CreateTeamResponse
@@ -837,7 +1205,7 @@ export type CreateTeamResponse = Message<"tank.agentops.v1.CreateTeamResponse"> 
  * Use `create(CreateTeamResponseSchema)` to create a new message.
  */
 export const CreateTeamResponseSchema: GenMessage<CreateTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 18);
+  messageDesc(file_tank_agentops_v1_agentops, 26);
 
 /**
  * Replaces the team's name, handle, purpose, caps, envelope and roster. A member
@@ -863,7 +1231,7 @@ export type UpdateTeamRequest = Message<"tank.agentops.v1.UpdateTeamRequest"> & 
  * Use `create(UpdateTeamRequestSchema)` to create a new message.
  */
 export const UpdateTeamRequestSchema: GenMessage<UpdateTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 19);
+  messageDesc(file_tank_agentops_v1_agentops, 27);
 
 /**
  * @generated from message tank.agentops.v1.UpdateTeamResponse
@@ -880,7 +1248,7 @@ export type UpdateTeamResponse = Message<"tank.agentops.v1.UpdateTeamResponse"> 
  * Use `create(UpdateTeamResponseSchema)` to create a new message.
  */
 export const UpdateTeamResponseSchema: GenMessage<UpdateTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 20);
+  messageDesc(file_tank_agentops_v1_agentops, 28);
 
 /**
  * @generated from message tank.agentops.v1.DeleteTeamRequest
@@ -902,7 +1270,7 @@ export type DeleteTeamRequest = Message<"tank.agentops.v1.DeleteTeamRequest"> & 
  * Use `create(DeleteTeamRequestSchema)` to create a new message.
  */
 export const DeleteTeamRequestSchema: GenMessage<DeleteTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 21);
+  messageDesc(file_tank_agentops_v1_agentops, 29);
 
 /**
  * @generated from message tank.agentops.v1.DeleteTeamResponse
@@ -915,7 +1283,7 @@ export type DeleteTeamResponse = Message<"tank.agentops.v1.DeleteTeamResponse"> 
  * Use `create(DeleteTeamResponseSchema)` to create a new message.
  */
 export const DeleteTeamResponseSchema: GenMessage<DeleteTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 22);
+  messageDesc(file_tank_agentops_v1_agentops, 30);
 
 /**
  * Puts the team to work in a Tread: its members are seated there and its handle
@@ -945,7 +1313,7 @@ export type AttachTeamRequest = Message<"tank.agentops.v1.AttachTeamRequest"> & 
  * Use `create(AttachTeamRequestSchema)` to create a new message.
  */
 export const AttachTeamRequestSchema: GenMessage<AttachTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 23);
+  messageDesc(file_tank_agentops_v1_agentops, 31);
 
 /**
  * @generated from message tank.agentops.v1.AttachTeamResponse
@@ -962,7 +1330,7 @@ export type AttachTeamResponse = Message<"tank.agentops.v1.AttachTeamResponse"> 
  * Use `create(AttachTeamResponseSchema)` to create a new message.
  */
 export const AttachTeamResponseSchema: GenMessage<AttachTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 24);
+  messageDesc(file_tank_agentops_v1_agentops, 32);
 
 /**
  * @generated from message tank.agentops.v1.DetachTeamRequest
@@ -989,7 +1357,7 @@ export type DetachTeamRequest = Message<"tank.agentops.v1.DetachTeamRequest"> & 
  * Use `create(DetachTeamRequestSchema)` to create a new message.
  */
 export const DetachTeamRequestSchema: GenMessage<DetachTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 25);
+  messageDesc(file_tank_agentops_v1_agentops, 33);
 
 /**
  * @generated from message tank.agentops.v1.DetachTeamResponse
@@ -1006,7 +1374,7 @@ export type DetachTeamResponse = Message<"tank.agentops.v1.DetachTeamResponse"> 
  * Use `create(DetachTeamResponseSchema)` to create a new message.
  */
 export const DetachTeamResponseSchema: GenMessage<DetachTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 26);
+  messageDesc(file_tank_agentops_v1_agentops, 34);
 
 /**
  * The team as a file (team.yaml), portable between workspaces.
@@ -1030,7 +1398,7 @@ export type ExportTeamRequest = Message<"tank.agentops.v1.ExportTeamRequest"> & 
  * Use `create(ExportTeamRequestSchema)` to create a new message.
  */
 export const ExportTeamRequestSchema: GenMessage<ExportTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 27);
+  messageDesc(file_tank_agentops_v1_agentops, 35);
 
 /**
  * @generated from message tank.agentops.v1.ExportTeamResponse
@@ -1047,7 +1415,7 @@ export type ExportTeamResponse = Message<"tank.agentops.v1.ExportTeamResponse"> 
  * Use `create(ExportTeamResponseSchema)` to create a new message.
  */
 export const ExportTeamResponseSchema: GenMessage<ExportTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 28);
+  messageDesc(file_tank_agentops_v1_agentops, 36);
 
 /**
  * @generated from message tank.agentops.v1.ImportTeamRequest
@@ -1076,7 +1444,7 @@ export type ImportTeamRequest = Message<"tank.agentops.v1.ImportTeamRequest"> & 
  * Use `create(ImportTeamRequestSchema)` to create a new message.
  */
 export const ImportTeamRequestSchema: GenMessage<ImportTeamRequest> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 29);
+  messageDesc(file_tank_agentops_v1_agentops, 37);
 
 /**
  * @generated from message tank.agentops.v1.ImportTeamResponse
@@ -1093,7 +1461,7 @@ export type ImportTeamResponse = Message<"tank.agentops.v1.ImportTeamResponse"> 
  * Use `create(ImportTeamResponseSchema)` to create a new message.
  */
 export const ImportTeamResponseSchema: GenMessage<ImportTeamResponse> = /*@__PURE__*/
-  messageDesc(file_tank_agentops_v1_agentops, 30);
+  messageDesc(file_tank_agentops_v1_agentops, 38);
 
 /**
  * Where a member sits in the team.
@@ -1225,6 +1593,30 @@ export const OpsService: GenService<{
     methodKind: "unary";
     input: typeof StopTeamRequestSchema;
     output: typeof StopTeamResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.agentops.v1.OpsService.SetTeamShift
+   */
+  setTeamShift: {
+    methodKind: "unary";
+    input: typeof SetTeamShiftRequestSchema;
+    output: typeof SetTeamShiftResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.agentops.v1.OpsService.GetTeamReplay
+   */
+  getTeamReplay: {
+    methodKind: "unary";
+    input: typeof GetTeamReplayRequestSchema;
+    output: typeof GetTeamReplayResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.agentops.v1.OpsService.PublishTemplate
+   */
+  publishTemplate: {
+    methodKind: "unary";
+    input: typeof PublishTemplateRequestSchema;
+    output: typeof PublishTemplateResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_agentops_v1_agentops, 0);

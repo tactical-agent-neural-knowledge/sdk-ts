@@ -351,12 +351,305 @@ export type Team = Message<"tank.agentops.v1.Team"> & {
      * @generated from field: tank.agentops.v1.TeamSlo slo = 21;
      */
     slo?: TeamSlo;
+    /**
+     * A shift: the team works a backlog on its own at a time of day, inside an envelope,
+     * and posts a brief when the shift ends.
+     *
+     * @generated from field: tank.agentops.v1.Shift shift = 22;
+     */
+    shift?: Shift;
+    /**
+     * What the team learned, newest last: lines its hand-offs reported done and what
+     * members chose to remember. Every member's run reads them.
+     *
+     * @generated from field: repeated string memory = 23;
+     */
+    memory: string[];
 };
 /**
  * Describes the message tank.agentops.v1.Team.
  * Use `create(TeamSchema)` to create a new message.
  */
 export declare const TeamSchema: GenMessage<Team>;
+/**
+ * @generated from message tank.agentops.v1.Shift
+ */
+export type Shift = Message<"tank.agentops.v1.Shift"> & {
+    /**
+     * @generated from field: bool enabled = 1;
+     */
+    enabled: boolean;
+    /**
+     * 0..23
+     *
+     * @generated from field: int32 start_hour_utc = 2;
+     */
+    startHourUtc: number;
+    /**
+     * how long the shift runs; the brief posts at the end
+     *
+     * @generated from field: int32 hours = 3;
+     */
+    hours: number;
+    /**
+     * the shift's envelope
+     *
+     * @generated from field: double usd = 4;
+     */
+    usd: number;
+    /**
+     * what to work on: "the backlog in #eng", a list, a goal
+     *
+     * @generated from field: string ask = 5;
+     */
+    ask: string;
+    /**
+     * the Tread the shift runs in (one the team is attached to)
+     *
+     * @generated from field: string channel_id = 6;
+     */
+    channelId: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_started_at = 7;
+     */
+    lastStartedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_brief_at = 8;
+     */
+    lastBriefAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agentops.v1.Shift.
+ * Use `create(ShiftSchema)` to create a new message.
+ */
+export declare const ShiftSchema: GenMessage<Shift>;
+/**
+ * @generated from message tank.agentops.v1.SetTeamShiftRequest
+ */
+export type SetTeamShiftRequest = Message<"tank.agentops.v1.SetTeamShiftRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string team_id = 2;
+     */
+    teamId: string;
+    /**
+     * @generated from field: tank.agentops.v1.Shift shift = 3;
+     */
+    shift?: Shift;
+};
+/**
+ * Describes the message tank.agentops.v1.SetTeamShiftRequest.
+ * Use `create(SetTeamShiftRequestSchema)` to create a new message.
+ */
+export declare const SetTeamShiftRequestSchema: GenMessage<SetTeamShiftRequest>;
+/**
+ * @generated from message tank.agentops.v1.SetTeamShiftResponse
+ */
+export type SetTeamShiftResponse = Message<"tank.agentops.v1.SetTeamShiftResponse"> & {
+    /**
+     * @generated from field: tank.agentops.v1.Team team = 1;
+     */
+    team?: Team;
+};
+/**
+ * Describes the message tank.agentops.v1.SetTeamShiftResponse.
+ * Use `create(SetTeamShiftResponseSchema)` to create a new message.
+ */
+export declare const SetTeamShiftResponseSchema: GenMessage<SetTeamShiftResponse>;
+/**
+ * Replay: the team's runs and hand-offs over a window, as a tree with cost on every
+ * node, so "why did this cost $40" has an answer per branch.
+ *
+ * @generated from message tank.agentops.v1.ReplayRun
+ */
+export type ReplayRun = Message<"tank.agentops.v1.ReplayRun"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * @generated from field: string parent_run_id = 2;
+     */
+    parentRunId: string;
+    /**
+     * @generated from field: string member_id = 3;
+     */
+    memberId: string;
+    /**
+     * who ran it
+     *
+     * @generated from field: string title = 4;
+     */
+    title: string;
+    /**
+     * @generated from field: string handle = 5;
+     */
+    handle: string;
+    /**
+     * @generated from field: string ask = 6;
+     */
+    ask: string;
+    /**
+     * @generated from field: string state = 7;
+     */
+    state: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp started_at = 8;
+     */
+    startedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp ended_at = 9;
+     */
+    endedAt?: Timestamp;
+    /**
+     * this run alone, at the Tread rate
+     *
+     * @generated from field: double cost_usd = 10;
+     */
+    costUsd: number;
+    /**
+     * this run and every hand-off under it
+     *
+     * @generated from field: double tree_cost_usd = 11;
+     */
+    treeCostUsd: number;
+    /**
+     * accepted | rejected | "" for a hand-off
+     *
+     * @generated from field: string verdict = 12;
+     */
+    verdict: string;
+    /**
+     * @generated from field: string channel_id = 13;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 14;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string pr_url = 15;
+     */
+    prUrl: string;
+    /**
+     * @generated from field: int32 depth = 16;
+     */
+    depth: number;
+    /**
+     * a hand-off to a person (state waiting | done | timed_out)
+     *
+     * @generated from field: bool person = 17;
+     */
+    person: boolean;
+    /**
+     * @generated from field: string requested_by = 18;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentops.v1.ReplayRun.
+ * Use `create(ReplayRunSchema)` to create a new message.
+ */
+export declare const ReplayRunSchema: GenMessage<ReplayRun>;
+/**
+ * @generated from message tank.agentops.v1.GetTeamReplayRequest
+ */
+export type GetTeamReplayRequest = Message<"tank.agentops.v1.GetTeamReplayRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string team_id = 2;
+     */
+    teamId: string;
+    /**
+     * default: seven days
+     *
+     * @generated from field: google.protobuf.Timestamp since = 3;
+     */
+    since?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp until = 4;
+     */
+    until?: Timestamp;
+};
+/**
+ * Describes the message tank.agentops.v1.GetTeamReplayRequest.
+ * Use `create(GetTeamReplayRequestSchema)` to create a new message.
+ */
+export declare const GetTeamReplayRequestSchema: GenMessage<GetTeamReplayRequest>;
+/**
+ * @generated from message tank.agentops.v1.GetTeamReplayResponse
+ */
+export type GetTeamReplayResponse = Message<"tank.agentops.v1.GetTeamReplayResponse"> & {
+    /**
+     * oldest first, parents before their hand-offs
+     *
+     * @generated from field: repeated tank.agentops.v1.ReplayRun runs = 1;
+     */
+    runs: ReplayRun[];
+    /**
+     * @generated from field: double total_usd = 2;
+     */
+    totalUsd: number;
+};
+/**
+ * Describes the message tank.agentops.v1.GetTeamReplayResponse.
+ * Use `create(GetTeamReplayResponseSchema)` to create a new message.
+ */
+export declare const GetTeamReplayResponseSchema: GenMessage<GetTeamReplayResponse>;
+/**
+ * Publish the team as a template others start from: the workspace's own, or everyone's.
+ *
+ * @generated from message tank.agentops.v1.PublishTemplateRequest
+ */
+export type PublishTemplateRequest = Message<"tank.agentops.v1.PublishTemplateRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string team_id = 2;
+     */
+    teamId: string;
+    /**
+     * @generated from field: string name = 3;
+     */
+    name: string;
+    /**
+     * @generated from field: string summary = 4;
+     */
+    summary: string;
+    /**
+     * share across every workspace; false keeps it in this one
+     *
+     * @generated from field: bool everyone = 5;
+     */
+    everyone: boolean;
+};
+/**
+ * Describes the message tank.agentops.v1.PublishTemplateRequest.
+ * Use `create(PublishTemplateRequestSchema)` to create a new message.
+ */
+export declare const PublishTemplateRequestSchema: GenMessage<PublishTemplateRequest>;
+/**
+ * @generated from message tank.agentops.v1.PublishTemplateResponse
+ */
+export type PublishTemplateResponse = Message<"tank.agentops.v1.PublishTemplateResponse"> & {
+    /**
+     * @generated from field: tank.agentops.v1.Template template = 1;
+     */
+    template?: Template;
+};
+/**
+ * Describes the message tank.agentops.v1.PublishTemplateResponse.
+ * Use `create(PublishTemplateResponseSchema)` to create a new message.
+ */
+export declare const PublishTemplateResponseSchema: GenMessage<PublishTemplateResponse>;
 /**
  * A claim: one run holds one thing for its duration. A second run wanting it waits
  * or is told who has it.
@@ -556,6 +849,19 @@ export type Template = Message<"tank.agentops.v1.Template"> & {
      * @generated from field: tank.agentops.v1.Team team = 4;
      */
     team?: Team;
+    /**
+     * Who shared it: "" for one TANK ships, the workspace's name for its own, or the
+     * sharing workspace's name for one shared with everyone.
+     *
+     * @generated from field: string shared_by = 5;
+     */
+    sharedBy: string;
+    /**
+     * this workspace published it (so it can be withdrawn)
+     *
+     * @generated from field: bool mine = 6;
+     */
+    mine: boolean;
 };
 /**
  * Describes the message tank.agentops.v1.Template.
@@ -1026,5 +1332,29 @@ export declare const OpsService: GenService<{
         methodKind: "unary";
         input: typeof StopTeamRequestSchema;
         output: typeof StopTeamResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentops.v1.OpsService.SetTeamShift
+     */
+    setTeamShift: {
+        methodKind: "unary";
+        input: typeof SetTeamShiftRequestSchema;
+        output: typeof SetTeamShiftResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentops.v1.OpsService.GetTeamReplay
+     */
+    getTeamReplay: {
+        methodKind: "unary";
+        input: typeof GetTeamReplayRequestSchema;
+        output: typeof GetTeamReplayResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentops.v1.OpsService.PublishTemplate
+     */
+    publishTemplate: {
+        methodKind: "unary";
+        input: typeof PublishTemplateRequestSchema;
+        output: typeof PublishTemplateResponseSchema;
     };
 }>;
