@@ -1148,6 +1148,206 @@ export type SpendByTread = Message<"tank.agent.v1.SpendByTread"> & {
  */
 export declare const SpendByTreadSchema: GenMessage<SpendByTread>;
 /**
+ * What one Ops team's runs cost, and who asked for them.
+ *
+ * @generated from message tank.agent.v1.SpendByTeam
+ */
+export type SpendByTeam = Message<"tank.agent.v1.SpendByTeam"> & {
+    /**
+     * @generated from field: string team_id = 1;
+     */
+    teamId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: int32 runs_month = 3;
+     */
+    runsMonth: number;
+    /**
+     * @generated from field: double spend_month_usd = 4;
+     */
+    spendMonthUsd: number;
+    /**
+     * @generated from field: int32 runs_today = 5;
+     */
+    runsToday: number;
+    /**
+     * @generated from field: double spend_today_usd = 6;
+     */
+    spendTodayUsd: number;
+    /**
+     * @generated from field: repeated tank.agent.v1.SpendByPerson people = 7;
+     */
+    people: SpendByPerson[];
+};
+/**
+ * Describes the message tank.agent.v1.SpendByTeam.
+ * Use `create(SpendByTeamSchema)` to create a new message.
+ */
+export declare const SpendByTeamSchema: GenMessage<SpendByTeam>;
+/**
+ * One UTC day of the workspace's agent spend.
+ *
+ * @generated from message tank.agent.v1.SpendByDay
+ */
+export type SpendByDay = Message<"tank.agent.v1.SpendByDay"> & {
+    /**
+     * YYYY-MM-DD, UTC
+     *
+     * @generated from field: string day = 1;
+     */
+    day: string;
+    /**
+     * @generated from field: int32 runs = 2;
+     */
+    runs: number;
+    /**
+     * @generated from field: double spend_usd = 3;
+     */
+    spendUsd: number;
+};
+/**
+ * Describes the message tank.agent.v1.SpendByDay.
+ * Use `create(SpendByDaySchema)` to create a new message.
+ */
+export declare const SpendByDaySchema: GenMessage<SpendByDay>;
+/**
+ * Who ran it: the Tread's own agents, Crew members, or an Ops team.
+ *
+ * @generated from message tank.agent.v1.SpendByKind
+ */
+export type SpendByKind = Message<"tank.agent.v1.SpendByKind"> & {
+    /**
+     * tread | crew | ops
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: int32 runs_month = 2;
+     */
+    runsMonth: number;
+    /**
+     * @generated from field: double spend_month_usd = 3;
+     */
+    spendMonthUsd: number;
+    /**
+     * @generated from field: int32 runs_today = 4;
+     */
+    runsToday: number;
+    /**
+     * @generated from field: double spend_today_usd = 5;
+     */
+    spendTodayUsd: number;
+};
+/**
+ * Describes the message tank.agent.v1.SpendByKind.
+ * Use `create(SpendByKindSchema)` to create a new message.
+ */
+export declare const SpendByKindSchema: GenMessage<SpendByKind>;
+/**
+ * Spend: the whole picture of the workspace's agent money. Dollars are at the Tread rate,
+ * the number Books books. A member sees the Treads they belong to and the public ones; a
+ * workspace admin sees them all. The totals count every Tread either way.
+ *
+ * @generated from message tank.agent.v1.WorkspaceSpend
+ */
+export type WorkspaceSpend = Message<"tank.agent.v1.WorkspaceSpend"> & {
+    /**
+     * @generated from field: double spend_today_usd = 1;
+     */
+    spendTodayUsd: number;
+    /**
+     * @generated from field: double spend_month_usd = 2;
+     */
+    spendMonthUsd: number;
+    /**
+     * @generated from field: int32 runs_today = 3;
+     */
+    runsToday: number;
+    /**
+     * @generated from field: int32 runs_month = 4;
+     */
+    runsMonth: number;
+    /**
+     * @generated from field: int32 running_now = 5;
+     */
+    runningNow: number;
+    /**
+     * the workspace's monthly cap; 0 = none
+     *
+     * @generated from field: double cap_month_usd = 6;
+     */
+    capMonthUsd: number;
+    /**
+     * what Books holds for this month so far
+     *
+     * @generated from field: double booked_month_usd = 7;
+     */
+    bookedMonthUsd: number;
+    /**
+     * @generated from field: repeated tank.agent.v1.SpendByPerson people = 8;
+     */
+    people: SpendByPerson[];
+    /**
+     * @generated from field: repeated tank.agent.v1.SpendByTread treads = 9;
+     */
+    treads: SpendByTread[];
+    /**
+     * @generated from field: repeated tank.agent.v1.SpendByTeam teams = 10;
+     */
+    teams: SpendByTeam[];
+    /**
+     * @generated from field: repeated tank.agent.v1.SpendByKind kinds = 11;
+     */
+    kinds: SpendByKind[];
+    /**
+     * the last thirty-one days, oldest first
+     *
+     * @generated from field: repeated tank.agent.v1.SpendByDay days = 12;
+     */
+    days: SpendByDay[];
+};
+/**
+ * Describes the message tank.agent.v1.WorkspaceSpend.
+ * Use `create(WorkspaceSpendSchema)` to create a new message.
+ */
+export declare const WorkspaceSpendSchema: GenMessage<WorkspaceSpend>;
+/**
+ * @generated from message tank.agent.v1.GetWorkspaceSpendRequest
+ */
+export type GetWorkspaceSpendRequest = Message<"tank.agent.v1.GetWorkspaceSpendRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetWorkspaceSpendRequest.
+ * Use `create(GetWorkspaceSpendRequestSchema)` to create a new message.
+ */
+export declare const GetWorkspaceSpendRequestSchema: GenMessage<GetWorkspaceSpendRequest>;
+/**
+ * @generated from message tank.agent.v1.GetWorkspaceSpendResponse
+ */
+export type GetWorkspaceSpendResponse = Message<"tank.agent.v1.GetWorkspaceSpendResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.WorkspaceSpend spend = 1;
+     */
+    spend?: WorkspaceSpend;
+    /**
+     * @generated from field: bool can_manage = 2;
+     */
+    canManage: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.GetWorkspaceSpendResponse.
+ * Use `create(GetWorkspaceSpendResponseSchema)` to create a new message.
+ */
+export declare const GetWorkspaceSpendResponseSchema: GenMessage<GetWorkspaceSpendResponse>;
+/**
  * @generated from message tank.agent.v1.GetTreadSwitchboardRequest
  */
 export type GetTreadSwitchboardRequest = Message<"tank.agent.v1.GetTreadSwitchboardRequest"> & {
@@ -2048,6 +2248,16 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof SetTreadSettingsRequestSchema;
         output: typeof SetTreadSettingsResponseSchema;
+    };
+    /**
+     * Spend: the workspace's agent money by Tread, person, team, kind and day.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.GetWorkspaceSpend
+     */
+    getWorkspaceSpend: {
+        methodKind: "unary";
+        input: typeof GetWorkspaceSpendRequestSchema;
+        output: typeof GetWorkspaceSpendResponseSchema;
     };
     /**
      * The security state of every Tread in the workspace that is connected to a repository.
