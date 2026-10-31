@@ -147,6 +147,14 @@ export type StartRunRequest = Message<"tank.agent.v1.StartRunRequest"> & {
      * @generated from field: string requested_by = 4;
      */
     requestedBy: string;
+    /**
+     * The run that handed this one its work (an Ops team hand-off), by the core's id of
+     * that run; empty for a run a person started. Spend attributes the child to the same
+     * person, and the tree hangs off this.
+     *
+     * @generated from field: string parent_run_id = 5;
+     */
+    parentRunId: string;
 };
 /**
  * Describes the message tank.agent.v1.StartRunRequest.

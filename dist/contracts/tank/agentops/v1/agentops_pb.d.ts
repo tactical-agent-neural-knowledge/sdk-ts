@@ -240,12 +240,209 @@ export type Team = Message<"tank.agentops.v1.Team"> & {
      * @generated from field: string created_by = 17;
      */
     createdBy: string;
+    /**
+     * The formation board: one lane per member, hand-off edges drawn as they happen, a
+     * note dropped in a lane steers that member's run. Made with the team.
+     *
+     * @generated from field: string board_id = 18;
+     */
+    boardId: string;
+    /**
+     * Draining: no new run starts and no new hand-off is made; what runs finishes.
+     *
+     * @generated from field: bool paused = 19;
+     */
+    paused: boolean;
+    /**
+     * What the team's runs hold right now (files, tables, routes, Treads), so two
+     * agents never work the same thing at once.
+     *
+     * @generated from field: repeated tank.agentops.v1.Claim claims = 20;
+     */
+    claims: Claim[];
+    /**
+     * @generated from field: tank.agentops.v1.TeamSlo slo = 21;
+     */
+    slo?: TeamSlo;
 };
 /**
  * Describes the message tank.agentops.v1.Team.
  * Use `create(TeamSchema)` to create a new message.
  */
 export declare const TeamSchema: GenMessage<Team>;
+/**
+ * A claim: one run holds one thing for its duration. A second run wanting it waits
+ * or is told who has it.
+ *
+ * @generated from message tank.agentops.v1.Claim
+ */
+export type Claim = Message<"tank.agentops.v1.Claim"> & {
+    /**
+     * path | table | route | tread
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: string key = 2;
+     */
+    key: string;
+    /**
+     * @generated from field: string run_id = 3;
+     */
+    runId: string;
+    /**
+     * the member holding it
+     *
+     * @generated from field: string title = 4;
+     */
+    title: string;
+    /**
+     * what for
+     *
+     * @generated from field: string ask = 5;
+     */
+    ask: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp since = 6;
+     */
+    since?: Timestamp;
+};
+/**
+ * Describes the message tank.agentops.v1.Claim.
+ * Use `create(ClaimSchema)` to create a new message.
+ */
+export declare const ClaimSchema: GenMessage<Claim>;
+/**
+ * How the team is doing, over the last thirty days and right now.
+ *
+ * @generated from message tank.agentops.v1.TeamSlo
+ */
+export type TeamSlo = Message<"tank.agentops.v1.TeamSlo"> & {
+    /**
+     * from a run's start to its first message in the thread
+     *
+     * @generated from field: double first_result_minutes_p50 = 1;
+     */
+    firstResultMinutesP50: number;
+    /**
+     * @generated from field: double run_minutes_p95 = 2;
+     */
+    runMinutesP95: number;
+    /**
+     * @generated from field: int32 finished_30d = 3;
+     */
+    finished30d: number;
+    /**
+     * @generated from field: int32 failed_30d = 4;
+     */
+    failed30d: number;
+    /**
+     * running with no sign of life for ten minutes
+     *
+     * @generated from field: int32 stalled_now = 5;
+     */
+    stalledNow: number;
+    /**
+     * hand-offs accepted over hand-offs judged
+     *
+     * @generated from field: double accepted_rate_30d = 6;
+     */
+    acceptedRate30d: number;
+    /**
+     * Near the daily cap (80%): the coordinator is told to finish, not start.
+     *
+     * @generated from field: bool near_cap = 7;
+     */
+    nearCap: boolean;
+};
+/**
+ * Describes the message tank.agentops.v1.TeamSlo.
+ * Use `create(TeamSloSchema)` to create a new message.
+ */
+export declare const TeamSloSchema: GenMessage<TeamSlo>;
+/**
+ * Drain (paused = true): nothing new starts, what runs finishes. Resume with false.
+ *
+ * @generated from message tank.agentops.v1.SetTeamPauseRequest
+ */
+export type SetTeamPauseRequest = Message<"tank.agentops.v1.SetTeamPauseRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string team_id = 2;
+     */
+    teamId: string;
+    /**
+     * @generated from field: bool paused = 3;
+     */
+    paused: boolean;
+};
+/**
+ * Describes the message tank.agentops.v1.SetTeamPauseRequest.
+ * Use `create(SetTeamPauseRequestSchema)` to create a new message.
+ */
+export declare const SetTeamPauseRequestSchema: GenMessage<SetTeamPauseRequest>;
+/**
+ * @generated from message tank.agentops.v1.SetTeamPauseResponse
+ */
+export type SetTeamPauseResponse = Message<"tank.agentops.v1.SetTeamPauseResponse"> & {
+    /**
+     * @generated from field: tank.agentops.v1.Team team = 1;
+     */
+    team?: Team;
+};
+/**
+ * Describes the message tank.agentops.v1.SetTeamPauseResponse.
+ * Use `create(SetTeamPauseResponseSchema)` to create a new message.
+ */
+export declare const SetTeamPauseResponseSchema: GenMessage<SetTeamPauseResponse>;
+/**
+ * Stop everything the team is doing now, hand-offs included, and drain.
+ *
+ * @generated from message tank.agentops.v1.StopTeamRequest
+ */
+export type StopTeamRequest = Message<"tank.agentops.v1.StopTeamRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string team_id = 2;
+     */
+    teamId: string;
+    /**
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.agentops.v1.StopTeamRequest.
+ * Use `create(StopTeamRequestSchema)` to create a new message.
+ */
+export declare const StopTeamRequestSchema: GenMessage<StopTeamRequest>;
+/**
+ * @generated from message tank.agentops.v1.StopTeamResponse
+ */
+export type StopTeamResponse = Message<"tank.agentops.v1.StopTeamResponse"> & {
+    /**
+     * @generated from field: tank.agentops.v1.Team team = 1;
+     */
+    team?: Team;
+    /**
+     * runs cancelled
+     *
+     * @generated from field: int32 stopped = 2;
+     */
+    stopped: number;
+};
+/**
+ * Describes the message tank.agentops.v1.StopTeamResponse.
+ * Use `create(StopTeamResponseSchema)` to create a new message.
+ */
+export declare const StopTeamResponseSchema: GenMessage<StopTeamResponse>;
 /**
  * A roster ready to start from; the members are a starting point, editable.
  *
@@ -720,5 +917,21 @@ export declare const OpsService: GenService<{
         methodKind: "unary";
         input: typeof ImportTeamRequestSchema;
         output: typeof ImportTeamResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentops.v1.OpsService.SetTeamPause
+     */
+    setTeamPause: {
+        methodKind: "unary";
+        input: typeof SetTeamPauseRequestSchema;
+        output: typeof SetTeamPauseResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentops.v1.OpsService.StopTeam
+     */
+    stopTeam: {
+        methodKind: "unary";
+        input: typeof StopTeamRequestSchema;
+        output: typeof StopTeamResponseSchema;
     };
 }>;
