@@ -373,12 +373,607 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: tank.agent.v1.TreadPlan tread_plan = 32;
      */
     treadPlan?: TreadPlan;
+    /**
+     * How the run was started: "" (a summon), recon, neural, remediation, continue,
+     * verify, crew, or ops (an Ops team member at work).
+     *
+     * @generated from field: string mode = 33;
+     */
+    mode: string;
+    /**
+     * The Ops team this run's agent is on, when it is on one: the roster, who may hand
+     * work to whom, and the triggers that route an ask.
+     *
+     * @generated from field: tank.agentctl.v1.TeamContext team = 34;
+     */
+    team?: TeamContext;
+    /**
+     * The run that handed this one its work, for a hand-off; empty otherwise.
+     *
+     * @generated from field: string parent_run_id = 35;
+     */
+    parentRunId: string;
+    /**
+     * The hand-off this run is: what was asked, what to return, how it will be checked,
+     * and what it may spend. Empty for a run a person started.
+     *
+     * @generated from field: tank.agentctl.v1.Handoff handoff = 36;
+     */
+    handoff?: Handoff;
+    /**
+     * What this run may still hand out: its own envelope less what its hand-offs have
+     * taken. Zero means no envelope (the policy's budget applies).
+     *
+     * @generated from field: tank.agentctl.v1.Envelope envelope_left = 37;
+     */
+    envelopeLeft?: Envelope;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
  * Use `create(RunContextSchema)` to create a new message.
  */
 export declare const RunContextSchema: GenMessage<RunContext>;
+/**
+ * An Ops team as a run sees it (tank.agentops.v1 holds the full record).
+ *
+ * @generated from message tank.agentctl.v1.TeamContext
+ */
+export type TeamContext = Message<"tank.agentctl.v1.TeamContext"> & {
+    /**
+     * @generated from field: string team_id = 1;
+     */
+    teamId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string handle = 3;
+     */
+    handle: string;
+    /**
+     * @generated from field: string purpose = 4;
+     */
+    purpose: string;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.TeamMember members = 5;
+     */
+    members: TeamMember[];
+    /**
+     * This run's own seat on the team.
+     *
+     * @generated from field: string member_id = 6;
+     */
+    memberId: string;
+    /**
+     * @generated from field: bool coordinator = 7;
+     */
+    coordinator: boolean;
+    /**
+     * The team's formation board, which the run draws its lane and edges on.
+     *
+     * @generated from field: string board_id = 8;
+     */
+    boardId: string;
+    /**
+     * Draining: make no new hand-off; finish what is in hand.
+     *
+     * @generated from field: bool paused = 9;
+     */
+    paused: boolean;
+    /**
+     * Set near the daily cap: finish, do not start.
+     *
+     * @generated from field: string cap_note = 10;
+     */
+    capNote: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.TeamContext.
+ * Use `create(TeamContextSchema)` to create a new message.
+ */
+export declare const TeamContextSchema: GenMessage<TeamContext>;
+/**
+ * Claims: a run holds files, tables, routes or Treads for its duration, so two
+ * members of a team never work the same thing at once. Held means another run has
+ * it; the caller waits for it to end or works on something else.
+ *
+ * @generated from message tank.agentctl.v1.ClaimItem
+ */
+export type ClaimItem = Message<"tank.agentctl.v1.ClaimItem"> & {
+    /**
+     * path | table | route | tread
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: string key = 2;
+     */
+    key: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ClaimItem.
+ * Use `create(ClaimItemSchema)` to create a new message.
+ */
+export declare const ClaimItemSchema: GenMessage<ClaimItem>;
+/**
+ * @generated from message tank.agentctl.v1.HeldClaim
+ */
+export type HeldClaim = Message<"tank.agentctl.v1.HeldClaim"> & {
+    /**
+     * @generated from field: tank.agentctl.v1.ClaimItem item = 1;
+     */
+    item?: ClaimItem;
+    /**
+     * @generated from field: string run_id = 2;
+     */
+    runId: string;
+    /**
+     * who holds it
+     *
+     * @generated from field: string title = 3;
+     */
+    title: string;
+    /**
+     * what for
+     *
+     * @generated from field: string ask = 4;
+     */
+    ask: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp since = 5;
+     */
+    since?: Timestamp;
+};
+/**
+ * Describes the message tank.agentctl.v1.HeldClaim.
+ * Use `create(HeldClaimSchema)` to create a new message.
+ */
+export declare const HeldClaimSchema: GenMessage<HeldClaim>;
+/**
+ * @generated from message tank.agentctl.v1.ClaimRequest
+ */
+export type ClaimRequest = Message<"tank.agentctl.v1.ClaimRequest"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ClaimItem items = 1;
+     */
+    items: ClaimItem[];
+    /**
+     * what for, shown to whoever is refused
+     *
+     * @generated from field: string note = 2;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ClaimRequest.
+ * Use `create(ClaimRequestSchema)` to create a new message.
+ */
+export declare const ClaimRequestSchema: GenMessage<ClaimRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ClaimResponse
+ */
+export type ClaimResponse = Message<"tank.agentctl.v1.ClaimResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ClaimItem granted = 1;
+     */
+    granted: ClaimItem[];
+    /**
+     * @generated from field: repeated tank.agentctl.v1.HeldClaim held = 2;
+     */
+    held: HeldClaim[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ClaimResponse.
+ * Use `create(ClaimResponseSchema)` to create a new message.
+ */
+export declare const ClaimResponseSchema: GenMessage<ClaimResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ReleaseClaimsRequest
+ */
+export type ReleaseClaimsRequest = Message<"tank.agentctl.v1.ReleaseClaimsRequest"> & {
+    /**
+     * empty = everything this run holds
+     *
+     * @generated from field: repeated tank.agentctl.v1.ClaimItem items = 1;
+     */
+    items: ClaimItem[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ReleaseClaimsRequest.
+ * Use `create(ReleaseClaimsRequestSchema)` to create a new message.
+ */
+export declare const ReleaseClaimsRequestSchema: GenMessage<ReleaseClaimsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ReleaseClaimsResponse
+ */
+export type ReleaseClaimsResponse = Message<"tank.agentctl.v1.ReleaseClaimsResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ReleaseClaimsResponse.
+ * Use `create(ReleaseClaimsResponseSchema)` to create a new message.
+ */
+export declare const ReleaseClaimsResponseSchema: GenMessage<ReleaseClaimsResponse>;
+/**
+ * A single file about to be edited: held by somebody else, or claimed for this run
+ * now if it was free.
+ *
+ * @generated from message tank.agentctl.v1.CheckClaimRequest
+ */
+export type CheckClaimRequest = Message<"tank.agentctl.v1.CheckClaimRequest"> & {
+    /**
+     * @generated from field: tank.agentctl.v1.ClaimItem item = 1;
+     */
+    item?: ClaimItem;
+};
+/**
+ * Describes the message tank.agentctl.v1.CheckClaimRequest.
+ * Use `create(CheckClaimRequestSchema)` to create a new message.
+ */
+export declare const CheckClaimRequestSchema: GenMessage<CheckClaimRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CheckClaimResponse
+ */
+export type CheckClaimResponse = Message<"tank.agentctl.v1.CheckClaimResponse"> & {
+    /**
+     * @generated from field: bool ok = 1;
+     */
+    ok: boolean;
+    /**
+     * @generated from field: tank.agentctl.v1.HeldClaim held = 2;
+     */
+    held?: HeldClaim;
+};
+/**
+ * Describes the message tank.agentctl.v1.CheckClaimResponse.
+ * Use `create(CheckClaimResponseSchema)` to create a new message.
+ */
+export declare const CheckClaimResponseSchema: GenMessage<CheckClaimResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListClaimsRequest
+ */
+export type ListClaimsRequest = Message<"tank.agentctl.v1.ListClaimsRequest"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ListClaimsRequest.
+ * Use `create(ListClaimsRequestSchema)` to create a new message.
+ */
+export declare const ListClaimsRequestSchema: GenMessage<ListClaimsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListClaimsResponse
+ */
+export type ListClaimsResponse = Message<"tank.agentctl.v1.ListClaimsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.HeldClaim mine = 1;
+     */
+    mine: HeldClaim[];
+    /**
+     * held by other runs of the team
+     *
+     * @generated from field: repeated tank.agentctl.v1.HeldClaim others = 2;
+     */
+    others: HeldClaim[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListClaimsResponse.
+ * Use `create(ListClaimsResponseSchema)` to create a new message.
+ */
+export declare const ListClaimsResponseSchema: GenMessage<ListClaimsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.TeamMember
+ */
+export type TeamMember = Message<"tank.agentctl.v1.TeamMember"> & {
+    /**
+     * @generated from field: string member_id = 1;
+     */
+    memberId: string;
+    /**
+     * @generated from field: string agent_id = 2;
+     */
+    agentId: string;
+    /**
+     * @generated from field: string title = 3;
+     */
+    title: string;
+    /**
+     * @generated from field: string handle = 4;
+     */
+    handle: string;
+    /**
+     * @generated from field: bool coordinator = 5;
+     */
+    coordinator: boolean;
+    /**
+     * @generated from field: repeated string triggers = 6;
+     */
+    triggers: string[];
+    /**
+     * @generated from field: bool delegate = 7;
+     */
+    delegate: boolean;
+    /**
+     * member ids; empty with delegate = any specialist
+     *
+     * @generated from field: repeated string delegate_to = 8;
+     */
+    delegateTo: string[];
+    /**
+     * the default for a hand-off to this member
+     *
+     * @generated from field: tank.agentctl.v1.Envelope envelope = 9;
+     */
+    envelope?: Envelope;
+    /**
+     * @generated from field: bool enabled = 10;
+     */
+    enabled: boolean;
+    /**
+     * @generated from field: bool is_me = 11;
+     */
+    isMe: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.TeamMember.
+ * Use `create(TeamMemberSchema)` to create a new message.
+ */
+export declare const TeamMemberSchema: GenMessage<TeamMember>;
+/**
+ * @generated from message tank.agentctl.v1.Envelope
+ */
+export type Envelope = Message<"tank.agentctl.v1.Envelope"> & {
+    /**
+     * @generated from field: double usd = 1;
+     */
+    usd: number;
+    /**
+     * @generated from field: int32 turns = 2;
+     */
+    turns: number;
+    /**
+     * @generated from field: int32 minutes = 3;
+     */
+    minutes: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.Envelope.
+ * Use `create(EnvelopeSchema)` to create a new message.
+ */
+export declare const EnvelopeSchema: GenMessage<Envelope>;
+/**
+ * A hand-off contract: a delegation carries what is asked, the shape of what comes
+ * back, and how the result will be checked. The coordinator cannot mark it done until
+ * the check passes (proof, not claims, between agents).
+ *
+ * @generated from message tank.agentctl.v1.Handoff
+ */
+export type Handoff = Message<"tank.agentctl.v1.Handoff"> & {
+    /**
+     * @generated from field: string ask = 1;
+     */
+    ask: string;
+    /**
+     * @generated from field: string return_shape = 2;
+     */
+    returnShape: string;
+    /**
+     * @generated from field: string acceptance_check = 3;
+     */
+    acceptanceCheck: string;
+    /**
+     * @generated from field: tank.agentctl.v1.Envelope envelope = 4;
+     */
+    envelope?: Envelope;
+    /**
+     * who handed it
+     *
+     * @generated from field: string from_title = 5;
+     */
+    fromTitle: string;
+    /**
+     * who took it
+     *
+     * @generated from field: string to_title = 6;
+     */
+    toTitle: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.Handoff.
+ * Use `create(HandoffSchema)` to create a new message.
+ */
+export declare const HandoffSchema: GenMessage<Handoff>;
+/**
+ * Where a hand-off stands, for the run that made it.
+ *
+ * @generated from message tank.agentctl.v1.HandoffStatus
+ */
+export type HandoffStatus = Message<"tank.agentctl.v1.HandoffStatus"> & {
+    /**
+     * @generated from field: string child_run_id = 1;
+     */
+    childRunId: string;
+    /**
+     * @generated from field: string member_id = 2;
+     */
+    memberId: string;
+    /**
+     * @generated from field: string title = 3;
+     */
+    title: string;
+    /**
+     * @generated from field: string handle = 4;
+     */
+    handle: string;
+    /**
+     * running | done | failed | budget_exhausted | timed_out | cancelled
+     *
+     * @generated from field: string state = 5;
+     */
+    state: string;
+    /**
+     * @generated from field: double cost_usd = 6;
+     */
+    costUsd: number;
+    /**
+     * @generated from field: tank.agentctl.v1.Envelope envelope = 7;
+     */
+    envelope?: Envelope;
+    /**
+     * @generated from field: tank.agentctl.v1.Handoff handoff = 8;
+     */
+    handoff?: Handoff;
+    /**
+     * the child's completion, as text, once it ended
+     *
+     * @generated from field: string result = 9;
+     */
+    result: string;
+    /**
+     * @generated from field: string thread_root_id = 10;
+     */
+    threadRootId: string;
+    /**
+     * accepted: the coordinator checked the result against the acceptance check.
+     * "" until it decides; "accepted" or "rejected" after.
+     *
+     * @generated from field: string verdict = 11;
+     */
+    verdict: string;
+    /**
+     * @generated from field: string verdict_note = 12;
+     */
+    verdictNote: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.HandoffStatus.
+ * Use `create(HandoffStatusSchema)` to create a new message.
+ */
+export declare const HandoffStatusSchema: GenMessage<HandoffStatus>;
+/**
+ * Hand a bounded piece of work to a team member: a child run in a new sub-thread of
+ * this Tread, with an envelope carved from this run's. Refused when this run may not
+ * delegate, the member is not one it may hand to, or the envelope is more than it has left.
+ *
+ * @generated from message tank.agentctl.v1.DelegateRequest
+ */
+export type DelegateRequest = Message<"tank.agentctl.v1.DelegateRequest"> & {
+    /**
+     * @generated from field: string member_handle = 1;
+     */
+    memberHandle: string;
+    /**
+     * @generated from field: string ask = 2;
+     */
+    ask: string;
+    /**
+     * @generated from field: string return_shape = 3;
+     */
+    returnShape: string;
+    /**
+     * @generated from field: string acceptance_check = 4;
+     */
+    acceptanceCheck: string;
+    /**
+     * zero fields take the member's default, bounded by what is left
+     *
+     * @generated from field: tank.agentctl.v1.Envelope envelope = 5;
+     */
+    envelope?: Envelope;
+};
+/**
+ * Describes the message tank.agentctl.v1.DelegateRequest.
+ * Use `create(DelegateRequestSchema)` to create a new message.
+ */
+export declare const DelegateRequestSchema: GenMessage<DelegateRequest>;
+/**
+ * @generated from message tank.agentctl.v1.DelegateResponse
+ */
+export type DelegateResponse = Message<"tank.agentctl.v1.DelegateResponse"> & {
+    /**
+     * @generated from field: string child_run_id = 1;
+     */
+    childRunId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * what the child actually got
+     *
+     * @generated from field: tank.agentctl.v1.Envelope envelope = 3;
+     */
+    envelope?: Envelope;
+    /**
+     * what this run has left to hand out
+     *
+     * @generated from field: tank.agentctl.v1.Envelope envelope_left = 4;
+     */
+    envelopeLeft?: Envelope;
+};
+/**
+ * Describes the message tank.agentctl.v1.DelegateResponse.
+ * Use `create(DelegateResponseSchema)` to create a new message.
+ */
+export declare const DelegateResponseSchema: GenMessage<DelegateResponse>;
+/**
+ * The coordinator's verdict on a hand-off, after checking the result against the
+ * acceptance check. A rejected hand-off may be handed again.
+ *
+ * @generated from message tank.agentctl.v1.AcceptHandoffRequest
+ */
+export type AcceptHandoffRequest = Message<"tank.agentctl.v1.AcceptHandoffRequest"> & {
+    /**
+     * @generated from field: string child_run_id = 1;
+     */
+    childRunId: string;
+    /**
+     * @generated from field: bool accepted = 2;
+     */
+    accepted: boolean;
+    /**
+     * @generated from field: string note = 3;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.AcceptHandoffRequest.
+ * Use `create(AcceptHandoffRequestSchema)` to create a new message.
+ */
+export declare const AcceptHandoffRequestSchema: GenMessage<AcceptHandoffRequest>;
+/**
+ * @generated from message tank.agentctl.v1.AcceptHandoffResponse
+ */
+export type AcceptHandoffResponse = Message<"tank.agentctl.v1.AcceptHandoffResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.AcceptHandoffResponse.
+ * Use `create(AcceptHandoffResponseSchema)` to create a new message.
+ */
+export declare const AcceptHandoffResponseSchema: GenMessage<AcceptHandoffResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListHandoffsRequest
+ */
+export type ListHandoffsRequest = Message<"tank.agentctl.v1.ListHandoffsRequest"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ListHandoffsRequest.
+ * Use `create(ListHandoffsRequestSchema)` to create a new message.
+ */
+export declare const ListHandoffsRequestSchema: GenMessage<ListHandoffsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListHandoffsResponse
+ */
+export type ListHandoffsResponse = Message<"tank.agentctl.v1.ListHandoffsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.HandoffStatus handoffs = 1;
+     */
+    handoffs: HandoffStatus[];
+    /**
+     * @generated from field: tank.agentctl.v1.Envelope envelope_left = 2;
+     */
+    envelopeLeft?: Envelope;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListHandoffsResponse.
+ * Use `create(ListHandoffsResponseSchema)` to create a new message.
+ */
+export declare const ListHandoffsResponseSchema: GenMessage<ListHandoffsResponse>;
 /**
  * @generated from message tank.agentctl.v1.GetRunContextRequest
  */
@@ -2943,6 +3538,12 @@ export type InboxItem = Message<"tank.agentctl.v1.InboxItem"> & {
      * @generated from field: google.protobuf.Timestamp at = 9;
      */
     at?: Timestamp;
+    /**
+     * INBOX_KIND_HANDOFF
+     *
+     * @generated from field: tank.agentctl.v1.HandoffStatus handoff = 10;
+     */
+    handoff?: HandoffStatus;
 };
 /**
  * Describes the message tank.agentctl.v1.InboxItem.
@@ -5786,7 +6387,13 @@ export declare enum InboxKind {
     /**
      * @generated from enum value: INBOX_KIND_CANCEL = 4;
      */
-    CANCEL = 4
+    CANCEL = 4,
+    /**
+     * A hand-off this run made has ended: text carries the child's result, handoff the rest.
+     *
+     * @generated from enum value: INBOX_KIND_HANDOFF = 5;
+     */
+    HANDOFF = 5
 }
 /**
  * Describes the enum tank.agentctl.v1.InboxKind.
@@ -5905,6 +6512,65 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof ReportCompletionRequestSchema;
         output: typeof ReportCompletionResponseSchema;
+    };
+    /**
+     * Ops teams: hand work to a member as a child run, judge what came back, see where
+     * every hand-off stands.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.Delegate
+     */
+    delegate: {
+        methodKind: "unary";
+        input: typeof DelegateRequestSchema;
+        output: typeof DelegateResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.AcceptHandoff
+     */
+    acceptHandoff: {
+        methodKind: "unary";
+        input: typeof AcceptHandoffRequestSchema;
+        output: typeof AcceptHandoffResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ListHandoffs
+     */
+    listHandoffs: {
+        methodKind: "unary";
+        input: typeof ListHandoffsRequestSchema;
+        output: typeof ListHandoffsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.Claim
+     */
+    claim: {
+        methodKind: "unary";
+        input: typeof ClaimRequestSchema;
+        output: typeof ClaimResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ReleaseClaims
+     */
+    releaseClaims: {
+        methodKind: "unary";
+        input: typeof ReleaseClaimsRequestSchema;
+        output: typeof ReleaseClaimsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.CheckClaim
+     */
+    checkClaim: {
+        methodKind: "unary";
+        input: typeof CheckClaimRequestSchema;
+        output: typeof CheckClaimResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ListClaims
+     */
+    listClaims: {
+        methodKind: "unary";
+        input: typeof ListClaimsRequestSchema;
+        output: typeof ListClaimsResponseSchema;
     };
     /**
      * Opens a page of the product TANK hosts for this run's repository, as a visitor would,
