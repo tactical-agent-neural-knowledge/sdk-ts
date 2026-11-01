@@ -92,6 +92,29 @@ describe("interactions", () => {
     ]);
   });
 
+  it("a merge approval links to its pull request, before and after the decision", () => {
+    const url = "https://github.com/edero-io/edero-app-v3/pull/20";
+    for (const decided of [false, true]) {
+      const { unmount } = render(
+        <ThemeProvider theme={tankTheme}>
+          <BlocksView
+            blocks={blocks([
+              approvalPrompt({
+                gateId: "g1",
+                kind: "merge",
+                subject: url,
+                decided,
+                decision: decided ? "approved" : "",
+              }),
+            ])}
+          />
+        </ThemeProvider>,
+      );
+      expect(screen.getByTestId("approval-subject-link").getAttribute("href")).toBe(url);
+      unmount();
+    }
+  });
+
   it("confirm buttons open a dialog and fire only on confirm", () => {
     const seen: unknown[] = [];
     render(

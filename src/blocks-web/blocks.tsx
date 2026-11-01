@@ -773,13 +773,33 @@ function GuardrailPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: Bloc
   );
 }
 
+function isWebUrl(s: string): boolean {
+  return /^https?:\/\/\S+$/.test(s.trim());
+}
+
 export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
   const expires = tsMs(value.expiresAt);
   const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
   if (value.kind === GateKind.GUARDRAIL) return <GuardrailPromptBlock value={value} ctx={ctx} />;
   return (
     <Card accent="alert" label={GATE_LABEL[value.kind] ?? "approval"}>
-      <Typography variant="body1">{value.subject}</Typography>
+      {/* A merge's subject is its pull request: a link before and after the decision
+          (Robby, 2026-11-01: "I still want to be able to click and navigate to the PR even
+          after approving"). */}
+      {isWebUrl(value.subject) ? (
+        <Link
+          href={value.subject}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="body1"
+          sx={{ wordBreak: "break-all" }}
+          data-testid="approval-subject-link"
+        >
+          {value.subject}
+        </Link>
+      ) : (
+        <Typography variant="body1">{value.subject}</Typography>
+      )}
       <Typography variant="caption" color="text.secondary">
         {value.minApprovals} approval{value.minApprovals === 1 ? "" : "s"} needed
         {value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : ""}
