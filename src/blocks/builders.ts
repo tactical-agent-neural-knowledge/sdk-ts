@@ -13,6 +13,7 @@ import {
   type DiffFile,
   type Field,
   GateKind,
+  type GuardrailCheck,
   type PlanStep,
   StepStatus,
   type ToolLogEntry,
@@ -150,6 +151,8 @@ export interface PlanCardInput {
   planHash?: string;
   version?: number;
   blockId?: string;
+  /** Guardrails checked against the plan (phase 1): each met, or a conflict with the quoted reason. */
+  guardrails?: GuardrailCheck[];
 }
 
 export function planCard(input: PlanCardInput): Block {
@@ -165,6 +168,7 @@ export function planCard(input: PlanCardInput): Block {
         approverIds: input.approverIds ?? [],
         planHash: input.planHash ?? "",
         version: input.version ?? 1,
+        guardrails: input.guardrails ?? [],
       },
     },
     input.blockId,
@@ -268,7 +272,15 @@ export function ciStatus(input: CiStatusInput): Block {
 
 export interface ApprovalPromptInput {
   gateId: string;
-  kind?: GateKind | "plan" | "scope_change" | "merge" | "deploy" | "destructive_tool" | "budget_increase";
+  kind?:
+    | GateKind
+    | "plan"
+    | "scope_change"
+    | "merge"
+    | "deploy"
+    | "destructive_tool"
+    | "budget_increase"
+    | "guardrail";
   subject: string;
   approverIds?: string[];
   minApprovals?: number;
@@ -277,10 +289,15 @@ export interface ApprovalPromptInput {
   decided?: boolean;
   decision?: "approved" | "rejected" | "expired" | "";
   blockId?: string;
+  /** For a guardrail gate: the guardrail the run stopped at, its sentence, and the exact blocker. */
+  guardrailId?: string;
+  guardrailText?: string;
+  blocker?: string;
 }
 
 const GATE: Record<string, GateKind> = {
   plan: GateKind.PLAN,
+  guardrail: GateKind.GUARDRAIL,
   scope_change: GateKind.SCOPE_CHANGE,
   merge: GateKind.MERGE,
   deploy: GateKind.DEPLOY,
@@ -306,6 +323,9 @@ export function approvalPrompt(input: ApprovalPromptInput): Block {
         expiresAt: input.expiresAt === undefined ? undefined : timestampFromMs(input.expiresAt),
         decided: input.decided ?? false,
         decision: input.decision ?? "",
+        guardrailId: input.guardrailId ?? "",
+        guardrailText: input.guardrailText ?? "",
+        blocker: input.blocker ?? "",
       },
     },
     input.blockId,

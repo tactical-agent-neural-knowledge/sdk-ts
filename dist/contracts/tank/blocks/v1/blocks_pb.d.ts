@@ -326,12 +326,55 @@ export type PlanCard = Message<"tank.blocks.v1.PlanCard"> & {
      * @generated from field: int32 version = 7;
      */
     version: number;
+    /**
+     * Each guardrail checked against this plan: met, or a conflict with the quoted reason.
+     * A plan with a conflict cannot be approved.
+     *
+     * @generated from field: repeated tank.blocks.v1.GuardrailCheck guardrails = 8;
+     */
+    guardrails: GuardrailCheck[];
 };
 /**
  * Describes the message tank.blocks.v1.PlanCard.
  * Use `create(PlanCardSchema)` to create a new message.
  */
 export declare const PlanCardSchema: GenMessage<PlanCard>;
+/**
+ * One guardrail's verdict on a plan or a run, as a card shows it.
+ *
+ * @generated from message tank.blocks.v1.GuardrailCheck
+ */
+export type GuardrailCheck = Message<"tank.blocks.v1.GuardrailCheck"> & {
+    /**
+     * @generated from field: string guardrail_id = 1;
+     */
+    guardrailId: string;
+    /**
+     * @generated from field: string text = 2;
+     */
+    text: string;
+    /**
+     * met | violated | unsure | not_applicable | blocked
+     *
+     * @generated from field: string state = 3;
+     */
+    state: string;
+    /**
+     * @generated from field: string quote = 4;
+     */
+    quote: string;
+    /**
+     * Watched (a model's verdict) rather than Guaranteed
+     *
+     * @generated from field: bool judged = 5;
+     */
+    judged: boolean;
+};
+/**
+ * Describes the message tank.blocks.v1.GuardrailCheck.
+ * Use `create(GuardrailCheckSchema)` to create a new message.
+ */
+export declare const GuardrailCheckSchema: GenMessage<GuardrailCheck>;
 /**
  * @generated from message tank.blocks.v1.DiffFile
  */
@@ -480,6 +523,20 @@ export type ApprovalPrompt = Message<"tank.blocks.v1.ApprovalPrompt"> & {
      * @generated from field: string decision = 8;
      */
     decision: string;
+    /**
+     * For a GUARDRAIL gate: the guardrail, its sentence, and what the run was about to do.
+     *
+     * @generated from field: string guardrail_id = 9;
+     */
+    guardrailId: string;
+    /**
+     * @generated from field: string guardrail_text = 10;
+     */
+    guardrailText: string;
+    /**
+     * @generated from field: string blocker = 11;
+     */
+    blocker: string;
 };
 /**
  * Describes the message tank.blocks.v1.ApprovalPrompt.
@@ -767,7 +824,14 @@ export declare enum GateKind {
     /**
      * @generated from enum value: GATE_KIND_BUDGET_INCREASE = 6;
      */
-    BUDGET_INCREASE = 6
+    BUDGET_INCREASE = 6,
+    /**
+     * A guardrail the run cannot meet: the run stops and asks. The only ways on are to
+     * change the guardrail or to stop the run; nothing is allowed once.
+     *
+     * @generated from enum value: GATE_KIND_GUARDRAIL = 7;
+     */
+    GUARDRAIL = 7
 }
 /**
  * Describes the enum tank.blocks.v1.GateKind.

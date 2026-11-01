@@ -1,4 +1,4 @@
-import { type Block, type Blocks, type Button, ButtonStyle, type Check, CheckState, type DiffFile, type Field, GateKind, type PlanStep, StepStatus, type ToolLogEntry } from "../contracts/tank/blocks/v1/blocks_pb.js";
+import { type Block, type Blocks, type Button, ButtonStyle, type Check, CheckState, type DiffFile, type Field, GateKind, type GuardrailCheck, type PlanStep, StepStatus, type ToolLogEntry } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type RichTextInput } from "./richtext.js";
 /** Wrap blocks into a `Blocks` message (what `Message.blocks` holds). */
 export declare function blocks(...items: Array<Block | Block[]>): Blocks;
@@ -47,6 +47,8 @@ export interface PlanCardInput {
     planHash?: string;
     version?: number;
     blockId?: string;
+    /** Guardrails checked against the plan (phase 1): each met, or a conflict with the quoted reason. */
+    guardrails?: GuardrailCheck[];
 }
 export declare function planCard(input: PlanCardInput): Block;
 export interface DiffFileInput {
@@ -80,7 +82,7 @@ export interface CiStatusInput {
 export declare function ciStatus(input: CiStatusInput): Block;
 export interface ApprovalPromptInput {
     gateId: string;
-    kind?: GateKind | "plan" | "scope_change" | "merge" | "deploy" | "destructive_tool" | "budget_increase";
+    kind?: GateKind | "plan" | "scope_change" | "merge" | "deploy" | "destructive_tool" | "budget_increase" | "guardrail";
     subject: string;
     approverIds?: string[];
     minApprovals?: number;
@@ -89,6 +91,10 @@ export interface ApprovalPromptInput {
     decided?: boolean;
     decision?: "approved" | "rejected" | "expired" | "";
     blockId?: string;
+    /** For a guardrail gate: the guardrail the run stopped at, its sentence, and the exact blocker. */
+    guardrailId?: string;
+    guardrailText?: string;
+    blocker?: string;
 }
 export declare function approvalPrompt(input: ApprovalPromptInput): Block;
 export interface ToolLogEntryInput {

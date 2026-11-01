@@ -25,7 +25,7 @@ describe("runTone", () => {
         RunState.MERGED,
         RunState.VERIFYING_DEPLOY,
       ],
-      awaiting: [RunState.AWAITING_PLAN_APPROVAL, RunState.AWAITING_MERGE_APPROVAL],
+      awaiting: [RunState.AWAITING_PLAN_APPROVAL, RunState.AWAITING_MERGE_APPROVAL, RunState.BLOCKED],
       done: [RunState.DONE],
       failed: [RunState.FAILED, RunState.BUDGET_EXHAUSTED, RunState.TIMED_OUT, RunState.APPROVAL_EXPIRED],
       cancelled: [RunState.CANCELLED, RunState.UNSPECIFIED],
