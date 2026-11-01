@@ -387,6 +387,59 @@ export type ListVerdictsResponse = Message<"tank.guardrails.v1.ListVerdictsRespo
  */
 export declare const ListVerdictsResponseSchema: GenMessage<ListVerdictsResponse>;
 /**
+ * Phase 3: "add guardrails from this document". The text of a plan, a spec or a policy
+ * is read for the rules it states; each becomes a proposed guardrail, shaped where the
+ * sentence has a shape and a rule otherwise, rated, and shown for confirmation before
+ * anything is saved. Nothing is stored by this call.
+ *
+ * @generated from message tank.guardrails.v1.ExtractGuardrailsRequest
+ */
+export type ExtractGuardrailsRequest = Message<"tank.guardrails.v1.ExtractGuardrailsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * The document's text (plain text or Markdown), at most 200 KiB.
+     *
+     * @generated from field: string text = 2;
+     */
+    text: string;
+    /**
+     * With a channel id the proposals are scoped to that Tread; otherwise the workspace.
+     *
+     * @generated from field: string channel_id = 3;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.guardrails.v1.ExtractGuardrailsRequest.
+ * Use `create(ExtractGuardrailsRequestSchema)` to create a new message.
+ */
+export declare const ExtractGuardrailsRequestSchema: GenMessage<ExtractGuardrailsRequest>;
+/**
+ * @generated from message tank.guardrails.v1.ExtractGuardrailsResponse
+ */
+export type ExtractGuardrailsResponse = Message<"tank.guardrails.v1.ExtractGuardrailsResponse"> & {
+    /**
+     * Proposed guardrails, unsaved (no id), each with its rating filled in.
+     *
+     * @generated from field: repeated tank.guardrails.v1.Guardrail proposals = 1;
+     */
+    proposals: Guardrail[];
+    /**
+     * The document's sentence each proposal came from, parallel to proposals.
+     *
+     * @generated from field: repeated string sources = 2;
+     */
+    sources: string[];
+};
+/**
+ * Describes the message tank.guardrails.v1.ExtractGuardrailsResponse.
+ * Use `create(ExtractGuardrailsResponseSchema)` to create a new message.
+ */
+export declare const ExtractGuardrailsResponseSchema: GenMessage<ExtractGuardrailsResponse>;
+/**
  * What shape a guardrail has, which decides how it is enforced.
  *
  * @generated from enum tank.guardrails.v1.GuardrailKind
@@ -584,5 +637,13 @@ export declare const GuardrailService: GenService<{
         methodKind: "unary";
         input: typeof ListVerdictsRequestSchema;
         output: typeof ListVerdictsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.guardrails.v1.GuardrailService.ExtractGuardrails
+     */
+    extractGuardrails: {
+        methodKind: "unary";
+        input: typeof ExtractGuardrailsRequestSchema;
+        output: typeof ExtractGuardrailsResponseSchema;
     };
 }>;
