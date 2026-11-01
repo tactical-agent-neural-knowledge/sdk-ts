@@ -6301,6 +6301,46 @@ export type ListGuardrailVerdictsResponse = Message<"tank.agentctl.v1.ListGuardr
  */
 export declare const ListGuardrailVerdictsResponseSchema: GenMessage<ListGuardrailVerdictsResponse>;
 /**
+ * @generated from message tank.agentctl.v1.ExtractGuardrailsRequest
+ */
+export type ExtractGuardrailsRequest = Message<"tank.agentctl.v1.ExtractGuardrailsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string text = 2;
+     */
+    text: string;
+    /**
+     * @generated from field: string channel_id = 3;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ExtractGuardrailsRequest.
+ * Use `create(ExtractGuardrailsRequestSchema)` to create a new message.
+ */
+export declare const ExtractGuardrailsRequestSchema: GenMessage<ExtractGuardrailsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ExtractGuardrailsResponse
+ */
+export type ExtractGuardrailsResponse = Message<"tank.agentctl.v1.ExtractGuardrailsResponse"> & {
+    /**
+     * @generated from field: repeated tank.guardrails.v1.Guardrail proposals = 1;
+     */
+    proposals: Guardrail[];
+    /**
+     * @generated from field: repeated string sources = 2;
+     */
+    sources: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ExtractGuardrailsResponse.
+ * Use `create(ExtractGuardrailsResponseSchema)` to create a new message.
+ */
+export declare const ExtractGuardrailsResponseSchema: GenMessage<ExtractGuardrailsResponse>;
+/**
  * @generated from message tank.agentctl.v1.ArenaTurnRequest
  */
 export type ArenaTurnRequest = Message<"tank.agentctl.v1.ArenaTurnRequest"> & {
@@ -7377,6 +7417,14 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof ListGuardrailVerdictsRequestSchema;
         output: typeof ListGuardrailVerdictsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.ExtractGuardrails
+     */
+    extractGuardrails: {
+        methodKind: "unary";
+        input: typeof ExtractGuardrailsRequestSchema;
+        output: typeof ExtractGuardrailsResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.StartRun
