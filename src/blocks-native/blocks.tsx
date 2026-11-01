@@ -713,6 +713,10 @@ function GuardrailPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: Bloc
   );
 }
 
+function isWebUrl(s: string): boolean {
+  return /^https?:\/\/\S+$/.test(s.trim());
+}
+
 export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
   const theme = useTheme();
   const expires = tsMs(value.expiresAt);
@@ -725,7 +729,15 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
     ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
   return (
     <Card accent="alert" label={GATE_LABEL[value.kind] ?? "approval"}>
-      <Text variant="bodyLarge">{value.subject}</Text>
+      {/* A merge's subject is its pull request: a link before and after the decision
+          (Robby, 2026-11-01). */}
+      {isWebUrl(value.subject) ? (
+        <LinkText url={value.subject.trim()} ctx={ctx}>
+          {value.subject}
+        </LinkText>
+      ) : (
+        <Text variant="bodyLarge">{value.subject}</Text>
+      )}
       <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
         {value.minApprovals} approval{value.minApprovals === 1 ? "" : "s"} needed
         {value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : ""}

@@ -118,6 +118,21 @@ describe("interactions", () => {
     expect(seen).toEqual([{ blockId: "b4", actionId: "run.stop", value: "run_01J8" }]);
   });
 
+  it("an approved merge still links to its pull request", () => {
+    const url = "https://github.com/edero-io/edero-app-v3/pull/20";
+    const openedHere: string[] = [];
+    const r = render(
+      <BlocksViewNative
+        blocks={blocks([
+          approvalPrompt({ gateId: "g1", kind: "merge", subject: url, decided: true, decision: "approved" }),
+        ])}
+        openUrl={(u) => openedHere.push(u)}
+      />,
+    );
+    press(hostTestIds(r.root, "link-")[0]!);
+    expect(openedHere).toEqual([url]);
+  });
+
   it("url buttons and links open through `openUrl` (default: Linking.openURL)", () => {
     const openedHere: string[] = [];
     const r = render(<BlocksViewNative blocks={load("ci-green")} openUrl={(u) => openedHere.push(u)} />);
