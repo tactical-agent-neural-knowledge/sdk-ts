@@ -12,6 +12,7 @@ import type {
   Context,
   DiffPreview,
   FilePreview,
+  GuardrailCheck,
   Header,
   PlanCard,
   Section,
@@ -405,6 +406,7 @@ function PlanCardDetail({
         {value.questions.length > 0 ? (
           <BulletList title="Questions" items={value.questions} color={theme.colors.primary} />
         ) : null}
+        {value.guardrails.length > 0 ? <GuardrailChecks checks={value.guardrails} ctx={ctx} /> : null}
         {value.approverIds.length > 0 ? (
           <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
             Approvers: {names(value.approverIds, ctx)}
@@ -412,6 +414,79 @@ function PlanCardDetail({
         ) : null}
       </Pressable>
     </Card>
+  );
+}
+
+const GUARDRAIL_NA = { glyph: "–", label: "not applicable" };
+const GUARDRAIL_GLYPH: Record<string, { glyph: string; label: string }> = {
+  met: { glyph: "✓", label: "met" },
+  violated: { glyph: "✗", label: "conflict" },
+  unsure: { glyph: "?", label: "unsure" },
+  blocked: { glyph: "✗", label: "blocked" },
+  not_applicable: GUARDRAIL_NA,
+};
+
+/** Whether a plan can be approved: not while a guardrail check is a conflict or a doubt. */
+export function planConflicts(checks: GuardrailCheck[]): boolean {
+  return checks.some((c) => c.state === "violated" || c.state === "unsure");
+}
+
+/** The plan card's Guardrails section: each guardrail met or in conflict, with the quoted reason. */
+function GuardrailChecks({ checks, ctx }: { checks: GuardrailCheck[]; ctx: BlockContext }) {
+  const theme = useTheme();
+  const sem = semanticColors(theme);
+  const codeFont = ctx.codeFontFamily ?? DEFAULT_CODE_FONT;
+  const conflict = planConflicts(checks);
+  const colorOf = (state: string) =>
+    state === "met"
+      ? sem.success
+      : state === "unsure"
+        ? theme.colors.tertiary
+        : state === "not_applicable"
+          ? theme.colors.onSurfaceVariant
+          : sem.error;
+  return (
+    <View testID="plan-guardrails">
+      <Text variant="labelLarge" style={{ color: conflict ? sem.error : sem.success }}>
+        Guardrails
+      </Text>
+      {checks.map((c) => {
+        const g = GUARDRAIL_GLYPH[c.state] ?? GUARDRAIL_NA;
+        return (
+          <View key={c.guardrailId || c.text} style={styles.step} testID={`guardrail-${c.state}`}>
+            <Text
+              style={{ color: colorOf(c.state), fontFamily: codeFont, width: 16 }}
+              accessibilityLabel={g.label}
+            >
+              {g.glyph}
+            </Text>
+            <View style={styles.grow}>
+              <Text variant="bodyMedium">
+                {c.text}
+                {c.judged ? (
+                  <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+                    {"  watched"}
+                  </Text>
+                ) : null}
+              </Text>
+              {c.quote && c.state !== "met" ? (
+                <Text
+                  variant="bodySmall"
+                  style={{ color: theme.colors.onSurfaceVariant, fontStyle: "italic" }}
+                >
+                  “{c.quote}”
+                </Text>
+              ) : null}
+            </View>
+          </View>
+        );
+      })}
+      {conflict ? (
+        <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+          This plan cannot be approved as it is: ask for a new plan, or change the guardrail.
+        </Text>
+      ) : null}
+    </View>
   );
 }
 
@@ -554,12 +629,95 @@ const GATE_LABEL: Record<number, string> = {
   [GateKind.DEPLOY]: "deploy approval",
   [GateKind.DESTRUCTIVE_TOOL]: "destructive tool",
   [GateKind.BUDGET_INCREASE]: "budget increase",
+  [GateKind.GUARDRAIL]: "guardrail",
 };
+
+/**
+ * A guardrail gate (phase 1): the run stopped at a guardrail and asks. Nothing is allowed
+ * once, so there is no Approve: change the guardrail (guardrail.change carries its id and
+ * the app opens the page), resume once it has changed (gate.approve, refused by the
+ * control plane until then), or stop the run (gate.request_changes).
+ */
+function GuardrailPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
+  const theme = useTheme();
+  const fire = (actionId: "gate.approve" | "gate.request_changes" | "guardrail.change") =>
+    ctx.onAction?.({
+      blockId: ctx.blockId,
+      actionId,
+      value: actionId === "guardrail.change" ? value.guardrailId : value.gateId,
+    });
+  const platform = !value.guardrailId || value.guardrailId.startsWith("platform:");
+  return (
+    <Card accent="alert" label="guardrail">
+      <Text variant="bodyLarge" testID="guardrail-text">
+        {value.guardrailText || value.subject}
+      </Text>
+      {value.blocker ? (
+        <Text
+          variant="bodyMedium"
+          style={{ color: theme.colors.onSurfaceVariant }}
+          testID="guardrail-blocker"
+        >
+          {value.blocker}
+        </Text>
+      ) : null}
+      {value.decided ? (
+        <ToneChip
+          tone={value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "muted"}
+          label={
+            value.decision === "approved"
+              ? "resumed"
+              : value.decision === "rejected"
+                ? "stopped"
+                : value.decision || "decided"
+          }
+          testID="approval-decision"
+        />
+      ) : (
+        <View style={styles.wrap}>
+          {!platform ? (
+            <Button
+              compact
+              mode="contained"
+              onPress={() => fire("guardrail.change")}
+              testID="action-change-guardrail"
+              style={styles.button}
+            >
+              Change the guardrail
+            </Button>
+          ) : null}
+          {!platform ? (
+            <Button
+              compact
+              mode="outlined"
+              onPress={() => fire("gate.approve")}
+              testID="action-resume"
+              style={styles.button}
+            >
+              Resume the run
+            </Button>
+          ) : null}
+          <Button
+            compact
+            mode="outlined"
+            textColor={theme.colors.error}
+            onPress={() => fire("gate.request_changes")}
+            testID="action-stop"
+            style={styles.button}
+          >
+            Stop the run
+          </Button>
+        </View>
+      )}
+    </Card>
+  );
+}
 
 export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
   const theme = useTheme();
   const expires = tsMs(value.expiresAt);
   const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
+  if (value.kind === GateKind.GUARDRAIL) return <GuardrailPromptBlock value={value} ctx={ctx} />;
   // The ids the control plane answers to (agent-control/internal/cards: gate.approve,
   // gate.request_changes). These sent "approve" / "reject" until 2026-10-15 and were
   // ignored, which is why every approval card carried a second pair of buttons.

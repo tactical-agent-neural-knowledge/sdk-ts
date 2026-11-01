@@ -147,7 +147,31 @@ function PlanCardDetail({ value, ctx, onToggle, }) {
                 : undefined, sx: { display: "flex", flexDirection: "column", gap: 1.5, cursor: toggle ? "pointer" : undefined }, children: [_jsx(Typography, { variant: "body1", children: value.summary }), value.steps.length > 0 ? (_jsxs(Box, { children: [_jsx(LinearProgress, { variant: "determinate", color: "secondary", value: (done / value.steps.length) * 100, sx: { mb: 1, height: 4, borderRadius: 2 }, "aria-label": `${done} of ${value.steps.length} steps done` }), _jsx(Box, { component: "ol", sx: { m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.5 }, children: value.steps.map((s) => {
                                 const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
                                 return (_jsxs(Box, { component: "li", "data-step-status": g.label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-label": g.label, sx: { color: g.color, width: "1em", textAlign: "center", ...mono }, children: g.glyph }), _jsxs(Box, { sx: { minWidth: 0 }, children: [_jsx(Typography, { variant: "body2", component: "span", children: s.title }), s.files.length > 0 ? (_jsx(Typography, { variant: "caption", component: "div", color: "text.secondary", sx: mono, children: s.files.join("  ") })) : null] })] }, s.id));
-                            }) })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: "tank.warningText" })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: "tank.primaryText" })) : null, value.approverIds.length > 0 ? (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }) }));
+                            }) })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: "tank.warningText" })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: "tank.primaryText" })) : null, value.guardrails.length > 0 ? _jsx(GuardrailChecks, { checks: value.guardrails }) : null, value.approverIds.length > 0 ? (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }) }));
+}
+/** How a guardrail's check reads on a card: the mark, the word, and the color it sits in. */
+const GUARDRAIL_NA = { glyph: "–", label: "not applicable", color: "text.secondary" };
+export const GUARDRAIL_STATE = {
+    met: { glyph: "✓", label: "met", color: "tank.successText" },
+    violated: { glyph: "✗", label: "conflict", color: "tank.errorText" },
+    unsure: { glyph: "?", label: "unsure", color: "tank.warningText" },
+    blocked: { glyph: "✗", label: "blocked", color: "tank.errorText" },
+    not_applicable: GUARDRAIL_NA,
+};
+/** Whether a plan can be approved: not while a guardrail check is a conflict or a doubt. */
+export function planConflicts(checks) {
+    return checks.some((c) => c.state === "violated" || c.state === "unsure");
+}
+/**
+ * The plan card's Guardrails section (phase 1): each guardrail the run carries, met or in
+ * conflict with the quoted reason. A conflict is why the plan cannot be approved as it is.
+ */
+function GuardrailChecks({ checks }) {
+    const conflict = planConflicts(checks);
+    return (_jsxs(Box, { "data-testid": "plan-guardrails", children: [_jsx(Typography, { variant: "subtitle2", sx: { color: conflict ? "tank.errorText" : "tank.successText" }, children: "Guardrails" }), _jsx(Box, { component: "ul", sx: { m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.25 }, children: checks.map((c) => {
+                    const st = GUARDRAIL_STATE[c.state] ?? GUARDRAIL_NA;
+                    return (_jsxs(Box, { component: "li", "data-guardrail-state": c.state, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-label": st.label, sx: { color: st.color, width: "1em", textAlign: "center", ...mono }, children: st.glyph }), _jsxs(Box, { sx: { minWidth: 0 }, children: [_jsx(Typography, { variant: "body2", component: "span", children: c.text }), c.judged ? (_jsx(Typography, { variant: "caption", component: "span", color: "text.secondary", sx: { ml: 0.75 }, children: "watched" })) : null, c.quote && c.state !== "met" ? (_jsxs(Typography, { variant: "caption", component: "div", color: "text.secondary", sx: { fontStyle: "italic" }, children: ["\u201C", c.quote, "\u201D"] })) : null] })] }, c.guardrailId || c.text));
+                }) }), conflict ? (_jsx(Typography, { variant: "caption", component: "div", color: "text.secondary", sx: { mt: 0.5 }, children: "This plan cannot be approved as it is: ask for a new plan, or change the guardrail." })) : null] }));
 }
 function BulletList({ title, items, color }) {
     return (_jsxs(Box, { children: [_jsx(Typography, { variant: "subtitle2", sx: { color }, children: title }), _jsx(Box, { component: "ul", sx: { m: 0, pl: 2.5 }, children: items.map((r) => (_jsx(Typography, { component: "li", variant: "body2", children: r }, r))) })] }));
@@ -208,10 +232,32 @@ const GATE_LABEL = {
     [GateKind.DEPLOY]: "deploy approval",
     [GateKind.DESTRUCTIVE_TOOL]: "destructive tool",
     [GateKind.BUDGET_INCREASE]: "budget increase",
+    [GateKind.GUARDRAIL]: "guardrail",
 };
+/**
+ * A guardrail gate (phase 1): the run stopped at a guardrail and asks. Nothing is allowed
+ * once, so there is no Approve: change the guardrail (the client opens the page; action
+ * guardrail.change carries the guardrail's id), resume once it has changed (gate.approve,
+ * which the control plane refuses until then), or stop the run (gate.request_changes).
+ */
+function GuardrailPromptBlock({ value, ctx }) {
+    const fire = (actionId) => ctx.onAction?.({
+        blockId: ctx.blockId,
+        actionId,
+        value: actionId === "guardrail.change" ? value.guardrailId : value.gateId,
+    });
+    const platform = !value.guardrailId || value.guardrailId.startsWith("platform:");
+    return (_jsxs(Card, { accent: "alert", label: "guardrail", children: [_jsx(Typography, { variant: "body1", "data-testid": "guardrail-text", children: value.guardrailText || value.subject }), value.blocker ? (_jsx(Typography, { variant: "body2", color: "text.secondary", "data-testid": "guardrail-blocker", children: value.blocker })) : null, value.decided ? (_jsx(Chip, { size: "small", label: value.decision === "approved"
+                    ? "resumed"
+                    : value.decision === "rejected"
+                        ? "stopped"
+                        : value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } })) : (_jsxs(Stack, { direction: "row", spacing: 1, flexWrap: "wrap", useFlexGap: true, children: [!platform ? (_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "guardrail.change", onClick: () => fire("guardrail.change"), children: "Change the guardrail" })) : null, !platform ? (_jsx(Button, { size: "small", variant: "outlined", "data-action-id": "gate.approve", onClick: () => fire("gate.approve"), children: "Resume the run" })) : null, _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "gate.request_changes", onClick: () => fire("gate.request_changes"), children: "Stop the run" })] }))] }));
+}
 export function ApprovalPromptBlock({ value, ctx }) {
     const expires = tsMs(value.expiresAt);
     const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
+    if (value.kind === GateKind.GUARDRAIL)
+        return _jsx(GuardrailPromptBlock, { value: value, ctx: ctx });
     return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [_jsx(Typography, { variant: "body1", children: value.subject }), _jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] }), value.decided ? (_jsx(Chip, { size: "small", label: value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } })) : (_jsxs(Stack, { direction: "row", spacing: 1, children: [_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "gate.approve", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.approve", value: value.gateId }), children: "Approve" }), _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "gate.request_changes", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.request_changes", value: value.gateId }), children: "Reject" })] }))] }));
 }
 export function ToolLogBlock({ value, ctx }) {

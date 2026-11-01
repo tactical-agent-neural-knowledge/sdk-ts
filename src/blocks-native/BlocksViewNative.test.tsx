@@ -4,7 +4,16 @@ import { fileURLToPath } from "node:url";
 import { fromJson, type JsonValue } from "@bufbuild/protobuf";
 import { act, create, type ReactTestInstance, type ReactTestRenderer } from "react-test-renderer";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { actions, blocks, header, normalizeBlocks, rt, section } from "../blocks/index.js";
+import {
+  actions,
+  approvalPrompt,
+  blocks,
+  header,
+  normalizeBlocks,
+  planCard,
+  rt,
+  section,
+} from "../blocks/index.js";
 import { BlocksSchema } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { FIXTURE_NAMES } from "../test/fixture-defs.js";
 import { alerts, opened } from "../test/mocks/react-native.js";
@@ -158,5 +167,67 @@ describe("plan card at a glance (native)", () => {
     expect(all()).toContain("Should bots get a separate, higher budget?");
     press(byTestId(r.root, "plan-detail"));
     expect(all()).not.toContain("token-bucket limiter");
+  });
+});
+
+// Guardrails phase 1, the native half: the plan's checks, and a gate with no Approve.
+describe("guardrails", () => {
+  it("the plan card lists each guardrail's check and a guardrail gate offers change, resume and stop", () => {
+    const plan = render(
+      <BlocksViewNative
+        blocks={blocks([
+          planCard({
+            summary: "Build it",
+            guardrails: [
+              {
+                $typeName: "tank.blocks.v1.GuardrailCheck",
+                guardrailId: "1",
+                text: "One pull request per repository",
+                state: "met",
+                quote: "",
+                judged: true,
+              },
+              {
+                $typeName: "tank.blocks.v1.GuardrailCheck",
+                guardrailId: "2",
+                text: "Phase 0 lands first",
+                state: "violated",
+                quote: "step 2: Phase 1.1",
+                judged: true,
+              },
+            ],
+          }),
+        ])}
+      />,
+    );
+    expect(hostTestIds(plan.root, "guardrail-").map((n) => n.props.testID)).toEqual([
+      "guardrail-met",
+      "guardrail-violated",
+    ]);
+    const seen: { actionId: string; value: string }[] = [];
+    const r = render(
+      <BlocksViewNative
+        blocks={blocks([
+          approvalPrompt({
+            gateId: "g9",
+            kind: "guardrail",
+            subject: "x",
+            guardrailId: "17",
+            guardrailText: "One pull request per repository",
+            blocker: "About to open a second pull request",
+          }),
+        ])}
+        onAction={(a) => seen.push(a)}
+      />,
+    );
+    expect(r.root.findAll((n) => n.props.testID === "action-approve").length).toBe(0);
+    press(byTestId(r.root, "action-change-guardrail"));
+    press(byTestId(r.root, "action-resume"));
+    press(byTestId(r.root, "action-stop"));
+    expect(seen.map((a) => `${a.actionId}:${a.value}`)).toEqual([
+      "guardrail.change:17",
+      "gate.approve:g9",
+      "gate.request_changes:g9",
+    ]);
   });
 });
