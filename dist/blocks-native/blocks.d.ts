@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { type MD3Theme } from "react-native-paper";
-import type { Actions, ApprovalPrompt, Button as ButtonMsg, CiStatus, Context, DiffPreview, FilePreview, Header, PlanCard, Section, StatusCard, ToolLog } from "../contracts/tank/blocks/v1/blocks_pb.js";
+import type { Actions, ApprovalPrompt, Button as ButtonMsg, CiStatus, Context, DiffPreview, FilePreview, GuardrailCheck, Header, PlanCard, Section, StatusCard, ToolLog } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type BlockContext } from "./context.js";
 export type Accent = "agent" | "ai" | "alert" | "none";
 export declare function accentColor(theme: MD3Theme, accent: Accent): string;
@@ -54,6 +54,8 @@ export declare function PlanCardBlock({ value, ctx }: {
     value: PlanCard;
     ctx: BlockContext;
 }): import("react").JSX.Element;
+/** Whether a plan can be approved: not while a guardrail check is a conflict or a doubt. */
+export declare function planConflicts(checks: GuardrailCheck[]): boolean;
 export declare function DiffPreviewBlock({ value, ctx }: {
     value: DiffPreview;
     ctx: BlockContext;

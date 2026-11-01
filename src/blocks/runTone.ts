@@ -11,6 +11,7 @@ export function runTone(state: RunState): RunTone {
   switch (state) {
     case RunState.AWAITING_PLAN_APPROVAL:
     case RunState.AWAITING_MERGE_APPROVAL:
+    case RunState.BLOCKED:
       return "awaiting";
     case RunState.DONE:
       return "done";
@@ -53,6 +54,7 @@ const RUN_STATE_LABEL: Record<RunState, string> = {
   [RunState.BUDGET_EXHAUSTED]: "budget exhausted",
   [RunState.TIMED_OUT]: "timed out",
   [RunState.APPROVAL_EXPIRED]: "approval expired",
+  [RunState.BLOCKED]: "stopped at a guardrail",
 };
 
 /** Human label for a run state ("awaiting plan approval", "watching CI", …). */
@@ -102,6 +104,7 @@ const RUN_STATE_PHRASE: Record<RunState, string> = {
   [RunState.BUDGET_EXHAUSTED]: "Stopped: the budget is used up",
   [RunState.TIMED_OUT]: "Timed out",
   [RunState.APPROVAL_EXPIRED]: "The approval expired",
+  [RunState.BLOCKED]: "Stopped at a guardrail, waiting for a person",
 };
 
 /**

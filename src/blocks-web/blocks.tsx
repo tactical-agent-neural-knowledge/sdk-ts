@@ -23,6 +23,7 @@ import type {
   Context,
   DiffPreview,
   FilePreview,
+  GuardrailCheck,
   Header,
   PlanCard,
   Section,
@@ -434,6 +435,7 @@ function PlanCardDetail({
         {value.questions.length > 0 ? (
           <BulletList title="Questions" items={value.questions} color="tank.primaryText" />
         ) : null}
+        {value.guardrails.length > 0 ? <GuardrailChecks checks={value.guardrails} /> : null}
         {value.approverIds.length > 0 ? (
           <Typography variant="caption" color="text.secondary">
             Approvers: {names(value.approverIds, ctx)}
@@ -441,6 +443,85 @@ function PlanCardDetail({
         ) : null}
       </Box>
     </Card>
+  );
+}
+
+/** How a guardrail's check reads on a card: the mark, the word, and the color it sits in. */
+const GUARDRAIL_NA = { glyph: "–", label: "not applicable", color: "text.secondary" };
+export const GUARDRAIL_STATE: Record<string, { glyph: string; label: string; color: string }> = {
+  met: { glyph: "✓", label: "met", color: "tank.successText" },
+  violated: { glyph: "✗", label: "conflict", color: "tank.errorText" },
+  unsure: { glyph: "?", label: "unsure", color: "tank.warningText" },
+  blocked: { glyph: "✗", label: "blocked", color: "tank.errorText" },
+  not_applicable: GUARDRAIL_NA,
+};
+
+/** Whether a plan can be approved: not while a guardrail check is a conflict or a doubt. */
+export function planConflicts(checks: GuardrailCheck[]): boolean {
+  return checks.some((c) => c.state === "violated" || c.state === "unsure");
+}
+
+/**
+ * The plan card's Guardrails section (phase 1): each guardrail the run carries, met or in
+ * conflict with the quoted reason. A conflict is why the plan cannot be approved as it is.
+ */
+function GuardrailChecks({ checks }: { checks: GuardrailCheck[] }) {
+  const conflict = planConflicts(checks);
+  return (
+    <Box data-testid="plan-guardrails">
+      <Typography variant="subtitle2" sx={{ color: conflict ? "tank.errorText" : "tank.successText" }}>
+        Guardrails
+      </Typography>
+      <Box
+        component="ul"
+        sx={{ m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.25 }}
+      >
+        {checks.map((c) => {
+          const st = GUARDRAIL_STATE[c.state] ?? GUARDRAIL_NA;
+          return (
+            <Box
+              component="li"
+              key={c.guardrailId || c.text}
+              data-guardrail-state={c.state}
+              sx={{ display: "flex", gap: 1, alignItems: "baseline" }}
+            >
+              <Box
+                component="span"
+                aria-label={st.label}
+                sx={{ color: st.color, width: "1em", textAlign: "center", ...mono }}
+              >
+                {st.glyph}
+              </Box>
+              <Box sx={{ minWidth: 0 }}>
+                <Typography variant="body2" component="span">
+                  {c.text}
+                </Typography>
+                {c.judged ? (
+                  <Typography variant="caption" component="span" color="text.secondary" sx={{ ml: 0.75 }}>
+                    watched
+                  </Typography>
+                ) : null}
+                {c.quote && c.state !== "met" ? (
+                  <Typography
+                    variant="caption"
+                    component="div"
+                    color="text.secondary"
+                    sx={{ fontStyle: "italic" }}
+                  >
+                    “{c.quote}”
+                  </Typography>
+                ) : null}
+              </Box>
+            </Box>
+          );
+        })}
+      </Box>
+      {conflict ? (
+        <Typography variant="caption" component="div" color="text.secondary" sx={{ mt: 0.5 }}>
+          This plan cannot be approved as it is: ask for a new plan, or change the guardrail.
+        </Typography>
+      ) : null}
+    </Box>
   );
 }
 
@@ -612,11 +693,90 @@ const GATE_LABEL: Record<number, string> = {
   [GateKind.DEPLOY]: "deploy approval",
   [GateKind.DESTRUCTIVE_TOOL]: "destructive tool",
   [GateKind.BUDGET_INCREASE]: "budget increase",
+  [GateKind.GUARDRAIL]: "guardrail",
 };
+
+/**
+ * A guardrail gate (phase 1): the run stopped at a guardrail and asks. Nothing is allowed
+ * once, so there is no Approve: change the guardrail (the client opens the page; action
+ * guardrail.change carries the guardrail's id), resume once it has changed (gate.approve,
+ * which the control plane refuses until then), or stop the run (gate.request_changes).
+ */
+function GuardrailPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
+  const fire = (actionId: "gate.approve" | "gate.request_changes" | "guardrail.change") =>
+    ctx.onAction?.({
+      blockId: ctx.blockId,
+      actionId,
+      value: actionId === "guardrail.change" ? value.guardrailId : value.gateId,
+    });
+  const platform = !value.guardrailId || value.guardrailId.startsWith("platform:");
+  return (
+    <Card accent="alert" label="guardrail">
+      <Typography variant="body1" data-testid="guardrail-text">
+        {value.guardrailText || value.subject}
+      </Typography>
+      {value.blocker ? (
+        <Typography variant="body2" color="text.secondary" data-testid="guardrail-blocker">
+          {value.blocker}
+        </Typography>
+      ) : null}
+      {value.decided ? (
+        <Chip
+          size="small"
+          label={
+            value.decision === "approved"
+              ? "resumed"
+              : value.decision === "rejected"
+                ? "stopped"
+                : value.decision || "decided"
+          }
+          color={
+            value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default"
+          }
+          sx={{ alignSelf: "flex-start" }}
+        />
+      ) : (
+        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          {!platform ? (
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              data-action-id="guardrail.change"
+              onClick={() => fire("guardrail.change")}
+            >
+              Change the guardrail
+            </Button>
+          ) : null}
+          {!platform ? (
+            <Button
+              size="small"
+              variant="outlined"
+              data-action-id="gate.approve"
+              onClick={() => fire("gate.approve")}
+            >
+              Resume the run
+            </Button>
+          ) : null}
+          <Button
+            size="small"
+            variant="outlined"
+            color="error"
+            data-action-id="gate.request_changes"
+            onClick={() => fire("gate.request_changes")}
+          >
+            Stop the run
+          </Button>
+        </Stack>
+      )}
+    </Card>
+  );
+}
 
 export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
   const expires = tsMs(value.expiresAt);
   const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
+  if (value.kind === GateKind.GUARDRAIL) return <GuardrailPromptBlock value={value} ctx={ctx} />;
   return (
     <Card accent="alert" label={GATE_LABEL[value.kind] ?? "approval"}>
       <Typography variant="body1">{value.subject}</Typography>

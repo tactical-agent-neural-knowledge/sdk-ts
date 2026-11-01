@@ -5,6 +5,7 @@ import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks
 import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
 import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
+import type { Guardrail, GuardrailKind, GuardrailScope, Rating, Verdict } from "../../guardrails/v1/guardrails_pb.js";
 import type { Account, Platform, Post } from "../../social/v1/social_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
 /**
@@ -407,6 +408,24 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: tank.agentctl.v1.Envelope envelope_left = 37;
      */
     envelopeLeft?: Envelope;
+    /**
+     * TANK's git proxy (Guardrails phase 0, 2026-11-01): the base URL git reads from
+     * instead of github.com, authenticated with the run's LLM token as the password of
+     * the user "run". It serves upload-pack for the repositories the run may read and
+     * answers every receive-pack with 403; a push is PushBranch. Empty when the control
+     * plane hands out credentials the old way.
+     *
+     * @generated from field: string git_proxy_url = 38;
+     */
+    gitProxyUrl: string;
+    /**
+     * Every guardrail this run carries (workspace, Tread and platform), snapshotted at
+     * admission. TANK enforces them at the action; the runner shows them to the model and
+     * stops and asks when one is hit.
+     *
+     * @generated from field: repeated tank.guardrails.v1.Guardrail guardrails = 39;
+     */
+    guardrails: Guardrail[];
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -1140,6 +1159,83 @@ export type GetGitCredentialResponse = Message<"tank.agentctl.v1.GetGitCredentia
  */
 export declare const GetGitCredentialResponseSchema: GenMessage<GetGitCredentialResponse>;
 /**
+ * PushBranch (Guardrails phase 0): the one way a commit leaves the sandbox. The runner
+ * streams a git bundle of the commits since the base branch; the control plane applies
+ * it to its own clone, inspects the diff against the guarded paths, and pushes the ref
+ * with the App's own token, which the sandbox never holds. A refused push leaves no
+ * commit on GitHub. wip writes refs/agent/wip/<run> (a checkpoint, force-updated, not
+ * inspected); otherwise refs/heads/<branch> in the run's repository or, with repo set,
+ * in another repository the Tread may write to.
+ *
+ * @generated from message tank.agentctl.v1.PushBranchRequest
+ */
+export type PushBranchRequest = Message<"tank.agentctl.v1.PushBranchRequest"> & {
+    /**
+     * The first message names the target; every message may carry a chunk.
+     *
+     * @generated from field: string branch = 1;
+     */
+    branch: string;
+    /**
+     * @generated from field: bool wip = 2;
+     */
+    wip: boolean;
+    /**
+     * owner/name; empty = the run's own repository
+     *
+     * @generated from field: string repo = 3;
+     */
+    repo: string;
+    /**
+     * what the bundle's head is expected to be
+     *
+     * @generated from field: string head_sha = 4;
+     */
+    headSha: string;
+    /**
+     * a piece of `git bundle create` output, in order
+     *
+     * @generated from field: bytes chunk = 5;
+     */
+    chunk: Uint8Array;
+};
+/**
+ * Describes the message tank.agentctl.v1.PushBranchRequest.
+ * Use `create(PushBranchRequestSchema)` to create a new message.
+ */
+export declare const PushBranchRequestSchema: GenMessage<PushBranchRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PushBranchResponse
+ */
+export type PushBranchResponse = Message<"tank.agentctl.v1.PushBranchResponse"> & {
+    /**
+     * @generated from field: string head_sha = 1;
+     */
+    headSha: string;
+    /**
+     * the ref written
+     *
+     * @generated from field: string ref = 2;
+     */
+    ref: string;
+    /**
+     * Set when nothing was written: what the control plane would not push and why. The
+     * run stops and asks; it never tries another way.
+     *
+     * @generated from field: string refused = 3;
+     */
+    refused: string;
+    /**
+     * @generated from field: int32 changed_files = 4;
+     */
+    changedFiles: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.PushBranchResponse.
+ * Use `create(PushBranchResponseSchema)` to create a new message.
+ */
+export declare const PushBranchResponseSchema: GenMessage<PushBranchResponse>;
+/**
  * @generated from message tank.agentctl.v1.PostToThreadRequest
  */
 export type PostToThreadRequest = Message<"tank.agentctl.v1.PostToThreadRequest"> & {
@@ -1388,6 +1484,12 @@ export type AskForApprovalRequest = Message<"tank.agentctl.v1.AskForApprovalRequ
      * @generated from field: string reason = 3;
      */
     reason: string;
+    /**
+     * For kind GUARDRAIL: which guardrail stopped the run.
+     *
+     * @generated from field: string guardrail_id = 4;
+     */
+    guardrailId: string;
 };
 /**
  * Describes the message tank.agentctl.v1.AskForApprovalRequest.
@@ -1616,7 +1718,15 @@ export declare const ReportCompletionRequestSchema: GenMessage<ReportCompletionR
 /**
  * @generated from message tank.agentctl.v1.ReportCompletionResponse
  */
-export type ReportCompletionResponse = Message<"tank.agentctl.v1.ReportCompletionResponse"> & {};
+export type ReportCompletionResponse = Message<"tank.agentctl.v1.ReportCompletionResponse"> & {
+    /**
+     * Guardrails judged unmet for the whole run: the run is blocked, not finished, until
+     * each is met or the guardrail changes.
+     *
+     * @generated from field: repeated tank.agentctl.v1.GuardrailRefusal unmet = 1;
+     */
+    unmet: GuardrailRefusal[];
+};
 /**
  * Describes the message tank.agentctl.v1.ReportCompletionResponse.
  * Use `create(ReportCompletionResponseSchema)` to create a new message.
@@ -3036,12 +3146,43 @@ export type OpenPullRequestResponse = Message<"tank.agentctl.v1.OpenPullRequestR
      * @generated from field: int32 pr_number = 2;
      */
     prNumber: number;
+    /**
+     * Set when no pull request was opened because a guardrail refused it: the run stops
+     * and asks with ask_for_approval(kind: GUARDRAIL), never tries another way.
+     *
+     * @generated from field: tank.agentctl.v1.GuardrailRefusal refused = 3;
+     */
+    refused?: GuardrailRefusal;
 };
 /**
  * Describes the message tank.agentctl.v1.OpenPullRequestResponse.
  * Use `create(OpenPullRequestResponseSchema)` to create a new message.
  */
 export declare const OpenPullRequestResponseSchema: GenMessage<OpenPullRequestResponse>;
+/**
+ * Why an action was not performed: the guardrail and the exact blocker.
+ *
+ * @generated from message tank.agentctl.v1.GuardrailRefusal
+ */
+export type GuardrailRefusal = Message<"tank.agentctl.v1.GuardrailRefusal"> & {
+    /**
+     * @generated from field: string guardrail_id = 1;
+     */
+    guardrailId: string;
+    /**
+     * @generated from field: string text = 2;
+     */
+    text: string;
+    /**
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.GuardrailRefusal.
+ * Use `create(GuardrailRefusalSchema)` to create a new message.
+ */
+export declare const GuardrailRefusalSchema: GenMessage<GuardrailRefusal>;
 /**
  * @generated from message tank.agentctl.v1.RequestCiWatchRequest
  */
@@ -5973,6 +6114,193 @@ export type SetWorkspaceAgentPolicyResponse = Message<"tank.agentctl.v1.SetWorks
  */
 export declare const SetWorkspaceAgentPolicyResponseSchema: GenMessage<SetWorkspaceAgentPolicyResponse>;
 /**
+ * @generated from message tank.agentctl.v1.ListGuardrailsRequest
+ */
+export type ListGuardrailsRequest = Message<"tank.agentctl.v1.ListGuardrailsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * with it: the workspace's plus that Tread's own
+     *
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListGuardrailsRequest.
+ * Use `create(ListGuardrailsRequestSchema)` to create a new message.
+ */
+export declare const ListGuardrailsRequestSchema: GenMessage<ListGuardrailsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListGuardrailsResponse
+ */
+export type ListGuardrailsResponse = Message<"tank.agentctl.v1.ListGuardrailsResponse"> & {
+    /**
+     * @generated from field: repeated tank.guardrails.v1.Guardrail guardrails = 1;
+     */
+    guardrails: Guardrail[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListGuardrailsResponse.
+ * Use `create(ListGuardrailsResponseSchema)` to create a new message.
+ */
+export declare const ListGuardrailsResponseSchema: GenMessage<ListGuardrailsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.PutGuardrailRequest
+ */
+export type PutGuardrailRequest = Message<"tank.agentctl.v1.PutGuardrailRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.guardrails.v1.Guardrail guardrail = 2;
+     */
+    guardrail?: Guardrail;
+    /**
+     * user id, for the audit record
+     *
+     * @generated from field: string requested_by = 3;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.PutGuardrailRequest.
+ * Use `create(PutGuardrailRequestSchema)` to create a new message.
+ */
+export declare const PutGuardrailRequestSchema: GenMessage<PutGuardrailRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PutGuardrailResponse
+ */
+export type PutGuardrailResponse = Message<"tank.agentctl.v1.PutGuardrailResponse"> & {
+    /**
+     * @generated from field: tank.guardrails.v1.Guardrail guardrail = 1;
+     */
+    guardrail?: Guardrail;
+};
+/**
+ * Describes the message tank.agentctl.v1.PutGuardrailResponse.
+ * Use `create(PutGuardrailResponseSchema)` to create a new message.
+ */
+export declare const PutGuardrailResponseSchema: GenMessage<PutGuardrailResponse>;
+/**
+ * @generated from message tank.agentctl.v1.DeleteGuardrailRequest
+ */
+export type DeleteGuardrailRequest = Message<"tank.agentctl.v1.DeleteGuardrailRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+    /**
+     * @generated from field: string requested_by = 3;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.DeleteGuardrailRequest.
+ * Use `create(DeleteGuardrailRequestSchema)` to create a new message.
+ */
+export declare const DeleteGuardrailRequestSchema: GenMessage<DeleteGuardrailRequest>;
+/**
+ * @generated from message tank.agentctl.v1.DeleteGuardrailResponse
+ */
+export type DeleteGuardrailResponse = Message<"tank.agentctl.v1.DeleteGuardrailResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.DeleteGuardrailResponse.
+ * Use `create(DeleteGuardrailResponseSchema)` to create a new message.
+ */
+export declare const DeleteGuardrailResponseSchema: GenMessage<DeleteGuardrailResponse>;
+/**
+ * @generated from message tank.agentctl.v1.RateGuardrailRequest
+ */
+export type RateGuardrailRequest = Message<"tank.agentctl.v1.RateGuardrailRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.guardrails.v1.GuardrailScope scope = 2;
+     */
+    scope: GuardrailScope;
+    /**
+     * @generated from field: tank.guardrails.v1.GuardrailKind kind = 3;
+     */
+    kind: GuardrailKind;
+    /**
+     * @generated from field: string text = 4;
+     */
+    text: string;
+    /**
+     * @generated from field: google.protobuf.Struct params = 5;
+     */
+    params?: JsonObject;
+};
+/**
+ * Describes the message tank.agentctl.v1.RateGuardrailRequest.
+ * Use `create(RateGuardrailRequestSchema)` to create a new message.
+ */
+export declare const RateGuardrailRequestSchema: GenMessage<RateGuardrailRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RateGuardrailResponse
+ */
+export type RateGuardrailResponse = Message<"tank.agentctl.v1.RateGuardrailResponse"> & {
+    /**
+     * @generated from field: tank.guardrails.v1.Rating rating = 1;
+     */
+    rating?: Rating;
+};
+/**
+ * Describes the message tank.agentctl.v1.RateGuardrailResponse.
+ * Use `create(RateGuardrailResponseSchema)` to create a new message.
+ */
+export declare const RateGuardrailResponseSchema: GenMessage<RateGuardrailResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListGuardrailVerdictsRequest
+ */
+export type ListGuardrailVerdictsRequest = Message<"tank.agentctl.v1.ListGuardrailVerdictsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string run_id = 2;
+     */
+    runId: string;
+    /**
+     * @generated from field: string guardrail_id = 3;
+     */
+    guardrailId: string;
+    /**
+     * @generated from field: int32 limit = 4;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListGuardrailVerdictsRequest.
+ * Use `create(ListGuardrailVerdictsRequestSchema)` to create a new message.
+ */
+export declare const ListGuardrailVerdictsRequestSchema: GenMessage<ListGuardrailVerdictsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListGuardrailVerdictsResponse
+ */
+export type ListGuardrailVerdictsResponse = Message<"tank.agentctl.v1.ListGuardrailVerdictsResponse"> & {
+    /**
+     * @generated from field: repeated tank.guardrails.v1.Verdict verdicts = 1;
+     */
+    verdicts: Verdict[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListGuardrailVerdictsResponse.
+ * Use `create(ListGuardrailVerdictsResponseSchema)` to create a new message.
+ */
+export declare const ListGuardrailVerdictsResponseSchema: GenMessage<ListGuardrailVerdictsResponse>;
+/**
  * @generated from message tank.agentctl.v1.ArenaTurnRequest
  */
 export type ArenaTurnRequest = Message<"tank.agentctl.v1.ArenaTurnRequest"> & {
@@ -6517,6 +6845,14 @@ export declare const RunnerService: GenService<{
         output: typeof GetGitCredentialResponseSchema;
     };
     /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.PushBranch
+     */
+    pushBranch: {
+        methodKind: "client_streaming";
+        input: typeof PushBranchRequestSchema;
+        output: typeof PushBranchResponseSchema;
+    };
+    /**
      * @generated from rpc tank.agentctl.v1.RunnerService.PostToThread
      */
     postToThread: {
@@ -6998,6 +7334,49 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof ArenaTurnRequestSchema;
         output: typeof ArenaTurnResponseSchema;
+    };
+    /**
+     * Guardrails, for the messaging core (which never writes schema agent): the rows and
+     * the verdicts live here, the rating is computed here.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ListGuardrails
+     */
+    listGuardrails: {
+        methodKind: "unary";
+        input: typeof ListGuardrailsRequestSchema;
+        output: typeof ListGuardrailsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.PutGuardrail
+     */
+    putGuardrail: {
+        methodKind: "unary";
+        input: typeof PutGuardrailRequestSchema;
+        output: typeof PutGuardrailResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.DeleteGuardrail
+     */
+    deleteGuardrail: {
+        methodKind: "unary";
+        input: typeof DeleteGuardrailRequestSchema;
+        output: typeof DeleteGuardrailResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.RateGuardrail
+     */
+    rateGuardrail: {
+        methodKind: "unary";
+        input: typeof RateGuardrailRequestSchema;
+        output: typeof RateGuardrailResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.ListGuardrailVerdicts
+     */
+    listGuardrailVerdicts: {
+        methodKind: "unary";
+        input: typeof ListGuardrailVerdictsRequestSchema;
+        output: typeof ListGuardrailVerdictsResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.StartRun

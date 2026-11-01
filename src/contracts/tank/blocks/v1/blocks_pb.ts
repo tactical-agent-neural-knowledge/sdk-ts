@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/blocks/v1/blocks.proto.
  */
 export const file_tank_blocks_v1_blocks: GenFile = /*@__PURE__*/
-  fileDesc("Cht0YW5rL2Jsb2Nrcy92MS9ibG9ja3MucHJvdG8SDnRhbmsuYmxvY2tzLnYxIi8KBkJsb2NrcxIlCgZibG9ja3MYASADKAsyFS50YW5rLmJsb2Nrcy52MS5CbG9jayLeBAoFQmxvY2sSEAoIYmxvY2tfaWQYASABKAkSKAoGaGVhZGVyGAIgASgLMhYudGFuay5ibG9ja3MudjEuSGVhZGVySAASKgoHc2VjdGlvbhgDIAEoCzIXLnRhbmsuYmxvY2tzLnYxLlNlY3Rpb25IABIqCgdjb250ZXh0GAQgASgLMhcudGFuay5ibG9ja3MudjEuQ29udGV4dEgAEioKB2RpdmlkZXIYBSABKAsyFy50YW5rLmJsb2Nrcy52MS5EaXZpZGVySAASKgoHYWN0aW9ucxgGIAEoCzIXLnRhbmsuYmxvY2tzLnYxLkFjdGlvbnNIABItCglwbGFuX2NhcmQYByABKAsyGC50YW5rLmJsb2Nrcy52MS5QbGFuQ2FyZEgAEjMKDGRpZmZfcHJldmlldxgIIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkRpZmZQcmV2aWV3SAASLQoJY2lfc3RhdHVzGAkgASgLMhgudGFuay5ibG9ja3MudjEuQ2lTdGF0dXNIABI5Cg9hcHByb3ZhbF9wcm9tcHQYCiABKAsyHi50YW5rLmJsb2Nrcy52MS5BcHByb3ZhbFByb21wdEgAEisKCHRvb2xfbG9nGAsgASgLMhcudGFuay5ibG9ja3MudjEuVG9vbExvZ0gAEjMKDGZpbGVfcHJldmlldxgMIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkZpbGVQcmV2aWV3SAASMQoLc3RhdHVzX2NhcmQYDSABKAsyGi50YW5rLmJsb2Nrcy52MS5TdGF0dXNDYXJkSABCBgoEa2luZCIWCgZIZWFkZXISDAoEdGV4dBgBIAEoCSKFAQoHU2VjdGlvbhIoCgR0ZXh0GAEgASgLMhoudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dBIlCgZmaWVsZHMYAiADKAsyFS50YW5rLmJsb2Nrcy52MS5GaWVsZBIpCglhY2Nlc3NvcnkYAyABKAsyFi50YW5rLmJsb2Nrcy52MS5CdXR0b24iJQoFRmllbGQSDQoFbGFiZWwYASABKAkSDQoFdmFsdWUYAiABKAkiNwoHQ29udGV4dBIsCghlbGVtZW50cxgBIAMoCzIaLnRhbmsucmljaHRleHQudjEuUmljaFRleHQiCQoHRGl2aWRlciKbAQoGQnV0dG9uEhEKCWFjdGlvbl9pZBgBIAEoCRIMCgR0ZXh0GAIgASgJEg0KBXZhbHVlGAMgASgJEioKBXN0eWxlGAQgASgOMhsudGFuay5ibG9ja3MudjEuQnV0dG9uU3R5bGUSCwoDdXJsGAUgASgJEigKB2NvbmZpcm0YBiABKAsyFy50YW5rLmJsb2Nrcy52MS5Db25maXJtIkUKB0NvbmZpcm0SDQoFdGl0bGUYASABKAkSDAoEdGV4dBgCIAEoCRIPCgdjb25maXJtGAMgASgJEgwKBGRlbnkYBCABKAkiMgoHQWN0aW9ucxInCgdidXR0b25zGAEgAygLMhYudGFuay5ibG9ja3MudjEuQnV0dG9uImAKCFBsYW5TdGVwEgoKAmlkGAEgASgJEg0KBXRpdGxlGAIgASgJEioKBnN0YXR1cxgDIAEoDjIaLnRhbmsuYmxvY2tzLnYxLlN0ZXBTdGF0dXMSDQoFZmlsZXMYBCADKAkioAEKCFBsYW5DYXJkEg8KB3N1bW1hcnkYASABKAkSJwoFc3RlcHMYAiADKAsyGC50YW5rLmJsb2Nrcy52MS5QbGFuU3RlcBINCgVyaXNrcxgDIAMoCRIRCglxdWVzdGlvbnMYBCADKAkSFAoMYXBwcm92ZXJfaWRzGAUgAygJEhEKCXBsYW5faGFzaBgGIAEoCRIPCgd2ZXJzaW9uGAcgASgFIlQKCERpZmZGaWxlEgwKBHBhdGgYASABKAkSEQoJYWRkaXRpb25zGAIgASgFEhEKCWRlbGV0aW9ucxgDIAEoBRIUCgxodW5rX3ByZXZpZXcYBCABKAkikQEKC0RpZmZQcmV2aWV3EhIKCmNvbW1pdF9zaGEYASABKAkSEwoLY29tcGFyZV91cmwYAiABKAkSJwoFZmlsZXMYAyADKAsyGC50YW5rLmJsb2Nrcy52MS5EaWZmRmlsZRIXCg90b3RhbF9hZGRpdGlvbnMYBCABKAUSFwoPdG90YWxfZGVsZXRpb25zGAUgASgFImYKBUNoZWNrEgwKBG5hbWUYASABKAkSKQoFc3RhdGUYAiABKA4yGi50YW5rLmJsb2Nrcy52MS5DaGVja1N0YXRlEgsKA3VybBgDIAEoCRIXCg9mYWlsdXJlX2V4Y2VycHQYBCABKAkiZgoIQ2lTdGF0dXMSEAoIaGVhZF9zaGEYASABKAkSJQoGY2hlY2tzGAIgAygLMhUudGFuay5ibG9ja3MudjEuQ2hlY2sSDgoGcHJfdXJsGAMgASgJEhEKCXByX251bWJlchgEIAEoBSLaAQoOQXBwcm92YWxQcm9tcHQSDwoHZ2F0ZV9pZBgBIAEoCRImCgRraW5kGAIgASgOMhgudGFuay5ibG9ja3MudjEuR2F0ZUtpbmQSDwoHc3ViamVjdBgDIAEoCRIUCgxhcHByb3Zlcl9pZHMYBCADKAkSFQoNbWluX2FwcHJvdmFscxgFIAEoBRIuCgpleHBpcmVzX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIPCgdkZWNpZGVkGAcgASgIEhAKCGRlY2lzaW9uGAggASgJImEKDFRvb2xMb2dFbnRyeRImCgJhdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDAoEdG9vbBgCIAEoCRIPCgdzdW1tYXJ5GAMgASgJEgoKAm9rGAQgASgIIocBCgdUb29sTG9nEg0KBXBoYXNlGAEgASgJEhIKCnRvb2xfY2FsbHMYAiABKAUSFAoMZmlsZXNfZWRpdGVkGAMgASgFEiwKBnJlY2VudBgEIAMoCzIcLnRhbmsuYmxvY2tzLnYxLlRvb2xMb2dFbnRyeRIVCg1ydW5fcGFuZWxfdXJsGAUgASgJIl8KC0ZpbGVQcmV2aWV3Eg8KB2ZpbGVfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRtaW1lGAMgASgJEgwKBHNpemUYBCABKAMSFQoNdGh1bWJuYWlsX3VybBgFIAEoCSKkAQoKU3RhdHVzQ2FyZBIOCgZydW5faWQYASABKAkSDQoFc3RhdGUYAiABKAkSDgoGZGV0YWlsGAMgASgJEg4KBmJyYW5jaBgEIAEoCRIQCghjb3N0X3VzZBgFIAEoARIuCgpzdGFydGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIVCg1ydW5fcGFuZWxfdXJsGAcgASgJIo4BCgtCbG9ja0FjdGlvbhISCgptZXNzYWdlX2lkGAEgASgJEhAKCGJsb2NrX2lkGAIgASgJEhEKCWFjdGlvbl9pZBgDIAEoCRINCgV2YWx1ZRgEIAEoCRIPCgd1c2VyX2lkGAUgASgJEiYKAmF0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCpeCgtCdXR0b25TdHlsZRIcChhCVVRUT05fU1RZTEVfVU5TUEVDSUZJRUQQABIYChRCVVRUT05fU1RZTEVfUFJJTUFSWRABEhcKE0JVVFRPTl9TVFlMRV9EQU5HRVIQAiqiAQoKU3RlcFN0YXR1cxIbChdTVEVQX1NUQVRVU19VTlNQRUNJRklFRBAAEhcKE1NURVBfU1RBVFVTX1BFTkRJTkcQARIXChNTVEVQX1NUQVRVU19SVU5OSU5HEAISFAoQU1RFUF9TVEFUVVNfRE9ORRADEhYKElNURVBfU1RBVFVTX0ZBSUxFRBAEEhcKE1NURVBfU1RBVFVTX1NLSVBQRUQQBSqnAQoKQ2hlY2tTdGF0ZRIbChdDSEVDS19TVEFURV9VTlNQRUNJRklFRBAAEhYKEkNIRUNLX1NUQVRFX1FVRVVFRBABEhcKE0NIRUNLX1NUQVRFX1JVTk5JTkcQAhIXChNDSEVDS19TVEFURV9TVUNDRVNTEAMSFwoTQ0hFQ0tfU1RBVEVfRkFJTFVSRRAEEhkKFUNIRUNLX1NUQVRFX0NBTkNFTExFRBAFKr8BCghHYXRlS2luZBIZChVHQVRFX0tJTkRfVU5TUEVDSUZJRUQQABISCg5HQVRFX0tJTkRfUExBThABEhoKFkdBVEVfS0lORF9TQ09QRV9DSEFOR0UQAhITCg9HQVRFX0tJTkRfTUVSR0UQAxIUChBHQVRFX0tJTkRfREVQTE9ZEAQSHgoaR0FURV9LSU5EX0RFU1RSVUNUSVZFX1RPT0wQBRIdChlHQVRFX0tJTkRfQlVER0VUX0lOQ1JFQVNFEAZC0AEKEmNvbS50YW5rLmJsb2Nrcy52MUILQmxvY2tzUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9ibG9ja3MvdjE7YmxvY2tzdjGiAgNUQliqAg5UYW5rLkJsb2Nrcy5WMcoCDlRhbmtcQmxvY2tzXFYx4gIaVGFua1xCbG9ja3NcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpCbG9ja3M6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_richtext_v1_richtext]);
+  fileDesc("Cht0YW5rL2Jsb2Nrcy92MS9ibG9ja3MucHJvdG8SDnRhbmsuYmxvY2tzLnYxIi8KBkJsb2NrcxIlCgZibG9ja3MYASADKAsyFS50YW5rLmJsb2Nrcy52MS5CbG9jayLeBAoFQmxvY2sSEAoIYmxvY2tfaWQYASABKAkSKAoGaGVhZGVyGAIgASgLMhYudGFuay5ibG9ja3MudjEuSGVhZGVySAASKgoHc2VjdGlvbhgDIAEoCzIXLnRhbmsuYmxvY2tzLnYxLlNlY3Rpb25IABIqCgdjb250ZXh0GAQgASgLMhcudGFuay5ibG9ja3MudjEuQ29udGV4dEgAEioKB2RpdmlkZXIYBSABKAsyFy50YW5rLmJsb2Nrcy52MS5EaXZpZGVySAASKgoHYWN0aW9ucxgGIAEoCzIXLnRhbmsuYmxvY2tzLnYxLkFjdGlvbnNIABItCglwbGFuX2NhcmQYByABKAsyGC50YW5rLmJsb2Nrcy52MS5QbGFuQ2FyZEgAEjMKDGRpZmZfcHJldmlldxgIIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkRpZmZQcmV2aWV3SAASLQoJY2lfc3RhdHVzGAkgASgLMhgudGFuay5ibG9ja3MudjEuQ2lTdGF0dXNIABI5Cg9hcHByb3ZhbF9wcm9tcHQYCiABKAsyHi50YW5rLmJsb2Nrcy52MS5BcHByb3ZhbFByb21wdEgAEisKCHRvb2xfbG9nGAsgASgLMhcudGFuay5ibG9ja3MudjEuVG9vbExvZ0gAEjMKDGZpbGVfcHJldmlldxgMIAEoCzIbLnRhbmsuYmxvY2tzLnYxLkZpbGVQcmV2aWV3SAASMQoLc3RhdHVzX2NhcmQYDSABKAsyGi50YW5rLmJsb2Nrcy52MS5TdGF0dXNDYXJkSABCBgoEa2luZCIWCgZIZWFkZXISDAoEdGV4dBgBIAEoCSKFAQoHU2VjdGlvbhIoCgR0ZXh0GAEgASgLMhoudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dBIlCgZmaWVsZHMYAiADKAsyFS50YW5rLmJsb2Nrcy52MS5GaWVsZBIpCglhY2Nlc3NvcnkYAyABKAsyFi50YW5rLmJsb2Nrcy52MS5CdXR0b24iJQoFRmllbGQSDQoFbGFiZWwYASABKAkSDQoFdmFsdWUYAiABKAkiNwoHQ29udGV4dBIsCghlbGVtZW50cxgBIAMoCzIaLnRhbmsucmljaHRleHQudjEuUmljaFRleHQiCQoHRGl2aWRlciKbAQoGQnV0dG9uEhEKCWFjdGlvbl9pZBgBIAEoCRIMCgR0ZXh0GAIgASgJEg0KBXZhbHVlGAMgASgJEioKBXN0eWxlGAQgASgOMhsudGFuay5ibG9ja3MudjEuQnV0dG9uU3R5bGUSCwoDdXJsGAUgASgJEigKB2NvbmZpcm0YBiABKAsyFy50YW5rLmJsb2Nrcy52MS5Db25maXJtIkUKB0NvbmZpcm0SDQoFdGl0bGUYASABKAkSDAoEdGV4dBgCIAEoCRIPCgdjb25maXJtGAMgASgJEgwKBGRlbnkYBCABKAkiMgoHQWN0aW9ucxInCgdidXR0b25zGAEgAygLMhYudGFuay5ibG9ja3MudjEuQnV0dG9uImAKCFBsYW5TdGVwEgoKAmlkGAEgASgJEg0KBXRpdGxlGAIgASgJEioKBnN0YXR1cxgDIAEoDjIaLnRhbmsuYmxvY2tzLnYxLlN0ZXBTdGF0dXMSDQoFZmlsZXMYBCADKAki1AEKCFBsYW5DYXJkEg8KB3N1bW1hcnkYASABKAkSJwoFc3RlcHMYAiADKAsyGC50YW5rLmJsb2Nrcy52MS5QbGFuU3RlcBINCgVyaXNrcxgDIAMoCRIRCglxdWVzdGlvbnMYBCADKAkSFAoMYXBwcm92ZXJfaWRzGAUgAygJEhEKCXBsYW5faGFzaBgGIAEoCRIPCgd2ZXJzaW9uGAcgASgFEjIKCmd1YXJkcmFpbHMYCCADKAsyHi50YW5rLmJsb2Nrcy52MS5HdWFyZHJhaWxDaGVjayJiCg5HdWFyZHJhaWxDaGVjaxIUCgxndWFyZHJhaWxfaWQYASABKAkSDAoEdGV4dBgCIAEoCRINCgVzdGF0ZRgDIAEoCRINCgVxdW90ZRgEIAEoCRIOCgZqdWRnZWQYBSABKAgiVAoIRGlmZkZpbGUSDAoEcGF0aBgBIAEoCRIRCglhZGRpdGlvbnMYAiABKAUSEQoJZGVsZXRpb25zGAMgASgFEhQKDGh1bmtfcHJldmlldxgEIAEoCSKRAQoLRGlmZlByZXZpZXcSEgoKY29tbWl0X3NoYRgBIAEoCRITCgtjb21wYXJlX3VybBgCIAEoCRInCgVmaWxlcxgDIAMoCzIYLnRhbmsuYmxvY2tzLnYxLkRpZmZGaWxlEhcKD3RvdGFsX2FkZGl0aW9ucxgEIAEoBRIXCg90b3RhbF9kZWxldGlvbnMYBSABKAUiZgoFQ2hlY2sSDAoEbmFtZRgBIAEoCRIpCgVzdGF0ZRgCIAEoDjIaLnRhbmsuYmxvY2tzLnYxLkNoZWNrU3RhdGUSCwoDdXJsGAMgASgJEhcKD2ZhaWx1cmVfZXhjZXJwdBgEIAEoCSJmCghDaVN0YXR1cxIQCghoZWFkX3NoYRgBIAEoCRIlCgZjaGVja3MYAiADKAsyFS50YW5rLmJsb2Nrcy52MS5DaGVjaxIOCgZwcl91cmwYAyABKAkSEQoJcHJfbnVtYmVyGAQgASgFIpkCCg5BcHByb3ZhbFByb21wdBIPCgdnYXRlX2lkGAEgASgJEiYKBGtpbmQYAiABKA4yGC50YW5rLmJsb2Nrcy52MS5HYXRlS2luZBIPCgdzdWJqZWN0GAMgASgJEhQKDGFwcHJvdmVyX2lkcxgEIAMoCRIVCg1taW5fYXBwcm92YWxzGAUgASgFEi4KCmV4cGlyZXNfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB2RlY2lkZWQYByABKAgSEAoIZGVjaXNpb24YCCABKAkSFAoMZ3VhcmRyYWlsX2lkGAkgASgJEhYKDmd1YXJkcmFpbF90ZXh0GAogASgJEg8KB2Jsb2NrZXIYCyABKAkiYQoMVG9vbExvZ0VudHJ5EiYKAmF0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIMCgR0b29sGAIgASgJEg8KB3N1bW1hcnkYAyABKAkSCgoCb2sYBCABKAgihwEKB1Rvb2xMb2cSDQoFcGhhc2UYASABKAkSEgoKdG9vbF9jYWxscxgCIAEoBRIUCgxmaWxlc19lZGl0ZWQYAyABKAUSLAoGcmVjZW50GAQgAygLMhwudGFuay5ibG9ja3MudjEuVG9vbExvZ0VudHJ5EhUKDXJ1bl9wYW5lbF91cmwYBSABKAkiXwoLRmlsZVByZXZpZXcSDwoHZmlsZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEgwKBG1pbWUYAyABKAkSDAoEc2l6ZRgEIAEoAxIVCg10aHVtYm5haWxfdXJsGAUgASgJIqQBCgpTdGF0dXNDYXJkEg4KBnJ1bl9pZBgBIAEoCRINCgVzdGF0ZRgCIAEoCRIOCgZkZXRhaWwYAyABKAkSDgoGYnJhbmNoGAQgASgJEhAKCGNvc3RfdXNkGAUgASgBEi4KCnN0YXJ0ZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhUKDXJ1bl9wYW5lbF91cmwYByABKAkijgEKC0Jsb2NrQWN0aW9uEhIKCm1lc3NhZ2VfaWQYASABKAkSEAoIYmxvY2tfaWQYAiABKAkSEQoJYWN0aW9uX2lkGAMgASgJEg0KBXZhbHVlGAQgASgJEg8KB3VzZXJfaWQYBSABKAkSJgoCYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wKl4KC0J1dHRvblN0eWxlEhwKGEJVVFRPTl9TVFlMRV9VTlNQRUNJRklFRBAAEhgKFEJVVFRPTl9TVFlMRV9QUklNQVJZEAESFwoTQlVUVE9OX1NUWUxFX0RBTkdFUhACKqIBCgpTdGVwU3RhdHVzEhsKF1NURVBfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFwoTU1RFUF9TVEFUVVNfUEVORElORxABEhcKE1NURVBfU1RBVFVTX1JVTk5JTkcQAhIUChBTVEVQX1NUQVRVU19ET05FEAMSFgoSU1RFUF9TVEFUVVNfRkFJTEVEEAQSFwoTU1RFUF9TVEFUVVNfU0tJUFBFRBAFKqcBCgpDaGVja1N0YXRlEhsKF0NIRUNLX1NUQVRFX1VOU1BFQ0lGSUVEEAASFgoSQ0hFQ0tfU1RBVEVfUVVFVUVEEAESFwoTQ0hFQ0tfU1RBVEVfUlVOTklORxACEhcKE0NIRUNLX1NUQVRFX1NVQ0NFU1MQAxIXChNDSEVDS19TVEFURV9GQUlMVVJFEAQSGQoVQ0hFQ0tfU1RBVEVfQ0FOQ0VMTEVEEAUq2AEKCEdhdGVLaW5kEhkKFUdBVEVfS0lORF9VTlNQRUNJRklFRBAAEhIKDkdBVEVfS0lORF9QTEFOEAESGgoWR0FURV9LSU5EX1NDT1BFX0NIQU5HRRACEhMKD0dBVEVfS0lORF9NRVJHRRADEhQKEEdBVEVfS0lORF9ERVBMT1kQBBIeChpHQVRFX0tJTkRfREVTVFJVQ1RJVkVfVE9PTBAFEh0KGUdBVEVfS0lORF9CVURHRVRfSU5DUkVBU0UQBhIXChNHQVRFX0tJTkRfR1VBUkRSQUlMEAdC0AEKEmNvbS50YW5rLmJsb2Nrcy52MUILQmxvY2tzUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9ibG9ja3MvdjE7YmxvY2tzdjGiAgNUQliqAg5UYW5rLkJsb2Nrcy5WMcoCDlRhbmtcQmxvY2tzXFYx4gIaVGFua1xCbG9ja3NcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpCbG9ja3M6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_richtext_v1_richtext]);
 
 /**
  * Rich "cards" rendered identically by web and mobile. Agents post these.
@@ -388,6 +388,14 @@ export type PlanCard = Message<"tank.blocks.v1.PlanCard"> & {
    * @generated from field: int32 version = 7;
    */
   version: number;
+
+  /**
+   * Each guardrail checked against this plan: met, or a conflict with the quoted reason.
+   * A plan with a conflict cannot be approved.
+   *
+   * @generated from field: repeated tank.blocks.v1.GuardrailCheck guardrails = 8;
+   */
+  guardrails: GuardrailCheck[];
 };
 
 /**
@@ -396,6 +404,49 @@ export type PlanCard = Message<"tank.blocks.v1.PlanCard"> & {
  */
 export const PlanCardSchema: GenMessage<PlanCard> = /*@__PURE__*/
   messageDesc(file_tank_blocks_v1_blocks, 11);
+
+/**
+ * One guardrail's verdict on a plan or a run, as a card shows it.
+ *
+ * @generated from message tank.blocks.v1.GuardrailCheck
+ */
+export type GuardrailCheck = Message<"tank.blocks.v1.GuardrailCheck"> & {
+  /**
+   * @generated from field: string guardrail_id = 1;
+   */
+  guardrailId: string;
+
+  /**
+   * @generated from field: string text = 2;
+   */
+  text: string;
+
+  /**
+   * met | violated | unsure | not_applicable | blocked
+   *
+   * @generated from field: string state = 3;
+   */
+  state: string;
+
+  /**
+   * @generated from field: string quote = 4;
+   */
+  quote: string;
+
+  /**
+   * Watched (a model's verdict) rather than Guaranteed
+   *
+   * @generated from field: bool judged = 5;
+   */
+  judged: boolean;
+};
+
+/**
+ * Describes the message tank.blocks.v1.GuardrailCheck.
+ * Use `create(GuardrailCheckSchema)` to create a new message.
+ */
+export const GuardrailCheckSchema: GenMessage<GuardrailCheck> = /*@__PURE__*/
+  messageDesc(file_tank_blocks_v1_blocks, 12);
 
 /**
  * @generated from message tank.blocks.v1.DiffFile
@@ -429,7 +480,7 @@ export type DiffFile = Message<"tank.blocks.v1.DiffFile"> & {
  * Use `create(DiffFileSchema)` to create a new message.
  */
 export const DiffFileSchema: GenMessage<DiffFile> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 12);
+  messageDesc(file_tank_blocks_v1_blocks, 13);
 
 /**
  * @generated from message tank.blocks.v1.DiffPreview
@@ -466,7 +517,7 @@ export type DiffPreview = Message<"tank.blocks.v1.DiffPreview"> & {
  * Use `create(DiffPreviewSchema)` to create a new message.
  */
 export const DiffPreviewSchema: GenMessage<DiffPreview> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 13);
+  messageDesc(file_tank_blocks_v1_blocks, 14);
 
 /**
  * @generated from message tank.blocks.v1.Check
@@ -498,7 +549,7 @@ export type Check = Message<"tank.blocks.v1.Check"> & {
  * Use `create(CheckSchema)` to create a new message.
  */
 export const CheckSchema: GenMessage<Check> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 14);
+  messageDesc(file_tank_blocks_v1_blocks, 15);
 
 /**
  * @generated from message tank.blocks.v1.CiStatus
@@ -530,7 +581,7 @@ export type CiStatus = Message<"tank.blocks.v1.CiStatus"> & {
  * Use `create(CiStatusSchema)` to create a new message.
  */
 export const CiStatusSchema: GenMessage<CiStatus> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 15);
+  messageDesc(file_tank_blocks_v1_blocks, 16);
 
 /**
  * @generated from message tank.blocks.v1.ApprovalPrompt
@@ -577,6 +628,23 @@ export type ApprovalPrompt = Message<"tank.blocks.v1.ApprovalPrompt"> & {
    * @generated from field: string decision = 8;
    */
   decision: string;
+
+  /**
+   * For a GUARDRAIL gate: the guardrail, its sentence, and what the run was about to do.
+   *
+   * @generated from field: string guardrail_id = 9;
+   */
+  guardrailId: string;
+
+  /**
+   * @generated from field: string guardrail_text = 10;
+   */
+  guardrailText: string;
+
+  /**
+   * @generated from field: string blocker = 11;
+   */
+  blocker: string;
 };
 
 /**
@@ -584,7 +652,7 @@ export type ApprovalPrompt = Message<"tank.blocks.v1.ApprovalPrompt"> & {
  * Use `create(ApprovalPromptSchema)` to create a new message.
  */
 export const ApprovalPromptSchema: GenMessage<ApprovalPrompt> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 16);
+  messageDesc(file_tank_blocks_v1_blocks, 17);
 
 /**
  * @generated from message tank.blocks.v1.ToolLogEntry
@@ -616,7 +684,7 @@ export type ToolLogEntry = Message<"tank.blocks.v1.ToolLogEntry"> & {
  * Use `create(ToolLogEntrySchema)` to create a new message.
  */
 export const ToolLogEntrySchema: GenMessage<ToolLogEntry> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 17);
+  messageDesc(file_tank_blocks_v1_blocks, 18);
 
 /**
  * @generated from message tank.blocks.v1.ToolLog
@@ -655,7 +723,7 @@ export type ToolLog = Message<"tank.blocks.v1.ToolLog"> & {
  * Use `create(ToolLogSchema)` to create a new message.
  */
 export const ToolLogSchema: GenMessage<ToolLog> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 18);
+  messageDesc(file_tank_blocks_v1_blocks, 19);
 
 /**
  * @generated from message tank.blocks.v1.FilePreview
@@ -692,7 +760,7 @@ export type FilePreview = Message<"tank.blocks.v1.FilePreview"> & {
  * Use `create(FilePreviewSchema)` to create a new message.
  */
 export const FilePreviewSchema: GenMessage<FilePreview> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 19);
+  messageDesc(file_tank_blocks_v1_blocks, 20);
 
 /**
  * @generated from message tank.blocks.v1.StatusCard
@@ -739,7 +807,7 @@ export type StatusCard = Message<"tank.blocks.v1.StatusCard"> & {
  * Use `create(StatusCardSchema)` to create a new message.
  */
 export const StatusCardSchema: GenMessage<StatusCard> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 20);
+  messageDesc(file_tank_blocks_v1_blocks, 21);
 
 /**
  * Posted by a client when a user interacts with a block; delivered to the
@@ -784,7 +852,7 @@ export type BlockAction = Message<"tank.blocks.v1.BlockAction"> & {
  * Use `create(BlockActionSchema)` to create a new message.
  */
 export const BlockActionSchema: GenMessage<BlockAction> = /*@__PURE__*/
-  messageDesc(file_tank_blocks_v1_blocks, 21);
+  messageDesc(file_tank_blocks_v1_blocks, 22);
 
 /**
  * @generated from enum tank.blocks.v1.ButtonStyle
@@ -932,6 +1000,14 @@ export enum GateKind {
    * @generated from enum value: GATE_KIND_BUDGET_INCREASE = 6;
    */
   BUDGET_INCREASE = 6,
+
+  /**
+   * A guardrail the run cannot meet: the run stops and asks. The only ways on are to
+   * change the guardrail or to stop the run; nothing is allowed once.
+   *
+   * @generated from enum value: GATE_KIND_GUARDRAIL = 7;
+   */
+  GUARDRAIL = 7,
 }
 
 /**

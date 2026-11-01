@@ -5,7 +5,7 @@ import { fromJson, type JsonValue } from "@bufbuild/protobuf";
 import { ThemeProvider } from "@mui/material/styles";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { actions, blocks, header, normalizeBlocks } from "../blocks/index.js";
+import { actions, approvalPrompt, blocks, header, normalizeBlocks, planCard } from "../blocks/index.js";
 import { BlocksSchema } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { FIXTURE_NAMES } from "../test/fixture-defs.js";
 import { BlocksView } from "./BlocksView.js";
@@ -147,5 +147,92 @@ describe("plan card at a glance", () => {
     fireEvent.click(screen.getByTestId("plan-detail"));
     expect(screen.getByTestId("plan-glance")).toBeTruthy();
     expect(screen.queryByText(/token-bucket limiter/)).toBeNull();
+  });
+});
+
+// Guardrails phase 1: a plan carries each guardrail's check, a conflict says why the plan
+// cannot be approved, and a guardrail gate offers the only ways on: change it, resume once
+// changed, or stop. Nothing is allowed once, so there is no Approve.
+describe("guardrails", () => {
+  it("the plan card lists each guardrail met or in conflict, with the quoted reason", () => {
+    const b = blocks([
+      planCard({
+        summary: "Build it",
+        guardrails: [
+          {
+            $typeName: "tank.blocks.v1.GuardrailCheck",
+            guardrailId: "1",
+            text: "One pull request per repository",
+            state: "met",
+            quote: "",
+            judged: true,
+          },
+          {
+            $typeName: "tank.blocks.v1.GuardrailCheck",
+            guardrailId: "2",
+            text: "Phase 0 lands before any other phase starts",
+            state: "violated",
+            quote: "step 2: Phase 1.1 buy-option links",
+            judged: true,
+          },
+        ],
+      }),
+    ]);
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView blocks={b} />
+      </ThemeProvider>,
+    );
+    const list = screen.getByTestId("plan-guardrails");
+    expect(list.querySelectorAll("[data-guardrail-state=met]").length).toBe(1);
+    expect(list.querySelectorAll("[data-guardrail-state=violated]").length).toBe(1);
+    expect(screen.getByText(/step 2: Phase 1.1 buy-option links/)).toBeTruthy();
+    expect(screen.getByText(/cannot be approved as it is/)).toBeTruthy();
+  });
+
+  it("a guardrail gate offers change, resume and stop, never approve; a platform one only stop", () => {
+    const seen: { actionId: string; value: string }[] = [];
+    const b = blocks([
+      approvalPrompt({
+        gateId: "g9",
+        kind: "guardrail",
+        subject: "One pull request per repository",
+        guardrailId: "17",
+        guardrailText: "One pull request per repository",
+        blocker: "About to open a second pull request in acme/app from agent/x",
+      }),
+    ]);
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView blocks={b} onAction={(a) => seen.push(a)} />
+      </ThemeProvider>,
+    );
+    expect(screen.queryByRole("button", { name: "Approve" })).toBeNull();
+    expect(screen.getByTestId("guardrail-blocker").textContent).toMatch(/second pull request/);
+    fireEvent.click(screen.getByRole("button", { name: "Change the guardrail" }));
+    fireEvent.click(screen.getByRole("button", { name: "Resume the run" }));
+    fireEvent.click(screen.getByRole("button", { name: "Stop the run" }));
+    expect(seen).toEqual([
+      { blockId: expect.any(String), actionId: "guardrail.change", value: "17" },
+      { blockId: expect.any(String), actionId: "gate.approve", value: "g9" },
+      { blockId: expect.any(String), actionId: "gate.request_changes", value: "g9" },
+    ]);
+    cleanup();
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView
+          blocks={blocks([
+            approvalPrompt({
+              gateId: "g1",
+              kind: "guardrail",
+              subject: "x",
+              guardrailId: "platform:no-secrets",
+            }),
+          ])}
+        />
+      </ThemeProvider>,
+    );
+    expect(screen.queryByRole("button", { name: "Change the guardrail" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Stop the run" })).toBeTruthy();
   });
 });

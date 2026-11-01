@@ -2156,7 +2156,14 @@ export declare enum RunState {
     /**
      * @generated from enum value: RUN_STATE_APPROVAL_EXPIRED = 18;
      */
-    APPROVAL_EXPIRED = 18
+    APPROVAL_EXPIRED = 18,
+    /**
+     * Stopped at a guardrail it cannot meet, waiting for the guardrail to change or the run
+     * to be stopped. Not terminal: the run's branch and session are kept.
+     *
+     * @generated from enum value: RUN_STATE_BLOCKED = 19;
+     */
+    BLOCKED = 19
 }
 /**
  * Describes the enum tank.agent.v1.RunState.

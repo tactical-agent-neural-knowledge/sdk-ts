@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import type { Actions, ApprovalPrompt, Button as ButtonMsg, CiStatus, Context, DiffPreview, FilePreview, Header, PlanCard, Section, StatusCard, ToolLog } from "../contracts/tank/blocks/v1/blocks_pb.js";
+import type { Actions, ApprovalPrompt, Button as ButtonMsg, CiStatus, Context, DiffPreview, FilePreview, GuardrailCheck, Header, PlanCard, Section, StatusCard, ToolLog } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type RichTextViewProps } from "./RichTextView.js";
 /** Posted when a user interacts with a block; pair with `TankClient.postBlockAction`. */
 export interface BlockActionEvent {
@@ -46,6 +46,13 @@ export declare function PlanCardBlock({ value, ctx }: {
     value: PlanCard;
     ctx: BlockContext;
 }): import("react").JSX.Element;
+export declare const GUARDRAIL_STATE: Record<string, {
+    glyph: string;
+    label: string;
+    color: string;
+}>;
+/** Whether a plan can be approved: not while a guardrail check is a conflict or a doubt. */
+export declare function planConflicts(checks: GuardrailCheck[]): boolean;
 export declare function DiffPreviewBlock({ value }: {
     value: DiffPreview;
 }): import("react").JSX.Element;

@@ -94,6 +94,7 @@ export function planCard(input) {
             approverIds: input.approverIds ?? [],
             planHash: input.planHash ?? "",
             version: input.version ?? 1,
+            guardrails: input.guardrails ?? [],
         },
     }, input.blockId);
 }
@@ -153,6 +154,7 @@ export function ciStatus(input) {
 }
 const GATE = {
     plan: GateKind.PLAN,
+    guardrail: GateKind.GUARDRAIL,
     scope_change: GateKind.SCOPE_CHANGE,
     merge: GateKind.MERGE,
     deploy: GateKind.DEPLOY,
@@ -175,6 +177,9 @@ export function approvalPrompt(input) {
             expiresAt: input.expiresAt === undefined ? undefined : timestampFromMs(input.expiresAt),
             decided: input.decided ?? false,
             decision: input.decision ?? "",
+            guardrailId: input.guardrailId ?? "",
+            guardrailText: input.guardrailText ?? "",
+            blocker: input.blocker ?? "",
         },
     }, input.blockId);
 }
