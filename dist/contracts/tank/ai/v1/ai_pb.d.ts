@@ -152,6 +152,13 @@ export type ListConversationsRequest = Message$1<"tank.ai.v1.ListConversationsRe
      * @generated from field: int32 limit = 2;
      */
     limit: number;
+    /**
+     * With a workspace id: only the caller's conversations in that workspace, for its TANK
+     * Neural section (2026-11-01). Empty keeps the list as it was: every conversation.
+     *
+     * @generated from field: string workspace_id = 3;
+     */
+    workspaceId: string;
 };
 /**
  * Describes the message tank.ai.v1.ListConversationsRequest.
