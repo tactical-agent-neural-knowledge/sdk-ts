@@ -1,5 +1,6 @@
 export { Backoff } from "./backoff.js";
 export { createTankClient, TankClient, } from "./client.js";
+export { codeFileName, codeFileType } from "./codefile.js";
 export { Emitter } from "./emitter.js";
 export { MODEL_CHOICES, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";

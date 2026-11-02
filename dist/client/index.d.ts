@@ -1,5 +1,6 @@
 export { Backoff, type BackoffOptions } from "./backoff.js";
 export { type CreateChannelInput, createTankClient, type ListRunsInput, type LoadChannelOptions, type LoadNotificationsInput, type LoadNotificationsResult, type RoleName, type SendMessageInput, type SetGoalInput, type SetStatusInput, TankClient, type TankClientEvents, type TankClientOptions, type UpdateMessageInput, type UploadFileOptions, } from "./client.js";
+export { codeFileName, codeFileType } from "./codefile.js";
 export { Emitter, type Handler } from "./emitter.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
