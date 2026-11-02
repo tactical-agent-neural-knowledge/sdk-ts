@@ -605,6 +605,13 @@ export type CreateCanvasRequest = Message<"tank.canvas.v1.CreateCanvasRequest"> 
      * @generated from field: repeated tank.access.v1.Invite invites = 9;
      */
     invites: Invite[];
+    /**
+     * The page as Markdown, converted by the server (a plan Neural wrote, added to Atlas).
+     * Ignored when blocks are given; an empty title takes the first heading.
+     *
+     * @generated from field: string markdown = 10;
+     */
+    markdown: string;
 };
 /**
  * Describes the message tank.canvas.v1.CreateCanvasRequest.
