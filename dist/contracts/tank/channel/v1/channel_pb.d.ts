@@ -119,6 +119,14 @@ export type Channel = Message<"tank.channel.v1.Channel"> & {
      * @generated from field: bool read_receipts = 16;
      */
     readReceipts: boolean;
+    /**
+     * Set on a Tread TANK keeps for its own work, naming which ("neural-knowledge"). The
+     * apps list it under TANK Neural rather than Treads, and nobody can delete, archive or
+     * rename it (Robby, 2026-11-02).
+     *
+     * @generated from field: string system = 17;
+     */
+    system: string;
 };
 /**
  * Describes the message tank.channel.v1.Channel.
