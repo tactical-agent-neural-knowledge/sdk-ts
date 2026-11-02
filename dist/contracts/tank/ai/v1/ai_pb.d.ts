@@ -132,6 +132,13 @@ export type Message = Message$1<"tank.ai.v1.Message"> & {
      * @generated from field: int32 rating = 10;
      */
     rating: number;
+    /**
+     * How current the sources behind an assistant turn were, as the server says it ("Sources
+     * from today"); empty when nothing was looked up.
+     *
+     * @generated from field: string as_of = 11;
+     */
+    asOf: string;
 };
 /**
  * Describes the message tank.ai.v1.Message.
@@ -431,23 +438,61 @@ export declare const SendMessageResponseSchema: GenMessage<SendMessageResponse>;
  */
 export type Stage = Message$1<"tank.ai.v1.Stage"> & {
     /**
-     * sorting | searching | reading | writing
+     * sorting | searching | reading | writing | outline
      *
      * @generated from field: string kind = 1;
      */
     kind: string;
     /**
-     * The line to show, from the server (for example "Searching 6.1M pages").
+     * The line to show, from the server (for example "Searching 6.1M pages"). Empty for an
+     * outline, which has no line of its own.
      *
      * @generated from field: string text = 2;
      */
     text: string;
+    /**
+     * Reading: the pages found, in the order the answer numbers them.
+     *
+     * @generated from field: repeated tank.ai.v1.StageSource sources = 3;
+     */
+    sources: StageSource[];
+    /**
+     * Outline: the sections a long answer is about to write, in order. It arrives with or
+     * after the first words and the clients tick each one off as its heading appears.
+     *
+     * @generated from field: repeated string outline = 4;
+     */
+    outline: string[];
 };
 /**
  * Describes the message tank.ai.v1.Stage.
  * Use `create(StageSchema)` to create a new message.
  */
 export declare const StageSchema: GenMessage<Stage>;
+/**
+ * @generated from message tank.ai.v1.StageSource
+ */
+export type StageSource = Message$1<"tank.ai.v1.StageSource"> & {
+    /**
+     * @generated from field: string title = 1;
+     */
+    title: string;
+    /**
+     * The site, for the chip: "en.wikipedia.org".
+     *
+     * @generated from field: string host = 2;
+     */
+    host: string;
+    /**
+     * @generated from field: string url = 3;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.ai.v1.StageSource.
+ * Use `create(StageSourceSchema)` to create a new message.
+ */
+export declare const StageSourceSchema: GenMessage<StageSource>;
 /**
  * @generated from message tank.ai.v1.Started
  */

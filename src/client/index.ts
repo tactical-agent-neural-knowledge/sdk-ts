@@ -16,7 +16,7 @@ export {
   type UpdateMessageInput,
   type UploadFileOptions,
 } from "./client.js";
-export { codeFileName, codeFileType } from "./codefile.js";
+export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
 export { Emitter, type Handler } from "./emitter.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
