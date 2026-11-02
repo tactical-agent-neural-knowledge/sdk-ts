@@ -545,6 +545,35 @@ export type RateMessageResponse = Message$1<"tank.ai.v1.RateMessageResponse"> & 
  */
 export declare const RateMessageResponseSchema: GenMessage<RateMessageResponse>;
 /**
+ * Stops a reply the server is writing. A reply belongs to the server once it starts, so a
+ * dropped connection does not stop it (the client fetches the stored reply instead); only
+ * this does. The reply is stored as far as it got, with stop_reason "stopped".
+ *
+ * @generated from message tank.ai.v1.StopReplyRequest
+ */
+export type StopReplyRequest = Message$1<"tank.ai.v1.StopReplyRequest"> & {
+    /**
+     * the assistant message id from Started
+     *
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.ai.v1.StopReplyRequest.
+ * Use `create(StopReplyRequestSchema)` to create a new message.
+ */
+export declare const StopReplyRequestSchema: GenMessage<StopReplyRequest>;
+/**
+ * @generated from message tank.ai.v1.StopReplyResponse
+ */
+export type StopReplyResponse = Message$1<"tank.ai.v1.StopReplyResponse"> & {};
+/**
+ * Describes the message tank.ai.v1.StopReplyResponse.
+ * Use `create(StopReplyResponseSchema)` to create a new message.
+ */
+export declare const StopReplyResponseSchema: GenMessage<StopReplyResponse>;
+/**
  * What the person wants the model to know every time: name, how to answer, their work.
  *
  * @generated from message tank.ai.v1.GetSettingsRequest
@@ -845,6 +874,14 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof RateMessageRequestSchema;
         output: typeof RateMessageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.StopReply
+     */
+    stopReply: {
+        methodKind: "unary";
+        input: typeof StopReplyRequestSchema;
+        output: typeof StopReplyResponseSchema;
     };
     /**
      * @generated from rpc tank.ai.v1.AiService.GetSettings
