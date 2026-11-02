@@ -48,8 +48,20 @@ const EXTENSIONS = {
     txt: "txt",
     plaintext: "txt",
 };
+/**
+ * A fence named for a file rather than a language: Neural writes a file it was asked for as
+ * one block whose info string is the file's name (```release-notes.md), and both apps draw
+ * that block as a file card.
+ */
+export function fenceFileName(lang) {
+    const name = lang.trim();
+    return /^[\w][\w.-]{0,80}\.[A-Za-z0-9]{1,8}$/.test(name) ? name : null;
+}
 /** The file name a code block in the given language is saved under. */
 export function codeFileName(lang) {
+    const named = fenceFileName(lang);
+    if (named)
+        return named;
     const ext = EXTENSIONS[lang.trim().toLowerCase()] ?? "txt";
     return ext === "Dockerfile" ? "Dockerfile" : `neural.${ext}`;
 }
