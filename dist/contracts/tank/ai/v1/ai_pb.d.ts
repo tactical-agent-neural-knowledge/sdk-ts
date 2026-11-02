@@ -406,6 +406,15 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
         value: string;
         case: "warming";
     } | {
+        /**
+         * What Neural is doing before the first word: sorting the question, searching, reading
+         * what it found, writing. Each one replaces the last; the reply's first delta ends them.
+         *
+         * @generated from field: tank.ai.v1.Stage stage = 6;
+         */
+        value: Stage;
+        case: "stage";
+    } | {
         case: undefined;
         value?: undefined;
     };
@@ -415,6 +424,30 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
  * Use `create(SendMessageResponseSchema)` to create a new message.
  */
 export declare const SendMessageResponseSchema: GenMessage<SendMessageResponse>;
+/**
+ * Stage is one step of the work before a reply, as the server names it.
+ *
+ * @generated from message tank.ai.v1.Stage
+ */
+export type Stage = Message$1<"tank.ai.v1.Stage"> & {
+    /**
+     * sorting | searching | reading | writing
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * The line to show, from the server (for example "Searching 6.1M pages").
+     *
+     * @generated from field: string text = 2;
+     */
+    text: string;
+};
+/**
+ * Describes the message tank.ai.v1.Stage.
+ * Use `create(StageSchema)` to create a new message.
+ */
+export declare const StageSchema: GenMessage<Stage>;
 /**
  * @generated from message tank.ai.v1.Started
  */

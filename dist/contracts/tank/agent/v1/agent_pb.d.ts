@@ -2078,6 +2078,44 @@ export type GetTreadPlanResponse = Message<"tank.agent.v1.GetTreadPlanResponse">
  */
 export declare const GetTreadPlanResponseSchema: GenMessage<GetTreadPlanResponse>;
 /**
+ * @generated from message tank.agent.v1.EnsureAgentTreadRequest
+ */
+export type EnsureAgentTreadRequest = Message<"tank.agent.v1.EnsureAgentTreadRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * The Tread's name, without '#': 1-80 of a-z 0-9 . _ -
+     *
+     * @generated from field: string name = 2;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.agent.v1.EnsureAgentTreadRequest.
+ * Use `create(EnsureAgentTreadRequestSchema)` to create a new message.
+ */
+export declare const EnsureAgentTreadRequestSchema: GenMessage<EnsureAgentTreadRequest>;
+/**
+ * @generated from message tank.agent.v1.EnsureAgentTreadResponse
+ */
+export type EnsureAgentTreadResponse = Message<"tank.agent.v1.EnsureAgentTreadResponse"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: bool created = 2;
+     */
+    created: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.EnsureAgentTreadResponse.
+ * Use `create(EnsureAgentTreadResponseSchema)` to create a new message.
+ */
+export declare const EnsureAgentTreadResponseSchema: GenMessage<EnsureAgentTreadResponse>;
+/**
  * @generated from enum tank.agent.v1.RunState
  */
 export declare enum RunState {
@@ -2460,5 +2498,18 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof ListWorkspaceDeploymentsRequestSchema;
         output: typeof ListWorkspaceDeploymentsResponseSchema;
+    };
+    /**
+     * The control plane's own Tread in a workspace, found by name or made, with the
+     * workspace's agent, owners and admins in it. Platform token only. First use: Neural
+     * Knowledge refreshes live in #neural-knowledge rather than a Tread like #general
+     * (Robby, 2026-11-01).
+     *
+     * @generated from rpc tank.agent.v1.AgentService.EnsureAgentTread
+     */
+    ensureAgentTread: {
+        methodKind: "unary";
+        input: typeof EnsureAgentTreadRequestSchema;
+        output: typeof EnsureAgentTreadResponseSchema;
     };
 }>;
