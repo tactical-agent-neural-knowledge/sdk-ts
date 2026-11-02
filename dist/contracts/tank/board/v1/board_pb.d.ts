@@ -212,6 +212,14 @@ export type AppFrame = Message<"tank.board.v1.AppFrame"> & {
      * @generated from field: bool change_approved = 17;
      */
     changeApproved: boolean;
+    /**
+     * Server-filled while TANK builds the frame's app (status "building"): how far along
+     * it is, 1 to 99, from the step the build has reached. 0 = no build in progress or
+     * not known.
+     *
+     * @generated from field: int32 progress = 18;
+     */
+    progress: number;
 };
 /**
  * Describes the message tank.board.v1.AppFrame.

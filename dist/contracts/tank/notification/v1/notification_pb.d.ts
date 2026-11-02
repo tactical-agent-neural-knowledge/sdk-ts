@@ -51,6 +51,8 @@ export type Notification = Message<"tank.notification.v1.Notification"> & {
     createdAt?: Timestamp;
     /**
      * kind shared: what was shared with the person. item_kind is canvas | board.
+     * kind mention with item_kind canvas: the Atlas page the person was mentioned on
+     * (no message_id).
      *
      * @generated from field: string item_kind = 10;
      */

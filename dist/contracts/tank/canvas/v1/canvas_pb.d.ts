@@ -218,12 +218,40 @@ export type Block = Message<"tank.canvas.v1.Block"> & {
      * @generated from field: int32 rev = 13;
      */
     rev: number;
+    /**
+     * People and agents referenced in `text` as "@label". Clients render each "@label"
+     * as a link to that person; the server tells a person when they are newly mentioned
+     * on a page they can read (notification kind "mention", item_kind "canvas").
+     *
+     * @generated from field: repeated tank.canvas.v1.BlockMention mentions = 14;
+     */
+    mentions: BlockMention[];
 };
 /**
  * Describes the message tank.canvas.v1.Block.
  * Use `create(BlockSchema)` to create a new message.
  */
 export declare const BlockSchema: GenMessage<Block>;
+/**
+ * @generated from message tank.canvas.v1.BlockMention
+ */
+export type BlockMention = Message<"tank.canvas.v1.BlockMention"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * the text after "@", as it appears in Block.text
+     *
+     * @generated from field: string label = 2;
+     */
+    label: string;
+};
+/**
+ * Describes the message tank.canvas.v1.BlockMention.
+ * Use `create(BlockMentionSchema)` to create a new message.
+ */
+export declare const BlockMentionSchema: GenMessage<BlockMention>;
 /**
  * Where the page came from, and whether it still holds.
  *
