@@ -185,6 +185,34 @@ describe("plan card at a glance (native)", () => {
   });
 });
 
+// Robby, 2026-11-02: Download and Add to Atlas on the phone's plan card too.
+describe("plan card file actions (native)", () => {
+  it("offers Download and Add to Atlas, each handed the plan as Markdown", async () => {
+    const got: string[] = [];
+    const r = render(
+      <BlocksViewNative
+        blocks={load("plan")}
+        planFile={{
+          download: (f) => void got.push(`save ${f.name}`),
+          addToAtlas: (f) => void got.push(`atlas ${f.title}`),
+        }}
+      />,
+    );
+    press(byTestId(r.root, "plan-download"));
+    // Add to Atlas is async (it shows a spinner while the page is made): await its act.
+    await act(async () => {
+      await (byTestId(r.root, "plan-atlas").props as { onPress: () => Promise<void> }).onPress();
+    });
+    expect(got[0]).toMatch(/^save plan-introduce-a-token-bucket-limiter.*\.md$/);
+    expect(got[1]).toMatch(/^atlas Introduce a token-bucket limiter/);
+  });
+
+  it("shows no buttons when the host offers none", () => {
+    const r = render(<BlocksViewNative blocks={load("plan")} />);
+    expect(hostTestIds(r.root, "plan-file")).toHaveLength(0);
+  });
+});
+
 // Guardrails phase 1, the native half: the plan's checks, and a gate with no Approve.
 describe("guardrails", () => {
   it("the plan card lists each guardrail's check and a guardrail gate offers change, resume and stop", () => {

@@ -1,3 +1,4 @@
+import type { PlanFileActions } from "../blocks/plan.js";
 import type { RichTextViewNativeProps } from "./RichTextViewNative.js";
 /** Posted when a user interacts with a block; pair with `TankClient.postBlockAction`. Same shape as blocks-web. */
 export interface BlockActionEvent {
@@ -13,6 +14,8 @@ export interface BlocksNativeOptions extends Pick<RichTextViewNativeProps, "reso
     codeFontFamily?: string;
     /** Open a URL (link buttons, PR links). Default: `Linking.openURL`. */
     openUrl?: (url: string) => void;
+    /** Download and Add to Atlas on a plan card; each button shows only when its action is given. */
+    planFile?: PlanFileActions | undefined;
 }
 export interface BlockContext extends BlocksNativeOptions {
     blockId: string;

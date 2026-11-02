@@ -17,7 +17,8 @@ import {
   ToolLogBlock,
 } from "./blocks.js";
 
-export interface BlocksViewProps extends Pick<BlockContext, "resolveUser" | "resolveChannel" | "formatTime"> {
+export interface BlocksViewProps
+  extends Pick<BlockContext, "resolveUser" | "resolveChannel" | "formatTime" | "planFile"> {
   blocks: Blocks | Block[] | undefined;
   onAction?: (action: BlockActionEvent) => void;
 }

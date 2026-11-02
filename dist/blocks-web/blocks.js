@@ -14,7 +14,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
-import { planGlance } from "../blocks/plan.js";
+import { planGlance, planMarkdown } from "../blocks/plan.js";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { typography } from "../design/tokens.js";
 import { Mark } from "./Mark.js";
@@ -110,20 +110,20 @@ export function PlanCardBlock({ value, ctx }) {
     const [detail, setDetail] = useState(false);
     if (value.steps.length > 0 && !detail) {
         const g = planGlance(value.steps);
-        return (_jsx(Card, { accent: "agent", label: `${g.done}/${g.total}`, icon: _jsx(Mark, { kind: planMark(value.steps), size: 16 }), children: _jsx(Box, { component: "ol", role: "button", tabIndex: 0, "aria-expanded": false, "aria-label": "Show the whole plan", "data-testid": "plan-glance", onClick: () => setDetail(true), onKeyDown: (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setDetail(true);
-                    }
-                }, sx: {
-                    m: 0,
-                    p: 0,
-                    listStyle: "none",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 0.5,
-                    cursor: "pointer",
-                }, children: value.steps.map((s, i) => (_jsxs(Box, { component: "li", "data-step-status": (STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", sx: { width: "1.4em", flexShrink: 0, alignSelf: "flex-start", pt: 0.25 }, children: _jsx(Mark, { kind: stepMark(s.status), title: MARKS[stepMark(s.status)].label }) }), _jsx(Typography, { variant: "body2", component: "span", sx: { minWidth: 0 }, children: s.title })] }, s.id || i))) }) }));
+        return (_jsxs(Card, { accent: "agent", label: `${g.done}/${g.total}`, icon: _jsx(Mark, { kind: planMark(value.steps), size: 16 }), children: [_jsx(Box, { component: "ol", role: "button", tabIndex: 0, "aria-expanded": false, "aria-label": "Show the whole plan", "data-testid": "plan-glance", onClick: () => setDetail(true), onKeyDown: (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setDetail(true);
+                        }
+                    }, sx: {
+                        m: 0,
+                        p: 0,
+                        listStyle: "none",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.5,
+                        cursor: "pointer",
+                    }, children: value.steps.map((s, i) => (_jsxs(Box, { component: "li", "data-step-status": (STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING]).label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", sx: { width: "1.4em", flexShrink: 0, alignSelf: "flex-start", pt: 0.25 }, children: _jsx(Mark, { kind: stepMark(s.status), title: MARKS[stepMark(s.status)].label }) }), _jsx(Typography, { variant: "body2", component: "span", sx: { minWidth: 0 }, children: s.title })] }, s.id || i))) }), _jsx(PlanFileRow, { value: value, ctx: ctx })] }));
     }
     return (_jsx(PlanCardDetail, { value: value, ctx: ctx, onToggle: value.steps.length > 0 ? () => setDetail(false) : undefined }));
 }
@@ -137,17 +137,37 @@ function PlanCardDetail({ value, ctx, onToggle, }) {
             onToggle();
         }
         : undefined;
-    return (_jsx(Card, { accent: "agent", label: `Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`, children: _jsxs(Box, { role: toggle ? "button" : undefined, tabIndex: toggle ? 0 : undefined, "aria-expanded": toggle ? true : undefined, "data-testid": "plan-detail", onClick: toggle, onKeyDown: toggle
-                ? (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        toggle();
+    return (_jsxs(Card, { accent: "agent", label: `Plan · v${value.version}${value.planHash ? ` · ${value.planHash}` : ""}`, children: [_jsxs(Box, { role: toggle ? "button" : undefined, tabIndex: toggle ? 0 : undefined, "aria-expanded": toggle ? true : undefined, "data-testid": "plan-detail", onClick: toggle, onKeyDown: toggle
+                    ? (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            toggle();
+                        }
                     }
-                }
-                : undefined, sx: { display: "flex", flexDirection: "column", gap: 1.5, cursor: toggle ? "pointer" : undefined }, children: [_jsx(Typography, { variant: "body1", children: value.summary }), value.steps.length > 0 ? (_jsxs(Box, { children: [_jsx(LinearProgress, { variant: "determinate", color: "secondary", value: (done / value.steps.length) * 100, sx: { mb: 1, height: 4, borderRadius: 2 }, "aria-label": `${done} of ${value.steps.length} steps done` }), _jsx(Box, { component: "ol", sx: { m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.5 }, children: value.steps.map((s) => {
-                                const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
-                                return (_jsxs(Box, { component: "li", "data-step-status": g.label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-label": g.label, sx: { color: g.color, width: "1em", textAlign: "center", ...mono }, children: g.glyph }), _jsxs(Box, { sx: { minWidth: 0 }, children: [_jsx(Typography, { variant: "body2", component: "span", children: s.title }), s.files.length > 0 ? (_jsx(Typography, { variant: "caption", component: "div", color: "text.secondary", sx: mono, children: s.files.join("  ") })) : null] })] }, s.id));
-                            }) })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: "tank.warningText" })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: "tank.primaryText" })) : null, value.guardrails.length > 0 ? _jsx(GuardrailChecks, { checks: value.guardrails }) : null, value.approverIds.length > 0 ? (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }) }));
+                    : undefined, sx: { display: "flex", flexDirection: "column", gap: 1.5, cursor: toggle ? "pointer" : undefined }, children: [_jsx(Typography, { variant: "body1", children: value.summary }), value.steps.length > 0 ? (_jsxs(Box, { children: [_jsx(LinearProgress, { variant: "determinate", color: "secondary", value: (done / value.steps.length) * 100, sx: { mb: 1, height: 4, borderRadius: 2 }, "aria-label": `${done} of ${value.steps.length} steps done` }), _jsx(Box, { component: "ol", sx: { m: 0, p: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 0.5 }, children: value.steps.map((s) => {
+                                    const g = STEP_GLYPH[s.status] ?? STEP_GLYPH[StepStatus.PENDING];
+                                    return (_jsxs(Box, { component: "li", "data-step-status": g.label, sx: { display: "flex", gap: 1, alignItems: "baseline" }, children: [_jsx(Box, { component: "span", "aria-label": g.label, sx: { color: g.color, width: "1em", textAlign: "center", ...mono }, children: g.glyph }), _jsxs(Box, { sx: { minWidth: 0 }, children: [_jsx(Typography, { variant: "body2", component: "span", children: s.title }), s.files.length > 0 ? (_jsx(Typography, { variant: "caption", component: "div", color: "text.secondary", sx: mono, children: s.files.join("  ") })) : null] })] }, s.id));
+                                }) })] })) : null, value.risks.length > 0 ? (_jsx(BulletList, { title: "Risks", items: value.risks, color: "tank.warningText" })) : null, value.questions.length > 0 ? (_jsx(BulletList, { title: "Questions", items: value.questions, color: "tank.primaryText" })) : null, value.guardrails.length > 0 ? _jsx(GuardrailChecks, { checks: value.guardrails }) : null, value.approverIds.length > 0 ? (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: ["Approvers: ", names(value.approverIds, ctx)] })) : null] }), _jsx(PlanFileRow, { value: value, ctx: ctx })] }));
+}
+/**
+ * Download and Add to Atlas under a plan (Robby, 2026-11-02): the plan as a Markdown file,
+ * written by `planMarkdown` so both apps save and add the same document.
+ */
+function PlanFileRow({ value, ctx }) {
+    const [adding, setAdding] = useState(false);
+    const actions = ctx.planFile;
+    if (!actions?.download && !actions?.addToAtlas)
+        return null;
+    const file = () => planMarkdown(value, ctx.resolveUser);
+    return (_jsxs(Stack, { direction: "row", spacing: 1, sx: { flexWrap: "wrap", rowGap: 1 }, "data-testid": "plan-file", children: [actions.download ? (_jsx(Button, { size: "small", onClick: () => void actions.download?.(file()), "data-testid": "plan-download", children: "Download" })) : null, actions.addToAtlas ? (_jsx(Button, { size: "small", variant: "outlined", disabled: adding, onClick: async () => {
+                    setAdding(true);
+                    try {
+                        await actions.addToAtlas?.(file());
+                    }
+                    finally {
+                        setAdding(false);
+                    }
+                }, "data-testid": "plan-atlas", children: "Add to Atlas" })) : null] }));
 }
 /** How a guardrail's check reads on a card: the mark, the word, and the color it sits in. */
 const GUARDRAIL_NA = { glyph: "–", label: "not applicable", color: "text.secondary" };

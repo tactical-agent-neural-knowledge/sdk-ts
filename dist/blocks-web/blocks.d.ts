@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { type PlanFileActions } from "../blocks/plan.js";
 import type { Actions, ApprovalPrompt, Button as ButtonMsg, CiStatus, Context, DiffPreview, FilePreview, GuardrailCheck, Header, PlanCard, Section, StatusCard, ToolLog } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type RichTextViewProps } from "./RichTextView.js";
 /** Posted when a user interacts with a block; pair with `TankClient.postBlockAction`. */
@@ -12,6 +13,8 @@ export interface BlockContext extends Pick<RichTextViewProps, "resolveUser" | "r
     onAction?: (action: BlockActionEvent) => void;
     /** Format a timestamp (ms) for display. Default: locale time. */
     formatTime?: (ms: number) => string;
+    /** Download and Add to Atlas on a plan card; each button shows only when its action is given. */
+    planFile?: PlanFileActions | undefined;
 }
 /** Accent stripe for agent cards: purple = agent execution, cyan = AI/context, amber = needs a human. */
 export declare function Card({ accent, children, label, icon, }: {

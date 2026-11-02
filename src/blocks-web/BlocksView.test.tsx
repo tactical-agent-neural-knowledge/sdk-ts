@@ -173,6 +173,44 @@ describe("plan card at a glance", () => {
   });
 });
 
+// Robby, 2026-11-02: a plan TANK makes can be downloaded or added to Atlas, from the glance
+// and from the whole plan alike; with no actions given the card shows neither button.
+describe("plan card file actions", () => {
+  it("offers Download and Add to Atlas, each handed the plan as Markdown", async () => {
+    const saved: { name: string; markdown: string }[] = [];
+    const added: string[] = [];
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView
+          blocks={load("plan")}
+          planFile={{
+            download: (f) => void saved.push(f),
+            addToAtlas: async (f) => void added.push(f.title),
+          }}
+        />
+      </ThemeProvider>,
+    );
+    fireEvent.click(screen.getByTestId("plan-download"));
+    expect(saved[0]?.name).toMatch(/^plan-introduce-a-token-bucket-limiter.*\.md$/);
+    expect(saved[0]?.markdown).toContain("- [x] Add limiter middleware in internal/gateway/limit.go");
+    fireEvent.click(screen.getByTestId("plan-glance"));
+    fireEvent.click(screen.getByTestId("plan-atlas"));
+    await screen.findByTestId("plan-atlas");
+    expect(added).toHaveLength(1);
+    // The buttons do not fold the plan away.
+    expect(screen.getByTestId("plan-detail")).toBeTruthy();
+  });
+
+  it("shows no buttons when the host offers none", () => {
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView blocks={load("plan")} />
+      </ThemeProvider>,
+    );
+    expect(screen.queryByTestId("plan-file")).toBeNull();
+  });
+});
+
 // Guardrails phase 1: a plan carries each guardrail's check, a conflict says why the plan
 // cannot be approved, and a guardrail gate offers the only ways on: change it, resume once
 // changed, or stop. Nothing is allowed once, so there is no Approve.
