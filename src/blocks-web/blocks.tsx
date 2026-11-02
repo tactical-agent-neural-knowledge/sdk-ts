@@ -13,7 +13,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type ReactNode, useState } from "react";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
-import { planGlance } from "../blocks/plan.js";
+import { type PlanFileActions, planGlance, planMarkdown } from "../blocks/plan.js";
 import type {
   Actions,
   ApprovalPrompt,
@@ -48,6 +48,8 @@ export interface BlockContext extends Pick<RichTextViewProps, "resolveUser" | "r
   onAction?: (action: BlockActionEvent) => void;
   /** Format a timestamp (ms) for display. Default: locale time. */
   formatTime?: (ms: number) => string;
+  /** Download and Add to Atlas on a plan card; each button shows only when its action is given. */
+  planFile?: PlanFileActions | undefined;
 }
 
 // Branch names, run ids and diagnostic codes are single unbroken tokens that
@@ -334,6 +336,7 @@ export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockConte
             </Box>
           ))}
         </Box>
+        <PlanFileRow value={value} ctx={ctx} />
       </Card>
     );
   }
@@ -442,7 +445,46 @@ function PlanCardDetail({
           </Typography>
         ) : null}
       </Box>
+      <PlanFileRow value={value} ctx={ctx} />
     </Card>
+  );
+}
+
+/**
+ * Download and Add to Atlas under a plan (Robby, 2026-11-02): the plan as a Markdown file,
+ * written by `planMarkdown` so both apps save and add the same document.
+ */
+function PlanFileRow({ value, ctx }: { value: PlanCard; ctx: BlockContext }) {
+  const [adding, setAdding] = useState(false);
+  const actions = ctx.planFile;
+  if (!actions?.download && !actions?.addToAtlas) return null;
+  const file = () => planMarkdown(value, ctx.resolveUser);
+  return (
+    <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap", rowGap: 1 }} data-testid="plan-file">
+      {actions.download ? (
+        <Button size="small" onClick={() => void actions.download?.(file())} data-testid="plan-download">
+          Download
+        </Button>
+      ) : null}
+      {actions.addToAtlas ? (
+        <Button
+          size="small"
+          variant="outlined"
+          disabled={adding}
+          onClick={async () => {
+            setAdding(true);
+            try {
+              await actions.addToAtlas?.(file());
+            } finally {
+              setAdding(false);
+            }
+          }}
+          data-testid="plan-atlas"
+        >
+          Add to Atlas
+        </Button>
+      ) : null}
+    </Stack>
   );
 }
 

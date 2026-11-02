@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import type { PlanFileActions } from "../blocks/plan.js";
 import { fonts } from "../design/fonts.js";
 import type { RichTextViewNativeProps } from "./RichTextViewNative.js";
 
@@ -17,6 +18,8 @@ export interface BlocksNativeOptions extends Pick<RichTextViewNativeProps, "reso
   codeFontFamily?: string;
   /** Open a URL (link buttons, PR links). Default: `Linking.openURL`. */
   openUrl?: (url: string) => void;
+  /** Download and Add to Atlas on a plan card; each button shows only when its action is given. */
+  planFile?: PlanFileActions | undefined;
 }
 
 export interface BlockContext extends BlocksNativeOptions {

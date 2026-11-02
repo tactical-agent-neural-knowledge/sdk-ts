@@ -2,7 +2,7 @@ import { type ReactNode, useState } from "react";
 import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native";
 import { Button, Chip, Divider, type MD3Theme, ProgressBar, Text, useTheme } from "react-native-paper";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
-import { planGlance } from "../blocks/plan.js";
+import { planGlance, planMarkdown } from "../blocks/plan.js";
 import type {
   Actions,
   ApprovalPrompt,
@@ -334,6 +334,7 @@ export function PlanCardBlock({ value, ctx }: { value: PlanCard; ctx: BlockConte
             </View>
           ))}
         </Pressable>
+        <PlanFileRow value={value} ctx={ctx} />
       </Card>
     );
   }
@@ -413,7 +414,53 @@ function PlanCardDetail({
           </Text>
         ) : null}
       </Pressable>
+      <PlanFileRow value={value} ctx={ctx} />
     </Card>
+  );
+}
+
+/**
+ * Download and Add to Atlas under a plan (Robby, 2026-11-02): the plan as a Markdown file,
+ * written by `planMarkdown` so both apps save and add the same document.
+ */
+function PlanFileRow({ value, ctx }: { value: PlanCard; ctx: BlockContext }) {
+  const [adding, setAdding] = useState(false);
+  const actions = ctx.planFile;
+  if (!actions?.download && !actions?.addToAtlas) return null;
+  const file = () => planMarkdown(value, ctx.resolveUser);
+  return (
+    <View style={styles.wrap} testID="plan-file">
+      {actions.download ? (
+        <Button
+          compact
+          icon="download-outline"
+          onPress={() => void actions.download?.(file())}
+          testID="plan-download"
+        >
+          Download
+        </Button>
+      ) : null}
+      {actions.addToAtlas ? (
+        <Button
+          compact
+          mode="outlined"
+          icon="book-open-page-variant-outline"
+          disabled={adding}
+          loading={adding}
+          onPress={async () => {
+            setAdding(true);
+            try {
+              await actions.addToAtlas?.(file());
+            } finally {
+              setAdding(false);
+            }
+          }}
+          testID="plan-atlas"
+        >
+          Add to Atlas
+        </Button>
+      ) : null}
+    </View>
   );
 }
 
