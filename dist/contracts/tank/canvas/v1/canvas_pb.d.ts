@@ -733,12 +733,89 @@ export type UpdateCanvasResponse = Message<"tank.canvas.v1.UpdateCanvasResponse"
      * @generated from field: tank.canvas.v1.Canvas canvas = 1;
      */
     canvas?: Canvas;
+    /**
+     * @generated from field: tank.canvas.v1.MentionOutcome mentions = 2;
+     */
+    mentions?: MentionOutcome;
 };
 /**
  * Describes the message tank.canvas.v1.UpdateCanvasResponse.
  * Use `create(UpdateCanvasResponseSchema)` to create a new message.
  */
 export declare const UpdateCanvasResponseSchema: GenMessage<UpdateCanvasResponse>;
+/**
+ * Write markdown onto a page as blocks, placed after after_block_id or at the end.
+ * How an agent answers on a page what it was asked there.
+ *
+ * @generated from message tank.canvas.v1.WriteMarkdownRequest
+ */
+export type WriteMarkdownRequest = Message<"tank.canvas.v1.WriteMarkdownRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string canvas_id = 2;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: string markdown = 3;
+     */
+    markdown: string;
+    /**
+     * @generated from field: string after_block_id = 4;
+     */
+    afterBlockId: string;
+};
+/**
+ * Describes the message tank.canvas.v1.WriteMarkdownRequest.
+ * Use `create(WriteMarkdownRequestSchema)` to create a new message.
+ */
+export declare const WriteMarkdownRequestSchema: GenMessage<WriteMarkdownRequest>;
+/**
+ * @generated from message tank.canvas.v1.WriteMarkdownResponse
+ */
+export type WriteMarkdownResponse = Message<"tank.canvas.v1.WriteMarkdownResponse"> & {
+    /**
+     * @generated from field: tank.canvas.v1.Canvas canvas = 1;
+     */
+    canvas?: Canvas;
+    /**
+     * @generated from field: int32 written = 2;
+     */
+    written: number;
+};
+/**
+ * Describes the message tank.canvas.v1.WriteMarkdownResponse.
+ * Use `create(WriteMarkdownResponseSchema)` to create a new message.
+ */
+export declare const WriteMarkdownResponseSchema: GenMessage<WriteMarkdownResponse>;
+/**
+ * What a write's new mentions led to. A person who cannot open the page was not told,
+ * so the writer can offer to share it; an agent mentioned on the page was asked in the
+ * page's Tread, which needs the page to have one the writer is in.
+ *
+ * @generated from message tank.canvas.v1.MentionOutcome
+ */
+export type MentionOutcome = Message<"tank.canvas.v1.MentionOutcome"> & {
+    /**
+     * @generated from field: repeated tank.canvas.v1.BlockMention cannot_open = 1;
+     */
+    cannotOpen: BlockMention[];
+    /**
+     * @generated from field: string asked_in_channel_id = 2;
+     */
+    askedInChannelId: string;
+    /**
+     * @generated from field: bool ask_needs_tread = 3;
+     */
+    askNeedsTread: boolean;
+};
+/**
+ * Describes the message tank.canvas.v1.MentionOutcome.
+ * Use `create(MentionOutcomeSchema)` to create a new message.
+ */
+export declare const MentionOutcomeSchema: GenMessage<MentionOutcome>;
 /**
  * @generated from message tank.canvas.v1.DeleteCanvasRequest
  */
@@ -838,6 +915,10 @@ export type UpdateBlockResponse = Message<"tank.canvas.v1.UpdateBlockResponse"> 
      * @generated from field: string conflict_note = 4;
      */
     conflictNote: string;
+    /**
+     * @generated from field: tank.canvas.v1.MentionOutcome mentions = 5;
+     */
+    mentions?: MentionOutcome;
 };
 /**
  * Describes the message tank.canvas.v1.UpdateBlockResponse.
@@ -1426,6 +1507,14 @@ export declare const CanvasService: GenService<{
         methodKind: "unary";
         input: typeof UpdateBlockRequestSchema;
         output: typeof UpdateBlockResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.canvas.v1.CanvasService.WriteMarkdown
+     */
+    writeMarkdown: {
+        methodKind: "unary";
+        input: typeof WriteMarkdownRequestSchema;
+        output: typeof WriteMarkdownResponseSchema;
     };
     /**
      * @generated from rpc tank.canvas.v1.CanvasService.ListTemplates
