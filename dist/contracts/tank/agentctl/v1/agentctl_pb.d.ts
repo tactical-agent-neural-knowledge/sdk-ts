@@ -2551,6 +2551,49 @@ export type ReadCanvasRequest = Message<"tank.agentctl.v1.ReadCanvasRequest"> & 
  */
 export declare const ReadCanvasRequestSchema: GenMessage<ReadCanvasRequest>;
 /**
+ * Write on an Atlas page: markdown becomes blocks, placed after after_block_id or at
+ * the end. How a run answers an ask made on the page itself.
+ *
+ * @generated from message tank.agentctl.v1.WriteOnCanvasRequest
+ */
+export type WriteOnCanvasRequest = Message<"tank.agentctl.v1.WriteOnCanvasRequest"> & {
+    /**
+     * @generated from field: string canvas_id = 1;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: string markdown = 2;
+     */
+    markdown: string;
+    /**
+     * @generated from field: string after_block_id = 3;
+     */
+    afterBlockId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.WriteOnCanvasRequest.
+ * Use `create(WriteOnCanvasRequestSchema)` to create a new message.
+ */
+export declare const WriteOnCanvasRequestSchema: GenMessage<WriteOnCanvasRequest>;
+/**
+ * @generated from message tank.agentctl.v1.WriteOnCanvasResponse
+ */
+export type WriteOnCanvasResponse = Message<"tank.agentctl.v1.WriteOnCanvasResponse"> & {
+    /**
+     * @generated from field: string title = 1;
+     */
+    title: string;
+    /**
+     * @generated from field: int32 blocks = 2;
+     */
+    blocks: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.WriteOnCanvasResponse.
+ * Use `create(WriteOnCanvasResponseSchema)` to create a new message.
+ */
+export declare const WriteOnCanvasResponseSchema: GenMessage<WriteOnCanvasResponse>;
+/**
  * @generated from message tank.agentctl.v1.ReadCanvasResponse
  */
 export type ReadCanvasResponse = Message<"tank.agentctl.v1.ReadCanvasResponse"> & {
@@ -7202,6 +7245,14 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof ReadCanvasRequestSchema;
         output: typeof ReadCanvasResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.WriteOnCanvas
+     */
+    writeOnCanvas: {
+        methodKind: "unary";
+        input: typeof WriteOnCanvasRequestSchema;
+        output: typeof WriteOnCanvasResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.AskCanvas
