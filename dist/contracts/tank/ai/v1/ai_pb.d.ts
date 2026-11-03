@@ -77,6 +77,15 @@ export type Attachment = Message$1<"tank.ai.v1.Attachment"> & {
      * @generated from field: int64 size = 5;
      */
     size: bigint;
+    /**
+     * A video, uploaded through FilesService into the conversation's workspace first,
+     * because it is too large to travel in the request: data is empty and the server reads
+     * the file itself. TANK's own models see its frames and hear its speech; nothing else
+     * does. Clients play it back through FilesService.GetDownloadUrl.
+     *
+     * @generated from field: string file_id = 6;
+     */
+    fileId: string;
 };
 /**
  * Describes the message tank.ai.v1.Attachment.
