@@ -212,12 +212,97 @@ export type GetConversationResponse = Message$1<"tank.ai.v1.GetConversationRespo
      * @generated from field: repeated tank.ai.v1.Message messages = 2;
      */
     messages: Message[];
+    /**
+     * The Markdown files from this conversation that are pages in Atlas, oldest first. A page
+     * since deleted is not listed.
+     *
+     * @generated from field: repeated tank.ai.v1.AtlasPage atlas_pages = 3;
+     */
+    atlasPages: AtlasPage[];
 };
 /**
  * Describes the message tank.ai.v1.GetConversationResponse.
  * Use `create(GetConversationResponseSchema)` to create a new message.
  */
 export declare const GetConversationResponseSchema: GenMessage<GetConversationResponse>;
+/**
+ * A Markdown file Neural wrote, added to Atlas from this conversation (Robby, 2026-11-03:
+ * a file already added is not offered again; a changed one is offered as a new page or as
+ * a replacement for the page it made).
+ *
+ * @generated from message tank.ai.v1.AtlasPage
+ */
+export type AtlasPage = Message$1<"tank.ai.v1.AtlasPage"> & {
+    /**
+     * the file's name, as Neural's fence named it
+     *
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string canvas_id = 2;
+     */
+    canvasId: string;
+    /**
+     * The Markdown the page was last made from: the same text means the file is in Atlas.
+     *
+     * @generated from field: string markdown = 3;
+     */
+    markdown: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp added_at = 4;
+     */
+    addedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.ai.v1.AtlasPage.
+ * Use `create(AtlasPageSchema)` to create a new message.
+ */
+export declare const AtlasPageSchema: GenMessage<AtlasPage>;
+/**
+ * AddToAtlas makes a page from a file in a workspace conversation, or with
+ * replace_canvas_id replaces the page an earlier version of it made (that page must be
+ * one of this conversation's atlas_pages, and the person must be able to edit it).
+ *
+ * @generated from message tank.ai.v1.AddToAtlasRequest
+ */
+export type AddToAtlasRequest = Message$1<"tank.ai.v1.AddToAtlasRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string markdown = 3;
+     */
+    markdown: string;
+    /**
+     * @generated from field: string replace_canvas_id = 4;
+     */
+    replaceCanvasId: string;
+};
+/**
+ * Describes the message tank.ai.v1.AddToAtlasRequest.
+ * Use `create(AddToAtlasRequestSchema)` to create a new message.
+ */
+export declare const AddToAtlasRequestSchema: GenMessage<AddToAtlasRequest>;
+/**
+ * @generated from message tank.ai.v1.AddToAtlasResponse
+ */
+export type AddToAtlasResponse = Message$1<"tank.ai.v1.AddToAtlasResponse"> & {
+    /**
+     * @generated from field: tank.ai.v1.AtlasPage page = 1;
+     */
+    page?: AtlasPage;
+};
+/**
+ * Describes the message tank.ai.v1.AddToAtlasResponse.
+ * Use `create(AddToAtlasResponseSchema)` to create a new message.
+ */
+export declare const AddToAtlasResponseSchema: GenMessage<AddToAtlasResponse>;
 /**
  * @generated from message tank.ai.v1.CreateConversationRequest
  */
@@ -906,5 +991,13 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof GetUsageRequestSchema;
         output: typeof GetUsageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.AddToAtlas
+     */
+    addToAtlas: {
+        methodKind: "unary";
+        input: typeof AddToAtlasRequestSchema;
+        output: typeof AddToAtlasResponseSchema;
     };
 }>;
