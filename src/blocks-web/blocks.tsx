@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { type ReactNode, useState } from "react";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { type PlanFileActions, planGlance, planMarkdown } from "../blocks/plan.js";
+import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
 import type {
   Actions,
   ApprovalPrompt,
@@ -50,6 +51,12 @@ export interface BlockContext extends Pick<RichTextViewProps, "resolveUser" | "r
   formatTime?: (ms: number) => string;
   /** Download and Add to Atlas on a plan card; each button shows only when its action is given. */
   planFile?: PlanFileActions | undefined;
+  /**
+   * A "Copy key" button (`neural.key.reveal`): redeem the reveal id with
+   * `NeuralKeyService.RevealApiKey` and put the key on the clipboard, resolving true once it is
+   * there. Without it the button says the key can no longer be shown.
+   */
+  revealKey?: ((revealId: string) => Promise<boolean>) | undefined;
 }
 
 // Branch names, run ids and diagnostic codes are single unbroken tokens that
@@ -203,6 +210,7 @@ export function ActionButton({
   size?: "small" | "medium";
 }) {
   const [confirming, setConfirming] = useState(false);
+  if (button.actionId === ACTION_REVEAL_KEY) return <RevealKeyButton button={button} ctx={ctx} size={size} />;
   const color =
     button.style === ButtonStyle.DANGER
       ? "error"
@@ -259,6 +267,55 @@ export function ActionButton({
         </Dialog>
       ) : null}
     </>
+  );
+}
+
+/**
+ * Copies a key a run made, through the host: the key goes from the server to the clipboard and
+ * is never posted as an action. A refusal (somebody else, a second press, expired) is one line.
+ */
+function RevealKeyButton({
+  button,
+  ctx,
+  size,
+}: {
+  button: ButtonMsg;
+  ctx: BlockContext;
+  size: "small" | "medium";
+}) {
+  const [busy, setBusy] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [gone, setGone] = useState(false);
+  const press = async () => {
+    setBusy(true);
+    let ok = false;
+    try {
+      ok = copied ? false : ((await ctx.revealKey?.(button.value)) ?? false);
+    } catch {
+      ok = false;
+    }
+    setBusy(false);
+    if (ok) setCopied(true);
+    else setGone(true);
+  };
+  return (
+    <Stack spacing={0.5} alignItems="flex-start">
+      <Button
+        size={size}
+        variant="contained"
+        color="primary"
+        data-action-id={button.actionId}
+        disabled={busy}
+        onClick={() => void press()}
+      >
+        {copied ? REVEAL_COPIED : button.text}
+      </Button>
+      {gone ? (
+        <Typography variant="caption" color="text.secondary" role="status" data-testid="reveal-gone">
+          {REVEAL_GONE}
+        </Typography>
+      ) : null}
+    </Stack>
   );
 }
 
@@ -842,11 +899,17 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
       ) : (
         <Typography variant="body1">{value.subject}</Typography>
       )}
-      <Typography variant="caption" color="text.secondary">
-        {value.minApprovals} approval{value.minApprovals === 1 ? "" : "s"} needed
-        {value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : ""}
-        {expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""}
-      </Typography>
+      {value.detail ? (
+        <Typography variant="body2" color="text.secondary" data-testid="approval-detail">
+          {value.detail}
+        </Typography>
+      ) : (
+        <Typography variant="caption" color="text.secondary">
+          {value.minApprovals} approval{value.minApprovals === 1 ? "" : "s"} needed
+          {value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : ""}
+          {expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""}
+        </Typography>
+      )}
       {value.decided ? (
         <Chip
           size="small"
@@ -867,7 +930,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
               ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.approve", value: value.gateId })
             }
           >
-            Approve
+            {value.approveLabel || "Approve"}
           </Button>
           <Button
             size="small"
@@ -878,7 +941,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
               ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.request_changes", value: value.gateId })
             }
           >
-            Reject
+            {value.rejectLabel || "Reject"}
           </Button>
         </Stack>
       )}

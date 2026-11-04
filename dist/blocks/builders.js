@@ -180,6 +180,9 @@ export function approvalPrompt(input) {
             guardrailId: input.guardrailId ?? "",
             guardrailText: input.guardrailText ?? "",
             blocker: input.blocker ?? "",
+            approveLabel: input.approveLabel ?? "",
+            rejectLabel: input.rejectLabel ?? "",
+            detail: input.detail ?? "",
         },
     }, input.blockId);
 }

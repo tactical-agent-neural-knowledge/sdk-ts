@@ -1,6 +1,6 @@
 import type { Block, Blocks } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type BlockActionEvent, type BlockContext } from "./blocks.js";
-export interface BlocksViewProps extends Pick<BlockContext, "resolveUser" | "resolveChannel" | "formatTime" | "planFile"> {
+export interface BlocksViewProps extends Pick<BlockContext, "resolveUser" | "resolveChannel" | "formatTime" | "planFile" | "revealKey"> {
     blocks: Blocks | Block[] | undefined;
     onAction?: (action: BlockActionEvent) => void;
 }

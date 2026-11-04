@@ -3,6 +3,7 @@ import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native
 import { Button, Chip, Divider, type MD3Theme, ProgressBar, Text, useTheme } from "react-native-paper";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { planGlance, planMarkdown } from "../blocks/plan.js";
+import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
 import type {
   Actions,
   ApprovalPrompt,
@@ -235,6 +236,7 @@ export function DividerBlock() {
 
 export function ActionButton({ button, ctx }: { button: ButtonMsg; ctx: BlockContext }) {
   const theme = useTheme();
+  if (button.actionId === ACTION_REVEAL_KEY) return <RevealKeyButton button={button} ctx={ctx} />;
   const danger = button.style === ButtonStyle.DANGER;
   const mode = button.style === ButtonStyle.UNSPECIFIED ? "outlined" : "contained";
   const color = danger ? { buttonColor: theme.colors.error, textColor: theme.colors.onError } : {};
@@ -260,6 +262,49 @@ export function ActionButton({ button, ctx }: { button: ButtonMsg; ctx: BlockCon
     >
       {button.text}
     </Button>
+  );
+}
+
+/**
+ * Copies a key a run made, through the host: the key goes from the server to the clipboard and
+ * is never posted as an action. A refusal (somebody else, a second press, expired) is one line.
+ */
+function RevealKeyButton({ button, ctx }: { button: ButtonMsg; ctx: BlockContext }) {
+  const theme = useTheme();
+  const [busy, setBusy] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [gone, setGone] = useState(false);
+  const press = async () => {
+    setBusy(true);
+    let ok = false;
+    try {
+      ok = copied ? false : ((await ctx.revealKey?.(button.value)) ?? false);
+    } catch {
+      ok = false;
+    }
+    setBusy(false);
+    if (ok) setCopied(true);
+    else setGone(true);
+  };
+  return (
+    <View>
+      <Button
+        compact
+        mode="contained"
+        onPress={() => void press()}
+        disabled={busy}
+        testID={`action-${button.actionId}`}
+        accessibilityLabel={copied ? REVEAL_COPIED : button.text}
+        style={styles.button}
+      >
+        {copied ? REVEAL_COPIED : button.text}
+      </Button>
+      {gone ? (
+        <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }} testID="reveal-gone">
+          {REVEAL_GONE}
+        </Text>
+      ) : null}
+    </View>
   );
 }
 
@@ -785,11 +830,17 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
       ) : (
         <Text variant="bodyLarge">{value.subject}</Text>
       )}
-      <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-        {value.minApprovals} approval{value.minApprovals === 1 ? "" : "s"} needed
-        {value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : ""}
-        {expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""}
-      </Text>
+      {value.detail ? (
+        <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }} testID="approval-detail">
+          {value.detail}
+        </Text>
+      ) : (
+        <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+          {value.minApprovals} approval{value.minApprovals === 1 ? "" : "s"} needed
+          {value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : ""}
+          {expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""}
+        </Text>
+      )}
       {value.decided ? (
         <ToneChip
           tone={value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "muted"}
@@ -805,7 +856,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
             testID="action-approve"
             style={styles.button}
           >
-            Approve
+            {value.approveLabel || "Approve"}
           </Button>
           <Button
             compact
@@ -815,7 +866,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
             testID="action-reject"
             style={styles.button}
           >
-            Reject
+            {value.rejectLabel || "Reject"}
           </Button>
         </View>
       )}

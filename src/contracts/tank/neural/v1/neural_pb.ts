@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/neural/v1/neural.proto.
  */
 export const file_tank_neural_v1_neural: GenFile = /*@__PURE__*/
-  fileDesc("Cht0YW5rL25ldXJhbC92MS9uZXVyYWwucHJvdG8SDnRhbmsubmV1cmFsLnYxIqcBCgZBcGlLZXkSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgVsYXN0NBgDIAEoCRIuCgpjcmVhdGVkX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIwCgxsYXN0X3VzZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmNyZWF0ZWRfYnkYBiABKAkiKgoSTGlzdEFwaUtleXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI7ChNMaXN0QXBpS2V5c1Jlc3BvbnNlEiQKBGtleXMYASADKAsyFi50YW5rLm5ldXJhbC52MS5BcGlLZXkiOQoTQ3JlYXRlQXBpS2V5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCSJLChRDcmVhdGVBcGlLZXlSZXNwb25zZRIjCgNrZXkYASABKAsyFi50YW5rLm5ldXJhbC52MS5BcGlLZXkSDgoGc2VjcmV0GAIgASgJIjsKE1Jldm9rZUFwaUtleVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg4KBmtleV9pZBgCIAEoCSIWChRSZXZva2VBcGlLZXlSZXNwb25zZSJ6CghVc2FnZURheRILCgNkYXkYASABKAkSDgoGa2V5X2lkGAIgASgJEhAKCHJlcXVlc3RzGAMgASgDEhQKDGlucHV0X3Rva2VucxgEIAEoAxIVCg1vdXRwdXRfdG9rZW5zGAUgASgDEhIKCmNoYXJnZV91c2QYBiABKAEiKgoSR2V0QXBpVXNhZ2VSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSKQAQoTR2V0QXBpVXNhZ2VSZXNwb25zZRImCgRkYXlzGAEgAygLMhgudGFuay5uZXVyYWwudjEuVXNhZ2VEYXkSEAoIcmVxdWVzdHMYAiABKAMSFAoMaW5wdXRfdG9rZW5zGAMgASgDEhUKDW91dHB1dF90b2tlbnMYBCABKAMSEgoKY2hhcmdlX3VzZBgFIAEoASJWCgtDaGF0TWVzc2FnZRIMCgRyb2xlGAEgASgJEgwKBHRleHQYAiABKAkSKwoLYXR0YWNobWVudHMYAyADKAsyFi50YW5rLmFpLnYxLkF0dGFjaG1lbnQiYwoLQ2hhdFJlcXVlc3QSLQoIbWVzc2FnZXMYASADKAsyGy50YW5rLm5ldXJhbC52MS5DaGF0TWVzc2FnZRIUCgxpbnN0cnVjdGlvbnMYAiABKAkSDwoHbG9va191cBgDIAEoCCJsCghDaGF0RG9uZRIKCgJpZBgBIAEoCRITCgtzdG9wX3JlYXNvbhgCIAEoCRIUCgxpbnB1dF90b2tlbnMYAyABKAUSFQoNb3V0cHV0X3Rva2VucxgEIAEoBRISCgpjaGFyZ2VfdXNkGAUgASgBIlIKDENoYXRSZXNwb25zZRIPCgVkZWx0YRgBIAEoCUgAEigKBGRvbmUYAiABKAsyGC50YW5rLm5ldXJhbC52MS5DaGF0RG9uZUgAQgcKBWV2ZW50MvgCChBOZXVyYWxLZXlTZXJ2aWNlElYKC0xpc3RBcGlLZXlzEiIudGFuay5uZXVyYWwudjEuTGlzdEFwaUtleXNSZXF1ZXN0GiMudGFuay5uZXVyYWwudjEuTGlzdEFwaUtleXNSZXNwb25zZRJZCgxDcmVhdGVBcGlLZXkSIy50YW5rLm5ldXJhbC52MS5DcmVhdGVBcGlLZXlSZXF1ZXN0GiQudGFuay5uZXVyYWwudjEuQ3JlYXRlQXBpS2V5UmVzcG9uc2USWQoMUmV2b2tlQXBpS2V5EiMudGFuay5uZXVyYWwudjEuUmV2b2tlQXBpS2V5UmVxdWVzdBokLnRhbmsubmV1cmFsLnYxLlJldm9rZUFwaUtleVJlc3BvbnNlElYKC0dldEFwaVVzYWdlEiIudGFuay5uZXVyYWwudjEuR2V0QXBpVXNhZ2VSZXF1ZXN0GiMudGFuay5uZXVyYWwudjEuR2V0QXBpVXNhZ2VSZXNwb25zZTJUCg1OZXVyYWxTZXJ2aWNlEkMKBENoYXQSGy50YW5rLm5ldXJhbC52MS5DaGF0UmVxdWVzdBocLnRhbmsubmV1cmFsLnYxLkNoYXRSZXNwb25zZTABQtABChJjb20udGFuay5uZXVyYWwudjFCC05ldXJhbFByb3RvUAFaU2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvbmV1cmFsL3YxO25ldXJhbHYxogIDVE5YqgIOVGFuay5OZXVyYWwuVjHKAg5UYW5rXE5ldXJhbFxWMeICGlRhbmtcTmV1cmFsXFYxXEdQQk1ldGFkYXRh6gIQVGFuazo6TmV1cmFsOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_ai_v1_ai]);
+  fileDesc("Cht0YW5rL25ldXJhbC92MS9uZXVyYWwucHJvdG8SDnRhbmsubmV1cmFsLnYxIqcBCgZBcGlLZXkSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgVsYXN0NBgDIAEoCRIuCgpjcmVhdGVkX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIwCgxsYXN0X3VzZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmNyZWF0ZWRfYnkYBiABKAkiKgoSTGlzdEFwaUtleXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI7ChNMaXN0QXBpS2V5c1Jlc3BvbnNlEiQKBGtleXMYASADKAsyFi50YW5rLm5ldXJhbC52MS5BcGlLZXkiOQoTQ3JlYXRlQXBpS2V5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCSJeChRDcmVhdGVBcGlLZXlSZXNwb25zZRIjCgNrZXkYASABKAsyFi50YW5rLm5ldXJhbC52MS5BcGlLZXkSDgoGc2VjcmV0GAIgASgJEhEKCXJldmVhbF9pZBgDIAEoCSIoChNSZXZlYWxBcGlLZXlSZXF1ZXN0EhEKCXJldmVhbF9pZBgBIAEoCSImChRSZXZlYWxBcGlLZXlSZXNwb25zZRIOCgZzZWNyZXQYASABKAkiOwoTUmV2b2tlQXBpS2V5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDgoGa2V5X2lkGAIgASgJIhYKFFJldm9rZUFwaUtleVJlc3BvbnNlInoKCFVzYWdlRGF5EgsKA2RheRgBIAEoCRIOCgZrZXlfaWQYAiABKAkSEAoIcmVxdWVzdHMYAyABKAMSFAoMaW5wdXRfdG9rZW5zGAQgASgDEhUKDW91dHB1dF90b2tlbnMYBSABKAMSEgoKY2hhcmdlX3VzZBgGIAEoASIqChJHZXRBcGlVc2FnZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIpABChNHZXRBcGlVc2FnZVJlc3BvbnNlEiYKBGRheXMYASADKAsyGC50YW5rLm5ldXJhbC52MS5Vc2FnZURheRIQCghyZXF1ZXN0cxgCIAEoAxIUCgxpbnB1dF90b2tlbnMYAyABKAMSFQoNb3V0cHV0X3Rva2VucxgEIAEoAxISCgpjaGFyZ2VfdXNkGAUgASgBIlYKC0NoYXRNZXNzYWdlEgwKBHJvbGUYASABKAkSDAoEdGV4dBgCIAEoCRIrCgthdHRhY2htZW50cxgDIAMoCzIWLnRhbmsuYWkudjEuQXR0YWNobWVudCJjCgtDaGF0UmVxdWVzdBItCghtZXNzYWdlcxgBIAMoCzIbLnRhbmsubmV1cmFsLnYxLkNoYXRNZXNzYWdlEhQKDGluc3RydWN0aW9ucxgCIAEoCRIPCgdsb29rX3VwGAMgASgIImwKCENoYXREb25lEgoKAmlkGAEgASgJEhMKC3N0b3BfcmVhc29uGAIgASgJEhQKDGlucHV0X3Rva2VucxgDIAEoBRIVCg1vdXRwdXRfdG9rZW5zGAQgASgFEhIKCmNoYXJnZV91c2QYBSABKAEiUgoMQ2hhdFJlc3BvbnNlEg8KBWRlbHRhGAEgASgJSAASKAoEZG9uZRgCIAEoCzIYLnRhbmsubmV1cmFsLnYxLkNoYXREb25lSABCBwoFZXZlbnQy0wMKEE5ldXJhbEtleVNlcnZpY2USVgoLTGlzdEFwaUtleXMSIi50YW5rLm5ldXJhbC52MS5MaXN0QXBpS2V5c1JlcXVlc3QaIy50YW5rLm5ldXJhbC52MS5MaXN0QXBpS2V5c1Jlc3BvbnNlElkKDENyZWF0ZUFwaUtleRIjLnRhbmsubmV1cmFsLnYxLkNyZWF0ZUFwaUtleVJlcXVlc3QaJC50YW5rLm5ldXJhbC52MS5DcmVhdGVBcGlLZXlSZXNwb25zZRJZCgxSZXZva2VBcGlLZXkSIy50YW5rLm5ldXJhbC52MS5SZXZva2VBcGlLZXlSZXF1ZXN0GiQudGFuay5uZXVyYWwudjEuUmV2b2tlQXBpS2V5UmVzcG9uc2USVgoLR2V0QXBpVXNhZ2USIi50YW5rLm5ldXJhbC52MS5HZXRBcGlVc2FnZVJlcXVlc3QaIy50YW5rLm5ldXJhbC52MS5HZXRBcGlVc2FnZVJlc3BvbnNlElkKDFJldmVhbEFwaUtleRIjLnRhbmsubmV1cmFsLnYxLlJldmVhbEFwaUtleVJlcXVlc3QaJC50YW5rLm5ldXJhbC52MS5SZXZlYWxBcGlLZXlSZXNwb25zZTJUCg1OZXVyYWxTZXJ2aWNlEkMKBENoYXQSGy50YW5rLm5ldXJhbC52MS5DaGF0UmVxdWVzdBocLnRhbmsubmV1cmFsLnYxLkNoYXRSZXNwb25zZTABQtABChJjb20udGFuay5uZXVyYWwudjFCC05ldXJhbFByb3RvUAFaU2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvbmV1cmFsL3YxO25ldXJhbHYxogIDVE5YqgIOVGFuay5OZXVyYWwuVjHKAg5UYW5rXE5ldXJhbFxWMeICGlRhbmtcTmV1cmFsXFYxXEdQQk1ldGFkYXRh6gIQVGFuazo6TmV1cmFsOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_ai_v1_ai]);
 
 /**
  * An API key as its workspace sees it. The secret is shown once, when it is made.
@@ -130,11 +130,20 @@ export type CreateApiKeyResponse = Message<"tank.neural.v1.CreateApiKeyResponse"
   key?: ApiKey;
 
   /**
-   * The key itself, returned this once and never again.
+   * The key itself, returned this once and never again. Empty when a run made the key.
    *
    * @generated from field: string secret = 2;
    */
   secret: string;
+
+  /**
+   * Set instead of secret when the tank agent made the key for the person who asked: the
+   * secret is sealed for that person and copied by them, once, through RevealApiKey. It never
+   * passes through the agent (the Lockbox rule).
+   *
+   * @generated from field: string reveal_id = 3;
+   */
+  revealId: string;
 };
 
 /**
@@ -143,6 +152,43 @@ export type CreateApiKeyResponse = Message<"tank.neural.v1.CreateApiKeyResponse"
  */
 export const CreateApiKeyResponseSchema: GenMessage<CreateApiKeyResponse> = /*@__PURE__*/
   messageDesc(file_tank_neural_v1_neural, 4);
+
+/**
+ * The key an agent made, for the person who asked for it: only that person, signed in, and
+ * only once; a reveal expires after a day.
+ *
+ * @generated from message tank.neural.v1.RevealApiKeyRequest
+ */
+export type RevealApiKeyRequest = Message<"tank.neural.v1.RevealApiKeyRequest"> & {
+  /**
+   * @generated from field: string reveal_id = 1;
+   */
+  revealId: string;
+};
+
+/**
+ * Describes the message tank.neural.v1.RevealApiKeyRequest.
+ * Use `create(RevealApiKeyRequestSchema)` to create a new message.
+ */
+export const RevealApiKeyRequestSchema: GenMessage<RevealApiKeyRequest> = /*@__PURE__*/
+  messageDesc(file_tank_neural_v1_neural, 5);
+
+/**
+ * @generated from message tank.neural.v1.RevealApiKeyResponse
+ */
+export type RevealApiKeyResponse = Message<"tank.neural.v1.RevealApiKeyResponse"> & {
+  /**
+   * @generated from field: string secret = 1;
+   */
+  secret: string;
+};
+
+/**
+ * Describes the message tank.neural.v1.RevealApiKeyResponse.
+ * Use `create(RevealApiKeyResponseSchema)` to create a new message.
+ */
+export const RevealApiKeyResponseSchema: GenMessage<RevealApiKeyResponse> = /*@__PURE__*/
+  messageDesc(file_tank_neural_v1_neural, 6);
 
 /**
  * @generated from message tank.neural.v1.RevokeApiKeyRequest
@@ -164,7 +210,7 @@ export type RevokeApiKeyRequest = Message<"tank.neural.v1.RevokeApiKeyRequest"> 
  * Use `create(RevokeApiKeyRequestSchema)` to create a new message.
  */
 export const RevokeApiKeyRequestSchema: GenMessage<RevokeApiKeyRequest> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 5);
+  messageDesc(file_tank_neural_v1_neural, 7);
 
 /**
  * @generated from message tank.neural.v1.RevokeApiKeyResponse
@@ -177,7 +223,7 @@ export type RevokeApiKeyResponse = Message<"tank.neural.v1.RevokeApiKeyResponse"
  * Use `create(RevokeApiKeyResponseSchema)` to create a new message.
  */
 export const RevokeApiKeyResponseSchema: GenMessage<RevokeApiKeyResponse> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 6);
+  messageDesc(file_tank_neural_v1_neural, 8);
 
 /**
  * One key's use on one day (UTC).
@@ -223,7 +269,7 @@ export type UsageDay = Message<"tank.neural.v1.UsageDay"> & {
  * Use `create(UsageDaySchema)` to create a new message.
  */
 export const UsageDaySchema: GenMessage<UsageDay> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 7);
+  messageDesc(file_tank_neural_v1_neural, 9);
 
 /**
  * @generated from message tank.neural.v1.GetApiUsageRequest
@@ -240,7 +286,7 @@ export type GetApiUsageRequest = Message<"tank.neural.v1.GetApiUsageRequest"> & 
  * Use `create(GetApiUsageRequestSchema)` to create a new message.
  */
 export const GetApiUsageRequestSchema: GenMessage<GetApiUsageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 8);
+  messageDesc(file_tank_neural_v1_neural, 10);
 
 /**
  * This month's use of the workspace's keys, by day and key, and the totals.
@@ -279,7 +325,7 @@ export type GetApiUsageResponse = Message<"tank.neural.v1.GetApiUsageResponse"> 
  * Use `create(GetApiUsageResponseSchema)` to create a new message.
  */
 export const GetApiUsageResponseSchema: GenMessage<GetApiUsageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 9);
+  messageDesc(file_tank_neural_v1_neural, 11);
 
 /**
  * One turn of a conversation the caller keeps.
@@ -313,7 +359,7 @@ export type ChatMessage = Message<"tank.neural.v1.ChatMessage"> & {
  * Use `create(ChatMessageSchema)` to create a new message.
  */
 export const ChatMessageSchema: GenMessage<ChatMessage> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 10);
+  messageDesc(file_tank_neural_v1_neural, 12);
 
 /**
  * @generated from message tank.neural.v1.ChatRequest
@@ -346,7 +392,7 @@ export type ChatRequest = Message<"tank.neural.v1.ChatRequest"> & {
  * Use `create(ChatRequestSchema)` to create a new message.
  */
 export const ChatRequestSchema: GenMessage<ChatRequest> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 11);
+  messageDesc(file_tank_neural_v1_neural, 13);
 
 /**
  * @generated from message tank.neural.v1.ChatDone
@@ -385,7 +431,7 @@ export type ChatDone = Message<"tank.neural.v1.ChatDone"> & {
  * Use `create(ChatDoneSchema)` to create a new message.
  */
 export const ChatDoneSchema: GenMessage<ChatDone> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 12);
+  messageDesc(file_tank_neural_v1_neural, 14);
 
 /**
  * @generated from message tank.neural.v1.ChatResponse
@@ -418,10 +464,11 @@ export type ChatResponse = Message<"tank.neural.v1.ChatResponse"> & {
  * Use `create(ChatResponseSchema)` to create a new message.
  */
 export const ChatResponseSchema: GenMessage<ChatResponse> = /*@__PURE__*/
-  messageDesc(file_tank_neural_v1_neural, 13);
+  messageDesc(file_tank_neural_v1_neural, 15);
 
 /**
- * Managing keys: a workspace's owners and admins, signed in.
+ * Managing keys: a workspace's owners and admins, signed in, or a run of the tank agent whose
+ * requester is one (checked at every call).
  *
  * @generated from service tank.neural.v1.NeuralKeyService
  */
@@ -457,6 +504,14 @@ export const NeuralKeyService: GenService<{
     methodKind: "unary";
     input: typeof GetApiUsageRequestSchema;
     output: typeof GetApiUsageResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.neural.v1.NeuralKeyService.RevealApiKey
+   */
+  revealApiKey: {
+    methodKind: "unary";
+    input: typeof RevealApiKeyRequestSchema;
+    output: typeof RevealApiKeyResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_neural_v1_neural, 0);

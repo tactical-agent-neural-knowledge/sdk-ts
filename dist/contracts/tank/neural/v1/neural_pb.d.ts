@@ -101,17 +101,56 @@ export type CreateApiKeyResponse = Message<"tank.neural.v1.CreateApiKeyResponse"
      */
     key?: ApiKey;
     /**
-     * The key itself, returned this once and never again.
+     * The key itself, returned this once and never again. Empty when a run made the key.
      *
      * @generated from field: string secret = 2;
      */
     secret: string;
+    /**
+     * Set instead of secret when the tank agent made the key for the person who asked: the
+     * secret is sealed for that person and copied by them, once, through RevealApiKey. It never
+     * passes through the agent (the Lockbox rule).
+     *
+     * @generated from field: string reveal_id = 3;
+     */
+    revealId: string;
 };
 /**
  * Describes the message tank.neural.v1.CreateApiKeyResponse.
  * Use `create(CreateApiKeyResponseSchema)` to create a new message.
  */
 export declare const CreateApiKeyResponseSchema: GenMessage<CreateApiKeyResponse>;
+/**
+ * The key an agent made, for the person who asked for it: only that person, signed in, and
+ * only once; a reveal expires after a day.
+ *
+ * @generated from message tank.neural.v1.RevealApiKeyRequest
+ */
+export type RevealApiKeyRequest = Message<"tank.neural.v1.RevealApiKeyRequest"> & {
+    /**
+     * @generated from field: string reveal_id = 1;
+     */
+    revealId: string;
+};
+/**
+ * Describes the message tank.neural.v1.RevealApiKeyRequest.
+ * Use `create(RevealApiKeyRequestSchema)` to create a new message.
+ */
+export declare const RevealApiKeyRequestSchema: GenMessage<RevealApiKeyRequest>;
+/**
+ * @generated from message tank.neural.v1.RevealApiKeyResponse
+ */
+export type RevealApiKeyResponse = Message<"tank.neural.v1.RevealApiKeyResponse"> & {
+    /**
+     * @generated from field: string secret = 1;
+     */
+    secret: string;
+};
+/**
+ * Describes the message tank.neural.v1.RevealApiKeyResponse.
+ * Use `create(RevealApiKeyResponseSchema)` to create a new message.
+ */
+export declare const RevealApiKeyResponseSchema: GenMessage<RevealApiKeyResponse>;
 /**
  * @generated from message tank.neural.v1.RevokeApiKeyRequest
  */
@@ -346,7 +385,8 @@ export type ChatResponse = Message<"tank.neural.v1.ChatResponse"> & {
  */
 export declare const ChatResponseSchema: GenMessage<ChatResponse>;
 /**
- * Managing keys: a workspace's owners and admins, signed in.
+ * Managing keys: a workspace's owners and admins, signed in, or a run of the tank agent whose
+ * requester is one (checked at every call).
  *
  * @generated from service tank.neural.v1.NeuralKeyService
  */
@@ -382,6 +422,14 @@ export declare const NeuralKeyService: GenService<{
         methodKind: "unary";
         input: typeof GetApiUsageRequestSchema;
         output: typeof GetApiUsageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.neural.v1.NeuralKeyService.RevealApiKey
+     */
+    revealApiKey: {
+        methodKind: "unary";
+        input: typeof RevealApiKeyRequestSchema;
+        output: typeof RevealApiKeyResponseSchema;
     };
 }>;
 /**

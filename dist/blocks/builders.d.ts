@@ -95,6 +95,10 @@ export interface ApprovalPromptInput {
     guardrailId?: string;
     guardrailText?: string;
     blocker?: string;
+    /** A gate that names its own buttons ("Revoke" / "Keep") and says in one line what approving does. */
+    approveLabel?: string;
+    rejectLabel?: string;
+    detail?: string;
 }
 export declare function approvalPrompt(input: ApprovalPromptInput): Block;
 export interface ToolLogEntryInput {

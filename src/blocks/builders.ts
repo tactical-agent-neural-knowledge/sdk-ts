@@ -293,6 +293,10 @@ export interface ApprovalPromptInput {
   guardrailId?: string;
   guardrailText?: string;
   blocker?: string;
+  /** A gate that names its own buttons ("Revoke" / "Keep") and says in one line what approving does. */
+  approveLabel?: string;
+  rejectLabel?: string;
+  detail?: string;
 }
 
 const GATE: Record<string, GateKind> = {
@@ -326,6 +330,9 @@ export function approvalPrompt(input: ApprovalPromptInput): Block {
         guardrailId: input.guardrailId ?? "",
         guardrailText: input.guardrailText ?? "",
         blocker: input.blocker ?? "",
+        approveLabel: input.approveLabel ?? "",
+        rejectLabel: input.rejectLabel ?? "",
+        detail: input.detail ?? "",
       },
     },
     input.blockId,

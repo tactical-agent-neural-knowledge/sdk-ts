@@ -18,7 +18,7 @@ import {
 } from "./blocks.js";
 
 export interface BlocksViewProps
-  extends Pick<BlockContext, "resolveUser" | "resolveChannel" | "formatTime" | "planFile"> {
+  extends Pick<BlockContext, "resolveUser" | "resolveChannel" | "formatTime" | "planFile" | "revealKey"> {
   blocks: Blocks | Block[] | undefined;
   onAction?: (action: BlockActionEvent) => void;
 }

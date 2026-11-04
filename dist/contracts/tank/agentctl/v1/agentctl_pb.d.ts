@@ -6,6 +6,7 @@ import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
 import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
 import type { Guardrail, GuardrailKind, GuardrailScope, Rating, Verdict } from "../../guardrails/v1/guardrails_pb.js";
+import type { ApiKey, GetApiUsageResponse } from "../../neural/v1/neural_pb.js";
 import type { Account, Platform, Post } from "../../social/v1/social_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
 /**
@@ -2550,6 +2551,131 @@ export type ReadCanvasRequest = Message<"tank.agentctl.v1.ReadCanvasRequest"> & 
  * Use `create(ReadCanvasRequestSchema)` to create a new message.
  */
 export declare const ReadCanvasRequestSchema: GenMessage<ReadCanvasRequest>;
+/**
+ * The workspace's Neural API keys, for a run whose requester is an owner or admin (checked
+ * at every call). Nothing here ever carries a key's secret: a key the run makes is copied by
+ * the person who asked from a card the control plane posts, once.
+ *
+ * @generated from message tank.agentctl.v1.ListApiKeysRequest
+ */
+export type ListApiKeysRequest = Message<"tank.agentctl.v1.ListApiKeysRequest"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ListApiKeysRequest.
+ * Use `create(ListApiKeysRequestSchema)` to create a new message.
+ */
+export declare const ListApiKeysRequestSchema: GenMessage<ListApiKeysRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListApiKeysResponse
+ */
+export type ListApiKeysResponse = Message<"tank.agentctl.v1.ListApiKeysResponse"> & {
+    /**
+     * @generated from field: repeated tank.neural.v1.ApiKey keys = 1;
+     */
+    keys: ApiKey[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListApiKeysResponse.
+ * Use `create(ListApiKeysResponseSchema)` to create a new message.
+ */
+export declare const ListApiKeysResponseSchema: GenMessage<ListApiKeysResponse>;
+/**
+ * @generated from message tank.agentctl.v1.CreateApiKeyRequest
+ */
+export type CreateApiKeyRequest = Message<"tank.agentctl.v1.CreateApiKeyRequest"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateApiKeyRequest.
+ * Use `create(CreateApiKeyRequestSchema)` to create a new message.
+ */
+export declare const CreateApiKeyRequestSchema: GenMessage<CreateApiKeyRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CreateApiKeyResponse
+ */
+export type CreateApiKeyResponse = Message<"tank.agentctl.v1.CreateApiKeyResponse"> & {
+    /**
+     * @generated from field: tank.neural.v1.ApiKey created = 1;
+     */
+    created?: ApiKey;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateApiKeyResponse.
+ * Use `create(CreateApiKeyResponseSchema)` to create a new message.
+ */
+export declare const CreateApiKeyResponseSchema: GenMessage<CreateApiKeyResponse>;
+/**
+ * Revoking asks the requester first, on an approval card; the key is revoked when they press
+ * Revoke, and the decision reaches the run on its inbox.
+ *
+ * @generated from message tank.agentctl.v1.RevokeApiKeyRequest
+ */
+export type RevokeApiKeyRequest = Message<"tank.agentctl.v1.RevokeApiKeyRequest"> & {
+    /**
+     * @generated from field: string key_id = 1;
+     */
+    keyId: string;
+    /**
+     * when key_id is empty: the one live key with this name
+     *
+     * @generated from field: string name = 2;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RevokeApiKeyRequest.
+ * Use `create(RevokeApiKeyRequestSchema)` to create a new message.
+ */
+export declare const RevokeApiKeyRequestSchema: GenMessage<RevokeApiKeyRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RevokeApiKeyResponse
+ */
+export type RevokeApiKeyResponse = Message<"tank.agentctl.v1.RevokeApiKeyResponse"> & {
+    /**
+     * @generated from field: string gate_id = 1;
+     */
+    gateId: string;
+    /**
+     * @generated from field: tank.neural.v1.ApiKey revoking = 2;
+     */
+    revoking?: ApiKey;
+};
+/**
+ * Describes the message tank.agentctl.v1.RevokeApiKeyResponse.
+ * Use `create(RevokeApiKeyResponseSchema)` to create a new message.
+ */
+export declare const RevokeApiKeyResponseSchema: GenMessage<RevokeApiKeyResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ApiUsageRequest
+ */
+export type ApiUsageRequest = Message<"tank.agentctl.v1.ApiUsageRequest"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ApiUsageRequest.
+ * Use `create(ApiUsageRequestSchema)` to create a new message.
+ */
+export declare const ApiUsageRequestSchema: GenMessage<ApiUsageRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ApiUsageResponse
+ */
+export type ApiUsageResponse = Message<"tank.agentctl.v1.ApiUsageResponse"> & {
+    /**
+     * @generated from field: tank.neural.v1.GetApiUsageResponse usage = 1;
+     */
+    usage?: GetApiUsageResponse;
+    /**
+     * names for usage's key ids
+     *
+     * @generated from field: repeated tank.neural.v1.ApiKey keys = 2;
+     */
+    keys: ApiKey[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ApiUsageResponse.
+ * Use `create(ApiUsageResponseSchema)` to create a new message.
+ */
+export declare const ApiUsageResponseSchema: GenMessage<ApiUsageResponse>;
 /**
  * Write on an Atlas page: markdown becomes blocks, placed after after_block_id or at
  * the end. How a run answers an ask made on the page itself.
@@ -7261,6 +7387,38 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof AskCanvasRequestSchema;
         output: typeof AskCanvasResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ListApiKeys
+     */
+    listApiKeys: {
+        methodKind: "unary";
+        input: typeof ListApiKeysRequestSchema;
+        output: typeof ListApiKeysResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.CreateApiKey
+     */
+    createApiKey: {
+        methodKind: "unary";
+        input: typeof CreateApiKeyRequestSchema;
+        output: typeof CreateApiKeyResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.RevokeApiKey
+     */
+    revokeApiKey: {
+        methodKind: "unary";
+        input: typeof RevokeApiKeyRequestSchema;
+        output: typeof RevokeApiKeyResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ApiUsage
+     */
+    apiUsage: {
+        methodKind: "unary";
+        input: typeof ApiUsageRequestSchema;
+        output: typeof ApiUsageResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.ListBoards

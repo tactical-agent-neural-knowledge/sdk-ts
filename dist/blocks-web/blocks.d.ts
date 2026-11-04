@@ -15,6 +15,12 @@ export interface BlockContext extends Pick<RichTextViewProps, "resolveUser" | "r
     formatTime?: (ms: number) => string;
     /** Download and Add to Atlas on a plan card; each button shows only when its action is given. */
     planFile?: PlanFileActions | undefined;
+    /**
+     * A "Copy key" button (`neural.key.reveal`): redeem the reveal id with
+     * `NeuralKeyService.RevealApiKey` and put the key on the clipboard, resolving true once it is
+     * there. Without it the button says the key can no longer be shown.
+     */
+    revealKey?: ((revealId: string) => Promise<boolean>) | undefined;
 }
 /** Accent stripe for agent cards: purple = agent execution, cyan = AI/context, amber = needs a human. */
 export declare function Card({ accent, children, label, icon, }: {
