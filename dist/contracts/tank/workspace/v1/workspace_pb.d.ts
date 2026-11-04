@@ -196,6 +196,63 @@ export type ListWorkspacesResponse = Message<"tank.workspace.v1.ListWorkspacesRe
  */
 export declare const ListWorkspacesResponseSchema: GenMessage<ListWorkspacesResponse>;
 /**
+ * What is waiting for the caller in each workspace they belong to, so the
+ * workspace rail and switcher can mark the ones with something new. Counted on
+ * the server over the caller's own memberships only; muted Treads, archived
+ * Treads and threads in them are left out.
+ *
+ * @generated from message tank.workspace.v1.ListWorkspaceUnreadsRequest
+ */
+export type ListWorkspaceUnreadsRequest = Message<"tank.workspace.v1.ListWorkspaceUnreadsRequest"> & {};
+/**
+ * Describes the message tank.workspace.v1.ListWorkspaceUnreadsRequest.
+ * Use `create(ListWorkspaceUnreadsRequestSchema)` to create a new message.
+ */
+export declare const ListWorkspaceUnreadsRequestSchema: GenMessage<ListWorkspaceUnreadsRequest>;
+/**
+ * @generated from message tank.workspace.v1.ListWorkspaceUnreadsResponse
+ */
+export type ListWorkspaceUnreadsResponse = Message<"tank.workspace.v1.ListWorkspaceUnreadsResponse"> & {
+    /**
+     * One per workspace the caller is an active member of, including those with
+     * nothing unread.
+     *
+     * @generated from field: repeated tank.workspace.v1.WorkspaceUnread unreads = 1;
+     */
+    unreads: WorkspaceUnread[];
+};
+/**
+ * Describes the message tank.workspace.v1.ListWorkspaceUnreadsResponse.
+ * Use `create(ListWorkspaceUnreadsResponseSchema)` to create a new message.
+ */
+export declare const ListWorkspaceUnreadsResponseSchema: GenMessage<ListWorkspaceUnreadsResponse>;
+/**
+ * @generated from message tank.workspace.v1.WorkspaceUnread
+ */
+export type WorkspaceUnread = Message<"tank.workspace.v1.WorkspaceUnread"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * Something unread in a Tread, a DM or a followed thread: the dot.
+     *
+     * @generated from field: bool has_unread = 2;
+     */
+    hasUnread: boolean;
+    /**
+     * Mentions plus unread direct messages: the number on the badge.
+     *
+     * @generated from field: int32 badge_count = 3;
+     */
+    badgeCount: number;
+};
+/**
+ * Describes the message tank.workspace.v1.WorkspaceUnread.
+ * Use `create(WorkspaceUnreadSchema)` to create a new message.
+ */
+export declare const WorkspaceUnreadSchema: GenMessage<WorkspaceUnread>;
+/**
  * One call on app open. Everything else is lazy.
  *
  * @generated from message tank.workspace.v1.GetBootstrapRequest
@@ -2681,6 +2738,16 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof ListWorkspacesRequestSchema;
         output: typeof ListWorkspacesResponseSchema;
+    };
+    /**
+     * Unread state per workspace for the switcher; polled, cheap.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.ListWorkspaceUnreads
+     */
+    listWorkspaceUnreads: {
+        methodKind: "unary";
+        input: typeof ListWorkspaceUnreadsRequestSchema;
+        output: typeof ListWorkspaceUnreadsResponseSchema;
     };
     /**
      * The agenture board.
