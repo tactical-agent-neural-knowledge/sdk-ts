@@ -4,6 +4,7 @@ import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native
 import { Button, Chip, Divider, ProgressBar, Text, useTheme } from "react-native-paper";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { planGlance, planMarkdown } from "../blocks/plan.js";
+import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { shades } from "../design/tokens.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
@@ -103,6 +104,8 @@ export function DividerBlock() {
 // ------------------------------------------------------------------ buttons
 export function ActionButton({ button, ctx }) {
     const theme = useTheme();
+    if (button.actionId === ACTION_REVEAL_KEY)
+        return _jsx(RevealKeyButton, { button: button, ctx: ctx });
     const danger = button.style === ButtonStyle.DANGER;
     const mode = button.style === ButtonStyle.UNSPECIFIED ? "outlined" : "contained";
     const color = danger ? { buttonColor: theme.colors.error, textColor: theme.colors.onError } : {};
@@ -119,6 +122,32 @@ export function ActionButton({ button, ctx }) {
         ]);
     };
     return (_jsx(Button, { compact: true, mode: mode, ...color, onPress: onPress, testID: `action-${button.actionId || button.url}`, accessibilityLabel: button.text, style: styles.button, children: button.text }));
+}
+/**
+ * Copies a key a run made, through the host: the key goes from the server to the clipboard and
+ * is never posted as an action. A refusal (somebody else, a second press, expired) is one line.
+ */
+function RevealKeyButton({ button, ctx }) {
+    const theme = useTheme();
+    const [busy, setBusy] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [gone, setGone] = useState(false);
+    const press = async () => {
+        setBusy(true);
+        let ok = false;
+        try {
+            ok = copied ? false : ((await ctx.revealKey?.(button.value)) ?? false);
+        }
+        catch {
+            ok = false;
+        }
+        setBusy(false);
+        if (ok)
+            setCopied(true);
+        else
+            setGone(true);
+    };
+    return (_jsxs(View, { children: [_jsx(Button, { compact: true, mode: "contained", onPress: () => void press(), disabled: busy, testID: `action-${button.actionId}`, accessibilityLabel: copied ? REVEAL_COPIED : button.text, style: styles.button, children: copied ? REVEAL_COPIED : button.text }), gone ? (_jsx(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, testID: "reveal-gone", children: REVEAL_GONE })) : null] }));
 }
 export function ActionsBlock({ value, ctx }) {
     return (_jsx(View, { style: styles.wrap, children: value.buttons.map((b, i) => (_jsx(ActionButton, { button: b, ctx: ctx }, b.actionId || b.url || i))) }));
@@ -298,7 +327,7 @@ export function ApprovalPromptBlock({ value, ctx }) {
     // gate.request_changes). These sent "approve" / "reject" until 2026-10-15 and were
     // ignored, which is why every approval card carried a second pair of buttons.
     const fire = (actionId) => ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
-    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [isWebUrl(value.subject) ? (_jsx(LinkText, { url: value.subject.trim(), ctx: ctx, children: value.subject })) : (_jsx(Text, { variant: "bodyLarge", children: value.subject })), _jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] }), value.decided ? (_jsx(ToneChip, { tone: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "muted", label: value.decision || "decided", testID: "approval-decision" })) : (_jsxs(View, { style: styles.wrap, children: [_jsx(Button, { compact: true, mode: "contained", onPress: () => fire("gate.approve"), testID: "action-approve", style: styles.button, children: "Approve" }), _jsx(Button, { compact: true, mode: "outlined", textColor: theme.colors.error, onPress: () => fire("gate.request_changes"), testID: "action-reject", style: styles.button, children: "Reject" })] }))] }));
+    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [isWebUrl(value.subject) ? (_jsx(LinkText, { url: value.subject.trim(), ctx: ctx, children: value.subject })) : (_jsx(Text, { variant: "bodyLarge", children: value.subject })), value.detail ? (_jsx(Text, { variant: "bodyMedium", style: { color: theme.colors.onSurfaceVariant }, testID: "approval-detail", children: value.detail })) : (_jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] })), value.decided ? (_jsx(ToneChip, { tone: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "muted", label: value.decision || "decided", testID: "approval-decision" })) : (_jsxs(View, { style: styles.wrap, children: [_jsx(Button, { compact: true, mode: "contained", onPress: () => fire("gate.approve"), testID: "action-approve", style: styles.button, children: value.approveLabel || "Approve" }), _jsx(Button, { compact: true, mode: "outlined", textColor: theme.colors.error, onPress: () => fire("gate.request_changes"), testID: "action-reject", style: styles.button, children: value.rejectLabel || "Reject" })] }))] }));
 }
 export function ToolLogBlock({ value, ctx }) {
     const theme = useTheme();

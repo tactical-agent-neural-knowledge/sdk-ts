@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { planGlance, planMarkdown } from "../blocks/plan.js";
+import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
 import { ButtonStyle, CheckState, GateKind, StepStatus } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { typography } from "../design/tokens.js";
 import { Mark } from "./Mark.js";
@@ -76,6 +77,8 @@ export function DividerBlock() {
 // ------------------------------------------------------------------ buttons
 export function ActionButton({ button, ctx, size = "small", }) {
     const [confirming, setConfirming] = useState(false);
+    if (button.actionId === ACTION_REVEAL_KEY)
+        return _jsx(RevealKeyButton, { button: button, ctx: ctx, size: size });
     const color = button.style === ButtonStyle.DANGER
         ? "error"
         : button.style === ButtonStyle.PRIMARY
@@ -90,6 +93,31 @@ export function ActionButton({ button, ctx, size = "small", }) {
                                     setConfirming(false);
                                     fire();
                                 }, children: button.confirm.confirm || "Confirm" })] })] })) : null] }));
+}
+/**
+ * Copies a key a run made, through the host: the key goes from the server to the clipboard and
+ * is never posted as an action. A refusal (somebody else, a second press, expired) is one line.
+ */
+function RevealKeyButton({ button, ctx, size, }) {
+    const [busy, setBusy] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [gone, setGone] = useState(false);
+    const press = async () => {
+        setBusy(true);
+        let ok = false;
+        try {
+            ok = copied ? false : ((await ctx.revealKey?.(button.value)) ?? false);
+        }
+        catch {
+            ok = false;
+        }
+        setBusy(false);
+        if (ok)
+            setCopied(true);
+        else
+            setGone(true);
+    };
+    return (_jsxs(Stack, { spacing: 0.5, alignItems: "flex-start", children: [_jsx(Button, { size: size, variant: "contained", color: "primary", "data-action-id": button.actionId, disabled: busy, onClick: () => void press(), children: copied ? REVEAL_COPIED : button.text }), gone ? (_jsx(Typography, { variant: "caption", color: "text.secondary", role: "status", "data-testid": "reveal-gone", children: REVEAL_GONE })) : null] }));
 }
 export function ActionsBlock({ value, ctx }) {
     return (_jsx(Stack, { direction: "row", spacing: 1, flexWrap: "wrap", useFlexGap: true, children: value.buttons.map((b, i) => (_jsx(ActionButton, { button: b, ctx: ctx }, b.actionId || b.url || i))) }));
@@ -281,7 +309,7 @@ export function ApprovalPromptBlock({ value, ctx }) {
     const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
     if (value.kind === GateKind.GUARDRAIL)
         return _jsx(GuardrailPromptBlock, { value: value, ctx: ctx });
-    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [isWebUrl(value.subject) ? (_jsx(Link, { href: value.subject, target: "_blank", rel: "noopener noreferrer", variant: "body1", sx: { wordBreak: "break-all" }, "data-testid": "approval-subject-link", children: value.subject })) : (_jsx(Typography, { variant: "body1", children: value.subject })), _jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] }), value.decided ? (_jsx(Chip, { size: "small", label: value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } })) : (_jsxs(Stack, { direction: "row", spacing: 1, children: [_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "gate.approve", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.approve", value: value.gateId }), children: "Approve" }), _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "gate.request_changes", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.request_changes", value: value.gateId }), children: "Reject" })] }))] }));
+    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [isWebUrl(value.subject) ? (_jsx(Link, { href: value.subject, target: "_blank", rel: "noopener noreferrer", variant: "body1", sx: { wordBreak: "break-all" }, "data-testid": "approval-subject-link", children: value.subject })) : (_jsx(Typography, { variant: "body1", children: value.subject })), value.detail ? (_jsx(Typography, { variant: "body2", color: "text.secondary", "data-testid": "approval-detail", children: value.detail })) : (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] })), value.decided ? (_jsx(Chip, { size: "small", label: value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } })) : (_jsxs(Stack, { direction: "row", spacing: 1, children: [_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "gate.approve", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.approve", value: value.gateId }), children: value.approveLabel || "Approve" }), _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "gate.request_changes", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.request_changes", value: value.gateId }), children: value.rejectLabel || "Reject" })] }))] }));
 }
 export function ToolLogBlock({ value, ctx }) {
     const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString().slice(11, 19));

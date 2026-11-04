@@ -29,6 +29,7 @@ export {
   planTitle,
   stepEmoji,
 } from "./plan.js";
+export { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "./reveal.js";
 export {
   broadcastRange,
   broadcastWord,

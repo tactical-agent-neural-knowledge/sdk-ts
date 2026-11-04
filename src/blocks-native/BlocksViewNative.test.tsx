@@ -107,6 +107,65 @@ describe("interactions", () => {
     ]);
   });
 
+  it("a run's key card copies through the host once, never posts the action, and refuses after", async () => {
+    const seen: unknown[] = [];
+    const asked: string[] = [];
+    let left = 1;
+    const card = blocks(
+      header("API key “Barn robot” created"),
+      actions([{ actionId: "neural.key.reveal", text: "Copy key", value: "rv1", style: "primary" }], "key"),
+    );
+    const r = render(
+      <BlocksViewNative
+        blocks={card}
+        onAction={(a) => seen.push(a)}
+        revealKey={async (id) => {
+          asked.push(id);
+          return left-- > 0;
+        }}
+      />,
+    );
+    const button = () => byTestId(r.root, "action-neural.key.reveal");
+    await act(async () => (button().props as { onPress: () => void }).onPress());
+    expect(textOf(button())).toContain("Copied");
+    expect(hostTestIds(r.root, "reveal-gone")).toHaveLength(0);
+    await act(async () => (button().props as { onPress: () => void }).onPress());
+    expect(textOf(byTestId(r.root, "reveal-gone"))).toBe("This key can no longer be shown.");
+    expect(asked).toEqual(["rv1"]);
+    expect(seen).toEqual([]);
+    // Somebody else's app, or one with no way to copy: the same sentence.
+    const other = render(<BlocksViewNative blocks={card} />);
+    await act(async () =>
+      (byTestId(other.root, "action-neural.key.reveal").props as { onPress: () => void }).onPress(),
+    );
+    expect(textOf(byTestId(other.root, "reveal-gone"))).toBe("This key can no longer be shown.");
+  });
+
+  it("a gate can name its buttons and say what approving does", () => {
+    const seen: unknown[] = [];
+    const r = render(
+      <BlocksViewNative
+        blocks={blocks([
+          approvalPrompt({
+            gateId: "g9",
+            kind: "destructive_tool",
+            subject: "Revoke API key “Barn robot”?",
+            detail: "Apps using it stop working right away.",
+            approveLabel: "Revoke",
+            rejectLabel: "Keep",
+          }),
+        ])}
+        onAction={(a) => seen.push(a)}
+      />,
+    );
+    expect(textOf(byTestId(r.root, "approval-detail"))).toBe("Apps using it stop working right away.");
+    expect(textOf(byTestId(r.root, "action-approve"))).toContain("Revoke");
+    expect(textOf(byTestId(r.root, "action-reject"))).toContain("Keep");
+    expect(textOf(r.root)).not.toContain("approval needed");
+    press(byTestId(r.root, "action-reject"));
+    expect(seen).toEqual([{ blockId: expect.any(String), actionId: "gate.request_changes", value: "g9" }]);
+  });
+
   it("confirm buttons go through Alert and fire only on confirm", () => {
     const seen: unknown[] = [];
     const r = render(<BlocksViewNative blocks={load("status")} onAction={(a) => seen.push(a)} />);

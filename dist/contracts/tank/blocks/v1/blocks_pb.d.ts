@@ -537,6 +537,21 @@ export type ApprovalPrompt = Message<"tank.blocks.v1.ApprovalPrompt"> & {
      * @generated from field: string blocker = 11;
      */
     blocker: string;
+    /**
+     * A gate that names its own buttons ("Revoke" / "Keep") and says what approving does in
+     * one line, shown instead of the approvals count. Unset: Approve / Reject.
+     *
+     * @generated from field: string approve_label = 12;
+     */
+    approveLabel: string;
+    /**
+     * @generated from field: string reject_label = 13;
+     */
+    rejectLabel: string;
+    /**
+     * @generated from field: string detail = 14;
+     */
+    detail: string;
 };
 /**
  * Describes the message tank.blocks.v1.ApprovalPrompt.

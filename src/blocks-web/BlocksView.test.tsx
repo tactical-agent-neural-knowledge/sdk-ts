@@ -92,6 +92,64 @@ describe("interactions", () => {
     ]);
   });
 
+  it("a run's key card copies through the host once, never posts the action, and refuses after", async () => {
+    const seen: unknown[] = [];
+    const asked: string[] = [];
+    let left = 1;
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView
+          blocks={blocks(
+            header("API key “Barn robot” created"),
+            actions(
+              [{ actionId: "neural.key.reveal", text: "Copy key", value: "rv1", style: "primary" }],
+              "key",
+            ),
+          )}
+          onAction={(a) => seen.push(a)}
+          revealKey={async (id) => {
+            asked.push(id);
+            return left-- > 0;
+          }}
+        />
+      </ThemeProvider>,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Copy key" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Copied" }));
+    expect((await screen.findByTestId("reveal-gone")).textContent).toBe("This key can no longer be shown.");
+    expect(asked).toEqual(["rv1"]);
+    expect(seen).toEqual([]);
+  });
+
+  it("a gate can name its buttons and say what approving does", () => {
+    const seen: unknown[] = [];
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView
+          blocks={blocks([
+            approvalPrompt({
+              gateId: "g9",
+              kind: "destructive_tool",
+              subject: "Revoke API key “Barn robot”?",
+              detail: "Apps using it stop working right away.",
+              approveLabel: "Revoke",
+              rejectLabel: "Keep",
+            }),
+          ])}
+          onAction={(a) => seen.push(a)}
+        />
+      </ThemeProvider>,
+    );
+    expect(screen.getByTestId("approval-detail").textContent).toBe("Apps using it stop working right away.");
+    expect(screen.queryByText(/approval needed/)).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Revoke" }));
+    fireEvent.click(screen.getByRole("button", { name: "Keep" }));
+    expect(seen.map((a) => (a as { actionId: string }).actionId)).toEqual([
+      "gate.approve",
+      "gate.request_changes",
+    ]);
+  });
+
   it("a merge approval links to its pull request, before and after the decision", () => {
     const url = "https://github.com/edero-io/edero-app-v3/pull/20";
     for (const decided of [false, true]) {

@@ -7,7 +7,7 @@ import { file_tank_ai_v1_ai } from "../../ai/v1/ai_pb.js";
 /**
  * Describes the file tank/neural/v1/neural.proto.
  */
-export const file_tank_neural_v1_neural = /*@__PURE__*/ fileDesc("Cht0YW5rL25ldXJhbC92MS9uZXVyYWwucHJvdG8SDnRhbmsubmV1cmFsLnYxIqcBCgZBcGlLZXkSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgVsYXN0NBgDIAEoCRIuCgpjcmVhdGVkX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIwCgxsYXN0X3VzZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmNyZWF0ZWRfYnkYBiABKAkiKgoSTGlzdEFwaUtleXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI7ChNMaXN0QXBpS2V5c1Jlc3BvbnNlEiQKBGtleXMYASADKAsyFi50YW5rLm5ldXJhbC52MS5BcGlLZXkiOQoTQ3JlYXRlQXBpS2V5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCSJLChRDcmVhdGVBcGlLZXlSZXNwb25zZRIjCgNrZXkYASABKAsyFi50YW5rLm5ldXJhbC52MS5BcGlLZXkSDgoGc2VjcmV0GAIgASgJIjsKE1Jldm9rZUFwaUtleVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg4KBmtleV9pZBgCIAEoCSIWChRSZXZva2VBcGlLZXlSZXNwb25zZSJ6CghVc2FnZURheRILCgNkYXkYASABKAkSDgoGa2V5X2lkGAIgASgJEhAKCHJlcXVlc3RzGAMgASgDEhQKDGlucHV0X3Rva2VucxgEIAEoAxIVCg1vdXRwdXRfdG9rZW5zGAUgASgDEhIKCmNoYXJnZV91c2QYBiABKAEiKgoSR2V0QXBpVXNhZ2VSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSKQAQoTR2V0QXBpVXNhZ2VSZXNwb25zZRImCgRkYXlzGAEgAygLMhgudGFuay5uZXVyYWwudjEuVXNhZ2VEYXkSEAoIcmVxdWVzdHMYAiABKAMSFAoMaW5wdXRfdG9rZW5zGAMgASgDEhUKDW91dHB1dF90b2tlbnMYBCABKAMSEgoKY2hhcmdlX3VzZBgFIAEoASJWCgtDaGF0TWVzc2FnZRIMCgRyb2xlGAEgASgJEgwKBHRleHQYAiABKAkSKwoLYXR0YWNobWVudHMYAyADKAsyFi50YW5rLmFpLnYxLkF0dGFjaG1lbnQiYwoLQ2hhdFJlcXVlc3QSLQoIbWVzc2FnZXMYASADKAsyGy50YW5rLm5ldXJhbC52MS5DaGF0TWVzc2FnZRIUCgxpbnN0cnVjdGlvbnMYAiABKAkSDwoHbG9va191cBgDIAEoCCJsCghDaGF0RG9uZRIKCgJpZBgBIAEoCRITCgtzdG9wX3JlYXNvbhgCIAEoCRIUCgxpbnB1dF90b2tlbnMYAyABKAUSFQoNb3V0cHV0X3Rva2VucxgEIAEoBRISCgpjaGFyZ2VfdXNkGAUgASgBIlIKDENoYXRSZXNwb25zZRIPCgVkZWx0YRgBIAEoCUgAEigKBGRvbmUYAiABKAsyGC50YW5rLm5ldXJhbC52MS5DaGF0RG9uZUgAQgcKBWV2ZW50MvgCChBOZXVyYWxLZXlTZXJ2aWNlElYKC0xpc3RBcGlLZXlzEiIudGFuay5uZXVyYWwudjEuTGlzdEFwaUtleXNSZXF1ZXN0GiMudGFuay5uZXVyYWwudjEuTGlzdEFwaUtleXNSZXNwb25zZRJZCgxDcmVhdGVBcGlLZXkSIy50YW5rLm5ldXJhbC52MS5DcmVhdGVBcGlLZXlSZXF1ZXN0GiQudGFuay5uZXVyYWwudjEuQ3JlYXRlQXBpS2V5UmVzcG9uc2USWQoMUmV2b2tlQXBpS2V5EiMudGFuay5uZXVyYWwudjEuUmV2b2tlQXBpS2V5UmVxdWVzdBokLnRhbmsubmV1cmFsLnYxLlJldm9rZUFwaUtleVJlc3BvbnNlElYKC0dldEFwaVVzYWdlEiIudGFuay5uZXVyYWwudjEuR2V0QXBpVXNhZ2VSZXF1ZXN0GiMudGFuay5uZXVyYWwudjEuR2V0QXBpVXNhZ2VSZXNwb25zZTJUCg1OZXVyYWxTZXJ2aWNlEkMKBENoYXQSGy50YW5rLm5ldXJhbC52MS5DaGF0UmVxdWVzdBocLnRhbmsubmV1cmFsLnYxLkNoYXRSZXNwb25zZTABQtABChJjb20udGFuay5uZXVyYWwudjFCC05ldXJhbFByb3RvUAFaU2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvbmV1cmFsL3YxO25ldXJhbHYxogIDVE5YqgIOVGFuay5OZXVyYWwuVjHKAg5UYW5rXE5ldXJhbFxWMeICGlRhbmtcTmV1cmFsXFYxXEdQQk1ldGFkYXRh6gIQVGFuazo6TmV1cmFsOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_ai_v1_ai]);
+export const file_tank_neural_v1_neural = /*@__PURE__*/ fileDesc("Cht0YW5rL25ldXJhbC92MS9uZXVyYWwucHJvdG8SDnRhbmsubmV1cmFsLnYxIqcBCgZBcGlLZXkSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRINCgVsYXN0NBgDIAEoCRIuCgpjcmVhdGVkX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIwCgxsYXN0X3VzZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmNyZWF0ZWRfYnkYBiABKAkiKgoSTGlzdEFwaUtleXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI7ChNMaXN0QXBpS2V5c1Jlc3BvbnNlEiQKBGtleXMYASADKAsyFi50YW5rLm5ldXJhbC52MS5BcGlLZXkiOQoTQ3JlYXRlQXBpS2V5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCSJeChRDcmVhdGVBcGlLZXlSZXNwb25zZRIjCgNrZXkYASABKAsyFi50YW5rLm5ldXJhbC52MS5BcGlLZXkSDgoGc2VjcmV0GAIgASgJEhEKCXJldmVhbF9pZBgDIAEoCSIoChNSZXZlYWxBcGlLZXlSZXF1ZXN0EhEKCXJldmVhbF9pZBgBIAEoCSImChRSZXZlYWxBcGlLZXlSZXNwb25zZRIOCgZzZWNyZXQYASABKAkiOwoTUmV2b2tlQXBpS2V5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDgoGa2V5X2lkGAIgASgJIhYKFFJldm9rZUFwaUtleVJlc3BvbnNlInoKCFVzYWdlRGF5EgsKA2RheRgBIAEoCRIOCgZrZXlfaWQYAiABKAkSEAoIcmVxdWVzdHMYAyABKAMSFAoMaW5wdXRfdG9rZW5zGAQgASgDEhUKDW91dHB1dF90b2tlbnMYBSABKAMSEgoKY2hhcmdlX3VzZBgGIAEoASIqChJHZXRBcGlVc2FnZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIpABChNHZXRBcGlVc2FnZVJlc3BvbnNlEiYKBGRheXMYASADKAsyGC50YW5rLm5ldXJhbC52MS5Vc2FnZURheRIQCghyZXF1ZXN0cxgCIAEoAxIUCgxpbnB1dF90b2tlbnMYAyABKAMSFQoNb3V0cHV0X3Rva2VucxgEIAEoAxISCgpjaGFyZ2VfdXNkGAUgASgBIlYKC0NoYXRNZXNzYWdlEgwKBHJvbGUYASABKAkSDAoEdGV4dBgCIAEoCRIrCgthdHRhY2htZW50cxgDIAMoCzIWLnRhbmsuYWkudjEuQXR0YWNobWVudCJjCgtDaGF0UmVxdWVzdBItCghtZXNzYWdlcxgBIAMoCzIbLnRhbmsubmV1cmFsLnYxLkNoYXRNZXNzYWdlEhQKDGluc3RydWN0aW9ucxgCIAEoCRIPCgdsb29rX3VwGAMgASgIImwKCENoYXREb25lEgoKAmlkGAEgASgJEhMKC3N0b3BfcmVhc29uGAIgASgJEhQKDGlucHV0X3Rva2VucxgDIAEoBRIVCg1vdXRwdXRfdG9rZW5zGAQgASgFEhIKCmNoYXJnZV91c2QYBSABKAEiUgoMQ2hhdFJlc3BvbnNlEg8KBWRlbHRhGAEgASgJSAASKAoEZG9uZRgCIAEoCzIYLnRhbmsubmV1cmFsLnYxLkNoYXREb25lSABCBwoFZXZlbnQy0wMKEE5ldXJhbEtleVNlcnZpY2USVgoLTGlzdEFwaUtleXMSIi50YW5rLm5ldXJhbC52MS5MaXN0QXBpS2V5c1JlcXVlc3QaIy50YW5rLm5ldXJhbC52MS5MaXN0QXBpS2V5c1Jlc3BvbnNlElkKDENyZWF0ZUFwaUtleRIjLnRhbmsubmV1cmFsLnYxLkNyZWF0ZUFwaUtleVJlcXVlc3QaJC50YW5rLm5ldXJhbC52MS5DcmVhdGVBcGlLZXlSZXNwb25zZRJZCgxSZXZva2VBcGlLZXkSIy50YW5rLm5ldXJhbC52MS5SZXZva2VBcGlLZXlSZXF1ZXN0GiQudGFuay5uZXVyYWwudjEuUmV2b2tlQXBpS2V5UmVzcG9uc2USVgoLR2V0QXBpVXNhZ2USIi50YW5rLm5ldXJhbC52MS5HZXRBcGlVc2FnZVJlcXVlc3QaIy50YW5rLm5ldXJhbC52MS5HZXRBcGlVc2FnZVJlc3BvbnNlElkKDFJldmVhbEFwaUtleRIjLnRhbmsubmV1cmFsLnYxLlJldmVhbEFwaUtleVJlcXVlc3QaJC50YW5rLm5ldXJhbC52MS5SZXZlYWxBcGlLZXlSZXNwb25zZTJUCg1OZXVyYWxTZXJ2aWNlEkMKBENoYXQSGy50YW5rLm5ldXJhbC52MS5DaGF0UmVxdWVzdBocLnRhbmsubmV1cmFsLnYxLkNoYXRSZXNwb25zZTABQtABChJjb20udGFuay5uZXVyYWwudjFCC05ldXJhbFByb3RvUAFaU2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvbmV1cmFsL3YxO25ldXJhbHYxogIDVE5YqgIOVGFuay5OZXVyYWwuVjHKAg5UYW5rXE5ldXJhbFxWMeICGlRhbmtcTmV1cmFsXFYxXEdQQk1ldGFkYXRh6gIQVGFuazo6TmV1cmFsOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_ai_v1_ai]);
 /**
  * Describes the message tank.neural.v1.ApiKey.
  * Use `create(ApiKeySchema)` to create a new message.
@@ -34,52 +34,63 @@ export const CreateApiKeyRequestSchema = /*@__PURE__*/ messageDesc(file_tank_neu
  */
 export const CreateApiKeyResponseSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 4);
 /**
+ * Describes the message tank.neural.v1.RevealApiKeyRequest.
+ * Use `create(RevealApiKeyRequestSchema)` to create a new message.
+ */
+export const RevealApiKeyRequestSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 5);
+/**
+ * Describes the message tank.neural.v1.RevealApiKeyResponse.
+ * Use `create(RevealApiKeyResponseSchema)` to create a new message.
+ */
+export const RevealApiKeyResponseSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 6);
+/**
  * Describes the message tank.neural.v1.RevokeApiKeyRequest.
  * Use `create(RevokeApiKeyRequestSchema)` to create a new message.
  */
-export const RevokeApiKeyRequestSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 5);
+export const RevokeApiKeyRequestSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 7);
 /**
  * Describes the message tank.neural.v1.RevokeApiKeyResponse.
  * Use `create(RevokeApiKeyResponseSchema)` to create a new message.
  */
-export const RevokeApiKeyResponseSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 6);
+export const RevokeApiKeyResponseSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 8);
 /**
  * Describes the message tank.neural.v1.UsageDay.
  * Use `create(UsageDaySchema)` to create a new message.
  */
-export const UsageDaySchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 7);
+export const UsageDaySchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 9);
 /**
  * Describes the message tank.neural.v1.GetApiUsageRequest.
  * Use `create(GetApiUsageRequestSchema)` to create a new message.
  */
-export const GetApiUsageRequestSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 8);
+export const GetApiUsageRequestSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 10);
 /**
  * Describes the message tank.neural.v1.GetApiUsageResponse.
  * Use `create(GetApiUsageResponseSchema)` to create a new message.
  */
-export const GetApiUsageResponseSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 9);
+export const GetApiUsageResponseSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 11);
 /**
  * Describes the message tank.neural.v1.ChatMessage.
  * Use `create(ChatMessageSchema)` to create a new message.
  */
-export const ChatMessageSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 10);
+export const ChatMessageSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 12);
 /**
  * Describes the message tank.neural.v1.ChatRequest.
  * Use `create(ChatRequestSchema)` to create a new message.
  */
-export const ChatRequestSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 11);
+export const ChatRequestSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 13);
 /**
  * Describes the message tank.neural.v1.ChatDone.
  * Use `create(ChatDoneSchema)` to create a new message.
  */
-export const ChatDoneSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 12);
+export const ChatDoneSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 14);
 /**
  * Describes the message tank.neural.v1.ChatResponse.
  * Use `create(ChatResponseSchema)` to create a new message.
  */
-export const ChatResponseSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 13);
+export const ChatResponseSchema = /*@__PURE__*/ messageDesc(file_tank_neural_v1_neural, 15);
 /**
- * Managing keys: a workspace's owners and admins, signed in.
+ * Managing keys: a workspace's owners and admins, signed in, or a run of the tank agent whose
+ * requester is one (checked at every call).
  *
  * @generated from service tank.neural.v1.NeuralKeyService
  */
