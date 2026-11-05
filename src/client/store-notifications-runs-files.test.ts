@@ -138,6 +138,36 @@ describe("notifications", () => {
     expect(store.selectNotifications("ws1", true)).toEqual([]);
   });
 
+  it("settle reads what the server no longer lists as unread, and nothing else", () => {
+    const store = new TankStore();
+    store.dispatch({
+      type: "notifications/upsert",
+      workspaceId: "ws1",
+      notifications: [
+        notif("n1", T0),
+        notif("n2", T0 + 1),
+        notif("n3", T0 + 2, { readAt: timestampFromMs(T0 + 5) }),
+      ],
+      unreadCount: 2,
+    });
+    store.dispatch({
+      type: "notifications/settle",
+      workspaceId: "ws1",
+      unreadIds: ["n2"],
+      readAt: timestampFromMs(T0 + 9),
+    });
+    expect(store.selectNotifications("ws1", true).map((n) => n.id)).toEqual(["n2"]);
+    expect(store.getState().notifications.n3?.readAt).toEqual(timestampFromMs(T0 + 5));
+    const before = store.getState();
+    store.dispatch({
+      type: "notifications/settle",
+      workspaceId: "ws1",
+      unreadIds: ["n2"],
+      readAt: timestampFromMs(T0 + 10),
+    });
+    expect(store.getState()).toBe(before);
+  });
+
   it("restore puts rows and the count back", () => {
     const store = bootstrapped(2);
     const before = [notif("n1", T0), notif("n2", T0 + 1)];

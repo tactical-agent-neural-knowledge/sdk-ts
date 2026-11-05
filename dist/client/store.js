@@ -703,6 +703,18 @@ export function reduce(state, action) {
                 },
             };
         }
+        case "notifications/settle": {
+            const keep = new Set(action.unreadIds);
+            let notifications;
+            for (const id of state.notificationIds[action.workspaceId] ?? []) {
+                const n = state.notifications[id];
+                if (n && isUnread(n) && !keep.has(id)) {
+                    notifications ??= { ...state.notifications };
+                    notifications[id] = { ...n, readAt: action.readAt };
+                }
+            }
+            return notifications ? { ...state, notifications } : state;
+        }
         case "unreadNotificationCount/set": {
             const count = Math.max(0, action.count);
             if (state.unreadNotificationCount[action.workspaceId] === count)

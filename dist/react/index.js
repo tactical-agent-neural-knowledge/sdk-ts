@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { create } from "@bufbuild/protobuf";
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, useSyncExternalStore, } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore, } from "react";
 import { isTerminalRunState } from "../blocks/runTone.js";
 import { notificationPagingKey, } from "../client/store.js";
 import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
@@ -306,6 +306,10 @@ export function usePresence(userIds) {
 export function useTyping(channelId, threadRootId = "") {
     return useTankSelector(useCallback((s) => s.selectTyping(channelId, threadRootId), [channelId, threadRootId]));
 }
+/** A list with more pages may simply not have reached the older unread rows yet. */
+function hasMorePages(paging) {
+    return paging?.loaded === true && paging.hasMore;
+}
 /** A workspace's notifications (unread or all), loading the first page on mount. */
 export function useNotifications(workspaceId, opts = {}) {
     const { client } = useCtx();
@@ -326,19 +330,49 @@ export function useNotifications(workspaceId, opts = {}) {
         });
     }, [client, workspaceId, unreadOnly, mode, opts.pageSize]);
     const markRead = useCallback((ids) => client.markNotificationsRead(workspaceId, ids), [client, workspaceId]);
+    // The first page again, from the server, whatever was loaded before.
+    const refresh = useCallback(() => {
+        const cur = client.store.getState().notificationPaging[notificationPagingKey(workspaceId, mode)];
+        if (cur?.loading)
+            return Promise.resolve(undefined);
+        return client.loadNotifications({
+            workspaceId,
+            unreadOnly,
+            ...(opts.pageSize ? { limit: opts.pageSize } : {}),
+        });
+    }, [client, workspaceId, unreadOnly, mode, opts.pageSize]);
+    // Every time the list is shown, not only the first: a notification that arrived while
+    // the socket was away (another account on the device, an app in the background) still
+    // raised the badge through the bootstrap, and a list loaded once never fetched it, so
+    // the badge said "2 unread" over an empty list (Robby, 2026-11-05).
     useEffect(() => {
         if (!load || !workspaceId)
             return;
-        const cur = client.store.getState().notificationPaging[notificationPagingKey(workspaceId, mode)];
-        if (!cur?.loaded)
-            void loadMore().catch(() => undefined);
-    }, [client, workspaceId, mode, load, loadMore]);
+        void refresh().catch(() => undefined);
+    }, [load, workspaceId, refresh]);
+    // And whenever the badge counts more unread rows than the list holds.
+    const unreadCount = useTankSelector(useCallback((s) => s.getState().unreadNotificationCount[workspaceId] ?? 0, [workspaceId]));
+    const heldUnread = notifications.filter((n) => n.readAt === undefined).length;
+    // Once per count: a list with more pages may not have reached the older rows yet, and a
+    // count the server still disagrees with after a refresh is not asked about again.
+    const behind = load && unreadCount > heldUnread && !hasMorePages(paging);
+    const askedFor = useRef(-1);
+    useEffect(() => {
+        if (!behind || askedFor.current === unreadCount)
+            return;
+        const t = setTimeout(() => {
+            askedFor.current = unreadCount;
+            void refresh().catch(() => undefined);
+        }, 500);
+        return () => clearTimeout(t);
+    }, [behind, unreadCount, refresh]);
     return {
         notifications,
         loading: paging?.loading ?? false,
         hasMore: paging?.loaded ? paging.hasMore : false,
         loadMore,
         markRead,
+        refresh,
     };
 }
 /** The workspace's unread notification badge (bootstrap count + live deltas). */
