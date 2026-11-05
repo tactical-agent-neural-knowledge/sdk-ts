@@ -127,6 +127,8 @@ export interface UseNotificationsResult {
     loadMore: () => Promise<unknown>;
     /** Mark rows read (no ids = every unread one in the workspace). Optimistic. */
     markRead: (notificationIds?: string[]) => Promise<void>;
+    /** Fetch the first page again from the server (a screen coming back into view). */
+    refresh: () => Promise<unknown>;
 }
 /** A workspace's notifications (unread or all), loading the first page on mount. */
 export declare function useNotifications(workspaceId: string, opts?: UseNotificationsOptions): UseNotificationsResult;

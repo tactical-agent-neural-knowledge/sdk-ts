@@ -240,6 +240,12 @@ export type Action =
   | { type: "notifications/read"; workspaceId: string; notificationIds: string[]; readAt: Timestamp }
   /** Put rows back (rollback of an optimistic read) and reset the unread count. */
   | { type: "notifications/restore"; workspaceId: string; notifications: Notification[]; unreadCount: number }
+  /**
+   * The server's complete unread list for a workspace (a first page with nothing after it):
+   * a row held here as unread that the server does not list was read somewhere this client
+   * never heard about, so it is read here too.
+   */
+  | { type: "notifications/settle"; workspaceId: string; unreadIds: string[]; readAt: Timestamp }
   | { type: "unreadNotificationCount/set"; workspaceId: string; count: number }
   | { type: "entitlements/set"; workspaceId: string; entitlements: Entitlements }
   | {
@@ -916,6 +922,18 @@ export function reduce(state: TankState, action: Action): TankState {
           [action.workspaceId]: Math.max(0, action.unreadCount),
         },
       };
+    }
+    case "notifications/settle": {
+      const keep = new Set(action.unreadIds);
+      let notifications: Record<string, Notification> | undefined;
+      for (const id of state.notificationIds[action.workspaceId] ?? []) {
+        const n = state.notifications[id];
+        if (n && isUnread(n) && !keep.has(id)) {
+          notifications ??= { ...state.notifications };
+          notifications[id] = { ...n, readAt: action.readAt };
+        }
+      }
+      return notifications ? { ...state, notifications } : state;
     }
     case "unreadNotificationCount/set": {
       const count = Math.max(0, action.count);

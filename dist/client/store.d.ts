@@ -236,6 +236,17 @@ export type Action = {
     workspaceId: string;
     notifications: Notification[];
     unreadCount: number;
+}
+/**
+ * The server's complete unread list for a workspace (a first page with nothing after it):
+ * a row held here as unread that the server does not list was read somewhere this client
+ * never heard about, so it is read here too.
+ */
+ | {
+    type: "notifications/settle";
+    workspaceId: string;
+    unreadIds: string[];
+    readAt: Timestamp;
 } | {
     type: "unreadNotificationCount/set";
     workspaceId: string;

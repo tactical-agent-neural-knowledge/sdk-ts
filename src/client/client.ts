@@ -947,6 +947,14 @@ export class TankClient {
         notifications: res.notifications,
         unreadCount: res.unreadCount,
       });
+      if (mode === "unread" && cursor === "" && res.nextCursor === "") {
+        this.store.dispatch({
+          type: "notifications/settle",
+          workspaceId,
+          unreadIds: res.notifications.map((n) => n.id),
+          readAt: timestampFromMs(Date.now()),
+        });
+      }
       this.store.dispatch({
         type: "notificationPaging/set",
         workspaceId,

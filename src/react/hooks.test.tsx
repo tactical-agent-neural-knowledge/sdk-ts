@@ -151,7 +151,7 @@ afterEach(() => {
 });
 
 describe("notification hooks", () => {
-  it("useNotifications loads the first page per mode once; the badge follows bootstrap and live events", async () => {
+  it("useNotifications loads the first page each time a mode is shown; the badge follows bootstrap and live events", async () => {
     const client = makeClient();
     await client.bootstrap("ws1");
     const { result, rerender } = renderHook(({ unreadOnly }) => useNotifications("ws1", { unreadOnly }), {
@@ -169,7 +169,8 @@ describe("notification hooks", () => {
     expect(lists.map((l) => l.unreadOnly)).toEqual([false, true]);
     rerender({ unreadOnly: false });
     await flush();
-    expect(lists).toHaveLength(2); // "all" was already loaded
+    // Shown again, asked again: a list loaded once would miss what arrived while away.
+    expect(lists.map((l) => l.unreadOnly)).toEqual([false, true, false]);
 
     act(() =>
       client.store.applyEnvelope(
