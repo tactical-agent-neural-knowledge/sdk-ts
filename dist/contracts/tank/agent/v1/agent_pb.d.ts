@@ -384,6 +384,44 @@ export type HeartbeatResponse = Message<"tank.agent.v1.HeartbeatResponse"> & {};
  */
 export declare const HeartbeatResponseSchema: GenMessage<HeartbeatResponse>;
 /**
+ * A fresh agent-session token for a run that has not ended, for the control plane only. A
+ * run can wait days for a person (a plan or merge approval) and its token keeps a fixed
+ * eight-hour clock; without this the run could not say anything once the wait was over.
+ * The old token is revoked; the new one has the same principal, workspace, thread, scopes
+ * and clock.
+ *
+ * @generated from message tank.agent.v1.RenewRunTokenRequest
+ */
+export type RenewRunTokenRequest = Message<"tank.agent.v1.RenewRunTokenRequest"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+};
+/**
+ * Describes the message tank.agent.v1.RenewRunTokenRequest.
+ * Use `create(RenewRunTokenRequestSchema)` to create a new message.
+ */
+export declare const RenewRunTokenRequestSchema: GenMessage<RenewRunTokenRequest>;
+/**
+ * @generated from message tank.agent.v1.RenewRunTokenResponse
+ */
+export type RenewRunTokenResponse = Message<"tank.agent.v1.RenewRunTokenResponse"> & {
+    /**
+     * @generated from field: string agent_session_token = 1;
+     */
+    agentSessionToken: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp token_expires_at = 2;
+     */
+    tokenExpiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agent.v1.RenewRunTokenResponse.
+ * Use `create(RenewRunTokenResponseSchema)` to create a new message.
+ */
+export declare const RenewRunTokenResponseSchema: GenMessage<RenewRunTokenResponse>;
+/**
  * @generated from message tank.agent.v1.SetStatusRequest
  */
 export type SetStatusRequest = Message<"tank.agent.v1.SetStatusRequest"> & {
@@ -2311,6 +2349,14 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof HeartbeatRequestSchema;
         output: typeof HeartbeatResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.RenewRunToken
+     */
+    renewRunToken: {
+        methodKind: "unary";
+        input: typeof RenewRunTokenRequestSchema;
+        output: typeof RenewRunTokenResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.SetStatus

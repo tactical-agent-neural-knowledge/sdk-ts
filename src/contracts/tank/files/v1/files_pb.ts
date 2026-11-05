@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/files/v1/files.proto.
  */
 export const file_tank_files_v1_files: GenFile = /*@__PURE__*/
-  fileDesc("Chl0YW5rL2ZpbGVzL3YxL2ZpbGVzLnByb3RvEg10YW5rLmZpbGVzLnYxIqUDCgRGaWxlEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRITCgt1cGxvYWRlcl9pZBgDIAEoCRIMCgRuYW1lGAQgASgJEgwKBG1pbWUYBSABKAkSDAoEc2l6ZRgGIAEoAxIuCgtzY2FuX3N0YXR1cxgHIAEoDjIZLnRhbmsuZmlsZXMudjEuU2NhblN0YXR1cxINCgV3aWR0aBgIIAEoBRIOCgZoZWlnaHQYCSABKAUSEwoLZHVyYXRpb25fbXMYCiABKAMSNwoKdGh1bWJuYWlscxgLIAMoCzIjLnRhbmsuZmlsZXMudjEuRmlsZS5UaHVtYm5haWxzRW50cnkSLgoKY3JlYXRlZF9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHQoVc2hhcmVkX2luX2NoYW5uZWxfaWRzGA0gAygJEh0KFXVwbG9hZGVyX2Rpc3BsYXlfbmFtZRgOIAEoCRoxCg9UaHVtYm5haWxzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASJpChNDcmVhdGVVcGxvYWRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEgwKBG1pbWUYAyABKAkSDAoEc2l6ZRgEIAEoAxISCgpjaGFubmVsX2lkGAUgASgJIoYBChRDcmVhdGVVcGxvYWRSZXNwb25zZRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlEhIKCnVwbG9hZF91cmwYAiABKAkSEQoJdXBsb2FkX2lkGAMgASgJEhEKCXBhcnRfdXJscxgEIAMoCRIRCglwYXJ0X3NpemUYBSABKAMiSgoVQ29tcGxldGVVcGxvYWRSZXF1ZXN0Eg8KB2ZpbGVfaWQYASABKAkSEQoJdXBsb2FkX2lkGAIgASgJEg0KBWV0YWdzGAMgAygJIjsKFkNvbXBsZXRlVXBsb2FkUmVzcG9uc2USIQoEZmlsZRgBIAEoCzITLnRhbmsuZmlsZXMudjEuRmlsZSJGChVHZXREb3dubG9hZFVybFJlcXVlc3QSDwoHZmlsZV9pZBgBIAEoCRIOCgZpbmxpbmUYAiABKAgSDAoEcGFnZRgDIAEoCCJVChZHZXREb3dubG9hZFVybFJlc3BvbnNlEgsKA3VybBgBIAEoCRIuCgpleHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIhCg5HZXRGaWxlUmVxdWVzdBIPCgdmaWxlX2lkGAEgASgJIjQKD0dldEZpbGVSZXNwb25zZRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlIlsKEExpc3RGaWxlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDgoGY3Vyc29yGAMgASgJEg0KBWxpbWl0GAQgASgFIkwKEUxpc3RGaWxlc1Jlc3BvbnNlEiIKBWZpbGVzGAEgAygLMhMudGFuay5maWxlcy52MS5GaWxlEhMKC25leHRfY3Vyc29yGAIgASgJIiQKEURlbGV0ZUZpbGVSZXF1ZXN0Eg8KB2ZpbGVfaWQYASABKAkiKQoSRGVsZXRlRmlsZVJlc3BvbnNlEhMKC21lc3NhZ2VfaWRzGAEgAygJKosBCgpTY2FuU3RhdHVzEhsKF1NDQU5fU1RBVFVTX1VOU1BFQ0lGSUVEEAASFwoTU0NBTl9TVEFUVVNfUEVORElORxABEhUKEVNDQU5fU1RBVFVTX0NMRUFOEAISGAoUU0NBTl9TVEFUVVNfSU5GRUNURUQQAxIWChJTQ0FOX1NUQVRVU19GQUlMRUQQBDKSBAoMRmlsZXNTZXJ2aWNlElcKDENyZWF0ZVVwbG9hZBIiLnRhbmsuZmlsZXMudjEuQ3JlYXRlVXBsb2FkUmVxdWVzdBojLnRhbmsuZmlsZXMudjEuQ3JlYXRlVXBsb2FkUmVzcG9uc2USXQoOQ29tcGxldGVVcGxvYWQSJC50YW5rLmZpbGVzLnYxLkNvbXBsZXRlVXBsb2FkUmVxdWVzdBolLnRhbmsuZmlsZXMudjEuQ29tcGxldGVVcGxvYWRSZXNwb25zZRJdCg5HZXREb3dubG9hZFVybBIkLnRhbmsuZmlsZXMudjEuR2V0RG93bmxvYWRVcmxSZXF1ZXN0GiUudGFuay5maWxlcy52MS5HZXREb3dubG9hZFVybFJlc3BvbnNlEkgKB0dldEZpbGUSHS50YW5rLmZpbGVzLnYxLkdldEZpbGVSZXF1ZXN0Gh4udGFuay5maWxlcy52MS5HZXRGaWxlUmVzcG9uc2USTgoJTGlzdEZpbGVzEh8udGFuay5maWxlcy52MS5MaXN0RmlsZXNSZXF1ZXN0GiAudGFuay5maWxlcy52MS5MaXN0RmlsZXNSZXNwb25zZRJRCgpEZWxldGVGaWxlEiAudGFuay5maWxlcy52MS5EZWxldGVGaWxlUmVxdWVzdBohLnRhbmsuZmlsZXMudjEuRGVsZXRlRmlsZVJlc3BvbnNlQsgBChFjb20udGFuay5maWxlcy52MUIKRmlsZXNQcm90b1ABWlFnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2ZpbGVzL3YxO2ZpbGVzdjGiAgNURliqAg1UYW5rLkZpbGVzLlYxygINVGFua1xGaWxlc1xWMeICGVRhbmtcRmlsZXNcVjFcR1BCTWV0YWRhdGHqAg9UYW5rOjpGaWxlczo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Chl0YW5rL2ZpbGVzL3YxL2ZpbGVzLnByb3RvEg10YW5rLmZpbGVzLnYxIqUDCgRGaWxlEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRITCgt1cGxvYWRlcl9pZBgDIAEoCRIMCgRuYW1lGAQgASgJEgwKBG1pbWUYBSABKAkSDAoEc2l6ZRgGIAEoAxIuCgtzY2FuX3N0YXR1cxgHIAEoDjIZLnRhbmsuZmlsZXMudjEuU2NhblN0YXR1cxINCgV3aWR0aBgIIAEoBRIOCgZoZWlnaHQYCSABKAUSEwoLZHVyYXRpb25fbXMYCiABKAMSNwoKdGh1bWJuYWlscxgLIAMoCzIjLnRhbmsuZmlsZXMudjEuRmlsZS5UaHVtYm5haWxzRW50cnkSLgoKY3JlYXRlZF9hdBgMIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHQoVc2hhcmVkX2luX2NoYW5uZWxfaWRzGA0gAygJEh0KFXVwbG9hZGVyX2Rpc3BsYXlfbmFtZRgOIAEoCRoxCg9UaHVtYm5haWxzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASJpChNDcmVhdGVVcGxvYWRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEgwKBG1pbWUYAyABKAkSDAoEc2l6ZRgEIAEoAxISCgpjaGFubmVsX2lkGAUgASgJIoYBChRDcmVhdGVVcGxvYWRSZXNwb25zZRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlEhIKCnVwbG9hZF91cmwYAiABKAkSEQoJdXBsb2FkX2lkGAMgASgJEhEKCXBhcnRfdXJscxgEIAMoCRIRCglwYXJ0X3NpemUYBSABKAMiSgoVQ29tcGxldGVVcGxvYWRSZXF1ZXN0Eg8KB2ZpbGVfaWQYASABKAkSEQoJdXBsb2FkX2lkGAIgASgJEg0KBWV0YWdzGAMgAygJIjsKFkNvbXBsZXRlVXBsb2FkUmVzcG9uc2USIQoEZmlsZRgBIAEoCzITLnRhbmsuZmlsZXMudjEuRmlsZSJGChVHZXREb3dubG9hZFVybFJlcXVlc3QSDwoHZmlsZV9pZBgBIAEoCRIOCgZpbmxpbmUYAiABKAgSDAoEcGFnZRgDIAEoCCJVChZHZXREb3dubG9hZFVybFJlc3BvbnNlEgsKA3VybBgBIAEoCRIuCgpleHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIhCg5HZXRGaWxlUmVxdWVzdBIPCgdmaWxlX2lkGAEgASgJIjQKD0dldEZpbGVSZXNwb25zZRIhCgRmaWxlGAEgASgLMhMudGFuay5maWxlcy52MS5GaWxlIlsKEExpc3RGaWxlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDgoGY3Vyc29yGAMgASgJEg0KBWxpbWl0GAQgASgFIkwKEUxpc3RGaWxlc1Jlc3BvbnNlEiIKBWZpbGVzGAEgAygLMhMudGFuay5maWxlcy52MS5GaWxlEhMKC25leHRfY3Vyc29yGAIgASgJIiUKFk9wZW5QcmV2aWV3TGlua1JlcXVlc3QSCwoDdXJsGAEgASgJIlYKF09wZW5QcmV2aWV3TGlua1Jlc3BvbnNlEgsKA3VybBgBIAEoCRIuCgpleHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIkChFEZWxldGVGaWxlUmVxdWVzdBIPCgdmaWxlX2lkGAEgASgJIikKEkRlbGV0ZUZpbGVSZXNwb25zZRITCgttZXNzYWdlX2lkcxgBIAMoCSqLAQoKU2NhblN0YXR1cxIbChdTQ0FOX1NUQVRVU19VTlNQRUNJRklFRBAAEhcKE1NDQU5fU1RBVFVTX1BFTkRJTkcQARIVChFTQ0FOX1NUQVRVU19DTEVBThACEhgKFFNDQU5fU1RBVFVTX0lORkVDVEVEEAMSFgoSU0NBTl9TVEFUVVNfRkFJTEVEEAQy9AQKDEZpbGVzU2VydmljZRJXCgxDcmVhdGVVcGxvYWQSIi50YW5rLmZpbGVzLnYxLkNyZWF0ZVVwbG9hZFJlcXVlc3QaIy50YW5rLmZpbGVzLnYxLkNyZWF0ZVVwbG9hZFJlc3BvbnNlEl0KDkNvbXBsZXRlVXBsb2FkEiQudGFuay5maWxlcy52MS5Db21wbGV0ZVVwbG9hZFJlcXVlc3QaJS50YW5rLmZpbGVzLnYxLkNvbXBsZXRlVXBsb2FkUmVzcG9uc2USXQoOR2V0RG93bmxvYWRVcmwSJC50YW5rLmZpbGVzLnYxLkdldERvd25sb2FkVXJsUmVxdWVzdBolLnRhbmsuZmlsZXMudjEuR2V0RG93bmxvYWRVcmxSZXNwb25zZRJICgdHZXRGaWxlEh0udGFuay5maWxlcy52MS5HZXRGaWxlUmVxdWVzdBoeLnRhbmsuZmlsZXMudjEuR2V0RmlsZVJlc3BvbnNlEk4KCUxpc3RGaWxlcxIfLnRhbmsuZmlsZXMudjEuTGlzdEZpbGVzUmVxdWVzdBogLnRhbmsuZmlsZXMudjEuTGlzdEZpbGVzUmVzcG9uc2USUQoKRGVsZXRlRmlsZRIgLnRhbmsuZmlsZXMudjEuRGVsZXRlRmlsZVJlcXVlc3QaIS50YW5rLmZpbGVzLnYxLkRlbGV0ZUZpbGVSZXNwb25zZRJgCg9PcGVuUHJldmlld0xpbmsSJS50YW5rLmZpbGVzLnYxLk9wZW5QcmV2aWV3TGlua1JlcXVlc3QaJi50YW5rLmZpbGVzLnYxLk9wZW5QcmV2aWV3TGlua1Jlc3BvbnNlQsgBChFjb20udGFuay5maWxlcy52MUIKRmlsZXNQcm90b1ABWlFnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2ZpbGVzL3YxO2ZpbGVzdjGiAgNURliqAg1UYW5rLkZpbGVzLlYxygINVGFua1xGaWxlc1xWMeICGVRhbmtcRmlsZXNcVjFcR1BCTWV0YWRhdGHqAg9UYW5rOjpGaWxlczo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.files.v1.File
@@ -377,6 +377,49 @@ export const ListFilesResponseSchema: GenMessage<ListFilesResponse> = /*@__PURE_
   messageDesc(file_tank_files_v1_files, 10);
 
 /**
+ * @generated from message tank.files.v1.OpenPreviewLinkRequest
+ */
+export type OpenPreviewLinkRequest = Message<"tank.files.v1.OpenPreviewLinkRequest"> & {
+  /**
+   * The whole address, https://<host>.<preview domain>/<path>?<query>.
+   *
+   * @generated from field: string url = 1;
+   */
+  url: string;
+};
+
+/**
+ * Describes the message tank.files.v1.OpenPreviewLinkRequest.
+ * Use `create(OpenPreviewLinkRequestSchema)` to create a new message.
+ */
+export const OpenPreviewLinkRequestSchema: GenMessage<OpenPreviewLinkRequest> = /*@__PURE__*/
+  messageDesc(file_tank_files_v1_files, 11);
+
+/**
+ * @generated from message tank.files.v1.OpenPreviewLinkResponse
+ */
+export type OpenPreviewLinkResponse = Message<"tank.files.v1.OpenPreviewLinkResponse"> & {
+  /**
+   * The address to open: the host's pass door, which keeps the pass and redirects to the path.
+   *
+   * @generated from field: string url = 1;
+   */
+  url: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp expires_at = 2;
+   */
+  expiresAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.files.v1.OpenPreviewLinkResponse.
+ * Use `create(OpenPreviewLinkResponseSchema)` to create a new message.
+ */
+export const OpenPreviewLinkResponseSchema: GenMessage<OpenPreviewLinkResponse> = /*@__PURE__*/
+  messageDesc(file_tank_files_v1_files, 12);
+
+/**
  * @generated from message tank.files.v1.DeleteFileRequest
  */
 export type DeleteFileRequest = Message<"tank.files.v1.DeleteFileRequest"> & {
@@ -391,7 +434,7 @@ export type DeleteFileRequest = Message<"tank.files.v1.DeleteFileRequest"> & {
  * Use `create(DeleteFileRequestSchema)` to create a new message.
  */
 export const DeleteFileRequestSchema: GenMessage<DeleteFileRequest> = /*@__PURE__*/
-  messageDesc(file_tank_files_v1_files, 11);
+  messageDesc(file_tank_files_v1_files, 13);
 
 /**
  * @generated from message tank.files.v1.DeleteFileResponse
@@ -412,7 +455,7 @@ export type DeleteFileResponse = Message<"tank.files.v1.DeleteFileResponse"> & {
  * Use `create(DeleteFileResponseSchema)` to create a new message.
  */
 export const DeleteFileResponseSchema: GenMessage<DeleteFileResponse> = /*@__PURE__*/
-  messageDesc(file_tank_files_v1_files, 12);
+  messageDesc(file_tank_files_v1_files, 14);
 
 /**
  * @generated from enum tank.files.v1.ScanStatus
@@ -505,6 +548,19 @@ export const FilesService: GenService<{
     methodKind: "unary";
     input: typeof DeleteFileRequestSchema;
     output: typeof DeleteFileResponseSchema;
+  },
+  /**
+   * Open an address on TANK's preview domain that somebody pasted or copied: a page sent
+   * in TANK or a branch preview TANK built. The address carries no pass, so the edge sends
+   * the viewer here (2026-11-05); the caller gets the same address with a fresh pass when
+   * they may see what it shows, and NotFound otherwise, so hosts cannot be probed.
+   *
+   * @generated from rpc tank.files.v1.FilesService.OpenPreviewLink
+   */
+  openPreviewLink: {
+    methodKind: "unary";
+    input: typeof OpenPreviewLinkRequestSchema;
+    output: typeof OpenPreviewLinkResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_files_v1_files, 0);

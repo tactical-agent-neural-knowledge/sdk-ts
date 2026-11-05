@@ -307,6 +307,42 @@ export type ListFilesResponse = Message<"tank.files.v1.ListFilesResponse"> & {
  */
 export declare const ListFilesResponseSchema: GenMessage<ListFilesResponse>;
 /**
+ * @generated from message tank.files.v1.OpenPreviewLinkRequest
+ */
+export type OpenPreviewLinkRequest = Message<"tank.files.v1.OpenPreviewLinkRequest"> & {
+    /**
+     * The whole address, https://<host>.<preview domain>/<path>?<query>.
+     *
+     * @generated from field: string url = 1;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.files.v1.OpenPreviewLinkRequest.
+ * Use `create(OpenPreviewLinkRequestSchema)` to create a new message.
+ */
+export declare const OpenPreviewLinkRequestSchema: GenMessage<OpenPreviewLinkRequest>;
+/**
+ * @generated from message tank.files.v1.OpenPreviewLinkResponse
+ */
+export type OpenPreviewLinkResponse = Message<"tank.files.v1.OpenPreviewLinkResponse"> & {
+    /**
+     * The address to open: the host's pass door, which keeps the pass and redirects to the path.
+     *
+     * @generated from field: string url = 1;
+     */
+    url: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 2;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.files.v1.OpenPreviewLinkResponse.
+ * Use `create(OpenPreviewLinkResponseSchema)` to create a new message.
+ */
+export declare const OpenPreviewLinkResponseSchema: GenMessage<OpenPreviewLinkResponse>;
+/**
  * @generated from message tank.files.v1.DeleteFileRequest
  */
 export type DeleteFileRequest = Message<"tank.files.v1.DeleteFileRequest"> & {
@@ -422,5 +458,18 @@ export declare const FilesService: GenService<{
         methodKind: "unary";
         input: typeof DeleteFileRequestSchema;
         output: typeof DeleteFileResponseSchema;
+    };
+    /**
+     * Open an address on TANK's preview domain that somebody pasted or copied: a page sent
+     * in TANK or a branch preview TANK built. The address carries no pass, so the edge sends
+     * the viewer here (2026-11-05); the caller gets the same address with a fresh pass when
+     * they may see what it shows, and NotFound otherwise, so hosts cannot be probed.
+     *
+     * @generated from rpc tank.files.v1.FilesService.OpenPreviewLink
+     */
+    openPreviewLink: {
+        methodKind: "unary";
+        input: typeof OpenPreviewLinkRequestSchema;
+        output: typeof OpenPreviewLinkResponseSchema;
     };
 }>;
