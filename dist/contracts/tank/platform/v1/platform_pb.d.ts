@@ -627,6 +627,16 @@ export type UserRow = Message<"tank.platform.v1.UserRow"> & {
      * @generated from field: bool super_admin = 9;
      */
     superAdmin: boolean;
+    /**
+     * unset when the account is not suspended
+     *
+     * @generated from field: google.protobuf.Timestamp suspended_at = 10;
+     */
+    suspendedAt?: Timestamp;
+    /**
+     * @generated from field: string suspended_reason = 11;
+     */
+    suspendedReason: string;
 };
 /**
  * Describes the message tank.platform.v1.UserRow.
@@ -871,6 +881,16 @@ export type WorkspaceRow = Message<"tank.platform.v1.WorkspaceRow"> & {
      * @generated from field: int64 agent_billed_cents_month = 13;
      */
     agentBilledCentsMonth: bigint;
+    /**
+     * unset when the workspace is not suspended
+     *
+     * @generated from field: google.protobuf.Timestamp suspended_at = 14;
+     */
+    suspendedAt?: Timestamp;
+    /**
+     * @generated from field: string suspended_reason = 15;
+     */
+    suspendedReason: string;
 };
 /**
  * Describes the message tank.platform.v1.WorkspaceRow.
@@ -1959,6 +1979,145 @@ export type GetNeuralResponse = Message<"tank.platform.v1.GetNeuralResponse"> & 
  */
 export declare const GetNeuralResponseSchema: GenMessage<GetNeuralResponse>;
 /**
+ * SetWorkspacePlan moves a workspace between free and premium. Premium provisions its
+ * agent. Nothing is charged or refunded: Stripe and the App Store are not touched.
+ *
+ * @generated from message tank.platform.v1.SetWorkspacePlanRequest
+ */
+export type SetWorkspacePlanRequest = Message<"tank.platform.v1.SetWorkspacePlanRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * free | premium
+     *
+     * @generated from field: string plan = 2;
+     */
+    plan: string;
+};
+/**
+ * Describes the message tank.platform.v1.SetWorkspacePlanRequest.
+ * Use `create(SetWorkspacePlanRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspacePlanRequestSchema: GenMessage<SetWorkspacePlanRequest>;
+/**
+ * @generated from message tank.platform.v1.SetWorkspacePlanResponse
+ */
+export type SetWorkspacePlanResponse = Message<"tank.platform.v1.SetWorkspacePlanResponse"> & {};
+/**
+ * Describes the message tank.platform.v1.SetWorkspacePlanResponse.
+ * Use `create(SetWorkspacePlanResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspacePlanResponseSchema: GenMessage<SetWorkspacePlanResponse>;
+/**
+ * SetWorkspaceAddon turns one add-on on or off.
+ *
+ * @generated from message tank.platform.v1.SetWorkspaceAddonRequest
+ */
+export type SetWorkspaceAddonRequest = Message<"tank.platform.v1.SetWorkspaceAddonRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * shield | books | blueprint | atlas | neuron | agentops
+     *
+     * @generated from field: string addon = 2;
+     */
+    addon: string;
+    /**
+     * @generated from field: bool on = 3;
+     */
+    on: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.SetWorkspaceAddonRequest.
+ * Use `create(SetWorkspaceAddonRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAddonRequestSchema: GenMessage<SetWorkspaceAddonRequest>;
+/**
+ * @generated from message tank.platform.v1.SetWorkspaceAddonResponse
+ */
+export type SetWorkspaceAddonResponse = Message<"tank.platform.v1.SetWorkspaceAddonResponse"> & {};
+/**
+ * Describes the message tank.platform.v1.SetWorkspaceAddonResponse.
+ * Use `create(SetWorkspaceAddonResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAddonResponseSchema: GenMessage<SetWorkspaceAddonResponse>;
+/**
+ * SuspendWorkspace stops everyone using a workspace, its agents included, until it is
+ * unsuspended. Nothing in it is changed or deleted.
+ *
+ * @generated from message tank.platform.v1.SuspendWorkspaceRequest
+ */
+export type SuspendWorkspaceRequest = Message<"tank.platform.v1.SuspendWorkspaceRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * false unsuspends
+     *
+     * @generated from field: bool suspended = 2;
+     */
+    suspended: boolean;
+    /**
+     * kept with the suspension and in the audit log
+     *
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.platform.v1.SuspendWorkspaceRequest.
+ * Use `create(SuspendWorkspaceRequestSchema)` to create a new message.
+ */
+export declare const SuspendWorkspaceRequestSchema: GenMessage<SuspendWorkspaceRequest>;
+/**
+ * @generated from message tank.platform.v1.SuspendWorkspaceResponse
+ */
+export type SuspendWorkspaceResponse = Message<"tank.platform.v1.SuspendWorkspaceResponse"> & {};
+/**
+ * Describes the message tank.platform.v1.SuspendWorkspaceResponse.
+ * Use `create(SuspendWorkspaceResponseSchema)` to create a new message.
+ */
+export declare const SuspendWorkspaceResponseSchema: GenMessage<SuspendWorkspaceResponse>;
+/**
+ * SuspendUser signs a person out everywhere and refuses them across the platform until
+ * they are unsuspended. Their memberships, messages and keys are kept.
+ *
+ * @generated from message tank.platform.v1.SuspendUserRequest
+ */
+export type SuspendUserRequest = Message<"tank.platform.v1.SuspendUserRequest"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: bool suspended = 2;
+     */
+    suspended: boolean;
+    /**
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.platform.v1.SuspendUserRequest.
+ * Use `create(SuspendUserRequestSchema)` to create a new message.
+ */
+export declare const SuspendUserRequestSchema: GenMessage<SuspendUserRequest>;
+/**
+ * @generated from message tank.platform.v1.SuspendUserResponse
+ */
+export type SuspendUserResponse = Message<"tank.platform.v1.SuspendUserResponse"> & {};
+/**
+ * Describes the message tank.platform.v1.SuspendUserResponse.
+ * Use `create(SuspendUserResponseSchema)` to create a new message.
+ */
+export declare const SuspendUserResponseSchema: GenMessage<SuspendUserResponse>;
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export declare const PlatformService: GenService<{
@@ -2089,5 +2248,37 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof GetNeuralRequestSchema;
         output: typeof GetNeuralResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SetWorkspacePlan
+     */
+    setWorkspacePlan: {
+        methodKind: "unary";
+        input: typeof SetWorkspacePlanRequestSchema;
+        output: typeof SetWorkspacePlanResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SetWorkspaceAddon
+     */
+    setWorkspaceAddon: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceAddonRequestSchema;
+        output: typeof SetWorkspaceAddonResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SuspendWorkspace
+     */
+    suspendWorkspace: {
+        methodKind: "unary";
+        input: typeof SuspendWorkspaceRequestSchema;
+        output: typeof SuspendWorkspaceResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SuspendUser
+     */
+    suspendUser: {
+        methodKind: "unary";
+        input: typeof SuspendUserRequestSchema;
+        output: typeof SuspendUserResponseSchema;
     };
 }>;
