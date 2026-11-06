@@ -392,6 +392,257 @@ export type SetAgentCapResponse = Message<"tank.billing.v1.SetAgentCapResponse">
  */
 export declare const SetAgentCapResponseSchema: GenMessage<SetAgentCapResponse>;
 /**
+ * AgentTime is a workspace's prepaid agent time. Every amount is in cents of what
+ * the workspace pays (agent usage is priced at cost x 2 before it reaches here).
+ *
+ * @generated from message tank.billing.v1.AgentTime
+ */
+export type AgentTime = Message<"tank.billing.v1.AgentTime"> & {
+    /**
+     * purchased time left; may dip a little below zero
+     *
+     * @generated from field: int64 balance_cents = 1;
+     */
+    balanceCents: bigint;
+    /**
+     * included with Premium each month
+     *
+     * @generated from field: int64 included_cents = 2;
+     */
+    includedCents: bigint;
+    /**
+     * of that, what is left this month
+     *
+     * @generated from field: int64 included_left_cents = 3;
+     */
+    includedLeftCents: bigint;
+    /**
+     * all agent usage this month
+     *
+     * @generated from field: int64 used_this_month_cents = 4;
+     */
+    usedThisMonthCents: bigint;
+    /**
+     * true when nothing is left and no run may start
+     *
+     * @generated from field: bool blocked = 5;
+     */
+    blocked: boolean;
+    /**
+     * @generated from field: tank.billing.v1.AutoRefill auto_refill = 6;
+     */
+    autoRefill?: AutoRefill;
+    /**
+     * @generated from field: int64 auto_refilled_this_month_cents = 7;
+     */
+    autoRefilledThisMonthCents: bigint;
+    /**
+     * a saved card auto-refill can charge
+     *
+     * @generated from field: bool has_payment_method = 8;
+     */
+    hasPaymentMethod: boolean;
+    /**
+     * newest first
+     *
+     * @generated from field: repeated tank.billing.v1.AgentTimeEntry history = 9;
+     */
+    history: AgentTimeEntry[];
+    /**
+     * the preset amounts to buy
+     *
+     * @generated from field: repeated int64 pack_cents = 10;
+     */
+    packCents: bigint[];
+    /**
+     * the smallest custom amount
+     *
+     * @generated from field: int64 min_custom_cents = 11;
+     */
+    minCustomCents: bigint;
+    /**
+     * the caller may buy and change auto-refill
+     *
+     * @generated from field: bool can_manage = 12;
+     */
+    canManage: boolean;
+    /**
+     * false: the workspace is not on prepaid agent time yet
+     *
+     * @generated from field: bool prepaid = 13;
+     */
+    prepaid: boolean;
+};
+/**
+ * Describes the message tank.billing.v1.AgentTime.
+ * Use `create(AgentTimeSchema)` to create a new message.
+ */
+export declare const AgentTimeSchema: GenMessage<AgentTime>;
+/**
+ * @generated from message tank.billing.v1.AutoRefill
+ */
+export type AutoRefill = Message<"tank.billing.v1.AutoRefill"> & {
+    /**
+     * @generated from field: bool enabled = 1;
+     */
+    enabled: boolean;
+    /**
+     * refill when the balance falls below this
+     *
+     * @generated from field: int64 below_cents = 2;
+     */
+    belowCents: bigint;
+    /**
+     * how much each refill buys
+     *
+     * @generated from field: int64 amount_cents = 3;
+     */
+    amountCents: bigint;
+    /**
+     * the most auto-refill may buy in a month; 0 = no cap
+     *
+     * @generated from field: int64 monthly_cap_cents = 4;
+     */
+    monthlyCapCents: bigint;
+    /**
+     * why the last refill failed, in words people read
+     *
+     * @generated from field: string last_error = 5;
+     */
+    lastError: string;
+};
+/**
+ * Describes the message tank.billing.v1.AutoRefill.
+ * Use `create(AutoRefillSchema)` to create a new message.
+ */
+export declare const AutoRefillSchema: GenMessage<AutoRefill>;
+/**
+ * @generated from message tank.billing.v1.AgentTimeEntry
+ */
+export type AgentTimeEntry = Message<"tank.billing.v1.AgentTimeEntry"> & {
+    /**
+     * purchase | auto_refill | adjustment
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: int64 cents = 2;
+     */
+    cents: bigint;
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 3;
+     */
+    at?: Timestamp;
+    /**
+     * @generated from field: string note = 4;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.billing.v1.AgentTimeEntry.
+ * Use `create(AgentTimeEntrySchema)` to create a new message.
+ */
+export declare const AgentTimeEntrySchema: GenMessage<AgentTimeEntry>;
+/**
+ * @generated from message tank.billing.v1.GetAgentTimeRequest
+ */
+export type GetAgentTimeRequest = Message<"tank.billing.v1.GetAgentTimeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.billing.v1.GetAgentTimeRequest.
+ * Use `create(GetAgentTimeRequestSchema)` to create a new message.
+ */
+export declare const GetAgentTimeRequestSchema: GenMessage<GetAgentTimeRequest>;
+/**
+ * @generated from message tank.billing.v1.GetAgentTimeResponse
+ */
+export type GetAgentTimeResponse = Message<"tank.billing.v1.GetAgentTimeResponse"> & {
+    /**
+     * @generated from field: tank.billing.v1.AgentTime agent_time = 1;
+     */
+    agentTime?: AgentTime;
+};
+/**
+ * Describes the message tank.billing.v1.GetAgentTimeResponse.
+ * Use `create(GetAgentTimeResponseSchema)` to create a new message.
+ */
+export declare const GetAgentTimeResponseSchema: GenMessage<GetAgentTimeResponse>;
+/**
+ * @generated from message tank.billing.v1.StartAgentTimeCheckoutRequest
+ */
+export type StartAgentTimeCheckoutRequest = Message<"tank.billing.v1.StartAgentTimeCheckoutRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: int64 cents = 2;
+     */
+    cents: bigint;
+    /**
+     * @generated from field: string return_path = 3;
+     */
+    returnPath: string;
+};
+/**
+ * Describes the message tank.billing.v1.StartAgentTimeCheckoutRequest.
+ * Use `create(StartAgentTimeCheckoutRequestSchema)` to create a new message.
+ */
+export declare const StartAgentTimeCheckoutRequestSchema: GenMessage<StartAgentTimeCheckoutRequest>;
+/**
+ * @generated from message tank.billing.v1.StartAgentTimeCheckoutResponse
+ */
+export type StartAgentTimeCheckoutResponse = Message<"tank.billing.v1.StartAgentTimeCheckoutResponse"> & {
+    /**
+     * @generated from field: string checkout_url = 1;
+     */
+    checkoutUrl: string;
+};
+/**
+ * Describes the message tank.billing.v1.StartAgentTimeCheckoutResponse.
+ * Use `create(StartAgentTimeCheckoutResponseSchema)` to create a new message.
+ */
+export declare const StartAgentTimeCheckoutResponseSchema: GenMessage<StartAgentTimeCheckoutResponse>;
+/**
+ * @generated from message tank.billing.v1.SetAutoRefillRequest
+ */
+export type SetAutoRefillRequest = Message<"tank.billing.v1.SetAutoRefillRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * last_error is ignored
+     *
+     * @generated from field: tank.billing.v1.AutoRefill auto_refill = 2;
+     */
+    autoRefill?: AutoRefill;
+};
+/**
+ * Describes the message tank.billing.v1.SetAutoRefillRequest.
+ * Use `create(SetAutoRefillRequestSchema)` to create a new message.
+ */
+export declare const SetAutoRefillRequestSchema: GenMessage<SetAutoRefillRequest>;
+/**
+ * @generated from message tank.billing.v1.SetAutoRefillResponse
+ */
+export type SetAutoRefillResponse = Message<"tank.billing.v1.SetAutoRefillResponse"> & {
+    /**
+     * @generated from field: tank.billing.v1.AgentTime agent_time = 1;
+     */
+    agentTime?: AgentTime;
+};
+/**
+ * Describes the message tank.billing.v1.SetAutoRefillResponse.
+ * Use `create(SetAutoRefillResponseSchema)` to create a new message.
+ */
+export declare const SetAutoRefillResponseSchema: GenMessage<SetAutoRefillResponse>;
+/**
  * @generated from message tank.billing.v1.ServiceSubscription
  */
 export type ServiceSubscription = Message<"tank.billing.v1.ServiceSubscription"> & {
@@ -651,5 +902,33 @@ export declare const BillingService: GenService<{
         methodKind: "unary";
         input: typeof CreateServiceApiKeyRequestSchema;
         output: typeof CreateServiceApiKeyResponseSchema;
+    };
+    /**
+     * Agent time (2026-11-06) is prepaid. Premium includes an amount each month, spent
+     * first; past it an admin buys agent time in advance, by hand or with auto-refill.
+     * At zero no run starts and a running one stops with its work saved.
+     *
+     * @generated from rpc tank.billing.v1.BillingService.GetAgentTime
+     */
+    getAgentTime: {
+        methodKind: "unary";
+        input: typeof GetAgentTimeRequestSchema;
+        output: typeof GetAgentTimeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.billing.v1.BillingService.StartAgentTimeCheckout
+     */
+    startAgentTimeCheckout: {
+        methodKind: "unary";
+        input: typeof StartAgentTimeCheckoutRequestSchema;
+        output: typeof StartAgentTimeCheckoutResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.billing.v1.BillingService.SetAutoRefill
+     */
+    setAutoRefill: {
+        methodKind: "unary";
+        input: typeof SetAutoRefillRequestSchema;
+        output: typeof SetAutoRefillResponseSchema;
     };
 }>;
