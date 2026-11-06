@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/billing/v1/billing.proto.
  */
 export const file_tank_billing_v1_billing: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2JpbGxpbmcvdjEvYmlsbGluZy5wcm90bxIPdGFuay5iaWxsaW5nLnYxIncKBVByaWNlEgwKBHNsdWcYASABKAkSDAoEbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIVCg1hZ2VudF9taW51dGVzGAQgASgDEhMKC3ByaWNlX2NlbnRzGAUgASgDEhEKCWF2YWlsYWJsZRgGIAEoCCIfCg9HZXRQcmljZVJlcXVlc3QSDAoEc2x1ZxgBIAEoCSI5ChBHZXRQcmljZVJlc3BvbnNlEiUKBXByaWNlGAEgASgLMhYudGFuay5iaWxsaW5nLnYxLlByaWNlIlQKGVN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QSDAoEc2x1ZxgBIAEoCRIUCgxzdWNjZXNzX3BhdGgYAiABKAkSEwoLY2FuY2VsX3BhdGgYAyABKAkiYgoaU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJEi4KCmhlbGRfdW50aWwYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIvICCgxTdWJzY3JpcHRpb24SFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHBsYW4YAiABKAkSDgoGc3RhdHVzGAMgASgJEhUKDW1vbnRobHlfY2VudHMYBCABKAMSGgoSYWdlbnRfbWludXRlX2NlbnRzGAUgASgDEiEKGWFnZW50X21pbnV0ZXNfdGhpc19wZXJpb2QYBiABKAMSJAocYWdlbnRfZmVlc19jZW50c190aGlzX3BlcmlvZBgHIAEoAxIuCgpwZXJpb2RfZW5kGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpoYXNfYWdlbnRzGAkgASgIEg4KBmFkZG9ucxgKIAMoCRIkChxhZ2VudF91c2FnZV9jZW50c190aGlzX21vbnRoGAsgASgDEhcKD2FnZW50X2NhcF9jZW50cxgMIAEoAxIQCghwcm92aWRlchgNIAEoCRINCgVzZWF0cxgOIAEoBSIuChZHZXRTdWJzY3JpcHRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJOChdHZXRTdWJzY3JpcHRpb25SZXNwb25zZRIzCgxzdWJzY3JpcHRpb24YASABKAsyHS50YW5rLmJpbGxpbmcudjEuU3Vic2NyaXB0aW9uIm8KG1N0YXJ0VXBncmFkZUNoZWNrb3V0UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSFAoMc3VjY2Vzc19wYXRoGAIgASgJEhMKC2NhbmNlbF9wYXRoGAMgASgJEg8KB3Byb2R1Y3QYBCABKAkiNAocU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRIUCgxjaGVja291dF91cmwYASABKAkiRQoYT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRITCgtyZXR1cm5fcGF0aBgCIAEoCSIoChlPcGVuQmlsbGluZ1BvcnRhbFJlc3BvbnNlEgsKA3VybBgBIAEoCSJRCh1WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSGgoSc2lnbmVkX3RyYW5zYWN0aW9uGAIgASgJIkEKHlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXNwb25zZRIPCgdwcm9kdWN0GAEgASgJEg4KBnN0YXR1cxgCIAEoCSJDChJTZXRBZ2VudENhcFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhcKD2FnZW50X2NhcF9jZW50cxgCIAEoAyIuChNTZXRBZ2VudENhcFJlc3BvbnNlEhcKD2FnZW50X2NhcF9jZW50cxgBIAEoAyLnAQoTU2VydmljZVN1YnNjcmlwdGlvbhIcChRwcm9kdWN0X3dvcmtzcGFjZV9pZBgBIAEoCRIUCgxwcm9kdWN0X3NsdWcYAiABKAkSFAoMcHJvZHVjdF9uYW1lGAMgASgJEg4KBnN0YXR1cxgEIAEoCRI2ChJjdXJyZW50X3BlcmlvZF9lbmQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC3ByaWNlX2NlbnRzGAYgASgDEhMKC2hhc19hcGlfa2V5GAcgASgIEhQKDGFwaV9rZXlfaGludBgIIAEoCSJIChtTdGFydFNlcnZpY2VDaGVja291dFJlcXVlc3QSFAoMcHJvZHVjdF9zbHVnGAEgASgJEhMKC3JldHVybl9wYXRoGAIgASgJIjQKHFN0YXJ0U2VydmljZUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJIiEKH0xpc3RTZXJ2aWNlU3Vic2NyaXB0aW9uc1JlcXVlc3QidAogTGlzdFNlcnZpY2VTdWJzY3JpcHRpb25zUmVzcG9uc2USOwoNc3Vic2NyaXB0aW9ucxgBIAMoCzIkLnRhbmsuYmlsbGluZy52MS5TZXJ2aWNlU3Vic2NyaXB0aW9uEhMKC3ByaWNlX2NlbnRzGAIgASgDIi8KGE9wZW5TZXJ2aWNlUG9ydGFsUmVxdWVzdBITCgtyZXR1cm5fcGF0aBgBIAEoCSIvChlPcGVuU2VydmljZVBvcnRhbFJlc3BvbnNlEhIKCnBvcnRhbF91cmwYASABKAkiHAoaQ3JlYXRlU2VydmljZUFwaUtleVJlcXVlc3QiOAobQ3JlYXRlU2VydmljZUFwaUtleVJlc3BvbnNlEgsKA2tleRgBIAEoCRIMCgRoaW50GAIgASgJMsAJCg5CaWxsaW5nU2VydmljZRJPCghHZXRQcmljZRIgLnRhbmsuYmlsbGluZy52MS5HZXRQcmljZVJlcXVlc3QaIS50YW5rLmJpbGxpbmcudjEuR2V0UHJpY2VSZXNwb25zZRJtChJTdGFydENsYWltQ2hlY2tvdXQSKi50YW5rLmJpbGxpbmcudjEuU3RhcnRDbGFpbUNoZWNrb3V0UmVxdWVzdBorLnRhbmsuYmlsbGluZy52MS5TdGFydENsYWltQ2hlY2tvdXRSZXNwb25zZRJkCg9HZXRTdWJzY3JpcHRpb24SJy50YW5rLmJpbGxpbmcudjEuR2V0U3Vic2NyaXB0aW9uUmVxdWVzdBooLnRhbmsuYmlsbGluZy52MS5HZXRTdWJzY3JpcHRpb25SZXNwb25zZRJzChRTdGFydFVwZ3JhZGVDaGVja291dBIsLnRhbmsuYmlsbGluZy52MS5TdGFydFVwZ3JhZGVDaGVja291dFJlcXVlc3QaLS50YW5rLmJpbGxpbmcudjEuU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRJqChFPcGVuQmlsbGluZ1BvcnRhbBIpLnRhbmsuYmlsbGluZy52MS5PcGVuQmlsbGluZ1BvcnRhbFJlcXVlc3QaKi50YW5rLmJpbGxpbmcudjEuT3BlbkJpbGxpbmdQb3J0YWxSZXNwb25zZRJ5ChZWZXJpZnlBcHBsZVRyYW5zYWN0aW9uEi4udGFuay5iaWxsaW5nLnYxLlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXF1ZXN0Gi8udGFuay5iaWxsaW5nLnYxLlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXNwb25zZRJYCgtTZXRBZ2VudENhcBIjLnRhbmsuYmlsbGluZy52MS5TZXRBZ2VudENhcFJlcXVlc3QaJC50YW5rLmJpbGxpbmcudjEuU2V0QWdlbnRDYXBSZXNwb25zZRJzChRTdGFydFNlcnZpY2VDaGVja291dBIsLnRhbmsuYmlsbGluZy52MS5TdGFydFNlcnZpY2VDaGVja291dFJlcXVlc3QaLS50YW5rLmJpbGxpbmcudjEuU3RhcnRTZXJ2aWNlQ2hlY2tvdXRSZXNwb25zZRJ/ChhMaXN0U2VydmljZVN1YnNjcmlwdGlvbnMSMC50YW5rLmJpbGxpbmcudjEuTGlzdFNlcnZpY2VTdWJzY3JpcHRpb25zUmVxdWVzdBoxLnRhbmsuYmlsbGluZy52MS5MaXN0U2VydmljZVN1YnNjcmlwdGlvbnNSZXNwb25zZRJqChFPcGVuU2VydmljZVBvcnRhbBIpLnRhbmsuYmlsbGluZy52MS5PcGVuU2VydmljZVBvcnRhbFJlcXVlc3QaKi50YW5rLmJpbGxpbmcudjEuT3BlblNlcnZpY2VQb3J0YWxSZXNwb25zZRJwChNDcmVhdGVTZXJ2aWNlQXBpS2V5EisudGFuay5iaWxsaW5nLnYxLkNyZWF0ZVNlcnZpY2VBcGlLZXlSZXF1ZXN0GiwudGFuay5iaWxsaW5nLnYxLkNyZWF0ZVNlcnZpY2VBcGlLZXlSZXNwb25zZULYAQoTY29tLnRhbmsuYmlsbGluZy52MUIMQmlsbGluZ1Byb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvYmlsbGluZy92MTtiaWxsaW5ndjGiAgNUQliqAg9UYW5rLkJpbGxpbmcuVjHKAg9UYW5rXEJpbGxpbmdcVjHiAhtUYW5rXEJpbGxpbmdcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpCaWxsaW5nOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2JpbGxpbmcvdjEvYmlsbGluZy5wcm90bxIPdGFuay5iaWxsaW5nLnYxIncKBVByaWNlEgwKBHNsdWcYASABKAkSDAoEbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIVCg1hZ2VudF9taW51dGVzGAQgASgDEhMKC3ByaWNlX2NlbnRzGAUgASgDEhEKCWF2YWlsYWJsZRgGIAEoCCIfCg9HZXRQcmljZVJlcXVlc3QSDAoEc2x1ZxgBIAEoCSI5ChBHZXRQcmljZVJlc3BvbnNlEiUKBXByaWNlGAEgASgLMhYudGFuay5iaWxsaW5nLnYxLlByaWNlIlQKGVN0YXJ0Q2xhaW1DaGVja291dFJlcXVlc3QSDAoEc2x1ZxgBIAEoCRIUCgxzdWNjZXNzX3BhdGgYAiABKAkSEwoLY2FuY2VsX3BhdGgYAyABKAkiYgoaU3RhcnRDbGFpbUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJEi4KCmhlbGRfdW50aWwYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIvICCgxTdWJzY3JpcHRpb24SFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBHBsYW4YAiABKAkSDgoGc3RhdHVzGAMgASgJEhUKDW1vbnRobHlfY2VudHMYBCABKAMSGgoSYWdlbnRfbWludXRlX2NlbnRzGAUgASgDEiEKGWFnZW50X21pbnV0ZXNfdGhpc19wZXJpb2QYBiABKAMSJAocYWdlbnRfZmVlc19jZW50c190aGlzX3BlcmlvZBgHIAEoAxIuCgpwZXJpb2RfZW5kGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpoYXNfYWdlbnRzGAkgASgIEg4KBmFkZG9ucxgKIAMoCRIkChxhZ2VudF91c2FnZV9jZW50c190aGlzX21vbnRoGAsgASgDEhcKD2FnZW50X2NhcF9jZW50cxgMIAEoAxIQCghwcm92aWRlchgNIAEoCRINCgVzZWF0cxgOIAEoBSIuChZHZXRTdWJzY3JpcHRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJOChdHZXRTdWJzY3JpcHRpb25SZXNwb25zZRIzCgxzdWJzY3JpcHRpb24YASABKAsyHS50YW5rLmJpbGxpbmcudjEuU3Vic2NyaXB0aW9uIm8KG1N0YXJ0VXBncmFkZUNoZWNrb3V0UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSFAoMc3VjY2Vzc19wYXRoGAIgASgJEhMKC2NhbmNlbF9wYXRoGAMgASgJEg8KB3Byb2R1Y3QYBCABKAkiNAocU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRIUCgxjaGVja291dF91cmwYASABKAkiRQoYT3BlbkJpbGxpbmdQb3J0YWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRITCgtyZXR1cm5fcGF0aBgCIAEoCSIoChlPcGVuQmlsbGluZ1BvcnRhbFJlc3BvbnNlEgsKA3VybBgBIAEoCSJRCh1WZXJpZnlBcHBsZVRyYW5zYWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSGgoSc2lnbmVkX3RyYW5zYWN0aW9uGAIgASgJIkEKHlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXNwb25zZRIPCgdwcm9kdWN0GAEgASgJEg4KBnN0YXR1cxgCIAEoCSJDChJTZXRBZ2VudENhcFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhcKD2FnZW50X2NhcF9jZW50cxgCIAEoAyIuChNTZXRBZ2VudENhcFJlc3BvbnNlEhcKD2FnZW50X2NhcF9jZW50cxgBIAEoAyKCAwoJQWdlbnRUaW1lEhUKDWJhbGFuY2VfY2VudHMYASABKAMSFgoOaW5jbHVkZWRfY2VudHMYAiABKAMSGwoTaW5jbHVkZWRfbGVmdF9jZW50cxgDIAEoAxIdChV1c2VkX3RoaXNfbW9udGhfY2VudHMYBCABKAMSDwoHYmxvY2tlZBgFIAEoCBIwCgthdXRvX3JlZmlsbBgGIAEoCzIbLnRhbmsuYmlsbGluZy52MS5BdXRvUmVmaWxsEiYKHmF1dG9fcmVmaWxsZWRfdGhpc19tb250aF9jZW50cxgHIAEoAxIaChJoYXNfcGF5bWVudF9tZXRob2QYCCABKAgSMAoHaGlzdG9yeRgJIAMoCzIfLnRhbmsuYmlsbGluZy52MS5BZ2VudFRpbWVFbnRyeRISCgpwYWNrX2NlbnRzGAogAygDEhgKEG1pbl9jdXN0b21fY2VudHMYCyABKAMSEgoKY2FuX21hbmFnZRgMIAEoCBIPCgdwcmVwYWlkGA0gASgIIncKCkF1dG9SZWZpbGwSDwoHZW5hYmxlZBgBIAEoCBITCgtiZWxvd19jZW50cxgCIAEoAxIUCgxhbW91bnRfY2VudHMYAyABKAMSGQoRbW9udGhseV9jYXBfY2VudHMYBCABKAMSEgoKbGFzdF9lcnJvchgFIAEoCSJjCg5BZ2VudFRpbWVFbnRyeRIMCgRraW5kGAEgASgJEg0KBWNlbnRzGAIgASgDEiYKAmF0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIMCgRub3RlGAQgASgJIisKE0dldEFnZW50VGltZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIkYKFEdldEFnZW50VGltZVJlc3BvbnNlEi4KCmFnZW50X3RpbWUYASABKAsyGi50YW5rLmJpbGxpbmcudjEuQWdlbnRUaW1lIlkKHVN0YXJ0QWdlbnRUaW1lQ2hlY2tvdXRSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRINCgVjZW50cxgCIAEoAxITCgtyZXR1cm5fcGF0aBgDIAEoCSI2Ch5TdGFydEFnZW50VGltZUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJIl4KFFNldEF1dG9SZWZpbGxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIwCgthdXRvX3JlZmlsbBgCIAEoCzIbLnRhbmsuYmlsbGluZy52MS5BdXRvUmVmaWxsIkcKFVNldEF1dG9SZWZpbGxSZXNwb25zZRIuCgphZ2VudF90aW1lGAEgASgLMhoudGFuay5iaWxsaW5nLnYxLkFnZW50VGltZSLnAQoTU2VydmljZVN1YnNjcmlwdGlvbhIcChRwcm9kdWN0X3dvcmtzcGFjZV9pZBgBIAEoCRIUCgxwcm9kdWN0X3NsdWcYAiABKAkSFAoMcHJvZHVjdF9uYW1lGAMgASgJEg4KBnN0YXR1cxgEIAEoCRI2ChJjdXJyZW50X3BlcmlvZF9lbmQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC3ByaWNlX2NlbnRzGAYgASgDEhMKC2hhc19hcGlfa2V5GAcgASgIEhQKDGFwaV9rZXlfaGludBgIIAEoCSJIChtTdGFydFNlcnZpY2VDaGVja291dFJlcXVlc3QSFAoMcHJvZHVjdF9zbHVnGAEgASgJEhMKC3JldHVybl9wYXRoGAIgASgJIjQKHFN0YXJ0U2VydmljZUNoZWNrb3V0UmVzcG9uc2USFAoMY2hlY2tvdXRfdXJsGAEgASgJIiEKH0xpc3RTZXJ2aWNlU3Vic2NyaXB0aW9uc1JlcXVlc3QidAogTGlzdFNlcnZpY2VTdWJzY3JpcHRpb25zUmVzcG9uc2USOwoNc3Vic2NyaXB0aW9ucxgBIAMoCzIkLnRhbmsuYmlsbGluZy52MS5TZXJ2aWNlU3Vic2NyaXB0aW9uEhMKC3ByaWNlX2NlbnRzGAIgASgDIi8KGE9wZW5TZXJ2aWNlUG9ydGFsUmVxdWVzdBITCgtyZXR1cm5fcGF0aBgBIAEoCSIvChlPcGVuU2VydmljZVBvcnRhbFJlc3BvbnNlEhIKCnBvcnRhbF91cmwYASABKAkiHAoaQ3JlYXRlU2VydmljZUFwaUtleVJlcXVlc3QiOAobQ3JlYXRlU2VydmljZUFwaUtleVJlc3BvbnNlEgsKA2tleRgBIAEoCRIMCgRoaW50GAIgASgJMvgLCg5CaWxsaW5nU2VydmljZRJPCghHZXRQcmljZRIgLnRhbmsuYmlsbGluZy52MS5HZXRQcmljZVJlcXVlc3QaIS50YW5rLmJpbGxpbmcudjEuR2V0UHJpY2VSZXNwb25zZRJtChJTdGFydENsYWltQ2hlY2tvdXQSKi50YW5rLmJpbGxpbmcudjEuU3RhcnRDbGFpbUNoZWNrb3V0UmVxdWVzdBorLnRhbmsuYmlsbGluZy52MS5TdGFydENsYWltQ2hlY2tvdXRSZXNwb25zZRJkCg9HZXRTdWJzY3JpcHRpb24SJy50YW5rLmJpbGxpbmcudjEuR2V0U3Vic2NyaXB0aW9uUmVxdWVzdBooLnRhbmsuYmlsbGluZy52MS5HZXRTdWJzY3JpcHRpb25SZXNwb25zZRJzChRTdGFydFVwZ3JhZGVDaGVja291dBIsLnRhbmsuYmlsbGluZy52MS5TdGFydFVwZ3JhZGVDaGVja291dFJlcXVlc3QaLS50YW5rLmJpbGxpbmcudjEuU3RhcnRVcGdyYWRlQ2hlY2tvdXRSZXNwb25zZRJqChFPcGVuQmlsbGluZ1BvcnRhbBIpLnRhbmsuYmlsbGluZy52MS5PcGVuQmlsbGluZ1BvcnRhbFJlcXVlc3QaKi50YW5rLmJpbGxpbmcudjEuT3BlbkJpbGxpbmdQb3J0YWxSZXNwb25zZRJ5ChZWZXJpZnlBcHBsZVRyYW5zYWN0aW9uEi4udGFuay5iaWxsaW5nLnYxLlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXF1ZXN0Gi8udGFuay5iaWxsaW5nLnYxLlZlcmlmeUFwcGxlVHJhbnNhY3Rpb25SZXNwb25zZRJYCgtTZXRBZ2VudENhcBIjLnRhbmsuYmlsbGluZy52MS5TZXRBZ2VudENhcFJlcXVlc3QaJC50YW5rLmJpbGxpbmcudjEuU2V0QWdlbnRDYXBSZXNwb25zZRJzChRTdGFydFNlcnZpY2VDaGVja291dBIsLnRhbmsuYmlsbGluZy52MS5TdGFydFNlcnZpY2VDaGVja291dFJlcXVlc3QaLS50YW5rLmJpbGxpbmcudjEuU3RhcnRTZXJ2aWNlQ2hlY2tvdXRSZXNwb25zZRJ/ChhMaXN0U2VydmljZVN1YnNjcmlwdGlvbnMSMC50YW5rLmJpbGxpbmcudjEuTGlzdFNlcnZpY2VTdWJzY3JpcHRpb25zUmVxdWVzdBoxLnRhbmsuYmlsbGluZy52MS5MaXN0U2VydmljZVN1YnNjcmlwdGlvbnNSZXNwb25zZRJqChFPcGVuU2VydmljZVBvcnRhbBIpLnRhbmsuYmlsbGluZy52MS5PcGVuU2VydmljZVBvcnRhbFJlcXVlc3QaKi50YW5rLmJpbGxpbmcudjEuT3BlblNlcnZpY2VQb3J0YWxSZXNwb25zZRJwChNDcmVhdGVTZXJ2aWNlQXBpS2V5EisudGFuay5iaWxsaW5nLnYxLkNyZWF0ZVNlcnZpY2VBcGlLZXlSZXF1ZXN0GiwudGFuay5iaWxsaW5nLnYxLkNyZWF0ZVNlcnZpY2VBcGlLZXlSZXNwb25zZRJbCgxHZXRBZ2VudFRpbWUSJC50YW5rLmJpbGxpbmcudjEuR2V0QWdlbnRUaW1lUmVxdWVzdBolLnRhbmsuYmlsbGluZy52MS5HZXRBZ2VudFRpbWVSZXNwb25zZRJ5ChZTdGFydEFnZW50VGltZUNoZWNrb3V0Ei4udGFuay5iaWxsaW5nLnYxLlN0YXJ0QWdlbnRUaW1lQ2hlY2tvdXRSZXF1ZXN0Gi8udGFuay5iaWxsaW5nLnYxLlN0YXJ0QWdlbnRUaW1lQ2hlY2tvdXRSZXNwb25zZRJeCg1TZXRBdXRvUmVmaWxsEiUudGFuay5iaWxsaW5nLnYxLlNldEF1dG9SZWZpbGxSZXF1ZXN0GiYudGFuay5iaWxsaW5nLnYxLlNldEF1dG9SZWZpbGxSZXNwb25zZULYAQoTY29tLnRhbmsuYmlsbGluZy52MUIMQmlsbGluZ1Byb3RvUAFaVWdpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvYmlsbGluZy92MTtiaWxsaW5ndjGiAgNUQliqAg9UYW5rLkJpbGxpbmcuVjHKAg9UYW5rXEJpbGxpbmdcVjHiAhtUYW5rXEJpbGxpbmdcVjFcR1BCTWV0YWRhdGHqAhFUYW5rOjpCaWxsaW5nOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp]);
 
 /**
  * Price is what a product costs to take over right now, and why.
@@ -477,6 +477,306 @@ export const SetAgentCapResponseSchema: GenMessage<SetAgentCapResponse> = /*@__P
   messageDesc(file_tank_billing_v1_billing, 15);
 
 /**
+ * AgentTime is a workspace's prepaid agent time. Every amount is in cents of what
+ * the workspace pays (agent usage is priced at cost x 2 before it reaches here).
+ *
+ * @generated from message tank.billing.v1.AgentTime
+ */
+export type AgentTime = Message<"tank.billing.v1.AgentTime"> & {
+  /**
+   * purchased time left; may dip a little below zero
+   *
+   * @generated from field: int64 balance_cents = 1;
+   */
+  balanceCents: bigint;
+
+  /**
+   * included with Premium each month
+   *
+   * @generated from field: int64 included_cents = 2;
+   */
+  includedCents: bigint;
+
+  /**
+   * of that, what is left this month
+   *
+   * @generated from field: int64 included_left_cents = 3;
+   */
+  includedLeftCents: bigint;
+
+  /**
+   * all agent usage this month
+   *
+   * @generated from field: int64 used_this_month_cents = 4;
+   */
+  usedThisMonthCents: bigint;
+
+  /**
+   * true when nothing is left and no run may start
+   *
+   * @generated from field: bool blocked = 5;
+   */
+  blocked: boolean;
+
+  /**
+   * @generated from field: tank.billing.v1.AutoRefill auto_refill = 6;
+   */
+  autoRefill?: AutoRefill;
+
+  /**
+   * @generated from field: int64 auto_refilled_this_month_cents = 7;
+   */
+  autoRefilledThisMonthCents: bigint;
+
+  /**
+   * a saved card auto-refill can charge
+   *
+   * @generated from field: bool has_payment_method = 8;
+   */
+  hasPaymentMethod: boolean;
+
+  /**
+   * newest first
+   *
+   * @generated from field: repeated tank.billing.v1.AgentTimeEntry history = 9;
+   */
+  history: AgentTimeEntry[];
+
+  /**
+   * the preset amounts to buy
+   *
+   * @generated from field: repeated int64 pack_cents = 10;
+   */
+  packCents: bigint[];
+
+  /**
+   * the smallest custom amount
+   *
+   * @generated from field: int64 min_custom_cents = 11;
+   */
+  minCustomCents: bigint;
+
+  /**
+   * the caller may buy and change auto-refill
+   *
+   * @generated from field: bool can_manage = 12;
+   */
+  canManage: boolean;
+
+  /**
+   * false: the workspace is not on prepaid agent time yet
+   *
+   * @generated from field: bool prepaid = 13;
+   */
+  prepaid: boolean;
+};
+
+/**
+ * Describes the message tank.billing.v1.AgentTime.
+ * Use `create(AgentTimeSchema)` to create a new message.
+ */
+export const AgentTimeSchema: GenMessage<AgentTime> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 16);
+
+/**
+ * @generated from message tank.billing.v1.AutoRefill
+ */
+export type AutoRefill = Message<"tank.billing.v1.AutoRefill"> & {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * refill when the balance falls below this
+   *
+   * @generated from field: int64 below_cents = 2;
+   */
+  belowCents: bigint;
+
+  /**
+   * how much each refill buys
+   *
+   * @generated from field: int64 amount_cents = 3;
+   */
+  amountCents: bigint;
+
+  /**
+   * the most auto-refill may buy in a month; 0 = no cap
+   *
+   * @generated from field: int64 monthly_cap_cents = 4;
+   */
+  monthlyCapCents: bigint;
+
+  /**
+   * why the last refill failed, in words people read
+   *
+   * @generated from field: string last_error = 5;
+   */
+  lastError: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.AutoRefill.
+ * Use `create(AutoRefillSchema)` to create a new message.
+ */
+export const AutoRefillSchema: GenMessage<AutoRefill> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 17);
+
+/**
+ * @generated from message tank.billing.v1.AgentTimeEntry
+ */
+export type AgentTimeEntry = Message<"tank.billing.v1.AgentTimeEntry"> & {
+  /**
+   * purchase | auto_refill | adjustment
+   *
+   * @generated from field: string kind = 1;
+   */
+  kind: string;
+
+  /**
+   * @generated from field: int64 cents = 2;
+   */
+  cents: bigint;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp at = 3;
+   */
+  at?: Timestamp;
+
+  /**
+   * @generated from field: string note = 4;
+   */
+  note: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.AgentTimeEntry.
+ * Use `create(AgentTimeEntrySchema)` to create a new message.
+ */
+export const AgentTimeEntrySchema: GenMessage<AgentTimeEntry> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 18);
+
+/**
+ * @generated from message tank.billing.v1.GetAgentTimeRequest
+ */
+export type GetAgentTimeRequest = Message<"tank.billing.v1.GetAgentTimeRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.GetAgentTimeRequest.
+ * Use `create(GetAgentTimeRequestSchema)` to create a new message.
+ */
+export const GetAgentTimeRequestSchema: GenMessage<GetAgentTimeRequest> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 19);
+
+/**
+ * @generated from message tank.billing.v1.GetAgentTimeResponse
+ */
+export type GetAgentTimeResponse = Message<"tank.billing.v1.GetAgentTimeResponse"> & {
+  /**
+   * @generated from field: tank.billing.v1.AgentTime agent_time = 1;
+   */
+  agentTime?: AgentTime;
+};
+
+/**
+ * Describes the message tank.billing.v1.GetAgentTimeResponse.
+ * Use `create(GetAgentTimeResponseSchema)` to create a new message.
+ */
+export const GetAgentTimeResponseSchema: GenMessage<GetAgentTimeResponse> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 20);
+
+/**
+ * @generated from message tank.billing.v1.StartAgentTimeCheckoutRequest
+ */
+export type StartAgentTimeCheckoutRequest = Message<"tank.billing.v1.StartAgentTimeCheckoutRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: int64 cents = 2;
+   */
+  cents: bigint;
+
+  /**
+   * @generated from field: string return_path = 3;
+   */
+  returnPath: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.StartAgentTimeCheckoutRequest.
+ * Use `create(StartAgentTimeCheckoutRequestSchema)` to create a new message.
+ */
+export const StartAgentTimeCheckoutRequestSchema: GenMessage<StartAgentTimeCheckoutRequest> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 21);
+
+/**
+ * @generated from message tank.billing.v1.StartAgentTimeCheckoutResponse
+ */
+export type StartAgentTimeCheckoutResponse = Message<"tank.billing.v1.StartAgentTimeCheckoutResponse"> & {
+  /**
+   * @generated from field: string checkout_url = 1;
+   */
+  checkoutUrl: string;
+};
+
+/**
+ * Describes the message tank.billing.v1.StartAgentTimeCheckoutResponse.
+ * Use `create(StartAgentTimeCheckoutResponseSchema)` to create a new message.
+ */
+export const StartAgentTimeCheckoutResponseSchema: GenMessage<StartAgentTimeCheckoutResponse> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 22);
+
+/**
+ * @generated from message tank.billing.v1.SetAutoRefillRequest
+ */
+export type SetAutoRefillRequest = Message<"tank.billing.v1.SetAutoRefillRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * last_error is ignored
+   *
+   * @generated from field: tank.billing.v1.AutoRefill auto_refill = 2;
+   */
+  autoRefill?: AutoRefill;
+};
+
+/**
+ * Describes the message tank.billing.v1.SetAutoRefillRequest.
+ * Use `create(SetAutoRefillRequestSchema)` to create a new message.
+ */
+export const SetAutoRefillRequestSchema: GenMessage<SetAutoRefillRequest> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 23);
+
+/**
+ * @generated from message tank.billing.v1.SetAutoRefillResponse
+ */
+export type SetAutoRefillResponse = Message<"tank.billing.v1.SetAutoRefillResponse"> & {
+  /**
+   * @generated from field: tank.billing.v1.AgentTime agent_time = 1;
+   */
+  agentTime?: AgentTime;
+};
+
+/**
+ * Describes the message tank.billing.v1.SetAutoRefillResponse.
+ * Use `create(SetAutoRefillResponseSchema)` to create a new message.
+ */
+export const SetAutoRefillResponseSchema: GenMessage<SetAutoRefillResponse> = /*@__PURE__*/
+  messageDesc(file_tank_billing_v1_billing, 24);
+
+/**
  * @generated from message tank.billing.v1.ServiceSubscription
  */
 export type ServiceSubscription = Message<"tank.billing.v1.ServiceSubscription"> & {
@@ -530,7 +830,7 @@ export type ServiceSubscription = Message<"tank.billing.v1.ServiceSubscription">
  * Use `create(ServiceSubscriptionSchema)` to create a new message.
  */
 export const ServiceSubscriptionSchema: GenMessage<ServiceSubscription> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 16);
+  messageDesc(file_tank_billing_v1_billing, 25);
 
 /**
  * @generated from message tank.billing.v1.StartServiceCheckoutRequest
@@ -552,7 +852,7 @@ export type StartServiceCheckoutRequest = Message<"tank.billing.v1.StartServiceC
  * Use `create(StartServiceCheckoutRequestSchema)` to create a new message.
  */
 export const StartServiceCheckoutRequestSchema: GenMessage<StartServiceCheckoutRequest> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 17);
+  messageDesc(file_tank_billing_v1_billing, 26);
 
 /**
  * @generated from message tank.billing.v1.StartServiceCheckoutResponse
@@ -569,7 +869,7 @@ export type StartServiceCheckoutResponse = Message<"tank.billing.v1.StartService
  * Use `create(StartServiceCheckoutResponseSchema)` to create a new message.
  */
 export const StartServiceCheckoutResponseSchema: GenMessage<StartServiceCheckoutResponse> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 18);
+  messageDesc(file_tank_billing_v1_billing, 27);
 
 /**
  * @generated from message tank.billing.v1.ListServiceSubscriptionsRequest
@@ -582,7 +882,7 @@ export type ListServiceSubscriptionsRequest = Message<"tank.billing.v1.ListServi
  * Use `create(ListServiceSubscriptionsRequestSchema)` to create a new message.
  */
 export const ListServiceSubscriptionsRequestSchema: GenMessage<ListServiceSubscriptionsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 19);
+  messageDesc(file_tank_billing_v1_billing, 28);
 
 /**
  * @generated from message tank.billing.v1.ListServiceSubscriptionsResponse
@@ -606,7 +906,7 @@ export type ListServiceSubscriptionsResponse = Message<"tank.billing.v1.ListServ
  * Use `create(ListServiceSubscriptionsResponseSchema)` to create a new message.
  */
 export const ListServiceSubscriptionsResponseSchema: GenMessage<ListServiceSubscriptionsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 20);
+  messageDesc(file_tank_billing_v1_billing, 29);
 
 /**
  * @generated from message tank.billing.v1.OpenServicePortalRequest
@@ -623,7 +923,7 @@ export type OpenServicePortalRequest = Message<"tank.billing.v1.OpenServicePorta
  * Use `create(OpenServicePortalRequestSchema)` to create a new message.
  */
 export const OpenServicePortalRequestSchema: GenMessage<OpenServicePortalRequest> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 21);
+  messageDesc(file_tank_billing_v1_billing, 30);
 
 /**
  * @generated from message tank.billing.v1.OpenServicePortalResponse
@@ -640,7 +940,7 @@ export type OpenServicePortalResponse = Message<"tank.billing.v1.OpenServicePort
  * Use `create(OpenServicePortalResponseSchema)` to create a new message.
  */
 export const OpenServicePortalResponseSchema: GenMessage<OpenServicePortalResponse> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 22);
+  messageDesc(file_tank_billing_v1_billing, 31);
 
 /**
  * @generated from message tank.billing.v1.CreateServiceApiKeyRequest
@@ -653,7 +953,7 @@ export type CreateServiceApiKeyRequest = Message<"tank.billing.v1.CreateServiceA
  * Use `create(CreateServiceApiKeyRequestSchema)` to create a new message.
  */
 export const CreateServiceApiKeyRequestSchema: GenMessage<CreateServiceApiKeyRequest> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 23);
+  messageDesc(file_tank_billing_v1_billing, 32);
 
 /**
  * @generated from message tank.billing.v1.CreateServiceApiKeyResponse
@@ -677,7 +977,7 @@ export type CreateServiceApiKeyResponse = Message<"tank.billing.v1.CreateService
  * Use `create(CreateServiceApiKeyResponseSchema)` to create a new message.
  */
 export const CreateServiceApiKeyResponseSchema: GenMessage<CreateServiceApiKeyResponse> = /*@__PURE__*/
-  messageDesc(file_tank_billing_v1_billing, 24);
+  messageDesc(file_tank_billing_v1_billing, 33);
 
 /**
  * @generated from service tank.billing.v1.BillingService
@@ -775,6 +1075,34 @@ export const BillingService: GenService<{
     methodKind: "unary";
     input: typeof CreateServiceApiKeyRequestSchema;
     output: typeof CreateServiceApiKeyResponseSchema;
+  },
+  /**
+   * Agent time (2026-11-06) is prepaid. Premium includes an amount each month, spent
+   * first; past it an admin buys agent time in advance, by hand or with auto-refill.
+   * At zero no run starts and a running one stops with its work saved.
+   *
+   * @generated from rpc tank.billing.v1.BillingService.GetAgentTime
+   */
+  getAgentTime: {
+    methodKind: "unary";
+    input: typeof GetAgentTimeRequestSchema;
+    output: typeof GetAgentTimeResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.billing.v1.BillingService.StartAgentTimeCheckout
+   */
+  startAgentTimeCheckout: {
+    methodKind: "unary";
+    input: typeof StartAgentTimeCheckoutRequestSchema;
+    output: typeof StartAgentTimeCheckoutResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.billing.v1.BillingService.SetAutoRefill
+   */
+  setAutoRefill: {
+    methodKind: "unary";
+    input: typeof SetAutoRefillRequestSchema;
+    output: typeof SetAutoRefillResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_billing_v1_billing, 0);
