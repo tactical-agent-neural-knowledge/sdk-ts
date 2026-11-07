@@ -6,6 +6,7 @@ import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
 import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
 import type { Guardrail, GuardrailKind, GuardrailScope, Rating, Verdict } from "../../guardrails/v1/guardrails_pb.js";
+import type { CreateConnectionRequest, CreateConnectionResponse, CreateRelayRequest, CreateRelayResponse, DeleteConnectionRequest, DeleteConnectionResponse, DeleteRunbookRequest, DeleteRunbookResponse, GetConnectionRequest, GetConnectionResponse, GetSetupGuideRequest, GetSetupGuideResponse, ListConnectionsRequest, ListConnectionsResponse, ListRelaysRequest, ListRelaysResponse, ListRunbooksRequest as ListRunbooksRequest$1, ListRunbooksResponse as ListRunbooksResponse$1, ListUsesRequest, ListUsesResponse, ListWorkflowCandidatesRequest, ListWorkflowCandidatesResponse, Provider, PutRunbookRequest, PutRunbookResponse, RevokeRelayRequest, RevokeRelayResponse, Runbook, TestConnectionRequest, TestConnectionResponse, UpdateConnectionRequest, UpdateConnectionResponse } from "../../infra/v1/infra_pb.js";
 import type { ApiKey, GetApiUsageResponse } from "../../neural/v1/neural_pb.js";
 import type { Account, Platform, Post } from "../../social/v1/social_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
@@ -427,6 +428,13 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: repeated tank.guardrails.v1.Guardrail guardrails = 39;
      */
     guardrails: Guardrail[];
+    /**
+     * The workspace's infrastructure connections this Tread may use (names, what each is
+     * for, regions and clusters), never a credential. Read them with infra_run.
+     *
+     * @generated from field: repeated tank.agentctl.v1.InfraConnectionBrief infra_connections = 40;
+     */
+    infraConnections: InfraConnectionBrief[];
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -6923,6 +6931,751 @@ export type MergeChangeResponse = Message<"tank.agentctl.v1.MergeChangeResponse"
  */
 export declare const MergeChangeResponseSchema: GenMessage<MergeChangeResponse>;
 /**
+ * What a run is told about one infrastructure connection: enough to choose it and write
+ * a command, never a credential.
+ *
+ * @generated from message tank.agentctl.v1.InfraConnectionBrief
+ */
+export type InfraConnectionBrief = Message<"tank.agentctl.v1.InfraConnectionBrief"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: tank.infra.v1.Provider provider = 2;
+     */
+    provider: Provider;
+    /**
+     * @generated from field: string description = 3;
+     */
+    description: string;
+    /**
+     * @generated from field: repeated string regions = 4;
+     */
+    regions: string[];
+    /**
+     * Clusters kubectl can reach through it (EKS, GKE, AKS or the cluster itself).
+     *
+     * @generated from field: repeated string clusters = 5;
+     */
+    clusters: string[];
+    /**
+     * The tools it answers: aws, kubectl, gcloud, bq, az, http.
+     *
+     * @generated from field: repeated string tools = 6;
+     */
+    tools: string[];
+    /**
+     * For an API connection, where its paths are relative to.
+     *
+     * @generated from field: string base_url = 7;
+     */
+    baseUrl: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.InfraConnectionBrief.
+ * Use `create(InfraConnectionBriefSchema)` to create a new message.
+ */
+export declare const InfraConnectionBriefSchema: GenMessage<InfraConnectionBrief>;
+/**
+ * @generated from message tank.agentctl.v1.InfraRunRequest
+ */
+export type InfraRunRequest = Message<"tank.agentctl.v1.InfraRunRequest"> & {
+    /**
+     * its name (or id)
+     *
+     * @generated from field: string connection = 1;
+     */
+    connection: string;
+    /**
+     * One command, e.g. "aws logs tail /ecs/api --since 1h" or "kubectl -n prod get pods".
+     * For kubectl, cluster picks one of the connection's clusters (default: the first).
+     *
+     * @generated from field: string command = 2;
+     */
+    command: string;
+    /**
+     * @generated from field: string cluster = 3;
+     */
+    cluster: string;
+    /**
+     * one line, recorded with the use
+     *
+     * @generated from field: string reason = 4;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.InfraRunRequest.
+ * Use `create(InfraRunRequestSchema)` to create a new message.
+ */
+export declare const InfraRunRequestSchema: GenMessage<InfraRunRequest>;
+/**
+ * @generated from message tank.agentctl.v1.InfraRunResponse
+ */
+export type InfraRunResponse = Message<"tank.agentctl.v1.InfraRunResponse"> & {
+    /**
+     * @generated from field: string output = 1;
+     */
+    output: string;
+    /**
+     * @generated from field: int32 exit_code = 2;
+     */
+    exitCode: number;
+    /**
+     * Why it did not run: not a read, not this Tread's connection, not connected.
+     *
+     * @generated from field: string refused = 3;
+     */
+    refused: string;
+    /**
+     * @generated from field: bool truncated = 4;
+     */
+    truncated: boolean;
+    /**
+     * @generated from field: int64 duration_ms = 5;
+     */
+    durationMs: bigint;
+};
+/**
+ * Describes the message tank.agentctl.v1.InfraRunResponse.
+ * Use `create(InfraRunResponseSchema)` to create a new message.
+ */
+export declare const InfraRunResponseSchema: GenMessage<InfraRunResponse>;
+/**
+ * @generated from message tank.agentctl.v1.InfraHttpRequest
+ */
+export type InfraHttpRequest = Message<"tank.agentctl.v1.InfraHttpRequest"> & {
+    /**
+     * @generated from field: string connection = 1;
+     */
+    connection: string;
+    /**
+     * relative to the connection's base URL, e.g. /api/v2/logs/events
+     *
+     * @generated from field: string path = 2;
+     */
+    path: string;
+    /**
+     * @generated from field: map<string, string> query = 3;
+     */
+    query: {
+        [key: string]: string;
+    };
+    /**
+     * @generated from field: string reason = 4;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.InfraHttpRequest.
+ * Use `create(InfraHttpRequestSchema)` to create a new message.
+ */
+export declare const InfraHttpRequestSchema: GenMessage<InfraHttpRequest>;
+/**
+ * @generated from message tank.agentctl.v1.InfraHttpResponse
+ */
+export type InfraHttpResponse = Message<"tank.agentctl.v1.InfraHttpResponse"> & {
+    /**
+     * @generated from field: int32 status = 1;
+     */
+    status: number;
+    /**
+     * @generated from field: string body = 2;
+     */
+    body: string;
+    /**
+     * @generated from field: string content_type = 3;
+     */
+    contentType: string;
+    /**
+     * @generated from field: string refused = 4;
+     */
+    refused: string;
+    /**
+     * @generated from field: bool truncated = 5;
+     */
+    truncated: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.InfraHttpResponse.
+ * Use `create(InfraHttpResponseSchema)` to create a new message.
+ */
+export declare const InfraHttpResponseSchema: GenMessage<InfraHttpResponse>;
+/**
+ * @generated from message tank.agentctl.v1.InfraCostsRequest
+ */
+export type InfraCostsRequest = Message<"tank.agentctl.v1.InfraCostsRequest"> & {
+    /**
+     * @generated from field: string connection = 1;
+     */
+    connection: string;
+    /**
+     * YYYY-MM-DD, inclusive; the first of this month when empty
+     *
+     * @generated from field: string start = 2;
+     */
+    start: string;
+    /**
+     * YYYY-MM-DD, exclusive; today when empty
+     *
+     * @generated from field: string end = 3;
+     */
+    end: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.InfraCostsRequest.
+ * Use `create(InfraCostsRequestSchema)` to create a new message.
+ */
+export declare const InfraCostsRequestSchema: GenMessage<InfraCostsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.InfraCostLine
+ */
+export type InfraCostLine = Message<"tank.agentctl.v1.InfraCostLine"> & {
+    /**
+     * @generated from field: string service = 1;
+     */
+    service: string;
+    /**
+     * @generated from field: double amount = 2;
+     */
+    amount: number;
+    /**
+     * @generated from field: string currency = 3;
+     */
+    currency: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.InfraCostLine.
+ * Use `create(InfraCostLineSchema)` to create a new message.
+ */
+export declare const InfraCostLineSchema: GenMessage<InfraCostLine>;
+/**
+ * @generated from message tank.agentctl.v1.InfraCostsResponse
+ */
+export type InfraCostsResponse = Message<"tank.agentctl.v1.InfraCostsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.InfraCostLine lines = 1;
+     */
+    lines: InfraCostLine[];
+    /**
+     * @generated from field: double total = 2;
+     */
+    total: number;
+    /**
+     * @generated from field: string currency = 3;
+     */
+    currency: string;
+    /**
+     * @generated from field: string note = 4;
+     */
+    note: string;
+    /**
+     * @generated from field: string refused = 5;
+     */
+    refused: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.InfraCostsResponse.
+ * Use `create(InfraCostsResponseSchema)` to create a new message.
+ */
+export declare const InfraCostsResponseSchema: GenMessage<InfraCostsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListRunbooksRequest
+ */
+export type ListRunbooksRequest = Message<"tank.agentctl.v1.ListRunbooksRequest"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ListRunbooksRequest.
+ * Use `create(ListRunbooksRequestSchema)` to create a new message.
+ */
+export declare const ListRunbooksRequestSchema: GenMessage<ListRunbooksRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListRunbooksResponse
+ */
+export type ListRunbooksResponse = Message<"tank.agentctl.v1.ListRunbooksResponse"> & {
+    /**
+     * @generated from field: repeated tank.infra.v1.Runbook runbooks = 1;
+     */
+    runbooks: Runbook[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListRunbooksResponse.
+ * Use `create(ListRunbooksResponseSchema)` to create a new message.
+ */
+export declare const ListRunbooksResponseSchema: GenMessage<ListRunbooksResponse>;
+/**
+ * @generated from message tank.agentctl.v1.RunRunbookRequest
+ */
+export type RunRunbookRequest = Message<"tank.agentctl.v1.RunRunbookRequest"> & {
+    /**
+     * its name (or id)
+     *
+     * @generated from field: string runbook = 1;
+     */
+    runbook: string;
+    /**
+     * @generated from field: map<string, string> inputs = 2;
+     */
+    inputs: {
+        [key: string]: string;
+    };
+    /**
+     * Why it should run, in a sentence the approver reads on the card.
+     *
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RunRunbookRequest.
+ * Use `create(RunRunbookRequestSchema)` to create a new message.
+ */
+export declare const RunRunbookRequestSchema: GenMessage<RunRunbookRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RunRunbookResponse
+ */
+export type RunRunbookResponse = Message<"tank.agentctl.v1.RunRunbookResponse"> & {
+    /**
+     * @generated from field: string gate_id = 1;
+     */
+    gateId: string;
+    /**
+     * @generated from field: string refused = 2;
+     */
+    refused: string;
+    /**
+     * @generated from field: string note = 3;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RunRunbookResponse.
+ * Use `create(RunRunbookResponseSchema)` to create a new message.
+ */
+export declare const RunRunbookResponseSchema: GenMessage<RunRunbookResponse>;
+/**
+ * ControlService wrappers for tank.infra.v1 (one request type per RPC).
+ *
+ * @generated from message tank.agentctl.v1.ListInfraConnectionsRequest
+ */
+export type ListInfraConnectionsRequest = Message<"tank.agentctl.v1.ListInfraConnectionsRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListConnectionsRequest request = 1;
+     */
+    request?: ListConnectionsRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraConnectionsRequest.
+ * Use `create(ListInfraConnectionsRequestSchema)` to create a new message.
+ */
+export declare const ListInfraConnectionsRequestSchema: GenMessage<ListInfraConnectionsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraConnectionsResponse
+ */
+export type ListInfraConnectionsResponse = Message<"tank.agentctl.v1.ListInfraConnectionsResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListConnectionsResponse response = 1;
+     */
+    response?: ListConnectionsResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraConnectionsResponse.
+ * Use `create(ListInfraConnectionsResponseSchema)` to create a new message.
+ */
+export declare const ListInfraConnectionsResponseSchema: GenMessage<ListInfraConnectionsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.GetInfraConnectionRequest
+ */
+export type GetInfraConnectionRequest = Message<"tank.agentctl.v1.GetInfraConnectionRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.GetConnectionRequest request = 1;
+     */
+    request?: GetConnectionRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetInfraConnectionRequest.
+ * Use `create(GetInfraConnectionRequestSchema)` to create a new message.
+ */
+export declare const GetInfraConnectionRequestSchema: GenMessage<GetInfraConnectionRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetInfraConnectionResponse
+ */
+export type GetInfraConnectionResponse = Message<"tank.agentctl.v1.GetInfraConnectionResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.GetConnectionResponse response = 1;
+     */
+    response?: GetConnectionResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetInfraConnectionResponse.
+ * Use `create(GetInfraConnectionResponseSchema)` to create a new message.
+ */
+export declare const GetInfraConnectionResponseSchema: GenMessage<GetInfraConnectionResponse>;
+/**
+ * @generated from message tank.agentctl.v1.CreateInfraConnectionRequest
+ */
+export type CreateInfraConnectionRequest = Message<"tank.agentctl.v1.CreateInfraConnectionRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.CreateConnectionRequest request = 1;
+     */
+    request?: CreateConnectionRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateInfraConnectionRequest.
+ * Use `create(CreateInfraConnectionRequestSchema)` to create a new message.
+ */
+export declare const CreateInfraConnectionRequestSchema: GenMessage<CreateInfraConnectionRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CreateInfraConnectionResponse
+ */
+export type CreateInfraConnectionResponse = Message<"tank.agentctl.v1.CreateInfraConnectionResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.CreateConnectionResponse response = 1;
+     */
+    response?: CreateConnectionResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateInfraConnectionResponse.
+ * Use `create(CreateInfraConnectionResponseSchema)` to create a new message.
+ */
+export declare const CreateInfraConnectionResponseSchema: GenMessage<CreateInfraConnectionResponse>;
+/**
+ * @generated from message tank.agentctl.v1.UpdateInfraConnectionRequest
+ */
+export type UpdateInfraConnectionRequest = Message<"tank.agentctl.v1.UpdateInfraConnectionRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.UpdateConnectionRequest request = 1;
+     */
+    request?: UpdateConnectionRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.UpdateInfraConnectionRequest.
+ * Use `create(UpdateInfraConnectionRequestSchema)` to create a new message.
+ */
+export declare const UpdateInfraConnectionRequestSchema: GenMessage<UpdateInfraConnectionRequest>;
+/**
+ * @generated from message tank.agentctl.v1.UpdateInfraConnectionResponse
+ */
+export type UpdateInfraConnectionResponse = Message<"tank.agentctl.v1.UpdateInfraConnectionResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.UpdateConnectionResponse response = 1;
+     */
+    response?: UpdateConnectionResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.UpdateInfraConnectionResponse.
+ * Use `create(UpdateInfraConnectionResponseSchema)` to create a new message.
+ */
+export declare const UpdateInfraConnectionResponseSchema: GenMessage<UpdateInfraConnectionResponse>;
+/**
+ * @generated from message tank.agentctl.v1.DeleteInfraConnectionRequest
+ */
+export type DeleteInfraConnectionRequest = Message<"tank.agentctl.v1.DeleteInfraConnectionRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.DeleteConnectionRequest request = 1;
+     */
+    request?: DeleteConnectionRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.DeleteInfraConnectionRequest.
+ * Use `create(DeleteInfraConnectionRequestSchema)` to create a new message.
+ */
+export declare const DeleteInfraConnectionRequestSchema: GenMessage<DeleteInfraConnectionRequest>;
+/**
+ * @generated from message tank.agentctl.v1.DeleteInfraConnectionResponse
+ */
+export type DeleteInfraConnectionResponse = Message<"tank.agentctl.v1.DeleteInfraConnectionResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.DeleteConnectionResponse response = 1;
+     */
+    response?: DeleteConnectionResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.DeleteInfraConnectionResponse.
+ * Use `create(DeleteInfraConnectionResponseSchema)` to create a new message.
+ */
+export declare const DeleteInfraConnectionResponseSchema: GenMessage<DeleteInfraConnectionResponse>;
+/**
+ * @generated from message tank.agentctl.v1.TestInfraConnectionRequest
+ */
+export type TestInfraConnectionRequest = Message<"tank.agentctl.v1.TestInfraConnectionRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.TestConnectionRequest request = 1;
+     */
+    request?: TestConnectionRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestInfraConnectionRequest.
+ * Use `create(TestInfraConnectionRequestSchema)` to create a new message.
+ */
+export declare const TestInfraConnectionRequestSchema: GenMessage<TestInfraConnectionRequest>;
+/**
+ * @generated from message tank.agentctl.v1.TestInfraConnectionResponse
+ */
+export type TestInfraConnectionResponse = Message<"tank.agentctl.v1.TestInfraConnectionResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.TestConnectionResponse response = 1;
+     */
+    response?: TestConnectionResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestInfraConnectionResponse.
+ * Use `create(TestInfraConnectionResponseSchema)` to create a new message.
+ */
+export declare const TestInfraConnectionResponseSchema: GenMessage<TestInfraConnectionResponse>;
+/**
+ * @generated from message tank.agentctl.v1.GetInfraSetupGuideRequest
+ */
+export type GetInfraSetupGuideRequest = Message<"tank.agentctl.v1.GetInfraSetupGuideRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.GetSetupGuideRequest request = 1;
+     */
+    request?: GetSetupGuideRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetInfraSetupGuideRequest.
+ * Use `create(GetInfraSetupGuideRequestSchema)` to create a new message.
+ */
+export declare const GetInfraSetupGuideRequestSchema: GenMessage<GetInfraSetupGuideRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetInfraSetupGuideResponse
+ */
+export type GetInfraSetupGuideResponse = Message<"tank.agentctl.v1.GetInfraSetupGuideResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.GetSetupGuideResponse response = 1;
+     */
+    response?: GetSetupGuideResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetInfraSetupGuideResponse.
+ * Use `create(GetInfraSetupGuideResponseSchema)` to create a new message.
+ */
+export declare const GetInfraSetupGuideResponseSchema: GenMessage<GetInfraSetupGuideResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraUsesRequest
+ */
+export type ListInfraUsesRequest = Message<"tank.agentctl.v1.ListInfraUsesRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListUsesRequest request = 1;
+     */
+    request?: ListUsesRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraUsesRequest.
+ * Use `create(ListInfraUsesRequestSchema)` to create a new message.
+ */
+export declare const ListInfraUsesRequestSchema: GenMessage<ListInfraUsesRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraUsesResponse
+ */
+export type ListInfraUsesResponse = Message<"tank.agentctl.v1.ListInfraUsesResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListUsesResponse response = 1;
+     */
+    response?: ListUsesResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraUsesResponse.
+ * Use `create(ListInfraUsesResponseSchema)` to create a new message.
+ */
+export declare const ListInfraUsesResponseSchema: GenMessage<ListInfraUsesResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraRunbooksRequest
+ */
+export type ListInfraRunbooksRequest = Message<"tank.agentctl.v1.ListInfraRunbooksRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListRunbooksRequest request = 1;
+     */
+    request?: ListRunbooksRequest$1;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraRunbooksRequest.
+ * Use `create(ListInfraRunbooksRequestSchema)` to create a new message.
+ */
+export declare const ListInfraRunbooksRequestSchema: GenMessage<ListInfraRunbooksRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraRunbooksResponse
+ */
+export type ListInfraRunbooksResponse = Message<"tank.agentctl.v1.ListInfraRunbooksResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListRunbooksResponse response = 1;
+     */
+    response?: ListRunbooksResponse$1;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraRunbooksResponse.
+ * Use `create(ListInfraRunbooksResponseSchema)` to create a new message.
+ */
+export declare const ListInfraRunbooksResponseSchema: GenMessage<ListInfraRunbooksResponse>;
+/**
+ * @generated from message tank.agentctl.v1.PutInfraRunbookRequest
+ */
+export type PutInfraRunbookRequest = Message<"tank.agentctl.v1.PutInfraRunbookRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.PutRunbookRequest request = 1;
+     */
+    request?: PutRunbookRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.PutInfraRunbookRequest.
+ * Use `create(PutInfraRunbookRequestSchema)` to create a new message.
+ */
+export declare const PutInfraRunbookRequestSchema: GenMessage<PutInfraRunbookRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PutInfraRunbookResponse
+ */
+export type PutInfraRunbookResponse = Message<"tank.agentctl.v1.PutInfraRunbookResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.PutRunbookResponse response = 1;
+     */
+    response?: PutRunbookResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.PutInfraRunbookResponse.
+ * Use `create(PutInfraRunbookResponseSchema)` to create a new message.
+ */
+export declare const PutInfraRunbookResponseSchema: GenMessage<PutInfraRunbookResponse>;
+/**
+ * @generated from message tank.agentctl.v1.DeleteInfraRunbookRequest
+ */
+export type DeleteInfraRunbookRequest = Message<"tank.agentctl.v1.DeleteInfraRunbookRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.DeleteRunbookRequest request = 1;
+     */
+    request?: DeleteRunbookRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.DeleteInfraRunbookRequest.
+ * Use `create(DeleteInfraRunbookRequestSchema)` to create a new message.
+ */
+export declare const DeleteInfraRunbookRequestSchema: GenMessage<DeleteInfraRunbookRequest>;
+/**
+ * @generated from message tank.agentctl.v1.DeleteInfraRunbookResponse
+ */
+export type DeleteInfraRunbookResponse = Message<"tank.agentctl.v1.DeleteInfraRunbookResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.DeleteRunbookResponse response = 1;
+     */
+    response?: DeleteRunbookResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.DeleteInfraRunbookResponse.
+ * Use `create(DeleteInfraRunbookResponseSchema)` to create a new message.
+ */
+export declare const DeleteInfraRunbookResponseSchema: GenMessage<DeleteInfraRunbookResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraWorkflowCandidatesRequest
+ */
+export type ListInfraWorkflowCandidatesRequest = Message<"tank.agentctl.v1.ListInfraWorkflowCandidatesRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListWorkflowCandidatesRequest request = 1;
+     */
+    request?: ListWorkflowCandidatesRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraWorkflowCandidatesRequest.
+ * Use `create(ListInfraWorkflowCandidatesRequestSchema)` to create a new message.
+ */
+export declare const ListInfraWorkflowCandidatesRequestSchema: GenMessage<ListInfraWorkflowCandidatesRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraWorkflowCandidatesResponse
+ */
+export type ListInfraWorkflowCandidatesResponse = Message<"tank.agentctl.v1.ListInfraWorkflowCandidatesResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListWorkflowCandidatesResponse response = 1;
+     */
+    response?: ListWorkflowCandidatesResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraWorkflowCandidatesResponse.
+ * Use `create(ListInfraWorkflowCandidatesResponseSchema)` to create a new message.
+ */
+export declare const ListInfraWorkflowCandidatesResponseSchema: GenMessage<ListInfraWorkflowCandidatesResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraRelaysRequest
+ */
+export type ListInfraRelaysRequest = Message<"tank.agentctl.v1.ListInfraRelaysRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListRelaysRequest request = 1;
+     */
+    request?: ListRelaysRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraRelaysRequest.
+ * Use `create(ListInfraRelaysRequestSchema)` to create a new message.
+ */
+export declare const ListInfraRelaysRequestSchema: GenMessage<ListInfraRelaysRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListInfraRelaysResponse
+ */
+export type ListInfraRelaysResponse = Message<"tank.agentctl.v1.ListInfraRelaysResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.ListRelaysResponse response = 1;
+     */
+    response?: ListRelaysResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListInfraRelaysResponse.
+ * Use `create(ListInfraRelaysResponseSchema)` to create a new message.
+ */
+export declare const ListInfraRelaysResponseSchema: GenMessage<ListInfraRelaysResponse>;
+/**
+ * @generated from message tank.agentctl.v1.CreateInfraRelayRequest
+ */
+export type CreateInfraRelayRequest = Message<"tank.agentctl.v1.CreateInfraRelayRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.CreateRelayRequest request = 1;
+     */
+    request?: CreateRelayRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateInfraRelayRequest.
+ * Use `create(CreateInfraRelayRequestSchema)` to create a new message.
+ */
+export declare const CreateInfraRelayRequestSchema: GenMessage<CreateInfraRelayRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CreateInfraRelayResponse
+ */
+export type CreateInfraRelayResponse = Message<"tank.agentctl.v1.CreateInfraRelayResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.CreateRelayResponse response = 1;
+     */
+    response?: CreateRelayResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreateInfraRelayResponse.
+ * Use `create(CreateInfraRelayResponseSchema)` to create a new message.
+ */
+export declare const CreateInfraRelayResponseSchema: GenMessage<CreateInfraRelayResponse>;
+/**
+ * @generated from message tank.agentctl.v1.RevokeInfraRelayRequest
+ */
+export type RevokeInfraRelayRequest = Message<"tank.agentctl.v1.RevokeInfraRelayRequest"> & {
+    /**
+     * @generated from field: tank.infra.v1.RevokeRelayRequest request = 1;
+     */
+    request?: RevokeRelayRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.RevokeInfraRelayRequest.
+ * Use `create(RevokeInfraRelayRequestSchema)` to create a new message.
+ */
+export declare const RevokeInfraRelayRequestSchema: GenMessage<RevokeInfraRelayRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RevokeInfraRelayResponse
+ */
+export type RevokeInfraRelayResponse = Message<"tank.agentctl.v1.RevokeInfraRelayResponse"> & {
+    /**
+     * @generated from field: tank.infra.v1.RevokeRelayResponse response = 1;
+     */
+    response?: RevokeRelayResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.RevokeInfraRelayResponse.
+ * Use `create(RevokeInfraRelayResponseSchema)` to create a new message.
+ */
+export declare const RevokeInfraRelayResponseSchema: GenMessage<RevokeInfraRelayResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -7221,6 +7974,53 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof CheckLiveRequestSchema;
         output: typeof CheckLiveResponseSchema;
+    };
+    /**
+     * Infrastructure connections (2026-11-07): read-only commands against the workspace's
+     * own clouds and clusters, run in a job of the control plane's with 15-minute
+     * credentials the sandbox never sees; the run gets the output, redacted.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.InfraRun
+     */
+    infraRun: {
+        methodKind: "unary";
+        input: typeof InfraRunRequestSchema;
+        output: typeof InfraRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.InfraHttp
+     */
+    infraHttp: {
+        methodKind: "unary";
+        input: typeof InfraHttpRequestSchema;
+        output: typeof InfraHttpResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.InfraCosts
+     */
+    infraCosts: {
+        methodKind: "unary";
+        input: typeof InfraCostsRequestSchema;
+        output: typeof InfraCostsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ListRunbooks
+     */
+    listRunbooks: {
+        methodKind: "unary";
+        input: typeof ListRunbooksRequestSchema;
+        output: typeof ListRunbooksResponseSchema;
+    };
+    /**
+     * Asks to run a runbook: opens a gate a workspace admin decides; the outcome of the
+     * workflow arrives on the inbox.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.RunRunbook
+     */
+    runRunbook: {
+        methodKind: "unary";
+        input: typeof RunRunbookRequestSchema;
+        output: typeof RunRunbookResponseSchema;
     };
     /**
      * The product TANK runs for this run's repository, as its operator sees it: whether it
@@ -7634,6 +8434,130 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof ExtractGuardrailsRequestSchema;
         output: typeof ExtractGuardrailsResponseSchema;
+    };
+    /**
+     * Infrastructure connections, for the messaging core: the rows live here, and so do
+     * the credentials path and the Lockbox Agent vault. api decides who may ask and sets
+     * requested_by.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ListInfraConnections
+     */
+    listInfraConnections: {
+        methodKind: "unary";
+        input: typeof ListInfraConnectionsRequestSchema;
+        output: typeof ListInfraConnectionsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.GetInfraConnection
+     */
+    getInfraConnection: {
+        methodKind: "unary";
+        input: typeof GetInfraConnectionRequestSchema;
+        output: typeof GetInfraConnectionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.CreateInfraConnection
+     */
+    createInfraConnection: {
+        methodKind: "unary";
+        input: typeof CreateInfraConnectionRequestSchema;
+        output: typeof CreateInfraConnectionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.UpdateInfraConnection
+     */
+    updateInfraConnection: {
+        methodKind: "unary";
+        input: typeof UpdateInfraConnectionRequestSchema;
+        output: typeof UpdateInfraConnectionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.DeleteInfraConnection
+     */
+    deleteInfraConnection: {
+        methodKind: "unary";
+        input: typeof DeleteInfraConnectionRequestSchema;
+        output: typeof DeleteInfraConnectionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.TestInfraConnection
+     */
+    testInfraConnection: {
+        methodKind: "unary";
+        input: typeof TestInfraConnectionRequestSchema;
+        output: typeof TestInfraConnectionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.GetInfraSetupGuide
+     */
+    getInfraSetupGuide: {
+        methodKind: "unary";
+        input: typeof GetInfraSetupGuideRequestSchema;
+        output: typeof GetInfraSetupGuideResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.ListInfraUses
+     */
+    listInfraUses: {
+        methodKind: "unary";
+        input: typeof ListInfraUsesRequestSchema;
+        output: typeof ListInfraUsesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.ListInfraRunbooks
+     */
+    listInfraRunbooks: {
+        methodKind: "unary";
+        input: typeof ListInfraRunbooksRequestSchema;
+        output: typeof ListInfraRunbooksResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.PutInfraRunbook
+     */
+    putInfraRunbook: {
+        methodKind: "unary";
+        input: typeof PutInfraRunbookRequestSchema;
+        output: typeof PutInfraRunbookResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.DeleteInfraRunbook
+     */
+    deleteInfraRunbook: {
+        methodKind: "unary";
+        input: typeof DeleteInfraRunbookRequestSchema;
+        output: typeof DeleteInfraRunbookResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.ListInfraWorkflowCandidates
+     */
+    listInfraWorkflowCandidates: {
+        methodKind: "unary";
+        input: typeof ListInfraWorkflowCandidatesRequestSchema;
+        output: typeof ListInfraWorkflowCandidatesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.ListInfraRelays
+     */
+    listInfraRelays: {
+        methodKind: "unary";
+        input: typeof ListInfraRelaysRequestSchema;
+        output: typeof ListInfraRelaysResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.CreateInfraRelay
+     */
+    createInfraRelay: {
+        methodKind: "unary";
+        input: typeof CreateInfraRelayRequestSchema;
+        output: typeof CreateInfraRelayResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.RevokeInfraRelay
+     */
+    revokeInfraRelay: {
+        methodKind: "unary";
+        input: typeof RevokeInfraRelayRequestSchema;
+        output: typeof RevokeInfraRelayResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.StartRun

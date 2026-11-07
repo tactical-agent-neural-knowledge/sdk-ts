@@ -11,6 +11,7 @@ export * as events from "./tank/events/v1/events_pb.js";
 export * as files from "./tank/files/v1/files_pb.js";
 export * as guardrails from "./tank/guardrails/v1/guardrails_pb.js";
 export * as huddle from "./tank/huddle/v1/huddle_pb.js";
+export * as infra from "./tank/infra/v1/infra_pb.js";
 export * as message from "./tank/message/v1/message_pb.js";
 export * as notification from "./tank/notification/v1/notification_pb.js";
 export * as presence from "./tank/presence/v1/presence_pb.js";
