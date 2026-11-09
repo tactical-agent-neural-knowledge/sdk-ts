@@ -350,6 +350,8 @@ export function useMessages(channelId: string, opts: UseMessagesOptions = {}): U
     if (!view || !channelId) return;
     client.viewChannel(channelId);
     if (!client.store.getState().channelPaging[channelId]?.loaded) void loadOlder().catch(() => undefined);
+    // Loaded earlier this session: ask for what was posted while this screen was closed.
+    else void client.catchUpChannel(channelId).catch(() => undefined);
     return () => client.realtime.unsubscribe({ channelIds: [channelId] });
   }, [client, channelId, view, loadOlder]);
   return {
