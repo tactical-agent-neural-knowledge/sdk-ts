@@ -1,5 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { App } from "../../apps/v1/apps_pb.js";
 import type { Message as Message$1 } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/ai/v1/ai.proto.
@@ -43,6 +44,13 @@ export type Conversation = Message$1<"tank.ai.v1.Conversation"> & {
      * @generated from field: string workspace_id = 7;
      */
     workspaceId: string;
+    /**
+     * Apps connected to this conversation ("Connect apps"). Their data joins the answer and
+     * is cited; any published app may be connected, from any workspace or none.
+     *
+     * @generated from field: repeated tank.apps.v1.App apps = 8;
+     */
+    apps: App[];
 };
 /**
  * Describes the message tank.ai.v1.Conversation.
@@ -889,6 +897,98 @@ export type GetUsageResponse = Message$1<"tank.ai.v1.GetUsageResponse"> & {
  */
 export declare const GetUsageResponseSchema: GenMessage<GetUsageResponse>;
 /**
+ * @generated from message tank.ai.v1.ListAppsRequest
+ */
+export type ListAppsRequest = Message$1<"tank.ai.v1.ListAppsRequest"> & {
+    /**
+     * @generated from field: string query = 1;
+     */
+    query: string;
+};
+/**
+ * Describes the message tank.ai.v1.ListAppsRequest.
+ * Use `create(ListAppsRequestSchema)` to create a new message.
+ */
+export declare const ListAppsRequestSchema: GenMessage<ListAppsRequest>;
+/**
+ * @generated from message tank.ai.v1.ListAppsResponse
+ */
+export type ListAppsResponse = Message$1<"tank.ai.v1.ListAppsResponse"> & {
+    /**
+     * @generated from field: repeated tank.apps.v1.App apps = 1;
+     */
+    apps: App[];
+};
+/**
+ * Describes the message tank.ai.v1.ListAppsResponse.
+ * Use `create(ListAppsResponseSchema)` to create a new message.
+ */
+export declare const ListAppsResponseSchema: GenMessage<ListAppsResponse>;
+/**
+ * @generated from message tank.ai.v1.ConnectAppRequest
+ */
+export type ConnectAppRequest = Message$1<"tank.ai.v1.ConnectAppRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: string app_id = 2;
+     */
+    appId: string;
+};
+/**
+ * Describes the message tank.ai.v1.ConnectAppRequest.
+ * Use `create(ConnectAppRequestSchema)` to create a new message.
+ */
+export declare const ConnectAppRequestSchema: GenMessage<ConnectAppRequest>;
+/**
+ * @generated from message tank.ai.v1.ConnectAppResponse
+ */
+export type ConnectAppResponse = Message$1<"tank.ai.v1.ConnectAppResponse"> & {
+    /**
+     * @generated from field: tank.ai.v1.Conversation conversation = 1;
+     */
+    conversation?: Conversation;
+};
+/**
+ * Describes the message tank.ai.v1.ConnectAppResponse.
+ * Use `create(ConnectAppResponseSchema)` to create a new message.
+ */
+export declare const ConnectAppResponseSchema: GenMessage<ConnectAppResponse>;
+/**
+ * @generated from message tank.ai.v1.DisconnectAppRequest
+ */
+export type DisconnectAppRequest = Message$1<"tank.ai.v1.DisconnectAppRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: string app_id = 2;
+     */
+    appId: string;
+};
+/**
+ * Describes the message tank.ai.v1.DisconnectAppRequest.
+ * Use `create(DisconnectAppRequestSchema)` to create a new message.
+ */
+export declare const DisconnectAppRequestSchema: GenMessage<DisconnectAppRequest>;
+/**
+ * @generated from message tank.ai.v1.DisconnectAppResponse
+ */
+export type DisconnectAppResponse = Message$1<"tank.ai.v1.DisconnectAppResponse"> & {
+    /**
+     * @generated from field: tank.ai.v1.Conversation conversation = 1;
+     */
+    conversation?: Conversation;
+};
+/**
+ * Describes the message tank.ai.v1.DisconnectAppResponse.
+ * Use `create(DisconnectAppResponseSchema)` to create a new message.
+ */
+export declare const DisconnectAppResponseSchema: GenMessage<DisconnectAppResponse>;
+/**
  * @generated from enum tank.ai.v1.Role
  */
 export declare enum Role {
@@ -1008,5 +1108,31 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof AddToAtlasRequestSchema;
         output: typeof AddToAtlasResponseSchema;
+    };
+    /**
+     * Every app published to Neural, for the "Connect apps" picker.
+     *
+     * @generated from rpc tank.ai.v1.AiService.ListApps
+     */
+    listApps: {
+        methodKind: "unary";
+        input: typeof ListAppsRequestSchema;
+        output: typeof ListAppsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.ConnectApp
+     */
+    connectApp: {
+        methodKind: "unary";
+        input: typeof ConnectAppRequestSchema;
+        output: typeof ConnectAppResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.DisconnectApp
+     */
+    disconnectApp: {
+        methodKind: "unary";
+        input: typeof DisconnectAppRequestSchema;
+        output: typeof DisconnectAppResponseSchema;
     };
 }>;
