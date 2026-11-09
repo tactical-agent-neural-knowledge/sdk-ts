@@ -852,6 +852,52 @@ describe("stale persisted timeline", () => {
   });
 });
 
+describe("catching up a channel opened earlier this session", () => {
+  // Robby, 2026-11-09: a DM stuck at message 994 while the server had 1001, his own 11:44
+  // message among the missing. The DM had loaded once; leaving it unsubscribed it, and
+  // opening it again never asked the server for what came after.
+  const row = (id: string, channelSeq: bigint) =>
+    create(MessageSchema, {
+      id,
+      workspaceId: "ws1",
+      channelId: "dm",
+      channelSeq,
+      authorId: "mike",
+      text: id,
+    });
+
+  it("fetches what was posted while the channel was closed", async () => {
+    api.messages = [row("m1", 1n), row("m2", 2n), row("m3", 3n)];
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    await c.loadChannel("dm");
+    expect(c.store.selectChannelMessages("dm").map((m) => m.id)).toEqual(["m1", "m2", "m3"]);
+    // Posted on the server while this device was elsewhere: no live event reached it.
+    api.messages.push(row("m4", 4n), row("m5", 5n));
+    await c.catchUpChannel("dm");
+    expect(c.store.selectChannelMessages("dm").map((m) => m.id)).toEqual(["m1", "m2", "m3", "m4", "m5"]);
+  });
+
+  it("pages until it has caught up with a long gap", async () => {
+    api.messages = [row("m1", 1n)];
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    await c.loadChannel("dm");
+    for (let i = 2; i <= 450; i++) api.messages.push(row(`m${i}`, BigInt(i)));
+    await c.catchUpChannel("dm");
+    const ids = c.store.selectChannelMessages("dm").map((m) => m.id);
+    expect(ids.length).toBe(450);
+    expect(ids.at(-1)).toBe("m450");
+  });
+
+  it("does nothing for a channel never loaded", async () => {
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    await c.catchUpChannel("never");
+    expect(c.store.selectChannelMessages("never")).toEqual([]);
+  });
+});
+
 describe("searchMembers", () => {
   it("asks the server and folds the results into the store", async () => {
     // Bootstrap loads at most 200 members; suggestions used to filter only

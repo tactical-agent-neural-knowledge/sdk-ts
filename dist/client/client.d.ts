@@ -400,6 +400,16 @@ export declare class TankClient {
     /** Fetches a Tread the store does not have yet, once at a time. */
     private ensureChannel;
     private refreshChannel;
+    private readyBefore;
+    /**
+     * Fetches everything posted in a channel after the newest message this device holds,
+     * page by page. A channel loaded once in a session was never asked again: leaving it
+     * unsubscribes it (a DM's messages reach only those viewing it), so what arrived while
+     * elsewhere stayed missing until the app restarted (Robby, 2026-11-09: a DM stuck seven
+     * messages behind, his own among them). Opening a channel and reconnecting both call it.
+     */
+    catchUpChannel(channelId: string): Promise<void>;
+    private catchUpRecent;
     private resync;
     private touchRecent;
     private schedulePersist;

@@ -1051,8 +1051,14 @@ export class TankClient {
         const rt = this.realtime;
         rt.on("state", (s) => {
             this.store.dispatch({ type: "connection", state: s });
-            if (s === "ready")
+            if (s === "ready") {
                 void this.flushOutbox();
+                // Back after a drop (a phone asleep, a train tunnel): the gateway replays only the
+                // channels that were subscribed, so every recent channel asks for what it missed.
+                if (this.readyBefore)
+                    void this.catchUpRecent();
+                this.readyBefore = true;
+            }
         });
         rt.on("event", (ev) => {
             const env = ev.envelope;
@@ -1187,6 +1193,26 @@ export class TankClient {
         catch {
             // transient; the next ChannelUpdated or bootstrap repairs it
         }
+    }
+    readyBefore = false;
+    /**
+     * Fetches everything posted in a channel after the newest message this device holds,
+     * page by page. A channel loaded once in a session was never asked again: leaving it
+     * unsubscribes it (a DM's messages reach only those viewing it), so what arrived while
+     * elsewhere stayed missing until the app restarted (Robby, 2026-11-09: a DM stuck seven
+     * messages behind, his own among them). Opening a channel and reconnecting both call it.
+     */
+    async catchUpChannel(channelId) {
+        if ((this.store.getState().messageIdsByChannel[channelId]?.length ?? 0) === 0)
+            return;
+        for (let page = 0; page < 10; page++) {
+            const more = await this.loadChannel(channelId, { direction: "after", limit: 200 });
+            if (!more)
+                return;
+        }
+    }
+    async catchUpRecent() {
+        await Promise.allSettled(this.recentChannels.map((id) => this.catchUpChannel(id)));
     }
     async resync() {
         this.store.dispatch({ type: "cursors/reset" });
