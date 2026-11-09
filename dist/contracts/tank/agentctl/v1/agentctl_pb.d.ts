@@ -1,6 +1,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
+import type { CallToolRequest, CallToolResponse, GetToolsRequest, GetToolsResponse, ListAppsRequest, ListAppsResponse } from "../../apps/v1/apps_pb.js";
 import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks/v1/blocks_pb.js";
 import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
@@ -7256,6 +7257,90 @@ export declare const RunRunbookResponseSchema: GenMessage<RunRunbookResponse>;
 /**
  * ControlService wrappers for tank.infra.v1 (one request type per RPC).
  *
+ * @generated from message tank.agentctl.v1.ListNeuralAppsRequest
+ */
+export type ListNeuralAppsRequest = Message<"tank.agentctl.v1.ListNeuralAppsRequest"> & {
+    /**
+     * @generated from field: tank.apps.v1.ListAppsRequest request = 1;
+     */
+    request?: ListAppsRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListNeuralAppsRequest.
+ * Use `create(ListNeuralAppsRequestSchema)` to create a new message.
+ */
+export declare const ListNeuralAppsRequestSchema: GenMessage<ListNeuralAppsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListNeuralAppsResponse
+ */
+export type ListNeuralAppsResponse = Message<"tank.agentctl.v1.ListNeuralAppsResponse"> & {
+    /**
+     * @generated from field: tank.apps.v1.ListAppsResponse response = 1;
+     */
+    response?: ListAppsResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListNeuralAppsResponse.
+ * Use `create(ListNeuralAppsResponseSchema)` to create a new message.
+ */
+export declare const ListNeuralAppsResponseSchema: GenMessage<ListNeuralAppsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.GetNeuralAppToolsRequest
+ */
+export type GetNeuralAppToolsRequest = Message<"tank.agentctl.v1.GetNeuralAppToolsRequest"> & {
+    /**
+     * @generated from field: tank.apps.v1.GetToolsRequest request = 1;
+     */
+    request?: GetToolsRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetNeuralAppToolsRequest.
+ * Use `create(GetNeuralAppToolsRequestSchema)` to create a new message.
+ */
+export declare const GetNeuralAppToolsRequestSchema: GenMessage<GetNeuralAppToolsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetNeuralAppToolsResponse
+ */
+export type GetNeuralAppToolsResponse = Message<"tank.agentctl.v1.GetNeuralAppToolsResponse"> & {
+    /**
+     * @generated from field: tank.apps.v1.GetToolsResponse response = 1;
+     */
+    response?: GetToolsResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetNeuralAppToolsResponse.
+ * Use `create(GetNeuralAppToolsResponseSchema)` to create a new message.
+ */
+export declare const GetNeuralAppToolsResponseSchema: GenMessage<GetNeuralAppToolsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.CallNeuralAppToolRequest
+ */
+export type CallNeuralAppToolRequest = Message<"tank.agentctl.v1.CallNeuralAppToolRequest"> & {
+    /**
+     * @generated from field: tank.apps.v1.CallToolRequest request = 1;
+     */
+    request?: CallToolRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.CallNeuralAppToolRequest.
+ * Use `create(CallNeuralAppToolRequestSchema)` to create a new message.
+ */
+export declare const CallNeuralAppToolRequestSchema: GenMessage<CallNeuralAppToolRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CallNeuralAppToolResponse
+ */
+export type CallNeuralAppToolResponse = Message<"tank.agentctl.v1.CallNeuralAppToolResponse"> & {
+    /**
+     * @generated from field: tank.apps.v1.CallToolResponse response = 1;
+     */
+    response?: CallToolResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.CallNeuralAppToolResponse.
+ * Use `create(CallNeuralAppToolResponseSchema)` to create a new message.
+ */
+export declare const CallNeuralAppToolResponseSchema: GenMessage<CallNeuralAppToolResponse>;
+/**
  * @generated from message tank.agentctl.v1.ListInfraConnectionsRequest
  */
 export type ListInfraConnectionsRequest = Message<"tank.agentctl.v1.ListInfraConnectionsRequest"> & {
@@ -8439,7 +8524,33 @@ export declare const ControlService: GenService<{
      * Infrastructure connections, for the messaging core: the rows live here, and so do
      * the credentials path and the Lockbox Agent vault. api decides who may ask and sets
      * requested_by.
+     * Apps published to Neural (tank.apps.v1). api asks; the control plane owns products,
+     * holds each app's token and makes every call to an app.
      *
+     * @generated from rpc tank.agentctl.v1.ControlService.ListNeuralApps
+     */
+    listNeuralApps: {
+        methodKind: "unary";
+        input: typeof ListNeuralAppsRequestSchema;
+        output: typeof ListNeuralAppsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.GetNeuralAppTools
+     */
+    getNeuralAppTools: {
+        methodKind: "unary";
+        input: typeof GetNeuralAppToolsRequestSchema;
+        output: typeof GetNeuralAppToolsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.CallNeuralAppTool
+     */
+    callNeuralAppTool: {
+        methodKind: "unary";
+        input: typeof CallNeuralAppToolRequestSchema;
+        output: typeof CallNeuralAppToolResponseSchema;
+    };
+    /**
      * @generated from rpc tank.agentctl.v1.ControlService.ListInfraConnections
      */
     listInfraConnections: {
