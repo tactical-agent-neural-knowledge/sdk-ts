@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/devices/v1/devices.proto.
  */
 export const file_tank_devices_v1_devices: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2RldmljZXMvdjEvZGV2aWNlcy5wcm90bxIPdGFuay5kZXZpY2VzLnYxIqABCgZEZXZpY2USEQoJdHJhbnNwb3J0GAEgASgJEgwKBG5hbWUYAiABKAkSFAoMbWFudWZhY3R1cmVyGAMgASgJEg0KBW1vZGVsGAQgASgJEhAKCGZpcm13YXJlGAUgASgJEioKCHNlcnZpY2VzGAYgAygLMhgudGFuay5kZXZpY2VzLnYxLlNlcnZpY2USEgoKY29tcGFueV9pZBgHIAEoDSJRCgdTZXJ2aWNlEgwKBHV1aWQYASABKAkSOAoPY2hhcmFjdGVyaXN0aWNzGAIgAygLMh8udGFuay5kZXZpY2VzLnYxLkNoYXJhY3RlcmlzdGljIkEKDkNoYXJhY3RlcmlzdGljEgwKBHV1aWQYASABKAkSEgoKcHJvcGVydGllcxgCIAMoCRINCgV2YWx1ZRgDIAEoDCJECgdSZWFkaW5nEhsKE2NoYXJhY3RlcmlzdGljX3V1aWQYASABKAkSDQoFYXRfbXMYAiABKAMSDQoFdmFsdWUYAyABKAwiNAoFUG9pbnQSDQoFZmllbGQYASABKAkSDQoFYXRfbXMYAiABKAMSDQoFdmFsdWUYAyABKAEiXgoFRmllbGQSCwoDa2V5GAEgASgJEg0KBWxhYmVsGAIgASgJEgwKBHVuaXQYAyABKAkSGwoTY2hhcmFjdGVyaXN0aWNfdXVpZBgEIAEoCRIOCgZzb3VyY2UYBSABKAkioQEKCkZpZWxkU3RhdHMSDQoFZmllbGQYASABKAkSDAoEbGFzdBgCIAEoARIPCgdhdmdfMzBzGAMgASgBEg4KBmF2Z181bRgEIAEoARITCgthdmdfc2Vzc2lvbhgFIAEoARILCgNtaW4YBiABKAESCwoDbWF4GAcgASgBEhUKDXRyZW5kX3Blcl9taW4YCCABKAESDwoHc2FtcGxlcxgJIAEoAyLAAgoHU2Vzc2lvbhIKCgJpZBgBIAEoCRIXCg9jb252ZXJzYXRpb25faWQYAiABKAkSJwoGZGV2aWNlGAMgASgLMhcudGFuay5kZXZpY2VzLnYxLkRldmljZRIlCgVzdGF0ZRgEIAEoDjIWLnRhbmsuZGV2aWNlcy52MS5TdGF0ZRIQCghpZGVudGl0eRgFIAEoCRImCgZmaWVsZHMYBiADKAsyFi50YW5rLmRldmljZXMudjEuRmllbGQSEQoJc3Vic2NyaWJlGAcgAygJEi0KCW9wZW5lZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLQoJY2xvc2VkX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIVCg1mZWVkYmFja19ydWxlGAogASgJIhwKGkxpc3RDYXRhbG9nU2VydmljZXNSZXF1ZXN0IiwKG0xpc3RDYXRhbG9nU2VydmljZXNSZXNwb25zZRINCgV1dWlkcxgBIAMoCSJWChJPcGVuU2Vzc2lvblJlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEicKBmRldmljZRgCIAEoCzIXLnRhbmsuZGV2aWNlcy52MS5EZXZpY2UiQAoTT3BlblNlc3Npb25SZXNwb25zZRIpCgdzZXNzaW9uGAEgASgLMhgudGFuay5kZXZpY2VzLnYxLlNlc3Npb24iVQoTUHVzaFJlYWRpbmdzUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJEioKCHJlYWRpbmdzGAIgAygLMhgudGFuay5kZXZpY2VzLnYxLlJlYWRpbmcivAEKFFB1c2hSZWFkaW5nc1Jlc3BvbnNlEiYKBnBvaW50cxgBIAMoCzIWLnRhbmsuZGV2aWNlcy52MS5Qb2ludBIpCgdzZXNzaW9uGAIgASgLMhgudGFuay5kZXZpY2VzLnYxLlNlc3Npb24SKgoFc3RhdHMYAyADKAsyGy50YW5rLmRldmljZXMudjEuRmllbGRTdGF0cxIlCghtZXNzYWdlcxgEIAMoCzITLnRhbmsuYWkudjEuTWVzc2FnZSI5ChFHZXRTZXNzaW9uUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJEhAKCHNpbmNlX21zGAIgASgDIpMBChJHZXRTZXNzaW9uUmVzcG9uc2USKQoHc2Vzc2lvbhgBIAEoCzIYLnRhbmsuZGV2aWNlcy52MS5TZXNzaW9uEiYKBnBvaW50cxgCIAMoCzIWLnRhbmsuZGV2aWNlcy52MS5Qb2ludBIqCgVzdGF0cxgDIAMoCzIbLnRhbmsuZGV2aWNlcy52MS5GaWVsZFN0YXRzIi4KE0xpc3RTZXNzaW9uc1JlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJIkIKFExpc3RTZXNzaW9uc1Jlc3BvbnNlEioKCHNlc3Npb25zGAEgAygLMhgudGFuay5kZXZpY2VzLnYxLlNlc3Npb24iKQoTQ2xvc2VTZXNzaW9uUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJImcKFENsb3NlU2Vzc2lvblJlc3BvbnNlEikKB3Nlc3Npb24YASABKAsyGC50YW5rLmRldmljZXMudjEuU2Vzc2lvbhIkCgdzdW1tYXJ5GAIgASgLMhMudGFuay5haS52MS5NZXNzYWdlKloKBVN0YXRlEhUKEVNUQVRFX1VOU1BFQ0lGSUVEEAASFQoRU1RBVEVfSURFTlRJRllJTkcQARIRCg1TVEFURV9SRUFESU5HEAISEAoMU1RBVEVfQ0xPU0VEEAMyyQQKDURldmljZVNlcnZpY2UScAoTTGlzdENhdGFsb2dTZXJ2aWNlcxIrLnRhbmsuZGV2aWNlcy52MS5MaXN0Q2F0YWxvZ1NlcnZpY2VzUmVxdWVzdBosLnRhbmsuZGV2aWNlcy52MS5MaXN0Q2F0YWxvZ1NlcnZpY2VzUmVzcG9uc2USWAoLT3BlblNlc3Npb24SIy50YW5rLmRldmljZXMudjEuT3BlblNlc3Npb25SZXF1ZXN0GiQudGFuay5kZXZpY2VzLnYxLk9wZW5TZXNzaW9uUmVzcG9uc2USWwoMUHVzaFJlYWRpbmdzEiQudGFuay5kZXZpY2VzLnYxLlB1c2hSZWFkaW5nc1JlcXVlc3QaJS50YW5rLmRldmljZXMudjEuUHVzaFJlYWRpbmdzUmVzcG9uc2USVQoKR2V0U2Vzc2lvbhIiLnRhbmsuZGV2aWNlcy52MS5HZXRTZXNzaW9uUmVxdWVzdBojLnRhbmsuZGV2aWNlcy52MS5HZXRTZXNzaW9uUmVzcG9uc2USWwoMTGlzdFNlc3Npb25zEiQudGFuay5kZXZpY2VzLnYxLkxpc3RTZXNzaW9uc1JlcXVlc3QaJS50YW5rLmRldmljZXMudjEuTGlzdFNlc3Npb25zUmVzcG9uc2USWwoMQ2xvc2VTZXNzaW9uEiQudGFuay5kZXZpY2VzLnYxLkNsb3NlU2Vzc2lvblJlcXVlc3QaJS50YW5rLmRldmljZXMudjEuQ2xvc2VTZXNzaW9uUmVzcG9uc2VC2AEKE2NvbS50YW5rLmRldmljZXMudjFCDERldmljZXNQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2RldmljZXMvdjE7ZGV2aWNlc3YxogIDVERYqgIPVGFuay5EZXZpY2VzLlYxygIPVGFua1xEZXZpY2VzXFYx4gIbVGFua1xEZXZpY2VzXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6RGV2aWNlczo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_ai_v1_ai]);
+  fileDesc("Ch10YW5rL2RldmljZXMvdjEvZGV2aWNlcy5wcm90bxIPdGFuay5kZXZpY2VzLnYxIqABCgZEZXZpY2USEQoJdHJhbnNwb3J0GAEgASgJEgwKBG5hbWUYAiABKAkSFAoMbWFudWZhY3R1cmVyGAMgASgJEg0KBW1vZGVsGAQgASgJEhAKCGZpcm13YXJlGAUgASgJEioKCHNlcnZpY2VzGAYgAygLMhgudGFuay5kZXZpY2VzLnYxLlNlcnZpY2USEgoKY29tcGFueV9pZBgHIAEoDSJRCgdTZXJ2aWNlEgwKBHV1aWQYASABKAkSOAoPY2hhcmFjdGVyaXN0aWNzGAIgAygLMh8udGFuay5kZXZpY2VzLnYxLkNoYXJhY3RlcmlzdGljIoEBCg5DaGFyYWN0ZXJpc3RpYxIMCgR1dWlkGAEgASgJEhIKCnByb3BlcnRpZXMYAiADKAkSDQoFdmFsdWUYAyABKAwSDAoEbmFtZRgEIAEoCRIwCghkZWNsYXJlZBgFIAMoCzIeLnRhbmsuZGV2aWNlcy52MS5EZWNsYXJlZEZpZWxkIisKDURlY2xhcmVkRmllbGQSDAoEbmFtZRgBIAEoCRIMCgR1bml0GAIgASgJIiQKBUZyYW1lEg0KBWF0X21zGAEgASgDEgwKBGpwZWcYAiABKAwiRAoHUmVhZGluZxIbChNjaGFyYWN0ZXJpc3RpY191dWlkGAEgASgJEg0KBWF0X21zGAIgASgDEg0KBXZhbHVlGAMgASgMIjQKBVBvaW50Eg0KBWZpZWxkGAEgASgJEg0KBWF0X21zGAIgASgDEg0KBXZhbHVlGAMgASgBIl4KBUZpZWxkEgsKA2tleRgBIAEoCRINCgVsYWJlbBgCIAEoCRIMCgR1bml0GAMgASgJEhsKE2NoYXJhY3RlcmlzdGljX3V1aWQYBCABKAkSDgoGc291cmNlGAUgASgJIqEBCgpGaWVsZFN0YXRzEg0KBWZpZWxkGAEgASgJEgwKBGxhc3QYAiABKAESDwoHYXZnXzMwcxgDIAEoARIOCgZhdmdfNW0YBCABKAESEwoLYXZnX3Nlc3Npb24YBSABKAESCwoDbWluGAYgASgBEgsKA21heBgHIAEoARIVCg10cmVuZF9wZXJfbWluGAggASgBEg8KB3NhbXBsZXMYCSABKAMi+wIKB1Nlc3Npb24SCgoCaWQYASABKAkSFwoPY29udmVyc2F0aW9uX2lkGAIgASgJEicKBmRldmljZRgDIAEoCzIXLnRhbmsuZGV2aWNlcy52MS5EZXZpY2USJQoFc3RhdGUYBCABKA4yFi50YW5rLmRldmljZXMudjEuU3RhdGUSEAoIaWRlbnRpdHkYBSABKAkSJgoGZmllbGRzGAYgAygLMhYudGFuay5kZXZpY2VzLnYxLkZpZWxkEhEKCXN1YnNjcmliZRgHIAMoCRItCglvcGVuZWRfYXQYCCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi0KCWNsb3NlZF9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNZmVlZGJhY2tfcnVsZRgKIAEoCRIMCgR2aWV3GAsgASgJEisKB3ZpZXdfYXQYDCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIhwKGkxpc3RDYXRhbG9nU2VydmljZXNSZXF1ZXN0IiwKG0xpc3RDYXRhbG9nU2VydmljZXNSZXNwb25zZRINCgV1dWlkcxgBIAMoCSJWChJPcGVuU2Vzc2lvblJlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEicKBmRldmljZRgCIAEoCzIXLnRhbmsuZGV2aWNlcy52MS5EZXZpY2UiQAoTT3BlblNlc3Npb25SZXNwb25zZRIpCgdzZXNzaW9uGAEgASgLMhgudGFuay5kZXZpY2VzLnYxLlNlc3Npb24ifAoTUHVzaFJlYWRpbmdzUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJEioKCHJlYWRpbmdzGAIgAygLMhgudGFuay5kZXZpY2VzLnYxLlJlYWRpbmcSJQoFZnJhbWUYAyABKAsyFi50YW5rLmRldmljZXMudjEuRnJhbWUivAEKFFB1c2hSZWFkaW5nc1Jlc3BvbnNlEiYKBnBvaW50cxgBIAMoCzIWLnRhbmsuZGV2aWNlcy52MS5Qb2ludBIpCgdzZXNzaW9uGAIgASgLMhgudGFuay5kZXZpY2VzLnYxLlNlc3Npb24SKgoFc3RhdHMYAyADKAsyGy50YW5rLmRldmljZXMudjEuRmllbGRTdGF0cxIlCghtZXNzYWdlcxgEIAMoCzITLnRhbmsuYWkudjEuTWVzc2FnZSI5ChFHZXRTZXNzaW9uUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJEhAKCHNpbmNlX21zGAIgASgDIpMBChJHZXRTZXNzaW9uUmVzcG9uc2USKQoHc2Vzc2lvbhgBIAEoCzIYLnRhbmsuZGV2aWNlcy52MS5TZXNzaW9uEiYKBnBvaW50cxgCIAMoCzIWLnRhbmsuZGV2aWNlcy52MS5Qb2ludBIqCgVzdGF0cxgDIAMoCzIbLnRhbmsuZGV2aWNlcy52MS5GaWVsZFN0YXRzIi4KE0xpc3RTZXNzaW9uc1JlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJIkIKFExpc3RTZXNzaW9uc1Jlc3BvbnNlEioKCHNlc3Npb25zGAEgAygLMhgudGFuay5kZXZpY2VzLnYxLlNlc3Npb24iKQoTQ2xvc2VTZXNzaW9uUmVxdWVzdBISCgpzZXNzaW9uX2lkGAEgASgJImcKFENsb3NlU2Vzc2lvblJlc3BvbnNlEikKB3Nlc3Npb24YASABKAsyGC50YW5rLmRldmljZXMudjEuU2Vzc2lvbhIkCgdzdW1tYXJ5GAIgASgLMhMudGFuay5haS52MS5NZXNzYWdlKloKBVN0YXRlEhUKEVNUQVRFX1VOU1BFQ0lGSUVEEAASFQoRU1RBVEVfSURFTlRJRllJTkcQARIRCg1TVEFURV9SRUFESU5HEAISEAoMU1RBVEVfQ0xPU0VEEAMyyQQKDURldmljZVNlcnZpY2UScAoTTGlzdENhdGFsb2dTZXJ2aWNlcxIrLnRhbmsuZGV2aWNlcy52MS5MaXN0Q2F0YWxvZ1NlcnZpY2VzUmVxdWVzdBosLnRhbmsuZGV2aWNlcy52MS5MaXN0Q2F0YWxvZ1NlcnZpY2VzUmVzcG9uc2USWAoLT3BlblNlc3Npb24SIy50YW5rLmRldmljZXMudjEuT3BlblNlc3Npb25SZXF1ZXN0GiQudGFuay5kZXZpY2VzLnYxLk9wZW5TZXNzaW9uUmVzcG9uc2USWwoMUHVzaFJlYWRpbmdzEiQudGFuay5kZXZpY2VzLnYxLlB1c2hSZWFkaW5nc1JlcXVlc3QaJS50YW5rLmRldmljZXMudjEuUHVzaFJlYWRpbmdzUmVzcG9uc2USVQoKR2V0U2Vzc2lvbhIiLnRhbmsuZGV2aWNlcy52MS5HZXRTZXNzaW9uUmVxdWVzdBojLnRhbmsuZGV2aWNlcy52MS5HZXRTZXNzaW9uUmVzcG9uc2USWwoMTGlzdFNlc3Npb25zEiQudGFuay5kZXZpY2VzLnYxLkxpc3RTZXNzaW9uc1JlcXVlc3QaJS50YW5rLmRldmljZXMudjEuTGlzdFNlc3Npb25zUmVzcG9uc2USWwoMQ2xvc2VTZXNzaW9uEiQudGFuay5kZXZpY2VzLnYxLkNsb3NlU2Vzc2lvblJlcXVlc3QaJS50YW5rLmRldmljZXMudjEuQ2xvc2VTZXNzaW9uUmVzcG9uc2VC2AEKE2NvbS50YW5rLmRldmljZXMudjFCDERldmljZXNQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2RldmljZXMvdjE7ZGV2aWNlc3YxogIDVERYqgIPVGFuay5EZXZpY2VzLlYxygIPVGFua1xEZXZpY2VzXFYx4gIbVGFua1xEZXZpY2VzXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6RGV2aWNlczo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_ai_v1_ai]);
 
 /**
  * What the app can see of a device once connected.
@@ -23,7 +23,10 @@ export const file_tank_devices_v1_devices: GenFile = /*@__PURE__*/
  */
 export type Device = Message<"tank.devices.v1.Device"> & {
   /**
-   * "ble"
+   * "ble", or "phone" for the person's own phone or computer: its camera and its sensors
+   * (Robby, 2026-11-10). A phone's sensors are characteristics with made-up UUIDs whose values
+   * the app declares (Characteristic.declared), because the operating system already hands
+   * them over as numbers with units; the camera is frames (PushReadingsRequest.frame).
    *
    * @generated from field: string transport = 1;
    */
@@ -111,7 +114,8 @@ export type Characteristic = Message<"tank.devices.v1.Characteristic"> & {
   uuid: string;
 
   /**
-   * "read", "write", "write_without_response", "notify", "indicate"
+   * "read", "write", "write_without_response", "notify", "indicate"; for transport "phone",
+   * "notify" on a sensor and "frames" on the camera, whose stills come as PushReadingsRequest.frame
    *
    * @generated from field: repeated string properties = 2;
    */
@@ -123,6 +127,22 @@ export type Characteristic = Message<"tank.devices.v1.Characteristic"> & {
    * @generated from field: bytes value = 3;
    */
   value: Uint8Array;
+
+  /**
+   * A phone sensor's own name ("Accelerometer"), for transport "phone"; empty for Bluetooth.
+   *
+   * @generated from field: string name = 4;
+   */
+  name: string;
+
+  /**
+   * For transport "phone": what each reading holds, in order, one little-endian float32 per
+   * field, as the operating system reported it. Ignored for Bluetooth, whose bytes the server
+   * reads itself.
+   *
+   * @generated from field: repeated tank.devices.v1.DeclaredField declared = 5;
+   */
+  declared: DeclaredField[];
 };
 
 /**
@@ -131,6 +151,56 @@ export type Characteristic = Message<"tank.devices.v1.Characteristic"> & {
  */
 export const CharacteristicSchema: GenMessage<Characteristic> = /*@__PURE__*/
   messageDesc(file_tank_devices_v1_devices, 2);
+
+/**
+ * @generated from message tank.devices.v1.DeclaredField
+ */
+export type DeclaredField = Message<"tank.devices.v1.DeclaredField"> & {
+  /**
+   * "X", "Pressure"
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * "g", "hPa", "rad/s"; empty when unitless
+   *
+   * @generated from field: string unit = 2;
+   */
+  unit: string;
+};
+
+/**
+ * Describes the message tank.devices.v1.DeclaredField.
+ * Use `create(DeclaredFieldSchema)` to create a new message.
+ */
+export const DeclaredFieldSchema: GenMessage<DeclaredField> = /*@__PURE__*/
+  messageDesc(file_tank_devices_v1_devices, 3);
+
+/**
+ * One still from a connected camera, JPEG, at most 1 MB.
+ *
+ * @generated from message tank.devices.v1.Frame
+ */
+export type Frame = Message<"tank.devices.v1.Frame"> & {
+  /**
+   * @generated from field: int64 at_ms = 1;
+   */
+  atMs: bigint;
+
+  /**
+   * @generated from field: bytes jpeg = 2;
+   */
+  jpeg: Uint8Array;
+};
+
+/**
+ * Describes the message tank.devices.v1.Frame.
+ * Use `create(FrameSchema)` to create a new message.
+ */
+export const FrameSchema: GenMessage<Frame> = /*@__PURE__*/
+  messageDesc(file_tank_devices_v1_devices, 4);
 
 /**
  * One notification or read from the device, as raw bytes.
@@ -161,7 +231,7 @@ export type Reading = Message<"tank.devices.v1.Reading"> & {
  * Use `create(ReadingSchema)` to create a new message.
  */
 export const ReadingSchema: GenMessage<Reading> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 3);
+  messageDesc(file_tank_devices_v1_devices, 5);
 
 /**
  * One number the server read out of the device's data.
@@ -192,7 +262,7 @@ export type Point = Message<"tank.devices.v1.Point"> & {
  * Use `create(PointSchema)` to create a new message.
  */
 export const PointSchema: GenMessage<Point> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 4);
+  messageDesc(file_tank_devices_v1_devices, 6);
 
 /**
  * @generated from message tank.devices.v1.Field
@@ -239,7 +309,7 @@ export type Field = Message<"tank.devices.v1.Field"> & {
  * Use `create(FieldSchema)` to create a new message.
  */
 export const FieldSchema: GenMessage<Field> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 5);
+  messageDesc(file_tank_devices_v1_devices, 7);
 
 /**
  * Generic figures for one field, worked out by the server.
@@ -300,7 +370,7 @@ export type FieldStats = Message<"tank.devices.v1.FieldStats"> & {
  * Use `create(FieldStatsSchema)` to create a new message.
  */
 export const FieldStatsSchema: GenMessage<FieldStats> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 6);
+  messageDesc(file_tank_devices_v1_devices, 8);
 
 /**
  * @generated from message tank.devices.v1.Session
@@ -363,6 +433,19 @@ export type Session = Message<"tank.devices.v1.Session"> & {
    * @generated from field: string feedback_rule = 10;
    */
   feedbackRule: string;
+
+  /**
+   * What the connected camera last showed, in TANK's vision model's words; empty without a
+   * camera or before the first frame was looked at.
+   *
+   * @generated from field: string view = 11;
+   */
+  view: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp view_at = 12;
+   */
+  viewAt?: Timestamp;
 };
 
 /**
@@ -370,7 +453,7 @@ export type Session = Message<"tank.devices.v1.Session"> & {
  * Use `create(SessionSchema)` to create a new message.
  */
 export const SessionSchema: GenMessage<Session> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 7);
+  messageDesc(file_tank_devices_v1_devices, 9);
 
 /**
  * @generated from message tank.devices.v1.ListCatalogServicesRequest
@@ -383,7 +466,7 @@ export type ListCatalogServicesRequest = Message<"tank.devices.v1.ListCatalogSer
  * Use `create(ListCatalogServicesRequestSchema)` to create a new message.
  */
 export const ListCatalogServicesRequestSchema: GenMessage<ListCatalogServicesRequest> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 8);
+  messageDesc(file_tank_devices_v1_devices, 10);
 
 /**
  * Every standard service UUID, for an app that must name services before it may open them
@@ -403,7 +486,7 @@ export type ListCatalogServicesResponse = Message<"tank.devices.v1.ListCatalogSe
  * Use `create(ListCatalogServicesResponseSchema)` to create a new message.
  */
 export const ListCatalogServicesResponseSchema: GenMessage<ListCatalogServicesResponse> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 9);
+  messageDesc(file_tank_devices_v1_devices, 11);
 
 /**
  * @generated from message tank.devices.v1.OpenSessionRequest
@@ -425,7 +508,7 @@ export type OpenSessionRequest = Message<"tank.devices.v1.OpenSessionRequest"> &
  * Use `create(OpenSessionRequestSchema)` to create a new message.
  */
 export const OpenSessionRequestSchema: GenMessage<OpenSessionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 10);
+  messageDesc(file_tank_devices_v1_devices, 12);
 
 /**
  * @generated from message tank.devices.v1.OpenSessionResponse
@@ -442,7 +525,7 @@ export type OpenSessionResponse = Message<"tank.devices.v1.OpenSessionResponse">
  * Use `create(OpenSessionResponseSchema)` to create a new message.
  */
 export const OpenSessionResponseSchema: GenMessage<OpenSessionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 11);
+  messageDesc(file_tank_devices_v1_devices, 13);
 
 /**
  * @generated from message tank.devices.v1.PushReadingsRequest
@@ -457,6 +540,14 @@ export type PushReadingsRequest = Message<"tank.devices.v1.PushReadingsRequest">
    * @generated from field: repeated tank.devices.v1.Reading readings = 2;
    */
   readings: Reading[];
+
+  /**
+   * The camera's latest still, when a camera is connected; the server looks at one every few
+   * seconds and ignores the rest.
+   *
+   * @generated from field: tank.devices.v1.Frame frame = 3;
+   */
+  frame?: Frame;
 };
 
 /**
@@ -464,7 +555,7 @@ export type PushReadingsRequest = Message<"tank.devices.v1.PushReadingsRequest">
  * Use `create(PushReadingsRequestSchema)` to create a new message.
  */
 export const PushReadingsRequestSchema: GenMessage<PushReadingsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 12);
+  messageDesc(file_tank_devices_v1_devices, 14);
 
 /**
  * @generated from message tank.devices.v1.PushReadingsResponse
@@ -502,7 +593,7 @@ export type PushReadingsResponse = Message<"tank.devices.v1.PushReadingsResponse
  * Use `create(PushReadingsResponseSchema)` to create a new message.
  */
 export const PushReadingsResponseSchema: GenMessage<PushReadingsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 13);
+  messageDesc(file_tank_devices_v1_devices, 15);
 
 /**
  * @generated from message tank.devices.v1.GetSessionRequest
@@ -526,7 +617,7 @@ export type GetSessionRequest = Message<"tank.devices.v1.GetSessionRequest"> & {
  * Use `create(GetSessionRequestSchema)` to create a new message.
  */
 export const GetSessionRequestSchema: GenMessage<GetSessionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 14);
+  messageDesc(file_tank_devices_v1_devices, 16);
 
 /**
  * @generated from message tank.devices.v1.GetSessionResponse
@@ -553,7 +644,7 @@ export type GetSessionResponse = Message<"tank.devices.v1.GetSessionResponse"> &
  * Use `create(GetSessionResponseSchema)` to create a new message.
  */
 export const GetSessionResponseSchema: GenMessage<GetSessionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 15);
+  messageDesc(file_tank_devices_v1_devices, 17);
 
 /**
  * @generated from message tank.devices.v1.ListSessionsRequest
@@ -570,7 +661,7 @@ export type ListSessionsRequest = Message<"tank.devices.v1.ListSessionsRequest">
  * Use `create(ListSessionsRequestSchema)` to create a new message.
  */
 export const ListSessionsRequestSchema: GenMessage<ListSessionsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 16);
+  messageDesc(file_tank_devices_v1_devices, 18);
 
 /**
  * @generated from message tank.devices.v1.ListSessionsResponse
@@ -587,7 +678,7 @@ export type ListSessionsResponse = Message<"tank.devices.v1.ListSessionsResponse
  * Use `create(ListSessionsResponseSchema)` to create a new message.
  */
 export const ListSessionsResponseSchema: GenMessage<ListSessionsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 17);
+  messageDesc(file_tank_devices_v1_devices, 19);
 
 /**
  * @generated from message tank.devices.v1.CloseSessionRequest
@@ -604,7 +695,7 @@ export type CloseSessionRequest = Message<"tank.devices.v1.CloseSessionRequest">
  * Use `create(CloseSessionRequestSchema)` to create a new message.
  */
 export const CloseSessionRequestSchema: GenMessage<CloseSessionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 18);
+  messageDesc(file_tank_devices_v1_devices, 20);
 
 /**
  * @generated from message tank.devices.v1.CloseSessionResponse
@@ -628,7 +719,7 @@ export type CloseSessionResponse = Message<"tank.devices.v1.CloseSessionResponse
  * Use `create(CloseSessionResponseSchema)` to create a new message.
  */
 export const CloseSessionResponseSchema: GenMessage<CloseSessionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_devices_v1_devices, 19);
+  messageDesc(file_tank_devices_v1_devices, 21);
 
 /**
  * @generated from enum tank.devices.v1.State
