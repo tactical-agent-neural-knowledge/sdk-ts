@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/infra/v1/infra.proto.
  */
 export const file_tank_infra_v1_infra: GenFile = /*@__PURE__*/
-  fileDesc("Chl0YW5rL2luZnJhL3YxL2luZnJhLnByb3RvEg10YW5rLmluZnJhLnYxIlkKCUF3c0NvbmZpZxIQCghyb2xlX2FybhgBIAEoCRITCgtleHRlcm5hbF9pZBgCIAEoCRIPCgdyZWdpb25zGAMgAygJEhQKDGVrc19jbHVzdGVycxgEIAMoCSKMAQoJR2NwQ29uZmlnEhIKCnByb2plY3RfaWQYASABKAkSFgoOcHJvamVjdF9udW1iZXIYAiABKAkSDwoHcG9vbF9pZBgDIAEoCRITCgtwcm92aWRlcl9pZBgEIAEoCRIXCg9zZXJ2aWNlX2FjY291bnQYBSABKAkSFAoMZ2tlX2NsdXN0ZXJzGAYgAygJImIKC0F6dXJlQ29uZmlnEhEKCXRlbmFudF9pZBgBIAEoCRIRCgljbGllbnRfaWQYAiABKAkSFwoPc3Vic2NyaXB0aW9uX2lkGAMgASgJEhQKDGFrc19jbHVzdGVycxgEIAMoCSJsChBLdWJlcm5ldGVzQ29uZmlnEg4KBnNlcnZlchgBIAEoCRIPCgdjYV9kYXRhGAIgASgJEiUKBGF1dGgYAyABKA4yFy50YW5rLmluZnJhLnYxLkt1YmVBdXRoEhAKCGF1ZGllbmNlGAQgASgJImAKCUFwaUNvbmZpZxIQCghiYXNlX3VybBgBIAEoCRIVCg1hbGxvd2VkX2hvc3RzGAIgAygJEhMKC2hlYWRlcl9uYW1lGAMgASgJEhUKDWhlYWRlcl9wcmVmaXgYBCABKAkinAUKCkNvbm5lY3Rpb24SCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEgwKBG5hbWUYAyABKAkSKQoIcHJvdmlkZXIYBCABKA4yFy50YW5rLmluZnJhLnYxLlByb3ZpZGVyEhMKC2Rlc2NyaXB0aW9uGAUgASgJEiUKA2F3cxgGIAEoCzIYLnRhbmsuaW5mcmEudjEuQXdzQ29uZmlnEiUKA2djcBgHIAEoCzIYLnRhbmsuaW5mcmEudjEuR2NwQ29uZmlnEikKBWF6dXJlGAggASgLMhoudGFuay5pbmZyYS52MS5BenVyZUNvbmZpZxIzCgprdWJlcm5ldGVzGAkgASgLMh8udGFuay5pbmZyYS52MS5LdWJlcm5ldGVzQ29uZmlnEiUKA2FwaRgKIAEoCzIYLnRhbmsuaW5mcmEudjEuQXBpQ29uZmlnEhMKC2NoYW5uZWxfaWRzGAsgAygJEhEKCXZpYV9yZWxheRgMIAEoCBIQCghyZWxheV9pZBgNIAEoCRItCgVzdGF0ZRgOIAEoDjIeLnRhbmsuaW5mcmEudjEuQ29ubmVjdGlvblN0YXRlEhIKCmxhc3RfZXJyb3IYDyABKAkSMwoPbGFzdF9jaGVja2VkX2F0GBAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpjcmVhdGVkX2J5GBEgASgJEi4KCmNyZWF0ZWRfYXQYEiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYEyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB3N1YmplY3QYFCABKAkSEgoKaGFzX3NlY3JldBgVIAEoCCJkCglTZXR1cFN0ZXASDQoFdGl0bGUYASABKAkSDAoEdGV4dBgCIAEoCRIMCgRjb2RlGAMgASgJEhUKDWNvZGVfbGFuZ3VhZ2UYBCABKAkSFQoNZG93bmxvYWRfbmFtZRgFIAEoCSKMAgoDVXNlEgoKAmlkGAEgASgJEhUKDWNvbm5lY3Rpb25faWQYAiABKAkSFwoPY29ubmVjdGlvbl9uYW1lGAMgASgJEg4KBnJ1bl9pZBgEIAEoCRISCgpjaGFubmVsX2lkGAUgASgJEg8KB3VzZXJfaWQYBiABKAkSDAoEa2luZBgHIAEoCRIPCgdjb21tYW5kGAggASgJEhEKCWV4aXRfY29kZRgJIAEoBRIPCgdyZWZ1c2VkGAogASgJEhMKC2R1cmF0aW9uX21zGAsgASgDEhQKDG91dHB1dF9ieXRlcxgMIAEoAxImCgJhdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiawoMUnVuYm9va0lucHV0EgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSEAoIcmVxdWlyZWQYAyABKAgSFQoNZGVmYXVsdF92YWx1ZRgEIAEoCRIPCgdvcHRpb25zGAUgAygJIuwBCgdSdW5ib29rEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRIMCgRyZXBvGAMgASgJEhAKCHdvcmtmbG93GAQgASgJEgsKA3JlZhgFIAEoCRIMCgRuYW1lGAYgASgJEhMKC2Rlc2NyaXB0aW9uGAcgASgJEisKBmlucHV0cxgIIAMoCzIbLnRhbmsuaW5mcmEudjEuUnVuYm9va0lucHV0EhIKCmNyZWF0ZWRfYnkYCSABKAkSLgoKY3JlYXRlZF9hdBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAibgoRV29ya2Zsb3dDYW5kaWRhdGUSDAoEcmVwbxgBIAEoCRIQCgh3b3JrZmxvdxgCIAEoCRIMCgRuYW1lGAMgASgJEisKBmlucHV0cxgEIAMoCzIbLnRhbmsuaW5mcmEudjEuUnVuYm9va0lucHV0Ir4BCgVSZWxheRIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSDAoEbmFtZRgDIAEoCRIwCgxsYXN0X3NlZW5fYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB3ZlcnNpb24YBSABKAkSLgoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKY3JlYXRlZF9ieRgHIAEoCSJCChZMaXN0Q29ubmVjdGlvbnNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJIoYBChdMaXN0Q29ubmVjdGlvbnNSZXNwb25zZRIuCgtjb25uZWN0aW9ucxgBIAMoCzIZLnRhbmsuaW5mcmEudjEuQ29ubmVjdGlvbhIPCgdwcmVtaXVtGAIgASgIEhUKDWF3c19wcmluY2lwYWwYAyABKAkSEwoLb2lkY19pc3N1ZXIYBCABKAkiOAoUR2V0Q29ubmVjdGlvblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJIkYKFUdldENvbm5lY3Rpb25SZXNwb25zZRItCgpjb25uZWN0aW9uGAEgASgLMhkudGFuay5pbmZyYS52MS5Db25uZWN0aW9uIoQBChdDcmVhdGVDb25uZWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSLQoKY29ubmVjdGlvbhgCIAEoCzIZLnRhbmsuaW5mcmEudjEuQ29ubmVjdGlvbhIOCgZzZWNyZXQYAyABKAkSFAoMcmVxdWVzdGVkX2J5GAQgASgJIkkKGENyZWF0ZUNvbm5lY3Rpb25SZXNwb25zZRItCgpjb25uZWN0aW9uGAEgASgLMhkudGFuay5pbmZyYS52MS5Db25uZWN0aW9uIoQBChdVcGRhdGVDb25uZWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSLQoKY29ubmVjdGlvbhgCIAEoCzIZLnRhbmsuaW5mcmEudjEuQ29ubmVjdGlvbhIOCgZzZWNyZXQYAyABKAkSFAoMcmVxdWVzdGVkX2J5GAQgASgJIkkKGFVwZGF0ZUNvbm5lY3Rpb25SZXNwb25zZRItCgpjb25uZWN0aW9uGAEgASgLMhkudGFuay5pbmZyYS52MS5Db25uZWN0aW9uIlEKF0RlbGV0ZUNvbm5lY3Rpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYAyABKAkiGgoYRGVsZXRlQ29ubmVjdGlvblJlc3BvbnNlIk8KFVRlc3RDb25uZWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSFAoMcmVxdWVzdGVkX2J5GAMgASgJIngKFlRlc3RDb25uZWN0aW9uUmVzcG9uc2USLQoFc3RhdGUYASABKA4yHi50YW5rLmluZnJhLnYxLkNvbm5lY3Rpb25TdGF0ZRIOCgZkZXRhaWwYAiABKAkSDgoGb3V0cHV0GAMgAygJEg8KB3dhcm5pbmcYBCABKAkiOAoUR2V0U2V0dXBHdWlkZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJIkAKFUdldFNldHVwR3VpZGVSZXNwb25zZRInCgVzdGVwcxgBIAMoCzIYLnRhbmsuaW5mcmEudjEuU2V0dXBTdGVwIk0KD0xpc3RVc2VzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSFQoNY29ubmVjdGlvbl9pZBgCIAEoCRINCgVsaW1pdBgDIAEoBSI0ChBMaXN0VXNlc1Jlc3BvbnNlEiAKBHVzZXMYASADKAsyEi50YW5rLmluZnJhLnYxLlVzZSIrChNMaXN0UnVuYm9va3NSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJAChRMaXN0UnVuYm9va3NSZXNwb25zZRIoCghydW5ib29rcxgBIAMoCzIWLnRhbmsuaW5mcmEudjEuUnVuYm9vayJoChFQdXRSdW5ib29rUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSJwoHcnVuYm9vaxgCIAEoCzIWLnRhbmsuaW5mcmEudjEuUnVuYm9vaxIUCgxyZXF1ZXN0ZWRfYnkYAyABKAkiPQoSUHV0UnVuYm9va1Jlc3BvbnNlEicKB3J1bmJvb2sYASABKAsyFi50YW5rLmluZnJhLnYxLlJ1bmJvb2siTgoURGVsZXRlUnVuYm9va1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJEhQKDHJlcXVlc3RlZF9ieRgDIAEoCSIXChVEZWxldGVSdW5ib29rUmVzcG9uc2UiNQodTGlzdFdvcmtmbG93Q2FuZGlkYXRlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJImQKHkxpc3RXb3JrZmxvd0NhbmRpZGF0ZXNSZXNwb25zZRI0CgpjYW5kaWRhdGVzGAEgAygLMiAudGFuay5pbmZyYS52MS5Xb3JrZmxvd0NhbmRpZGF0ZRIMCgRub3RlGAIgASgJIikKEUxpc3RSZWxheXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI6ChJMaXN0UmVsYXlzUmVzcG9uc2USJAoGcmVsYXlzGAEgAygLMhQudGFuay5pbmZyYS52MS5SZWxheSJOChJDcmVhdGVSZWxheVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBG5hbWUYAiABKAkSFAoMcmVxdWVzdGVkX2J5GAMgASgJInIKE0NyZWF0ZVJlbGF5UmVzcG9uc2USIwoFcmVsYXkYASABKAsyFC50YW5rLmluZnJhLnYxLlJlbGF5Eg0KBXRva2VuGAIgASgJEicKBXN0ZXBzGAMgAygLMhgudGFuay5pbmZyYS52MS5TZXR1cFN0ZXAiTAoSUmV2b2tlUmVsYXlSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYAyABKAkiFQoTUmV2b2tlUmVsYXlSZXNwb25zZSqHAQoIUHJvdmlkZXISGAoUUFJPVklERVJfVU5TUEVDSUZJRUQQABIQCgxQUk9WSURFUl9BV1MQARIQCgxQUk9WSURFUl9HQ1AQAhISCg5QUk9WSURFUl9BWlVSRRADEhcKE1BST1ZJREVSX0tVQkVSTkVURVMQBBIQCgxQUk9WSURFUl9BUEkQBSqLAQoPQ29ubmVjdGlvblN0YXRlEiAKHENPTk5FQ1RJT05fU1RBVEVfVU5TUEVDSUZJRUQQABIfChtDT05ORUNUSU9OX1NUQVRFX1VOVkVSSUZJRUQQARIXChNDT05ORUNUSU9OX1NUQVRFX09LEAISHAoYQ09OTkVDVElPTl9TVEFURV9GQUlMSU5HEAMqTgoIS3ViZUF1dGgSGQoVS1VCRV9BVVRIX1VOU1BFQ0lGSUVEEAASEgoOS1VCRV9BVVRIX09JREMQARITCg9LVUJFX0FVVEhfVE9LRU4QAjKBCwoMSW5mcmFTZXJ2aWNlEmAKD0xpc3RDb25uZWN0aW9ucxIlLnRhbmsuaW5mcmEudjEuTGlzdENvbm5lY3Rpb25zUmVxdWVzdBomLnRhbmsuaW5mcmEudjEuTGlzdENvbm5lY3Rpb25zUmVzcG9uc2USWgoNR2V0Q29ubmVjdGlvbhIjLnRhbmsuaW5mcmEudjEuR2V0Q29ubmVjdGlvblJlcXVlc3QaJC50YW5rLmluZnJhLnYxLkdldENvbm5lY3Rpb25SZXNwb25zZRJjChBDcmVhdGVDb25uZWN0aW9uEiYudGFuay5pbmZyYS52MS5DcmVhdGVDb25uZWN0aW9uUmVxdWVzdBonLnRhbmsuaW5mcmEudjEuQ3JlYXRlQ29ubmVjdGlvblJlc3BvbnNlEmMKEFVwZGF0ZUNvbm5lY3Rpb24SJi50YW5rLmluZnJhLnYxLlVwZGF0ZUNvbm5lY3Rpb25SZXF1ZXN0GicudGFuay5pbmZyYS52MS5VcGRhdGVDb25uZWN0aW9uUmVzcG9uc2USYwoQRGVsZXRlQ29ubmVjdGlvbhImLnRhbmsuaW5mcmEudjEuRGVsZXRlQ29ubmVjdGlvblJlcXVlc3QaJy50YW5rLmluZnJhLnYxLkRlbGV0ZUNvbm5lY3Rpb25SZXNwb25zZRJdCg5UZXN0Q29ubmVjdGlvbhIkLnRhbmsuaW5mcmEudjEuVGVzdENvbm5lY3Rpb25SZXF1ZXN0GiUudGFuay5pbmZyYS52MS5UZXN0Q29ubmVjdGlvblJlc3BvbnNlEloKDUdldFNldHVwR3VpZGUSIy50YW5rLmluZnJhLnYxLkdldFNldHVwR3VpZGVSZXF1ZXN0GiQudGFuay5pbmZyYS52MS5HZXRTZXR1cEd1aWRlUmVzcG9uc2USSwoITGlzdFVzZXMSHi50YW5rLmluZnJhLnYxLkxpc3RVc2VzUmVxdWVzdBofLnRhbmsuaW5mcmEudjEuTGlzdFVzZXNSZXNwb25zZRJXCgxMaXN0UnVuYm9va3MSIi50YW5rLmluZnJhLnYxLkxpc3RSdW5ib29rc1JlcXVlc3QaIy50YW5rLmluZnJhLnYxLkxpc3RSdW5ib29rc1Jlc3BvbnNlElEKClB1dFJ1bmJvb2sSIC50YW5rLmluZnJhLnYxLlB1dFJ1bmJvb2tSZXF1ZXN0GiEudGFuay5pbmZyYS52MS5QdXRSdW5ib29rUmVzcG9uc2USWgoNRGVsZXRlUnVuYm9vaxIjLnRhbmsuaW5mcmEudjEuRGVsZXRlUnVuYm9va1JlcXVlc3QaJC50YW5rLmluZnJhLnYxLkRlbGV0ZVJ1bmJvb2tSZXNwb25zZRJ1ChZMaXN0V29ya2Zsb3dDYW5kaWRhdGVzEiwudGFuay5pbmZyYS52MS5MaXN0V29ya2Zsb3dDYW5kaWRhdGVzUmVxdWVzdBotLnRhbmsuaW5mcmEudjEuTGlzdFdvcmtmbG93Q2FuZGlkYXRlc1Jlc3BvbnNlElEKCkxpc3RSZWxheXMSIC50YW5rLmluZnJhLnYxLkxpc3RSZWxheXNSZXF1ZXN0GiEudGFuay5pbmZyYS52MS5MaXN0UmVsYXlzUmVzcG9uc2USVAoLQ3JlYXRlUmVsYXkSIS50YW5rLmluZnJhLnYxLkNyZWF0ZVJlbGF5UmVxdWVzdBoiLnRhbmsuaW5mcmEudjEuQ3JlYXRlUmVsYXlSZXNwb25zZRJUCgtSZXZva2VSZWxheRIhLnRhbmsuaW5mcmEudjEuUmV2b2tlUmVsYXlSZXF1ZXN0GiIudGFuay5pbmZyYS52MS5SZXZva2VSZWxheVJlc3BvbnNlQsgBChFjb20udGFuay5pbmZyYS52MUIKSW5mcmFQcm90b1ABWlFnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2luZnJhL3YxO2luZnJhdjGiAgNUSViqAg1UYW5rLkluZnJhLlYxygINVGFua1xJbmZyYVxWMeICGVRhbmtcSW5mcmFcVjFcR1BCTWV0YWRhdGHqAg9UYW5rOjpJbmZyYTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Chl0YW5rL2luZnJhL3YxL2luZnJhLnByb3RvEg10YW5rLmluZnJhLnYxIlkKCUF3c0NvbmZpZxIQCghyb2xlX2FybhgBIAEoCRITCgtleHRlcm5hbF9pZBgCIAEoCRIPCgdyZWdpb25zGAMgAygJEhQKDGVrc19jbHVzdGVycxgEIAMoCSKMAQoJR2NwQ29uZmlnEhIKCnByb2plY3RfaWQYASABKAkSFgoOcHJvamVjdF9udW1iZXIYAiABKAkSDwoHcG9vbF9pZBgDIAEoCRITCgtwcm92aWRlcl9pZBgEIAEoCRIXCg9zZXJ2aWNlX2FjY291bnQYBSABKAkSFAoMZ2tlX2NsdXN0ZXJzGAYgAygJImIKC0F6dXJlQ29uZmlnEhEKCXRlbmFudF9pZBgBIAEoCRIRCgljbGllbnRfaWQYAiABKAkSFwoPc3Vic2NyaXB0aW9uX2lkGAMgASgJEhQKDGFrc19jbHVzdGVycxgEIAMoCSJsChBLdWJlcm5ldGVzQ29uZmlnEg4KBnNlcnZlchgBIAEoCRIPCgdjYV9kYXRhGAIgASgJEiUKBGF1dGgYAyABKA4yFy50YW5rLmluZnJhLnYxLkt1YmVBdXRoEhAKCGF1ZGllbmNlGAQgASgJImAKCUFwaUNvbmZpZxIQCghiYXNlX3VybBgBIAEoCRIVCg1hbGxvd2VkX2hvc3RzGAIgAygJEhMKC2hlYWRlcl9uYW1lGAMgASgJEhUKDWhlYWRlcl9wcmVmaXgYBCABKAkijQEKDkRhdGFiYXNlQ29uZmlnEi0KBmVuZ2luZRgBIAEoDjIdLnRhbmsuaW5mcmEudjEuRGF0YWJhc2VFbmdpbmUSDAoEaG9zdBgCIAEoCRIMCgRwb3J0GAMgASgFEhAKCGRhdGFiYXNlGAQgASgJEgwKBHVzZXIYBSABKAkSEAoIc3NsX21vZGUYBiABKAkizQUKCkNvbm5lY3Rpb24SCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEgwKBG5hbWUYAyABKAkSKQoIcHJvdmlkZXIYBCABKA4yFy50YW5rLmluZnJhLnYxLlByb3ZpZGVyEhMKC2Rlc2NyaXB0aW9uGAUgASgJEiUKA2F3cxgGIAEoCzIYLnRhbmsuaW5mcmEudjEuQXdzQ29uZmlnEiUKA2djcBgHIAEoCzIYLnRhbmsuaW5mcmEudjEuR2NwQ29uZmlnEikKBWF6dXJlGAggASgLMhoudGFuay5pbmZyYS52MS5BenVyZUNvbmZpZxIzCgprdWJlcm5ldGVzGAkgASgLMh8udGFuay5pbmZyYS52MS5LdWJlcm5ldGVzQ29uZmlnEiUKA2FwaRgKIAEoCzIYLnRhbmsuaW5mcmEudjEuQXBpQ29uZmlnEhMKC2NoYW5uZWxfaWRzGAsgAygJEhEKCXZpYV9yZWxheRgMIAEoCBIQCghyZWxheV9pZBgNIAEoCRItCgVzdGF0ZRgOIAEoDjIeLnRhbmsuaW5mcmEudjEuQ29ubmVjdGlvblN0YXRlEhIKCmxhc3RfZXJyb3IYDyABKAkSMwoPbGFzdF9jaGVja2VkX2F0GBAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBISCgpjcmVhdGVkX2J5GBEgASgJEi4KCmNyZWF0ZWRfYXQYEiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYEyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg8KB3N1YmplY3QYFCABKAkSEgoKaGFzX3NlY3JldBgVIAEoCBIvCghkYXRhYmFzZRgWIAEoCzIdLnRhbmsuaW5mcmEudjEuRGF0YWJhc2VDb25maWciZAoJU2V0dXBTdGVwEg0KBXRpdGxlGAEgASgJEgwKBHRleHQYAiABKAkSDAoEY29kZRgDIAEoCRIVCg1jb2RlX2xhbmd1YWdlGAQgASgJEhUKDWRvd25sb2FkX25hbWUYBSABKAkijAIKA1VzZRIKCgJpZBgBIAEoCRIVCg1jb25uZWN0aW9uX2lkGAIgASgJEhcKD2Nvbm5lY3Rpb25fbmFtZRgDIAEoCRIOCgZydW5faWQYBCABKAkSEgoKY2hhbm5lbF9pZBgFIAEoCRIPCgd1c2VyX2lkGAYgASgJEgwKBGtpbmQYByABKAkSDwoHY29tbWFuZBgIIAEoCRIRCglleGl0X2NvZGUYCSABKAUSDwoHcmVmdXNlZBgKIAEoCRITCgtkdXJhdGlvbl9tcxgLIAEoAxIUCgxvdXRwdXRfYnl0ZXMYDCABKAMSJgoCYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImsKDFJ1bmJvb2tJbnB1dBIMCgRuYW1lGAEgASgJEhMKC2Rlc2NyaXB0aW9uGAIgASgJEhAKCHJlcXVpcmVkGAMgASgIEhUKDWRlZmF1bHRfdmFsdWUYBCABKAkSDwoHb3B0aW9ucxgFIAMoCSLsAQoHUnVuYm9vaxIKCgJpZBgBIAEoCRIUCgx3b3Jrc3BhY2VfaWQYAiABKAkSDAoEcmVwbxgDIAEoCRIQCgh3b3JrZmxvdxgEIAEoCRILCgNyZWYYBSABKAkSDAoEbmFtZRgGIAEoCRITCgtkZXNjcmlwdGlvbhgHIAEoCRIrCgZpbnB1dHMYCCADKAsyGy50YW5rLmluZnJhLnYxLlJ1bmJvb2tJbnB1dBISCgpjcmVhdGVkX2J5GAkgASgJEi4KCmNyZWF0ZWRfYXQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIm4KEVdvcmtmbG93Q2FuZGlkYXRlEgwKBHJlcG8YASABKAkSEAoId29ya2Zsb3cYAiABKAkSDAoEbmFtZRgDIAEoCRIrCgZpbnB1dHMYBCADKAsyGy50YW5rLmluZnJhLnYxLlJ1bmJvb2tJbnB1dCK+AQoFUmVsYXkSCgoCaWQYASABKAkSFAoMd29ya3NwYWNlX2lkGAIgASgJEgwKBG5hbWUYAyABKAkSMAoMbGFzdF9zZWVuX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIPCgd2ZXJzaW9uGAUgASgJEi4KCmNyZWF0ZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmNyZWF0ZWRfYnkYByABKAkiQgoWTGlzdENvbm5lY3Rpb25zUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCSKGAQoXTGlzdENvbm5lY3Rpb25zUmVzcG9uc2USLgoLY29ubmVjdGlvbnMYASADKAsyGS50YW5rLmluZnJhLnYxLkNvbm5lY3Rpb24SDwoHcHJlbWl1bRgCIAEoCBIVCg1hd3NfcHJpbmNpcGFsGAMgASgJEhMKC29pZGNfaXNzdWVyGAQgASgJIjgKFEdldENvbm5lY3Rpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSJGChVHZXRDb25uZWN0aW9uUmVzcG9uc2USLQoKY29ubmVjdGlvbhgBIAEoCzIZLnRhbmsuaW5mcmEudjEuQ29ubmVjdGlvbiKEAQoXQ3JlYXRlQ29ubmVjdGlvblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEi0KCmNvbm5lY3Rpb24YAiABKAsyGS50YW5rLmluZnJhLnYxLkNvbm5lY3Rpb24SDgoGc2VjcmV0GAMgASgJEhQKDHJlcXVlc3RlZF9ieRgEIAEoCSJJChhDcmVhdGVDb25uZWN0aW9uUmVzcG9uc2USLQoKY29ubmVjdGlvbhgBIAEoCzIZLnRhbmsuaW5mcmEudjEuQ29ubmVjdGlvbiKEAQoXVXBkYXRlQ29ubmVjdGlvblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEi0KCmNvbm5lY3Rpb24YAiABKAsyGS50YW5rLmluZnJhLnYxLkNvbm5lY3Rpb24SDgoGc2VjcmV0GAMgASgJEhQKDHJlcXVlc3RlZF9ieRgEIAEoCSJJChhVcGRhdGVDb25uZWN0aW9uUmVzcG9uc2USLQoKY29ubmVjdGlvbhgBIAEoCzIZLnRhbmsuaW5mcmEudjEuQ29ubmVjdGlvbiJRChdEZWxldGVDb25uZWN0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSFAoMcmVxdWVzdGVkX2J5GAMgASgJIhoKGERlbGV0ZUNvbm5lY3Rpb25SZXNwb25zZSJPChVUZXN0Q29ubmVjdGlvblJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgoKAmlkGAIgASgJEhQKDHJlcXVlc3RlZF9ieRgDIAEoCSJ4ChZUZXN0Q29ubmVjdGlvblJlc3BvbnNlEi0KBXN0YXRlGAEgASgOMh4udGFuay5pbmZyYS52MS5Db25uZWN0aW9uU3RhdGUSDgoGZGV0YWlsGAIgASgJEg4KBm91dHB1dBgDIAMoCRIPCgd3YXJuaW5nGAQgASgJIjgKFEdldFNldHVwR3VpZGVSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCSJAChVHZXRTZXR1cEd1aWRlUmVzcG9uc2USJwoFc3RlcHMYASADKAsyGC50YW5rLmluZnJhLnYxLlNldHVwU3RlcCJNCg9MaXN0VXNlc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhUKDWNvbm5lY3Rpb25faWQYAiABKAkSDQoFbGltaXQYAyABKAUiNAoQTGlzdFVzZXNSZXNwb25zZRIgCgR1c2VzGAEgAygLMhIudGFuay5pbmZyYS52MS5Vc2UiKwoTTGlzdFJ1bmJvb2tzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiQAoUTGlzdFJ1bmJvb2tzUmVzcG9uc2USKAoIcnVuYm9va3MYASADKAsyFi50YW5rLmluZnJhLnYxLlJ1bmJvb2siaAoRUHV0UnVuYm9va1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEicKB3J1bmJvb2sYAiABKAsyFi50YW5rLmluZnJhLnYxLlJ1bmJvb2sSFAoMcmVxdWVzdGVkX2J5GAMgASgJIj0KElB1dFJ1bmJvb2tSZXNwb25zZRInCgdydW5ib29rGAEgASgLMhYudGFuay5pbmZyYS52MS5SdW5ib29rIk4KFERlbGV0ZVJ1bmJvb2tSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIKCgJpZBgCIAEoCRIUCgxyZXF1ZXN0ZWRfYnkYAyABKAkiFwoVRGVsZXRlUnVuYm9va1Jlc3BvbnNlIjUKHUxpc3RXb3JrZmxvd0NhbmRpZGF0ZXNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJkCh5MaXN0V29ya2Zsb3dDYW5kaWRhdGVzUmVzcG9uc2USNAoKY2FuZGlkYXRlcxgBIAMoCzIgLnRhbmsuaW5mcmEudjEuV29ya2Zsb3dDYW5kaWRhdGUSDAoEbm90ZRgCIAEoCSIpChFMaXN0UmVsYXlzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiOgoSTGlzdFJlbGF5c1Jlc3BvbnNlEiQKBnJlbGF5cxgBIAMoCzIULnRhbmsuaW5mcmEudjEuUmVsYXkiTgoSQ3JlYXRlUmVsYXlSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhQKDHJlcXVlc3RlZF9ieRgDIAEoCSJyChNDcmVhdGVSZWxheVJlc3BvbnNlEiMKBXJlbGF5GAEgASgLMhQudGFuay5pbmZyYS52MS5SZWxheRINCgV0b2tlbhgCIAEoCRInCgVzdGVwcxgDIAMoCzIYLnRhbmsuaW5mcmEudjEuU2V0dXBTdGVwIkwKElJldm9rZVJlbGF5UmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSCgoCaWQYAiABKAkSFAoMcmVxdWVzdGVkX2J5GAMgASgJIhUKE1Jldm9rZVJlbGF5UmVzcG9uc2UqngEKCFByb3ZpZGVyEhgKFFBST1ZJREVSX1VOU1BFQ0lGSUVEEAASEAoMUFJPVklERVJfQVdTEAESEAoMUFJPVklERVJfR0NQEAISEgoOUFJPVklERVJfQVpVUkUQAxIXChNQUk9WSURFUl9LVUJFUk5FVEVTEAQSEAoMUFJPVklERVJfQVBJEAUSFQoRUFJPVklERVJfREFUQUJBU0UQBipPCg5EYXRhYmFzZUVuZ2luZRIfChtEQVRBQkFTRV9FTkdJTkVfVU5TUEVDSUZJRUQQABIcChhEQVRBQkFTRV9FTkdJTkVfUE9TVEdSRVMQASqLAQoPQ29ubmVjdGlvblN0YXRlEiAKHENPTk5FQ1RJT05fU1RBVEVfVU5TUEVDSUZJRUQQABIfChtDT05ORUNUSU9OX1NUQVRFX1VOVkVSSUZJRUQQARIXChNDT05ORUNUSU9OX1NUQVRFX09LEAISHAoYQ09OTkVDVElPTl9TVEFURV9GQUlMSU5HEAMqTgoIS3ViZUF1dGgSGQoVS1VCRV9BVVRIX1VOU1BFQ0lGSUVEEAASEgoOS1VCRV9BVVRIX09JREMQARITCg9LVUJFX0FVVEhfVE9LRU4QAjKBCwoMSW5mcmFTZXJ2aWNlEmAKD0xpc3RDb25uZWN0aW9ucxIlLnRhbmsuaW5mcmEudjEuTGlzdENvbm5lY3Rpb25zUmVxdWVzdBomLnRhbmsuaW5mcmEudjEuTGlzdENvbm5lY3Rpb25zUmVzcG9uc2USWgoNR2V0Q29ubmVjdGlvbhIjLnRhbmsuaW5mcmEudjEuR2V0Q29ubmVjdGlvblJlcXVlc3QaJC50YW5rLmluZnJhLnYxLkdldENvbm5lY3Rpb25SZXNwb25zZRJjChBDcmVhdGVDb25uZWN0aW9uEiYudGFuay5pbmZyYS52MS5DcmVhdGVDb25uZWN0aW9uUmVxdWVzdBonLnRhbmsuaW5mcmEudjEuQ3JlYXRlQ29ubmVjdGlvblJlc3BvbnNlEmMKEFVwZGF0ZUNvbm5lY3Rpb24SJi50YW5rLmluZnJhLnYxLlVwZGF0ZUNvbm5lY3Rpb25SZXF1ZXN0GicudGFuay5pbmZyYS52MS5VcGRhdGVDb25uZWN0aW9uUmVzcG9uc2USYwoQRGVsZXRlQ29ubmVjdGlvbhImLnRhbmsuaW5mcmEudjEuRGVsZXRlQ29ubmVjdGlvblJlcXVlc3QaJy50YW5rLmluZnJhLnYxLkRlbGV0ZUNvbm5lY3Rpb25SZXNwb25zZRJdCg5UZXN0Q29ubmVjdGlvbhIkLnRhbmsuaW5mcmEudjEuVGVzdENvbm5lY3Rpb25SZXF1ZXN0GiUudGFuay5pbmZyYS52MS5UZXN0Q29ubmVjdGlvblJlc3BvbnNlEloKDUdldFNldHVwR3VpZGUSIy50YW5rLmluZnJhLnYxLkdldFNldHVwR3VpZGVSZXF1ZXN0GiQudGFuay5pbmZyYS52MS5HZXRTZXR1cEd1aWRlUmVzcG9uc2USSwoITGlzdFVzZXMSHi50YW5rLmluZnJhLnYxLkxpc3RVc2VzUmVxdWVzdBofLnRhbmsuaW5mcmEudjEuTGlzdFVzZXNSZXNwb25zZRJXCgxMaXN0UnVuYm9va3MSIi50YW5rLmluZnJhLnYxLkxpc3RSdW5ib29rc1JlcXVlc3QaIy50YW5rLmluZnJhLnYxLkxpc3RSdW5ib29rc1Jlc3BvbnNlElEKClB1dFJ1bmJvb2sSIC50YW5rLmluZnJhLnYxLlB1dFJ1bmJvb2tSZXF1ZXN0GiEudGFuay5pbmZyYS52MS5QdXRSdW5ib29rUmVzcG9uc2USWgoNRGVsZXRlUnVuYm9vaxIjLnRhbmsuaW5mcmEudjEuRGVsZXRlUnVuYm9va1JlcXVlc3QaJC50YW5rLmluZnJhLnYxLkRlbGV0ZVJ1bmJvb2tSZXNwb25zZRJ1ChZMaXN0V29ya2Zsb3dDYW5kaWRhdGVzEiwudGFuay5pbmZyYS52MS5MaXN0V29ya2Zsb3dDYW5kaWRhdGVzUmVxdWVzdBotLnRhbmsuaW5mcmEudjEuTGlzdFdvcmtmbG93Q2FuZGlkYXRlc1Jlc3BvbnNlElEKCkxpc3RSZWxheXMSIC50YW5rLmluZnJhLnYxLkxpc3RSZWxheXNSZXF1ZXN0GiEudGFuay5pbmZyYS52MS5MaXN0UmVsYXlzUmVzcG9uc2USVAoLQ3JlYXRlUmVsYXkSIS50YW5rLmluZnJhLnYxLkNyZWF0ZVJlbGF5UmVxdWVzdBoiLnRhbmsuaW5mcmEudjEuQ3JlYXRlUmVsYXlSZXNwb25zZRJUCgtSZXZva2VSZWxheRIhLnRhbmsuaW5mcmEudjEuUmV2b2tlUmVsYXlSZXF1ZXN0GiIudGFuay5pbmZyYS52MS5SZXZva2VSZWxheVJlc3BvbnNlQsgBChFjb20udGFuay5pbmZyYS52MUIKSW5mcmFQcm90b1ABWlFnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2luZnJhL3YxO2luZnJhdjGiAgNUSViqAg1UYW5rLkluZnJhLlYxygINVGFua1xJbmZyYVxWMeICGVRhbmtcSW5mcmFcVjFcR1BCTWV0YWRhdGHqAg9UYW5rOjpJbmZyYTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.infra.v1.AwsConfig
@@ -214,6 +214,56 @@ export const ApiConfigSchema: GenMessage<ApiConfig> = /*@__PURE__*/
   messageDesc(file_tank_infra_v1_infra, 4);
 
 /**
+ * @generated from message tank.infra.v1.DatabaseConfig
+ */
+export type DatabaseConfig = Message<"tank.infra.v1.DatabaseConfig"> & {
+  /**
+   * @generated from field: tank.infra.v1.DatabaseEngine engine = 1;
+   */
+  engine: DatabaseEngine;
+
+  /**
+   * as the relay reaches it, e.g. edero-console-db.xxxx.us-east-1.rds.amazonaws.com
+   *
+   * @generated from field: string host = 2;
+   */
+  host: string;
+
+  /**
+   * 5432 when zero
+   *
+   * @generated from field: int32 port = 3;
+   */
+  port: number;
+
+  /**
+   * @generated from field: string database = 4;
+   */
+  database: string;
+
+  /**
+   * a read-only role; the setup guide creates one
+   *
+   * @generated from field: string user = 5;
+   */
+  user: string;
+
+  /**
+   * require (default), verify-full, disable
+   *
+   * @generated from field: string ssl_mode = 6;
+   */
+  sslMode: string;
+};
+
+/**
+ * Describes the message tank.infra.v1.DatabaseConfig.
+ * Use `create(DatabaseConfigSchema)` to create a new message.
+ */
+export const DatabaseConfigSchema: GenMessage<DatabaseConfig> = /*@__PURE__*/
+  messageDesc(file_tank_infra_v1_infra, 5);
+
+/**
  * @generated from message tank.infra.v1.Connection
  */
 export type Connection = Message<"tank.infra.v1.Connection"> & {
@@ -326,11 +376,16 @@ export type Connection = Message<"tank.infra.v1.Connection"> & {
   subject: string;
 
   /**
-   * A token is stored for it in the Lockbox Agent vault (Kubernetes token, API).
+   * A token is stored for it in the Lockbox Agent vault (Kubernetes token, API, database password).
    *
    * @generated from field: bool has_secret = 21;
    */
   hasSecret: boolean;
+
+  /**
+   * @generated from field: tank.infra.v1.DatabaseConfig database = 22;
+   */
+  database?: DatabaseConfig;
 };
 
 /**
@@ -338,7 +393,7 @@ export type Connection = Message<"tank.infra.v1.Connection"> & {
  * Use `create(ConnectionSchema)` to create a new message.
  */
 export const ConnectionSchema: GenMessage<Connection> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 5);
+  messageDesc(file_tank_infra_v1_infra, 6);
 
 /**
  * One step of the setup a person follows to grant TANK access, with the exact script
@@ -382,7 +437,7 @@ export type SetupStep = Message<"tank.infra.v1.SetupStep"> & {
  * Use `create(SetupStepSchema)` to create a new message.
  */
 export const SetupStepSchema: GenMessage<SetupStep> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 6);
+  messageDesc(file_tank_infra_v1_infra, 7);
 
 /**
  * @generated from message tank.infra.v1.Use
@@ -465,7 +520,7 @@ export type Use = Message<"tank.infra.v1.Use"> & {
  * Use `create(UseSchema)` to create a new message.
  */
 export const UseSchema: GenMessage<Use> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 7);
+  messageDesc(file_tank_infra_v1_infra, 8);
 
 /**
  * @generated from message tank.infra.v1.RunbookInput
@@ -502,7 +557,7 @@ export type RunbookInput = Message<"tank.infra.v1.RunbookInput"> & {
  * Use `create(RunbookInputSchema)` to create a new message.
  */
 export const RunbookInputSchema: GenMessage<RunbookInput> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 8);
+  messageDesc(file_tank_infra_v1_infra, 9);
 
 /**
  * A workflow in one of the workspace's repositories that an agent may ask to run.
@@ -573,7 +628,7 @@ export type Runbook = Message<"tank.infra.v1.Runbook"> & {
  * Use `create(RunbookSchema)` to create a new message.
  */
 export const RunbookSchema: GenMessage<Runbook> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 9);
+  messageDesc(file_tank_infra_v1_infra, 10);
 
 /**
  * A dispatchable workflow found in a repository, offered when adding a runbook.
@@ -607,7 +662,7 @@ export type WorkflowCandidate = Message<"tank.infra.v1.WorkflowCandidate"> & {
  * Use `create(WorkflowCandidateSchema)` to create a new message.
  */
 export const WorkflowCandidateSchema: GenMessage<WorkflowCandidate> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 10);
+  messageDesc(file_tank_infra_v1_infra, 11);
 
 /**
  * @generated from message tank.infra.v1.Relay
@@ -654,7 +709,7 @@ export type Relay = Message<"tank.infra.v1.Relay"> & {
  * Use `create(RelaySchema)` to create a new message.
  */
 export const RelaySchema: GenMessage<Relay> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 11);
+  messageDesc(file_tank_infra_v1_infra, 12);
 
 /**
  * @generated from message tank.infra.v1.ListConnectionsRequest
@@ -678,7 +733,7 @@ export type ListConnectionsRequest = Message<"tank.infra.v1.ListConnectionsReque
  * Use `create(ListConnectionsRequestSchema)` to create a new message.
  */
 export const ListConnectionsRequestSchema: GenMessage<ListConnectionsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 12);
+  messageDesc(file_tank_infra_v1_infra, 13);
 
 /**
  * @generated from message tank.infra.v1.ListConnectionsResponse
@@ -712,7 +767,7 @@ export type ListConnectionsResponse = Message<"tank.infra.v1.ListConnectionsResp
  * Use `create(ListConnectionsResponseSchema)` to create a new message.
  */
 export const ListConnectionsResponseSchema: GenMessage<ListConnectionsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 13);
+  messageDesc(file_tank_infra_v1_infra, 14);
 
 /**
  * @generated from message tank.infra.v1.GetConnectionRequest
@@ -734,7 +789,7 @@ export type GetConnectionRequest = Message<"tank.infra.v1.GetConnectionRequest">
  * Use `create(GetConnectionRequestSchema)` to create a new message.
  */
 export const GetConnectionRequestSchema: GenMessage<GetConnectionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 14);
+  messageDesc(file_tank_infra_v1_infra, 15);
 
 /**
  * @generated from message tank.infra.v1.GetConnectionResponse
@@ -751,7 +806,7 @@ export type GetConnectionResponse = Message<"tank.infra.v1.GetConnectionResponse
  * Use `create(GetConnectionResponseSchema)` to create a new message.
  */
 export const GetConnectionResponseSchema: GenMessage<GetConnectionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 15);
+  messageDesc(file_tank_infra_v1_infra, 16);
 
 /**
  * @generated from message tank.infra.v1.CreateConnectionRequest
@@ -787,7 +842,7 @@ export type CreateConnectionRequest = Message<"tank.infra.v1.CreateConnectionReq
  * Use `create(CreateConnectionRequestSchema)` to create a new message.
  */
 export const CreateConnectionRequestSchema: GenMessage<CreateConnectionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 16);
+  messageDesc(file_tank_infra_v1_infra, 17);
 
 /**
  * @generated from message tank.infra.v1.CreateConnectionResponse
@@ -804,7 +859,7 @@ export type CreateConnectionResponse = Message<"tank.infra.v1.CreateConnectionRe
  * Use `create(CreateConnectionResponseSchema)` to create a new message.
  */
 export const CreateConnectionResponseSchema: GenMessage<CreateConnectionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 17);
+  messageDesc(file_tank_infra_v1_infra, 18);
 
 /**
  * @generated from message tank.infra.v1.UpdateConnectionRequest
@@ -838,7 +893,7 @@ export type UpdateConnectionRequest = Message<"tank.infra.v1.UpdateConnectionReq
  * Use `create(UpdateConnectionRequestSchema)` to create a new message.
  */
 export const UpdateConnectionRequestSchema: GenMessage<UpdateConnectionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 18);
+  messageDesc(file_tank_infra_v1_infra, 19);
 
 /**
  * @generated from message tank.infra.v1.UpdateConnectionResponse
@@ -855,7 +910,7 @@ export type UpdateConnectionResponse = Message<"tank.infra.v1.UpdateConnectionRe
  * Use `create(UpdateConnectionResponseSchema)` to create a new message.
  */
 export const UpdateConnectionResponseSchema: GenMessage<UpdateConnectionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 19);
+  messageDesc(file_tank_infra_v1_infra, 20);
 
 /**
  * @generated from message tank.infra.v1.DeleteConnectionRequest
@@ -882,7 +937,7 @@ export type DeleteConnectionRequest = Message<"tank.infra.v1.DeleteConnectionReq
  * Use `create(DeleteConnectionRequestSchema)` to create a new message.
  */
 export const DeleteConnectionRequestSchema: GenMessage<DeleteConnectionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 20);
+  messageDesc(file_tank_infra_v1_infra, 21);
 
 /**
  * @generated from message tank.infra.v1.DeleteConnectionResponse
@@ -895,7 +950,7 @@ export type DeleteConnectionResponse = Message<"tank.infra.v1.DeleteConnectionRe
  * Use `create(DeleteConnectionResponseSchema)` to create a new message.
  */
 export const DeleteConnectionResponseSchema: GenMessage<DeleteConnectionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 21);
+  messageDesc(file_tank_infra_v1_infra, 22);
 
 /**
  * @generated from message tank.infra.v1.TestConnectionRequest
@@ -922,7 +977,7 @@ export type TestConnectionRequest = Message<"tank.infra.v1.TestConnectionRequest
  * Use `create(TestConnectionRequestSchema)` to create a new message.
  */
 export const TestConnectionRequestSchema: GenMessage<TestConnectionRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 22);
+  messageDesc(file_tank_infra_v1_infra, 23);
 
 /**
  * @generated from message tank.infra.v1.TestConnectionResponse
@@ -960,7 +1015,7 @@ export type TestConnectionResponse = Message<"tank.infra.v1.TestConnectionRespon
  * Use `create(TestConnectionResponseSchema)` to create a new message.
  */
 export const TestConnectionResponseSchema: GenMessage<TestConnectionResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 23);
+  messageDesc(file_tank_infra_v1_infra, 24);
 
 /**
  * @generated from message tank.infra.v1.GetSetupGuideRequest
@@ -982,7 +1037,7 @@ export type GetSetupGuideRequest = Message<"tank.infra.v1.GetSetupGuideRequest">
  * Use `create(GetSetupGuideRequestSchema)` to create a new message.
  */
 export const GetSetupGuideRequestSchema: GenMessage<GetSetupGuideRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 24);
+  messageDesc(file_tank_infra_v1_infra, 25);
 
 /**
  * @generated from message tank.infra.v1.GetSetupGuideResponse
@@ -999,7 +1054,7 @@ export type GetSetupGuideResponse = Message<"tank.infra.v1.GetSetupGuideResponse
  * Use `create(GetSetupGuideResponseSchema)` to create a new message.
  */
 export const GetSetupGuideResponseSchema: GenMessage<GetSetupGuideResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 25);
+  messageDesc(file_tank_infra_v1_infra, 26);
 
 /**
  * @generated from message tank.infra.v1.ListUsesRequest
@@ -1028,7 +1083,7 @@ export type ListUsesRequest = Message<"tank.infra.v1.ListUsesRequest"> & {
  * Use `create(ListUsesRequestSchema)` to create a new message.
  */
 export const ListUsesRequestSchema: GenMessage<ListUsesRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 26);
+  messageDesc(file_tank_infra_v1_infra, 27);
 
 /**
  * @generated from message tank.infra.v1.ListUsesResponse
@@ -1045,7 +1100,7 @@ export type ListUsesResponse = Message<"tank.infra.v1.ListUsesResponse"> & {
  * Use `create(ListUsesResponseSchema)` to create a new message.
  */
 export const ListUsesResponseSchema: GenMessage<ListUsesResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 27);
+  messageDesc(file_tank_infra_v1_infra, 28);
 
 /**
  * @generated from message tank.infra.v1.ListRunbooksRequest
@@ -1062,7 +1117,7 @@ export type ListRunbooksRequest = Message<"tank.infra.v1.ListRunbooksRequest"> &
  * Use `create(ListRunbooksRequestSchema)` to create a new message.
  */
 export const ListRunbooksRequestSchema: GenMessage<ListRunbooksRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 28);
+  messageDesc(file_tank_infra_v1_infra, 29);
 
 /**
  * @generated from message tank.infra.v1.ListRunbooksResponse
@@ -1079,7 +1134,7 @@ export type ListRunbooksResponse = Message<"tank.infra.v1.ListRunbooksResponse">
  * Use `create(ListRunbooksResponseSchema)` to create a new message.
  */
 export const ListRunbooksResponseSchema: GenMessage<ListRunbooksResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 29);
+  messageDesc(file_tank_infra_v1_infra, 30);
 
 /**
  * @generated from message tank.infra.v1.PutRunbookRequest
@@ -1106,7 +1161,7 @@ export type PutRunbookRequest = Message<"tank.infra.v1.PutRunbookRequest"> & {
  * Use `create(PutRunbookRequestSchema)` to create a new message.
  */
 export const PutRunbookRequestSchema: GenMessage<PutRunbookRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 30);
+  messageDesc(file_tank_infra_v1_infra, 31);
 
 /**
  * @generated from message tank.infra.v1.PutRunbookResponse
@@ -1123,7 +1178,7 @@ export type PutRunbookResponse = Message<"tank.infra.v1.PutRunbookResponse"> & {
  * Use `create(PutRunbookResponseSchema)` to create a new message.
  */
 export const PutRunbookResponseSchema: GenMessage<PutRunbookResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 31);
+  messageDesc(file_tank_infra_v1_infra, 32);
 
 /**
  * @generated from message tank.infra.v1.DeleteRunbookRequest
@@ -1150,7 +1205,7 @@ export type DeleteRunbookRequest = Message<"tank.infra.v1.DeleteRunbookRequest">
  * Use `create(DeleteRunbookRequestSchema)` to create a new message.
  */
 export const DeleteRunbookRequestSchema: GenMessage<DeleteRunbookRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 32);
+  messageDesc(file_tank_infra_v1_infra, 33);
 
 /**
  * @generated from message tank.infra.v1.DeleteRunbookResponse
@@ -1163,7 +1218,7 @@ export type DeleteRunbookResponse = Message<"tank.infra.v1.DeleteRunbookResponse
  * Use `create(DeleteRunbookResponseSchema)` to create a new message.
  */
 export const DeleteRunbookResponseSchema: GenMessage<DeleteRunbookResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 33);
+  messageDesc(file_tank_infra_v1_infra, 34);
 
 /**
  * @generated from message tank.infra.v1.ListWorkflowCandidatesRequest
@@ -1180,7 +1235,7 @@ export type ListWorkflowCandidatesRequest = Message<"tank.infra.v1.ListWorkflowC
  * Use `create(ListWorkflowCandidatesRequestSchema)` to create a new message.
  */
 export const ListWorkflowCandidatesRequestSchema: GenMessage<ListWorkflowCandidatesRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 34);
+  messageDesc(file_tank_infra_v1_infra, 35);
 
 /**
  * @generated from message tank.infra.v1.ListWorkflowCandidatesResponse
@@ -1204,7 +1259,7 @@ export type ListWorkflowCandidatesResponse = Message<"tank.infra.v1.ListWorkflow
  * Use `create(ListWorkflowCandidatesResponseSchema)` to create a new message.
  */
 export const ListWorkflowCandidatesResponseSchema: GenMessage<ListWorkflowCandidatesResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 35);
+  messageDesc(file_tank_infra_v1_infra, 36);
 
 /**
  * @generated from message tank.infra.v1.ListRelaysRequest
@@ -1221,7 +1276,7 @@ export type ListRelaysRequest = Message<"tank.infra.v1.ListRelaysRequest"> & {
  * Use `create(ListRelaysRequestSchema)` to create a new message.
  */
 export const ListRelaysRequestSchema: GenMessage<ListRelaysRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 36);
+  messageDesc(file_tank_infra_v1_infra, 37);
 
 /**
  * @generated from message tank.infra.v1.ListRelaysResponse
@@ -1238,7 +1293,7 @@ export type ListRelaysResponse = Message<"tank.infra.v1.ListRelaysResponse"> & {
  * Use `create(ListRelaysResponseSchema)` to create a new message.
  */
 export const ListRelaysResponseSchema: GenMessage<ListRelaysResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 37);
+  messageDesc(file_tank_infra_v1_infra, 38);
 
 /**
  * @generated from message tank.infra.v1.CreateRelayRequest
@@ -1265,7 +1320,7 @@ export type CreateRelayRequest = Message<"tank.infra.v1.CreateRelayRequest"> & {
  * Use `create(CreateRelayRequestSchema)` to create a new message.
  */
 export const CreateRelayRequestSchema: GenMessage<CreateRelayRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 38);
+  messageDesc(file_tank_infra_v1_infra, 39);
 
 /**
  * @generated from message tank.infra.v1.CreateRelayResponse
@@ -1296,7 +1351,7 @@ export type CreateRelayResponse = Message<"tank.infra.v1.CreateRelayResponse"> &
  * Use `create(CreateRelayResponseSchema)` to create a new message.
  */
 export const CreateRelayResponseSchema: GenMessage<CreateRelayResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 39);
+  messageDesc(file_tank_infra_v1_infra, 40);
 
 /**
  * @generated from message tank.infra.v1.RevokeRelayRequest
@@ -1323,7 +1378,7 @@ export type RevokeRelayRequest = Message<"tank.infra.v1.RevokeRelayRequest"> & {
  * Use `create(RevokeRelayRequestSchema)` to create a new message.
  */
 export const RevokeRelayRequestSchema: GenMessage<RevokeRelayRequest> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 40);
+  messageDesc(file_tank_infra_v1_infra, 41);
 
 /**
  * @generated from message tank.infra.v1.RevokeRelayResponse
@@ -1336,7 +1391,7 @@ export type RevokeRelayResponse = Message<"tank.infra.v1.RevokeRelayResponse"> &
  * Use `create(RevokeRelayResponseSchema)` to create a new message.
  */
 export const RevokeRelayResponseSchema: GenMessage<RevokeRelayResponse> = /*@__PURE__*/
-  messageDesc(file_tank_infra_v1_infra, 41);
+  messageDesc(file_tank_infra_v1_infra, 42);
 
 /**
  * @generated from enum tank.infra.v1.Provider
@@ -1375,6 +1430,15 @@ export enum Provider {
    * @generated from enum value: PROVIDER_API = 5;
    */
   API = 5,
+
+  /**
+   * A database, read only (2026-11-10). Reached through the workspace's Lockbox Relay inside
+   * its own network; the password is kept in the Lockbox Agent vault and handed to the relay
+   * with each query, never to an agent.
+   *
+   * @generated from enum value: PROVIDER_DATABASE = 6;
+   */
+  DATABASE = 6,
 }
 
 /**
@@ -1382,6 +1446,27 @@ export enum Provider {
  */
 export const ProviderSchema: GenEnum<Provider> = /*@__PURE__*/
   enumDesc(file_tank_infra_v1_infra, 0);
+
+/**
+ * @generated from enum tank.infra.v1.DatabaseEngine
+ */
+export enum DatabaseEngine {
+  /**
+   * @generated from enum value: DATABASE_ENGINE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: DATABASE_ENGINE_POSTGRES = 1;
+   */
+  POSTGRES = 1,
+}
+
+/**
+ * Describes the enum tank.infra.v1.DatabaseEngine.
+ */
+export const DatabaseEngineSchema: GenEnum<DatabaseEngine> = /*@__PURE__*/
+  enumDesc(file_tank_infra_v1_infra, 1);
 
 /**
  * @generated from enum tank.infra.v1.ConnectionState
@@ -1418,7 +1503,7 @@ export enum ConnectionState {
  * Describes the enum tank.infra.v1.ConnectionState.
  */
 export const ConnectionStateSchema: GenEnum<ConnectionState> = /*@__PURE__*/
-  enumDesc(file_tank_infra_v1_infra, 1);
+  enumDesc(file_tank_infra_v1_infra, 2);
 
 /**
  * @generated from enum tank.infra.v1.KubeAuth
@@ -1448,7 +1533,7 @@ export enum KubeAuth {
  * Describes the enum tank.infra.v1.KubeAuth.
  */
 export const KubeAuthSchema: GenEnum<KubeAuth> = /*@__PURE__*/
-  enumDesc(file_tank_infra_v1_infra, 2);
+  enumDesc(file_tank_infra_v1_infra, 3);
 
 /**
  * @generated from service tank.infra.v1.InfraService
