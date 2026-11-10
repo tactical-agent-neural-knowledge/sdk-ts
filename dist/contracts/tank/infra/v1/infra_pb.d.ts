@@ -173,6 +173,48 @@ export type ApiConfig = Message<"tank.infra.v1.ApiConfig"> & {
  */
 export declare const ApiConfigSchema: GenMessage<ApiConfig>;
 /**
+ * @generated from message tank.infra.v1.DatabaseConfig
+ */
+export type DatabaseConfig = Message<"tank.infra.v1.DatabaseConfig"> & {
+    /**
+     * @generated from field: tank.infra.v1.DatabaseEngine engine = 1;
+     */
+    engine: DatabaseEngine;
+    /**
+     * as the relay reaches it, e.g. edero-console-db.xxxx.us-east-1.rds.amazonaws.com
+     *
+     * @generated from field: string host = 2;
+     */
+    host: string;
+    /**
+     * 5432 when zero
+     *
+     * @generated from field: int32 port = 3;
+     */
+    port: number;
+    /**
+     * @generated from field: string database = 4;
+     */
+    database: string;
+    /**
+     * a read-only role; the setup guide creates one
+     *
+     * @generated from field: string user = 5;
+     */
+    user: string;
+    /**
+     * require (default), verify-full, disable
+     *
+     * @generated from field: string ssl_mode = 6;
+     */
+    sslMode: string;
+};
+/**
+ * Describes the message tank.infra.v1.DatabaseConfig.
+ * Use `create(DatabaseConfigSchema)` to create a new message.
+ */
+export declare const DatabaseConfigSchema: GenMessage<DatabaseConfig>;
+/**
  * @generated from message tank.infra.v1.Connection
  */
 export type Connection = Message<"tank.infra.v1.Connection"> & {
@@ -265,11 +307,15 @@ export type Connection = Message<"tank.infra.v1.Connection"> & {
      */
     subject: string;
     /**
-     * A token is stored for it in the Lockbox Agent vault (Kubernetes token, API).
+     * A token is stored for it in the Lockbox Agent vault (Kubernetes token, API, database password).
      *
      * @generated from field: bool has_secret = 21;
      */
     hasSecret: boolean;
+    /**
+     * @generated from field: tank.infra.v1.DatabaseConfig database = 22;
+     */
+    database?: DatabaseConfig;
 };
 /**
  * Describes the message tank.infra.v1.Connection.
@@ -1124,12 +1170,37 @@ export declare enum Provider {
      *
      * @generated from enum value: PROVIDER_API = 5;
      */
-    API = 5
+    API = 5,
+    /**
+     * A database, read only (2026-11-10). Reached through the workspace's Lockbox Relay inside
+     * its own network; the password is kept in the Lockbox Agent vault and handed to the relay
+     * with each query, never to an agent.
+     *
+     * @generated from enum value: PROVIDER_DATABASE = 6;
+     */
+    DATABASE = 6
 }
 /**
  * Describes the enum tank.infra.v1.Provider.
  */
 export declare const ProviderSchema: GenEnum<Provider>;
+/**
+ * @generated from enum tank.infra.v1.DatabaseEngine
+ */
+export declare enum DatabaseEngine {
+    /**
+     * @generated from enum value: DATABASE_ENGINE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: DATABASE_ENGINE_POSTGRES = 1;
+     */
+    POSTGRES = 1
+}
+/**
+ * Describes the enum tank.infra.v1.DatabaseEngine.
+ */
+export declare const DatabaseEngineSchema: GenEnum<DatabaseEngine>;
 /**
  * @generated from enum tank.infra.v1.ConnectionState
  */
