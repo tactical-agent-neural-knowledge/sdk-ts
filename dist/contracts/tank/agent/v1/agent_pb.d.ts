@@ -1512,6 +1512,13 @@ export type WorkspaceSpend = Message<"tank.agent.v1.WorkspaceSpend"> & {
      * @generated from field: repeated tank.agent.v1.CostPerRunDay cost_per_run = 14;
      */
     costPerRun: CostPerRunDay[];
+    /**
+     * What Neural Knowledge saved this workspace this month, at what it pays: its share of the
+     * saving (Robby, 2026-11-10: TANK keeps half). The rate behind it is never shown.
+     *
+     * @generated from field: double neural_saved_month_usd = 15;
+     */
+    neuralSavedMonthUsd: number;
 };
 /**
  * Describes the message tank.agent.v1.WorkspaceSpend.
