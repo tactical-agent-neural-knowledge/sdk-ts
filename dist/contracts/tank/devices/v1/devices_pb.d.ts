@@ -13,7 +13,10 @@ export declare const file_tank_devices_v1_devices: GenFile;
  */
 export type Device = Message<"tank.devices.v1.Device"> & {
     /**
-     * "ble"
+     * "ble", or "phone" for the person's own phone or computer: its camera and its sensors
+     * (Robby, 2026-11-10). A phone's sensors are characteristics with made-up UUIDs whose values
+     * the app declares (Characteristic.declared), because the operating system already hands
+     * them over as numbers with units; the camera is frames (PushReadingsRequest.frame).
      *
      * @generated from field: string transport = 1;
      */
@@ -87,7 +90,8 @@ export type Characteristic = Message<"tank.devices.v1.Characteristic"> & {
      */
     uuid: string;
     /**
-     * "read", "write", "write_without_response", "notify", "indicate"
+     * "read", "write", "write_without_response", "notify", "indicate"; for transport "phone",
+     * "notify" on a sensor and "frames" on the camera, whose stills come as PushReadingsRequest.frame
      *
      * @generated from field: repeated string properties = 2;
      */
@@ -98,12 +102,68 @@ export type Characteristic = Message<"tank.devices.v1.Characteristic"> & {
      * @generated from field: bytes value = 3;
      */
     value: Uint8Array;
+    /**
+     * A phone sensor's own name ("Accelerometer"), for transport "phone"; empty for Bluetooth.
+     *
+     * @generated from field: string name = 4;
+     */
+    name: string;
+    /**
+     * For transport "phone": what each reading holds, in order, one little-endian float32 per
+     * field, as the operating system reported it. Ignored for Bluetooth, whose bytes the server
+     * reads itself.
+     *
+     * @generated from field: repeated tank.devices.v1.DeclaredField declared = 5;
+     */
+    declared: DeclaredField[];
 };
 /**
  * Describes the message tank.devices.v1.Characteristic.
  * Use `create(CharacteristicSchema)` to create a new message.
  */
 export declare const CharacteristicSchema: GenMessage<Characteristic>;
+/**
+ * @generated from message tank.devices.v1.DeclaredField
+ */
+export type DeclaredField = Message<"tank.devices.v1.DeclaredField"> & {
+    /**
+     * "X", "Pressure"
+     *
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * "g", "hPa", "rad/s"; empty when unitless
+     *
+     * @generated from field: string unit = 2;
+     */
+    unit: string;
+};
+/**
+ * Describes the message tank.devices.v1.DeclaredField.
+ * Use `create(DeclaredFieldSchema)` to create a new message.
+ */
+export declare const DeclaredFieldSchema: GenMessage<DeclaredField>;
+/**
+ * One still from a connected camera, JPEG, at most 1 MB.
+ *
+ * @generated from message tank.devices.v1.Frame
+ */
+export type Frame = Message<"tank.devices.v1.Frame"> & {
+    /**
+     * @generated from field: int64 at_ms = 1;
+     */
+    atMs: bigint;
+    /**
+     * @generated from field: bytes jpeg = 2;
+     */
+    jpeg: Uint8Array;
+};
+/**
+ * Describes the message tank.devices.v1.Frame.
+ * Use `create(FrameSchema)` to create a new message.
+ */
+export declare const FrameSchema: GenMessage<Frame>;
 /**
  * One notification or read from the device, as raw bytes.
  *
@@ -298,6 +358,17 @@ export type Session = Message<"tank.devices.v1.Session"> & {
      * @generated from field: string feedback_rule = 10;
      */
     feedbackRule: string;
+    /**
+     * What the connected camera last showed, in TANK's vision model's words; empty without a
+     * camera or before the first frame was looked at.
+     *
+     * @generated from field: string view = 11;
+     */
+    view: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp view_at = 12;
+     */
+    viewAt?: Timestamp;
 };
 /**
  * Describes the message tank.devices.v1.Session.
@@ -374,6 +445,13 @@ export type PushReadingsRequest = Message<"tank.devices.v1.PushReadingsRequest">
      * @generated from field: repeated tank.devices.v1.Reading readings = 2;
      */
     readings: Reading[];
+    /**
+     * The camera's latest still, when a camera is connected; the server looks at one every few
+     * seconds and ignores the rest.
+     *
+     * @generated from field: tank.devices.v1.Frame frame = 3;
+     */
+    frame?: Frame;
 };
 /**
  * Describes the message tank.devices.v1.PushReadingsRequest.
