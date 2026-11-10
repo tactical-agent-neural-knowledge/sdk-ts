@@ -1198,12 +1198,80 @@ export type AgentUsage = Message<"tank.platform.v1.AgentUsage"> & {
      * @generated from field: repeated string agents = 9;
      */
     agents: string[];
+    /**
+     * What Neural Knowledge saved this month: raw, what the runs would have cost TANK without it
+     * (the frozen per-stratum baseline) minus what they cost; and the customer's share of it.
+     *
+     * @generated from field: double neural_saved_raw_usd_month = 10;
+     */
+    neuralSavedRawUsdMonth: number;
+    /**
+     * @generated from field: double neural_saved_customer_usd_month = 11;
+     */
+    neuralSavedCustomerUsdMonth: number;
+    /**
+     * The rate this month (agent price as a multiple of raw cost) and every month before it,
+     * newest first. 1.5 is the starting rate; it grows with what Neural Knowledge saves.
+     *
+     * @generated from field: double rate = 12;
+     */
+    rate: number;
+    /**
+     * @generated from field: repeated tank.platform.v1.RateMonth rate_history = 13;
+     */
+    rateHistory: RateMonth[];
 };
 /**
  * Describes the message tank.platform.v1.AgentUsage.
  * Use `create(AgentUsageSchema)` to create a new message.
  */
 export declare const AgentUsageSchema: GenMessage<AgentUsage>;
+/**
+ * One month's rate for a workspace, locked on the 1st from the month before's measured runs.
+ *
+ * @generated from message tank.platform.v1.RateMonth
+ */
+export type RateMonth = Message<"tank.platform.v1.RateMonth"> & {
+    /**
+     * YYYY-MM, the month the rate applies to
+     *
+     * @generated from field: string month = 1;
+     */
+    month: string;
+    /**
+     * @generated from field: double rate = 2;
+     */
+    rate: number;
+    /**
+     * what the measured runs would have cost TANK without Neural Knowledge
+     *
+     * @generated from field: double baseline_usd = 3;
+     */
+    baselineUsd: number;
+    /**
+     * what they cost
+     *
+     * @generated from field: double actual_usd = 4;
+     */
+    actualUsd: number;
+    /**
+     * runs with a frozen baseline to compare against
+     *
+     * @generated from field: int32 measured_runs = 5;
+     */
+    measuredRuns: number;
+    /**
+     * baseline - actual, raw
+     *
+     * @generated from field: double saved_usd = 6;
+     */
+    savedUsd: number;
+};
+/**
+ * Describes the message tank.platform.v1.RateMonth.
+ * Use `create(RateMonthSchema)` to create a new message.
+ */
+export declare const RateMonthSchema: GenMessage<RateMonth>;
 /**
  * @generated from message tank.platform.v1.WorkspaceCounts
  */
@@ -1845,6 +1913,18 @@ export type NeuralDay = Message<"tank.platform.v1.NeuralDay"> & {
      * @generated from field: int64 agent_tokens = 10;
      */
     agentTokens: bigint;
+    /**
+     * what Neural's GPUs cost that day (AWS Cost Explorer)
+     *
+     * @generated from field: double gpu_cost_usd = 11;
+     */
+    gpuCostUsd: number;
+    /**
+     * what workspaces were charged for Neural chats
+     *
+     * @generated from field: double charged_usd = 12;
+     */
+    chargedUsd: number;
 };
 /**
  * Describes the message tank.platform.v1.NeuralDay.
@@ -1911,6 +1991,25 @@ export type NeuralUsage = Message<"tank.platform.v1.NeuralUsage"> & {
      * @generated from field: int32 thumbs_down_30d = 13;
      */
     thumbsDown30d: number;
+    /**
+     * What running Neural actually cost: GPU instances and SageMaker training, from AWS Cost
+     * Explorer. cost_usd_30d is a per-token estimate and is not what TANK pays.
+     *
+     * @generated from field: double gpu_cost_usd_30d = 14;
+     */
+    gpuCostUsd30d: number;
+    /**
+     * false when Cost Explorer could not be read
+     *
+     * @generated from field: bool gpu_cost_known = 15;
+     */
+    gpuCostKnown: boolean;
+    /**
+     * what workspaces were charged for Neural chats
+     *
+     * @generated from field: double charged_usd_30d = 16;
+     */
+    chargedUsd30d: number;
 };
 /**
  * Describes the message tank.platform.v1.NeuralUsage.
