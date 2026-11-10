@@ -14,7 +14,7 @@ import type { Message as Message$1 } from "@bufbuild/protobuf";
  * Describes the file tank/ai/v1/ai.proto.
  */
 export const file_tank_ai_v1_ai: GenFile = /*@__PURE__*/
-  fileDesc("ChN0YW5rL2FpL3YxL2FpLnByb3RvEgp0YW5rLmFpLnYxIuEBCgxDb252ZXJzYXRpb24SCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHcHJldmlldxgFIAEoCRIOCgZwaW5uZWQYBiABKAgSFAoMd29ya3NwYWNlX2lkGAcgASgJEh8KBGFwcHMYCCADKAsyES50YW5rLmFwcHMudjEuQXBwImEKCkF0dGFjaG1lbnQSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRtaW1lGAMgASgJEgwKBGRhdGEYBCABKAwSDAoEc2l6ZRgFIAEoAxIPCgdmaWxlX2lkGAYgASgJIpoCCgdNZXNzYWdlEgoKAmlkGAEgASgJEhcKD2NvbnZlcnNhdGlvbl9pZBgCIAEoCRIeCgRyb2xlGAMgASgOMhAudGFuay5haS52MS5Sb2xlEgwKBHRleHQYBCABKAkSKwoLYXR0YWNobWVudHMYBSADKAsyFi50YW5rLmFpLnYxLkF0dGFjaG1lbnQSLgoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLc3RvcF9yZWFzb24YByABKAkSFAoMaW5wdXRfdG9rZW5zGAggASgFEhUKDW91dHB1dF90b2tlbnMYCSABKAUSDgoGcmF0aW5nGAogASgFEg0KBWFzX29mGAsgASgJIk4KGExpc3RDb252ZXJzYXRpb25zUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIUCgx3b3Jrc3BhY2VfaWQYAyABKAkiTAoZTGlzdENvbnZlcnNhdGlvbnNSZXNwb25zZRIvCg1jb252ZXJzYXRpb25zGAEgAygLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24iJAoWR2V0Q29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCSKcAQoXR2V0Q29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24SJQoIbWVzc2FnZXMYAiADKAsyEy50YW5rLmFpLnYxLk1lc3NhZ2USKgoLYXRsYXNfcGFnZXMYAyADKAsyFS50YW5rLmFpLnYxLkF0bGFzUGFnZSJsCglBdGxhc1BhZ2USDAoEbmFtZRgBIAEoCRIRCgljYW52YXNfaWQYAiABKAkSEAoIbWFya2Rvd24YAyABKAkSLAoIYWRkZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImcKEUFkZFRvQXRsYXNSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhAKCG1hcmtkb3duGAMgASgJEhkKEXJlcGxhY2VfY2FudmFzX2lkGAQgASgJIjkKEkFkZFRvQXRsYXNSZXNwb25zZRIjCgRwYWdlGAEgASgLMhUudGFuay5haS52MS5BdGxhc1BhZ2UiMQoZQ3JlYXRlQ29udmVyc2F0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiTAoaQ3JlYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24ibQoZVXBkYXRlQ29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIRCglzZXRfdGl0bGUYAyABKAgSDgoGcGlubmVkGAQgASgIEhIKCnNldF9waW5uZWQYBSABKAgiTAoaVXBkYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24iJwoZRGVsZXRlQ29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCSIcChpEZWxldGVDb252ZXJzYXRpb25SZXNwb25zZSK5AQoSU2VuZE1lc3NhZ2VSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRIMCgR0ZXh0GAIgASgJEisKC2F0dGFjaG1lbnRzGAMgAygLMhYudGFuay5haS52MS5BdHRhY2htZW50Eh0KFXJlZ2VuZXJhdGVfbWVzc2FnZV9pZBgEIAEoCRIaChJyZXBsYWNlX21lc3NhZ2VfaWQYBSABKAkSFAoMd29ya3NwYWNlX2lkGAYgASgJIsQBChNTZW5kTWVzc2FnZVJlc3BvbnNlEiYKB3N0YXJ0ZWQYASABKAsyEy50YW5rLmFpLnYxLlN0YXJ0ZWRIABIPCgVkZWx0YRgCIAEoCUgAEiMKBGRvbmUYAyABKAsyEy50YW5rLmFpLnYxLk1lc3NhZ2VIABIPCgV0aXRsZRgEIAEoCUgAEhEKB3dhcm1pbmcYBSABKAlIABIiCgVzdGFnZRgGIAEoCzIRLnRhbmsuYWkudjEuU3RhZ2VIAEIHCgVldmVudCJeCgVTdGFnZRIMCgRraW5kGAEgASgJEgwKBHRleHQYAiABKAkSKAoHc291cmNlcxgDIAMoCzIXLnRhbmsuYWkudjEuU3RhZ2VTb3VyY2USDwoHb3V0bGluZRgEIAMoCSI3CgtTdGFnZVNvdXJjZRINCgV0aXRsZRgBIAEoCRIMCgRob3N0GAIgASgJEgsKA3VybBgDIAEoCSKCAQoHU3RhcnRlZBIuCgxjb252ZXJzYXRpb24YASABKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbhIpCgx1c2VyX21lc3NhZ2UYAiABKAsyEy50YW5rLmFpLnYxLk1lc3NhZ2USHAoUYXNzaXN0YW50X21lc3NhZ2VfaWQYAyABKAkiOAoSUmF0ZU1lc3NhZ2VSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkSDgoGcmF0aW5nGAIgASgFIhUKE1JhdGVNZXNzYWdlUmVzcG9uc2UiJgoQU3RvcFJlcGx5UmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJIhMKEVN0b3BSZXBseVJlc3BvbnNlIhQKEkdldFNldHRpbmdzUmVxdWVzdCI9ChNHZXRTZXR0aW5nc1Jlc3BvbnNlEiYKCHNldHRpbmdzGAEgASgLMhQudGFuay5haS52MS5TZXR0aW5ncyJ3CghTZXR0aW5ncxIUCgxpbnN0cnVjdGlvbnMYASABKAkSEwoLbW9kZWxfbGFiZWwYAiABKAkSEQoJYXZhaWxhYmxlGAMgASgIEi0KCWxhdW5jaF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiLQoVVXBkYXRlU2V0dGluZ3NSZXF1ZXN0EhQKDGluc3RydWN0aW9ucxgBIAEoCSJAChZVcGRhdGVTZXR0aW5nc1Jlc3BvbnNlEiYKCHNldHRpbmdzGAEgASgLMhQudGFuay5haS52MS5TZXR0aW5ncyIfCg9HZXRVc2FnZVJlcXVlc3QSDAoEZGF5cxgBIAEoBSJvCghVc2FnZURheRIMCgRkYXRlGAEgASgJEhAKCG1lc3NhZ2VzGAIgASgFEhQKDGlucHV0X3Rva2VucxgDIAEoAxIVCg1vdXRwdXRfdG9rZW5zGAQgASgDEhYKDmNvc3RfbWljcm9fdXNkGAUgASgDIpIBChFDb252ZXJzYXRpb25Vc2FnZRIXCg9jb252ZXJzYXRpb25faWQYASABKAkSDQoFdGl0bGUYAiABKAkSEAoIbWVzc2FnZXMYAyABKAUSFAoMaW5wdXRfdG9rZW5zGAQgASgDEhUKDW91dHB1dF90b2tlbnMYBSABKAMSFgoOY29zdF9taWNyb191c2QYBiABKAMiqQIKEEdldFVzYWdlUmVzcG9uc2USIgoEZGF5cxgBIAMoCzIULnRhbmsuYWkudjEuVXNhZ2VEYXkSEAoIbWVzc2FnZXMYAiABKAUSFAoMaW5wdXRfdG9rZW5zGAMgASgDEhUKDW91dHB1dF90b2tlbnMYBCABKAMSFgoOY29zdF9taWNyb191c2QYBSABKAMSFgoOdG9kYXlfbWVzc2FnZXMYBiABKAUSHAoUbW9udGhfY29zdF9taWNyb191c2QYByABKAMSGQoRYWxsX3RpbWVfbWVzc2FnZXMYCCABKAMSNAoNY29udmVyc2F0aW9ucxgJIAMoCzIdLnRhbmsuYWkudjEuQ29udmVyc2F0aW9uVXNhZ2USEwoLbW9kZWxfbGFiZWwYCiABKAkiIAoPTGlzdEFwcHNSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJIjMKEExpc3RBcHBzUmVzcG9uc2USHwoEYXBwcxgBIAMoCzIRLnRhbmsuYXBwcy52MS5BcHAiPAoRQ29ubmVjdEFwcFJlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEg4KBmFwcF9pZBgCIAEoCSJEChJDb25uZWN0QXBwUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24iPwoURGlzY29ubmVjdEFwcFJlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEg4KBmFwcF9pZBgCIAEoCSJHChVEaXNjb25uZWN0QXBwUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24qPwoEUm9sZRIUChBST0xFX1VOU1BFQ0lGSUVEEAASDQoJUk9MRV9VU0VSEAESEgoOUk9MRV9BU1NJU1RBTlQQAjKLCgoJQWlTZXJ2aWNlEmAKEUxpc3RDb252ZXJzYXRpb25zEiQudGFuay5haS52MS5MaXN0Q29udmVyc2F0aW9uc1JlcXVlc3QaJS50YW5rLmFpLnYxLkxpc3RDb252ZXJzYXRpb25zUmVzcG9uc2USWgoPR2V0Q29udmVyc2F0aW9uEiIudGFuay5haS52MS5HZXRDb252ZXJzYXRpb25SZXF1ZXN0GiMudGFuay5haS52MS5HZXRDb252ZXJzYXRpb25SZXNwb25zZRJjChJDcmVhdGVDb252ZXJzYXRpb24SJS50YW5rLmFpLnYxLkNyZWF0ZUNvbnZlcnNhdGlvblJlcXVlc3QaJi50YW5rLmFpLnYxLkNyZWF0ZUNvbnZlcnNhdGlvblJlc3BvbnNlEmMKElVwZGF0ZUNvbnZlcnNhdGlvbhIlLnRhbmsuYWkudjEuVXBkYXRlQ29udmVyc2F0aW9uUmVxdWVzdBomLnRhbmsuYWkudjEuVXBkYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USYwoSRGVsZXRlQ29udmVyc2F0aW9uEiUudGFuay5haS52MS5EZWxldGVDb252ZXJzYXRpb25SZXF1ZXN0GiYudGFuay5haS52MS5EZWxldGVDb252ZXJzYXRpb25SZXNwb25zZRJQCgtTZW5kTWVzc2FnZRIeLnRhbmsuYWkudjEuU2VuZE1lc3NhZ2VSZXF1ZXN0Gh8udGFuay5haS52MS5TZW5kTWVzc2FnZVJlc3BvbnNlMAESTgoLUmF0ZU1lc3NhZ2USHi50YW5rLmFpLnYxLlJhdGVNZXNzYWdlUmVxdWVzdBofLnRhbmsuYWkudjEuUmF0ZU1lc3NhZ2VSZXNwb25zZRJICglTdG9wUmVwbHkSHC50YW5rLmFpLnYxLlN0b3BSZXBseVJlcXVlc3QaHS50YW5rLmFpLnYxLlN0b3BSZXBseVJlc3BvbnNlEk4KC0dldFNldHRpbmdzEh4udGFuay5haS52MS5HZXRTZXR0aW5nc1JlcXVlc3QaHy50YW5rLmFpLnYxLkdldFNldHRpbmdzUmVzcG9uc2USVwoOVXBkYXRlU2V0dGluZ3MSIS50YW5rLmFpLnYxLlVwZGF0ZVNldHRpbmdzUmVxdWVzdBoiLnRhbmsuYWkudjEuVXBkYXRlU2V0dGluZ3NSZXNwb25zZRJFCghHZXRVc2FnZRIbLnRhbmsuYWkudjEuR2V0VXNhZ2VSZXF1ZXN0GhwudGFuay5haS52MS5HZXRVc2FnZVJlc3BvbnNlEksKCkFkZFRvQXRsYXMSHS50YW5rLmFpLnYxLkFkZFRvQXRsYXNSZXF1ZXN0Gh4udGFuay5haS52MS5BZGRUb0F0bGFzUmVzcG9uc2USRQoITGlzdEFwcHMSGy50YW5rLmFpLnYxLkxpc3RBcHBzUmVxdWVzdBocLnRhbmsuYWkudjEuTGlzdEFwcHNSZXNwb25zZRJLCgpDb25uZWN0QXBwEh0udGFuay5haS52MS5Db25uZWN0QXBwUmVxdWVzdBoeLnRhbmsuYWkudjEuQ29ubmVjdEFwcFJlc3BvbnNlElQKDURpc2Nvbm5lY3RBcHASIC50YW5rLmFpLnYxLkRpc2Nvbm5lY3RBcHBSZXF1ZXN0GiEudGFuay5haS52MS5EaXNjb25uZWN0QXBwUmVzcG9uc2VCsAEKDmNvbS50YW5rLmFpLnYxQgdBaVByb3RvUAFaS2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvYWkvdjE7YWl2MaICA1RBWKoCClRhbmsuQWkuVjHKAgpUYW5rXEFpXFYx4gIWVGFua1xBaVxWMVxHUEJNZXRhZGF0YeoCDFRhbms6OkFpOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_apps_v1_apps]);
+  fileDesc("ChN0YW5rL2FpL3YxL2FpLnByb3RvEgp0YW5rLmFpLnYxIuEBCgxDb252ZXJzYXRpb24SCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHcHJldmlldxgFIAEoCRIOCgZwaW5uZWQYBiABKAgSFAoMd29ya3NwYWNlX2lkGAcgASgJEh8KBGFwcHMYCCADKAsyES50YW5rLmFwcHMudjEuQXBwImEKCkF0dGFjaG1lbnQSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRtaW1lGAMgASgJEgwKBGRhdGEYBCABKAwSDAoEc2l6ZRgFIAEoAxIPCgdmaWxlX2lkGAYgASgJIq8CCgdNZXNzYWdlEgoKAmlkGAEgASgJEhcKD2NvbnZlcnNhdGlvbl9pZBgCIAEoCRIeCgRyb2xlGAMgASgOMhAudGFuay5haS52MS5Sb2xlEgwKBHRleHQYBCABKAkSKwoLYXR0YWNobWVudHMYBSADKAsyFi50YW5rLmFpLnYxLkF0dGFjaG1lbnQSLgoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLc3RvcF9yZWFzb24YByABKAkSFAoMaW5wdXRfdG9rZW5zGAggASgFEhUKDW91dHB1dF90b2tlbnMYCSABKAUSDgoGcmF0aW5nGAogASgFEg0KBWFzX29mGAsgASgJEhMKC3N1Z2dlc3Rpb25zGAwgAygJIk4KGExpc3RDb252ZXJzYXRpb25zUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIUCgx3b3Jrc3BhY2VfaWQYAyABKAkiTAoZTGlzdENvbnZlcnNhdGlvbnNSZXNwb25zZRIvCg1jb252ZXJzYXRpb25zGAEgAygLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24iJAoWR2V0Q29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCSKcAQoXR2V0Q29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24SJQoIbWVzc2FnZXMYAiADKAsyEy50YW5rLmFpLnYxLk1lc3NhZ2USKgoLYXRsYXNfcGFnZXMYAyADKAsyFS50YW5rLmFpLnYxLkF0bGFzUGFnZSJsCglBdGxhc1BhZ2USDAoEbmFtZRgBIAEoCRIRCgljYW52YXNfaWQYAiABKAkSEAoIbWFya2Rvd24YAyABKAkSLAoIYWRkZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImcKEUFkZFRvQXRsYXNSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhAKCG1hcmtkb3duGAMgASgJEhkKEXJlcGxhY2VfY2FudmFzX2lkGAQgASgJIjkKEkFkZFRvQXRsYXNSZXNwb25zZRIjCgRwYWdlGAEgASgLMhUudGFuay5haS52MS5BdGxhc1BhZ2UiMQoZQ3JlYXRlQ29udmVyc2F0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiTAoaQ3JlYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24ibQoZVXBkYXRlQ29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIRCglzZXRfdGl0bGUYAyABKAgSDgoGcGlubmVkGAQgASgIEhIKCnNldF9waW5uZWQYBSABKAgiTAoaVXBkYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24iJwoZRGVsZXRlQ29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCSIcChpEZWxldGVDb252ZXJzYXRpb25SZXNwb25zZSK5AQoSU2VuZE1lc3NhZ2VSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRIMCgR0ZXh0GAIgASgJEisKC2F0dGFjaG1lbnRzGAMgAygLMhYudGFuay5haS52MS5BdHRhY2htZW50Eh0KFXJlZ2VuZXJhdGVfbWVzc2FnZV9pZBgEIAEoCRIaChJyZXBsYWNlX21lc3NhZ2VfaWQYBSABKAkSFAoMd29ya3NwYWNlX2lkGAYgASgJIvQBChNTZW5kTWVzc2FnZVJlc3BvbnNlEiYKB3N0YXJ0ZWQYASABKAsyEy50YW5rLmFpLnYxLlN0YXJ0ZWRIABIPCgVkZWx0YRgCIAEoCUgAEiMKBGRvbmUYAyABKAsyEy50YW5rLmFpLnYxLk1lc3NhZ2VIABIPCgV0aXRsZRgEIAEoCUgAEhEKB3dhcm1pbmcYBSABKAlIABIiCgVzdGFnZRgGIAEoCzIRLnRhbmsuYWkudjEuU3RhZ2VIABIuCgtzdWdnZXN0aW9ucxgHIAEoCzIXLnRhbmsuYWkudjEuU3VnZ2VzdGlvbnNIAEIHCgVldmVudCIwCgtTdWdnZXN0aW9ucxISCgptZXNzYWdlX2lkGAEgASgJEg0KBWl0ZW1zGAIgAygJIl4KBVN0YWdlEgwKBGtpbmQYASABKAkSDAoEdGV4dBgCIAEoCRIoCgdzb3VyY2VzGAMgAygLMhcudGFuay5haS52MS5TdGFnZVNvdXJjZRIPCgdvdXRsaW5lGAQgAygJIjcKC1N0YWdlU291cmNlEg0KBXRpdGxlGAEgASgJEgwKBGhvc3QYAiABKAkSCwoDdXJsGAMgASgJIoIBCgdTdGFydGVkEi4KDGNvbnZlcnNhdGlvbhgBIAEoCzIYLnRhbmsuYWkudjEuQ29udmVyc2F0aW9uEikKDHVzZXJfbWVzc2FnZRgCIAEoCzITLnRhbmsuYWkudjEuTWVzc2FnZRIcChRhc3Npc3RhbnRfbWVzc2FnZV9pZBgDIAEoCSI4ChJSYXRlTWVzc2FnZVJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCRIOCgZyYXRpbmcYAiABKAUiFQoTUmF0ZU1lc3NhZ2VSZXNwb25zZSImChBTdG9wUmVwbHlSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiEwoRU3RvcFJlcGx5UmVzcG9uc2UiFAoSR2V0U2V0dGluZ3NSZXF1ZXN0Ij0KE0dldFNldHRpbmdzUmVzcG9uc2USJgoIc2V0dGluZ3MYASABKAsyFC50YW5rLmFpLnYxLlNldHRpbmdzIncKCFNldHRpbmdzEhQKDGluc3RydWN0aW9ucxgBIAEoCRITCgttb2RlbF9sYWJlbBgCIAEoCRIRCglhdmFpbGFibGUYAyABKAgSLQoJbGF1bmNoX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCItChVVcGRhdGVTZXR0aW5nc1JlcXVlc3QSFAoMaW5zdHJ1Y3Rpb25zGAEgASgJIkAKFlVwZGF0ZVNldHRpbmdzUmVzcG9uc2USJgoIc2V0dGluZ3MYASABKAsyFC50YW5rLmFpLnYxLlNldHRpbmdzIh8KD0dldFVzYWdlUmVxdWVzdBIMCgRkYXlzGAEgASgFIm8KCFVzYWdlRGF5EgwKBGRhdGUYASABKAkSEAoIbWVzc2FnZXMYAiABKAUSFAoMaW5wdXRfdG9rZW5zGAMgASgDEhUKDW91dHB1dF90b2tlbnMYBCABKAMSFgoOY29zdF9taWNyb191c2QYBSABKAMikgEKEUNvbnZlcnNhdGlvblVzYWdlEhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIQCghtZXNzYWdlcxgDIAEoBRIUCgxpbnB1dF90b2tlbnMYBCABKAMSFQoNb3V0cHV0X3Rva2VucxgFIAEoAxIWCg5jb3N0X21pY3JvX3VzZBgGIAEoAyKpAgoQR2V0VXNhZ2VSZXNwb25zZRIiCgRkYXlzGAEgAygLMhQudGFuay5haS52MS5Vc2FnZURheRIQCghtZXNzYWdlcxgCIAEoBRIUCgxpbnB1dF90b2tlbnMYAyABKAMSFQoNb3V0cHV0X3Rva2VucxgEIAEoAxIWCg5jb3N0X21pY3JvX3VzZBgFIAEoAxIWCg50b2RheV9tZXNzYWdlcxgGIAEoBRIcChRtb250aF9jb3N0X21pY3JvX3VzZBgHIAEoAxIZChFhbGxfdGltZV9tZXNzYWdlcxgIIAEoAxI0Cg1jb252ZXJzYXRpb25zGAkgAygLMh0udGFuay5haS52MS5Db252ZXJzYXRpb25Vc2FnZRITCgttb2RlbF9sYWJlbBgKIAEoCSIgCg9MaXN0QXBwc1JlcXVlc3QSDQoFcXVlcnkYASABKAkiMwoQTGlzdEFwcHNSZXNwb25zZRIfCgRhcHBzGAEgAygLMhEudGFuay5hcHBzLnYxLkFwcCI8ChFDb25uZWN0QXBwUmVxdWVzdBIXCg9jb252ZXJzYXRpb25faWQYASABKAkSDgoGYXBwX2lkGAIgASgJIkQKEkNvbm5lY3RBcHBSZXNwb25zZRIuCgxjb252ZXJzYXRpb24YASABKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbiI/ChREaXNjb25uZWN0QXBwUmVxdWVzdBIXCg9jb252ZXJzYXRpb25faWQYASABKAkSDgoGYXBwX2lkGAIgASgJIkcKFURpc2Nvbm5lY3RBcHBSZXNwb25zZRIuCgxjb252ZXJzYXRpb24YASABKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbio/CgRSb2xlEhQKEFJPTEVfVU5TUEVDSUZJRUQQABINCglST0xFX1VTRVIQARISCg5ST0xFX0FTU0lTVEFOVBACMosKCglBaVNlcnZpY2USYAoRTGlzdENvbnZlcnNhdGlvbnMSJC50YW5rLmFpLnYxLkxpc3RDb252ZXJzYXRpb25zUmVxdWVzdBolLnRhbmsuYWkudjEuTGlzdENvbnZlcnNhdGlvbnNSZXNwb25zZRJaCg9HZXRDb252ZXJzYXRpb24SIi50YW5rLmFpLnYxLkdldENvbnZlcnNhdGlvblJlcXVlc3QaIy50YW5rLmFpLnYxLkdldENvbnZlcnNhdGlvblJlc3BvbnNlEmMKEkNyZWF0ZUNvbnZlcnNhdGlvbhIlLnRhbmsuYWkudjEuQ3JlYXRlQ29udmVyc2F0aW9uUmVxdWVzdBomLnRhbmsuYWkudjEuQ3JlYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USYwoSVXBkYXRlQ29udmVyc2F0aW9uEiUudGFuay5haS52MS5VcGRhdGVDb252ZXJzYXRpb25SZXF1ZXN0GiYudGFuay5haS52MS5VcGRhdGVDb252ZXJzYXRpb25SZXNwb25zZRJjChJEZWxldGVDb252ZXJzYXRpb24SJS50YW5rLmFpLnYxLkRlbGV0ZUNvbnZlcnNhdGlvblJlcXVlc3QaJi50YW5rLmFpLnYxLkRlbGV0ZUNvbnZlcnNhdGlvblJlc3BvbnNlElAKC1NlbmRNZXNzYWdlEh4udGFuay5haS52MS5TZW5kTWVzc2FnZVJlcXVlc3QaHy50YW5rLmFpLnYxLlNlbmRNZXNzYWdlUmVzcG9uc2UwARJOCgtSYXRlTWVzc2FnZRIeLnRhbmsuYWkudjEuUmF0ZU1lc3NhZ2VSZXF1ZXN0Gh8udGFuay5haS52MS5SYXRlTWVzc2FnZVJlc3BvbnNlEkgKCVN0b3BSZXBseRIcLnRhbmsuYWkudjEuU3RvcFJlcGx5UmVxdWVzdBodLnRhbmsuYWkudjEuU3RvcFJlcGx5UmVzcG9uc2USTgoLR2V0U2V0dGluZ3MSHi50YW5rLmFpLnYxLkdldFNldHRpbmdzUmVxdWVzdBofLnRhbmsuYWkudjEuR2V0U2V0dGluZ3NSZXNwb25zZRJXCg5VcGRhdGVTZXR0aW5ncxIhLnRhbmsuYWkudjEuVXBkYXRlU2V0dGluZ3NSZXF1ZXN0GiIudGFuay5haS52MS5VcGRhdGVTZXR0aW5nc1Jlc3BvbnNlEkUKCEdldFVzYWdlEhsudGFuay5haS52MS5HZXRVc2FnZVJlcXVlc3QaHC50YW5rLmFpLnYxLkdldFVzYWdlUmVzcG9uc2USSwoKQWRkVG9BdGxhcxIdLnRhbmsuYWkudjEuQWRkVG9BdGxhc1JlcXVlc3QaHi50YW5rLmFpLnYxLkFkZFRvQXRsYXNSZXNwb25zZRJFCghMaXN0QXBwcxIbLnRhbmsuYWkudjEuTGlzdEFwcHNSZXF1ZXN0GhwudGFuay5haS52MS5MaXN0QXBwc1Jlc3BvbnNlEksKCkNvbm5lY3RBcHASHS50YW5rLmFpLnYxLkNvbm5lY3RBcHBSZXF1ZXN0Gh4udGFuay5haS52MS5Db25uZWN0QXBwUmVzcG9uc2USVAoNRGlzY29ubmVjdEFwcBIgLnRhbmsuYWkudjEuRGlzY29ubmVjdEFwcFJlcXVlc3QaIS50YW5rLmFpLnYxLkRpc2Nvbm5lY3RBcHBSZXNwb25zZUKwAQoOY29tLnRhbmsuYWkudjFCB0FpUHJvdG9QAVpLZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9haS92MTthaXYxogIDVEFYqgIKVGFuay5BaS5WMcoCClRhbmtcQWlcVjHiAhZUYW5rXEFpXFYxXEdQQk1ldGFkYXRh6gIMVGFuazo6QWk6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_apps_v1_apps]);
 
 /**
  * @generated from message tank.ai.v1.Conversation
@@ -194,6 +194,15 @@ export type Message = Message$1<"tank.ai.v1.Message"> & {
    * @generated from field: string as_of = 11;
    */
   asOf: string;
+
+  /**
+   * What Neural could do next, as short requests the person can tap to send, worked out from
+   * the reply and the apps and devices connected to the conversation (Robby, 2026-11-10).
+   * Assistant turns only; the clients show them under the latest one.
+   *
+   * @generated from field: repeated string suggestions = 12;
+   */
+  suggestions: string[];
 };
 
 /**
@@ -626,6 +635,14 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
      */
     value: Stage;
     case: "stage";
+  } | {
+    /**
+     * After done: what Neural could do next (Message.suggestions of the message just done).
+     *
+     * @generated from field: tank.ai.v1.Suggestions suggestions = 7;
+     */
+    value: Suggestions;
+    case: "suggestions";
   } | { case: undefined; value?: undefined };
 };
 
@@ -635,6 +652,28 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
  */
 export const SendMessageResponseSchema: GenMessage<SendMessageResponse> = /*@__PURE__*/
   messageDesc(file_tank_ai_v1_ai, 17);
+
+/**
+ * @generated from message tank.ai.v1.Suggestions
+ */
+export type Suggestions = Message$1<"tank.ai.v1.Suggestions"> & {
+  /**
+   * @generated from field: string message_id = 1;
+   */
+  messageId: string;
+
+  /**
+   * @generated from field: repeated string items = 2;
+   */
+  items: string[];
+};
+
+/**
+ * Describes the message tank.ai.v1.Suggestions.
+ * Use `create(SuggestionsSchema)` to create a new message.
+ */
+export const SuggestionsSchema: GenMessage<Suggestions> = /*@__PURE__*/
+  messageDesc(file_tank_ai_v1_ai, 18);
 
 /**
  * Stage is one step of the work before a reply, as the server names it.
@@ -678,7 +717,7 @@ export type Stage = Message$1<"tank.ai.v1.Stage"> & {
  * Use `create(StageSchema)` to create a new message.
  */
 export const StageSchema: GenMessage<Stage> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 18);
+  messageDesc(file_tank_ai_v1_ai, 19);
 
 /**
  * @generated from message tank.ai.v1.StageSource
@@ -707,7 +746,7 @@ export type StageSource = Message$1<"tank.ai.v1.StageSource"> & {
  * Use `create(StageSourceSchema)` to create a new message.
  */
 export const StageSourceSchema: GenMessage<StageSource> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 19);
+  messageDesc(file_tank_ai_v1_ai, 20);
 
 /**
  * @generated from message tank.ai.v1.Started
@@ -736,7 +775,7 @@ export type Started = Message$1<"tank.ai.v1.Started"> & {
  * Use `create(StartedSchema)` to create a new message.
  */
 export const StartedSchema: GenMessage<Started> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 20);
+  messageDesc(file_tank_ai_v1_ai, 21);
 
 /**
  * @generated from message tank.ai.v1.RateMessageRequest
@@ -758,7 +797,7 @@ export type RateMessageRequest = Message$1<"tank.ai.v1.RateMessageRequest"> & {
  * Use `create(RateMessageRequestSchema)` to create a new message.
  */
 export const RateMessageRequestSchema: GenMessage<RateMessageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 21);
+  messageDesc(file_tank_ai_v1_ai, 22);
 
 /**
  * @generated from message tank.ai.v1.RateMessageResponse
@@ -771,7 +810,7 @@ export type RateMessageResponse = Message$1<"tank.ai.v1.RateMessageResponse"> & 
  * Use `create(RateMessageResponseSchema)` to create a new message.
  */
 export const RateMessageResponseSchema: GenMessage<RateMessageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 22);
+  messageDesc(file_tank_ai_v1_ai, 23);
 
 /**
  * Stops a reply the server is writing. A reply belongs to the server once it starts, so a
@@ -794,7 +833,7 @@ export type StopReplyRequest = Message$1<"tank.ai.v1.StopReplyRequest"> & {
  * Use `create(StopReplyRequestSchema)` to create a new message.
  */
 export const StopReplyRequestSchema: GenMessage<StopReplyRequest> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 23);
+  messageDesc(file_tank_ai_v1_ai, 24);
 
 /**
  * @generated from message tank.ai.v1.StopReplyResponse
@@ -807,7 +846,7 @@ export type StopReplyResponse = Message$1<"tank.ai.v1.StopReplyResponse"> & {
  * Use `create(StopReplyResponseSchema)` to create a new message.
  */
 export const StopReplyResponseSchema: GenMessage<StopReplyResponse> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 24);
+  messageDesc(file_tank_ai_v1_ai, 25);
 
 /**
  * What the person wants the model to know every time: name, how to answer, their work.
@@ -822,7 +861,7 @@ export type GetSettingsRequest = Message$1<"tank.ai.v1.GetSettingsRequest"> & {
  * Use `create(GetSettingsRequestSchema)` to create a new message.
  */
 export const GetSettingsRequestSchema: GenMessage<GetSettingsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 25);
+  messageDesc(file_tank_ai_v1_ai, 26);
 
 /**
  * @generated from message tank.ai.v1.GetSettingsResponse
@@ -839,7 +878,7 @@ export type GetSettingsResponse = Message$1<"tank.ai.v1.GetSettingsResponse"> & 
  * Use `create(GetSettingsResponseSchema)` to create a new message.
  */
 export const GetSettingsResponseSchema: GenMessage<GetSettingsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 26);
+  messageDesc(file_tank_ai_v1_ai, 27);
 
 /**
  * @generated from message tank.ai.v1.Settings
@@ -876,7 +915,7 @@ export type Settings = Message$1<"tank.ai.v1.Settings"> & {
  * Use `create(SettingsSchema)` to create a new message.
  */
 export const SettingsSchema: GenMessage<Settings> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 27);
+  messageDesc(file_tank_ai_v1_ai, 28);
 
 /**
  * @generated from message tank.ai.v1.UpdateSettingsRequest
@@ -893,7 +932,7 @@ export type UpdateSettingsRequest = Message$1<"tank.ai.v1.UpdateSettingsRequest"
  * Use `create(UpdateSettingsRequestSchema)` to create a new message.
  */
 export const UpdateSettingsRequestSchema: GenMessage<UpdateSettingsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 28);
+  messageDesc(file_tank_ai_v1_ai, 29);
 
 /**
  * @generated from message tank.ai.v1.UpdateSettingsResponse
@@ -910,7 +949,7 @@ export type UpdateSettingsResponse = Message$1<"tank.ai.v1.UpdateSettingsRespons
  * Use `create(UpdateSettingsResponseSchema)` to create a new message.
  */
 export const UpdateSettingsResponseSchema: GenMessage<UpdateSettingsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 29);
+  messageDesc(file_tank_ai_v1_ai, 30);
 
 /**
  * GetUsage is what the person's chats have used: per day for the last `days`, in total,
@@ -930,7 +969,7 @@ export type GetUsageRequest = Message$1<"tank.ai.v1.GetUsageRequest"> & {
  * Use `create(GetUsageRequestSchema)` to create a new message.
  */
 export const GetUsageRequestSchema: GenMessage<GetUsageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 30);
+  messageDesc(file_tank_ai_v1_ai, 31);
 
 /**
  * @generated from message tank.ai.v1.UsageDay
@@ -969,7 +1008,7 @@ export type UsageDay = Message$1<"tank.ai.v1.UsageDay"> & {
  * Use `create(UsageDaySchema)` to create a new message.
  */
 export const UsageDaySchema: GenMessage<UsageDay> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 31);
+  messageDesc(file_tank_ai_v1_ai, 32);
 
 /**
  * @generated from message tank.ai.v1.ConversationUsage
@@ -1011,7 +1050,7 @@ export type ConversationUsage = Message$1<"tank.ai.v1.ConversationUsage"> & {
  * Use `create(ConversationUsageSchema)` to create a new message.
  */
 export const ConversationUsageSchema: GenMessage<ConversationUsage> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 32);
+  messageDesc(file_tank_ai_v1_ai, 33);
 
 /**
  * @generated from message tank.ai.v1.GetUsageResponse
@@ -1077,7 +1116,7 @@ export type GetUsageResponse = Message$1<"tank.ai.v1.GetUsageResponse"> & {
  * Use `create(GetUsageResponseSchema)` to create a new message.
  */
 export const GetUsageResponseSchema: GenMessage<GetUsageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 33);
+  messageDesc(file_tank_ai_v1_ai, 34);
 
 /**
  * @generated from message tank.ai.v1.ListAppsRequest
@@ -1094,7 +1133,7 @@ export type ListAppsRequest = Message$1<"tank.ai.v1.ListAppsRequest"> & {
  * Use `create(ListAppsRequestSchema)` to create a new message.
  */
 export const ListAppsRequestSchema: GenMessage<ListAppsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 34);
+  messageDesc(file_tank_ai_v1_ai, 35);
 
 /**
  * @generated from message tank.ai.v1.ListAppsResponse
@@ -1111,7 +1150,7 @@ export type ListAppsResponse = Message$1<"tank.ai.v1.ListAppsResponse"> & {
  * Use `create(ListAppsResponseSchema)` to create a new message.
  */
 export const ListAppsResponseSchema: GenMessage<ListAppsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 35);
+  messageDesc(file_tank_ai_v1_ai, 36);
 
 /**
  * @generated from message tank.ai.v1.ConnectAppRequest
@@ -1133,7 +1172,7 @@ export type ConnectAppRequest = Message$1<"tank.ai.v1.ConnectAppRequest"> & {
  * Use `create(ConnectAppRequestSchema)` to create a new message.
  */
 export const ConnectAppRequestSchema: GenMessage<ConnectAppRequest> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 36);
+  messageDesc(file_tank_ai_v1_ai, 37);
 
 /**
  * @generated from message tank.ai.v1.ConnectAppResponse
@@ -1150,7 +1189,7 @@ export type ConnectAppResponse = Message$1<"tank.ai.v1.ConnectAppResponse"> & {
  * Use `create(ConnectAppResponseSchema)` to create a new message.
  */
 export const ConnectAppResponseSchema: GenMessage<ConnectAppResponse> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 37);
+  messageDesc(file_tank_ai_v1_ai, 38);
 
 /**
  * @generated from message tank.ai.v1.DisconnectAppRequest
@@ -1172,7 +1211,7 @@ export type DisconnectAppRequest = Message$1<"tank.ai.v1.DisconnectAppRequest"> 
  * Use `create(DisconnectAppRequestSchema)` to create a new message.
  */
 export const DisconnectAppRequestSchema: GenMessage<DisconnectAppRequest> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 38);
+  messageDesc(file_tank_ai_v1_ai, 39);
 
 /**
  * @generated from message tank.ai.v1.DisconnectAppResponse
@@ -1189,7 +1228,7 @@ export type DisconnectAppResponse = Message$1<"tank.ai.v1.DisconnectAppResponse"
  * Use `create(DisconnectAppResponseSchema)` to create a new message.
  */
 export const DisconnectAppResponseSchema: GenMessage<DisconnectAppResponse> = /*@__PURE__*/
-  messageDesc(file_tank_ai_v1_ai, 39);
+  messageDesc(file_tank_ai_v1_ai, 40);
 
 /**
  * @generated from enum tank.ai.v1.Role

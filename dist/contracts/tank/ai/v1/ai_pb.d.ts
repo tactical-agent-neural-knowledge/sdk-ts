@@ -156,6 +156,14 @@ export type Message = Message$1<"tank.ai.v1.Message"> & {
      * @generated from field: string as_of = 11;
      */
     asOf: string;
+    /**
+     * What Neural could do next, as short requests the person can tap to send, worked out from
+     * the reply and the apps and devices connected to the conversation (Robby, 2026-11-10).
+     * Assistant turns only; the clients show them under the latest one.
+     *
+     * @generated from field: repeated string suggestions = 12;
+     */
+    suggestions: string[];
 };
 /**
  * Describes the message tank.ai.v1.Message.
@@ -524,6 +532,14 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
         value: Stage;
         case: "stage";
     } | {
+        /**
+         * After done: what Neural could do next (Message.suggestions of the message just done).
+         *
+         * @generated from field: tank.ai.v1.Suggestions suggestions = 7;
+         */
+        value: Suggestions;
+        case: "suggestions";
+    } | {
         case: undefined;
         value?: undefined;
     };
@@ -533,6 +549,24 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
  * Use `create(SendMessageResponseSchema)` to create a new message.
  */
 export declare const SendMessageResponseSchema: GenMessage<SendMessageResponse>;
+/**
+ * @generated from message tank.ai.v1.Suggestions
+ */
+export type Suggestions = Message$1<"tank.ai.v1.Suggestions"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * @generated from field: repeated string items = 2;
+     */
+    items: string[];
+};
+/**
+ * Describes the message tank.ai.v1.Suggestions.
+ * Use `create(SuggestionsSchema)` to create a new message.
+ */
+export declare const SuggestionsSchema: GenMessage<Suggestions>;
 /**
  * Stage is one step of the work before a reply, as the server names it.
  *
