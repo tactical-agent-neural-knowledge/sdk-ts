@@ -1498,12 +1498,62 @@ export type WorkspaceSpend = Message<"tank.agent.v1.WorkspaceSpend"> & {
      * @generated from field: repeated tank.agent.v1.SpendByDay days = 12;
      */
     days: SpendByDay[];
+    /**
+     * Whether Books is turned on in this workspace. Off, Books books nothing, so the page says
+     * so rather than promising the roll-up (2026-11-10: edero had $0 booked for that reason).
+     *
+     * @generated from field: bool books_on = 13;
+     */
+    booksOn: boolean;
+    /**
+     * Cost per run over the last ninety days, oldest first, at the Tread rate: whether the work
+     * is getting cheaper as Neural Knowledge learns the workspace's repositories.
+     *
+     * @generated from field: repeated tank.agent.v1.CostPerRunDay cost_per_run = 14;
+     */
+    costPerRun: CostPerRunDay[];
 };
 /**
  * Describes the message tank.agent.v1.WorkspaceSpend.
  * Use `create(WorkspaceSpendSchema)` to create a new message.
  */
 export declare const WorkspaceSpendSchema: GenMessage<WorkspaceSpend>;
+/**
+ * One UTC day of agent runs (Neural chats excluded: a reply is not a run). Dollars at the
+ * Tread rate. cost_per_run_usd is the day's spend over its runs, 0 on a day with none;
+ * trailing_7d_usd is the seven days ending here, summed spend over summed runs, the line to read.
+ *
+ * @generated from message tank.agent.v1.CostPerRunDay
+ */
+export type CostPerRunDay = Message<"tank.agent.v1.CostPerRunDay"> & {
+    /**
+     * YYYY-MM-DD, UTC
+     *
+     * @generated from field: string day = 1;
+     */
+    day: string;
+    /**
+     * @generated from field: int32 runs = 2;
+     */
+    runs: number;
+    /**
+     * @generated from field: double spend_usd = 3;
+     */
+    spendUsd: number;
+    /**
+     * @generated from field: double cost_per_run_usd = 4;
+     */
+    costPerRunUsd: number;
+    /**
+     * @generated from field: double trailing_7d_usd = 5;
+     */
+    trailing7dUsd: number;
+};
+/**
+ * Describes the message tank.agent.v1.CostPerRunDay.
+ * Use `create(CostPerRunDaySchema)` to create a new message.
+ */
+export declare const CostPerRunDaySchema: GenMessage<CostPerRunDay>;
 /**
  * @generated from message tank.agent.v1.GetWorkspaceSpendRequest
  */
