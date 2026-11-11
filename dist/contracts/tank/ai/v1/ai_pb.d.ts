@@ -73,12 +73,93 @@ export type Conversation = Message$1<"tank.ai.v1.Conversation"> & {
      * @generated from field: repeated tank.ai.v1.ConnectedPage pages = 11;
      */
     pages: ConnectedPage[];
+    /**
+     * For the chat list (Robby's redesign, 2026-11-11): the newest message, who wrote it and
+     * when, so a row reads "Sam: …" with its time.
+     *
+     * @generated from field: string last_text = 12;
+     */
+    lastText: string;
+    /**
+     * @generated from field: string last_author_id = 13;
+     */
+    lastAuthorId: string;
+    /**
+     * @generated from field: string last_author_name = 14;
+     */
+    lastAuthorName: string;
+    /**
+     * "user" or "assistant".
+     *
+     * @generated from field: string last_role = 15;
+     */
+    lastRole: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_at = 16;
+     */
+    lastAt?: Timestamp;
+    /**
+     * Messages after the caller last read the conversation; 0 when read.
+     *
+     * @generated from field: int32 unread = 17;
+     */
+    unread: number;
+    /**
+     * The caller has muted it: no pushes.
+     *
+     * @generated from field: bool muted = 18;
+     */
+    muted: boolean;
+    /**
+     * Devices connected to it now, for the row's avatar and the LIVE card.
+     *
+     * @generated from field: repeated tank.ai.v1.ConnectedDevice devices = 19;
+     */
+    devices: ConnectedDevice[];
 };
 /**
  * Describes the message tank.ai.v1.Conversation.
  * Use `create(ConversationSchema)` to create a new message.
  */
 export declare const ConversationSchema: GenMessage<Conversation>;
+/**
+ * @generated from message tank.ai.v1.ConnectedDevice
+ */
+export type ConnectedDevice = Message$1<"tank.ai.v1.ConnectedDevice"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+    /**
+     * What Neural says it is, or its own name.
+     *
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * "phone" or "bluetooth".
+     *
+     * @generated from field: string transport = 3;
+     */
+    transport: string;
+    /**
+     * @generated from field: string owner_id = 4;
+     */
+    ownerId: string;
+    /**
+     * @generated from field: string owner_name = 5;
+     */
+    ownerName: string;
+    /**
+     * @generated from field: bool camera = 6;
+     */
+    camera: boolean;
+};
+/**
+ * Describes the message tank.ai.v1.ConnectedDevice.
+ * Use `create(ConnectedDeviceSchema)` to create a new message.
+ */
+export declare const ConnectedDeviceSchema: GenMessage<ConnectedDevice>;
 /**
  * @generated from message tank.ai.v1.ConnectedPage
  */
@@ -1614,6 +1695,61 @@ export type SetTypingResponse = Message$1<"tank.ai.v1.SetTypingResponse"> & {};
  */
 export declare const SetTypingResponseSchema: GenMessage<SetTypingResponse>;
 /**
+ * @generated from message tank.ai.v1.MarkReadRequest
+ */
+export type MarkReadRequest = Message$1<"tank.ai.v1.MarkReadRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+};
+/**
+ * Describes the message tank.ai.v1.MarkReadRequest.
+ * Use `create(MarkReadRequestSchema)` to create a new message.
+ */
+export declare const MarkReadRequestSchema: GenMessage<MarkReadRequest>;
+/**
+ * @generated from message tank.ai.v1.MarkReadResponse
+ */
+export type MarkReadResponse = Message$1<"tank.ai.v1.MarkReadResponse"> & {};
+/**
+ * Describes the message tank.ai.v1.MarkReadResponse.
+ * Use `create(MarkReadResponseSchema)` to create a new message.
+ */
+export declare const MarkReadResponseSchema: GenMessage<MarkReadResponse>;
+/**
+ * @generated from message tank.ai.v1.SetMutedRequest
+ */
+export type SetMutedRequest = Message$1<"tank.ai.v1.SetMutedRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: bool muted = 2;
+     */
+    muted: boolean;
+};
+/**
+ * Describes the message tank.ai.v1.SetMutedRequest.
+ * Use `create(SetMutedRequestSchema)` to create a new message.
+ */
+export declare const SetMutedRequestSchema: GenMessage<SetMutedRequest>;
+/**
+ * @generated from message tank.ai.v1.SetMutedResponse
+ */
+export type SetMutedResponse = Message$1<"tank.ai.v1.SetMutedResponse"> & {
+    /**
+     * @generated from field: tank.ai.v1.Conversation conversation = 1;
+     */
+    conversation?: Conversation;
+};
+/**
+ * Describes the message tank.ai.v1.SetMutedResponse.
+ * Use `create(SetMutedResponseSchema)` to create a new message.
+ */
+export declare const SetMutedResponseSchema: GenMessage<SetMutedResponse>;
+/**
  * @generated from enum tank.ai.v1.Role
  */
 export declare enum Role {
@@ -1848,5 +1984,23 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof SetTypingRequestSchema;
         output: typeof SetTypingResponseSchema;
+    };
+    /**
+     * The caller has read the conversation up to now.
+     *
+     * @generated from rpc tank.ai.v1.AiService.MarkRead
+     */
+    markRead: {
+        methodKind: "unary";
+        input: typeof MarkReadRequestSchema;
+        output: typeof MarkReadResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.SetMuted
+     */
+    setMuted: {
+        methodKind: "unary";
+        input: typeof SetMutedRequestSchema;
+        output: typeof SetMutedResponseSchema;
     };
 }>;
