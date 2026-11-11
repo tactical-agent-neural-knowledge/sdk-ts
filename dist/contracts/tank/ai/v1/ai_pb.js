@@ -7,212 +7,242 @@ import { file_tank_apps_v1_apps } from "../../apps/v1/apps_pb.js";
 /**
  * Describes the file tank/ai/v1/ai.proto.
  */
-export const file_tank_ai_v1_ai = /*@__PURE__*/ fileDesc("ChN0YW5rL2FpL3YxL2FpLnByb3RvEgp0YW5rLmFpLnYxIuEBCgxDb252ZXJzYXRpb24SCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHcHJldmlldxgFIAEoCRIOCgZwaW5uZWQYBiABKAgSFAoMd29ya3NwYWNlX2lkGAcgASgJEh8KBGFwcHMYCCADKAsyES50YW5rLmFwcHMudjEuQXBwImEKCkF0dGFjaG1lbnQSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRtaW1lGAMgASgJEgwKBGRhdGEYBCABKAwSDAoEc2l6ZRgFIAEoAxIPCgdmaWxlX2lkGAYgASgJIq8CCgdNZXNzYWdlEgoKAmlkGAEgASgJEhcKD2NvbnZlcnNhdGlvbl9pZBgCIAEoCRIeCgRyb2xlGAMgASgOMhAudGFuay5haS52MS5Sb2xlEgwKBHRleHQYBCABKAkSKwoLYXR0YWNobWVudHMYBSADKAsyFi50YW5rLmFpLnYxLkF0dGFjaG1lbnQSLgoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLc3RvcF9yZWFzb24YByABKAkSFAoMaW5wdXRfdG9rZW5zGAggASgFEhUKDW91dHB1dF90b2tlbnMYCSABKAUSDgoGcmF0aW5nGAogASgFEg0KBWFzX29mGAsgASgJEhMKC3N1Z2dlc3Rpb25zGAwgAygJIk4KGExpc3RDb252ZXJzYXRpb25zUmVxdWVzdBINCgVxdWVyeRgBIAEoCRINCgVsaW1pdBgCIAEoBRIUCgx3b3Jrc3BhY2VfaWQYAyABKAkiTAoZTGlzdENvbnZlcnNhdGlvbnNSZXNwb25zZRIvCg1jb252ZXJzYXRpb25zGAEgAygLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24iJAoWR2V0Q29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCSKcAQoXR2V0Q29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24SJQoIbWVzc2FnZXMYAiADKAsyEy50YW5rLmFpLnYxLk1lc3NhZ2USKgoLYXRsYXNfcGFnZXMYAyADKAsyFS50YW5rLmFpLnYxLkF0bGFzUGFnZSJsCglBdGxhc1BhZ2USDAoEbmFtZRgBIAEoCRIRCgljYW52YXNfaWQYAiABKAkSEAoIbWFya2Rvd24YAyABKAkSLAoIYWRkZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImcKEUFkZFRvQXRsYXNSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEhAKCG1hcmtkb3duGAMgASgJEhkKEXJlcGxhY2VfY2FudmFzX2lkGAQgASgJIjkKEkFkZFRvQXRsYXNSZXNwb25zZRIjCgRwYWdlGAEgASgLMhUudGFuay5haS52MS5BdGxhc1BhZ2UiMQoZQ3JlYXRlQ29udmVyc2F0aW9uUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiTAoaQ3JlYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24ibQoZVXBkYXRlQ29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIRCglzZXRfdGl0bGUYAyABKAgSDgoGcGlubmVkGAQgASgIEhIKCnNldF9waW5uZWQYBSABKAgiTAoaVXBkYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24iJwoZRGVsZXRlQ29udmVyc2F0aW9uUmVxdWVzdBIKCgJpZBgBIAEoCSIcChpEZWxldGVDb252ZXJzYXRpb25SZXNwb25zZSK5AQoSU2VuZE1lc3NhZ2VSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRIMCgR0ZXh0GAIgASgJEisKC2F0dGFjaG1lbnRzGAMgAygLMhYudGFuay5haS52MS5BdHRhY2htZW50Eh0KFXJlZ2VuZXJhdGVfbWVzc2FnZV9pZBgEIAEoCRIaChJyZXBsYWNlX21lc3NhZ2VfaWQYBSABKAkSFAoMd29ya3NwYWNlX2lkGAYgASgJIvQBChNTZW5kTWVzc2FnZVJlc3BvbnNlEiYKB3N0YXJ0ZWQYASABKAsyEy50YW5rLmFpLnYxLlN0YXJ0ZWRIABIPCgVkZWx0YRgCIAEoCUgAEiMKBGRvbmUYAyABKAsyEy50YW5rLmFpLnYxLk1lc3NhZ2VIABIPCgV0aXRsZRgEIAEoCUgAEhEKB3dhcm1pbmcYBSABKAlIABIiCgVzdGFnZRgGIAEoCzIRLnRhbmsuYWkudjEuU3RhZ2VIABIuCgtzdWdnZXN0aW9ucxgHIAEoCzIXLnRhbmsuYWkudjEuU3VnZ2VzdGlvbnNIAEIHCgVldmVudCIwCgtTdWdnZXN0aW9ucxISCgptZXNzYWdlX2lkGAEgASgJEg0KBWl0ZW1zGAIgAygJIl4KBVN0YWdlEgwKBGtpbmQYASABKAkSDAoEdGV4dBgCIAEoCRIoCgdzb3VyY2VzGAMgAygLMhcudGFuay5haS52MS5TdGFnZVNvdXJjZRIPCgdvdXRsaW5lGAQgAygJIjcKC1N0YWdlU291cmNlEg0KBXRpdGxlGAEgASgJEgwKBGhvc3QYAiABKAkSCwoDdXJsGAMgASgJIoIBCgdTdGFydGVkEi4KDGNvbnZlcnNhdGlvbhgBIAEoCzIYLnRhbmsuYWkudjEuQ29udmVyc2F0aW9uEikKDHVzZXJfbWVzc2FnZRgCIAEoCzITLnRhbmsuYWkudjEuTWVzc2FnZRIcChRhc3Npc3RhbnRfbWVzc2FnZV9pZBgDIAEoCSI4ChJSYXRlTWVzc2FnZVJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCRIOCgZyYXRpbmcYAiABKAUiFQoTUmF0ZU1lc3NhZ2VSZXNwb25zZSImChBTdG9wUmVwbHlSZXF1ZXN0EhIKCm1lc3NhZ2VfaWQYASABKAkiEwoRU3RvcFJlcGx5UmVzcG9uc2UiFAoSR2V0U2V0dGluZ3NSZXF1ZXN0Ij0KE0dldFNldHRpbmdzUmVzcG9uc2USJgoIc2V0dGluZ3MYASABKAsyFC50YW5rLmFpLnYxLlNldHRpbmdzIncKCFNldHRpbmdzEhQKDGluc3RydWN0aW9ucxgBIAEoCRITCgttb2RlbF9sYWJlbBgCIAEoCRIRCglhdmFpbGFibGUYAyABKAgSLQoJbGF1bmNoX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCItChVVcGRhdGVTZXR0aW5nc1JlcXVlc3QSFAoMaW5zdHJ1Y3Rpb25zGAEgASgJIkAKFlVwZGF0ZVNldHRpbmdzUmVzcG9uc2USJgoIc2V0dGluZ3MYASABKAsyFC50YW5rLmFpLnYxLlNldHRpbmdzIh8KD0dldFVzYWdlUmVxdWVzdBIMCgRkYXlzGAEgASgFIm8KCFVzYWdlRGF5EgwKBGRhdGUYASABKAkSEAoIbWVzc2FnZXMYAiABKAUSFAoMaW5wdXRfdG9rZW5zGAMgASgDEhUKDW91dHB1dF90b2tlbnMYBCABKAMSFgoOY29zdF9taWNyb191c2QYBSABKAMikgEKEUNvbnZlcnNhdGlvblVzYWdlEhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIQCghtZXNzYWdlcxgDIAEoBRIUCgxpbnB1dF90b2tlbnMYBCABKAMSFQoNb3V0cHV0X3Rva2VucxgFIAEoAxIWCg5jb3N0X21pY3JvX3VzZBgGIAEoAyKpAgoQR2V0VXNhZ2VSZXNwb25zZRIiCgRkYXlzGAEgAygLMhQudGFuay5haS52MS5Vc2FnZURheRIQCghtZXNzYWdlcxgCIAEoBRIUCgxpbnB1dF90b2tlbnMYAyABKAMSFQoNb3V0cHV0X3Rva2VucxgEIAEoAxIWCg5jb3N0X21pY3JvX3VzZBgFIAEoAxIWCg50b2RheV9tZXNzYWdlcxgGIAEoBRIcChRtb250aF9jb3N0X21pY3JvX3VzZBgHIAEoAxIZChFhbGxfdGltZV9tZXNzYWdlcxgIIAEoAxI0Cg1jb252ZXJzYXRpb25zGAkgAygLMh0udGFuay5haS52MS5Db252ZXJzYXRpb25Vc2FnZRITCgttb2RlbF9sYWJlbBgKIAEoCSIgCg9MaXN0QXBwc1JlcXVlc3QSDQoFcXVlcnkYASABKAkiMwoQTGlzdEFwcHNSZXNwb25zZRIfCgRhcHBzGAEgAygLMhEudGFuay5hcHBzLnYxLkFwcCI8ChFDb25uZWN0QXBwUmVxdWVzdBIXCg9jb252ZXJzYXRpb25faWQYASABKAkSDgoGYXBwX2lkGAIgASgJIkQKEkNvbm5lY3RBcHBSZXNwb25zZRIuCgxjb252ZXJzYXRpb24YASABKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbiI/ChREaXNjb25uZWN0QXBwUmVxdWVzdBIXCg9jb252ZXJzYXRpb25faWQYASABKAkSDgoGYXBwX2lkGAIgASgJIkcKFURpc2Nvbm5lY3RBcHBSZXNwb25zZRIuCgxjb252ZXJzYXRpb24YASABKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbio/CgRSb2xlEhQKEFJPTEVfVU5TUEVDSUZJRUQQABINCglST0xFX1VTRVIQARISCg5ST0xFX0FTU0lTVEFOVBACMosKCglBaVNlcnZpY2USYAoRTGlzdENvbnZlcnNhdGlvbnMSJC50YW5rLmFpLnYxLkxpc3RDb252ZXJzYXRpb25zUmVxdWVzdBolLnRhbmsuYWkudjEuTGlzdENvbnZlcnNhdGlvbnNSZXNwb25zZRJaCg9HZXRDb252ZXJzYXRpb24SIi50YW5rLmFpLnYxLkdldENvbnZlcnNhdGlvblJlcXVlc3QaIy50YW5rLmFpLnYxLkdldENvbnZlcnNhdGlvblJlc3BvbnNlEmMKEkNyZWF0ZUNvbnZlcnNhdGlvbhIlLnRhbmsuYWkudjEuQ3JlYXRlQ29udmVyc2F0aW9uUmVxdWVzdBomLnRhbmsuYWkudjEuQ3JlYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USYwoSVXBkYXRlQ29udmVyc2F0aW9uEiUudGFuay5haS52MS5VcGRhdGVDb252ZXJzYXRpb25SZXF1ZXN0GiYudGFuay5haS52MS5VcGRhdGVDb252ZXJzYXRpb25SZXNwb25zZRJjChJEZWxldGVDb252ZXJzYXRpb24SJS50YW5rLmFpLnYxLkRlbGV0ZUNvbnZlcnNhdGlvblJlcXVlc3QaJi50YW5rLmFpLnYxLkRlbGV0ZUNvbnZlcnNhdGlvblJlc3BvbnNlElAKC1NlbmRNZXNzYWdlEh4udGFuay5haS52MS5TZW5kTWVzc2FnZVJlcXVlc3QaHy50YW5rLmFpLnYxLlNlbmRNZXNzYWdlUmVzcG9uc2UwARJOCgtSYXRlTWVzc2FnZRIeLnRhbmsuYWkudjEuUmF0ZU1lc3NhZ2VSZXF1ZXN0Gh8udGFuay5haS52MS5SYXRlTWVzc2FnZVJlc3BvbnNlEkgKCVN0b3BSZXBseRIcLnRhbmsuYWkudjEuU3RvcFJlcGx5UmVxdWVzdBodLnRhbmsuYWkudjEuU3RvcFJlcGx5UmVzcG9uc2USTgoLR2V0U2V0dGluZ3MSHi50YW5rLmFpLnYxLkdldFNldHRpbmdzUmVxdWVzdBofLnRhbmsuYWkudjEuR2V0U2V0dGluZ3NSZXNwb25zZRJXCg5VcGRhdGVTZXR0aW5ncxIhLnRhbmsuYWkudjEuVXBkYXRlU2V0dGluZ3NSZXF1ZXN0GiIudGFuay5haS52MS5VcGRhdGVTZXR0aW5nc1Jlc3BvbnNlEkUKCEdldFVzYWdlEhsudGFuay5haS52MS5HZXRVc2FnZVJlcXVlc3QaHC50YW5rLmFpLnYxLkdldFVzYWdlUmVzcG9uc2USSwoKQWRkVG9BdGxhcxIdLnRhbmsuYWkudjEuQWRkVG9BdGxhc1JlcXVlc3QaHi50YW5rLmFpLnYxLkFkZFRvQXRsYXNSZXNwb25zZRJFCghMaXN0QXBwcxIbLnRhbmsuYWkudjEuTGlzdEFwcHNSZXF1ZXN0GhwudGFuay5haS52MS5MaXN0QXBwc1Jlc3BvbnNlEksKCkNvbm5lY3RBcHASHS50YW5rLmFpLnYxLkNvbm5lY3RBcHBSZXF1ZXN0Gh4udGFuay5haS52MS5Db25uZWN0QXBwUmVzcG9uc2USVAoNRGlzY29ubmVjdEFwcBIgLnRhbmsuYWkudjEuRGlzY29ubmVjdEFwcFJlcXVlc3QaIS50YW5rLmFpLnYxLkRpc2Nvbm5lY3RBcHBSZXNwb25zZUKwAQoOY29tLnRhbmsuYWkudjFCB0FpUHJvdG9QAVpLZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9haS92MTthaXYxogIDVEFYqgIKVGFuay5BaS5WMcoCClRhbmtcQWlcVjHiAhZUYW5rXEFpXFYxXEdQQk1ldGFkYXRh6gIMVGFuazo6QWk6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_apps_v1_apps]);
+export const file_tank_ai_v1_ai = /*@__PURE__*/ fileDesc("ChN0YW5rL2FpL3YxL2FpLnByb3RvEgp0YW5rLmFpLnYxIogCCgxDb252ZXJzYXRpb24SCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSLgoKY3JlYXRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHcHJldmlldxgFIAEoCRIOCgZwaW5uZWQYBiABKAgSFAoMd29ya3NwYWNlX2lkGAcgASgJEh8KBGFwcHMYCCADKAsyES50YW5rLmFwcHMudjEuQXBwEiUKCG92ZXJsYXlzGAkgAygLMhMudGFuay5haS52MS5PdmVybGF5IpQBCgdPdmVybGF5EgoKAmlkGAEgASgJEg0KBXRpdGxlGAIgASgJEg4KBnNvdXJjZRgDIAEoCRIhCgVtYXJrcxgEIAMoCzISLnRhbmsuYXBwcy52MS5NYXJrEikKBWFzX29mGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIQCghvZmZlcl9pZBgGIAEoCSIhCgVPZmZlchIKCgJpZBgBIAEoCRIMCgR0ZXh0GAIgASgJImEKCkF0dGFjaG1lbnQSCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIMCgRtaW1lGAMgASgJEgwKBGRhdGEYBCABKAwSDAoEc2l6ZRgFIAEoAxIPCgdmaWxlX2lkGAYgASgJItICCgdNZXNzYWdlEgoKAmlkGAEgASgJEhcKD2NvbnZlcnNhdGlvbl9pZBgCIAEoCRIeCgRyb2xlGAMgASgOMhAudGFuay5haS52MS5Sb2xlEgwKBHRleHQYBCABKAkSKwoLYXR0YWNobWVudHMYBSADKAsyFi50YW5rLmFpLnYxLkF0dGFjaG1lbnQSLgoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLc3RvcF9yZWFzb24YByABKAkSFAoMaW5wdXRfdG9rZW5zGAggASgFEhUKDW91dHB1dF90b2tlbnMYCSABKAUSDgoGcmF0aW5nGAogASgFEg0KBWFzX29mGAsgASgJEhMKC3N1Z2dlc3Rpb25zGAwgAygJEiEKBm9mZmVycxgNIAMoCzIRLnRhbmsuYWkudjEuT2ZmZXIiTgoYTGlzdENvbnZlcnNhdGlvbnNSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJEg0KBWxpbWl0GAIgASgFEhQKDHdvcmtzcGFjZV9pZBgDIAEoCSJMChlMaXN0Q29udmVyc2F0aW9uc1Jlc3BvbnNlEi8KDWNvbnZlcnNhdGlvbnMYASADKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbiIkChZHZXRDb252ZXJzYXRpb25SZXF1ZXN0EgoKAmlkGAEgASgJIpwBChdHZXRDb252ZXJzYXRpb25SZXNwb25zZRIuCgxjb252ZXJzYXRpb24YASABKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbhIlCghtZXNzYWdlcxgCIAMoCzITLnRhbmsuYWkudjEuTWVzc2FnZRIqCgthdGxhc19wYWdlcxgDIAMoCzIVLnRhbmsuYWkudjEuQXRsYXNQYWdlImwKCUF0bGFzUGFnZRIMCgRuYW1lGAEgASgJEhEKCWNhbnZhc19pZBgCIAEoCRIQCghtYXJrZG93bhgDIAEoCRIsCghhZGRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiZwoRQWRkVG9BdGxhc1JlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEgwKBG5hbWUYAiABKAkSEAoIbWFya2Rvd24YAyABKAkSGQoRcmVwbGFjZV9jYW52YXNfaWQYBCABKAkiOQoSQWRkVG9BdGxhc1Jlc3BvbnNlEiMKBHBhZ2UYASABKAsyFS50YW5rLmFpLnYxLkF0bGFzUGFnZSIxChlDcmVhdGVDb252ZXJzYXRpb25SZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSJMChpDcmVhdGVDb252ZXJzYXRpb25SZXNwb25zZRIuCgxjb252ZXJzYXRpb24YASABKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbiJtChlVcGRhdGVDb252ZXJzYXRpb25SZXF1ZXN0EgoKAmlkGAEgASgJEg0KBXRpdGxlGAIgASgJEhEKCXNldF90aXRsZRgDIAEoCBIOCgZwaW5uZWQYBCABKAgSEgoKc2V0X3Bpbm5lZBgFIAEoCCJMChpVcGRhdGVDb252ZXJzYXRpb25SZXNwb25zZRIuCgxjb252ZXJzYXRpb24YASABKAsyGC50YW5rLmFpLnYxLkNvbnZlcnNhdGlvbiInChlEZWxldGVDb252ZXJzYXRpb25SZXF1ZXN0EgoKAmlkGAEgASgJIhwKGkRlbGV0ZUNvbnZlcnNhdGlvblJlc3BvbnNlIssBChJTZW5kTWVzc2FnZVJlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEgwKBHRleHQYAiABKAkSKwoLYXR0YWNobWVudHMYAyADKAsyFi50YW5rLmFpLnYxLkF0dGFjaG1lbnQSHQoVcmVnZW5lcmF0ZV9tZXNzYWdlX2lkGAQgASgJEhoKEnJlcGxhY2VfbWVzc2FnZV9pZBgFIAEoCRIUCgx3b3Jrc3BhY2VfaWQYBiABKAkSEAoIb2ZmZXJfaWQYByABKAkinAIKE1NlbmRNZXNzYWdlUmVzcG9uc2USJgoHc3RhcnRlZBgBIAEoCzITLnRhbmsuYWkudjEuU3RhcnRlZEgAEg8KBWRlbHRhGAIgASgJSAASIwoEZG9uZRgDIAEoCzITLnRhbmsuYWkudjEuTWVzc2FnZUgAEg8KBXRpdGxlGAQgASgJSAASEQoHd2FybWluZxgFIAEoCUgAEiIKBXN0YWdlGAYgASgLMhEudGFuay5haS52MS5TdGFnZUgAEi4KC3N1Z2dlc3Rpb25zGAcgASgLMhcudGFuay5haS52MS5TdWdnZXN0aW9uc0gAEiYKB292ZXJsYXkYCCABKAsyEy50YW5rLmFpLnYxLk92ZXJsYXlIAEIHCgVldmVudCJTCgtTdWdnZXN0aW9ucxISCgptZXNzYWdlX2lkGAEgASgJEg0KBWl0ZW1zGAIgAygJEiEKBm9mZmVycxgDIAMoCzIRLnRhbmsuYWkudjEuT2ZmZXIiXgoFU3RhZ2USDAoEa2luZBgBIAEoCRIMCgR0ZXh0GAIgASgJEigKB3NvdXJjZXMYAyADKAsyFy50YW5rLmFpLnYxLlN0YWdlU291cmNlEg8KB291dGxpbmUYBCADKAkiNwoLU3RhZ2VTb3VyY2USDQoFdGl0bGUYASABKAkSDAoEaG9zdBgCIAEoCRILCgN1cmwYAyABKAkiggEKB1N0YXJ0ZWQSLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24SKQoMdXNlcl9tZXNzYWdlGAIgASgLMhMudGFuay5haS52MS5NZXNzYWdlEhwKFGFzc2lzdGFudF9tZXNzYWdlX2lkGAMgASgJIjgKElJhdGVNZXNzYWdlUmVxdWVzdBISCgptZXNzYWdlX2lkGAEgASgJEg4KBnJhdGluZxgCIAEoBSIVChNSYXRlTWVzc2FnZVJlc3BvbnNlIiYKEFN0b3BSZXBseVJlcXVlc3QSEgoKbWVzc2FnZV9pZBgBIAEoCSITChFTdG9wUmVwbHlSZXNwb25zZSIUChJHZXRTZXR0aW5nc1JlcXVlc3QiPQoTR2V0U2V0dGluZ3NSZXNwb25zZRImCghzZXR0aW5ncxgBIAEoCzIULnRhbmsuYWkudjEuU2V0dGluZ3MidwoIU2V0dGluZ3MSFAoMaW5zdHJ1Y3Rpb25zGAEgASgJEhMKC21vZGVsX2xhYmVsGAIgASgJEhEKCWF2YWlsYWJsZRgDIAEoCBItCglsYXVuY2hfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIi0KFVVwZGF0ZVNldHRpbmdzUmVxdWVzdBIUCgxpbnN0cnVjdGlvbnMYASABKAkiQAoWVXBkYXRlU2V0dGluZ3NSZXNwb25zZRImCghzZXR0aW5ncxgBIAEoCzIULnRhbmsuYWkudjEuU2V0dGluZ3MiHwoPR2V0VXNhZ2VSZXF1ZXN0EgwKBGRheXMYASABKAUibwoIVXNhZ2VEYXkSDAoEZGF0ZRgBIAEoCRIQCghtZXNzYWdlcxgCIAEoBRIUCgxpbnB1dF90b2tlbnMYAyABKAMSFQoNb3V0cHV0X3Rva2VucxgEIAEoAxIWCg5jb3N0X21pY3JvX3VzZBgFIAEoAyKSAQoRQ29udmVyc2F0aW9uVXNhZ2USFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEg0KBXRpdGxlGAIgASgJEhAKCG1lc3NhZ2VzGAMgASgFEhQKDGlucHV0X3Rva2VucxgEIAEoAxIVCg1vdXRwdXRfdG9rZW5zGAUgASgDEhYKDmNvc3RfbWljcm9fdXNkGAYgASgDIqkCChBHZXRVc2FnZVJlc3BvbnNlEiIKBGRheXMYASADKAsyFC50YW5rLmFpLnYxLlVzYWdlRGF5EhAKCG1lc3NhZ2VzGAIgASgFEhQKDGlucHV0X3Rva2VucxgDIAEoAxIVCg1vdXRwdXRfdG9rZW5zGAQgASgDEhYKDmNvc3RfbWljcm9fdXNkGAUgASgDEhYKDnRvZGF5X21lc3NhZ2VzGAYgASgFEhwKFG1vbnRoX2Nvc3RfbWljcm9fdXNkGAcgASgDEhkKEWFsbF90aW1lX21lc3NhZ2VzGAggASgDEjQKDWNvbnZlcnNhdGlvbnMYCSADKAsyHS50YW5rLmFpLnYxLkNvbnZlcnNhdGlvblVzYWdlEhMKC21vZGVsX2xhYmVsGAogASgJIiAKD0xpc3RBcHBzUmVxdWVzdBINCgVxdWVyeRgBIAEoCSIzChBMaXN0QXBwc1Jlc3BvbnNlEh8KBGFwcHMYASADKAsyES50YW5rLmFwcHMudjEuQXBwIjwKEUNvbm5lY3RBcHBSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRIOCgZhcHBfaWQYAiABKAkiRAoSQ29ubmVjdEFwcFJlc3BvbnNlEi4KDGNvbnZlcnNhdGlvbhgBIAEoCzIYLnRhbmsuYWkudjEuQ29udmVyc2F0aW9uIj8KFERpc2Nvbm5lY3RBcHBSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRIOCgZhcHBfaWQYAiABKAkiRwoVRGlzY29ubmVjdEFwcFJlc3BvbnNlEi4KDGNvbnZlcnNhdGlvbhgBIAEoCzIYLnRhbmsuYWkudjEuQ29udmVyc2F0aW9uIkIKE0NsZWFyT3ZlcmxheVJlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEhIKCm92ZXJsYXlfaWQYAiABKAkiRgoUQ2xlYXJPdmVybGF5UmVzcG9uc2USLgoMY29udmVyc2F0aW9uGAEgASgLMhgudGFuay5haS52MS5Db252ZXJzYXRpb24iMQoWUmVmcmVzaE92ZXJsYXlzUmVxdWVzdBIXCg9jb252ZXJzYXRpb25faWQYASABKAkiQAoXUmVmcmVzaE92ZXJsYXlzUmVzcG9uc2USJQoIb3ZlcmxheXMYASADKAsyEy50YW5rLmFpLnYxLk92ZXJsYXkqPwoEUm9sZRIUChBST0xFX1VOU1BFQ0lGSUVEEAASDQoJUk9MRV9VU0VSEAESEgoOUk9MRV9BU1NJU1RBTlQQAjK6CwoJQWlTZXJ2aWNlEmAKEUxpc3RDb252ZXJzYXRpb25zEiQudGFuay5haS52MS5MaXN0Q29udmVyc2F0aW9uc1JlcXVlc3QaJS50YW5rLmFpLnYxLkxpc3RDb252ZXJzYXRpb25zUmVzcG9uc2USWgoPR2V0Q29udmVyc2F0aW9uEiIudGFuay5haS52MS5HZXRDb252ZXJzYXRpb25SZXF1ZXN0GiMudGFuay5haS52MS5HZXRDb252ZXJzYXRpb25SZXNwb25zZRJjChJDcmVhdGVDb252ZXJzYXRpb24SJS50YW5rLmFpLnYxLkNyZWF0ZUNvbnZlcnNhdGlvblJlcXVlc3QaJi50YW5rLmFpLnYxLkNyZWF0ZUNvbnZlcnNhdGlvblJlc3BvbnNlEmMKElVwZGF0ZUNvbnZlcnNhdGlvbhIlLnRhbmsuYWkudjEuVXBkYXRlQ29udmVyc2F0aW9uUmVxdWVzdBomLnRhbmsuYWkudjEuVXBkYXRlQ29udmVyc2F0aW9uUmVzcG9uc2USYwoSRGVsZXRlQ29udmVyc2F0aW9uEiUudGFuay5haS52MS5EZWxldGVDb252ZXJzYXRpb25SZXF1ZXN0GiYudGFuay5haS52MS5EZWxldGVDb252ZXJzYXRpb25SZXNwb25zZRJQCgtTZW5kTWVzc2FnZRIeLnRhbmsuYWkudjEuU2VuZE1lc3NhZ2VSZXF1ZXN0Gh8udGFuay5haS52MS5TZW5kTWVzc2FnZVJlc3BvbnNlMAESTgoLUmF0ZU1lc3NhZ2USHi50YW5rLmFpLnYxLlJhdGVNZXNzYWdlUmVxdWVzdBofLnRhbmsuYWkudjEuUmF0ZU1lc3NhZ2VSZXNwb25zZRJICglTdG9wUmVwbHkSHC50YW5rLmFpLnYxLlN0b3BSZXBseVJlcXVlc3QaHS50YW5rLmFpLnYxLlN0b3BSZXBseVJlc3BvbnNlEk4KC0dldFNldHRpbmdzEh4udGFuay5haS52MS5HZXRTZXR0aW5nc1JlcXVlc3QaHy50YW5rLmFpLnYxLkdldFNldHRpbmdzUmVzcG9uc2USVwoOVXBkYXRlU2V0dGluZ3MSIS50YW5rLmFpLnYxLlVwZGF0ZVNldHRpbmdzUmVxdWVzdBoiLnRhbmsuYWkudjEuVXBkYXRlU2V0dGluZ3NSZXNwb25zZRJFCghHZXRVc2FnZRIbLnRhbmsuYWkudjEuR2V0VXNhZ2VSZXF1ZXN0GhwudGFuay5haS52MS5HZXRVc2FnZVJlc3BvbnNlEksKCkFkZFRvQXRsYXMSHS50YW5rLmFpLnYxLkFkZFRvQXRsYXNSZXF1ZXN0Gh4udGFuay5haS52MS5BZGRUb0F0bGFzUmVzcG9uc2USRQoITGlzdEFwcHMSGy50YW5rLmFpLnYxLkxpc3RBcHBzUmVxdWVzdBocLnRhbmsuYWkudjEuTGlzdEFwcHNSZXNwb25zZRJLCgpDb25uZWN0QXBwEh0udGFuay5haS52MS5Db25uZWN0QXBwUmVxdWVzdBoeLnRhbmsuYWkudjEuQ29ubmVjdEFwcFJlc3BvbnNlElQKDURpc2Nvbm5lY3RBcHASIC50YW5rLmFpLnYxLkRpc2Nvbm5lY3RBcHBSZXF1ZXN0GiEudGFuay5haS52MS5EaXNjb25uZWN0QXBwUmVzcG9uc2USUQoMQ2xlYXJPdmVybGF5Eh8udGFuay5haS52MS5DbGVhck92ZXJsYXlSZXF1ZXN0GiAudGFuay5haS52MS5DbGVhck92ZXJsYXlSZXNwb25zZRJaCg9SZWZyZXNoT3ZlcmxheXMSIi50YW5rLmFpLnYxLlJlZnJlc2hPdmVybGF5c1JlcXVlc3QaIy50YW5rLmFpLnYxLlJlZnJlc2hPdmVybGF5c1Jlc3BvbnNlQrABCg5jb20udGFuay5haS52MUIHQWlQcm90b1ABWktnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FpL3YxO2FpdjGiAgNUQViqAgpUYW5rLkFpLlYxygIKVGFua1xBaVxWMeICFlRhbmtcQWlcVjFcR1BCTWV0YWRhdGHqAgxUYW5rOjpBaTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_apps_v1_apps]);
 /**
  * Describes the message tank.ai.v1.Conversation.
  * Use `create(ConversationSchema)` to create a new message.
  */
 export const ConversationSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 0);
 /**
+ * Describes the message tank.ai.v1.Overlay.
+ * Use `create(OverlaySchema)` to create a new message.
+ */
+export const OverlaySchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 1);
+/**
+ * Describes the message tank.ai.v1.Offer.
+ * Use `create(OfferSchema)` to create a new message.
+ */
+export const OfferSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 2);
+/**
  * Describes the message tank.ai.v1.Attachment.
  * Use `create(AttachmentSchema)` to create a new message.
  */
-export const AttachmentSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 1);
+export const AttachmentSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 3);
 /**
  * Describes the message tank.ai.v1.Message.
  * Use `create(MessageSchema)` to create a new message.
  */
-export const MessageSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 2);
+export const MessageSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 4);
 /**
  * Describes the message tank.ai.v1.ListConversationsRequest.
  * Use `create(ListConversationsRequestSchema)` to create a new message.
  */
-export const ListConversationsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 3);
+export const ListConversationsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 5);
 /**
  * Describes the message tank.ai.v1.ListConversationsResponse.
  * Use `create(ListConversationsResponseSchema)` to create a new message.
  */
-export const ListConversationsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 4);
+export const ListConversationsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 6);
 /**
  * Describes the message tank.ai.v1.GetConversationRequest.
  * Use `create(GetConversationRequestSchema)` to create a new message.
  */
-export const GetConversationRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 5);
+export const GetConversationRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 7);
 /**
  * Describes the message tank.ai.v1.GetConversationResponse.
  * Use `create(GetConversationResponseSchema)` to create a new message.
  */
-export const GetConversationResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 6);
+export const GetConversationResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 8);
 /**
  * Describes the message tank.ai.v1.AtlasPage.
  * Use `create(AtlasPageSchema)` to create a new message.
  */
-export const AtlasPageSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 7);
+export const AtlasPageSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 9);
 /**
  * Describes the message tank.ai.v1.AddToAtlasRequest.
  * Use `create(AddToAtlasRequestSchema)` to create a new message.
  */
-export const AddToAtlasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 8);
+export const AddToAtlasRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 10);
 /**
  * Describes the message tank.ai.v1.AddToAtlasResponse.
  * Use `create(AddToAtlasResponseSchema)` to create a new message.
  */
-export const AddToAtlasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 9);
+export const AddToAtlasResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 11);
 /**
  * Describes the message tank.ai.v1.CreateConversationRequest.
  * Use `create(CreateConversationRequestSchema)` to create a new message.
  */
-export const CreateConversationRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 10);
+export const CreateConversationRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 12);
 /**
  * Describes the message tank.ai.v1.CreateConversationResponse.
  * Use `create(CreateConversationResponseSchema)` to create a new message.
  */
-export const CreateConversationResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 11);
+export const CreateConversationResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 13);
 /**
  * Describes the message tank.ai.v1.UpdateConversationRequest.
  * Use `create(UpdateConversationRequestSchema)` to create a new message.
  */
-export const UpdateConversationRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 12);
+export const UpdateConversationRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 14);
 /**
  * Describes the message tank.ai.v1.UpdateConversationResponse.
  * Use `create(UpdateConversationResponseSchema)` to create a new message.
  */
-export const UpdateConversationResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 13);
+export const UpdateConversationResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 15);
 /**
  * Describes the message tank.ai.v1.DeleteConversationRequest.
  * Use `create(DeleteConversationRequestSchema)` to create a new message.
  */
-export const DeleteConversationRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 14);
+export const DeleteConversationRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 16);
 /**
  * Describes the message tank.ai.v1.DeleteConversationResponse.
  * Use `create(DeleteConversationResponseSchema)` to create a new message.
  */
-export const DeleteConversationResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 15);
+export const DeleteConversationResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 17);
 /**
  * Describes the message tank.ai.v1.SendMessageRequest.
  * Use `create(SendMessageRequestSchema)` to create a new message.
  */
-export const SendMessageRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 16);
+export const SendMessageRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 18);
 /**
  * Describes the message tank.ai.v1.SendMessageResponse.
  * Use `create(SendMessageResponseSchema)` to create a new message.
  */
-export const SendMessageResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 17);
+export const SendMessageResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 19);
 /**
  * Describes the message tank.ai.v1.Suggestions.
  * Use `create(SuggestionsSchema)` to create a new message.
  */
-export const SuggestionsSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 18);
+export const SuggestionsSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 20);
 /**
  * Describes the message tank.ai.v1.Stage.
  * Use `create(StageSchema)` to create a new message.
  */
-export const StageSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 19);
+export const StageSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 21);
 /**
  * Describes the message tank.ai.v1.StageSource.
  * Use `create(StageSourceSchema)` to create a new message.
  */
-export const StageSourceSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 20);
+export const StageSourceSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 22);
 /**
  * Describes the message tank.ai.v1.Started.
  * Use `create(StartedSchema)` to create a new message.
  */
-export const StartedSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 21);
+export const StartedSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 23);
 /**
  * Describes the message tank.ai.v1.RateMessageRequest.
  * Use `create(RateMessageRequestSchema)` to create a new message.
  */
-export const RateMessageRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 22);
+export const RateMessageRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 24);
 /**
  * Describes the message tank.ai.v1.RateMessageResponse.
  * Use `create(RateMessageResponseSchema)` to create a new message.
  */
-export const RateMessageResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 23);
+export const RateMessageResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 25);
 /**
  * Describes the message tank.ai.v1.StopReplyRequest.
  * Use `create(StopReplyRequestSchema)` to create a new message.
  */
-export const StopReplyRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 24);
+export const StopReplyRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 26);
 /**
  * Describes the message tank.ai.v1.StopReplyResponse.
  * Use `create(StopReplyResponseSchema)` to create a new message.
  */
-export const StopReplyResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 25);
+export const StopReplyResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 27);
 /**
  * Describes the message tank.ai.v1.GetSettingsRequest.
  * Use `create(GetSettingsRequestSchema)` to create a new message.
  */
-export const GetSettingsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 26);
+export const GetSettingsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 28);
 /**
  * Describes the message tank.ai.v1.GetSettingsResponse.
  * Use `create(GetSettingsResponseSchema)` to create a new message.
  */
-export const GetSettingsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 27);
+export const GetSettingsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 29);
 /**
  * Describes the message tank.ai.v1.Settings.
  * Use `create(SettingsSchema)` to create a new message.
  */
-export const SettingsSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 28);
+export const SettingsSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 30);
 /**
  * Describes the message tank.ai.v1.UpdateSettingsRequest.
  * Use `create(UpdateSettingsRequestSchema)` to create a new message.
  */
-export const UpdateSettingsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 29);
+export const UpdateSettingsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 31);
 /**
  * Describes the message tank.ai.v1.UpdateSettingsResponse.
  * Use `create(UpdateSettingsResponseSchema)` to create a new message.
  */
-export const UpdateSettingsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 30);
+export const UpdateSettingsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 32);
 /**
  * Describes the message tank.ai.v1.GetUsageRequest.
  * Use `create(GetUsageRequestSchema)` to create a new message.
  */
-export const GetUsageRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 31);
+export const GetUsageRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 33);
 /**
  * Describes the message tank.ai.v1.UsageDay.
  * Use `create(UsageDaySchema)` to create a new message.
  */
-export const UsageDaySchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 32);
+export const UsageDaySchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 34);
 /**
  * Describes the message tank.ai.v1.ConversationUsage.
  * Use `create(ConversationUsageSchema)` to create a new message.
  */
-export const ConversationUsageSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 33);
+export const ConversationUsageSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 35);
 /**
  * Describes the message tank.ai.v1.GetUsageResponse.
  * Use `create(GetUsageResponseSchema)` to create a new message.
  */
-export const GetUsageResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 34);
+export const GetUsageResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 36);
 /**
  * Describes the message tank.ai.v1.ListAppsRequest.
  * Use `create(ListAppsRequestSchema)` to create a new message.
  */
-export const ListAppsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 35);
+export const ListAppsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 37);
 /**
  * Describes the message tank.ai.v1.ListAppsResponse.
  * Use `create(ListAppsResponseSchema)` to create a new message.
  */
-export const ListAppsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 36);
+export const ListAppsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 38);
 /**
  * Describes the message tank.ai.v1.ConnectAppRequest.
  * Use `create(ConnectAppRequestSchema)` to create a new message.
  */
-export const ConnectAppRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 37);
+export const ConnectAppRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 39);
 /**
  * Describes the message tank.ai.v1.ConnectAppResponse.
  * Use `create(ConnectAppResponseSchema)` to create a new message.
  */
-export const ConnectAppResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 38);
+export const ConnectAppResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 40);
 /**
  * Describes the message tank.ai.v1.DisconnectAppRequest.
  * Use `create(DisconnectAppRequestSchema)` to create a new message.
  */
-export const DisconnectAppRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 39);
+export const DisconnectAppRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 41);
 /**
  * Describes the message tank.ai.v1.DisconnectAppResponse.
  * Use `create(DisconnectAppResponseSchema)` to create a new message.
  */
-export const DisconnectAppResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 40);
+export const DisconnectAppResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 42);
+/**
+ * Describes the message tank.ai.v1.ClearOverlayRequest.
+ * Use `create(ClearOverlayRequestSchema)` to create a new message.
+ */
+export const ClearOverlayRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 43);
+/**
+ * Describes the message tank.ai.v1.ClearOverlayResponse.
+ * Use `create(ClearOverlayResponseSchema)` to create a new message.
+ */
+export const ClearOverlayResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 44);
+/**
+ * Describes the message tank.ai.v1.RefreshOverlaysRequest.
+ * Use `create(RefreshOverlaysRequestSchema)` to create a new message.
+ */
+export const RefreshOverlaysRequestSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 45);
+/**
+ * Describes the message tank.ai.v1.RefreshOverlaysResponse.
+ * Use `create(RefreshOverlaysResponseSchema)` to create a new message.
+ */
+export const RefreshOverlaysResponseSchema = /*@__PURE__*/ messageDesc(file_tank_ai_v1_ai, 46);
 /**
  * @generated from enum tank.ai.v1.Role
  */

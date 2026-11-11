@@ -5,7 +5,7 @@ import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
 /**
  * Describes the file tank/apps/v1/apps.proto.
  */
-export const file_tank_apps_v1_apps = /*@__PURE__*/ fileDesc("Chd0YW5rL2FwcHMvdjEvYXBwcy5wcm90bxIMdGFuay5hcHBzLnYxImIKA0FwcBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhAKCGxvZ29fdXJsGAQgASgJEgsKA3VybBgFIAEoCRINCgVtYWtlchgGIAEoCSJECgRUb29sEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSGQoRaW5wdXRfc2NoZW1hX2pzb24YAyABKAkiJAoGU291cmNlEg0KBXRpdGxlGAEgASgJEgsKA3VybBgCIAEoCSIgCg9MaXN0QXBwc1JlcXVlc3QSDQoFcXVlcnkYASABKAkiMwoQTGlzdEFwcHNSZXNwb25zZRIfCgRhcHBzGAEgAygLMhEudGFuay5hcHBzLnYxLkFwcCIhCg9HZXRUb29sc1JlcXVlc3QSDgoGYXBwX2lkGAEgASgJIlUKEEdldFRvb2xzUmVzcG9uc2USHgoDYXBwGAEgASgLMhEudGFuay5hcHBzLnYxLkFwcBIhCgV0b29scxgCIAMoCzISLnRhbmsuYXBwcy52MS5Ub29sIkcKD0NhbGxUb29sUmVxdWVzdBIOCgZhcHBfaWQYASABKAkSDAoEdG9vbBgCIAEoCRIWCg5hcmd1bWVudHNfanNvbhgDIAEoCSJZChBDYWxsVG9vbFJlc3BvbnNlEgwKBHRleHQYASABKAkSJQoHc291cmNlcxgCIAMoCzIULnRhbmsuYXBwcy52MS5Tb3VyY2USEAoIaXNfZXJyb3IYAyABKAhCwAEKEGNvbS50YW5rLmFwcHMudjFCCUFwcHNQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FwcHMvdjE7YXBwc3YxogIDVEFYqgIMVGFuay5BcHBzLlYxygIMVGFua1xBcHBzXFYx4gIYVGFua1xBcHBzXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXBwczo6VjFiBnByb3RvMw");
+export const file_tank_apps_v1_apps = /*@__PURE__*/ fileDesc("Chd0YW5rL2FwcHMvdjEvYXBwcy5wcm90bxIMdGFuay5hcHBzLnYxImIKA0FwcBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhAKCGxvZ29fdXJsGAQgASgJEgsKA3VybBgFIAEoCRINCgVtYWtlchgGIAEoCSJoCgRUb29sEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSGQoRaW5wdXRfc2NoZW1hX2pzb24YAyABKAkSIgoFb2ZmZXIYBCABKAsyEy50YW5rLmFwcHMudjEuT2ZmZXIiJAoFT2ZmZXISDAoEdGV4dBgBIAEoCRINCgVuZWVkcxgCIAMoCSJXCgRNYXJrEgwKBGtpbmQYASABKAkSDwoHYmVhcmluZxgCIAEoARINCgVsYWJlbBgDIAEoCRIOCgZkZXRhaWwYBCABKAkSEQoJZWxldmF0aW9uGAUgASgBIiQKBlNvdXJjZRINCgV0aXRsZRgBIAEoCRILCgN1cmwYAiABKAkiIAoPTGlzdEFwcHNSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJIjMKEExpc3RBcHBzUmVzcG9uc2USHwoEYXBwcxgBIAMoCzIRLnRhbmsuYXBwcy52MS5BcHAiIQoPR2V0VG9vbHNSZXF1ZXN0Eg4KBmFwcF9pZBgBIAEoCSJVChBHZXRUb29sc1Jlc3BvbnNlEh4KA2FwcBgBIAEoCzIRLnRhbmsuYXBwcy52MS5BcHASIQoFdG9vbHMYAiADKAsyEi50YW5rLmFwcHMudjEuVG9vbCJHCg9DYWxsVG9vbFJlcXVlc3QSDgoGYXBwX2lkGAEgASgJEgwKBHRvb2wYAiABKAkSFgoOYXJndW1lbnRzX2pzb24YAyABKAkifAoQQ2FsbFRvb2xSZXNwb25zZRIMCgR0ZXh0GAEgASgJEiUKB3NvdXJjZXMYAiADKAsyFC50YW5rLmFwcHMudjEuU291cmNlEhAKCGlzX2Vycm9yGAMgASgIEiEKBW1hcmtzGAQgAygLMhIudGFuay5hcHBzLnYxLk1hcmtCwAEKEGNvbS50YW5rLmFwcHMudjFCCUFwcHNQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FwcHMvdjE7YXBwc3YxogIDVEFYqgIMVGFuay5BcHBzLlYxygIMVGFua1xBcHBzXFYx4gIYVGFua1xBcHBzXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXBwczo6VjFiBnByb3RvMw");
 /**
  * Describes the message tank.apps.v1.App.
  * Use `create(AppSchema)` to create a new message.
@@ -17,37 +17,47 @@ export const AppSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 0);
  */
 export const ToolSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 1);
 /**
+ * Describes the message tank.apps.v1.Offer.
+ * Use `create(OfferSchema)` to create a new message.
+ */
+export const OfferSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 2);
+/**
+ * Describes the message tank.apps.v1.Mark.
+ * Use `create(MarkSchema)` to create a new message.
+ */
+export const MarkSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 3);
+/**
  * Describes the message tank.apps.v1.Source.
  * Use `create(SourceSchema)` to create a new message.
  */
-export const SourceSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 2);
+export const SourceSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 4);
 /**
  * Describes the message tank.apps.v1.ListAppsRequest.
  * Use `create(ListAppsRequestSchema)` to create a new message.
  */
-export const ListAppsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 3);
+export const ListAppsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 5);
 /**
  * Describes the message tank.apps.v1.ListAppsResponse.
  * Use `create(ListAppsResponseSchema)` to create a new message.
  */
-export const ListAppsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 4);
+export const ListAppsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 6);
 /**
  * Describes the message tank.apps.v1.GetToolsRequest.
  * Use `create(GetToolsRequestSchema)` to create a new message.
  */
-export const GetToolsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 5);
+export const GetToolsRequestSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 7);
 /**
  * Describes the message tank.apps.v1.GetToolsResponse.
  * Use `create(GetToolsResponseSchema)` to create a new message.
  */
-export const GetToolsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 6);
+export const GetToolsResponseSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 8);
 /**
  * Describes the message tank.apps.v1.CallToolRequest.
  * Use `create(CallToolRequestSchema)` to create a new message.
  */
-export const CallToolRequestSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 7);
+export const CallToolRequestSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 9);
 /**
  * Describes the message tank.apps.v1.CallToolResponse.
  * Use `create(CallToolResponseSchema)` to create a new message.
  */
-export const CallToolResponseSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 8);
+export const CallToolResponseSchema = /*@__PURE__*/ messageDesc(file_tank_apps_v1_apps, 10);

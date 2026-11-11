@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { App } from "../../apps/v1/apps_pb.js";
+import type { App, Mark } from "../../apps/v1/apps_pb.js";
 import type { Message as Message$1 } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/ai/v1/ai.proto.
@@ -51,12 +51,86 @@ export type Conversation = Message$1<"tank.ai.v1.Conversation"> & {
      * @generated from field: repeated tank.apps.v1.App apps = 8;
      */
     apps: App[];
+    /**
+     * What Neural has put over the person's camera in this conversation, oldest first. A
+     * phone connected here draws them on its camera view; ClearOverlay takes one away.
+     *
+     * @generated from field: repeated tank.ai.v1.Overlay overlays = 9;
+     */
+    overlays: Overlay[];
 };
 /**
  * Describes the message tank.ai.v1.Conversation.
  * Use `create(ConversationSchema)` to create a new message.
  */
 export declare const ConversationSchema: GenMessage<Conversation>;
+/**
+ * Overlay is a layer Neural drew over the person's camera when they took an offer.
+ *
+ * @generated from message tank.ai.v1.Overlay
+ */
+export type Overlay = Message$1<"tank.ai.v1.Overlay"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * "Wind", "Sunset": the overlay's name, from the server.
+     *
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * Who the figures came from, cited on the overlay: an app's name, or "TANK".
+     *
+     * @generated from field: string source = 3;
+     */
+    source: string;
+    /**
+     * @generated from field: repeated tank.apps.v1.Mark marks = 4;
+     */
+    marks: Mark[];
+    /**
+     * When the figures were read.
+     *
+     * @generated from field: google.protobuf.Timestamp as_of = 5;
+     */
+    asOf?: Timestamp;
+    /**
+     * The offer it came from.
+     *
+     * @generated from field: string offer_id = 6;
+     */
+    offerId: string;
+};
+/**
+ * Describes the message tank.ai.v1.Overlay.
+ * Use `create(OverlaySchema)` to create a new message.
+ */
+export declare const OverlaySchema: GenMessage<Overlay>;
+/**
+ * Offer is something Neural offers to do with what is connected to the conversation; taking
+ * it sends SendMessageRequest.offer_id with the offer's text.
+ *
+ * @generated from message tank.ai.v1.Offer
+ */
+export type Offer = Message$1<"tank.ai.v1.Offer"> & {
+    /**
+     * "app:<app id>/<tool>" for an app's tool, "tank:<name>" for one of TANK's own.
+     *
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string text = 2;
+     */
+    text: string;
+};
+/**
+ * Describes the message tank.ai.v1.Offer.
+ * Use `create(OfferSchema)` to create a new message.
+ */
+export declare const OfferSchema: GenMessage<Offer>;
 /**
  * An attachment a person sends with a message: an image the model can see or a text file
  * whose contents are given to it. Bytes travel in the request; the stored copy is what the
@@ -164,6 +238,13 @@ export type Message = Message$1<"tank.ai.v1.Message"> & {
      * @generated from field: repeated string suggestions = 12;
      */
     suggestions: string[];
+    /**
+     * What Neural offers to do next with what is connected (the wind over the camera, where
+     * the sun sets), shown before the suggestions. Assistant turns only, latest one only.
+     *
+     * @generated from field: repeated tank.ai.v1.Offer offers = 13;
+     */
+    offers: Offer[];
 };
 /**
  * Describes the message tank.ai.v1.Message.
@@ -468,6 +549,13 @@ export type SendMessageRequest = Message$1<"tank.ai.v1.SendMessageRequest"> & {
      * @generated from field: string workspace_id = 6;
      */
     workspaceId: string;
+    /**
+     * Taking an offer (Message.offers): text is the offer's text, shown as the person's
+     * message, and the server does what the offer says before it replies.
+     *
+     * @generated from field: string offer_id = 7;
+     */
+    offerId: string;
 };
 /**
  * Describes the message tank.ai.v1.SendMessageRequest.
@@ -540,6 +628,15 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
         value: Suggestions;
         case: "suggestions";
     } | {
+        /**
+         * An offer was taken and its overlay is ready: draw it over the camera now. It is also
+         * in Conversation.overlays from here on.
+         *
+         * @generated from field: tank.ai.v1.Overlay overlay = 8;
+         */
+        value: Overlay;
+        case: "overlay";
+    } | {
         case: undefined;
         value?: undefined;
     };
@@ -561,6 +658,10 @@ export type Suggestions = Message$1<"tank.ai.v1.Suggestions"> & {
      * @generated from field: repeated string items = 2;
      */
     items: string[];
+    /**
+     * @generated from field: repeated tank.ai.v1.Offer offers = 3;
+     */
+    offers: Offer[];
 };
 /**
  * Describes the message tank.ai.v1.Suggestions.
@@ -1023,6 +1124,66 @@ export type DisconnectAppResponse = Message$1<"tank.ai.v1.DisconnectAppResponse"
  */
 export declare const DisconnectAppResponseSchema: GenMessage<DisconnectAppResponse>;
 /**
+ * @generated from message tank.ai.v1.ClearOverlayRequest
+ */
+export type ClearOverlayRequest = Message$1<"tank.ai.v1.ClearOverlayRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: string overlay_id = 2;
+     */
+    overlayId: string;
+};
+/**
+ * Describes the message tank.ai.v1.ClearOverlayRequest.
+ * Use `create(ClearOverlayRequestSchema)` to create a new message.
+ */
+export declare const ClearOverlayRequestSchema: GenMessage<ClearOverlayRequest>;
+/**
+ * @generated from message tank.ai.v1.ClearOverlayResponse
+ */
+export type ClearOverlayResponse = Message$1<"tank.ai.v1.ClearOverlayResponse"> & {
+    /**
+     * @generated from field: tank.ai.v1.Conversation conversation = 1;
+     */
+    conversation?: Conversation;
+};
+/**
+ * Describes the message tank.ai.v1.ClearOverlayResponse.
+ * Use `create(ClearOverlayResponseSchema)` to create a new message.
+ */
+export declare const ClearOverlayResponseSchema: GenMessage<ClearOverlayResponse>;
+/**
+ * @generated from message tank.ai.v1.RefreshOverlaysRequest
+ */
+export type RefreshOverlaysRequest = Message$1<"tank.ai.v1.RefreshOverlaysRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+};
+/**
+ * Describes the message tank.ai.v1.RefreshOverlaysRequest.
+ * Use `create(RefreshOverlaysRequestSchema)` to create a new message.
+ */
+export declare const RefreshOverlaysRequestSchema: GenMessage<RefreshOverlaysRequest>;
+/**
+ * @generated from message tank.ai.v1.RefreshOverlaysResponse
+ */
+export type RefreshOverlaysResponse = Message$1<"tank.ai.v1.RefreshOverlaysResponse"> & {
+    /**
+     * @generated from field: repeated tank.ai.v1.Overlay overlays = 1;
+     */
+    overlays: Overlay[];
+};
+/**
+ * Describes the message tank.ai.v1.RefreshOverlaysResponse.
+ * Use `create(RefreshOverlaysResponseSchema)` to create a new message.
+ */
+export declare const RefreshOverlaysResponseSchema: GenMessage<RefreshOverlaysResponse>;
+/**
  * @generated from enum tank.ai.v1.Role
  */
 export declare enum Role {
@@ -1168,5 +1329,26 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof DisconnectAppRequestSchema;
         output: typeof DisconnectAppResponseSchema;
+    };
+    /**
+     * Takes an overlay off the camera.
+     *
+     * @generated from rpc tank.ai.v1.AiService.ClearOverlay
+     */
+    clearOverlay: {
+        methodKind: "unary";
+        input: typeof ClearOverlayRequestSchema;
+        output: typeof ClearOverlayResponseSchema;
+    };
+    /**
+     * Reads every overlay's figures again where they are more than ten minutes old, from where
+     * the phone is now. Clients call it while the camera is showing.
+     *
+     * @generated from rpc tank.ai.v1.AiService.RefreshOverlays
+     */
+    refreshOverlays: {
+        methodKind: "unary";
+        input: typeof RefreshOverlaysRequestSchema;
+        output: typeof RefreshOverlaysResponseSchema;
     };
 }>;
