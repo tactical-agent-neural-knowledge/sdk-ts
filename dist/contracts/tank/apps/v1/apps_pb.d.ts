@@ -102,6 +102,12 @@ export type Offer = Message<"tank.apps.v1.Offer"> & {
      * @generated from field: repeated string needs = 2;
      */
     needs: string[];
+    /**
+     * What the overlay it draws is called, shown on the camera with the app's name: "Wind".
+     *
+     * @generated from field: string title = 3;
+     */
+    title: string;
 };
 /**
  * Describes the message tank.apps.v1.Offer.

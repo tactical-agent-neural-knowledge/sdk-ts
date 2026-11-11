@@ -58,12 +58,54 @@ export type Conversation = Message$1<"tank.ai.v1.Conversation"> & {
      * @generated from field: repeated tank.ai.v1.Overlay overlays = 9;
      */
     overlays: Overlay[];
+    /**
+     * The people in the conversation (Robby, 2026-11-11: "the thing we are adding is people"),
+     * the owner first. One member is a personal conversation: Neural answers every message.
+     * With more, Neural answers a message that addresses it ("Neural, ...", "@Neural").
+     *
+     * @generated from field: repeated tank.ai.v1.Member members = 10;
+     */
+    members: Member[];
 };
 /**
  * Describes the message tank.ai.v1.Conversation.
  * Use `create(ConversationSchema)` to create a new message.
  */
 export declare const ConversationSchema: GenMessage<Conversation>;
+/**
+ * Member is one person in a conversation.
+ *
+ * @generated from message tank.ai.v1.Member
+ */
+export type Member = Message$1<"tank.ai.v1.Member"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string avatar_url = 3;
+     */
+    avatarUrl: string;
+    /**
+     * "owner" (made it; may remove people and delete it) or "member".
+     *
+     * @generated from field: string role = 4;
+     */
+    role: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp joined_at = 5;
+     */
+    joinedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.ai.v1.Member.
+ * Use `create(MemberSchema)` to create a new message.
+ */
+export declare const MemberSchema: GenMessage<Member>;
 /**
  * Overlay is a layer Neural drew over the person's camera when they took an offer.
  *
@@ -245,6 +287,20 @@ export type Message = Message$1<"tank.ai.v1.Message"> & {
      * @generated from field: repeated tank.ai.v1.Offer offers = 13;
      */
     offers: Offer[];
+    /**
+     * Who wrote a user message, so a conversation with several people shows each person.
+     *
+     * @generated from field: string author_id = 14;
+     */
+    authorId: string;
+    /**
+     * @generated from field: string author_name = 15;
+     */
+    authorName: string;
+    /**
+     * @generated from field: string author_avatar_url = 16;
+     */
+    authorAvatarUrl: string;
 };
 /**
  * Describes the message tank.ai.v1.Message.
@@ -744,6 +800,8 @@ export type Started = Message$1<"tank.ai.v1.Started"> & {
     userMessage?: Message;
     /**
      * The assistant message's id, assigned before the first delta so a stop can name it.
+     * Empty when Neural does not answer this message (a conversation with several people in
+     * which the message does not address Neural): the stream ends after started.
      *
      * @generated from field: string assistant_message_id = 3;
      */
@@ -1184,6 +1242,333 @@ export type RefreshOverlaysResponse = Message$1<"tank.ai.v1.RefreshOverlaysRespo
  */
 export declare const RefreshOverlaysResponseSchema: GenMessage<RefreshOverlaysResponse>;
 /**
+ * @generated from message tank.ai.v1.CreateInviteRequest
+ */
+export type CreateInviteRequest = Message$1<"tank.ai.v1.CreateInviteRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+};
+/**
+ * Describes the message tank.ai.v1.CreateInviteRequest.
+ * Use `create(CreateInviteRequestSchema)` to create a new message.
+ */
+export declare const CreateInviteRequestSchema: GenMessage<CreateInviteRequest>;
+/**
+ * @generated from message tank.ai.v1.CreateInviteResponse
+ */
+export type CreateInviteResponse = Message$1<"tank.ai.v1.CreateInviteResponse"> & {
+    /**
+     * The link to send. It is not stored and cannot be read again.
+     *
+     * @generated from field: string url = 1;
+     */
+    url: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 2;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.ai.v1.CreateInviteResponse.
+ * Use `create(CreateInviteResponseSchema)` to create a new message.
+ */
+export declare const CreateInviteResponseSchema: GenMessage<CreateInviteResponse>;
+/**
+ * @generated from message tank.ai.v1.PreviewInviteRequest
+ */
+export type PreviewInviteRequest = Message$1<"tank.ai.v1.PreviewInviteRequest"> & {
+    /**
+     * The token from the link.
+     *
+     * @generated from field: string token = 1;
+     */
+    token: string;
+};
+/**
+ * Describes the message tank.ai.v1.PreviewInviteRequest.
+ * Use `create(PreviewInviteRequestSchema)` to create a new message.
+ */
+export declare const PreviewInviteRequestSchema: GenMessage<PreviewInviteRequest>;
+/**
+ * @generated from message tank.ai.v1.PreviewInviteResponse
+ */
+export type PreviewInviteResponse = Message$1<"tank.ai.v1.PreviewInviteResponse"> & {
+    /**
+     * @generated from field: string conversation_title = 1;
+     */
+    conversationTitle: string;
+    /**
+     * @generated from field: string inviter_name = 2;
+     */
+    inviterName: string;
+    /**
+     * @generated from field: int32 member_count = 3;
+     */
+    memberCount: number;
+    /**
+     * Set when the caller is already in it; the client opens it.
+     *
+     * @generated from field: string conversation_id = 4;
+     */
+    conversationId: string;
+};
+/**
+ * Describes the message tank.ai.v1.PreviewInviteResponse.
+ * Use `create(PreviewInviteResponseSchema)` to create a new message.
+ */
+export declare const PreviewInviteResponseSchema: GenMessage<PreviewInviteResponse>;
+/**
+ * @generated from message tank.ai.v1.JoinConversationRequest
+ */
+export type JoinConversationRequest = Message$1<"tank.ai.v1.JoinConversationRequest"> & {
+    /**
+     * @generated from field: string token = 1;
+     */
+    token: string;
+};
+/**
+ * Describes the message tank.ai.v1.JoinConversationRequest.
+ * Use `create(JoinConversationRequestSchema)` to create a new message.
+ */
+export declare const JoinConversationRequestSchema: GenMessage<JoinConversationRequest>;
+/**
+ * @generated from message tank.ai.v1.JoinConversationResponse
+ */
+export type JoinConversationResponse = Message$1<"tank.ai.v1.JoinConversationResponse"> & {
+    /**
+     * @generated from field: tank.ai.v1.Conversation conversation = 1;
+     */
+    conversation?: Conversation;
+};
+/**
+ * Describes the message tank.ai.v1.JoinConversationResponse.
+ * Use `create(JoinConversationResponseSchema)` to create a new message.
+ */
+export declare const JoinConversationResponseSchema: GenMessage<JoinConversationResponse>;
+/**
+ * @generated from message tank.ai.v1.LeaveConversationRequest
+ */
+export type LeaveConversationRequest = Message$1<"tank.ai.v1.LeaveConversationRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+};
+/**
+ * Describes the message tank.ai.v1.LeaveConversationRequest.
+ * Use `create(LeaveConversationRequestSchema)` to create a new message.
+ */
+export declare const LeaveConversationRequestSchema: GenMessage<LeaveConversationRequest>;
+/**
+ * @generated from message tank.ai.v1.LeaveConversationResponse
+ */
+export type LeaveConversationResponse = Message$1<"tank.ai.v1.LeaveConversationResponse"> & {};
+/**
+ * Describes the message tank.ai.v1.LeaveConversationResponse.
+ * Use `create(LeaveConversationResponseSchema)` to create a new message.
+ */
+export declare const LeaveConversationResponseSchema: GenMessage<LeaveConversationResponse>;
+/**
+ * @generated from message tank.ai.v1.RemoveMemberRequest
+ */
+export type RemoveMemberRequest = Message$1<"tank.ai.v1.RemoveMemberRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: string user_id = 2;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.ai.v1.RemoveMemberRequest.
+ * Use `create(RemoveMemberRequestSchema)` to create a new message.
+ */
+export declare const RemoveMemberRequestSchema: GenMessage<RemoveMemberRequest>;
+/**
+ * @generated from message tank.ai.v1.RemoveMemberResponse
+ */
+export type RemoveMemberResponse = Message$1<"tank.ai.v1.RemoveMemberResponse"> & {
+    /**
+     * @generated from field: tank.ai.v1.Conversation conversation = 1;
+     */
+    conversation?: Conversation;
+};
+/**
+ * Describes the message tank.ai.v1.RemoveMemberResponse.
+ * Use `create(RemoveMemberResponseSchema)` to create a new message.
+ */
+export declare const RemoveMemberResponseSchema: GenMessage<RemoveMemberResponse>;
+/**
+ * @generated from message tank.ai.v1.WatchRequest
+ */
+export type WatchRequest = Message$1<"tank.ai.v1.WatchRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+};
+/**
+ * Describes the message tank.ai.v1.WatchRequest.
+ * Use `create(WatchRequestSchema)` to create a new message.
+ */
+export declare const WatchRequestSchema: GenMessage<WatchRequest>;
+/**
+ * @generated from message tank.ai.v1.WatchResponse
+ */
+export type WatchResponse = Message$1<"tank.ai.v1.WatchResponse"> & {
+    /**
+     * @generated from oneof tank.ai.v1.WatchResponse.event
+     */
+    event: {
+        /**
+         * A stored message: someone's, or Neural's when its reply is done.
+         *
+         * @generated from field: tank.ai.v1.Message message = 1;
+         */
+        value: Message;
+        case: "message";
+    } | {
+        /**
+         * Neural has started a reply; deltas for it follow.
+         *
+         * @generated from field: tank.ai.v1.ReplyStarted reply_started = 2;
+         */
+        value: ReplyStarted;
+        case: "replyStarted";
+    } | {
+        /**
+         * A piece of Neural's reply as it is written.
+         *
+         * @generated from field: tank.ai.v1.ReplyDelta reply_delta = 3;
+         */
+        value: ReplyDelta;
+        case: "replyDelta";
+    } | {
+        /**
+         * The conversation changed: people, apps, overlays or its title.
+         *
+         * @generated from field: tank.ai.v1.Conversation conversation = 4;
+         */
+        value: Conversation;
+        case: "conversation";
+    } | {
+        /**
+         * Someone is typing.
+         *
+         * @generated from field: tank.ai.v1.Typing typing = 5;
+         */
+        value: Typing;
+        case: "typing";
+    } | {
+        /**
+         * Offers and suggestions for a message just done.
+         *
+         * @generated from field: tank.ai.v1.Suggestions suggestions = 6;
+         */
+        value: Suggestions;
+        case: "suggestions";
+    } | {
+        /**
+         * A device was connected or disconnected; the client reloads the conversation's devices.
+         *
+         * @generated from field: string devices_changed = 7;
+         */
+        value: string;
+        case: "devicesChanged";
+    } | {
+        case: undefined;
+        value?: undefined;
+    };
+};
+/**
+ * Describes the message tank.ai.v1.WatchResponse.
+ * Use `create(WatchResponseSchema)` to create a new message.
+ */
+export declare const WatchResponseSchema: GenMessage<WatchResponse>;
+/**
+ * @generated from message tank.ai.v1.ReplyStarted
+ */
+export type ReplyStarted = Message$1<"tank.ai.v1.ReplyStarted"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * Who addressed Neural.
+     *
+     * @generated from field: string asked_by = 2;
+     */
+    askedBy: string;
+};
+/**
+ * Describes the message tank.ai.v1.ReplyStarted.
+ * Use `create(ReplyStartedSchema)` to create a new message.
+ */
+export declare const ReplyStartedSchema: GenMessage<ReplyStarted>;
+/**
+ * @generated from message tank.ai.v1.ReplyDelta
+ */
+export type ReplyDelta = Message$1<"tank.ai.v1.ReplyDelta"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * @generated from field: string text = 2;
+     */
+    text: string;
+};
+/**
+ * Describes the message tank.ai.v1.ReplyDelta.
+ * Use `create(ReplyDeltaSchema)` to create a new message.
+ */
+export declare const ReplyDeltaSchema: GenMessage<ReplyDelta>;
+/**
+ * @generated from message tank.ai.v1.Typing
+ */
+export type Typing = Message$1<"tank.ai.v1.Typing"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.ai.v1.Typing.
+ * Use `create(TypingSchema)` to create a new message.
+ */
+export declare const TypingSchema: GenMessage<Typing>;
+/**
+ * @generated from message tank.ai.v1.SetTypingRequest
+ */
+export type SetTypingRequest = Message$1<"tank.ai.v1.SetTypingRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+};
+/**
+ * Describes the message tank.ai.v1.SetTypingRequest.
+ * Use `create(SetTypingRequestSchema)` to create a new message.
+ */
+export declare const SetTypingRequestSchema: GenMessage<SetTypingRequest>;
+/**
+ * @generated from message tank.ai.v1.SetTypingResponse
+ */
+export type SetTypingResponse = Message$1<"tank.ai.v1.SetTypingResponse"> & {};
+/**
+ * Describes the message tank.ai.v1.SetTypingResponse.
+ * Use `create(SetTypingResponseSchema)` to create a new message.
+ */
+export declare const SetTypingResponseSchema: GenMessage<SetTypingResponse>;
+/**
  * @generated from enum tank.ai.v1.Role
  */
 export declare enum Role {
@@ -1350,5 +1735,73 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof RefreshOverlaysRequestSchema;
         output: typeof RefreshOverlaysResponseSchema;
+    };
+    /**
+     * People (docs/neural-people/PLAN.md). An invite is a link shown once when made; opening it
+     * signed in joins the conversation.
+     *
+     * @generated from rpc tank.ai.v1.AiService.CreateInvite
+     */
+    createInvite: {
+        methodKind: "unary";
+        input: typeof CreateInviteRequestSchema;
+        output: typeof CreateInviteResponseSchema;
+    };
+    /**
+     * What a link leads to, for the page that asks whether to join.
+     *
+     * @generated from rpc tank.ai.v1.AiService.PreviewInvite
+     */
+    previewInvite: {
+        methodKind: "unary";
+        input: typeof PreviewInviteRequestSchema;
+        output: typeof PreviewInviteResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.JoinConversation
+     */
+    joinConversation: {
+        methodKind: "unary";
+        input: typeof JoinConversationRequestSchema;
+        output: typeof JoinConversationResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.LeaveConversation
+     */
+    leaveConversation: {
+        methodKind: "unary";
+        input: typeof LeaveConversationRequestSchema;
+        output: typeof LeaveConversationResponseSchema;
+    };
+    /**
+     * The owner takes someone out.
+     *
+     * @generated from rpc tank.ai.v1.AiService.RemoveMember
+     */
+    removeMember: {
+        methodKind: "unary";
+        input: typeof RemoveMemberRequestSchema;
+        output: typeof RemoveMemberResponseSchema;
+    };
+    /**
+     * Everything that happens in a conversation, live, for every member with it open: messages
+     * from anyone, Neural's reply as it is written, people, devices and overlays changing.
+     *
+     * @generated from rpc tank.ai.v1.AiService.Watch
+     */
+    watch: {
+        methodKind: "server_streaming";
+        input: typeof WatchRequestSchema;
+        output: typeof WatchResponseSchema;
+    };
+    /**
+     * The caller is typing; the others see it for a few seconds.
+     *
+     * @generated from rpc tank.ai.v1.AiService.SetTyping
+     */
+    setTyping: {
+        methodKind: "unary";
+        input: typeof SetTypingRequestSchema;
+        output: typeof SetTypingResponseSchema;
     };
 }>;
