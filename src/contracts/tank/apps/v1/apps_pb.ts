@@ -4,13 +4,15 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file tank/apps/v1/apps.proto.
  */
 export const file_tank_apps_v1_apps: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL2FwcHMvdjEvYXBwcy5wcm90bxIMdGFuay5hcHBzLnYxImIKA0FwcBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhAKCGxvZ29fdXJsGAQgASgJEgsKA3VybBgFIAEoCRINCgVtYWtlchgGIAEoCSJoCgRUb29sEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSGQoRaW5wdXRfc2NoZW1hX2pzb24YAyABKAkSIgoFb2ZmZXIYBCABKAsyEy50YW5rLmFwcHMudjEuT2ZmZXIiMwoFT2ZmZXISDAoEdGV4dBgBIAEoCRINCgVuZWVkcxgCIAMoCRINCgV0aXRsZRgDIAEoCSKDAQoETWFyaxIMCgRraW5kGAEgASgJEg8KB2JlYXJpbmcYAiABKAESDQoFbGFiZWwYAyABKAkSDgoGZGV0YWlsGAQgASgJEhEKCWVsZXZhdGlvbhgFIAEoARIJCgF4GAYgASgBEgkKAXkYByABKAESCQoBdxgIIAEoARIJCgFoGAkgASgBIiQKBlNvdXJjZRINCgV0aXRsZRgBIAEoCRILCgN1cmwYAiABKAkiIAoPTGlzdEFwcHNSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJIjMKEExpc3RBcHBzUmVzcG9uc2USHwoEYXBwcxgBIAMoCzIRLnRhbmsuYXBwcy52MS5BcHAiIQoPR2V0VG9vbHNSZXF1ZXN0Eg4KBmFwcF9pZBgBIAEoCSJVChBHZXRUb29sc1Jlc3BvbnNlEh4KA2FwcBgBIAEoCzIRLnRhbmsuYXBwcy52MS5BcHASIQoFdG9vbHMYAiADKAsyEi50YW5rLmFwcHMudjEuVG9vbCJHCg9DYWxsVG9vbFJlcXVlc3QSDgoGYXBwX2lkGAEgASgJEgwKBHRvb2wYAiABKAkSFgoOYXJndW1lbnRzX2pzb24YAyABKAkifAoQQ2FsbFRvb2xSZXNwb25zZRIMCgR0ZXh0GAEgASgJEiUKB3NvdXJjZXMYAiADKAsyFC50YW5rLmFwcHMudjEuU291cmNlEhAKCGlzX2Vycm9yGAMgASgIEiEKBW1hcmtzGAQgAygLMhIudGFuay5hcHBzLnYxLk1hcmtCwAEKEGNvbS50YW5rLmFwcHMudjFCCUFwcHNQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FwcHMvdjE7YXBwc3YxogIDVEFYqgIMVGFuay5BcHBzLlYxygIMVGFua1xBcHBzXFYx4gIYVGFua1xBcHBzXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXBwczo6VjFiBnByb3RvMw");
+  fileDesc("Chd0YW5rL2FwcHMvdjEvYXBwcy5wcm90bxIMdGFuay5hcHBzLnYxInoKA0FwcBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhAKCGxvZ29fdXJsGAQgASgJEgsKA3VybBgFIAEoCRINCgVtYWtlchgGIAEoCRIWCg5yZXF1aXJlc19sb2dpbhgHIAEoCCJ4CgpBcHBBY2NvdW50Eg4KBmFwcF9pZBgBIAEoCRIRCglzaWduZWRfaW4YAiABKAgSFQoNYWNjb3VudF9sYWJlbBgDIAEoCRIwCgxzaWduZWRfaW5fYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wImgKBFRvb2wSDAoEbmFtZRgBIAEoCRITCgtkZXNjcmlwdGlvbhgCIAEoCRIZChFpbnB1dF9zY2hlbWFfanNvbhgDIAEoCRIiCgVvZmZlchgEIAEoCzITLnRhbmsuYXBwcy52MS5PZmZlciIzCgVPZmZlchIMCgR0ZXh0GAEgASgJEg0KBW5lZWRzGAIgAygJEg0KBXRpdGxlGAMgASgJIoMBCgRNYXJrEgwKBGtpbmQYASABKAkSDwoHYmVhcmluZxgCIAEoARINCgVsYWJlbBgDIAEoCRIOCgZkZXRhaWwYBCABKAkSEQoJZWxldmF0aW9uGAUgASgBEgkKAXgYBiABKAESCQoBeRgHIAEoARIJCgF3GAggASgBEgkKAWgYCSABKAEiJAoGU291cmNlEg0KBXRpdGxlGAEgASgJEgsKA3VybBgCIAEoCSIgCg9MaXN0QXBwc1JlcXVlc3QSDQoFcXVlcnkYASABKAkiMwoQTGlzdEFwcHNSZXNwb25zZRIfCgRhcHBzGAEgAygLMhEudGFuay5hcHBzLnYxLkFwcCIhCg9HZXRUb29sc1JlcXVlc3QSDgoGYXBwX2lkGAEgASgJIlUKEEdldFRvb2xzUmVzcG9uc2USHgoDYXBwGAEgASgLMhEudGFuay5hcHBzLnYxLkFwcBIhCgV0b29scxgCIAMoCzISLnRhbmsuYXBwcy52MS5Ub29sIlgKD0NhbGxUb29sUmVxdWVzdBIOCgZhcHBfaWQYASABKAkSDAoEdG9vbBgCIAEoCRIWCg5hcmd1bWVudHNfanNvbhgDIAEoCRIPCgd1c2VyX2lkGAQgASgJInwKEENhbGxUb29sUmVzcG9uc2USDAoEdGV4dBgBIAEoCRIlCgdzb3VyY2VzGAIgAygLMhQudGFuay5hcHBzLnYxLlNvdXJjZRIQCghpc19lcnJvchgDIAEoCBIhCgVtYXJrcxgEIAMoCzISLnRhbmsuYXBwcy52MS5NYXJrQsABChBjb20udGFuay5hcHBzLnYxQglBcHBzUHJvdG9QAVpPZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9hcHBzL3YxO2FwcHN2MaICA1RBWKoCDFRhbmsuQXBwcy5WMcoCDFRhbmtcQXBwc1xWMeICGFRhbmtcQXBwc1xWMVxHUEJNZXRhZGF0YeoCDlRhbms6OkFwcHM6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.apps.v1.App
@@ -55,6 +57,14 @@ export type App = Message<"tank.apps.v1.App"> & {
    * @generated from field: string maker = 6;
    */
   maker: string;
+
+  /**
+   * The app needs the person to sign in to it before Neural can read it (tank.yaml
+   * neural_app.login). Its tools then answer for that person's account.
+   *
+   * @generated from field: bool requires_login = 7;
+   */
+  requiresLogin: boolean;
 };
 
 /**
@@ -63,6 +73,43 @@ export type App = Message<"tank.apps.v1.App"> & {
  */
 export const AppSchema: GenMessage<App> = /*@__PURE__*/
   messageDesc(file_tank_apps_v1_apps, 0);
+
+/**
+ * AppAccount is the person's sign-in to an app that requires one. TANK keeps the app's token
+ * for them (encrypted, in the control plane); Neural never sees it.
+ *
+ * @generated from message tank.apps.v1.AppAccount
+ */
+export type AppAccount = Message<"tank.apps.v1.AppAccount"> & {
+  /**
+   * @generated from field: string app_id = 1;
+   */
+  appId: string;
+
+  /**
+   * @generated from field: bool signed_in = 2;
+   */
+  signedIn: boolean;
+
+  /**
+   * How the app names the account ("robby@ketchell.dev"), from the app.
+   *
+   * @generated from field: string account_label = 3;
+   */
+  accountLabel: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp signed_in_at = 4;
+   */
+  signedInAt?: Timestamp;
+};
+
+/**
+ * Describes the message tank.apps.v1.AppAccount.
+ * Use `create(AppAccountSchema)` to create a new message.
+ */
+export const AppAccountSchema: GenMessage<AppAccount> = /*@__PURE__*/
+  messageDesc(file_tank_apps_v1_apps, 1);
 
 /**
  * One thing an app lets Neural read: an MCP tool.
@@ -102,7 +149,7 @@ export type Tool = Message<"tank.apps.v1.Tool"> & {
  * Use `create(ToolSchema)` to create a new message.
  */
 export const ToolSchema: GenMessage<Tool> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 1);
+  messageDesc(file_tank_apps_v1_apps, 2);
 
 /**
  * Offer is how a tool asks Neural to offer it (Robby, 2026-11-11: "Want me to display the
@@ -139,7 +186,7 @@ export type Offer = Message<"tank.apps.v1.Offer"> & {
  * Use `create(OfferSchema)` to create a new message.
  */
 export const OfferSchema: GenMessage<Offer> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 2);
+  messageDesc(file_tank_apps_v1_apps, 3);
 
 /**
  * Mark is one thing drawn over the person's camera, placed by compass bearing. The phone
@@ -213,7 +260,7 @@ export type Mark = Message<"tank.apps.v1.Mark"> & {
  * Use `create(MarkSchema)` to create a new message.
  */
 export const MarkSchema: GenMessage<Mark> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 3);
+  messageDesc(file_tank_apps_v1_apps, 4);
 
 /**
  * Where a result came from, for the citation.
@@ -237,7 +284,7 @@ export type Source = Message<"tank.apps.v1.Source"> & {
  * Use `create(SourceSchema)` to create a new message.
  */
 export const SourceSchema: GenMessage<Source> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 4);
+  messageDesc(file_tank_apps_v1_apps, 5);
 
 /**
  * @generated from message tank.apps.v1.ListAppsRequest
@@ -256,7 +303,7 @@ export type ListAppsRequest = Message<"tank.apps.v1.ListAppsRequest"> & {
  * Use `create(ListAppsRequestSchema)` to create a new message.
  */
 export const ListAppsRequestSchema: GenMessage<ListAppsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 5);
+  messageDesc(file_tank_apps_v1_apps, 6);
 
 /**
  * @generated from message tank.apps.v1.ListAppsResponse
@@ -273,7 +320,7 @@ export type ListAppsResponse = Message<"tank.apps.v1.ListAppsResponse"> & {
  * Use `create(ListAppsResponseSchema)` to create a new message.
  */
 export const ListAppsResponseSchema: GenMessage<ListAppsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 6);
+  messageDesc(file_tank_apps_v1_apps, 7);
 
 /**
  * @generated from message tank.apps.v1.GetToolsRequest
@@ -290,7 +337,7 @@ export type GetToolsRequest = Message<"tank.apps.v1.GetToolsRequest"> & {
  * Use `create(GetToolsRequestSchema)` to create a new message.
  */
 export const GetToolsRequestSchema: GenMessage<GetToolsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 7);
+  messageDesc(file_tank_apps_v1_apps, 8);
 
 /**
  * @generated from message tank.apps.v1.GetToolsResponse
@@ -312,7 +359,7 @@ export type GetToolsResponse = Message<"tank.apps.v1.GetToolsResponse"> & {
  * Use `create(GetToolsResponseSchema)` to create a new message.
  */
 export const GetToolsResponseSchema: GenMessage<GetToolsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 8);
+  messageDesc(file_tank_apps_v1_apps, 9);
 
 /**
  * Calls one tool. Carries nothing about the person, workspace or conversation by design.
@@ -334,6 +381,14 @@ export type CallToolRequest = Message<"tank.apps.v1.CallToolRequest"> & {
    * @generated from field: string arguments_json = 3;
    */
   argumentsJson: string;
+
+  /**
+   * For an app that requires login: whose account the call is made with. The control plane
+   * attaches that person's token; without one the call is refused with "sign in".
+   *
+   * @generated from field: string user_id = 4;
+   */
+  userId: string;
 };
 
 /**
@@ -341,7 +396,7 @@ export type CallToolRequest = Message<"tank.apps.v1.CallToolRequest"> & {
  * Use `create(CallToolRequestSchema)` to create a new message.
  */
 export const CallToolRequestSchema: GenMessage<CallToolRequest> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 9);
+  messageDesc(file_tank_apps_v1_apps, 10);
 
 /**
  * @generated from message tank.apps.v1.CallToolResponse
@@ -377,5 +432,5 @@ export type CallToolResponse = Message<"tank.apps.v1.CallToolResponse"> & {
  * Use `create(CallToolResponseSchema)` to create a new message.
  */
 export const CallToolResponseSchema: GenMessage<CallToolResponse> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 10);
+  messageDesc(file_tank_apps_v1_apps, 11);
 

@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { App, Mark } from "../../apps/v1/apps_pb.js";
+import type { App, AppAccount, Mark } from "../../apps/v1/apps_pb.js";
 import type { Message as Message$1 } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/ai/v1/ai.proto.
@@ -116,12 +116,48 @@ export type Conversation = Message$1<"tank.ai.v1.Conversation"> & {
      * @generated from field: repeated tank.ai.v1.ConnectedDevice devices = 19;
      */
     devices: ConnectedDevice[];
+    /**
+     * Who connected each app, so an app the person signed in to shows whose account it reads
+     * ("Datum · Robby's account"). In a shared conversation such an app answers only the
+     * messages of the person whose account it is.
+     *
+     * @generated from field: repeated tank.ai.v1.AppConnection app_connections = 20;
+     */
+    appConnections: AppConnection[];
 };
 /**
  * Describes the message tank.ai.v1.Conversation.
  * Use `create(ConversationSchema)` to create a new message.
  */
 export declare const ConversationSchema: GenMessage<Conversation>;
+/**
+ * @generated from message tank.ai.v1.AppConnection
+ */
+export type AppConnection = Message$1<"tank.ai.v1.AppConnection"> & {
+    /**
+     * @generated from field: string app_id = 1;
+     */
+    appId: string;
+    /**
+     * @generated from field: string connected_by_id = 2;
+     */
+    connectedById: string;
+    /**
+     * @generated from field: string connected_by_name = 3;
+     */
+    connectedByName: string;
+    /**
+     * The app requires login and the person who connected it has not signed in yet.
+     *
+     * @generated from field: bool needs_login = 4;
+     */
+    needsLogin: boolean;
+};
+/**
+ * Describes the message tank.ai.v1.AppConnection.
+ * Use `create(AppConnectionSchema)` to create a new message.
+ */
+export declare const AppConnectionSchema: GenMessage<AppConnection>;
 /**
  * @generated from message tank.ai.v1.ConnectedDevice
  */
@@ -1036,12 +1072,79 @@ export type Settings = Message$1<"tank.ai.v1.Settings"> & {
      * @generated from field: google.protobuf.Timestamp launch_at = 4;
      */
     launchAt?: Timestamp;
+    /**
+     * What every new conversation starts with (Robby, 2026-11-11: "if I want datum in every
+     * new conversation, I can select it in settings … same thing for devices and webpages").
+     *
+     * @generated from field: tank.ai.v1.Defaults defaults = 5;
+     */
+    defaults?: Defaults;
 };
 /**
  * Describes the message tank.ai.v1.Settings.
  * Use `create(SettingsSchema)` to create a new message.
  */
 export declare const SettingsSchema: GenMessage<Settings>;
+/**
+ * @generated from message tank.ai.v1.Defaults
+ */
+export type Defaults = Message$1<"tank.ai.v1.Defaults"> & {
+    /**
+     * Apps connected to every new conversation by the server when it is made.
+     *
+     * @generated from field: repeated string app_ids = 1;
+     */
+    appIds: string[];
+    /**
+     * Devices the app connects itself when it starts a new conversation, if it can.
+     *
+     * @generated from field: repeated tank.ai.v1.DefaultDevice devices = 2;
+     */
+    devices: DefaultDevice[];
+    /**
+     * Webpages the app opens in every new conversation (tank.browse.v1.OpenPage).
+     *
+     * @generated from field: repeated string page_urls = 3;
+     */
+    pageUrls: string[];
+};
+/**
+ * Describes the message tank.ai.v1.Defaults.
+ * Use `create(DefaultsSchema)` to create a new message.
+ */
+export declare const DefaultsSchema: GenMessage<Defaults>;
+/**
+ * @generated from message tank.ai.v1.DefaultDevice
+ */
+export type DefaultDevice = Message$1<"tank.ai.v1.DefaultDevice"> & {
+    /**
+     * "phone": this phone's own sensors; "bluetooth": a Bluetooth device the app has paired.
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * For a phone: which of its sensors ("camera", "location", "motion", ...).
+     *
+     * @generated from field: repeated string sensors = 2;
+     */
+    sensors: string[];
+    /**
+     * For Bluetooth: the id the app knows it by and its name.
+     *
+     * @generated from field: string bluetooth_id = 3;
+     */
+    bluetoothId: string;
+    /**
+     * @generated from field: string name = 4;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.ai.v1.DefaultDevice.
+ * Use `create(DefaultDeviceSchema)` to create a new message.
+ */
+export declare const DefaultDeviceSchema: GenMessage<DefaultDevice>;
 /**
  * @generated from message tank.ai.v1.UpdateSettingsRequest
  */
@@ -1050,6 +1153,17 @@ export type UpdateSettingsRequest = Message$1<"tank.ai.v1.UpdateSettingsRequest"
      * @generated from field: string instructions = 1;
      */
     instructions: string;
+    /**
+     * Set defaults (replacing them) only when set_defaults is true, so an older client that
+     * sends only instructions never clears them.
+     *
+     * @generated from field: tank.ai.v1.Defaults defaults = 2;
+     */
+    defaults?: Defaults;
+    /**
+     * @generated from field: bool set_defaults = 3;
+     */
+    setDefaults: boolean;
 };
 /**
  * Describes the message tank.ai.v1.UpdateSettingsRequest.
@@ -1750,6 +1864,86 @@ export type SetMutedResponse = Message$1<"tank.ai.v1.SetMutedResponse"> & {
  */
 export declare const SetMutedResponseSchema: GenMessage<SetMutedResponse>;
 /**
+ * @generated from message tank.ai.v1.StartAppLoginRequest
+ */
+export type StartAppLoginRequest = Message$1<"tank.ai.v1.StartAppLoginRequest"> & {
+    /**
+     * @generated from field: string app_id = 1;
+     */
+    appId: string;
+    /**
+     * Where the browser goes when sign-in finishes: a TANK web address or an app link.
+     *
+     * @generated from field: string return_to = 2;
+     */
+    returnTo: string;
+};
+/**
+ * Describes the message tank.ai.v1.StartAppLoginRequest.
+ * Use `create(StartAppLoginRequestSchema)` to create a new message.
+ */
+export declare const StartAppLoginRequestSchema: GenMessage<StartAppLoginRequest>;
+/**
+ * @generated from message tank.ai.v1.StartAppLoginResponse
+ */
+export type StartAppLoginResponse = Message$1<"tank.ai.v1.StartAppLoginResponse"> & {
+    /**
+     * @generated from field: string url = 1;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.ai.v1.StartAppLoginResponse.
+ * Use `create(StartAppLoginResponseSchema)` to create a new message.
+ */
+export declare const StartAppLoginResponseSchema: GenMessage<StartAppLoginResponse>;
+/**
+ * @generated from message tank.ai.v1.ListAppAccountsRequest
+ */
+export type ListAppAccountsRequest = Message$1<"tank.ai.v1.ListAppAccountsRequest"> & {};
+/**
+ * Describes the message tank.ai.v1.ListAppAccountsRequest.
+ * Use `create(ListAppAccountsRequestSchema)` to create a new message.
+ */
+export declare const ListAppAccountsRequestSchema: GenMessage<ListAppAccountsRequest>;
+/**
+ * @generated from message tank.ai.v1.ListAppAccountsResponse
+ */
+export type ListAppAccountsResponse = Message$1<"tank.ai.v1.ListAppAccountsResponse"> & {
+    /**
+     * @generated from field: repeated tank.apps.v1.AppAccount accounts = 1;
+     */
+    accounts: AppAccount[];
+};
+/**
+ * Describes the message tank.ai.v1.ListAppAccountsResponse.
+ * Use `create(ListAppAccountsResponseSchema)` to create a new message.
+ */
+export declare const ListAppAccountsResponseSchema: GenMessage<ListAppAccountsResponse>;
+/**
+ * @generated from message tank.ai.v1.SignOutOfAppRequest
+ */
+export type SignOutOfAppRequest = Message$1<"tank.ai.v1.SignOutOfAppRequest"> & {
+    /**
+     * @generated from field: string app_id = 1;
+     */
+    appId: string;
+};
+/**
+ * Describes the message tank.ai.v1.SignOutOfAppRequest.
+ * Use `create(SignOutOfAppRequestSchema)` to create a new message.
+ */
+export declare const SignOutOfAppRequestSchema: GenMessage<SignOutOfAppRequest>;
+/**
+ * @generated from message tank.ai.v1.SignOutOfAppResponse
+ */
+export type SignOutOfAppResponse = Message$1<"tank.ai.v1.SignOutOfAppResponse"> & {};
+/**
+ * Describes the message tank.ai.v1.SignOutOfAppResponse.
+ * Use `create(SignOutOfAppResponseSchema)` to create a new message.
+ */
+export declare const SignOutOfAppResponseSchema: GenMessage<SignOutOfAppResponse>;
+/**
  * @generated from enum tank.ai.v1.Role
  */
 export declare enum Role {
@@ -1895,6 +2089,33 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof DisconnectAppRequestSchema;
         output: typeof DisconnectAppResponseSchema;
+    };
+    /**
+     * Signing in to an app that requires it: the address of the app's own sign-in page, which
+     * the client opens in the system browser; it comes back to return_to when done.
+     *
+     * @generated from rpc tank.ai.v1.AiService.StartAppLogin
+     */
+    startAppLogin: {
+        methodKind: "unary";
+        input: typeof StartAppLoginRequestSchema;
+        output: typeof StartAppLoginResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.ListAppAccounts
+     */
+    listAppAccounts: {
+        methodKind: "unary";
+        input: typeof ListAppAccountsRequestSchema;
+        output: typeof ListAppAccountsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.SignOutOfApp
+     */
+    signOutOfApp: {
+        methodKind: "unary";
+        input: typeof SignOutOfAppRequestSchema;
+        output: typeof SignOutOfAppResponseSchema;
     };
     /**
      * Takes an overlay off the camera.

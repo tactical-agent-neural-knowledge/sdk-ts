@@ -1,4 +1,5 @@
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/apps/v1/apps.proto.
@@ -42,12 +43,50 @@ export type App = Message<"tank.apps.v1.App"> & {
      * @generated from field: string maker = 6;
      */
     maker: string;
+    /**
+     * The app needs the person to sign in to it before Neural can read it (tank.yaml
+     * neural_app.login). Its tools then answer for that person's account.
+     *
+     * @generated from field: bool requires_login = 7;
+     */
+    requiresLogin: boolean;
 };
 /**
  * Describes the message tank.apps.v1.App.
  * Use `create(AppSchema)` to create a new message.
  */
 export declare const AppSchema: GenMessage<App>;
+/**
+ * AppAccount is the person's sign-in to an app that requires one. TANK keeps the app's token
+ * for them (encrypted, in the control plane); Neural never sees it.
+ *
+ * @generated from message tank.apps.v1.AppAccount
+ */
+export type AppAccount = Message<"tank.apps.v1.AppAccount"> & {
+    /**
+     * @generated from field: string app_id = 1;
+     */
+    appId: string;
+    /**
+     * @generated from field: bool signed_in = 2;
+     */
+    signedIn: boolean;
+    /**
+     * How the app names the account ("robby@ketchell.dev"), from the app.
+     *
+     * @generated from field: string account_label = 3;
+     */
+    accountLabel: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp signed_in_at = 4;
+     */
+    signedInAt?: Timestamp;
+};
+/**
+ * Describes the message tank.apps.v1.AppAccount.
+ * Use `create(AppAccountSchema)` to create a new message.
+ */
+export declare const AppAccountSchema: GenMessage<AppAccount>;
 /**
  * One thing an app lets Neural read: an MCP tool.
  *
@@ -277,6 +316,13 @@ export type CallToolRequest = Message<"tank.apps.v1.CallToolRequest"> & {
      * @generated from field: string arguments_json = 3;
      */
     argumentsJson: string;
+    /**
+     * For an app that requires login: whose account the call is made with. The control plane
+     * attaches that person's token; without one the call is refused with "sign in".
+     *
+     * @generated from field: string user_id = 4;
+     */
+    userId: string;
 };
 /**
  * Describes the message tank.apps.v1.CallToolRequest.
