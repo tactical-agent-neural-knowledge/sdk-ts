@@ -12,7 +12,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { planGlance, planMarkdown } from "../blocks/plan.js";
 import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
@@ -304,12 +304,39 @@ function GuardrailPromptBlock({ value, ctx }) {
 function isWebUrl(s) {
     return /^https?:\/\/\S+$/.test(s.trim());
 }
+/**
+ * A decision tapped and not yet reflected on the card (Robby, 2026-11-11: "the button didn't
+ * update for 5-7 seconds and I kept tapping it"). The buttons lock at once and say what is
+ * happening; they unlock when the card comes back decided, or after 20 s so a lost tap can be
+ * retried.
+ */
+function usePendingDecision(decided) {
+    const [pending, setPending] = useState(null);
+    useEffect(() => {
+        if (decided)
+            setPending(null);
+    }, [decided]);
+    useEffect(() => {
+        if (!pending)
+            return;
+        const t = setTimeout(() => setPending(null), 20000);
+        return () => clearTimeout(t);
+    }, [pending]);
+    return [pending, setPending];
+}
 export function ApprovalPromptBlock({ value, ctx }) {
+    const [pending, setPending] = usePendingDecision(value.decided);
+    const fire = (actionId) => {
+        if (pending)
+            return;
+        setPending(actionId);
+        ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
+    };
     const expires = tsMs(value.expiresAt);
     const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
     if (value.kind === GateKind.GUARDRAIL)
         return _jsx(GuardrailPromptBlock, { value: value, ctx: ctx });
-    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [isWebUrl(value.subject) ? (_jsx(Link, { href: value.subject, target: "_blank", rel: "noopener noreferrer", variant: "body1", sx: { wordBreak: "break-all" }, "data-testid": "approval-subject-link", children: value.subject })) : (_jsx(Typography, { variant: "body1", children: value.subject })), value.detail ? (_jsx(Typography, { variant: "body2", color: "text.secondary", "data-testid": "approval-detail", children: value.detail })) : (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] })), value.decided ? (_jsx(Chip, { size: "small", label: value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } })) : (_jsxs(Stack, { direction: "row", spacing: 1, children: [_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "gate.approve", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.approve", value: value.gateId }), children: value.approveLabel || "Approve" }), _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "gate.request_changes", onClick: () => ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.request_changes", value: value.gateId }), children: value.rejectLabel || "Reject" })] }))] }));
+    return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [isWebUrl(value.subject) ? (_jsx(Link, { href: value.subject, target: "_blank", rel: "noopener noreferrer", variant: "body1", sx: { wordBreak: "break-all" }, "data-testid": "approval-subject-link", children: value.subject })) : (_jsx(Typography, { variant: "body1", children: value.subject })), value.detail ? (_jsx(Typography, { variant: "body2", color: "text.secondary", "data-testid": "approval-detail", children: value.detail })) : (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] })), value.decided ? (_jsx(Chip, { size: "small", label: value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } })) : (_jsxs(Stack, { direction: "row", spacing: 1, children: [_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "gate.approve", disabled: pending !== null, onClick: () => fire("gate.approve"), children: pending === "gate.approve" ? "Approving…" : value.approveLabel || "Approve" }), _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "gate.request_changes", disabled: pending !== null, onClick: () => fire("gate.request_changes"), children: pending === "gate.request_changes" ? "Sending…" : value.rejectLabel || "Reject" })] }))] }));
 }
 export function ToolLogBlock({ value, ctx }) {
     const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString().slice(11, 19));

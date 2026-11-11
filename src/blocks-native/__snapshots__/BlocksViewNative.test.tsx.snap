@@ -192,6 +192,8 @@ exports[`BlocksViewNative fixtures > renders approval and matches its snapshot 1
       >
         <Button
           compact={true}
+          disabled={false}
+          loading={false}
           mode="contained"
           onPress={[Function]}
           style={
@@ -205,6 +207,8 @@ exports[`BlocksViewNative fixtures > renders approval and matches its snapshot 1
         </Button>
         <Button
           compact={true}
+          disabled={false}
+          loading={false}
           mode="outlined"
           onPress={[Function]}
           style={

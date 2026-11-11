@@ -100,11 +100,13 @@ describe("interactions", () => {
     const seen: unknown[] = [];
     const r = render(<BlocksViewNative blocks={load("approval")} onAction={(a) => seen.push(a)} />);
     press(byTestId(r.root, "action-approve"));
+    // A tap locks the card until it comes back decided: a second tap sends nothing.
+    press(byTestId(r.root, "action-approve"));
     press(byTestId(r.root, "action-reject"));
-    expect(seen).toEqual([
-      { blockId: "b3", actionId: "gate.approve", value: "gate_01J8ZX" },
-      { blockId: "b3", actionId: "gate.request_changes", value: "gate_01J8ZX" },
-    ]);
+    expect(seen).toEqual([{ blockId: "b3", actionId: "gate.approve", value: "gate_01J8ZX" }]);
+    const r2 = render(<BlocksViewNative blocks={load("approval")} onAction={(a) => seen.push(a)} />);
+    press(byTestId(r2.root, "action-reject"));
+    expect(seen[1]).toEqual({ blockId: "b3", actionId: "gate.request_changes", value: "gate_01J8ZX" });
   });
 
   it("a run's key card copies through the host once, never posts the action, and refuses after", async () => {
