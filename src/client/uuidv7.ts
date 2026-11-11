@@ -10,17 +10,31 @@ let seq = 0;
 /** Fills `n` cryptographically random bytes. Injectable for runtimes without `crypto.getRandomValues`. */
 export type RandomBytes = (n: number) => Uint8Array;
 
-/** Default source: `globalThis.crypto.getRandomValues` (browsers, node, Expo with `expo-crypto`'s polyfill). */
+/** Bytes from Math.random: enough for a client_msg_id, which must be unique, not secret. */
+const weakRandomBytes: RandomBytes = (n) => {
+  const out = new Uint8Array(n);
+  for (let i = 0; i < n; i++) out[i] = Math.floor(Math.random() * 256);
+  return out;
+};
+
+/**
+ * Default source: `globalThis.crypto.getRandomValues` (browsers, node, Expo with `expo-crypto`'s
+ * polyfill), falling back to Math.random when it is missing or refuses. On 2026-11-11 a person on
+ * Ubuntu's Firefox could not send a single message: getRandomValues threw "OperationError" in
+ * their browser, and the composer failed before anything left it. An id only has to be unique.
+ */
 export const cryptoRandomBytes: RandomBytes = (n) => {
   const c = (globalThis as { crypto?: { getRandomValues?: (a: Uint8Array) => Uint8Array } }).crypto;
-  if (typeof c?.getRandomValues !== "function") {
-    throw new Error(
-      "uuidv7: crypto.getRandomValues is not available; polyfill it (expo-crypto) or pass `randomBytes` to createTankClient",
-    );
+  if (typeof c?.getRandomValues === "function") {
+    try {
+      const out = new Uint8Array(n);
+      c.getRandomValues(out);
+      return out;
+    } catch {
+      // fall through
+    }
   }
-  const out = new Uint8Array(n);
-  c.getRandomValues(out);
-  return out;
+  return weakRandomBytes(n);
 };
 
 export function uuidv7(now: number = Date.now(), randomBytes: RandomBytes = cryptoRandomBytes): string {

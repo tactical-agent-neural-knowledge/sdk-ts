@@ -22,3 +22,27 @@ describe("uuidv7", () => {
     expect(b > a).toBe(true);
   });
 });
+
+describe("uuidv7 when the browser refuses random bytes", () => {
+  it("still makes unique ids", () => {
+    const g = globalThis as { crypto?: unknown };
+    const saved = Object.getOwnPropertyDescriptor(globalThis, "crypto");
+    Object.defineProperty(globalThis, "crypto", {
+      configurable: true,
+      value: {
+        getRandomValues: () => {
+          throw new DOMException("The operation failed for an operation-specific reason", "OperationError");
+        },
+      },
+    });
+    try {
+      const a = uuidv7();
+      const b = uuidv7();
+      expect(a).toMatch(/^[0-9a-f-]{36}$/);
+      expect(a).not.toBe(b);
+    } finally {
+      if (saved) Object.defineProperty(globalThis, "crypto", saved);
+      else delete g.crypto;
+    }
+  });
+});
