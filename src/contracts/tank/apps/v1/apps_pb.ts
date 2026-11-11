@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/apps/v1/apps.proto.
  */
 export const file_tank_apps_v1_apps: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL2FwcHMvdjEvYXBwcy5wcm90bxIMdGFuay5hcHBzLnYxImIKA0FwcBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhAKCGxvZ29fdXJsGAQgASgJEgsKA3VybBgFIAEoCRINCgVtYWtlchgGIAEoCSJECgRUb29sEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSGQoRaW5wdXRfc2NoZW1hX2pzb24YAyABKAkiJAoGU291cmNlEg0KBXRpdGxlGAEgASgJEgsKA3VybBgCIAEoCSIgCg9MaXN0QXBwc1JlcXVlc3QSDQoFcXVlcnkYASABKAkiMwoQTGlzdEFwcHNSZXNwb25zZRIfCgRhcHBzGAEgAygLMhEudGFuay5hcHBzLnYxLkFwcCIhCg9HZXRUb29sc1JlcXVlc3QSDgoGYXBwX2lkGAEgASgJIlUKEEdldFRvb2xzUmVzcG9uc2USHgoDYXBwGAEgASgLMhEudGFuay5hcHBzLnYxLkFwcBIhCgV0b29scxgCIAMoCzISLnRhbmsuYXBwcy52MS5Ub29sIkcKD0NhbGxUb29sUmVxdWVzdBIOCgZhcHBfaWQYASABKAkSDAoEdG9vbBgCIAEoCRIWCg5hcmd1bWVudHNfanNvbhgDIAEoCSJZChBDYWxsVG9vbFJlc3BvbnNlEgwKBHRleHQYASABKAkSJQoHc291cmNlcxgCIAMoCzIULnRhbmsuYXBwcy52MS5Tb3VyY2USEAoIaXNfZXJyb3IYAyABKAhCwAEKEGNvbS50YW5rLmFwcHMudjFCCUFwcHNQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FwcHMvdjE7YXBwc3YxogIDVEFYqgIMVGFuay5BcHBzLlYxygIMVGFua1xBcHBzXFYx4gIYVGFua1xBcHBzXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXBwczo6VjFiBnByb3RvMw");
+  fileDesc("Chd0YW5rL2FwcHMvdjEvYXBwcy5wcm90bxIMdGFuay5hcHBzLnYxImIKA0FwcBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhAKCGxvZ29fdXJsGAQgASgJEgsKA3VybBgFIAEoCRINCgVtYWtlchgGIAEoCSJoCgRUb29sEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSGQoRaW5wdXRfc2NoZW1hX2pzb24YAyABKAkSIgoFb2ZmZXIYBCABKAsyEy50YW5rLmFwcHMudjEuT2ZmZXIiJAoFT2ZmZXISDAoEdGV4dBgBIAEoCRINCgVuZWVkcxgCIAMoCSJXCgRNYXJrEgwKBGtpbmQYASABKAkSDwoHYmVhcmluZxgCIAEoARINCgVsYWJlbBgDIAEoCRIOCgZkZXRhaWwYBCABKAkSEQoJZWxldmF0aW9uGAUgASgBIiQKBlNvdXJjZRINCgV0aXRsZRgBIAEoCRILCgN1cmwYAiABKAkiIAoPTGlzdEFwcHNSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJIjMKEExpc3RBcHBzUmVzcG9uc2USHwoEYXBwcxgBIAMoCzIRLnRhbmsuYXBwcy52MS5BcHAiIQoPR2V0VG9vbHNSZXF1ZXN0Eg4KBmFwcF9pZBgBIAEoCSJVChBHZXRUb29sc1Jlc3BvbnNlEh4KA2FwcBgBIAEoCzIRLnRhbmsuYXBwcy52MS5BcHASIQoFdG9vbHMYAiADKAsyEi50YW5rLmFwcHMudjEuVG9vbCJHCg9DYWxsVG9vbFJlcXVlc3QSDgoGYXBwX2lkGAEgASgJEgwKBHRvb2wYAiABKAkSFgoOYXJndW1lbnRzX2pzb24YAyABKAkifAoQQ2FsbFRvb2xSZXNwb25zZRIMCgR0ZXh0GAEgASgJEiUKB3NvdXJjZXMYAiADKAsyFC50YW5rLmFwcHMudjEuU291cmNlEhAKCGlzX2Vycm9yGAMgASgIEiEKBW1hcmtzGAQgAygLMhIudGFuay5hcHBzLnYxLk1hcmtCwAEKEGNvbS50YW5rLmFwcHMudjFCCUFwcHNQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FwcHMvdjE7YXBwc3YxogIDVEFYqgIMVGFuay5BcHBzLlYxygIMVGFua1xBcHBzXFYx4gIYVGFua1xBcHBzXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXBwczo6VjFiBnByb3RvMw");
 
 /**
  * @generated from message tank.apps.v1.App
@@ -86,6 +86,15 @@ export type Tool = Message<"tank.apps.v1.Tool"> & {
    * @generated from field: string input_schema_json = 3;
    */
   inputSchemaJson: string;
+
+  /**
+   * Set when the tool is something Neural can offer to do on its own, from what is connected
+   * (the kit's _meta "chat.tank/offer"). An offered tool is called with the person's position
+   * as {"latitude": <number>, "longitude": <number>}, so its schema must take those two.
+   *
+   * @generated from field: tank.apps.v1.Offer offer = 4;
+   */
+  offer?: Offer;
 };
 
 /**
@@ -94,6 +103,87 @@ export type Tool = Message<"tank.apps.v1.Tool"> & {
  */
 export const ToolSchema: GenMessage<Tool> = /*@__PURE__*/
   messageDesc(file_tank_apps_v1_apps, 1);
+
+/**
+ * Offer is how a tool asks Neural to offer it (Robby, 2026-11-11: "Want me to display the
+ * wind over your camera so you can see the direction it is coming from?").
+ *
+ * @generated from message tank.apps.v1.Offer
+ */
+export type Offer = Message<"tank.apps.v1.Offer"> & {
+  /**
+   * The offer as Neural says it, a question the person answers by tapping it.
+   *
+   * @generated from field: string text = 1;
+   */
+  text: string;
+
+  /**
+   * What the conversation must have for the offer to make sense: "camera" (a phone camera
+   * connected), "location" (a position from a connected device). Unknown needs are never met.
+   *
+   * @generated from field: repeated string needs = 2;
+   */
+  needs: string[];
+};
+
+/**
+ * Describes the message tank.apps.v1.Offer.
+ * Use `create(OfferSchema)` to create a new message.
+ */
+export const OfferSchema: GenMessage<Offer> = /*@__PURE__*/
+  messageDesc(file_tank_apps_v1_apps, 2);
+
+/**
+ * Mark is one thing drawn over the person's camera, placed by compass bearing. The phone
+ * turns it against its own compass, so it stays where it belongs as the person pans.
+ *
+ * @generated from message tank.apps.v1.Mark
+ */
+export type Mark = Message<"tank.apps.v1.Mark"> & {
+  /**
+   * "from": something arriving from the bearing (wind, rain). "at": something that sits at
+   * the bearing (the sunset, a place). "badge": a reading with no direction.
+   *
+   * @generated from field: string kind = 1;
+   */
+  kind: string;
+
+  /**
+   * Degrees clockwise from true north, [0, 360). Ignored for a badge.
+   *
+   * @generated from field: double bearing = 2;
+   */
+  bearing: number;
+
+  /**
+   * Short, shown large: "14 km/h".
+   *
+   * @generated from field: string label = 3;
+   */
+  label: string;
+
+  /**
+   * Shown under the label: "Gusts 25 km/h".
+   *
+   * @generated from field: string detail = 4;
+   */
+  detail: string;
+
+  /**
+   * Degrees above the horizon, for something in the sky; 0 on the horizon.
+   *
+   * @generated from field: double elevation = 5;
+   */
+  elevation: number;
+};
+
+/**
+ * Describes the message tank.apps.v1.Mark.
+ * Use `create(MarkSchema)` to create a new message.
+ */
+export const MarkSchema: GenMessage<Mark> = /*@__PURE__*/
+  messageDesc(file_tank_apps_v1_apps, 3);
 
 /**
  * Where a result came from, for the citation.
@@ -117,7 +207,7 @@ export type Source = Message<"tank.apps.v1.Source"> & {
  * Use `create(SourceSchema)` to create a new message.
  */
 export const SourceSchema: GenMessage<Source> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 2);
+  messageDesc(file_tank_apps_v1_apps, 4);
 
 /**
  * @generated from message tank.apps.v1.ListAppsRequest
@@ -136,7 +226,7 @@ export type ListAppsRequest = Message<"tank.apps.v1.ListAppsRequest"> & {
  * Use `create(ListAppsRequestSchema)` to create a new message.
  */
 export const ListAppsRequestSchema: GenMessage<ListAppsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 3);
+  messageDesc(file_tank_apps_v1_apps, 5);
 
 /**
  * @generated from message tank.apps.v1.ListAppsResponse
@@ -153,7 +243,7 @@ export type ListAppsResponse = Message<"tank.apps.v1.ListAppsResponse"> & {
  * Use `create(ListAppsResponseSchema)` to create a new message.
  */
 export const ListAppsResponseSchema: GenMessage<ListAppsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 4);
+  messageDesc(file_tank_apps_v1_apps, 6);
 
 /**
  * @generated from message tank.apps.v1.GetToolsRequest
@@ -170,7 +260,7 @@ export type GetToolsRequest = Message<"tank.apps.v1.GetToolsRequest"> & {
  * Use `create(GetToolsRequestSchema)` to create a new message.
  */
 export const GetToolsRequestSchema: GenMessage<GetToolsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 5);
+  messageDesc(file_tank_apps_v1_apps, 7);
 
 /**
  * @generated from message tank.apps.v1.GetToolsResponse
@@ -192,7 +282,7 @@ export type GetToolsResponse = Message<"tank.apps.v1.GetToolsResponse"> & {
  * Use `create(GetToolsResponseSchema)` to create a new message.
  */
 export const GetToolsResponseSchema: GenMessage<GetToolsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 6);
+  messageDesc(file_tank_apps_v1_apps, 8);
 
 /**
  * Calls one tool. Carries nothing about the person, workspace or conversation by design.
@@ -221,7 +311,7 @@ export type CallToolRequest = Message<"tank.apps.v1.CallToolRequest"> & {
  * Use `create(CallToolRequestSchema)` to create a new message.
  */
 export const CallToolRequestSchema: GenMessage<CallToolRequest> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 7);
+  messageDesc(file_tank_apps_v1_apps, 9);
 
 /**
  * @generated from message tank.apps.v1.CallToolResponse
@@ -243,6 +333,13 @@ export type CallToolResponse = Message<"tank.apps.v1.CallToolResponse"> & {
    * @generated from field: bool is_error = 3;
    */
   isError: boolean;
+
+  /**
+   * What the result draws over the camera (the kit's _meta "chat.tank/marks"), at most 12.
+   *
+   * @generated from field: repeated tank.apps.v1.Mark marks = 4;
+   */
+  marks: Mark[];
 };
 
 /**
@@ -250,5 +347,5 @@ export type CallToolResponse = Message<"tank.apps.v1.CallToolResponse"> & {
  * Use `create(CallToolResponseSchema)` to create a new message.
  */
 export const CallToolResponseSchema: GenMessage<CallToolResponse> = /*@__PURE__*/
-  messageDesc(file_tank_apps_v1_apps, 8);
+  messageDesc(file_tank_apps_v1_apps, 10);
 

@@ -68,12 +68,90 @@ export type Tool = Message<"tank.apps.v1.Tool"> & {
      * @generated from field: string input_schema_json = 3;
      */
     inputSchemaJson: string;
+    /**
+     * Set when the tool is something Neural can offer to do on its own, from what is connected
+     * (the kit's _meta "chat.tank/offer"). An offered tool is called with the person's position
+     * as {"latitude": <number>, "longitude": <number>}, so its schema must take those two.
+     *
+     * @generated from field: tank.apps.v1.Offer offer = 4;
+     */
+    offer?: Offer;
 };
 /**
  * Describes the message tank.apps.v1.Tool.
  * Use `create(ToolSchema)` to create a new message.
  */
 export declare const ToolSchema: GenMessage<Tool>;
+/**
+ * Offer is how a tool asks Neural to offer it (Robby, 2026-11-11: "Want me to display the
+ * wind over your camera so you can see the direction it is coming from?").
+ *
+ * @generated from message tank.apps.v1.Offer
+ */
+export type Offer = Message<"tank.apps.v1.Offer"> & {
+    /**
+     * The offer as Neural says it, a question the person answers by tapping it.
+     *
+     * @generated from field: string text = 1;
+     */
+    text: string;
+    /**
+     * What the conversation must have for the offer to make sense: "camera" (a phone camera
+     * connected), "location" (a position from a connected device). Unknown needs are never met.
+     *
+     * @generated from field: repeated string needs = 2;
+     */
+    needs: string[];
+};
+/**
+ * Describes the message tank.apps.v1.Offer.
+ * Use `create(OfferSchema)` to create a new message.
+ */
+export declare const OfferSchema: GenMessage<Offer>;
+/**
+ * Mark is one thing drawn over the person's camera, placed by compass bearing. The phone
+ * turns it against its own compass, so it stays where it belongs as the person pans.
+ *
+ * @generated from message tank.apps.v1.Mark
+ */
+export type Mark = Message<"tank.apps.v1.Mark"> & {
+    /**
+     * "from": something arriving from the bearing (wind, rain). "at": something that sits at
+     * the bearing (the sunset, a place). "badge": a reading with no direction.
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * Degrees clockwise from true north, [0, 360). Ignored for a badge.
+     *
+     * @generated from field: double bearing = 2;
+     */
+    bearing: number;
+    /**
+     * Short, shown large: "14 km/h".
+     *
+     * @generated from field: string label = 3;
+     */
+    label: string;
+    /**
+     * Shown under the label: "Gusts 25 km/h".
+     *
+     * @generated from field: string detail = 4;
+     */
+    detail: string;
+    /**
+     * Degrees above the horizon, for something in the sky; 0 on the horizon.
+     *
+     * @generated from field: double elevation = 5;
+     */
+    elevation: number;
+};
+/**
+ * Describes the message tank.apps.v1.Mark.
+ * Use `create(MarkSchema)` to create a new message.
+ */
+export declare const MarkSchema: GenMessage<Mark>;
 /**
  * Where a result came from, for the citation.
  *
@@ -198,6 +276,12 @@ export type CallToolResponse = Message<"tank.apps.v1.CallToolResponse"> & {
      * @generated from field: bool is_error = 3;
      */
     isError: boolean;
+    /**
+     * What the result draws over the camera (the kit's _meta "chat.tank/marks"), at most 12.
+     *
+     * @generated from field: repeated tank.apps.v1.Mark marks = 4;
+     */
+    marks: Mark[];
 };
 /**
  * Describes the message tank.apps.v1.CallToolResponse.
