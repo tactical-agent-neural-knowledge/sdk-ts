@@ -369,6 +369,17 @@ export type Session = Message<"tank.devices.v1.Session"> & {
      * @generated from field: google.protobuf.Timestamp view_at = 12;
      */
     viewAt?: Timestamp;
+    /**
+     * Whose device it is. In a conversation with several people everyone sees every connected
+     * device, named by its owner; only the owner may send its data or disconnect it.
+     *
+     * @generated from field: string owner_id = 13;
+     */
+    ownerId: string;
+    /**
+     * @generated from field: string owner_name = 14;
+     */
+    ownerName: string;
 };
 /**
  * Describes the message tank.devices.v1.Session.
