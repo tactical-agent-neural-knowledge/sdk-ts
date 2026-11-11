@@ -152,6 +152,25 @@ export type Mark = Message<"tank.apps.v1.Mark"> & {
      * @generated from field: double elevation = 5;
      */
     elevation: number;
+    /**
+     * Kind "box": a rectangle on a screen or picture rather than a compass bearing (a webpage's
+     * button, a spot on a camera still), as fractions of the image's width and height (0..1).
+     *
+     * @generated from field: double x = 6;
+     */
+    x: number;
+    /**
+     * @generated from field: double y = 7;
+     */
+    y: number;
+    /**
+     * @generated from field: double w = 8;
+     */
+    w: number;
+    /**
+     * @generated from field: double h = 9;
+     */
+    h: number;
 };
 /**
  * Describes the message tank.apps.v1.Mark.
