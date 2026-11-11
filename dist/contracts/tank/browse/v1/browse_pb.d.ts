@@ -48,12 +48,54 @@ export type Page = Message<"tank.browse.v1.Page"> & {
      * @generated from field: string reason = 9;
      */
     reason: string;
+    /**
+     * Who is driving now: the owner unless they gave control to someone else.
+     *
+     * @generated from field: string driver_id = 10;
+     */
+    driverId: string;
+    /**
+     * @generated from field: string driver_name = 11;
+     */
+    driverName: string;
 };
 /**
  * Describes the message tank.browse.v1.Page.
  * Use `create(PageSchema)` to create a new message.
  */
 export declare const PageSchema: GenMessage<Page>;
+/**
+ * @generated from message tank.browse.v1.SetDriverRequest
+ */
+export type SetDriverRequest = Message<"tank.browse.v1.SetDriverRequest"> & {
+    /**
+     * @generated from field: string page_id = 1;
+     */
+    pageId: string;
+    /**
+     * @generated from field: string user_id = 2;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.browse.v1.SetDriverRequest.
+ * Use `create(SetDriverRequestSchema)` to create a new message.
+ */
+export declare const SetDriverRequestSchema: GenMessage<SetDriverRequest>;
+/**
+ * @generated from message tank.browse.v1.SetDriverResponse
+ */
+export type SetDriverResponse = Message<"tank.browse.v1.SetDriverResponse"> & {
+    /**
+     * @generated from field: tank.browse.v1.Page page = 1;
+     */
+    page?: Page;
+};
+/**
+ * Describes the message tank.browse.v1.SetDriverResponse.
+ * Use `create(SetDriverResponseSchema)` to create a new message.
+ */
+export declare const SetDriverResponseSchema: GenMessage<SetDriverResponse>;
 /**
  * @generated from message tank.browse.v1.OpenPageRequest
  */
@@ -393,7 +435,7 @@ export declare const BrowseService: GenService<{
     };
     /**
      * What the person does on the page: tap, type, scroll, back, go to an address. Only the
-     * page's owner may act.
+     * page's current driver may act.
      *
      * @generated from rpc tank.browse.v1.BrowseService.Act
      */
@@ -401,6 +443,19 @@ export declare const BrowseService: GenService<{
         methodKind: "unary";
         input: typeof ActRequestSchema;
         output: typeof ActResponseSchema;
+    };
+    /**
+     * Hands control of the page to someone else in the conversation (Robby, 2026-11-11: "allow
+     * them to give control to the other people in the conversation"). The owner may give it to
+     * anyone in the conversation and take it back at any time; the current driver may hand it
+     * back to the owner. An empty user_id gives it back to the owner.
+     *
+     * @generated from rpc tank.browse.v1.BrowseService.SetDriver
+     */
+    setDriver: {
+        methodKind: "unary";
+        input: typeof SetDriverRequestSchema;
+        output: typeof SetDriverResponseSchema;
     };
     /**
      * The page's screen as it changes (about once a second while it moves), with Neural's

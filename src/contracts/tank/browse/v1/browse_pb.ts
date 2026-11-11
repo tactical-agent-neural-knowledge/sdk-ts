@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/browse/v1/browse.proto.
  */
 export const file_tank_browse_v1_browse: GenFile = /*@__PURE__*/
-  fileDesc("Cht0YW5rL2Jyb3dzZS92MS9icm93c2UucHJvdG8SDnRhbmsuYnJvd3NlLnYxIrsBCgRQYWdlEgoKAmlkGAEgASgJEhcKD2NvbnZlcnNhdGlvbl9pZBgCIAEoCRILCgN1cmwYAyABKAkSDQoFdGl0bGUYBCABKAkSEAoIb3duZXJfaWQYBSABKAkSEgoKb3duZXJfbmFtZRgGIAEoCRItCglvcGVuZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg0KBXN0YXRlGAggASgJEg4KBnJlYXNvbhgJIAEoCSJoCg9PcGVuUGFnZVJlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJEgsKA3VybBgCIAEoCRIWCg52aWV3cG9ydF93aWR0aBgDIAEoBRIXCg92aWV3cG9ydF9oZWlnaHQYBCABKAUiNgoQT3BlblBhZ2VSZXNwb25zZRIiCgRwYWdlGAEgASgLMhQudGFuay5icm93c2UudjEuUGFnZSIjChBDbG9zZVBhZ2VSZXF1ZXN0Eg8KB3BhZ2VfaWQYASABKAkiEwoRQ2xvc2VQYWdlUmVzcG9uc2UiKwoQTGlzdFBhZ2VzUmVxdWVzdBIXCg9jb252ZXJzYXRpb25faWQYASABKAkiOAoRTGlzdFBhZ2VzUmVzcG9uc2USIwoFcGFnZXMYASADKAsyFC50YW5rLmJyb3dzZS52MS5QYWdlIscBCgpBY3RSZXF1ZXN0Eg8KB3BhZ2VfaWQYASABKAkSJAoDdGFwGAIgASgLMhUudGFuay5icm93c2UudjEuUG9pbnRIABIOCgR0eXBlGAMgASgJSAASDQoDa2V5GAQgASgJSAASEAoGc2Nyb2xsGAUgASgFSAASDgoEYmFjaxgGIAEoCEgAEhEKB2ZvcndhcmQYByABKAhIABISCghuYXZpZ2F0ZRgIIAEoCUgAEhAKBnJlbG9hZBgJIAEoCEgAQggKBmFjdGlvbiIdCgVQb2ludBIJCgF4GAEgASgBEgkKAXkYAiABKAEiMQoLQWN0UmVzcG9uc2USIgoEcGFnZRgBIAEoCzIULnRhbmsuYnJvd3NlLnYxLlBhZ2UiIwoQV2F0Y2hQYWdlUmVxdWVzdBIPCgdwYWdlX2lkGAEgASgJImoKEVdhdGNoUGFnZVJlc3BvbnNlEiYKBWZyYW1lGAEgASgLMhUudGFuay5icm93c2UudjEuRnJhbWVIABIkCgRwYWdlGAIgASgLMhQudGFuay5icm93c2UudjEuUGFnZUgAQgcKBWV2ZW50IrQBCgVGcmFtZRIMCgRqcGVnGAEgASgMEg0KBXdpZHRoGAIgASgFEg4KBmhlaWdodBgDIAEoBRILCgN1cmwYBCABKAkSDQoFdGl0bGUYBSABKAkSJgoCYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiEKBW1hcmtzGAcgAygLMhIudGFuay5hcHBzLnYxLk1hcmsSFwoPd2FpdGluZ19mb3JfdGFwGAggASgJMpYDCg1Ccm93c2VTZXJ2aWNlEk0KCE9wZW5QYWdlEh8udGFuay5icm93c2UudjEuT3BlblBhZ2VSZXF1ZXN0GiAudGFuay5icm93c2UudjEuT3BlblBhZ2VSZXNwb25zZRJQCglDbG9zZVBhZ2USIC50YW5rLmJyb3dzZS52MS5DbG9zZVBhZ2VSZXF1ZXN0GiEudGFuay5icm93c2UudjEuQ2xvc2VQYWdlUmVzcG9uc2USUAoJTGlzdFBhZ2VzEiAudGFuay5icm93c2UudjEuTGlzdFBhZ2VzUmVxdWVzdBohLnRhbmsuYnJvd3NlLnYxLkxpc3RQYWdlc1Jlc3BvbnNlEj4KA0FjdBIaLnRhbmsuYnJvd3NlLnYxLkFjdFJlcXVlc3QaGy50YW5rLmJyb3dzZS52MS5BY3RSZXNwb25zZRJSCglXYXRjaFBhZ2USIC50YW5rLmJyb3dzZS52MS5XYXRjaFBhZ2VSZXF1ZXN0GiEudGFuay5icm93c2UudjEuV2F0Y2hQYWdlUmVzcG9uc2UwAULQAQoSY29tLnRhbmsuYnJvd3NlLnYxQgtCcm93c2VQcm90b1ABWlNnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2Jyb3dzZS92MTticm93c2V2MaICA1RCWKoCDlRhbmsuQnJvd3NlLlYxygIOVGFua1xCcm93c2VcVjHiAhpUYW5rXEJyb3dzZVxWMVxHUEJNZXRhZGF0YeoCEFRhbms6OkJyb3dzZTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_apps_v1_apps]);
+  fileDesc("Cht0YW5rL2Jyb3dzZS92MS9icm93c2UucHJvdG8SDnRhbmsuYnJvd3NlLnYxIuMBCgRQYWdlEgoKAmlkGAEgASgJEhcKD2NvbnZlcnNhdGlvbl9pZBgCIAEoCRILCgN1cmwYAyABKAkSDQoFdGl0bGUYBCABKAkSEAoIb3duZXJfaWQYBSABKAkSEgoKb3duZXJfbmFtZRgGIAEoCRItCglvcGVuZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg0KBXN0YXRlGAggASgJEg4KBnJlYXNvbhgJIAEoCRIRCglkcml2ZXJfaWQYCiABKAkSEwoLZHJpdmVyX25hbWUYCyABKAkiNAoQU2V0RHJpdmVyUmVxdWVzdBIPCgdwYWdlX2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkiNwoRU2V0RHJpdmVyUmVzcG9uc2USIgoEcGFnZRgBIAEoCzIULnRhbmsuYnJvd3NlLnYxLlBhZ2UiaAoPT3BlblBhZ2VSZXF1ZXN0EhcKD2NvbnZlcnNhdGlvbl9pZBgBIAEoCRILCgN1cmwYAiABKAkSFgoOdmlld3BvcnRfd2lkdGgYAyABKAUSFwoPdmlld3BvcnRfaGVpZ2h0GAQgASgFIjYKEE9wZW5QYWdlUmVzcG9uc2USIgoEcGFnZRgBIAEoCzIULnRhbmsuYnJvd3NlLnYxLlBhZ2UiIwoQQ2xvc2VQYWdlUmVxdWVzdBIPCgdwYWdlX2lkGAEgASgJIhMKEUNsb3NlUGFnZVJlc3BvbnNlIisKEExpc3RQYWdlc1JlcXVlc3QSFwoPY29udmVyc2F0aW9uX2lkGAEgASgJIjgKEUxpc3RQYWdlc1Jlc3BvbnNlEiMKBXBhZ2VzGAEgAygLMhQudGFuay5icm93c2UudjEuUGFnZSLHAQoKQWN0UmVxdWVzdBIPCgdwYWdlX2lkGAEgASgJEiQKA3RhcBgCIAEoCzIVLnRhbmsuYnJvd3NlLnYxLlBvaW50SAASDgoEdHlwZRgDIAEoCUgAEg0KA2tleRgEIAEoCUgAEhAKBnNjcm9sbBgFIAEoBUgAEg4KBGJhY2sYBiABKAhIABIRCgdmb3J3YXJkGAcgASgISAASEgoIbmF2aWdhdGUYCCABKAlIABIQCgZyZWxvYWQYCSABKAhIAEIICgZhY3Rpb24iHQoFUG9pbnQSCQoBeBgBIAEoARIJCgF5GAIgASgBIjEKC0FjdFJlc3BvbnNlEiIKBHBhZ2UYASABKAsyFC50YW5rLmJyb3dzZS52MS5QYWdlIiMKEFdhdGNoUGFnZVJlcXVlc3QSDwoHcGFnZV9pZBgBIAEoCSJqChFXYXRjaFBhZ2VSZXNwb25zZRImCgVmcmFtZRgBIAEoCzIVLnRhbmsuYnJvd3NlLnYxLkZyYW1lSAASJAoEcGFnZRgCIAEoCzIULnRhbmsuYnJvd3NlLnYxLlBhZ2VIAEIHCgVldmVudCK0AQoFRnJhbWUSDAoEanBlZxgBIAEoDBINCgV3aWR0aBgCIAEoBRIOCgZoZWlnaHQYAyABKAUSCwoDdXJsGAQgASgJEg0KBXRpdGxlGAUgASgJEiYKAmF0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIhCgVtYXJrcxgHIAMoCzISLnRhbmsuYXBwcy52MS5NYXJrEhcKD3dhaXRpbmdfZm9yX3RhcBgIIAEoCTLoAwoNQnJvd3NlU2VydmljZRJNCghPcGVuUGFnZRIfLnRhbmsuYnJvd3NlLnYxLk9wZW5QYWdlUmVxdWVzdBogLnRhbmsuYnJvd3NlLnYxLk9wZW5QYWdlUmVzcG9uc2USUAoJQ2xvc2VQYWdlEiAudGFuay5icm93c2UudjEuQ2xvc2VQYWdlUmVxdWVzdBohLnRhbmsuYnJvd3NlLnYxLkNsb3NlUGFnZVJlc3BvbnNlElAKCUxpc3RQYWdlcxIgLnRhbmsuYnJvd3NlLnYxLkxpc3RQYWdlc1JlcXVlc3QaIS50YW5rLmJyb3dzZS52MS5MaXN0UGFnZXNSZXNwb25zZRI+CgNBY3QSGi50YW5rLmJyb3dzZS52MS5BY3RSZXF1ZXN0GhsudGFuay5icm93c2UudjEuQWN0UmVzcG9uc2USUAoJU2V0RHJpdmVyEiAudGFuay5icm93c2UudjEuU2V0RHJpdmVyUmVxdWVzdBohLnRhbmsuYnJvd3NlLnYxLlNldERyaXZlclJlc3BvbnNlElIKCVdhdGNoUGFnZRIgLnRhbmsuYnJvd3NlLnYxLldhdGNoUGFnZVJlcXVlc3QaIS50YW5rLmJyb3dzZS52MS5XYXRjaFBhZ2VSZXNwb25zZTABQtABChJjb20udGFuay5icm93c2UudjFCC0Jyb3dzZVByb3RvUAFaU2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvYnJvd3NlL3YxO2Jyb3dzZXYxogIDVEJYqgIOVGFuay5Ccm93c2UuVjHKAg5UYW5rXEJyb3dzZVxWMeICGlRhbmtcQnJvd3NlXFYxXEdQQk1ldGFkYXRh6gIQVGFuazo6QnJvd3NlOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_apps_v1_apps]);
 
 /**
  * @generated from message tank.browse.v1.Page
@@ -66,6 +66,18 @@ export type Page = Message<"tank.browse.v1.Page"> & {
    * @generated from field: string reason = 9;
    */
   reason: string;
+
+  /**
+   * Who is driving now: the owner unless they gave control to someone else.
+   *
+   * @generated from field: string driver_id = 10;
+   */
+  driverId: string;
+
+  /**
+   * @generated from field: string driver_name = 11;
+   */
+  driverName: string;
 };
 
 /**
@@ -74,6 +86,45 @@ export type Page = Message<"tank.browse.v1.Page"> & {
  */
 export const PageSchema: GenMessage<Page> = /*@__PURE__*/
   messageDesc(file_tank_browse_v1_browse, 0);
+
+/**
+ * @generated from message tank.browse.v1.SetDriverRequest
+ */
+export type SetDriverRequest = Message<"tank.browse.v1.SetDriverRequest"> & {
+  /**
+   * @generated from field: string page_id = 1;
+   */
+  pageId: string;
+
+  /**
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+};
+
+/**
+ * Describes the message tank.browse.v1.SetDriverRequest.
+ * Use `create(SetDriverRequestSchema)` to create a new message.
+ */
+export const SetDriverRequestSchema: GenMessage<SetDriverRequest> = /*@__PURE__*/
+  messageDesc(file_tank_browse_v1_browse, 1);
+
+/**
+ * @generated from message tank.browse.v1.SetDriverResponse
+ */
+export type SetDriverResponse = Message<"tank.browse.v1.SetDriverResponse"> & {
+  /**
+   * @generated from field: tank.browse.v1.Page page = 1;
+   */
+  page?: Page;
+};
+
+/**
+ * Describes the message tank.browse.v1.SetDriverResponse.
+ * Use `create(SetDriverResponseSchema)` to create a new message.
+ */
+export const SetDriverResponseSchema: GenMessage<SetDriverResponse> = /*@__PURE__*/
+  messageDesc(file_tank_browse_v1_browse, 2);
 
 /**
  * @generated from message tank.browse.v1.OpenPageRequest
@@ -109,7 +160,7 @@ export type OpenPageRequest = Message<"tank.browse.v1.OpenPageRequest"> & {
  * Use `create(OpenPageRequestSchema)` to create a new message.
  */
 export const OpenPageRequestSchema: GenMessage<OpenPageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 1);
+  messageDesc(file_tank_browse_v1_browse, 3);
 
 /**
  * @generated from message tank.browse.v1.OpenPageResponse
@@ -126,7 +177,7 @@ export type OpenPageResponse = Message<"tank.browse.v1.OpenPageResponse"> & {
  * Use `create(OpenPageResponseSchema)` to create a new message.
  */
 export const OpenPageResponseSchema: GenMessage<OpenPageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 2);
+  messageDesc(file_tank_browse_v1_browse, 4);
 
 /**
  * @generated from message tank.browse.v1.ClosePageRequest
@@ -143,7 +194,7 @@ export type ClosePageRequest = Message<"tank.browse.v1.ClosePageRequest"> & {
  * Use `create(ClosePageRequestSchema)` to create a new message.
  */
 export const ClosePageRequestSchema: GenMessage<ClosePageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 3);
+  messageDesc(file_tank_browse_v1_browse, 5);
 
 /**
  * @generated from message tank.browse.v1.ClosePageResponse
@@ -156,7 +207,7 @@ export type ClosePageResponse = Message<"tank.browse.v1.ClosePageResponse"> & {
  * Use `create(ClosePageResponseSchema)` to create a new message.
  */
 export const ClosePageResponseSchema: GenMessage<ClosePageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 4);
+  messageDesc(file_tank_browse_v1_browse, 6);
 
 /**
  * @generated from message tank.browse.v1.ListPagesRequest
@@ -173,7 +224,7 @@ export type ListPagesRequest = Message<"tank.browse.v1.ListPagesRequest"> & {
  * Use `create(ListPagesRequestSchema)` to create a new message.
  */
 export const ListPagesRequestSchema: GenMessage<ListPagesRequest> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 5);
+  messageDesc(file_tank_browse_v1_browse, 7);
 
 /**
  * @generated from message tank.browse.v1.ListPagesResponse
@@ -190,7 +241,7 @@ export type ListPagesResponse = Message<"tank.browse.v1.ListPagesResponse"> & {
  * Use `create(ListPagesResponseSchema)` to create a new message.
  */
 export const ListPagesResponseSchema: GenMessage<ListPagesResponse> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 6);
+  messageDesc(file_tank_browse_v1_browse, 8);
 
 /**
  * @generated from message tank.browse.v1.ActRequest
@@ -268,7 +319,7 @@ export type ActRequest = Message<"tank.browse.v1.ActRequest"> & {
  * Use `create(ActRequestSchema)` to create a new message.
  */
 export const ActRequestSchema: GenMessage<ActRequest> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 7);
+  messageDesc(file_tank_browse_v1_browse, 9);
 
 /**
  * @generated from message tank.browse.v1.Point
@@ -290,7 +341,7 @@ export type Point = Message<"tank.browse.v1.Point"> & {
  * Use `create(PointSchema)` to create a new message.
  */
 export const PointSchema: GenMessage<Point> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 8);
+  messageDesc(file_tank_browse_v1_browse, 10);
 
 /**
  * @generated from message tank.browse.v1.ActResponse
@@ -307,7 +358,7 @@ export type ActResponse = Message<"tank.browse.v1.ActResponse"> & {
  * Use `create(ActResponseSchema)` to create a new message.
  */
 export const ActResponseSchema: GenMessage<ActResponse> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 9);
+  messageDesc(file_tank_browse_v1_browse, 11);
 
 /**
  * @generated from message tank.browse.v1.WatchPageRequest
@@ -324,7 +375,7 @@ export type WatchPageRequest = Message<"tank.browse.v1.WatchPageRequest"> & {
  * Use `create(WatchPageRequestSchema)` to create a new message.
  */
 export const WatchPageRequestSchema: GenMessage<WatchPageRequest> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 10);
+  messageDesc(file_tank_browse_v1_browse, 12);
 
 /**
  * @generated from message tank.browse.v1.WatchPageResponse
@@ -355,7 +406,7 @@ export type WatchPageResponse = Message<"tank.browse.v1.WatchPageResponse"> & {
  * Use `create(WatchPageResponseSchema)` to create a new message.
  */
 export const WatchPageResponseSchema: GenMessage<WatchPageResponse> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 11);
+  messageDesc(file_tank_browse_v1_browse, 13);
 
 /**
  * Frame is the page's screen at one moment.
@@ -414,7 +465,7 @@ export type Frame = Message<"tank.browse.v1.Frame"> & {
  * Use `create(FrameSchema)` to create a new message.
  */
 export const FrameSchema: GenMessage<Frame> = /*@__PURE__*/
-  messageDesc(file_tank_browse_v1_browse, 12);
+  messageDesc(file_tank_browse_v1_browse, 14);
 
 /**
  * Connect a webpage (Robby, 2026-11-11): a page opened in a Neural conversation, run by TANK in
@@ -457,7 +508,7 @@ export const BrowseService: GenService<{
   },
   /**
    * What the person does on the page: tap, type, scroll, back, go to an address. Only the
-   * page's owner may act.
+   * page's current driver may act.
    *
    * @generated from rpc tank.browse.v1.BrowseService.Act
    */
@@ -465,6 +516,19 @@ export const BrowseService: GenService<{
     methodKind: "unary";
     input: typeof ActRequestSchema;
     output: typeof ActResponseSchema;
+  },
+  /**
+   * Hands control of the page to someone else in the conversation (Robby, 2026-11-11: "allow
+   * them to give control to the other people in the conversation"). The owner may give it to
+   * anyone in the conversation and take it back at any time; the current driver may hand it
+   * back to the owner. An empty user_id gives it back to the owner.
+   *
+   * @generated from rpc tank.browse.v1.BrowseService.SetDriver
+   */
+  setDriver: {
+    methodKind: "unary";
+    input: typeof SetDriverRequestSchema;
+    output: typeof SetDriverResponseSchema;
   },
   /**
    * The page's screen as it changes (about once a second while it moves), with Neural's
