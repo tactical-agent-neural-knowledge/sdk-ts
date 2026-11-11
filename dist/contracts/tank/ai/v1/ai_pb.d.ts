@@ -66,12 +66,49 @@ export type Conversation = Message$1<"tank.ai.v1.Conversation"> & {
      * @generated from field: repeated tank.ai.v1.Member members = 10;
      */
     members: Member[];
+    /**
+     * Webpages connected to the conversation ("Connect a webpage"), from tank.browse.v1: id,
+     * address and title, so the list and the chat show them without another call.
+     *
+     * @generated from field: repeated tank.ai.v1.ConnectedPage pages = 11;
+     */
+    pages: ConnectedPage[];
 };
 /**
  * Describes the message tank.ai.v1.Conversation.
  * Use `create(ConversationSchema)` to create a new message.
  */
 export declare const ConversationSchema: GenMessage<Conversation>;
+/**
+ * @generated from message tank.ai.v1.ConnectedPage
+ */
+export type ConnectedPage = Message$1<"tank.ai.v1.ConnectedPage"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string url = 2;
+     */
+    url: string;
+    /**
+     * @generated from field: string title = 3;
+     */
+    title: string;
+    /**
+     * @generated from field: string owner_id = 4;
+     */
+    ownerId: string;
+    /**
+     * @generated from field: string owner_name = 5;
+     */
+    ownerName: string;
+};
+/**
+ * Describes the message tank.ai.v1.ConnectedPage.
+ * Use `create(ConnectedPageSchema)` to create a new message.
+ */
+export declare const ConnectedPageSchema: GenMessage<ConnectedPage>;
 /**
  * Member is one person in a conversation.
  *
@@ -1479,6 +1516,14 @@ export type WatchResponse = Message$1<"tank.ai.v1.WatchResponse"> & {
          */
         value: string;
         case: "devicesChanged";
+    } | {
+        /**
+         * A webpage was opened or closed; the client reloads the conversation's pages.
+         *
+         * @generated from field: string pages_changed = 8;
+         */
+        value: string;
+        case: "pagesChanged";
     } | {
         case: undefined;
         value?: undefined;

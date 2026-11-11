@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/apps/v1/apps.proto.
  */
 export const file_tank_apps_v1_apps: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL2FwcHMvdjEvYXBwcy5wcm90bxIMdGFuay5hcHBzLnYxImIKA0FwcBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhAKCGxvZ29fdXJsGAQgASgJEgsKA3VybBgFIAEoCRINCgVtYWtlchgGIAEoCSJoCgRUb29sEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSGQoRaW5wdXRfc2NoZW1hX2pzb24YAyABKAkSIgoFb2ZmZXIYBCABKAsyEy50YW5rLmFwcHMudjEuT2ZmZXIiMwoFT2ZmZXISDAoEdGV4dBgBIAEoCRINCgVuZWVkcxgCIAMoCRINCgV0aXRsZRgDIAEoCSJXCgRNYXJrEgwKBGtpbmQYASABKAkSDwoHYmVhcmluZxgCIAEoARINCgVsYWJlbBgDIAEoCRIOCgZkZXRhaWwYBCABKAkSEQoJZWxldmF0aW9uGAUgASgBIiQKBlNvdXJjZRINCgV0aXRsZRgBIAEoCRILCgN1cmwYAiABKAkiIAoPTGlzdEFwcHNSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJIjMKEExpc3RBcHBzUmVzcG9uc2USHwoEYXBwcxgBIAMoCzIRLnRhbmsuYXBwcy52MS5BcHAiIQoPR2V0VG9vbHNSZXF1ZXN0Eg4KBmFwcF9pZBgBIAEoCSJVChBHZXRUb29sc1Jlc3BvbnNlEh4KA2FwcBgBIAEoCzIRLnRhbmsuYXBwcy52MS5BcHASIQoFdG9vbHMYAiADKAsyEi50YW5rLmFwcHMudjEuVG9vbCJHCg9DYWxsVG9vbFJlcXVlc3QSDgoGYXBwX2lkGAEgASgJEgwKBHRvb2wYAiABKAkSFgoOYXJndW1lbnRzX2pzb24YAyABKAkifAoQQ2FsbFRvb2xSZXNwb25zZRIMCgR0ZXh0GAEgASgJEiUKB3NvdXJjZXMYAiADKAsyFC50YW5rLmFwcHMudjEuU291cmNlEhAKCGlzX2Vycm9yGAMgASgIEiEKBW1hcmtzGAQgAygLMhIudGFuay5hcHBzLnYxLk1hcmtCwAEKEGNvbS50YW5rLmFwcHMudjFCCUFwcHNQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FwcHMvdjE7YXBwc3YxogIDVEFYqgIMVGFuay5BcHBzLlYxygIMVGFua1xBcHBzXFYx4gIYVGFua1xBcHBzXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXBwczo6VjFiBnByb3RvMw");
+  fileDesc("Chd0YW5rL2FwcHMvdjEvYXBwcy5wcm90bxIMdGFuay5hcHBzLnYxImIKA0FwcBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhAKCGxvZ29fdXJsGAQgASgJEgsKA3VybBgFIAEoCRINCgVtYWtlchgGIAEoCSJoCgRUb29sEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSGQoRaW5wdXRfc2NoZW1hX2pzb24YAyABKAkSIgoFb2ZmZXIYBCABKAsyEy50YW5rLmFwcHMudjEuT2ZmZXIiMwoFT2ZmZXISDAoEdGV4dBgBIAEoCRINCgVuZWVkcxgCIAMoCRINCgV0aXRsZRgDIAEoCSKDAQoETWFyaxIMCgRraW5kGAEgASgJEg8KB2JlYXJpbmcYAiABKAESDQoFbGFiZWwYAyABKAkSDgoGZGV0YWlsGAQgASgJEhEKCWVsZXZhdGlvbhgFIAEoARIJCgF4GAYgASgBEgkKAXkYByABKAESCQoBdxgIIAEoARIJCgFoGAkgASgBIiQKBlNvdXJjZRINCgV0aXRsZRgBIAEoCRILCgN1cmwYAiABKAkiIAoPTGlzdEFwcHNSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJIjMKEExpc3RBcHBzUmVzcG9uc2USHwoEYXBwcxgBIAMoCzIRLnRhbmsuYXBwcy52MS5BcHAiIQoPR2V0VG9vbHNSZXF1ZXN0Eg4KBmFwcF9pZBgBIAEoCSJVChBHZXRUb29sc1Jlc3BvbnNlEh4KA2FwcBgBIAEoCzIRLnRhbmsuYXBwcy52MS5BcHASIQoFdG9vbHMYAiADKAsyEi50YW5rLmFwcHMudjEuVG9vbCJHCg9DYWxsVG9vbFJlcXVlc3QSDgoGYXBwX2lkGAEgASgJEgwKBHRvb2wYAiABKAkSFgoOYXJndW1lbnRzX2pzb24YAyABKAkifAoQQ2FsbFRvb2xSZXNwb25zZRIMCgR0ZXh0GAEgASgJEiUKB3NvdXJjZXMYAiADKAsyFC50YW5rLmFwcHMudjEuU291cmNlEhAKCGlzX2Vycm9yGAMgASgIEiEKBW1hcmtzGAQgAygLMhIudGFuay5hcHBzLnYxLk1hcmtCwAEKEGNvbS50YW5rLmFwcHMudjFCCUFwcHNQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2FwcHMvdjE7YXBwc3YxogIDVEFYqgIMVGFuay5BcHBzLlYxygIMVGFua1xBcHBzXFYx4gIYVGFua1xBcHBzXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6QXBwczo6VjFiBnByb3RvMw");
 
 /**
  * @generated from message tank.apps.v1.App
@@ -183,6 +183,29 @@ export type Mark = Message<"tank.apps.v1.Mark"> & {
    * @generated from field: double elevation = 5;
    */
   elevation: number;
+
+  /**
+   * Kind "box": a rectangle on a screen or picture rather than a compass bearing (a webpage's
+   * button, a spot on a camera still), as fractions of the image's width and height (0..1).
+   *
+   * @generated from field: double x = 6;
+   */
+  x: number;
+
+  /**
+   * @generated from field: double y = 7;
+   */
+  y: number;
+
+  /**
+   * @generated from field: double w = 8;
+   */
+  w: number;
+
+  /**
+   * @generated from field: double h = 9;
+   */
+  h: number;
 };
 
 /**
