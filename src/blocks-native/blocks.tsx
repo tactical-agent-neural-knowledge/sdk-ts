@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native";
 import { Button, Chip, Divider, type MD3Theme, ProgressBar, Text, useTheme } from "react-native-paper";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
@@ -809,16 +809,39 @@ function isWebUrl(s: string): boolean {
   return /^https?:\/\/\S+$/.test(s.trim());
 }
 
+/**
+ * A decision tapped and not yet reflected on the card (Robby, 2026-11-11: "the button didn't
+ * update for 5-7 seconds and I kept tapping it"). The buttons lock at once and say what is
+ * happening; they unlock when the card comes back decided, or after 20 s so a lost tap can be
+ * retried.
+ */
+function usePendingDecision(decided: boolean): [string | null, (which: string) => void] {
+  const [pending, setPending] = useState<string | null>(null);
+  useEffect(() => {
+    if (decided) setPending(null);
+  }, [decided]);
+  useEffect(() => {
+    if (!pending) return;
+    const t = setTimeout(() => setPending(null), 20000);
+    return () => clearTimeout(t);
+  }, [pending]);
+  return [pending, setPending];
+}
+
 export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
   const theme = useTheme();
   const expires = tsMs(value.expiresAt);
   const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
+  const [pending, setPending] = usePendingDecision(value.decided);
   if (value.kind === GateKind.GUARDRAIL) return <GuardrailPromptBlock value={value} ctx={ctx} />;
   // The ids the control plane answers to (agent-control/internal/cards: gate.approve,
   // gate.request_changes). These sent "approve" / "reject" until 2026-10-15 and were
   // ignored, which is why every approval card carried a second pair of buttons.
-  const fire = (actionId: "gate.approve" | "gate.request_changes") =>
+  const fire = (actionId: "gate.approve" | "gate.request_changes") => {
+    if (pending) return;
+    setPending(actionId);
     ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
+  };
   return (
     <Card accent="alert" label={GATE_LABEL[value.kind] ?? "approval"}>
       {/* A merge's subject is its pull request: a link before and after the decision
@@ -853,20 +876,24 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
             compact
             mode="contained"
             onPress={() => fire("gate.approve")}
+            disabled={pending !== null}
+            loading={pending === "gate.approve"}
             testID="action-approve"
             style={styles.button}
           >
-            {value.approveLabel || "Approve"}
+            {pending === "gate.approve" ? "Approving…" : value.approveLabel || "Approve"}
           </Button>
           <Button
             compact
             mode="outlined"
             textColor={theme.colors.error}
             onPress={() => fire("gate.request_changes")}
+            disabled={pending !== null}
+            loading={pending === "gate.request_changes"}
             testID="action-reject"
             style={styles.button}
           >
-            {value.rejectLabel || "Reject"}
+            {pending === "gate.request_changes" ? "Sending…" : value.rejectLabel || "Reject"}
           </Button>
         </View>
       )}

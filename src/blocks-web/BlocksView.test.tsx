@@ -85,11 +85,10 @@ describe("interactions", () => {
       </ThemeProvider>,
     );
     fireEvent.click(screen.getByRole("button", { name: "Approve" }));
+    // The tap shows at once and locks both buttons until the card comes back decided.
+    expect(screen.getByRole("button", { name: "Approving…" })).toHaveProperty("disabled", true);
     fireEvent.click(screen.getByRole("button", { name: "Reject" }));
-    expect(seen).toEqual([
-      { blockId: "b3", actionId: "gate.approve", value: "gate_01J8ZX" },
-      { blockId: "b3", actionId: "gate.request_changes", value: "gate_01J8ZX" },
-    ]);
+    expect(seen).toEqual([{ blockId: "b3", actionId: "gate.approve", value: "gate_01J8ZX" }]);
   });
 
   it("a run's key card copies through the host once, never posts the action, and refuses after", async () => {
@@ -142,12 +141,9 @@ describe("interactions", () => {
     );
     expect(screen.getByTestId("approval-detail").textContent).toBe("Apps using it stop working right away.");
     expect(screen.queryByText(/approval needed/)).toBeNull();
-    fireEvent.click(screen.getByRole("button", { name: "Revoke" }));
     fireEvent.click(screen.getByRole("button", { name: "Keep" }));
-    expect(seen.map((a) => (a as { actionId: string }).actionId)).toEqual([
-      "gate.approve",
-      "gate.request_changes",
-    ]);
+    expect(seen.map((a) => (a as { actionId: string }).actionId)).toEqual(["gate.request_changes"]);
+    expect(screen.getByRole("button", { name: "Sending…" })).toHaveProperty("disabled", true);
   });
 
   it("a merge approval links to its pull request, before and after the decision", () => {

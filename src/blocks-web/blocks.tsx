@@ -11,7 +11,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { type PlanFileActions, planGlance, planMarkdown } from "../blocks/plan.js";
 import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
@@ -876,7 +876,32 @@ function isWebUrl(s: string): boolean {
   return /^https?:\/\/\S+$/.test(s.trim());
 }
 
+/**
+ * A decision tapped and not yet reflected on the card (Robby, 2026-11-11: "the button didn't
+ * update for 5-7 seconds and I kept tapping it"). The buttons lock at once and say what is
+ * happening; they unlock when the card comes back decided, or after 20 s so a lost tap can be
+ * retried.
+ */
+function usePendingDecision(decided: boolean): [string | null, (which: string) => void] {
+  const [pending, setPending] = useState<string | null>(null);
+  useEffect(() => {
+    if (decided) setPending(null);
+  }, [decided]);
+  useEffect(() => {
+    if (!pending) return;
+    const t = setTimeout(() => setPending(null), 20000);
+    return () => clearTimeout(t);
+  }, [pending]);
+  return [pending, setPending];
+}
+
 export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
+  const [pending, setPending] = usePendingDecision(value.decided);
+  const fire = (actionId: "gate.approve" | "gate.request_changes") => {
+    if (pending) return;
+    setPending(actionId);
+    ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
+  };
   const expires = tsMs(value.expiresAt);
   const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
   if (value.kind === GateKind.GUARDRAIL) return <GuardrailPromptBlock value={value} ctx={ctx} />;
@@ -926,22 +951,20 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
             variant="contained"
             color="primary"
             data-action-id="gate.approve"
-            onClick={() =>
-              ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.approve", value: value.gateId })
-            }
+            disabled={pending !== null}
+            onClick={() => fire("gate.approve")}
           >
-            {value.approveLabel || "Approve"}
+            {pending === "gate.approve" ? "Approving…" : value.approveLabel || "Approve"}
           </Button>
           <Button
             size="small"
             variant="outlined"
             color="error"
             data-action-id="gate.request_changes"
-            onClick={() =>
-              ctx.onAction?.({ blockId: ctx.blockId, actionId: "gate.request_changes", value: value.gateId })
-            }
+            disabled={pending !== null}
+            onClick={() => fire("gate.request_changes")}
           >
-            {value.rejectLabel || "Reject"}
+            {pending === "gate.request_changes" ? "Sending…" : value.rejectLabel || "Reject"}
           </Button>
         </Stack>
       )}
