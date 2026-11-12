@@ -347,6 +347,25 @@ export type Offer = Message$1<"tank.ai.v1.Offer"> & {
      * @generated from field: string text = 2;
      */
     text: string;
+    /**
+     * Set when taking the offer happens on the person's own device, because it needs their tap
+     * or a permission (Robby, 2026-11-12: "tell tank I want to connect devices ... and have it
+     * use the features I built"). The client opens that flow, exactly as its own menu would, and
+     * sends nothing: "connect_phone" (This phone / This device: camera and sensors),
+     * "connect_bluetooth" (the Bluetooth picker), "connect_device" (the Connect a device menu),
+     * "add_people" (Add people), "pick_app" (Connect apps), "sign_in_app" (sign in to app_id).
+     * Empty: send SendMessageRequest.offer_id. A client that does not know the action ignores
+     * the offer.
+     *
+     * @generated from field: string action = 3;
+     */
+    action: string;
+    /**
+     * For "sign_in_app": the app to sign in to (tank.apps.v1.App.id).
+     *
+     * @generated from field: string app_id = 4;
+     */
+    appId: string;
 };
 /**
  * Describes the message tank.ai.v1.Offer.
@@ -1042,6 +1061,16 @@ export type SendMessageResponse = Message$1<"tank.ai.v1.SendMessageResponse"> & 
          */
         value: Overlay;
         case: "overlay";
+    } | {
+        /**
+         * Neural did what the person asked before it replied (opened a webpage in the
+         * conversation, connected an app): the conversation as it is now. The client replaces its
+         * copy and reloads the conversation's pages, as it does after its own Connect a webpage.
+         *
+         * @generated from field: tank.ai.v1.Conversation conversation = 9;
+         */
+        value: Conversation;
+        case: "conversation";
     } | {
         case: undefined;
         value?: undefined;
