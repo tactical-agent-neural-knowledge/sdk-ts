@@ -455,12 +455,74 @@ export type Message = Message$1<"tank.ai.v1.Message"> & {
      * @generated from field: string author_avatar_url = 16;
      */
     authorAvatarUrl: string;
+    /**
+     * Emoji people put on the message, people's and Neural's alike, in the order each emoji was
+     * first used (Robby, 2026-11-12: "I need to be able to add an emoji as a reaction").
+     *
+     * @generated from field: repeated tank.ai.v1.Reaction reactions = 17;
+     */
+    reactions: Reaction[];
 };
 /**
  * Describes the message tank.ai.v1.Message.
  * Use `create(MessageSchema)` to create a new message.
  */
 export declare const MessageSchema: GenMessage<Message>;
+/**
+ * Reaction is one emoji on a message and who put it there, as reactions show in Treads.
+ *
+ * @generated from message tank.ai.v1.Reaction
+ */
+export type Reaction = Message$1<"tank.ai.v1.Reaction"> & {
+    /**
+     * A standard emoji ("👍"), or a workspace's custom emoji as ":name:" in a workspace's
+     * conversation.
+     *
+     * @generated from field: string emoji = 1;
+     */
+    emoji: string;
+    /**
+     * @generated from field: int32 count = 2;
+     */
+    count: number;
+    /**
+     * The caller put it there. On a Watch event it is worked out for each person watching.
+     *
+     * @generated from field: bool mine = 3;
+     */
+    mine: boolean;
+    /**
+     * Everyone who put it there, in the order they did.
+     *
+     * @generated from field: repeated string user_ids = 4;
+     */
+    userIds: string[];
+};
+/**
+ * Describes the message tank.ai.v1.Reaction.
+ * Use `create(ReactionSchema)` to create a new message.
+ */
+export declare const ReactionSchema: GenMessage<Reaction>;
+/**
+ * MessageReactions is a message's reactions as they are now, after someone changed them.
+ *
+ * @generated from message tank.ai.v1.MessageReactions
+ */
+export type MessageReactions = Message$1<"tank.ai.v1.MessageReactions"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * @generated from field: repeated tank.ai.v1.Reaction reactions = 2;
+     */
+    reactions: Reaction[];
+};
+/**
+ * Describes the message tank.ai.v1.MessageReactions.
+ * Use `create(MessageReactionsSchema)` to create a new message.
+ */
+export declare const MessageReactionsSchema: GenMessage<MessageReactions>;
 /**
  * @generated from message tank.ai.v1.ListConversationsRequest
  */
@@ -1343,6 +1405,72 @@ export type GetUsageResponse = Message$1<"tank.ai.v1.GetUsageResponse"> & {
  */
 export declare const GetUsageResponseSchema: GenMessage<GetUsageResponse>;
 /**
+ * @generated from message tank.ai.v1.AddReactionRequest
+ */
+export type AddReactionRequest = Message$1<"tank.ai.v1.AddReactionRequest"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * @generated from field: string emoji = 2;
+     */
+    emoji: string;
+};
+/**
+ * Describes the message tank.ai.v1.AddReactionRequest.
+ * Use `create(AddReactionRequestSchema)` to create a new message.
+ */
+export declare const AddReactionRequestSchema: GenMessage<AddReactionRequest>;
+/**
+ * @generated from message tank.ai.v1.AddReactionResponse
+ */
+export type AddReactionResponse = Message$1<"tank.ai.v1.AddReactionResponse"> & {
+    /**
+     * The message's reactions after the change.
+     *
+     * @generated from field: repeated tank.ai.v1.Reaction reactions = 1;
+     */
+    reactions: Reaction[];
+};
+/**
+ * Describes the message tank.ai.v1.AddReactionResponse.
+ * Use `create(AddReactionResponseSchema)` to create a new message.
+ */
+export declare const AddReactionResponseSchema: GenMessage<AddReactionResponse>;
+/**
+ * @generated from message tank.ai.v1.RemoveReactionRequest
+ */
+export type RemoveReactionRequest = Message$1<"tank.ai.v1.RemoveReactionRequest"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * @generated from field: string emoji = 2;
+     */
+    emoji: string;
+};
+/**
+ * Describes the message tank.ai.v1.RemoveReactionRequest.
+ * Use `create(RemoveReactionRequestSchema)` to create a new message.
+ */
+export declare const RemoveReactionRequestSchema: GenMessage<RemoveReactionRequest>;
+/**
+ * @generated from message tank.ai.v1.RemoveReactionResponse
+ */
+export type RemoveReactionResponse = Message$1<"tank.ai.v1.RemoveReactionResponse"> & {
+    /**
+     * @generated from field: repeated tank.ai.v1.Reaction reactions = 1;
+     */
+    reactions: Reaction[];
+};
+/**
+ * Describes the message tank.ai.v1.RemoveReactionResponse.
+ * Use `create(RemoveReactionResponseSchema)` to create a new message.
+ */
+export declare const RemoveReactionResponseSchema: GenMessage<RemoveReactionResponse>;
+/**
  * TranscribeRequest is one recording from the composer's microphone, at most two minutes
  * and 10 MB (larger is refused with invalid_argument).
  *
@@ -1802,6 +1930,14 @@ export type WatchResponse = Message$1<"tank.ai.v1.WatchResponse"> & {
          */
         value: string;
         case: "deviceUpdated";
+    } | {
+        /**
+         * Someone added or removed a reaction; the message's reactions as they are now.
+         *
+         * @generated from field: tank.ai.v1.MessageReactions reactions = 10;
+         */
+        value: MessageReactions;
+        case: "reactions";
     } | {
         case: undefined;
         value?: undefined;
@@ -2318,5 +2454,25 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof TranscribeRequestSchema;
         output: typeof TranscribeResponseSchema;
+    };
+    /**
+     * Emoji reactions on any message in a conversation the caller is in. A reaction is quiet: it
+     * never asks Neural for a reply and never sends a notification. Everyone watching gets
+     * WatchResponse.reactions. Adding one already there, or removing one that is not, is no error.
+     *
+     * @generated from rpc tank.ai.v1.AiService.AddReaction
+     */
+    addReaction: {
+        methodKind: "unary";
+        input: typeof AddReactionRequestSchema;
+        output: typeof AddReactionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.ai.v1.AiService.RemoveReaction
+     */
+    removeReaction: {
+        methodKind: "unary";
+        input: typeof RemoveReactionRequestSchema;
+        output: typeof RemoveReactionResponseSchema;
     };
 }>;

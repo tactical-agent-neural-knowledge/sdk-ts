@@ -1,3 +1,4 @@
+export { applyReaction, isCustomEmoji, QUICK_REACTIONS, reacted } from "./aiReactions.js";
 export { Backoff } from "./backoff.js";
 export { createTankClient, TankClient, } from "./client.js";
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
