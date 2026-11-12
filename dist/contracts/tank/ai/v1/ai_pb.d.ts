@@ -629,6 +629,14 @@ export type CreateConversationRequest = Message$1<"tank.ai.v1.CreateConversation
      * @generated from field: string workspace_id = 1;
      */
     workspaceId: string;
+    /**
+     * People added as members when it is made (the chat list's strip: a person you already talk
+     * with, Robby 2026-11-12). Each must already share a conversation or a workspace with the
+     * caller; anyone else is refused, so an id alone never reaches a stranger.
+     *
+     * @generated from field: repeated string member_ids = 2;
+     */
+    memberIds: string[];
 };
 /**
  * Describes the message tank.ai.v1.CreateConversationRequest.
