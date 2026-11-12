@@ -1,4 +1,5 @@
 export { applyReaction, isCustomEmoji, QUICK_REACTIONS, reacted } from "./aiReactions.js";
+export { applyReceiptsChanged, clearReceipts, deliveriesToAck, MAX_DELIVERED, messageTime, RECEIPTS_COPY, receiptPeople, ticksLabel, ticksOf, timestampDate, } from "./aiReceipts.js";
 export { Backoff } from "./backoff.js";
 export { createTankClient, TankClient, } from "./client.js";
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";

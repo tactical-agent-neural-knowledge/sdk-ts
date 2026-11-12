@@ -1,4 +1,5 @@
 export { applyReaction, isCustomEmoji, QUICK_REACTIONS, reacted } from "./aiReactions.js";
+export { applyReceiptsChanged, clearReceipts, deliveriesToAck, MAX_DELIVERED, messageTime, RECEIPTS_COPY, type ReceiptPerson, receiptPeople, type Ticks, type TimeFormat, ticksLabel, ticksOf, timestampDate, } from "./aiReceipts.js";
 export { Backoff, type BackoffOptions } from "./backoff.js";
 export { type CreateChannelInput, type CreateTaskInput, createTankClient, type ListRunsInput, type ListTasksInput, type LoadChannelOptions, type LoadNotificationsInput, type LoadNotificationsResult, type NotifyPick, type RoleName, type SendMessageInput, type SetGoalInput, type SetStatusInput, TankClient, type TankClientEvents, type TankClientOptions, type UpdateMessageInput, type UploadFileOptions, } from "./client.js";
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";

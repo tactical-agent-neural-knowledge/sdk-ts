@@ -2308,6 +2308,30 @@ export type BooksRecordExpenseRequest = Message<"tank.agentctl.v1.BooksRecordExp
      * @generated from field: string receipt_file_id = 5;
      */
     receiptFileId: string;
+    /**
+     * YYYY-MM-DD the money went out (a receipt)
+     *
+     * @generated from field: string date = 6;
+     */
+    date: string;
+    /**
+     * YYYY-MM-DD, first day a bill or usage figure covers
+     *
+     * @generated from field: string period_start = 7;
+     */
+    periodStart: string;
+    /**
+     * YYYY-MM-DD, last day it covers (inclusive)
+     *
+     * @generated from field: string period_end = 8;
+     */
+    periodEnd: string;
+    /**
+     * e.g. aws-cost-explorer; with period + category, the revise key
+     *
+     * @generated from field: string source = 9;
+     */
+    source: string;
 };
 /**
  * Describes the message tank.agentctl.v1.BooksRecordExpenseRequest.
@@ -2322,12 +2346,48 @@ export type BooksRecordExpenseResponse = Message<"tank.agentctl.v1.BooksRecordEx
      * @generated from field: tank.books.v1.Expense expense = 1;
      */
     expense?: Expense;
+    /**
+     * booked | revised | unchanged
+     *
+     * @generated from field: string outcome = 2;
+     */
+    outcome: string;
 };
 /**
  * Describes the message tank.agentctl.v1.BooksRecordExpenseResponse.
  * Use `create(BooksRecordExpenseResponseSchema)` to create a new message.
  */
 export declare const BooksRecordExpenseResponseSchema: GenMessage<BooksRecordExpenseResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BooksListExpensesRequest
+ */
+export type BooksListExpensesRequest = Message<"tank.agentctl.v1.BooksListExpensesRequest"> & {
+    /**
+     * 0 = 90
+     *
+     * @generated from field: int32 days = 1;
+     */
+    days: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksListExpensesRequest.
+ * Use `create(BooksListExpensesRequestSchema)` to create a new message.
+ */
+export declare const BooksListExpensesRequestSchema: GenMessage<BooksListExpensesRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BooksListExpensesResponse
+ */
+export type BooksListExpensesResponse = Message<"tank.agentctl.v1.BooksListExpensesResponse"> & {
+    /**
+     * @generated from field: repeated tank.books.v1.Expense expenses = 1;
+     */
+    expenses: Expense[];
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksListExpensesResponse.
+ * Use `create(BooksListExpensesResponseSchema)` to create a new message.
+ */
+export declare const BooksListExpensesResponseSchema: GenMessage<BooksListExpensesResponse>;
 /**
  * @generated from message tank.agentctl.v1.BooksRecordPaymentRequest
  */
@@ -2352,6 +2412,12 @@ export type BooksRecordPaymentRequest = Message<"tank.agentctl.v1.BooksRecordPay
      * @generated from field: string reference = 4;
      */
     reference: string;
+    /**
+     * the thread message where a person said the money arrived
+     *
+     * @generated from field: string evidence_message_id = 5;
+     */
+    evidenceMessageId: string;
 };
 /**
  * Describes the message tank.agentctl.v1.BooksRecordPaymentRequest.
@@ -8329,6 +8395,14 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof BooksRecordPaymentRequestSchema;
         output: typeof BooksRecordPaymentResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BooksListExpenses
+     */
+    booksListExpenses: {
+        methodKind: "unary";
+        input: typeof BooksListExpensesRequestSchema;
+        output: typeof BooksListExpensesResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.BooksReport

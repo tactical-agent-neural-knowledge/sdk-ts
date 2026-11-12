@@ -124,6 +124,21 @@ export type Conversation = Message$1<"tank.ai.v1.Conversation"> & {
      * @generated from field: repeated tank.ai.v1.AppConnection app_connections = 20;
      */
     appConnections: AppConnection[];
+    /**
+     * The caller's own read receipts switch for this conversation (Robby, 2026-11-12: "the option
+     * to turn on read receipts per conversation. Defaults to off"). On, the caller's deliveries and
+     * reads are shared with others whose switch is on, and the caller sees theirs: ticks on the
+     * caller's own messages (Message.receipts) and Member.read_message_id. Off, neither way.
+     *
+     * @generated from field: bool read_receipts = 21;
+     */
+    readReceipts: boolean;
+    /**
+     * The newest message's id, so a client that has received it can say so (MarkDelivered).
+     *
+     * @generated from field: string last_message_id = 22;
+     */
+    lastMessageId: string;
 };
 /**
  * Describes the message tank.ai.v1.Conversation.
@@ -254,6 +269,17 @@ export type Member = Message$1<"tank.ai.v1.Member"> & {
      * @generated from field: google.protobuf.Timestamp joined_at = 5;
      */
     joinedAt?: Timestamp;
+    /**
+     * How far this member has read and when they reached it, only when the caller's read receipts
+     * and this member's are both on; empty otherwise, and always empty for the caller.
+     *
+     * @generated from field: string read_message_id = 6;
+     */
+    readMessageId: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp read_at = 7;
+     */
+    readAt?: Timestamp;
 };
 /**
  * Describes the message tank.ai.v1.Member.
@@ -462,12 +488,112 @@ export type Message = Message$1<"tank.ai.v1.Message"> & {
      * @generated from field: repeated tank.ai.v1.Reaction reactions = 17;
      */
     reactions: Reaction[];
+    /**
+     * Ticks, on the caller's own messages only, when the caller's read receipts are on and someone
+     * else was in the conversation when it was sent. Unset otherwise.
+     *
+     * @generated from field: tank.ai.v1.Receipts receipts = 18;
+     */
+    receipts?: Receipts;
 };
 /**
  * Describes the message tank.ai.v1.Message.
  * Use `create(MessageSchema)` to create a new message.
  */
 export declare const MessageSchema: GenMessage<Message>;
+/**
+ * Receipts is how far one of the caller's messages has got, worked out by the server.
+ *
+ * @generated from message tank.ai.v1.Receipts
+ */
+export type Receipts = Message$1<"tank.ai.v1.Receipts"> & {
+    /**
+     * "sent"; "delivered" once it is on a device of every other member who was in the conversation
+     * when it was sent; "read" once every one of them has read it. A member whose read receipts are
+     * off counts as neither, as in WhatsApp.
+     *
+     * @generated from field: string state = 1;
+     */
+    state: string;
+    /**
+     * Each of those members whose read receipts are on, with when it reached them and when they
+     * read it (either unset until it happens), in the order they joined.
+     *
+     * @generated from field: repeated tank.ai.v1.MemberReceipt members = 2;
+     */
+    members: MemberReceipt[];
+};
+/**
+ * Describes the message tank.ai.v1.Receipts.
+ * Use `create(ReceiptsSchema)` to create a new message.
+ */
+export declare const ReceiptsSchema: GenMessage<Receipts>;
+/**
+ * @generated from message tank.ai.v1.MemberReceipt
+ */
+export type MemberReceipt = Message$1<"tank.ai.v1.MemberReceipt"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string avatar_url = 3;
+     */
+    avatarUrl: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp delivered_at = 4;
+     */
+    deliveredAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp read_at = 5;
+     */
+    readAt?: Timestamp;
+};
+/**
+ * Describes the message tank.ai.v1.MemberReceipt.
+ * Use `create(MemberReceiptSchema)` to create a new message.
+ */
+export declare const MemberReceiptSchema: GenMessage<MemberReceipt>;
+/**
+ * MessageReceipts is one message's receipts as they are now.
+ *
+ * @generated from message tank.ai.v1.MessageReceipts
+ */
+export type MessageReceipts = Message$1<"tank.ai.v1.MessageReceipts"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * @generated from field: tank.ai.v1.Receipts receipts = 2;
+     */
+    receipts?: Receipts;
+};
+/**
+ * Describes the message tank.ai.v1.MessageReceipts.
+ * Use `create(MessageReceiptsSchema)` to create a new message.
+ */
+export declare const MessageReceiptsSchema: GenMessage<MessageReceipts>;
+/**
+ * ReceiptsChanged is the watcher's own messages whose receipts changed.
+ *
+ * @generated from message tank.ai.v1.ReceiptsChanged
+ */
+export type ReceiptsChanged = Message$1<"tank.ai.v1.ReceiptsChanged"> & {
+    /**
+     * @generated from field: repeated tank.ai.v1.MessageReceipts messages = 1;
+     */
+    messages: MessageReceipts[];
+};
+/**
+ * Describes the message tank.ai.v1.ReceiptsChanged.
+ * Use `create(ReceiptsChangedSchema)` to create a new message.
+ */
+export declare const ReceiptsChangedSchema: GenMessage<ReceiptsChanged>;
 /**
  * Reaction is one emoji on a message and who put it there, as reactions show in Treads.
  *
@@ -1405,6 +1531,81 @@ export type GetUsageResponse = Message$1<"tank.ai.v1.GetUsageResponse"> & {
  */
 export declare const GetUsageResponseSchema: GenMessage<GetUsageResponse>;
 /**
+ * @generated from message tank.ai.v1.SetReadReceiptsRequest
+ */
+export type SetReadReceiptsRequest = Message$1<"tank.ai.v1.SetReadReceiptsRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: bool on = 2;
+     */
+    on: boolean;
+};
+/**
+ * Describes the message tank.ai.v1.SetReadReceiptsRequest.
+ * Use `create(SetReadReceiptsRequestSchema)` to create a new message.
+ */
+export declare const SetReadReceiptsRequestSchema: GenMessage<SetReadReceiptsRequest>;
+/**
+ * @generated from message tank.ai.v1.SetReadReceiptsResponse
+ */
+export type SetReadReceiptsResponse = Message$1<"tank.ai.v1.SetReadReceiptsResponse"> & {
+    /**
+     * @generated from field: tank.ai.v1.Conversation conversation = 1;
+     */
+    conversation?: Conversation;
+};
+/**
+ * Describes the message tank.ai.v1.SetReadReceiptsResponse.
+ * Use `create(SetReadReceiptsResponseSchema)` to create a new message.
+ */
+export declare const SetReadReceiptsResponseSchema: GenMessage<SetReadReceiptsResponse>;
+/**
+ * @generated from message tank.ai.v1.MarkDeliveredRequest
+ */
+export type MarkDeliveredRequest = Message$1<"tank.ai.v1.MarkDeliveredRequest"> & {
+    /**
+     * At most 200.
+     *
+     * @generated from field: repeated tank.ai.v1.Delivered delivered = 1;
+     */
+    delivered: Delivered[];
+};
+/**
+ * Describes the message tank.ai.v1.MarkDeliveredRequest.
+ * Use `create(MarkDeliveredRequestSchema)` to create a new message.
+ */
+export declare const MarkDeliveredRequestSchema: GenMessage<MarkDeliveredRequest>;
+/**
+ * @generated from message tank.ai.v1.Delivered
+ */
+export type Delivered = Message$1<"tank.ai.v1.Delivered"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: string message_id = 2;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.ai.v1.Delivered.
+ * Use `create(DeliveredSchema)` to create a new message.
+ */
+export declare const DeliveredSchema: GenMessage<Delivered>;
+/**
+ * @generated from message tank.ai.v1.MarkDeliveredResponse
+ */
+export type MarkDeliveredResponse = Message$1<"tank.ai.v1.MarkDeliveredResponse"> & {};
+/**
+ * Describes the message tank.ai.v1.MarkDeliveredResponse.
+ * Use `create(MarkDeliveredResponseSchema)` to create a new message.
+ */
+export declare const MarkDeliveredResponseSchema: GenMessage<MarkDeliveredResponse>;
+/**
  * @generated from message tank.ai.v1.AddReactionRequest
  */
 export type AddReactionRequest = Message$1<"tank.ai.v1.AddReactionRequest"> & {
@@ -1938,6 +2139,15 @@ export type WatchResponse = Message$1<"tank.ai.v1.WatchResponse"> & {
          */
         value: MessageReactions;
         case: "reactions";
+    } | {
+        /**
+         * The watcher's own messages whose ticks changed (someone received or read them, or turned
+         * their read receipts on or off). Only ever sent to a watcher whose read receipts are on.
+         *
+         * @generated from field: tank.ai.v1.ReceiptsChanged receipts = 11;
+         */
+        value: ReceiptsChanged;
+        case: "receipts";
     } | {
         case: undefined;
         value?: undefined;
@@ -2474,5 +2684,29 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof RemoveReactionRequestSchema;
         output: typeof RemoveReactionResponseSchema;
+    };
+    /**
+     * The caller's read receipts switch for one conversation (Conversation.read_receipts). Off by
+     * default, for every member of every conversation. Turning it on shares only what happens from
+     * then on: nothing read while it was off is ever shown as read.
+     *
+     * @generated from rpc tank.ai.v1.AiService.SetReadReceipts
+     */
+    setReadReceipts: {
+        methodKind: "unary";
+        input: typeof SetReadReceiptsRequestSchema;
+        output: typeof SetReadReceiptsResponseSchema;
+    };
+    /**
+     * The client has received messages (in the chat list, say): the newest it has in each
+     * conversation. Reading implies it (MarkRead, and a Watch that delivers a message), so a
+     * conversation on screen needs no call. A conversation the caller is not in is skipped.
+     *
+     * @generated from rpc tank.ai.v1.AiService.MarkDelivered
+     */
+    markDelivered: {
+        methodKind: "unary";
+        input: typeof MarkDeliveredRequestSchema;
+        output: typeof MarkDeliveredResponseSchema;
     };
 }>;

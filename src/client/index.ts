@@ -1,4 +1,19 @@
 export { applyReaction, isCustomEmoji, QUICK_REACTIONS, reacted } from "./aiReactions.js";
+export {
+  applyReceiptsChanged,
+  clearReceipts,
+  deliveriesToAck,
+  MAX_DELIVERED,
+  messageTime,
+  RECEIPTS_COPY,
+  type ReceiptPerson,
+  receiptPeople,
+  type Ticks,
+  type TimeFormat,
+  ticksLabel,
+  ticksOf,
+  timestampDate,
+} from "./aiReceipts.js";
 export { Backoff, type BackoffOptions } from "./backoff.js";
 export {
   type CreateChannelInput,

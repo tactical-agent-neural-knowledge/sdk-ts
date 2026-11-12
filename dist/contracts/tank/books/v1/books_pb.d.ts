@@ -350,6 +350,24 @@ export type Expense = Message<"tank.books.v1.Expense"> & {
      * @generated from field: google.protobuf.Timestamp created_at = 9;
      */
     createdAt?: Timestamp;
+    /**
+     * The period a bill or a usage figure covers (a cloud bill for October: Oct 1 to
+     * Oct 31, both inclusive, at midnight UTC). Unset for a one-off purchase.
+     *
+     * @generated from field: google.protobuf.Timestamp period_start = 10;
+     */
+    periodStart?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp period_end = 11;
+     */
+    periodEnd?: Timestamp;
+    /**
+     * Where the figure came from, e.g. "aws-cost-explorer". With the period and the
+     * category it is the key a repeated collection revises instead of duplicating.
+     *
+     * @generated from field: string source = 12;
+     */
+    source: string;
 };
 /**
  * Describes the message tank.books.v1.Expense.
@@ -770,6 +788,14 @@ export type RecordPaymentRequest = Message<"tank.books.v1.RecordPaymentRequest">
      * @generated from field: google.protobuf.Timestamp at = 6;
      */
     at?: Timestamp;
+    /**
+     * When the agent records a payment: the message in its thread where a person said
+     * the money arrived. A payment is money received, never a charge or a receivable,
+     * so an agent's payment without one is refused. A person's own call needs none.
+     *
+     * @generated from field: string evidence_message_id = 7;
+     */
+    evidenceMessageId: string;
 };
 /**
  * Describes the message tank.books.v1.RecordPaymentRequest.
@@ -896,6 +922,22 @@ export type RecordExpenseRequest = Message<"tank.books.v1.RecordExpenseRequest">
      * @generated from field: string receipt_file_id = 7;
      */
     receiptFileId: string;
+    /**
+     * The period the expense covers. Required with a source; the expense is dated at
+     * the period's end. Booking the same source, category and period start again
+     * revises that expense (amount, end) rather than adding a second one.
+     *
+     * @generated from field: google.protobuf.Timestamp period_start = 8;
+     */
+    periodStart?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp period_end = 9;
+     */
+    periodEnd?: Timestamp;
+    /**
+     * @generated from field: string source = 10;
+     */
+    source: string;
 };
 /**
  * Describes the message tank.books.v1.RecordExpenseRequest.
@@ -910,6 +952,12 @@ export type RecordExpenseResponse = Message<"tank.books.v1.RecordExpenseResponse
      * @generated from field: tank.books.v1.Expense expense = 1;
      */
     expense?: Expense;
+    /**
+     * booked | revised | unchanged
+     *
+     * @generated from field: string outcome = 2;
+     */
+    outcome: string;
 };
 /**
  * Describes the message tank.books.v1.RecordExpenseResponse.
