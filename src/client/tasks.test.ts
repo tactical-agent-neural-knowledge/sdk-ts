@@ -313,3 +313,20 @@ describe("task client", () => {
     expect(client.store.getState().readStates.c1?.view).toBe(ChannelView.SIMPLE);
   });
 });
+
+describe("reading a Tread keeps its view", () => {
+  it("a read position update leaves the person's view and notify level alone", () => {
+    const s = new TankStore();
+    s.dispatch({
+      type: "readStates/upsert",
+      readStates: [
+        create(ChannelReadStateSchema, { channelId: "c1", view: ChannelView.SIMPLE, notifyPref: 2 }),
+      ],
+    });
+    s.dispatch({ type: "readStates/updated", channelId: "c1", lastReadSeq: 9n });
+    const rs = s.getState().readStates.c1;
+    expect(rs?.lastReadSeq).toBe(9n);
+    expect(rs?.view).toBe(ChannelView.SIMPLE);
+    expect(rs?.notifyPref).toBe(2);
+  });
+});
