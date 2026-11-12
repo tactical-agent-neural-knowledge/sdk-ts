@@ -44,5 +44,7 @@ describe("RichTextViewNative headings, tables and rules", () => {
     );
     expect(rows).toHaveLength(4);
     for (const r of rows) expect(r.children).toHaveLength(3);
+    expect(text(root)).toContain("3. third");
+    expect(text(root)).toContain("4. fourth");
   });
 });

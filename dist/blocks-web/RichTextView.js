@@ -78,7 +78,7 @@ export function RichTextView({ richText, resolveUser, resolveChannel, renderEmoj
                             lineHeight: 1.5,
                         }, children: _jsx("code", { children: k.value.text }) }, key));
                 case "list":
-                    return (_jsx(Box, { component: k.value.ordered ? "ol" : "ul", sx: { m: 0, pl: 3 + k.value.indent * 2 }, children: k.value.items.map((it, j) => (_jsx(Typography, { component: "li", variant: variant, children: it.elements.map((e, m) => (_jsx(ElementView, { element: e, resolveUser: resolveUser, resolveChannel: resolveChannel, renderEmoji: renderEmoji }, m))) }, j))) }, key));
+                    return (_jsx(Box, { component: k.value.ordered ? "ol" : "ul", start: k.value.ordered && k.value.start > 1 ? k.value.start : undefined, sx: { m: 0, pl: 3 + k.value.indent * 2 }, children: k.value.items.map((it, j) => (_jsx(Typography, { component: "li", variant: variant, children: it.elements.map((e, m) => (_jsx(ElementView, { element: e, resolveUser: resolveUser, resolveChannel: resolveChannel, renderEmoji: renderEmoji }, m))) }, j))) }, key));
                 case "heading": {
                     const level = Math.min(6, Math.max(1, k.value.level || 1));
                     return (_jsx(Typography, { component: `h${level}`, variant: variant, "data-testid": "rt-heading", sx: {
@@ -126,6 +126,7 @@ function TableView({ table, variant, elements, }) {
             borderColor: "divider",
             borderRadius: 1,
             width: "fit-content",
+            my: 0.5,
         }, children: _jsxs(Box, { component: "table", sx: { borderCollapse: "collapse", minWidth: "100%" }, children: [table.header && (_jsx(Box, { component: "thead", sx: { bgcolor: "tank.panel" }, children: _jsx("tr", { children: span.map((c) => (_jsx(Typography, { component: "th", variant: variant, scope: "col", align: cellAlign(table.align[c]), sx: { ...cell, fontWeight: 700, whiteSpace: "nowrap" }, children: elements(table.header?.cells[c]?.elements ?? []) }, c))) }) })), _jsx("tbody", { children: table.rows.map((r, j) => (
                     // biome-ignore lint/suspicious/noArrayIndexKey: rows are positional and never reordered
                     _jsx(Box, { component: "tr", sx: { "&:last-of-type td": { borderBottom: 0 } }, children: span.map((c) => (_jsx(Typography, { component: "td", variant: variant, align: cellAlign(table.align[c]), sx: cell, children: elements(r.cells[c]?.elements ?? []) }, c))) }, j))) })] }) }));

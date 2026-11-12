@@ -193,6 +193,7 @@ export function RichTextView({
               <Box
                 key={key}
                 component={k.value.ordered ? "ol" : "ul"}
+                start={k.value.ordered && k.value.start > 1 ? k.value.start : undefined}
                 sx={{ m: 0, pl: 3 + k.value.indent * 2 }}
               >
                 {k.value.items.map((it, j) => (
@@ -288,6 +289,7 @@ function TableView({
         borderColor: "divider",
         borderRadius: 1,
         width: "fit-content",
+        my: 0.5,
       }}
     >
       <Box component="table" sx={{ borderCollapse: "collapse", minWidth: "100%" }}>

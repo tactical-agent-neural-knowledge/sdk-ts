@@ -133,7 +133,7 @@ describe("richText", () => {
     expect(richTextToPlain(r)).toBe("Hi @u1, see this🎉");
     expect(richTextToPlain(richText("plain"))).toBe("plain");
     expect(richTextToPlain(usageReport)).toBe(
-      "Customer AI usage\nWorkspace | Calls | Charged\ntank-team | 97 | $0.30\nEdero | 5\nTotal | 1,279 | $1.70\n---\nAll via tank-neural.",
+      "Customer AI usage\nWorkspace | Calls | Charged\ntank-team | 97 | $0.30\nEdero | 5\nTotal | 1,279 | $1.70\n---\n3. third\n4. fourth\nAll via tank-neural.",
     );
   });
 });

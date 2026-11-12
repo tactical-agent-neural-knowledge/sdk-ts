@@ -134,7 +134,7 @@ export function RichTextViewNative({ richText, variant = "bodyMedium", ...p }: R
               <View key={key} style={{ paddingLeft: 12 + k.value.indent * 12 }}>
                 {k.value.items.map((it, j) => (
                   <Text key={j} variant={variant}>
-                    {k.value.ordered ? `${j + 1}. ` : "• "}
+                    {k.value.ordered ? `${(k.value.start || 1) + j}. ` : "• "}
                     {elements(it.elements)}
                   </Text>
                 ))}

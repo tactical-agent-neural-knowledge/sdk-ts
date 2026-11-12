@@ -88,7 +88,8 @@ export function richTextToPlain(r: RichText | undefined): string {
         out.push(
           k.value.items
             .map(
-              (it, i) => `${k.value.ordered ? `${i + 1}.` : "•"} ${it.elements.map(elementToPlain).join("")}`,
+              (it, i) =>
+                `${k.value.ordered ? `${(k.value.start || 1) + i}.` : "•"} ${it.elements.map(elementToPlain).join("")}`,
             )
             .join("\n"),
         );

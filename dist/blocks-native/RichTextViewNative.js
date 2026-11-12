@@ -62,7 +62,7 @@ export function RichTextViewNative({ richText, variant = "bodyMedium", ...p }) {
                 case "code":
                     return (_jsx(View, { style: [styles.code, { backgroundColor: theme.colors.surfaceVariant }], testID: `code-${k.value.language || "plain"}`, children: _jsx(Text, { variant: "bodySmall", style: { fontFamily: codeFont }, children: k.value.text }) }, key));
                 case "list":
-                    return (_jsx(View, { style: { paddingLeft: 12 + k.value.indent * 12 }, children: k.value.items.map((it, j) => (_jsxs(Text, { variant: variant, children: [k.value.ordered ? `${j + 1}. ` : "• ", elements(it.elements)] }, j))) }, key));
+                    return (_jsx(View, { style: { paddingLeft: 12 + k.value.indent * 12 }, children: k.value.items.map((it, j) => (_jsxs(Text, { variant: variant, children: [k.value.ordered ? `${(k.value.start || 1) + j}. ` : "• ", elements(it.elements)] }, j))) }, key));
                 case "heading": {
                     const level = k.value.level || 1;
                     return (_jsx(Text, { variant: level <= 1 ? "titleMedium" : "titleSmall", accessibilityRole: "header", style: { fontWeight: "700" }, testID: "rt-heading", children: elements(k.value.elements) }, key));

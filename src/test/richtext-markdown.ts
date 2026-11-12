@@ -28,6 +28,16 @@ export const usageReport: RichText = create(RichTextSchema, {
     { kind: { case: "divider", value: {} } },
     {
       kind: {
+        case: "list",
+        value: {
+          ordered: true,
+          start: 3,
+          items: [{ elements: [rt.text("third")] }, { elements: [rt.text("fourth")] }],
+        },
+      },
+    },
+    {
+      kind: {
         case: "section",
         value: { elements: [rt.text("All via "), rt.code("tank-neural"), rt.text(".")] },
       },

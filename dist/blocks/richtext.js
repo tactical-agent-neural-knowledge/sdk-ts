@@ -68,7 +68,7 @@ export function richTextToPlain(r) {
                 break;
             case "list":
                 out.push(k.value.items
-                    .map((it, i) => `${k.value.ordered ? `${i + 1}.` : "•"} ${it.elements.map(elementToPlain).join("")}`)
+                    .map((it, i) => `${k.value.ordered ? `${(k.value.start || 1) + i}.` : "•"} ${it.elements.map(elementToPlain).join("")}`)
                     .join("\n"));
                 break;
             case "heading":

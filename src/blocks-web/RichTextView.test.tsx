@@ -127,6 +127,7 @@ describe("RichTextView headings, tables and rules", () => {
     expect(rows[2]?.querySelector("strong")?.textContent).toBe("Total");
     expect(rows[0]?.querySelectorAll("td")[1]?.className).toMatch(/alignRight/);
     expect(container.querySelector("hr")).toBeTruthy();
+    expect(container.querySelector("ol")?.getAttribute("start")).toBe("3");
     expect(container.querySelector("code")?.textContent).toBe("tank-neural");
   });
 

@@ -356,6 +356,13 @@ export type RichTextList = Message<"tank.richtext.v1.RichTextList"> & {
      * @generated from field: repeated tank.richtext.v1.RichTextSection items = 3;
      */
     items: RichTextSection[];
+    /**
+     * The first item's number in an ordered list; 0 means 1. A Markdown list
+     * that a nested list splits into several blocks keeps counting through it.
+     *
+     * @generated from field: int32 start = 4;
+     */
+    start: number;
 };
 /**
  * Describes the message tank.richtext.v1.RichTextList.
