@@ -1,3 +1,4 @@
+export { applyReaction, isCustomEmoji, QUICK_REACTIONS, reacted } from "./aiReactions.js";
 export { Backoff, type BackoffOptions } from "./backoff.js";
 export {
   type CreateChannelInput,
