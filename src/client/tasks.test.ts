@@ -323,7 +323,7 @@ describe("reading a Tread keeps its view", () => {
         create(ChannelReadStateSchema, { channelId: "c1", view: ChannelView.SIMPLE, notifyPref: 2 }),
       ],
     });
-    s.dispatch({ type: "readStates/updated", channelId: "c1", lastReadSeq: 9n });
+    s.dispatch({ type: "readStates/updated", channelId: "c1", lastReadSeq: 9n, userId: "" });
     const rs = s.getState().readStates.c1;
     expect(rs?.lastReadSeq).toBe(9n);
     expect(rs?.view).toBe(ChannelView.SIMPLE);
