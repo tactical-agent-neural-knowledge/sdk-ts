@@ -1,7 +1,7 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
-import type { CallToolRequest, CallToolResponse, GetToolsRequest, GetToolsResponse, ListAppsRequest, ListAppsResponse } from "../../apps/v1/apps_pb.js";
+import type { AppAccount, CallToolRequest, CallToolResponse, GetToolsRequest, GetToolsResponse, ListAppsRequest, ListAppsResponse } from "../../apps/v1/apps_pb.js";
 import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks/v1/blocks_pb.js";
 import type { Board } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
@@ -7341,6 +7341,108 @@ export type CallNeuralAppToolResponse = Message<"tank.agentctl.v1.CallNeuralAppT
  */
 export declare const CallNeuralAppToolResponseSchema: GenMessage<CallNeuralAppToolResponse>;
 /**
+ * The person signing in (a TANK user id), the app (its slug) and where the browser goes once
+ * sign-in finishes: https://app.tank.chat/..., tank://... or tank-neural://...; anything else
+ * is refused. The control plane adds app_login=signed_in|cancelled|failed and app=<slug>.
+ *
+ * @generated from message tank.agentctl.v1.StartNeuralAppLoginRequest
+ */
+export type StartNeuralAppLoginRequest = Message<"tank.agentctl.v1.StartNeuralAppLoginRequest"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string app_id = 2;
+     */
+    appId: string;
+    /**
+     * @generated from field: string return_to = 3;
+     */
+    returnTo: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.StartNeuralAppLoginRequest.
+ * Use `create(StartNeuralAppLoginRequestSchema)` to create a new message.
+ */
+export declare const StartNeuralAppLoginRequestSchema: GenMessage<StartNeuralAppLoginRequest>;
+/**
+ * The app's own sign-in page, for the person's browser. Valid for ten minutes, once.
+ *
+ * @generated from message tank.agentctl.v1.StartNeuralAppLoginResponse
+ */
+export type StartNeuralAppLoginResponse = Message<"tank.agentctl.v1.StartNeuralAppLoginResponse"> & {
+    /**
+     * @generated from field: string url = 1;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.StartNeuralAppLoginResponse.
+ * Use `create(StartNeuralAppLoginResponseSchema)` to create a new message.
+ */
+export declare const StartNeuralAppLoginResponseSchema: GenMessage<StartNeuralAppLoginResponse>;
+/**
+ * Every app the person has signed in to; an app they have not is absent.
+ *
+ * @generated from message tank.agentctl.v1.ListNeuralAppAccountsRequest
+ */
+export type ListNeuralAppAccountsRequest = Message<"tank.agentctl.v1.ListNeuralAppAccountsRequest"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListNeuralAppAccountsRequest.
+ * Use `create(ListNeuralAppAccountsRequestSchema)` to create a new message.
+ */
+export declare const ListNeuralAppAccountsRequestSchema: GenMessage<ListNeuralAppAccountsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListNeuralAppAccountsResponse
+ */
+export type ListNeuralAppAccountsResponse = Message<"tank.agentctl.v1.ListNeuralAppAccountsResponse"> & {
+    /**
+     * @generated from field: repeated tank.apps.v1.AppAccount accounts = 1;
+     */
+    accounts: AppAccount[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListNeuralAppAccountsResponse.
+ * Use `create(ListNeuralAppAccountsResponseSchema)` to create a new message.
+ */
+export declare const ListNeuralAppAccountsResponseSchema: GenMessage<ListNeuralAppAccountsResponse>;
+/**
+ * Revokes the person's token at the app and forgets it. Signing out of an app the person is
+ * not signed in to succeeds.
+ *
+ * @generated from message tank.agentctl.v1.SignOutOfNeuralAppRequest
+ */
+export type SignOutOfNeuralAppRequest = Message<"tank.agentctl.v1.SignOutOfNeuralAppRequest"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: string app_id = 2;
+     */
+    appId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SignOutOfNeuralAppRequest.
+ * Use `create(SignOutOfNeuralAppRequestSchema)` to create a new message.
+ */
+export declare const SignOutOfNeuralAppRequestSchema: GenMessage<SignOutOfNeuralAppRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SignOutOfNeuralAppResponse
+ */
+export type SignOutOfNeuralAppResponse = Message<"tank.agentctl.v1.SignOutOfNeuralAppResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.SignOutOfNeuralAppResponse.
+ * Use `create(SignOutOfNeuralAppResponseSchema)` to create a new message.
+ */
+export declare const SignOutOfNeuralAppResponseSchema: GenMessage<SignOutOfNeuralAppResponse>;
+/**
  * @generated from message tank.agentctl.v1.ListInfraConnectionsRequest
  */
 export type ListInfraConnectionsRequest = Message<"tank.agentctl.v1.ListInfraConnectionsRequest"> & {
@@ -8549,6 +8651,34 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof CallNeuralAppToolRequestSchema;
         output: typeof CallNeuralAppToolResponseSchema;
+    };
+    /**
+     * Signing in to an app that requires it (App.requires_login). The control plane is the
+     * OAuth client (authorization code + PKCE), keeps each person's app token encrypted and
+     * never returns it; the api passes the person and decides who may ask.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.StartNeuralAppLogin
+     */
+    startNeuralAppLogin: {
+        methodKind: "unary";
+        input: typeof StartNeuralAppLoginRequestSchema;
+        output: typeof StartNeuralAppLoginResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.ListNeuralAppAccounts
+     */
+    listNeuralAppAccounts: {
+        methodKind: "unary";
+        input: typeof ListNeuralAppAccountsRequestSchema;
+        output: typeof ListNeuralAppAccountsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.SignOutOfNeuralApp
+     */
+    signOutOfNeuralApp: {
+        methodKind: "unary";
+        input: typeof SignOutOfNeuralAppRequestSchema;
+        output: typeof SignOutOfNeuralAppResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.ListInfraConnections

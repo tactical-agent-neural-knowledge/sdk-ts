@@ -353,6 +353,14 @@ export type CallToolResponse = Message<"tank.apps.v1.CallToolResponse"> & {
      * @generated from field: repeated tank.apps.v1.Mark marks = 4;
      */
     marks: Mark[];
+    /**
+     * The app requires login and the person has no working sign-in to it (never signed in,
+     * signed out, or the app ended it). is_error is set and text says "<App> needs you to sign
+     * in."; a client offers Sign in (StartAppLogin) rather than showing it as a failure.
+     *
+     * @generated from field: bool needs_login = 5;
+     */
+    needsLogin: boolean;
 };
 /**
  * Describes the message tank.apps.v1.CallToolResponse.
