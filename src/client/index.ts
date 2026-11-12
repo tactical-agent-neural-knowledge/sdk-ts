@@ -1,11 +1,14 @@
 export { Backoff, type BackoffOptions } from "./backoff.js";
 export {
   type CreateChannelInput,
+  type CreateTaskInput,
   createTankClient,
   type ListRunsInput,
+  type ListTasksInput,
   type LoadChannelOptions,
   type LoadNotificationsInput,
   type LoadNotificationsResult,
+  type NotifyPick,
   type RoleName,
   type SendMessageInput,
   type SetGoalInput,
@@ -62,6 +65,21 @@ export {
   type Unreads,
   unpackEnvelope,
 } from "./store.js";
+export {
+  commandTasks,
+  DONE_WINDOW_MS,
+  effectiveView,
+  isAgentInternal,
+  notifyFor,
+  ownNotify,
+  readyToCheckCount,
+  simpleConversation,
+  TASK_STAGES,
+  type TaskFilter,
+  taskForThread,
+  taskStageKey,
+  tasksByStage,
+} from "./tasks.js";
 export { createTankTransport, type TankAuth, type TransportOptions } from "./transport.js";
 export {
   type NativeFileInput,

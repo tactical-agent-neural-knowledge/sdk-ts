@@ -42,6 +42,7 @@ import {
   type ReactionRemoved,
   type ReadStateUpdated,
   type ScheduledMessageSent,
+  type TaskChanged,
   type ThreadDeleted,
   type TopoMarkUpdated,
   type Typing,
@@ -51,6 +52,7 @@ import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message, Reaction, ReadPosition } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification, NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
+import type { Task } from "../contracts/tank/task/v1/task_pb.js";
 import type { Entitlements, Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { uuidv7Time } from "./uuidv7.js";
 
@@ -143,6 +145,8 @@ export interface TankState {
   runsByThread: Record<string, Run>;
   /** file id → File (from `FileReady` events and upload responses). */
   filesById: Record<string, File>;
+  /** task id → Task (from `TaskChanged` events and every TaskService response). */
+  tasksById: Record<string, Task>;
 }
 
 export const TYPING_TTL_MS = 5_000;
@@ -179,6 +183,7 @@ export function initialState(): TankState {
     runsById: {},
     runsByThread: {},
     filesById: {},
+    tasksById: {},
   };
 }
 
@@ -256,6 +261,7 @@ export type Action =
     }
   | { type: "runs/upsert"; runs: Run[] }
   | { type: "files/upsert"; files: File[] }
+  | { type: "tasks/upsert"; tasks: Task[] }
   | { type: "files/deleted"; fileId: string; messageIds: string[] }
   | { type: "pending/add"; message: Message; now: number }
   | { type: "pending/failed"; clientMsgId: string; error: string }
@@ -958,6 +964,17 @@ export function reduce(state: TankState, action: Action): TankState {
     }
     case "runs/upsert":
       return upsertRuns(state, action.runs);
+    case "tasks/upsert": {
+      if (action.tasks.length === 0) return state;
+      const tasksById = { ...state.tasksById };
+      for (const t of action.tasks) {
+        const prev = tasksById[t.id];
+        // Events and responses can cross: an older copy never replaces a newer one.
+        if (prev && tsMs(prev.updatedAt) > tsMs(t.updatedAt)) continue;
+        tasksById[t.id] = t;
+      }
+      return { ...state, tasksById };
+    }
     case "files/upsert": {
       if (action.files.length === 0) return state;
       return { ...state, filesById: { ...state.filesById, ...byId(action.files) } };
@@ -1102,7 +1119,8 @@ export type KnownEventPayload =
   | CanvasBlockChanged
   | CanvasChanged
   | BoardObjectsChanged
-  | BoardChanged;
+  | BoardChanged
+  | TaskChanged;
 
 /**
  * A payload whose type is not in the vendored contracts (a newer event than this SDK build). The
@@ -1224,6 +1242,8 @@ export function envelopeToActions(env: Envelope, now: number): Action[] {
       return payload.run ? [{ type: "runs/upsert", runs: [payload.run] }] : [];
     case "tank.events.v1.FileReady":
       return payload.file ? [{ type: "files/upsert", files: [payload.file] }] : [];
+    case "tank.events.v1.TaskChanged":
+      return payload.task ? [{ type: "tasks/upsert", tasks: [payload.task] }] : [];
     case "tank.events.v1.NotificationCreated":
       return [
         {
@@ -1475,6 +1495,34 @@ export class TankStore {
         ids
           .map((id) => s.notifications[id])
           .filter((n): n is Notification => n !== undefined && (!unreadOnly || n.readAt === undefined)),
+      shallowEqualArrays,
+    );
+  };
+
+  /** Tasks in a workspace (every Tread the store has seen them for), oldest first. */
+  selectTasks = (workspaceId: string): Task[] => {
+    const s = this.state;
+    return this.memoize(
+      `tasks:${workspaceId}`,
+      [s.tasksById],
+      () =>
+        Object.values(s.tasksById)
+          .filter((t) => t.workspaceId === workspaceId)
+          .sort((a, b) => tsMs(a.createdAt) - tsMs(b.createdAt) || (a.id < b.id ? -1 : 1)),
+      shallowEqualArrays,
+    );
+  };
+
+  /** One Tread's tasks, oldest first. */
+  selectChannelTasks = (channelId: string): Task[] => {
+    const s = this.state;
+    return this.memoize(
+      `tasks-ch:${channelId}`,
+      [s.tasksById],
+      () =>
+        Object.values(s.tasksById)
+          .filter((t) => t.channelId === channelId)
+          .sort((a, b) => tsMs(a.createdAt) - tsMs(b.createdAt) || (a.id < b.id ? -1 : 1)),
       shallowEqualArrays,
     );
   };

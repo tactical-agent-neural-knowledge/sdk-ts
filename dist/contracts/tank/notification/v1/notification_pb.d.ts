@@ -1,5 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { TaskStage } from "../../task/v1/task_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/notification/v1/notification.proto.
@@ -8,7 +9,7 @@ export declare const file_tank_notification_v1_notification: GenFile;
 /**
  * A notification is written by the core's notify worker from bus events and
  * read back here. kind: mention | dm | thread_reply | reaction |
- * channel_invite | agent_needs_input | shared.
+ * channel_invite | agent_needs_input | shared | task.
  *
  * @generated from message tank.notification.v1.Notification
  */
@@ -65,6 +66,12 @@ export type Notification = Message<"tank.notification.v1.Notification"> & {
      * @generated from field: string item_title = 12;
      */
     itemTitle: string;
+    /**
+     * kind task (item_kind task): the stage the task reached.
+     *
+     * @generated from field: tank.task.v1.TaskStage task_stage = 13;
+     */
+    taskStage: TaskStage;
 };
 /**
  * Describes the message tank.notification.v1.Notification.

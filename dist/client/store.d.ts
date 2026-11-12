@@ -2,11 +2,12 @@ import { type Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { Channel, ChannelReadState, ThreadReadState } from "../contracts/tank/channel/v1/channel_pb.js";
-import { type AgentRunUpdated, type AgentStatus, type AppCommand, type BoardChanged, type BoardObjectsChanged, type BookmarkChanged, type CanvasBlockChanged, type CanvasChanged, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelPreferenceUpdated, type ChannelUpdated, type DraftUpdated, type EmojiChanged, type Envelope, type FileDeleted, type FileReady, type HuddleEnded, type HuddleParticipantsChanged, type HuddleStarted, type MemberUpdated, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PinChanged, type PreferencesUpdated, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ScheduledMessageSent, type ThreadDeleted, type TopoMarkUpdated, type Typing, type UserGroupUpdated } from "../contracts/tank/events/v1/events_pb.js";
+import { type AgentRunUpdated, type AgentStatus, type AppCommand, type BoardChanged, type BoardObjectsChanged, type BookmarkChanged, type CanvasBlockChanged, type CanvasChanged, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelPreferenceUpdated, type ChannelUpdated, type DraftUpdated, type EmojiChanged, type Envelope, type FileDeleted, type FileReady, type HuddleEnded, type HuddleParticipantsChanged, type HuddleStarted, type MemberUpdated, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PinChanged, type PreferencesUpdated, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ScheduledMessageSent, type TaskChanged, type ThreadDeleted, type TopoMarkUpdated, type Typing, type UserGroupUpdated } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message, ReadPosition } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
+import type { Task } from "../contracts/tank/task/v1/task_pb.js";
 import type { Entitlements, Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export type ConnectionState = "idle" | "connecting" | "open" | "ready" | "reconnecting" | "closed";
 export interface PendingMessage {
@@ -91,6 +92,8 @@ export interface TankState {
     runsByThread: Record<string, Run>;
     /** file id → File (from `FileReady` events and upload responses). */
     filesById: Record<string, File>;
+    /** task id → Task (from `TaskChanged` events and every TaskService response). */
+    tasksById: Record<string, Task>;
 }
 export declare const TYPING_TTL_MS = 5000;
 /** How long an `agent_status` frame stays live without a newer one. */
@@ -267,6 +270,9 @@ export type Action = {
     type: "files/upsert";
     files: File[];
 } | {
+    type: "tasks/upsert";
+    tasks: Task[];
+} | {
     type: "files/deleted";
     fileId: string;
     messageIds: string[];
@@ -310,7 +316,7 @@ export declare function notificationPagingKey(workspaceId: string, mode: Notific
 export declare function typingKey(channelId: string, threadRootId?: string): string;
 export declare function reduce(state: TankState, action: Action): TankState;
 /** Every `tank.events.v1` payload this SDK's vendored contracts know how to decode. */
-export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ThreadDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelDeleted | ChannelMembershipChanged | ChannelPreferenceUpdated | MemberUpdated | PinChanged | BookmarkChanged | DraftUpdated | EmojiChanged | PreferencesUpdated | ScheduledMessageSent | UserGroupUpdated | HuddleStarted | HuddleParticipantsChanged | HuddleEnded | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | FileDeleted | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated | MonitorWidgetUpdated | CanvasBlockChanged | CanvasChanged | BoardObjectsChanged | BoardChanged;
+export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ThreadDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelDeleted | ChannelMembershipChanged | ChannelPreferenceUpdated | MemberUpdated | PinChanged | BookmarkChanged | DraftUpdated | EmojiChanged | PreferencesUpdated | ScheduledMessageSent | UserGroupUpdated | HuddleStarted | HuddleParticipantsChanged | HuddleEnded | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | FileDeleted | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated | MonitorWidgetUpdated | CanvasBlockChanged | CanvasChanged | BoardObjectsChanged | BoardChanged | TaskChanged;
 /**
  * A payload whose type is not in the vendored contracts (a newer event than this SDK build). The
  * `$typeName` is the literal `"unknown"` so a `switch ($typeName)` still narrows every known case and
@@ -386,6 +392,10 @@ export declare class TankStore {
     selectTyping: (channelId: string, threadRootId?: string) => string[];
     /** A workspace's notifications newest first; `unreadOnly` keeps only rows without `read_at`. */
     selectNotifications: (workspaceId: string, unreadOnly?: boolean) => Notification[];
+    /** Tasks in a workspace (every Tread the store has seen them for), oldest first. */
+    selectTasks: (workspaceId: string) => Task[];
+    /** One Tread's tasks, oldest first. */
+    selectChannelTasks: (channelId: string) => Task[];
     /** Runs in a workspace, newest first (by started_at). */
     selectRuns: (workspaceId: string) => Run[];
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */

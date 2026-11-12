@@ -127,6 +127,12 @@ export type Channel = Message<"tank.channel.v1.Channel"> & {
      * @generated from field: string system = 17;
      */
     system: string;
+    /**
+     * The view for people who have not chosen one; a Tread admin sets it.
+     *
+     * @generated from field: tank.channel.v1.ChannelView default_view = 18;
+     */
+    defaultView: ChannelView;
 };
 /**
  * Describes the message tank.channel.v1.Channel.
@@ -195,6 +201,12 @@ export type ChannelReadState = Message<"tank.channel.v1.ChannelReadState"> & {
      * @generated from field: optional int32 unread_count = 7;
      */
     unreadCount?: number;
+    /**
+     * The caller's own view of this Tread; UNSPECIFIED follows Channel.default_view.
+     *
+     * @generated from field: tank.channel.v1.ChannelView view = 8;
+     */
+    view: ChannelView;
 };
 /**
  * Describes the message tank.channel.v1.ChannelReadState.
@@ -682,6 +694,10 @@ export type UpdateChannelRequest = Message<"tank.channel.v1.UpdateChannelRequest
      * @generated from field: optional bool read_receipts = 5;
      */
     readReceipts?: boolean;
+    /**
+     * @generated from field: optional tank.channel.v1.ChannelView default_view = 6;
+     */
+    defaultView?: ChannelView;
 };
 /**
  * Describes the message tank.channel.v1.UpdateChannelRequest.
@@ -815,6 +831,10 @@ export type SetChannelPreferenceRequest = Message<"tank.channel.v1.SetChannelPre
      * @generated from field: optional bool starred = 4;
      */
     starred?: boolean;
+    /**
+     * @generated from field: optional tank.channel.v1.ChannelView view = 5;
+     */
+    view?: ChannelView;
 };
 /**
  * Describes the message tank.channel.v1.SetChannelPreferenceRequest.
@@ -875,7 +895,33 @@ export declare enum ChannelType {
 export declare const ChannelTypeSchema: GenEnum<ChannelType>;
 /**
  * Per-member notification level for a channel.
+ * How a person reads a Tread (tasks, 2026-11-12). Builder is the Tread as it has always
+ * been; Simple is the conversation with the Tread's tasks on top and agent internals
+ * folded into their task.
  *
+ * @generated from enum tank.channel.v1.ChannelView
+ */
+export declare enum ChannelView {
+    /**
+     * follow the Tread's default (which defaults to Builder)
+     *
+     * @generated from enum value: CHANNEL_VIEW_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: CHANNEL_VIEW_BUILDER = 1;
+     */
+    BUILDER = 1,
+    /**
+     * @generated from enum value: CHANNEL_VIEW_SIMPLE = 2;
+     */
+    SIMPLE = 2
+}
+/**
+ * Describes the enum tank.channel.v1.ChannelView.
+ */
+export declare const ChannelViewSchema: GenEnum<ChannelView>;
+/**
  * @generated from enum tank.channel.v1.NotifyPref
  */
 export declare enum NotifyPref {

@@ -18,6 +18,7 @@ import {
   ChannelReadStateSchema,
   ChannelService,
   ChannelType,
+  type ChannelView,
   type TreadGoal,
   TreadGoalSchema,
 } from "../contracts/tank/channel/v1/channel_pb.js";
@@ -42,6 +43,14 @@ import {
   PresenceService,
   type PresenceStatus,
 } from "../contracts/tank/presence/v1/presence_pb.js";
+import {
+  type ListTasksResponse,
+  type Task,
+  type TaskNotify,
+  TaskNotifySchema,
+  TaskService,
+  type TaskStage,
+} from "../contracts/tank/task/v1/task_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import {
   type GetBootstrapResponse,
@@ -165,6 +174,34 @@ export interface LoadNotificationsResult {
   unreadCount: number;
 }
 
+export interface ListTasksInput {
+  workspaceId: string;
+  /** One Tread; leave out for Command (every Tread the caller can see). */
+  channelId?: string;
+  stages?: TaskStage[];
+  askedBy?: string;
+  limit?: number;
+}
+
+/** Who to tell when a task reaches a stage. */
+export interface NotifyPick {
+  stage: TaskStage;
+  userId: string;
+}
+
+export interface CreateTaskInput {
+  workspaceId: string;
+  title: string;
+  details?: string;
+  /** Start a run on it now instead of waiting in Queued. */
+  startNow?: boolean;
+  notify?: NotifyPick[];
+}
+
+function notifyRows(picks: readonly NotifyPick[] | undefined): TaskNotify[] {
+  return (picks ?? []).map((p) => create(TaskNotifySchema, { stage: p.stage, userId: p.userId }));
+}
+
 export interface ListRunsInput {
   workspaceId?: string;
   channelId?: string;
@@ -276,6 +313,8 @@ export class TankClient {
   readonly environment: Client<typeof EnvironmentService>;
   /** The Infrastructure page: a Tread's product, its state, log and live check. */
   readonly hosting: Client<typeof HostingService>;
+  /** Tasks: one piece of work in a Tread, moving through stages; Command is every Tread's. */
+  readonly tasks: Client<typeof TaskService>;
   readonly realtime: RealtimeClient;
   readonly store: TankStore;
   readonly storage: TankStorage;
@@ -335,6 +374,7 @@ export class TankClient {
     this.ai = createClient(AiService, this.transport);
     this.environment = createClient(EnvironmentService, this.transport);
     this.hosting = createClient(HostingService, this.transport);
+    this.tasks = createClient(TaskService, this.transport);
     this.realtime = new RealtimeClient({
       wsUrl: opts.wsUrl,
       getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
@@ -1050,6 +1090,112 @@ export class TankClient {
     });
     this.store.dispatch({ type: "runs/upsert", runs: res.runs });
     return { runs: res.runs, nextCursor: res.nextCursor };
+  }
+
+  // ------------------------------------------------------------ tasks
+
+  private keepTask<T extends { task?: Task | undefined }>(res: T): Task {
+    if (!res.task) throw new Error("TaskService returned no task");
+    this.store.dispatch({ type: "tasks/upsert", tasks: [res.task] });
+    return res.task;
+  }
+
+  /** A Tread's tasks (channelId) or every Tread's the caller can see (Command), into the store. */
+  async listTasks(input: ListTasksInput): Promise<ListTasksResponse> {
+    const res = await this.tasks.listTasks({
+      workspaceId: input.workspaceId,
+      channelId: input.channelId ?? "",
+      stages: input.stages ?? [],
+      askedBy: input.askedBy ?? "",
+      limit: input.limit ?? 0,
+    });
+    this.store.dispatch({ type: "tasks/upsert", tasks: res.tasks });
+    return res;
+  }
+
+  async getTask(taskId: string): Promise<Task> {
+    return this.keepTask(await this.tasks.getTask({ taskId }));
+  }
+
+  /** Add a task to a Tread. */
+  async createTask(input: CreateTaskInput & { channelId: string }): Promise<Task> {
+    return this.keepTask(
+      await this.tasks.createTask({
+        workspaceId: input.workspaceId,
+        channelId: input.channelId,
+        title: input.title,
+        details: input.details ?? "",
+        startNow: input.startNow ?? false,
+        notify: notifyRows(input.notify),
+      }),
+    );
+  }
+
+  /** Command's Add task: a new Tread whose goal is the title, with the task in it. */
+  async createTaskWithChannel(input: CreateTaskInput): Promise<{ task: Task; channel: Channel | undefined }> {
+    const res = await this.tasks.createTaskWithChannel({
+      workspaceId: input.workspaceId,
+      title: input.title,
+      details: input.details ?? "",
+      startNow: input.startNow ?? false,
+      notify: notifyRows(input.notify),
+    });
+    if (res.channel) this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
+    return { task: this.keepTask(res), channel: res.channel };
+  }
+
+  async startTask(taskId: string): Promise<Task> {
+    return this.keepTask(await this.tasks.startTask({ taskId }));
+  }
+
+  /** Looks right: Ready to check → Done. */
+  async confirmTask(taskId: string): Promise<Task> {
+    return this.keepTask(await this.tasks.confirmTask({ taskId }));
+  }
+
+  /** Not yet: the sentence goes to the Tread as the caller and the work goes back. */
+  async sendBackTask(taskId: string, text: string): Promise<Task> {
+    return this.keepTask(await this.tasks.sendBackTask({ taskId, text }));
+  }
+
+  /** Try again on a stuck task. */
+  async retryTask(taskId: string): Promise<Task> {
+    return this.keepTask(await this.tasks.retryTask({ taskId }));
+  }
+
+  /** Replace the task's own notify picks (workspace rules stay). */
+  async setTaskNotify(taskId: string, notify: NotifyPick[], askerMuted?: boolean): Promise<Task> {
+    return this.keepTask(
+      await this.tasks.setTaskNotify({
+        taskId,
+        notify: notifyRows(notify),
+        ...(askerMuted === undefined ? {} : { askerMuted }),
+      }),
+    );
+  }
+
+  /**
+   * This person's view of a Tread (Builder or Simple). Optimistic: the read state changes at
+   * once and rolls back on error; other devices hear it as channel_preference.updated.
+   */
+  async setChannelView(channelId: string, view: ChannelView): Promise<void> {
+    const prev = this.store.getState().readStates[channelId];
+    const base = prev ?? create(ChannelReadStateSchema, { channelId });
+    this.store.dispatch({ type: "readStates/upsert", readStates: [{ ...base, view }] });
+    try {
+      const res = await this.channels.setChannelPreference({ channelId, view });
+      if (res.readState) this.store.dispatch({ type: "readStates/upsert", readStates: [res.readState] });
+    } catch (err) {
+      if (prev) this.store.dispatch({ type: "readStates/upsert", readStates: [prev] });
+      throw err;
+    }
+  }
+
+  /** A Tread admin's default view for people who have not picked one. */
+  async setChannelDefaultView(channelId: string, view: ChannelView): Promise<Channel | undefined> {
+    const res = await this.channels.updateChannel({ channelId, defaultView: view });
+    if (res.channel) this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
+    return res.channel;
   }
 
   /** Fetch one run into the store. */

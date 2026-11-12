@@ -23,13 +23,15 @@ import {
   type ThreadView,
   type Unreads,
 } from "../client/store.js";
+import { effectiveView, readyToCheckCount } from "../client/tasks.js";
 import type { Run, TreadPlan } from "../contracts/tank/agent/v1/agent_pb.js";
-import type { Channel } from "../contracts/tank/channel/v1/channel_pb.js";
+import type { Channel, ChannelView } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { AgentStatus } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
+import type { Task } from "../contracts/tank/task/v1/task_pb.js";
 import type { Mark, MarkType, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Preferences, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
@@ -714,3 +716,99 @@ export type {
   ThreadView,
   Unreads,
 };
+
+// ------------------------------------------------------------ tasks
+
+export interface TasksState {
+  tasks: Task[];
+  loading: boolean;
+  /** The workspace has an agent, so Start does something. */
+  hasAgent: boolean;
+  /** The last load failed (the list may be what the store already had). */
+  error: boolean;
+  reload: () => void;
+}
+
+/**
+ * Load tasks once per key and again whenever the gateway comes back (events missed while
+ * away are not replayed for every Tread); task.changed events keep the store current between.
+ */
+function useTaskLoad(
+  key: string,
+  load: (client: TankClient) => Promise<{ hasAgent: boolean }>,
+): Omit<TasksState, "tasks"> {
+  const client = useTank();
+  const connection = useConnectionState();
+  const [loading, setLoading] = useState(true);
+  const [hasAgent, setHasAgent] = useState(false);
+  const [error, setError] = useState(false);
+  const [tick, setTick] = useState(0);
+  const reload = useCallback(() => setTick((t) => t + 1), []);
+  const ready = connection === "ready";
+  // biome-ignore lint/correctness/useExhaustiveDependencies: `tick` and `ready` are refetch triggers; `load` is keyed by `key`
+  useEffect(() => {
+    if (!key) return;
+    let live = true;
+    load(client)
+      .then((r) => {
+        if (!live) return;
+        setHasAgent(r.hasAgent);
+        setError(false);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!live) return;
+        setError(true);
+        setLoading(false);
+      });
+    return () => {
+      live = false;
+    };
+  }, [client, key, tick, ready]);
+  return { loading, hasAgent, error, reload };
+}
+
+/** One Tread's tasks, live (the strip in a Tread, both views). */
+export function useTasks(workspaceId: string, channelId: string): TasksState {
+  const tasks = useTankSelector(useCallback((s: TankStore) => s.selectChannelTasks(channelId), [channelId]));
+  const meta = useTaskLoad(channelId && workspaceId ? `${workspaceId}:${channelId}` : "", (c) =>
+    c.listTasks({ workspaceId, channelId }),
+  );
+  return { tasks, ...meta };
+}
+
+export interface WorkspaceTasksState extends TasksState {
+  /** Ready to check across the workspace, for Home's count. */
+  readyToCheck: number;
+}
+
+/** Every task in every Tread the person can see, live (Command on Home). */
+export function useWorkspaceTasks(workspaceId: string): WorkspaceTasksState {
+  const tasks = useTankSelector(useCallback((s: TankStore) => s.selectTasks(workspaceId), [workspaceId]));
+  const meta = useTaskLoad(workspaceId ? `ws:${workspaceId}` : "", (c) => c.listTasks({ workspaceId }));
+  const readyToCheck = useMemo(() => readyToCheckCount(tasks), [tasks]);
+  return { tasks, readyToCheck, ...meta };
+}
+
+/** One task from the store, fetched when it is not there yet. */
+export function useTask(taskId: string): Task | undefined {
+  const client = useTank();
+  const task = useTankSelector(useCallback((s: TankStore) => s.getState().tasksById[taskId], [taskId]));
+  const missing = !task;
+  useEffect(() => {
+    if (!taskId || !missing) return;
+    void client.getTask(taskId).catch(() => undefined);
+  }, [client, taskId, missing]);
+  return task;
+}
+
+/** The view this person reads a Tread in (their pick, else the Tread's default, else Builder). */
+export function useChannelView(channelId: string): ChannelView.BUILDER | ChannelView.SIMPLE {
+  const channel = useTankSelector(
+    useCallback((s: TankStore) => s.getState().channels[channelId], [channelId]),
+  );
+  const readState = useTankSelector(
+    useCallback((s: TankStore) => s.getState().readStates[channelId], [channelId]),
+  );
+  return effectiveView(channel, readState);
+}

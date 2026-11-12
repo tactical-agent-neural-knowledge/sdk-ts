@@ -2,12 +2,13 @@ import { type ReactNode } from "react";
 import type { TankClient } from "../client/client.js";
 import { type ChannelPaging, type ConnectionState, type NotificationPaging, type PendingMessage, type TankState, type TankStore, type ThreadView, type Unreads } from "../client/store.js";
 import type { Run, TreadPlan } from "../contracts/tank/agent/v1/agent_pb.js";
-import type { Channel } from "../contracts/tank/channel/v1/channel_pb.js";
+import type { Channel, ChannelView } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { AgentStatus } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import type { Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
+import type { Task } from "../contracts/tank/task/v1/task_pb.js";
 import type { Mark, MarkType, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export { noRecall, type Recall, type RecallStep, recallStep, recentOwn } from "./history.js";
@@ -175,3 +176,24 @@ export declare function useFile(fileId: string): File | undefined;
 export declare function useMessageFiles(messageId: string): File[];
 export { TankStore } from "../client/store.js";
 export type { ChannelPaging, ConnectionState, NotificationPaging, PendingMessage, TankState, ThreadView, Unreads, };
+export interface TasksState {
+    tasks: Task[];
+    loading: boolean;
+    /** The workspace has an agent, so Start does something. */
+    hasAgent: boolean;
+    /** The last load failed (the list may be what the store already had). */
+    error: boolean;
+    reload: () => void;
+}
+/** One Tread's tasks, live (the strip in a Tread, both views). */
+export declare function useTasks(workspaceId: string, channelId: string): TasksState;
+export interface WorkspaceTasksState extends TasksState {
+    /** Ready to check across the workspace, for Home's count. */
+    readyToCheck: number;
+}
+/** Every task in every Tread the person can see, live (Command on Home). */
+export declare function useWorkspaceTasks(workspaceId: string): WorkspaceTasksState;
+/** One task from the store, fetched when it is not there yet. */
+export declare function useTask(taskId: string): Task | undefined;
+/** The view this person reads a Tread in (their pick, else the Tread's default, else Builder). */
+export declare function useChannelView(channelId: string): ChannelView.BUILDER | ChannelView.SIMPLE;

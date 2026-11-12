@@ -37,6 +37,7 @@ export function initialState() {
         runsById: {},
         runsByThread: {},
         filesById: {},
+        tasksById: {},
     };
 }
 // ---------------------------------------------------------------- helpers
@@ -739,6 +740,19 @@ export function reduce(state, action) {
         }
         case "runs/upsert":
             return upsertRuns(state, action.runs);
+        case "tasks/upsert": {
+            if (action.tasks.length === 0)
+                return state;
+            const tasksById = { ...state.tasksById };
+            for (const t of action.tasks) {
+                const prev = tasksById[t.id];
+                // Events and responses can cross: an older copy never replaces a newer one.
+                if (prev && tsMs(prev.updatedAt) > tsMs(t.updatedAt))
+                    continue;
+                tasksById[t.id] = t;
+            }
+            return { ...state, tasksById };
+        }
         case "files/upsert": {
             if (action.files.length === 0)
                 return state;
@@ -954,6 +968,8 @@ export function envelopeToActions(env, now) {
             return payload.run ? [{ type: "runs/upsert", runs: [payload.run] }] : [];
         case "tank.events.v1.FileReady":
             return payload.file ? [{ type: "files/upsert", files: [payload.file] }] : [];
+        case "tank.events.v1.TaskChanged":
+            return payload.task ? [{ type: "tasks/upsert", tasks: [payload.task] }] : [];
         case "tank.events.v1.NotificationCreated":
             return [
                 {
@@ -1129,6 +1145,20 @@ export class TankStore {
         return this.memoize(`notifications:${workspaceId}:${unreadOnly ? "unread" : "all"}`, [ids, s.notifications], () => ids
             .map((id) => s.notifications[id])
             .filter((n) => n !== undefined && (!unreadOnly || n.readAt === undefined)), shallowEqualArrays);
+    };
+    /** Tasks in a workspace (every Tread the store has seen them for), oldest first. */
+    selectTasks = (workspaceId) => {
+        const s = this.state;
+        return this.memoize(`tasks:${workspaceId}`, [s.tasksById], () => Object.values(s.tasksById)
+            .filter((t) => t.workspaceId === workspaceId)
+            .sort((a, b) => tsMs(a.createdAt) - tsMs(b.createdAt) || (a.id < b.id ? -1 : 1)), shallowEqualArrays);
+    };
+    /** One Tread's tasks, oldest first. */
+    selectChannelTasks = (channelId) => {
+        const s = this.state;
+        return this.memoize(`tasks-ch:${channelId}`, [s.tasksById], () => Object.values(s.tasksById)
+            .filter((t) => t.channelId === channelId)
+            .sort((a, b) => tsMs(a.createdAt) - tsMs(b.createdAt) || (a.id < b.id ? -1 : 1)), shallowEqualArrays);
     };
     /** Runs in a workspace, newest first (by started_at). */
     selectRuns = (workspaceId) => {
