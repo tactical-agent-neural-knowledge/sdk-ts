@@ -752,6 +752,9 @@ export function reduce(state: TankState, action: Action): TankState {
         mentionCount: 0,
         muted: prev?.muted ?? false,
         starred: prev?.starred ?? false,
+        // Reading a Tread changes where you read to, never how you read it or what you hear.
+        notifyPref: prev?.notifyPref ?? 0,
+        view: prev?.view ?? 0,
         // Read to the end is zero by definition. Read part-way is rare and the
         // exact remainder is not knowable here; keeping the last count is
         // wrong by at most what was just read, and the next bootstrap fixes it.
