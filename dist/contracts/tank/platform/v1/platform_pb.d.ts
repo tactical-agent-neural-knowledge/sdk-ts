@@ -1220,6 +1220,31 @@ export type AgentUsage = Message<"tank.platform.v1.AgentUsage"> & {
      * @generated from field: repeated tank.platform.v1.RateMonth rate_history = 13;
      */
     rateHistory: RateMonth[];
+    /**
+     * Prepaid agent time (tankctl agent-time prepaid), the same figures as Billing's GetAgentTime.
+     * When prepaid is true the cap no longer applies: runs stop when available reaches zero.
+     *
+     * @generated from field: bool prepaid = 14;
+     */
+    prepaid: boolean;
+    /**
+     * purchased time left; may dip a little below zero
+     *
+     * @generated from field: int64 balance_cents = 15;
+     */
+    balanceCents: bigint;
+    /**
+     * what runs can still spend: included left + balance
+     *
+     * @generated from field: int64 available_cents = 16;
+     */
+    availableCents: bigint;
+    /**
+     * of this month's included amount, what is left
+     *
+     * @generated from field: int64 included_left_cents = 17;
+     */
+    includedLeftCents: bigint;
 };
 /**
  * Describes the message tank.platform.v1.AgentUsage.
