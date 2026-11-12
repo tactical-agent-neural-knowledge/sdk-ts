@@ -1322,6 +1322,58 @@ export type GetUsageResponse = Message$1<"tank.ai.v1.GetUsageResponse"> & {
  */
 export declare const GetUsageResponseSchema: GenMessage<GetUsageResponse>;
 /**
+ * TranscribeRequest is one recording from the composer's microphone, at most two minutes
+ * and 10 MB (larger is refused with invalid_argument).
+ *
+ * @generated from message tank.ai.v1.TranscribeRequest
+ */
+export type TranscribeRequest = Message$1<"tank.ai.v1.TranscribeRequest"> & {
+    /**
+     * The recording as the client made it: audio/webm or audio/ogg (browsers), audio/mp4 or
+     * audio/m4a (iOS, Safari), audio/wav, audio/3gpp or audio/aac (Android).
+     *
+     * @generated from field: bytes audio = 1;
+     */
+    audio: Uint8Array;
+    /**
+     * @generated from field: string mime_type = 2;
+     */
+    mimeType: string;
+    /**
+     * A hint for the hearing model, BCP 47 ("en", "en-US"); empty lets it tell.
+     *
+     * @generated from field: string language = 3;
+     */
+    language: string;
+};
+/**
+ * Describes the message tank.ai.v1.TranscribeRequest.
+ * Use `create(TranscribeRequestSchema)` to create a new message.
+ */
+export declare const TranscribeRequestSchema: GenMessage<TranscribeRequest>;
+/**
+ * @generated from message tank.ai.v1.TranscribeResponse
+ */
+export type TranscribeResponse = Message$1<"tank.ai.v1.TranscribeResponse"> & {
+    /**
+     * What was said; empty when nothing could be heard.
+     *
+     * @generated from field: string text = 1;
+     */
+    text: string;
+    /**
+     * How long the recording was, in milliseconds, as the server measured it.
+     *
+     * @generated from field: int32 duration_ms = 2;
+     */
+    durationMs: number;
+};
+/**
+ * Describes the message tank.ai.v1.TranscribeResponse.
+ * Use `create(TranscribeResponseSchema)` to create a new message.
+ */
+export declare const TranscribeResponseSchema: GenMessage<TranscribeResponse>;
+/**
  * @generated from message tank.ai.v1.ListAppsRequest
  */
 export type ListAppsRequest = Message$1<"tank.ai.v1.ListAppsRequest"> & {
@@ -2223,5 +2275,17 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof SetMutedRequestSchema;
         output: typeof SetMutedResponseSchema;
+    };
+    /**
+     * Voice in the composer: a short recording the person made, written out as text by TANK's
+     * own hearing model (never another company's, never the device's dictation). The words go
+     * back into the composer for the person to edit and send; nothing is sent or kept.
+     *
+     * @generated from rpc tank.ai.v1.AiService.Transcribe
+     */
+    transcribe: {
+        methodKind: "unary";
+        input: typeof TranscribeRequestSchema;
+        output: typeof TranscribeResponseSchema;
     };
 }>;

@@ -35,6 +35,13 @@ export {
   type WebSocketLike,
 } from "./realtime.js";
 export { expandShortcodes } from "./shortcodes.js";
+export {
+  NEURAL_STARTERS,
+  type PickStartersOptions,
+  pickStarters,
+  type Starter,
+  type StarterNeed,
+} from "./starters.js";
 export { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";
 export { IndexedDbStorage, type IndexedDbStorageOptions } from "./storage-idb.js";
 export {
@@ -91,3 +98,11 @@ export {
   type XhrLike,
 } from "./upload.js";
 export { cryptoRandomBytes, isUuidv7, type RandomBytes, uuidv7, uuidv7Time } from "./uuidv7.js";
+export {
+  appendDictation,
+  formatElapsed,
+  VOICE_COPY,
+  VOICE_MAX_BYTES,
+  VOICE_MAX_SECONDS,
+  voiceErrorText,
+} from "./voice.js";
