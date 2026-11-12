@@ -7,6 +7,7 @@ export { isPaywall, paywallMessage } from "./paywall.js";
 export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 export { browserOnlineSignal, RealtimeClient, } from "./realtime.js";
 export { expandShortcodes } from "./shortcodes.js";
+export { NEURAL_STARTERS, pickStarters, } from "./starters.js";
 export { MemoryStorage, storageKeys } from "./storage.js";
 export { IndexedDbStorage } from "./storage-idb.js";
 export { AGENT_STATUS_TTL_MS, envelopeToActions, initialState, notificationPagingKey, readReceipt, reduce, TankStore, TYPING_TTL_MS, tsMs, typingKey, unpackEnvelope, } from "./store.js";
@@ -14,3 +15,4 @@ export { commandTasks, DONE_WINDOW_MS, effectiveView, isAgentInternal, notifyFor
 export { createTankTransport } from "./transport.js";
 export { putUpload, UploadError, } from "./upload.js";
 export { cryptoRandomBytes, isUuidv7, uuidv7, uuidv7Time } from "./uuidv7.js";
+export { appendDictation, formatElapsed, VOICE_COPY, VOICE_MAX_BYTES, VOICE_MAX_SECONDS, voiceErrorText, } from "./voice.js";

@@ -7,6 +7,7 @@ export { isPaywall, paywallMessage } from "./paywall.js";
 export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 export { browserOnlineSignal, type OnlineSignal, RealtimeClient, type RealtimeEvents, type RealtimeOptions, type RealtimeSession, type WebSocketCtor, type WebSocketLike, } from "./realtime.js";
 export { expandShortcodes } from "./shortcodes.js";
+export { NEURAL_STARTERS, type PickStartersOptions, pickStarters, type Starter, type StarterNeed, } from "./starters.js";
 export { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";
 export { IndexedDbStorage, type IndexedDbStorageOptions } from "./storage-idb.js";
 export { type Action, AGENT_STATUS_TTL_MS, type AgentStatusEntry, type ChannelPaging, type ConnectionState, type EventPayload, envelopeToActions, initialState, type KnownEventPayload, type Listener, type NotificationMode, type NotificationPaging, notificationPagingKey, type PendingMessage, type ReadReceipt, readReceipt, reduce, type TankState, TankStore, type ThreadView, TYPING_TTL_MS, tsMs, typingKey, type UnknownEventPayload, type Unreads, unpackEnvelope, } from "./store.js";
@@ -14,3 +15,4 @@ export { commandTasks, DONE_WINDOW_MS, effectiveView, isAgentInternal, notifyFor
 export { createTankTransport, type TankAuth, type TransportOptions } from "./transport.js";
 export { type NativeFileInput, type PutOptions, putUpload, UploadError, type UploadInput, type XhrCtor, type XhrLike, } from "./upload.js";
 export { cryptoRandomBytes, isUuidv7, type RandomBytes, uuidv7, uuidv7Time } from "./uuidv7.js";
+export { appendDictation, formatElapsed, VOICE_COPY, VOICE_MAX_BYTES, VOICE_MAX_SECONDS, voiceErrorText, } from "./voice.js";
