@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/richtext/v1/richtext.proto.
  */
 export const file_tank_richtext_v1_richtext: GenFile = /*@__PURE__*/
-  fileDesc("Ch90YW5rL3JpY2h0ZXh0L3YxL3JpY2h0ZXh0LnByb3RvEhB0YW5rLnJpY2h0ZXh0LnYxIjsKCFJpY2hUZXh0Ei8KBmJsb2NrcxgBIAMoCzIfLnRhbmsucmljaHRleHQudjEuUmljaFRleHRCbG9jayLfAQoNUmljaFRleHRCbG9jaxI0CgdzZWN0aW9uGAEgASgLMiEudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dFNlY3Rpb25IABIuCgRjb2RlGAIgASgLMh4udGFuay5yaWNodGV4dC52MS5SaWNoVGV4dENvZGVIABIwCgVxdW90ZRgDIAEoCzIfLnRhbmsucmljaHRleHQudjEuUmljaFRleHRRdW90ZUgAEi4KBGxpc3QYBCABKAsyHi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0TGlzdEgAQgYKBGtpbmQiQwoFU3R5bGUSDAoEYm9sZBgBIAEoCBIOCgZpdGFsaWMYAiABKAgSDgoGc3RyaWtlGAMgASgIEgwKBGNvZGUYBCABKAgi/wIKD1JpY2hUZXh0RWxlbWVudBItCgR0ZXh0GAEgASgLMh0udGFuay5yaWNodGV4dC52MS5UZXh0RWxlbWVudEgAEi8KBWVtb2ppGAIgASgLMh4udGFuay5yaWNodGV4dC52MS5FbW9qaUVsZW1lbnRIABItCgR1c2VyGAMgASgLMh0udGFuay5yaWNodGV4dC52MS5Vc2VyTWVudGlvbkgAEjMKB2NoYW5uZWwYBCABKAsyIC50YW5rLnJpY2h0ZXh0LnYxLkNoYW5uZWxNZW50aW9uSAASNwoJYnJvYWRjYXN0GAUgASgLMiIudGFuay5yaWNodGV4dC52MS5Ccm9hZGNhc3RNZW50aW9uSAASLQoEbGluaxgGIAEoCzIdLnRhbmsucmljaHRleHQudjEuTGlua0VsZW1lbnRIABI4Cgp1c2VyX2dyb3VwGAcgASgLMiIudGFuay5yaWNodGV4dC52MS5Vc2VyR3JvdXBNZW50aW9uSABCBgoEa2luZCI0ChBVc2VyR3JvdXBNZW50aW9uEhAKCGdyb3VwX2lkGAEgASgJEg4KBmhhbmRsZRgCIAEoCSJDCgtUZXh0RWxlbWVudBIMCgR0ZXh0GAEgASgJEiYKBXN0eWxlGAIgASgLMhcudGFuay5yaWNodGV4dC52MS5TdHlsZSItCgxFbW9qaUVsZW1lbnQSDAoEbmFtZRgBIAEoCRIPCgd1bmljb2RlGAIgASgJIkYKC1VzZXJNZW50aW9uEg8KB3VzZXJfaWQYASABKAkSJgoFc3R5bGUYAiABKAsyFy50YW5rLnJpY2h0ZXh0LnYxLlN0eWxlIiQKDkNoYW5uZWxNZW50aW9uEhIKCmNoYW5uZWxfaWQYASABKAkiPgoQQnJvYWRjYXN0TWVudGlvbhIqCgVyYW5nZRgBIAEoDjIbLnRhbmsucmljaHRleHQudjEuQnJvYWRjYXN0IlAKC0xpbmtFbGVtZW50EgsKA3VybBgBIAEoCRIMCgR0ZXh0GAIgASgJEiYKBXN0eWxlGAMgASgLMhcudGFuay5yaWNodGV4dC52MS5TdHlsZSJGCg9SaWNoVGV4dFNlY3Rpb24SMwoIZWxlbWVudHMYASADKAsyIS50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0RWxlbWVudCIuCgxSaWNoVGV4dENvZGUSEAoIbGFuZ3VhZ2UYASABKAkSDAoEdGV4dBgCIAEoCSJECg1SaWNoVGV4dFF1b3RlEjMKCGVsZW1lbnRzGAEgAygLMiEudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dEVsZW1lbnQiYQoMUmljaFRleHRMaXN0Eg8KB29yZGVyZWQYASABKAgSDgoGaW5kZW50GAIgASgFEjAKBWl0ZW1zGAMgAygLMiEudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dFNlY3Rpb24qaQoJQnJvYWRjYXN0EhkKFUJST0FEQ0FTVF9VTlNQRUNJRklFRBAAEhIKDkJST0FEQ0FTVF9IRVJFEAESFQoRQlJPQURDQVNUX0NIQU5ORUwQAhIWChJCUk9BRENBU1RfRVZFUllPTkUQA0LgAQoUY29tLnRhbmsucmljaHRleHQudjFCDVJpY2h0ZXh0UHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9yaWNodGV4dC92MTtyaWNodGV4dHYxogIDVFJYqgIQVGFuay5SaWNodGV4dC5WMcoCEFRhbmtcUmljaHRleHRcVjHiAhxUYW5rXFJpY2h0ZXh0XFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UmljaHRleHQ6OlYxYgZwcm90bzM");
+  fileDesc("Ch90YW5rL3JpY2h0ZXh0L3YxL3JpY2h0ZXh0LnByb3RvEhB0YW5rLnJpY2h0ZXh0LnYxIjsKCFJpY2hUZXh0Ei8KBmJsb2NrcxgBIAMoCzIfLnRhbmsucmljaHRleHQudjEuUmljaFRleHRCbG9jayL9AgoNUmljaFRleHRCbG9jaxI0CgdzZWN0aW9uGAEgASgLMiEudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dFNlY3Rpb25IABIuCgRjb2RlGAIgASgLMh4udGFuay5yaWNodGV4dC52MS5SaWNoVGV4dENvZGVIABIwCgVxdW90ZRgDIAEoCzIfLnRhbmsucmljaHRleHQudjEuUmljaFRleHRRdW90ZUgAEi4KBGxpc3QYBCABKAsyHi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0TGlzdEgAEjQKB2hlYWRpbmcYBSABKAsyIS50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0SGVhZGluZ0gAEjAKBXRhYmxlGAYgASgLMh8udGFuay5yaWNodGV4dC52MS5SaWNoVGV4dFRhYmxlSAASNAoHZGl2aWRlchgHIAEoCzIhLnRhbmsucmljaHRleHQudjEuUmljaFRleHREaXZpZGVySABCBgoEa2luZCJDCgVTdHlsZRIMCgRib2xkGAEgASgIEg4KBml0YWxpYxgCIAEoCBIOCgZzdHJpa2UYAyABKAgSDAoEY29kZRgEIAEoCCL/AgoPUmljaFRleHRFbGVtZW50Ei0KBHRleHQYASABKAsyHS50YW5rLnJpY2h0ZXh0LnYxLlRleHRFbGVtZW50SAASLwoFZW1vamkYAiABKAsyHi50YW5rLnJpY2h0ZXh0LnYxLkVtb2ppRWxlbWVudEgAEi0KBHVzZXIYAyABKAsyHS50YW5rLnJpY2h0ZXh0LnYxLlVzZXJNZW50aW9uSAASMwoHY2hhbm5lbBgEIAEoCzIgLnRhbmsucmljaHRleHQudjEuQ2hhbm5lbE1lbnRpb25IABI3Cglicm9hZGNhc3QYBSABKAsyIi50YW5rLnJpY2h0ZXh0LnYxLkJyb2FkY2FzdE1lbnRpb25IABItCgRsaW5rGAYgASgLMh0udGFuay5yaWNodGV4dC52MS5MaW5rRWxlbWVudEgAEjgKCnVzZXJfZ3JvdXAYByABKAsyIi50YW5rLnJpY2h0ZXh0LnYxLlVzZXJHcm91cE1lbnRpb25IAEIGCgRraW5kIjQKEFVzZXJHcm91cE1lbnRpb24SEAoIZ3JvdXBfaWQYASABKAkSDgoGaGFuZGxlGAIgASgJIkMKC1RleHRFbGVtZW50EgwKBHRleHQYASABKAkSJgoFc3R5bGUYAiABKAsyFy50YW5rLnJpY2h0ZXh0LnYxLlN0eWxlIi0KDEVtb2ppRWxlbWVudBIMCgRuYW1lGAEgASgJEg8KB3VuaWNvZGUYAiABKAkiRgoLVXNlck1lbnRpb24SDwoHdXNlcl9pZBgBIAEoCRImCgVzdHlsZRgCIAEoCzIXLnRhbmsucmljaHRleHQudjEuU3R5bGUiJAoOQ2hhbm5lbE1lbnRpb24SEgoKY2hhbm5lbF9pZBgBIAEoCSI+ChBCcm9hZGNhc3RNZW50aW9uEioKBXJhbmdlGAEgASgOMhsudGFuay5yaWNodGV4dC52MS5Ccm9hZGNhc3QiUAoLTGlua0VsZW1lbnQSCwoDdXJsGAEgASgJEgwKBHRleHQYAiABKAkSJgoFc3R5bGUYAyABKAsyFy50YW5rLnJpY2h0ZXh0LnYxLlN0eWxlIkYKD1JpY2hUZXh0U2VjdGlvbhIzCghlbGVtZW50cxgBIAMoCzIhLnRhbmsucmljaHRleHQudjEuUmljaFRleHRFbGVtZW50Ii4KDFJpY2hUZXh0Q29kZRIQCghsYW5ndWFnZRgBIAEoCRIMCgR0ZXh0GAIgASgJIkQKDVJpY2hUZXh0UXVvdGUSMwoIZWxlbWVudHMYASADKAsyIS50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0RWxlbWVudCJwCgxSaWNoVGV4dExpc3QSDwoHb3JkZXJlZBgBIAEoCBIOCgZpbmRlbnQYAiABKAUSMAoFaXRlbXMYAyADKAsyIS50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0U2VjdGlvbhINCgVzdGFydBgEIAEoBSJVCg9SaWNoVGV4dEhlYWRpbmcSDQoFbGV2ZWwYASABKAUSMwoIZWxlbWVudHMYAiADKAsyIS50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0RWxlbWVudCKiAQoNUmljaFRleHRUYWJsZRIyCgZoZWFkZXIYASABKAsyIi50YW5rLnJpY2h0ZXh0LnYxLlJpY2hUZXh0VGFibGVSb3cSMAoEcm93cxgCIAMoCzIiLnRhbmsucmljaHRleHQudjEuUmljaFRleHRUYWJsZVJvdxIrCgVhbGlnbhgDIAMoDjIcLnRhbmsucmljaHRleHQudjEuVGFibGVBbGlnbiJGChBSaWNoVGV4dFRhYmxlUm93EjIKBWNlbGxzGAEgAygLMiMudGFuay5yaWNodGV4dC52MS5SaWNoVGV4dFRhYmxlQ2VsbCJIChFSaWNoVGV4dFRhYmxlQ2VsbBIzCghlbGVtZW50cxgBIAMoCzIhLnRhbmsucmljaHRleHQudjEuUmljaFRleHRFbGVtZW50IhEKD1JpY2hUZXh0RGl2aWRlcippCglCcm9hZGNhc3QSGQoVQlJPQURDQVNUX1VOU1BFQ0lGSUVEEAASEgoOQlJPQURDQVNUX0hFUkUQARIVChFCUk9BRENBU1RfQ0hBTk5FTBACEhYKEkJST0FEQ0FTVF9FVkVSWU9ORRADKm4KClRhYmxlQWxpZ24SGwoXVEFCTEVfQUxJR05fVU5TUEVDSUZJRUQQABIUChBUQUJMRV9BTElHTl9MRUZUEAESFgoSVEFCTEVfQUxJR05fQ0VOVEVSEAISFQoRVEFCTEVfQUxJR05fUklHSFQQA0LgAQoUY29tLnRhbmsucmljaHRleHQudjFCDVJpY2h0ZXh0UHJvdG9QAVpXZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9yaWNodGV4dC92MTtyaWNodGV4dHYxogIDVFJYqgIQVGFuay5SaWNodGV4dC5WMcoCEFRhbmtcUmljaHRleHRcVjHiAhxUYW5rXFJpY2h0ZXh0XFYxXEdQQk1ldGFkYXRh6gISVGFuazo6UmljaHRleHQ6OlYxYgZwcm90bzM");
 
 /**
  * Portable rich-text AST (the shape of Slack's rich_text block). Editors
@@ -63,6 +63,28 @@ export type RichTextBlock = Message<"tank.richtext.v1.RichTextBlock"> & {
      */
     value: RichTextList;
     case: "list";
+  } | {
+    /**
+     * Added 2026-11-12 so an agent's Markdown (headings, GitHub tables, rules) has a
+     * shape. A client that predates them sees an unset kind and draws nothing, so
+     * the server only emits them once every client renders them.
+     *
+     * @generated from field: tank.richtext.v1.RichTextHeading heading = 5;
+     */
+    value: RichTextHeading;
+    case: "heading";
+  } | {
+    /**
+     * @generated from field: tank.richtext.v1.RichTextTable table = 6;
+     */
+    value: RichTextTable;
+    case: "table";
+  } | {
+    /**
+     * @generated from field: tank.richtext.v1.RichTextDivider divider = 7;
+     */
+    value: RichTextDivider;
+    case: "divider";
   } | { case: undefined; value?: undefined };
 };
 
@@ -390,6 +412,14 @@ export type RichTextList = Message<"tank.richtext.v1.RichTextList"> & {
    * @generated from field: repeated tank.richtext.v1.RichTextSection items = 3;
    */
   items: RichTextSection[];
+
+  /**
+   * The first item's number in an ordered list; 0 means 1. A Markdown list
+   * that a nested list splits into several blocks keeps counting through it.
+   *
+   * @generated from field: int32 start = 4;
+   */
+  start: number;
 };
 
 /**
@@ -398,6 +428,109 @@ export type RichTextList = Message<"tank.richtext.v1.RichTextList"> & {
  */
 export const RichTextListSchema: GenMessage<RichTextList> = /*@__PURE__*/
   messageDesc(file_tank_richtext_v1_richtext, 14);
+
+/**
+ * A heading line; level 1 to 6, as in Markdown's # to ######.
+ *
+ * @generated from message tank.richtext.v1.RichTextHeading
+ */
+export type RichTextHeading = Message<"tank.richtext.v1.RichTextHeading"> & {
+  /**
+   * @generated from field: int32 level = 1;
+   */
+  level: number;
+
+  /**
+   * @generated from field: repeated tank.richtext.v1.RichTextElement elements = 2;
+   */
+  elements: RichTextElement[];
+};
+
+/**
+ * Describes the message tank.richtext.v1.RichTextHeading.
+ * Use `create(RichTextHeadingSchema)` to create a new message.
+ */
+export const RichTextHeadingSchema: GenMessage<RichTextHeading> = /*@__PURE__*/
+  messageDesc(file_tank_richtext_v1_richtext, 15);
+
+/**
+ * A table: a header row, the rows under it, and each column's alignment
+ * (align[i] is column i; a missing entry is unspecified, drawn as left).
+ *
+ * @generated from message tank.richtext.v1.RichTextTable
+ */
+export type RichTextTable = Message<"tank.richtext.v1.RichTextTable"> & {
+  /**
+   * @generated from field: tank.richtext.v1.RichTextTableRow header = 1;
+   */
+  header?: RichTextTableRow;
+
+  /**
+   * @generated from field: repeated tank.richtext.v1.RichTextTableRow rows = 2;
+   */
+  rows: RichTextTableRow[];
+
+  /**
+   * @generated from field: repeated tank.richtext.v1.TableAlign align = 3;
+   */
+  align: TableAlign[];
+};
+
+/**
+ * Describes the message tank.richtext.v1.RichTextTable.
+ * Use `create(RichTextTableSchema)` to create a new message.
+ */
+export const RichTextTableSchema: GenMessage<RichTextTable> = /*@__PURE__*/
+  messageDesc(file_tank_richtext_v1_richtext, 16);
+
+/**
+ * @generated from message tank.richtext.v1.RichTextTableRow
+ */
+export type RichTextTableRow = Message<"tank.richtext.v1.RichTextTableRow"> & {
+  /**
+   * @generated from field: repeated tank.richtext.v1.RichTextTableCell cells = 1;
+   */
+  cells: RichTextTableCell[];
+};
+
+/**
+ * Describes the message tank.richtext.v1.RichTextTableRow.
+ * Use `create(RichTextTableRowSchema)` to create a new message.
+ */
+export const RichTextTableRowSchema: GenMessage<RichTextTableRow> = /*@__PURE__*/
+  messageDesc(file_tank_richtext_v1_richtext, 17);
+
+/**
+ * @generated from message tank.richtext.v1.RichTextTableCell
+ */
+export type RichTextTableCell = Message<"tank.richtext.v1.RichTextTableCell"> & {
+  /**
+   * @generated from field: repeated tank.richtext.v1.RichTextElement elements = 1;
+   */
+  elements: RichTextElement[];
+};
+
+/**
+ * Describes the message tank.richtext.v1.RichTextTableCell.
+ * Use `create(RichTextTableCellSchema)` to create a new message.
+ */
+export const RichTextTableCellSchema: GenMessage<RichTextTableCell> = /*@__PURE__*/
+  messageDesc(file_tank_richtext_v1_richtext, 18);
+
+/**
+ * A horizontal rule between blocks.
+ *
+ * @generated from message tank.richtext.v1.RichTextDivider
+ */
+export type RichTextDivider = Message<"tank.richtext.v1.RichTextDivider"> & {
+};
+
+/**
+ * Describes the message tank.richtext.v1.RichTextDivider.
+ * Use `create(RichTextDividerSchema)` to create a new message.
+ */
+export const RichTextDividerSchema: GenMessage<RichTextDivider> = /*@__PURE__*/
+  messageDesc(file_tank_richtext_v1_richtext, 19);
 
 /**
  * @generated from enum tank.richtext.v1.Broadcast
@@ -429,4 +562,35 @@ export enum Broadcast {
  */
 export const BroadcastSchema: GenEnum<Broadcast> = /*@__PURE__*/
   enumDesc(file_tank_richtext_v1_richtext, 0);
+
+/**
+ * @generated from enum tank.richtext.v1.TableAlign
+ */
+export enum TableAlign {
+  /**
+   * @generated from enum value: TABLE_ALIGN_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: TABLE_ALIGN_LEFT = 1;
+   */
+  LEFT = 1,
+
+  /**
+   * @generated from enum value: TABLE_ALIGN_CENTER = 2;
+   */
+  CENTER = 2,
+
+  /**
+   * @generated from enum value: TABLE_ALIGN_RIGHT = 3;
+   */
+  RIGHT = 3,
+}
+
+/**
+ * Describes the enum tank.richtext.v1.TableAlign.
+ */
+export const TableAlignSchema: GenEnum<TableAlign> = /*@__PURE__*/
+  enumDesc(file_tank_richtext_v1_richtext, 1);
 
