@@ -113,12 +113,13 @@ function TableView({ table, variant, elements, }) {
     const cell = {
         px: 1.25,
         py: 0.75,
-        maxWidth: "22rem",
         verticalAlign: "top",
         borderBottom: 1,
         borderColor: "divider",
-        overflowWrap: "anywhere",
     };
+    // A cell is as wide as its words up to 22rem, then wraps between words; the table never
+    // squeezes a cell to fit the column (that broke words mid-way), it scrolls instead.
+    const words = (els) => (_jsx(Box, { component: "span", sx: { display: "inline-block", maxWidth: "22rem", overflowWrap: "break-word", textAlign: "inherit" }, children: elements(els) }));
     return (_jsx(Box, { "data-testid": "rt-table", sx: {
             maxWidth: "100%",
             overflowX: "auto",
@@ -127,7 +128,7 @@ function TableView({ table, variant, elements, }) {
             borderRadius: 1,
             width: "fit-content",
             my: 0.5,
-        }, children: _jsxs(Box, { component: "table", sx: { borderCollapse: "collapse", minWidth: "100%" }, children: [table.header && (_jsx(Box, { component: "thead", sx: { bgcolor: "tank.panel" }, children: _jsx("tr", { children: span.map((c) => (_jsx(Typography, { component: "th", variant: variant, scope: "col", align: cellAlign(table.align[c]), sx: { ...cell, fontWeight: 700, whiteSpace: "nowrap" }, children: elements(table.header?.cells[c]?.elements ?? []) }, c))) }) })), _jsx("tbody", { children: table.rows.map((r, j) => (
+        }, children: _jsxs(Box, { component: "table", sx: { borderCollapse: "collapse", width: "max-content", minWidth: "100%" }, children: [table.header && (_jsx(Box, { component: "thead", sx: { bgcolor: "tank.panel" }, children: _jsx("tr", { children: span.map((c) => (_jsx(Typography, { component: "th", variant: variant, scope: "col", align: cellAlign(table.align[c]), sx: { ...cell, fontWeight: 700, whiteSpace: "nowrap" }, children: words(table.header?.cells[c]?.elements ?? []) }, c))) }) })), _jsx("tbody", { children: table.rows.map((r, j) => (
                     // biome-ignore lint/suspicious/noArrayIndexKey: rows are positional and never reordered
-                    _jsx(Box, { component: "tr", sx: { "&:last-of-type td": { borderBottom: 0 } }, children: span.map((c) => (_jsx(Typography, { component: "td", variant: variant, align: cellAlign(table.align[c]), sx: cell, children: elements(r.cells[c]?.elements ?? []) }, c))) }, j))) })] }) }));
+                    _jsx(Box, { component: "tr", sx: { "&:last-of-type td": { borderBottom: 0 } }, children: span.map((c) => (_jsx(Typography, { component: "td", variant: variant, align: cellAlign(table.align[c]), sx: cell, children: words(r.cells[c]?.elements ?? []) }, c))) }, j))) })] }) }));
 }

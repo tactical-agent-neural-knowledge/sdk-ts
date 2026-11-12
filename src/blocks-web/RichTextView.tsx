@@ -273,12 +273,20 @@ function TableView({
   const cell = {
     px: 1.25,
     py: 0.75,
-    maxWidth: "22rem",
     verticalAlign: "top",
     borderBottom: 1,
     borderColor: "divider",
-    overflowWrap: "anywhere",
   } as const;
+  // A cell is as wide as its words up to 22rem, then wraps between words; the table never
+  // squeezes a cell to fit the column (that broke words mid-way), it scrolls instead.
+  const words = (els: RichTextElement[]) => (
+    <Box
+      component="span"
+      sx={{ display: "inline-block", maxWidth: "22rem", overflowWrap: "break-word", textAlign: "inherit" }}
+    >
+      {elements(els)}
+    </Box>
+  );
   return (
     <Box
       data-testid="rt-table"
@@ -292,7 +300,7 @@ function TableView({
         my: 0.5,
       }}
     >
-      <Box component="table" sx={{ borderCollapse: "collapse", minWidth: "100%" }}>
+      <Box component="table" sx={{ borderCollapse: "collapse", width: "max-content", minWidth: "100%" }}>
         {table.header && (
           <Box component="thead" sx={{ bgcolor: "tank.panel" }}>
             <tr>
@@ -305,7 +313,7 @@ function TableView({
                   align={cellAlign(table.align[c])}
                   sx={{ ...cell, fontWeight: 700, whiteSpace: "nowrap" }}
                 >
-                  {elements(table.header?.cells[c]?.elements ?? [])}
+                  {words(table.header?.cells[c]?.elements ?? [])}
                 </Typography>
               ))}
             </tr>
@@ -323,7 +331,7 @@ function TableView({
                   align={cellAlign(table.align[c])}
                   sx={cell}
                 >
-                  {elements(r.cells[c]?.elements ?? [])}
+                  {words(r.cells[c]?.elements ?? [])}
                 </Typography>
               ))}
             </Box>
