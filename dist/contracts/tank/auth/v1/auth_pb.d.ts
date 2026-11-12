@@ -786,6 +786,145 @@ export type CompleteSsoResponse = Message<"tank.auth.v1.CompleteSsoResponse"> & 
  */
 export declare const CompleteSsoResponseSchema: GenMessage<CompleteSsoResponse>;
 /**
+ * The person's name and photo, which are theirs everywhere (every workspace and every Neural
+ * conversation). Unlike workspace.v1.UpdateProfile it names no workspace, so the Neural app,
+ * which belongs to none, can set them. Unset fields are unchanged.
+ *
+ * @generated from message tank.auth.v1.UpdateMeRequest
+ */
+export type UpdateMeRequest = Message<"tank.auth.v1.UpdateMeRequest"> & {
+    /**
+     * @generated from field: optional string display_name = 1;
+     */
+    displayName?: string;
+    /**
+     * A new photo: JPEG or PNG bytes, at most 1 MB. It replaces any uploaded avatar.
+     *
+     * @generated from field: bytes avatar = 2;
+     */
+    avatar: Uint8Array;
+    /**
+     * @generated from field: string avatar_mime = 3;
+     */
+    avatarMime: string;
+    /**
+     * Removes the photo (initials are shown instead).
+     *
+     * @generated from field: bool clear_avatar = 4;
+     */
+    clearAvatar: boolean;
+};
+/**
+ * Describes the message tank.auth.v1.UpdateMeRequest.
+ * Use `create(UpdateMeRequestSchema)` to create a new message.
+ */
+export declare const UpdateMeRequestSchema: GenMessage<UpdateMeRequest>;
+/**
+ * @generated from message tank.auth.v1.UpdateMeResponse
+ */
+export type UpdateMeResponse = Message<"tank.auth.v1.UpdateMeResponse"> & {
+    /**
+     * @generated from field: tank.auth.v1.Principal me = 1;
+     */
+    me?: Principal;
+};
+/**
+ * Describes the message tank.auth.v1.UpdateMeResponse.
+ * Use `create(UpdateMeResponseSchema)` to create a new message.
+ */
+export declare const UpdateMeResponseSchema: GenMessage<UpdateMeResponse>;
+/**
+ * A workspace named by an account deletion: one that blocks it, or one that closes with it.
+ *
+ * @generated from message tank.auth.v1.AccountWorkspace
+ */
+export type AccountWorkspace = Message<"tank.auth.v1.AccountWorkspace"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string slug = 3;
+     */
+    slug: string;
+};
+/**
+ * Describes the message tank.auth.v1.AccountWorkspace.
+ * Use `create(AccountWorkspaceSchema)` to create a new message.
+ */
+export declare const AccountWorkspaceSchema: GenMessage<AccountWorkspace>;
+/**
+ * What deleting this account would do, read before asking the person to confirm.
+ *
+ * @generated from message tank.auth.v1.GetAccountDeletionRequest
+ */
+export type GetAccountDeletionRequest = Message<"tank.auth.v1.GetAccountDeletionRequest"> & {};
+/**
+ * Describes the message tank.auth.v1.GetAccountDeletionRequest.
+ * Use `create(GetAccountDeletionRequestSchema)` to create a new message.
+ */
+export declare const GetAccountDeletionRequestSchema: GenMessage<GetAccountDeletionRequest>;
+/**
+ * @generated from message tank.auth.v1.GetAccountDeletionResponse
+ */
+export type GetAccountDeletionResponse = Message<"tank.auth.v1.GetAccountDeletionResponse"> & {
+    /**
+     * Workspaces where this person is the only owner and other people are still members.
+     * Deletion is refused while any are listed: ownership has to move first.
+     *
+     * @generated from field: repeated tank.auth.v1.AccountWorkspace blocking = 1;
+     */
+    blocking: AccountWorkspace[];
+    /**
+     * Workspaces nobody else is in. They close with the account.
+     *
+     * @generated from field: repeated tank.auth.v1.AccountWorkspace closing = 2;
+     */
+    closing: AccountWorkspace[];
+    /**
+     * The text the person types to confirm (DeleteAccountRequest.confirm).
+     *
+     * @generated from field: string confirm_text = 3;
+     */
+    confirmText: string;
+};
+/**
+ * Describes the message tank.auth.v1.GetAccountDeletionResponse.
+ * Use `create(GetAccountDeletionResponseSchema)` to create a new message.
+ */
+export declare const GetAccountDeletionResponseSchema: GenMessage<GetAccountDeletionResponse>;
+/**
+ * Deletes the signed-in person's account (App Store guideline 5.1.1(v)). Refused with
+ * FailedPrecondition while GetAccountDeletionResponse.blocking is not empty, and with
+ * InvalidArgument unless confirm matches confirm_text. Every session and token ends.
+ *
+ * @generated from message tank.auth.v1.DeleteAccountRequest
+ */
+export type DeleteAccountRequest = Message<"tank.auth.v1.DeleteAccountRequest"> & {
+    /**
+     * @generated from field: string confirm = 1;
+     */
+    confirm: string;
+};
+/**
+ * Describes the message tank.auth.v1.DeleteAccountRequest.
+ * Use `create(DeleteAccountRequestSchema)` to create a new message.
+ */
+export declare const DeleteAccountRequestSchema: GenMessage<DeleteAccountRequest>;
+/**
+ * @generated from message tank.auth.v1.DeleteAccountResponse
+ */
+export type DeleteAccountResponse = Message<"tank.auth.v1.DeleteAccountResponse"> & {};
+/**
+ * Describes the message tank.auth.v1.DeleteAccountResponse.
+ * Use `create(DeleteAccountResponseSchema)` to create a new message.
+ */
+export declare const DeleteAccountResponseSchema: GenMessage<DeleteAccountResponse>;
+/**
  * Every actor is a principal. Bots and agents are first-class so every author
  * reference is uniform across the data model.
  *
@@ -965,5 +1104,29 @@ export declare const AuthService: GenService<{
         methodKind: "unary";
         input: typeof CompleteSsoRequestSchema;
         output: typeof CompleteSsoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.UpdateMe
+     */
+    updateMe: {
+        methodKind: "unary";
+        input: typeof UpdateMeRequestSchema;
+        output: typeof UpdateMeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.GetAccountDeletion
+     */
+    getAccountDeletion: {
+        methodKind: "unary";
+        input: typeof GetAccountDeletionRequestSchema;
+        output: typeof GetAccountDeletionResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.DeleteAccount
+     */
+    deleteAccount: {
+        methodKind: "unary";
+        input: typeof DeleteAccountRequestSchema;
+        output: typeof DeleteAccountResponseSchema;
     };
 }>;

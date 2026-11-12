@@ -1079,6 +1079,13 @@ export type Settings = Message$1<"tank.ai.v1.Settings"> & {
      * @generated from field: tank.ai.v1.Defaults defaults = 5;
      */
     defaults?: Defaults;
+    /**
+     * Whether this person's Neural chats may help train TANK Neural (ai_settings.training). On
+     * unless they turn it off.
+     *
+     * @generated from field: bool training = 6;
+     */
+    training: boolean;
 };
 /**
  * Describes the message tank.ai.v1.Settings.
@@ -1164,6 +1171,12 @@ export type UpdateSettingsRequest = Message$1<"tank.ai.v1.UpdateSettingsRequest"
      * @generated from field: bool set_defaults = 3;
      */
     setDefaults: boolean;
+    /**
+     * Changes training consent only when present, so an older client never turns it off.
+     *
+     * @generated from field: optional bool training = 4;
+     */
+    training?: boolean;
 };
 /**
  * Describes the message tank.ai.v1.UpdateSettingsRequest.
