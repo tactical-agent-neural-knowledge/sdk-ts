@@ -68,7 +68,8 @@ export function expandShortcodes(rt: RichText, isKnown: (name: string) => boolea
     const k = b.kind;
     switch (k.case) {
       case "section":
-      case "quote": {
+      case "quote":
+      case "heading": {
         const elements = expandElements(k.value.elements, isKnown);
         if (same(elements, k.value.elements)) return b;
         changed = true;
@@ -85,6 +86,26 @@ export function expandShortcodes(rt: RichText, isKnown: (name: string) => boolea
         if (!listChanged) return b;
         changed = true;
         return { ...b, kind: { ...k, value: { ...k.value, items } } } as typeof b;
+      }
+      case "table": {
+        let tableChanged = false;
+        const row = (r: (typeof k.value.rows)[number]) => {
+          let rowChanged = false;
+          const cells = r.cells.map((c) => {
+            const elements = expandElements(c.elements, isKnown);
+            if (same(elements, c.elements)) return c;
+            rowChanged = true;
+            return { ...c, elements };
+          });
+          if (!rowChanged) return r;
+          tableChanged = true;
+          return { ...r, cells };
+        };
+        const header = k.value.header && row(k.value.header);
+        const rows = k.value.rows.map(row);
+        if (!tableChanged) return b;
+        changed = true;
+        return { ...b, kind: { ...k, value: { ...k.value, header, rows } } } as typeof b;
       }
       default:
         return b;

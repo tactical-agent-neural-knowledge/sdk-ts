@@ -53,6 +53,28 @@ export type RichTextBlock = Message<"tank.richtext.v1.RichTextBlock"> & {
         value: RichTextList;
         case: "list";
     } | {
+        /**
+         * Added 2026-11-12 so an agent's Markdown (headings, GitHub tables, rules) has a
+         * shape. A client that predates them sees an unset kind and draws nothing, so
+         * the server only emits them once every client renders them.
+         *
+         * @generated from field: tank.richtext.v1.RichTextHeading heading = 5;
+         */
+        value: RichTextHeading;
+        case: "heading";
+    } | {
+        /**
+         * @generated from field: tank.richtext.v1.RichTextTable table = 6;
+         */
+        value: RichTextTable;
+        case: "table";
+    } | {
+        /**
+         * @generated from field: tank.richtext.v1.RichTextDivider divider = 7;
+         */
+        value: RichTextDivider;
+        case: "divider";
+    } | {
         case: undefined;
         value?: undefined;
     };
@@ -341,6 +363,90 @@ export type RichTextList = Message<"tank.richtext.v1.RichTextList"> & {
  */
 export declare const RichTextListSchema: GenMessage<RichTextList>;
 /**
+ * A heading line; level 1 to 6, as in Markdown's # to ######.
+ *
+ * @generated from message tank.richtext.v1.RichTextHeading
+ */
+export type RichTextHeading = Message<"tank.richtext.v1.RichTextHeading"> & {
+    /**
+     * @generated from field: int32 level = 1;
+     */
+    level: number;
+    /**
+     * @generated from field: repeated tank.richtext.v1.RichTextElement elements = 2;
+     */
+    elements: RichTextElement[];
+};
+/**
+ * Describes the message tank.richtext.v1.RichTextHeading.
+ * Use `create(RichTextHeadingSchema)` to create a new message.
+ */
+export declare const RichTextHeadingSchema: GenMessage<RichTextHeading>;
+/**
+ * A table: a header row, the rows under it, and each column's alignment
+ * (align[i] is column i; a missing entry is unspecified, drawn as left).
+ *
+ * @generated from message tank.richtext.v1.RichTextTable
+ */
+export type RichTextTable = Message<"tank.richtext.v1.RichTextTable"> & {
+    /**
+     * @generated from field: tank.richtext.v1.RichTextTableRow header = 1;
+     */
+    header?: RichTextTableRow;
+    /**
+     * @generated from field: repeated tank.richtext.v1.RichTextTableRow rows = 2;
+     */
+    rows: RichTextTableRow[];
+    /**
+     * @generated from field: repeated tank.richtext.v1.TableAlign align = 3;
+     */
+    align: TableAlign[];
+};
+/**
+ * Describes the message tank.richtext.v1.RichTextTable.
+ * Use `create(RichTextTableSchema)` to create a new message.
+ */
+export declare const RichTextTableSchema: GenMessage<RichTextTable>;
+/**
+ * @generated from message tank.richtext.v1.RichTextTableRow
+ */
+export type RichTextTableRow = Message<"tank.richtext.v1.RichTextTableRow"> & {
+    /**
+     * @generated from field: repeated tank.richtext.v1.RichTextTableCell cells = 1;
+     */
+    cells: RichTextTableCell[];
+};
+/**
+ * Describes the message tank.richtext.v1.RichTextTableRow.
+ * Use `create(RichTextTableRowSchema)` to create a new message.
+ */
+export declare const RichTextTableRowSchema: GenMessage<RichTextTableRow>;
+/**
+ * @generated from message tank.richtext.v1.RichTextTableCell
+ */
+export type RichTextTableCell = Message<"tank.richtext.v1.RichTextTableCell"> & {
+    /**
+     * @generated from field: repeated tank.richtext.v1.RichTextElement elements = 1;
+     */
+    elements: RichTextElement[];
+};
+/**
+ * Describes the message tank.richtext.v1.RichTextTableCell.
+ * Use `create(RichTextTableCellSchema)` to create a new message.
+ */
+export declare const RichTextTableCellSchema: GenMessage<RichTextTableCell>;
+/**
+ * A horizontal rule between blocks.
+ *
+ * @generated from message tank.richtext.v1.RichTextDivider
+ */
+export type RichTextDivider = Message<"tank.richtext.v1.RichTextDivider"> & {};
+/**
+ * Describes the message tank.richtext.v1.RichTextDivider.
+ * Use `create(RichTextDividerSchema)` to create a new message.
+ */
+export declare const RichTextDividerSchema: GenMessage<RichTextDivider>;
+/**
  * @generated from enum tank.richtext.v1.Broadcast
  */
 export declare enum Broadcast {
@@ -365,3 +471,28 @@ export declare enum Broadcast {
  * Describes the enum tank.richtext.v1.Broadcast.
  */
 export declare const BroadcastSchema: GenEnum<Broadcast>;
+/**
+ * @generated from enum tank.richtext.v1.TableAlign
+ */
+export declare enum TableAlign {
+    /**
+     * @generated from enum value: TABLE_ALIGN_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: TABLE_ALIGN_LEFT = 1;
+     */
+    LEFT = 1,
+    /**
+     * @generated from enum value: TABLE_ALIGN_CENTER = 2;
+     */
+    CENTER = 2,
+    /**
+     * @generated from enum value: TABLE_ALIGN_RIGHT = 3;
+     */
+    RIGHT = 3
+}
+/**
+ * Describes the enum tank.richtext.v1.TableAlign.
+ */
+export declare const TableAlignSchema: GenEnum<TableAlign>;

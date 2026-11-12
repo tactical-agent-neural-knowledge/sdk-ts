@@ -3,7 +3,13 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import type { ReactNode } from "react";
 import { broadcastWord } from "../blocks/richtext.js";
-import type { RichText, RichTextElement, Style } from "../contracts/tank/richtext/v1/richtext_pb.js";
+import {
+  type RichText,
+  type RichTextElement,
+  type RichTextTable,
+  type Style,
+  TableAlign,
+} from "../contracts/tank/richtext/v1/richtext_pb.js";
 import { typography } from "../design/tokens.js";
 
 export interface RichTextViewProps {
@@ -106,6 +112,16 @@ export function RichTextView({
   variant = "body1",
 }: RichTextViewProps) {
   if (!richText) return null;
+  const elements = (els: RichTextElement[]) =>
+    els.map((e, j) => (
+      <ElementView
+        key={j}
+        element={e}
+        resolveUser={resolveUser}
+        resolveChannel={resolveChannel}
+        renderEmoji={renderEmoji}
+      />
+    ));
   return (
     <>
       {richText.blocks.map((b, i) => {
@@ -194,10 +210,124 @@ export function RichTextView({
                 ))}
               </Box>
             );
+          case "heading": {
+            const level = Math.min(6, Math.max(1, k.value.level || 1));
+            return (
+              <Typography
+                key={key}
+                component={`h${level}` as "h1"}
+                variant={variant}
+                data-testid="rt-heading"
+                sx={{
+                  m: 0,
+                  mt: i === 0 ? 0 : 0.5,
+                  fontFamily: typography.fontDisplay,
+                  fontWeight: 700,
+                  fontSize: level === 1 ? "1.25em" : level === 2 ? "1.125em" : "1em",
+                  lineHeight: 1.35,
+                }}
+              >
+                {elements(k.value.elements)}
+              </Typography>
+            );
+          }
+          case "table":
+            return <TableView key={key} table={k.value} variant={variant} elements={elements} />;
+          case "divider":
+            return (
+              <Box
+                key={key}
+                component="hr"
+                sx={{ m: 0, my: 0.5, border: 0, borderTop: 1, borderColor: "divider" }}
+              />
+            );
           default:
             return null;
         }
       })}
     </>
+  );
+}
+
+function cellAlign(a: TableAlign | undefined): "left" | "center" | "right" {
+  return a === TableAlign.CENTER ? "center" : a === TableAlign.RIGHT ? "right" : "left";
+}
+
+/**
+ * A table in a message. It is as wide as its cells need (a cell wraps past 22rem) and scrolls
+ * sideways inside the message when that is wider than the column, so a phone-width page never
+ * scrolls.
+ */
+function TableView({
+  table,
+  variant,
+  elements,
+}: {
+  table: RichTextTable;
+  variant: NonNullable<RichTextViewProps["variant"]>;
+  elements: (els: RichTextElement[]) => ReactNode;
+}) {
+  const cols = Math.max(table.header?.cells.length ?? 0, ...table.rows.map((r) => r.cells.length));
+  const span = Array.from({ length: cols }, (_, c) => c);
+  const cell = {
+    px: 1.25,
+    py: 0.75,
+    maxWidth: "22rem",
+    verticalAlign: "top",
+    borderBottom: 1,
+    borderColor: "divider",
+    overflowWrap: "anywhere",
+  } as const;
+  return (
+    <Box
+      data-testid="rt-table"
+      sx={{
+        maxWidth: "100%",
+        overflowX: "auto",
+        border: 1,
+        borderColor: "divider",
+        borderRadius: 1,
+        width: "fit-content",
+      }}
+    >
+      <Box component="table" sx={{ borderCollapse: "collapse", minWidth: "100%" }}>
+        {table.header && (
+          <Box component="thead" sx={{ bgcolor: "tank.panel" }}>
+            <tr>
+              {span.map((c) => (
+                <Typography
+                  key={c}
+                  component="th"
+                  variant={variant}
+                  scope="col"
+                  align={cellAlign(table.align[c])}
+                  sx={{ ...cell, fontWeight: 700, whiteSpace: "nowrap" }}
+                >
+                  {elements(table.header?.cells[c]?.elements ?? [])}
+                </Typography>
+              ))}
+            </tr>
+          </Box>
+        )}
+        <tbody>
+          {table.rows.map((r, j) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: rows are positional and never reordered
+            <Box component="tr" key={j} sx={{ "&:last-of-type td": { borderBottom: 0 } }}>
+              {span.map((c) => (
+                <Typography
+                  key={c}
+                  component="td"
+                  variant={variant}
+                  align={cellAlign(table.align[c])}
+                  sx={cell}
+                >
+                  {elements(r.cells[c]?.elements ?? [])}
+                </Typography>
+              ))}
+            </Box>
+          ))}
+        </tbody>
+      </Box>
+    </Box>
   );
 }

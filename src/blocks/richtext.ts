@@ -93,6 +93,19 @@ export function richTextToPlain(r: RichText | undefined): string {
             .join("\n"),
         );
         break;
+      case "heading":
+        out.push(k.value.elements.map(elementToPlain).join(""));
+        break;
+      case "table": {
+        const row = (cells: { elements: RichTextElement[] }[]) =>
+          cells.map((c) => c.elements.map(elementToPlain).join("")).join(" | ");
+        const rows = k.value.header ? [k.value.header, ...k.value.rows] : k.value.rows;
+        out.push(rows.map((r) => row(r.cells)).join("\n"));
+        break;
+      }
+      case "divider":
+        out.push("---");
+        break;
       default:
         break;
     }

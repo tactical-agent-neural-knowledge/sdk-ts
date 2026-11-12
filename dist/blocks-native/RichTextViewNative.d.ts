@@ -1,4 +1,4 @@
-import type { RichText, RichTextElement } from "../contracts/tank/richtext/v1/richtext_pb.js";
+import { type RichText, type RichTextElement } from "../contracts/tank/richtext/v1/richtext_pb.js";
 export interface RichTextViewNativeProps {
     richText: RichText | undefined;
     /** Resolve a user id to a display name for @mentions. */

@@ -1,7 +1,8 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
-import { Linking, StyleSheet, View } from "react-native";
+import { Linking, ScrollView, StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 import { broadcastWord } from "../blocks/richtext.js";
+import { TableAlign, } from "../contracts/tank/richtext/v1/richtext_pb.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
 function styledSpan(node, s, codeFont, panel) {
     if (!s)
@@ -62,6 +63,26 @@ export function RichTextViewNative({ richText, variant = "bodyMedium", ...p }) {
                     return (_jsx(View, { style: [styles.code, { backgroundColor: theme.colors.surfaceVariant }], testID: `code-${k.value.language || "plain"}`, children: _jsx(Text, { variant: "bodySmall", style: { fontFamily: codeFont }, children: k.value.text }) }, key));
                 case "list":
                     return (_jsx(View, { style: { paddingLeft: 12 + k.value.indent * 12 }, children: k.value.items.map((it, j) => (_jsxs(Text, { variant: variant, children: [k.value.ordered ? `${j + 1}. ` : "• ", elements(it.elements)] }, j))) }, key));
+                case "heading": {
+                    const level = k.value.level || 1;
+                    return (_jsx(Text, { variant: level <= 1 ? "titleMedium" : "titleSmall", accessibilityRole: "header", style: { fontWeight: "700" }, testID: "rt-heading", children: elements(k.value.elements) }, key));
+                }
+                case "table": {
+                    const t = k.value;
+                    const cols = Math.max(t.header?.cells.length ?? 0, ...t.rows.map((r) => r.cells.length));
+                    const span = Array.from({ length: cols }, (_, c) => c);
+                    const align = (c) => t.align[c] === TableAlign.CENTER
+                        ? "center"
+                        : t.align[c] === TableAlign.RIGHT
+                            ? "right"
+                            : "left";
+                    const line = { borderColor: theme.colors.outlineVariant };
+                    return (_jsx(ScrollView, { horizontal: true, style: styles.tableScroll, testID: "rt-table", children: _jsxs(View, { style: [styles.table, line], children: [t.header ? (_jsx(View, { style: [styles.row, { backgroundColor: theme.colors.surfaceVariant }], children: span.map((c) => (_jsx(View, { style: styles.cell, children: _jsx(Text, { variant: variant, style: { fontWeight: "700", textAlign: align(c) }, children: elements(t.header?.cells[c]?.elements ?? []) }) }, c))) })) : null, t.rows.map((r, j) => (
+                                // biome-ignore lint/suspicious/noArrayIndexKey: rows are positional
+                                _jsx(View, { style: [styles.row, styles.divided, line], children: span.map((c) => (_jsx(View, { style: styles.cell, children: _jsx(Text, { variant: variant, style: { textAlign: align(c) }, children: elements(r.cells[c]?.elements ?? []) }) }, c))) }, j)))] }) }, key));
+                }
+                case "divider":
+                    return (_jsx(View, { style: [styles.divider, { backgroundColor: theme.colors.outlineVariant }] }, key));
                 default:
                     return null;
             }
@@ -71,4 +92,10 @@ const styles = StyleSheet.create({
     stack: { gap: 6 },
     quote: { borderLeftWidth: 3, paddingLeft: 10 },
     code: { padding: 10, borderRadius: 6 },
+    tableScroll: { flexGrow: 0 },
+    table: { borderWidth: StyleSheet.hairlineWidth, borderRadius: 6, overflow: "hidden" },
+    row: { flexDirection: "row" },
+    divided: { borderTopWidth: StyleSheet.hairlineWidth },
+    cell: { paddingHorizontal: 10, paddingVertical: 6, minWidth: 72, maxWidth: 240 },
+    divider: { height: StyleSheet.hairlineWidth },
 });

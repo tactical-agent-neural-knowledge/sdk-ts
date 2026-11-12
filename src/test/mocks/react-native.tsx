@@ -11,8 +11,10 @@ const host = (name: string) => (props: Props) => createElement(name, props);
 export const View = host("View");
 export const Image = host("Image");
 export const Pressable = host("Pressable");
+export const ScrollView = host("ScrollView");
 
 export const StyleSheet = {
+  hairlineWidth: 1,
   create<T>(styles: T): T {
     return styles;
   },

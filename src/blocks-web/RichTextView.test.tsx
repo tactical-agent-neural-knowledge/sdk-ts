@@ -3,6 +3,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { expandShortcodes } from "../client/shortcodes.js";
 import type { RichText } from "../contracts/tank/richtext/v1/richtext_pb.js";
+import { usageReport } from "../test/richtext-markdown.js";
 import { RichTextView } from "./RichTextView.js";
 import { tankTheme } from "./theme.js";
 
@@ -102,5 +103,42 @@ describe("RichTextView Tread-wide mentions", () => {
       return text;
     });
     expect(words).toEqual(["@here", "@everyone", "@tread"]);
+  });
+});
+
+describe("RichTextView headings, tables and rules", () => {
+  it("draws a heading, a table with its header and cells, and a rule", () => {
+    const { container } = render(
+      <ThemeProvider theme={tankTheme}>
+        <RichTextView richText={usageReport} />
+      </ThemeProvider>,
+    );
+    const h = screen.getByTestId("rt-heading");
+    expect(h.tagName).toBe("H2");
+    expect(h.textContent).toBe("Customer AI usage");
+    const table = screen.getByTestId("rt-table").querySelector("table");
+    expect(table).toBeTruthy();
+    const heads = [...(table?.querySelectorAll("th") ?? [])].map((th) => th.textContent);
+    expect(heads).toEqual(["Workspace", "Calls", "Charged"]);
+    const rows = [...(table?.querySelectorAll("tbody tr") ?? [])];
+    expect(rows).toHaveLength(3);
+    // A short row still has every column, so the grid never shifts.
+    expect(rows[1]?.querySelectorAll("td")).toHaveLength(3);
+    expect(rows[2]?.querySelector("strong")?.textContent).toBe("Total");
+    expect(rows[0]?.querySelectorAll("td")[1]?.className).toMatch(/alignRight/);
+    expect(container.querySelector("hr")).toBeTruthy();
+    expect(container.querySelector("code")?.textContent).toBe("tank-neural");
+  });
+
+  it("scrolls a wide table inside its own box rather than the page", () => {
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <RichTextView richText={usageReport} />
+      </ThemeProvider>,
+    );
+    const box = screen.getByTestId("rt-table");
+    const css = getComputedStyle(box);
+    expect(css.overflowX).toBe("auto");
+    expect(css.maxWidth).toBe("100%");
   });
 });

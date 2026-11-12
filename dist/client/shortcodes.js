@@ -61,7 +61,8 @@ export function expandShortcodes(rt, isKnown) {
         const k = b.kind;
         switch (k.case) {
             case "section":
-            case "quote": {
+            case "quote":
+            case "heading": {
                 const elements = expandElements(k.value.elements, isKnown);
                 if (same(elements, k.value.elements))
                     return b;
@@ -81,6 +82,29 @@ export function expandShortcodes(rt, isKnown) {
                     return b;
                 changed = true;
                 return { ...b, kind: { ...k, value: { ...k.value, items } } };
+            }
+            case "table": {
+                let tableChanged = false;
+                const row = (r) => {
+                    let rowChanged = false;
+                    const cells = r.cells.map((c) => {
+                        const elements = expandElements(c.elements, isKnown);
+                        if (same(elements, c.elements))
+                            return c;
+                        rowChanged = true;
+                        return { ...c, elements };
+                    });
+                    if (!rowChanged)
+                        return r;
+                    tableChanged = true;
+                    return { ...r, cells };
+                };
+                const header = k.value.header && row(k.value.header);
+                const rows = k.value.rows.map(row);
+                if (!tableChanged)
+                    return b;
+                changed = true;
+                return { ...b, kind: { ...k, value: { ...k.value, header, rows } } };
             }
             default:
                 return b;
