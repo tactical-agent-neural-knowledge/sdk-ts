@@ -1785,6 +1785,16 @@ export type WatchResponse = Message$1<"tank.ai.v1.WatchResponse"> & {
         value: string;
         case: "pagesChanged";
     } | {
+        /**
+         * A connected device sent new figures, or its camera was looked at again; the value is its
+         * session id. Everyone in the conversation sees every device's figures and what its camera
+         * shows: a client showing that session reads it again (tank.devices.v1 GetSession).
+         *
+         * @generated from field: string device_updated = 9;
+         */
+        value: string;
+        case: "deviceUpdated";
+    } | {
         case: undefined;
         value?: undefined;
     };
