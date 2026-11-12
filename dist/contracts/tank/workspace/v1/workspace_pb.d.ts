@@ -406,6 +406,13 @@ export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
      * @generated from field: int64 agent_cap_cents = 12;
      */
     agentCapCents: bigint;
+    /**
+     * A recurring payment that failed: "" none, "failing" while it is retried, "paused"
+     * once paid features are paused. Admins see a banner with Fix payment.
+     *
+     * @generated from field: string payment_state = 13;
+     */
+    paymentState: string;
 };
 /**
  * Describes the message tank.workspace.v1.Entitlements.

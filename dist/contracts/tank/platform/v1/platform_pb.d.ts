@@ -891,6 +891,12 @@ export type WorkspaceRow = Message<"tank.platform.v1.WorkspaceRow"> & {
      * @generated from field: string suspended_reason = 15;
      */
     suspendedReason: string;
+    /**
+     * pays nothing; its raw agent cost still shows here
+     *
+     * @generated from field: bool no_charge = 16;
+     */
+    noCharge: boolean;
 };
 /**
  * Describes the message tank.platform.v1.WorkspaceRow.
@@ -2242,6 +2248,44 @@ export type SuspendUserResponse = Message<"tank.platform.v1.SuspendUserResponse"
  */
 export declare const SuspendUserResponseSchema: GenMessage<SuspendUserResponse>;
 /**
+ * SetWorkspaceNoCharge marks a workspace that will never pay (Robby, 2026-11-12: ones
+ * he uses himself). It pays no fees and its agent time is never stopped or sold; its
+ * raw agent cost still shows on the console. Distinct from a waived fee, which still
+ * pays for agent time. Recorded as workspace.no_charge.changed.
+ *
+ * @generated from message tank.platform.v1.SetWorkspaceNoChargeRequest
+ */
+export type SetWorkspaceNoChargeRequest = Message<"tank.platform.v1.SetWorkspaceNoChargeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: bool no_charge = 2;
+     */
+    noCharge: boolean;
+    /**
+     * kept in the audit log
+     *
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.platform.v1.SetWorkspaceNoChargeRequest.
+ * Use `create(SetWorkspaceNoChargeRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceNoChargeRequestSchema: GenMessage<SetWorkspaceNoChargeRequest>;
+/**
+ * @generated from message tank.platform.v1.SetWorkspaceNoChargeResponse
+ */
+export type SetWorkspaceNoChargeResponse = Message<"tank.platform.v1.SetWorkspaceNoChargeResponse"> & {};
+/**
+ * Describes the message tank.platform.v1.SetWorkspaceNoChargeResponse.
+ * Use `create(SetWorkspaceNoChargeResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceNoChargeResponseSchema: GenMessage<SetWorkspaceNoChargeResponse>;
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export declare const PlatformService: GenService<{
@@ -2404,5 +2448,13 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof SuspendUserRequestSchema;
         output: typeof SuspendUserResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SetWorkspaceNoCharge
+     */
+    setWorkspaceNoCharge: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceNoChargeRequestSchema;
+        output: typeof SetWorkspaceNoChargeResponseSchema;
     };
 }>;
