@@ -4046,6 +4046,25 @@ export type StartRunRequest = Message<"tank.agentctl.v1.StartRunRequest"> & {
      * @generated from field: double envelope_usd = 10;
      */
     envelopeUsd: number;
+    /**
+     * The task this run works on (tank.task.v1), so the run moves it.
+     *
+     * @generated from field: string task_id = 11;
+     */
+    taskId: string;
+    /**
+     * Carry on from this run (the core's run id): Try again on a stuck task, or Not yet
+     * after the run ended. The new run starts from its branch and checkpoints.
+     *
+     * @generated from field: string continue_run_id = 12;
+     */
+    continueRunId: string;
+    /**
+     * What a person said when sending the work back, verbatim.
+     *
+     * @generated from field: string note = 13;
+     */
+    note: string;
 };
 /**
  * Describes the message tank.agentctl.v1.StartRunRequest.

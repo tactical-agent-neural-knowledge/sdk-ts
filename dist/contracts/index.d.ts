@@ -13,4 +13,5 @@ export * as presence from "./tank/presence/v1/presence_pb.js";
 export * as realtime from "./tank/realtime/v1/realtime_pb.js";
 export * as richtext from "./tank/richtext/v1/richtext_pb.js";
 export * as search from "./tank/search/v1/search_pb.js";
+export * as task from "./tank/task/v1/task_pb.js";
 export * as workspace from "./tank/workspace/v1/workspace_pb.js";

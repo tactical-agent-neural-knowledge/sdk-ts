@@ -4,7 +4,7 @@ import { AiService } from "../contracts/tank/ai/v1/ai_pb.js";
 import { AuthService } from "../contracts/tank/auth/v1/auth_pb.js";
 import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
-import { type Channel, ChannelService, ChannelType, type TreadGoal } from "../contracts/tank/channel/v1/channel_pb.js";
+import { type Channel, ChannelService, ChannelType, type ChannelView, type TreadGoal } from "../contracts/tank/channel/v1/channel_pb.js";
 import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
 import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js";
@@ -13,6 +13,7 @@ import { ChatService, type Message, MessageKind, type PostMessageRequest } from 
 import { MonitorService, type Widget } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { type DescribeStatusResponse, type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
+import { type ListTasksResponse, type Task, TaskService, type TaskStage } from "../contracts/tank/task/v1/task_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import { type GetBootstrapResponse, type Invite, type Member, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
@@ -106,6 +107,27 @@ export interface LoadNotificationsResult {
     /** Total unread in the workspace, independent of paging. */
     unreadCount: number;
 }
+export interface ListTasksInput {
+    workspaceId: string;
+    /** One Tread; leave out for Command (every Tread the caller can see). */
+    channelId?: string;
+    stages?: TaskStage[];
+    askedBy?: string;
+    limit?: number;
+}
+/** Who to tell when a task reaches a stage. */
+export interface NotifyPick {
+    stage: TaskStage;
+    userId: string;
+}
+export interface CreateTaskInput {
+    workspaceId: string;
+    title: string;
+    details?: string;
+    /** Start a run on it now instead of waiting in Queued. */
+    startNow?: boolean;
+    notify?: NotifyPick[];
+}
 export interface ListRunsInput {
     workspaceId?: string;
     channelId?: string;
@@ -172,6 +194,8 @@ export declare class TankClient {
     readonly environment: Client<typeof EnvironmentService>;
     /** The Infrastructure page: a Tread's product, its state, log and live check. */
     readonly hosting: Client<typeof HostingService>;
+    /** Tasks: one piece of work in a Tread, moving through stages; Command is every Tread's. */
+    readonly tasks: Client<typeof TaskService>;
     readonly realtime: RealtimeClient;
     readonly store: TankStore;
     readonly storage: TankStorage;
@@ -358,6 +382,35 @@ export declare class TankClient {
         runs: Run[];
         nextCursor: string;
     }>;
+    private keepTask;
+    /** A Tread's tasks (channelId) or every Tread's the caller can see (Command), into the store. */
+    listTasks(input: ListTasksInput): Promise<ListTasksResponse>;
+    getTask(taskId: string): Promise<Task>;
+    /** Add a task to a Tread. */
+    createTask(input: CreateTaskInput & {
+        channelId: string;
+    }): Promise<Task>;
+    /** Command's Add task: a new Tread whose goal is the title, with the task in it. */
+    createTaskWithChannel(input: CreateTaskInput): Promise<{
+        task: Task;
+        channel: Channel | undefined;
+    }>;
+    startTask(taskId: string): Promise<Task>;
+    /** Looks right: Ready to check → Done. */
+    confirmTask(taskId: string): Promise<Task>;
+    /** Not yet: the sentence goes to the Tread as the caller and the work goes back. */
+    sendBackTask(taskId: string, text: string): Promise<Task>;
+    /** Try again on a stuck task. */
+    retryTask(taskId: string): Promise<Task>;
+    /** Replace the task's own notify picks (workspace rules stay). */
+    setTaskNotify(taskId: string, notify: NotifyPick[], askerMuted?: boolean): Promise<Task>;
+    /**
+     * This person's view of a Tread (Builder or Simple). Optimistic: the read state changes at
+     * once and rolls back on error; other devices hear it as channel_preference.updated.
+     */
+    setChannelView(channelId: string, view: ChannelView): Promise<void>;
+    /** A Tread admin's default view for people who have not picked one. */
+    setChannelDefaultView(channelId: string, view: ChannelView): Promise<Channel | undefined>;
     /** Fetch one run into the store. */
     getRun(runId: string): Promise<Run | undefined>;
     /**

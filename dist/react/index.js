@@ -3,6 +3,7 @@ import { create } from "@bufbuild/protobuf";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore, } from "react";
 import { isTerminalRunState } from "../blocks/runTone.js";
 import { notificationPagingKey, } from "../client/store.js";
+import { effectiveView, readyToCheckCount } from "../client/tasks.js";
 import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { visibleMarkTypes } from "../topo/visibility.js";
 import { recentOwn } from "./history.js";
@@ -508,3 +509,72 @@ export function useMessageFiles(messageId) {
     return useTankSelector(useCallback((s) => s.selectMessageFiles(messageId), [messageId]));
 }
 export { TankStore } from "../client/store.js";
+/**
+ * Load tasks once per key and again whenever the gateway comes back (events missed while
+ * away are not replayed for every Tread); task.changed events keep the store current between.
+ */
+function useTaskLoad(key, load) {
+    const client = useTank();
+    const connection = useConnectionState();
+    const [loading, setLoading] = useState(true);
+    const [hasAgent, setHasAgent] = useState(false);
+    const [error, setError] = useState(false);
+    const [tick, setTick] = useState(0);
+    const reload = useCallback(() => setTick((t) => t + 1), []);
+    const ready = connection === "ready";
+    // biome-ignore lint/correctness/useExhaustiveDependencies: `tick` and `ready` are refetch triggers; `load` is keyed by `key`
+    useEffect(() => {
+        if (!key)
+            return;
+        let live = true;
+        load(client)
+            .then((r) => {
+            if (!live)
+                return;
+            setHasAgent(r.hasAgent);
+            setError(false);
+            setLoading(false);
+        })
+            .catch(() => {
+            if (!live)
+                return;
+            setError(true);
+            setLoading(false);
+        });
+        return () => {
+            live = false;
+        };
+    }, [client, key, tick, ready]);
+    return { loading, hasAgent, error, reload };
+}
+/** One Tread's tasks, live (the strip in a Tread, both views). */
+export function useTasks(workspaceId, channelId) {
+    const tasks = useTankSelector(useCallback((s) => s.selectChannelTasks(channelId), [channelId]));
+    const meta = useTaskLoad(channelId && workspaceId ? `${workspaceId}:${channelId}` : "", (c) => c.listTasks({ workspaceId, channelId }));
+    return { tasks, ...meta };
+}
+/** Every task in every Tread the person can see, live (Command on Home). */
+export function useWorkspaceTasks(workspaceId) {
+    const tasks = useTankSelector(useCallback((s) => s.selectTasks(workspaceId), [workspaceId]));
+    const meta = useTaskLoad(workspaceId ? `ws:${workspaceId}` : "", (c) => c.listTasks({ workspaceId }));
+    const readyToCheck = useMemo(() => readyToCheckCount(tasks), [tasks]);
+    return { tasks, readyToCheck, ...meta };
+}
+/** One task from the store, fetched when it is not there yet. */
+export function useTask(taskId) {
+    const client = useTank();
+    const task = useTankSelector(useCallback((s) => s.getState().tasksById[taskId], [taskId]));
+    const missing = !task;
+    useEffect(() => {
+        if (!taskId || !missing)
+            return;
+        void client.getTask(taskId).catch(() => undefined);
+    }, [client, taskId, missing]);
+    return task;
+}
+/** The view this person reads a Tread in (their pick, else the Tread's default, else Builder). */
+export function useChannelView(channelId) {
+    const channel = useTankSelector(useCallback((s) => s.getState().channels[channelId], [channelId]));
+    const readState = useTankSelector(useCallback((s) => s.getState().readStates[channelId], [channelId]));
+    return effectiveView(channel, readState);
+}

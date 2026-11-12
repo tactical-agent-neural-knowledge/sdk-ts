@@ -14,6 +14,7 @@ import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } fr
 import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { PresenceSchema, PresenceService, } from "../contracts/tank/presence/v1/presence_pb.js";
+import { TaskNotifySchema, TaskService, } from "../contracts/tank/task/v1/task_pb.js";
 import { TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import { GetBootstrapResponseSchema, Role, WorkspaceService, } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Backoff } from "./backoff.js";
@@ -24,6 +25,9 @@ import { TankStore, unpackEnvelope } from "./store.js";
 import { createTankTransport } from "./transport.js";
 import { inputMime, inputName, inputSize, putUpload, toBlob, } from "./upload.js";
 import { cryptoRandomBytes, uuidv7 } from "./uuidv7.js";
+function notifyRows(picks) {
+    return (picks ?? []).map((p) => create(TaskNotifySchema, { stage: p.stage, userId: p.userId }));
+}
 const DOWNLOAD_URL_TTL_MS = 10 * 60_000;
 const ROLE_BY_NAME = {
     owner: Role.OWNER,
@@ -76,6 +80,8 @@ export class TankClient {
     environment;
     /** The Infrastructure page: a Tread's product, its state, log and live check. */
     hosting;
+    /** Tasks: one piece of work in a Tread, moving through stages; Command is every Tread's. */
+    tasks;
     realtime;
     store;
     storage;
@@ -133,6 +139,7 @@ export class TankClient {
         this.ai = createClient(AiService, this.transport);
         this.environment = createClient(EnvironmentService, this.transport);
         this.hosting = createClient(HostingService, this.transport);
+        this.tasks = createClient(TaskService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
             getGatewayToken: async () => (await this.auth.mintGatewayToken({})).token,
@@ -825,6 +832,101 @@ export class TankClient {
         });
         this.store.dispatch({ type: "runs/upsert", runs: res.runs });
         return { runs: res.runs, nextCursor: res.nextCursor };
+    }
+    // ------------------------------------------------------------ tasks
+    keepTask(res) {
+        if (!res.task)
+            throw new Error("TaskService returned no task");
+        this.store.dispatch({ type: "tasks/upsert", tasks: [res.task] });
+        return res.task;
+    }
+    /** A Tread's tasks (channelId) or every Tread's the caller can see (Command), into the store. */
+    async listTasks(input) {
+        const res = await this.tasks.listTasks({
+            workspaceId: input.workspaceId,
+            channelId: input.channelId ?? "",
+            stages: input.stages ?? [],
+            askedBy: input.askedBy ?? "",
+            limit: input.limit ?? 0,
+        });
+        this.store.dispatch({ type: "tasks/upsert", tasks: res.tasks });
+        return res;
+    }
+    async getTask(taskId) {
+        return this.keepTask(await this.tasks.getTask({ taskId }));
+    }
+    /** Add a task to a Tread. */
+    async createTask(input) {
+        return this.keepTask(await this.tasks.createTask({
+            workspaceId: input.workspaceId,
+            channelId: input.channelId,
+            title: input.title,
+            details: input.details ?? "",
+            startNow: input.startNow ?? false,
+            notify: notifyRows(input.notify),
+        }));
+    }
+    /** Command's Add task: a new Tread whose goal is the title, with the task in it. */
+    async createTaskWithChannel(input) {
+        const res = await this.tasks.createTaskWithChannel({
+            workspaceId: input.workspaceId,
+            title: input.title,
+            details: input.details ?? "",
+            startNow: input.startNow ?? false,
+            notify: notifyRows(input.notify),
+        });
+        if (res.channel)
+            this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
+        return { task: this.keepTask(res), channel: res.channel };
+    }
+    async startTask(taskId) {
+        return this.keepTask(await this.tasks.startTask({ taskId }));
+    }
+    /** Looks right: Ready to check → Done. */
+    async confirmTask(taskId) {
+        return this.keepTask(await this.tasks.confirmTask({ taskId }));
+    }
+    /** Not yet: the sentence goes to the Tread as the caller and the work goes back. */
+    async sendBackTask(taskId, text) {
+        return this.keepTask(await this.tasks.sendBackTask({ taskId, text }));
+    }
+    /** Try again on a stuck task. */
+    async retryTask(taskId) {
+        return this.keepTask(await this.tasks.retryTask({ taskId }));
+    }
+    /** Replace the task's own notify picks (workspace rules stay). */
+    async setTaskNotify(taskId, notify, askerMuted) {
+        return this.keepTask(await this.tasks.setTaskNotify({
+            taskId,
+            notify: notifyRows(notify),
+            ...(askerMuted === undefined ? {} : { askerMuted }),
+        }));
+    }
+    /**
+     * This person's view of a Tread (Builder or Simple). Optimistic: the read state changes at
+     * once and rolls back on error; other devices hear it as channel_preference.updated.
+     */
+    async setChannelView(channelId, view) {
+        const prev = this.store.getState().readStates[channelId];
+        const base = prev ?? create(ChannelReadStateSchema, { channelId });
+        this.store.dispatch({ type: "readStates/upsert", readStates: [{ ...base, view }] });
+        try {
+            const res = await this.channels.setChannelPreference({ channelId, view });
+            if (res.readState)
+                this.store.dispatch({ type: "readStates/upsert", readStates: [res.readState] });
+        }
+        catch (err) {
+            if (prev)
+                this.store.dispatch({ type: "readStates/upsert", readStates: [prev] });
+            throw err;
+        }
+    }
+    /** A Tread admin's default view for people who have not picked one. */
+    async setChannelDefaultView(channelId, view) {
+        const res = await this.channels.updateChannel({ channelId, defaultView: view });
+        if (res.channel)
+            this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
+        return res.channel;
     }
     /** Fetch one run into the store. */
     async getRun(runId) {

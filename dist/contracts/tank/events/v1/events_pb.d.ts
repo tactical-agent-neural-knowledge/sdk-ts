@@ -11,6 +11,7 @@ import type { Huddle } from "../../huddle/v1/huddle_pb.js";
 import type { Message as Message$1 } from "../../message/v1/message_pb.js";
 import type { Health, Widget } from "../../monitor/v1/monitor_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
+import type { Task } from "../../task/v1/task_pb.js";
 import type { Mark } from "../../topo/v1/topo_pb.js";
 import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -1120,3 +1121,24 @@ export type BoardPointer = Message<"tank.events.v1.BoardPointer"> & {
  * Use `create(BoardPointerSchema)` to create a new message.
  */
 export declare const BoardPointerSchema: GenMessage<BoardPointer>;
+/**
+ * task.changed on evt.{ws}.ch.{channel}, and on evt.{ws}.ws for a public Tread, so a
+ * Tread's strip and Command move without a refresh.
+ *
+ * @generated from message tank.events.v1.TaskChanged
+ */
+export type TaskChanged = Message<"tank.events.v1.TaskChanged"> & {
+    /**
+     * @generated from field: tank.task.v1.Task task = 1;
+     */
+    task?: Task;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.events.v1.TaskChanged.
+ * Use `create(TaskChangedSchema)` to create a new message.
+ */
+export declare const TaskChangedSchema: GenMessage<TaskChanged>;
