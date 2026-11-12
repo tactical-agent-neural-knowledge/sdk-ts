@@ -199,12 +199,69 @@ export type Subscription = Message<"tank.billing.v1.Subscription"> & {
      * @generated from field: int32 seats = 14;
      */
     seats: number;
+    /**
+     * Premium and each add-on that is on with no payment behind it, because somebody at
+     * TANK turned it on by hand (the platform console or tankctl). Waived fees stay
+     * waived until it is turned off; there is no expiry. Agent time is still paid for.
+     *
+     * @generated from field: repeated tank.billing.v1.Waiver waivers = 15;
+     */
+    waivers: Waiver[];
+    /**
+     * The workspace pays nothing at all (a super admin's switch): no fees, and its agent
+     * time is never stopped, sold or refilled.
+     *
+     * @generated from field: bool no_charge = 16;
+     */
+    noCharge: boolean;
+    /**
+     * A recurring payment that failed. "" none; "failing" while the provider retries it
+     * (about two weeks); "paused" once the retries are over: agent runs and add-ons are
+     * paused until it is paid, and Treads, messages and files keep working.
+     *
+     * @generated from field: string payment_state = 17;
+     */
+    paymentState: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp payment_failed_at = 18;
+     */
+    paymentFailedAt?: Timestamp;
 };
 /**
  * Describes the message tank.billing.v1.Subscription.
  * Use `create(SubscriptionSchema)` to create a new message.
  */
 export declare const SubscriptionSchema: GenMessage<Subscription>;
+/**
+ * Waiver is one product whose fee is waived, and who turned it on.
+ *
+ * @generated from message tank.billing.v1.Waiver
+ */
+export type Waiver = Message<"tank.billing.v1.Waiver"> & {
+    /**
+     * premium | shield | books | blueprint | atlas | neuron | agentops
+     *
+     * @generated from field: string product = 1;
+     */
+    product: string;
+    /**
+     * the person's name, or "TANK" when no person is on record
+     *
+     * @generated from field: string by_name = 2;
+     */
+    byName: string;
+    /**
+     * unset when the record does not say
+     *
+     * @generated from field: google.protobuf.Timestamp at = 3;
+     */
+    at?: Timestamp;
+};
+/**
+ * Describes the message tank.billing.v1.Waiver.
+ * Use `create(WaiverSchema)` to create a new message.
+ */
+export declare const WaiverSchema: GenMessage<Waiver>;
 /**
  * @generated from message tank.billing.v1.GetSubscriptionRequest
  */
@@ -392,6 +449,92 @@ export type SetAgentCapResponse = Message<"tank.billing.v1.SetAgentCapResponse">
  */
 export declare const SetAgentCapResponseSchema: GenMessage<SetAgentCapResponse>;
 /**
+ * BillingRecord is one invoice or charge as the Billing page lists it.
+ *
+ * @generated from message tank.billing.v1.BillingRecord
+ */
+export type BillingRecord = Message<"tank.billing.v1.BillingRecord"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 2;
+     */
+    at?: Timestamp;
+    /**
+     * @generated from field: string description = 3;
+     */
+    description: string;
+    /**
+     * @generated from field: int64 amount_cents = 4;
+     */
+    amountCents: bigint;
+    /**
+     * paid | open | failed | waived | void
+     *
+     * @generated from field: string status = 5;
+     */
+    status: string;
+    /**
+     * the receipt, or the page to pay it; empty when there is none
+     *
+     * @generated from field: string url = 6;
+     */
+    url: string;
+    /**
+     * invoice | subscription | agent_time | auto_refill | adjustment
+     *
+     * @generated from field: string kind = 7;
+     */
+    kind: string;
+    /**
+     * the invoice number, when there is one
+     *
+     * @generated from field: string number = 8;
+     */
+    number: string;
+};
+/**
+ * Describes the message tank.billing.v1.BillingRecord.
+ * Use `create(BillingRecordSchema)` to create a new message.
+ */
+export declare const BillingRecordSchema: GenMessage<BillingRecord>;
+/**
+ * @generated from message tank.billing.v1.ListBillingHistoryRequest
+ */
+export type ListBillingHistoryRequest = Message<"tank.billing.v1.ListBillingHistoryRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * 0 is 50; at most 200
+     *
+     * @generated from field: int32 limit = 2;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.billing.v1.ListBillingHistoryRequest.
+ * Use `create(ListBillingHistoryRequestSchema)` to create a new message.
+ */
+export declare const ListBillingHistoryRequestSchema: GenMessage<ListBillingHistoryRequest>;
+/**
+ * @generated from message tank.billing.v1.ListBillingHistoryResponse
+ */
+export type ListBillingHistoryResponse = Message<"tank.billing.v1.ListBillingHistoryResponse"> & {
+    /**
+     * @generated from field: repeated tank.billing.v1.BillingRecord records = 1;
+     */
+    records: BillingRecord[];
+};
+/**
+ * Describes the message tank.billing.v1.ListBillingHistoryResponse.
+ * Use `create(ListBillingHistoryResponseSchema)` to create a new message.
+ */
+export declare const ListBillingHistoryResponseSchema: GenMessage<ListBillingHistoryResponse>;
+/**
  * AgentTime is a workspace's prepaid agent time. Every amount is in cents of what
  * the workspace pays (agent usage is priced at cost x 2 before it reaches here).
  *
@@ -472,6 +615,12 @@ export type AgentTime = Message<"tank.billing.v1.AgentTime"> & {
      * @generated from field: bool prepaid = 13;
      */
     prepaid: boolean;
+    /**
+     * the workspace pays nothing: never blocked, nothing to buy
+     *
+     * @generated from field: bool no_charge = 14;
+     */
+    noCharge: boolean;
 };
 /**
  * Describes the message tank.billing.v1.AgentTime.
@@ -930,5 +1079,16 @@ export declare const BillingService: GenService<{
         methodKind: "unary";
         input: typeof SetAutoRefillRequestSchema;
         output: typeof SetAutoRefillResponseSchema;
+    };
+    /**
+     * Billing history (2026-11-12): every invoice and charge, newest first, from TANK's
+     * own record that the provider's webhooks and hand entries keep. Admins only.
+     *
+     * @generated from rpc tank.billing.v1.BillingService.ListBillingHistory
+     */
+    listBillingHistory: {
+        methodKind: "unary";
+        input: typeof ListBillingHistoryRequestSchema;
+        output: typeof ListBillingHistoryResponseSchema;
     };
 }>;
