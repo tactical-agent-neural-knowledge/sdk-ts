@@ -6,6 +6,7 @@ export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
 export { Emitter, type Handler } from "./emitter.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
+export { plainPreview } from "./plainPreview.js";
 export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 export { browserOnlineSignal, type OnlineSignal, RealtimeClient, type RealtimeEvents, type RealtimeOptions, type RealtimeSession, type WebSocketCtor, type WebSocketLike, } from "./realtime.js";
 export { expandShortcodes } from "./shortcodes.js";

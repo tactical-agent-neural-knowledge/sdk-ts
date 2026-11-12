@@ -19,6 +19,8 @@ export declare const LIMITS: {
     readonly planStepFiles: 20;
     readonly planList: 20;
     readonly planListItem: 500;
+    readonly tableRows: 200;
+    readonly tableColumns: 20;
     readonly approverIds: 50;
     readonly diffFiles: 100;
     readonly diffPath: 500;

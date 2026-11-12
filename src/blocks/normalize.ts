@@ -21,6 +21,8 @@ export const LIMITS = {
   planStepFiles: 20,
   planList: 20,
   planListItem: 500,
+  tableRows: 200,
+  tableColumns: 20,
   approverIds: 50,
   diffFiles: 100,
   diffPath: 500,
@@ -108,6 +110,34 @@ export function normalizeRichText(r: RichText | undefined): RichText | undefined
               },
             },
           };
+        case "heading":
+          return {
+            ...b,
+            kind: {
+              case: "heading",
+              value: { ...k.value, elements: k.value.elements.map(normalizeElement) },
+            },
+          };
+        case "table": {
+          const row = (r: (typeof k.value.rows)[number]) => ({
+            ...r,
+            cells: cap(r.cells, LIMITS.tableColumns).map((c) => ({
+              ...c,
+              elements: c.elements.map(normalizeElement),
+            })),
+          });
+          return {
+            ...b,
+            kind: {
+              case: "table",
+              value: {
+                ...k.value,
+                header: k.value.header && row(k.value.header),
+                rows: cap(k.value.rows, LIMITS.tableRows).map(row),
+              },
+            },
+          };
+        }
         default:
           return b;
       }

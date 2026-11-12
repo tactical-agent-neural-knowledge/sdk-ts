@@ -5,6 +5,7 @@ import { fromJson, type JsonValue, toJson } from "@bufbuild/protobuf";
 import { describe, expect, it } from "vitest";
 import { BlocksSchema } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { FIXTURE_NAMES, fixtureDefs } from "../test/fixture-defs.js";
+import { usageReport } from "../test/richtext-markdown.js";
 import { actions, blocks, button, header, planCard, section, toolLog } from "./builders.js";
 import { LIMITS, normalizeBlocks, truncate, validateBlocks } from "./normalize.js";
 import { richText, richTextToPlain, rt } from "./richtext.js";
@@ -131,6 +132,9 @@ describe("richText", () => {
     ]);
     expect(richTextToPlain(r)).toBe("Hi @u1, see this🎉");
     expect(richTextToPlain(richText("plain"))).toBe("plain");
+    expect(richTextToPlain(usageReport)).toBe(
+      "Customer AI usage\nWorkspace | Calls | Charged\ntank-team | 97 | $0.30\nEdero | 5\nTotal | 1,279 | $1.70\n---\n3. third\n4. fourth\nAll via tank-neural.",
+    );
   });
 });
 

@@ -68,8 +68,20 @@ export function richTextToPlain(r) {
                 break;
             case "list":
                 out.push(k.value.items
-                    .map((it, i) => `${k.value.ordered ? `${i + 1}.` : "•"} ${it.elements.map(elementToPlain).join("")}`)
+                    .map((it, i) => `${k.value.ordered ? `${(k.value.start || 1) + i}.` : "•"} ${it.elements.map(elementToPlain).join("")}`)
                     .join("\n"));
+                break;
+            case "heading":
+                out.push(k.value.elements.map(elementToPlain).join(""));
+                break;
+            case "table": {
+                const row = (cells) => cells.map((c) => c.elements.map(elementToPlain).join("")).join(" | ");
+                const rows = k.value.header ? [k.value.header, ...k.value.rows] : k.value.rows;
+                out.push(rows.map((r) => row(r.cells)).join("\n"));
+                break;
+            }
+            case "divider":
+                out.push("---");
                 break;
             default:
                 break;

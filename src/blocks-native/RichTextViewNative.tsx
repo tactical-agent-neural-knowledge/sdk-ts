@@ -1,8 +1,13 @@
 import type { ReactNode } from "react";
-import { Linking, StyleSheet, View } from "react-native";
+import { Linking, ScrollView, StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 import { broadcastWord } from "../blocks/richtext.js";
-import type { RichText, RichTextElement, Style } from "../contracts/tank/richtext/v1/richtext_pb.js";
+import {
+  type RichText,
+  type RichTextElement,
+  type Style,
+  TableAlign,
+} from "../contracts/tank/richtext/v1/richtext_pb.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
 
 export interface RichTextViewNativeProps {
@@ -129,11 +134,70 @@ export function RichTextViewNative({ richText, variant = "bodyMedium", ...p }: R
               <View key={key} style={{ paddingLeft: 12 + k.value.indent * 12 }}>
                 {k.value.items.map((it, j) => (
                   <Text key={j} variant={variant}>
-                    {k.value.ordered ? `${j + 1}. ` : "• "}
+                    {k.value.ordered ? `${(k.value.start || 1) + j}. ` : "• "}
                     {elements(it.elements)}
                   </Text>
                 ))}
               </View>
+            );
+          case "heading": {
+            const level = k.value.level || 1;
+            return (
+              <Text
+                key={key}
+                variant={level <= 1 ? "titleMedium" : "titleSmall"}
+                accessibilityRole="header"
+                style={{ fontWeight: "700" }}
+                testID="rt-heading"
+              >
+                {elements(k.value.elements)}
+              </Text>
+            );
+          }
+          case "table": {
+            const t = k.value;
+            const cols = Math.max(t.header?.cells.length ?? 0, ...t.rows.map((r) => r.cells.length));
+            const span = Array.from({ length: cols }, (_, c) => c);
+            const align = (c: number) =>
+              t.align[c] === TableAlign.CENTER
+                ? "center"
+                : t.align[c] === TableAlign.RIGHT
+                  ? "right"
+                  : "left";
+            const line = { borderColor: theme.colors.outlineVariant };
+            return (
+              <ScrollView key={key} horizontal style={styles.tableScroll} testID="rt-table">
+                <View style={[styles.table, line]}>
+                  {t.header ? (
+                    <View style={[styles.row, { backgroundColor: theme.colors.surfaceVariant }]}>
+                      {span.map((c) => (
+                        <View key={c} style={styles.cell}>
+                          <Text variant={variant} style={{ fontWeight: "700", textAlign: align(c) }}>
+                            {elements(t.header?.cells[c]?.elements ?? [])}
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
+                  ) : null}
+                  {t.rows.map((r, j) => (
+                    // biome-ignore lint/suspicious/noArrayIndexKey: rows are positional
+                    <View key={j} style={[styles.row, styles.divided, line]}>
+                      {span.map((c) => (
+                        <View key={c} style={styles.cell}>
+                          <Text variant={variant} style={{ textAlign: align(c) }}>
+                            {elements(r.cells[c]?.elements ?? [])}
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
+                  ))}
+                </View>
+              </ScrollView>
+            );
+          }
+          case "divider":
+            return (
+              <View key={key} style={[styles.divider, { backgroundColor: theme.colors.outlineVariant }]} />
             );
           default:
             return null;
@@ -147,4 +211,10 @@ const styles = StyleSheet.create({
   stack: { gap: 6 },
   quote: { borderLeftWidth: 3, paddingLeft: 10 },
   code: { padding: 10, borderRadius: 6 },
+  tableScroll: { flexGrow: 0 },
+  table: { borderWidth: StyleSheet.hairlineWidth, borderRadius: 6, overflow: "hidden" },
+  row: { flexDirection: "row" },
+  divided: { borderTopWidth: StyleSheet.hairlineWidth },
+  cell: { paddingHorizontal: 10, paddingVertical: 6, minWidth: 72, maxWidth: 240 },
+  divider: { height: StyleSheet.hairlineWidth },
 });
