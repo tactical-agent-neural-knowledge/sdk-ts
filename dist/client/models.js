@@ -4,7 +4,7 @@ export const TANK_NEURAL_NEXT = "tank-neural-next";
 export const MODEL_CHOICES = [
     {
         id: "",
-        label: "TANK decides",
+        label: "TANK chooses",
         note: "The cheapest model that fits each run; moves up only after checks fail.",
         relativeCost: 1,
     },
@@ -19,6 +19,30 @@ export const MODEL_CHOICES = [
         label: "TANK Neural next",
         note: "The candidate for the next TANK Neural, measured against the stable one. Pick it to help prove it.",
         relativeCost: 0.5,
+    },
+    {
+        id: "claude-sonnet-5-5",
+        label: "Claude Sonnet 5.5",
+        note: "The newest Sonnet; the same price as Sonnet 5.",
+        relativeCost: 1,
+    },
+    {
+        id: "claude-opus-5-5",
+        label: "Claude Opus 5.5",
+        note: "The newest Opus; twice the cost of Sonnet on every token.",
+        relativeCost: 2,
+    },
+    {
+        id: "claude-haiku-5-5",
+        label: "Claude Haiku 5.5",
+        note: "The newest Haiku; fast and the cheapest Claude.",
+        relativeCost: 0.05,
+    },
+    {
+        id: "claude-fable-5-2",
+        label: "Claude Fable 5.2",
+        note: "Anthropic's most capable model; four times the cost of Sonnet on every token.",
+        relativeCost: 4,
     },
     {
         id: "claude-sonnet-5",
