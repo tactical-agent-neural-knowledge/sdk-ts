@@ -453,6 +453,8 @@ export declare class TankClient {
     /** Fetches a Tread the store does not have yet, once at a time. */
     private ensureChannel;
     private refreshChannel;
+    /** Re-reads a held Tread once at a time; a NotFound answer removes it. */
+    private ensureChannelStillExists;
     private readyBefore;
     /**
      * Fetches everything posted in a channel after the newest message this device holds,

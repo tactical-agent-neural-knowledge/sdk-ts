@@ -1,4 +1,4 @@
-import { create } from "@bufbuild/protobuf";
+import { create, toJson } from "@bufbuild/protobuf";
 import { timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { Code, ConnectError, createRouterTransport } from "@connectrpc/connect";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -14,6 +14,7 @@ import {
   type PostMessageRequest,
 } from "../contracts/tank/message/v1/message_pb.js";
 import {
+  GetBootstrapResponseSchema,
   MemberSchema,
   Role,
   WorkspaceSchema,
@@ -47,6 +48,8 @@ interface FakeApi {
   failRpcs: Set<string>;
   calls: Array<{ rpc: string; req: unknown }>;
   markReads: MarkReadRequest[];
+  /** Channel ids the api answers NotFound for: deleted Treads. */
+  deleted?: Set<string>;
 }
 
 function record(rpc: string, req: unknown): void {
@@ -101,16 +104,19 @@ function fakeTransport() {
       }),
     });
     service(ChannelService, {
-      getChannel: (req) => ({
-        // As the api answers a member: joined (GetChannel sets it from the caller's read state).
-        channel: create(ChannelSchema, {
-          id: req.channelId,
-          workspaceId: "ws1",
-          name: "renamed",
-          type: ChannelType.PUBLIC,
-          joined: true,
-        }),
-      }),
+      getChannel: (req) => {
+        if (api.deleted?.has(req.channelId)) throw new ConnectError("channel not found", Code.NotFound);
+        return {
+          // As the api answers a member: joined (GetChannel sets it from the caller's read state).
+          channel: create(ChannelSchema, {
+            id: req.channelId,
+            workspaceId: "ws1",
+            name: "renamed",
+            type: ChannelType.PUBLIC,
+            joined: true,
+          }),
+        };
+      },
       joinChannel: (req) => {
         record("joinChannel", req);
         return {
@@ -270,6 +276,63 @@ beforeEach(async () => {
 afterEach(async () => {
   for (const c of clients.splice(0)) await c.stop();
   await gw.close();
+});
+
+describe("TankClient: a deleted Tread leaves the list", () => {
+  // lidl-trek, 2026-11-13: #general was deleted by hand (no ChannelDeleted event) and a new
+  // #general made. The old one came back from the device's cached snapshot on every launch
+  // and no bootstrap ever removed it, so web and phone showed two #general Treads.
+  it("drops a Tread the cached snapshot holds and the server no longer lists", async () => {
+    const storage = new MemoryStorage();
+    const old = create(ChannelSchema, {
+      id: "old-general",
+      workspaceId: "ws1",
+      type: ChannelType.PUBLIC,
+      name: "general",
+    });
+    const cached = create(GetBootstrapResponseSchema, {
+      workspace: create(WorkspaceSchema, { id: "ws1", name: "TANK", slug: "tank" }),
+      channels: [old],
+    });
+    await storage.put(
+      storageKeys.bootstrap("ws1"),
+      JSON.stringify(toJson(GetBootstrapResponseSchema, cached)),
+    );
+    const c = makeClient(storage);
+    await c.start();
+    expect(c.store.getState().channels["old-general"]).toBeDefined();
+    await c.bootstrap("ws1");
+    expect(c.store.getState().channels["old-general"]).toBeUndefined();
+    expect(c.store.selectChannels("ws1").map((ch) => ch.id)).toEqual(["general"]);
+  });
+
+  it("asks about a held archived Tread and drops it when the server says it is gone", async () => {
+    api.deleted = new Set(["gone"]);
+    const c = makeClient();
+    await c.bootstrap("ws1");
+    c.store.dispatch({
+      type: "channels/upsert",
+      channels: [
+        create(ChannelSchema, {
+          id: "gone",
+          workspaceId: "ws1",
+          type: ChannelType.PUBLIC,
+          name: "gone",
+          archivedAt: timestampFromMs(1),
+        }),
+        create(ChannelSchema, {
+          id: "shelved",
+          workspaceId: "ws1",
+          type: ChannelType.PUBLIC,
+          name: "shelved",
+          archivedAt: timestampFromMs(1),
+        }),
+      ],
+    });
+    await c.bootstrap("ws1");
+    await until(() => c.store.getState().channels.gone === undefined);
+    expect(c.store.getState().channels.shelved).toBeDefined();
+  });
 });
 
 describe("TankClient", () => {

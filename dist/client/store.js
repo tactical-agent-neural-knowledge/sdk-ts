@@ -315,6 +315,19 @@ export function reduce(state, action) {
         case "bootstrap": {
             const workspaces = { ...state.workspaces, [action.workspace.id]: action.workspace };
             const channels = { ...state.channels, ...byId(action.channels) };
+            const removed = [];
+            if (action.pruneIfAbsent?.length) {
+                const listed = new Set(action.channels.map((c) => c.id));
+                for (const id of action.pruneIfAbsent) {
+                    const c = channels[id];
+                    // Archived Treads are never in a bootstrap, so absence says nothing about them;
+                    // the client checks those one by one (a deleted one answers NotFound).
+                    if (!c || listed.has(id) || c.archivedAt || c.workspaceId !== action.workspace.id)
+                        continue;
+                    delete channels[id];
+                    removed.push(id);
+                }
+            }
             const all = Object.values(channels).filter((c) => c.workspaceId === action.workspace.id);
             const membersForWs = { ...(state.members[action.workspace.id] ?? {}) };
             for (const mbr of action.members)
@@ -323,6 +336,8 @@ export function reduce(state, action) {
             if (action.me?.principal)
                 membersForWs[action.me.principal.id] = action.me;
             const readStates = { ...state.readStates };
+            for (const id of removed)
+                delete readStates[id];
             for (const rs of action.readStates)
                 readStates[rs.channelId] = rs;
             // Thread positions from the server never lower what this device already marked.
