@@ -1387,12 +1387,55 @@ export type GetWorkspaceResponse = Message<"tank.platform.v1.GetWorkspaceRespons
      * @generated from field: tank.platform.v1.WorkspaceCounts counts = 7;
      */
     counts?: WorkspaceCounts;
+    /**
+     * @generated from field: tank.platform.v1.Claude5Spend claude5 = 8;
+     */
+    claude5?: Claude5Spend;
 };
 /**
  * Describes the message tank.platform.v1.GetWorkspaceResponse.
  * Use `create(GetWorkspaceResponseSchema)` to create a new message.
  */
 export declare const GetWorkspaceResponseSchema: GenMessage<GetWorkspaceResponse>;
+/**
+ * Claude5Spend is a workspace's spend on the Claude 5 family this calendar month (UTC),
+ * at what the model costs TANK, against the cap a super admin set (2026-11-12). At or
+ * over the cap the gateway answers that workspace's Claude 5 requests with Claude Sonnet
+ * 4.6 on Amazon Bedrock instead of refusing them. Raw cost: console only.
+ *
+ * @generated from message tank.platform.v1.Claude5Spend
+ */
+export type Claude5Spend = Message<"tank.platform.v1.Claude5Spend"> & {
+    /**
+     * a cap is set; false = no cap
+     *
+     * @generated from field: bool capped = 1;
+     */
+    capped: boolean;
+    /**
+     * the cap, meaningful when capped
+     *
+     * @generated from field: int64 cap_cents = 2;
+     */
+    capCents: bigint;
+    /**
+     * Claude 5 spend this month so far
+     *
+     * @generated from field: int64 month_cents = 3;
+     */
+    monthCents: bigint;
+    /**
+     * month_cents >= cap_cents while capped
+     *
+     * @generated from field: bool over_cap = 4;
+     */
+    overCap: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.Claude5Spend.
+ * Use `create(Claude5SpendSchema)` to create a new message.
+ */
+export declare const Claude5SpendSchema: GenMessage<Claude5Spend>;
 /**
  * @generated from message tank.platform.v1.GetOverviewRequest
  */
@@ -2286,6 +2329,54 @@ export type SetWorkspaceNoChargeResponse = Message<"tank.platform.v1.SetWorkspac
  */
 export declare const SetWorkspaceNoChargeResponseSchema: GenMessage<SetWorkspaceNoChargeResponse>;
 /**
+ * SetWorkspaceClaude5Cap sets or clears a workspace's monthly cap on Claude 5 spend, in
+ * cents of raw model cost (see Claude5Spend). capped false clears it (no cap). Recorded
+ * as workspace.claude5_cap.changed.
+ *
+ * @generated from message tank.platform.v1.SetWorkspaceClaude5CapRequest
+ */
+export type SetWorkspaceClaude5CapRequest = Message<"tank.platform.v1.SetWorkspaceClaude5CapRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: bool capped = 2;
+     */
+    capped: boolean;
+    /**
+     * > 0 when capped
+     *
+     * @generated from field: int64 cap_cents = 3;
+     */
+    capCents: bigint;
+    /**
+     * kept in the audit log
+     *
+     * @generated from field: string reason = 4;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.platform.v1.SetWorkspaceClaude5CapRequest.
+ * Use `create(SetWorkspaceClaude5CapRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceClaude5CapRequestSchema: GenMessage<SetWorkspaceClaude5CapRequest>;
+/**
+ * @generated from message tank.platform.v1.SetWorkspaceClaude5CapResponse
+ */
+export type SetWorkspaceClaude5CapResponse = Message<"tank.platform.v1.SetWorkspaceClaude5CapResponse"> & {
+    /**
+     * @generated from field: tank.platform.v1.Claude5Spend claude5 = 1;
+     */
+    claude5?: Claude5Spend;
+};
+/**
+ * Describes the message tank.platform.v1.SetWorkspaceClaude5CapResponse.
+ * Use `create(SetWorkspaceClaude5CapResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceClaude5CapResponseSchema: GenMessage<SetWorkspaceClaude5CapResponse>;
+/**
  * CreateWorkspace makes a workspace owned by the calling super admin (Robby, 2026-11-12:
  * workspaces he uses himself, made from the console rather than tankctl). It is made
  * exactly as the app makes one (its owner and #general), then given its plan (premium
@@ -2517,5 +2608,13 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof CreateWorkspaceRequestSchema;
         output: typeof CreateWorkspaceResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SetWorkspaceClaude5Cap
+     */
+    setWorkspaceClaude5Cap: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceClaude5CapRequestSchema;
+        output: typeof SetWorkspaceClaude5CapResponseSchema;
     };
 }>;

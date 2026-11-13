@@ -1519,6 +1519,22 @@ export type WorkspaceSpend = Message<"tank.agent.v1.WorkspaceSpend"> & {
      * @generated from field: double neural_saved_month_usd = 15;
      */
     neuralSavedMonthUsd: number;
+    /**
+     * The workspace's Claude 5 spend this month against its Claude 5 cap, when one is set
+     * (2026-11-12), at the Tread rate like every dollar here. Past the cap its agents carry on
+     * on Claude Sonnet 4.6. claude5_capped false = no cap, and the page shows neither.
+     *
+     * @generated from field: bool claude5_capped = 16;
+     */
+    claude5Capped: boolean;
+    /**
+     * @generated from field: double claude5_month_usd = 17;
+     */
+    claude5MonthUsd: number;
+    /**
+     * @generated from field: double claude5_cap_month_usd = 18;
+     */
+    claude5CapMonthUsd: number;
 };
 /**
  * Describes the message tank.agent.v1.WorkspaceSpend.
