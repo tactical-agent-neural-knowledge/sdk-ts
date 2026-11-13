@@ -436,6 +436,13 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: repeated tank.agentctl.v1.InfraConnectionBrief infra_connections = 40;
      */
     infraConnections: InfraConnectionBrief[];
+    /**
+     * The workspace's test logins this run may use (2026-11-13): accounts on the workspace's
+     * own apps that TANK's browser signs in with (test_login_open). Never a password.
+     *
+     * @generated from field: repeated tank.agentctl.v1.TestLoginBrief test_logins = 41;
+     */
+    testLogins: TestLoginBrief[];
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -7116,6 +7123,357 @@ export type InfraConnectionBrief = Message<"tank.agentctl.v1.InfraConnectionBrie
  */
 export declare const InfraConnectionBriefSchema: GenMessage<InfraConnectionBrief>;
 /**
+ * What a run is told about one test login: enough to choose it, never its password.
+ *
+ * @generated from message tank.agentctl.v1.TestLoginBrief
+ */
+export type TestLoginBrief = Message<"tank.agentctl.v1.TestLoginBrief"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string login_url = 2;
+     */
+    loginUrl: string;
+    /**
+     * The hosts TANK's browser opens with it; anything else is refused.
+     *
+     * @generated from field: repeated string app_hosts = 3;
+     */
+    appHosts: string[];
+    /**
+     * @generated from field: string username = 4;
+     */
+    username: string;
+    /**
+     * What it is for, in the admin's words ("a guide account on staging").
+     *
+     * @generated from field: string description = 5;
+     */
+    description: string;
+    /**
+     * @generated from field: bool has_totp = 6;
+     */
+    hasTotp: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestLoginBrief.
+ * Use `create(TestLoginBriefSchema)` to create a new message.
+ */
+export declare const TestLoginBriefSchema: GenMessage<TestLoginBrief>;
+/**
+ * One look at a test-login page, after a step. Nothing in it is a credential: every value of
+ * the login is masked out of the text before it leaves TANK's browser and again here.
+ *
+ * @generated from message tank.agentctl.v1.TestLoginPage
+ */
+export type TestLoginPage = Message<"tank.agentctl.v1.TestLoginPage"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+    /**
+     * @generated from field: string url = 2;
+     */
+    url: string;
+    /**
+     * @generated from field: string title = 3;
+     */
+    title: string;
+    /**
+     * The page as it looks now (JPEG).
+     *
+     * @generated from field: bytes screenshot = 4;
+     */
+    screenshot: Uint8Array;
+    /**
+     * The page's main text.
+     *
+     * @generated from field: string text = 5;
+     */
+    text: string;
+    /**
+     * What can be used on the page, one per line ("12 button \"Save\""): the numbers are what
+     * click and fill take.
+     *
+     * @generated from field: string elements = 6;
+     */
+    elements: string;
+    /**
+     * A sentence when the step did not work.
+     *
+     * @generated from field: string error = 7;
+     */
+    error: string;
+    /**
+     * Why TANK would not do it (an undeclared host, a session that is not this run's).
+     *
+     * @generated from field: string refused = 8;
+     */
+    refused: string;
+    /**
+     * With attach: the screenshot as one of this run's files, for a card or report_completion.
+     *
+     * @generated from field: string file_id = 9;
+     */
+    fileId: string;
+    /**
+     * Open only: no sign-in form is left on the page, so TANK believes the sign-in worked.
+     *
+     * @generated from field: bool signed_in = 10;
+     */
+    signedIn: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestLoginPage.
+ * Use `create(TestLoginPageSchema)` to create a new message.
+ */
+export declare const TestLoginPageSchema: GenMessage<TestLoginPage>;
+/**
+ * @generated from message tank.agentctl.v1.TestLoginOpenRequest
+ */
+export type TestLoginOpenRequest = Message<"tank.agentctl.v1.TestLoginOpenRequest"> & {
+    /**
+     * The test login's name. Empty opens url as a public page with no login (any public site;
+     * private addresses are refused as everywhere in TANK's browser).
+     *
+     * @generated from field: string login = 1;
+     */
+    login: string;
+    /**
+     * Where to go once signed in: an https address on one of the login's hosts. Empty stays
+     * wherever signing in lands. Required when login is empty.
+     *
+     * @generated from field: string url = 2;
+     */
+    url: string;
+    /**
+     * The browser's size in CSS pixels; 1280x800 when zero (393x852 is a phone).
+     *
+     * @generated from field: int32 width = 3;
+     */
+    width: number;
+    /**
+     * @generated from field: int32 height = 4;
+     */
+    height: number;
+    /**
+     * One line: why, recorded with the use.
+     *
+     * @generated from field: string reason = 5;
+     */
+    reason: string;
+    /**
+     * @generated from field: bool attach = 6;
+     */
+    attach: boolean;
+    /**
+     * @generated from field: string caption = 7;
+     */
+    caption: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestLoginOpenRequest.
+ * Use `create(TestLoginOpenRequestSchema)` to create a new message.
+ */
+export declare const TestLoginOpenRequestSchema: GenMessage<TestLoginOpenRequest>;
+/**
+ * @generated from message tank.agentctl.v1.TestLoginOpenResponse
+ */
+export type TestLoginOpenResponse = Message<"tank.agentctl.v1.TestLoginOpenResponse"> & {
+    /**
+     * @generated from field: tank.agentctl.v1.TestLoginPage page = 1;
+     */
+    page?: TestLoginPage;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestLoginOpenResponse.
+ * Use `create(TestLoginOpenResponseSchema)` to create a new message.
+ */
+export declare const TestLoginOpenResponseSchema: GenMessage<TestLoginOpenResponse>;
+/**
+ * @generated from message tank.agentctl.v1.TestLoginActRequest
+ */
+export type TestLoginActRequest = Message<"tank.agentctl.v1.TestLoginActRequest"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+    /**
+     * navigate (url) | click (element) | fill (element, text, enter) | type (text) | key (key:
+     * Enter, Tab, Escape, Backspace) | scroll (dy) | back | forward | reload | look (a fresh
+     * screenshot and the page's text).
+     *
+     * @generated from field: string action = 2;
+     */
+    action: string;
+    /**
+     * @generated from field: string url = 3;
+     */
+    url: string;
+    /**
+     * @generated from field: int32 element = 4;
+     */
+    element: number;
+    /**
+     * @generated from field: string text = 5;
+     */
+    text: string;
+    /**
+     * @generated from field: string key = 6;
+     */
+    key: string;
+    /**
+     * @generated from field: int32 dy = 7;
+     */
+    dy: number;
+    /**
+     * @generated from field: bool enter = 8;
+     */
+    enter: boolean;
+    /**
+     * Keep this step's screenshot as one of the run's files (TestLoginPage.file_id), as proof.
+     *
+     * @generated from field: bool attach = 9;
+     */
+    attach: boolean;
+    /**
+     * @generated from field: string caption = 10;
+     */
+    caption: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestLoginActRequest.
+ * Use `create(TestLoginActRequestSchema)` to create a new message.
+ */
+export declare const TestLoginActRequestSchema: GenMessage<TestLoginActRequest>;
+/**
+ * @generated from message tank.agentctl.v1.TestLoginActResponse
+ */
+export type TestLoginActResponse = Message<"tank.agentctl.v1.TestLoginActResponse"> & {
+    /**
+     * @generated from field: tank.agentctl.v1.TestLoginPage page = 1;
+     */
+    page?: TestLoginPage;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestLoginActResponse.
+ * Use `create(TestLoginActResponseSchema)` to create a new message.
+ */
+export declare const TestLoginActResponseSchema: GenMessage<TestLoginActResponse>;
+/**
+ * @generated from message tank.agentctl.v1.TestLoginCloseRequest
+ */
+export type TestLoginCloseRequest = Message<"tank.agentctl.v1.TestLoginCloseRequest"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.TestLoginCloseRequest.
+ * Use `create(TestLoginCloseRequestSchema)` to create a new message.
+ */
+export declare const TestLoginCloseRequestSchema: GenMessage<TestLoginCloseRequest>;
+/**
+ * @generated from message tank.agentctl.v1.TestLoginCloseResponse
+ */
+export type TestLoginCloseResponse = Message<"tank.agentctl.v1.TestLoginCloseResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.TestLoginCloseResponse.
+ * Use `create(TestLoginCloseResponseSchema)` to create a new message.
+ */
+export declare const TestLoginCloseResponseSchema: GenMessage<TestLoginCloseResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BrowserRecordStartRequest
+ */
+export type BrowserRecordStartRequest = Message<"tank.agentctl.v1.BrowserRecordStartRequest"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BrowserRecordStartRequest.
+ * Use `create(BrowserRecordStartRequestSchema)` to create a new message.
+ */
+export declare const BrowserRecordStartRequestSchema: GenMessage<BrowserRecordStartRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BrowserRecordStartResponse
+ */
+export type BrowserRecordStartResponse = Message<"tank.agentctl.v1.BrowserRecordStartResponse"> & {
+    /**
+     * Why it did not start (another recording running, a sign-in still going, no such page).
+     *
+     * @generated from field: string refused = 1;
+     */
+    refused: string;
+    /**
+     * How long it may run before it stops by itself, in seconds.
+     *
+     * @generated from field: int32 max_seconds = 2;
+     */
+    maxSeconds: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.BrowserRecordStartResponse.
+ * Use `create(BrowserRecordStartResponseSchema)` to create a new message.
+ */
+export declare const BrowserRecordStartResponseSchema: GenMessage<BrowserRecordStartResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BrowserRecordStopRequest
+ */
+export type BrowserRecordStopRequest = Message<"tank.agentctl.v1.BrowserRecordStopRequest"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+    /**
+     * Said with the clip in the thread: what it shows.
+     *
+     * @generated from field: string caption = 2;
+     */
+    caption: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BrowserRecordStopRequest.
+ * Use `create(BrowserRecordStopRequestSchema)` to create a new message.
+ */
+export declare const BrowserRecordStopRequestSchema: GenMessage<BrowserRecordStopRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BrowserRecordStopResponse
+ */
+export type BrowserRecordStopResponse = Message<"tank.agentctl.v1.BrowserRecordStopResponse"> & {
+    /**
+     * The clip (video/mp4), posted in the thread; the task's proof shows it.
+     *
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+    /**
+     * @generated from field: int64 duration_ms = 2;
+     */
+    durationMs: bigint;
+    /**
+     * @generated from field: int32 frames = 3;
+     */
+    frames: number;
+    /**
+     * @generated from field: string refused = 4;
+     */
+    refused: string;
+    /**
+     * @generated from field: string error = 5;
+     */
+    error: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BrowserRecordStopResponse.
+ * Use `create(BrowserRecordStopResponseSchema)` to create a new message.
+ */
+export declare const BrowserRecordStopResponseSchema: GenMessage<BrowserRecordStopResponse>;
+/**
  * @generated from message tank.agentctl.v1.InfraRunRequest
  */
 export type InfraRunRequest = Message<"tank.agentctl.v1.InfraRunRequest"> & {
@@ -8345,6 +8703,55 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof RunRunbookRequestSchema;
         output: typeof RunRunbookResponseSchema;
+    };
+    /**
+     * Test logins (2026-11-13): TANK's own browser signs in to one of the workspace's apps with
+     * a login kept in the Lockbox Agent vault, and the run drives that page by steps. The
+     * password and one-time code never reach the run: it gets screenshots and the page's text.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.TestLoginOpen
+     */
+    testLoginOpen: {
+        methodKind: "unary";
+        input: typeof TestLoginOpenRequestSchema;
+        output: typeof TestLoginOpenResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.TestLoginAct
+     */
+    testLoginAct: {
+        methodKind: "unary";
+        input: typeof TestLoginActRequestSchema;
+        output: typeof TestLoginActResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.TestLoginClose
+     */
+    testLoginClose: {
+        methodKind: "unary";
+        input: typeof TestLoginCloseRequestSchema;
+        output: typeof TestLoginCloseResponseSchema;
+    };
+    /**
+     * Recording (2026-11-13): what the run does on a page in TANK's browser (a test login's, or
+     * a public page opened with TestLoginOpen and no login) as a video, posted in the thread as
+     * proof. Starts only after any sign-in has finished; password fields are blanked while it
+     * records. Capped at 60 seconds.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.BrowserRecordStart
+     */
+    browserRecordStart: {
+        methodKind: "unary";
+        input: typeof BrowserRecordStartRequestSchema;
+        output: typeof BrowserRecordStartResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BrowserRecordStop
+     */
+    browserRecordStop: {
+        methodKind: "unary";
+        input: typeof BrowserRecordStopRequestSchema;
+        output: typeof BrowserRecordStopResponseSchema;
     };
     /**
      * The product TANK runs for this run's repository, as its operator sees it: whether it
