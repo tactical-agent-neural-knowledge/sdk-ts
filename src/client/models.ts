@@ -23,7 +23,7 @@ export const TANK_NEURAL_NEXT = "tank-neural-next";
 export const MODEL_CHOICES: readonly ModelChoice[] = [
   {
     id: "",
-    label: "TANK decides",
+    label: "TANK chooses",
     note: "The cheapest model that fits each run; moves up only after checks fail.",
     relativeCost: 1,
   },
