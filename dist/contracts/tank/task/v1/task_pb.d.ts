@@ -57,6 +57,13 @@ export type TaskProof = Message<"tank.task.v1.TaskProof"> & {
      * @generated from field: google.protobuf.Timestamp at = 5;
      */
     at?: Timestamp;
+    /**
+     * A recording TANK's browser made of the run doing the thing (video/mp4), posted in the
+     * task's Tread (2026-11-13). Shown under "What TANK showed".
+     *
+     * @generated from field: string video_file_id = 6;
+     */
+    videoFileId: string;
 };
 /**
  * Describes the message tank.task.v1.TaskProof.

@@ -215,6 +215,64 @@ export type DatabaseConfig = Message<"tank.infra.v1.DatabaseConfig"> & {
  */
 export declare const DatabaseConfigSchema: GenMessage<DatabaseConfig>;
 /**
+ * A test login's settings. Nothing in it is secret: the password and the one-time-code seed
+ * are write only (CreateConnectionRequest.secret and totp_seed).
+ *
+ * @generated from message tank.infra.v1.TestLoginConfig
+ */
+export type TestLoginConfig = Message<"tank.infra.v1.TestLoginConfig"> & {
+    /**
+     * Where the sign-in form is: https://…
+     *
+     * @generated from field: string login_url = 1;
+     */
+    loginUrl: string;
+    /**
+     * The hosts TANK's browser may open while signed in with it (the app, and the sign-in
+     * provider's host when it is a different one). The login URL's host is always one.
+     *
+     * @generated from field: repeated string app_hosts = 2;
+     */
+    appHosts: string[];
+    /**
+     * The account's username or email. Not secret: an agent may read it.
+     *
+     * @generated from field: string username = 3;
+     */
+    username: string;
+    /**
+     * A one-time-code (TOTP) seed is stored. Read only for clients.
+     *
+     * @generated from field: bool has_totp = 4;
+     */
+    hasTotp: boolean;
+    /**
+     * Repositories (owner/name) whose runs may use it; empty means any run its Treads allow.
+     *
+     * @generated from field: repeated string repos = 5;
+     */
+    repos: string[];
+    /**
+     * CSS selectors for a sign-in form TANK cannot work out by itself; empty works it out.
+     *
+     * @generated from field: string username_selector = 6;
+     */
+    usernameSelector: string;
+    /**
+     * @generated from field: string password_selector = 7;
+     */
+    passwordSelector: string;
+    /**
+     * @generated from field: string submit_selector = 8;
+     */
+    submitSelector: string;
+};
+/**
+ * Describes the message tank.infra.v1.TestLoginConfig.
+ * Use `create(TestLoginConfigSchema)` to create a new message.
+ */
+export declare const TestLoginConfigSchema: GenMessage<TestLoginConfig>;
+/**
  * @generated from message tank.infra.v1.Connection
  */
 export type Connection = Message<"tank.infra.v1.Connection"> & {
@@ -316,6 +374,10 @@ export type Connection = Message<"tank.infra.v1.Connection"> & {
      * @generated from field: tank.infra.v1.DatabaseConfig database = 22;
      */
     database?: DatabaseConfig;
+    /**
+     * @generated from field: tank.infra.v1.TestLoginConfig test_login = 23;
+     */
+    testLogin?: TestLoginConfig;
 };
 /**
  * Describes the message tank.infra.v1.Connection.
@@ -388,7 +450,7 @@ export type Use = Message<"tank.infra.v1.Use"> & {
      */
     userId: string;
     /**
-     * command | http | runbook | test | costs
+     * command | http | runbook | test | costs | login (a test login opened) | browse (a step on its page)
      *
      * @generated from field: string kind = 7;
      */
@@ -686,6 +748,12 @@ export type CreateConnectionRequest = Message<"tank.infra.v1.CreateConnectionReq
      * @generated from field: string requested_by = 4;
      */
     requestedBy: string;
+    /**
+     * A test login's one-time-code (TOTP) seed, base32 or an otpauth:// URI; write only.
+     *
+     * @generated from field: string totp_seed = 5;
+     */
+    totpSeed: string;
 };
 /**
  * Describes the message tank.infra.v1.CreateConnectionRequest.
@@ -728,6 +796,18 @@ export type UpdateConnectionRequest = Message<"tank.infra.v1.UpdateConnectionReq
      * @generated from field: string requested_by = 4;
      */
     requestedBy: string;
+    /**
+     * A test login's one-time-code seed; empty keeps the stored one.
+     *
+     * @generated from field: string totp_seed = 5;
+     */
+    totpSeed: string;
+    /**
+     * Forget a test login's stored one-time-code seed.
+     *
+     * @generated from field: bool remove_totp = 6;
+     */
+    removeTotp: boolean;
 };
 /**
  * Describes the message tank.infra.v1.UpdateConnectionRequest.
@@ -1178,7 +1258,17 @@ export declare enum Provider {
      *
      * @generated from enum value: PROVIDER_DATABASE = 6;
      */
-    DATABASE = 6
+    DATABASE = 6,
+    /**
+     * A test login (2026-11-13): an account on one of the workspace's own apps that TANK's own
+     * browser signs in with, so an agent can check logged-in pages itself. The password and the
+     * one-time-code seed are kept in the Lockbox Agent vault and typed by TANK's browser, never
+     * given to an agent, a sandbox or a log. The agent drives the signed-in page and sees only
+     * screenshots and the page's text.
+     *
+     * @generated from enum value: PROVIDER_TEST_LOGIN = 7;
+     */
+    TEST_LOGIN = 7
 }
 /**
  * Describes the enum tank.infra.v1.Provider.
