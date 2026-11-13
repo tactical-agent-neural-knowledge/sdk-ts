@@ -25,7 +25,12 @@ describe("runTone", () => {
         RunState.MERGED,
         RunState.VERIFYING_DEPLOY,
       ],
-      awaiting: [RunState.AWAITING_PLAN_APPROVAL, RunState.AWAITING_MERGE_APPROVAL, RunState.BLOCKED],
+      awaiting: [
+        RunState.AWAITING_PLAN_APPROVAL,
+        RunState.AWAITING_ANSWER,
+        RunState.AWAITING_MERGE_APPROVAL,
+        RunState.BLOCKED,
+      ],
       done: [RunState.DONE],
       failed: [RunState.FAILED, RunState.BUDGET_EXHAUSTED, RunState.TIMED_OUT, RunState.APPROVAL_EXPIRED],
       cancelled: [RunState.CANCELLED, RunState.UNSPECIFIED],
@@ -57,6 +62,8 @@ describe("runTone", () => {
 
   it("labels and terminal states", () => {
     expect(runStateLabel(RunState.AWAITING_PLAN_APPROVAL)).toBe("awaiting plan approval");
+    expect(runStateLabel(RunState.AWAITING_ANSWER)).toBe("awaiting answer");
+    expect(isTerminalRunState(RunState.AWAITING_ANSWER)).toBe(false);
     expect(runStateLabel(RunState.CI_WATCHING)).toBe("watching CI");
     expect(runStateLabel(99 as RunState)).toBe("unknown");
     expect(isTerminalRunState(RunState.DONE)).toBe(true);
@@ -72,6 +79,11 @@ describe("runStatusPhrase", () => {
     expect(runStatusPhrase(RunState.AWAITING_MERGE_APPROVAL)).toBe("Waiting for your go to merge");
     expect(runStatusPhrase(RunState.CI_WATCHING)).toBe("Watching the checks");
     expect(runStatusPhrase(RunState.FAILED)).toBe("Failed");
+    // A run held on its own question never reads as a plan waiting for a yes.
+    expect(runStatusPhrase(RunState.AWAITING_ANSWER)).toBe("Waiting for an answer to the agent's question");
+    expect(runStatusPhrase(RunState.AWAITING_ANSWER)).not.toBe(
+      runStatusPhrase(RunState.AWAITING_PLAN_APPROVAL),
+    );
     for (const v of Object.values(RunState)) {
       if (typeof v === "number") expect(runStatusPhrase(v)).not.toBe("");
     }
