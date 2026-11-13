@@ -2312,7 +2312,16 @@ export declare enum RunState {
      *
      * @generated from enum value: RUN_STATE_BLOCKED = 19;
      */
-    BLOCKED = 19
+    BLOCKED = 19,
+    /**
+     * Held for an answer to a question the agent asked in the thread. Not terminal: the
+     * answer goes in the thread and the run carries on. Before this value the control plane
+     * reported such a run as RUN_STATE_AWAITING_PLAN_APPROVAL, so a client read "waiting for
+     * your go on the plan" for a run that had no plan waiting.
+     *
+     * @generated from enum value: RUN_STATE_AWAITING_ANSWER = 20;
+     */
+    AWAITING_ANSWER = 20
 }
 /**
  * Describes the enum tank.agent.v1.RunState.
