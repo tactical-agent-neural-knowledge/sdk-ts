@@ -2286,6 +2286,59 @@ export type SetWorkspaceNoChargeResponse = Message<"tank.platform.v1.SetWorkspac
  */
 export declare const SetWorkspaceNoChargeResponseSchema: GenMessage<SetWorkspaceNoChargeResponse>;
 /**
+ * CreateWorkspace makes a workspace owned by the calling super admin (Robby, 2026-11-12:
+ * workspaces he uses himself, made from the console rather than tankctl). It is made
+ * exactly as the app makes one (its owner and #general), then given its plan (premium
+ * provisions its agent, as SetWorkspacePlan does) and, when asked, marked no charge.
+ * Recorded as operator.workspace.created in the new workspace's log and the platform's.
+ * A slug already in use is ALREADY_EXISTS.
+ *
+ * @generated from message tank.platform.v1.CreateWorkspaceRequest
+ */
+export type CreateWorkspaceRequest = Message<"tank.platform.v1.CreateWorkspaceRequest"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * empty makes one from the name
+     *
+     * @generated from field: string slug = 2;
+     */
+    slug: string;
+    /**
+     * free | premium; empty is free
+     *
+     * @generated from field: string plan = 3;
+     */
+    plan: string;
+    /**
+     * as SetWorkspaceNoCharge
+     *
+     * @generated from field: bool no_charge = 4;
+     */
+    noCharge: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.CreateWorkspaceRequest.
+ * Use `create(CreateWorkspaceRequestSchema)` to create a new message.
+ */
+export declare const CreateWorkspaceRequestSchema: GenMessage<CreateWorkspaceRequest>;
+/**
+ * @generated from message tank.platform.v1.CreateWorkspaceResponse
+ */
+export type CreateWorkspaceResponse = Message<"tank.platform.v1.CreateWorkspaceResponse"> & {
+    /**
+     * @generated from field: tank.platform.v1.WorkspaceRow workspace = 1;
+     */
+    workspace?: WorkspaceRow;
+};
+/**
+ * Describes the message tank.platform.v1.CreateWorkspaceResponse.
+ * Use `create(CreateWorkspaceResponseSchema)` to create a new message.
+ */
+export declare const CreateWorkspaceResponseSchema: GenMessage<CreateWorkspaceResponse>;
+/**
  * @generated from service tank.platform.v1.PlatformService
  */
 export declare const PlatformService: GenService<{
@@ -2456,5 +2509,13 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceNoChargeRequestSchema;
         output: typeof SetWorkspaceNoChargeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.CreateWorkspace
+     */
+    createWorkspace: {
+        methodKind: "unary";
+        input: typeof CreateWorkspaceRequestSchema;
+        output: typeof CreateWorkspaceResponseSchema;
     };
 }>;
