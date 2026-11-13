@@ -7235,14 +7235,15 @@ export declare const TestLoginPageSchema: GenMessage<TestLoginPage>;
  */
 export type TestLoginOpenRequest = Message<"tank.agentctl.v1.TestLoginOpenRequest"> & {
     /**
-     * The test login's name.
+     * The test login's name. Empty opens url as a public page with no login (any public site;
+     * private addresses are refused as everywhere in TANK's browser).
      *
      * @generated from field: string login = 1;
      */
     login: string;
     /**
      * Where to go once signed in: an https address on one of the login's hosts. Empty stays
-     * wherever signing in lands.
+     * wherever signing in lands. Required when login is empty.
      *
      * @generated from field: string url = 2;
      */
@@ -7384,6 +7385,94 @@ export type TestLoginCloseResponse = Message<"tank.agentctl.v1.TestLoginCloseRes
  * Use `create(TestLoginCloseResponseSchema)` to create a new message.
  */
 export declare const TestLoginCloseResponseSchema: GenMessage<TestLoginCloseResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BrowserRecordStartRequest
+ */
+export type BrowserRecordStartRequest = Message<"tank.agentctl.v1.BrowserRecordStartRequest"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BrowserRecordStartRequest.
+ * Use `create(BrowserRecordStartRequestSchema)` to create a new message.
+ */
+export declare const BrowserRecordStartRequestSchema: GenMessage<BrowserRecordStartRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BrowserRecordStartResponse
+ */
+export type BrowserRecordStartResponse = Message<"tank.agentctl.v1.BrowserRecordStartResponse"> & {
+    /**
+     * Why it did not start (another recording running, a sign-in still going, no such page).
+     *
+     * @generated from field: string refused = 1;
+     */
+    refused: string;
+    /**
+     * How long it may run before it stops by itself, in seconds.
+     *
+     * @generated from field: int32 max_seconds = 2;
+     */
+    maxSeconds: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.BrowserRecordStartResponse.
+ * Use `create(BrowserRecordStartResponseSchema)` to create a new message.
+ */
+export declare const BrowserRecordStartResponseSchema: GenMessage<BrowserRecordStartResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BrowserRecordStopRequest
+ */
+export type BrowserRecordStopRequest = Message<"tank.agentctl.v1.BrowserRecordStopRequest"> & {
+    /**
+     * @generated from field: string session_id = 1;
+     */
+    sessionId: string;
+    /**
+     * Said with the clip in the thread: what it shows.
+     *
+     * @generated from field: string caption = 2;
+     */
+    caption: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BrowserRecordStopRequest.
+ * Use `create(BrowserRecordStopRequestSchema)` to create a new message.
+ */
+export declare const BrowserRecordStopRequestSchema: GenMessage<BrowserRecordStopRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BrowserRecordStopResponse
+ */
+export type BrowserRecordStopResponse = Message<"tank.agentctl.v1.BrowserRecordStopResponse"> & {
+    /**
+     * The clip (video/mp4), posted in the thread; the task's proof shows it.
+     *
+     * @generated from field: string file_id = 1;
+     */
+    fileId: string;
+    /**
+     * @generated from field: int64 duration_ms = 2;
+     */
+    durationMs: bigint;
+    /**
+     * @generated from field: int32 frames = 3;
+     */
+    frames: number;
+    /**
+     * @generated from field: string refused = 4;
+     */
+    refused: string;
+    /**
+     * @generated from field: string error = 5;
+     */
+    error: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BrowserRecordStopResponse.
+ * Use `create(BrowserRecordStopResponseSchema)` to create a new message.
+ */
+export declare const BrowserRecordStopResponseSchema: GenMessage<BrowserRecordStopResponse>;
 /**
  * @generated from message tank.agentctl.v1.InfraRunRequest
  */
@@ -8642,6 +8731,27 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof TestLoginCloseRequestSchema;
         output: typeof TestLoginCloseResponseSchema;
+    };
+    /**
+     * Recording (2026-11-13): what the run does on a page in TANK's browser (a test login's, or
+     * a public page opened with TestLoginOpen and no login) as a video, posted in the thread as
+     * proof. Starts only after any sign-in has finished; password fields are blanked while it
+     * records. Capped at 60 seconds.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.BrowserRecordStart
+     */
+    browserRecordStart: {
+        methodKind: "unary";
+        input: typeof BrowserRecordStartRequestSchema;
+        output: typeof BrowserRecordStartResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BrowserRecordStop
+     */
+    browserRecordStop: {
+        methodKind: "unary";
+        input: typeof BrowserRecordStopRequestSchema;
+        output: typeof BrowserRecordStopResponseSchema;
     };
     /**
      * The product TANK runs for this run's repository, as its operator sees it: whether it
