@@ -2809,6 +2809,58 @@ export type ReadCanvasResponse = Message<"tank.agentctl.v1.ReadCanvasResponse"> 
  */
 export declare const ReadCanvasResponseSchema: GenMessage<ReadCanvasResponse>;
 /**
+ * A new Atlas page in the run's Tread, written from markdown: how a run hands over a
+ * report, forecast, summary or any document meant to be read, instead of uploading a
+ * .txt or .md file. The api's Atlas add-on gate applies as it does to a person.
+ *
+ * @generated from message tank.agentctl.v1.CreatePageRequest
+ */
+export type CreatePageRequest = Message<"tank.agentctl.v1.CreatePageRequest"> & {
+    /**
+     * empty takes the markdown's first heading
+     *
+     * @generated from field: string title = 1;
+     */
+    title: string;
+    /**
+     * @generated from field: string markdown = 2;
+     */
+    markdown: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreatePageRequest.
+ * Use `create(CreatePageRequestSchema)` to create a new message.
+ */
+export declare const CreatePageRequestSchema: GenMessage<CreatePageRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CreatePageResponse
+ */
+export type CreatePageResponse = Message<"tank.agentctl.v1.CreatePageResponse"> & {
+    /**
+     * @generated from field: string canvas_id = 1;
+     */
+    canvasId: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: int32 blocks = 3;
+     */
+    blocks: number;
+    /**
+     * the page inside TANK, for the run to link in the thread
+     *
+     * @generated from field: string url = 4;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.CreatePageResponse.
+ * Use `create(CreatePageResponseSchema)` to create a new message.
+ */
+export declare const CreatePageResponseSchema: GenMessage<CreatePageResponse>;
+/**
  * @generated from message tank.agentctl.v1.AskCanvasRequest
  */
 export type AskCanvasRequest = Message<"tank.agentctl.v1.AskCanvasRequest"> & {
@@ -8467,6 +8519,14 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof AskCanvasRequestSchema;
         output: typeof AskCanvasResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.CreatePage
+     */
+    createPage: {
+        methodKind: "unary";
+        input: typeof CreatePageRequestSchema;
+        output: typeof CreatePageResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.ListApiKeys
