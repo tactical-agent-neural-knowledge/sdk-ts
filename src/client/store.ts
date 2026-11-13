@@ -201,6 +201,15 @@ export type Action =
       unreadNotificationCount?: number;
       /** `GetBootstrap.entitlements`; absent on an older server, which the UI reads as "assume free". */
       entitlements?: Entitlements | undefined;
+      /**
+       * Set on a bootstrap fresh from the server (never on a cached snapshot): the ids of this
+       * workspace's channels the store held when the request went out. Any of them the server
+       * no longer lists, and that the store does not know to be archived, is gone and is
+       * dropped. Without it a bootstrap only ever added: a Tread deleted while this client
+       * missed the `ChannelDeleted` event stayed in the list for good (lidl-trek, 2026-11-13:
+       * two #general Treads on web and phone, the deleted one with its old name).
+       */
+      pruneIfAbsent?: string[];
     }
   | { type: "workspaces/upsert"; workspaces: Workspace[] }
   | { type: "members/upsert"; workspaceId: string; members: Member[] }
@@ -571,11 +580,24 @@ export function reduce(state: TankState, action: Action): TankState {
     case "bootstrap": {
       const workspaces = { ...state.workspaces, [action.workspace.id]: action.workspace };
       const channels = { ...state.channels, ...byId(action.channels) };
+      const removed: string[] = [];
+      if (action.pruneIfAbsent?.length) {
+        const listed = new Set(action.channels.map((c) => c.id));
+        for (const id of action.pruneIfAbsent) {
+          const c = channels[id];
+          // Archived Treads are never in a bootstrap, so absence says nothing about them;
+          // the client checks those one by one (a deleted one answers NotFound).
+          if (!c || listed.has(id) || c.archivedAt || c.workspaceId !== action.workspace.id) continue;
+          delete channels[id];
+          removed.push(id);
+        }
+      }
       const all = Object.values(channels).filter((c) => c.workspaceId === action.workspace.id);
       const membersForWs = { ...(state.members[action.workspace.id] ?? {}) };
       for (const mbr of action.members) if (mbr.principal) membersForWs[mbr.principal.id] = mbr;
       if (action.me?.principal) membersForWs[action.me.principal.id] = action.me;
       const readStates = { ...state.readStates };
+      for (const id of removed) delete readStates[id];
       for (const rs of action.readStates) readStates[rs.channelId] = rs;
       // Thread positions from the server never lower what this device already marked.
       const threadReadStates = { ...state.threadReadStates };

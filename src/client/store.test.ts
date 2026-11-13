@@ -66,6 +66,77 @@ describe("bootstrap", () => {
   });
 });
 
+describe("bootstrap drops Treads the server no longer lists", () => {
+  const again = (store: TankStore, channels: Channel[], pruneIfAbsent?: string[]) =>
+    store.dispatch({
+      type: "bootstrap",
+      workspace: ws,
+      me: create(MemberSchema, { principal: me, role: 1 }),
+      channels,
+      readStates: [],
+      members: [],
+      pruneIfAbsent,
+    });
+
+  // lidl-trek, 2026-11-13: #general was deleted (and renamed general-old) without this client
+  // seeing the event; every later bootstrap merged, so the old one stayed beside the new one.
+  it("removes a deleted Tread held from before, with its read state", () => {
+    const store = bootstrapped();
+    const held = Object.keys(store.getState().channels);
+    again(
+      store,
+      [
+        ch("zeta"),
+        ch("general2", { name: "general" }),
+        ch("dm-1", { type: ChannelType.DM, name: "" }),
+        ch("alpha"),
+      ],
+      held,
+    );
+    const s = store.getState();
+    expect(s.channels.general).toBeUndefined();
+    expect(s.readStates.general).toBeUndefined();
+    expect(s.channelOrder.ws1).toEqual(["alpha", "general2", "zeta", "dm-1"]);
+    expect(store.selectChannels("ws1").filter((c) => c.name === "general")).toHaveLength(1);
+  });
+
+  it("keeps a Tread that arrived while the request was in flight", () => {
+    const store = bootstrapped();
+    const held = Object.keys(store.getState().channels);
+    store.dispatch({ type: "channels/upsert", channels: [ch("brand-new")] });
+    again(
+      store,
+      [ch("zeta"), ch("general"), ch("dm-1", { type: ChannelType.DM, name: "" }), ch("alpha")],
+      held,
+    );
+    expect(store.getState().channels["brand-new"]).toBeDefined();
+    expect(store.getState().channelOrder.ws1).toContain("brand-new");
+  });
+
+  it("keeps an archived Tread, which a bootstrap never lists", () => {
+    const store = bootstrapped();
+    store.dispatch({ type: "channels/upsert", channels: [ch("alpha", { archivedAt: timestampFromMs(1) })] });
+    const held = Object.keys(store.getState().channels);
+    again(store, [ch("zeta"), ch("general"), ch("dm-1", { type: ChannelType.DM, name: "" })], held);
+    expect(store.getState().channels.alpha?.archivedAt).toBeDefined();
+    expect(store.getState().channelOrder.ws1).not.toContain("alpha");
+  });
+
+  it("never drops anything on a cached snapshot (no prune list)", () => {
+    const store = bootstrapped();
+    again(store, [ch("zeta")]);
+    expect(Object.keys(store.getState().channels).sort()).toEqual(["alpha", "dm-1", "general", "zeta"]);
+  });
+
+  it("leaves other workspaces' Treads alone", () => {
+    const store = bootstrapped();
+    store.dispatch({ type: "channels/upsert", channels: [ch("elsewhere", { workspaceId: "ws2" })] });
+    again(store, [ch("zeta")], ["elsewhere", "alpha"]);
+    expect(store.getState().channels.elsewhere).toBeDefined();
+    expect(store.getState().channels.alpha).toBeUndefined();
+  });
+});
+
 describe("messages", () => {
   let store: TankStore;
   beforeEach(() => {

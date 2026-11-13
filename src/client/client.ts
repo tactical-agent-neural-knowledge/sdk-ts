@@ -473,8 +473,17 @@ export class TankClient {
 
   /** GetBootstrap for a workspace: workspace, me, channels, read states, capped members. */
   async bootstrap(workspaceId: string): Promise<GetBootstrapResponse> {
+    // What the store held when the request went out: anything of these the answer leaves out
+    // is gone (deleted, or no longer ours). A Tread that arrives while the request is in
+    // flight is not in this list, so it cannot be dropped by an answer older than it.
+    // A cached snapshot replayed after this point would bring back what the answer drops.
+    await this.hydrate();
+    const known = Object.values(this.store.getState().channels)
+      .filter((c) => c.workspaceId === workspaceId)
+      .map((c) => c.id);
     const res = await this.workspaces.getBootstrap({ workspaceId });
     if (res.workspace) {
+      const listed = new Set(res.channels.map((c) => c.id));
       this.store.dispatch({
         type: "bootstrap",
         workspace: res.workspace,
@@ -485,7 +494,14 @@ export class TankClient {
         members: res.members,
         unreadNotificationCount: res.unreadNotificationCount,
         entitlements: res.entitlements,
+        pruneIfAbsent: known,
       });
+      // Archived Treads are never in a bootstrap, so their absence proves nothing: ask
+      // about each one still held, and a deleted one (NotFound) leaves the store.
+      for (const id of known) {
+        const c = this.store.getState().channels[id];
+        if (c?.archivedAt && !listed.has(id)) this.ensureChannelStillExists(id);
+      }
       this.realtime.setWorkspaceIds(Object.keys(this.store.getState().workspaces));
       await this.storage.put(
         storageKeys.bootstrap(workspaceId),
@@ -1555,9 +1571,22 @@ export class TankClient {
       const res = await this.channels.getChannel({ channelId });
       if (res.channel) this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
       if (res.readState) this.store.dispatch({ type: "readStates/upsert", readStates: [res.readState] });
-    } catch {
+    } catch (err) {
+      // NotFound is an answer, not a failure: the Tread was deleted (or is no longer
+      // visible to this person), so it leaves the store rather than lingering in the list.
+      if (err instanceof ConnectError && err.code === Code.NotFound) {
+        this.store.dispatch({ type: "channels/remove", channelId });
+        return;
+      }
       // transient; the next ChannelUpdated or bootstrap repairs it
     }
+  }
+
+  /** Re-reads a held Tread once at a time; a NotFound answer removes it. */
+  private ensureChannelStillExists(channelId: string): void {
+    if (this.fetchingChannels.has(channelId)) return;
+    this.fetchingChannels.add(channelId);
+    void this.refreshChannel(channelId).finally(() => this.fetchingChannels.delete(channelId));
   }
 
   private readyBefore = false;

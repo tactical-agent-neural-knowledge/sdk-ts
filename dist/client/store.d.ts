@@ -112,6 +112,15 @@ export type Action = {
     unreadNotificationCount?: number;
     /** `GetBootstrap.entitlements`; absent on an older server, which the UI reads as "assume free". */
     entitlements?: Entitlements | undefined;
+    /**
+     * Set on a bootstrap fresh from the server (never on a cached snapshot): the ids of this
+     * workspace's channels the store held when the request went out. Any of them the server
+     * no longer lists, and that the store does not know to be archived, is gone and is
+     * dropped. Without it a bootstrap only ever added: a Tread deleted while this client
+     * missed the `ChannelDeleted` event stayed in the list for good (lidl-trek, 2026-11-13:
+     * two #general Treads on web and phone, the deleted one with its old name).
+     */
+    pruneIfAbsent?: string[];
 } | {
     type: "workspaces/upsert";
     workspaces: Workspace[];
