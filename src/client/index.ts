@@ -97,10 +97,12 @@ export {
   notifyFor,
   ownNotify,
   readyToCheckCount,
+  SEND_NOTE_MAX,
   simpleConversation,
   TASK_STAGES,
   type TaskFilter,
   taskForThread,
+  taskSendCandidates,
   taskStageKey,
   tasksByStage,
 } from "./tasks.js";

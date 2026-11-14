@@ -195,5 +195,22 @@ export interface WorkspaceTasksState extends TasksState {
 export declare function useWorkspaceTasks(workspaceId: string): WorkspaceTasksState;
 /** One task from the store, fetched when it is not there yet. */
 export declare function useTask(taskId: string): Task | undefined;
+/**
+ * Whether this person may open a task: `not_in_tread` when the server says it is in a Tread
+ * they're not in (a task link handed to somebody outside it), `gone` when there is no such
+ * task for them, else the task. It always asks the server once per id, and a refusal wins
+ * over whatever the store holds, so a link never shows a task its Tread would not.
+ */
+export type TaskAccess = {
+    state: "loading";
+    task?: undefined;
+} | {
+    state: "ready";
+    task: Task;
+} | {
+    state: "not_in_tread" | "gone" | "error";
+    task?: undefined;
+};
+export declare function useTaskAccess(taskId: string): TaskAccess;
 /** The view this person reads a Tread in (their pick, else the Tread's default, else Builder). */
 export declare function useChannelView(channelId: string): ChannelView.BUILDER | ChannelView.SIMPLE;

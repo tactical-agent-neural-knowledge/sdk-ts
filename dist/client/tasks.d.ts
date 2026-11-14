@@ -1,6 +1,7 @@
 import { type Channel, type ChannelReadState, ChannelView } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import { type Task, type TaskNotify, TaskStage } from "../contracts/tank/task/v1/task_pb.js";
+import type { Member } from "../contracts/tank/workspace/v1/workspace_pb.js";
 /** Command's columns and the strip's groups, left to right. */
 export declare const TASK_STAGES: readonly TaskStage[];
 /** A stable key per stage, for test ids, routes and analytics-free CSS hooks. */
@@ -38,3 +39,11 @@ export declare function taskForThread(tasks: readonly Task[], threadRootId: stri
 export declare function notifyFor(task: Pick<Task, "notify">, stage: TaskStage): TaskNotify[];
 /** The task's own picks only (what SetTaskNotify replaces). */
 export declare function ownNotify(task: Pick<Task, "notify">): TaskNotify[];
+/** The longest note Send to takes (the server refuses more). */
+export declare const SEND_NOTE_MAX = 500;
+/**
+ * Who Send to offers: the Tread's members (ListChannelMembers) who are people, still in the
+ * workspace, and not the caller, in the order given. The server checks the same rule again;
+ * this only keeps a name off the list that would be refused.
+ */
+export declare function taskSendCandidates(treadMemberIds: readonly string[], members: Readonly<Record<string, Pick<Member, "principal" | "deactivatedAt"> | undefined>>, meId: string | undefined): string[];

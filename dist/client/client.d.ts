@@ -402,6 +402,12 @@ export declare class TankClient {
     sendBackTask(taskId: string, text: string): Promise<Task>;
     /** Try again on a stuck task. */
     retryTask(taskId: string): Promise<Task>;
+    /**
+     * Send to: tell people in the task's Tread about it now, at its current stage, with an
+     * optional note (500 characters at most; Activity only, never a push). The server refuses
+     * the whole call if anyone named isn't a person in the Tread. Returns who was told.
+     */
+    sendTask(taskId: string, userIds: readonly string[], note?: string): Promise<string[]>;
     /** Replace the task's own notify picks (workspace rules stay). */
     setTaskNotify(taskId: string, notify: NotifyPick[], askerMuted?: boolean): Promise<Task>;
     /**

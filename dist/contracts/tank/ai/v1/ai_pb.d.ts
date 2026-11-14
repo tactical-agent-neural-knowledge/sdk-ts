@@ -689,6 +689,14 @@ export type ListConversationsRequest = Message$1<"tank.ai.v1.ListConversationsRe
      * @generated from field: string workspace_id = 3;
      */
     workspaceId: string;
+    /**
+     * Paging (2026-11-14): the next_cursor of the previous page. Empty is the first page.
+     * Opaque: a client never builds or reads one. Without a cursor `limit` means what it
+     * always did (default 200, at most 500), so a client that never pages sees no change.
+     *
+     * @generated from field: string cursor = 4;
+     */
+    cursor: string;
 };
 /**
  * Describes the message tank.ai.v1.ListConversationsRequest.
@@ -703,6 +711,15 @@ export type ListConversationsResponse = Message$1<"tank.ai.v1.ListConversationsR
      * @generated from field: repeated tank.ai.v1.Conversation conversations = 1;
      */
     conversations: Conversation[];
+    /**
+     * Pass back as ListConversationsRequest.cursor for the page after this one. Empty means
+     * there is nothing after it. The order (pinned first, then most recently updated) is held
+     * steady while conversations move: one updated between pages can be missed or repeated,
+     * never another one skipped.
+     *
+     * @generated from field: string next_cursor = 2;
+     */
+    nextCursor: string;
 };
 /**
  * Describes the message tank.ai.v1.ListConversationsResponse.
@@ -717,6 +734,13 @@ export type GetConversationRequest = Message$1<"tank.ai.v1.GetConversationReques
      * @generated from field: string id = 1;
      */
     id: string;
+    /**
+     * How many of the newest messages to return; 0 returns every message, as before. The
+     * ones returned are still oldest first. Older ones come from ListMessages.
+     *
+     * @generated from field: int32 message_limit = 2;
+     */
+    messageLimit: number;
 };
 /**
  * Describes the message tank.ai.v1.GetConversationRequest.
@@ -742,12 +766,66 @@ export type GetConversationResponse = Message$1<"tank.ai.v1.GetConversationRespo
      * @generated from field: repeated tank.ai.v1.AtlasPage atlas_pages = 3;
      */
     atlasPages: AtlasPage[];
+    /**
+     * There are messages older than the first one in `messages` (only with message_limit).
+     *
+     * @generated from field: bool has_older = 4;
+     */
+    hasOlder: boolean;
 };
 /**
  * Describes the message tank.ai.v1.GetConversationResponse.
  * Use `create(GetConversationResponseSchema)` to create a new message.
  */
 export declare const GetConversationResponseSchema: GenMessage<GetConversationResponse>;
+/**
+ * @generated from message tank.ai.v1.ListMessagesRequest
+ */
+export type ListMessagesRequest = Message$1<"tank.ai.v1.ListMessagesRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * The page ends just before this message; empty pages back from the newest.
+     *
+     * @generated from field: string before_message_id = 2;
+     */
+    beforeMessageId: string;
+    /**
+     * Default 50, at most 200.
+     *
+     * @generated from field: int32 limit = 3;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.ai.v1.ListMessagesRequest.
+ * Use `create(ListMessagesRequestSchema)` to create a new message.
+ */
+export declare const ListMessagesRequestSchema: GenMessage<ListMessagesRequest>;
+/**
+ * @generated from message tank.ai.v1.ListMessagesResponse
+ */
+export type ListMessagesResponse = Message$1<"tank.ai.v1.ListMessagesResponse"> & {
+    /**
+     * Oldest first, as in GetConversationResponse.
+     *
+     * @generated from field: repeated tank.ai.v1.Message messages = 1;
+     */
+    messages: Message[];
+    /**
+     * There are messages older than the first one here.
+     *
+     * @generated from field: bool has_older = 2;
+     */
+    hasOlder: boolean;
+};
+/**
+ * Describes the message tank.ai.v1.ListMessagesResponse.
+ * Use `create(ListMessagesResponseSchema)` to create a new message.
+ */
+export declare const ListMessagesResponseSchema: GenMessage<ListMessagesResponse>;
 /**
  * A Markdown file Neural wrote, added to Atlas from this conversation (Robby, 2026-11-03:
  * a file already added is not offered again; a changed one is offered as a new page or as
@@ -2737,5 +2815,17 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof MarkDeliveredRequestSchema;
         output: typeof MarkDeliveredResponseSchema;
+    };
+    /**
+     * A page of a conversation's messages, older than a message the client already has
+     * (GetConversation with message_limit gives the newest ones). Same membership rule as
+     * GetConversation; reading a page never marks anything read.
+     *
+     * @generated from rpc tank.ai.v1.AiService.ListMessages
+     */
+    listMessages: {
+        methodKind: "unary";
+        input: typeof ListMessagesRequestSchema;
+        output: typeof ListMessagesResponseSchema;
     };
 }>;

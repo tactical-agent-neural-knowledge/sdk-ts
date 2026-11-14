@@ -200,6 +200,14 @@ export type Task = Message<"tank.task.v1.Task"> & {
      * @generated from field: string channel_name = 20;
      */
     channelName: string;
+    /**
+     * The task's own address in the web app (https://app.tank.chat/w/<workspace slug>/c/<tread
+     * id>?task=<id>), the same one its Activity row and push open. It opens only for people in
+     * the task's Tread; anyone else is told it is in a Tread they're not in, and sees nothing of it.
+     *
+     * @generated from field: string link = 21;
+     */
+    link: string;
 };
 /**
  * Describes the message tank.task.v1.Task.
@@ -628,6 +636,49 @@ export type SetTaskSettingsResponse = Message<"tank.task.v1.SetTaskSettingsRespo
  */
 export declare const SetTaskSettingsResponseSchema: GenMessage<SetTaskSettingsResponse>;
 /**
+ * Send to: hand a task to people in its Tread so they hear about it now, at whatever stage it
+ * is in ("I want someone else to check it"). The caller must be in the task's Tread, and so
+ * must everyone named: a person who isn't is refused for the whole call, and nobody is told
+ * anything. People only (no agents or bots), never the caller, each person once.
+ *
+ * @generated from message tank.task.v1.SendTaskRequest
+ */
+export type SendTaskRequest = Message<"tank.task.v1.SendTaskRequest"> & {
+    /**
+     * @generated from field: string task_id = 1;
+     */
+    taskId: string;
+    /**
+     * @generated from field: repeated string user_ids = 2;
+     */
+    userIds: string[];
+    /**
+     * Optional, at most 500 characters. Shown in Activity inside the app; never in a push.
+     *
+     * @generated from field: string note = 3;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.task.v1.SendTaskRequest.
+ * Use `create(SendTaskRequestSchema)` to create a new message.
+ */
+export declare const SendTaskRequestSchema: GenMessage<SendTaskRequest>;
+/**
+ * @generated from message tank.task.v1.SendTaskResponse
+ */
+export type SendTaskResponse = Message<"tank.task.v1.SendTaskResponse"> & {
+    /**
+     * @generated from field: repeated string sent_user_ids = 1;
+     */
+    sentUserIds: string[];
+};
+/**
+ * Describes the message tank.task.v1.SendTaskResponse.
+ * Use `create(SendTaskResponseSchema)` to create a new message.
+ */
+export declare const SendTaskResponseSchema: GenMessage<SendTaskResponse>;
+/**
  * Control plane only: the run's own token or the control plane's bot token with
  * agent:run, authorised as AgentService.SetStatus is.
  *
@@ -867,5 +918,13 @@ export declare const TaskService: GenService<{
         methodKind: "unary";
         input: typeof RecordTaskRunRequestSchema;
         output: typeof RecordTaskRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.task.v1.TaskService.SendTask
+     */
+    sendTask: {
+        methodKind: "unary";
+        input: typeof SendTaskRequestSchema;
+        output: typeof SendTaskResponseSchema;
     };
 }>;
