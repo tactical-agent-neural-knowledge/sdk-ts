@@ -2145,12 +2145,444 @@ export type GetNeuralResponse = Message<"tank.platform.v1.GetNeuralResponse"> & 
      * @generated from field: repeated tank.platform.v1.NeuralDay days = 9;
      */
     days: NeuralDay[];
+    /**
+     * The nightly benchmarks (suite neural) over time, for the tab's graph: each task's
+     * headline metric, oldest first, and the runs where the served model changed.
+     *
+     * @generated from field: repeated tank.platform.v1.EvalSeries eval_series = 10;
+     */
+    evalSeries: EvalSeries[];
+    /**
+     * @generated from field: repeated tank.platform.v1.EvalVersionMark eval_versions = 11;
+     */
+    evalVersions: EvalVersionMark[];
 };
 /**
  * Describes the message tank.platform.v1.GetNeuralResponse.
  * Use `create(GetNeuralResponseSchema)` to create a new message.
  */
 export declare const GetNeuralResponseSchema: GenMessage<GetNeuralResponse>;
+/**
+ * EvalRun is one pass of a suite over one model.
+ *
+ * @generated from message tank.platform.v1.EvalRun
+ */
+export type EvalRun = Message<"tank.platform.v1.EvalRun"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * neural | tank
+     *
+     * @generated from field: string suite = 2;
+     */
+    suite: string;
+    /**
+     * what was evaluated, e.g. tank-neural
+     *
+     * @generated from field: string subject = 3;
+     */
+    subject: string;
+    /**
+     * the served model name the harness asked
+     *
+     * @generated from field: string model = 4;
+     */
+    model: string;
+    /**
+     * what the server says it is serving (weights path or adapter)
+     *
+     * @generated from field: string model_version = 5;
+     */
+    modelVersion: string;
+    /**
+     * schedule | manual | candidate
+     *
+     * @generated from field: string trigger = 6;
+     */
+    trigger: string;
+    /**
+     * queued | running | done | failed
+     *
+     * @generated from field: string status = 7;
+     */
+    status: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 8;
+     */
+    createdAt?: Timestamp;
+    /**
+     * unset while queued
+     *
+     * @generated from field: google.protobuf.Timestamp started_at = 9;
+     */
+    startedAt?: Timestamp;
+    /**
+     * unset until done or failed
+     *
+     * @generated from field: google.protobuf.Timestamp finished_at = 10;
+     */
+    finishedAt?: Timestamp;
+    /**
+     * what the run spent; 0 for a suite on TANK's own GPU
+     *
+     * @generated from field: double cost_usd = 11;
+     */
+    costUsd: number;
+    /**
+     * why it failed, in TANK's words
+     *
+     * @generated from field: string error = 12;
+     */
+    error: string;
+    /**
+     * lm-eval version
+     *
+     * @generated from field: string harness_version = 13;
+     */
+    harnessVersion: string;
+    /**
+     * sha256 of the dataset manifests the run read
+     *
+     * @generated from field: string dataset_manifest_sha = 14;
+     */
+    datasetManifestSha: string;
+    /**
+     * @generated from field: int32 tasks_done = 15;
+     */
+    tasksDone: number;
+    /**
+     * skipped because the GPU was busy, or failed
+     *
+     * @generated from field: int32 tasks_skipped = 16;
+     */
+    tasksSkipped: number;
+    /**
+     * user id for a manual run
+     *
+     * @generated from field: string requested_by = 17;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.platform.v1.EvalRun.
+ * Use `create(EvalRunSchema)` to create a new message.
+ */
+export declare const EvalRunSchema: GenMessage<EvalRun>;
+/**
+ * EvalResult is one metric of one task in a run.
+ *
+ * @generated from message tank.platform.v1.EvalResult
+ */
+export type EvalResult = Message<"tank.platform.v1.EvalResult"> & {
+    /**
+     * e.g. arc_challenge
+     *
+     * @generated from field: string task = 1;
+     */
+    task: string;
+    /**
+     * e.g. acc_norm, exact_match,strict-match
+     *
+     * @generated from field: string metric = 2;
+     */
+    metric: string;
+    /**
+     * @generated from field: double value = 3;
+     */
+    value: number;
+    /**
+     * @generated from field: optional double stderr = 4;
+     */
+    stderr?: number;
+    /**
+     * questions scored
+     *
+     * @generated from field: int32 n = 5;
+     */
+    n: number;
+    /**
+     * @generated from field: double cost_usd = 6;
+     */
+    costUsd: number;
+    /**
+     * answers per model that served them (suite tank)
+     *
+     * @generated from field: map<string, int32> served_by = 7;
+     */
+    servedBy: {
+        [key: string]: number;
+    };
+    /**
+     * done | skipped | failed
+     *
+     * @generated from field: string status = 8;
+     */
+    status: string;
+    /**
+     * why skipped or failed
+     *
+     * @generated from field: string note = 9;
+     */
+    note: string;
+    /**
+     * the task's headline metric
+     *
+     * @generated from field: bool primary = 10;
+     */
+    primary: boolean;
+    /**
+     * @generated from field: bool higher_is_better = 11;
+     */
+    higherIsBetter: boolean;
+};
+/**
+ * Describes the message tank.platform.v1.EvalResult.
+ * Use `create(EvalResultSchema)` to create a new message.
+ */
+export declare const EvalResultSchema: GenMessage<EvalResult>;
+/**
+ * @generated from message tank.platform.v1.EvalPoint
+ */
+export type EvalPoint = Message<"tank.platform.v1.EvalPoint"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * when the run started
+     *
+     * @generated from field: google.protobuf.Timestamp at = 2;
+     */
+    at?: Timestamp;
+    /**
+     * @generated from field: double value = 3;
+     */
+    value: number;
+    /**
+     * @generated from field: optional double stderr = 4;
+     */
+    stderr?: number;
+    /**
+     * @generated from field: string model_version = 5;
+     */
+    modelVersion: string;
+};
+/**
+ * Describes the message tank.platform.v1.EvalPoint.
+ * Use `create(EvalPointSchema)` to create a new message.
+ */
+export declare const EvalPointSchema: GenMessage<EvalPoint>;
+/**
+ * EvalSeries is one task's headline metric across runs, oldest first.
+ *
+ * @generated from message tank.platform.v1.EvalSeries
+ */
+export type EvalSeries = Message<"tank.platform.v1.EvalSeries"> & {
+    /**
+     * @generated from field: string task = 1;
+     */
+    task: string;
+    /**
+     * @generated from field: string metric = 2;
+     */
+    metric: string;
+    /**
+     * @generated from field: bool higher_is_better = 3;
+     */
+    higherIsBetter: boolean;
+    /**
+     * @generated from field: repeated tank.platform.v1.EvalPoint points = 4;
+     */
+    points: EvalPoint[];
+};
+/**
+ * Describes the message tank.platform.v1.EvalSeries.
+ * Use `create(EvalSeriesSchema)` to create a new message.
+ */
+export declare const EvalSeriesSchema: GenMessage<EvalSeries>;
+/**
+ * EvalVersionMark is a run where the served model was not the one before it.
+ *
+ * @generated from message tank.platform.v1.EvalVersionMark
+ */
+export type EvalVersionMark = Message<"tank.platform.v1.EvalVersionMark"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 2;
+     */
+    at?: Timestamp;
+    /**
+     * @generated from field: string model_version = 3;
+     */
+    modelVersion: string;
+};
+/**
+ * Describes the message tank.platform.v1.EvalVersionMark.
+ * Use `create(EvalVersionMarkSchema)` to create a new message.
+ */
+export declare const EvalVersionMarkSchema: GenMessage<EvalVersionMark>;
+/**
+ * @generated from message tank.platform.v1.ListEvalRunsRequest
+ */
+export type ListEvalRunsRequest = Message<"tank.platform.v1.ListEvalRunsRequest"> & {
+    /**
+     * empty: every suite
+     *
+     * @generated from field: string suite = 1;
+     */
+    suite: string;
+    /**
+     * default 50, at most 200
+     *
+     * @generated from field: int32 limit = 2;
+     */
+    limit: number;
+};
+/**
+ * Describes the message tank.platform.v1.ListEvalRunsRequest.
+ * Use `create(ListEvalRunsRequestSchema)` to create a new message.
+ */
+export declare const ListEvalRunsRequestSchema: GenMessage<ListEvalRunsRequest>;
+/**
+ * @generated from message tank.platform.v1.ListEvalRunsResponse
+ */
+export type ListEvalRunsResponse = Message<"tank.platform.v1.ListEvalRunsResponse"> & {
+    /**
+     * newest first
+     *
+     * @generated from field: repeated tank.platform.v1.EvalRun runs = 1;
+     */
+    runs: EvalRun[];
+};
+/**
+ * Describes the message tank.platform.v1.ListEvalRunsResponse.
+ * Use `create(ListEvalRunsResponseSchema)` to create a new message.
+ */
+export declare const ListEvalRunsResponseSchema: GenMessage<ListEvalRunsResponse>;
+/**
+ * @generated from message tank.platform.v1.GetEvalRunRequest
+ */
+export type GetEvalRunRequest = Message<"tank.platform.v1.GetEvalRunRequest"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+};
+/**
+ * Describes the message tank.platform.v1.GetEvalRunRequest.
+ * Use `create(GetEvalRunRequestSchema)` to create a new message.
+ */
+export declare const GetEvalRunRequestSchema: GenMessage<GetEvalRunRequest>;
+/**
+ * @generated from message tank.platform.v1.GetEvalRunResponse
+ */
+export type GetEvalRunResponse = Message<"tank.platform.v1.GetEvalRunResponse"> & {
+    /**
+     * @generated from field: tank.platform.v1.EvalRun run = 1;
+     */
+    run?: EvalRun;
+    /**
+     * @generated from field: repeated tank.platform.v1.EvalResult results = 2;
+     */
+    results: EvalResult[];
+};
+/**
+ * Describes the message tank.platform.v1.GetEvalRunResponse.
+ * Use `create(GetEvalRunResponseSchema)` to create a new message.
+ */
+export declare const GetEvalRunResponseSchema: GenMessage<GetEvalRunResponse>;
+/**
+ * @generated from message tank.platform.v1.GetEvalSeriesRequest
+ */
+export type GetEvalSeriesRequest = Message<"tank.platform.v1.GetEvalSeriesRequest"> & {
+    /**
+     * neural
+     *
+     * @generated from field: string suite = 1;
+     */
+    suite: string;
+    /**
+     * empty: every model in the suite
+     *
+     * @generated from field: string model = 2;
+     */
+    model: string;
+    /**
+     * empty: every task with a headline metric
+     *
+     * @generated from field: repeated string tasks = 3;
+     */
+    tasks: string[];
+    /**
+     * default 90
+     *
+     * @generated from field: int32 days = 4;
+     */
+    days: number;
+};
+/**
+ * Describes the message tank.platform.v1.GetEvalSeriesRequest.
+ * Use `create(GetEvalSeriesRequestSchema)` to create a new message.
+ */
+export declare const GetEvalSeriesRequestSchema: GenMessage<GetEvalSeriesRequest>;
+/**
+ * @generated from message tank.platform.v1.GetEvalSeriesResponse
+ */
+export type GetEvalSeriesResponse = Message<"tank.platform.v1.GetEvalSeriesResponse"> & {
+    /**
+     * @generated from field: repeated tank.platform.v1.EvalSeries series = 1;
+     */
+    series: EvalSeries[];
+    /**
+     * @generated from field: repeated tank.platform.v1.EvalVersionMark versions = 2;
+     */
+    versions: EvalVersionMark[];
+};
+/**
+ * Describes the message tank.platform.v1.GetEvalSeriesResponse.
+ * Use `create(GetEvalSeriesResponseSchema)` to create a new message.
+ */
+export declare const GetEvalSeriesResponseSchema: GenMessage<GetEvalSeriesResponse>;
+/**
+ * StartEvalRun runs a suite now, outside its schedule: a Job from the suite's CronJob.
+ * FAILED_PRECONDITION while a run of that suite is queued or running.
+ *
+ * @generated from message tank.platform.v1.StartEvalRunRequest
+ */
+export type StartEvalRunRequest = Message<"tank.platform.v1.StartEvalRunRequest"> & {
+    /**
+     * neural
+     *
+     * @generated from field: string suite = 1;
+     */
+    suite: string;
+};
+/**
+ * Describes the message tank.platform.v1.StartEvalRunRequest.
+ * Use `create(StartEvalRunRequestSchema)` to create a new message.
+ */
+export declare const StartEvalRunRequestSchema: GenMessage<StartEvalRunRequest>;
+/**
+ * @generated from message tank.platform.v1.StartEvalRunResponse
+ */
+export type StartEvalRunResponse = Message<"tank.platform.v1.StartEvalRunResponse"> & {
+    /**
+     * queued
+     *
+     * @generated from field: tank.platform.v1.EvalRun run = 1;
+     */
+    run?: EvalRun;
+};
+/**
+ * Describes the message tank.platform.v1.StartEvalRunResponse.
+ * Use `create(StartEvalRunResponseSchema)` to create a new message.
+ */
+export declare const StartEvalRunResponseSchema: GenMessage<StartEvalRunResponse>;
 /**
  * SetWorkspacePlan moves a workspace between free and premium. Premium provisions its
  * agent. Nothing is charged or refunded: Stripe and the App Store are not touched.
@@ -2616,5 +3048,37 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceClaude5CapRequestSchema;
         output: typeof SetWorkspaceClaude5CapResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.ListEvalRuns
+     */
+    listEvalRuns: {
+        methodKind: "unary";
+        input: typeof ListEvalRunsRequestSchema;
+        output: typeof ListEvalRunsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.GetEvalRun
+     */
+    getEvalRun: {
+        methodKind: "unary";
+        input: typeof GetEvalRunRequestSchema;
+        output: typeof GetEvalRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.GetEvalSeries
+     */
+    getEvalSeries: {
+        methodKind: "unary";
+        input: typeof GetEvalSeriesRequestSchema;
+        output: typeof GetEvalSeriesResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.StartEvalRun
+     */
+    startEvalRun: {
+        methodKind: "unary";
+        input: typeof StartEvalRunRequestSchema;
+        output: typeof StartEvalRunResponseSchema;
     };
 }>;
