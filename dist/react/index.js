@@ -1,5 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { create } from "@bufbuild/protobuf";
+import { Code, ConnectError } from "@connectrpc/connect";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore, } from "react";
 import { isTerminalRunState } from "../blocks/runTone.js";
 import { notificationPagingKey, } from "../client/store.js";
@@ -571,6 +572,36 @@ export function useTask(taskId) {
         void client.getTask(taskId).catch(() => undefined);
     }, [client, taskId, missing]);
     return task;
+}
+export function useTaskAccess(taskId) {
+    const client = useTank();
+    const task = useTankSelector(useCallback((s) => s.getState().tasksById[taskId], [taskId]));
+    const [refused, setRefused] = useState(null);
+    useEffect(() => {
+        if (!taskId)
+            return;
+        let live = true;
+        setRefused(null);
+        client.getTask(taskId).catch((err) => {
+            if (!live)
+                return;
+            const code = ConnectError.from(err).code;
+            setRefused({
+                id: taskId,
+                state: code === Code.PermissionDenied ? "not_in_tread" : code === Code.NotFound ? "gone" : "error",
+            });
+        });
+        return () => {
+            live = false;
+        };
+    }, [client, taskId]);
+    if (!taskId)
+        return { state: "loading" };
+    if (refused?.id === taskId)
+        return { state: refused.state };
+    if (task)
+        return { state: "ready", task };
+    return { state: "loading" };
 }
 /** The view this person reads a Tread in (their pick, else the Tread's default, else Builder). */
 export function useChannelView(channelId) {

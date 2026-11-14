@@ -119,3 +119,24 @@ export function notifyFor(task, stage) {
 export function ownNotify(task) {
     return task.notify.filter((n) => !n.fromWorkspace);
 }
+/** The longest note Send to takes (the server refuses more). */
+export const SEND_NOTE_MAX = 500;
+/**
+ * Who Send to offers: the Tread's members (ListChannelMembers) who are people, still in the
+ * workspace, and not the caller, in the order given. The server checks the same rule again;
+ * this only keeps a name off the list that would be refused.
+ */
+export function taskSendCandidates(treadMemberIds, members, meId) {
+    const seen = new Set();
+    const out = [];
+    for (const id of treadMemberIds) {
+        if (!id || id === meId || seen.has(id))
+            continue;
+        seen.add(id);
+        const m = members[id];
+        if (!m || m.deactivatedAt || m.principal?.kind !== PrincipalKind.USER)
+            continue;
+        out.push(id);
+    }
+    return out;
+}

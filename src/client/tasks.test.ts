@@ -31,9 +31,11 @@ import {
   notifyFor,
   ownNotify,
   readyToCheckCount,
+  SEND_NOTE_MAX,
   simpleConversation,
   TASK_STAGES,
   taskForThread,
+  taskSendCandidates,
   taskStageKey,
   tasksByStage,
 } from "./tasks.js";
@@ -328,5 +330,51 @@ describe("reading a Tread keeps its view", () => {
     expect(rs?.lastReadSeq).toBe(9n);
     expect(rs?.view).toBe(ChannelView.SIMPLE);
     expect(rs?.notifyPref).toBe(2);
+  });
+});
+
+describe("Send to and the task link", () => {
+  it("offers only people in the Tread, never the caller, each once", () => {
+    const person = (kind: PrincipalKind, gone = false) => ({
+      principal: { kind } as never,
+      deactivatedAt: gone ? ({ seconds: 1n, nanos: 0 } as never) : undefined,
+    });
+    const members = {
+      me: person(PrincipalKind.USER),
+      amy: person(PrincipalKind.USER),
+      bob: person(PrincipalKind.USER, true),
+      tank: person(PrincipalKind.AGENT),
+      hook: person(PrincipalKind.BOT),
+      cat: person(PrincipalKind.USER),
+    };
+    expect(
+      taskSendCandidates(["me", "amy", "bob", "tank", "hook", "amy", "cat", "stranger"], members, "me"),
+    ).toEqual(["amy", "cat"]);
+    expect(SEND_NOTE_MAX).toBe(500);
+  });
+
+  it("sends the ids and the trimmed note, and returns who was told", async () => {
+    const seen: { taskId: string; userIds: string[]; note: string }[] = [];
+    const transport = createRouterTransport(({ service }) => {
+      service(TaskService, {
+        sendTask: (req) => {
+          seen.push({ taskId: req.taskId, userIds: [...req.userIds], note: req.note });
+          return { sentUserIds: req.userIds };
+        },
+      });
+    });
+    const client = createTankClient({
+      baseUrl: "http://unused",
+      wsUrl: "ws://unused",
+      auth: "cookie",
+      transport,
+    });
+    expect(await client.sendTask("t1", ["amy", "cat"], "  please check  ")).toEqual(["amy", "cat"]);
+    expect(seen).toEqual([{ taskId: "t1", userIds: ["amy", "cat"], note: "please check" }]);
+  });
+
+  it("carries the server's link on a task", () => {
+    const t = create(TaskSchema, { id: "t1", link: "https://app.tank.chat/w/acme/c/c1?task=t1" });
+    expect(t.link).toBe("https://app.tank.chat/w/acme/c/c1?task=t1");
   });
 });

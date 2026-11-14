@@ -5,6 +5,7 @@ import { PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
 import { type Channel, type ChannelReadState, ChannelView } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { Message } from "../contracts/tank/message/v1/message_pb.js";
 import { type Task, type TaskNotify, TaskStage } from "../contracts/tank/task/v1/task_pb.js";
+import type { Member } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { tsMs } from "./store.js";
 
 /** Command's columns and the strip's groups, left to right. */
@@ -137,4 +138,29 @@ export function notifyFor(task: Pick<Task, "notify">, stage: TaskStage): TaskNot
 /** The task's own picks only (what SetTaskNotify replaces). */
 export function ownNotify(task: Pick<Task, "notify">): TaskNotify[] {
   return task.notify.filter((n) => !n.fromWorkspace);
+}
+
+/** The longest note Send to takes (the server refuses more). */
+export const SEND_NOTE_MAX = 500;
+
+/**
+ * Who Send to offers: the Tread's members (ListChannelMembers) who are people, still in the
+ * workspace, and not the caller, in the order given. The server checks the same rule again;
+ * this only keeps a name off the list that would be refused.
+ */
+export function taskSendCandidates(
+  treadMemberIds: readonly string[],
+  members: Readonly<Record<string, Pick<Member, "principal" | "deactivatedAt"> | undefined>>,
+  meId: string | undefined,
+): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const id of treadMemberIds) {
+    if (!id || id === meId || seen.has(id)) continue;
+    seen.add(id);
+    const m = members[id];
+    if (!m || m.deactivatedAt || m.principal?.kind !== PrincipalKind.USER) continue;
+    out.push(id);
+  }
+  return out;
 }

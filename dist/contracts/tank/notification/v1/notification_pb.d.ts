@@ -9,7 +9,7 @@ export declare const file_tank_notification_v1_notification: GenFile;
 /**
  * A notification is written by the core's notify worker from bus events and
  * read back here. kind: mention | dm | thread_reply | reaction |
- * channel_invite | agent_needs_input | shared | task.
+ * channel_invite | agent_needs_input | shared | task | task_sent.
  *
  * @generated from message tank.notification.v1.Notification
  */
@@ -68,10 +68,18 @@ export type Notification = Message<"tank.notification.v1.Notification"> & {
     itemTitle: string;
     /**
      * kind task (item_kind task): the stage the task reached.
+     * kind task_sent: the stage the task was in when it was sent.
      *
      * @generated from field: tank.task.v1.TaskStage task_stage = 13;
      */
     taskStage: TaskStage;
+    /**
+     * kind task_sent (item_kind task): what the sender wrote, if anything. Shown in Activity
+     * only; it never travels in a push.
+     *
+     * @generated from field: string note = 14;
+     */
+    note: string;
 };
 /**
  * Describes the message tank.notification.v1.Notification.

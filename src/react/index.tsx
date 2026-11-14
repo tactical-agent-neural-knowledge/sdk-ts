@@ -1,4 +1,5 @@
 import { create, type MessageInitShape } from "@bufbuild/protobuf";
+import { Code, ConnectError } from "@connectrpc/connect";
 import {
   createContext,
   type ReactNode,
@@ -800,6 +801,45 @@ export function useTask(taskId: string): Task | undefined {
     void client.getTask(taskId).catch(() => undefined);
   }, [client, taskId, missing]);
   return task;
+}
+
+/**
+ * Whether this person may open a task: `not_in_tread` when the server says it is in a Tread
+ * they're not in (a task link handed to somebody outside it), `gone` when there is no such
+ * task for them, else the task. It always asks the server once per id, and a refusal wins
+ * over whatever the store holds, so a link never shows a task its Tread would not.
+ */
+export type TaskAccess =
+  | { state: "loading"; task?: undefined }
+  | { state: "ready"; task: Task }
+  | { state: "not_in_tread" | "gone" | "error"; task?: undefined };
+
+export function useTaskAccess(taskId: string): TaskAccess {
+  const client = useTank();
+  const task = useTankSelector(useCallback((s: TankStore) => s.getState().tasksById[taskId], [taskId]));
+  const [refused, setRefused] = useState<{ id: string; state: "not_in_tread" | "gone" | "error" } | null>(
+    null,
+  );
+  useEffect(() => {
+    if (!taskId) return;
+    let live = true;
+    setRefused(null);
+    client.getTask(taskId).catch((err: unknown) => {
+      if (!live) return;
+      const code = ConnectError.from(err).code;
+      setRefused({
+        id: taskId,
+        state: code === Code.PermissionDenied ? "not_in_tread" : code === Code.NotFound ? "gone" : "error",
+      });
+    });
+    return () => {
+      live = false;
+    };
+  }, [client, taskId]);
+  if (!taskId) return { state: "loading" };
+  if (refused?.id === taskId) return { state: refused.state };
+  if (task) return { state: "ready", task };
+  return { state: "loading" };
 }
 
 /** The view this person reads a Tread in (their pick, else the Tread's default, else Builder). */

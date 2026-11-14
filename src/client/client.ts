@@ -1179,6 +1179,16 @@ export class TankClient {
     return this.keepTask(await this.tasks.retryTask({ taskId }));
   }
 
+  /**
+   * Send to: tell people in the task's Tread about it now, at its current stage, with an
+   * optional note (500 characters at most; Activity only, never a push). The server refuses
+   * the whole call if anyone named isn't a person in the Tread. Returns who was told.
+   */
+  async sendTask(taskId: string, userIds: readonly string[], note = ""): Promise<string[]> {
+    const res = await this.tasks.sendTask({ taskId, userIds: [...userIds], note: note.trim() });
+    return res.sentUserIds;
+  }
+
   /** Replace the task's own notify picks (workspace rules stay). */
   async setTaskNotify(taskId: string, notify: NotifyPick[], askerMuted?: boolean): Promise<Task> {
     return this.keepTask(
