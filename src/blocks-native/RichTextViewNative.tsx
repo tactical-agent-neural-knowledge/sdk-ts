@@ -166,8 +166,26 @@ export function RichTextViewNative({ richText, variant = "bodyMedium", ...p }: R
                   : "left";
             const line = { borderColor: theme.colors.outlineVariant };
             return (
-              <ScrollView key={key} horizontal style={styles.tableScroll} testID="rt-table">
-                <View style={[styles.table, line]}>
+              <ScrollView
+                key={key}
+                horizontal
+                showsHorizontalScrollIndicator
+                style={styles.tableScroll}
+                testID="rt-table"
+              >
+                {/*
+                 * The content claims the touch itself. A message row around a card is usually a
+                 * Pressable, which React Native makes the JS responder on touch-down, and on iOS a
+                 * scroll view with the JS responder among its ancestors refuses to scroll
+                 * (RCTScrollViewComponentView._shouldDisableScrollInteraction), so a sideways drag
+                 * on the table did nothing. A responder inside the scroll view does not block it.
+                 */}
+                <View
+                  style={[styles.table, line]}
+                  onStartShouldSetResponder={claimTouch}
+                  onResponderTerminationRequest={claimTouch}
+                  testID="rt-table-content"
+                >
                   {t.header ? (
                     <View style={[styles.row, { backgroundColor: theme.colors.surfaceVariant }]}>
                       {span.map((c) => (
@@ -206,6 +224,9 @@ export function RichTextViewNative({ richText, variant = "bodyMedium", ...p }: R
     </View>
   );
 }
+
+/** Take the touch on touch-down, and give it up to the scroll view as soon as it asks. */
+const claimTouch = () => true;
 
 const styles = StyleSheet.create({
   stack: { gap: 6 },

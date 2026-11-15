@@ -47,4 +47,18 @@ describe("RichTextViewNative headings, tables and rules", () => {
     expect(text(root)).toContain("3. third");
     expect(text(root)).toContain("4. fourth");
   });
+
+  it("lets the table scroll inside a pressable message row: its content, inside the scroller, claims the touch", () => {
+    act(() => {
+      tree = create(<RichTextViewNative richText={usageReport} />);
+    });
+    const table = host(tree!.root, "rt-table");
+    // On iOS a scroll view whose ancestor is the JS responder does not scroll; the row's
+    // Pressable never becomes it because the table's content answers touch-down first, and
+    // hands the touch to the scroller the moment it is asked.
+    const content = host(table, "rt-table-content");
+    expect(content.props.onStartShouldSetResponder()).toBe(true);
+    expect(content.props.onResponderTerminationRequest()).toBe(true);
+    expect(table.props.showsHorizontalScrollIndicator).toBe(true);
+  });
 });
