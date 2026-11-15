@@ -208,6 +208,12 @@ export type Task = Message<"tank.task.v1.Task"> & {
      * @generated from field: string link = 21;
      */
     link: string;
+    /**
+     * Files attached when the task was made, shared into its Tread when it starts.
+     *
+     * @generated from field: repeated string file_ids = 22;
+     */
+    fileIds: string[];
 };
 /**
  * Describes the message tank.task.v1.Task.
@@ -335,6 +341,12 @@ export type CreateTaskRequest = Message<"tank.task.v1.CreateTaskRequest"> & {
      * @generated from field: repeated tank.task.v1.TaskNotify notify = 6;
      */
     notify: TaskNotify[];
+    /**
+     * Finished uploads by the caller in this workspace; at most 10.
+     *
+     * @generated from field: repeated string file_ids = 7;
+     */
+    fileIds: string[];
 };
 /**
  * Describes the message tank.task.v1.CreateTaskRequest.
@@ -382,6 +394,10 @@ export type CreateTaskWithChannelRequest = Message<"tank.task.v1.CreateTaskWithC
      * @generated from field: repeated tank.task.v1.TaskNotify notify = 5;
      */
     notify: TaskNotify[];
+    /**
+     * @generated from field: repeated string file_ids = 6;
+     */
+    fileIds: string[];
 };
 /**
  * Describes the message tank.task.v1.CreateTaskWithChannelRequest.
