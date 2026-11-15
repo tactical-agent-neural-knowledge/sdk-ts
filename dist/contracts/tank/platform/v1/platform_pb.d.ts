@@ -897,12 +897,60 @@ export type WorkspaceRow = Message<"tank.platform.v1.WorkspaceRow"> & {
      * @generated from field: bool no_charge = 16;
      */
     noCharge: boolean;
+    /**
+     * the rate in force now (1.5 when it has no schedule row)
+     *
+     * @generated from field: double markup = 17;
+     */
+    markup: number;
+    /**
+     * when that rate began; unset for the default
+     *
+     * @generated from field: google.protobuf.Timestamp markup_effective_from = 18;
+     */
+    markupEffectiveFrom?: Timestamp;
+    /**
+     * billed / raw cost this month; 0 with no cost yet
+     *
+     * @generated from field: double effective_markup = 19;
+     */
+    effectiveMarkup: number;
 };
 /**
  * Describes the message tank.platform.v1.WorkspaceRow.
  * Use `create(WorkspaceRowSchema)` to create a new message.
  */
 export declare const WorkspaceRowSchema: GenMessage<WorkspaceRow>;
+/**
+ * MarkupChange is one row of a workspace's markup schedule (see SetWorkspaceMarkup).
+ *
+ * @generated from message tank.platform.v1.MarkupChange
+ */
+export type MarkupChange = Message<"tank.platform.v1.MarkupChange"> & {
+    /**
+     * @generated from field: double markup = 1;
+     */
+    markup: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp effective_from = 2;
+     */
+    effectiveFrom?: Timestamp;
+    /**
+     * @generated from field: string reason = 3;
+     */
+    reason: string;
+    /**
+     * empty for the migration's own rows
+     *
+     * @generated from field: string set_by_email = 4;
+     */
+    setByEmail: string;
+};
+/**
+ * Describes the message tank.platform.v1.MarkupChange.
+ * Use `create(MarkupChangeSchema)` to create a new message.
+ */
+export declare const MarkupChangeSchema: GenMessage<MarkupChange>;
 /**
  * @generated from message tank.platform.v1.SearchWorkspacesRequest
  */
@@ -1391,6 +1439,12 @@ export type GetWorkspaceResponse = Message<"tank.platform.v1.GetWorkspaceRespons
      * @generated from field: tank.platform.v1.Claude5Spend claude5 = 8;
      */
     claude5?: Claude5Spend;
+    /**
+     * newest first
+     *
+     * @generated from field: repeated tank.platform.v1.MarkupChange markup_history = 9;
+     */
+    markupHistory: MarkupChange[];
 };
 /**
  * Describes the message tank.platform.v1.GetWorkspaceResponse.
@@ -1503,6 +1557,18 @@ export type GetOverviewResponse = Message<"tank.platform.v1.GetOverviewResponse"
      * @generated from field: repeated tank.platform.v1.WorkspaceRow most_active = 12;
      */
     mostActive: WorkspaceRow[];
+    /**
+     * what workspaces are charged for agents this month
+     *
+     * @generated from field: double agent_billed_usd_month = 13;
+     */
+    agentBilledUsdMonth: number;
+    /**
+     * billed / raw cost this month; 0 with no cost yet
+     *
+     * @generated from field: double effective_markup = 14;
+     */
+    effectiveMarkup: number;
 };
 /**
  * Describes the message tank.platform.v1.GetOverviewResponse.
@@ -2761,6 +2827,61 @@ export type SetWorkspaceNoChargeResponse = Message<"tank.platform.v1.SetWorkspac
  */
 export declare const SetWorkspaceNoChargeResponseSchema: GenMessage<SetWorkspaceNoChargeResponse>;
 /**
+ * SetWorkspaceMarkup adds a row to a workspace's markup schedule: from effective_from
+ * (empty is now) its agent usage is priced at markup times raw cost. Rows are added and
+ * never edited, so usage before the date keeps the rate it was priced at. markup must be
+ * at least 1 and at most 10. Recorded as workspace.markup.changed.
+ *
+ * @generated from message tank.platform.v1.SetWorkspaceMarkupRequest
+ */
+export type SetWorkspaceMarkupRequest = Message<"tank.platform.v1.SetWorkspaceMarkupRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: double markup = 2;
+     */
+    markup: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp effective_from = 3;
+     */
+    effectiveFrom?: Timestamp;
+    /**
+     * kept in the schedule and the audit log
+     *
+     * @generated from field: string reason = 4;
+     */
+    reason: string;
+};
+/**
+ * Describes the message tank.platform.v1.SetWorkspaceMarkupRequest.
+ * Use `create(SetWorkspaceMarkupRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceMarkupRequestSchema: GenMessage<SetWorkspaceMarkupRequest>;
+/**
+ * @generated from message tank.platform.v1.SetWorkspaceMarkupResponse
+ */
+export type SetWorkspaceMarkupResponse = Message<"tank.platform.v1.SetWorkspaceMarkupResponse"> & {
+    /**
+     * newest first
+     *
+     * @generated from field: repeated tank.platform.v1.MarkupChange markup_history = 1;
+     */
+    markupHistory: MarkupChange[];
+    /**
+     * the rate in force now
+     *
+     * @generated from field: double markup = 2;
+     */
+    markup: number;
+};
+/**
+ * Describes the message tank.platform.v1.SetWorkspaceMarkupResponse.
+ * Use `create(SetWorkspaceMarkupResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceMarkupResponseSchema: GenMessage<SetWorkspaceMarkupResponse>;
+/**
  * SetWorkspaceClaude5Cap sets or clears a workspace's monthly cap on Claude 5 spend, in
  * cents of raw model cost (see Claude5Spend). capped false clears it (no cap). Recorded
  * as workspace.claude5_cap.changed.
@@ -3032,6 +3153,14 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceNoChargeRequestSchema;
         output: typeof SetWorkspaceNoChargeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.SetWorkspaceMarkup
+     */
+    setWorkspaceMarkup: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceMarkupRequestSchema;
+        output: typeof SetWorkspaceMarkupResponseSchema;
     };
     /**
      * @generated from rpc tank.platform.v1.PlatformService.CreateWorkspace
