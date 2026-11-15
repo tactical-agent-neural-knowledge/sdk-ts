@@ -1871,7 +1871,9 @@ export type StatementPeriod = Message<"tank.books.v1.StatementPeriod"> & {
 export declare const StatementPeriodSchema: GenMessage<StatementPeriod>;
 /**
  * One figure. What the cell shows is actual + expected; budget is beside it.
- * Expected and budget are zero until forecasts (phase 2) and budgets (phase 3).
+ * Expected comes from the forecast (recurring items, TANK's charges, open invoices and
+ * unpaid bills) in the current and future periods, through the end of next fiscal
+ * year. Budget is zero until budgets (phase 3).
  *
  * @generated from message tank.books.v1.StatementCell
  */
@@ -1892,6 +1894,18 @@ export type StatementCell = Message<"tank.books.v1.StatementCell"> & {
      * @generated from field: tank.books.v1.CellState state = 4;
      */
     state: CellState;
+    /**
+     * Expected and not seen: recurring items due in this period whose matching window
+     * (seven days either side) closed with no actual to match. Not in expected_cents;
+     * shown beside the figure so a person can see what went missing.
+     *
+     * @generated from field: int64 missed_cents = 5;
+     */
+    missedCents: bigint;
+    /**
+     * @generated from field: int32 missed_count = 6;
+     */
+    missedCount: number;
 };
 /**
  * Describes the message tank.books.v1.StatementCell.
@@ -1967,7 +1981,7 @@ export type GetStatementRequest = Message<"tank.books.v1.GetStatementRequest"> &
     /**
      * The range, by period key ("2026-04", "FY2027-Q1", "FY2027") of any grain, or by
      * dates: every period that overlaps [from, to) is a column. Nothing given = this
-     * fiscal year (year grain: the last two fiscal years and this one).
+     * fiscal year and next (year grain: the last two fiscal years, this one and next).
      *
      * @generated from field: string from_period = 4;
      */
@@ -2067,12 +2081,378 @@ export type GetStatementResponse = Message<"tank.books.v1.GetStatementResponse">
      * @generated from field: tank.books.v1.CashBalance opening_balance = 13;
      */
     openingBalance?: CashBalance;
+    /**
+     * How long cash lasts at this rate, by month through the end of next fiscal year.
+     * Unset without an opening balance.
+     *
+     * @generated from field: tank.books.v1.Runway runway = 14;
+     */
+    runway?: Runway;
 };
 /**
  * Describes the message tank.books.v1.GetStatementResponse.
  * Use `create(GetStatementResponseSchema)` to create a new message.
  */
 export declare const GetStatementResponseSchema: GenMessage<GetStatementResponse>;
+/**
+ * Money that comes in or goes out on a cadence: rent, payroll, a retainer, a contract
+ * with an end date. Each occurrence is matched to an actual (same vendor, customer or
+ * category; amount within 15%; date within seven days) so nothing counts twice.
+ *
+ * @generated from message tank.books.v1.Recurring
+ */
+export type Recurring = Message<"tank.books.v1.Recurring"> & {
+    /**
+     * A Snowflake id; a TANK rule's is a stable name instead ("tank:fee:premium",
+     * "tank:agents").
+     *
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: tank.books.v1.CategoryKind kind = 2;
+     */
+    kind: CategoryKind;
+    /**
+     * @generated from field: string category_id = 3;
+     */
+    categoryId: string;
+    /**
+     * income: who pays it, when known
+     *
+     * @generated from field: string customer_id = 4;
+     */
+    customerId: string;
+    /**
+     * @generated from field: string customer_name = 5;
+     */
+    customerName: string;
+    /**
+     * expense: who is paid, when known
+     *
+     * @generated from field: string vendor = 6;
+     */
+    vendor: string;
+    /**
+     * what people call it, e.g. "Office rent"; may be empty
+     *
+     * @generated from field: string name = 7;
+     */
+    name: string;
+    /**
+     * each occurrence; a TANK agents rule: the month's projection
+     *
+     * @generated from field: int64 amount_cents = 8;
+     */
+    amountCents: bigint;
+    /**
+     * @generated from field: tank.books.v1.Cadence cadence = 9;
+     */
+    cadence: Cadence;
+    /**
+     * Weekly: ISO weekday, 1 (Monday) to 7. Otherwise the day of the month, 1 to 31; a
+     * month shorter than that has it on its last day (the 31st is Feb 28).
+     *
+     * @generated from field: int32 anchor_day = 10;
+     */
+    anchorDay: number;
+    /**
+     * Days, at midnight in the books' timezone. ends_on inclusive; unset = no end.
+     *
+     * @generated from field: google.protobuf.Timestamp starts_on = 11;
+     */
+    startsOn?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp ends_on = 12;
+     */
+    endsOn?: Timestamp;
+    /**
+     * How many days after it is earned the cash moves (an invoice paid 30 days later).
+     *
+     * @generated from field: int32 basis_offset_days = 13;
+     */
+    basisOffsetDays: number;
+    /**
+     * @generated from field: tank.books.v1.RecurringSource source = 14;
+     */
+    source: RecurringSource;
+    /**
+     * @generated from field: tank.books.v1.RecurringStatus status = 15;
+     */
+    status: RecurringStatus;
+    /**
+     * user id, "agent", "books" (detected) or "tank"
+     *
+     * @generated from field: string created_by = 16;
+     */
+    createdBy: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 17;
+     */
+    createdAt?: Timestamp;
+    /**
+     * a TANK rule: it follows TANK's billing, nobody edits it
+     *
+     * @generated from field: bool read_only = 18;
+     */
+    readOnly: boolean;
+    /**
+     * What a detected repeat was found from: how many times it was seen and since when.
+     *
+     * @generated from field: int32 seen_count = 19;
+     */
+    seenCount: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp seen_since = 20;
+     */
+    seenSince?: Timestamp;
+    /**
+     * The next occurrence on or after today; unset when it has ended.
+     *
+     * @generated from field: google.protobuf.Timestamp next_on = 21;
+     */
+    nextOn?: Timestamp;
+    /**
+     * A TANK agents rule: the trailing 30-day daily average it projects from, and
+     * whether the workspace's monthly cap holds the projection down.
+     *
+     * @generated from field: int64 daily_average_cents = 22;
+     */
+    dailyAverageCents: bigint;
+    /**
+     * @generated from field: bool capped = 23;
+     */
+    capped: boolean;
+    /**
+     * @generated from field: int64 cap_cents = 24;
+     */
+    capCents: bigint;
+};
+/**
+ * Describes the message tank.books.v1.Recurring.
+ * Use `create(RecurringSchema)` to create a new message.
+ */
+export declare const RecurringSchema: GenMessage<Recurring>;
+/**
+ * One occurrence of a recurring item.
+ *
+ * @generated from message tank.books.v1.Occurrence
+ */
+export type Occurrence = Message<"tank.books.v1.Occurrence"> & {
+    /**
+     * @generated from field: string recurring_id = 1;
+     */
+    recurringId: string;
+    /**
+     * the day it was due, midnight in the books' timezone
+     *
+     * @generated from field: google.protobuf.Timestamp on = 2;
+     */
+    on?: Timestamp;
+    /**
+     * @generated from field: int64 amount_cents = 3;
+     */
+    amountCents: bigint;
+    /**
+     * @generated from field: tank.books.v1.CategoryKind kind = 4;
+     */
+    kind: CategoryKind;
+    /**
+     * @generated from field: string category_id = 5;
+     */
+    categoryId: string;
+    /**
+     * The rule's own words, for the list: its name, else the vendor or customer.
+     *
+     * @generated from field: string name = 6;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.books.v1.Occurrence.
+ * Use `create(OccurrenceSchema)` to create a new message.
+ */
+export declare const OccurrenceSchema: GenMessage<Occurrence>;
+/**
+ * How long cash lasts at the forecast's rate.
+ *
+ * @generated from message tank.books.v1.Runway
+ */
+export type Runway = Message<"tank.books.v1.Runway"> & {
+    /**
+     * The first month ending below zero ("2027-03"); empty when cash stays at or above
+     * zero through horizon_month.
+     *
+     * @generated from field: string runs_out_month = 1;
+     */
+    runsOutMonth: string;
+    /**
+     * that month's start
+     *
+     * @generated from field: google.protobuf.Timestamp runs_out_at = 2;
+     */
+    runsOutAt?: Timestamp;
+    /**
+     * the last month looked at: the end of next fiscal year
+     *
+     * @generated from field: string horizon_month = 3;
+     */
+    horizonMonth: string;
+    /**
+     * the lowest month-end cash in the horizon
+     *
+     * @generated from field: int64 lowest_cents = 4;
+     */
+    lowestCents: bigint;
+    /**
+     * @generated from field: string lowest_month = 5;
+     */
+    lowestMonth: string;
+};
+/**
+ * Describes the message tank.books.v1.Runway.
+ * Use `create(RunwaySchema)` to create a new message.
+ */
+export declare const RunwaySchema: GenMessage<Runway>;
+/**
+ * @generated from message tank.books.v1.ListRecurringRequest
+ */
+export type ListRecurringRequest = Message<"tank.books.v1.ListRecurringRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.books.v1.ListRecurringRequest.
+ * Use `create(ListRecurringRequestSchema)` to create a new message.
+ */
+export declare const ListRecurringRequestSchema: GenMessage<ListRecurringRequest>;
+/**
+ * @generated from message tank.books.v1.ListRecurringResponse
+ */
+export type ListRecurringResponse = Message<"tank.books.v1.ListRecurringResponse"> & {
+    /**
+     * People's and accepted rules (person, detected, agent), active and paused.
+     *
+     * @generated from field: repeated tank.books.v1.Recurring rules = 1;
+     */
+    rules: Recurring[];
+    /**
+     * Waiting for a person: detected repeats and agents' proposals.
+     *
+     * @generated from field: repeated tank.books.v1.Recurring proposals = 2;
+     */
+    proposals: Recurring[];
+    /**
+     * From TANK: the subscriptions and the agents' projected spend. Read-only.
+     *
+     * @generated from field: repeated tank.books.v1.Recurring tank = 3;
+     */
+    tank: Recurring[];
+    /**
+     * Expected and not seen, latest first: occurrences whose window closed with no actual.
+     *
+     * @generated from field: repeated tank.books.v1.Occurrence not_seen = 4;
+     */
+    notSeen: Occurrence[];
+    /**
+     * unset without an opening balance
+     *
+     * @generated from field: tank.books.v1.Runway runway = 5;
+     */
+    runway?: Runway;
+    /**
+     * the caller may add, change and accept rules
+     *
+     * @generated from field: bool can_edit = 6;
+     */
+    canEdit: boolean;
+    /**
+     * @generated from field: string currency = 7;
+     */
+    currency: string;
+};
+/**
+ * Describes the message tank.books.v1.ListRecurringResponse.
+ * Use `create(ListRecurringResponseSchema)` to create a new message.
+ */
+export declare const ListRecurringResponseSchema: GenMessage<ListRecurringResponse>;
+/**
+ * @generated from message tank.books.v1.UpsertRecurringRequest
+ */
+export type UpsertRecurringRequest = Message<"tank.books.v1.UpsertRecurringRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * id empty to add one. Read from it: kind, category_id, customer_id, vendor, name,
+     * amount_cents, cadence, anchor_day (0 = from starts_on), starts_on (unset = today),
+     * ends_on, basis_offset_days. A person saving a proposal accepts it; anything an
+     * agent saves is a proposal.
+     *
+     * @generated from field: tank.books.v1.Recurring rule = 2;
+     */
+    rule?: Recurring;
+};
+/**
+ * Describes the message tank.books.v1.UpsertRecurringRequest.
+ * Use `create(UpsertRecurringRequestSchema)` to create a new message.
+ */
+export declare const UpsertRecurringRequestSchema: GenMessage<UpsertRecurringRequest>;
+/**
+ * @generated from message tank.books.v1.UpsertRecurringResponse
+ */
+export type UpsertRecurringResponse = Message<"tank.books.v1.UpsertRecurringResponse"> & {
+    /**
+     * @generated from field: tank.books.v1.Recurring rule = 1;
+     */
+    rule?: Recurring;
+};
+/**
+ * Describes the message tank.books.v1.UpsertRecurringResponse.
+ * Use `create(UpsertRecurringResponseSchema)` to create a new message.
+ */
+export declare const UpsertRecurringResponseSchema: GenMessage<UpsertRecurringResponse>;
+/**
+ * @generated from message tank.books.v1.SetRecurringStatusRequest
+ */
+export type SetRecurringStatusRequest = Message<"tank.books.v1.SetRecurringStatusRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+    /**
+     * ACTIVE accepts a proposal or resumes a paused rule; PAUSED; DISMISSED.
+     *
+     * @generated from field: tank.books.v1.RecurringStatus status = 3;
+     */
+    status: RecurringStatus;
+};
+/**
+ * Describes the message tank.books.v1.SetRecurringStatusRequest.
+ * Use `create(SetRecurringStatusRequestSchema)` to create a new message.
+ */
+export declare const SetRecurringStatusRequestSchema: GenMessage<SetRecurringStatusRequest>;
+/**
+ * @generated from message tank.books.v1.SetRecurringStatusResponse
+ */
+export type SetRecurringStatusResponse = Message<"tank.books.v1.SetRecurringStatusResponse"> & {
+    /**
+     * @generated from field: tank.books.v1.Recurring rule = 1;
+     */
+    rule?: Recurring;
+};
+/**
+ * Describes the message tank.books.v1.SetRecurringStatusResponse.
+ * Use `create(SetRecurringStatusResponseSchema)` to create a new message.
+ */
+export declare const SetRecurringStatusResponseSchema: GenMessage<SetRecurringStatusResponse>;
 /**
  * What is behind one cell: the invoices, payments and expenses in a category and a
  * period, on a basis.
@@ -2390,6 +2770,111 @@ export declare enum StatementRowKind {
  */
 export declare const StatementRowKindSchema: GenEnum<StatementRowKind>;
 /**
+ * @generated from enum tank.books.v1.Cadence
+ */
+export declare enum Cadence {
+    /**
+     * @generated from enum value: CADENCE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: CADENCE_WEEKLY = 1;
+     */
+    WEEKLY = 1,
+    /**
+     * @generated from enum value: CADENCE_MONTHLY = 2;
+     */
+    MONTHLY = 2,
+    /**
+     * every three months from starts_on's month
+     *
+     * @generated from enum value: CADENCE_QUARTERLY = 3;
+     */
+    QUARTERLY = 3,
+    /**
+     * @generated from enum value: CADENCE_YEARLY = 4;
+     */
+    YEARLY = 4
+}
+/**
+ * Describes the enum tank.books.v1.Cadence.
+ */
+export declare const CadenceSchema: GenEnum<Cadence>;
+/**
+ * @generated from enum tank.books.v1.RecurringSource
+ */
+export declare enum RecurringSource {
+    /**
+     * @generated from enum value: RECURRING_SOURCE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * a person added it
+     *
+     * @generated from enum value: RECURRING_SOURCE_PERSON = 1;
+     */
+    PERSON = 1,
+    /**
+     * Books found the repeat and proposed it
+     *
+     * @generated from enum value: RECURRING_SOURCE_DETECTED = 2;
+     */
+    DETECTED = 2,
+    /**
+     * what TANK itself charges: read-only, computed on read
+     *
+     * @generated from enum value: RECURRING_SOURCE_TANK = 3;
+     */
+    TANK = 3,
+    /**
+     * an agent proposed it
+     *
+     * @generated from enum value: RECURRING_SOURCE_AGENT = 4;
+     */
+    AGENT = 4
+}
+/**
+ * Describes the enum tank.books.v1.RecurringSource.
+ */
+export declare const RecurringSourceSchema: GenEnum<RecurringSource>;
+/**
+ * @generated from enum tank.books.v1.RecurringStatus
+ */
+export declare enum RecurringStatus {
+    /**
+     * @generated from enum value: RECURRING_STATUS_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * in the forecast
+     *
+     * @generated from enum value: RECURRING_STATUS_ACTIVE = 1;
+     */
+    ACTIVE = 1,
+    /**
+     * waiting for a person to accept, change or dismiss
+     *
+     * @generated from enum value: RECURRING_STATUS_PROPOSED = 2;
+     */
+    PROPOSED = 2,
+    /**
+     * kept, not forecast
+     *
+     * @generated from enum value: RECURRING_STATUS_PAUSED = 3;
+     */
+    PAUSED = 3,
+    /**
+     * gone; a dismissed detected repeat is never proposed again
+     *
+     * @generated from enum value: RECURRING_STATUS_DISMISSED = 4;
+     */
+    DISMISSED = 4
+}
+/**
+ * Describes the enum tank.books.v1.RecurringStatus.
+ */
+export declare const RecurringStatusSchema: GenEnum<RecurringStatus>;
+/**
  * @generated from service tank.books.v1.BooksService
  */
 export declare const BooksService: GenService<{
@@ -2592,5 +3077,29 @@ export declare const BooksService: GenService<{
         methodKind: "unary";
         input: typeof ListTransactionsRequestSchema;
         output: typeof ListTransactionsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.ListRecurring
+     */
+    listRecurring: {
+        methodKind: "unary";
+        input: typeof ListRecurringRequestSchema;
+        output: typeof ListRecurringResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.UpsertRecurring
+     */
+    upsertRecurring: {
+        methodKind: "unary";
+        input: typeof UpsertRecurringRequestSchema;
+        output: typeof UpsertRecurringResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.SetRecurringStatus
+     */
+    setRecurringStatus: {
+        methodKind: "unary";
+        input: typeof SetRecurringStatusRequestSchema;
+        output: typeof SetRecurringStatusResponseSchema;
     };
 }>;
