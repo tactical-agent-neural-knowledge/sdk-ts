@@ -77,7 +77,7 @@ export function RichTextViewNative({ richText, variant = "bodyMedium", ...p }) {
                             ? "right"
                             : "left";
                     const line = { borderColor: theme.colors.outlineVariant };
-                    return (_jsx(ScrollView, { horizontal: true, style: styles.tableScroll, testID: "rt-table", children: _jsxs(View, { style: [styles.table, line], children: [t.header ? (_jsx(View, { style: [styles.row, { backgroundColor: theme.colors.surfaceVariant }], children: span.map((c) => (_jsx(View, { style: styles.cell, children: _jsx(Text, { variant: variant, style: { fontWeight: "700", textAlign: align(c) }, children: elements(t.header?.cells[c]?.elements ?? []) }) }, c))) })) : null, t.rows.map((r, j) => (
+                    return (_jsx(ScrollView, { horizontal: true, showsHorizontalScrollIndicator: true, style: styles.tableScroll, testID: "rt-table", children: _jsxs(View, { style: [styles.table, line], onStartShouldSetResponder: claimTouch, onResponderTerminationRequest: claimTouch, testID: "rt-table-content", children: [t.header ? (_jsx(View, { style: [styles.row, { backgroundColor: theme.colors.surfaceVariant }], children: span.map((c) => (_jsx(View, { style: styles.cell, children: _jsx(Text, { variant: variant, style: { fontWeight: "700", textAlign: align(c) }, children: elements(t.header?.cells[c]?.elements ?? []) }) }, c))) })) : null, t.rows.map((r, j) => (
                                 // biome-ignore lint/suspicious/noArrayIndexKey: rows are positional
                                 _jsx(View, { style: [styles.row, styles.divided, line], children: span.map((c) => (_jsx(View, { style: styles.cell, children: _jsx(Text, { variant: variant, style: { textAlign: align(c) }, children: elements(r.cells[c]?.elements ?? []) }) }, c))) }, j)))] }) }, key));
                 }
@@ -88,6 +88,8 @@ export function RichTextViewNative({ richText, variant = "bodyMedium", ...p }) {
             }
         }) }));
 }
+/** Take the touch on touch-down, and give it up to the scroll view as soon as it asks. */
+const claimTouch = () => true;
 const styles = StyleSheet.create({
     stack: { gap: 6 },
     quote: { borderLeftWidth: 3, paddingLeft: 10 },
