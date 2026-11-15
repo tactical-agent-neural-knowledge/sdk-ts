@@ -1638,6 +1638,37 @@ export type GetUsageResponse = Message$1<"tank.ai.v1.GetUsageResponse"> & {
  */
 export declare const GetUsageResponseSchema: GenMessage<GetUsageResponse>;
 /**
+ * @generated from message tank.ai.v1.RecordAnswerSignalRequest
+ */
+export type RecordAnswerSignalRequest = Message$1<"tank.ai.v1.RecordAnswerSignalRequest"> & {
+    /**
+     * The assistant message.
+     *
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * "copy" (the whole answer), "copy_code" (one code block of it) or "share".
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+};
+/**
+ * Describes the message tank.ai.v1.RecordAnswerSignalRequest.
+ * Use `create(RecordAnswerSignalRequestSchema)` to create a new message.
+ */
+export declare const RecordAnswerSignalRequestSchema: GenMessage<RecordAnswerSignalRequest>;
+/**
+ * @generated from message tank.ai.v1.RecordAnswerSignalResponse
+ */
+export type RecordAnswerSignalResponse = Message$1<"tank.ai.v1.RecordAnswerSignalResponse"> & {};
+/**
+ * Describes the message tank.ai.v1.RecordAnswerSignalResponse.
+ * Use `create(RecordAnswerSignalResponseSchema)` to create a new message.
+ */
+export declare const RecordAnswerSignalResponseSchema: GenMessage<RecordAnswerSignalResponse>;
+/**
  * @generated from message tank.ai.v1.SetReadReceiptsRequest
  */
 export type SetReadReceiptsRequest = Message$1<"tank.ai.v1.SetReadReceiptsRequest"> & {
@@ -2827,5 +2858,20 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof ListMessagesRequestSchema;
         output: typeof ListMessagesResponseSchema;
+    };
+    /**
+     * A quiet signal about one of Neural's answers (2026-11-15): the person copied it or shared
+     * it. Kept for TANK Neural's evals and preference labels, never shown. Only the
+     * conversation's owner is recorded; anyone else, an unknown message or a person's own
+     * message changes nothing and is no error. Rate-limited per person. A regenerate is not
+     * sent: the server records it from SendMessage.regenerate_message_id, and a stop from
+     * StopReply.
+     *
+     * @generated from rpc tank.ai.v1.AiService.RecordAnswerSignal
+     */
+    recordAnswerSignal: {
+        methodKind: "unary";
+        input: typeof RecordAnswerSignalRequestSchema;
+        output: typeof RecordAnswerSignalResponseSchema;
     };
 }>;
