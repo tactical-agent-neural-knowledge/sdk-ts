@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/search/v1/search.proto.
  */
 export const file_tank_search_v1_search: GenFile = /*@__PURE__*/
-  fileDesc("Cht0YW5rL3NlYXJjaC92MS9zZWFyY2gucHJvdG8SDnRhbmsuc2VhcmNoLnYxIr0BCg1TZWFyY2hGaWx0ZXJzEhUKDWZyb21fdXNlcl9pZHMYASADKAkSFgoOaW5fY2hhbm5lbF9pZHMYAiADKAkSJgoDaGFzGAMgAygOMhkudGFuay5zZWFyY2gudjEuSGFzRmlsdGVyEioKBmJlZm9yZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKQoFYWZ0ZXIYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIqABCg1TZWFyY2hSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRINCgVxdWVyeRgCIAEoCRIuCgdmaWx0ZXJzGAMgASgLMh0udGFuay5zZWFyY2gudjEuU2VhcmNoRmlsdGVycxIOCgZjdXJzb3IYBCABKAkSDQoFbGltaXQYBSABKAUSCQoBcRgGIAEoCRIQCghzZW1hbnRpYxgHIAEoCCJtCglTZWFyY2hIaXQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKaGlnaGxpZ2h0cxgDIAMoCRINCgVzY29yZRgEIAEoASLKAQoOU2VhcmNoUmVzcG9uc2USJwoEaGl0cxgBIAMoCzIZLnRhbmsuc2VhcmNoLnYxLlNlYXJjaEhpdBITCgtuZXh0X2N1cnNvchgCIAEoCRIWCg50b3RhbF9lc3RpbWF0ZRgDIAEoAxI1Cg5wYXJzZWRfZmlsdGVycxgEIAEoCzIdLnRhbmsuc2VhcmNoLnYxLlNlYXJjaEZpbHRlcnMSFAoMcGFyc2VkX3F1ZXJ5GAUgASgJEhUKDXNlbWFudGljX3VzZWQYBiABKAgqhAEKCUhhc0ZpbHRlchIaChZIQVNfRklMVEVSX1VOU1BFQ0lGSUVEEAASFAoQSEFTX0ZJTFRFUl9GSUxFUxABEhQKEEhBU19GSUxURVJfTElOS1MQAhIYChRIQVNfRklMVEVSX1JFQUNUSU9OUxADEhUKEUhBU19GSUxURVJfQkxPQ0tTEAQyWAoNU2VhcmNoU2VydmljZRJHCgZTZWFyY2gSHS50YW5rLnNlYXJjaC52MS5TZWFyY2hSZXF1ZXN0Gh4udGFuay5zZWFyY2gudjEuU2VhcmNoUmVzcG9uc2VC0AEKEmNvbS50YW5rLnNlYXJjaC52MUILU2VhcmNoUHJvdG9QAVpTZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9zZWFyY2gvdjE7c2VhcmNodjGiAgNUU1iqAg5UYW5rLlNlYXJjaC5WMcoCDlRhbmtcU2VhcmNoXFYx4gIaVGFua1xTZWFyY2hcVjFcR1BCTWV0YWRhdGHqAhBUYW5rOjpTZWFyY2g6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
+  fileDesc("Cht0YW5rL3NlYXJjaC92MS9zZWFyY2gucHJvdG8SDnRhbmsuc2VhcmNoLnYxIr0BCg1TZWFyY2hGaWx0ZXJzEhUKDWZyb21fdXNlcl9pZHMYASADKAkSFgoOaW5fY2hhbm5lbF9pZHMYAiADKAkSJgoDaGFzGAMgAygOMhkudGFuay5zZWFyY2gudjEuSGFzRmlsdGVyEioKBmJlZm9yZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKQoFYWZ0ZXIYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIqABCg1TZWFyY2hSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRINCgVxdWVyeRgCIAEoCRIuCgdmaWx0ZXJzGAMgASgLMh0udGFuay5zZWFyY2gudjEuU2VhcmNoRmlsdGVycxIOCgZjdXJzb3IYBCABKAkSDQoFbGltaXQYBSABKAUSCQoBcRgGIAEoCRIQCghzZW1hbnRpYxgHIAEoCCJtCglTZWFyY2hIaXQSKQoHbWVzc2FnZRgBIAEoCzIYLnRhbmsubWVzc2FnZS52MS5NZXNzYWdlEhIKCmNoYW5uZWxfaWQYAiABKAkSEgoKaGlnaGxpZ2h0cxgDIAMoCRINCgVzY29yZRgEIAEoASLKAQoOU2VhcmNoUmVzcG9uc2USJwoEaGl0cxgBIAMoCzIZLnRhbmsuc2VhcmNoLnYxLlNlYXJjaEhpdBITCgtuZXh0X2N1cnNvchgCIAEoCRIWCg50b3RhbF9lc3RpbWF0ZRgDIAEoAxI1Cg5wYXJzZWRfZmlsdGVycxgEIAEoCzIdLnRhbmsuc2VhcmNoLnYxLlNlYXJjaEZpbHRlcnMSFAoMcGFyc2VkX3F1ZXJ5GAUgASgJEhUKDXNlbWFudGljX3VzZWQYBiABKAgihwEKGVJlY29yZFJlc3VsdE9wZW5lZFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgkKAXEYAiABKAkSEQoJcmVzdWx0X2lkGAMgASgJEgwKBHJhbmsYBCABKAUSEQoJc2hvd25faWRzGAUgAygJEhUKDXNlbWFudGljX3VzZWQYBiABKAgiHAoaUmVjb3JkUmVzdWx0T3BlbmVkUmVzcG9uc2UqhAEKCUhhc0ZpbHRlchIaChZIQVNfRklMVEVSX1VOU1BFQ0lGSUVEEAASFAoQSEFTX0ZJTFRFUl9GSUxFUxABEhQKEEhBU19GSUxURVJfTElOS1MQAhIYChRIQVNfRklMVEVSX1JFQUNUSU9OUxADEhUKEUhBU19GSUxURVJfQkxPQ0tTEAQyxQEKDVNlYXJjaFNlcnZpY2USRwoGU2VhcmNoEh0udGFuay5zZWFyY2gudjEuU2VhcmNoUmVxdWVzdBoeLnRhbmsuc2VhcmNoLnYxLlNlYXJjaFJlc3BvbnNlEmsKElJlY29yZFJlc3VsdE9wZW5lZBIpLnRhbmsuc2VhcmNoLnYxLlJlY29yZFJlc3VsdE9wZW5lZFJlcXVlc3QaKi50YW5rLnNlYXJjaC52MS5SZWNvcmRSZXN1bHRPcGVuZWRSZXNwb25zZULQAQoSY29tLnRhbmsuc2VhcmNoLnYxQgtTZWFyY2hQcm90b1ABWlNnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3NlYXJjaC92MTtzZWFyY2h2MaICA1RTWKoCDlRhbmsuU2VhcmNoLlYxygIOVGFua1xTZWFyY2hcVjHiAhpUYW5rXFNlYXJjaFxWMVxHUEJNZXRhZGF0YeoCEFRhbms6OlNlYXJjaDo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_message_v1_message]);
 
 /**
  * @generated from message tank.search.v1.SearchFilters
@@ -194,6 +194,74 @@ export const SearchResponseSchema: GenMessage<SearchResponse> = /*@__PURE__*/
   messageDesc(file_tank_search_v1_search, 3);
 
 /**
+ * A person opened a result (2026-11-15): which one, where it was in the list, and what the list
+ * showed, so the Vault's ranking can be measured. Kept for evals, never shown.
+ *
+ * @generated from message tank.search.v1.RecordResultOpenedRequest
+ */
+export type RecordResultOpenedRequest = Message<"tank.search.v1.RecordResultOpenedRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * The query as the person typed it (SearchRequest.q, or query when q was empty).
+   *
+   * @generated from field: string q = 2;
+   */
+  q: string;
+
+  /**
+   * The opened hit's message id.
+   *
+   * @generated from field: string result_id = 3;
+   */
+  resultId: string;
+
+  /**
+   * Its position in the list, from 0.
+   *
+   * @generated from field: int32 rank = 4;
+   */
+  rank: number;
+
+  /**
+   * Every hit the list showed, in order, at most 200; the opened one among them.
+   *
+   * @generated from field: repeated string shown_ids = 5;
+   */
+  shownIds: string[];
+
+  /**
+   * Whether the Vault's semantic half contributed (SearchResponse.semantic_used).
+   *
+   * @generated from field: bool semantic_used = 6;
+   */
+  semanticUsed: boolean;
+};
+
+/**
+ * Describes the message tank.search.v1.RecordResultOpenedRequest.
+ * Use `create(RecordResultOpenedRequestSchema)` to create a new message.
+ */
+export const RecordResultOpenedRequestSchema: GenMessage<RecordResultOpenedRequest> = /*@__PURE__*/
+  messageDesc(file_tank_search_v1_search, 4);
+
+/**
+ * @generated from message tank.search.v1.RecordResultOpenedResponse
+ */
+export type RecordResultOpenedResponse = Message<"tank.search.v1.RecordResultOpenedResponse"> & {
+};
+
+/**
+ * Describes the message tank.search.v1.RecordResultOpenedResponse.
+ * Use `create(RecordResultOpenedResponseSchema)` to create a new message.
+ */
+export const RecordResultOpenedResponseSchema: GenMessage<RecordResultOpenedResponse> = /*@__PURE__*/
+  messageDesc(file_tank_search_v1_search, 5);
+
+/**
  * @generated from enum tank.search.v1.HasFilter
  */
 export enum HasFilter {
@@ -240,6 +308,16 @@ export const SearchService: GenService<{
     methodKind: "unary";
     input: typeof SearchRequestSchema;
     output: typeof SearchResponseSchema;
+  },
+  /**
+   * Members of the workspace only; rate-limited per person. A failure is never shown.
+   *
+   * @generated from rpc tank.search.v1.SearchService.RecordResultOpened
+   */
+  recordResultOpened: {
+    methodKind: "unary";
+    input: typeof RecordResultOpenedRequestSchema;
+    output: typeof RecordResultOpenedResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_search_v1_search, 0);

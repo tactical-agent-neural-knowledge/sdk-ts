@@ -154,6 +154,62 @@ export type SearchResponse = Message<"tank.search.v1.SearchResponse"> & {
  */
 export declare const SearchResponseSchema: GenMessage<SearchResponse>;
 /**
+ * A person opened a result (2026-11-15): which one, where it was in the list, and what the list
+ * showed, so the Vault's ranking can be measured. Kept for evals, never shown.
+ *
+ * @generated from message tank.search.v1.RecordResultOpenedRequest
+ */
+export type RecordResultOpenedRequest = Message<"tank.search.v1.RecordResultOpenedRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * The query as the person typed it (SearchRequest.q, or query when q was empty).
+     *
+     * @generated from field: string q = 2;
+     */
+    q: string;
+    /**
+     * The opened hit's message id.
+     *
+     * @generated from field: string result_id = 3;
+     */
+    resultId: string;
+    /**
+     * Its position in the list, from 0.
+     *
+     * @generated from field: int32 rank = 4;
+     */
+    rank: number;
+    /**
+     * Every hit the list showed, in order, at most 200; the opened one among them.
+     *
+     * @generated from field: repeated string shown_ids = 5;
+     */
+    shownIds: string[];
+    /**
+     * Whether the Vault's semantic half contributed (SearchResponse.semantic_used).
+     *
+     * @generated from field: bool semantic_used = 6;
+     */
+    semanticUsed: boolean;
+};
+/**
+ * Describes the message tank.search.v1.RecordResultOpenedRequest.
+ * Use `create(RecordResultOpenedRequestSchema)` to create a new message.
+ */
+export declare const RecordResultOpenedRequestSchema: GenMessage<RecordResultOpenedRequest>;
+/**
+ * @generated from message tank.search.v1.RecordResultOpenedResponse
+ */
+export type RecordResultOpenedResponse = Message<"tank.search.v1.RecordResultOpenedResponse"> & {};
+/**
+ * Describes the message tank.search.v1.RecordResultOpenedResponse.
+ * Use `create(RecordResultOpenedResponseSchema)` to create a new message.
+ */
+export declare const RecordResultOpenedResponseSchema: GenMessage<RecordResultOpenedResponse>;
+/**
  * @generated from enum tank.search.v1.HasFilter
  */
 export declare enum HasFilter {
@@ -193,5 +249,15 @@ export declare const SearchService: GenService<{
         methodKind: "unary";
         input: typeof SearchRequestSchema;
         output: typeof SearchResponseSchema;
+    };
+    /**
+     * Members of the workspace only; rate-limited per person. A failure is never shown.
+     *
+     * @generated from rpc tank.search.v1.SearchService.RecordResultOpened
+     */
+    recordResultOpened: {
+        methodKind: "unary";
+        input: typeof RecordResultOpenedRequestSchema;
+        output: typeof RecordResultOpenedResponseSchema;
     };
 }>;
