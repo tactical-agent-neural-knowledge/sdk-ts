@@ -169,6 +169,48 @@ export function tasksByStage(tasks: readonly Task[]): Map<TaskStage, Task[]> {
   return out;
 }
 
+/** How the stage list in Command's modal is ordered. */
+export type TaskSort = "newest" | "oldest" | "title" | "tread";
+
+/** The sorts a person can pick, in the order the control shows them. */
+export const TASK_SORTS: readonly TaskSort[] = ["newest", "oldest", "title", "tread"];
+
+/** The time a sort reads: when a Done task was done, else when the task was asked. */
+function sortTime(t: Task): number {
+  return t.stage === TaskStage.DONE ? doneAt(t) : tsMs(t.createdAt);
+}
+
+/** A copy of the tasks in this order; ties keep a stable order by title then id. */
+export function sortTasks<T extends Task>(tasks: readonly T[], sort: TaskSort = "newest"): T[] {
+  const byText = (a: string, b: string) => a.localeCompare(b, undefined, { sensitivity: "base" });
+  const tie = (a: T, b: T) => byText(a.title, b.title) || byText(a.id, b.id);
+  return [...tasks].sort((a, b) => {
+    switch (sort) {
+      case "oldest":
+        return sortTime(a) - sortTime(b) || tie(a, b);
+      case "title":
+        return tie(a, b);
+      case "tread":
+        return byText(a.channelName, b.channelName) || sortTime(b) - sortTime(a) || tie(a, b);
+      default:
+        return sortTime(b) - sortTime(a) || tie(a, b);
+    }
+  });
+}
+
+/** The tasks whose title or Tread name has every word of the query (case-insensitive); a blank query keeps all. */
+export function searchTasks<T extends Pick<Task, "title" | "channelName">>(
+  tasks: readonly T[],
+  query: string,
+): T[] {
+  const words = query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return [...tasks];
+  return tasks.filter((t) => {
+    const hay = `${t.title} ${t.channelName}`.toLocaleLowerCase();
+    return words.every((w) => hay.includes(w));
+  });
+}
+
 /** How many tasks wait for a person to check them. */
 export function readyToCheckCount(tasks: readonly Task[]): number {
   return tasks.filter((t) => t.stage === TaskStage.READY_TO_CHECK).length;

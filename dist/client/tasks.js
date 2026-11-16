@@ -133,6 +133,39 @@ export function tasksByStage(tasks) {
         out.get(TASK_STAGES.includes(t.stage) ? t.stage : TaskStage.QUEUED)?.push(t);
     return out;
 }
+/** The sorts a person can pick, in the order the control shows them. */
+export const TASK_SORTS = ["newest", "oldest", "title", "tread"];
+/** The time a sort reads: when a Done task was done, else when the task was asked. */
+function sortTime(t) {
+    return t.stage === TaskStage.DONE ? doneAt(t) : tsMs(t.createdAt);
+}
+/** A copy of the tasks in this order; ties keep a stable order by title then id. */
+export function sortTasks(tasks, sort = "newest") {
+    const byText = (a, b) => a.localeCompare(b, undefined, { sensitivity: "base" });
+    const tie = (a, b) => byText(a.title, b.title) || byText(a.id, b.id);
+    return [...tasks].sort((a, b) => {
+        switch (sort) {
+            case "oldest":
+                return sortTime(a) - sortTime(b) || tie(a, b);
+            case "title":
+                return tie(a, b);
+            case "tread":
+                return byText(a.channelName, b.channelName) || sortTime(b) - sortTime(a) || tie(a, b);
+            default:
+                return sortTime(b) - sortTime(a) || tie(a, b);
+        }
+    });
+}
+/** The tasks whose title or Tread name has every word of the query (case-insensitive); a blank query keeps all. */
+export function searchTasks(tasks, query) {
+    const words = query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    if (words.length === 0)
+        return [...tasks];
+    return tasks.filter((t) => {
+        const hay = `${t.title} ${t.channelName}`.toLocaleLowerCase();
+        return words.every((w) => hay.includes(w));
+    });
+}
 /** How many tasks wait for a person to check them. */
 export function readyToCheckCount(tasks) {
     return tasks.filter((t) => t.stage === TaskStage.READY_TO_CHECK).length;
