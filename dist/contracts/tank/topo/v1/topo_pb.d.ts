@@ -723,6 +723,19 @@ export type GetBriefingResponse = Message<"tank.topo.v1.GetBriefingResponse"> & 
      * @generated from field: tank.topo.v1.BriefingSetup setup = 6;
      */
     setup?: BriefingSetup;
+    /**
+     * Your unread notifications (mentions, replies, reactions, task events), the same count the
+     * Activity badge shows. Zero means nothing waits for you there.
+     *
+     * @generated from field: int32 unread_notifications = 7;
+     */
+    unreadNotifications: number;
+    /**
+     * How the narrative came out; set only when narrate was requested.
+     *
+     * @generated from field: tank.topo.v1.NarrativeStatus narrative_status = 8;
+     */
+    narrativeStatus: NarrativeStatus;
 };
 /**
  * Describes the message tank.topo.v1.GetBriefingResponse.
@@ -1004,6 +1017,39 @@ export declare enum WaitingDirection {
  * Describes the enum tank.topo.v1.WaitingDirection.
  */
 export declare const WaitingDirectionSchema: GenEnum<WaitingDirection>;
+/**
+ * Why the narrative is what it is, so a client never mistakes a failure for "caught up".
+ *
+ * @generated from enum tank.topo.v1.NarrativeStatus
+ */
+export declare enum NarrativeStatus {
+    /**
+     * @generated from enum value: NARRATIVE_STATUS_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * Written; the narrative has text.
+     *
+     * @generated from enum value: NARRATIVE_STATUS_NARRATED = 1;
+     */
+    NARRATED = 1,
+    /**
+     * No unread messages and no unread notifications: the person really is caught up.
+     *
+     * @generated from enum value: NARRATIVE_STATUS_NOTHING_NEW = 2;
+     */
+    NOTHING_NEW = 2,
+    /**
+     * There is something unread but the narration failed or is not configured.
+     *
+     * @generated from enum value: NARRATIVE_STATUS_UNAVAILABLE = 3;
+     */
+    UNAVAILABLE = 3
+}
+/**
+ * Describes the enum tank.topo.v1.NarrativeStatus.
+ */
+export declare const NarrativeStatusSchema: GenEnum<NarrativeStatus>;
 /**
  * Marks are always read through the channel, so a Tread the caller cannot see
  * has no marks, and a mark can never carry content from one that they cannot.
