@@ -1,58 +1,53 @@
-# Neural Knowledge by TANK · refreshed 2026-10-31 · bf59edafde49
+# Neural Knowledge by TANK · refreshed 2026-11-16 · ad2838acc55d
 
-`@tactical-agent-neural-knowledge/sdk` is the single npm package that every TANK client app installs. It ships a typed Connect transport, a normalised realtime store, React hooks, design tokens, and block renderers for both web (MUI 7) and React Native (react-native-paper). The repo root is the package; there are no sub-packages or workspace monorepo machinery. Consumers install it as a git dependency pinned to a commit sha (`github:tactical-agent-neural-knowledge/sdk-ts#<sha>`), so a green `main` sha is the release artifact.
+sdk-ts is the TypeScript SDK package `@tactical-agent-neural-knowledge/sdk`, built with `tsc` into a committed `dist/`. It ships the Connect client, the realtime gateway client, a normalized store, React hooks, design tokens, and block renderers for web (MUI) and native (react-native-paper). Consumers `web`, `mobile` and `agent-runner` install it as a git dependency pinned to a commit sha, so a green `main` commit is the release.
 
 ## Commands
-
-```
-pnpm check          # everything CI runs: lint + typecheck + test + build + dist diff check
-pnpm lint           # biome check .
-pnpm typecheck      # tsc --noEmit
-pnpm test           # vitest run
-pnpm build          # rm -rf dist && tsc -p tsconfig.build.json  (commits dist/ afterward)
-UPDATE_FIXTURES=1 pnpm test          # regenerate fixtures/*.json after editing src/test/fixture-defs.ts
-pnpm vitest run -u src/blocks-web    # update renderer snapshots (deliberate visual change only)
-pnpm vitest run -u src/blocks-native # same for native
-pnpm sync-contracts <sha>            # vendor contracts at a new sha
-```
+- `pnpm install --frozen-lockfile`
+- `pnpm check` (lint, typecheck, test, build and the `dist/` diff: the CI gate)
+- `pnpm lint`
+- `pnpm typecheck`
+- `pnpm test` (Vitest, `vitest run`)
+- `pnpm vitest run <file>` (one test file)
+- `pnpm build` (rebuilds `dist/`; commit the result)
+- `pnpm format`
+- `UPDATE_FIXTURES=1 pnpm test` (regenerate block goldens after editing `src/test/fixture-defs.ts`)
+- `pnpm vitest run -u src/blocks-web` (renderer snapshots; only for a deliberate visual change)
+- `pnpm sync-contracts <contracts-sha>`
+- Scripts come from `package.json`; the refresh that wrote this file could not run them because its sandbox could not reach the npm registry.
 
 ## Areas
-
-| Path | What it is | Neuron file |
-|---|---|---|
-| `.` | Package root: package.json, tsconfigs, biome.json, pnpm-workspace.yaml, CLAUDE.md | `.neural/neurons/root.md` |
-| `.github` | CI workflow (ci.yml: lint/typecheck/test/build/dist-diff) and security workflow | `.neural/neurons/github.md` |
-| `scripts` | `sync-contracts.sh` — vendors contracts at a given sha | `.neural/neurons/scripts.md` |
-| `src` | Packaging guard (`src/exports.test.ts`); no index.ts | `.neural/neurons/src.md` |
-| `src/blocks` | Block types, builders, normalizer, richtext, runTone, plan, marks | `.neural/neurons/src-blocks.md` |
-| `src/blocks-native` | React Native Paper renderers (only place react-native may be imported) | `.neural/neurons/src-blocks-native.md` |
-| `src/blocks-web` | MUI 7 renderers, theme | `.neural/neurons/src-blocks-web.md` |
-| `src/client` | Transport, TankClient, TankStore, realtime, outbox, storage, upload, models, uuidv7 | `.neural/neurons/src-client.md` |
-| `src/contracts` | Vendored protobuf-es generated code + namespaced barrel + flat shims | `.neural/neurons/src-contracts.md` |
-| `src/design` | Tokens, fonts, MUI options, Paper theme, contrast utilities | `.neural/neurons/src-design.md` |
-| `src/react` | TankProvider, all hooks, composer history (recall) | `.neural/neurons/src-react.md` |
-| `src/test` | FakeGateway, fixture defs, react-native/paper/svg stubs for Vitest | `.neural/neurons/src-test.md` |
-| `src/topo` | Mark visibility rules, searchMarks | `.neural/neurons/src-topo.md` |
+- `.` package root: exports, build and CI config; read `.neural/neurons/root.md`
+- `.github` CI and security workflows; read `.neural/neurons/github.md`
+- `scripts` contracts vendoring script; read `.neural/neurons/scripts.md`
+- `src` exports guard test and folder map; read `.neural/neurons/src.md`
+- `src/blocks` block types, builders, normalizer, run tone; read `.neural/neurons/src-blocks.md`
+- `src/blocks-native` react-native-paper renderers, the only place React Native is imported; read `.neural/neurons/src-blocks-native.md`
+- `src/blocks-web` MUI renderers and rich text; read `.neural/neurons/src-blocks-web.md`
+- `src/client` transport, realtime client, store, outbox, storage, upload; read `.neural/neurons/src-client.md`
+- `src/contracts` vendored generated protobuf code and namespaced barrel; read `.neural/neurons/src-contracts.md`
+- `src/design` tokens, fonts, MUI options, Paper theme, contrast; read `.neural/neurons/src-design.md`
+- `src/react` provider and hooks; read `.neural/neurons/src-react.md`
+- `src/test` fake gateway, fixture definitions, react-native stand-ins; read `.neural/neurons/src-test.md`
+- `src/topo` mark search and visibility rules; read `.neural/neurons/src-topo.md`
 
 ## Rules
-
-From `CLAUDE.md` hard prohibitions:
-- Never edit `dist/` by hand — run `pnpm build`
-- Never edit `src/contracts/tank/` by hand — run `pnpm sync-contracts <sha>`
-- Never import `react-native` or `react-native-paper` outside `src/blocks-native` (`src/exports.test.ts` scans `src/` and `dist/`)
-- No `link:`/`file:` deps in a PR
-- Never push without committing the rebuilt `dist/`
-- Never add a non-optional peer that the client subpath would drag into node/mobile
-- Never log message bodies (`text` field) anywhere
-
-From `biome.json`: `noExplicitAny` is an error; `noNonNullAssertion` is off; `src/contracts/tank` and `dist` are excluded from linting.
-
-From `tsconfig.json`: strict + `noUncheckedIndexedAccess`, `noUnusedLocals/Parameters`, `verbatimModuleSyntax`, `NodeNext` — every relative import must end in `.js`; `import type` is required for type-only imports.
+- Do not edit `dist/` by hand (run `pnpm build`), and do not push without committing the rebuilt `dist/` (`CLAUDE.md`).
+- Do not edit `src/contracts/tank/` by hand (run the sync script) (`CLAUDE.md`).
+- Do not import `react-native` or `react-native-paper` outside `src/blocks-native`; `src/exports.test.ts` scans `src/` and `dist/` (`CLAUDE.md`).
+- Do not add `link:` or `file:` dependencies in a pull request (`CLAUDE.md`).
+- Do not add a non-optional peer that the client subpath would drag into node or mobile (`CLAUDE.md`).
+- Message bodies live only in the store; do not log `text` anywhere (`CLAUDE.md`).
+- Biome, not ESLint and Prettier; Vitest, not Jest (`CLAUDE.md`).
+- Guardrail 380454556067254325: a feature or bug fix must have parity across Android and iOS, Firefox, Safari and Chrome, and macOS, Linux and Windows, or be implemented in the same task.
+- A pull request never changes workflow files, anything under `.github/`, or `kit/` (platform guardrail).
 
 ## Before changing anything
-
-Run `pnpm lint && pnpm typecheck` first; both are fast. Run `pnpm vitest run <area>` for the area you changed. Run `pnpm build` before committing — CI will fail if `dist/` is out of date or has an untracked file. `src/exports.test.ts` guards the `package.json` exports shape and the react-native isolation contract; if it fails after your change, fix the subpath or the import before opening a PR. The two CI gates (ci.yml and security.yml) both run on every PR and push to main.
+- Run `pnpm check` before opening a pull request; it is the same gate CI runs, and each failure is fixed rather than skipped.
+- After any change under `src/`, run `pnpm build` and commit the rebuilt `dist/` in the same commit.
+- Change `src/contracts` only through `pnpm sync-contracts <sha>`; the pinned sha is in `src/contracts/VERSION`.
+- Keep `src/blocks-web` and `src/blocks-native` in step, and update snapshots only for a deliberate visual change.
+- TANK opens the pull request and merges it after a person approves; consumers bump the sha in their `package.json` once `main` is green.
 
 ## Neural Knowledge
-
-This file and everything under `.neural/` is generated by TANK and refreshed on every push to the default branch. Manual edits are overwritten on the next refresh. The neuron files under `.neural/neurons/` hold distilled facts about each area of the codebase — read the relevant neuron before making changes in that area.
+This file and the `.neural/` folder are generated by TANK. They live in `.neural/` and are refreshed on every default-branch push, so edits made by hand are overwritten; change the code or the source documents instead.

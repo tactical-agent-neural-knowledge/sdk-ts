@@ -1,15 +1,16 @@
 # Neurons · src/blocks-web
 
-refreshed 2026-10-31 · bf59edafde49
+refreshed 2026-11-16 · ad2838acc55d
 
-- `src/blocks-web/index.ts` exports `BlocksView`, `BlockView`, `BlocksViewProps`, `BlockActionEvent`, `BlockContext`, `Card`, `CiStatusBlock`, `ContextBlock`, `DiffPreviewBlock`, `DividerBlock`, `FilePreviewBlock`, `HeaderBlock`, `PlanCardBlock`, `SectionBlock`, `StatusCardBlock`, `ToolLogBlock`, `ActionsBlock`, `ActionButton`, `ApprovalPromptBlock`, `Mark`, `ElementView`, `RichTextView`, `RichTextViewProps`, `muiThemeOptions`, `tankTheme`.
-- `src/blocks-web/blocks.tsx` contains all block component implementations for MUI 7 + Emotion; `src/blocks-web/RichTextView.tsx` renders rich text inline; `src/blocks-web/theme.ts` exports `muiThemeOptions` and `tankTheme` built from `src/design` tokens.
-- `src/blocks-web/BlocksView.tsx` is the top-level renderer: takes `blocks: Blocks`, `context: BlockContext`, and an optional `onAction` callback; dispatches `BlockActionEvent` on button/check interactions.
-- Snapshot tests live in `src/blocks-web/__snapshots__/`; update with `pnpm vitest run -u src/blocks-web` only with a deliberate visual change.
-- `src/blocks-web/BlocksView.test.tsx` and `src/blocks-web/RichTextView.test.tsx` use `@testing-library/react` with jsdom; they import from `src/test/fixture-defs.ts` for golden blocks.
-- MUI and Emotion are optional peers (`peerDependenciesMeta`); `blocks-web` must not be imported in Node or React Native paths — it is guarded by the react-native isolation test in `src/exports.test.ts`.
-- `biome.json` turns off `noArrayIndexKey` for `src/blocks-web/**` because block lists are keyed by stable block array index by design.
+- Entry point is `BlocksView` in `BlocksView.tsx`; it renders a message's blocks with MUI and expects a ThemeProvider wrapped with `tankTheme` (`theme.ts`).
+- `BlockView` in `BlocksView.tsx` switches on `block.kind.case` for the 12 kinds and returns null for unknown kinds; a new kind is added there and in `blocks-native`.
+- Every block component lives in `blocks.tsx` (about 1,100 lines); `BlockContext` carries `resolveUser`, `resolveChannel`, `formatTime`, `planFile` and `revealKey`.
+- `RichTextView.tsx` renders rich text: `ElementView` per element, tables through `TableView` with `cellAlign`.
+- `theme.ts` augments the MUI `Palette` with the `tank` colours (panel, overlay, agent, ai, alert and text variants) through a module declaration.
+- Run-state colours come from `RUN_TONE_MUI_COLOR` in `src/blocks/runTone.ts`; do not add a local map.
+- Parity: a feature here must also land in `src/blocks-native` in the same change (guardrail 380454556067254325).
+- Snapshot tests: `BlocksView.test.tsx` renders each `FIXTURE_NAMES` entry and matches `innerHTML`; update only on a deliberate visual change (`pnpm vitest run -u src/blocks-web`).
+- `Mark.tsx` renders the marks defined in `src/blocks/marks.ts`; keep the mark list shared with native.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`
+- none run in this refresh: `pnpm install --frozen-lockfile` could not reach the npm registry from the sandbox (ENETUNREACH), so lint, typecheck and tests were not run here; CI runs `pnpm check`.
