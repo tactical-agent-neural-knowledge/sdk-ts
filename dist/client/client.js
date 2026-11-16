@@ -881,6 +881,7 @@ export class TankClient {
             details: input.details ?? "",
             startNow: input.startNow ?? false,
             notify: notifyRows(input.notify),
+            fileIds: input.fileIds ?? [],
         }));
     }
     /** Command's Add task: a new Tread whose goal is the title, with the task in it. */
@@ -891,6 +892,7 @@ export class TankClient {
             details: input.details ?? "",
             startNow: input.startNow ?? false,
             notify: notifyRows(input.notify),
+            fileIds: input.fileIds ?? [],
         });
         if (res.channel)
             this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });

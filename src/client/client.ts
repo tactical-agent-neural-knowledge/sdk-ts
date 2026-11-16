@@ -196,6 +196,8 @@ export interface CreateTaskInput {
   /** Start a run on it now instead of waiting in Queued. */
   startNow?: boolean;
   notify?: NotifyPick[];
+  /** Uploaded files to attach (at most 10); they join the Tread when the task starts. */
+  fileIds?: string[];
 }
 
 function notifyRows(picks: readonly NotifyPick[] | undefined): TaskNotify[] {
@@ -1143,6 +1145,7 @@ export class TankClient {
         details: input.details ?? "",
         startNow: input.startNow ?? false,
         notify: notifyRows(input.notify),
+        fileIds: input.fileIds ?? [],
       }),
     );
   }
@@ -1155,6 +1158,7 @@ export class TankClient {
       details: input.details ?? "",
       startNow: input.startNow ?? false,
       notify: notifyRows(input.notify),
+      fileIds: input.fileIds ?? [],
     });
     if (res.channel) this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
     return { task: this.keepTask(res), channel: res.channel };
