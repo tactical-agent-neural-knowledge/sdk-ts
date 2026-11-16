@@ -14,8 +14,42 @@ export interface TaskFilter {
     /** Only this Tread. */
     channelId?: string;
 }
-/** Tasks for Command: the filter, and Done trimmed to the window. */
-export declare function commandTasks(tasks: readonly Task[], filter?: TaskFilter, now?: number): Task[];
+/**
+ * Which Done tasks Command and the strip show: everything (the 30-day window on Command), a
+ * preset in the person's local time (weeks start on Monday), or picked days. Custom days are
+ * "YYYY-MM-DD" as a date input gives them; one day alone means that single day.
+ */
+export type DoneRange = {
+    kind: "all" | "today" | "yesterday" | "week" | "month";
+} | {
+    kind: "custom";
+    from?: string;
+    to?: string;
+};
+/** The ranges a person can pick without choosing days, in the order the chips show them. */
+export declare const DONE_RANGE_PRESETS: readonly ["all", "today", "yesterday", "week", "month"];
+export declare const DONE_ALL: DoneRange;
+/** A local date as "YYYY-MM-DD", the value of a date input. */
+export declare function localDateKey(ms: number): string;
+/** Whether the range keeps every Done task (so Command's 30-day window applies). */
+export declare function isAllDone(range: DoneRange | undefined): boolean;
+/**
+ * The span of a range in the person's local time: [start, end) in ms, or undefined for All
+ * (or custom days that are empty or not dates). A reversed pair is put the right way round.
+ */
+export declare function doneRangeBounds(range: DoneRange | undefined, now?: number): {
+    start: number;
+    end: number;
+} | undefined;
+/** When a task was done: checked, else moved to its stage, else last touched (what the 30-day trim reads). */
+export declare function doneAt(task: Pick<Task, "checkedAt" | "stageAt" | "updatedAt">): number;
+/** The Done tasks inside the range; non-Done tasks pass through. A task with no time is left out of a chosen range. */
+export declare function filterDone<T extends Pick<Task, "stage" | "checkedAt" | "stageAt" | "updatedAt">>(tasks: readonly T[], range: DoneRange | undefined, now?: number): T[];
+/**
+ * Tasks for Command: the filter, and Done trimmed to the window, or to the range when one is
+ * chosen (a chosen range replaces the window, so older days can be looked at).
+ */
+export declare function commandTasks(tasks: readonly Task[], filter?: TaskFilter, now?: number, doneRange?: DoneRange): Task[];
 /** Tasks grouped by stage, every stage present (possibly empty), each group oldest first. */
 export declare function tasksByStage(tasks: readonly Task[]): Map<TaskStage, Task[]>;
 /** How many tasks wait for a person to check them. */
