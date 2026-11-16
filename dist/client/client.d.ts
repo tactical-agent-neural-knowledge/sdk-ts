@@ -127,6 +127,8 @@ export interface CreateTaskInput {
     /** Start a run on it now instead of waiting in Queued. */
     startNow?: boolean;
     notify?: NotifyPick[];
+    /** Uploaded files to attach (at most 10); they join the Tread when the task starts. */
+    fileIds?: string[];
 }
 export interface ListRunsInput {
     workspaceId?: string;
@@ -402,6 +404,8 @@ export declare class TankClient {
     sendBackTask(taskId: string, text: string): Promise<Task>;
     /** Try again on a stuck task. */
     retryTask(taskId: string): Promise<Task>;
+    /** Stop a task at any stage short of Done: the live run is stopped and the task becomes Cancelled. */
+    cancelTask(taskId: string): Promise<Task>;
     /**
      * Send to: tell people in the task's Tread about it now, at its current stage, with an
      * optional note (500 characters at most; Activity only, never a push). The server refuses

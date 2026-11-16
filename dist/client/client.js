@@ -881,6 +881,7 @@ export class TankClient {
             details: input.details ?? "",
             startNow: input.startNow ?? false,
             notify: notifyRows(input.notify),
+            fileIds: input.fileIds ?? [],
         }));
     }
     /** Command's Add task: a new Tread whose goal is the title, with the task in it. */
@@ -891,6 +892,7 @@ export class TankClient {
             details: input.details ?? "",
             startNow: input.startNow ?? false,
             notify: notifyRows(input.notify),
+            fileIds: input.fileIds ?? [],
         });
         if (res.channel)
             this.store.dispatch({ type: "channels/upsert", channels: [res.channel] });
@@ -910,6 +912,10 @@ export class TankClient {
     /** Try again on a stuck task. */
     async retryTask(taskId) {
         return this.keepTask(await this.tasks.retryTask({ taskId }));
+    }
+    /** Stop a task at any stage short of Done: the live run is stopped and the task becomes Cancelled. */
+    async cancelTask(taskId) {
+        return this.keepTask(await this.tasks.cancelTask({ taskId }));
     }
     /**
      * Send to: tell people in the task's Tread about it now, at its current stage, with an

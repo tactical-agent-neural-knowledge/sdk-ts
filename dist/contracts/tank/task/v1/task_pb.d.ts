@@ -208,6 +208,12 @@ export type Task = Message<"tank.task.v1.Task"> & {
      * @generated from field: string link = 21;
      */
     link: string;
+    /**
+     * Files attached when the task was made, shared into its Tread when it starts.
+     *
+     * @generated from field: repeated string file_ids = 22;
+     */
+    fileIds: string[];
 };
 /**
  * Describes the message tank.task.v1.Task.
@@ -335,6 +341,12 @@ export type CreateTaskRequest = Message<"tank.task.v1.CreateTaskRequest"> & {
      * @generated from field: repeated tank.task.v1.TaskNotify notify = 6;
      */
     notify: TaskNotify[];
+    /**
+     * Finished uploads by the caller in this workspace; at most 10.
+     *
+     * @generated from field: repeated string file_ids = 7;
+     */
+    fileIds: string[];
 };
 /**
  * Describes the message tank.task.v1.CreateTaskRequest.
@@ -382,6 +394,10 @@ export type CreateTaskWithChannelRequest = Message<"tank.task.v1.CreateTaskWithC
      * @generated from field: repeated tank.task.v1.TaskNotify notify = 5;
      */
     notify: TaskNotify[];
+    /**
+     * @generated from field: repeated string file_ids = 6;
+     */
+    fileIds: string[];
 };
 /**
  * Describes the message tank.task.v1.CreateTaskWithChannelRequest.
@@ -529,6 +545,37 @@ export type RetryTaskResponse = Message<"tank.task.v1.RetryTaskResponse"> & {
  * Use `create(RetryTaskResponseSchema)` to create a new message.
  */
 export declare const RetryTaskResponseSchema: GenMessage<RetryTaskResponse>;
+/**
+ * Cancel a task at any stage short of DONE: a live run is stopped, and the task moves to
+ * CANCELLED. Cancelling a task that is already CANCELLED returns it unchanged.
+ *
+ * @generated from message tank.task.v1.CancelTaskRequest
+ */
+export type CancelTaskRequest = Message<"tank.task.v1.CancelTaskRequest"> & {
+    /**
+     * @generated from field: string task_id = 1;
+     */
+    taskId: string;
+};
+/**
+ * Describes the message tank.task.v1.CancelTaskRequest.
+ * Use `create(CancelTaskRequestSchema)` to create a new message.
+ */
+export declare const CancelTaskRequestSchema: GenMessage<CancelTaskRequest>;
+/**
+ * @generated from message tank.task.v1.CancelTaskResponse
+ */
+export type CancelTaskResponse = Message<"tank.task.v1.CancelTaskResponse"> & {
+    /**
+     * @generated from field: tank.task.v1.Task task = 1;
+     */
+    task?: Task;
+};
+/**
+ * Describes the message tank.task.v1.CancelTaskResponse.
+ * Use `create(CancelTaskResponseSchema)` to create a new message.
+ */
+export declare const CancelTaskResponseSchema: GenMessage<CancelTaskResponse>;
 /**
  * Replace the task's own picks (workspace rules are not affected).
  *
@@ -768,7 +815,11 @@ export declare enum TaskStage {
     /**
      * @generated from enum value: TASK_STAGE_STUCK = 5;
      */
-    STUCK = 5
+    STUCK = 5,
+    /**
+     * @generated from enum value: TASK_STAGE_CANCELLED = 6;
+     */
+    CANCELLED = 6
 }
 /**
  * Describes the enum tank.task.v1.TaskStage.
@@ -886,6 +937,14 @@ export declare const TaskService: GenService<{
         methodKind: "unary";
         input: typeof RetryTaskRequestSchema;
         output: typeof RetryTaskResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.task.v1.TaskService.CancelTask
+     */
+    cancelTask: {
+        methodKind: "unary";
+        input: typeof CancelTaskRequestSchema;
+        output: typeof CancelTaskResponseSchema;
     };
     /**
      * @generated from rpc tank.task.v1.TaskService.SetTaskNotify

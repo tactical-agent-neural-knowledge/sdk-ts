@@ -14,7 +14,7 @@ export { NEURAL_STARTERS, pickStarters, } from "./starters.js";
 export { MemoryStorage, storageKeys } from "./storage.js";
 export { IndexedDbStorage } from "./storage-idb.js";
 export { AGENT_STATUS_TTL_MS, envelopeToActions, initialState, notificationPagingKey, readReceipt, reduce, TankStore, TYPING_TTL_MS, tsMs, typingKey, unpackEnvelope, } from "./store.js";
-export { commandTasks, DONE_WINDOW_MS, effectiveView, isAgentInternal, notifyFor, ownNotify, readyToCheckCount, SEND_NOTE_MAX, simpleConversation, TASK_STAGES, taskForThread, taskSendCandidates, taskStageKey, tasksByStage, } from "./tasks.js";
+export { canCancelTask, commandTasks, DONE_WINDOW_MS, effectiveView, isAgentInternal, notifyFor, ownNotify, readyToCheckCount, SEND_NOTE_MAX, simpleConversation, TASK_STAGES, taskForThread, taskSendCandidates, taskStageKey, tasksByStage, } from "./tasks.js";
 export { createTankTransport } from "./transport.js";
 export { putUpload, UploadError, } from "./upload.js";
 export { cryptoRandomBytes, isUuidv7, uuidv7, uuidv7Time } from "./uuidv7.js";

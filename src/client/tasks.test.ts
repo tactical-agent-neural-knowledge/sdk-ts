@@ -14,6 +14,7 @@ import {
 import { EnvelopeSchema, TaskChangedSchema } from "../contracts/tank/events/v1/events_pb.js";
 import { MessageSchema } from "../contracts/tank/message/v1/message_pb.js";
 import {
+  type CreateTaskRequest,
   type CreateTaskWithChannelRequest,
   type Task,
   TaskNotifySchema,
@@ -24,6 +25,7 @@ import {
 import { createTankClient } from "./client.js";
 import { envelopeToActions, TankStore } from "./store.js";
 import {
+  canCancelTask,
   commandTasks,
   DONE_WINDOW_MS,
   effectiveView,
@@ -116,6 +118,7 @@ describe("task rules", () => {
       "ready_to_check",
       "done",
       "stuck",
+      "cancelled",
     ]);
   });
 
@@ -135,6 +138,27 @@ describe("task rules", () => {
     expect([...groups.keys()]).toEqual([...TASK_STAGES]);
     expect(groups.get(TaskStage.DONE)?.map((t) => t.id)).toEqual(["old", "new"]);
     expect(groups.get(TaskStage.STUCK)).toEqual([]);
+    expect(groups.get(TaskStage.CANCELLED)).toEqual([]);
+  });
+
+  it("keeps Cancelled in the same 30-day window as Done, and cancels anything short of Done", () => {
+    const now = T0 + DONE_WINDOW_MS + 10_000;
+    const list = [
+      task({ id: "gone", stage: TaskStage.CANCELLED, stageAt: timestampFromMs(T0) }),
+      task({ id: "fresh", stage: TaskStage.CANCELLED, stageAt: timestampFromMs(now - 1000) }),
+    ];
+    expect(commandTasks(list, {}, now).map((t) => t.id)).toEqual(["fresh"]);
+    expect(
+      tasksByStage(list)
+        .get(TaskStage.CANCELLED)
+        ?.map((t) => t.id),
+    ).toEqual(["gone", "fresh"]);
+    expect(taskStageKey(TaskStage.CANCELLED)).toBe("cancelled");
+    const can = (stage: TaskStage) => canCancelTask({ stage });
+    expect(
+      [TaskStage.QUEUED, TaskStage.IN_PROGRESS, TaskStage.READY_TO_CHECK, TaskStage.STUCK].map(can),
+    ).toEqual([true, true, true, true]);
+    expect([TaskStage.DONE, TaskStage.CANCELLED].map(can)).toEqual([false, false]);
   });
 
   it("reads the person's view, then the Tread's default, then Builder", () => {
@@ -232,7 +256,11 @@ describe("task rules", () => {
 
 describe("task client", () => {
   function makeClient() {
-    const calls: { created?: CreateTaskWithChannelRequest; pref?: SetChannelPreferenceRequest } = {};
+    const calls: {
+      created?: CreateTaskWithChannelRequest;
+      createdIn?: CreateTaskRequest;
+      pref?: SetChannelPreferenceRequest;
+    } = {};
     let failPref = false;
     const transport = createRouterTransport(({ service }) => {
       service(TaskService, {
@@ -244,13 +272,26 @@ describe("task client", () => {
           hasAgent: true,
           readyToCheck: 1,
         }),
+        createTask: (req) => {
+          calls.createdIn = req;
+          return {
+            task: task({ id: "t4", channelId: req.channelId, title: req.title, fileIds: req.fileIds }),
+          };
+        },
         createTaskWithChannel: (req) => {
           calls.created = req;
           return {
-            task: task({ id: "t3", channelId: "c9", title: req.title }),
+            task: task({ id: "t3", channelId: "c9", title: req.title, fileIds: req.fileIds }),
             channel: create(ChannelSchema, { id: "c9", workspaceId: "ws1", name: "fix-the-login-page" }),
           };
         },
+        cancelTask: (req) => ({
+          task: task({
+            id: req.taskId,
+            stage: TaskStage.CANCELLED,
+            updatedAt: timestampFromMs(T0 + 9),
+          }),
+        }),
         confirmTask: (req) => ({
           task: task({
             id: req.taskId,
@@ -288,6 +329,14 @@ describe("task client", () => {
     expect(client.store.getState().tasksById.t2?.stage).toBe(TaskStage.DONE);
   });
 
+  it("cancels a task and keeps what the server says", async () => {
+    const { client } = makeClient();
+    await client.listTasks({ workspaceId: "ws1" });
+    const t = await client.cancelTask("t1");
+    expect(t.stage).toBe(TaskStage.CANCELLED);
+    expect(client.store.getState().tasksById.t1?.stage).toBe(TaskStage.CANCELLED);
+  });
+
   it("adds a task with a Tread and notify picks", async () => {
     const { client, calls } = makeClient();
     const { task: t, channel } = await client.createTaskWithChannel({
@@ -303,6 +352,27 @@ describe("task client", () => {
     expect(t.channelId).toBe("c9");
     expect(channel?.id).toBe("c9");
     expect(client.store.getState().channels.c9?.name).toBe("fix-the-login-page");
+  });
+
+  it("sends the files a task is added with, in a Tread and in a new one", async () => {
+    const { client, calls } = makeClient();
+    const inTread = await client.createTask({
+      workspaceId: "ws1",
+      channelId: "c1",
+      title: "Look",
+      fileIds: ["f1", "f2"],
+    });
+    expect(calls.createdIn?.fileIds).toEqual(["f1", "f2"]);
+    expect(inTread.fileIds).toEqual(["f1", "f2"]);
+    const { task: t } = await client.createTaskWithChannel({
+      workspaceId: "ws1",
+      title: "Look",
+      fileIds: ["f3"],
+    });
+    expect(calls.created?.fileIds).toEqual(["f3"]);
+    expect(t.fileIds).toEqual(["f3"]);
+    await client.createTask({ workspaceId: "ws1", channelId: "c1", title: "No files" });
+    expect(calls.createdIn?.fileIds).toEqual([]);
   });
 
   it("switches the view at once and rolls back on error", async () => {
