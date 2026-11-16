@@ -915,6 +915,24 @@ export type WorkspaceRow = Message<"tank.platform.v1.WorkspaceRow"> & {
      * @generated from field: double effective_markup = 19;
      */
     effectiveMarkup: number;
+    /**
+     * premium without a paid subscription: no agent time included each month
+     *
+     * @generated from field: bool fee_waived = 20;
+     */
+    feeWaived: boolean;
+    /**
+     * its agents run off a balance
+     *
+     * @generated from field: bool agent_time_prepaid = 21;
+     */
+    agentTimePrepaid: boolean;
+    /**
+     * what its agents may still spend now; meaningful when prepaid
+     *
+     * @generated from field: int64 agent_time_available_cents = 22;
+     */
+    agentTimeAvailableCents: bigint;
 };
 /**
  * Describes the message tank.platform.v1.WorkspaceRow.
@@ -1445,12 +1463,112 @@ export type GetWorkspaceResponse = Message<"tank.platform.v1.GetWorkspaceRespons
      * @generated from field: repeated tank.platform.v1.MarkupChange markup_history = 9;
      */
     markupHistory: MarkupChange[];
+    /**
+     * @generated from field: tank.platform.v1.WorkspaceAgentTime agent_time = 10;
+     */
+    agentTime?: WorkspaceAgentTime;
 };
 /**
  * Describes the message tank.platform.v1.GetWorkspaceResponse.
  * Use `create(GetWorkspaceResponseSchema)` to create a new message.
  */
 export declare const GetWorkspaceResponseSchema: GenMessage<GetWorkspaceResponse>;
+/**
+ * WorkspaceAgentTime is a workspace's agent time as the console shows it: the balance a
+ * run draws on and what put it there. A workspace that is not prepaid, or is no charge,
+ * is never stopped, whatever the balance says.
+ *
+ * @generated from message tank.platform.v1.WorkspaceAgentTime
+ */
+export type WorkspaceAgentTime = Message<"tank.platform.v1.WorkspaceAgentTime"> & {
+    /**
+     * @generated from field: bool prepaid = 1;
+     */
+    prepaid: boolean;
+    /**
+     * @generated from field: bool no_charge = 2;
+     */
+    noCharge: boolean;
+    /**
+     * no agent time included each month
+     *
+     * @generated from field: bool fee_waived = 3;
+     */
+    feeWaived: boolean;
+    /**
+     * what the plan includes each month (0 when waived or free)
+     *
+     * @generated from field: int64 included_cents = 4;
+     */
+    includedCents: bigint;
+    /**
+     * @generated from field: int64 included_left_cents = 5;
+     */
+    includedLeftCents: bigint;
+    /**
+     * bought or given, less what was used past the included amount
+     *
+     * @generated from field: int64 balance_cents = 6;
+     */
+    balanceCents: bigint;
+    /**
+     * included_left + balance
+     *
+     * @generated from field: int64 available_cents = 7;
+     */
+    availableCents: bigint;
+    /**
+     * @generated from field: int64 used_this_month_cents = 8;
+     */
+    usedThisMonthCents: bigint;
+    /**
+     * no run may start
+     *
+     * @generated from field: bool blocked = 9;
+     */
+    blocked: boolean;
+    /**
+     * newest first, at most 50: purchases, refills and what was given
+     *
+     * @generated from field: repeated tank.platform.v1.AgentTimeGift history = 10;
+     */
+    history: AgentTimeGift[];
+};
+/**
+ * Describes the message tank.platform.v1.WorkspaceAgentTime.
+ * Use `create(WorkspaceAgentTimeSchema)` to create a new message.
+ */
+export declare const WorkspaceAgentTimeSchema: GenMessage<WorkspaceAgentTime>;
+/**
+ * AgentTimeGift is one addition to (or, negative, removal from) the balance.
+ *
+ * @generated from message tank.platform.v1.AgentTimeGift
+ */
+export type AgentTimeGift = Message<"tank.platform.v1.AgentTimeGift"> & {
+    /**
+     * purchase | auto_refill | adjustment
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * @generated from field: int64 cents = 2;
+     */
+    cents: bigint;
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 3;
+     */
+    at?: Timestamp;
+    /**
+     * @generated from field: string note = 4;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.platform.v1.AgentTimeGift.
+ * Use `create(AgentTimeGiftSchema)` to create a new message.
+ */
+export declare const AgentTimeGiftSchema: GenMessage<AgentTimeGift>;
 /**
  * Claude5Spend is a workspace's spend on the Claude 5 family this calendar month (UTC),
  * at what the model costs TANK, against the cap a super admin set (2026-11-12). At or
@@ -2652,6 +2770,9 @@ export declare const StartEvalRunResponseSchema: GenMessage<StartEvalRunResponse
 /**
  * SetWorkspacePlan moves a workspace between free and premium. Premium provisions its
  * agent. Nothing is charged or refunded: Stripe and the App Store are not touched.
+ * A workspace made premium here with no paid subscription has its fee waived: no agent
+ * time is included each month, so its agents run only on time given or bought. A paid
+ * subscription starting later ends the waiver.
  *
  * @generated from message tank.platform.v1.SetWorkspacePlanRequest
  */
@@ -2827,6 +2948,54 @@ export type SetWorkspaceNoChargeResponse = Message<"tank.platform.v1.SetWorkspac
  */
 export declare const SetWorkspaceNoChargeResponseSchema: GenMessage<SetWorkspaceNoChargeResponse>;
 /**
+ * GiveAgentTime adds agent time to a workspace's balance without a payment (Robby,
+ * 2026-11-16: a few dollars for a new customer, more when one runs out, or a top-up for
+ * one that buys its own). The balance rises by cents at once and a workspace that was
+ * stopped for having none may run again. A negative cents takes back what was given by
+ * mistake, never below a balance of zero. The workspace is put on prepaid agent time if
+ * it was not. An addition is listed in the workspace's billing history as given, with
+ * the note. Recorded as agent_time.bought with kind adjustment in the workspace's log.
+ *
+ * @generated from message tank.platform.v1.GiveAgentTimeRequest
+ */
+export type GiveAgentTimeRequest = Message<"tank.platform.v1.GiveAgentTimeRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * not zero; at most 1,000,000 either way
+     *
+     * @generated from field: int64 cents = 2;
+     */
+    cents: bigint;
+    /**
+     * why; the workspace's admins read it in billing history
+     *
+     * @generated from field: string note = 3;
+     */
+    note: string;
+};
+/**
+ * Describes the message tank.platform.v1.GiveAgentTimeRequest.
+ * Use `create(GiveAgentTimeRequestSchema)` to create a new message.
+ */
+export declare const GiveAgentTimeRequestSchema: GenMessage<GiveAgentTimeRequest>;
+/**
+ * @generated from message tank.platform.v1.GiveAgentTimeResponse
+ */
+export type GiveAgentTimeResponse = Message<"tank.platform.v1.GiveAgentTimeResponse"> & {
+    /**
+     * @generated from field: tank.platform.v1.WorkspaceAgentTime agent_time = 1;
+     */
+    agentTime?: WorkspaceAgentTime;
+};
+/**
+ * Describes the message tank.platform.v1.GiveAgentTimeResponse.
+ * Use `create(GiveAgentTimeResponseSchema)` to create a new message.
+ */
+export declare const GiveAgentTimeResponseSchema: GenMessage<GiveAgentTimeResponse>;
+/**
  * SetWorkspaceMarkup adds a row to a workspace's markup schedule: from effective_from
  * (empty is now) its agent usage is priced at markup times raw cost. Rows are added and
  * never edited, so usage before the date keeps the rate it was priced at. markup must be
@@ -2934,6 +3103,8 @@ export declare const SetWorkspaceClaude5CapResponseSchema: GenMessage<SetWorkspa
  * workspaces he uses himself, made from the console rather than tankctl). It is made
  * exactly as the app makes one (its owner and #general), then given its plan (premium
  * provisions its agent, as SetWorkspacePlan does) and, when asked, marked no charge.
+ * A premium workspace made here pays no subscription, so unless it is no charge its fee
+ * is waived and it has no agent time until some is given (agent_time_cents) or bought.
  * Recorded as operator.workspace.created in the new workspace's log and the platform's.
  * A slug already in use is ALREADY_EXISTS.
  *
@@ -2962,6 +3133,12 @@ export type CreateWorkspaceRequest = Message<"tank.platform.v1.CreateWorkspaceRe
      * @generated from field: bool no_charge = 4;
      */
     noCharge: boolean;
+    /**
+     * agent time given at the start, as GiveAgentTime; 0 gives none
+     *
+     * @generated from field: int64 agent_time_cents = 5;
+     */
+    agentTimeCents: bigint;
 };
 /**
  * Describes the message tank.platform.v1.CreateWorkspaceRequest.
@@ -3153,6 +3330,14 @@ export declare const PlatformService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceNoChargeRequestSchema;
         output: typeof SetWorkspaceNoChargeResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.platform.v1.PlatformService.GiveAgentTime
+     */
+    giveAgentTime: {
+        methodKind: "unary";
+        input: typeof GiveAgentTimeRequestSchema;
+        output: typeof GiveAgentTimeResponseSchema;
     };
     /**
      * @generated from rpc tank.platform.v1.PlatformService.SetWorkspaceMarkup
