@@ -1,17 +1,15 @@
 # Neurons · src/contracts
 
-refreshed 2026-10-31 · bf59edafde49
+refreshed 2026-11-16 · ad2838acc55d
 
-- `src/contracts/VERSION` records the contracts repo commit this vendoring was cut from: currently `727058f2fd99` (adds `OpenThread` to `AgentService`); bump by running `pnpm sync-contracts <new-sha>`.
-- `src/contracts/index.ts` is the namespaced barrel: each package exported as a named namespace (`agent`, `auth`, `blocks`, `channel`, `events`, `files`, `huddle`, `message`, `notification`, `presence`, `realtime`, `richtext`, `search`, `workspace`) to avoid cross-package name collisions like `SetStatusRequest`. **`agentops`, `agentctl`, and `crew` are vendored but not yet in this barrel.**
-- `src/contracts/tank/agent/v1/agent_pb.ts` exports `AgentService` (the main agent control service), `Run`, `RunSchema`, `RunState` enum, `TreadPlan`, `TreadPlanSchema`, `OpenThreadRequest/Response` (added in latest sync), `StartRun/StopRun/Heartbeat/SetStatus/SetProductBrand/SetProductLanding/RecordProductFinding/GetRun/ListRuns` — all RPCs TANK's runner calls.
-- `src/contracts/tank/agentops/v1/agentops_pb.ts` is the agent-ops analytics/management layer: `ToolPolicy`, `Envelope` (cost summary), `Member` (agentops member with spend/run counts), `MemberRecord`, `KindRecord`, `Team`, `Shift`, `Claim` — not yet imported by `src/client/`.
-- `src/contracts/tank/agentctl/v1/agentctl_pb.ts` is the internal agent control/handoff protocol: `Attachment`, `ThreadMessage`, `PolicySummary`, `RunContext`, `TeamContext`, `ClaimItem`, `HeldClaim`, `ClaimRequest/Response`, `ReleaseClaimsRequest/Response`, `CheckClaimRequest/Response`, `ListClaimsRequest/Response` — not yet imported by `src/client/`.
-- `src/contracts/tank/crew/v1/crew_pb.ts` is the Crew AI-swarm management service: `CrewService` with `ListCrew`, `AddMember`, `UpdateMember`, `RemoveMember`; `Member` has `id`, `agentId`, `principalId`, `role`, `title`, `handle`, `skill`, `enabled`, `treads` (enum), `channelIds`, `activity`, `dailyCapUsd`, `concurrentCap`, and spend/run stats; `Preset` for template crew configs; `Treads` enum (`ALL` / `SELECTED`); `Activity` enum (MENTIONED / LOW / NORMAL / HIGH) — not yet imported by `src/client/`.
-- Hand-editing anything under `src/contracts/tank/` is a hard prohibition; run `pnpm sync-contracts <sha>` instead — the script also regenerates the flat shims.
-- `src/contracts/tank/events/v1/events_pb.ts` is the closed event union that feeds `TankState`; every `$typeName` in `EventPayload` must be a literal string for discriminated-union `switch` narrowing.
-- The flat shims (e.g. `src/contracts/message.ts`) re-export specific named symbols from the deep generated paths so `./contracts/message` resolves as the `./contracts/*` wildcard export.
+- `src/contracts/tank/**` (84 files) is vendored generated code from the contracts repo at the sha in `src/contracts/VERSION`; never edit it, and rerun `pnpm sync-contracts <sha>` instead.
+- `scripts/sync-contracts.sh` fails with "run 'make gen' in contracts first" when `gen/ts/src/tank` is missing at the sha; that is a contracts-repo problem, not a local one.
+- `src/contracts/index.ts` is the hand-maintained namespaced barrel: `export * as presence from ...`, one line per package, 17 packages today; same-named messages (for example `SetStatusRequest` in presence and agent) are reached only through their namespace.
+- The barrel is a subset: `client.ts` imports `ai`, `billing`, `command`, `environment`, `hosting` and `monitor` straight from `tank/<pkg>/v1/*_pb.js`; add a barrel line when a new package needs a namespace.
+- The flat shims `src/contracts/<pkg>.ts` are generated per package and exist so consumers can import `@tactical-agent-neural-knowledge/sdk/contracts/<pkg>`.
+- Generated `*_pb.ts` files export `*Schema` values for `create` and `fromJson`/`toJson` from `@bufbuild/protobuf` v2; the store keeps these shapes directly.
+- Hot files named in the map: `ai_pb.ts`, `agentctl_pb.ts`, `platform_pb.ts`, `agent_pb.ts`, `apps_pb.ts`.
+- Contract changes are additive by convention in this repo's history (commit titles such as "contracts 30277be: workspace markup schedule (additive)"); a removed or renamed field is a breaking change for all four consumers.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`
+- none run in this refresh: `pnpm install --frozen-lockfile` could not reach the npm registry from the sandbox (ENETUNREACH), so lint, typecheck and tests were not run here; CI runs `pnpm check`.

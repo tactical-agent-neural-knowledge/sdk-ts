@@ -1,14 +1,14 @@
 # Neurons · src/test
 
-refreshed 2026-10-31 · bf59edafde49
+refreshed 2026-11-16 · ad2838acc55d
 
-- `src/test/` is excluded from `tsconfig.build.json` entirely; nothing here reaches `dist/`; all imports from `src/test/` are test-only by construction.
-- `src/test/fake-gateway.ts` exports `FakeGateway` and `FakeConn`. `FakeGateway.start(opts)` spins up an in-process `ws` WebSocketServer on a random port; `FakeConn` records every `ClientFrame` the client sends and tracks per-workspace Resume cursors in `resumeCursors: Record<string, bigint>`. `FakeGatewayOptions` lets tests control which tokens are accepted and which session ids trigger `ResyncRequired`.
-- `FakeGateway` maintains a per-workspace event log (`log: Map<string, Array<{cursor, envelope}>>`) so Resume can replay missed envelopes; used in `src/client/client.test.ts` to test gap-buffer and resume logic.
-- `src/test/fixture-defs.ts` exports `fixtureDefs: Record<string, () => Blocks>` — the eight golden block card factories (plan, statusCard, ciStatus, diffPreview, toolLog, approvalPrompt, context, actions). Edit here, then run `UPDATE_FIXTURES=1 pnpm test` to regenerate `fixtures/*.json`.
-- `src/test/mocks/react-native.tsx` is a partial stub of `react-native` for Vitest; `react-native-paper.tsx` stubs the Paper components `blocks-native` uses; `react-native-svg.tsx` stubs SVG primitives. All three are aliased in `vitest.config.ts` and must not be imported in production code.
-- `vitest.config.ts` sets up the module name mapper for the three RN stubs, configures jsdom for `src/blocks-web/**` and `src/react/**` tests, and sets `TEST_TRANSPORT` for `src/client/` integration tests.
+- `src/test/fake-gateway.ts` `FakeGateway` (line 49) is a `ws` server that speaks the binary Connect realtime frames; it records each connection's `received` client frames and pushes `Event` frames to tests.
+- `fakeMessage()` builds a `Message` fixture with a fixed shape; `resetSeq()` resets the gateway sequence counters between tests.
+- `src/test/fixture-defs.ts` maps names to block builders (`fixtureDefs`, line 22); `FIXTURE_NAMES` drives the snapshot tests in `blocks-web` and `blocks-native`, so editing a fixture changes snapshots.
+- Regenerate the golden JSON in the repo-root `fixtures/` folder after editing a fixture with `UPDATE_FIXTURES=1 pnpm test` (`CLAUDE.md`, command vocabulary).
+- `src/test/mocks/react-native.tsx` renders host components as plain elements, makes `StyleSheet.create` the identity and records `Alert` and `Linking` calls; these are aliased in the Vitest config and never built.
+- `src/test/mocks/react-native-paper.tsx` and `react-native-svg.tsx` are the matching stand-ins; extend them only for what `src/blocks-native` actually touches.
+- `src/test/richtext-markdown.ts` exports `usageReport`, a `RichText` fixture for rich text rendering tests.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`
+- none run in this refresh: `pnpm install --frozen-lockfile` could not reach the npm registry from the sandbox (ENETUNREACH), so lint, typecheck and tests were not run here; CI runs `pnpm check`.
