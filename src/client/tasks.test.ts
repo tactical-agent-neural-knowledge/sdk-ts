@@ -26,8 +26,14 @@ import { envelopeToActions, TankStore } from "./store.js";
 import {
   commandTasks,
   DONE_WINDOW_MS,
+  type DoneRange,
+  doneAt,
+  doneRangeBounds,
   effectiveView,
+  filterDone,
   isAgentInternal,
+  isAllDone,
+  localDateKey,
   notifyFor,
   ownNotify,
   readyToCheckCount,
@@ -376,5 +382,112 @@ describe("Send to and the task link", () => {
   it("carries the server's link on a task", () => {
     const t = create(TaskSchema, { id: "t1", link: "https://app.tank.chat/w/acme/c/c1?task=t1" });
     expect(t.link).toBe("https://app.tank.chat/w/acme/c/c1?task=t1");
+  });
+});
+
+describe("done range", () => {
+  // Wednesday 18 November 2026, noon, local time.
+  const now = new Date(2026, 10, 18, 12).getTime();
+  const at = (y: number, m: number, d: number, h = 12) => new Date(y, m - 1, d, h).getTime();
+  const done = (id: string, ms: number) =>
+    task({ id, stage: TaskStage.DONE, checkedAt: timestampFromMs(ms) });
+  const ids = (list: Task[]) => list.map((t) => t.id);
+
+  const list = [
+    done("today", at(2026, 11, 18, 1)),
+    done("yesterday", at(2026, 11, 17, 23)),
+    done("monday", at(2026, 11, 16, 0)),
+    done("sunday", at(2026, 11, 15, 23)),
+    done("nov1", at(2026, 11, 1, 0)),
+    done("oct31", at(2026, 10, 31, 23)),
+    done("lastyear", at(2025, 12, 31, 12)),
+    task({ id: "open", stage: TaskStage.IN_PROGRESS }),
+  ];
+  const pick = (range: DoneRange | undefined) =>
+    ids(filterDone(list, range, now)).filter((i) => i !== "open");
+
+  it("keeps everything for All, no range or empty days", () => {
+    expect(filterDone(list, undefined, now)).toHaveLength(list.length);
+    expect(filterDone(list, { kind: "all" }, now)).toHaveLength(list.length);
+    expect(filterDone(list, { kind: "custom" }, now)).toHaveLength(list.length);
+    expect(filterDone(list, { kind: "custom", from: "nope" }, now)).toHaveLength(list.length);
+    expect(isAllDone({ kind: "custom", from: "" })).toBe(true);
+    expect(isAllDone({ kind: "today" })).toBe(false);
+  });
+
+  it("cuts each preset at local midnight", () => {
+    expect(pick({ kind: "today" })).toEqual(["today"]);
+    expect(pick({ kind: "yesterday" })).toEqual(["yesterday"]);
+    expect(pick({ kind: "week" })).toEqual(["today", "yesterday", "monday"]);
+    expect(pick({ kind: "month" })).toEqual(["today", "yesterday", "monday", "sunday", "nov1"]);
+  });
+
+  it("never drops a task that is not Done", () => {
+    expect(ids(filterDone(list, { kind: "today" }, now))).toContain("open");
+  });
+
+  it("starts the week on Monday, also when today is Sunday or Monday", () => {
+    const sunday = at(2026, 11, 22);
+    expect(doneRangeBounds({ kind: "week" }, sunday)).toEqual({
+      start: at(2026, 11, 16, 0),
+      end: at(2026, 11, 23, 0),
+    });
+    const monday = at(2026, 11, 16);
+    expect(doneRangeBounds({ kind: "week" }, monday)?.start).toBe(at(2026, 11, 16, 0));
+  });
+
+  it("crosses a month and a year boundary", () => {
+    expect(doneRangeBounds({ kind: "yesterday" }, at(2026, 1, 1))).toEqual({
+      start: at(2025, 12, 31, 0),
+      end: at(2026, 1, 1, 0),
+    });
+    expect(doneRangeBounds({ kind: "month" }, at(2026, 12, 31))).toEqual({
+      start: at(2026, 12, 1, 0),
+      end: at(2027, 1, 1, 0),
+    });
+    expect(doneRangeBounds({ kind: "week" }, at(2026, 1, 1))?.start).toBe(at(2025, 12, 29, 0));
+  });
+
+  it("takes one picked date as that single day, and two as an inclusive range", () => {
+    expect(pick({ kind: "custom", from: "2026-11-17" })).toEqual(["yesterday"]);
+    expect(pick({ kind: "custom", to: "2026-11-17" })).toEqual(["yesterday"]);
+    expect(pick({ kind: "custom", from: "2026-11-15", to: "2026-11-16" })).toEqual(["monday", "sunday"]);
+  });
+
+  it("puts a reversed range the right way round", () => {
+    expect(pick({ kind: "custom", from: "2026-11-16", to: "2026-11-15" })).toEqual(["monday", "sunday"]);
+  });
+
+  it("reaches past the 30-day window and refuses impossible dates", () => {
+    expect(pick({ kind: "custom", from: "2025-12-31" })).toEqual(["lastyear"]);
+    expect(doneRangeBounds({ kind: "custom", from: "2026-02-31" }, now)).toBeUndefined();
+  });
+
+  it("leaves a Done task with no time out of a chosen range", () => {
+    const blank = task({ id: "blank", stage: TaskStage.DONE, updatedAt: undefined });
+    expect(doneAt(blank)).toBe(0);
+    expect(filterDone([blank], { kind: "month" }, now)).toEqual([]);
+    expect(filterDone([blank], { kind: "all" }, now)).toEqual([blank]);
+  });
+
+  it("falls back from checkedAt to stageAt to updatedAt", () => {
+    const t = at(2026, 11, 18, 3);
+    expect(doneAt(task({ stage: TaskStage.DONE, stageAt: timestampFromMs(t) }))).toBe(t);
+    expect(doneAt(task({ stage: TaskStage.DONE, updatedAt: timestampFromMs(t) }))).toBe(t);
+  });
+
+  it("lets Command take a range in place of the 30-day window", () => {
+    const all = commandTasks(list, {}, now);
+    expect(ids(all)).toContain("nov1");
+    expect(ids(all)).not.toContain("lastyear");
+    expect(ids(commandTasks(list, {}, now, { kind: "today" })).filter((i) => i !== "open")).toEqual([
+      "today",
+    ]);
+    expect(ids(commandTasks(list, { channelId: "zzz" }, now, { kind: "today" }))).toEqual([]);
+    expect(ids(commandTasks(list, {}, now, { kind: "custom", from: "2025-12-31" }))).toContain("lastyear");
+  });
+
+  it("formats a local date as a date input does", () => {
+    expect(localDateKey(at(2026, 3, 4))).toBe("2026-03-04");
   });
 });
