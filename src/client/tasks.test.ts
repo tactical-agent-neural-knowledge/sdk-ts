@@ -14,6 +14,7 @@ import {
 import { EnvelopeSchema, TaskChangedSchema } from "../contracts/tank/events/v1/events_pb.js";
 import { MessageSchema } from "../contracts/tank/message/v1/message_pb.js";
 import {
+  type CreateTaskRequest,
   type CreateTaskWithChannelRequest,
   type Task,
   TaskNotifySchema,
@@ -238,7 +239,11 @@ describe("task rules", () => {
 
 describe("task client", () => {
   function makeClient() {
-    const calls: { created?: CreateTaskWithChannelRequest; pref?: SetChannelPreferenceRequest } = {};
+    const calls: {
+      created?: CreateTaskWithChannelRequest;
+      createdIn?: CreateTaskRequest;
+      pref?: SetChannelPreferenceRequest;
+    } = {};
     let failPref = false;
     const transport = createRouterTransport(({ service }) => {
       service(TaskService, {
@@ -250,10 +255,16 @@ describe("task client", () => {
           hasAgent: true,
           readyToCheck: 1,
         }),
+        createTask: (req) => {
+          calls.createdIn = req;
+          return {
+            task: task({ id: "t4", channelId: req.channelId, title: req.title, fileIds: req.fileIds }),
+          };
+        },
         createTaskWithChannel: (req) => {
           calls.created = req;
           return {
-            task: task({ id: "t3", channelId: "c9", title: req.title }),
+            task: task({ id: "t3", channelId: "c9", title: req.title, fileIds: req.fileIds }),
             channel: create(ChannelSchema, { id: "c9", workspaceId: "ws1", name: "fix-the-login-page" }),
           };
         },
@@ -309,6 +320,27 @@ describe("task client", () => {
     expect(t.channelId).toBe("c9");
     expect(channel?.id).toBe("c9");
     expect(client.store.getState().channels.c9?.name).toBe("fix-the-login-page");
+  });
+
+  it("sends the files a task is added with, in a Tread and in a new one", async () => {
+    const { client, calls } = makeClient();
+    const inTread = await client.createTask({
+      workspaceId: "ws1",
+      channelId: "c1",
+      title: "Look",
+      fileIds: ["f1", "f2"],
+    });
+    expect(calls.createdIn?.fileIds).toEqual(["f1", "f2"]);
+    expect(inTread.fileIds).toEqual(["f1", "f2"]);
+    const { task: t } = await client.createTaskWithChannel({
+      workspaceId: "ws1",
+      title: "Look",
+      fileIds: ["f3"],
+    });
+    expect(calls.created?.fileIds).toEqual(["f3"]);
+    expect(t.fileIds).toEqual(["f3"]);
+    await client.createTask({ workspaceId: "ws1", channelId: "c1", title: "No files" });
+    expect(calls.createdIn?.fileIds).toEqual([]);
   });
 
   it("switches the view at once and rolls back on error", async () => {

@@ -127,6 +127,8 @@ export interface CreateTaskInput {
     /** Start a run on it now instead of waiting in Queued. */
     startNow?: boolean;
     notify?: NotifyPick[];
+    /** Uploaded files to attach (at most 10); they join the Tread when the task starts. */
+    fileIds?: string[];
 }
 export interface ListRunsInput {
     workspaceId?: string;
