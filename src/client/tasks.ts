@@ -15,12 +15,13 @@ export const TASK_STAGES: readonly TaskStage[] = [
   TaskStage.READY_TO_CHECK,
   TaskStage.DONE,
   TaskStage.STUCK,
+  TaskStage.CANCELLED,
 ];
 
 /** A stable key per stage, for test ids, routes and analytics-free CSS hooks. */
 export function taskStageKey(
   stage: TaskStage,
-): "queued" | "in_progress" | "ready_to_check" | "done" | "stuck" {
+): "queued" | "in_progress" | "ready_to_check" | "done" | "stuck" | "cancelled" {
   switch (stage) {
     case TaskStage.IN_PROGRESS:
       return "in_progress";
@@ -30,12 +31,14 @@ export function taskStageKey(
       return "done";
     case TaskStage.STUCK:
       return "stuck";
+    case TaskStage.CANCELLED:
+      return "cancelled";
     default:
       return "queued";
   }
 }
 
-/** Command keeps Done for 30 days; older ones stay on their Tread. */
+/** Command keeps Done and Cancelled for 30 days; older ones stay on their Tread. */
 export const DONE_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
 
 export interface TaskFilter {
@@ -45,12 +48,12 @@ export interface TaskFilter {
   channelId?: string;
 }
 
-/** Tasks for Command: the filter, and Done trimmed to the window. */
+/** Tasks for Command: the filter, and Done and Cancelled trimmed to the window. */
 export function commandTasks(tasks: readonly Task[], filter: TaskFilter = {}, now = Date.now()): Task[] {
   return tasks.filter((t) => {
     if (filter.askedBy && t.createdBy !== filter.askedBy) return false;
     if (filter.channelId && t.channelId !== filter.channelId) return false;
-    if (t.stage === TaskStage.DONE) {
+    if (t.stage === TaskStage.DONE || t.stage === TaskStage.CANCELLED) {
       const at = tsMs(t.checkedAt) || tsMs(t.stageAt) || tsMs(t.updatedAt);
       if (at && now - at > DONE_WINDOW_MS) return false;
     }
@@ -63,6 +66,11 @@ export function tasksByStage(tasks: readonly Task[]): Map<TaskStage, Task[]> {
   const out = new Map<TaskStage, Task[]>(TASK_STAGES.map((s) => [s, []]));
   for (const t of tasks) out.get(TASK_STAGES.includes(t.stage) ? t.stage : TaskStage.QUEUED)?.push(t);
   return out;
+}
+
+/** A task can be cancelled at any stage short of Done (and Cancelled again changes nothing). */
+export function canCancelTask(task: Pick<Task, "stage">): boolean {
+  return task.stage !== TaskStage.DONE && task.stage !== TaskStage.CANCELLED;
 }
 
 /** How many tasks wait for a person to check them. */
