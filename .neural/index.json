@@ -1,17 +1,17 @@
 {
   "generated_by": "TANK Neural Knowledge",
-  "commit": "bf59edafde492042def8e38c8aeac28b391babca",
-  "refreshed_at": "2026-10-31T12:34:16.376Z",
+  "commit": "ad2838acc55d996abd8cd9cc4a7dde819f9645c9",
+  "refreshed_at": "2026-11-16T00:45:55.317Z",
   "areas": {
     ".": {
       "neurons": ".neural/neurons/root.md",
       "hot": [
         "AGENTS.md",
-        "package.json",
-        "pnpm-lock.yaml",
-        "vitest.config.ts",
         "CLAUDE.md",
-        "README.md"
+        "README.md",
+        "biome.json",
+        "package.json",
+        "pnpm-lock.yaml"
       ],
       "files": [
         "AGENTS.md",
@@ -58,12 +58,12 @@
     "src/blocks": {
       "neurons": ".neural/neurons/src-blocks.md",
       "hot": [
-        "src/blocks/index.ts",
         "src/blocks/blocks.test.ts",
-        "src/blocks/richtext.ts",
-        "src/blocks/plan.ts",
         "src/blocks/builders.ts",
-        "src/blocks/marks.ts"
+        "src/blocks/index.ts",
+        "src/blocks/normalize.ts",
+        "src/blocks/richtext.ts",
+        "src/blocks/runTone.test.ts"
       ],
       "files": [
         "src/blocks/blocks.test.ts",
@@ -71,7 +71,9 @@
         "src/blocks/index.ts",
         "src/blocks/marks.ts",
         "src/blocks/normalize.ts",
+        "src/blocks/plan.test.ts",
         "src/blocks/plan.ts",
+        "src/blocks/reveal.ts",
         "src/blocks/richtext.ts",
         "src/blocks/runTone.test.ts",
         "src/blocks/runTone.ts",
@@ -83,15 +85,16 @@
       "hot": [
         "src/blocks-native/BlocksViewNative.test.tsx",
         "src/blocks-native/RichTextViewNative.tsx",
-        "src/blocks-native/__snapshots__/BlocksViewNative.test.tsx.snap",
         "src/blocks-native/blocks.tsx",
-        "src/blocks-native/index.ts",
-        "src/blocks-native/BlocksViewNative.tsx"
+        "src/blocks-native/RichTextViewNative.test.tsx",
+        "src/blocks-native/__snapshots__/BlocksViewNative.test.tsx.snap",
+        "src/blocks-native/context.ts"
       ],
       "files": [
         "src/blocks-native/BlocksViewNative.test.tsx",
         "src/blocks-native/BlocksViewNative.tsx",
         "src/blocks-native/Mark.tsx",
+        "src/blocks-native/RichTextViewNative.test.tsx",
         "src/blocks-native/RichTextViewNative.tsx",
         "src/blocks-native/__snapshots__/BlocksViewNative.test.tsx.snap",
         "src/blocks-native/blocks.tsx",
@@ -103,11 +106,11 @@
       "neurons": ".neural/neurons/src-blocks-web.md",
       "hot": [
         "src/blocks-web/BlocksView.test.tsx",
+        "src/blocks-web/blocks.tsx",
+        "src/blocks-web/BlocksView.tsx",
         "src/blocks-web/RichTextView.test.tsx",
         "src/blocks-web/RichTextView.tsx",
-        "src/blocks-web/__snapshots__/BlocksView.test.tsx.snap",
-        "src/blocks-web/blocks.tsx",
-        "src/blocks-web/index.ts"
+        "src/blocks-web/Mark.tsx"
       ],
       "files": [
         "src/blocks-web/BlocksView.test.tsx",
@@ -124,17 +127,23 @@
     "src/client": {
       "neurons": ".neural/neurons/src-client.md",
       "hot": [
-        "src/client/client.ts",
-        "src/client/client.test.ts",
-        "src/client/store.ts",
         "src/client/index.ts",
-        "src/client/previewable.test.ts",
-        "src/client/previewable.ts"
+        "src/client/client.ts",
+        "src/client/store.ts",
+        "src/client/client.test.ts",
+        "src/client/tasks.test.ts",
+        "src/client/models.ts"
       ],
       "files": [
+        "src/client/aiReactions.test.ts",
+        "src/client/aiReactions.ts",
+        "src/client/aiReceipts.test.ts",
+        "src/client/aiReceipts.ts",
         "src/client/backoff.ts",
         "src/client/client.test.ts",
         "src/client/client.ts",
+        "src/client/codefile.test.ts",
+        "src/client/codefile.ts",
         "src/client/emitter.ts",
         "src/client/helpers.test.ts",
         "src/client/index.ts",
@@ -144,6 +153,8 @@
         "src/client/models.ts",
         "src/client/paywall.test.ts",
         "src/client/paywall.ts",
+        "src/client/plainPreview.test.ts",
+        "src/client/plainPreview.ts",
         "src/client/previewable.test.ts",
         "src/client/previewable.ts",
         "src/client/realtime.test.ts",
@@ -151,27 +162,33 @@
         "src/client/receipts.test.ts",
         "src/client/shortcodes.test.ts",
         "src/client/shortcodes.ts",
+        "src/client/starters.test.ts",
+        "src/client/starters.ts",
         "src/client/storage-idb.ts",
         "src/client/storage.ts",
         "src/client/store-notifications-runs-files.test.ts",
         "src/client/store.test.ts",
         "src/client/store.ts",
+        "src/client/tasks.test.ts",
+        "src/client/tasks.ts",
         "src/client/transport.test.ts",
         "src/client/transport.ts",
         "src/client/upload.ts",
         "src/client/uuidv7.test.ts",
-        "src/client/uuidv7.ts"
+        "src/client/uuidv7.ts",
+        "src/client/voice.test.ts",
+        "src/client/voice.ts"
       ]
     },
     "src/contracts": {
       "neurons": ".neural/neurons/src-contracts.md",
       "hot": [
         "src/contracts/VERSION",
-        "src/contracts/tank/agentctl/v1/agentctl_pb.ts",
-        "src/contracts/tank/hosting/v1/hosting_pb.ts",
-        "src/contracts/tank/agent/v1/agent_pb.ts",
         "src/contracts/tank/ai/v1/ai_pb.ts",
-        "src/contracts/tank/board/v1/board_pb.ts"
+        "src/contracts/tank/agentctl/v1/agentctl_pb.ts",
+        "src/contracts/tank/platform/v1/platform_pb.ts",
+        "src/contracts/tank/agent/v1/agent_pb.ts",
+        "src/contracts/tank/apps/v1/apps_pb.ts"
       ],
       "files": [
         "src/contracts/VERSION",
@@ -181,24 +198,30 @@
         "src/contracts/agentctl.ts",
         "src/contracts/agentops.ts",
         "src/contracts/ai.ts",
+        "src/contracts/apps.ts",
         "src/contracts/auth.ts",
         "src/contracts/billing.ts",
         "src/contracts/blocks.ts",
         "src/contracts/board.ts",
         "src/contracts/books.ts",
+        "src/contracts/browse.ts",
         "src/contracts/canvas.ts",
         "src/contracts/catalog.ts",
         "src/contracts/channel.ts",
         "src/contracts/command.ts",
         "src/contracts/crew.ts",
+        "src/contracts/devices.ts",
         "src/contracts/environment.ts",
         "src/contracts/events.ts",
         "src/contracts/files.ts",
+        "src/contracts/guardrails.ts",
         "src/contracts/hosting.ts",
         "src/contracts/huddle.ts",
         "src/contracts/index.ts",
+        "src/contracts/infra.ts",
         "src/contracts/message.ts",
         "src/contracts/monitor.ts",
+        "src/contracts/neural.ts",
         "src/contracts/notification.ts",
         "src/contracts/platform.ts",
         "src/contracts/presence.ts",
@@ -214,26 +237,20 @@
         "src/contracts/tank/agentctl/v1/agentctl_pb.ts",
         "src/contracts/tank/agentops/v1/agentops_pb.ts",
         "src/contracts/tank/ai/v1/ai_pb.ts",
+        "src/contracts/tank/apps/v1/apps_pb.ts",
         "src/contracts/tank/auth/v1/auth_pb.ts",
         "src/contracts/tank/billing/v1/billing_pb.ts",
         "src/contracts/tank/blocks/v1/blocks_pb.ts",
         "src/contracts/tank/board/v1/board_pb.ts",
         "src/contracts/tank/books/v1/books_pb.ts",
+        "src/contracts/tank/browse/v1/browse_pb.ts",
         "src/contracts/tank/canvas/v1/canvas_pb.ts",
         "src/contracts/tank/catalog/v1/catalog_pb.ts",
         "src/contracts/tank/channel/v1/channel_pb.ts",
         "src/contracts/tank/command/v1/command_pb.ts",
         "src/contracts/tank/crew/v1/crew_pb.ts",
-        "src/contracts/tank/environment/v1/environment_pb.ts",
-        "src/contracts/tank/events/v1/events_pb.ts",
-        "src/contracts/tank/files/v1/files_pb.ts",
-        "src/contracts/tank/hosting/v1/hosting_pb.ts",
-        "src/contracts/tank/huddle/v1/huddle_pb.ts",
-        "src/contracts/tank/message/v1/message_pb.ts",
-        "src/contracts/tank/monitor/v1/monitor_pb.ts",
-        "src/contracts/tank/notification/v1/notification_pb.ts",
-        "src/contracts/tank/platform/v1/platform_pb.ts",
-        "src/contracts/tank/presence/v1/presence_pb.ts"
+        "src/contracts/tank/devices/v1/devices_pb.ts",
+        "src/contracts/tank/environment/v1/environment_pb.ts"
       ]
     },
     "src/design": {
@@ -261,35 +278,39 @@
     "src/react": {
       "neurons": ".neural/neurons/src-react.md",
       "hot": [
-        "src/react/hooks.test.tsx",
         "src/react/index.tsx",
+        "src/react/hooks.test.tsx",
         "src/react/history.test.ts",
         "src/react/history.ts",
-        "src/react/index.test.tsx"
+        "src/react/index.test.tsx",
+        "src/react/taskAccess.test.tsx"
       ],
       "files": [
         "src/react/history.test.ts",
         "src/react/history.ts",
         "src/react/hooks.test.tsx",
         "src/react/index.test.tsx",
-        "src/react/index.tsx"
+        "src/react/index.tsx",
+        "src/react/taskAccess.test.tsx"
       ]
     },
     "src/test": {
       "neurons": ".neural/neurons/src-test.md",
       "hot": [
+        "src/test/mocks/react-native.tsx",
         "src/test/fake-gateway.ts",
         "src/test/fixture-defs.ts",
         "src/test/mocks/react-native-paper.tsx",
         "src/test/mocks/react-native-svg.tsx",
-        "src/test/mocks/react-native.tsx"
+        "src/test/richtext-markdown.ts"
       ],
       "files": [
         "src/test/fake-gateway.ts",
         "src/test/fixture-defs.ts",
         "src/test/mocks/react-native-paper.tsx",
         "src/test/mocks/react-native-svg.tsx",
-        "src/test/mocks/react-native.tsx"
+        "src/test/mocks/react-native.tsx",
+        "src/test/richtext-markdown.ts"
       ]
     },
     "src/topo": {

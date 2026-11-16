@@ -1,15 +1,16 @@
 # Neurons · src/blocks-native
 
-refreshed 2026-10-31 · bf59edafde49
+refreshed 2026-11-16 · ad2838acc55d
 
-- `src/blocks-native/index.ts` exports `BlocksViewNative`, `BlockViewNative`, `BlocksViewNativeProps`, `BlocksNativeContext`, `BlocksNativeOptions`, `BlockActionEvent`, `BlockContext`, `DEFAULT_CODE_FONT`, `useBlocksOptions`, `Accent`, `ActionButton`, `ActionsBlock`, `ApprovalPromptBlock`, `accentColor`, `Card`, `ChipTone`, `CiStatusBlock`, `ContextBlock`, `chipColors`, `DiffPreviewBlock`, `DividerBlock`, `FilePreviewBlock`, `HeaderBlock`, `PlanCardBlock`, `SectionBlock`, `StatusCardBlock`, `semanticColors`, `ToneChip`, `ToolLogBlock`, `Mark`, `ElementViewNative`, `RichTextViewNative`, `RichTextViewNativeProps`.
-- `src/blocks-native/` is **the only directory in the repo that may import `react-native` or `react-native-paper`** — this is a hard prohibition enforced by `src/exports.test.ts`'s react-native isolation test which also scans `dist/`.
-- `src/blocks-native/blocks.tsx` contains all block components for `react-native-paper`; `src/blocks-native/RichTextViewNative.tsx` renders rich text with native `Text` elements.
-- Vitest runs `blocks-native` tests against stand-ins in `src/test/mocks/`: `react-native.tsx`, `react-native-paper.tsx`, `react-native-svg.tsx` — aliased in `vitest.config.ts`; these stubs are never in `dist/`.
-- Snapshot tests live in `src/blocks-native/__snapshots__/`; update with `pnpm vitest run -u src/blocks-native` only with a deliberate visual change.
-- `biome.json` turns off `noArrayIndexKey` for `src/blocks-native/**` for the same reason as `blocks-web`.
-- `react-native` 0.81.x is a devDependency (types only); the optional peer is `>=0.76`. `react-native-paper ^5` and `react-native-svg >=15` are also optional peers.
+- This folder is the only place `react-native` and `react-native-paper` may be imported; `src/exports.test.ts` enforces it.
+- Entry point is `BlocksViewNative` in `BlocksViewNative.tsx`; `BlockViewNative` switches on `block.kind.case` for the 12 kinds and returns null for unknown kinds, so a new kind must be added there and in `blocks-web`.
+- Options flow through `BlocksNativeContext` and `useBlocksOptions()` in `context.ts`: `onAction`, `formatTime`, `codeFontFamily` (default `fonts.code.expoFonts[400]`), `openUrl` (default `Linking.openURL`), `planFile`, `revealKey`.
+- Every block component lives in `blocks.tsx` (about 1,000 lines); tones come from `RUN_TONE_PAPER_COLOR` in `src/blocks/runTone.ts`, not a local map.
+- Trap: a table in a card scrolls sideways in a horizontal `ScrollView` (`RichTextViewNative.tsx` around line 169); the comment near lines 178-180 explains an iOS touch-down responder issue, so read it before wrapping that area in a `Pressable` (commit 48af999).
+- Parity: a feature here must also land in `src/blocks-web` in the same change (guardrail 380454556067254325, mobile and web parity).
+- Snapshot tests: `BlocksViewNative.test.tsx` renders each `FIXTURE_NAMES` entry with `react-test-renderer` and matches `__snapshots__/`; update only on a deliberate visual change (`pnpm vitest run -u src/blocks-native`).
+- Real `react-native` is a dev dependency for types only; tests run against the Vitest stand-ins in `src/test/mocks/`.
+- `index.ts` also exports `ToneChip`, `chipColors`, `semanticColors` and `accentColor` for apps that match the native look.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`
+- none run in this refresh: `pnpm install --frozen-lockfile` could not reach the npm registry from the sandbox (ENETUNREACH), so lint, typecheck and tests were not run here; CI runs `pnpm check`.

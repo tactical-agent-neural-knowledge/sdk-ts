@@ -1,18 +1,17 @@
 # Neurons · src/blocks
 
-refreshed 2026-10-31 · bf59edafde49
+refreshed 2026-11-16 · ad2838acc55d
 
-- `src/blocks/index.ts` is the barrel for `./blocks`; it re-exports from `builders.ts`, `marks.ts`, `normalize.ts`, `plan.ts`, `richtext.ts`, `runTone.ts`, and `types.ts`.
-- `src/blocks/runTone.ts` maps `RunState` → `RunTone` (`"running" | "awaiting" | "done" | "failed" | "cancelled"`): `AWAITING_PLAN_APPROVAL` and `AWAITING_MERGE_APPROVAL` → `"awaiting"`; `DONE` → `"done"`; `FAILED`, `BUDGET_EXHAUSTED`, `TIMED_OUT`, `APPROVAL_EXPIRED` → `"failed"`; `CANCELLED`/`UNSPECIFIED` → `"cancelled"`; all others → `"running"`. Also exports `isTerminalRunState`, `RUN_TONE_MUI_COLOR`, `RUN_TONE_PAPER_COLOR`, `runStateLabel`, and `runStatusPhrase`.
-- `isTerminalRunState(state)` returns `true` when `runTone` returns `"done"`, `"failed"`, or `"cancelled"` — both renderers use this to stop polling.
-- `src/blocks/builders.ts` exports typed block constructors: `blocks()`, `header()`, `section()`, `field()`, `divider()`, `context()`, `actions()`, `ciStatus()`, `statusCard()`, `planCard()`, `diffPreview()`, `filePreview()`, `toolLog()`, `approvalPrompt()`. All return `Block` or `Blocks` protobuf messages created with `@bufbuild/protobuf` `create()`.
-- `src/blocks/richtext.ts` exports `richText(input)` (builds a `RichText` protobuf from a string, nested array, or template), `rt` (template-literal alias), `richTextToPlain`, `elementToPlain`, `broadcastRange`, `broadcastWord`, `codeBlock`, and `TextStyle`.
-- `src/blocks/normalize.ts` exports `normalizeBlocks`, `normalizeRichText`, `validateBlocks`, `truncate`, `LIMITS`, and `BlockIssue` — the normalizer the server runs before storing; clients call it before sending to avoid a round-trip rejection.
-- `src/blocks/types.ts` re-exports `Block`, `Blocks`, `Button`, `Check`, `Confirm`, `DiffFile`, `Field`, `GateKind`, `PlanStep`, `StepStatus`, `ToolLogEntry` from `contracts/tank/blocks` and `RichText` from `contracts/tank/richtext` — consumers import from `./blocks`, never from the deep contracts path.
-- `src/blocks/marks.ts` exports `MarkKind`, `MarkSpec`, `MARKS`, `MARK_HEX`, `planMark`, `planItemMark`, `stepMark`, `progressMark` — the mark type registry for the Topo strip.
-- `src/blocks/plan.ts` exports `planGlance`, `planProgress`, `planItemEmoji`, `stepEmoji` — helpers for summarising a `TreadPlan` into a status line or an emoji.
-- `runTone` lives in `./blocks` (not `./blocks-web` or `./blocks-native`) so both renderers share one state-to-colour mapping without a circular dependency.
+- `src/blocks/builders.ts` is the constructor surface (`blocks`, `section`, `actions`, `planCard`, `diffPreview`, `ciStatus`, `approvalPrompt`, `toolLog`, `statusCard`, `filePreview`); `index.ts` re-exports it with `export *`.
+- `src/blocks/types.ts` re-exports generated `blocks_pb` and `richtext_pb` types plus `BLOCK_KINDS`; use these, not a new DTO.
+- `normalizeBlocks()` in `src/blocks/normalize.ts` drops blocks with no kind case, de-duplicates `blockId` by suffixing `_2`, and caps lists with `LIMITS` (blocks 50, fields 10, buttons 10, fieldValue 2000, textElement 3000).
+- `validateBlocks()` in `src/blocks/normalize.ts` returns `BlockIssue[]` without changing input; use it in tests and when rejecting agent output.
+- `runTone()` in `src/blocks/runTone.ts` is the single RunState to tone map; `RUN_TONE_MUI_COLOR` and `RUN_TONE_PAPER_COLOR` in the same file are the colour maps both renderers must use.
+- Trap: `runTone` maps `UNSPECIFIED` to `cancelled`, and `FAILED`, `BUDGET_EXHAUSTED`, `TIMED_OUT`, `APPROVAL_EXPIRED` to `failed`; a new RunState falls through to `running`, so add it explicitly.
+- `src/blocks/richtext.ts` builds `RichText` (`rt`, `richText`, `codeBlock`, `broadcastRange`) and converts back with `richTextToPlain` for copy and plain previews.
+- `src/blocks/plan.ts` builds plan markdown (`planMarkdown`), the download file name (`planFileName`) and progress (`planProgress`); `src/blocks/marks.ts` maps step status to `MarkKind`.
+- `src/blocks/reveal.ts` holds the `ACTION_REVEAL_KEY`, `REVEAL_COPIED` and `REVEAL_GONE` constants for the one-time key reveal button.
+- Tests: `blocks.test.ts`, `plan.test.ts` and `runTone.test.ts` cover builders, plans and tone mapping.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`, `pnpm vitest run src/blocks/`
+- none run in this refresh: `pnpm install --frozen-lockfile` could not reach the npm registry from the sandbox (ENETUNREACH), so lint, typecheck and tests were not run here; CI runs `pnpm check`.
