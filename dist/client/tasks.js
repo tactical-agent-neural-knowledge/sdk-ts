@@ -30,20 +30,101 @@ export function taskStageKey(stage) {
 }
 /** Command keeps Done for 30 days; older ones stay on their Tread. */
 export const DONE_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
-/** Tasks for Command: the filter, and Done trimmed to the window. */
-export function commandTasks(tasks, filter = {}, now = Date.now()) {
+/** The ranges a person can pick without choosing days, in the order the chips show them. */
+export const DONE_RANGE_PRESETS = ["all", "today", "yesterday", "week", "month"];
+export const DONE_ALL = { kind: "all" };
+/** A local date as "YYYY-MM-DD", the value of a date input. */
+export function localDateKey(ms) {
+    const d = new Date(ms);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+function parseDateKey(key) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(key ?? "");
+    if (!m)
+        return undefined;
+    const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    // new Date rolls 2026-02-31 into March; refuse it.
+    return d.getMonth() === Number(m[2]) - 1 && d.getDate() === Number(m[3]) ? d : undefined;
+}
+/** Whether the range keeps every Done task (so Command's 30-day window applies). */
+export function isAllDone(range) {
+    if (!range || range.kind === "all")
+        return true;
+    return range.kind === "custom" && !parseDateKey(range.from) && !parseDateKey(range.to);
+}
+/**
+ * The span of a range in the person's local time: [start, end) in ms, or undefined for All
+ * (or custom days that are empty or not dates). A reversed pair is put the right way round.
+ */
+export function doneRangeBounds(range, now = Date.now()) {
+    if (isAllDone(range) || !range)
+        return undefined;
+    const today = new Date(now);
+    const day = (y, m, d) => new Date(y, m, d).getTime();
+    const y = today.getFullYear();
+    const m = today.getMonth();
+    const d = today.getDate();
+    switch (range.kind) {
+        case "today":
+            return { start: day(y, m, d), end: day(y, m, d + 1) };
+        case "yesterday":
+            return { start: day(y, m, d - 1), end: day(y, m, d) };
+        case "week": {
+            const sinceMonday = (today.getDay() + 6) % 7;
+            return { start: day(y, m, d - sinceMonday), end: day(y, m, d - sinceMonday + 7) };
+        }
+        case "month":
+            return { start: day(y, m, 1), end: day(y, m + 1, 1) };
+        case "custom": {
+            const a = parseDateKey(range.from) ?? parseDateKey(range.to);
+            const b = parseDateKey(range.to) ?? parseDateKey(range.from);
+            if (!a || !b)
+                return undefined;
+            const [first, last] = a.getTime() <= b.getTime() ? [a, b] : [b, a];
+            return {
+                start: first.getTime(),
+                end: day(last.getFullYear(), last.getMonth(), last.getDate() + 1),
+            };
+        }
+        default:
+            return undefined;
+    }
+}
+/** When a task was done: checked, else moved to its stage, else last touched (what the 30-day trim reads). */
+export function doneAt(task) {
+    return tsMs(task.checkedAt) || tsMs(task.stageAt) || tsMs(task.updatedAt);
+}
+/** The Done tasks inside the range; non-Done tasks pass through. A task with no time is left out of a chosen range. */
+export function filterDone(tasks, range, now = Date.now()) {
+    const bounds = doneRangeBounds(range, now);
+    if (!bounds)
+        return [...tasks];
     return tasks.filter((t) => {
+        if (t.stage !== TaskStage.DONE)
+            return true;
+        const at = doneAt(t);
+        return at > 0 && at >= bounds.start && at < bounds.end;
+    });
+}
+/**
+ * Tasks for Command: the filter, and Done trimmed to the window, or to the range when one is
+ * chosen (a chosen range replaces the window, so older days can be looked at).
+ */
+export function commandTasks(tasks, filter = {}, now = Date.now(), doneRange) {
+    const chosen = !isAllDone(doneRange);
+    const kept = tasks.filter((t) => {
         if (filter.askedBy && t.createdBy !== filter.askedBy)
             return false;
         if (filter.channelId && t.channelId !== filter.channelId)
             return false;
-        if (t.stage === TaskStage.DONE) {
-            const at = tsMs(t.checkedAt) || tsMs(t.stageAt) || tsMs(t.updatedAt);
+        if (t.stage === TaskStage.DONE && !chosen) {
+            const at = doneAt(t);
             if (at && now - at > DONE_WINDOW_MS)
                 return false;
         }
         return true;
     });
+    return chosen ? filterDone(kept, doneRange, now) : kept;
 }
 /** Tasks grouped by stage, every stage present (possibly empty), each group oldest first. */
 export function tasksByStage(tasks) {

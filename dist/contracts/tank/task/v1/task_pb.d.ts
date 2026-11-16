@@ -546,6 +546,37 @@ export type RetryTaskResponse = Message<"tank.task.v1.RetryTaskResponse"> & {
  */
 export declare const RetryTaskResponseSchema: GenMessage<RetryTaskResponse>;
 /**
+ * Cancel a task at any stage short of DONE: a live run is stopped, and the task moves to
+ * CANCELLED. Cancelling a task that is already CANCELLED returns it unchanged.
+ *
+ * @generated from message tank.task.v1.CancelTaskRequest
+ */
+export type CancelTaskRequest = Message<"tank.task.v1.CancelTaskRequest"> & {
+    /**
+     * @generated from field: string task_id = 1;
+     */
+    taskId: string;
+};
+/**
+ * Describes the message tank.task.v1.CancelTaskRequest.
+ * Use `create(CancelTaskRequestSchema)` to create a new message.
+ */
+export declare const CancelTaskRequestSchema: GenMessage<CancelTaskRequest>;
+/**
+ * @generated from message tank.task.v1.CancelTaskResponse
+ */
+export type CancelTaskResponse = Message<"tank.task.v1.CancelTaskResponse"> & {
+    /**
+     * @generated from field: tank.task.v1.Task task = 1;
+     */
+    task?: Task;
+};
+/**
+ * Describes the message tank.task.v1.CancelTaskResponse.
+ * Use `create(CancelTaskResponseSchema)` to create a new message.
+ */
+export declare const CancelTaskResponseSchema: GenMessage<CancelTaskResponse>;
+/**
  * Replace the task's own picks (workspace rules are not affected).
  *
  * @generated from message tank.task.v1.SetTaskNotifyRequest
@@ -784,7 +815,11 @@ export declare enum TaskStage {
     /**
      * @generated from enum value: TASK_STAGE_STUCK = 5;
      */
-    STUCK = 5
+    STUCK = 5,
+    /**
+     * @generated from enum value: TASK_STAGE_CANCELLED = 6;
+     */
+    CANCELLED = 6
 }
 /**
  * Describes the enum tank.task.v1.TaskStage.
@@ -902,6 +937,14 @@ export declare const TaskService: GenService<{
         methodKind: "unary";
         input: typeof RetryTaskRequestSchema;
         output: typeof RetryTaskResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.task.v1.TaskService.CancelTask
+     */
+    cancelTask: {
+        methodKind: "unary";
+        input: typeof CancelTaskRequestSchema;
+        output: typeof CancelTaskResponseSchema;
     };
     /**
      * @generated from rpc tank.task.v1.TaskService.SetTaskNotify

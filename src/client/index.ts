@@ -91,9 +91,17 @@ export {
 } from "./store.js";
 export {
   commandTasks,
+  DONE_ALL,
+  DONE_RANGE_PRESETS,
   DONE_WINDOW_MS,
+  type DoneRange,
+  doneAt,
+  doneRangeBounds,
   effectiveView,
+  filterDone,
   isAgentInternal,
+  isAllDone,
+  localDateKey,
   notifyFor,
   ownNotify,
   readyToCheckCount,

@@ -1,21 +1,17 @@
 # Neurons · .
 
-refreshed 2026-10-31 · bf59edafde49
+refreshed 2026-11-16 · ad2838acc55d
 
-- The repo root *is* the npm package `@tactical-agent-neural-knowledge/sdk` — there is no `packages/` and `pnpm-workspace.yaml` exists only to whitelist `esbuild`'s install script (`allowBuilds`) and pin `tinypool`/`shell-quote` overrides, not to declare a workspace.
-- `dist/` is committed. `package.json` `check` ends with `git diff --exit-code --stat dist/`, so any source change that is not followed by `pnpm build` fails CI; never hand-edit `dist/`.
-- One command reproduces CI: `pnpm check` = `lint && typecheck && test && build && git diff --exit-code --stat dist/` (`package.json`).
-- `package.json` exports nine code subpaths (`.`, `./react`, `./topo`, `./design`, `./blocks`, `./blocks-web`, `./blocks-native`, `./contracts`, `./contracts/*`) plus `./fixtures/*` and `./package.json`; each code entry carries exactly `types`/`import`/`default` and `default === import` — `src/exports.test.ts` asserts the shape and resolves every subpath through both `require.resolve` and `import.meta.resolve`.
-- `./topo` is a real export subpath in `package.json` but is still missing from the subpath list in `CLAUDE.md`; trust `package.json`, not `CLAUDE.md`.
-- All seven peer dependencies (react, react-dom, @mui/material, @emotion/*, react-native, react-native-paper, react-native-svg) are `optional: true` in `peerDependenciesMeta`, so installing the client subpath in Node or Expo drags in nothing; adding a non-optional peer is a listed prohibition.
-- `biome.json` is the only linter/formatter config (no ESLint, no Prettier): `lineWidth` 110, 2-space indent, `suspicious.noExplicitAny: "error"`, `style.noNonNullAssertion: "off"`; `src/contracts/tank` and `dist` are excluded from linting; `noArrayIndexKey` is off for `src/blocks-web/**` and `src/blocks-native/**`.
-- `tsconfig.json` is strict plus `noUncheckedIndexedAccess`, `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`, `noImplicitOverride`, `verbatimModuleSyntax`, `isolatedModules`, `NodeNext` — relative imports must end in `.js` even from `.ts` sources.
-- `tsconfig.build.json` ships only runtime code: `rootDir: src`, `types: []`, and it excludes `*.test.ts(x)`, `__tests__` and all of `src/test/**`, which is why the Vitest stand-ins never reach `dist/`.
-- `fixtures/*.json` are golden block cards published as a subpath (`./fixtures/*`) and regenerated with `UPDATE_FIXTURES=1 pnpm test` after editing `src/test/fixture-defs.ts`.
-- `CLAUDE.md` holds the binding rules: the hard prohibitions list and a "Decided — do not re-litigate" section; read it before proposing an architectural change.
-- Two gates run on every PR and push to `main`: `.github/workflows/ci.yml` (`check`) and `.github/workflows/security.yml` (secret + dependency scanning) — see `.neural/neurons/github.md`.
-- Latest contracts sync: commit `727058f` (adds `OpenThread` to `AgentService`); the `src/contracts/VERSION` file records the contracts commit sha.
+- The repo root is the npm package `@tactical-agent-neural-knowledge/sdk`; there is no `packages/` directory and no workspace (`package.json` has no `workspaces`).
+- `dist/` is committed and consumed as a git dependency by `web`, `mobile` and `agent-runner`; CI fails with "dist/ is stale" if `pnpm build` output differs (`.github/workflows/ci.yml`).
+- `pnpm check` is the whole CI gate: `pnpm lint && pnpm typecheck && pnpm test && pnpm build && git diff --exit-code --stat dist/` (`package.json` scripts.check).
+- Code subpaths in `package.json` `exports`: `.`, `./react`, `./topo`, `./design`, `./blocks`, `./blocks-web`, `./blocks-native`, `./contracts`, `./contracts/*`; plus `./fixtures/*` and `./package.json`.
+- Each code export carries exactly `types`, `import`, `default` with `default === import` (same ESM files); `src/exports.test.ts` asserts this and resolves through `require.resolve` and `import.meta.resolve`.
+- `./topo` is exported in `package.json` but missing from the subpath list in `CLAUDE.md`; `package.json` is authoritative.
+- Peer dependencies are optional (`CLAUDE.md`, Purpose + stack); adding a non-optional peer that the client subpath pulls into node or mobile is a listed prohibition.
+- Engines: `node >=24` (`package.json`), and CI runs `setup-node` with node 24 (`.github/workflows/ci.yml`).
+- `src/contracts/VERSION` pins the vendored contracts sha `30277bee2e882a36282d6a9ddf6d9a6b1a9be822`; bump it only through `pnpm sync-contracts <sha>`.
+- `sideEffects: false` and `files: ["dist", "fixtures", "src"]` in `package.json`: source ships alongside dist.
 
 ## Verified
-
-`pnpm lint`, `pnpm typecheck`
+- none run in this refresh: `pnpm install --frozen-lockfile` could not reach the npm registry from the sandbox (ENETUNREACH), so lint, typecheck and tests were not run here; CI runs `pnpm check`.
