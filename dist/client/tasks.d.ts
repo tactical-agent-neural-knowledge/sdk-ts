@@ -5,8 +5,8 @@ import type { Member } from "../contracts/tank/workspace/v1/workspace_pb.js";
 /** Command's columns and the strip's groups, left to right. */
 export declare const TASK_STAGES: readonly TaskStage[];
 /** A stable key per stage, for test ids, routes and analytics-free CSS hooks. */
-export declare function taskStageKey(stage: TaskStage): "queued" | "in_progress" | "ready_to_check" | "done" | "stuck";
-/** Command keeps Done for 30 days; older ones stay on their Tread. */
+export declare function taskStageKey(stage: TaskStage): "queued" | "in_progress" | "ready_to_check" | "done" | "stuck" | "cancelled";
+/** Command keeps Done and Cancelled for 30 days; older ones stay on their Tread. */
 export declare const DONE_WINDOW_MS: number;
 export interface TaskFilter {
     /** Only this person's asks. */
@@ -43,15 +43,17 @@ export declare function doneRangeBounds(range: DoneRange | undefined, now?: numb
 } | undefined;
 /** When a task was done: checked, else moved to its stage, else last touched (what the 30-day trim reads). */
 export declare function doneAt(task: Pick<Task, "checkedAt" | "stageAt" | "updatedAt">): number;
-/** The Done tasks inside the range; non-Done tasks pass through. A task with no time is left out of a chosen range. */
+/** The Done and Cancelled tasks inside the range; other tasks pass through. A task with no time is left out of a chosen range. */
 export declare function filterDone<T extends Pick<Task, "stage" | "checkedAt" | "stageAt" | "updatedAt">>(tasks: readonly T[], range: DoneRange | undefined, now?: number): T[];
 /**
- * Tasks for Command: the filter, and Done trimmed to the window, or to the range when one is
+ * Tasks for Command: the filter, and Done and Cancelled trimmed to the window, or to the range when one is
  * chosen (a chosen range replaces the window, so older days can be looked at).
  */
 export declare function commandTasks(tasks: readonly Task[], filter?: TaskFilter, now?: number, doneRange?: DoneRange): Task[];
 /** Tasks grouped by stage, every stage present (possibly empty), each group oldest first. */
 export declare function tasksByStage(tasks: readonly Task[]): Map<TaskStage, Task[]>;
+/** A task can be cancelled at any stage short of Done (and Cancelled again changes nothing). */
+export declare function canCancelTask(task: Pick<Task, "stage">): boolean;
 /** How many tasks wait for a person to check them. */
 export declare function readyToCheckCount(tasks: readonly Task[]): number;
 /**

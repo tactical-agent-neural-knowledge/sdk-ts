@@ -913,6 +913,10 @@ export class TankClient {
     async retryTask(taskId) {
         return this.keepTask(await this.tasks.retryTask({ taskId }));
     }
+    /** Stop a task at any stage short of Done: the live run is stopped and the task becomes Cancelled. */
+    async cancelTask(taskId) {
+        return this.keepTask(await this.tasks.cancelTask({ taskId }));
+    }
     /**
      * Send to: tell people in the task's Tread about it now, at its current stage, with an
      * optional note (500 characters at most; Activity only, never a push). The server refuses

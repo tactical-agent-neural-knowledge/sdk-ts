@@ -90,6 +90,7 @@ export {
   unpackEnvelope,
 } from "./store.js";
 export {
+  canCancelTask,
   commandTasks,
   DONE_ALL,
   DONE_RANGE_PRESETS,

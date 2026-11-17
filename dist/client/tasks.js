@@ -12,6 +12,7 @@ export const TASK_STAGES = [
     TaskStage.READY_TO_CHECK,
     TaskStage.DONE,
     TaskStage.STUCK,
+    TaskStage.CANCELLED,
 ];
 /** A stable key per stage, for test ids, routes and analytics-free CSS hooks. */
 export function taskStageKey(stage) {
@@ -24,11 +25,13 @@ export function taskStageKey(stage) {
             return "done";
         case TaskStage.STUCK:
             return "stuck";
+        case TaskStage.CANCELLED:
+            return "cancelled";
         default:
             return "queued";
     }
 }
-/** Command keeps Done for 30 days; older ones stay on their Tread. */
+/** Command keeps Done and Cancelled for 30 days; older ones stay on their Tread. */
 export const DONE_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
 /** The ranges a person can pick without choosing days, in the order the chips show them. */
 export const DONE_RANGE_PRESETS = ["all", "today", "yesterday", "week", "month"];
@@ -94,20 +97,20 @@ export function doneRangeBounds(range, now = Date.now()) {
 export function doneAt(task) {
     return tsMs(task.checkedAt) || tsMs(task.stageAt) || tsMs(task.updatedAt);
 }
-/** The Done tasks inside the range; non-Done tasks pass through. A task with no time is left out of a chosen range. */
+/** The Done and Cancelled tasks inside the range; other tasks pass through. A task with no time is left out of a chosen range. */
 export function filterDone(tasks, range, now = Date.now()) {
     const bounds = doneRangeBounds(range, now);
     if (!bounds)
         return [...tasks];
     return tasks.filter((t) => {
-        if (t.stage !== TaskStage.DONE)
+        if (t.stage !== TaskStage.DONE && t.stage !== TaskStage.CANCELLED)
             return true;
         const at = doneAt(t);
         return at > 0 && at >= bounds.start && at < bounds.end;
     });
 }
 /**
- * Tasks for Command: the filter, and Done trimmed to the window, or to the range when one is
+ * Tasks for Command: the filter, and Done and Cancelled trimmed to the window, or to the range when one is
  * chosen (a chosen range replaces the window, so older days can be looked at).
  */
 export function commandTasks(tasks, filter = {}, now = Date.now(), doneRange) {
@@ -117,7 +120,7 @@ export function commandTasks(tasks, filter = {}, now = Date.now(), doneRange) {
             return false;
         if (filter.channelId && t.channelId !== filter.channelId)
             return false;
-        if (t.stage === TaskStage.DONE && !chosen) {
+        if ((t.stage === TaskStage.DONE || t.stage === TaskStage.CANCELLED) && !chosen) {
             const at = doneAt(t);
             if (at && now - at > DONE_WINDOW_MS)
                 return false;
@@ -132,6 +135,10 @@ export function tasksByStage(tasks) {
     for (const t of tasks)
         out.get(TASK_STAGES.includes(t.stage) ? t.stage : TaskStage.QUEUED)?.push(t);
     return out;
+}
+/** A task can be cancelled at any stage short of Done (and Cancelled again changes nothing). */
+export function canCancelTask(task) {
+    return task.stage !== TaskStage.DONE && task.stage !== TaskStage.CANCELLED;
 }
 /** How many tasks wait for a person to check them. */
 export function readyToCheckCount(tasks) {

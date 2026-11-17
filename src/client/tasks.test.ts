@@ -25,6 +25,7 @@ import {
 import { createTankClient } from "./client.js";
 import { envelopeToActions, TankStore } from "./store.js";
 import {
+  canCancelTask,
   commandTasks,
   DONE_WINDOW_MS,
   type DoneRange,
@@ -123,6 +124,7 @@ describe("task rules", () => {
       "ready_to_check",
       "done",
       "stuck",
+      "cancelled",
     ]);
   });
 
@@ -142,6 +144,27 @@ describe("task rules", () => {
     expect([...groups.keys()]).toEqual([...TASK_STAGES]);
     expect(groups.get(TaskStage.DONE)?.map((t) => t.id)).toEqual(["old", "new"]);
     expect(groups.get(TaskStage.STUCK)).toEqual([]);
+    expect(groups.get(TaskStage.CANCELLED)).toEqual([]);
+  });
+
+  it("keeps Cancelled in the same 30-day window as Done, and cancels anything short of Done", () => {
+    const now = T0 + DONE_WINDOW_MS + 10_000;
+    const list = [
+      task({ id: "gone", stage: TaskStage.CANCELLED, stageAt: timestampFromMs(T0) }),
+      task({ id: "fresh", stage: TaskStage.CANCELLED, stageAt: timestampFromMs(now - 1000) }),
+    ];
+    expect(commandTasks(list, {}, now).map((t) => t.id)).toEqual(["fresh"]);
+    expect(
+      tasksByStage(list)
+        .get(TaskStage.CANCELLED)
+        ?.map((t) => t.id),
+    ).toEqual(["gone", "fresh"]);
+    expect(taskStageKey(TaskStage.CANCELLED)).toBe("cancelled");
+    const can = (stage: TaskStage) => canCancelTask({ stage });
+    expect(
+      [TaskStage.QUEUED, TaskStage.IN_PROGRESS, TaskStage.READY_TO_CHECK, TaskStage.STUCK].map(can),
+    ).toEqual([true, true, true, true]);
+    expect([TaskStage.DONE, TaskStage.CANCELLED].map(can)).toEqual([false, false]);
   });
 
   it("reads the person's view, then the Tread's default, then Builder", () => {
@@ -268,6 +291,13 @@ describe("task client", () => {
             channel: create(ChannelSchema, { id: "c9", workspaceId: "ws1", name: "fix-the-login-page" }),
           };
         },
+        cancelTask: (req) => ({
+          task: task({
+            id: req.taskId,
+            stage: TaskStage.CANCELLED,
+            updatedAt: timestampFromMs(T0 + 9),
+          }),
+        }),
         confirmTask: (req) => ({
           task: task({
             id: req.taskId,
@@ -303,6 +333,14 @@ describe("task client", () => {
     expect(client.store.selectTasks("ws1").map((t) => t.id)).toEqual(["t1", "t2"]);
     await client.confirmTask("t2");
     expect(client.store.getState().tasksById.t2?.stage).toBe(TaskStage.DONE);
+  });
+
+  it("cancels a task and keeps what the server says", async () => {
+    const { client } = makeClient();
+    await client.listTasks({ workspaceId: "ws1" });
+    const t = await client.cancelTask("t1");
+    expect(t.stage).toBe(TaskStage.CANCELLED);
+    expect(client.store.getState().tasksById.t1?.stage).toBe(TaskStage.CANCELLED);
   });
 
   it("adds a task with a Tread and notify picks", async () => {
