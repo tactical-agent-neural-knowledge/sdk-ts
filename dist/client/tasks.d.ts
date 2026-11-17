@@ -52,6 +52,14 @@ export declare function filterDone<T extends Pick<Task, "stage" | "checkedAt" | 
 export declare function commandTasks(tasks: readonly Task[], filter?: TaskFilter, now?: number, doneRange?: DoneRange): Task[];
 /** Tasks grouped by stage, every stage present (possibly empty), each group oldest first. */
 export declare function tasksByStage(tasks: readonly Task[]): Map<TaskStage, Task[]>;
+/** How the stage list in Command's modal is ordered. */
+export type TaskSort = "newest" | "oldest" | "title" | "tread";
+/** The sorts a person can pick, in the order the control shows them. */
+export declare const TASK_SORTS: readonly TaskSort[];
+/** A copy of the tasks in this order; ties keep a stable order by title then id. */
+export declare function sortTasks<T extends Task>(tasks: readonly T[], sort?: TaskSort): T[];
+/** The tasks whose title or Tread name has every word of the query (case-insensitive); a blank query keeps all. */
+export declare function searchTasks<T extends Pick<Task, "title" | "channelName">>(tasks: readonly T[], query: string): T[];
 /** A task can be cancelled at any stage short of Done (and Cancelled again changes nothing). */
 export declare function canCancelTask(task: Pick<Task, "stage">): boolean;
 /** How many tasks wait for a person to check them. */

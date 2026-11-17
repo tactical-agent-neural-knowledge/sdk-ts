@@ -40,7 +40,9 @@ import {
   ownNotify,
   readyToCheckCount,
   SEND_NOTE_MAX,
+  searchTasks,
   simpleConversation,
+  sortTasks,
   TASK_STAGES,
   taskForThread,
   taskSendCandidates,
@@ -559,5 +561,50 @@ describe("done range", () => {
 
   it("formats a local date as a date input does", () => {
     expect(localDateKey(at(2026, 3, 4))).toBe("2026-03-04");
+  });
+});
+
+describe("sorting and searching a stage", () => {
+  const ids = (list: Task[]) => list.map((t) => t.id);
+  const list = [
+    task({ id: "a", title: "banana", channelName: "zeta", createdAt: timestampFromMs(T0 + 1000) }),
+    task({ id: "b", title: "Apple", channelName: "alpha", createdAt: timestampFromMs(T0 + 3000) }),
+    task({ id: "c", title: "cherry", channelName: "alpha", createdAt: timestampFromMs(T0 + 2000) }),
+  ];
+
+  it("sorts newest, oldest, title A to Z and by Tread without touching the input", () => {
+    const before = ids(list);
+    expect(ids(sortTasks(list, "newest"))).toEqual(["b", "c", "a"]);
+    expect(ids(sortTasks(list, "oldest"))).toEqual(["a", "c", "b"]);
+    expect(ids(sortTasks(list, "title"))).toEqual(["b", "a", "c"]);
+    expect(ids(sortTasks(list, "tread"))).toEqual(["b", "c", "a"]);
+    expect(ids(list)).toEqual(before);
+  });
+
+  it("sorts Done by when they were done", () => {
+    const done = [
+      task({
+        id: "x",
+        stage: TaskStage.DONE,
+        createdAt: timestampFromMs(T0),
+        checkedAt: timestampFromMs(T0 + 9000),
+      }),
+      task({
+        id: "y",
+        stage: TaskStage.DONE,
+        createdAt: timestampFromMs(T0 + 5000),
+        checkedAt: timestampFromMs(T0 + 6000),
+      }),
+    ];
+    expect(ids(sortTasks(done, "newest"))).toEqual(["x", "y"]);
+    expect(ids(sortTasks(done, "oldest"))).toEqual(["y", "x"]);
+  });
+
+  it("searches title and Tread name, every word, any case", () => {
+    expect(ids(searchTasks(list, "APPLE"))).toEqual(["b"]);
+    expect(ids(searchTasks(list, "alpha"))).toEqual(["b", "c"]);
+    expect(ids(searchTasks(list, "alpha cher"))).toEqual(["c"]);
+    expect(ids(searchTasks(list, "nothing"))).toEqual([]);
+    expect(ids(searchTasks(list, "  "))).toEqual(["a", "b", "c"]);
   });
 });
