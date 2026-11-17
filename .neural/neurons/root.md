@@ -15,3 +15,6 @@ refreshed 2026-11-16 · ad2838acc55d
 
 ## Verified
 - none run in this refresh: `pnpm install --frozen-lockfile` could not reach the npm registry from the sandbox (ENETUNREACH), so lint, typecheck and tests were not run here; CI runs `pnpm check`.
+
+## Learned in runs
+- Sandbox installs fail with ENETUNREACH because corepack's node fetch ignores the egress proxy; run `NODE_USE_ENV_PROXY=1 corepack prepare pnpm@11.9.0 --activate` once (curl/npm go through the proxy fine) and open_pull_request's install/lint then works offline from the cache. (learned 2026-11-17, run 381066540660605901)
