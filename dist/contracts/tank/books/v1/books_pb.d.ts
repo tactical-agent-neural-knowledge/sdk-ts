@@ -2565,6 +2565,145 @@ export type ListTransactionsResponse = Message<"tank.books.v1.ListTransactionsRe
  */
 export declare const ListTransactionsResponseSchema: GenMessage<ListTransactionsResponse>;
 /**
+ * One thing the model expects to happen. Forecast lines are never booked: they are read
+ * from the books and the platform's own usage, and never enter the journal or the report.
+ *
+ * @generated from message tank.books.v1.ForecastLine
+ */
+export type ForecastLine = Message<"tank.books.v1.ForecastLine"> & {
+    /**
+     * "income" or "spend"
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * e.g. "Cache7 auto-refill"
+     *
+     * @generated from field: string label = 2;
+     */
+    label: string;
+    /**
+     * refill, usage, invoice, aws, agents_in_aws, recurring, bill, fee
+     *
+     * @generated from field: string source = 3;
+     */
+    source: string;
+    /**
+     * (agents_in_aws is shown for reference: it is inside the aws lines, so no total counts it)
+     *
+     * @generated from field: google.protobuf.Timestamp expected_at = 4;
+     */
+    expectedAt?: Timestamp;
+    /**
+     * @generated from field: int64 cents = 5;
+     */
+    cents: bigint;
+    /**
+     * how the figure was worked out, so it can be checked
+     *
+     * @generated from field: string basis = 6;
+     */
+    basis: string;
+};
+/**
+ * Describes the message tank.books.v1.ForecastLine.
+ * Use `create(ForecastLineSchema)` to create a new message.
+ */
+export declare const ForecastLineSchema: GenMessage<ForecastLine>;
+/**
+ * The forecast over one window, ending where the lines in it end.
+ *
+ * @generated from message tank.books.v1.ForecastTotals
+ */
+export type ForecastTotals = Message<"tank.books.v1.ForecastTotals"> & {
+    /**
+     * "rest of this month", "next 30 days", "next month"
+     *
+     * @generated from field: string label = 1;
+     */
+    label: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp from = 2;
+     */
+    from?: Timestamp;
+    /**
+     * exclusive
+     *
+     * @generated from field: google.protobuf.Timestamp to = 3;
+     */
+    to?: Timestamp;
+    /**
+     * @generated from field: int64 income_cents = 4;
+     */
+    incomeCents: bigint;
+    /**
+     * @generated from field: int64 spend_cents = 5;
+     */
+    spendCents: bigint;
+    /**
+     * income minus spend
+     *
+     * @generated from field: int64 net_cents = 6;
+     */
+    netCents: bigint;
+};
+/**
+ * Describes the message tank.books.v1.ForecastTotals.
+ * Use `create(ForecastTotalsSchema)` to create a new message.
+ */
+export declare const ForecastTotalsSchema: GenMessage<ForecastTotals>;
+/**
+ * @generated from message tank.books.v1.GetForecastRequest
+ */
+export type GetForecastRequest = Message<"tank.books.v1.GetForecastRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.books.v1.GetForecastRequest.
+ * Use `create(GetForecastRequestSchema)` to create a new message.
+ */
+export declare const GetForecastRequestSchema: GenMessage<GetForecastRequest>;
+/**
+ * @generated from message tank.books.v1.GetForecastResponse
+ */
+export type GetForecastResponse = Message<"tank.books.v1.GetForecastResponse"> & {
+    /**
+     * @generated from field: google.protobuf.Timestamp as_of = 1;
+     */
+    asOf?: Timestamp;
+    /**
+     * @generated from field: string currency = 2;
+     */
+    currency: string;
+    /**
+     * by expected date
+     *
+     * @generated from field: repeated tank.books.v1.ForecastLine lines = 3;
+     */
+    lines: ForecastLine[];
+    /**
+     * @generated from field: tank.books.v1.ForecastTotals rest_of_month = 4;
+     */
+    restOfMonth?: ForecastTotals;
+    /**
+     * @generated from field: tank.books.v1.ForecastTotals next_30_days = 5;
+     */
+    next30Days?: ForecastTotals;
+    /**
+     * @generated from field: tank.books.v1.ForecastTotals next_month = 6;
+     */
+    nextMonth?: ForecastTotals;
+};
+/**
+ * Describes the message tank.books.v1.GetForecastResponse.
+ * Use `create(GetForecastResponseSchema)` to create a new message.
+ */
+export declare const GetForecastResponseSchema: GenMessage<GetForecastResponse>;
+/**
  * @generated from enum tank.books.v1.InvoiceStatus
  */
 export declare enum InvoiceStatus {
@@ -3101,5 +3240,13 @@ export declare const BooksService: GenService<{
         methodKind: "unary";
         input: typeof SetRecurringStatusRequestSchema;
         output: typeof SetRecurringStatusResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.books.v1.BooksService.GetForecast
+     */
+    getForecast: {
+        methodKind: "unary";
+        input: typeof GetForecastRequestSchema;
+        output: typeof GetForecastResponseSchema;
     };
 }>;
