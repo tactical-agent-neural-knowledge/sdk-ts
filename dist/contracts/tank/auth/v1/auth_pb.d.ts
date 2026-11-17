@@ -925,6 +925,66 @@ export type DeleteAccountResponse = Message<"tank.auth.v1.DeleteAccountResponse"
  */
 export declare const DeleteAccountResponseSchema: GenMessage<DeleteAccountResponse>;
 /**
+ * Test accounts only (2026-11-17): accounts an operator made with tankctl so TANK's own test
+ * logins can sign in through TANK's browser, the password and authenticator seed kept in
+ * Lockbox. Everyone else signs in by magic link or a provider, and this answers every address
+ * that is not a test account exactly as it answers a wrong password.
+ *
+ * Two steps on one call: without `code`, a right password answers code_required and nothing
+ * else; with a current authenticator code, it signs in like CompleteMagicLink.
+ *
+ * @generated from message tank.auth.v1.SignInWithPasswordRequest
+ */
+export type SignInWithPasswordRequest = Message<"tank.auth.v1.SignInWithPasswordRequest"> & {
+    /**
+     * @generated from field: string email = 1;
+     */
+    email: string;
+    /**
+     * @generated from field: string password = 2;
+     */
+    password: string;
+    /**
+     * @generated from field: string code = 3;
+     */
+    code: string;
+};
+/**
+ * Describes the message tank.auth.v1.SignInWithPasswordRequest.
+ * Use `create(SignInWithPasswordRequestSchema)` to create a new message.
+ */
+export declare const SignInWithPasswordRequestSchema: GenMessage<SignInWithPasswordRequest>;
+/**
+ * @generated from message tank.auth.v1.SignInWithPasswordResponse
+ */
+export type SignInWithPasswordResponse = Message<"tank.auth.v1.SignInWithPasswordResponse"> & {
+    /**
+     * @generated from field: tank.auth.v1.Principal me = 1;
+     */
+    me?: Principal;
+    /**
+     * @generated from field: string access_token = 2;
+     */
+    accessToken: string;
+    /**
+     * @generated from field: string refresh_token = 3;
+     */
+    refreshToken: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp access_expires_at = 4;
+     */
+    accessExpiresAt?: Timestamp;
+    /**
+     * @generated from field: bool code_required = 5;
+     */
+    codeRequired: boolean;
+};
+/**
+ * Describes the message tank.auth.v1.SignInWithPasswordResponse.
+ * Use `create(SignInWithPasswordResponseSchema)` to create a new message.
+ */
+export declare const SignInWithPasswordResponseSchema: GenMessage<SignInWithPasswordResponse>;
+/**
  * Every actor is a principal. Bots and agents are first-class so every author
  * reference is uniform across the data model.
  *
@@ -1128,5 +1188,13 @@ export declare const AuthService: GenService<{
         methodKind: "unary";
         input: typeof DeleteAccountRequestSchema;
         output: typeof DeleteAccountResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.auth.v1.AuthService.SignInWithPassword
+     */
+    signInWithPassword: {
+        methodKind: "unary";
+        input: typeof SignInWithPasswordRequestSchema;
+        output: typeof SignInWithPasswordResponseSchema;
     };
 }>;
