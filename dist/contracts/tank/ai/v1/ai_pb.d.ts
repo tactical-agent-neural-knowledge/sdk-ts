@@ -409,6 +409,15 @@ export type Attachment = Message$1<"tank.ai.v1.Attachment"> & {
      * @generated from field: string file_id = 6;
      */
     fileId: string;
+    /**
+     * A small picture of an image attachment, for showing it in the conversation. Set when
+     * the messages were asked for light: then `data` is empty for every attachment, `size` is
+     * still the whole attachment's, and the bytes come from GetAttachment when the person
+     * opens it. A conversation with a few photos used to be megabytes every time it opened.
+     *
+     * @generated from field: bytes thumb = 7;
+     */
+    thumb: Uint8Array;
 };
 /**
  * Describes the message tank.ai.v1.Attachment.
@@ -741,6 +750,12 @@ export type GetConversationRequest = Message$1<"tank.ai.v1.GetConversationReques
      * @generated from field: int32 message_limit = 2;
      */
     messageLimit: number;
+    /**
+     * Attachments come without their bytes and pictures with a thumb (Attachment.thumb).
+     *
+     * @generated from field: bool light = 3;
+     */
+    light: boolean;
 };
 /**
  * Describes the message tank.ai.v1.GetConversationRequest.
@@ -798,12 +813,52 @@ export type ListMessagesRequest = Message$1<"tank.ai.v1.ListMessagesRequest"> & 
      * @generated from field: int32 limit = 3;
      */
     limit: number;
+    /**
+     * Attachments come without their bytes and pictures with a thumb (Attachment.thumb).
+     *
+     * @generated from field: bool light = 4;
+     */
+    light: boolean;
 };
 /**
  * Describes the message tank.ai.v1.ListMessagesRequest.
  * Use `create(ListMessagesRequestSchema)` to create a new message.
  */
 export declare const ListMessagesRequestSchema: GenMessage<ListMessagesRequest>;
+/**
+ * @generated from message tank.ai.v1.GetAttachmentRequest
+ */
+export type GetAttachmentRequest = Message$1<"tank.ai.v1.GetAttachmentRequest"> & {
+    /**
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * @generated from field: string attachment_id = 2;
+     */
+    attachmentId: string;
+};
+/**
+ * Describes the message tank.ai.v1.GetAttachmentRequest.
+ * Use `create(GetAttachmentRequestSchema)` to create a new message.
+ */
+export declare const GetAttachmentRequestSchema: GenMessage<GetAttachmentRequest>;
+/**
+ * @generated from message tank.ai.v1.GetAttachmentResponse
+ */
+export type GetAttachmentResponse = Message$1<"tank.ai.v1.GetAttachmentResponse"> & {
+    /**
+     * With its bytes.
+     *
+     * @generated from field: tank.ai.v1.Attachment attachment = 1;
+     */
+    attachment?: Attachment;
+};
+/**
+ * Describes the message tank.ai.v1.GetAttachmentResponse.
+ * Use `create(GetAttachmentResponseSchema)` to create a new message.
+ */
+export declare const GetAttachmentResponseSchema: GenMessage<GetAttachmentResponse>;
 /**
  * @generated from message tank.ai.v1.ListMessagesResponse
  */
@@ -2182,6 +2237,12 @@ export type WatchRequest = Message$1<"tank.ai.v1.WatchRequest"> & {
      * @generated from field: string conversation_id = 1;
      */
     conversationId: string;
+    /**
+     * Messages arrive with attachments as in a light read (Attachment.thumb).
+     *
+     * @generated from field: bool light = 2;
+     */
+    light: boolean;
 };
 /**
  * Describes the message tank.ai.v1.WatchRequest.
@@ -2858,6 +2919,16 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof ListMessagesRequestSchema;
         output: typeof ListMessagesResponseSchema;
+    };
+    /**
+     * One attachment with its bytes, for a member of its conversation: what a light read left out.
+     *
+     * @generated from rpc tank.ai.v1.AiService.GetAttachment
+     */
+    getAttachment: {
+        methodKind: "unary";
+        input: typeof GetAttachmentRequestSchema;
+        output: typeof GetAttachmentResponseSchema;
     };
     /**
      * A quiet signal about one of Neural's answers (2026-11-15): the person copied it or shared
