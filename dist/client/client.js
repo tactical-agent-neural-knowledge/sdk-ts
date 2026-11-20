@@ -8,6 +8,7 @@ import { BillingService } from "../contracts/tank/billing/v1/billing_pb.js";
 import { ChannelReadStateSchema, ChannelService, ChannelType, TreadGoalSchema, } from "../contracts/tank/channel/v1/channel_pb.js";
 import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
+import { EnvVarService } from "../contracts/tank/envvars/v1/envvars_pb.js";
 import { FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { HostingService } from "../contracts/tank/hosting/v1/hosting_pb.js";
 import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } from "../contracts/tank/message/v1/message_pb.js";
@@ -80,6 +81,8 @@ export class TankClient {
     environment;
     /** The Infrastructure page: a Tread's product, its state, log and live check. */
     hosting;
+    /** Settings > Environment: a workspace's plain variables and write-only secrets. Owners and admins only. */
+    envVars;
     /** Tasks: one piece of work in a Tread, moving through stages; Command is every Tread's. */
     tasks;
     realtime;
@@ -139,6 +142,7 @@ export class TankClient {
         this.ai = createClient(AiService, this.transport);
         this.environment = createClient(EnvironmentService, this.transport);
         this.hosting = createClient(HostingService, this.transport);
+        this.envVars = createClient(EnvVarService, this.transport);
         this.tasks = createClient(TaskService, this.transport);
         this.realtime = new RealtimeClient({
             wsUrl: opts.wsUrl,
