@@ -4,7 +4,7 @@ import type { Run, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v
 import type { AppAccount, CallToolRequest, CallToolResponse, GetToolsRequest, GetToolsResponse, ListAppsRequest, ListAppsResponse } from "../../apps/v1/apps_pb.js";
 import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks/v1/blocks_pb.js";
 import type { Board } from "../../board/v1/board_pb.js";
-import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Report } from "../../books/v1/books_pb.js";
+import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Recurring, Report } from "../../books/v1/books_pb.js";
 import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
 import type { Guardrail, GuardrailKind, GuardrailScope, Rating, Verdict } from "../../guardrails/v1/guardrails_pb.js";
 import type { CreateConnectionRequest, CreateConnectionResponse, CreateRelayRequest, CreateRelayResponse, DeleteConnectionRequest, DeleteConnectionResponse, DeleteRunbookRequest, DeleteRunbookResponse, GetConnectionRequest, GetConnectionResponse, GetSetupGuideRequest, GetSetupGuideResponse, ListConnectionsRequest, ListConnectionsResponse, ListRelaysRequest, ListRelaysResponse, ListRunbooksRequest as ListRunbooksRequest$1, ListRunbooksResponse as ListRunbooksResponse$1, ListUsesRequest, ListUsesResponse, ListWorkflowCandidatesRequest, ListWorkflowCandidatesResponse, Provider, PutRunbookRequest, PutRunbookResponse, RevokeRelayRequest, RevokeRelayResponse, Runbook, TestConnectionRequest, TestConnectionResponse, UpdateConnectionRequest, UpdateConnectionResponse } from "../../infra/v1/infra_pb.js";
@@ -1293,6 +1293,51 @@ export type PostToThreadResponse = Message<"tank.agentctl.v1.PostToThreadRespons
  */
 export declare const PostToThreadResponseSchema: GenMessage<PostToThreadResponse>;
 /**
+ * Ask another agent in this workspace to do a task, in this run's thread. The control plane
+ * posts the ask as this agent with an explicit mention; the other agent answers in the thread.
+ *
+ * @generated from message tank.agentctl.v1.RequestAgentTaskRequest
+ */
+export type RequestAgentTaskRequest = Message<"tank.agentctl.v1.RequestAgentTaskRequest"> & {
+    /**
+     * the other agent's name, or its title (for example "CFO")
+     *
+     * @generated from field: string agent = 1;
+     */
+    agent: string;
+    /**
+     * what to do, with the context it needs: it does not see this run's transcript
+     *
+     * @generated from field: string task = 2;
+     */
+    task: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RequestAgentTaskRequest.
+ * Use `create(RequestAgentTaskRequestSchema)` to create a new message.
+ */
+export declare const RequestAgentTaskRequestSchema: GenMessage<RequestAgentTaskRequest>;
+/**
+ * @generated from message tank.agentctl.v1.RequestAgentTaskResponse
+ */
+export type RequestAgentTaskResponse = Message<"tank.agentctl.v1.RequestAgentTaskResponse"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+    /**
+     * who was asked, as the workspace names them
+     *
+     * @generated from field: string agent_name = 2;
+     */
+    agentName: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.RequestAgentTaskResponse.
+ * Use `create(RequestAgentTaskResponseSchema)` to create a new message.
+ */
+export declare const RequestAgentTaskResponseSchema: GenMessage<RequestAgentTaskResponse>;
+/**
  * @generated from message tank.agentctl.v1.PostPlanRequest
  */
 export type PostPlanRequest = Message<"tank.agentctl.v1.PostPlanRequest"> & {
@@ -2395,6 +2440,142 @@ export type BooksListExpensesResponse = Message<"tank.agentctl.v1.BooksListExpen
  * Use `create(BooksListExpensesResponseSchema)` to create a new message.
  */
 export declare const BooksListExpensesResponseSchema: GenMessage<BooksListExpensesResponse>;
+/**
+ * @generated from message tank.agentctl.v1.BooksListRecurringRequest
+ */
+export type BooksListRecurringRequest = Message<"tank.agentctl.v1.BooksListRecurringRequest"> & {};
+/**
+ * Describes the message tank.agentctl.v1.BooksListRecurringRequest.
+ * Use `create(BooksListRecurringRequestSchema)` to create a new message.
+ */
+export declare const BooksListRecurringRequestSchema: GenMessage<BooksListRecurringRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BooksListRecurringResponse
+ */
+export type BooksListRecurringResponse = Message<"tank.agentctl.v1.BooksListRecurringResponse"> & {
+    /**
+     * accepted: in the forecast (active) or paused
+     *
+     * @generated from field: repeated tank.books.v1.Recurring rules = 1;
+     */
+    rules: Recurring[];
+    /**
+     * waiting for a person, including this agent's own
+     *
+     * @generated from field: repeated tank.books.v1.Recurring proposals = 2;
+     */
+    proposals: Recurring[];
+    /**
+     * what TANK itself charges, read-only
+     *
+     * @generated from field: repeated tank.books.v1.Recurring tank = 3;
+     */
+    tank: Recurring[];
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksListRecurringResponse.
+ * Use `create(BooksListRecurringResponseSchema)` to create a new message.
+ */
+export declare const BooksListRecurringResponseSchema: GenMessage<BooksListRecurringResponse>;
+/**
+ * A forecast rule an agent proposes. A person accepts it in Books; until then it is not in
+ * the forecast. Nothing here is booked.
+ *
+ * @generated from message tank.agentctl.v1.BooksProposeRecurringRequest
+ */
+export type BooksProposeRecurringRequest = Message<"tank.agentctl.v1.BooksProposeRecurringRequest"> & {
+    /**
+     * income | expense
+     *
+     * @generated from field: string kind = 1;
+     */
+    kind: string;
+    /**
+     * what people call it: "Cache7 refill #1"
+     *
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * expense: who is paid
+     *
+     * @generated from field: string vendor = 3;
+     */
+    vendor: string;
+    /**
+     * income: who pays; found by name, never created
+     *
+     * @generated from field: string customer_name = 4;
+     */
+    customerName: string;
+    /**
+     * a category's name or key; empty = the side's default
+     *
+     * @generated from field: string category = 5;
+     */
+    category: string;
+    /**
+     * each occurrence
+     *
+     * @generated from field: int64 amount_cents = 6;
+     */
+    amountCents: bigint;
+    /**
+     * weekly | monthly | quarterly | yearly
+     *
+     * @generated from field: string cadence = 7;
+     */
+    cadence: string;
+    /**
+     * 0 = the day of starts_on
+     *
+     * @generated from field: int32 anchor_day = 8;
+     */
+    anchorDay: number;
+    /**
+     * YYYY-MM-DD of the first occurrence
+     *
+     * @generated from field: string starts_on = 9;
+     */
+    startsOn: string;
+    /**
+     * YYYY-MM-DD, inclusive; equal to starts_on for a one-off
+     *
+     * @generated from field: string ends_on = 10;
+     */
+    endsOn: string;
+    /**
+     * days after it is earned that the cash moves
+     *
+     * @generated from field: int32 basis_offset_days = 11;
+     */
+    basisOffsetDays: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksProposeRecurringRequest.
+ * Use `create(BooksProposeRecurringRequestSchema)` to create a new message.
+ */
+export declare const BooksProposeRecurringRequestSchema: GenMessage<BooksProposeRecurringRequest>;
+/**
+ * @generated from message tank.agentctl.v1.BooksProposeRecurringResponse
+ */
+export type BooksProposeRecurringResponse = Message<"tank.agentctl.v1.BooksProposeRecurringResponse"> & {
+    /**
+     * @generated from field: tank.books.v1.Recurring rule = 1;
+     */
+    rule?: Recurring;
+    /**
+     * proposed | already_there
+     *
+     * @generated from field: string outcome = 2;
+     */
+    outcome: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.BooksProposeRecurringResponse.
+ * Use `create(BooksProposeRecurringResponseSchema)` to create a new message.
+ */
+export declare const BooksProposeRecurringResponseSchema: GenMessage<BooksProposeRecurringResponse>;
 /**
  * @generated from message tank.agentctl.v1.BooksRecordPaymentRequest
  */
@@ -3682,7 +3863,7 @@ export type RunEvent = Message<"tank.agentctl.v1.RunEvent"> & {
      */
     sdkSessionId: string;
     /**
-     * assistant_delta text, status, log line
+     * assistant_delta chunk (appended, not cumulative), status, log line
      *
      * @generated from field: string text = 5;
      */
@@ -8383,6 +8564,12 @@ export declare enum RunPhase {
  */
 export declare const RunPhaseSchema: GenEnum<RunPhase>;
 /**
+ * What the control plane forwards to people from a runner's event stream: only
+ * ASSISTANT_DELTA and STATUS (the planning phase included) become
+ * tank.events.v1.AgentStreamDelta, and only to users whose live_agent_stream is on.
+ * Tool input and output (TOOL_CALL, TOOL_RESULT, PERMISSION_REQUEST), usage, results and
+ * log lines are never forwarded as stream deltas.
+ *
  * @generated from enum tank.agentctl.v1.RunEventKind
  */
 export declare enum RunEventKind {
@@ -8391,6 +8578,8 @@ export declare enum RunEventKind {
      */
     UNSPECIFIED = 0,
     /**
+     * RunEvent.text is a chunk to append, not the text so far.
+     *
      * @generated from enum value: RUN_EVENT_KIND_ASSISTANT_DELTA = 1;
      */
     ASSISTANT_DELTA = 1,
@@ -8503,6 +8692,14 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof PostToThreadRequestSchema;
         output: typeof PostToThreadResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.RequestAgentTask
+     */
+    requestAgentTask: {
+        methodKind: "unary";
+        input: typeof RequestAgentTaskRequestSchema;
+        output: typeof RequestAgentTaskResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.AttachArtifact
@@ -8870,6 +9067,22 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof BooksReportRequestSchema;
         output: typeof BooksReportResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BooksListRecurring
+     */
+    booksListRecurring: {
+        methodKind: "unary";
+        input: typeof BooksListRecurringRequestSchema;
+        output: typeof BooksListRecurringResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.BooksProposeRecurring
+     */
+    booksProposeRecurring: {
+        methodKind: "unary";
+        input: typeof BooksProposeRecurringRequestSchema;
+        output: typeof BooksProposeRecurringResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.SocialAccounts

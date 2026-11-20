@@ -115,6 +115,29 @@ export type Run = Message<"tank.agent.v1.Run"> & {
      * @generated from field: string pending_gate_id = 15;
      */
     pendingGateId: string;
+    /**
+     * True when the run took a sandbox prepared from the composer draft instead of
+     * provisioning one, so a client and the metrics can tell a warm start from a cold one.
+     *
+     * @generated from field: bool prepared = 16;
+     */
+    prepared: boolean;
+    /**
+     * Delay breakdown, so the wait before the first reply is measured per workspace.
+     * acked_at: the immediate acknowledgement was posted. sandbox_ready_at: the sandbox
+     * could take work. first_reply_at: the first reply with content (not the ack) was posted.
+     *
+     * @generated from field: google.protobuf.Timestamp acked_at = 17;
+     */
+    ackedAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp sandbox_ready_at = 18;
+     */
+    sandboxReadyAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp first_reply_at = 19;
+     */
+    firstReplyAt?: Timestamp;
 };
 /**
  * Describes the message tank.agent.v1.Run.
@@ -155,6 +178,14 @@ export type StartRunRequest = Message<"tank.agent.v1.StartRunRequest"> & {
      * @generated from field: string parent_run_id = 5;
      */
     parentRunId: string;
+    /**
+     * The preparation id from the sender's Draft (tank.workspace.v1.Draft.preparation_id).
+     * When it names a live preparation for this thread and agent, the run adopts that warm
+     * sandbox; when it is empty, expired or cancelled the run provisions one as before.
+     *
+     * @generated from field: string preparation_id = 6;
+     */
+    preparationId: string;
 };
 /**
  * Describes the message tank.agent.v1.StartRunRequest.
@@ -179,12 +210,57 @@ export type StartRunResponse = Message<"tank.agent.v1.StartRunResponse"> & {
      * @generated from field: google.protobuf.Timestamp token_expires_at = 3;
      */
     tokenExpiresAt?: Timestamp;
+    /**
+     * Set instead of run when the workspace may not start a run: the typed reason, so the
+     * reply and its button are the same on every client. A refusal is a normal answer, not
+     * an error.
+     *
+     * @generated from field: tank.agent.v1.RunRefusal refusal = 4;
+     */
+    refusal?: RunRefusal;
+    /**
+     * The thread message posted the moment the run row exists, before the talker call or
+     * planning, so the person sees a reply at once. Empty when no acknowledgement was posted.
+     *
+     * @generated from field: string ack_message_id = 5;
+     */
+    ackMessageId: string;
 };
 /**
  * Describes the message tank.agent.v1.StartRunResponse.
  * Use `create(StartRunResponseSchema)` to create a new message.
  */
 export declare const StartRunResponseSchema: GenMessage<StartRunResponse>;
+/**
+ * @generated from message tank.agent.v1.RunRefusal
+ */
+export type RunRefusal = Message<"tank.agent.v1.RunRefusal"> & {
+    /**
+     * @generated from field: tank.agent.v1.RunRefusalReason reason = 1;
+     */
+    reason: RunRefusalReason;
+    /**
+     * @generated from field: tank.agent.v1.RunRefusalAction action = 2;
+     */
+    action: RunRefusalAction;
+    /**
+     * The sentence the agent's reply carries, in words people read.
+     *
+     * @generated from field: string message = 3;
+     */
+    message: string;
+    /**
+     * Label for the button, e.g. "Upgrade" or "Refill".
+     *
+     * @generated from field: string action_label = 4;
+     */
+    actionLabel: string;
+};
+/**
+ * Describes the message tank.agent.v1.RunRefusal.
+ * Use `create(RunRefusalSchema)` to create a new message.
+ */
+export declare const RunRefusalSchema: GenMessage<RunRefusal>;
 /**
  * Open a new thread in a Tread as one of the workspace's agents: the root of an Ops
  * hand-off or of a shift. Only a bot (the control plane) may call it; the person named
@@ -421,6 +497,54 @@ export type RenewRunTokenResponse = Message<"tank.agent.v1.RenewRunTokenResponse
  * Use `create(RenewRunTokenResponseSchema)` to create a new message.
  */
 export declare const RenewRunTokenResponseSchema: GenMessage<RenewRunTokenResponse>;
+/**
+ * The live output of a run so far, for a person who opens the thread or turns
+ * Preferences.live_agent_stream on mid-run, on any device. Same assistant text and
+ * status only as AgentStreamDelta, never tool input or output. The control plane keeps a
+ * bounded in-memory tail while the run is live; a finished run has an empty tail and
+ * the stored message is the record.
+ *
+ * @generated from message tank.agent.v1.GetRunStreamTailRequest
+ */
+export type GetRunStreamTailRequest = Message<"tank.agent.v1.GetRunStreamTailRequest"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetRunStreamTailRequest.
+ * Use `create(GetRunStreamTailRequestSchema)` to create a new message.
+ */
+export declare const GetRunStreamTailRequestSchema: GenMessage<GetRunStreamTailRequest>;
+/**
+ * @generated from message tank.agent.v1.GetRunStreamTailResponse
+ */
+export type GetRunStreamTailResponse = Message<"tank.agent.v1.GetRunStreamTailResponse"> & {
+    /**
+     * assistant text so far in the current turn
+     *
+     * @generated from field: string text = 1;
+     */
+    text: string;
+    /**
+     * the latest status line, empty if none
+     *
+     * @generated from field: string status = 2;
+     */
+    status: string;
+    /**
+     * seq of the last delta included; continue from last_seq + 1
+     *
+     * @generated from field: uint64 last_seq = 3;
+     */
+    lastSeq: bigint;
+};
+/**
+ * Describes the message tank.agent.v1.GetRunStreamTailResponse.
+ * Use `create(GetRunStreamTailResponseSchema)` to create a new message.
+ */
+export declare const GetRunStreamTailResponseSchema: GenMessage<GetRunStreamTailResponse>;
 /**
  * @generated from message tank.agent.v1.SetStatusRequest
  */
@@ -2328,6 +2452,56 @@ export declare enum RunState {
  */
 export declare const RunStateSchema: GenEnum<RunState>;
 /**
+ * @generated from enum tank.agent.v1.RunRefusalReason
+ */
+export declare enum RunRefusalReason {
+    /**
+     * @generated from enum value: RUN_REFUSAL_REASON_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * The workspace is on the free plan; agent time needs premium.
+     *
+     * @generated from enum value: RUN_REFUSAL_REASON_FREE_PLAN = 1;
+     */
+    FREE_PLAN = 1,
+    /**
+     * Prepaid agent time is spent and no auto-refill covered it.
+     *
+     * @generated from enum value: RUN_REFUSAL_REASON_OUT_OF_FUNDS = 2;
+     */
+    OUT_OF_FUNDS = 2
+}
+/**
+ * Describes the enum tank.agent.v1.RunRefusalReason.
+ */
+export declare const RunRefusalReasonSchema: GenEnum<RunRefusalReason>;
+/**
+ * @generated from enum tank.agent.v1.RunRefusalAction
+ */
+export declare enum RunRefusalAction {
+    /**
+     * @generated from enum value: RUN_REFUSAL_ACTION_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * The button opens BillingService.StartUpgradeCheckout.
+     *
+     * @generated from enum value: RUN_REFUSAL_ACTION_UPGRADE = 1;
+     */
+    UPGRADE = 1,
+    /**
+     * The button opens BillingService.StartAgentTimeCheckout.
+     *
+     * @generated from enum value: RUN_REFUSAL_ACTION_REFILL = 2;
+     */
+    REFILL = 2
+}
+/**
+ * Describes the enum tank.agent.v1.RunRefusalAction.
+ */
+export declare const RunRefusalActionSchema: GenEnum<RunRefusalAction>;
+/**
  * A Tread's plan ledger: the whole of what the Tread set out to build (a document like a
  * master build plan, or the first approved plan), item by item, with where each stands.
  * Runs keep it current; people read it as one progress bar under the goal and tap for the
@@ -2439,6 +2613,14 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof RenewRunTokenRequestSchema;
         output: typeof RenewRunTokenResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.GetRunStreamTail
+     */
+    getRunStreamTail: {
+        methodKind: "unary";
+        input: typeof GetRunStreamTailRequestSchema;
+        output: typeof GetRunStreamTailResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.SetStatus
