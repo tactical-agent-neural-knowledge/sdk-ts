@@ -235,11 +235,9 @@ export function DividerBlock() {
 // ------------------------------------------------------------------ buttons
 
 export function ActionButton({ button, ctx }: { button: ButtonMsg; ctx: BlockContext }) {
-  const theme = useTheme();
   if (button.actionId === ACTION_REVEAL_KEY) return <RevealKeyButton button={button} ctx={ctx} />;
   const danger = button.style === ButtonStyle.DANGER;
   const mode = button.style === ButtonStyle.UNSPECIFIED ? "outlined" : "contained";
-  const color = danger ? { buttonColor: theme.colors.error, textColor: theme.colors.onError } : {};
   const fire = () => ctx.onAction?.({ blockId: ctx.blockId, actionId: button.actionId, value: button.value });
   const open = ctx.openUrl ?? ((u: string) => void Linking.openURL(u));
   const onPress = () => {
@@ -251,17 +249,62 @@ export function ActionButton({ button, ctx }: { button: ButtonMsg; ctx: BlockCon
     ]);
   };
   return (
-    <Button
-      compact
+    <WrappingButton
       mode={mode}
-      {...color}
+      danger={danger}
       onPress={onPress}
       testID={`action-${button.actionId || button.url}`}
       accessibilityLabel={button.text}
-      style={styles.button}
     >
       {button.text}
-    </Button>
+    </WrappingButton>
+  );
+}
+
+/**
+ * Paper's Button draws its label on one line with an ellipsis, which cuts a long option
+ * ("Standby pod: start a generic runner pod from the dr…") short. This is the same look with a
+ * label that wraps, so the whole text can be read.
+ */
+function WrappingButton({
+  mode,
+  danger,
+  onPress,
+  disabled,
+  testID,
+  accessibilityLabel,
+  children,
+}: {
+  mode: "outlined" | "contained";
+  danger: boolean;
+  onPress: () => void;
+  disabled?: boolean;
+  testID: string;
+  accessibilityLabel: string;
+  children: ReactNode;
+}) {
+  const theme = useTheme();
+  const outlined = mode === "outlined";
+  const background = outlined ? "transparent" : danger ? theme.colors.error : theme.colors.primary;
+  const foreground = outlined ? theme.colors.primary : danger ? theme.colors.onError : theme.colors.onPrimary;
+  return (
+    <Pressable
+      accessibilityRole="button"
+      onPress={onPress}
+      disabled={disabled}
+      testID={testID}
+      accessibilityLabel={accessibilityLabel}
+      style={[
+        styles.button,
+        styles.wrapButton,
+        { backgroundColor: background, borderColor: outlined ? theme.colors.outline : "transparent" },
+        disabled ? styles.disabled : null,
+      ]}
+    >
+      <Text variant="labelLarge" style={[styles.wrapLabel, { color: foreground }]}>
+        {children}
+      </Text>
+    </Pressable>
   );
 }
 
@@ -288,17 +331,16 @@ function RevealKeyButton({ button, ctx }: { button: ButtonMsg; ctx: BlockContext
   };
   return (
     <View>
-      <Button
-        compact
+      <WrappingButton
         mode="contained"
+        danger={false}
         onPress={() => void press()}
         disabled={busy}
         testID={`action-${button.actionId}`}
         accessibilityLabel={copied ? REVEAL_COPIED : button.text}
-        style={styles.button}
       >
         {copied ? REVEAL_COPIED : button.text}
-      </Button>
+      </WrappingButton>
       {gone ? (
         <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }} testID="reveal-gone">
           {REVEAL_GONE}
@@ -1035,6 +1077,17 @@ const styles = StyleSheet.create({
   fields: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
   field: { minWidth: 140, flexGrow: 1 },
   button: { alignSelf: "flex-start" },
+  wrapButton: {
+    flexShrink: 1,
+    minHeight: 36,
+    borderWidth: 1,
+    borderRadius: 18,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    justifyContent: "center",
+  },
+  wrapLabel: { textAlign: "center" },
+  disabled: { opacity: 0.5 },
   chip: { height: 24, alignSelf: "flex-start" },
   chipText: { fontSize: 11, lineHeight: 14, marginVertical: 0 },
   progress: { height: 4, borderRadius: 2, marginBottom: 4 },

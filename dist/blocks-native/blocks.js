@@ -103,12 +103,10 @@ export function DividerBlock() {
 }
 // ------------------------------------------------------------------ buttons
 export function ActionButton({ button, ctx }) {
-    const theme = useTheme();
     if (button.actionId === ACTION_REVEAL_KEY)
         return _jsx(RevealKeyButton, { button: button, ctx: ctx });
     const danger = button.style === ButtonStyle.DANGER;
     const mode = button.style === ButtonStyle.UNSPECIFIED ? "outlined" : "contained";
-    const color = danger ? { buttonColor: theme.colors.error, textColor: theme.colors.onError } : {};
     const fire = () => ctx.onAction?.({ blockId: ctx.blockId, actionId: button.actionId, value: button.value });
     const open = ctx.openUrl ?? ((u) => void Linking.openURL(u));
     const onPress = () => {
@@ -121,7 +119,24 @@ export function ActionButton({ button, ctx }) {
             { text: button.confirm.confirm || "Confirm", style: danger ? "destructive" : "default", onPress: fire },
         ]);
     };
-    return (_jsx(Button, { compact: true, mode: mode, ...color, onPress: onPress, testID: `action-${button.actionId || button.url}`, accessibilityLabel: button.text, style: styles.button, children: button.text }));
+    return (_jsx(WrappingButton, { mode: mode, danger: danger, onPress: onPress, testID: `action-${button.actionId || button.url}`, accessibilityLabel: button.text, children: button.text }));
+}
+/**
+ * Paper's Button draws its label on one line with an ellipsis, which cuts a long option
+ * ("Standby pod: start a generic runner pod from the dr…") short. This is the same look with a
+ * label that wraps, so the whole text can be read.
+ */
+function WrappingButton({ mode, danger, onPress, disabled, testID, accessibilityLabel, children, }) {
+    const theme = useTheme();
+    const outlined = mode === "outlined";
+    const background = outlined ? "transparent" : danger ? theme.colors.error : theme.colors.primary;
+    const foreground = outlined ? theme.colors.primary : danger ? theme.colors.onError : theme.colors.onPrimary;
+    return (_jsx(Pressable, { accessibilityRole: "button", onPress: onPress, disabled: disabled, testID: testID, accessibilityLabel: accessibilityLabel, style: [
+            styles.button,
+            styles.wrapButton,
+            { backgroundColor: background, borderColor: outlined ? theme.colors.outline : "transparent" },
+            disabled ? styles.disabled : null,
+        ], children: _jsx(Text, { variant: "labelLarge", style: [styles.wrapLabel, { color: foreground }], children: children }) }));
 }
 /**
  * Copies a key a run made, through the host: the key goes from the server to the clipboard and
@@ -147,7 +162,7 @@ function RevealKeyButton({ button, ctx }) {
         else
             setGone(true);
     };
-    return (_jsxs(View, { children: [_jsx(Button, { compact: true, mode: "contained", onPress: () => void press(), disabled: busy, testID: `action-${button.actionId}`, accessibilityLabel: copied ? REVEAL_COPIED : button.text, style: styles.button, children: copied ? REVEAL_COPIED : button.text }), gone ? (_jsx(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, testID: "reveal-gone", children: REVEAL_GONE })) : null] }));
+    return (_jsxs(View, { children: [_jsx(WrappingButton, { mode: "contained", danger: false, onPress: () => void press(), disabled: busy, testID: `action-${button.actionId}`, accessibilityLabel: copied ? REVEAL_COPIED : button.text, children: copied ? REVEAL_COPIED : button.text }), gone ? (_jsx(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, testID: "reveal-gone", children: REVEAL_GONE })) : null] }));
 }
 export function ActionsBlock({ value, ctx }) {
     return (_jsx(View, { style: styles.wrap, children: value.buttons.map((b, i) => (_jsx(ActionButton, { button: b, ctx: ctx }, b.actionId || b.url || i))) }));
@@ -401,6 +416,17 @@ const styles = StyleSheet.create({
     fields: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
     field: { minWidth: 140, flexGrow: 1 },
     button: { alignSelf: "flex-start" },
+    wrapButton: {
+        flexShrink: 1,
+        minHeight: 36,
+        borderWidth: 1,
+        borderRadius: 18,
+        paddingVertical: 6,
+        paddingHorizontal: 14,
+        justifyContent: "center",
+    },
+    wrapLabel: { textAlign: "center" },
+    disabled: { opacity: 0.5 },
     chip: { height: 24, alignSelf: "flex-start" },
     chipText: { fontSize: 11, lineHeight: 14, marginVertical: 0 },
     progress: { height: 4, borderRadius: 2, marginBottom: 4 },
