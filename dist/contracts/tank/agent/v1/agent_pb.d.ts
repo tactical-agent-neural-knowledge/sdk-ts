@@ -179,12 +179,50 @@ export type StartRunResponse = Message<"tank.agent.v1.StartRunResponse"> & {
      * @generated from field: google.protobuf.Timestamp token_expires_at = 3;
      */
     tokenExpiresAt?: Timestamp;
+    /**
+     * Set instead of run when the workspace may not start a run: the typed reason, so the
+     * reply and its button are the same on every client. A refusal is a normal answer, not
+     * an error.
+     *
+     * @generated from field: tank.agent.v1.RunRefusal refusal = 4;
+     */
+    refusal?: RunRefusal;
 };
 /**
  * Describes the message tank.agent.v1.StartRunResponse.
  * Use `create(StartRunResponseSchema)` to create a new message.
  */
 export declare const StartRunResponseSchema: GenMessage<StartRunResponse>;
+/**
+ * @generated from message tank.agent.v1.RunRefusal
+ */
+export type RunRefusal = Message<"tank.agent.v1.RunRefusal"> & {
+    /**
+     * @generated from field: tank.agent.v1.RunRefusalReason reason = 1;
+     */
+    reason: RunRefusalReason;
+    /**
+     * @generated from field: tank.agent.v1.RunRefusalAction action = 2;
+     */
+    action: RunRefusalAction;
+    /**
+     * The sentence the agent's reply carries, in words people read.
+     *
+     * @generated from field: string message = 3;
+     */
+    message: string;
+    /**
+     * Label for the button, e.g. "Upgrade" or "Refill".
+     *
+     * @generated from field: string action_label = 4;
+     */
+    actionLabel: string;
+};
+/**
+ * Describes the message tank.agent.v1.RunRefusal.
+ * Use `create(RunRefusalSchema)` to create a new message.
+ */
+export declare const RunRefusalSchema: GenMessage<RunRefusal>;
 /**
  * Open a new thread in a Tread as one of the workspace's agents: the root of an Ops
  * hand-off or of a shift. Only a bot (the control plane) may call it; the person named
@@ -2327,6 +2365,56 @@ export declare enum RunState {
  * Describes the enum tank.agent.v1.RunState.
  */
 export declare const RunStateSchema: GenEnum<RunState>;
+/**
+ * @generated from enum tank.agent.v1.RunRefusalReason
+ */
+export declare enum RunRefusalReason {
+    /**
+     * @generated from enum value: RUN_REFUSAL_REASON_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * The workspace is on the free plan; agent time needs premium.
+     *
+     * @generated from enum value: RUN_REFUSAL_REASON_FREE_PLAN = 1;
+     */
+    FREE_PLAN = 1,
+    /**
+     * Prepaid agent time is spent and no auto-refill covered it.
+     *
+     * @generated from enum value: RUN_REFUSAL_REASON_OUT_OF_FUNDS = 2;
+     */
+    OUT_OF_FUNDS = 2
+}
+/**
+ * Describes the enum tank.agent.v1.RunRefusalReason.
+ */
+export declare const RunRefusalReasonSchema: GenEnum<RunRefusalReason>;
+/**
+ * @generated from enum tank.agent.v1.RunRefusalAction
+ */
+export declare enum RunRefusalAction {
+    /**
+     * @generated from enum value: RUN_REFUSAL_ACTION_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * The button opens BillingService.StartUpgradeCheckout.
+     *
+     * @generated from enum value: RUN_REFUSAL_ACTION_UPGRADE = 1;
+     */
+    UPGRADE = 1,
+    /**
+     * The button opens BillingService.StartAgentTimeCheckout.
+     *
+     * @generated from enum value: RUN_REFUSAL_ACTION_REFILL = 2;
+     */
+    REFILL = 2
+}
+/**
+ * Describes the enum tank.agent.v1.RunRefusalAction.
+ */
+export declare const RunRefusalActionSchema: GenEnum<RunRefusalAction>;
 /**
  * A Tread's plan ledger: the whole of what the Tread set out to build (a document like a
  * master build plan, or the first approved plan), item by item, with where each stands.

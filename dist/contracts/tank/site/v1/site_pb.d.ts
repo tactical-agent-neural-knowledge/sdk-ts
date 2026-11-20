@@ -1,0 +1,135 @@
+import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
+import type { Message } from "@bufbuild/protobuf";
+/**
+ * Describes the file tank/site/v1/site.proto.
+ */
+export declare const file_tank_site_v1_site: GenFile;
+/**
+ * @generated from message tank.site.v1.GetExperienceRequest
+ */
+export type GetExperienceRequest = Message<"tank.site.v1.GetExperienceRequest"> & {
+    /**
+     * What the visitor typed or the suggestion they picked. At most 300 characters.
+     *
+     * @generated from field: string prompt = 1;
+     */
+    prompt: string;
+};
+/**
+ * Describes the message tank.site.v1.GetExperienceRequest.
+ * Use `create(GetExperienceRequestSchema)` to create a new message.
+ */
+export declare const GetExperienceRequestSchema: GenMessage<GetExperienceRequest>;
+/**
+ * @generated from message tank.site.v1.GetExperienceResponse
+ */
+export type GetExperienceResponse = Message<"tank.site.v1.GetExperienceResponse"> & {
+    /**
+     * Absent when there is nothing to show (no saved page yet and the model is not answering):
+     * the site keeps its standard homepage.
+     *
+     * @generated from field: tank.site.v1.Experience experience = 1;
+     */
+    experience?: Experience;
+};
+/**
+ * Describes the message tank.site.v1.GetExperienceResponse.
+ * Use `create(GetExperienceResponseSchema)` to create a new message.
+ */
+export declare const GetExperienceResponseSchema: GenMessage<GetExperienceResponse>;
+/**
+ * @generated from message tank.site.v1.Experience
+ */
+export type Experience = Message<"tank.site.v1.Experience"> & {
+    /**
+     * @generated from field: string headline = 1;
+     */
+    headline: string;
+    /**
+     * @generated from field: string lede = 2;
+     */
+    lede: string;
+    /**
+     * @generated from field: repeated tank.site.v1.ExperienceSection sections = 3;
+     */
+    sections: ExperienceSection[];
+    /**
+     * One closing line above the call to action.
+     *
+     * @generated from field: string closing = 4;
+     */
+    closing: string;
+    /**
+     * True when this is a saved page for another prompt, the closest to what was asked.
+     *
+     * @generated from field: bool closest = 5;
+     */
+    closest: boolean;
+    /**
+     * The prompt the page was written for; differs from the request when closest is set.
+     *
+     * @generated from field: string written_for = 6;
+     */
+    writtenFor: string;
+    /**
+     * Which of the site's personas the visitor is closest to, by its key in the site's
+     * experiences.json (the model's choice, or the saved page's own). The site shows that
+     * persona's demo, sections and accent. Empty from an api that does not choose one.
+     *
+     * @generated from field: string persona = 7;
+     */
+    persona: string;
+};
+/**
+ * Describes the message tank.site.v1.Experience.
+ * Use `create(ExperienceSchema)` to create a new message.
+ */
+export declare const ExperienceSchema: GenMessage<Experience>;
+/**
+ * @generated from message tank.site.v1.ExperienceSection
+ */
+export type ExperienceSection = Message<"tank.site.v1.ExperienceSection"> & {
+    /**
+     * A key from the site's feature list (tank.chat/features.json), always one that is live.
+     *
+     * @generated from field: string feature = 1;
+     */
+    feature: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: string body = 3;
+     */
+    body: string;
+};
+/**
+ * Describes the message tank.site.v1.ExperienceSection.
+ * Use `create(ExperienceSectionSchema)` to create a new message.
+ */
+export declare const ExperienceSectionSchema: GenMessage<ExperienceSection>;
+/**
+ * SiteService is what the marketing site (tank.chat) asks of TANK without an account.
+ *
+ * "Choose your experience" (Robby, 2026-11-19): not every visitor is an engineer, and the
+ * homepage read as if they were. A visitor says who they are in a prompt ("I'm the CEO of a
+ * FinTech company, how can TANK be used in my organization") and Neural 1.0 writes the
+ * homepage for their field: a headline, an opening, and a handful of sections, each about
+ * one feature that is live today. TANK's own model only. When Neural is asleep or busy, the
+ * answer is the saved page whose prompt is closest to what was typed.
+ *
+ * @generated from service tank.site.v1.SiteService
+ */
+export declare const SiteService: GenService<{
+    /**
+     * GetExperience is public and rate limited. It never wakes the model.
+     *
+     * @generated from rpc tank.site.v1.SiteService.GetExperience
+     */
+    getExperience: {
+        methodKind: "unary";
+        input: typeof GetExperienceRequestSchema;
+        output: typeof GetExperienceResponseSchema;
+    };
+}>;

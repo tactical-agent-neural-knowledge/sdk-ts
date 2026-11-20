@@ -413,6 +413,36 @@ export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
      * @generated from field: string payment_state = 13;
      */
     paymentState: string;
+    /**
+     * Where the workspace's prepaid agent time stands, so every client draws the banner and
+     * the refused-run reply from one field:
+     *   free  the plan has no agent time; the button goes to upgrade (StartUpgradeCheckout)
+     *   ok    enough left
+     *   low   available is under agent_time_low_cents; the button goes to refill
+     *   out   nothing left, no run may start; the button goes to refill
+     * Both low and out open StartAgentTimeCheckout. A workspace that pays nothing is always ok.
+     *
+     * @generated from field: string agent_time_state = 14;
+     */
+    agentTimeState: string;
+    /**
+     * What is left to spend: the month's included time still unspent plus the purchased balance.
+     *
+     * @generated from field: int64 agent_time_available_cents = 15;
+     */
+    agentTimeAvailableCents: bigint;
+    /**
+     * The threshold the server used to decide "low", so a client can say "under $X".
+     *
+     * @generated from field: int64 agent_time_low_cents = 16;
+     */
+    agentTimeLowCents: bigint;
+    /**
+     * Auto-refill is on, so running out buys more instead of stopping runs.
+     *
+     * @generated from field: bool agent_time_auto_refill = 17;
+     */
+    agentTimeAutoRefill: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.Entitlements.
