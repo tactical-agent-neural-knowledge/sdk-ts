@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { AgentStatus, BoardPointer, CanvasEditing, Envelope, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
+import type { AgentStatus, BoardPointer, CanvasEditing, Envelope, PreparationUpdate, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/realtime/v1/realtime.proto.
@@ -485,6 +485,12 @@ export type ServerFrame = Message<"tank.realtime.v1.ServerFrame"> & {
          */
         value: BoardPointer;
         case: "boardPointer";
+    } | {
+        /**
+         * @generated from field: tank.events.v1.PreparationUpdate preparation = 12;
+         */
+        value: PreparationUpdate;
+        case: "preparation";
     } | {
         case: undefined;
         value?: undefined;

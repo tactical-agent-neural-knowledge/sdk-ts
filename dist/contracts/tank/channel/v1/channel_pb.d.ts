@@ -133,6 +133,18 @@ export type Channel = Message<"tank.channel.v1.Channel"> & {
      * @generated from field: tank.channel.v1.ChannelView default_view = 18;
      */
     defaultView: ChannelView;
+    /**
+     * How active @neural is in this Tread unprompted, 0 (off) to 4. Unset follows the workspace.
+     *
+     * @generated from field: optional int32 neural_involvement_override = 19;
+     */
+    neuralInvolvementOverride?: number;
+    /**
+     * What applies: the override when set, otherwise the workspace's level.
+     *
+     * @generated from field: int32 neural_involvement = 20;
+     */
+    neuralInvolvement: number;
 };
 /**
  * Describes the message tank.channel.v1.Channel.
@@ -698,6 +710,18 @@ export type UpdateChannelRequest = Message<"tank.channel.v1.UpdateChannelRequest
      * @generated from field: optional tank.channel.v1.ChannelView default_view = 6;
      */
     defaultView?: ChannelView;
+    /**
+     * 0 (off) to 4. Sets this Tread's own level; refused outside the range.
+     *
+     * @generated from field: optional int32 neural_involvement_override = 7;
+     */
+    neuralInvolvementOverride?: number;
+    /**
+     * Clears the override so the Tread follows the workspace again. Not allowed with an override.
+     *
+     * @generated from field: bool reset_neural_involvement = 8;
+     */
+    resetNeuralInvolvement: boolean;
 };
 /**
  * Describes the message tank.channel.v1.UpdateChannelRequest.

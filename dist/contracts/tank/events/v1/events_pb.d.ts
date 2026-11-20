@@ -13,7 +13,7 @@ import type { Health, Widget } from "../../monitor/v1/monitor_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
 import type { Task } from "../../task/v1/task_pb.js";
 import type { Mark } from "../../topo/v1/topo_pb.js";
-import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
+import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, PreparationState, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/events/v1/events.proto.
@@ -427,6 +427,37 @@ export type AgentStatus = Message<"tank.events.v1.AgentStatus"> & {
  * Use `create(AgentStatusSchema)` to create a new message.
  */
 export declare const AgentStatusSchema: GenMessage<AgentStatus>;
+/**
+ * preparation.updated on evt.{ws}.user.{uid}: the sandbox being prepared for that user's
+ * composer draft changed state, so every device shows the same "getting ready" indicator.
+ *
+ * @generated from message tank.events.v1.PreparationUpdate
+ */
+export type PreparationUpdate = Message<"tank.events.v1.PreparationUpdate"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * empty for the channel composer
+     *
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string preparation_id = 3;
+     */
+    preparationId: string;
+    /**
+     * @generated from field: tank.workspace.v1.PreparationState state = 4;
+     */
+    state: PreparationState;
+};
+/**
+ * Describes the message tank.events.v1.PreparationUpdate.
+ * Use `create(PreparationUpdateSchema)` to create a new message.
+ */
+export declare const PreparationUpdateSchema: GenMessage<PreparationUpdate>;
 /**
  * file.ready on evt.{ws}.user.{uploader}: the upload is verified and readable.
  * Also published on evt.{ws}.ch.{channel} for every channel the file is

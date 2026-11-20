@@ -45,6 +45,12 @@ export type Workspace = Message<"tank.workspace.v1.Workspace"> & {
      * @generated from field: string icon_file_id = 7;
      */
     iconFileId: string;
+    /**
+     * How active @neural is in Treads that have not set their own, 0 (off) to 4. Starts at 0.
+     *
+     * @generated from field: int32 neural_involvement = 8;
+     */
+    neuralInvolvement: number;
 };
 /**
  * Describes the message tank.workspace.v1.Workspace.
@@ -413,6 +419,36 @@ export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
      * @generated from field: string payment_state = 13;
      */
     paymentState: string;
+    /**
+     * Where the workspace's prepaid agent time stands, so every client draws the banner and
+     * the refused-run reply from one field:
+     *   free  the plan has no agent time; the button goes to upgrade (StartUpgradeCheckout)
+     *   ok    enough left
+     *   low   available is under agent_time_low_cents; the button goes to refill
+     *   out   nothing left, no run may start; the button goes to refill
+     * Both low and out open StartAgentTimeCheckout. A workspace that pays nothing is always ok.
+     *
+     * @generated from field: string agent_time_state = 14;
+     */
+    agentTimeState: string;
+    /**
+     * What is left to spend: the month's included time still unspent plus the purchased balance.
+     *
+     * @generated from field: int64 agent_time_available_cents = 15;
+     */
+    agentTimeAvailableCents: bigint;
+    /**
+     * The threshold the server used to decide "low", so a client can say "under $X".
+     *
+     * @generated from field: int64 agent_time_low_cents = 16;
+     */
+    agentTimeLowCents: bigint;
+    /**
+     * Auto-refill is on, so running out buys more instead of stopping runs.
+     *
+     * @generated from field: bool agent_time_auto_refill = 17;
+     */
+    agentTimeAutoRefill: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.Entitlements.
@@ -1537,6 +1573,30 @@ export type Draft = Message<"tank.workspace.v1.Draft"> & {
      * @generated from field: google.protobuf.Timestamp updated_at = 6;
      */
     updatedAt?: Timestamp;
+    /**
+     * Set by the server on every PutDraft, never by the client: the agents the draft
+     * text tags, resolved the way @ autocomplete resolves them. Empty when none.
+     *
+     * @generated from field: repeated string mentioned_agent_ids = 7;
+     */
+    mentionedAgentIds: string[];
+    /**
+     * Set while a sandbox is being prepared for this draft, empty otherwise. Send it as
+     * StartRunRequest.preparation_id when the message is sent so the run adopts the sandbox.
+     *
+     * @generated from field: string preparation_id = 8;
+     */
+    preparationId: string;
+    /**
+     * @generated from field: tank.workspace.v1.PreparationState preparation_state = 9;
+     */
+    preparationState: PreparationState;
+    /**
+     * When an unused preparation gives its sandbox back on its own.
+     *
+     * @generated from field: google.protobuf.Timestamp preparation_expires_at = 10;
+     */
+    preparationExpiresAt?: Timestamp;
 };
 /**
  * Describes the message tank.workspace.v1.Draft.
@@ -2277,6 +2337,38 @@ export type SetWorkspaceThemeResponse = Message<"tank.workspace.v1.SetWorkspaceT
  */
 export declare const SetWorkspaceThemeResponseSchema: GenMessage<SetWorkspaceThemeResponse>;
 /**
+ * @generated from message tank.workspace.v1.SetNeuralInvolvementRequest
+ */
+export type SetNeuralInvolvementRequest = Message<"tank.workspace.v1.SetNeuralInvolvementRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: int32 level = 2;
+     */
+    level: number;
+};
+/**
+ * Describes the message tank.workspace.v1.SetNeuralInvolvementRequest.
+ * Use `create(SetNeuralInvolvementRequestSchema)` to create a new message.
+ */
+export declare const SetNeuralInvolvementRequestSchema: GenMessage<SetNeuralInvolvementRequest>;
+/**
+ * @generated from message tank.workspace.v1.SetNeuralInvolvementResponse
+ */
+export type SetNeuralInvolvementResponse = Message<"tank.workspace.v1.SetNeuralInvolvementResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Workspace workspace = 1;
+     */
+    workspace?: Workspace;
+};
+/**
+ * Describes the message tank.workspace.v1.SetNeuralInvolvementResponse.
+ * Use `create(SetNeuralInvolvementResponseSchema)` to create a new message.
+ */
+export declare const SetNeuralInvolvementResponseSchema: GenMessage<SetNeuralInvolvementResponse>;
+/**
  * "A copper gear with a lightning bolt" → a small SVG, stored as a file the caller owns.
  *
  * @generated from message tank.workspace.v1.GenerateArtRequest
@@ -2700,6 +2792,68 @@ export declare enum Role {
  */
 export declare const RoleSchema: GenEnum<Role>;
 /**
+ * Where the sandbox being prepared for a draft is. The trigger is PutDraft: when a saved
+ * draft tags an agent the server starts a preparation. It ends in exactly one of READY
+ * (adopted by StartRun), EXPIRED or one of the CANCELLED_* values. All of these cancel it:
+ * DeleteDraft, a PutDraft whose text no longer tags the agent, and the message being sent
+ * without the tag (or to a different thread). An unused preparation expires on its own at
+ * Draft.preparation_expires_at, so tagging an agent and walking away never holds a sandbox.
+ *
+ * @generated from enum tank.workspace.v1.PreparationState
+ */
+export declare enum PreparationState {
+    /**
+     * @generated from enum value: PREPARATION_STATE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * sandbox is warming
+     *
+     * @generated from enum value: PREPARATION_STATE_PREPARING = 1;
+     */
+    PREPARING = 1,
+    /**
+     * sandbox is warm and waiting for the message to be sent
+     *
+     * @generated from enum value: PREPARATION_STATE_READY = 2;
+     */
+    READY = 2,
+    /**
+     * nobody sent the message in time
+     *
+     * @generated from enum value: PREPARATION_STATE_EXPIRED = 3;
+     */
+    EXPIRED = 3,
+    /**
+     * cancelled for a reason not listed below
+     *
+     * @generated from enum value: PREPARATION_STATE_CANCELLED = 4;
+     */
+    CANCELLED = 4,
+    /**
+     * an edit dropped the @mention
+     *
+     * @generated from enum value: PREPARATION_STATE_CANCELLED_MENTION_REMOVED = 5;
+     */
+    CANCELLED_MENTION_REMOVED = 5,
+    /**
+     * DeleteDraft
+     *
+     * @generated from enum value: PREPARATION_STATE_CANCELLED_DRAFT_DELETED = 6;
+     */
+    CANCELLED_DRAFT_DELETED = 6,
+    /**
+     * sent without the tag, or to another thread
+     *
+     * @generated from enum value: PREPARATION_STATE_CANCELLED_SENT_ELSEWHERE = 7;
+     */
+    CANCELLED_SENT_ELSEWHERE = 7
+}
+/**
+ * Describes the enum tank.workspace.v1.PreparationState.
+ */
+export declare const PreparationStateSchema: GenEnum<PreparationState>;
+/**
  * What a generated picture is for. It changes the brief, not the pipeline.
  *
  * @generated from enum tank.workspace.v1.ArtKind
@@ -2924,6 +3078,16 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceThemeRequestSchema;
         output: typeof SetWorkspaceThemeResponseSchema;
+    };
+    /**
+     * Admins only: how active @neural is across the workspace, 0 (off) to 4.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.SetNeuralInvolvement
+     */
+    setNeuralInvolvement: {
+        methodKind: "unary";
+        input: typeof SetNeuralInvolvementRequestSchema;
+        output: typeof SetNeuralInvolvementResponseSchema;
     };
     /**
      * Turn up to fifteen words into an icon or emoji picture. The file is saved; nothing is applied.
