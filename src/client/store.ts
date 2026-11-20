@@ -7,6 +7,8 @@ import { ChannelReadStateSchema } from "../contracts/tank/channel/v1/channel_pb.
 import {
   type AgentRunUpdated,
   type AgentStatus,
+  type AgentStreamDelta,
+  AgentStreamDelta_Kind,
   type AppCommand,
   type BoardChanged,
   type BoardObjectsChanged,
@@ -96,6 +98,20 @@ export interface AgentStatusEntry {
   expiresAt: number;
 }
 
+/** The agent's live output for one thread: appended text chunks plus the latest status line. */
+export interface AgentStreamEntry {
+  runId: string;
+  text: string;
+  status: string;
+  /** Highest `seq` applied. Deltas at or below it are duplicates. */
+  lastSeq: bigint;
+  /**
+   * Text was dropped (a gap in `seq`, a reconnect, or the person opened the thread mid-run) and
+   * `text` cannot be trusted until `agentStream/tail` replaces it from `getRunStreamTail`.
+   */
+  stale: boolean;
+}
+
 export interface TankState {
   me: Principal | undefined;
   workspaces: Record<string, Workspace>;
@@ -124,6 +140,8 @@ export interface TankState {
   agentStatus: Record<string, AgentStatus>;
   /** Live `agent_status` frames keyed by thread root id (or channel id); each expires `AGENT_STATUS_TTL_MS` after arrival. */
   agentStatusByThread: Record<string, AgentStatusEntry>;
+  /** Live agent output keyed like `agentStatusByThread`: thread root id, else channel id. Ephemeral, never persisted. */
+  agentStream: Record<string, AgentStreamEntry>;
   /** client_msg_id → outbox status. */
   pending: Record<string, PendingMessage>;
   connection: ConnectionState;
@@ -172,6 +190,7 @@ export function initialState(): TankState {
     typing: {},
     agentStatus: {},
     agentStatusByThread: {},
+    agentStream: {},
     pending: {},
     connection: "idle",
     cursors: {},
@@ -247,6 +266,13 @@ export type Action =
   /** `now` defaults to `Date.now()`; an empty `status.status` clears the entry. */
   | { type: "agentStatus"; status: AgentStatus; now?: number }
   | { type: "agentStatus/expire"; now: number }
+  /** One live `AgentStreamDelta`: TEXT appends (a `reset` starts over), STATUS replaces the status line, END drops the entry. */
+  | { type: "agentStream"; delta: AgentStreamDelta }
+  /** The server's tail for a run, applied after a gap or when opening a thread mid-run. Ignored if the run moved on. */
+  | { type: "agentStream/tail"; key: string; runId: string; text: string; status: string; lastSeq: bigint }
+  /** Mark every entry stale (a reconnect lost frames): text is hidden until a tail arrives. */
+  | { type: "agentStream/stale" }
+  | { type: "agentStream/clear"; key: string }
   | { type: "notifications/upsert"; workspaceId: string; notifications: Notification[]; unreadCount?: number }
   /** A `NotificationCreated` event: builds the row (user = me) and bumps the unread count when it is new. */
   | { type: "notifications/created"; workspaceId: string; event: NotificationCreated; occurredAt?: Timestamp }
@@ -858,6 +884,70 @@ export function reduce(state: TankState, action: Action): TankState {
           [key]: { status: action.status, expiresAt: now + AGENT_STATUS_TTL_MS },
         },
       };
+    }
+    case "agentStream": {
+      const d = action.delta;
+      const key = d.threadRootId || d.channelId;
+      const cur = state.agentStream[key];
+      if (d.kind === AgentStreamDelta_Kind.END) {
+        if (!cur || (cur.runId !== d.runId && cur.runId !== "")) return state;
+        const agentStream = { ...state.agentStream };
+        delete agentStream[key];
+        return { ...state, agentStream };
+      }
+      if (d.kind !== AgentStreamDelta_Kind.TEXT && d.kind !== AgentStreamDelta_Kind.STATUS) return state;
+      let entry: AgentStreamEntry;
+      if (!cur || cur.runId !== d.runId) {
+        entry = { runId: d.runId, text: "", status: "", lastSeq: 0n, stale: d.seq !== 1n };
+      } else {
+        if (d.seq <= cur.lastSeq) return state;
+        entry = { ...cur, stale: cur.stale || d.seq !== cur.lastSeq + 1n };
+      }
+      if (entry.stale) {
+        // Only the status line is safe to show without the text before it.
+        entry.text = "";
+        if (d.kind === AgentStreamDelta_Kind.STATUS) entry.status = d.text;
+      } else if (d.kind === AgentStreamDelta_Kind.STATUS) {
+        entry.status = d.text;
+      } else {
+        entry.text = d.reset ? d.text : entry.text + d.text;
+      }
+      entry.lastSeq = d.seq;
+      return { ...state, agentStream: { ...state.agentStream, [key]: entry } };
+    }
+    case "agentStream/tail": {
+      const cur = state.agentStream[action.key];
+      if (cur && cur.runId !== action.runId) return state;
+      if (cur && cur.lastSeq > action.lastSeq) {
+        // Newer deltas arrived while the tail was in flight: keep the live status, take the text only if we had none.
+        return state;
+      }
+      return {
+        ...state,
+        agentStream: {
+          ...state.agentStream,
+          [action.key]: {
+            runId: action.runId,
+            text: action.text,
+            status: action.status,
+            lastSeq: action.lastSeq,
+            stale: false,
+          },
+        },
+      };
+    }
+    case "agentStream/stale": {
+      if (Object.keys(state.agentStream).length === 0) return state;
+      const agentStream: TankState["agentStream"] = {};
+      for (const [k, e] of Object.entries(state.agentStream))
+        agentStream[k] = { ...e, text: "", stale: true };
+      return { ...state, agentStream };
+    }
+    case "agentStream/clear": {
+      if (!state.agentStream[action.key]) return state;
+      const agentStream = { ...state.agentStream };
+      delete agentStream[action.key];
+      return { ...state, agentStream };
     }
     case "agentStatus/expire": {
       let changed = false;
@@ -1567,6 +1657,7 @@ export class TankStore {
   };
 
   /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
+  selectAgentStream = (key: string): AgentStreamEntry | undefined => this.state.agentStream[key];
   selectAgentStatus = (key: string): AgentStatus | undefined => this.state.agentStatusByThread[key]?.status;
 
   /** Every live `agent_status` frame in a channel (channel-level and per-thread). */

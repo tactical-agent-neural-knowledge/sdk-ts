@@ -1,7 +1,7 @@
 import { create, createRegistry } from "@bufbuild/protobuf";
 import { anyUnpack, timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { ChannelReadStateSchema } from "../contracts/tank/channel/v1/channel_pb.js";
-import { file_tank_events_v1_events, } from "../contracts/tank/events/v1/events_pb.js";
+import { AgentStreamDelta_Kind, file_tank_events_v1_events, } from "../contracts/tank/events/v1/events_pb.js";
 import { NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
 import { uuidv7Time } from "./uuidv7.js";
 export const TYPING_TTL_MS = 5_000;
@@ -26,6 +26,7 @@ export function initialState() {
         typing: {},
         agentStatus: {},
         agentStatusByThread: {},
+        agentStream: {},
         pending: {},
         connection: "idle",
         cursors: {},
@@ -626,6 +627,80 @@ export function reduce(state, action) {
                 },
             };
         }
+        case "agentStream": {
+            const d = action.delta;
+            const key = d.threadRootId || d.channelId;
+            const cur = state.agentStream[key];
+            if (d.kind === AgentStreamDelta_Kind.END) {
+                if (!cur || (cur.runId !== d.runId && cur.runId !== ""))
+                    return state;
+                const agentStream = { ...state.agentStream };
+                delete agentStream[key];
+                return { ...state, agentStream };
+            }
+            if (d.kind !== AgentStreamDelta_Kind.TEXT && d.kind !== AgentStreamDelta_Kind.STATUS)
+                return state;
+            let entry;
+            if (!cur || cur.runId !== d.runId) {
+                entry = { runId: d.runId, text: "", status: "", lastSeq: 0n, stale: d.seq !== 1n };
+            }
+            else {
+                if (d.seq <= cur.lastSeq)
+                    return state;
+                entry = { ...cur, stale: cur.stale || d.seq !== cur.lastSeq + 1n };
+            }
+            if (entry.stale) {
+                // Only the status line is safe to show without the text before it.
+                entry.text = "";
+                if (d.kind === AgentStreamDelta_Kind.STATUS)
+                    entry.status = d.text;
+            }
+            else if (d.kind === AgentStreamDelta_Kind.STATUS) {
+                entry.status = d.text;
+            }
+            else {
+                entry.text = d.reset ? d.text : entry.text + d.text;
+            }
+            entry.lastSeq = d.seq;
+            return { ...state, agentStream: { ...state.agentStream, [key]: entry } };
+        }
+        case "agentStream/tail": {
+            const cur = state.agentStream[action.key];
+            if (cur && cur.runId !== action.runId)
+                return state;
+            if (cur && cur.lastSeq > action.lastSeq) {
+                // Newer deltas arrived while the tail was in flight: keep the live status, take the text only if we had none.
+                return state;
+            }
+            return {
+                ...state,
+                agentStream: {
+                    ...state.agentStream,
+                    [action.key]: {
+                        runId: action.runId,
+                        text: action.text,
+                        status: action.status,
+                        lastSeq: action.lastSeq,
+                        stale: false,
+                    },
+                },
+            };
+        }
+        case "agentStream/stale": {
+            if (Object.keys(state.agentStream).length === 0)
+                return state;
+            const agentStream = {};
+            for (const [k, e] of Object.entries(state.agentStream))
+                agentStream[k] = { ...e, text: "", stale: true };
+            return { ...state, agentStream };
+        }
+        case "agentStream/clear": {
+            if (!state.agentStream[action.key])
+                return state;
+            const agentStream = { ...state.agentStream };
+            delete agentStream[action.key];
+            return { ...state, agentStream };
+        }
         case "agentStatus/expire": {
             let changed = false;
             const agentStatusByThread = {};
@@ -1186,6 +1261,7 @@ export class TankStore {
             .sort((a, b) => tsMs(b.startedAt) - tsMs(a.startedAt)), shallowEqualArrays);
     };
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
+    selectAgentStream = (key) => this.state.agentStream[key];
     selectAgentStatus = (key) => this.state.agentStatusByThread[key]?.status;
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
     selectAgentStatuses = (channelId) => {

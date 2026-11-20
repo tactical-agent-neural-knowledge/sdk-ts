@@ -251,6 +251,13 @@ export declare class TankClient {
      */
     stopRun(runId: string, reason?: string): Promise<Run | undefined>;
     /**
+     * Fetch what the run has streamed so far and put it in the store under `key` (thread root id, else
+     * channel id). Call it when a `stale` stream entry appears or a thread is opened mid-run. The server
+     * answers empty when the person's live-output preference is off or the run has ended; that clears
+     * nothing and adds nothing.
+     */
+    refreshAgentStreamTail(key: string, runId: string): Promise<void>;
+    /**
      * Load where every member has read to in a Tread (or one thread), for read receipts. The
      * server answers empty when the Tread has receipts off; after this, read_position.updated
      * events keep the positions moving.
