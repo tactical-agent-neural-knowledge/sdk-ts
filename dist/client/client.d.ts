@@ -7,6 +7,7 @@ import type { BlockAction } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import { type Channel, ChannelService, ChannelType, type ChannelView, type TreadGoal } from "../contracts/tank/channel/v1/channel_pb.js";
 import { CommandService } from "../contracts/tank/command/v1/command_pb.js";
 import { EnvironmentService } from "../contracts/tank/environment/v1/environment_pb.js";
+import { EnvVarService } from "../contracts/tank/envvars/v1/envvars_pb.js";
 import { type File, FilesService } from "../contracts/tank/files/v1/files_pb.js";
 import { HostingService } from "../contracts/tank/hosting/v1/hosting_pb.js";
 import { ChatService, type Message, MessageKind, type PostMessageRequest } from "../contracts/tank/message/v1/message_pb.js";
@@ -196,6 +197,8 @@ export declare class TankClient {
     readonly environment: Client<typeof EnvironmentService>;
     /** The Infrastructure page: a Tread's product, its state, log and live check. */
     readonly hosting: Client<typeof HostingService>;
+    /** Settings > Environment: a workspace's plain variables and write-only secrets. Owners and admins only. */
+    readonly envVars: Client<typeof EnvVarService>;
     /** Tasks: one piece of work in a Tread, moving through stages; Command is every Tread's. */
     readonly tasks: Client<typeof TaskService>;
     readonly realtime: RealtimeClient;
