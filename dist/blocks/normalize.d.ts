@@ -10,7 +10,7 @@ export declare const LIMITS: {
     readonly textElement: 3000;
     readonly contextElements: 10;
     readonly buttons: 10;
-    readonly buttonText: 75;
+    readonly buttonText: 300;
     readonly buttonValue: 2000;
     readonly url: 3000;
     readonly planSummary: 3000;
