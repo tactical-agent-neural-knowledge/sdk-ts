@@ -621,6 +621,32 @@ export type AgentTime = Message<"tank.billing.v1.AgentTime"> & {
      * @generated from field: bool no_charge = 14;
      */
     noCharge: boolean;
+    /**
+     * Same answer as Entitlements.agent_time_state: free | ok | low | out. low is
+     * available_cents under low_cents; out is blocked. A failed auto-refill reads out.
+     *
+     * @generated from field: string state = 15;
+     */
+    state: string;
+    /**
+     * included_left_cents + balance_cents, never below zero
+     *
+     * @generated from field: int64 available_cents = 16;
+     */
+    availableCents: bigint;
+    /**
+     * the threshold "low" is judged against
+     *
+     * @generated from field: int64 low_cents = 17;
+     */
+    lowCents: bigint;
+    /**
+     * The last auto-refill charge failed and the workspace was sent to the out-of-funds
+     * flow; clears when funds are bought. AutoRefill.last_error says why.
+     *
+     * @generated from field: bool auto_refill_failed = 18;
+     */
+    autoRefillFailed: boolean;
 };
 /**
  * Describes the message tank.billing.v1.AgentTime.
@@ -693,6 +719,58 @@ export type AgentTimeEntry = Message<"tank.billing.v1.AgentTimeEntry"> & {
  * Use `create(AgentTimeEntrySchema)` to create a new message.
  */
 export declare const AgentTimeEntrySchema: GenMessage<AgentTimeEntry>;
+/**
+ * AutoRefillCharged is one auto-refill attempt, recorded once. The #general post ("a
+ * charge was just made"), the spend entry (Books source "refill"), the BillingRecord
+ * (kind "auto_refill") and the AgentTimeEntry (kind "auto_refill") are all written from
+ * it, so they cannot disagree. A failed attempt (succeeded false) puts the workspace in
+ * state "out" and sets AgentTime.auto_refill_failed.
+ *
+ * @generated from message tank.billing.v1.AutoRefillCharged
+ */
+export type AutoRefillCharged = Message<"tank.billing.v1.AutoRefillCharged"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * what the refill tried to buy
+     *
+     * @generated from field: int64 amount_cents = 2;
+     */
+    amountCents: bigint;
+    /**
+     * purchased balance once it was applied; unchanged on failure
+     *
+     * @generated from field: int64 balance_after_cents = 3;
+     */
+    balanceAfterCents: bigint;
+    /**
+     * @generated from field: bool succeeded = 4;
+     */
+    succeeded: boolean;
+    /**
+     * why it failed, in words people read; empty on success
+     *
+     * @generated from field: string error = 5;
+     */
+    error: string;
+    /**
+     * the BillingRecord written for it
+     *
+     * @generated from field: string billing_record_id = 6;
+     */
+    billingRecordId: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 7;
+     */
+    at?: Timestamp;
+};
+/**
+ * Describes the message tank.billing.v1.AutoRefillCharged.
+ * Use `create(AutoRefillChargedSchema)` to create a new message.
+ */
+export declare const AutoRefillChargedSchema: GenMessage<AutoRefillCharged>;
 /**
  * @generated from message tank.billing.v1.GetAgentTimeRequest
  */
