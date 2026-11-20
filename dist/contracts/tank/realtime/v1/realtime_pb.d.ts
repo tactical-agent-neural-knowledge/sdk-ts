@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { AgentStatus, BoardPointer, CanvasEditing, Envelope, PreparationUpdate, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
+import type { AgentStatus, AgentStreamDelta, BoardPointer, CanvasEditing, Envelope, PreparationUpdate, PresenceChanged, Typing } from "../../events/v1/events_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/realtime/v1/realtime.proto.
@@ -491,6 +491,17 @@ export type ServerFrame = Message<"tank.realtime.v1.ServerFrame"> & {
          */
         value: PreparationUpdate;
         case: "preparation";
+    } | {
+        /**
+         * Live agent output. Sent only for threads the connection is subscribed to, and only
+         * to a user whose Preferences.live_agent_stream is on. The same frame on every
+         * client. Resume does not replay it: after a reconnect, drop partial text and wait
+         * for the stored message (GetRunStreamTail shows what was said so far).
+         *
+         * @generated from field: tank.events.v1.AgentStreamDelta agent_stream = 13;
+         */
+        value: AgentStreamDelta;
+        case: "agentStream";
     } | {
         case: undefined;
         value?: undefined;

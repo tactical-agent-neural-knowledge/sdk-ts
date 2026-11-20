@@ -498,6 +498,54 @@ export type RenewRunTokenResponse = Message<"tank.agent.v1.RenewRunTokenResponse
  */
 export declare const RenewRunTokenResponseSchema: GenMessage<RenewRunTokenResponse>;
 /**
+ * The live output of a run so far, for a person who opens the thread or turns
+ * Preferences.live_agent_stream on mid-run, on any device. Same assistant text and
+ * status only as AgentStreamDelta, never tool input or output. The control plane keeps a
+ * bounded in-memory tail while the run is live; a finished run has an empty tail and
+ * the stored message is the record.
+ *
+ * @generated from message tank.agent.v1.GetRunStreamTailRequest
+ */
+export type GetRunStreamTailRequest = Message<"tank.agent.v1.GetRunStreamTailRequest"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetRunStreamTailRequest.
+ * Use `create(GetRunStreamTailRequestSchema)` to create a new message.
+ */
+export declare const GetRunStreamTailRequestSchema: GenMessage<GetRunStreamTailRequest>;
+/**
+ * @generated from message tank.agent.v1.GetRunStreamTailResponse
+ */
+export type GetRunStreamTailResponse = Message<"tank.agent.v1.GetRunStreamTailResponse"> & {
+    /**
+     * assistant text so far in the current turn
+     *
+     * @generated from field: string text = 1;
+     */
+    text: string;
+    /**
+     * the latest status line, empty if none
+     *
+     * @generated from field: string status = 2;
+     */
+    status: string;
+    /**
+     * seq of the last delta included; continue from last_seq + 1
+     *
+     * @generated from field: uint64 last_seq = 3;
+     */
+    lastSeq: bigint;
+};
+/**
+ * Describes the message tank.agent.v1.GetRunStreamTailResponse.
+ * Use `create(GetRunStreamTailResponseSchema)` to create a new message.
+ */
+export declare const GetRunStreamTailResponseSchema: GenMessage<GetRunStreamTailResponse>;
+/**
  * @generated from message tank.agent.v1.SetStatusRequest
  */
 export type SetStatusRequest = Message<"tank.agent.v1.SetStatusRequest"> & {
@@ -2565,6 +2613,14 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof RenewRunTokenRequestSchema;
         output: typeof RenewRunTokenResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.GetRunStreamTail
+     */
+    getRunStreamTail: {
+        methodKind: "unary";
+        input: typeof GetRunStreamTailRequestSchema;
+        output: typeof GetRunStreamTailResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.SetStatus

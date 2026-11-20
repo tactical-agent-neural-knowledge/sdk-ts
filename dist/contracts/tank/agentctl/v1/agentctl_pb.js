@@ -1734,6 +1734,12 @@ export var RunPhase;
  */
 export const RunPhaseSchema = /*@__PURE__*/ enumDesc(file_tank_agentctl_v1_agentctl, 0);
 /**
+ * What the control plane forwards to people from a runner's event stream: only
+ * ASSISTANT_DELTA and STATUS (the planning phase included) become
+ * tank.events.v1.AgentStreamDelta, and only to users whose live_agent_stream is on.
+ * Tool input and output (TOOL_CALL, TOOL_RESULT, PERMISSION_REQUEST), usage, results and
+ * log lines are never forwarded as stream deltas.
+ *
  * @generated from enum tank.agentctl.v1.RunEventKind
  */
 export var RunEventKind;
@@ -1743,6 +1749,8 @@ export var RunEventKind;
      */
     RunEventKind[RunEventKind["UNSPECIFIED"] = 0] = "UNSPECIFIED";
     /**
+     * RunEvent.text is a chunk to append, not the text so far.
+     *
      * @generated from enum value: RUN_EVENT_KIND_ASSISTANT_DELTA = 1;
      */
     RunEventKind[RunEventKind["ASSISTANT_DELTA"] = 1] = "ASSISTANT_DELTA";

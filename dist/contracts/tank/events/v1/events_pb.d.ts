@@ -1,4 +1,4 @@
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import type { AuditEntry, ExportJob, WorkspaceSettings } from "../../admin/v1/admin_pb.js";
 import type { Run } from "../../agent/v1/agent_pb.js";
@@ -633,6 +633,85 @@ export type PreferencesUpdated = Message<"tank.events.v1.PreferencesUpdated"> & 
  * Use `create(PreferencesUpdatedSchema)` to create a new message.
  */
 export declare const PreferencesUpdatedSchema: GenMessage<PreferencesUpdated>;
+/**
+ * One piece of an agent's live output, carried only on the realtime socket
+ * (ServerFrame.agent_stream). Never stored, never replayed, never an Envelope on the bus
+ * history: the stored message is the record and always wins. Carries only assistant text
+ * and status lines, never tool input or output.
+ *
+ * @generated from message tank.events.v1.AgentStreamDelta
+ */
+export type AgentStreamDelta = Message<"tank.events.v1.AgentStreamDelta"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string run_id = 3;
+     */
+    runId: string;
+    /**
+     * Starts at 1 for each run and rises by one per delta on a subscription. A gap means
+     * a delta was missed: drop the partial text and wait for the stored message.
+     *
+     * @generated from field: uint64 seq = 4;
+     */
+    seq: bigint;
+    /**
+     * @generated from field: tank.events.v1.AgentStreamDelta.Kind kind = 5;
+     */
+    kind: AgentStreamDelta_Kind;
+    /**
+     * @generated from field: string text = 6;
+     */
+    text: string;
+    /**
+     * True on the first delta of a new turn within the run: clear the partial text first.
+     *
+     * @generated from field: bool reset = 7;
+     */
+    reset: boolean;
+};
+/**
+ * Describes the message tank.events.v1.AgentStreamDelta.
+ * Use `create(AgentStreamDeltaSchema)` to create a new message.
+ */
+export declare const AgentStreamDeltaSchema: GenMessage<AgentStreamDelta>;
+/**
+ * @generated from enum tank.events.v1.AgentStreamDelta.Kind
+ */
+export declare enum AgentStreamDelta_Kind {
+    /**
+     * @generated from enum value: KIND_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * text is a chunk to append to the partial text, not the text so far.
+     *
+     * @generated from enum value: KIND_TEXT = 1;
+     */
+    TEXT = 1,
+    /**
+     * text is a short status line ("Reading the repository") replacing the previous one.
+     *
+     * @generated from enum value: KIND_STATUS = 2;
+     */
+    STATUS = 2,
+    /**
+     * The run finished or stopped; drop any partial text and show the stored message.
+     *
+     * @generated from enum value: KIND_END = 3;
+     */
+    END = 3
+}
+/**
+ * Describes the enum tank.events.v1.AgentStreamDelta.Kind.
+ */
+export declare const AgentStreamDelta_KindSchema: GenEnum<AgentStreamDelta_Kind>;
 /**
  * channel_preference.updated on evt.{ws}.user.{uid}.
  *
