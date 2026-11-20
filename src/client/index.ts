@@ -65,6 +65,7 @@ export {
   type Action,
   AGENT_STATUS_TTL_MS,
   type AgentStatusEntry,
+  type AgentStreamEntry,
   type ChannelPaging,
   type ConnectionState,
   type EventPayload,
