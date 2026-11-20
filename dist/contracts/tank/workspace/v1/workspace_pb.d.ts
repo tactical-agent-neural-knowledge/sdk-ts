@@ -928,6 +928,29 @@ export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
      * @generated from field: bool timezone_from_device = 13;
      */
     timezoneFromDevice: boolean;
+    /**
+     * Live agent output: while an agent works in a thread, show its status lines and
+     * stream its reply text as it is written, instead of only the final message. Per
+     * person, across the whole workspace, off by default. Written only through
+     * SetLiveAgentStream (never UpdatePreferences from a thread toggle), and synced to the
+     * person's other devices and open threads by preferences.updated.
+     *
+     * Client behaviour, identical on web (Safari, Chrome, Edge), desktop (macOS, Windows,
+     * Linux) and mobile (iOS, Android); no field depends on platform, browser or OS and
+     * there is no capability flag:
+     *  - The toggle sits in the thread header of a thread an agent is working in, off
+     *    until the person turns it on, and always shows this value.
+     *  - On: show STATUS lines as they arrive and animate TEXT chunks in as they arrive.
+     *    With the OS or browser reduced-motion setting, show each chunk at once, unanimated.
+     *  - Off: show nothing until the stored message arrives. Turning it off in any thread
+     *    or on any device turns it off everywhere.
+     *  - On a seq gap, a reconnect or a resync, drop the partial text; the stored message
+     *    wins. On opening a thread or turning the toggle on mid-run, call GetRunStreamTail
+     *    first to show what was already said.
+     *
+     * @generated from field: bool live_agent_stream = 14;
+     */
+    liveAgentStream: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.Preferences.
@@ -1066,6 +1089,40 @@ export type GetPreferencesResponse = Message<"tank.workspace.v1.GetPreferencesRe
  * Use `create(GetPreferencesResponseSchema)` to create a new message.
  */
 export declare const GetPreferencesResponseSchema: GenMessage<GetPreferencesResponse>;
+/**
+ * @generated from message tank.workspace.v1.SetLiveAgentStreamRequest
+ */
+export type SetLiveAgentStreamRequest = Message<"tank.workspace.v1.SetLiveAgentStreamRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: bool enabled = 2;
+     */
+    enabled: boolean;
+};
+/**
+ * Describes the message tank.workspace.v1.SetLiveAgentStreamRequest.
+ * Use `create(SetLiveAgentStreamRequestSchema)` to create a new message.
+ */
+export declare const SetLiveAgentStreamRequestSchema: GenMessage<SetLiveAgentStreamRequest>;
+/**
+ * @generated from message tank.workspace.v1.SetLiveAgentStreamResponse
+ */
+export type SetLiveAgentStreamResponse = Message<"tank.workspace.v1.SetLiveAgentStreamResponse"> & {
+    /**
+     * the stored preferences after the change
+     *
+     * @generated from field: tank.workspace.v1.Preferences preferences = 1;
+     */
+    preferences?: Preferences;
+};
+/**
+ * Describes the message tank.workspace.v1.SetLiveAgentStreamResponse.
+ * Use `create(SetLiveAgentStreamResponseSchema)` to create a new message.
+ */
+export declare const SetLiveAgentStreamResponseSchema: GenMessage<SetLiveAgentStreamResponse>;
 /**
  * @generated from message tank.workspace.v1.UpdatePreferencesRequest
  */
@@ -1567,6 +1624,30 @@ export type Draft = Message<"tank.workspace.v1.Draft"> & {
      * @generated from field: google.protobuf.Timestamp updated_at = 6;
      */
     updatedAt?: Timestamp;
+    /**
+     * Set by the server on every PutDraft, never by the client: the agents the draft
+     * text tags, resolved the way @ autocomplete resolves them. Empty when none.
+     *
+     * @generated from field: repeated string mentioned_agent_ids = 7;
+     */
+    mentionedAgentIds: string[];
+    /**
+     * Set while a sandbox is being prepared for this draft, empty otherwise. Send it as
+     * StartRunRequest.preparation_id when the message is sent so the run adopts the sandbox.
+     *
+     * @generated from field: string preparation_id = 8;
+     */
+    preparationId: string;
+    /**
+     * @generated from field: tank.workspace.v1.PreparationState preparation_state = 9;
+     */
+    preparationState: PreparationState;
+    /**
+     * When an unused preparation gives its sandbox back on its own.
+     *
+     * @generated from field: google.protobuf.Timestamp preparation_expires_at = 10;
+     */
+    preparationExpiresAt?: Timestamp;
 };
 /**
  * Describes the message tank.workspace.v1.Draft.
@@ -2730,6 +2811,68 @@ export declare enum Role {
  */
 export declare const RoleSchema: GenEnum<Role>;
 /**
+ * Where the sandbox being prepared for a draft is. The trigger is PutDraft: when a saved
+ * draft tags an agent the server starts a preparation. It ends in exactly one of READY
+ * (adopted by StartRun), EXPIRED or one of the CANCELLED_* values. All of these cancel it:
+ * DeleteDraft, a PutDraft whose text no longer tags the agent, and the message being sent
+ * without the tag (or to a different thread). An unused preparation expires on its own at
+ * Draft.preparation_expires_at, so tagging an agent and walking away never holds a sandbox.
+ *
+ * @generated from enum tank.workspace.v1.PreparationState
+ */
+export declare enum PreparationState {
+    /**
+     * @generated from enum value: PREPARATION_STATE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * sandbox is warming
+     *
+     * @generated from enum value: PREPARATION_STATE_PREPARING = 1;
+     */
+    PREPARING = 1,
+    /**
+     * sandbox is warm and waiting for the message to be sent
+     *
+     * @generated from enum value: PREPARATION_STATE_READY = 2;
+     */
+    READY = 2,
+    /**
+     * nobody sent the message in time
+     *
+     * @generated from enum value: PREPARATION_STATE_EXPIRED = 3;
+     */
+    EXPIRED = 3,
+    /**
+     * cancelled for a reason not listed below
+     *
+     * @generated from enum value: PREPARATION_STATE_CANCELLED = 4;
+     */
+    CANCELLED = 4,
+    /**
+     * an edit dropped the @mention
+     *
+     * @generated from enum value: PREPARATION_STATE_CANCELLED_MENTION_REMOVED = 5;
+     */
+    CANCELLED_MENTION_REMOVED = 5,
+    /**
+     * DeleteDraft
+     *
+     * @generated from enum value: PREPARATION_STATE_CANCELLED_DRAFT_DELETED = 6;
+     */
+    CANCELLED_DRAFT_DELETED = 6,
+    /**
+     * sent without the tag, or to another thread
+     *
+     * @generated from enum value: PREPARATION_STATE_CANCELLED_SENT_ELSEWHERE = 7;
+     */
+    CANCELLED_SENT_ELSEWHERE = 7
+}
+/**
+ * Describes the enum tank.workspace.v1.PreparationState.
+ */
+export declare const PreparationStateSchema: GenEnum<PreparationState>;
+/**
  * What a generated picture is for. It changes the brief, not the pipeline.
  *
  * @generated from enum tank.workspace.v1.ArtKind
@@ -2907,6 +3050,18 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof UpdatePreferencesRequestSchema;
         output: typeof UpdatePreferencesResponseSchema;
+    };
+    /**
+     * Turns live agent output on or off for the caller in this workspace, leaving every
+     * other preference as stored. The thread toggle and the settings screen on every
+     * platform call this and nothing else; emits preferences.updated.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.SetLiveAgentStream
+     */
+    setLiveAgentStream: {
+        methodKind: "unary";
+        input: typeof SetLiveAgentStreamRequestSchema;
+        output: typeof SetLiveAgentStreamResponseSchema;
     };
     /**
      * A new model's notice, shown once per person at the top of the workspace until they

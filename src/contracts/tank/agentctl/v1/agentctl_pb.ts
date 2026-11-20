@@ -4661,7 +4661,7 @@ export type RunEvent = Message<"tank.agentctl.v1.RunEvent"> & {
   sdkSessionId: string;
 
   /**
-   * assistant_delta text, status, log line
+   * assistant_delta chunk (appended, not cumulative), status, log line
    *
    * @generated from field: string text = 5;
    */
@@ -10331,6 +10331,12 @@ export const RunPhaseSchema: GenEnum<RunPhase> = /*@__PURE__*/
   enumDesc(file_tank_agentctl_v1_agentctl, 0);
 
 /**
+ * What the control plane forwards to people from a runner's event stream: only
+ * ASSISTANT_DELTA and STATUS (the planning phase included) become
+ * tank.events.v1.AgentStreamDelta, and only to users whose live_agent_stream is on.
+ * Tool input and output (TOOL_CALL, TOOL_RESULT, PERMISSION_REQUEST), usage, results and
+ * log lines are never forwarded as stream deltas.
+ *
  * @generated from enum tank.agentctl.v1.RunEventKind
  */
 export enum RunEventKind {
@@ -10340,6 +10346,8 @@ export enum RunEventKind {
   UNSPECIFIED = 0,
 
   /**
+   * RunEvent.text is a chunk to append, not the text so far.
+   *
    * @generated from enum value: RUN_EVENT_KIND_ASSISTANT_DELTA = 1;
    */
   ASSISTANT_DELTA = 1,
