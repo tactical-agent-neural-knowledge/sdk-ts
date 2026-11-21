@@ -500,6 +500,10 @@ export function useAgentStatus(threadRootIdOrChannelId) {
 export function useAgentStream(threadRootIdOrChannelId) {
     return useTankSelector(useCallback((s) => s.selectAgentStream(threadRootIdOrChannelId), [threadRootIdOrChannelId]));
 }
+/** Whether this person has live agent output on for a thread root id. Off until the server says otherwise. */
+export function useThreadLiveStream(threadRootId) {
+    return useTankSelector(useCallback((s) => s.selectThreadLiveStream(threadRootId), [threadRootId]));
+}
 /** Every live `agent_status` frame in a channel (its threads included). */
 export function useAgentStatuses(channelId) {
     return useTankSelector(useCallback((s) => s.selectAgentStatuses(channelId), [channelId]));

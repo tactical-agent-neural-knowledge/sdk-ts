@@ -465,7 +465,7 @@ export class TankClient {
   /**
    * Fetch what the run has streamed so far and put it in the store under `key` (thread root id, else
    * channel id). Call it when a `stale` stream entry appears or a thread is opened mid-run. The server
-   * answers empty when the person's live-output preference is off or the run has ended; that clears
+   * answers empty when the person's live-output switch for the run's thread is off or the run has ended; that clears
    * nothing and adds nothing.
    */
   async refreshAgentStreamTail(key: string, runId: string): Promise<void> {
@@ -479,6 +479,32 @@ export class TankClient {
       status: res.status,
       lastSeq: res.lastSeq,
     });
+  }
+
+  /**
+   * Turn live agent output on or off for one thread, for this person. The switch changes at once
+   * and is put back if the server refuses. Turning it on while a run is going (`activeRunId`)
+   * fetches what the run has streamed so far before the first frame arrives, so the text starts
+   * where the run is, not where this person happened to switch. Turning it off drops what was
+   * showing: nothing appears until the stored message does.
+   */
+  async setThreadLiveStream(
+    workspaceId: string,
+    channelId: string,
+    threadRootId: string,
+    enabled: boolean,
+    activeRunId?: string,
+  ): Promise<void> {
+    const before = this.store.getState().threadLiveStreams[threadRootId] !== undefined;
+    this.store.dispatch({ type: "threadLiveStream/set", workspaceId, threadRootId, enabled });
+    if (!enabled) this.store.dispatch({ type: "agentStream/clear", key: threadRootId });
+    try {
+      await this.workspaces.setThreadLiveStream({ workspaceId, channelId, threadRootId, enabled });
+    } catch (e) {
+      this.store.dispatch({ type: "threadLiveStream/set", workspaceId, threadRootId, enabled: before });
+      throw e;
+    }
+    if (enabled && activeRunId) await this.refreshAgentStreamTail(threadRootId, activeRunId).catch(() => {});
   }
 
   /**
@@ -519,6 +545,7 @@ export class TankClient {
         members: res.members,
         unreadNotificationCount: res.unreadNotificationCount,
         entitlements: res.entitlements,
+        threadLiveStreams: res.threadLiveStreams,
         pruneIfAbsent: known,
       });
       // Archived Treads are never in a bootstrap, so their absence proves nothing: ask
@@ -1758,6 +1785,7 @@ export class TankClient {
             members: res.members,
             unreadNotificationCount: res.unreadNotificationCount,
             entitlements: res.entitlements,
+            threadLiveStreams: res.threadLiveStreams,
           });
         }
       } catch {

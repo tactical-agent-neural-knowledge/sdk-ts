@@ -698,6 +698,13 @@ export function useAgentStream(threadRootIdOrChannelId: string): AgentStreamEntr
   );
 }
 
+/** Whether this person has live agent output on for a thread root id. Off until the server says otherwise. */
+export function useThreadLiveStream(threadRootId: string): boolean {
+  return useTankSelector(
+    useCallback((s: TankStore) => s.selectThreadLiveStream(threadRootId), [threadRootId]),
+  );
+}
+
 /** Every live `agent_status` frame in a channel (its threads included). */
 export function useAgentStatuses(channelId: string): AgentStatus[] {
   return useTankSelector(useCallback((s: TankStore) => s.selectAgentStatuses(channelId), [channelId]));

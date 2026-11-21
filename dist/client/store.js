@@ -27,6 +27,7 @@ export function initialState() {
         agentStatus: {},
         agentStatusByThread: {},
         agentStream: {},
+        threadLiveStreams: {},
         pending: {},
         connection: "idle",
         cursors: {},
@@ -356,6 +357,16 @@ export function reduce(state, action) {
             const entitlements = action.entitlements
                 ? { ...state.entitlements, [action.workspace.id]: action.entitlements }
                 : state.entitlements;
+            let threadLiveStreams = state.threadLiveStreams;
+            if (action.threadLiveStreams) {
+                threadLiveStreams = {};
+                for (const [root, ws] of Object.entries(state.threadLiveStreams))
+                    if (ws !== action.workspace.id)
+                        threadLiveStreams[root] = ws;
+                for (const t of action.threadLiveStreams)
+                    if (t.enabled)
+                        threadLiveStreams[t.threadRootId] = action.workspace.id;
+            }
             return {
                 ...state,
                 me: action.me?.principal ?? state.me,
@@ -367,6 +378,7 @@ export function reduce(state, action) {
                 threadReadStates,
                 unreadNotificationCount,
                 entitlements,
+                threadLiveStreams,
             };
         }
         case "entitlements/set":
@@ -693,6 +705,17 @@ export function reduce(state, action) {
             for (const [k, e] of Object.entries(state.agentStream))
                 agentStream[k] = { ...e, text: "", stale: true };
             return { ...state, agentStream };
+        }
+        case "threadLiveStream/set": {
+            const on = action.threadRootId in state.threadLiveStreams;
+            if (on === action.enabled)
+                return state;
+            const threadLiveStreams = { ...state.threadLiveStreams };
+            if (action.enabled)
+                threadLiveStreams[action.threadRootId] = action.workspaceId;
+            else
+                delete threadLiveStreams[action.threadRootId];
+            return { ...state, threadLiveStreams };
         }
         case "agentStream/clear": {
             if (!state.agentStream[action.key])
@@ -1046,6 +1069,18 @@ export function envelopeToActions(env, now) {
         case "tank.events.v1.ChannelPreferenceUpdated":
             // My own notify preference, mute or star on a Tread, changed from another device.
             return payload.readState ? [{ type: "readStates/upsert", readStates: [payload.readState] }] : [];
+        case "tank.events.v1.ThreadLiveStreamUpdated":
+            // My own live-output switch for a thread changed, here or on another device.
+            return payload.setting
+                ? [
+                    {
+                        type: "threadLiveStream/set",
+                        workspaceId: env.workspaceId,
+                        threadRootId: payload.setting.threadRootId,
+                        enabled: payload.setting.enabled,
+                    },
+                ]
+                : [];
         case "tank.events.v1.MemberUpdated":
             // A member's profile, status or timezone; the member row is the store's already.
             return payload.member
@@ -1262,6 +1297,8 @@ export class TankStore {
     };
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
     selectAgentStream = (key) => this.state.agentStream[key];
+    /** Whether this person has live agent output on for a thread root id. Off when unknown. */
+    selectThreadLiveStream = (threadRootId) => threadRootId in this.state.threadLiveStreams;
     selectAgentStatus = (key) => this.state.agentStatusByThread[key]?.status;
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
     selectAgentStatuses = (channelId) => {

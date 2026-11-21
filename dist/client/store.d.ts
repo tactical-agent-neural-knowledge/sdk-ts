@@ -2,13 +2,13 @@ import { type Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { Channel, ChannelReadState, ThreadReadState } from "../contracts/tank/channel/v1/channel_pb.js";
-import { type AgentRunUpdated, type AgentStatus, type AgentStreamDelta, type AppCommand, type BoardChanged, type BoardObjectsChanged, type BookmarkChanged, type CanvasBlockChanged, type CanvasChanged, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelPreferenceUpdated, type ChannelUpdated, type DraftUpdated, type EmojiChanged, type Envelope, type FileDeleted, type FileReady, type HuddleEnded, type HuddleParticipantsChanged, type HuddleStarted, type MemberUpdated, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PinChanged, type PreferencesUpdated, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ScheduledMessageSent, type TaskChanged, type ThreadDeleted, type TopoMarkUpdated, type Typing, type UserGroupUpdated } from "../contracts/tank/events/v1/events_pb.js";
+import { type AgentRunUpdated, type AgentStatus, type AgentStreamDelta, type AppCommand, type BoardChanged, type BoardObjectsChanged, type BookmarkChanged, type CanvasBlockChanged, type CanvasChanged, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelPreferenceUpdated, type ChannelUpdated, type DraftUpdated, type EmojiChanged, type Envelope, type FileDeleted, type FileReady, type HuddleEnded, type HuddleParticipantsChanged, type HuddleStarted, type MemberUpdated, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PinChanged, type PreferencesUpdated, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ScheduledMessageSent, type TaskChanged, type ThreadDeleted, type ThreadLiveStreamUpdated, type TopoMarkUpdated, type Typing, type UserGroupUpdated } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message, ReadPosition } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Task } from "../contracts/tank/task/v1/task_pb.js";
-import type { Entitlements, Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import type { Entitlements, Member, ThreadLiveStream, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export type ConnectionState = "idle" | "connecting" | "open" | "ready" | "reconnecting" | "closed";
 export interface PendingMessage {
     clientMsgId: string;
@@ -86,6 +86,12 @@ export interface TankState {
     agentStatusByThread: Record<string, AgentStatusEntry>;
     /** Live agent output keyed like `agentStatusByThread`: thread root id, else channel id. Ephemeral, never persisted. */
     agentStream: Record<string, AgentStreamEntry>;
+    /**
+     * The threads where this person turned live agent output on, keyed by thread root id; the value
+     * is the workspace the thread is in. No entry means off. Server-owned and per person: it is what
+     * the gateway filters `agent_stream` frames by, so it is never edited without telling the server.
+     */
+    threadLiveStreams: Record<string, string>;
     /** client_msg_id → outbox status. */
     pending: Record<string, PendingMessage>;
     connection: ConnectionState;
@@ -127,6 +133,8 @@ export type Action = {
     unreadNotificationCount?: number;
     /** `GetBootstrap.entitlements`; absent on an older server, which the UI reads as "assume free". */
     entitlements?: Entitlements | undefined;
+    /** `GetBootstrap.thread_live_streams`: the threads where this person has live agent output on. Replaces what the store held for this workspace. */
+    threadLiveStreams?: ThreadLiveStream[];
     /**
      * Set on a bootstrap fresh from the server (never on a cached snapshot): the ids of this
      * workspace's channels the store held when the request went out. Any of them the server
@@ -259,6 +267,11 @@ export type Action = {
     type: "agentStream/clear";
     key: string;
 } | {
+    type: "threadLiveStream/set";
+    workspaceId: string;
+    threadRootId: string;
+    enabled: boolean;
+} | {
     type: "notifications/upsert";
     workspaceId: string;
     notifications: Notification[];
@@ -361,7 +374,7 @@ export declare function notificationPagingKey(workspaceId: string, mode: Notific
 export declare function typingKey(channelId: string, threadRootId?: string): string;
 export declare function reduce(state: TankState, action: Action): TankState;
 /** Every `tank.events.v1` payload this SDK's vendored contracts know how to decode. */
-export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ThreadDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelDeleted | ChannelMembershipChanged | ChannelPreferenceUpdated | MemberUpdated | PinChanged | BookmarkChanged | DraftUpdated | EmojiChanged | PreferencesUpdated | ScheduledMessageSent | UserGroupUpdated | HuddleStarted | HuddleParticipantsChanged | HuddleEnded | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | FileDeleted | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated | MonitorWidgetUpdated | CanvasBlockChanged | CanvasChanged | BoardObjectsChanged | BoardChanged | TaskChanged;
+export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ThreadDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelDeleted | ChannelMembershipChanged | ChannelPreferenceUpdated | ThreadLiveStreamUpdated | MemberUpdated | PinChanged | BookmarkChanged | DraftUpdated | EmojiChanged | PreferencesUpdated | ScheduledMessageSent | UserGroupUpdated | HuddleStarted | HuddleParticipantsChanged | HuddleEnded | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | FileDeleted | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated | MonitorWidgetUpdated | CanvasBlockChanged | CanvasChanged | BoardObjectsChanged | BoardChanged | TaskChanged;
 /**
  * A payload whose type is not in the vendored contracts (a newer event than this SDK build). The
  * `$typeName` is the literal `"unknown"` so a `switch ($typeName)` still narrows every known case and
@@ -445,6 +458,8 @@ export declare class TankStore {
     selectRuns: (workspaceId: string) => Run[];
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
     selectAgentStream: (key: string) => AgentStreamEntry | undefined;
+    /** Whether this person has live agent output on for a thread root id. Off when unknown. */
+    selectThreadLiveStream: (threadRootId: string) => boolean;
     selectAgentStatus: (key: string) => AgentStatus | undefined;
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
     selectAgentStatuses: (channelId: string) => AgentStatus[];

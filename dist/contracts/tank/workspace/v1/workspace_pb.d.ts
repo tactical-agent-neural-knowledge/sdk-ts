@@ -335,6 +335,14 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
      * @generated from field: repeated tank.channel.v1.ThreadReadState thread_read_states = 11;
      */
     threadReadStates: ThreadReadState[];
+    /**
+     * The threads where the caller has live agent output turned on (every entry has
+     * enabled = true; a thread not listed is off). Loaded once so a client and the realtime
+     * gateway know the setting without a call per thread.
+     *
+     * @generated from field: repeated tank.workspace.v1.ThreadLiveStream thread_live_streams = 12;
+     */
+    threadLiveStreams: ThreadLiveStream[];
 };
 /**
  * Describes the message tank.workspace.v1.GetBootstrapResponse.
@@ -449,6 +457,15 @@ export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
      * @generated from field: bool agent_time_auto_refill = 17;
      */
     agentTimeAutoRefill: boolean;
+    /**
+     * @neural, the premium agent pinned to the Neural model (agent.v1 AGENT_KIND_NEURAL), is
+     * available to this workspace. Every client lists it in the mention picker from this one
+     * field: usable when true, grayed with an upgrade button when false. The server refuses a
+     * run for it regardless (RUN_REFUSAL_REASON_PREMIUM_ONLY_AGENT).
+     *
+     * @generated from field: bool neural_agent = 18;
+     */
+    neuralAgent: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.Entitlements.
@@ -935,26 +952,13 @@ export type Preferences = Message<"tank.workspace.v1.Preferences"> & {
      */
     timezoneFromDevice: boolean;
     /**
-     * Live agent output: while an agent works in a thread, show its status lines and
-     * stream its reply text as it is written, instead of only the final message. Per
-     * person, across the whole workspace, off by default. Written only through
-     * SetLiveAgentStream (never UpdatePreferences from a thread toggle), and synced to the
-     * person's other devices and open threads by preferences.updated.
+     * Deprecated: the workspace-wide live output switch. The setting is now per thread
+     * (ThreadLiveStream, SetThreadLiveStream). The server ignores this field when it fans
+     * out agent_stream frames, and clients stop reading and writing it. It stays on the wire
+     * until every client has shipped without it, then it is reserved in a later change.
      *
-     * Client behaviour, identical on web (Safari, Chrome, Edge), desktop (macOS, Windows,
-     * Linux) and mobile (iOS, Android); no field depends on platform, browser or OS and
-     * there is no capability flag:
-     *  - The toggle sits in the thread header of a thread an agent is working in, off
-     *    until the person turns it on, and always shows this value.
-     *  - On: show STATUS lines as they arrive and animate TEXT chunks in as they arrive.
-     *    With the OS or browser reduced-motion setting, show each chunk at once, unanimated.
-     *  - Off: show nothing until the stored message arrives. Turning it off in any thread
-     *    or on any device turns it off everywhere.
-     *  - On a seq gap, a reconnect or a resync, drop the partial text; the stored message
-     *    wins. On opening a thread or turning the toggle on mid-run, call GetRunStreamTail
-     *    first to show what was already said.
-     *
-     * @generated from field: bool live_agent_stream = 14;
+     * @generated from field: bool live_agent_stream = 14 [deprecated = true];
+     * @deprecated
      */
     liveAgentStream: boolean;
 };
@@ -1096,6 +1100,9 @@ export type GetPreferencesResponse = Message<"tank.workspace.v1.GetPreferencesRe
  */
 export declare const GetPreferencesResponseSchema: GenMessage<GetPreferencesResponse>;
 /**
+ * Deprecated with Preferences.live_agent_stream: the call is accepted and stored but
+ * no longer decides who receives agent_stream frames. Use SetThreadLiveStream.
+ *
  * @generated from message tank.workspace.v1.SetLiveAgentStreamRequest
  */
 export type SetLiveAgentStreamRequest = Message<"tank.workspace.v1.SetLiveAgentStreamRequest"> & {
@@ -1129,6 +1136,129 @@ export type SetLiveAgentStreamResponse = Message<"tank.workspace.v1.SetLiveAgent
  * Use `create(SetLiveAgentStreamResponseSchema)` to create a new message.
  */
 export declare const SetLiveAgentStreamResponseSchema: GenMessage<SetLiveAgentStreamResponse>;
+/**
+ * Live agent output for one person in one thread: while an agent works there, show its
+ * status lines and stream its reply text as it is written, instead of only the final
+ * message. Per person and per thread, off by default; off is the absence of a stored row.
+ * Written only through SetThreadLiveStream and synced to the person's other devices by
+ * thread_live_stream.updated.
+ *
+ * Client behaviour, identical on web (Safari, Chrome, Edge), desktop (macOS, Windows,
+ * Linux) and mobile (iOS, Android); no field depends on platform, browser or OS and
+ * there is no capability flag:
+ *  - The toggle sits in the thread header of a thread an agent is working in, off until
+ *    the person turns it on, remembered for that thread, and always shows this value.
+ *  - On: show STATUS lines as they arrive and animate TEXT chunks in as they arrive.
+ *    With the OS or browser reduced-motion setting, show each chunk at once, unanimated.
+ *  - Off: show nothing until the stored message arrives. Turning it on or off in one
+ *    thread does not change any other thread.
+ *  - On a seq gap, a reconnect or a resync, drop the partial text; the stored message
+ *    wins. On opening a thread with the setting on, or turning the toggle on mid-run,
+ *    call GetRunStreamTail first to show what was already said.
+ *
+ * @generated from message tank.workspace.v1.ThreadLiveStream
+ */
+export type ThreadLiveStream = Message<"tank.workspace.v1.ThreadLiveStream"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * The thread's root message id; a thread is always identified by channel and root.
+     *
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: bool enabled = 3;
+     */
+    enabled: boolean;
+};
+/**
+ * Describes the message tank.workspace.v1.ThreadLiveStream.
+ * Use `create(ThreadLiveStreamSchema)` to create a new message.
+ */
+export declare const ThreadLiveStreamSchema: GenMessage<ThreadLiveStream>;
+/**
+ * @generated from message tank.workspace.v1.SetThreadLiveStreamRequest
+ */
+export type SetThreadLiveStreamRequest = Message<"tank.workspace.v1.SetThreadLiveStreamRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 3;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: bool enabled = 4;
+     */
+    enabled: boolean;
+};
+/**
+ * Describes the message tank.workspace.v1.SetThreadLiveStreamRequest.
+ * Use `create(SetThreadLiveStreamRequestSchema)` to create a new message.
+ */
+export declare const SetThreadLiveStreamRequestSchema: GenMessage<SetThreadLiveStreamRequest>;
+/**
+ * @generated from message tank.workspace.v1.SetThreadLiveStreamResponse
+ */
+export type SetThreadLiveStreamResponse = Message<"tank.workspace.v1.SetThreadLiveStreamResponse"> & {
+    /**
+     * the stored setting after the change
+     *
+     * @generated from field: tank.workspace.v1.ThreadLiveStream setting = 1;
+     */
+    setting?: ThreadLiveStream;
+};
+/**
+ * Describes the message tank.workspace.v1.SetThreadLiveStreamResponse.
+ * Use `create(SetThreadLiveStreamResponseSchema)` to create a new message.
+ */
+export declare const SetThreadLiveStreamResponseSchema: GenMessage<SetThreadLiveStreamResponse>;
+/**
+ * @generated from message tank.workspace.v1.GetThreadLiveStreamRequest
+ */
+export type GetThreadLiveStreamRequest = Message<"tank.workspace.v1.GetThreadLiveStreamRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 3;
+     */
+    threadRootId: string;
+};
+/**
+ * Describes the message tank.workspace.v1.GetThreadLiveStreamRequest.
+ * Use `create(GetThreadLiveStreamRequestSchema)` to create a new message.
+ */
+export declare const GetThreadLiveStreamRequestSchema: GenMessage<GetThreadLiveStreamRequest>;
+/**
+ * @generated from message tank.workspace.v1.GetThreadLiveStreamResponse
+ */
+export type GetThreadLiveStreamResponse = Message<"tank.workspace.v1.GetThreadLiveStreamResponse"> & {
+    /**
+     * enabled = false when nothing is stored
+     *
+     * @generated from field: tank.workspace.v1.ThreadLiveStream setting = 1;
+     */
+    setting?: ThreadLiveStream;
+};
+/**
+ * Describes the message tank.workspace.v1.GetThreadLiveStreamResponse.
+ * Use `create(GetThreadLiveStreamResponseSchema)` to create a new message.
+ */
+export declare const GetThreadLiveStreamResponseSchema: GenMessage<GetThreadLiveStreamResponse>;
 /**
  * @generated from message tank.workspace.v1.UpdatePreferencesRequest
  */
@@ -3090,16 +3220,37 @@ export declare const WorkspaceService: GenService<{
         output: typeof UpdatePreferencesResponseSchema;
     };
     /**
-     * Turns live agent output on or off for the caller in this workspace, leaving every
-     * other preference as stored. The thread toggle and the settings screen on every
-     * platform call this and nothing else; emits preferences.updated.
+     * Deprecated: the workspace-wide switch, ignored for fan-out. Use SetThreadLiveStream.
      *
      * @generated from rpc tank.workspace.v1.WorkspaceService.SetLiveAgentStream
+     * @deprecated
      */
     setLiveAgentStream: {
         methodKind: "unary";
         input: typeof SetLiveAgentStreamRequestSchema;
         output: typeof SetLiveAgentStreamResponseSchema;
+    };
+    /**
+     * Turns live agent output on or off for the caller in one thread. The thread-header
+     * toggle on every platform calls this; emits thread_live_stream.updated. Turning it off
+     * removes the stored row.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.SetThreadLiveStream
+     */
+    setThreadLiveStream: {
+        methodKind: "unary";
+        input: typeof SetThreadLiveStreamRequestSchema;
+        output: typeof SetThreadLiveStreamResponseSchema;
+    };
+    /**
+     * The caller's setting for one thread, for a client that opens it.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.GetThreadLiveStream
+     */
+    getThreadLiveStream: {
+        methodKind: "unary";
+        input: typeof GetThreadLiveStreamRequestSchema;
+        output: typeof GetThreadLiveStreamResponseSchema;
     };
     /**
      * A new model's notice, shown once per person at the top of the workspace until they

@@ -256,10 +256,18 @@ export declare class TankClient {
     /**
      * Fetch what the run has streamed so far and put it in the store under `key` (thread root id, else
      * channel id). Call it when a `stale` stream entry appears or a thread is opened mid-run. The server
-     * answers empty when the person's live-output preference is off or the run has ended; that clears
+     * answers empty when the person's live-output switch for the run's thread is off or the run has ended; that clears
      * nothing and adds nothing.
      */
     refreshAgentStreamTail(key: string, runId: string): Promise<void>;
+    /**
+     * Turn live agent output on or off for one thread, for this person. The switch changes at once
+     * and is put back if the server refuses. Turning it on while a run is going (`activeRunId`)
+     * fetches what the run has streamed so far before the first frame arrives, so the text starts
+     * where the run is, not where this person happened to switch. Turning it off drops what was
+     * showing: nothing appears until the stored message does.
+     */
+    setThreadLiveStream(workspaceId: string, channelId: string, threadRootId: string, enabled: boolean, activeRunId?: string): Promise<void>;
     /**
      * Load where every member has read to in a Tread (or one thread), for read receipts. The
      * server answers empty when the Tread has receipts off; after this, read_position.updated
