@@ -13,7 +13,7 @@ import type { Health, Widget } from "../../monitor/v1/monitor_pb.js";
 import type { Presence } from "../../presence/v1/presence_pb.js";
 import type { Task } from "../../task/v1/task_pb.js";
 import type { Mark } from "../../topo/v1/topo_pb.js";
-import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, PreparationState, Role, ScheduledMessage, UserGroup } from "../../workspace/v1/workspace_pb.js";
+import type { ChannelBookmark, CustomEmoji, Draft, Member, Preferences, PreparationState, Role, ScheduledMessage, ThreadLiveStream, UserGroup } from "../../workspace/v1/workspace_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/events/v1/events.proto.
@@ -634,10 +634,32 @@ export type PreferencesUpdated = Message<"tank.events.v1.PreferencesUpdated"> & 
  */
 export declare const PreferencesUpdatedSchema: GenMessage<PreferencesUpdated>;
 /**
+ * thread_live_stream.updated on evt.{ws}.user.{uid}: the person's live output setting for
+ * one thread, so the toggle reads the same on every device.
+ *
+ * @generated from message tank.events.v1.ThreadLiveStreamUpdated
+ */
+export type ThreadLiveStreamUpdated = Message<"tank.events.v1.ThreadLiveStreamUpdated"> & {
+    /**
+     * @generated from field: string user_id = 1;
+     */
+    userId: string;
+    /**
+     * @generated from field: tank.workspace.v1.ThreadLiveStream setting = 2;
+     */
+    setting?: ThreadLiveStream;
+};
+/**
+ * Describes the message tank.events.v1.ThreadLiveStreamUpdated.
+ * Use `create(ThreadLiveStreamUpdatedSchema)` to create a new message.
+ */
+export declare const ThreadLiveStreamUpdatedSchema: GenMessage<ThreadLiveStreamUpdated>;
+/**
  * One piece of an agent's live output, carried only on the realtime socket
  * (ServerFrame.agent_stream). Never stored, never replayed, never an Envelope on the bus
  * history: the stored message is the record and always wins. Carries only assistant text
- * and status lines, never tool input or output.
+ * and status lines, never tool input or output. Sent only to users whose setting for this
+ * thread (channel_id plus thread_root_id) is on.
  *
  * @generated from message tank.events.v1.AgentStreamDelta
  */
