@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import type { TankClient } from "../client/client.js";
-import { type ChannelPaging, type ConnectionState, type NotificationPaging, type PendingMessage, type TankState, type TankStore, type ThreadView, type Unreads } from "../client/store.js";
+import { type AgentStreamEntry, type ChannelPaging, type ConnectionState, type NotificationPaging, type PendingMessage, type TankState, type TankStore, type ThreadView, type Unreads } from "../client/store.js";
 import type { Run, TreadPlan } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Channel, ChannelView } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { AgentStatus } from "../contracts/tank/events/v1/events_pb.js";
@@ -168,6 +168,8 @@ export declare function useRuns(workspaceId: string): Run[];
 export declare function useRunsByThread(): Record<string, Run>;
 /** The live `agent_status` frame for a thread root id (or channel id); `undefined` once it expires (30 s). */
 export declare function useAgentStatus(threadRootIdOrChannelId: string): AgentStatus | undefined;
+/** The live agent output for a thread root id (or channel id): streamed text and status line; `undefined` when none is flowing. */
+export declare function useAgentStream(threadRootIdOrChannelId: string): AgentStreamEntry | undefined;
 /** Every live `agent_status` frame in a channel (its threads included). */
 export declare function useAgentStatuses(channelId: string): AgentStatus[];
 /** A file the store knows about (from an upload or a `file.ready` event). */

@@ -45,6 +45,12 @@ export type Workspace = Message<"tank.workspace.v1.Workspace"> & {
      * @generated from field: string icon_file_id = 7;
      */
     iconFileId: string;
+    /**
+     * How active @neural is in Treads that have not set their own, 0 (off) to 4. Starts at 0.
+     *
+     * @generated from field: int32 neural_involvement = 8;
+     */
+    neuralInvolvement: number;
 };
 /**
  * Describes the message tank.workspace.v1.Workspace.
@@ -2388,6 +2394,38 @@ export type SetWorkspaceThemeResponse = Message<"tank.workspace.v1.SetWorkspaceT
  */
 export declare const SetWorkspaceThemeResponseSchema: GenMessage<SetWorkspaceThemeResponse>;
 /**
+ * @generated from message tank.workspace.v1.SetNeuralInvolvementRequest
+ */
+export type SetNeuralInvolvementRequest = Message<"tank.workspace.v1.SetNeuralInvolvementRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: int32 level = 2;
+     */
+    level: number;
+};
+/**
+ * Describes the message tank.workspace.v1.SetNeuralInvolvementRequest.
+ * Use `create(SetNeuralInvolvementRequestSchema)` to create a new message.
+ */
+export declare const SetNeuralInvolvementRequestSchema: GenMessage<SetNeuralInvolvementRequest>;
+/**
+ * @generated from message tank.workspace.v1.SetNeuralInvolvementResponse
+ */
+export type SetNeuralInvolvementResponse = Message<"tank.workspace.v1.SetNeuralInvolvementResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.Workspace workspace = 1;
+     */
+    workspace?: Workspace;
+};
+/**
+ * Describes the message tank.workspace.v1.SetNeuralInvolvementResponse.
+ * Use `create(SetNeuralInvolvementResponseSchema)` to create a new message.
+ */
+export declare const SetNeuralInvolvementResponseSchema: GenMessage<SetNeuralInvolvementResponse>;
+/**
  * "A copper gear with a lightning bolt" → a small SVG, stored as a file the caller owns.
  *
  * @generated from message tank.workspace.v1.GenerateArtRequest
@@ -3109,6 +3147,16 @@ export declare const WorkspaceService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceThemeRequestSchema;
         output: typeof SetWorkspaceThemeResponseSchema;
+    };
+    /**
+     * Admins only: how active @neural is across the workspace, 0 (off) to 4.
+     *
+     * @generated from rpc tank.workspace.v1.WorkspaceService.SetNeuralInvolvement
+     */
+    setNeuralInvolvement: {
+        methodKind: "unary";
+        input: typeof SetNeuralInvolvementRequestSchema;
+        output: typeof SetNeuralInvolvementResponseSchema;
     };
     /**
      * Turn up to fifteen words into an icon or emoji picture. The file is saved; nothing is applied.

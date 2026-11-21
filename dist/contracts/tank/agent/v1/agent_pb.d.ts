@@ -498,12 +498,49 @@ export type RenewRunTokenResponse = Message<"tank.agent.v1.RenewRunTokenResponse
  */
 export declare const RenewRunTokenResponseSchema: GenMessage<RenewRunTokenResponse>;
 /**
- * The live output of a run so far, for a person who opens the thread or turns
- * Preferences.live_agent_stream on mid-run, on any device. Same assistant text and
- * status only as AgentStreamDelta, never tool input or output. The control plane keeps a
- * bounded in-memory tail while the run is live; a finished run has an empty tail and
- * the stored message is the record.
- *
+ * @generated from message tank.agent.v1.PublishRunStreamRequest
+ */
+export type PublishRunStreamRequest = Message<"tank.agent.v1.PublishRunStreamRequest"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * per run, starting at 1, assigned by the control plane
+     *
+     * @generated from field: uint64 seq = 2;
+     */
+    seq: bigint;
+    /**
+     * @generated from field: tank.agent.v1.RunStreamKind kind = 3;
+     */
+    kind: RunStreamKind;
+    /**
+     * @generated from field: string text = 4;
+     */
+    text: string;
+    /**
+     * a new turn begins: clear the partial text first
+     *
+     * @generated from field: bool reset = 5;
+     */
+    reset: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.PublishRunStreamRequest.
+ * Use `create(PublishRunStreamRequestSchema)` to create a new message.
+ */
+export declare const PublishRunStreamRequestSchema: GenMessage<PublishRunStreamRequest>;
+/**
+ * @generated from message tank.agent.v1.PublishRunStreamResponse
+ */
+export type PublishRunStreamResponse = Message<"tank.agent.v1.PublishRunStreamResponse"> & {};
+/**
+ * Describes the message tank.agent.v1.PublishRunStreamResponse.
+ * Use `create(PublishRunStreamResponseSchema)` to create a new message.
+ */
+export declare const PublishRunStreamResponseSchema: GenMessage<PublishRunStreamResponse>;
+/**
  * @generated from message tank.agent.v1.GetRunStreamTailRequest
  */
 export type GetRunStreamTailRequest = Message<"tank.agent.v1.GetRunStreamTailRequest"> & {
@@ -2502,6 +2539,48 @@ export declare enum RunRefusalAction {
  */
 export declare const RunRefusalActionSchema: GenEnum<RunRefusalAction>;
 /**
+ * The live output of a run so far, for a person who opens the thread or turns
+ * Preferences.live_agent_stream on mid-run, on any device. Same assistant text and
+ * status only as AgentStreamDelta, never tool input or output. The control plane keeps a
+ * bounded in-memory tail while the run is live; a finished run has an empty tail and
+ * the stored message is the record.
+ * One piece of a run's live output, handed to the api by the control plane (called with the
+ * run's own token) to fan out as AgentStreamDelta and to fold into GetRunStreamTail. Only
+ * assistant text and status lines are ever sent; tool input and output never are. The
+ * control plane has already scrubbed the text. Best effort: the api may drop what it
+ * cannot place, and a run that has ended is not an error.
+ *
+ * @generated from enum tank.agent.v1.RunStreamKind
+ */
+export declare enum RunStreamKind {
+    /**
+     * @generated from enum value: RUN_STREAM_KIND_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * text is a chunk of the assistant's reply to append
+     *
+     * @generated from enum value: RUN_STREAM_KIND_TEXT = 1;
+     */
+    TEXT = 1,
+    /**
+     * text is a status line replacing the previous one
+     *
+     * @generated from enum value: RUN_STREAM_KIND_STATUS = 2;
+     */
+    STATUS = 2,
+    /**
+     * the turn's output is complete
+     *
+     * @generated from enum value: RUN_STREAM_KIND_END = 3;
+     */
+    END = 3
+}
+/**
+ * Describes the enum tank.agent.v1.RunStreamKind.
+ */
+export declare const RunStreamKindSchema: GenEnum<RunStreamKind>;
+/**
  * A Tread's plan ledger: the whole of what the Tread set out to build (a document like a
  * master build plan, or the first approved plan), item by item, with where each stands.
  * Runs keep it current; people read it as one progress bar under the goal and tap for the
@@ -2621,6 +2700,14 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof GetRunStreamTailRequestSchema;
         output: typeof GetRunStreamTailResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.PublishRunStream
+     */
+    publishRunStream: {
+        methodKind: "unary";
+        input: typeof PublishRunStreamRequestSchema;
+        output: typeof PublishRunStreamResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.SetStatus

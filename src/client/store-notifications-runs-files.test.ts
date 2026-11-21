@@ -7,6 +7,8 @@ import { ChannelSchema, ChannelType } from "../contracts/tank/channel/v1/channel
 import {
   AgentRunUpdatedSchema,
   AgentStatusSchema,
+  AgentStreamDelta_Kind,
+  AgentStreamDeltaSchema,
   EnvelopeSchema,
   FileDeletedSchema,
   FileReadySchema,
@@ -418,5 +420,88 @@ describe("files/deleted", () => {
       0,
     );
     expect(actions).toEqual([{ type: "files/deleted", fileId: "f1", messageIds: ["m1"] }]);
+  });
+});
+
+describe("agent_stream frames", () => {
+  const delta = (seq: number, kind: AgentStreamDelta_Kind, text: string, extra: { reset?: boolean } = {}) =>
+    create(AgentStreamDeltaSchema, {
+      channelId: "c1",
+      threadRootId: "root1",
+      runId: "r1",
+      seq: BigInt(seq),
+      kind,
+      text,
+      ...extra,
+    });
+
+  it("appends text, replaces the status, and END drops the entry", () => {
+    const store = new TankStore();
+    store.dispatch({
+      type: "agentStream",
+      delta: delta(1, AgentStreamDelta_Kind.STATUS, "Reading the repo"),
+    });
+    store.dispatch({ type: "agentStream", delta: delta(2, AgentStreamDelta_Kind.TEXT, "Hel") });
+    store.dispatch({ type: "agentStream", delta: delta(3, AgentStreamDelta_Kind.TEXT, "lo") });
+    const e = store.getState().agentStream.root1;
+    expect(e).toMatchObject({ text: "Hello", status: "Reading the repo", lastSeq: 3n, stale: false });
+    store.dispatch({ type: "agentStream", delta: delta(4, AgentStreamDelta_Kind.END, "") });
+    expect(store.getState().agentStream.root1).toBeUndefined();
+  });
+
+  it("reset starts the text over and duplicates are ignored", () => {
+    const store = new TankStore();
+    store.dispatch({ type: "agentStream", delta: delta(1, AgentStreamDelta_Kind.TEXT, "first turn") });
+    store.dispatch({ type: "agentStream", delta: delta(1, AgentStreamDelta_Kind.TEXT, "first turn") });
+    store.dispatch({
+      type: "agentStream",
+      delta: delta(2, AgentStreamDelta_Kind.TEXT, "second", { reset: true }),
+    });
+    expect(store.getState().agentStream.root1?.text).toBe("second");
+  });
+
+  it("a gap drops the text until the tail arrives, and a stale tail does not overwrite newer deltas", () => {
+    const store = new TankStore();
+    store.dispatch({ type: "agentStream", delta: delta(1, AgentStreamDelta_Kind.TEXT, "a") });
+    store.dispatch({ type: "agentStream", delta: delta(4, AgentStreamDelta_Kind.TEXT, "d") });
+    expect(store.getState().agentStream.root1).toMatchObject({ text: "", stale: true, lastSeq: 4n });
+    store.dispatch({ type: "agentStream", delta: delta(5, AgentStreamDelta_Kind.TEXT, "e") });
+    expect(store.getState().agentStream.root1?.text).toBe("");
+    store.dispatch({
+      type: "agentStream/tail",
+      key: "root1",
+      runId: "r1",
+      text: "abcde",
+      status: "",
+      lastSeq: 5n,
+    });
+    expect(store.getState().agentStream.root1).toMatchObject({ text: "abcde", stale: false });
+    store.dispatch({ type: "agentStream", delta: delta(6, AgentStreamDelta_Kind.TEXT, "f") });
+    expect(store.getState().agentStream.root1?.text).toBe("abcdef");
+    store.dispatch({
+      type: "agentStream/tail",
+      key: "root1",
+      runId: "r1",
+      text: "abc",
+      status: "",
+      lastSeq: 3n,
+    });
+    expect(store.getState().agentStream.root1?.text).toBe("abcdef");
+  });
+
+  it("opening mid-run (first delta seq > 1) is stale, and a reconnect marks everything stale", () => {
+    const store = new TankStore();
+    store.dispatch({ type: "agentStream", delta: delta(7, AgentStreamDelta_Kind.TEXT, "x") });
+    expect(store.getState().agentStream.root1?.stale).toBe(true);
+    store.dispatch({
+      type: "agentStream/tail",
+      key: "root1",
+      runId: "r1",
+      text: "abcdefx",
+      status: "s",
+      lastSeq: 7n,
+    });
+    store.dispatch({ type: "agentStream/stale" });
+    expect(store.getState().agentStream.root1).toMatchObject({ text: "", stale: true });
   });
 });

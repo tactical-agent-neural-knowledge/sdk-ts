@@ -1,6 +1,7 @@
 import { create, fromBinary, toBinary } from "@bufbuild/protobuf";
 import type {
   AgentStatus,
+  AgentStreamDelta,
   BoardPointer,
   CanvasEditing,
   PresenceChanged,
@@ -51,6 +52,8 @@ export interface RealtimeEvents {
   typing: Typing;
   presence: PresenceChanged;
   agent_status: AgentStatus;
+  /** Ephemeral live agent output (status line or text chunk); never replayed, only sent when the person turned the preference on. */
+  agent_stream: AgentStreamDelta;
   /** Someone else moved around a page this socket has open. */
   canvas_editing: CanvasEditing;
   /** Someone else moved their pointer on a board this socket has open. */
@@ -576,6 +579,9 @@ export class RealtimeClient {
         return;
       case "agentStatus":
         this.events.emit("agent_status", k.value);
+        return;
+      case "agentStream":
+        this.events.emit("agent_stream", k.value);
         return;
       case "canvasEditing":
         this.events.emit("canvas_editing", k.value);

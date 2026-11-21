@@ -14,6 +14,7 @@ import {
 import { isTerminalRunState } from "../blocks/runTone.js";
 import type { TankClient } from "../client/client.js";
 import {
+  type AgentStreamEntry,
   type ChannelPaging,
   type ConnectionState,
   type NotificationPaging,
@@ -687,6 +688,13 @@ export function useRunsByThread(): Record<string, Run> {
 export function useAgentStatus(threadRootIdOrChannelId: string): AgentStatus | undefined {
   return useTankSelector(
     useCallback((s: TankStore) => s.selectAgentStatus(threadRootIdOrChannelId), [threadRootIdOrChannelId]),
+  );
+}
+
+/** The live agent output for a thread root id (or channel id): streamed text and status line; `undefined` when none is flowing. */
+export function useAgentStream(threadRootIdOrChannelId: string): AgentStreamEntry | undefined {
+  return useTankSelector(
+    useCallback((s: TankStore) => s.selectAgentStream(threadRootIdOrChannelId), [threadRootIdOrChannelId]),
   );
 }
 
