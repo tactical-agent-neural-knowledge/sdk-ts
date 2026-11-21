@@ -12,6 +12,8 @@ import { AgentService, RunSchema, RunState, TreadPlanSchema } from "../contracts
 import { AuthService, PrincipalSchema } from "../contracts/tank/auth/v1/auth_pb.js";
 import {
   AgentStatusSchema,
+  AgentStreamDelta_Kind,
+  AgentStreamDeltaSchema,
   EnvelopeSchema,
   NotificationCreatedSchema,
 } from "../contracts/tank/events/v1/events_pb.js";
@@ -30,6 +32,7 @@ import {
   TankProvider,
   useAgentStatus,
   useAgentStatuses,
+  useAgentStream,
   useFile,
   useNotifications,
   useRun,
@@ -192,6 +195,26 @@ describe("notification hooks", () => {
 });
 
 describe("agent hooks", () => {
+  it("useAgentStream follows the store's live output for a thread", () => {
+    const client = makeClient();
+    const stream = renderHook(() => useAgentStream("root1"), { wrapper: wrap(client) });
+    expect(stream.result.current).toBeUndefined();
+    act(() =>
+      client.store.dispatch({
+        type: "agentStream",
+        delta: create(AgentStreamDeltaSchema, {
+          channelId: "general",
+          threadRootId: "root1",
+          runId: "r1",
+          seq: 1n,
+          kind: AgentStreamDelta_Kind.TEXT,
+          text: "Hello",
+        }),
+      }),
+    );
+    expect(stream.result.current?.text).toBe("Hello");
+  });
+
   it("useThreadRun seeds from ListRuns once, useRun from GetRun, and useAgentStatus expires", async () => {
     const client = makeClient();
     const w = wrap(client);

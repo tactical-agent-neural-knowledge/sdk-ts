@@ -496,6 +496,10 @@ export function useRunsByThread() {
 export function useAgentStatus(threadRootIdOrChannelId) {
     return useTankSelector(useCallback((s) => s.selectAgentStatus(threadRootIdOrChannelId), [threadRootIdOrChannelId]));
 }
+/** The live agent output for a thread root id (or channel id): streamed text and status line; `undefined` when none is flowing. */
+export function useAgentStream(threadRootIdOrChannelId) {
+    return useTankSelector(useCallback((s) => s.selectAgentStream(threadRootIdOrChannelId), [threadRootIdOrChannelId]));
+}
 /** Every live `agent_status` frame in a channel (its threads included). */
 export function useAgentStatuses(channelId) {
     return useTankSelector(useCallback((s) => s.selectAgentStatuses(channelId), [channelId]));

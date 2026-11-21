@@ -226,6 +226,25 @@ export class TankClient {
         return res.run;
     }
     /**
+     * Fetch what the run has streamed so far and put it in the store under `key` (thread root id, else
+     * channel id). Call it when a `stale` stream entry appears or a thread is opened mid-run. The server
+     * answers empty when the person's live-output preference is off or the run has ended; that clears
+     * nothing and adds nothing.
+     */
+    async refreshAgentStreamTail(key, runId) {
+        const res = await this.agents.getRunStreamTail({ runId });
+        if (res.lastSeq === 0n && res.text === "" && res.status === "")
+            return;
+        this.store.dispatch({
+            type: "agentStream/tail",
+            key,
+            runId,
+            text: res.text,
+            status: res.status,
+            lastSeq: res.lastSeq,
+        });
+    }
+    /**
      * Load where every member has read to in a Tread (or one thread), for read receipts. The
      * server answers empty when the Tread has receipts off; after this, read_position.updated
      * events keep the positions moving.
@@ -1190,6 +1209,8 @@ export class TankClient {
         rt.on("state", (s) => {
             this.store.dispatch({ type: "connection", state: s });
             if (s === "ready") {
+                // Ephemeral frames sent while we were away are gone for good.
+                this.store.dispatch({ type: "agentStream/stale" });
                 void this.flushOutbox();
                 // Back after a drop (a phone asleep, a train tunnel): the gateway replays only the
                 // channels that were subscribed, so every recent channel asks for what it missed.
@@ -1250,6 +1271,7 @@ export class TankClient {
                 this.store.dispatch({ type: "presence/changed", presence: p.presence });
         });
         rt.on("agent_status", (s) => this.store.dispatch({ type: "agentStatus", status: s, now: this.now() }));
+        rt.on("agent_stream", (d) => this.store.dispatch({ type: "agentStream", delta: d }));
         rt.on("resync", () => void this.resync());
     }
     /**

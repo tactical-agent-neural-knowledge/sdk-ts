@@ -464,6 +464,9 @@ export class RealtimeClient {
             case "agentStatus":
                 this.events.emit("agent_status", k.value);
                 return;
+            case "agentStream":
+                this.events.emit("agent_stream", k.value);
+                return;
             case "canvasEditing":
                 this.events.emit("canvas_editing", k.value);
                 return;

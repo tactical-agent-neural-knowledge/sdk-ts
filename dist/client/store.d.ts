@@ -2,7 +2,7 @@ import { type Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { Channel, ChannelReadState, ThreadReadState } from "../contracts/tank/channel/v1/channel_pb.js";
-import { type AgentRunUpdated, type AgentStatus, type AppCommand, type BoardChanged, type BoardObjectsChanged, type BookmarkChanged, type CanvasBlockChanged, type CanvasChanged, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelPreferenceUpdated, type ChannelUpdated, type DraftUpdated, type EmojiChanged, type Envelope, type FileDeleted, type FileReady, type HuddleEnded, type HuddleParticipantsChanged, type HuddleStarted, type MemberUpdated, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PinChanged, type PreferencesUpdated, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ScheduledMessageSent, type TaskChanged, type ThreadDeleted, type TopoMarkUpdated, type Typing, type UserGroupUpdated } from "../contracts/tank/events/v1/events_pb.js";
+import { type AgentRunUpdated, type AgentStatus, type AgentStreamDelta, type AppCommand, type BoardChanged, type BoardObjectsChanged, type BookmarkChanged, type CanvasBlockChanged, type CanvasChanged, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelPreferenceUpdated, type ChannelUpdated, type DraftUpdated, type EmojiChanged, type Envelope, type FileDeleted, type FileReady, type HuddleEnded, type HuddleParticipantsChanged, type HuddleStarted, type MemberUpdated, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PinChanged, type PreferencesUpdated, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ScheduledMessageSent, type TaskChanged, type ThreadDeleted, type TopoMarkUpdated, type Typing, type UserGroupUpdated } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message, ReadPosition } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification } from "../contracts/tank/notification/v1/notification_pb.js";
@@ -43,6 +43,19 @@ export interface AgentStatusEntry {
     /** ms since epoch after which the frame is stale and dropped by `agentStatus/expire`. */
     expiresAt: number;
 }
+/** The agent's live output for one thread: appended text chunks plus the latest status line. */
+export interface AgentStreamEntry {
+    runId: string;
+    text: string;
+    status: string;
+    /** Highest `seq` applied. Deltas at or below it are duplicates. */
+    lastSeq: bigint;
+    /**
+     * Text was dropped (a gap in `seq`, a reconnect, or the person opened the thread mid-run) and
+     * `text` cannot be trusted until `agentStream/tail` replaces it from `getRunStreamTail`.
+     */
+    stale: boolean;
+}
 export interface TankState {
     me: Principal | undefined;
     workspaces: Record<string, Workspace>;
@@ -71,6 +84,8 @@ export interface TankState {
     agentStatus: Record<string, AgentStatus>;
     /** Live `agent_status` frames keyed by thread root id (or channel id); each expires `AGENT_STATUS_TTL_MS` after arrival. */
     agentStatusByThread: Record<string, AgentStatusEntry>;
+    /** Live agent output keyed like `agentStatusByThread`: thread root id, else channel id. Ephemeral, never persisted. */
+    agentStream: Record<string, AgentStreamEntry>;
     /** client_msg_id → outbox status. */
     pending: Record<string, PendingMessage>;
     connection: ConnectionState;
@@ -222,6 +237,27 @@ export type Action = {
 } | {
     type: "agentStatus/expire";
     now: number;
+}
+/** One live `AgentStreamDelta`: TEXT appends (a `reset` starts over), STATUS replaces the status line, END drops the entry. */
+ | {
+    type: "agentStream";
+    delta: AgentStreamDelta;
+}
+/** The server's tail for a run, applied after a gap or when opening a thread mid-run. Ignored if the run moved on. */
+ | {
+    type: "agentStream/tail";
+    key: string;
+    runId: string;
+    text: string;
+    status: string;
+    lastSeq: bigint;
+}
+/** Mark every entry stale (a reconnect lost frames): text is hidden until a tail arrives. */
+ | {
+    type: "agentStream/stale";
+} | {
+    type: "agentStream/clear";
+    key: string;
 } | {
     type: "notifications/upsert";
     workspaceId: string;
@@ -408,6 +444,7 @@ export declare class TankStore {
     /** Runs in a workspace, newest first (by started_at). */
     selectRuns: (workspaceId: string) => Run[];
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
+    selectAgentStream: (key: string) => AgentStreamEntry | undefined;
     selectAgentStatus: (key: string) => AgentStatus | undefined;
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
     selectAgentStatuses: (channelId: string) => AgentStatus[];
