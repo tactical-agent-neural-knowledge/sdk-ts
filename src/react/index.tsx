@@ -36,7 +36,11 @@ import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Task } from "../contracts/tank/task/v1/task_pb.js";
 import type { Mark, MarkType, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Preferences, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
-import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import {
+  PreferencesSchema,
+  PreparationState,
+  TopoPreferencesSchema,
+} from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { visibleMarkTypes } from "../topo/visibility.js";
 import { recentOwn } from "./history.js";
 
@@ -725,6 +729,50 @@ export function useThreadLiveStream(channelId: string, threadRootId: string): Th
 /** Every live `agent_status` frame in a channel (its threads included). */
 export function useAgentStatuses(channelId: string): AgentStatus[] {
   return useTankSelector(useCallback((s: TankStore) => s.selectAgentStatuses(channelId), [channelId]));
+}
+
+/** The early-run "getting ready" state for a composer (`threadRootId` empty = the channel composer). */
+export interface Preparation {
+  /** The latest `PreparationState`; UNSPECIFIED when the store holds nothing for this composer. */
+  state: PreparationState;
+  /** True while a sandbox is warming and has not expired. */
+  isPreparing: boolean;
+  /** The agents the draft tags (from `Draft.mentioned_agent_ids`). */
+  agentIds: string[];
+  /** ms since epoch when an unused preparation gives its sandbox back, if known. */
+  expiresAt: number | undefined;
+}
+
+const NO_AGENT_IDS: string[] = [];
+
+/**
+ * The composer's early-run indicator. Shows while a preparation is PREPARING; READY, EXPIRED and
+ * CANCELLED_* clear it. Flips to not preparing on its own when `expiresAt` passes.
+ */
+export function usePreparation(channelId: string, threadRootId: string): Preparation {
+  const { client } = useCtx();
+  const entry = useTankSelector(
+    useCallback((s: TankStore) => s.selectPreparation(channelId, threadRootId), [channelId, threadRootId]),
+  );
+  const live = entry?.state === PreparationState.PREPARING;
+  const expiresAt = entry?.expiresAt;
+  useEffect(() => {
+    if (!live || expiresAt === undefined) return;
+    const timer = setTimeout(
+      () => client.store.dispatch({ type: "preparation/expire", now: Date.now() }),
+      Math.max(0, expiresAt - Date.now()),
+    );
+    return () => clearTimeout(timer);
+  }, [client, live, expiresAt]);
+  return useMemo<Preparation>(
+    () => ({
+      state: entry?.state ?? PreparationState.UNSPECIFIED,
+      isPreparing: live && (expiresAt === undefined || expiresAt > Date.now()),
+      agentIds: entry?.agentIds ?? NO_AGENT_IDS,
+      expiresAt,
+    }),
+    [entry, live, expiresAt],
+  );
 }
 
 // ---------------------------------------------------------------- files

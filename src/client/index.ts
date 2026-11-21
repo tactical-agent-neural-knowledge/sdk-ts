@@ -78,6 +78,8 @@ export {
   type NotificationPaging,
   notificationPagingKey,
   type PendingMessage,
+  type PreparationEntry,
+  preparationKey,
   type ReadReceipt,
   readReceipt,
   reduce,

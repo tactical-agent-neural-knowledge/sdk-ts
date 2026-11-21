@@ -11,6 +11,7 @@ import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Task } from "../contracts/tank/task/v1/task_pb.js";
 import type { Mark, MarkType, WaitingDirection, WaitingOnItem } from "../contracts/tank/topo/v1/topo_pb.js";
 import type { Entitlements, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { PreparationState } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export { noRecall, type Recall, type RecallStep, recallStep, recentOwn } from "./history.js";
 export interface TankProviderProps {
     client: TankClient;
@@ -180,6 +181,22 @@ export interface ThreadLiveStreamState {
 export declare function useThreadLiveStream(channelId: string, threadRootId: string): ThreadLiveStreamState;
 /** Every live `agent_status` frame in a channel (its threads included). */
 export declare function useAgentStatuses(channelId: string): AgentStatus[];
+/** The early-run "getting ready" state for a composer (`threadRootId` empty = the channel composer). */
+export interface Preparation {
+    /** The latest `PreparationState`; UNSPECIFIED when the store holds nothing for this composer. */
+    state: PreparationState;
+    /** True while a sandbox is warming and has not expired. */
+    isPreparing: boolean;
+    /** The agents the draft tags (from `Draft.mentioned_agent_ids`). */
+    agentIds: string[];
+    /** ms since epoch when an unused preparation gives its sandbox back, if known. */
+    expiresAt: number | undefined;
+}
+/**
+ * The composer's early-run indicator. Shows while a preparation is PREPARING; READY, EXPIRED and
+ * CANCELLED_* clear it. Flips to not preparing on its own when `expiresAt` passes.
+ */
+export declare function usePreparation(channelId: string, threadRootId: string): Preparation;
 /** A file the store knows about (from an upload or a `file.ready` event). */
 export declare function useFile(fileId: string): File | undefined;
 /** The known `File`s a message references, in `file_ids` order. */
