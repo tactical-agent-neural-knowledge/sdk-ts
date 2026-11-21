@@ -6,6 +6,7 @@ export * as agent from "./tank/agent/v1/agent_pb.js";
 export * as auth from "./tank/auth/v1/auth_pb.js";
 export * as blocks from "./tank/blocks/v1/blocks_pb.js";
 export * as channel from "./tank/channel/v1/channel_pb.js";
+export * as envvars from "./tank/envvars/v1/envvars_pb.js";
 export * as events from "./tank/events/v1/events_pb.js";
 export * as files from "./tank/files/v1/files_pb.js";
 export * as guardrails from "./tank/guardrails/v1/guardrails_pb.js";
