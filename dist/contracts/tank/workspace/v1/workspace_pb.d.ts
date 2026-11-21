@@ -449,6 +449,15 @@ export type Entitlements = Message<"tank.workspace.v1.Entitlements"> & {
      * @generated from field: bool agent_time_auto_refill = 17;
      */
     agentTimeAutoRefill: boolean;
+    /**
+     * @neural, the premium agent pinned to the Neural model (agent.v1 AGENT_KIND_NEURAL), is
+     * available to this workspace. Every client lists it in the mention picker from this one
+     * field: usable when true, grayed with an upgrade button when false. The server refuses a
+     * run for it regardless (RUN_REFUSAL_REASON_PREMIUM_ONLY_AGENT).
+     *
+     * @generated from field: bool neural_agent = 18;
+     */
+    neuralAgent: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.Entitlements.
