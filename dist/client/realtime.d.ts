@@ -1,4 +1,4 @@
-import type { AgentStatus, AgentStreamDelta, BoardPointer, CanvasEditing, PresenceChanged, Typing } from "../contracts/tank/events/v1/events_pb.js";
+import type { AgentStatus, AgentStreamDelta, BoardPointer, CanvasEditing, PreparationUpdate, PresenceChanged, Typing } from "../contracts/tank/events/v1/events_pb.js";
 import { type Error as ErrorFrame, type Event, type Pong, type Ready, type Resumed, type ResyncRequired } from "../contracts/tank/realtime/v1/realtime_pb.js";
 import { type BackoffOptions } from "./backoff.js";
 import { Emitter } from "./emitter.js";
@@ -37,6 +37,8 @@ export interface RealtimeEvents {
     agent_status: AgentStatus;
     /** Ephemeral live agent output (status line or text chunk); never replayed, only sent when the person turned the preference on. */
     agent_stream: AgentStreamDelta;
+    /** The early-run "getting ready" sandbox for a composer changed state. */
+    preparation: PreparationUpdate;
     /** Someone else moved around a page this socket has open. */
     canvas_editing: CanvasEditing;
     /** Someone else moved their pointer on a board this socket has open. */
