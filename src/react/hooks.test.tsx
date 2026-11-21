@@ -199,7 +199,13 @@ describe("agent hooks", () => {
     const client = makeClient();
     const stream = renderHook(() => useAgentStream("root1"), { wrapper: wrap(client) });
     expect(stream.result.current).toBeUndefined();
-    act(() =>
+    act(() => {
+      client.store.dispatch({
+        type: "threadLiveStream/set",
+        channelId: "general",
+        threadRootId: "root1",
+        enabled: true,
+      });
       client.store.dispatch({
         type: "agentStream",
         delta: create(AgentStreamDeltaSchema, {
@@ -210,8 +216,8 @@ describe("agent hooks", () => {
           kind: AgentStreamDelta_Kind.TEXT,
           text: "Hello",
         }),
-      }),
-    );
+      });
+    });
     expect(stream.result.current?.text).toBe("Hello");
   });
 

@@ -698,6 +698,30 @@ export function useAgentStream(threadRootIdOrChannelId: string): AgentStreamEntr
   );
 }
 
+/** The person's live agent output setting for one thread, and how to change it. Off until turned on. */
+export interface ThreadLiveStreamState {
+  enabled: boolean;
+  /** Optimistic: `enabled` changes at once and reverts if the server refuses. Resolves to the stored setting. */
+  setEnabled: (enabled: boolean) => Promise<boolean>;
+}
+
+/** The live-output toggle for one thread (channel id plus thread root id), synced across the person's devices. */
+export function useThreadLiveStream(channelId: string, threadRootId: string): ThreadLiveStreamState {
+  const client = useTank();
+  const enabled = useTankSelector(
+    useCallback(
+      (s: TankStore) => s.selectThreadLiveStream(channelId, threadRootId),
+      [channelId, threadRootId],
+    ),
+  );
+  const workspaceId = useChannel(channelId)?.workspaceId ?? "";
+  const setEnabled = useCallback(
+    (next: boolean) => client.setThreadLiveStream({ workspaceId, channelId, threadRootId, enabled: next }),
+    [client, workspaceId, channelId, threadRootId],
+  );
+  return { enabled, setEnabled };
+}
+
 /** Every live `agent_status` frame in a channel (its threads included). */
 export function useAgentStatuses(channelId: string): AgentStatus[] {
   return useTankSelector(useCallback((s: TankStore) => s.selectAgentStatuses(channelId), [channelId]));

@@ -1,6 +1,7 @@
 import { create, fromJson, toJson } from "@bufbuild/protobuf";
 import { timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { Code, ConnectError, createClient, } from "@connectrpc/connect";
+import { isTerminalRunState } from "../blocks/runTone.js";
 import { AgentService } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AiService } from "../contracts/tank/ai/v1/ai_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
@@ -231,18 +232,69 @@ export class TankClient {
      * answers empty when the person's live-output preference is off or the run has ended; that clears
      * nothing and adds nothing.
      */
-    async refreshAgentStreamTail(key, runId) {
+    async refreshAgentStreamTail(key, runId, channelId) {
         const res = await this.agents.getRunStreamTail({ runId });
         if (res.lastSeq === 0n && res.text === "" && res.status === "")
             return;
         this.store.dispatch({
             type: "agentStream/tail",
             key,
+            // The thread's channel, to find its setting; without it (root not loaded) the store can
+            // only apply a tail for a thread the person has on, which needs the channel to tell.
+            channelId: channelId ?? this.store.getState().messages[key]?.channelId ?? "",
             runId,
             text: res.text,
             status: res.status,
             lastSeq: res.lastSeq,
         });
+    }
+    /**
+     * Turn live agent output on or off for the caller in one thread. Optimistic: the store changes at
+     * once (turning off drops that thread's partial text) and reverts on error. Turning it on while a
+     * run is working there fetches what the run has said so far, after the server has stored the
+     * setting (the tail answers empty while it is off). Resolves to the stored setting.
+     */
+    async setThreadLiveStream(input) {
+        const { workspaceId, channelId, threadRootId, enabled } = input;
+        const was = this.store.selectThreadLiveStream(channelId, threadRootId);
+        this.store.dispatch({ type: "threadLiveStream/set", channelId, threadRootId, enabled });
+        try {
+            const res = await this.workspaces.setThreadLiveStream({
+                workspaceId,
+                channelId,
+                threadRootId,
+                enabled,
+            });
+            const stored = res.setting?.enabled ?? enabled;
+            this.store.dispatch({ type: "threadLiveStream/set", channelId, threadRootId, enabled: stored });
+            if (stored && !was)
+                await this.tailIfRunning(channelId, threadRootId);
+            return stored;
+        }
+        catch (err) {
+            this.store.dispatch({ type: "threadLiveStream/set", channelId, threadRootId, enabled: was });
+            throw err;
+        }
+    }
+    /**
+     * The caller's live-output setting for one thread, for a client that opens it. Syncs the store to
+     * the answer and, when the setting is on while a run works there, fetches the run's tail.
+     */
+    async getThreadLiveStream(input) {
+        const { workspaceId, channelId, threadRootId } = input;
+        const res = await this.workspaces.getThreadLiveStream({ workspaceId, channelId, threadRootId });
+        const enabled = res.setting?.enabled ?? false;
+        this.store.dispatch({ type: "threadLiveStream/set", channelId, threadRootId, enabled });
+        if (enabled)
+            await this.tailIfRunning(channelId, threadRootId);
+        return enabled;
+    }
+    /** Fetch the tail of the thread's run when one is working there. Best effort: the stored message wins. */
+    async tailIfRunning(channelId, threadRootId) {
+        const run = this.store.getState().runsByThread[threadRootId];
+        if (!run || isTerminalRunState(run.state))
+            return;
+        await this.refreshAgentStreamTail(threadRootId, run.id, channelId).catch(() => undefined);
     }
     /**
      * Load where every member has read to in a Tread (or one thread), for read receipts. The
@@ -278,6 +330,7 @@ export class TankClient {
                 channels: res.channels,
                 readStates: res.readStates,
                 threadReadStates: res.threadReadStates,
+                threadLiveStreams: res.threadLiveStreams,
                 members: res.members,
                 unreadNotificationCount: res.unreadNotificationCount,
                 entitlements: res.entitlements,
