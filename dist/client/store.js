@@ -4,6 +4,10 @@ import { ChannelReadStateSchema } from "../contracts/tank/channel/v1/channel_pb.
 import { AgentStreamDelta_Kind, file_tank_events_v1_events, } from "../contracts/tank/events/v1/events_pb.js";
 import { NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
 import { uuidv7Time } from "./uuidv7.js";
+/** The key of one thread's live-output setting: a thread is identified by its channel and root message. */
+export function threadLiveStreamKey(channelId, threadRootId) {
+    return `${channelId}:${threadRootId}`;
+}
 export const TYPING_TTL_MS = 5_000;
 /** How long an `agent_status` frame stays live without a newer one. */
 export const AGENT_STATUS_TTL_MS = 30_000;
@@ -311,6 +315,14 @@ function updateReaction(state, messageId, userId, emoji, add) {
 export function typingKey(channelId, threadRootId = "") {
     return threadRootId ? `${channelId}/${threadRootId}` : channelId;
 }
+/** The set of threads that are on, from stored rows (a row with enabled = false is not stored; it is skipped). */
+function threadLiveStreamsFrom(rows) {
+    const out = {};
+    for (const r of rows)
+        if (r.enabled)
+            out[threadLiveStreamKey(r.channelId, r.threadRootId)] = true;
+    return out;
+}
 // ---------------------------------------------------------------- reducer
 export function reduce(state, action) {
     switch (action.type) {
@@ -357,18 +369,12 @@ export function reduce(state, action) {
             const entitlements = action.entitlements
                 ? { ...state.entitlements, [action.workspace.id]: action.entitlements }
                 : state.entitlements;
-            let threadLiveStreams = state.threadLiveStreams;
-            if (action.threadLiveStreams) {
-                threadLiveStreams = {};
-                for (const [root, ws] of Object.entries(state.threadLiveStreams))
-                    if (ws !== action.workspace.id)
-                        threadLiveStreams[root] = ws;
-                for (const t of action.threadLiveStreams)
-                    if (t.enabled)
-                        threadLiveStreams[t.threadRootId] = action.workspace.id;
-            }
+            const threadLiveStreams = action.threadLiveStreams === undefined
+                ? state.threadLiveStreams
+                : threadLiveStreamsFrom(action.threadLiveStreams);
             return {
                 ...state,
+                threadLiveStreams,
                 me: action.me?.principal ?? state.me,
                 workspaces,
                 channels,
@@ -378,7 +384,6 @@ export function reduce(state, action) {
                 threadReadStates,
                 unreadNotificationCount,
                 entitlements,
-                threadLiveStreams,
             };
         }
         case "entitlements/set":
@@ -639,8 +644,32 @@ export function reduce(state, action) {
                 },
             };
         }
+        case "threadLiveStream/set": {
+            const k = threadLiveStreamKey(action.channelId, action.threadRootId);
+            const on = state.threadLiveStreams[k] === true;
+            if (action.enabled) {
+                if (on)
+                    return state;
+                return { ...state, threadLiveStreams: { ...state.threadLiveStreams, [k]: true } };
+            }
+            if (!on)
+                return state;
+            const threadLiveStreams = { ...state.threadLiveStreams };
+            delete threadLiveStreams[k];
+            // Off: nothing of this thread's live output is kept, and no more of it is applied.
+            let agentStream = state.agentStream;
+            if (agentStream[action.threadRootId]) {
+                agentStream = { ...agentStream };
+                delete agentStream[action.threadRootId];
+            }
+            return { ...state, threadLiveStreams, agentStream };
+        }
         case "agentStream": {
             const d = action.delta;
+            // Only threads the person has on: the server filters too, but the store must not show what
+            // was turned off, or a frame that raced the setting.
+            if (!state.threadLiveStreams[threadLiveStreamKey(d.channelId, d.threadRootId)])
+                return state;
             const key = d.threadRootId || d.channelId;
             const cur = state.agentStream[key];
             if (d.kind === AgentStreamDelta_Kind.END) {
@@ -677,6 +706,8 @@ export function reduce(state, action) {
             return { ...state, agentStream: { ...state.agentStream, [key]: entry } };
         }
         case "agentStream/tail": {
+            if (!state.threadLiveStreams[threadLiveStreamKey(action.channelId, action.key)])
+                return state;
             const cur = state.agentStream[action.key];
             if (cur && cur.runId !== action.runId)
                 return state;
@@ -705,17 +736,6 @@ export function reduce(state, action) {
             for (const [k, e] of Object.entries(state.agentStream))
                 agentStream[k] = { ...e, text: "", stale: true };
             return { ...state, agentStream };
-        }
-        case "threadLiveStream/set": {
-            const on = action.threadRootId in state.threadLiveStreams;
-            if (on === action.enabled)
-                return state;
-            const threadLiveStreams = { ...state.threadLiveStreams };
-            if (action.enabled)
-                threadLiveStreams[action.threadRootId] = action.workspaceId;
-            else
-                delete threadLiveStreams[action.threadRootId];
-            return { ...state, threadLiveStreams };
         }
         case "agentStream/clear": {
             if (!state.agentStream[action.key])
@@ -1066,21 +1086,21 @@ export function envelopeToActions(env, now) {
                     joined: payload.joined,
                 },
             ];
-        case "tank.events.v1.ChannelPreferenceUpdated":
-            // My own notify preference, mute or star on a Tread, changed from another device.
-            return payload.readState ? [{ type: "readStates/upsert", readStates: [payload.readState] }] : [];
         case "tank.events.v1.ThreadLiveStreamUpdated":
-            // My own live-output switch for a thread changed, here or on another device.
+            // The person's live-output setting for one thread, changed from another device (or this one).
             return payload.setting
                 ? [
                     {
                         type: "threadLiveStream/set",
-                        workspaceId: env.workspaceId,
+                        channelId: payload.setting.channelId,
                         threadRootId: payload.setting.threadRootId,
                         enabled: payload.setting.enabled,
                     },
                 ]
                 : [];
+        case "tank.events.v1.ChannelPreferenceUpdated":
+            // My own notify preference, mute or star on a Tread, changed from another device.
+            return payload.readState ? [{ type: "readStates/upsert", readStates: [payload.readState] }] : [];
         case "tank.events.v1.MemberUpdated":
             // A member's profile, status or timezone; the member row is the store's already.
             return payload.member
@@ -1297,8 +1317,8 @@ export class TankStore {
     };
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
     selectAgentStream = (key) => this.state.agentStream[key];
-    /** Whether this person has live agent output on for a thread root id. Off when unknown. */
-    selectThreadLiveStream = (threadRootId) => threadRootId in this.state.threadLiveStreams;
+    /** Whether the person has live agent output on in this thread. */
+    selectThreadLiveStream = (channelId, threadRootId) => this.state.threadLiveStreams[threadLiveStreamKey(channelId, threadRootId)] === true;
     selectAgentStatus = (key) => this.state.agentStatusByThread[key]?.status;
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
     selectAgentStatuses = (channelId) => {

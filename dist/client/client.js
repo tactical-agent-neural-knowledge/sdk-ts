@@ -1,6 +1,7 @@
 import { create, fromJson, toJson } from "@bufbuild/protobuf";
 import { timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { Code, ConnectError, createClient, } from "@connectrpc/connect";
+import { isTerminalRunState } from "../blocks/runTone.js";
 import { AgentService } from "../contracts/tank/agent/v1/agent_pb.js";
 import { AiService } from "../contracts/tank/ai/v1/ai_pb.js";
 import { AuthService, PrincipalKind } from "../contracts/tank/auth/v1/auth_pb.js";
@@ -228,16 +229,19 @@ export class TankClient {
     /**
      * Fetch what the run has streamed so far and put it in the store under `key` (thread root id, else
      * channel id). Call it when a `stale` stream entry appears or a thread is opened mid-run. The server
-     * answers empty when the person's live-output switch for the run's thread is off or the run has ended; that clears
+     * answers empty when the person's live-output preference is off or the run has ended; that clears
      * nothing and adds nothing.
      */
-    async refreshAgentStreamTail(key, runId) {
+    async refreshAgentStreamTail(key, runId, channelId) {
         const res = await this.agents.getRunStreamTail({ runId });
         if (res.lastSeq === 0n && res.text === "" && res.status === "")
             return;
         this.store.dispatch({
             type: "agentStream/tail",
             key,
+            // The thread's channel, to find its setting; without it (root not loaded) the store can
+            // only apply a tail for a thread the person has on, which needs the channel to tell.
+            channelId: channelId ?? this.store.getState().messages[key]?.channelId ?? "",
             runId,
             text: res.text,
             status: res.status,
@@ -245,26 +249,52 @@ export class TankClient {
         });
     }
     /**
-     * Turn live agent output on or off for one thread, for this person. The switch changes at once
-     * and is put back if the server refuses. Turning it on while a run is going (`activeRunId`)
-     * fetches what the run has streamed so far before the first frame arrives, so the text starts
-     * where the run is, not where this person happened to switch. Turning it off drops what was
-     * showing: nothing appears until the stored message does.
+     * Turn live agent output on or off for the caller in one thread. Optimistic: the store changes at
+     * once (turning off drops that thread's partial text) and reverts on error. Turning it on while a
+     * run is working there fetches what the run has said so far, after the server has stored the
+     * setting (the tail answers empty while it is off). Resolves to the stored setting.
      */
-    async setThreadLiveStream(workspaceId, channelId, threadRootId, enabled, activeRunId) {
-        const before = this.store.getState().threadLiveStreams[threadRootId] !== undefined;
-        this.store.dispatch({ type: "threadLiveStream/set", workspaceId, threadRootId, enabled });
-        if (!enabled)
-            this.store.dispatch({ type: "agentStream/clear", key: threadRootId });
+    async setThreadLiveStream(input) {
+        const { workspaceId, channelId, threadRootId, enabled } = input;
+        const was = this.store.selectThreadLiveStream(channelId, threadRootId);
+        this.store.dispatch({ type: "threadLiveStream/set", channelId, threadRootId, enabled });
         try {
-            await this.workspaces.setThreadLiveStream({ workspaceId, channelId, threadRootId, enabled });
+            const res = await this.workspaces.setThreadLiveStream({
+                workspaceId,
+                channelId,
+                threadRootId,
+                enabled,
+            });
+            const stored = res.setting?.enabled ?? enabled;
+            this.store.dispatch({ type: "threadLiveStream/set", channelId, threadRootId, enabled: stored });
+            if (stored && !was)
+                await this.tailIfRunning(channelId, threadRootId);
+            return stored;
         }
-        catch (e) {
-            this.store.dispatch({ type: "threadLiveStream/set", workspaceId, threadRootId, enabled: before });
-            throw e;
+        catch (err) {
+            this.store.dispatch({ type: "threadLiveStream/set", channelId, threadRootId, enabled: was });
+            throw err;
         }
-        if (enabled && activeRunId)
-            await this.refreshAgentStreamTail(threadRootId, activeRunId).catch(() => { });
+    }
+    /**
+     * The caller's live-output setting for one thread, for a client that opens it. Syncs the store to
+     * the answer and, when the setting is on while a run works there, fetches the run's tail.
+     */
+    async getThreadLiveStream(input) {
+        const { workspaceId, channelId, threadRootId } = input;
+        const res = await this.workspaces.getThreadLiveStream({ workspaceId, channelId, threadRootId });
+        const enabled = res.setting?.enabled ?? false;
+        this.store.dispatch({ type: "threadLiveStream/set", channelId, threadRootId, enabled });
+        if (enabled)
+            await this.tailIfRunning(channelId, threadRootId);
+        return enabled;
+    }
+    /** Fetch the tail of the thread's run when one is working there. Best effort: the stored message wins. */
+    async tailIfRunning(channelId, threadRootId) {
+        const run = this.store.getState().runsByThread[threadRootId];
+        if (!run || isTerminalRunState(run.state))
+            return;
+        await this.refreshAgentStreamTail(threadRootId, run.id, channelId).catch(() => undefined);
     }
     /**
      * Load where every member has read to in a Tread (or one thread), for read receipts. The
@@ -300,10 +330,10 @@ export class TankClient {
                 channels: res.channels,
                 readStates: res.readStates,
                 threadReadStates: res.threadReadStates,
+                threadLiveStreams: res.threadLiveStreams,
                 members: res.members,
                 unreadNotificationCount: res.unreadNotificationCount,
                 entitlements: res.entitlements,
-                threadLiveStreams: res.threadLiveStreams,
                 pruneIfAbsent: known,
             });
             // Archived Treads are never in a bootstrap, so their absence proves nothing: ask
@@ -1504,7 +1534,6 @@ export class TankClient {
                         members: res.members,
                         unreadNotificationCount: res.unreadNotificationCount,
                         entitlements: res.entitlements,
-                        threadLiveStreams: res.threadLiveStreams,
                     });
                 }
             }

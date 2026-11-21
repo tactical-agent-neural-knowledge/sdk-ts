@@ -435,8 +435,15 @@ describe("agent_stream frames", () => {
       ...extra,
     });
 
-  it("appends text, replaces the status, and END drops the entry", () => {
+  /** A store with the caller's live output on in c1 / root1, the thread the deltas below are for. */
+  const onStore = (): TankStore => {
     const store = new TankStore();
+    store.dispatch({ type: "threadLiveStream/set", channelId: "c1", threadRootId: "root1", enabled: true });
+    return store;
+  };
+
+  it("appends text, replaces the status, and END drops the entry", () => {
+    const store = onStore();
     store.dispatch({
       type: "agentStream",
       delta: delta(1, AgentStreamDelta_Kind.STATUS, "Reading the repo"),
@@ -450,7 +457,7 @@ describe("agent_stream frames", () => {
   });
 
   it("reset starts the text over and duplicates are ignored", () => {
-    const store = new TankStore();
+    const store = onStore();
     store.dispatch({ type: "agentStream", delta: delta(1, AgentStreamDelta_Kind.TEXT, "first turn") });
     store.dispatch({ type: "agentStream", delta: delta(1, AgentStreamDelta_Kind.TEXT, "first turn") });
     store.dispatch({
@@ -461,7 +468,7 @@ describe("agent_stream frames", () => {
   });
 
   it("a gap drops the text until the tail arrives, and a stale tail does not overwrite newer deltas", () => {
-    const store = new TankStore();
+    const store = onStore();
     store.dispatch({ type: "agentStream", delta: delta(1, AgentStreamDelta_Kind.TEXT, "a") });
     store.dispatch({ type: "agentStream", delta: delta(4, AgentStreamDelta_Kind.TEXT, "d") });
     expect(store.getState().agentStream.root1).toMatchObject({ text: "", stale: true, lastSeq: 4n });
@@ -470,6 +477,7 @@ describe("agent_stream frames", () => {
     store.dispatch({
       type: "agentStream/tail",
       key: "root1",
+      channelId: "c1",
       runId: "r1",
       text: "abcde",
       status: "",
@@ -481,6 +489,7 @@ describe("agent_stream frames", () => {
     store.dispatch({
       type: "agentStream/tail",
       key: "root1",
+      channelId: "c1",
       runId: "r1",
       text: "abc",
       status: "",
@@ -490,12 +499,13 @@ describe("agent_stream frames", () => {
   });
 
   it("opening mid-run (first delta seq > 1) is stale, and a reconnect marks everything stale", () => {
-    const store = new TankStore();
+    const store = onStore();
     store.dispatch({ type: "agentStream", delta: delta(7, AgentStreamDelta_Kind.TEXT, "x") });
     expect(store.getState().agentStream.root1?.stale).toBe(true);
     store.dispatch({
       type: "agentStream/tail",
       key: "root1",
+      channelId: "c1",
       runId: "r1",
       text: "abcdefx",
       status: "s",

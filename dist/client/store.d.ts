@@ -87,11 +87,12 @@ export interface TankState {
     /** Live agent output keyed like `agentStatusByThread`: thread root id, else channel id. Ephemeral, never persisted. */
     agentStream: Record<string, AgentStreamEntry>;
     /**
-     * The threads where this person turned live agent output on, keyed by thread root id; the value
-     * is the workspace the thread is in. No entry means off. Server-owned and per person: it is what
-     * the gateway filters `agent_stream` frames by, so it is never edited without telling the server.
+     * The caller's live agent output setting per thread, keyed by `threadLiveStreamKey(channelId, threadRootId)`.
+     * A key is present (true) only while the thread is on: off is the absence of the key. Seeded from
+     * bootstrap `threadLiveStreams` and synced by `thread_live_stream.updated`. Agent stream frames and
+     * partial text for a thread that is not on are dropped.
      */
-    threadLiveStreams: Record<string, string>;
+    threadLiveStreams: Record<string, true>;
     /** client_msg_id → outbox status. */
     pending: Record<string, PendingMessage>;
     connection: ConnectionState;
@@ -116,6 +117,8 @@ export interface TankState {
     /** task id → Task (from `TaskChanged` events and every TaskService response). */
     tasksById: Record<string, Task>;
 }
+/** The key of one thread's live-output setting: a thread is identified by its channel and root message. */
+export declare function threadLiveStreamKey(channelId: string, threadRootId: string): string;
 export declare const TYPING_TTL_MS = 5000;
 /** How long an `agent_status` frame stays live without a newer one. */
 export declare const AGENT_STATUS_TTL_MS = 30000;
@@ -133,8 +136,6 @@ export type Action = {
     unreadNotificationCount?: number;
     /** `GetBootstrap.entitlements`; absent on an older server, which the UI reads as "assume free". */
     entitlements?: Entitlements | undefined;
-    /** `GetBootstrap.thread_live_streams`: the threads where this person has live agent output on. Replaces what the store held for this workspace. */
-    threadLiveStreams?: ThreadLiveStream[];
     /**
      * Set on a bootstrap fresh from the server (never on a cached snapshot): the ids of this
      * workspace's channels the store held when the request went out. Any of them the server
@@ -144,6 +145,11 @@ export type Action = {
      * two #general Treads on web and phone, the deleted one with its old name).
      */
     pruneIfAbsent?: string[];
+    /**
+     * `GetBootstrap.thread_live_streams`: the caller's stored live-output settings. Replaces the whole
+     * set when present (only enabled rows are stored); absent on an older server, which leaves it alone.
+     */
+    threadLiveStreams?: ThreadLiveStream[];
 } | {
     type: "workspaces/upsert";
     workspaces: Workspace[];
@@ -255,6 +261,8 @@ export type Action = {
  | {
     type: "agentStream/tail";
     key: string;
+    /** The thread's channel: the tail applies only while the person has that thread on. */
+    channelId: string;
     runId: string;
     text: string;
     status: string;
@@ -266,9 +274,14 @@ export type Action = {
 } | {
     type: "agentStream/clear";
     key: string;
-} | {
+}
+/**
+ * The caller's live-output setting for one thread changed (optimistic, a server answer, or
+ * `thread_live_stream.updated`). Turning it off also drops that thread's partial text.
+ */
+ | {
     type: "threadLiveStream/set";
-    workspaceId: string;
+    channelId: string;
     threadRootId: string;
     enabled: boolean;
 } | {
@@ -374,7 +387,7 @@ export declare function notificationPagingKey(workspaceId: string, mode: Notific
 export declare function typingKey(channelId: string, threadRootId?: string): string;
 export declare function reduce(state: TankState, action: Action): TankState;
 /** Every `tank.events.v1` payload this SDK's vendored contracts know how to decode. */
-export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ThreadDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelDeleted | ChannelMembershipChanged | ChannelPreferenceUpdated | ThreadLiveStreamUpdated | MemberUpdated | PinChanged | BookmarkChanged | DraftUpdated | EmojiChanged | PreferencesUpdated | ScheduledMessageSent | UserGroupUpdated | HuddleStarted | HuddleParticipantsChanged | HuddleEnded | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | FileDeleted | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated | MonitorWidgetUpdated | CanvasBlockChanged | CanvasChanged | BoardObjectsChanged | BoardChanged | TaskChanged;
+export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ThreadDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelDeleted | ChannelMembershipChanged | ChannelPreferenceUpdated | MemberUpdated | PinChanged | BookmarkChanged | DraftUpdated | EmojiChanged | PreferencesUpdated | ScheduledMessageSent | UserGroupUpdated | HuddleStarted | HuddleParticipantsChanged | HuddleEnded | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | FileDeleted | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated | MonitorWidgetUpdated | CanvasBlockChanged | CanvasChanged | BoardObjectsChanged | BoardChanged | TaskChanged | ThreadLiveStreamUpdated;
 /**
  * A payload whose type is not in the vendored contracts (a newer event than this SDK build). The
  * `$typeName` is the literal `"unknown"` so a `switch ($typeName)` still narrows every known case and
@@ -458,8 +471,8 @@ export declare class TankStore {
     selectRuns: (workspaceId: string) => Run[];
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
     selectAgentStream: (key: string) => AgentStreamEntry | undefined;
-    /** Whether this person has live agent output on for a thread root id. Off when unknown. */
-    selectThreadLiveStream: (threadRootId: string) => boolean;
+    /** Whether the person has live agent output on in this thread. */
+    selectThreadLiveStream: (channelId: string, threadRootId: string) => boolean;
     selectAgentStatus: (key: string) => AgentStatus | undefined;
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
     selectAgentStatuses: (channelId: string) => AgentStatus[];

@@ -171,6 +171,13 @@ export interface TankClientEvents {
         error: string;
     };
 }
+/** One thread's live agent output setting: a thread is identified by its channel and root message. */
+export interface ThreadLiveStreamInput {
+    workspaceId: string;
+    channelId: string;
+    threadRootId: string;
+    enabled: boolean;
+}
 export declare class TankClient {
     readonly transport: Transport;
     readonly auth: Client<typeof AuthService>;
@@ -256,18 +263,24 @@ export declare class TankClient {
     /**
      * Fetch what the run has streamed so far and put it in the store under `key` (thread root id, else
      * channel id). Call it when a `stale` stream entry appears or a thread is opened mid-run. The server
-     * answers empty when the person's live-output switch for the run's thread is off or the run has ended; that clears
+     * answers empty when the person's live-output preference is off or the run has ended; that clears
      * nothing and adds nothing.
      */
-    refreshAgentStreamTail(key: string, runId: string): Promise<void>;
+    refreshAgentStreamTail(key: string, runId: string, channelId?: string): Promise<void>;
     /**
-     * Turn live agent output on or off for one thread, for this person. The switch changes at once
-     * and is put back if the server refuses. Turning it on while a run is going (`activeRunId`)
-     * fetches what the run has streamed so far before the first frame arrives, so the text starts
-     * where the run is, not where this person happened to switch. Turning it off drops what was
-     * showing: nothing appears until the stored message does.
+     * Turn live agent output on or off for the caller in one thread. Optimistic: the store changes at
+     * once (turning off drops that thread's partial text) and reverts on error. Turning it on while a
+     * run is working there fetches what the run has said so far, after the server has stored the
+     * setting (the tail answers empty while it is off). Resolves to the stored setting.
      */
-    setThreadLiveStream(workspaceId: string, channelId: string, threadRootId: string, enabled: boolean, activeRunId?: string): Promise<void>;
+    setThreadLiveStream(input: ThreadLiveStreamInput): Promise<boolean>;
+    /**
+     * The caller's live-output setting for one thread, for a client that opens it. Syncs the store to
+     * the answer and, when the setting is on while a run works there, fetches the run's tail.
+     */
+    getThreadLiveStream(input: Omit<ThreadLiveStreamInput, "enabled">): Promise<boolean>;
+    /** Fetch the tail of the thread's run when one is working there. Best effort: the stored message wins. */
+    private tailIfRunning;
     /**
      * Load where every member has read to in a Tread (or one thread), for read receipts. The
      * server answers empty when the Tread has receipts off; after this, read_position.updated

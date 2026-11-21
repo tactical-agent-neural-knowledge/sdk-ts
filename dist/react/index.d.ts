@@ -170,8 +170,14 @@ export declare function useRunsByThread(): Record<string, Run>;
 export declare function useAgentStatus(threadRootIdOrChannelId: string): AgentStatus | undefined;
 /** The live agent output for a thread root id (or channel id): streamed text and status line; `undefined` when none is flowing. */
 export declare function useAgentStream(threadRootIdOrChannelId: string): AgentStreamEntry | undefined;
-/** Whether this person has live agent output on for a thread root id. Off until the server says otherwise. */
-export declare function useThreadLiveStream(threadRootId: string): boolean;
+/** The person's live agent output setting for one thread, and how to change it. Off until turned on. */
+export interface ThreadLiveStreamState {
+    enabled: boolean;
+    /** Optimistic: `enabled` changes at once and reverts if the server refuses. Resolves to the stored setting. */
+    setEnabled: (enabled: boolean) => Promise<boolean>;
+}
+/** The live-output toggle for one thread (channel id plus thread root id), synced across the person's devices. */
+export declare function useThreadLiveStream(channelId: string, threadRootId: string): ThreadLiveStreamState;
 /** Every live `agent_status` frame in a channel (its threads included). */
 export declare function useAgentStatuses(channelId: string): AgentStatus[];
 /** A file the store knows about (from an upload or a `file.ready` event). */
