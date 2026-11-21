@@ -3,7 +3,12 @@ import { anyUnpack, timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { ChannelReadStateSchema } from "../contracts/tank/channel/v1/channel_pb.js";
 import { AgentStreamDelta_Kind, file_tank_events_v1_events, } from "../contracts/tank/events/v1/events_pb.js";
 import { NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
+import { PreparationState, } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { uuidv7Time } from "./uuidv7.js";
+/** Key for `TankState.preparationByThread`: one composer per (channel, thread root); an empty root is the channel composer. */
+export function preparationKey(channelId, threadRootId) {
+    return `${channelId}|${threadRootId}`;
+}
 export const TYPING_TTL_MS = 5_000;
 /** How long an `agent_status` frame stays live without a newer one. */
 export const AGENT_STATUS_TTL_MS = 30_000;
@@ -27,6 +32,7 @@ export function initialState() {
         agentStatus: {},
         agentStatusByThread: {},
         agentStream: {},
+        preparationByThread: {},
         pending: {},
         connection: "idle",
         cursors: {},
@@ -626,6 +632,59 @@ export function reduce(state, action) {
                     [key]: { status: action.status, expiresAt: now + AGENT_STATUS_TTL_MS },
                 },
             };
+        }
+        case "preparation": {
+            const u = action.update;
+            if (u.state === PreparationState.UNSPECIFIED)
+                return state;
+            const key = preparationKey(u.channelId, u.threadRootId);
+            const cur = state.preparationByThread[key];
+            // Only PREPARING can start a preparation; a terminal frame for another one is stale.
+            if (!cur && u.state !== PreparationState.PREPARING)
+                return state;
+            if (cur && cur.preparationId !== u.preparationId && u.state !== PreparationState.PREPARING)
+                return state;
+            const entry = {
+                channelId: u.channelId,
+                threadRootId: u.threadRootId,
+                preparationId: u.preparationId,
+                state: u.state,
+                agentIds: cur?.agentIds ?? [],
+                expiresAt: cur?.preparationId === u.preparationId ? cur.expiresAt : undefined,
+            };
+            return { ...state, preparationByThread: { ...state.preparationByThread, [key]: entry } };
+        }
+        case "preparation/seed": {
+            const d = action.draft;
+            const key = preparationKey(d.channelId, d.threadRootId);
+            const agentIds = [...d.mentionedAgentIds];
+            const idle = !d.preparationId && d.preparationState === PreparationState.UNSPECIFIED;
+            if (idle && agentIds.length === 0) {
+                if (!state.preparationByThread[key])
+                    return state;
+                const preparationByThread = { ...state.preparationByThread };
+                delete preparationByThread[key];
+                return { ...state, preparationByThread };
+            }
+            const entry = {
+                channelId: d.channelId,
+                threadRootId: d.threadRootId,
+                preparationId: d.preparationId,
+                state: d.preparationState,
+                agentIds,
+                expiresAt: d.preparationExpiresAt ? tsMs(d.preparationExpiresAt) : undefined,
+            };
+            return { ...state, preparationByThread: { ...state.preparationByThread, [key]: entry } };
+        }
+        case "preparation/expire": {
+            let next;
+            for (const [key, e] of Object.entries(state.preparationByThread)) {
+                if (e.state !== PreparationState.PREPARING || e.expiresAt === undefined || e.expiresAt > action.now)
+                    continue;
+                next ??= { ...state.preparationByThread };
+                next[key] = { ...e, state: PreparationState.EXPIRED };
+            }
+            return next ? { ...state, preparationByThread: next } : state;
         }
         case "agentStream": {
             const d = action.delta;
@@ -1263,6 +1322,8 @@ export class TankStore {
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
     selectAgentStream = (key) => this.state.agentStream[key];
     selectAgentStatus = (key) => this.state.agentStatusByThread[key]?.status;
+    /** The early-run preparation for a composer (empty `threadRootId` = the channel composer), if the store has one. */
+    selectPreparation = (channelId, threadRootId) => this.state.preparationByThread[preparationKey(channelId, threadRootId)];
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
     selectAgentStatuses = (channelId) => {
         const s = this.state;

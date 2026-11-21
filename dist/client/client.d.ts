@@ -16,7 +16,7 @@ import { type Notification, NotificationService } from "../contracts/tank/notifi
 import { type DescribeStatusResponse, type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
 import { type ListTasksResponse, type Task, TaskService, type TaskStage } from "../contracts/tank/task/v1/task_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
-import { type GetBootstrapResponse, type Invite, type Member, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { type Draft, type GetBootstrapResponse, type Invite, type Member, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
 import { RealtimeClient, type RealtimeOptions, type WebSocketCtor } from "./realtime.js";
 import { type TankStorage } from "./storage.js";
@@ -253,6 +253,12 @@ export declare class TankClient {
      * workspace's admins, the agent itself); the returned run replaces the store's copy at once.
      */
     stopRun(runId: string, reason?: string): Promise<Run | undefined>;
+    /**
+     * Seeds the early-run indicator from a draft the app just loaded or saved (GetDraft / PutDraft):
+     * its tagged agents and any preparation the server has started for it. Call it with every draft
+     * response; a draft with nothing to report clears what the store held for that composer.
+     */
+    seedPreparationFromDraft(draft: Draft): void;
     /**
      * Fetch what the run has streamed so far and put it in the store under `key` (thread root id, else
      * channel id). Call it when a `stale` stream entry appears or a thread is opened mid-run. The server

@@ -5,7 +5,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { isTerminalRunState } from "../blocks/runTone.js";
 import { notificationPagingKey, } from "../client/store.js";
 import { effectiveView, readyToCheckCount } from "../client/tasks.js";
-import { PreferencesSchema, TopoPreferencesSchema } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { PreferencesSchema, PreparationState, TopoPreferencesSchema, } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { visibleMarkTypes } from "../topo/visibility.js";
 import { recentOwn } from "./history.js";
 export { noRecall, recallStep, recentOwn } from "./history.js";
@@ -503,6 +503,29 @@ export function useAgentStream(threadRootIdOrChannelId) {
 /** Every live `agent_status` frame in a channel (its threads included). */
 export function useAgentStatuses(channelId) {
     return useTankSelector(useCallback((s) => s.selectAgentStatuses(channelId), [channelId]));
+}
+const NO_AGENT_IDS = [];
+/**
+ * The composer's early-run indicator. Shows while a preparation is PREPARING; READY, EXPIRED and
+ * CANCELLED_* clear it. Flips to not preparing on its own when `expiresAt` passes.
+ */
+export function usePreparation(channelId, threadRootId) {
+    const { client } = useCtx();
+    const entry = useTankSelector(useCallback((s) => s.selectPreparation(channelId, threadRootId), [channelId, threadRootId]));
+    const live = entry?.state === PreparationState.PREPARING;
+    const expiresAt = entry?.expiresAt;
+    useEffect(() => {
+        if (!live || expiresAt === undefined)
+            return;
+        const timer = setTimeout(() => client.store.dispatch({ type: "preparation/expire", now: Date.now() }), Math.max(0, expiresAt - Date.now()));
+        return () => clearTimeout(timer);
+    }, [client, live, expiresAt]);
+    return useMemo(() => ({
+        state: entry?.state ?? PreparationState.UNSPECIFIED,
+        isPreparing: live && (expiresAt === undefined || expiresAt > Date.now()),
+        agentIds: entry?.agentIds ?? NO_AGENT_IDS,
+        expiresAt,
+    }), [entry, live, expiresAt]);
 }
 // ---------------------------------------------------------------- files
 /** A file the store knows about (from an upload or a `file.ready` event). */

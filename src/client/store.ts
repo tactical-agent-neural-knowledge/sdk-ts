@@ -39,6 +39,7 @@ import {
   type NotificationsRead,
   type PinChanged,
   type PreferencesUpdated,
+  type PreparationUpdate,
   type PresenceChanged,
   type ReactionAdded,
   type ReactionRemoved,
@@ -55,7 +56,13 @@ import type { Message, Reaction, ReadPosition } from "../contracts/tank/message/
 import { type Notification, NotificationSchema } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Task } from "../contracts/tank/task/v1/task_pb.js";
-import type { Entitlements, Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import {
+  type Draft,
+  type Entitlements,
+  type Member,
+  PreparationState,
+  type Workspace,
+} from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { uuidv7Time } from "./uuidv7.js";
 
 export type ConnectionState = "idle" | "connecting" | "open" | "ready" | "reconnecting" | "closed";
@@ -112,6 +119,25 @@ export interface AgentStreamEntry {
   stale: boolean;
 }
 
+/**
+ * The sandbox being prepared for a composer draft (one channel composer or one thread composer).
+ * `state` is the latest `PreparationState`; `expiresAt` (ms) is when an unused preparation gives
+ * its sandbox back, and `agentIds` are the agents the draft tags (`Draft.mentioned_agent_ids`).
+ */
+export interface PreparationEntry {
+  channelId: string;
+  threadRootId: string;
+  preparationId: string;
+  state: PreparationState;
+  agentIds: string[];
+  expiresAt: number | undefined;
+}
+
+/** Key for `TankState.preparationByThread`: one composer per (channel, thread root); an empty root is the channel composer. */
+export function preparationKey(channelId: string, threadRootId: string): string {
+  return `${channelId}|${threadRootId}`;
+}
+
 export interface TankState {
   me: Principal | undefined;
   workspaces: Record<string, Workspace>;
@@ -142,6 +168,8 @@ export interface TankState {
   agentStatusByThread: Record<string, AgentStatusEntry>;
   /** Live agent output keyed like `agentStatusByThread`: thread root id, else channel id. Ephemeral, never persisted. */
   agentStream: Record<string, AgentStreamEntry>;
+  /** Early-run "getting ready" state keyed by `preparationKey(channelId, threadRootId)`. */
+  preparationByThread: Record<string, PreparationEntry>;
   /** client_msg_id → outbox status. */
   pending: Record<string, PendingMessage>;
   connection: ConnectionState;
@@ -191,6 +219,7 @@ export function initialState(): TankState {
     agentStatus: {},
     agentStatusByThread: {},
     agentStream: {},
+    preparationByThread: {},
     pending: {},
     connection: "idle",
     cursors: {},
@@ -273,6 +302,12 @@ export type Action =
   /** Mark every entry stale (a reconnect lost frames): text is hidden until a tail arrives. */
   | { type: "agentStream/stale" }
   | { type: "agentStream/clear"; key: string }
+  /** A `preparation.updated` frame. PREPARING shows; READY, EXPIRED and CANCELLED_* clear the indicator. */
+  | { type: "preparation"; update: PreparationUpdate }
+  /** A saved draft (a PutDraft or GetDraft response): seeds its tagged agents and any live preparation. */
+  | { type: "preparation/seed"; draft: Draft }
+  /** Marks PREPARING entries whose `expiresAt` has passed as EXPIRED. */
+  | { type: "preparation/expire"; now: number }
   | { type: "notifications/upsert"; workspaceId: string; notifications: Notification[]; unreadCount?: number }
   /** A `NotificationCreated` event: builds the row (user = me) and bumps the unread count when it is new. */
   | { type: "notifications/created"; workspaceId: string; event: NotificationCreated; occurredAt?: Timestamp }
@@ -884,6 +919,56 @@ export function reduce(state: TankState, action: Action): TankState {
           [key]: { status: action.status, expiresAt: now + AGENT_STATUS_TTL_MS },
         },
       };
+    }
+    case "preparation": {
+      const u = action.update;
+      if (u.state === PreparationState.UNSPECIFIED) return state;
+      const key = preparationKey(u.channelId, u.threadRootId);
+      const cur = state.preparationByThread[key];
+      // Only PREPARING can start a preparation; a terminal frame for another one is stale.
+      if (!cur && u.state !== PreparationState.PREPARING) return state;
+      if (cur && cur.preparationId !== u.preparationId && u.state !== PreparationState.PREPARING)
+        return state;
+      const entry: PreparationEntry = {
+        channelId: u.channelId,
+        threadRootId: u.threadRootId,
+        preparationId: u.preparationId,
+        state: u.state,
+        agentIds: cur?.agentIds ?? [],
+        expiresAt: cur?.preparationId === u.preparationId ? cur.expiresAt : undefined,
+      };
+      return { ...state, preparationByThread: { ...state.preparationByThread, [key]: entry } };
+    }
+    case "preparation/seed": {
+      const d = action.draft;
+      const key = preparationKey(d.channelId, d.threadRootId);
+      const agentIds = [...d.mentionedAgentIds];
+      const idle = !d.preparationId && d.preparationState === PreparationState.UNSPECIFIED;
+      if (idle && agentIds.length === 0) {
+        if (!state.preparationByThread[key]) return state;
+        const preparationByThread = { ...state.preparationByThread };
+        delete preparationByThread[key];
+        return { ...state, preparationByThread };
+      }
+      const entry: PreparationEntry = {
+        channelId: d.channelId,
+        threadRootId: d.threadRootId,
+        preparationId: d.preparationId,
+        state: d.preparationState,
+        agentIds,
+        expiresAt: d.preparationExpiresAt ? tsMs(d.preparationExpiresAt) : undefined,
+      };
+      return { ...state, preparationByThread: { ...state.preparationByThread, [key]: entry } };
+    }
+    case "preparation/expire": {
+      let next: Record<string, PreparationEntry> | undefined;
+      for (const [key, e] of Object.entries(state.preparationByThread)) {
+        if (e.state !== PreparationState.PREPARING || e.expiresAt === undefined || e.expiresAt > action.now)
+          continue;
+        next ??= { ...state.preparationByThread };
+        next[key] = { ...e, state: PreparationState.EXPIRED };
+      }
+      return next ? { ...state, preparationByThread: next } : state;
     }
     case "agentStream": {
       const d = action.delta;
@@ -1659,6 +1744,10 @@ export class TankStore {
   /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
   selectAgentStream = (key: string): AgentStreamEntry | undefined => this.state.agentStream[key];
   selectAgentStatus = (key: string): AgentStatus | undefined => this.state.agentStatusByThread[key]?.status;
+
+  /** The early-run preparation for a composer (empty `threadRootId` = the channel composer), if the store has one. */
+  selectPreparation = (channelId: string, threadRootId: string): PreparationEntry | undefined =>
+    this.state.preparationByThread[preparationKey(channelId, threadRootId)];
 
   /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
   selectAgentStatuses = (channelId: string): AgentStatus[] => {

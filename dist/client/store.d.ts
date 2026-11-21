@@ -2,13 +2,13 @@ import { type Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Run } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Principal } from "../contracts/tank/auth/v1/auth_pb.js";
 import type { Channel, ChannelReadState, ThreadReadState } from "../contracts/tank/channel/v1/channel_pb.js";
-import { type AgentRunUpdated, type AgentStatus, type AgentStreamDelta, type AppCommand, type BoardChanged, type BoardObjectsChanged, type BookmarkChanged, type CanvasBlockChanged, type CanvasChanged, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelPreferenceUpdated, type ChannelUpdated, type DraftUpdated, type EmojiChanged, type Envelope, type FileDeleted, type FileReady, type HuddleEnded, type HuddleParticipantsChanged, type HuddleStarted, type MemberUpdated, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PinChanged, type PreferencesUpdated, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ScheduledMessageSent, type TaskChanged, type ThreadDeleted, type TopoMarkUpdated, type Typing, type UserGroupUpdated } from "../contracts/tank/events/v1/events_pb.js";
+import { type AgentRunUpdated, type AgentStatus, type AgentStreamDelta, type AppCommand, type BoardChanged, type BoardObjectsChanged, type BookmarkChanged, type CanvasBlockChanged, type CanvasChanged, type CardAction, type ChannelDeleted, type ChannelMembershipChanged, type ChannelPreferenceUpdated, type ChannelUpdated, type DraftUpdated, type EmojiChanged, type Envelope, type FileDeleted, type FileReady, type HuddleEnded, type HuddleParticipantsChanged, type HuddleStarted, type MemberUpdated, type MessageCreated, type MessageDeleted, type MessageEphemeral, type MessageUpdated, type MonitorWidgetUpdated, type NotificationCreated, type NotificationsRead, type PinChanged, type PreferencesUpdated, type PreparationUpdate, type PresenceChanged, type ReactionAdded, type ReactionRemoved, type ReadStateUpdated, type ScheduledMessageSent, type TaskChanged, type ThreadDeleted, type TopoMarkUpdated, type Typing, type UserGroupUpdated } from "../contracts/tank/events/v1/events_pb.js";
 import type { File } from "../contracts/tank/files/v1/files_pb.js";
 import type { Message, ReadPosition } from "../contracts/tank/message/v1/message_pb.js";
 import { type Notification } from "../contracts/tank/notification/v1/notification_pb.js";
 import type { Presence } from "../contracts/tank/presence/v1/presence_pb.js";
 import type { Task } from "../contracts/tank/task/v1/task_pb.js";
-import type { Entitlements, Member, Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
+import { type Draft, type Entitlements, type Member, PreparationState, type Workspace } from "../contracts/tank/workspace/v1/workspace_pb.js";
 export type ConnectionState = "idle" | "connecting" | "open" | "ready" | "reconnecting" | "closed";
 export interface PendingMessage {
     clientMsgId: string;
@@ -56,6 +56,21 @@ export interface AgentStreamEntry {
      */
     stale: boolean;
 }
+/**
+ * The sandbox being prepared for a composer draft (one channel composer or one thread composer).
+ * `state` is the latest `PreparationState`; `expiresAt` (ms) is when an unused preparation gives
+ * its sandbox back, and `agentIds` are the agents the draft tags (`Draft.mentioned_agent_ids`).
+ */
+export interface PreparationEntry {
+    channelId: string;
+    threadRootId: string;
+    preparationId: string;
+    state: PreparationState;
+    agentIds: string[];
+    expiresAt: number | undefined;
+}
+/** Key for `TankState.preparationByThread`: one composer per (channel, thread root); an empty root is the channel composer. */
+export declare function preparationKey(channelId: string, threadRootId: string): string;
 export interface TankState {
     me: Principal | undefined;
     workspaces: Record<string, Workspace>;
@@ -86,6 +101,8 @@ export interface TankState {
     agentStatusByThread: Record<string, AgentStatusEntry>;
     /** Live agent output keyed like `agentStatusByThread`: thread root id, else channel id. Ephemeral, never persisted. */
     agentStream: Record<string, AgentStreamEntry>;
+    /** Early-run "getting ready" state keyed by `preparationKey(channelId, threadRootId)`. */
+    preparationByThread: Record<string, PreparationEntry>;
     /** client_msg_id → outbox status. */
     pending: Record<string, PendingMessage>;
     connection: ConnectionState;
@@ -258,6 +275,21 @@ export type Action = {
 } | {
     type: "agentStream/clear";
     key: string;
+}
+/** A `preparation.updated` frame. PREPARING shows; READY, EXPIRED and CANCELLED_* clear the indicator. */
+ | {
+    type: "preparation";
+    update: PreparationUpdate;
+}
+/** A saved draft (a PutDraft or GetDraft response): seeds its tagged agents and any live preparation. */
+ | {
+    type: "preparation/seed";
+    draft: Draft;
+}
+/** Marks PREPARING entries whose `expiresAt` has passed as EXPIRED. */
+ | {
+    type: "preparation/expire";
+    now: number;
 } | {
     type: "notifications/upsert";
     workspaceId: string;
@@ -446,6 +478,8 @@ export declare class TankStore {
     /** The live `agent_status` frame for a thread root id (or a channel id, for channel-level frames). */
     selectAgentStream: (key: string) => AgentStreamEntry | undefined;
     selectAgentStatus: (key: string) => AgentStatus | undefined;
+    /** The early-run preparation for a composer (empty `threadRootId` = the channel composer), if the store has one. */
+    selectPreparation: (channelId: string, threadRootId: string) => PreparationEntry | undefined;
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */
     selectAgentStatuses: (channelId: string) => AgentStatus[];
     /** The `File`s a message references that the store knows about (from uploads and `file.ready`). */
