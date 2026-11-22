@@ -10,7 +10,7 @@ export const LIMITS = {
     textElement: 3000,
     contextElements: 10,
     buttons: 10,
-    buttonText: 75,
+    buttonText: 300,
     buttonValue: 2000,
     url: 3000,
     planSummary: 3000,

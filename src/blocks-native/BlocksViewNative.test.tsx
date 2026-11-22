@@ -96,6 +96,25 @@ describe("interactions", () => {
     expect(seen).toEqual([{ blockId: "act", actionId: "go", value: "v1" }]);
   });
 
+  it("a long option label is drawn in full and may wrap, never cut to one line", () => {
+    const long =
+      "Standby pod: start a generic runner pod from the draft, then hand it the run when it is sent";
+    const seen: unknown[] = [];
+    const r = render(
+      <BlocksViewNative
+        blocks={normalizeBlocks(blocks(actions([{ actionId: "opt-1", text: long, value: long }], "q")))}
+        onAction={(a) => seen.push(a)}
+      />,
+    );
+    const button = byTestId(r.root, "action-opt-1");
+    expect(textOf(button)).toBe(long);
+    expect(
+      r.root.findAll((n) => n.props.numberOfLines !== undefined && textOf(n).includes("Standby")).length,
+    ).toBe(0);
+    press(button);
+    expect(seen).toEqual([{ blockId: "q", actionId: "opt-1", value: long }]);
+  });
+
   it("approval prompts fire approve/reject with the gate id", () => {
     const seen: unknown[] = [];
     const r = render(<BlocksViewNative blocks={load("approval")} onAction={(a) => seen.push(a)} />);

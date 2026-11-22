@@ -77,6 +77,19 @@ describe("interactions", () => {
     expect(seen).toEqual([{ blockId: "act", actionId: "go", value: "v1" }]);
   });
 
+  it("a long option label is drawn in full on a button that may wrap", () => {
+    const long =
+      "Standby pod: start a generic runner pod from the draft, then hand it the run when it is sent";
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView blocks={normalizeBlocks(blocks(actions([{ actionId: "opt-1", text: long }], "q")))} />
+      </ThemeProvider>,
+    );
+    const button = screen.getByRole("button", { name: long });
+    expect(button.textContent).toBe(long);
+    expect(getComputedStyle(button).whiteSpace).not.toBe("nowrap");
+  });
+
   it("approval prompts fire approve/reject with the gate id; decided ones show the decision", () => {
     const seen: unknown[] = [];
     render(
