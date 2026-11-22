@@ -1,7 +1,7 @@
 export { applyReaction, isCustomEmoji, QUICK_REACTIONS, reacted } from "./aiReactions.js";
 export { applyReceiptsChanged, clearReceipts, deliveriesToAck, MAX_DELIVERED, messageTime, RECEIPTS_COPY, type ReceiptPerson, receiptPeople, type Ticks, type TimeFormat, ticksLabel, ticksOf, timestampDate, } from "./aiReceipts.js";
 export { Backoff, type BackoffOptions } from "./backoff.js";
-export { type CreateChannelInput, type CreateTaskInput, createTankClient, type ListRunsInput, type ListTasksInput, type LoadChannelOptions, type LoadNotificationsInput, type LoadNotificationsResult, type NotifyPick, type RoleName, type SendMessageInput, type SetGoalInput, type SetStatusInput, TankClient, type TankClientEvents, type TankClientOptions, type UpdateMessageInput, type UploadFileOptions, } from "./client.js";
+export { type CreateChannelInput, type CreateTaskInput, createTankClient, type ListRunsInput, type ListTasksInput, type LoadChannelOptions, type LoadNotificationsInput, type LoadNotificationsResult, type NotifyPick, type RoleName, type SendMessageInput, type SetGoalInput, type SetStatusInput, TankClient, type TankClientEvents, type TankClientOptions, type ThreadLiveStreamInput, type UpdateMessageInput, type UploadFileOptions, } from "./client.js";
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
 export { Emitter, type Handler } from "./emitter.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
@@ -13,7 +13,7 @@ export { expandShortcodes } from "./shortcodes.js";
 export { NEURAL_STARTERS, type PickStartersOptions, pickStarters, type Starter, type StarterNeed, } from "./starters.js";
 export { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";
 export { IndexedDbStorage, type IndexedDbStorageOptions } from "./storage-idb.js";
-export { type Action, AGENT_STATUS_TTL_MS, type AgentStatusEntry, type AgentStreamEntry, type ChannelPaging, type ConnectionState, type EventPayload, envelopeToActions, initialState, type KnownEventPayload, type Listener, type NotificationMode, type NotificationPaging, notificationPagingKey, type PendingMessage, type ReadReceipt, readReceipt, reduce, type TankState, TankStore, type ThreadView, TYPING_TTL_MS, tsMs, typingKey, type UnknownEventPayload, type Unreads, unpackEnvelope, } from "./store.js";
+export { type Action, AGENT_STATUS_TTL_MS, type AgentStatusEntry, type AgentStreamEntry, type ChannelPaging, type ConnectionState, type EventPayload, envelopeToActions, initialState, type KnownEventPayload, type Listener, type NotificationMode, type NotificationPaging, notificationPagingKey, type PendingMessage, type ReadReceipt, readReceipt, reduce, type TankState, TankStore, type ThreadView, TYPING_TTL_MS, threadLiveStreamKey, tsMs, typingKey, type UnknownEventPayload, type Unreads, unpackEnvelope, } from "./store.js";
 export { canCancelTask, commandTasks, DONE_ALL, DONE_RANGE_PRESETS, DONE_WINDOW_MS, type DoneRange, doneAt, doneRangeBounds, effectiveView, filterDone, isAgentInternal, isAllDone, localDateKey, notifyFor, ownNotify, readyToCheckCount, SEND_NOTE_MAX, searchTasks, simpleConversation, sortTasks, TASK_SORTS, TASK_STAGES, type TaskFilter, type TaskSort, taskForThread, taskSendCandidates, taskStageKey, tasksByStage, } from "./tasks.js";
 export { createTankTransport, type TankAuth, type TransportOptions } from "./transport.js";
 export { type NativeFileInput, type PutOptions, putUpload, UploadError, type UploadInput, type XhrCtor, type XhrLike, } from "./upload.js";

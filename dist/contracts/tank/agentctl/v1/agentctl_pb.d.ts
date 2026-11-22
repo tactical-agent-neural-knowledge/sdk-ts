@@ -10,6 +10,7 @@ import type { Guardrail, GuardrailKind, GuardrailScope, Rating, Verdict } from "
 import type { CreateConnectionRequest, CreateConnectionResponse, CreateRelayRequest, CreateRelayResponse, DeleteConnectionRequest, DeleteConnectionResponse, DeleteRunbookRequest, DeleteRunbookResponse, GetConnectionRequest, GetConnectionResponse, GetSetupGuideRequest, GetSetupGuideResponse, ListConnectionsRequest, ListConnectionsResponse, ListRelaysRequest, ListRelaysResponse, ListRunbooksRequest as ListRunbooksRequest$1, ListRunbooksResponse as ListRunbooksResponse$1, ListUsesRequest, ListUsesResponse, ListWorkflowCandidatesRequest, ListWorkflowCandidatesResponse, Provider, PutRunbookRequest, PutRunbookResponse, RevokeRelayRequest, RevokeRelayResponse, Runbook, TestConnectionRequest, TestConnectionResponse, UpdateConnectionRequest, UpdateConnectionResponse } from "../../infra/v1/infra_pb.js";
 import type { ApiKey, GetApiUsageResponse } from "../../neural/v1/neural_pb.js";
 import type { Account, Platform, Post } from "../../social/v1/social_pb.js";
+import type { PreparationState } from "../../workspace/v1/workspace_pb.js";
 import type { JsonObject, Message } from "@bufbuild/protobuf";
 /**
  * Describes the file tank/agentctl/v1/agentctl.proto.
@@ -147,6 +148,14 @@ export type PolicySummary = Message<"tank.agentctl.v1.PolicySummary"> & {
      * @generated from field: repeated string tools_gate_destructive = 9;
      */
     toolsGateDestructive: string[];
+    /**
+     * True for a run of a pinned agent (@neural): default_model is the only model the run may
+     * use. The runner refuses any other model, including subagent_model, never escalates or
+     * falls back, and records the resolved model in the run record.
+     *
+     * @generated from field: bool model_locked = 10;
+     */
+    modelLocked: boolean;
 };
 /**
  * Describes the message tank.agentctl.v1.PolicySummary.
@@ -443,6 +452,15 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: repeated tank.agentctl.v1.TestLoginBrief test_logins = 41;
      */
     testLogins: TestLoginBrief[];
+    /**
+     * True for a run started by PrepareRun that no message has adopted yet: `instructions`
+     * is empty, the sandbox is up, and the runner does its setup (clone, tools) and then
+     * calls AwaitStart instead of beginning work. The run's token is the same one every run
+     * gets; adoption changes nothing about who holds it.
+     *
+     * @generated from field: bool standby = 42;
+     */
+    standby: boolean;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
@@ -4299,6 +4317,47 @@ export type PollInboxResponse = Message<"tank.agentctl.v1.PollInboxResponse"> & 
  */
 export declare const PollInboxResponseSchema: GenMessage<PollInboxResponse>;
 /**
+ * Long-poll for a standby run (RunContext.standby): returns when the run is adopted by
+ * StartRun, cancelled or expired, or after wait_ms with state still PREPARING so the
+ * runner asks again. When adopted, `context` is the run's full RunContext with
+ * `instructions` filled in and `standby` false, and the runner carries on exactly as if
+ * it had started with it.
+ *
+ * @generated from message tank.agentctl.v1.AwaitStartRequest
+ */
+export type AwaitStartRequest = Message<"tank.agentctl.v1.AwaitStartRequest"> & {
+    /**
+     * @generated from field: int32 wait_ms = 1;
+     */
+    waitMs: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.AwaitStartRequest.
+ * Use `create(AwaitStartRequestSchema)` to create a new message.
+ */
+export declare const AwaitStartRequestSchema: GenMessage<AwaitStartRequest>;
+/**
+ * @generated from message tank.agentctl.v1.AwaitStartResponse
+ */
+export type AwaitStartResponse = Message<"tank.agentctl.v1.AwaitStartResponse"> & {
+    /**
+     * PREPARING: nothing yet, ask again. READY: adopted, `context` is set. EXPIRED or any
+     * CANCELLED_* value: the run is over and the runner exits cleanly.
+     *
+     * @generated from field: tank.workspace.v1.PreparationState state = 1;
+     */
+    state: PreparationState;
+    /**
+     * @generated from field: tank.agentctl.v1.RunContext context = 2;
+     */
+    context?: RunContext;
+};
+/**
+ * Describes the message tank.agentctl.v1.AwaitStartResponse.
+ * Use `create(AwaitStartResponseSchema)` to create a new message.
+ */
+export declare const AwaitStartResponseSchema: GenMessage<AwaitStartResponse>;
+/**
  * @generated from message tank.agentctl.v1.StartRunRequest
  */
 export type StartRunRequest = Message<"tank.agentctl.v1.StartRunRequest"> & {
@@ -4371,6 +4430,17 @@ export type StartRunRequest = Message<"tank.agentctl.v1.StartRunRequest"> & {
      * @generated from field: string note = 13;
      */
     note: string;
+    /**
+     * The preparation (PrepareRun) whose standby run this message takes over. The control
+     * plane adopts that run instead of creating one: the run keeps its id and its warm
+     * sandbox, `instructions` and the rest of this request fill in what was unknown while
+     * the person was still typing, and Run.prepared is true. If the preparation has expired,
+     * been cancelled or belongs to a different agent or thread, it is ignored and the run
+     * starts cold; a stale preparation_id is never an error.
+     *
+     * @generated from field: string preparation_id = 14;
+     */
+    preparationId: string;
 };
 /**
  * Describes the message tank.agentctl.v1.StartRunRequest.
@@ -4385,12 +4455,124 @@ export type StartRunResponse = Message<"tank.agentctl.v1.StartRunResponse"> & {
      * @generated from field: tank.agent.v1.Run run = 1;
      */
     run?: Run;
+    /**
+     * The thread message posted the moment the run row exists, before the talker or planning.
+     * Empty when the run did not post one (a Neural Knowledge refresh, a team shift).
+     *
+     * @generated from field: string ack_message_id = 2;
+     */
+    ackMessageId: string;
 };
 /**
  * Describes the message tank.agentctl.v1.StartRunResponse.
  * Use `create(StartRunResponseSchema)` to create a new message.
  */
 export declare const StartRunResponseSchema: GenMessage<StartRunResponse>;
+/**
+ * PrepareRun starts a standby run for a draft that tags an agent: the real run row, its
+ * sandbox provisioned and set up, doing nothing until StartRun adopts it. Called by the
+ * api from PutDraft, never by a client. Idempotent per (workspace, channel, thread, agent,
+ * requested_by): a second call while one is live returns it and extends its expiry.
+ * Refused with no preparation when the run could not start anyway (free plan for a
+ * premium-only agent, out of funds, no repository bound): the draft then shows no
+ * preparation and the person's send takes the ordinary path with its ordinary refusal.
+ *
+ * @generated from message tank.agentctl.v1.PrepareRunRequest
+ */
+export type PrepareRunRequest = Message<"tank.agentctl.v1.PrepareRunRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * empty for a draft that starts a new thread
+     *
+     * @generated from field: string thread_root_id = 3;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string agent_id = 4;
+     */
+    agentId: string;
+    /**
+     * @generated from field: string requested_by = 5;
+     */
+    requestedBy: string;
+    /**
+     * How long an unused preparation lives; 0 takes the server default (a few minutes).
+     * The control plane caps it.
+     *
+     * @generated from field: int32 ttl_seconds = 6;
+     */
+    ttlSeconds: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.PrepareRunRequest.
+ * Use `create(PrepareRunRequestSchema)` to create a new message.
+ */
+export declare const PrepareRunRequestSchema: GenMessage<PrepareRunRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PrepareRunResponse
+ */
+export type PrepareRunResponse = Message<"tank.agentctl.v1.PrepareRunResponse"> & {
+    /**
+     * @generated from field: string preparation_id = 1;
+     */
+    preparationId: string;
+    /**
+     * @generated from field: tank.workspace.v1.PreparationState state = 2;
+     */
+    state: PreparationState;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 3;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agentctl.v1.PrepareRunResponse.
+ * Use `create(PrepareRunResponseSchema)` to create a new message.
+ */
+export declare const PrepareRunResponseSchema: GenMessage<PrepareRunResponse>;
+/**
+ * CancelPreparation gives a standby run's sandbox back. `reason` is one of the
+ * CANCELLED_* states (CANCELLED when unsure). Idempotent: an unknown, finished or already
+ * adopted preparation answers with its current state and changes nothing.
+ *
+ * @generated from message tank.agentctl.v1.CancelPreparationRequest
+ */
+export type CancelPreparationRequest = Message<"tank.agentctl.v1.CancelPreparationRequest"> & {
+    /**
+     * @generated from field: string preparation_id = 1;
+     */
+    preparationId: string;
+    /**
+     * @generated from field: tank.workspace.v1.PreparationState reason = 2;
+     */
+    reason: PreparationState;
+};
+/**
+ * Describes the message tank.agentctl.v1.CancelPreparationRequest.
+ * Use `create(CancelPreparationRequestSchema)` to create a new message.
+ */
+export declare const CancelPreparationRequestSchema: GenMessage<CancelPreparationRequest>;
+/**
+ * @generated from message tank.agentctl.v1.CancelPreparationResponse
+ */
+export type CancelPreparationResponse = Message<"tank.agentctl.v1.CancelPreparationResponse"> & {
+    /**
+     * @generated from field: tank.workspace.v1.PreparationState state = 1;
+     */
+    state: PreparationState;
+};
+/**
+ * Describes the message tank.agentctl.v1.CancelPreparationResponse.
+ * Use `create(CancelPreparationResponseSchema)` to create a new message.
+ */
+export declare const CancelPreparationResponseSchema: GenMessage<CancelPreparationResponse>;
 /**
  * @generated from message tank.agentctl.v1.GetRunRequest
  */
@@ -8566,7 +8748,8 @@ export declare const RunPhaseSchema: GenEnum<RunPhase>;
 /**
  * What the control plane forwards to people from a runner's event stream: only
  * ASSISTANT_DELTA and STATUS (the planning phase included) become
- * tank.events.v1.AgentStreamDelta, and only to users whose live_agent_stream is on.
+ * tank.events.v1.AgentStreamDelta, and only to users whose live output setting for that
+ * thread (channel_id plus thread_root_id) is on.
  * Tool input and output (TOOL_CALL, TOOL_RESULT, PERMISSION_REQUEST), usage, results and
  * log lines are never forwarded as stream deltas.
  *
@@ -8668,6 +8851,14 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof GetRunContextRequestSchema;
         output: typeof GetRunContextResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.AwaitStart
+     */
+    awaitStart: {
+        methodKind: "unary";
+        input: typeof AwaitStartRequestSchema;
+        output: typeof AwaitStartResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.RunnerService.GetGitCredential
@@ -9580,6 +9771,22 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof StartRunRequestSchema;
         output: typeof StartRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.PrepareRun
+     */
+    prepareRun: {
+        methodKind: "unary";
+        input: typeof PrepareRunRequestSchema;
+        output: typeof PrepareRunResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.CancelPreparation
+     */
+    cancelPreparation: {
+        methodKind: "unary";
+        input: typeof CancelPreparationRequestSchema;
+        output: typeof CancelPreparationResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.OpenThread

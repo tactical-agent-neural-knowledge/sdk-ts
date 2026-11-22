@@ -32,6 +32,7 @@ export {
   TankClient,
   type TankClientEvents,
   type TankClientOptions,
+  type ThreadLiveStreamInput,
   type UpdateMessageInput,
   type UploadFileOptions,
 } from "./client.js";
@@ -84,6 +85,7 @@ export {
   TankStore,
   type ThreadView,
   TYPING_TTL_MS,
+  threadLiveStreamKey,
   tsMs,
   typingKey,
   type UnknownEventPayload,

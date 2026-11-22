@@ -500,6 +500,14 @@ export function useAgentStatus(threadRootIdOrChannelId) {
 export function useAgentStream(threadRootIdOrChannelId) {
     return useTankSelector(useCallback((s) => s.selectAgentStream(threadRootIdOrChannelId), [threadRootIdOrChannelId]));
 }
+/** The live-output toggle for one thread (channel id plus thread root id), synced across the person's devices. */
+export function useThreadLiveStream(channelId, threadRootId) {
+    const client = useTank();
+    const enabled = useTankSelector(useCallback((s) => s.selectThreadLiveStream(channelId, threadRootId), [channelId, threadRootId]));
+    const workspaceId = useChannel(channelId)?.workspaceId ?? "";
+    const setEnabled = useCallback((next) => client.setThreadLiveStream({ workspaceId, channelId, threadRootId, enabled: next }), [client, workspaceId, channelId, threadRootId]);
+    return { enabled, setEnabled };
+}
 /** Every live `agent_status` frame in a channel (its threads included). */
 export function useAgentStatuses(channelId) {
     return useTankSelector(useCallback((s) => s.selectAgentStatuses(channelId), [channelId]));

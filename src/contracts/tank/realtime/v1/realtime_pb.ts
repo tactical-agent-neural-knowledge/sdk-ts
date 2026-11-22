@@ -575,7 +575,8 @@ export type ServerFrame = Message<"tank.realtime.v1.ServerFrame"> & {
   } | {
     /**
      * Live agent output. Sent only for threads the connection is subscribed to, and only
-     * to a user whose Preferences.live_agent_stream is on. The same frame on every
+     * to a user whose live output setting for that thread (channel_id plus thread_root_id,
+     * ThreadLiveStream) is on. The same frame on every
      * client. Resume does not replay it: after a reconnect, drop partial text and wait
      * for the stored message (GetRunStreamTail shows what was said so far).
      *

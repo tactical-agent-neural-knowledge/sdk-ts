@@ -41,6 +41,38 @@ export type Agent = Message<"tank.agent.v1.Agent"> & {
      * @generated from field: string skill = 7;
      */
     skill: string;
+    /**
+     * Which kind of principal this is. A client draws and gates an agent from this, never
+     * from its name or handle.
+     *
+     * @generated from field: tank.agent.v1.AgentKind kind = 8;
+     */
+    kind: AgentKind;
+    /**
+     * The one model this agent runs on, when model_pinned is set (e.g. "tank-neural-1").
+     * Empty for an agent that uses the Tread's policy ladder.
+     *
+     * @generated from field: string model = 9;
+     */
+    model: string;
+    /**
+     * True means the model above is the only model the agent may use: no ladder, no
+     * default-model routing, no escalation to a stronger model, no subagent model and no
+     * fallback when it is not being served (the run is refused with
+     * RUN_REFUSAL_REASON_MODEL_UNAVAILABLE). TreadSettings.model and TreadSettings.strongest_model
+     * are ignored for a pinned agent; the pin is never overridable by Tread or workspace settings.
+     *
+     * @generated from field: bool model_pinned = 10;
+     */
+    modelPinned: boolean;
+    /**
+     * The lowest plan that may run this agent: "" for any plan, "premium" for premium only.
+     * StartRun checks it server-side; a free workspace is refused with
+     * RUN_REFUSAL_REASON_PREMIUM_ONLY_AGENT and no trial run is spent.
+     *
+     * @generated from field: string min_plan = 11;
+     */
+    minPlan: string;
 };
 /**
  * Describes the message tank.agent.v1.Agent.
@@ -2489,6 +2521,46 @@ export declare enum RunState {
  */
 export declare const RunStateSchema: GenEnum<RunState>;
 /**
+ * What an agent principal is. @neural is the agent of kind AGENT_KIND_NEURAL: it resolves to
+ * that principal in any Tread of a workspace that has it, whatever the workspace's Crew or
+ * Ops handles are. It is the same on web, desktop and mobile: it appears in the mention
+ * picker when workspace.v1.Entitlements.neural_agent is true, is shown as the Neural agent
+ * with its pinned model name, and a refusal renders the same typed message and button on
+ * every surface.
+ *
+ * @generated from enum tank.agent.v1.AgentKind
+ */
+export declare enum AgentKind {
+    /**
+     * the workspace agent, or a client that predates this field
+     *
+     * @generated from enum value: AGENT_KIND_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * the workspace's own agent (@tank)
+     *
+     * @generated from enum value: AGENT_KIND_WORKSPACE = 1;
+     */
+    WORKSPACE = 1,
+    /**
+     * a Crew member (tank.crew.v1)
+     *
+     * @generated from enum value: AGENT_KIND_CREW = 2;
+     */
+    CREW = 2,
+    /**
+     * the built-in Neural agent: premium, pinned to the Neural model
+     *
+     * @generated from enum value: AGENT_KIND_NEURAL = 3;
+     */
+    NEURAL = 3
+}
+/**
+ * Describes the enum tank.agent.v1.AgentKind.
+ */
+export declare const AgentKindSchema: GenEnum<AgentKind>;
+/**
  * @generated from enum tank.agent.v1.RunRefusalReason
  */
 export declare enum RunRefusalReason {
@@ -2507,7 +2579,23 @@ export declare enum RunRefusalReason {
      *
      * @generated from enum value: RUN_REFUSAL_REASON_OUT_OF_FUNDS = 2;
      */
-    OUT_OF_FUNDS = 2
+    OUT_OF_FUNDS = 2,
+    /**
+     * A free workspace mentioned an agent whose min_plan is "premium" (@neural). The action is
+     * UPGRADE, the same button as FREE_PLAN, and no free trial run is spent on it. StartRun
+     * checks min_plan server-side. Out-of-funds and low-funds behaviour is unchanged: a premium
+     * workspace with no agent time left is refused with OUT_OF_FUNDS as for any agent.
+     *
+     * @generated from enum value: RUN_REFUSAL_REASON_PREMIUM_ONLY_AGENT = 3;
+     */
+    PREMIUM_ONLY_AGENT = 3,
+    /**
+     * The agent is pinned to a model that is not being served right now. The run is refused with
+     * no action; it never falls back to another model.
+     *
+     * @generated from enum value: RUN_REFUSAL_REASON_MODEL_UNAVAILABLE = 4;
+     */
+    MODEL_UNAVAILABLE = 4
 }
 /**
  * Describes the enum tank.agent.v1.RunRefusalReason.
@@ -2540,12 +2628,13 @@ export declare enum RunRefusalAction {
 export declare const RunRefusalActionSchema: GenEnum<RunRefusalAction>;
 /**
  * The live output of a run so far, for a person who opens the thread or turns
- * Preferences.live_agent_stream on mid-run, on any device. Same assistant text and
+ * the live output setting for that thread (ThreadLiveStream) on mid-run, on any device. Same assistant text and
  * status only as AgentStreamDelta, never tool input or output. The control plane keeps a
  * bounded in-memory tail while the run is live; a finished run has an empty tail and
  * the stored message is the record.
  * One piece of a run's live output, handed to the api by the control plane (called with the
- * run's own token) to fan out as AgentStreamDelta and to fold into GetRunStreamTail. Only
+ * run's own token) to fan out as AgentStreamDelta, only to users whose setting for the run's
+ * thread (channel_id plus thread_root_id) is on, and to fold into GetRunStreamTail. Only
  * assistant text and status lines are ever sent; tool input and output never are. The
  * control plane has already scrubbed the text. Best effort: the api may drop what it
  * cannot place, and a run that has ended is not an error.
