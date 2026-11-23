@@ -1,4 +1,4 @@
-# Neural Knowledge by TANK · refreshed 2026-11-16 · ad2838acc55d
+# Neural Knowledge by TANK · refreshed 2026-11-23 · 5a19bf7e597e
 
 sdk-ts is the TypeScript SDK package `@tactical-agent-neural-knowledge/sdk`, built with `tsc` into a committed `dist/`. It ships the Connect client, the realtime gateway client, a normalized store, React hooks, design tokens, and block renderers for web (MUI) and native (react-native-paper). Consumers `web`, `mobile` and `agent-runner` install it as a git dependency pinned to a commit sha, so a green `main` commit is the release.
 
@@ -14,7 +14,7 @@ sdk-ts is the TypeScript SDK package `@tactical-agent-neural-knowledge/sdk`, bui
 - `UPDATE_FIXTURES=1 pnpm test` (regenerate block goldens after editing `src/test/fixture-defs.ts`)
 - `pnpm vitest run -u src/blocks-web` (renderer snapshots; only for a deliberate visual change)
 - `pnpm sync-contracts <contracts-sha>`
-- Scripts come from `package.json`; the refresh that wrote this file could not run them because its sandbox could not reach the npm registry.
+- Scripts come from `package.json`; the refresh that wrote this file could not run them because the sandbox could not fetch pnpm.
 
 ## Areas
 - `.` package root: exports, build and CI config; read `.neural/neurons/root.md`
@@ -39,7 +39,6 @@ sdk-ts is the TypeScript SDK package `@tactical-agent-neural-knowledge/sdk`, bui
 - Do not add a non-optional peer that the client subpath would drag into node or mobile (`CLAUDE.md`).
 - Message bodies live only in the store; do not log `text` anywhere (`CLAUDE.md`).
 - Biome, not ESLint and Prettier; Vitest, not Jest (`CLAUDE.md`).
-- Guardrail 380454556067254325: a feature or bug fix must have parity across Android and iOS, Firefox, Safari and Chrome, and macOS, Linux and Windows, or be implemented in the same task.
 - A pull request never changes workflow files, anything under `.github/`, or `kit/` (platform guardrail).
 
 ## Before changing anything
