@@ -1,7 +1,7 @@
 {
   "generated_by": "TANK Neural Knowledge",
-  "commit": "ad2838acc55d996abd8cd9cc4a7dde819f9645c9",
-  "refreshed_at": "2026-11-16T00:45:55.317Z",
+  "commit": "5a19bf7e597eb3cf0b7e0ee47a8926854ab21d77",
+  "refreshed_at": "2026-11-23T00:22:17.722Z",
   "areas": {
     ".": {
       "neurons": ".neural/neurons/root.md",
@@ -58,12 +58,12 @@
     "src/blocks": {
       "neurons": ".neural/neurons/src-blocks.md",
       "hot": [
-        "src/blocks/blocks.test.ts",
-        "src/blocks/builders.ts",
-        "src/blocks/index.ts",
         "src/blocks/normalize.ts",
+        "src/blocks/blocks.test.ts",
         "src/blocks/richtext.ts",
-        "src/blocks/runTone.test.ts"
+        "src/blocks/runTone.test.ts",
+        "src/blocks/runTone.ts",
+        "src/blocks/builders.ts"
       ],
       "files": [
         "src/blocks/blocks.test.ts",
@@ -85,10 +85,10 @@
       "hot": [
         "src/blocks-native/BlocksViewNative.test.tsx",
         "src/blocks-native/RichTextViewNative.tsx",
+        "src/blocks-native/__snapshots__/BlocksViewNative.test.tsx.snap",
         "src/blocks-native/blocks.tsx",
         "src/blocks-native/RichTextViewNative.test.tsx",
-        "src/blocks-native/__snapshots__/BlocksViewNative.test.tsx.snap",
-        "src/blocks-native/context.ts"
+        "src/blocks-native/BlocksViewNative.tsx"
       ],
       "files": [
         "src/blocks-native/BlocksViewNative.test.tsx",
@@ -106,10 +106,10 @@
       "neurons": ".neural/neurons/src-blocks-web.md",
       "hot": [
         "src/blocks-web/BlocksView.test.tsx",
-        "src/blocks-web/blocks.tsx",
-        "src/blocks-web/BlocksView.tsx",
         "src/blocks-web/RichTextView.test.tsx",
         "src/blocks-web/RichTextView.tsx",
+        "src/blocks-web/blocks.tsx",
+        "src/blocks-web/BlocksView.tsx",
         "src/blocks-web/Mark.tsx"
       ],
       "files": [
@@ -127,12 +127,12 @@
     "src/client": {
       "neurons": ".neural/neurons/src-client.md",
       "hot": [
-        "src/client/index.ts",
         "src/client/client.ts",
+        "src/client/index.ts",
         "src/client/store.ts",
-        "src/client/client.test.ts",
         "src/client/tasks.test.ts",
-        "src/client/models.ts"
+        "src/client/tasks.ts",
+        "src/client/store-notifications-runs-files.test.ts"
       ],
       "files": [
         "src/client/aiReactions.test.ts",
@@ -171,6 +171,7 @@
         "src/client/store.ts",
         "src/client/tasks.test.ts",
         "src/client/tasks.ts",
+        "src/client/thread-live-stream.test.ts",
         "src/client/transport.test.ts",
         "src/client/transport.ts",
         "src/client/upload.ts",
@@ -212,6 +213,7 @@
         "src/contracts/crew.ts",
         "src/contracts/devices.ts",
         "src/contracts/environment.ts",
+        "src/contracts/envvars.ts",
         "src/contracts/events.ts",
         "src/contracts/files.ts",
         "src/contracts/guardrails.ts",
@@ -230,6 +232,7 @@
         "src/contracts/richtext.ts",
         "src/contracts/search.ts",
         "src/contracts/security.ts",
+        "src/contracts/site.ts",
         "src/contracts/social.ts",
         "src/contracts/tank/access/v1/access_pb.ts",
         "src/contracts/tank/admin/v1/admin_pb.ts",
@@ -248,9 +251,7 @@
         "src/contracts/tank/catalog/v1/catalog_pb.ts",
         "src/contracts/tank/channel/v1/channel_pb.ts",
         "src/contracts/tank/command/v1/command_pb.ts",
-        "src/contracts/tank/crew/v1/crew_pb.ts",
-        "src/contracts/tank/devices/v1/devices_pb.ts",
-        "src/contracts/tank/environment/v1/environment_pb.ts"
+        "src/contracts/tank/crew/v1/crew_pb.ts"
       ]
     },
     "src/design": {
