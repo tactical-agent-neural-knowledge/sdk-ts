@@ -55,6 +55,7 @@ import {
 } from "../contracts/tank/task/v1/task_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import {
+  type Draft,
   type GetBootstrapResponse,
   GetBootstrapResponseSchema,
   type Invite,
@@ -413,6 +414,7 @@ export class TankClient {
       const now = this.now();
       this.store.dispatch({ type: "typing/expire", now });
       this.store.dispatch({ type: "agentStatus/expire", now });
+      this.store.dispatch({ type: "preparation/expire", now });
     }, 1_000);
     this.unsubscribers.push(this.store.subscribe(() => this.schedulePersist()));
     void this.flushOutbox();
@@ -469,6 +471,15 @@ export class TankClient {
     const res = await this.agents.stopRun({ runId, reason });
     if (res.run) this.store.dispatch({ type: "runs/upsert", runs: [res.run] });
     return res.run;
+  }
+
+  /**
+   * Seeds the early-run indicator from a draft the app just loaded or saved (GetDraft / PutDraft):
+   * its tagged agents and any preparation the server has started for it. Call it with every draft
+   * response; a draft with nothing to report clears what the store held for that composer.
+   */
+  seedPreparationFromDraft(draft: Draft): void {
+    this.store.dispatch({ type: "preparation/seed", draft });
   }
 
   /**
@@ -1600,6 +1611,7 @@ export class TankClient {
     });
     rt.on("agent_status", (s) => this.store.dispatch({ type: "agentStatus", status: s, now: this.now() }));
     rt.on("agent_stream", (d) => this.store.dispatch({ type: "agentStream", delta: d }));
+    rt.on("preparation", (u) => this.store.dispatch({ type: "preparation", update: u }));
     rt.on("resync", () => void this.resync());
   }
 

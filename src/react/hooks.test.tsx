@@ -16,6 +16,7 @@ import {
   AgentStreamDeltaSchema,
   EnvelopeSchema,
   NotificationCreatedSchema,
+  PreparationUpdateSchema,
 } from "../contracts/tank/events/v1/events_pb.js";
 import { FileSchema } from "../contracts/tank/files/v1/files_pb.js";
 import {
@@ -24,7 +25,9 @@ import {
   NotificationService,
 } from "../contracts/tank/notification/v1/notification_pb.js";
 import {
+  DraftSchema,
   MemberSchema,
+  PreparationState,
   WorkspaceSchema,
   WorkspaceService,
 } from "../contracts/tank/workspace/v1/workspace_pb.js";
@@ -35,6 +38,7 @@ import {
   useAgentStream,
   useFile,
   useNotifications,
+  usePreparation,
   useRun,
   useThreadRun,
   useTreadPlan,
@@ -270,6 +274,76 @@ describe("file hooks", () => {
       }),
     );
     expect(result.current?.name).toBe("a.png");
+  });
+});
+
+describe("usePreparation", () => {
+  const frame = (state: PreparationState, preparationId = "p1") =>
+    create(PreparationUpdateSchema, { channelId: "general", threadRootId: "root1", preparationId, state });
+
+  it("shows while PREPARING, seeds from a draft, and clears on READY", () => {
+    const client = makeClient();
+    const { result } = renderHook(() => usePreparation("general", "root1"), { wrapper: wrap(client) });
+    expect(result.current.isPreparing).toBe(false);
+    expect(result.current.state).toBe(PreparationState.UNSPECIFIED);
+
+    act(() =>
+      client.seedPreparationFromDraft(
+        create(DraftSchema, {
+          channelId: "general",
+          threadRootId: "root1",
+          mentionedAgentIds: ["agent1"],
+          preparationId: "p1",
+          preparationState: PreparationState.PREPARING,
+          preparationExpiresAt: timestampFromMs(Date.now() + 60_000),
+        }),
+      ),
+    );
+    expect(result.current.isPreparing).toBe(true);
+    expect(result.current.agentIds).toEqual(["agent1"]);
+
+    act(() => client.store.dispatch({ type: "preparation", update: frame(PreparationState.READY) }));
+    expect(result.current.isPreparing).toBe(false);
+    expect(result.current.state).toBe(PreparationState.READY);
+    expect(result.current.agentIds).toEqual(["agent1"]);
+  });
+
+  it("ignores a terminal frame for an older preparation and keeps the composers apart", () => {
+    const client = makeClient();
+    const thread = renderHook(() => usePreparation("general", "root1"), { wrapper: wrap(client) });
+    const channel = renderHook(() => usePreparation("general", ""), { wrapper: wrap(client) });
+    act(() =>
+      client.store.dispatch({ type: "preparation", update: frame(PreparationState.PREPARING, "p2") }),
+    );
+    expect(thread.result.current.isPreparing).toBe(true);
+    expect(channel.result.current.isPreparing).toBe(false);
+    act(() =>
+      client.store.dispatch({
+        type: "preparation",
+        update: frame(PreparationState.CANCELLED_MENTION_REMOVED, "p1"),
+      }),
+    );
+    expect(thread.result.current.isPreparing).toBe(true);
+  });
+
+  it("stops preparing on its own when expiresAt passes", async () => {
+    const client = makeClient();
+    const { result } = renderHook(() => usePreparation("general", "root1"), { wrapper: wrap(client) });
+    act(() =>
+      client.seedPreparationFromDraft(
+        create(DraftSchema, {
+          channelId: "general",
+          threadRootId: "root1",
+          preparationId: "p1",
+          preparationState: PreparationState.PREPARING,
+          preparationExpiresAt: timestampFromMs(Date.now() + 30),
+        }),
+      ),
+    );
+    expect(result.current.isPreparing).toBe(true);
+    await act(() => new Promise((r) => setTimeout(r, 150)));
+    expect(result.current.isPreparing).toBe(false);
+    expect(result.current.state).toBe(PreparationState.EXPIRED);
   });
 });
 
