@@ -1,17 +1,24 @@
 /**
- * Text that is still arriving fades in, block by block (Robby, 2026-11-23, after trying words in
- * groups: "just makes it look like it's sticky ... What if the block of words fade in?"). Nothing
- * is ever held back: every character is on screen the moment it arrives, and only its opacity
- * moves, from 0 to 1 over FRESH_FADE_MS, eased. Each arrival is its own block with its own clock,
- * so blocks that arrive faster than the fade are fading at the same time and the text flows
- * instead of stepping; text that arrives all at once (a reply that was already written) is one
- * block and fades in together. Only the tail is ever touched: everything older is plain text.
+ * Text that is still arriving appears in blocks that fade in (Robby, 2026-11-24, after words in
+ * groups and then words one at a time: "I was asking for a softer fade in not like a typewriter
+ * again. And I was asking for fast." and, the day before, "What if the block of words fade in?").
  *
- * This file is the arithmetic only, shared by the browser and both phones: it says how many
- * characters at the end of the text are still fading and how visible each run of them is. The
- * clients draw that with whatever they have (a span's opacity, a text run's color).
+ * Two rules, and nothing else:
+ *
+ * - What has arrived is shown as a whole block. Arrivals within about BLOCK_WINDOW_MS of each
+ *   other are one block, cut at the end of a sentence or a line when there is one; nothing is
+ *   ever let out a word or a letter at a time, and nothing waits longer than that window. The
+ *   first text after a quiet moment is not held at all, and a reply that arrives all at once
+ *   (one that was already written) is one block.
+ * - A block fades in: opacity only, FRESH_FADE_MS, a gentle ease. The next block starts its own
+ *   fade while the one before is finishing, so the text reads as calm blocks arriving quickly.
+ *   Everything older is plain text.
+ *
+ * This file is the arithmetic only, shared by the browser and both phones: how much of the text
+ * is out, how many characters at its end are still fading, and how visible each run of them is.
+ * The clients draw that with what they have (a span's opacity, a text run's color).
  */
-export declare const FRESH_FADE_MS = 160;
+export declare const FRESH_FADE_MS = 280;
 /** How often a client redraws while something is fading. */
 export declare const FRESH_TICK_MS = 32;
 /** A run of characters still fading. Runs are in reading order and together end the text. */
@@ -24,10 +31,10 @@ export interface FreshRun {
      * itself between redraws (the browser does) computes its alpha from this with `freshAlpha`. */
     at: number;
 }
-/** How many runs fade at once. A burst of more words than this shows its oldest words plain, so
- * a long reply never has more than a line or two in motion (a mid-range phone keeps its frames). */
-export declare const FRESH_MAX_RUNS = 24;
-/** Ease out: quick at first, settling. */
+/** How many blocks fade at once. Blocks come at most one every BLOCK_WINDOW_MS and fade for
+ * FRESH_FADE_MS, so three or four overlap; the cap is a guard, not something a reply reaches. */
+export declare const FRESH_MAX_RUNS = 8;
+/** A gentle ease in and out (a half cosine): no jump at the start, no snap at the end. */
 export declare function freshAlpha(elapsedMs: number): number;
 /** Tracks one text as it grows. */
 export declare class FreshTail {
@@ -57,30 +64,25 @@ export interface FreshPiece {
  * back. A piece nothing reaches comes back whole and plain.
  */
 export declare function freshPieces(text: string, runs: FreshRun[], after: number): FreshPiece[];
+/** Arrivals this close together are one block; nothing waits longer than this to be shown. */
+export declare const BLOCK_WINDOW_MS = 150;
 /**
- * Text arrives from the network in bursts, and painting each burst as it lands is what makes a
- * reply look jerky (Robby, 2026-11-24: "We need to make the animation of words appearing
- * smoother"). The pacer lets arrived text out a word at a time at a steady rate that adapts to
- * how much is waiting: the more there is, the faster it goes, so what is on screen is never more
- * than about PACE_LAG_MS behind what has arrived. A word is let out whole. A long run with no
- * space in it (an address, a line of code) is not waited for past the lag, and when the stream
- * ends everything left is shown at once.
+ * Gathers arrived text into blocks. `step` says how much of the text is out now; when the
+ * answer grows, that growth is one block, to be faded in together.
  */
-export declare const PACE_LAG_MS = 120;
-/** The slowest the pacer goes while anything is waiting, in characters a second. */
-export declare const PACE_MIN_CPS = 90;
-export declare class RevealPacer {
+export declare class BlockGate {
     private shown;
     private seen;
-    private credit;
-    private last;
-    /** What has arrived and is not all out yet: up to where, and when it arrived. Oldest first. */
+    /** What has arrived and is not out yet: up to where, and when it arrived. Oldest first. */
     private arrivals;
+    private lastOut;
     /** How much of the text is out now. */
     get length(): number;
     /**
-     * Lets out what is due. Returns where each newly shown word ends, in order (empty when
-     * nothing new is shown); the last of them is the new length. `ended`: no more text will come.
+     * Returns the new length when a block is let out, and undefined when nothing changes.
+     * `ended`: no more text will come, so whatever is waiting goes out now.
      */
-    step(text: string, now: number, ended?: boolean): number[];
+    step(text: string, now: number, ended?: boolean): number | undefined;
+    /** When the character at `index` arrived. */
+    private arrivedAt;
 }

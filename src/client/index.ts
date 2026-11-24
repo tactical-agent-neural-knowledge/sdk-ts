@@ -39,6 +39,8 @@ export {
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
 export { Emitter, type Handler } from "./emitter.js";
 export {
+  BLOCK_WINDOW_MS,
+  BlockGate,
   FRESH_FADE_MS,
   FRESH_MAX_RUNS,
   FRESH_TICK_MS,
@@ -48,9 +50,6 @@ export {
   freshAlpha,
   freshChars,
   freshPieces,
-  PACE_LAG_MS,
-  PACE_MIN_CPS,
-  RevealPacer,
 } from "./fresh.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { OFFER_COPY, withOfferedMention } from "./offer.js";

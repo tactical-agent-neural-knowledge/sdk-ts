@@ -1,17 +1,24 @@
 /**
- * Text that is still arriving fades in, block by block (Robby, 2026-11-23, after trying words in
- * groups: "just makes it look like it's sticky ... What if the block of words fade in?"). Nothing
- * is ever held back: every character is on screen the moment it arrives, and only its opacity
- * moves, from 0 to 1 over FRESH_FADE_MS, eased. Each arrival is its own block with its own clock,
- * so blocks that arrive faster than the fade are fading at the same time and the text flows
- * instead of stepping; text that arrives all at once (a reply that was already written) is one
- * block and fades in together. Only the tail is ever touched: everything older is plain text.
+ * Text that is still arriving appears in blocks that fade in (Robby, 2026-11-24, after words in
+ * groups and then words one at a time: "I was asking for a softer fade in not like a typewriter
+ * again. And I was asking for fast." and, the day before, "What if the block of words fade in?").
  *
- * This file is the arithmetic only, shared by the browser and both phones: it says how many
- * characters at the end of the text are still fading and how visible each run of them is. The
- * clients draw that with whatever they have (a span's opacity, a text run's color).
+ * Two rules, and nothing else:
+ *
+ * - What has arrived is shown as a whole block. Arrivals within about BLOCK_WINDOW_MS of each
+ *   other are one block, cut at the end of a sentence or a line when there is one; nothing is
+ *   ever let out a word or a letter at a time, and nothing waits longer than that window. The
+ *   first text after a quiet moment is not held at all, and a reply that arrives all at once
+ *   (one that was already written) is one block.
+ * - A block fades in: opacity only, FRESH_FADE_MS, a gentle ease. The next block starts its own
+ *   fade while the one before is finishing, so the text reads as calm blocks arriving quickly.
+ *   Everything older is plain text.
+ *
+ * This file is the arithmetic only, shared by the browser and both phones: how much of the text
+ * is out, how many characters at its end are still fading, and how visible each run of them is.
+ * The clients draw that with what they have (a span's opacity, a text run's color).
  */
-export const FRESH_FADE_MS = 160;
+export const FRESH_FADE_MS = 280;
 /** How often a client redraws while something is fading. */
 export const FRESH_TICK_MS = 32;
 
@@ -26,9 +33,9 @@ export interface FreshRun {
   at: number;
 }
 
-/** How many runs fade at once. A burst of more words than this shows its oldest words plain, so
- * a long reply never has more than a line or two in motion (a mid-range phone keeps its frames). */
-export const FRESH_MAX_RUNS = 24;
+/** How many blocks fade at once. Blocks come at most one every BLOCK_WINDOW_MS and fade for
+ * FRESH_FADE_MS, so three or four overlap; the cap is a guard, not something a reply reaches. */
+export const FRESH_MAX_RUNS = 8;
 
 interface Block {
   /** Where the block starts in the text. */
@@ -37,12 +44,11 @@ interface Block {
   at: number;
 }
 
-/** Ease out: quick at first, settling. */
+/** A gentle ease in and out (a half cosine): no jump at the start, no snap at the end. */
 export function freshAlpha(elapsedMs: number): number {
   if (elapsedMs <= 0) return 0;
   if (elapsedMs >= FRESH_FADE_MS) return 1;
-  const left = 1 - elapsedMs / FRESH_FADE_MS;
-  return 1 - left * left * left;
+  return (1 - Math.cos((Math.PI * elapsedMs) / FRESH_FADE_MS)) / 2;
 }
 
 /** Tracks one text as it grows. */
@@ -131,26 +137,36 @@ export function freshPieces(text: string, runs: FreshRun[], after: number): Fres
   return out;
 }
 
-/**
- * Text arrives from the network in bursts, and painting each burst as it lands is what makes a
- * reply look jerky (Robby, 2026-11-24: "We need to make the animation of words appearing
- * smoother"). The pacer lets arrived text out a word at a time at a steady rate that adapts to
- * how much is waiting: the more there is, the faster it goes, so what is on screen is never more
- * than about PACE_LAG_MS behind what has arrived. A word is let out whole. A long run with no
- * space in it (an address, a line of code) is not waited for past the lag, and when the stream
- * ends everything left is shown at once.
- */
-export const PACE_LAG_MS = 120;
-/** The slowest the pacer goes while anything is waiting, in characters a second. */
-export const PACE_MIN_CPS = 90;
+/** Arrivals this close together are one block; nothing waits longer than this to be shown. */
+export const BLOCK_WINDOW_MS = 150;
 
-export class RevealPacer {
+/** The last place in `text` after `from` where a sentence or a line ends, or -1. */
+function lastBreak(text: string, from: number): number {
+  for (let i = text.length - 1; i > from; i--) {
+    const c = text[i - 1] as string;
+    if (c === "\n") return i;
+    if (/\s/.test(text[i] ?? "") && /[.!?:;]["')\]]?$/.test(text.slice(Math.max(from, i - 2), i)))
+      return i + 1;
+  }
+  return -1;
+}
+
+/** The last place in `text` after `from` that follows whitespace, or -1. */
+function lastSpace(text: string, from: number): number {
+  for (let i = text.length; i > from; i--) if (/\s/.test(text[i - 1] as string)) return i;
+  return -1;
+}
+
+/**
+ * Gathers arrived text into blocks. `step` says how much of the text is out now; when the
+ * answer grows, that growth is one block, to be faded in together.
+ */
+export class BlockGate {
   private shown = 0;
   private seen = 0;
-  private credit = 0;
-  private last = -1;
-  /** What has arrived and is not all out yet: up to where, and when it arrived. Oldest first. */
+  /** What has arrived and is not out yet: up to where, and when it arrived. Oldest first. */
   private arrivals: { to: number; at: number }[] = [];
+  private lastOut = Number.NEGATIVE_INFINITY;
 
   /** How much of the text is out now. */
   get length(): number {
@@ -158,69 +174,51 @@ export class RevealPacer {
   }
 
   /**
-   * Lets out what is due. Returns where each newly shown word ends, in order (empty when
-   * nothing new is shown); the last of them is the new length. `ended`: no more text will come.
+   * Returns the new length when a block is let out, and undefined when nothing changes.
+   * `ended`: no more text will come, so whatever is waiting goes out now.
    */
-  step(text: string, now: number, ended = false): number[] {
+  step(text: string, now: number, ended = false): number | undefined {
     if (text.length < this.seen) {
-      // A reset: start again from what is there.
+      // A reset: what is there now is what there is.
       this.shown = Math.min(this.shown, text.length);
       this.seen = this.shown;
-      this.credit = 0;
       this.arrivals = [];
     }
-    const dt = this.last < 0 ? 16 : Math.min(100, Math.max(0, now - this.last));
-    this.last = now;
     if (text.length > this.seen) {
-      if (this.arrivals.length === 0) {
-        // The first word after a quiet moment goes out at once: pacing smooths what follows,
-        // it never delays the start.
-        this.credit = wordEnd(text, this.shown) - this.shown;
-      }
       this.arrivals.push({ to: text.length, at: now });
       this.seen = text.length;
     }
     while (this.arrivals.length > 0 && (this.arrivals[0] as { to: number }).to <= this.shown)
       this.arrivals.shift();
-    const head = this.arrivals[0];
-    if (!head) {
-      this.credit = 0;
-      return [];
+    const oldest = this.arrivals[0];
+    if (!oldest) return undefined;
+    // The first text after a quiet moment is not held: it is the fast part. Neither is the
+    // end of the stream. Otherwise a block goes out once its oldest text has waited the window.
+    const quiet = now - this.lastOut >= BLOCK_WINDOW_MS * 2;
+    if (!ended && !quiet && now - oldest.at < BLOCK_WINDOW_MS) return undefined;
+    let to = text.length;
+    if (!ended) {
+      // Cut where a sentence or a line ends, or failing that between words, but only when what
+      // is left behind has only just arrived: nothing waits past the window for a tidy edge.
+      // (Text that came in the same piece as the block's oldest is never split from it: a
+      // reply that arrives whole is one block.)
+      const young = (at: number) => {
+        const came = this.arrivedAt(at);
+        return came > oldest.at && now - came < BLOCK_WINDOW_MS / 2;
+      };
+      const edge = lastBreak(text, this.shown);
+      const space = lastSpace(text, this.shown);
+      if (edge > this.shown && edge < text.length && young(edge)) to = edge;
+      else if (space > this.shown && space < text.length && young(space)) to = space;
     }
-    if (ended) {
-      this.shown = text.length;
-      this.credit = 0;
-      this.arrivals = [];
-      return [this.shown];
-    }
-    // Everything in the oldest arrival is due PACE_LAG_MS after it came: the rate is whatever
-    // gets there on time, and never slower than the floor, so a lone word is out in a few frames.
-    const due = head.at + PACE_LAG_MS;
-    const overdue = now >= due;
-    if (!overdue) this.credit += Math.max(PACE_MIN_CPS / 1000, (head.to - this.shown) / (due - now)) * dt;
-    const cuts: number[] = [];
-    for (;;) {
-      if (this.shown >= text.length) break;
-      const end = wordEnd(text, this.shown);
-      // The last word may still be arriving: it is let out when its end is known (a space
-      // follows it), or when it has waited as long as anything is allowed to.
-      const whole = end < text.length || /\s/.test(text[end - 1] as string);
-      const late = overdue && this.shown < head.to;
-      if (!late && (!whole || this.credit < end - this.shown)) break;
-      this.credit = Math.max(0, this.credit - (end - this.shown));
-      this.shown = end;
-      cuts.push(end);
-    }
-    if (this.shown >= text.length) this.credit = 0;
-    return cuts;
+    this.shown = to;
+    this.lastOut = now;
+    return to;
   }
-}
 
-/** Where the word starting at `from` ends: past its letters and the space after them. */
-function wordEnd(text: string, from: number): number {
-  let i = from;
-  while (i < text.length && /\s/.test(text[i] as string)) i++;
-  while (i < text.length && !/\s/.test(text[i] as string)) i++;
-  while (i < text.length && /\s/.test(text[i] as string)) i++;
-  return i;
+  /** When the character at `index` arrived. */
+  private arrivedAt(index: number): number {
+    for (const a of this.arrivals) if (index < a.to) return a.at;
+    return Number.POSITIVE_INFINITY;
+  }
 }
