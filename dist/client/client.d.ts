@@ -70,6 +70,11 @@ export interface SendMessageInput {
     metadata?: PostMessageRequest["metadata"];
     alsoSendToChannel?: boolean;
     kind?: MessageKind;
+    /**
+     * Explicit mentions merged by the server with those in `richText`: how a message summons an
+     * agent the person did not type (see `withOfferedMention`).
+     */
+    mentionIds?: string[];
 }
 export interface UpdateMessageInput {
     text?: string;
