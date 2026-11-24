@@ -85,11 +85,21 @@ export {
   type Starter,
   type StarterNeed,
 } from "./starters.js";
+export {
+  type ReplyStep,
+  replyWord,
+  STATUS_WORDS,
+  type StatusPlace,
+  type StatusWord,
+  treadWord,
+  typingWord,
+} from "./statusWords.js";
 export { MemoryStorage, storageKeys, type TankStorage } from "./storage.js";
 export { IndexedDbStorage, type IndexedDbStorageOptions } from "./storage-idb.js";
 export {
   type Action,
   AGENT_STATUS_TTL_MS,
+  AGENT_STREAM_STEPS,
   type AgentStatusEntry,
   type AgentStreamEntry,
   type ChannelPaging,

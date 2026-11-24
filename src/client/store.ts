@@ -112,6 +112,13 @@ export interface AgentStreamEntry {
   runId: string;
   text: string;
   status: string;
+  /**
+   * The status lines so far, oldest first, the newest last (it equals `status`): what the agent
+   * has been doing, for a client that shows more than the one line. At most
+   * `AGENT_STREAM_STEPS`; a line repeated straight after itself is kept once. Starts again
+   * from the newest when the text was dropped, because the lines before it were missed too.
+   */
+  steps: string[];
   /** Highest `seq` applied. Deltas at or below it are duplicates. */
   lastSeq: bigint;
   /**
@@ -208,7 +215,13 @@ export interface TankState {
    * bootstrap `threadLiveStreams` and synced by `thread_live_stream.updated`. Agent stream frames and
    * partial text for a thread that is not on are dropped.
    */
-  threadLiveStreams: Record<string, true>;
+  threadLiveStreams: Record<string, boolean>;
+  /**
+   * What a thread the person has not set takes, from bootstrap `threadLiveStreamDefault`: true
+   * since live output became the default everywhere (2026-11-24), false against a server from
+   * before that.
+   */
+  threadLiveStreamDefault: boolean;
   /** Early-run "getting ready" state keyed by `preparationKey(channelId, threadRootId)`. */
   preparationByThread: Record<string, PreparationEntry>;
   /** The agent offered on a draft, keyed like `preparationByThread`. Absent when there is no offer. */
@@ -268,6 +281,7 @@ export function initialState(): TankState {
     agentStatusByThread: {},
     agentStream: {},
     threadLiveStreams: {},
+    threadLiveStreamDefault: false,
     preparationByThread: {},
     offerByThread: {},
     pending: {},
@@ -313,6 +327,7 @@ export type Action =
        * set when present (only enabled rows are stored); absent on an older server, which leaves it alone.
        */
       threadLiveStreams?: ThreadLiveStream[];
+      threadLiveStreamDefault?: boolean;
     }
   | { type: "workspaces/upsert"; workspaces: Workspace[] }
   | { type: "members/upsert"; workspaceId: string; members: Member[] }
@@ -703,11 +718,28 @@ export function typingKey(channelId: string, threadRootId = ""): string {
   return threadRootId ? `${channelId}/${threadRootId}` : channelId;
 }
 
-/** The set of threads that are on, from stored rows (a row with enabled = false is not stored; it is skipped). */
-function threadLiveStreamsFrom(rows: ThreadLiveStream[]): Record<string, true> {
-  const out: Record<string, true> = {};
-  for (const r of rows) if (r.enabled) out[threadLiveStreamKey(r.channelId, r.threadRootId)] = true;
+/** How many status lines an `AgentStreamEntry` keeps. */
+export const AGENT_STREAM_STEPS = 6;
+
+/** `steps` with one more line: not twice in a row, and never more than `AGENT_STREAM_STEPS`. */
+function withStep(steps: string[], line: string): string[] {
+  if (!line || steps[steps.length - 1] === line) return steps;
+  return [...steps, line].slice(-AGENT_STREAM_STEPS);
+}
+
+/** What the person set themselves, per thread, from stored rows: on or off. */
+function threadLiveStreamsFrom(rows: ThreadLiveStream[]): Record<string, boolean> {
+  const out: Record<string, boolean> = {};
+  for (const r of rows) out[threadLiveStreamKey(r.channelId, r.threadRootId)] = r.enabled;
   return out;
+}
+
+/**
+ * Whether live agent output is on for the person in a thread: what they set there, and the
+ * server's default (on, since 2026-11-24) where they set nothing.
+ */
+function liveOn(state: TankState, key: string): boolean {
+  return state.threadLiveStreams[key] ?? state.threadLiveStreamDefault;
 }
 
 // ---------------------------------------------------------------- reducer
@@ -759,6 +791,7 @@ export function reduce(state: TankState, action: Action): TankState {
       return {
         ...state,
         threadLiveStreams,
+        threadLiveStreamDefault: action.threadLiveStreamDefault ?? state.threadLiveStreamDefault,
         me: action.me?.principal ?? state.me,
         workspaces,
         channels,
@@ -1003,14 +1036,10 @@ export function reduce(state: TankState, action: Action): TankState {
     }
     case "threadLiveStream/set": {
       const k = threadLiveStreamKey(action.channelId, action.threadRootId);
-      const on = state.threadLiveStreams[k] === true;
-      if (action.enabled) {
-        if (on) return state;
-        return { ...state, threadLiveStreams: { ...state.threadLiveStreams, [k]: true } };
-      }
-      if (!on) return state;
-      const threadLiveStreams = { ...state.threadLiveStreams };
-      delete threadLiveStreams[k];
+      // What the person chose is kept either way: under a default of on, off has to be remembered.
+      if (state.threadLiveStreams[k] === action.enabled) return state;
+      const threadLiveStreams = { ...state.threadLiveStreams, [k]: action.enabled };
+      if (action.enabled) return { ...state, threadLiveStreams };
       // Off: nothing of this thread's live output is kept, and no more of it is applied.
       let agentStream = state.agentStream;
       if (agentStream[action.threadRootId]) {
@@ -1074,7 +1103,7 @@ export function reduce(state: TankState, action: Action): TankState {
       const d = action.delta;
       // Only threads the person has on: the server filters too, but the store must not show what
       // was turned off, or a frame that raced the setting.
-      if (!state.threadLiveStreams[threadLiveStreamKey(d.channelId, d.threadRootId)]) return state;
+      if (!liveOn(state, threadLiveStreamKey(d.channelId, d.threadRootId))) return state;
       const key = d.threadRootId || d.channelId;
       const cur = state.agentStream[key];
       if (d.kind === AgentStreamDelta_Kind.END) {
@@ -1086,7 +1115,7 @@ export function reduce(state: TankState, action: Action): TankState {
       if (d.kind !== AgentStreamDelta_Kind.TEXT && d.kind !== AgentStreamDelta_Kind.STATUS) return state;
       let entry: AgentStreamEntry;
       if (!cur || cur.runId !== d.runId) {
-        entry = { runId: d.runId, text: "", status: "", lastSeq: 0n, stale: d.seq !== 1n };
+        entry = { runId: d.runId, text: "", status: "", steps: [], lastSeq: 0n, stale: d.seq !== 1n };
       } else {
         if (d.seq <= cur.lastSeq) return state;
         entry = { ...cur, stale: cur.stale || d.seq !== cur.lastSeq + 1n };
@@ -1094,9 +1123,13 @@ export function reduce(state: TankState, action: Action): TankState {
       if (entry.stale) {
         // Only the status line is safe to show without the text before it.
         entry.text = "";
-        if (d.kind === AgentStreamDelta_Kind.STATUS) entry.status = d.text;
+        if (d.kind === AgentStreamDelta_Kind.STATUS) {
+          entry.status = d.text;
+          entry.steps = withStep(entry.steps, d.text);
+        }
       } else if (d.kind === AgentStreamDelta_Kind.STATUS) {
         entry.status = d.text;
+        entry.steps = withStep(entry.steps, d.text);
       } else {
         entry.text = d.reset ? d.text : entry.text + d.text;
       }
@@ -1104,7 +1137,7 @@ export function reduce(state: TankState, action: Action): TankState {
       return { ...state, agentStream: { ...state.agentStream, [key]: entry } };
     }
     case "agentStream/tail": {
-      if (!state.threadLiveStreams[threadLiveStreamKey(action.channelId, action.key)]) return state;
+      if (!liveOn(state, threadLiveStreamKey(action.channelId, action.key))) return state;
       const cur = state.agentStream[action.key];
       if (cur && cur.runId !== action.runId) return state;
       if (cur && cur.lastSeq > action.lastSeq) {
@@ -1119,6 +1152,8 @@ export function reduce(state: TankState, action: Action): TankState {
             runId: action.runId,
             text: action.text,
             status: action.status,
+            // The lines seen so far are kept, ending with the one the server says is current.
+            steps: withStep(cur?.steps ?? [], action.status),
             lastSeq: action.lastSeq,
             stale: false,
           },
@@ -1862,7 +1897,7 @@ export class TankStore {
   selectAgentStream = (key: string): AgentStreamEntry | undefined => this.state.agentStream[key];
   /** Whether the person has live agent output on in this thread. */
   selectThreadLiveStream = (channelId: string, threadRootId: string): boolean =>
-    this.state.threadLiveStreams[threadLiveStreamKey(channelId, threadRootId)] === true;
+    liveOn(this.state, threadLiveStreamKey(channelId, threadRootId));
   selectAgentStatus = (key: string): AgentStatus | undefined => this.state.agentStatusByThread[key]?.status;
 
   /** The agent offered on a composer's draft (empty `threadRootId` = the channel composer), if any. */

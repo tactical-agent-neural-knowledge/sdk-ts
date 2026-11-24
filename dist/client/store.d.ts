@@ -48,6 +48,13 @@ export interface AgentStreamEntry {
     runId: string;
     text: string;
     status: string;
+    /**
+     * The status lines so far, oldest first, the newest last (it equals `status`): what the agent
+     * has been doing, for a client that shows more than the one line. At most
+     * `AGENT_STREAM_STEPS`; a line repeated straight after itself is kept once. Starts again
+     * from the newest when the text was dropped, because the lines before it were missed too.
+     */
+    steps: string[];
     /** Highest `seq` applied. Deltas at or below it are duplicates. */
     lastSeq: bigint;
     /**
@@ -119,7 +126,13 @@ export interface TankState {
      * bootstrap `threadLiveStreams` and synced by `thread_live_stream.updated`. Agent stream frames and
      * partial text for a thread that is not on are dropped.
      */
-    threadLiveStreams: Record<string, true>;
+    threadLiveStreams: Record<string, boolean>;
+    /**
+     * What a thread the person has not set takes, from bootstrap `threadLiveStreamDefault`: true
+     * since live output became the default everywhere (2026-11-24), false against a server from
+     * before that.
+     */
+    threadLiveStreamDefault: boolean;
     /** Early-run "getting ready" state keyed by `preparationKey(channelId, threadRootId)`. */
     preparationByThread: Record<string, PreparationEntry>;
     /** The agent offered on a draft, keyed like `preparationByThread`. Absent when there is no offer. */
@@ -181,6 +194,7 @@ export type Action = {
      * set when present (only enabled rows are stored); absent on an older server, which leaves it alone.
      */
     threadLiveStreams?: ThreadLiveStream[];
+    threadLiveStreamDefault?: boolean;
 } | {
     type: "workspaces/upsert";
     workspaces: Workspace[];
@@ -431,6 +445,8 @@ export type Action = {
 export declare function tsMs(t: Timestamp | undefined): number;
 export declare function notificationPagingKey(workspaceId: string, mode: NotificationMode): string;
 export declare function typingKey(channelId: string, threadRootId?: string): string;
+/** How many status lines an `AgentStreamEntry` keeps. */
+export declare const AGENT_STREAM_STEPS = 6;
 export declare function reduce(state: TankState, action: Action): TankState;
 /** Every `tank.events.v1` payload this SDK's vendored contracts know how to decode. */
 export type KnownEventPayload = MessageCreated | MessageUpdated | MessageDeleted | ThreadDeleted | ReactionAdded | ReactionRemoved | ReadStateUpdated | ChannelUpdated | ChannelDeleted | ChannelMembershipChanged | ChannelPreferenceUpdated | MemberUpdated | PinChanged | BookmarkChanged | DraftUpdated | EmojiChanged | PreferencesUpdated | ScheduledMessageSent | UserGroupUpdated | HuddleStarted | HuddleParticipantsChanged | HuddleEnded | CardAction | AppCommand | PresenceChanged | Typing | AgentStatus | FileReady | FileDeleted | MessageEphemeral | NotificationsRead | AgentRunUpdated | NotificationCreated | TopoMarkUpdated | MonitorWidgetUpdated | CanvasBlockChanged | CanvasChanged | BoardObjectsChanged | BoardChanged | TaskChanged | ThreadLiveStreamUpdated;

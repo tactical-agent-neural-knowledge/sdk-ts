@@ -43,3 +43,25 @@ export const Linking = {
 };
 
 export const Platform = { OS: "ios", select: <T,>(o: Record<string, T>) => o.ios ?? o.default };
+
+/** `Animated` and `Easing` as far as `StatusLine` uses them: values that hold a number, and
+ * animations that jump to their end when started. No timers, so a test never waits on one. */
+class AnimatedValue {
+  constructor(public value: number) {}
+  setValue(v: number): void {
+    this.value = v;
+  }
+}
+const animation = (run: () => void) => ({ start: () => run(), stop: () => undefined });
+export const Animated = {
+  Value: AnimatedValue,
+  View: host("View"),
+  Text: host("Text"),
+  timing: (v: AnimatedValue, cfg: { toValue: number }) => animation(() => v.setValue(cfg.toValue)),
+  sequence: (all: Array<{ start: () => void }>) =>
+    animation(() => {
+      for (const a of all) a.start();
+    }),
+  loop: (a: { start: () => void; stop: () => void }) => a,
+};
+export const Easing = { ease: (t: number) => t, inOut: (f: (t: number) => number) => f };

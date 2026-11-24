@@ -340,6 +340,7 @@ export class TankClient {
                 readStates: res.readStates,
                 threadReadStates: res.threadReadStates,
                 threadLiveStreams: res.threadLiveStreams,
+                threadLiveStreamDefault: res.threadLiveStreamDefault,
                 members: res.members,
                 unreadNotificationCount: res.unreadNotificationCount,
                 entitlements: res.entitlements,

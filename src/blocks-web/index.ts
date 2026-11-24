@@ -19,4 +19,5 @@ export {
 } from "./blocks.js";
 export { Mark } from "./Mark.js";
 export { ElementView, RichTextView, type RichTextViewProps } from "./RichTextView.js";
+export { StatusLine } from "./StatusLine.js";
 export { muiThemeOptions, tankTheme } from "./theme.js";
