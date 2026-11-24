@@ -106,3 +106,21 @@ describe("workspace default", () => {
     );
   });
 });
+
+describe("checks choice", () => {
+  it("is TANK unless it says the repository's own CI", async () => {
+    const { checksMode, checksLabel, checksChoice, workspaceChecksLabel, FOLLOWS_DEFAULT, CHECKS_CHOICES } =
+      await import("./overdrive.js");
+    const { ChecksMode } = await import("../contracts/tank/agent/v1/agent_pb.js");
+    expect(checksMode(undefined)).toBe(ChecksMode.TANK);
+    expect(checksMode(ChecksMode.UNSPECIFIED)).toBe(ChecksMode.TANK);
+    expect(checksMode(ChecksMode.OWN_CI)).toBe(ChecksMode.OWN_CI);
+    expect(checksLabel(ChecksMode.OWN_CI)).toBe("Wait for the repository's own CI");
+    expect(workspaceChecksLabel(undefined)).toBe("Workspace default (TANK runs them)");
+    expect(checksChoice({ checksMode: ChecksMode.OWN_CI, checksFollowsDefault: true })).toBe(FOLLOWS_DEFAULT);
+    expect(checksChoice({ checksMode: ChecksMode.OWN_CI, checksFollowsDefault: false })).toBe(
+      ChecksMode.OWN_CI,
+    );
+    expect(CHECKS_CHOICES.map((c) => c.mode)).toEqual([ChecksMode.TANK, ChecksMode.OWN_CI]);
+  });
+});
