@@ -62,6 +62,7 @@ export {
   createDraftPreparer,
   type DraftPreparer,
   type DraftPreparerOptions,
+  type DraftState,
   PREPARE_PAUSE_MS,
 } from "./prepare.js";
 export { framesAsPage, opensAsPage, previewable } from "./previewable.js";

@@ -88,4 +88,47 @@ describe("createDraftPreparer", () => {
     expect(sent).toEqual([]);
     vi.useRealTimers();
   });
+
+  it("says what is really happening to the draft, one step at a time", async () => {
+    vi.useFakeTimers();
+    const states: string[] = [];
+    let awake = false;
+    const p = createDraftPreparer({
+      send: () => Promise.resolve({ awake }),
+      onState: (s) => states.push(s),
+    });
+    // Typing begins while the model sleeps: heard, then waking.
+    p.changed("c1", "H");
+    await vi.advanceTimersByTimeAsync(0);
+    expect(states).toEqual(["heard", "waking"]);
+    // The model is up by the time typing pauses: the draft is read, then prepared.
+    awake = true;
+    p.changed("c1", "How do Roman numerals work?");
+    await vi.advanceTimersByTimeAsync(260);
+    expect(states).toEqual(["heard", "waking", "reading", "preparing"]);
+    // More typing: read again when it pauses, never the same state twice in a row.
+    p.changed("c1", "How do Roman numerals work, briefly?");
+    await vi.advanceTimersByTimeAsync(260);
+    expect(states.slice(4)).toEqual(["reading", "preparing"]);
+    // Sent: quiet, and a late answer to an old report changes nothing.
+    p.done();
+    await vi.advanceTimersByTimeAsync(500);
+    expect(states[states.length - 1]).toBe("quiet");
+    expect(states.filter((s) => s === "quiet")).toHaveLength(1);
+    vi.useRealTimers();
+  });
+
+  it("goes quiet when the draft is emptied", async () => {
+    vi.useFakeTimers();
+    const states: string[] = [];
+    const p = createDraftPreparer({
+      send: () => Promise.resolve({ awake: true }),
+      onState: (s) => states.push(s),
+    });
+    p.changed("", "Hello");
+    await vi.advanceTimersByTimeAsync(300);
+    p.changed("", "");
+    expect(states).toEqual(["heard", "reading", "preparing", "quiet"]);
+    vi.useRealTimers();
+  });
 });
