@@ -1693,6 +1693,50 @@ export type GetUsageResponse = Message$1<"tank.ai.v1.GetUsageResponse"> & {
  */
 export declare const GetUsageResponseSchema: GenMessage<GetUsageResponse>;
 /**
+ * @generated from message tank.ai.v1.PrepareRequest
+ */
+export type PrepareRequest = Message$1<"tank.ai.v1.PrepareRequest"> & {
+    /**
+     * Empty for a draft that will start a new conversation.
+     *
+     * @generated from field: string conversation_id = 1;
+     */
+    conversationId: string;
+    /**
+     * With an empty conversation_id: the workspace the new conversation would act in, or empty.
+     *
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * The draft as it stands.
+     *
+     * @generated from field: string text = 3;
+     */
+    text: string;
+};
+/**
+ * Describes the message tank.ai.v1.PrepareRequest.
+ * Use `create(PrepareRequestSchema)` to create a new message.
+ */
+export declare const PrepareRequestSchema: GenMessage<PrepareRequest>;
+/**
+ * @generated from message tank.ai.v1.PrepareResponse
+ */
+export type PrepareResponse = Message$1<"tank.ai.v1.PrepareResponse"> & {
+    /**
+     * The model answers now. False while it is starting, so a client can say so before the send.
+     *
+     * @generated from field: bool awake = 1;
+     */
+    awake: boolean;
+};
+/**
+ * Describes the message tank.ai.v1.PrepareResponse.
+ * Use `create(PrepareResponseSchema)` to create a new message.
+ */
+export declare const PrepareResponseSchema: GenMessage<PrepareResponse>;
+/**
  * @generated from message tank.ai.v1.RecordAnswerSignalRequest
  */
 export type RecordAnswerSignalRequest = Message$1<"tank.ai.v1.RecordAnswerSignalRequest"> & {
@@ -2944,5 +2988,20 @@ export declare const AiService: GenService<{
         methodKind: "unary";
         input: typeof RecordAnswerSignalRequestSchema;
         output: typeof RecordAnswerSignalResponseSchema;
+    };
+    /**
+     * The person is writing a message to Neural and has not sent it (2026-11-23, replies within
+     * half a second). The client calls this as the draft changes, at most about twice a second.
+     * The server wakes a sleeping model and may start working out the reply ahead of the send;
+     * what it prepares is used only when the message that is sent is exactly this text in this
+     * conversation, and is thrown away otherwise. Nothing is stored, nobody else is told, and a
+     * draft never reaches anyone's screen. Rate-limited per person; an empty text only wakes.
+     *
+     * @generated from rpc tank.ai.v1.AiService.Prepare
+     */
+    prepare: {
+        methodKind: "unary";
+        input: typeof PrepareRequestSchema;
+        output: typeof PrepareResponseSchema;
     };
 }>;
