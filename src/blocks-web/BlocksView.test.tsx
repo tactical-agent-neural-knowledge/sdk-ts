@@ -133,6 +133,26 @@ describe("interactions", () => {
     expect(seen).toEqual([]);
   });
 
+  it("a decided plan says who approved it and when, with no chip", () => {
+    render(
+      <ThemeProvider theme={tankTheme}>
+        <BlocksView
+          blocks={blocks([
+            approvalPrompt({
+              gateId: "g1",
+              kind: "plan",
+              subject: "",
+              decided: true,
+              decision: "approved",
+              detail: "Approved by Robby at 7:01 AM.",
+            }),
+          ])}
+        />
+      </ThemeProvider>,
+    );
+    expect(screen.getByTestId("approval-detail").textContent).toBe("Approved by Robby at 7:01 AM.");
+    expect(screen.queryByText("approved")).toBeNull();
+  });
   it("a gate can name its buttons and say what approving does", () => {
     const seen: unknown[] = [];
     render(
