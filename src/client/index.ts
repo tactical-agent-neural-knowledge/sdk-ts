@@ -78,6 +78,7 @@ export {
   type WebSocketCtor,
   type WebSocketLike,
 } from "./realtime.js";
+export { benchAt, frameAtFraction, liveAt, replayClock, replayEnding } from "./replay.js";
 export { nextReveal, REVEAL_TICK_MS, revealSteps } from "./reveal.js";
 export { expandShortcodes } from "./shortcodes.js";
 export {
