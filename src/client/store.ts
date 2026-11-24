@@ -135,9 +135,41 @@ export interface PreparationEntry {
   expiresAt: number | undefined;
 }
 
+/**
+ * The agent the server offers on a composer draft that tags none but reads like work
+ * (`Draft.offered_agent_id`). A client that shows the offer, and is not told otherwise by the
+ * person, sends the message with `agentUserId` among its mention ids, which starts the work
+ * exactly as a typed mention would.
+ */
+export interface OfferEntry {
+  channelId: string;
+  threadRootId: string;
+  agentId: string;
+  agentUserId: string;
+}
+
 /** Key for `TankState.preparationByThread`: one composer per (channel, thread root); an empty root is the channel composer. */
 export function preparationKey(channelId: string, threadRootId: string): string {
   return `${channelId}|${threadRootId}`;
+}
+
+/** The state with a draft's offer applied: set when the draft carries one, removed when it does not. */
+function withOffer(state: TankState, key: string, d: Draft): TankState {
+  const cur = state.offerByThread[key];
+  if (!d.offeredAgentId || !d.offeredAgentUserId) {
+    if (!cur) return state;
+    const offerByThread = { ...state.offerByThread };
+    delete offerByThread[key];
+    return { ...state, offerByThread };
+  }
+  if (cur && cur.agentId === d.offeredAgentId && cur.agentUserId === d.offeredAgentUserId) return state;
+  const entry: OfferEntry = {
+    channelId: d.channelId,
+    threadRootId: d.threadRootId,
+    agentId: d.offeredAgentId,
+    agentUserId: d.offeredAgentUserId,
+  };
+  return { ...state, offerByThread: { ...state.offerByThread, [key]: entry } };
 }
 
 export interface TankState {
@@ -179,6 +211,8 @@ export interface TankState {
   threadLiveStreams: Record<string, true>;
   /** Early-run "getting ready" state keyed by `preparationKey(channelId, threadRootId)`. */
   preparationByThread: Record<string, PreparationEntry>;
+  /** The agent offered on a draft, keyed like `preparationByThread`. Absent when there is no offer. */
+  offerByThread: Record<string, OfferEntry>;
   /** client_msg_id → outbox status. */
   pending: Record<string, PendingMessage>;
   connection: ConnectionState;
@@ -235,6 +269,7 @@ export function initialState(): TankState {
     agentStream: {},
     threadLiveStreams: {},
     preparationByThread: {},
+    offerByThread: {},
     pending: {},
     connection: "idle",
     cursors: {},
@@ -1006,13 +1041,14 @@ export function reduce(state: TankState, action: Action): TankState {
     case "preparation/seed": {
       const d = action.draft;
       const key = preparationKey(d.channelId, d.threadRootId);
+      const base = withOffer(state, key, d);
       const agentIds = [...d.mentionedAgentIds];
       const idle = !d.preparationId && d.preparationState === PreparationState.UNSPECIFIED;
       if (idle && agentIds.length === 0) {
-        if (!state.preparationByThread[key]) return state;
-        const preparationByThread = { ...state.preparationByThread };
+        if (!base.preparationByThread[key]) return base;
+        const preparationByThread = { ...base.preparationByThread };
         delete preparationByThread[key];
-        return { ...state, preparationByThread };
+        return { ...base, preparationByThread };
       }
       const entry: PreparationEntry = {
         channelId: d.channelId,
@@ -1022,7 +1058,7 @@ export function reduce(state: TankState, action: Action): TankState {
         agentIds,
         expiresAt: d.preparationExpiresAt ? tsMs(d.preparationExpiresAt) : undefined,
       };
-      return { ...state, preparationByThread: { ...state.preparationByThread, [key]: entry } };
+      return { ...base, preparationByThread: { ...base.preparationByThread, [key]: entry } };
     }
     case "preparation/expire": {
       let next: Record<string, PreparationEntry> | undefined;
@@ -1828,6 +1864,10 @@ export class TankStore {
   selectThreadLiveStream = (channelId: string, threadRootId: string): boolean =>
     this.state.threadLiveStreams[threadLiveStreamKey(channelId, threadRootId)] === true;
   selectAgentStatus = (key: string): AgentStatus | undefined => this.state.agentStatusByThread[key]?.status;
+
+  /** The agent offered on a composer's draft (empty `threadRootId` = the channel composer), if any. */
+  selectOffer = (channelId: string, threadRootId: string): OfferEntry | undefined =>
+    this.state.offerByThread[preparationKey(channelId, threadRootId)];
 
   /** The early-run preparation for a composer (empty `threadRootId` = the channel composer), if the store has one. */
   selectPreparation = (channelId: string, threadRootId: string): PreparationEntry | undefined =>

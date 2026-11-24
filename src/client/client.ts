@@ -132,6 +132,11 @@ export interface SendMessageInput {
   metadata?: PostMessageRequest["metadata"];
   alsoSendToChannel?: boolean;
   kind?: MessageKind;
+  /**
+   * Explicit mentions merged by the server with those in `richText`: how a message summons an
+   * agent the person did not type (see `withOfferedMention`).
+   */
+  mentionIds?: string[];
 }
 
 export interface UpdateMessageInput {
@@ -760,6 +765,7 @@ export class TankClient {
       kind: input.kind ?? MessageKind.MESSAGE,
       metadata: input.metadata,
       alsoSendToChannel: input.alsoSendToChannel ?? false,
+      mentionIds: input.mentionIds ?? [],
     });
     const optimistic = create(MessageSchema, {
       id: clientMsgId,
@@ -775,6 +781,7 @@ export class TankClient {
       blocks: request.blocks,
       fileIds: request.fileIds,
       metadata: request.metadata,
+      mentionIds: request.mentionIds,
       createdAt: timestampFromMs(this.now()),
     });
     const entry: OutboxEntry = { request, createdAt: this.now(), attempts: 0 };

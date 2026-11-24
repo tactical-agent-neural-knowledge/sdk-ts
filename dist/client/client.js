@@ -497,6 +497,7 @@ export class TankClient {
             kind: input.kind ?? MessageKind.MESSAGE,
             metadata: input.metadata,
             alsoSendToChannel: input.alsoSendToChannel ?? false,
+            mentionIds: input.mentionIds ?? [],
         });
         const optimistic = create(MessageSchema, {
             id: clientMsgId,
@@ -512,6 +513,7 @@ export class TankClient {
             blocks: request.blocks,
             fileIds: request.fileIds,
             metadata: request.metadata,
+            mentionIds: request.mentionIds,
             createdAt: timestampFromMs(this.now()),
         });
         const entry = { request, createdAt: this.now(), attempts: 0 };

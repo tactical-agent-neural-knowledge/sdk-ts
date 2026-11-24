@@ -352,6 +352,68 @@ export type OpenThreadResponse = Message<"tank.agent.v1.OpenThreadResponse"> & {
  */
 export declare const OpenThreadResponseSchema: GenMessage<OpenThreadResponse>;
 /**
+ * @generated from message tank.agent.v1.ReplyRequest
+ */
+export type ReplyRequest = Message<"tank.agent.v1.ReplyRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * The thread replied in: the root message's id.
+     *
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string agent_id = 3;
+     */
+    agentId: string;
+    /**
+     * The person the agent is answering.
+     *
+     * @generated from field: string requested_by = 4;
+     */
+    requestedBy: string;
+    /**
+     * The whole reply so far, as Markdown.
+     *
+     * @generated from field: string text = 5;
+     */
+    text: string;
+    /**
+     * Empty to post; the posted message's id to replace its text.
+     *
+     * @generated from field: string message_id = 6;
+     */
+    messageId: string;
+    /**
+     * Idempotency key for the post: the same key never posts twice.
+     *
+     * @generated from field: string client_msg_id = 7;
+     */
+    clientMsgId: string;
+};
+/**
+ * Describes the message tank.agent.v1.ReplyRequest.
+ * Use `create(ReplyRequestSchema)` to create a new message.
+ */
+export declare const ReplyRequestSchema: GenMessage<ReplyRequest>;
+/**
+ * @generated from message tank.agent.v1.ReplyResponse
+ */
+export type ReplyResponse = Message<"tank.agent.v1.ReplyResponse"> & {
+    /**
+     * @generated from field: string message_id = 1;
+     */
+    messageId: string;
+};
+/**
+ * Describes the message tank.agent.v1.ReplyResponse.
+ * Use `create(ReplyResponseSchema)` to create a new message.
+ */
+export declare const ReplyResponseSchema: GenMessage<ReplyResponse>;
+/**
  * Workspace-level agent settings, admins only. Off by default.
  *
  * @generated from message tank.agent.v1.WorkspaceAgentSettings
@@ -2733,6 +2795,21 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof OpenThreadRequestSchema;
         output: typeof OpenThreadResponseSchema;
+    };
+    /**
+     * An agent's reply written in a thread without a run (2026-11-23): an agent that answers from
+     * the Neural model alone talks within half a second, so the control plane posts its words as
+     * the agent the moment they start and replaces the text as the rest is written. The first
+     * call posts (message_id empty) and returns the message; later calls name it and carry the
+     * whole text so far. Bot tokens only, on the requester's membership, like OpenThread; the
+     * agent must be one of the workspace's own and allowed to run there.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.Reply
+     */
+    reply: {
+        methodKind: "unary";
+        input: typeof ReplyRequestSchema;
+        output: typeof ReplyResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.GetWorkspaceAgentSettings

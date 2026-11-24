@@ -512,6 +512,13 @@ export function useThreadLiveStream(channelId, threadRootId) {
 export function useAgentStatuses(channelId) {
     return useTankSelector(useCallback((s) => s.selectAgentStatuses(channelId), [channelId]));
 }
+/**
+ * The agent the server offers on this composer's draft (`threadRootId` empty = the channel
+ * composer), or undefined. See `OFFER_COPY` and `withOfferedMention` in the client.
+ */
+export function useOffer(channelId, threadRootId) {
+    return useTankSelector(useCallback((s) => s.selectOffer(channelId, threadRootId), [channelId, threadRootId]));
+}
 const NO_AGENT_IDS = [];
 /**
  * The composer's early-run indicator. Shows while a preparation is PREPARING; READY, EXPIRED and

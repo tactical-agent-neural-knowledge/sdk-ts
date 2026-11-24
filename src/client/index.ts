@@ -39,6 +39,7 @@ export {
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
 export { Emitter, type Handler } from "./emitter.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
+export { OFFER_COPY, withOfferedMention } from "./offer.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
 export { plainPreview } from "./plainPreview.js";
 export {
@@ -84,6 +85,7 @@ export {
   type NotificationMode,
   type NotificationPaging,
   notificationPagingKey,
+  type OfferEntry,
   type PendingMessage,
   type PreparationEntry,
   preparationKey,

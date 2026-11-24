@@ -69,6 +69,18 @@ export interface PreparationEntry {
     agentIds: string[];
     expiresAt: number | undefined;
 }
+/**
+ * The agent the server offers on a composer draft that tags none but reads like work
+ * (`Draft.offered_agent_id`). A client that shows the offer, and is not told otherwise by the
+ * person, sends the message with `agentUserId` among its mention ids, which starts the work
+ * exactly as a typed mention would.
+ */
+export interface OfferEntry {
+    channelId: string;
+    threadRootId: string;
+    agentId: string;
+    agentUserId: string;
+}
 /** Key for `TankState.preparationByThread`: one composer per (channel, thread root); an empty root is the channel composer. */
 export declare function preparationKey(channelId: string, threadRootId: string): string;
 export interface TankState {
@@ -110,6 +122,8 @@ export interface TankState {
     threadLiveStreams: Record<string, true>;
     /** Early-run "getting ready" state keyed by `preparationKey(channelId, threadRootId)`. */
     preparationByThread: Record<string, PreparationEntry>;
+    /** The agent offered on a draft, keyed like `preparationByThread`. Absent when there is no offer. */
+    offerByThread: Record<string, OfferEntry>;
     /** client_msg_id → outbox status. */
     pending: Record<string, PendingMessage>;
     connection: ConnectionState;
@@ -506,6 +520,8 @@ export declare class TankStore {
     /** Whether the person has live agent output on in this thread. */
     selectThreadLiveStream: (channelId: string, threadRootId: string) => boolean;
     selectAgentStatus: (key: string) => AgentStatus | undefined;
+    /** The agent offered on a composer's draft (empty `threadRootId` = the channel composer), if any. */
+    selectOffer: (channelId: string, threadRootId: string) => OfferEntry | undefined;
     /** The early-run preparation for a composer (empty `threadRootId` = the channel composer), if the store has one. */
     selectPreparation: (channelId: string, threadRootId: string) => PreparationEntry | undefined;
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */

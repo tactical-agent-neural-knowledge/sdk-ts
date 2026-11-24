@@ -19,6 +19,7 @@ import {
   type ConnectionState,
   type NotificationPaging,
   notificationPagingKey,
+  type OfferEntry,
   type PendingMessage,
   type TankState,
   type TankStore,
@@ -729,6 +730,16 @@ export function useThreadLiveStream(channelId: string, threadRootId: string): Th
 /** Every live `agent_status` frame in a channel (its threads included). */
 export function useAgentStatuses(channelId: string): AgentStatus[] {
   return useTankSelector(useCallback((s: TankStore) => s.selectAgentStatuses(channelId), [channelId]));
+}
+
+/**
+ * The agent the server offers on this composer's draft (`threadRootId` empty = the channel
+ * composer), or undefined. See `OFFER_COPY` and `withOfferedMention` in the client.
+ */
+export function useOffer(channelId: string, threadRootId: string): OfferEntry | undefined {
+  return useTankSelector(
+    useCallback((s: TankStore) => s.selectOffer(channelId, threadRootId), [channelId, threadRootId]),
+  );
 }
 
 /** The early-run "getting ready" state for a composer (`threadRootId` empty = the channel composer). */
