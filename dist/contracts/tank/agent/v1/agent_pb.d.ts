@@ -2599,6 +2599,13 @@ export type RepoDelivery = Message<"tank.agent.v1.RepoDelivery"> & {
      * @generated from field: string updated_by = 12;
      */
     updatedBy: string;
+    /**
+     * True when the repository has no choice of its own and follows the workspace's; mode is
+     * then the workspace default it follows.
+     *
+     * @generated from field: bool follows_default = 13;
+     */
+    followsDefault: boolean;
 };
 /**
  * Describes the message tank.agent.v1.RepoDelivery.
@@ -2627,6 +2634,28 @@ export type ListRepoDeliveryResponse = Message<"tank.agent.v1.ListRepoDeliveryRe
      * @generated from field: repeated tank.agent.v1.RepoDelivery repos = 1;
      */
     repos: RepoDelivery[];
+    /**
+     * The workspace's own choice; UNSPECIFIED is the same as OWN_CI (nothing moves).
+     *
+     * @generated from field: tank.agent.v1.DeliveryMode workspace_default = 2;
+     */
+    workspaceDefault: DeliveryMode;
+    /**
+     * Why the workspace default could not be applied, in one sentence; empty when it was.
+     *
+     * @generated from field: string workspace_reason = 3;
+     */
+    workspaceReason: string;
+    /**
+     * Whether TANK's runners can be chosen in this workspace now, and why not.
+     *
+     * @generated from field: bool tank_runners_available = 4;
+     */
+    tankRunnersAvailable: boolean;
+    /**
+     * @generated from field: string tank_runners_reason = 5;
+     */
+    tankRunnersReason: string;
 };
 /**
  * Describes the message tank.agent.v1.ListRepoDeliveryResponse.
@@ -2655,6 +2684,13 @@ export type SetRepoDeliveryRequest = Message<"tank.agent.v1.SetRepoDeliveryReque
      * @generated from field: bool rotate_report_token = 4;
      */
     rotateReportToken: boolean;
+    /**
+     * Drop the repository's own choice: it follows the workspace default again (mode is
+     * then ignored).
+     *
+     * @generated from field: bool use_default = 5;
+     */
+    useDefault: boolean;
 };
 /**
  * Describes the message tank.agent.v1.SetRepoDeliveryRequest.
@@ -2681,6 +2717,40 @@ export type SetRepoDeliveryResponse = Message<"tank.agent.v1.SetRepoDeliveryResp
  * Use `create(SetRepoDeliveryResponseSchema)` to create a new message.
  */
 export declare const SetRepoDeliveryResponseSchema: GenMessage<SetRepoDeliveryResponse>;
+/**
+ * @generated from message tank.agent.v1.SetWorkspaceDeliveryRequest
+ */
+export type SetWorkspaceDeliveryRequest = Message<"tank.agent.v1.SetWorkspaceDeliveryRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.agent.v1.DeliveryMode mode = 2;
+     */
+    mode: DeliveryMode;
+};
+/**
+ * Describes the message tank.agent.v1.SetWorkspaceDeliveryRequest.
+ * Use `create(SetWorkspaceDeliveryRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceDeliveryRequestSchema: GenMessage<SetWorkspaceDeliveryRequest>;
+/**
+ * The whole list again, every repository with what it now follows.
+ *
+ * @generated from message tank.agent.v1.SetWorkspaceDeliveryResponse
+ */
+export type SetWorkspaceDeliveryResponse = Message<"tank.agent.v1.SetWorkspaceDeliveryResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.ListRepoDeliveryResponse delivery = 1;
+     */
+    delivery?: ListRepoDeliveryResponse;
+};
+/**
+ * Describes the message tank.agent.v1.SetWorkspaceDeliveryResponse.
+ * Use `create(SetWorkspaceDeliveryResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceDeliveryResponseSchema: GenMessage<SetWorkspaceDeliveryResponse>;
 /**
  * PredictedWork is something TANK built, or proposes to build, before it was asked for.
  * It lives on a branch that is never merged until a person takes it.
@@ -3521,6 +3591,19 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof SetRepoDeliveryRequestSchema;
         output: typeof SetRepoDeliveryResponseSchema;
+    };
+    /**
+     * The workspace's own choice, which every repository follows unless it has its own
+     * (Robby, 2026-11-24: "set it globally for a workspace so they don't need to be set per
+     * tread"). Admins only. Choosing TANK's runners opens the switch pull request in every
+     * repository that follows it, and in each repository connected later.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.SetWorkspaceDelivery
+     */
+    setWorkspaceDelivery: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceDeliveryRequestSchema;
+        output: typeof SetWorkspaceDeliveryResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.ListPredictedWork

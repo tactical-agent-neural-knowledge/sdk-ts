@@ -32,6 +32,13 @@ export const OVERDRIVE_COPY = {
     switchBackOpened:
       "The pull request that moves your jobs back to GitHub's machines is open. Merge it to finish; until then your jobs keep running on TANK's runners.",
     adminsOnly: "Workspace admins choose where a repository builds and deploys.",
+    workspaceTitle: "Where this workspace's repositories build and deploy",
+    workspaceIntro:
+      "Every repository follows this unless it has its own choice in its Tread's settings. Repositories connected later follow it too.",
+    workspaceRunners:
+      "TANK opens one pull request in each repository that follows this. A repository's jobs move when its pull request is merged.",
+    workspaceDefault: "Workspace default",
+    followsDetail: "Follows the workspace's choice. Choose another option to give this repository its own.",
     none: "Connect a repository to a Tread and it shows up here.",
   },
   predicted: {
@@ -78,6 +85,28 @@ export const DELIVERY_CHOICES: readonly DeliveryChoice[] = [
   { mode: DeliveryMode.TANK_RUNNERS, ...OVERDRIVE_COPY.delivery.tankRunners },
   { mode: DeliveryMode.OTHER_CI, ...OVERDRIVE_COPY.delivery.otherCi },
 ];
+
+/** The name of a choice, as the options call it. */
+export function deliveryLabel(mode: DeliveryMode | undefined): string {
+  const m = deliveryMode(mode);
+  return DELIVERY_CHOICES.find((c) => c.mode === m)?.label ?? OVERDRIVE_COPY.delivery.ownCi.label;
+}
+
+/** The option that makes a repository follow the workspace: "Workspace default (TANK's runners)". */
+export function workspaceDefaultLabel(workspaceDefault: DeliveryMode | undefined): string {
+  return `${OVERDRIVE_COPY.delivery.workspaceDefault} (${deliveryLabel(workspaceDefault)})`;
+}
+
+/**
+ * Which option a repository shows as chosen: "default" while it follows the workspace, its
+ * own mode otherwise. The value a client puts on the "Workspace default" option.
+ */
+export const FOLLOWS_DEFAULT = "default";
+export function deliveryChoice(
+  r: Pick<RepoDelivery, "mode" | "followsDefault">,
+): DeliveryMode | typeof FOLLOWS_DEFAULT {
+  return r.followsDefault ? FOLLOWS_DEFAULT : deliveryMode(r.mode);
+}
 
 /** A repository with no setting builds on the CI it has today. */
 export function deliveryMode(mode: DeliveryMode | undefined): DeliveryMode {
