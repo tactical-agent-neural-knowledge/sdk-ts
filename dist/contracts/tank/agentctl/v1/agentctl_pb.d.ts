@@ -4574,6 +4574,60 @@ export type CancelPreparationResponse = Message<"tank.agentctl.v1.CancelPreparat
  */
 export declare const CancelPreparationResponseSchema: GenMessage<CancelPreparationResponse>;
 /**
+ * @generated from message tank.agentctl.v1.StageReplyRequest
+ */
+export type StageReplyRequest = Message<"tank.agentctl.v1.StageReplyRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 2;
+     */
+    channelId: string;
+    /**
+     * empty for a draft that starts a new thread
+     *
+     * @generated from field: string thread_root_id = 3;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string agent_id = 4;
+     */
+    agentId: string;
+    /**
+     * @generated from field: string requested_by = 5;
+     */
+    requestedBy: string;
+    /**
+     * The draft as it stands.
+     *
+     * @generated from field: string text = 6;
+     */
+    text: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.StageReplyRequest.
+ * Use `create(StageReplyRequestSchema)` to create a new message.
+ */
+export declare const StageReplyRequestSchema: GenMessage<StageReplyRequest>;
+/**
+ * @generated from message tank.agentctl.v1.StageReplyResponse
+ */
+export type StageReplyResponse = Message<"tank.agentctl.v1.StageReplyResponse"> & {
+    /**
+     * A reply is being written ahead for this draft.
+     *
+     * @generated from field: bool staged = 1;
+     */
+    staged: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.StageReplyResponse.
+ * Use `create(StageReplyResponseSchema)` to create a new message.
+ */
+export declare const StageReplyResponseSchema: GenMessage<StageReplyResponse>;
+/**
  * @generated from message tank.agentctl.v1.GetRunRequest
  */
 export type GetRunRequest = Message<"tank.agentctl.v1.GetRunRequest"> & {
@@ -9787,6 +9841,20 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof CancelPreparationRequestSchema;
         output: typeof CancelPreparationResponseSchema;
+    };
+    /**
+     * A draft tags an agent that answers from the Neural model alone (2026-11-23, replies within
+     * half a second): the control plane may write that reply ahead of the send. What it writes is
+     * used only when the message that arrives is exactly this text, from this person, in this
+     * thread, and is thrown away otherwise; nothing is posted or stored by this call. Idempotent,
+     * and a no-op for an agent that is not pinned to the Neural model.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.StageReply
+     */
+    stageReply: {
+        methodKind: "unary";
+        input: typeof StageReplyRequestSchema;
+        output: typeof StageReplyResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.OpenThread

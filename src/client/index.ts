@@ -41,6 +41,12 @@ export { Emitter, type Handler } from "./emitter.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
 export { plainPreview } from "./plainPreview.js";
+export {
+  createDraftPreparer,
+  type DraftPreparer,
+  type DraftPreparerOptions,
+  PREPARE_PAUSE_MS,
+} from "./prepare.js";
 export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 export {
   browserOnlineSignal,
@@ -52,6 +58,7 @@ export {
   type WebSocketCtor,
   type WebSocketLike,
 } from "./realtime.js";
+export { nextReveal, REVEAL_TICK_MS, revealSteps } from "./reveal.js";
 export { expandShortcodes } from "./shortcodes.js";
 export {
   NEURAL_STARTERS,
