@@ -48,6 +48,14 @@ export const OVERDRIVE_COPY = {
     proofStructure: "The database change was tried on an empty copy of your tables.",
     proofQuestions: "The database change was checked against your real data, read-only.",
     proofClone: "The database change was run on a private copy of your database.",
+    taken: "Taken. TANK is finishing it in a new thread.",
+  },
+  // Spend's own lines for the add-on (Overdrive phase 5): what building ahead cost, and the
+  // add-on's monthly price, which is not agent spend and is in no total.
+  spend: {
+    predicted: "Work built ahead (Overdrive)",
+    fee: "Overdrive add-on fee",
+    feeNote: "The add-on's monthly price. Not counted in the totals above.",
   },
   addon: {
     name: "Overdrive",
@@ -124,6 +132,14 @@ export function predictedAction(work: Pick<PredictedWork, "state">): string {
   return work.state === "ready" || work.state === "stale"
     ? OVERDRIVE_COPY.predicted.take
     : OVERDRIVE_COPY.predicted.start;
+}
+
+/**
+ * Whether Next takes this item with TakePredictedWork: built work that did not come from a
+ * queued task. A queued task's prediction is taken by starting the task, built or not.
+ */
+export function takesBuilt(work: Pick<PredictedWork, "state" | "sourceTaskId">): boolean {
+  return !work.sourceTaskId && (work.state === "ready" || work.state === "stale");
 }
 
 /** "4 of 9 taken in the last 30 days", or "" before anything was offered. */

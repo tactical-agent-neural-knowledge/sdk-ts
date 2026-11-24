@@ -8,6 +8,7 @@ import {
   OVERDRIVE_COPY,
   predictedAction,
   predictedLine,
+  takesBuilt,
 } from "./overdrive.js";
 
 describe("overdrive", () => {
@@ -78,5 +79,15 @@ describe("switchLine", () => {
       OVERDRIVE_COPY.delivery.switchBackOpened,
     );
     expect(switchLine({ mode: own, switchStatus: "merged", switchPullRequestUrl: url })).toBe("");
+  });
+});
+
+describe("taking built work", () => {
+  it("takes built work that no queued task owns; a task is started instead", () => {
+    expect(takesBuilt({ state: "ready", sourceTaskId: "" })).toBe(true);
+    expect(takesBuilt({ state: "stale", sourceTaskId: "" })).toBe(true);
+    expect(takesBuilt({ state: "ready", sourceTaskId: "9" })).toBe(false);
+    expect(takesBuilt({ state: "idea", sourceTaskId: "" })).toBe(false);
+    expect(OVERDRIVE_COPY.spend.fee).toBe("Overdrive add-on fee");
   });
 });

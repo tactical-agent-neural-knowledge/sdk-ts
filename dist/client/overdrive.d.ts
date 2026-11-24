@@ -45,6 +45,12 @@ export declare const OVERDRIVE_COPY: {
         readonly proofStructure: "The database change was tried on an empty copy of your tables.";
         readonly proofQuestions: "The database change was checked against your real data, read-only.";
         readonly proofClone: "The database change was run on a private copy of your database.";
+        readonly taken: "Taken. TANK is finishing it in a new thread.";
+    };
+    readonly spend: {
+        readonly predicted: "Work built ahead (Overdrive)";
+        readonly fee: "Overdrive add-on fee";
+        readonly feeNote: "The add-on's monthly price. Not counted in the totals above.";
     };
     readonly addon: {
         readonly name: "Overdrive";
@@ -74,6 +80,11 @@ export declare function predictedLine(work: Pick<PredictedWork, "state">): strin
 export declare function migrationProofLine(work: Pick<PredictedWork, "migrationProof">): string;
 /** What the primary button says: a built item is taken, an idea is started. */
 export declare function predictedAction(work: Pick<PredictedWork, "state">): string;
+/**
+ * Whether Next takes this item with TakePredictedWork: built work that did not come from a
+ * queued task. A queued task's prediction is taken by starting the task, built or not.
+ */
+export declare function takesBuilt(work: Pick<PredictedWork, "state" | "sourceTaskId">): boolean;
 /** "4 of 9 taken in the last 30 days", or "" before anything was offered. */
 export declare function hitRateLine(offered: number, taken: number): string;
 /** A duration the way the stopwatch says it: "40s", "5m 25s", "1h 38m" (the card's own wording). */
