@@ -170,6 +170,14 @@ export type Run = Message<"tank.agent.v1.Run"> & {
      * @generated from field: google.protobuf.Timestamp first_reply_at = 19;
      */
     firstReplyAt?: Timestamp;
+    /**
+     * When the run entered its current state: a strip shows how long a run has waited on a
+     * person ("waiting since 7:38") rather than its whole age (cache7, 2026-11-24: "3h 04m"
+     * under a merge waiting for a yes).
+     *
+     * @generated from field: google.protobuf.Timestamp state_changed_at = 20;
+     */
+    stateChangedAt?: Timestamp;
 };
 /**
  * Describes the message tank.agent.v1.Run.
