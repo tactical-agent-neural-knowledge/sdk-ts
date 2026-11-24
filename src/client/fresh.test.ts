@@ -8,6 +8,8 @@ import {
   freshAlpha,
   freshChars,
   freshPieces,
+  MARKER_HOLD_MS,
+  openMarker,
 } from "./fresh.js";
 
 describe("FreshTail", () => {
@@ -174,5 +176,81 @@ describe("BlockGate", () => {
     expect(g.step("One. Two is still arriv", 40, true)).toBe(23);
     expect(g.step("Next", 60)).toBeUndefined();
     expect(g.length).toBe(4);
+  });
+});
+
+describe("openMarker", () => {
+  it("finds a marker that has not closed yet, and nothing in balanced text", () => {
+    expect(openMarker("symbols from **largest to")).toBe(13);
+    expect(openMarker("symbols from **largest to smallest**, and")).toBe(-1);
+    expect(openMarker("so `VIII")).toBe(3);
+    expect(openMarker("so `VIII` is eight")).toBe(-1);
+    expect(openMarker("see [the docs](https://tank.ch")).toBe(4);
+    expect(openMarker("see [the docs](https://tank.chat) now")).toBe(-1);
+    expect(openMarker("this is *really")).toBe(8);
+    expect(openMarker("this is *really* true")).toBe(-1);
+    expect(openMarker("was ~~wrong")).toBe(4);
+  });
+
+  it("is not fooled by bullets, snake_case, plain brackets or a new paragraph", () => {
+    expect(openMarker("Steps:\n* first\n* second")).toBe(-1);
+    expect(openMarker("call read_file_now with it")).toBe(-1);
+    expect(openMarker("the list [1, 2] is short")).toBe(-1);
+    expect(openMarker("a stray **star here\n\nA new paragraph")).toBe(-1);
+    expect(openMarker("2 * 3 = 6")).toBe(-1);
+  });
+
+  it("knows an open code fence, and ignores markers inside one", () => {
+    const text = "Here:\n```ts\nconst a = b ** c;\n";
+    expect(openMarker(text)).toBe(6);
+    expect(openMarker(`${text}\`\`\`\nDone`)).toBe(-1);
+  });
+});
+
+describe("BlockGate and Markdown", () => {
+  const run = (g: BlockGate, pieces: [number, string][], until: number) => {
+    const shown: string[] = [];
+    let text = "";
+    let k = 0;
+    for (let now = 0; now <= until; now += 16) {
+      while (k < pieces.length && (pieces[k] as [number, string])[0] <= now)
+        text += (pieces[k++] as [number, string])[1];
+      const out = g.step(text, now);
+      if (out !== undefined) shown.push(text.slice(0, out));
+    }
+    return { shown, text };
+  };
+
+  it("never shows a block that ends inside bold, code or a link", () => {
+    const g = new BlockGate();
+    const { shown, text } = run(
+      g,
+      [
+        [0, "Roman "],
+        [40, "numerals add symbols from **largest "],
+        [200, "to "],
+        [380, "smallest**, and `VIII` is "],
+        [560, "eight. See [the "],
+        [740, "table](https://tank.chat/t) for more."],
+      ],
+      1400,
+    );
+    expect(shown[shown.length - 1]).toBe(text);
+    for (const s of shown) expect(openMarker(s)).toBe(-1);
+    // What came before the marker was not held back with it.
+    expect(shown.some((s) => s.endsWith("symbols from "))).toBe(true);
+  });
+
+  it("does not stall on a marker that never closes", () => {
+    const g = new BlockGate();
+    const { shown, text } = run(
+      g,
+      [
+        [0, "Price: "],
+        [40, "5 *per unit, before tax and shipping"],
+      ],
+      MARKER_HOLD_MS + 400,
+    );
+    expect(shown[shown.length - 1]).toBe(text);
   });
 });

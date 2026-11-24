@@ -66,6 +66,16 @@ export interface FreshPiece {
 export declare function freshPieces(text: string, runs: FreshRun[], after: number): FreshPiece[];
 /** Arrivals this close together are one block; nothing waits longer than this to be shown. */
 export declare const BLOCK_WINDOW_MS = 150;
+/** How long a block may be held back so that a Markdown marker in it can close. */
+export declare const MARKER_HOLD_MS = 400;
+/**
+ * Where the earliest Markdown marker that is still open at the end of `text` begins, or -1 when
+ * everything that was opened has been closed. Shown as it is, an open marker is raw punctuation
+ * on screen ("**largest to" until the closing stars arrive), so a block is never cut inside one.
+ * Known markers: bold (`**`, `__`), emphasis (`*x`, `_x`), strike (`~~`), inline code, a link
+ * (`[text](address)`), and a code fence. Inline markers do not outlive their paragraph.
+ */
+export declare function openMarker(text: string): number;
 /**
  * Gathers arrived text into blocks. `step` says how much of the text is out now; when the
  * answer grows, that growth is one block, to be faded in together.
@@ -76,6 +86,8 @@ export declare class BlockGate {
     /** What has arrived and is not out yet: up to where, and when it arrived. Oldest first. */
     private arrivals;
     private lastOut;
+    /** Since when a block has been held back for a marker to close; -1 when none is. */
+    private heldSince;
     /** How much of the text is out now. */
     get length(): number;
     /**
