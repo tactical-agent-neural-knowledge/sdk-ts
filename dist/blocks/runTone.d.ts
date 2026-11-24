@@ -8,7 +8,7 @@ export type RunTone = "running" | "awaiting" | "done" | "failed" | "cancelled";
 export declare function runTone(state: RunState): RunTone;
 /** True once a run can no longer change state. */
 export declare function isTerminalRunState(state: RunState): boolean;
-/** Human label for a run state ("awaiting plan approval", "watching CI", …). */
+/** Plain label for a run state ("ready to check", "checking it live", …). */
 export declare function runStateLabel(state: RunState): string;
 /** MUI palette key per tone (`secondary` = Cybernetic Purple, `warning` = Industrial Amber). */
 export declare const RUN_TONE_MUI_COLOR: Record<RunTone, "secondary" | "warning" | "success" | "error" | "default">;
