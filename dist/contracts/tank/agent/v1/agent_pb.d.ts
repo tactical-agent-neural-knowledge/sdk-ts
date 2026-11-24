@@ -2724,6 +2724,13 @@ export type PredictedWork = Message<"tank.agent.v1.PredictedWork"> & {
      * @generated from field: string run_id = 17;
      */
     runId: string;
+    /**
+     * source = queued_task: the task waiting in Queued that this was predicted from.
+     * Starting that task is how an idea is taken.
+     *
+     * @generated from field: string source_task_id = 18;
+     */
+    sourceTaskId: string;
 };
 /**
  * Describes the message tank.agent.v1.PredictedWork.

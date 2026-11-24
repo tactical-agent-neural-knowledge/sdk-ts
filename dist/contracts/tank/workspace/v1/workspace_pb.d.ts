@@ -336,13 +336,22 @@ export type GetBootstrapResponse = Message<"tank.workspace.v1.GetBootstrapRespon
      */
     threadReadStates: ThreadReadState[];
     /**
-     * The threads where the caller has live agent output turned on (every entry has
-     * enabled = true; a thread not listed is off). Loaded once so a client and the realtime
-     * gateway know the setting without a call per thread.
+     * The threads where the caller has set live agent output themselves, on or off (read
+     * `enabled`). A thread not listed takes the default below. Loaded once so a client and the
+     * realtime gateway know the setting without a call per thread.
      *
      * @generated from field: repeated tank.workspace.v1.ThreadLiveStream thread_live_streams = 12;
      */
     threadLiveStreams: ThreadLiveStream[];
+    /**
+     * What a thread not listed above takes: true since 2026-11-24, when live output became
+     * the default in every Tread (Robby: "default every tread to live output in all
+     * workspaces"). A server from before that never sets it, and a client then treats a
+     * thread not listed as off, as it always was.
+     *
+     * @generated from field: bool thread_live_stream_default = 13;
+     */
+    threadLiveStreamDefault: boolean;
 };
 /**
  * Describes the message tank.workspace.v1.GetBootstrapResponse.
@@ -1139,15 +1148,16 @@ export declare const SetLiveAgentStreamResponseSchema: GenMessage<SetLiveAgentSt
 /**
  * Live agent output for one person in one thread: while an agent works there, show its
  * status lines and stream its reply text as it is written, instead of only the final
- * message. Per person and per thread, off by default; off is the absence of a stored row.
+ * message. Per person and per thread, on by default (GetBootstrapResponse
+ * .thread_live_stream_default): a person who turns it off in a thread stays off there.
  * Written only through SetThreadLiveStream and synced to the person's other devices by
  * thread_live_stream.updated.
  *
  * Client behaviour, identical on web (Safari, Chrome, Edge), desktop (macOS, Windows,
  * Linux) and mobile (iOS, Android); no field depends on platform, browser or OS and
  * there is no capability flag:
- *  - The toggle sits in the thread header of a thread an agent is working in, off until
- *    the person turns it on, remembered for that thread, and always shows this value.
+ *  - The toggle sits in the thread header of a thread an agent is working in, on until
+ *    the person turns it off, remembered for that thread, and always shows this value.
  *  - On: show STATUS lines as they arrive and animate TEXT chunks in as they arrive.
  *    With the OS or browser reduced-motion setting, show each chunk at once, unanimated.
  *  - Off: show nothing until the stored message arrives. Turning it on or off in one
@@ -1248,7 +1258,7 @@ export declare const GetThreadLiveStreamRequestSchema: GenMessage<GetThreadLiveS
  */
 export type GetThreadLiveStreamResponse = Message<"tank.workspace.v1.GetThreadLiveStreamResponse"> & {
     /**
-     * enabled = false when nothing is stored
+     * the default (on) when the person has stored nothing
      *
      * @generated from field: tank.workspace.v1.ThreadLiveStream setting = 1;
      */
