@@ -46,3 +46,14 @@ describe("overdrive", () => {
     expect(hitRateLine(3, 7)).toBe("3 of 3 taken in the last 30 days");
   });
 });
+
+describe("askToLiveLine", () => {
+  it("words the server's seconds the way the card does", async () => {
+    const { askToLiveLine } = await import("./overdrive.js");
+    expect(askToLiveLine(0n)).toBe("");
+    expect(askToLiveLine(undefined)).toBe("");
+    expect(askToLiveLine(40n)).toBe("Ask to live: 40 s");
+    expect(askToLiveLine(853n)).toBe("Ask to live: 14 min");
+    expect(askToLiveLine(9000)).toBe("Ask to live: 2.5 h");
+  });
+});
