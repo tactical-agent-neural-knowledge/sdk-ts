@@ -34,12 +34,27 @@ export interface FreshRun {
 /** How many blocks fade at once. Blocks come at most one every BLOCK_WINDOW_MS and fade for
  * FRESH_FADE_MS, so three or four overlap; the cap is a guard, not something a reply reaches. */
 export declare const FRESH_MAX_RUNS = 8;
+/**
+ * The settling tint (Robby, 2026-11-24, after the fade went live: "The neural speed is perfect.
+ * What I want is for the text to appear, but the first time the user sees it, it soft fades
+ * from a lightly colored text to the font it is now. Don't change anything on the speed, add
+ * this as a separate animation."). Text still appears exactly when it does now and at full
+ * strength; it is drawn in a light tint and its color settles to the normal text color over
+ * TINT_SETTLE_MS, so on a long reply arriving fast a soft band of color trails the newest words.
+ */
+export declare const TINT_SETTLE_MS = 800;
+/** How many runs settle at once: the trailing band, never the whole reply. */
+export declare const TINT_MAX_RUNS = 16;
 /** A gentle ease in and out (a half cosine): no jump at the start, no snap at the end. */
-export declare function freshAlpha(elapsedMs: number): number;
+export declare function freshAlpha(elapsedMs: number, durationMs?: number): number;
 /** Tracks one text as it grows. */
 export declare class FreshTail {
     private length;
     private blocks;
+    private readonly durationMs;
+    private readonly maxRuns;
+    /** `durationMs`: how long a run takes to become plain (the fade by default, or TINT_SETTLE_MS). */
+    constructor(durationMs?: number, maxRuns?: number);
     /** The text is now `length` characters long. Call it whenever the text is drawn. */
     arrived(length: number, now: number): void;
     /** Whether anything is still fading. */

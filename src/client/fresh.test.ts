@@ -10,6 +10,8 @@ import {
   freshPieces,
   MARKER_HOLD_MS,
   openMarker,
+  TINT_MAX_RUNS,
+  TINT_SETTLE_MS,
 } from "./fresh.js";
 
 describe("FreshTail", () => {
@@ -252,5 +254,19 @@ describe("BlockGate and Markdown", () => {
       MARKER_HOLD_MS + 400,
     );
     expect(shown[shown.length - 1]).toBe(text);
+  });
+});
+
+describe("the settling tint", () => {
+  it("is a separate, longer clock, and keeps only the trailing band", () => {
+    const t = new FreshTail(TINT_SETTLE_MS, TINT_MAX_RUNS);
+    t.arrived(10, 0);
+    // Past the fade's 280 ms the tint is still settling; it is plain at 800 ms.
+    expect(t.runs(400)[0]?.alpha).toBeGreaterThan(0.4);
+    expect(t.runs(400)[0]?.alpha).toBeLessThan(1);
+    expect(t.active(TINT_SETTLE_MS)).toBe(false);
+    for (let i = 2; i <= 40; i++) t.arrived(i * 10, 1);
+    expect(t.runs(2)).toHaveLength(TINT_MAX_RUNS);
+    expect(freshAlpha(400, TINT_SETTLE_MS)).toBeCloseTo(0.5, 5);
   });
 });

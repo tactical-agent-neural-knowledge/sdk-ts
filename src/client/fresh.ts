@@ -44,17 +44,37 @@ interface Block {
   at: number;
 }
 
+/**
+ * The settling tint (Robby, 2026-11-24, after the fade went live: "The neural speed is perfect.
+ * What I want is for the text to appear, but the first time the user sees it, it soft fades
+ * from a lightly colored text to the font it is now. Don't change anything on the speed, add
+ * this as a separate animation."). Text still appears exactly when it does now and at full
+ * strength; it is drawn in a light tint and its color settles to the normal text color over
+ * TINT_SETTLE_MS, so on a long reply arriving fast a soft band of color trails the newest words.
+ */
+export const TINT_SETTLE_MS = 800;
+/** How many runs settle at once: the trailing band, never the whole reply. */
+export const TINT_MAX_RUNS = 16;
+
 /** A gentle ease in and out (a half cosine): no jump at the start, no snap at the end. */
-export function freshAlpha(elapsedMs: number): number {
+export function freshAlpha(elapsedMs: number, durationMs = FRESH_FADE_MS): number {
   if (elapsedMs <= 0) return 0;
-  if (elapsedMs >= FRESH_FADE_MS) return 1;
-  return (1 - Math.cos((Math.PI * elapsedMs) / FRESH_FADE_MS)) / 2;
+  if (elapsedMs >= durationMs) return 1;
+  return (1 - Math.cos((Math.PI * elapsedMs) / durationMs)) / 2;
 }
 
 /** Tracks one text as it grows. */
 export class FreshTail {
   private length = 0;
   private blocks: Block[] = [];
+  private readonly durationMs: number;
+  private readonly maxRuns: number;
+
+  /** `durationMs`: how long a run takes to become plain (the fade by default, or TINT_SETTLE_MS). */
+  constructor(durationMs = FRESH_FADE_MS, maxRuns = FRESH_MAX_RUNS) {
+    this.durationMs = durationMs;
+    this.maxRuns = maxRuns;
+  }
 
   /** The text is now `length` characters long. Call it whenever the text is drawn. */
   arrived(length: number, now: number): void {
@@ -67,7 +87,7 @@ export class FreshTail {
     }
     this.blocks.push({ from: this.length, at: now });
     this.length = length;
-    if (this.blocks.length > FRESH_MAX_RUNS) this.blocks.splice(0, this.blocks.length - FRESH_MAX_RUNS);
+    if (this.blocks.length > this.maxRuns) this.blocks.splice(0, this.blocks.length - this.maxRuns);
   }
 
   /** Whether anything is still fading. */
@@ -83,14 +103,16 @@ export class FreshTail {
     for (let i = 0; i < this.blocks.length; i++) {
       const b = this.blocks[i] as Block;
       const to = i + 1 < this.blocks.length ? (this.blocks[i + 1] as Block).from : this.length;
-      if (to > b.from) out.push({ chars: to - b.from, alpha: freshAlpha(now - b.at), at: b.at });
+      if (to > b.from)
+        out.push({ chars: to - b.from, alpha: freshAlpha(now - b.at, this.durationMs), at: b.at });
     }
     return out;
   }
 
   /** Blocks that have finished fading are plain text again. They finish in the order they came. */
   private settle(now: number): void {
-    while (this.blocks.length > 0 && now - (this.blocks[0] as Block).at >= FRESH_FADE_MS) this.blocks.shift();
+    while (this.blocks.length > 0 && now - (this.blocks[0] as Block).at >= this.durationMs)
+      this.blocks.shift();
   }
 }
 
