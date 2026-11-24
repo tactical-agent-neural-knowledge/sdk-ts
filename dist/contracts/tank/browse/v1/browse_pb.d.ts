@@ -58,6 +58,18 @@ export type Page = Message<"tank.browse.v1.Page"> & {
      * @generated from field: string driver_name = 11;
      */
     driverName: string;
+    /**
+     * The site behind the page, read in the background since it was connected (Robby,
+     * 2026-11-24: so Neural can answer about the site and go straight to a page it names):
+     * whether it is still reading, and how many of the site's pages have been read.
+     *
+     * @generated from field: bool site_reading = 12;
+     */
+    siteReading: boolean;
+    /**
+     * @generated from field: int32 site_pages = 13;
+     */
+    sitePages: number;
 };
 /**
  * Describes the message tank.browse.v1.Page.
