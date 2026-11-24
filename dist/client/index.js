@@ -4,7 +4,7 @@ export { Backoff } from "./backoff.js";
 export { createTankClient, TankClient, } from "./client.js";
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
 export { Emitter } from "./emitter.js";
-export { FRESH_FADE_MS, FRESH_MAX_RUNS, FRESH_TICK_MS, FreshTail, freshAlpha, freshChars, freshPieces, PACE_LAG_MS, PACE_MIN_CPS, RevealPacer, } from "./fresh.js";
+export { BLOCK_WINDOW_MS, BlockGate, FRESH_FADE_MS, FRESH_MAX_RUNS, FRESH_TICK_MS, FreshTail, freshAlpha, freshChars, freshPieces, } from "./fresh.js";
 export { MODEL_CHOICES, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { OFFER_COPY, withOfferedMention } from "./offer.js";
 export * from "./overdrive.js";

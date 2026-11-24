@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
+  BLOCK_WINDOW_MS,
+  BlockGate,
   FRESH_FADE_MS,
   FRESH_MAX_RUNS,
   FreshTail,
   freshAlpha,
   freshChars,
   freshPieces,
-  PACE_LAG_MS,
-  RevealPacer,
 } from "./fresh.js";
 
 describe("FreshTail", () => {
@@ -48,10 +48,13 @@ describe("FreshTail", () => {
     expect(freshChars(t.runs(20))).toBe(9);
   });
 
-  it("eases out from nothing to fully there", () => {
+  it("eases gently from nothing to fully there", () => {
     expect(freshAlpha(0)).toBe(0);
     expect(freshAlpha(FRESH_FADE_MS)).toBe(1);
-    expect(freshAlpha(FRESH_FADE_MS / 2)).toBeGreaterThan(0.8);
+    expect(freshAlpha(FRESH_FADE_MS / 2)).toBeCloseTo(0.5, 5);
+    // Gentle at both ends: the first and last tenth of the fade move very little.
+    expect(freshAlpha(FRESH_FADE_MS / 10)).toBeLessThan(0.03);
+    expect(freshAlpha((FRESH_FADE_MS * 9) / 10)).toBeGreaterThan(0.97);
   });
 });
 
@@ -92,47 +95,84 @@ describe("FreshTail cap", () => {
   });
 });
 
-describe("RevealPacer", () => {
-  const drain = (p: RevealPacer, text: string, from: number, until: number, ended = false) => {
-    const cuts: [number, number][] = [];
-    for (let now = from; now <= until; now += 16)
-      for (const c of p.step(text, now, ended)) cuts.push([now, c]);
-    return cuts;
-  };
-
-  it("lets a burst out a word at a time, spread over frames, and never far behind", () => {
-    const p = new RevealPacer();
-    const text = "one two three four five six seven eight nine ten eleven twelve ".repeat(4);
-    const cuts = drain(p, text, 0, 400);
-    expect(p.length).toBe(text.length);
-    // Spread over several frames, not painted in one.
-    expect(new Set(cuts.map(([at]) => at)).size).toBeGreaterThan(4);
-    // Every cut ends a whole word.
-    for (const [, c] of cuts) expect(c === text.length || !/\s/.test(text[c] as string)).toBe(true);
-    // And all of it is out by the time it has waited the lag (give or take a frame).
-    expect(Math.max(...cuts.map(([at]) => at))).toBeLessThanOrEqual(PACE_LAG_MS + 16);
+describe("BlockGate", () => {
+  it("shows the first text at once and a reply that arrives whole as one block", () => {
+    const g = new BlockGate();
+    const whole = "A reply that was already written arrives all at once. It is one block, not many.";
+    expect(g.step(whole, 1000)).toBe(whole.length);
+    expect(g.step(whole, 1016)).toBeUndefined();
   });
 
-  it("waits for the end of the last word, but not past the lag", () => {
-    const p = new RevealPacer();
-    expect(p.step("Hello wor", 0)).toEqual([6]);
-    expect(p.length).toBe(6);
-    // The rest of the word arrives: it goes out whole.
-    const cuts = drain(p, "Hello world and", 16, 64);
-    expect(cuts.map(([, c]) => c)).toContain(12);
-    // A run with no space is shown once it has waited as long as anything may.
-    const q = new RevealPacer();
-    q.step("https://example.com/a/very/long/address", 0);
-    expect(q.length).toBe(0);
-    drain(q, "https://example.com/a/very/long/address", 16, PACE_LAG_MS + 64);
-    expect(q.length).toBe(39);
+  it("gathers what arrives within the window into one block, never a word at a time", () => {
+    const g = new BlockGate();
+    let text = "The ";
+    expect(g.step(text, 0)).toBe(4);
+    // A token every 30 ms: nothing is let out word by word.
+    const outs: [number, number][] = [];
+    const tokens = [
+      "quick ",
+      "brown ",
+      "fox ",
+      "jumps ",
+      "over ",
+      "the ",
+      "lazy ",
+      "dog ",
+      "and ",
+      "keeps ",
+      "going ",
+    ];
+    let now = 0;
+    for (const tok of tokens) {
+      now += 30;
+      text += tok;
+      const out = g.step(text, now);
+      if (out !== undefined) outs.push([now, out]);
+    }
+    for (now += 16; now < 800; now += 16) {
+      const out = g.step(text, now);
+      if (out !== undefined) outs.push([now, out]);
+    }
+    expect(g.length).toBe(text.length);
+    // Eleven tokens came; they went out as a few blocks of several words each.
+    expect(outs.length).toBeLessThanOrEqual(4);
+    expect(outs.length).toBeGreaterThanOrEqual(2);
+    // Nothing waited longer than the window (give or take a frame) to be shown.
+    let shown = 4;
+    let arrived = 4;
+    now = 0;
+    const arrivals: [number, number][] = [];
+    for (const tok of tokens) {
+      now += 30;
+      arrived += tok.length;
+      arrivals.push([now, arrived]);
+    }
+    for (const [at, to] of outs) {
+      for (const [came, upTo] of arrivals) {
+        if (upTo > shown && upTo <= to) expect(at - came).toBeLessThanOrEqual(BLOCK_WINDOW_MS + 16);
+      }
+      shown = to;
+    }
   });
 
-  it("shows everything left the moment the stream ends, and starts over on a reset", () => {
-    const p = new RevealPacer();
-    p.step("a long sentence that has only just arrived", 0);
-    expect(p.step("a long sentence that has only just arrived", 16, true)).toEqual([42]);
-    expect(p.step("next", 32)).toEqual([]);
-    expect(p.length).toBe(4);
+  it("cuts a block where a sentence ends when what follows has only just arrived", () => {
+    const g = new BlockGate();
+    g.step("Intro. ", 0);
+    const text = "Intro. The first sentence is complete. And the";
+    // The sentence arrived at 20 ms, the start of the next one just before the block goes out.
+    g.step("Intro. The first sentence is complete. ", 20);
+    expect(g.step(text, 20 + BLOCK_WINDOW_MS - 10)).toBeUndefined();
+    expect(g.step(text, 20 + BLOCK_WINDOW_MS)).toBe("Intro. The first sentence is complete. ".length);
+    // What was left behind goes out with the next block, within its own window.
+    expect(g.step(text, 20 + BLOCK_WINDOW_MS * 2 + 16)).toBe(text.length);
+  });
+
+  it("lets everything out when the stream ends, and starts over on a reset", () => {
+    const g = new BlockGate();
+    g.step("One. ", 0);
+    expect(g.step("One. Two is still arriv", 30)).toBeUndefined();
+    expect(g.step("One. Two is still arriv", 40, true)).toBe(23);
+    expect(g.step("Next", 60)).toBeUndefined();
+    expect(g.length).toBe(4);
   });
 });
