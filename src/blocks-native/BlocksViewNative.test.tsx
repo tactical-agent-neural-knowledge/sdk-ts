@@ -364,11 +364,10 @@ describe("guardrails", () => {
     );
     expect(r.root.findAll((n) => n.props.testID === "action-approve").length).toBe(0);
     press(byTestId(r.root, "action-change-guardrail"));
-    press(byTestId(r.root, "action-resume"));
+    expect(r.root.findAll((n) => n.props.testID === "action-resume").length).toBe(0);
     press(byTestId(r.root, "action-stop"));
     expect(seen.map((a) => `${a.actionId}:${a.value}`)).toEqual([
       "guardrail.change:17",
-      "gate.approve:g9",
       "gate.request_changes:g9",
     ]);
   });
