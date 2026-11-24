@@ -327,7 +327,7 @@ function GuardrailPromptBlock({ value, ctx }) {
                     ? "resumed"
                     : value.decision === "rejected"
                         ? "stopped"
-                        : value.decision || "decided", testID: "approval-decision" })) : (_jsxs(View, { style: styles.wrap, children: [!platform ? (_jsx(Button, { compact: true, mode: "contained", onPress: () => fire("guardrail.change"), testID: "action-change-guardrail", style: styles.button, children: "Change the guardrail" })) : null, !platform ? (_jsx(Button, { compact: true, mode: "outlined", onPress: () => fire("gate.approve"), testID: "action-resume", style: styles.button, children: "Resume the run" })) : null, _jsx(Button, { compact: true, mode: "outlined", textColor: theme.colors.error, onPress: () => fire("gate.request_changes"), testID: "action-stop", style: styles.button, children: "Stop the run" })] }))] }));
+                        : value.decision || "decided", testID: "approval-decision" })) : (_jsxs(View, { style: styles.wrap, children: [!platform ? (_jsx(Button, { compact: true, mode: "contained", onPress: () => fire("guardrail.change"), testID: "action-change-guardrail", style: styles.button, children: "Change the guardrail" })) : null, _jsx(Button, { compact: true, mode: "outlined", textColor: theme.colors.error, onPress: () => fire("gate.request_changes"), testID: "action-stop", style: styles.button, children: "Stop the run" })] }))] }));
 }
 function isWebUrl(s) {
     return /^https?:\/\/\S+$/.test(s.trim());

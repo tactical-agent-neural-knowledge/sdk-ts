@@ -338,7 +338,7 @@ describe("guardrails", () => {
     expect(screen.getByText(/cannot be approved as it is/)).toBeTruthy();
   });
 
-  it("a guardrail gate offers change, resume and stop, never approve; a platform one only stop", () => {
+  it("a guardrail gate offers change and stop, never approve or resume; a platform one only stop", () => {
     const seen: { actionId: string; value: string }[] = [];
     const b = blocks([
       approvalPrompt({
@@ -358,11 +358,10 @@ describe("guardrails", () => {
     expect(screen.queryByRole("button", { name: "Approve" })).toBeNull();
     expect(screen.getByTestId("guardrail-blocker").textContent).toMatch(/second pull request/);
     fireEvent.click(screen.getByRole("button", { name: "Change the guardrail" }));
-    fireEvent.click(screen.getByRole("button", { name: "Resume the run" }));
+    expect(screen.queryByRole("button", { name: "Resume the run" })).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Stop the run" }));
     expect(seen).toEqual([
       { blockId: expect.any(String), actionId: "guardrail.change", value: "17" },
-      { blockId: expect.any(String), actionId: "gate.approve", value: "g9" },
       { blockId: expect.any(String), actionId: "gate.request_changes", value: "g9" },
     ]);
     cleanup();

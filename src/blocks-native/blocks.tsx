@@ -820,17 +820,8 @@ function GuardrailPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: Bloc
               Change the guardrail
             </Button>
           ) : null}
-          {!platform ? (
-            <Button
-              compact
-              mode="outlined"
-              onPress={() => fire("gate.approve")}
-              testID="action-resume"
-              style={styles.button}
-            >
-              Resume the run
-            </Button>
-          ) : null}
+          {/* No "Resume the run": a changed or deleted guardrail resumes the run by itself, so
+              two ways on are the whole of it (Robby, 2026-11-24). */}
           <Button
             compact
             mode="outlined"
