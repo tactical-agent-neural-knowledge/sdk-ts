@@ -2778,6 +2778,12 @@ export type PredictedWork = Message<"tank.agent.v1.PredictedWork"> & {
      * @generated from field: string source_task_id = 18;
      */
     sourceTaskId: string;
+    /**
+     * The draft pull request it was built on, when it was built.
+     *
+     * @generated from field: string pr_url = 19;
+     */
+    prUrl: string;
 };
 /**
  * Describes the message tank.agent.v1.PredictedWork.
@@ -2873,6 +2879,44 @@ export type DismissPredictedWorkResponse = Message<"tank.agent.v1.DismissPredict
  * Use `create(DismissPredictedWorkResponseSchema)` to create a new message.
  */
 export declare const DismissPredictedWorkResponseSchema: GenMessage<DismissPredictedWorkResponse>;
+/**
+ * @generated from message tank.agent.v1.TakePredictedWorkRequest
+ */
+export type TakePredictedWorkRequest = Message<"tank.agent.v1.TakePredictedWorkRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+};
+/**
+ * Describes the message tank.agent.v1.TakePredictedWorkRequest.
+ * Use `create(TakePredictedWorkRequestSchema)` to create a new message.
+ */
+export declare const TakePredictedWorkRequestSchema: GenMessage<TakePredictedWorkRequest>;
+/**
+ * @generated from message tank.agent.v1.TakePredictedWorkResponse
+ */
+export type TakePredictedWorkResponse = Message<"tank.agent.v1.TakePredictedWorkResponse"> & {
+    /**
+     * Where the run that carries it on is working.
+     *
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+};
+/**
+ * Describes the message tank.agent.v1.TakePredictedWorkResponse.
+ * Use `create(TakePredictedWorkResponseSchema)` to create a new message.
+ */
+export declare const TakePredictedWorkResponseSchema: GenMessage<TakePredictedWorkResponse>;
 /**
  * @generated from enum tank.agent.v1.RunState
  */
@@ -3493,6 +3537,18 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof DismissPredictedWorkRequestSchema;
         output: typeof DismissPredictedWorkResponseSchema;
+    };
+    /**
+     * Take work TANK built ahead: a run carries on its branch in a thread of the Tread it was
+     * predicted in, finishes it and asks for the merge like any other run. A prediction from a
+     * queued task is taken by starting the task instead.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.TakePredictedWork
+     */
+    takePredictedWork: {
+        methodKind: "unary";
+        input: typeof TakePredictedWorkRequestSchema;
+        output: typeof TakePredictedWorkResponseSchema;
     };
     /**
      * The Tread's switchboard: metrics for members, settings for admins.

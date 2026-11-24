@@ -1,9 +1,9 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { DismissPredictedWorkRequest, ListPredictedWorkRequest, ListPredictedWorkResponse, ListRepoDeliveryRequest, ListRepoDeliveryResponse, Run, SetRepoDeliveryRequest, SetRepoDeliveryResponse, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
+import type { DismissPredictedWorkRequest, ListPredictedWorkRequest, ListPredictedWorkResponse, ListRepoDeliveryRequest, ListRepoDeliveryResponse, Run, SetRepoDeliveryRequest, SetRepoDeliveryResponse, TakePredictedWorkRequest, TakePredictedWorkResponse, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
 import type { AppAccount, CallToolRequest, CallToolResponse, GetToolsRequest, GetToolsResponse, ListAppsRequest, ListAppsResponse } from "../../apps/v1/apps_pb.js";
 import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks/v1/blocks_pb.js";
-import type { Board } from "../../board/v1/board_pb.js";
+import type { Board, RunReplay } from "../../board/v1/board_pb.js";
 import type { CashSummary, Customer, Expense, Invoice, InvoiceLine, Recurring, Report } from "../../books/v1/books_pb.js";
 import type { Answer, Canvas } from "../../canvas/v1/canvas_pb.js";
 import type { Guardrail, GuardrailKind, GuardrailScope, Rating, Verdict } from "../../guardrails/v1/guardrails_pb.js";
@@ -4208,6 +4208,55 @@ export type RememberResponse = Message<"tank.agentctl.v1.RememberResponse"> & {}
  */
 export declare const RememberResponseSchema: GenMessage<RememberResponse>;
 /**
+ * @generated from message tank.agentctl.v1.ReportMigrationProofRequest
+ */
+export type ReportMigrationProofRequest = Message<"tank.agentctl.v1.ReportMigrationProofRequest"> & {
+    /**
+     * structure | questions | clone
+     *
+     * @generated from field: string tier = 1;
+     */
+    tier: string;
+    /**
+     * the migrations applied without an error
+     *
+     * @generated from field: bool ok = 2;
+     */
+    ok: boolean;
+    /**
+     * how long applying them took
+     *
+     * @generated from field: int32 duration_ms = 3;
+     */
+    durationMs: number;
+    /**
+     * what applied them (goose, prisma, alembic, a command), for the record
+     *
+     * @generated from field: string tool = 4;
+     */
+    tool: string;
+    /**
+     * the last lines of the output when it failed
+     *
+     * @generated from field: string detail = 5;
+     */
+    detail: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ReportMigrationProofRequest.
+ * Use `create(ReportMigrationProofRequestSchema)` to create a new message.
+ */
+export declare const ReportMigrationProofRequestSchema: GenMessage<ReportMigrationProofRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ReportMigrationProofResponse
+ */
+export type ReportMigrationProofResponse = Message<"tank.agentctl.v1.ReportMigrationProofResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.ReportMigrationProofResponse.
+ * Use `create(ReportMigrationProofResponseSchema)` to create a new message.
+ */
+export declare const ReportMigrationProofResponseSchema: GenMessage<ReportMigrationProofResponse>;
+/**
  * @generated from message tank.agentctl.v1.Usage
  */
 export type Usage = Message<"tank.agentctl.v1.Usage"> & {
@@ -5024,6 +5073,44 @@ export type GetRunRequest = Message<"tank.agentctl.v1.GetRunRequest"> & {
  * Use `create(GetRunRequestSchema)` to create a new message.
  */
 export declare const GetRunRequestSchema: GenMessage<GetRunRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetRunReplayRequest
+ */
+export type GetRunReplayRequest = Message<"tank.agentctl.v1.GetRunReplayRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * empty: the latest run on the bench
+     *
+     * @generated from field: string run_id = 3;
+     */
+    runId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetRunReplayRequest.
+ * Use `create(GetRunReplayRequestSchema)` to create a new message.
+ */
+export declare const GetRunReplayRequestSchema: GenMessage<GetRunReplayRequest>;
+/**
+ * @generated from message tank.agentctl.v1.GetRunReplayResponse
+ */
+export type GetRunReplayResponse = Message<"tank.agentctl.v1.GetRunReplayResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.RunReplay replay = 1;
+     */
+    replay?: RunReplay;
+};
+/**
+ * Describes the message tank.agentctl.v1.GetRunReplayResponse.
+ * Use `create(GetRunReplayResponseSchema)` to create a new message.
+ */
+export declare const GetRunReplayResponseSchema: GenMessage<GetRunReplayResponse>;
 /**
  * @generated from message tank.agentctl.v1.GetRunResponse
  */
@@ -9280,6 +9367,44 @@ export type DismissWorkspacePredictedWorkResponse = Message<"tank.agentctl.v1.Di
  */
 export declare const DismissWorkspacePredictedWorkResponseSchema: GenMessage<DismissWorkspacePredictedWorkResponse>;
 /**
+ * addon says whether the workspace has the add-on: without it nothing was built to take.
+ *
+ * @generated from message tank.agentctl.v1.TakeWorkspacePredictedWorkRequest
+ */
+export type TakeWorkspacePredictedWorkRequest = Message<"tank.agentctl.v1.TakeWorkspacePredictedWorkRequest"> & {
+    /**
+     * @generated from field: tank.agent.v1.TakePredictedWorkRequest request = 1;
+     */
+    request?: TakePredictedWorkRequest;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+    /**
+     * @generated from field: bool addon = 3;
+     */
+    addon: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.TakeWorkspacePredictedWorkRequest.
+ * Use `create(TakeWorkspacePredictedWorkRequestSchema)` to create a new message.
+ */
+export declare const TakeWorkspacePredictedWorkRequestSchema: GenMessage<TakeWorkspacePredictedWorkRequest>;
+/**
+ * @generated from message tank.agentctl.v1.TakeWorkspacePredictedWorkResponse
+ */
+export type TakeWorkspacePredictedWorkResponse = Message<"tank.agentctl.v1.TakeWorkspacePredictedWorkResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.TakePredictedWorkResponse response = 1;
+     */
+    response?: TakePredictedWorkResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.TakeWorkspacePredictedWorkResponse.
+ * Use `create(TakeWorkspacePredictedWorkResponseSchema)` to create a new message.
+ */
+export declare const TakeWorkspacePredictedWorkResponseSchema: GenMessage<TakeWorkspacePredictedWorkResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -10027,6 +10152,18 @@ export declare const RunnerService: GenService<{
         output: typeof RememberResponseSchema;
     };
     /**
+     * Overdrive's predicted work: how far a database change was proven before anybody asked
+     * for it. structure = the repository's migrations applied to an empty database in the
+     * sandbox. Recorded on the run's prediction; a run that builds none is answered and ignored.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.ReportMigrationProof
+     */
+    reportMigrationProof: {
+        methodKind: "unary";
+        input: typeof ReportMigrationProofRequestSchema;
+        output: typeof ReportMigrationProofResponseSchema;
+    };
+    /**
      * Client-streaming transcript: assistant_delta, tool_call, tool_result,
      * permission_request, result, usage. Persisted to agent.run_events.
      *
@@ -10413,6 +10550,17 @@ export declare const ControlService: GenService<{
         output: typeof GetRunResponseSchema;
     };
     /**
+     * A run's live view as it happened (Overdrive replay): the bench's writes and the live line,
+     * for the runs whose Workbench is board_id. The api checks who may read it.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.GetRunReplay
+     */
+    getRunReplay: {
+        methodKind: "unary";
+        input: typeof GetRunReplayRequestSchema;
+        output: typeof GetRunReplayResponseSchema;
+    };
+    /**
      * @generated from rpc tank.agentctl.v1.ControlService.ListRuns
      */
     listRuns: {
@@ -10796,5 +10944,13 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof DismissWorkspacePredictedWorkRequestSchema;
         output: typeof DismissWorkspacePredictedWorkResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.TakeWorkspacePredictedWork
+     */
+    takeWorkspacePredictedWork: {
+        methodKind: "unary";
+        input: typeof TakeWorkspacePredictedWorkRequestSchema;
+        output: typeof TakeWorkspacePredictedWorkResponseSchema;
     };
 }>;

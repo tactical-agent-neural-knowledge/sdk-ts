@@ -2903,6 +2903,277 @@ export type RemoveBoardAccessResponse = Message<"tank.board.v1.RemoveBoardAccess
  */
 export declare const RemoveBoardAccessResponseSchema: GenMessage<RemoveBoardAccessResponse>;
 /**
+ * Replay (Overdrive, 2026-11-24): a run's live view as it happened. Every write the run made to
+ * its Workbench and every line people read while it worked ("Running the tests"), in order,
+ * so a page can scrub through the task from its first step to its last. Private to the people
+ * who may read the bench; shared outside only by a link that expires and can be stopped.
+ *
+ * @generated from message tank.board.v1.ReplayFrame
+ */
+export type ReplayFrame = Message<"tank.board.v1.ReplayFrame"> & {
+    /**
+     * @generated from field: google.protobuf.Timestamp at = 1;
+     */
+    at?: Timestamp;
+    /**
+     * The bench objects written at this moment, whole, and the ones taken off.
+     *
+     * @generated from field: repeated tank.board.v1.BoardObject objects = 2;
+     */
+    objects: BoardObject[];
+    /**
+     * @generated from field: repeated string delete_ids = 3;
+     */
+    deleteIds: string[];
+    /**
+     * The live line when it changed; empty when it did not.
+     *
+     * @generated from field: string live = 4;
+     */
+    live: string;
+    /**
+     * The run's state when it changed (running, done, failed, …); empty when it did not.
+     *
+     * @generated from field: string state = 5;
+     */
+    state: string;
+};
+/**
+ * Describes the message tank.board.v1.ReplayFrame.
+ * Use `create(ReplayFrameSchema)` to create a new message.
+ */
+export declare const ReplayFrameSchema: GenMessage<ReplayFrame>;
+/**
+ * @generated from message tank.board.v1.RunReplay
+ */
+export type RunReplay = Message<"tank.board.v1.RunReplay"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * the ask, one line
+     *
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp started_at = 3;
+     */
+    startedAt?: Timestamp;
+    /**
+     * unset while it works
+     *
+     * @generated from field: google.protobuf.Timestamp ended_at = 4;
+     */
+    endedAt?: Timestamp;
+    /**
+     * @generated from field: string state = 5;
+     */
+    state: string;
+    /**
+     * oldest first
+     *
+     * @generated from field: repeated tank.board.v1.ReplayFrame frames = 6;
+     */
+    frames: ReplayFrame[];
+    /**
+     * @generated from field: string board_id = 7;
+     */
+    boardId: string;
+    /**
+     * Other runs that worked on this bench, newest first, for a picker: id, title, started_at.
+     *
+     * @generated from field: repeated tank.board.v1.RunReplaySummary runs = 8;
+     */
+    runs: RunReplaySummary[];
+};
+/**
+ * Describes the message tank.board.v1.RunReplay.
+ * Use `create(RunReplaySchema)` to create a new message.
+ */
+export declare const RunReplaySchema: GenMessage<RunReplay>;
+/**
+ * @generated from message tank.board.v1.RunReplaySummary
+ */
+export type RunReplaySummary = Message<"tank.board.v1.RunReplaySummary"> & {
+    /**
+     * @generated from field: string run_id = 1;
+     */
+    runId: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp started_at = 3;
+     */
+    startedAt?: Timestamp;
+    /**
+     * @generated from field: string state = 4;
+     */
+    state: string;
+};
+/**
+ * Describes the message tank.board.v1.RunReplaySummary.
+ * Use `create(RunReplaySummarySchema)` to create a new message.
+ */
+export declare const RunReplaySummarySchema: GenMessage<RunReplaySummary>;
+/**
+ * @generated from message tank.board.v1.GetRunReplayRequest
+ */
+export type GetRunReplayRequest = Message<"tank.board.v1.GetRunReplayRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * the Workbench
+     *
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * empty: the latest run on it
+     *
+     * @generated from field: string run_id = 3;
+     */
+    runId: string;
+};
+/**
+ * Describes the message tank.board.v1.GetRunReplayRequest.
+ * Use `create(GetRunReplayRequestSchema)` to create a new message.
+ */
+export declare const GetRunReplayRequestSchema: GenMessage<GetRunReplayRequest>;
+/**
+ * @generated from message tank.board.v1.GetRunReplayResponse
+ */
+export type GetRunReplayResponse = Message<"tank.board.v1.GetRunReplayResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.RunReplay replay = 1;
+     */
+    replay?: RunReplay;
+};
+/**
+ * Describes the message tank.board.v1.GetRunReplayResponse.
+ * Use `create(GetRunReplayResponseSchema)` to create a new message.
+ */
+export declare const GetRunReplayResponseSchema: GenMessage<GetRunReplayResponse>;
+/**
+ * A link to one run's replay for somebody outside the workspace, for as long as the person
+ * sharing chose (1 to 720 hours; 0 = 24), until somebody stops it. Managers of the bench only.
+ *
+ * @generated from message tank.board.v1.ShareRunReplayRequest
+ */
+export type ShareRunReplayRequest = Message<"tank.board.v1.ShareRunReplayRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+    /**
+     * @generated from field: string run_id = 3;
+     */
+    runId: string;
+    /**
+     * @generated from field: int32 hours = 4;
+     */
+    hours: number;
+};
+/**
+ * Describes the message tank.board.v1.ShareRunReplayRequest.
+ * Use `create(ShareRunReplayRequestSchema)` to create a new message.
+ */
+export declare const ShareRunReplayRequestSchema: GenMessage<ShareRunReplayRequest>;
+/**
+ * @generated from message tank.board.v1.ShareRunReplayResponse
+ */
+export type ShareRunReplayResponse = Message<"tank.board.v1.ShareRunReplayResponse"> & {
+    /**
+     * The link, present only in the response that made it: it is a credential and is never
+     * stored or read back.
+     *
+     * @generated from field: string url = 1;
+     */
+    url: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp expires_at = 2;
+     */
+    expiresAt?: Timestamp;
+};
+/**
+ * Describes the message tank.board.v1.ShareRunReplayResponse.
+ * Use `create(ShareRunReplayResponseSchema)` to create a new message.
+ */
+export declare const ShareRunReplayResponseSchema: GenMessage<ShareRunReplayResponse>;
+/**
+ * Stops every outside link to the replays of this bench's runs.
+ *
+ * @generated from message tank.board.v1.StopRunReplaySharesRequest
+ */
+export type StopRunReplaySharesRequest = Message<"tank.board.v1.StopRunReplaySharesRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string board_id = 2;
+     */
+    boardId: string;
+};
+/**
+ * Describes the message tank.board.v1.StopRunReplaySharesRequest.
+ * Use `create(StopRunReplaySharesRequestSchema)` to create a new message.
+ */
+export declare const StopRunReplaySharesRequestSchema: GenMessage<StopRunReplaySharesRequest>;
+/**
+ * @generated from message tank.board.v1.StopRunReplaySharesResponse
+ */
+export type StopRunReplaySharesResponse = Message<"tank.board.v1.StopRunReplaySharesResponse"> & {
+    /**
+     * @generated from field: int32 stopped = 1;
+     */
+    stopped: number;
+};
+/**
+ * Describes the message tank.board.v1.StopRunReplaySharesResponse.
+ * Use `create(StopRunReplaySharesResponseSchema)` to create a new message.
+ */
+export declare const StopRunReplaySharesResponseSchema: GenMessage<StopRunReplaySharesResponse>;
+/**
+ * What a shared link opens, with no sign-in: the one run's replay, or NotFound.
+ *
+ * @generated from message tank.board.v1.GetSharedRunReplayRequest
+ */
+export type GetSharedRunReplayRequest = Message<"tank.board.v1.GetSharedRunReplayRequest"> & {
+    /**
+     * @generated from field: string token = 1;
+     */
+    token: string;
+};
+/**
+ * Describes the message tank.board.v1.GetSharedRunReplayRequest.
+ * Use `create(GetSharedRunReplayRequestSchema)` to create a new message.
+ */
+export declare const GetSharedRunReplayRequestSchema: GenMessage<GetSharedRunReplayRequest>;
+/**
+ * @generated from message tank.board.v1.GetSharedRunReplayResponse
+ */
+export type GetSharedRunReplayResponse = Message<"tank.board.v1.GetSharedRunReplayResponse"> & {
+    /**
+     * @generated from field: tank.board.v1.RunReplay replay = 1;
+     */
+    replay?: RunReplay;
+};
+/**
+ * Describes the message tank.board.v1.GetSharedRunReplayResponse.
+ * Use `create(GetSharedRunReplayResponseSchema)` to create a new message.
+ */
+export declare const GetSharedRunReplayResponseSchema: GenMessage<GetSharedRunReplayResponse>;
+/**
  * @generated from enum tank.board.v1.ObjectKind
  */
 export declare enum ObjectKind {
@@ -3252,5 +3523,44 @@ export declare const BoardService: GenService<{
         methodKind: "unary";
         input: typeof ApproveChangeRequestSchema;
         output: typeof ApproveChangeResponseSchema;
+    };
+}>;
+/**
+ * @generated from service tank.board.v1.RunReplayService
+ */
+export declare const RunReplayService: GenService<{
+    /**
+     * @generated from rpc tank.board.v1.RunReplayService.GetRunReplay
+     */
+    getRunReplay: {
+        methodKind: "unary";
+        input: typeof GetRunReplayRequestSchema;
+        output: typeof GetRunReplayResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.RunReplayService.ShareRunReplay
+     */
+    shareRunReplay: {
+        methodKind: "unary";
+        input: typeof ShareRunReplayRequestSchema;
+        output: typeof ShareRunReplayResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.board.v1.RunReplayService.StopRunReplayShares
+     */
+    stopRunReplayShares: {
+        methodKind: "unary";
+        input: typeof StopRunReplaySharesRequestSchema;
+        output: typeof StopRunReplaySharesResponseSchema;
+    };
+    /**
+     * Public: the token is the credential.
+     *
+     * @generated from rpc tank.board.v1.RunReplayService.GetSharedRunReplay
+     */
+    getSharedRunReplay: {
+        methodKind: "unary";
+        input: typeof GetSharedRunReplayRequestSchema;
+        output: typeof GetSharedRunReplayResponseSchema;
     };
 }>;

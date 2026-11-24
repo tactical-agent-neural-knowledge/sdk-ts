@@ -13,6 +13,7 @@ export { plainPreview } from "./plainPreview.js";
 export { createDraftPreparer, type DraftPreparer, type DraftPreparerOptions, type DraftState, PREPARE_PAUSE_MS, } from "./prepare.js";
 export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 export { browserOnlineSignal, type OnlineSignal, RealtimeClient, type RealtimeEvents, type RealtimeOptions, type RealtimeSession, type WebSocketCtor, type WebSocketLike, } from "./realtime.js";
+export { benchAt, frameAtFraction, liveAt, replayClock, replayEnding } from "./replay.js";
 export { nextReveal, REVEAL_TICK_MS, revealSteps } from "./reveal.js";
 export { expandShortcodes } from "./shortcodes.js";
 export { NEURAL_STARTERS, type PickStartersOptions, pickStarters, type Starter, type StarterNeed, } from "./starters.js";
