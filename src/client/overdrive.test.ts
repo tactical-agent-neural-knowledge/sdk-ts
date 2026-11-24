@@ -60,3 +60,23 @@ describe("askToLiveLine", () => {
     expect(clock(7200)).toBe("2h");
   });
 });
+
+describe("switchLine", () => {
+  it("names the pull request that moves the jobs, either way, and nothing once the way back is done", async () => {
+    const { switchLine } = await import("./overdrive.js");
+    const url = "https://github.com/acme/app/pull/1";
+    const on = DeliveryMode.TANK_RUNNERS;
+    const own = DeliveryMode.OWN_CI;
+    expect(switchLine({ mode: on, switchStatus: "opened", switchPullRequestUrl: "" })).toBe("");
+    expect(switchLine({ mode: on, switchStatus: "opened", switchPullRequestUrl: url })).toBe(
+      OVERDRIVE_COPY.delivery.switchOpened,
+    );
+    expect(switchLine({ mode: on, switchStatus: "merged", switchPullRequestUrl: url })).toBe(
+      OVERDRIVE_COPY.delivery.switchMerged,
+    );
+    expect(switchLine({ mode: own, switchStatus: "opened", switchPullRequestUrl: url })).toBe(
+      OVERDRIVE_COPY.delivery.switchBackOpened,
+    );
+    expect(switchLine({ mode: own, switchStatus: "merged", switchPullRequestUrl: url })).toBe("");
+  });
+});

@@ -1,4 +1,4 @@
-import { DeliveryMode, type PredictedWork } from "../contracts/tank/agent/v1/agent_pb.js";
+import { DeliveryMode, type PredictedWork, type RepoDelivery } from "../contracts/tank/agent/v1/agent_pb.js";
 
 /**
  * Overdrive: where a repository builds and deploys, and predicted work (the add-on). The
@@ -29,6 +29,8 @@ export const OVERDRIVE_COPY = {
     reportTo: "Send results to",
     switchOpened: "The pull request that switches your jobs is open.",
     switchMerged: "Your jobs run on TANK's runners.",
+    switchBackOpened:
+      "The pull request that moves your jobs back to GitHub's machines is open. Merge it to finish; until then your jobs keep running on TANK's runners.",
     adminsOnly: "Workspace admins choose where a repository builds and deploys.",
     none: "Connect a repository to a Tread and it shows up here.",
   },
@@ -72,6 +74,21 @@ export const DELIVERY_CHOICES: readonly DeliveryChoice[] = [
 /** A repository with no setting builds on the CI it has today. */
 export function deliveryMode(mode: DeliveryMode | undefined): DeliveryMode {
   return mode === DeliveryMode.TANK_RUNNERS || mode === DeliveryMode.OTHER_CI ? mode : DeliveryMode.OWN_CI;
+}
+
+/**
+ * The line beside a repository's switch pull request, or "" when there is none to show: the
+ * one that moves its jobs to TANK's runners (open or merged), or the one that moves them back
+ * (while it is open, the repository keeps its runners).
+ */
+export function switchLine(r: Pick<RepoDelivery, "mode" | "switchStatus" | "switchPullRequestUrl">): string {
+  if (!r.switchPullRequestUrl) return "";
+  if (deliveryMode(r.mode) === DeliveryMode.TANK_RUNNERS) {
+    return r.switchStatus === "merged"
+      ? OVERDRIVE_COPY.delivery.switchMerged
+      : OVERDRIVE_COPY.delivery.switchOpened;
+  }
+  return r.switchStatus === "opened" ? OVERDRIVE_COPY.delivery.switchBackOpened : "";
 }
 
 /** The sentence under one predicted item, by what state it is in. */
