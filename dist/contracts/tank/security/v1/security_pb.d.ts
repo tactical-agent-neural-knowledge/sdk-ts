@@ -263,6 +263,14 @@ export type Control = Message<"tank.security.v1.Control"> & {
      * @generated from field: repeated string tags = 18;
      */
     tags: string[];
+    /**
+     * Set when the control has been failing for a day or more (a probe that is evidence for it
+     * succeeded, or it was met and no longer is): the posture page shows it as alerting and the
+     * platform owner was sent a notice. Unset otherwise.
+     *
+     * @generated from field: google.protobuf.Timestamp alerting_since = 19;
+     */
+    alertingSince?: Timestamp;
 };
 /**
  * Describes the message tank.security.v1.Control.

@@ -71,6 +71,13 @@ export type TaskProof = Message<"tank.task.v1.TaskProof"> & {
      * @generated from field: int64 ask_to_live_seconds = 7;
      */
     askToLiveSeconds: bigint;
+    /**
+     * Of ask_to_live_seconds, how long the work waited for a person (a plan or a merge to be
+     * approved). The rest is TANK's own time, which is what the stopwatch shows first.
+     *
+     * @generated from field: int64 waiting_seconds = 8;
+     */
+    waitingSeconds: bigint;
 };
 /**
  * Describes the message tank.task.v1.TaskProof.
@@ -782,6 +789,12 @@ export type RecordTaskRunRequest = Message<"tank.task.v1.RecordTaskRunRequest"> 
      * @generated from field: string progress = 7;
      */
     progress: string;
+    /**
+     * DONE: the person whose approval was the check; empty when nothing needed one
+     *
+     * @generated from field: string checked_by = 8;
+     */
+    checkedBy: string;
 };
 /**
  * Describes the message tank.task.v1.RecordTaskRunRequest.
@@ -878,7 +891,16 @@ export declare enum TaskRunEvent {
      *
      * @generated from enum value: TASK_RUN_EVENT_STUCK = 5;
      */
-    STUCK = 5
+    STUCK = 5,
+    /**
+     * Finished with nothing left for a person to check (2026-11-24): a merge a person
+     * approved and TANK confirmed live (the approval was the check; checked_by names the
+     * approver), or work that changed nothing to approve (an answer, a live check, a
+     * read-only ask). → DONE, with proof.
+     *
+     * @generated from enum value: TASK_RUN_EVENT_DONE = 6;
+     */
+    DONE = 6
 }
 /**
  * Describes the enum tank.task.v1.TaskRunEvent.

@@ -100,21 +100,28 @@ export function hitRateLine(offered, taken) {
         return "";
     return `${Math.max(0, Math.min(taken || 0, offered))} of ${offered} taken in the last 30 days`;
 }
+/** A duration the way the stopwatch says it: "40s", "5m 25s", "1h 38m" (the card's own wording). */
+export function clock(seconds) {
+    const s = Math.round(seconds);
+    if (s < 60)
+        return `${s}s`;
+    if (s < 3600)
+        return s % 60 === 0 ? `${s / 60}m` : `${Math.floor(s / 60)}m ${s % 60}s`;
+    const m = Math.round(s / 60);
+    return m % 60 === 0 ? `${m / 60}h` : `${Math.floor(m / 60)}h ${m % 60}m`;
+}
 /**
- * The stopwatch (Overdrive): a task's ask-to-live, small and plain, as both clients show it
- * beside the proof. The seconds come from the server (TaskProof.ask_to_live_seconds); this
- * only words them. "" when there is nothing to show.
+ * The stopwatch (Overdrive): a task's ask-to-live as both clients show it beside the proof,
+ * TANK's own time first and the wait for a person beside it, so a slow approval does not
+ * read as TANK being slow. The seconds come from the server (TaskProof.ask_to_live_seconds,
+ * waiting_seconds); this only words them. "" when there is nothing to show.
  */
-export function askToLiveLine(seconds) {
-    const s = Number(seconds ?? 0);
-    if (!Number.isFinite(s) || s <= 0)
+export function askToLiveLine(seconds, waitingSeconds) {
+    const total = Number(seconds ?? 0);
+    if (!Number.isFinite(total) || total <= 0)
         return "";
-    let took;
-    if (s < 90)
-        took = `${Math.round(s)} s`;
-    else if (s < 90 * 60)
-        took = `${Math.round(s / 60)} min`;
-    else
-        took = `${(s / 3600).toFixed(1)} h`;
-    return `Ask to live: ${took}`;
+    const wait = Number(waitingSeconds ?? 0);
+    if (!Number.isFinite(wait) || wait < 1 || wait >= total)
+        return `Live in ${clock(total)}`;
+    return `Live in ${clock(total - wait)} of TANK's time · ${clock(wait)} waiting for approval`;
 }
