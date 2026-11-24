@@ -39,6 +39,24 @@ export type EnvVar = Message<"tank.envvars.v1.EnvVar"> & {
      * @generated from field: string updated_by = 6;
      */
     updatedBy: string;
+    /**
+     * Preview value (Overdrive, 2026-11-24), for a secret only: a test value (a Stripe test
+     * key, a sandbox account) that TANK's previews use in place of the real one. Write-only,
+     * like the secret. A preview is never given the real value: without a preview value it
+     * gets nothing for this name. The app sees only a placeholder; TANK adds the preview
+     * value on the way out, to preview_hosts alone.
+     *
+     * @generated from field: bool preview_set = 7;
+     */
+    previewSet: boolean;
+    /**
+     * @generated from field: repeated string preview_hosts = 8;
+     */
+    previewHosts: string[];
+    /**
+     * @generated from field: bool preview_in_body = 9;
+     */
+    previewInBody: boolean;
 };
 /**
  * Describes the message tank.envvars.v1.EnvVar.
@@ -160,6 +178,86 @@ export type DeleteEnvVarResponse = Message<"tank.envvars.v1.DeleteEnvVarResponse
  */
 export declare const DeleteEnvVarResponseSchema: GenMessage<DeleteEnvVarResponse>;
 /**
+ * @generated from message tank.envvars.v1.PutPreviewValueRequest
+ */
+export type PutPreviewValueRequest = Message<"tank.envvars.v1.PutPreviewValueRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * The preview value. Empty keeps the stored one.
+     *
+     * @generated from field: string value = 3;
+     */
+    value: string;
+    /**
+     * Hostnames the value may be sent to ("api.stripe.com", "*.example.com"). At least one.
+     *
+     * @generated from field: repeated string hosts = 4;
+     */
+    hosts: string[];
+    /**
+     * @generated from field: bool in_body = 5;
+     */
+    inBody: boolean;
+};
+/**
+ * Describes the message tank.envvars.v1.PutPreviewValueRequest.
+ * Use `create(PutPreviewValueRequestSchema)` to create a new message.
+ */
+export declare const PutPreviewValueRequestSchema: GenMessage<PutPreviewValueRequest>;
+/**
+ * @generated from message tank.envvars.v1.PutPreviewValueResponse
+ */
+export type PutPreviewValueResponse = Message<"tank.envvars.v1.PutPreviewValueResponse"> & {
+    /**
+     * @generated from field: tank.envvars.v1.EnvVar var = 1;
+     */
+    var?: EnvVar;
+};
+/**
+ * Describes the message tank.envvars.v1.PutPreviewValueResponse.
+ * Use `create(PutPreviewValueResponseSchema)` to create a new message.
+ */
+export declare const PutPreviewValueResponseSchema: GenMessage<PutPreviewValueResponse>;
+/**
+ * @generated from message tank.envvars.v1.ClearPreviewValueRequest
+ */
+export type ClearPreviewValueRequest = Message<"tank.envvars.v1.ClearPreviewValueRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+};
+/**
+ * Describes the message tank.envvars.v1.ClearPreviewValueRequest.
+ * Use `create(ClearPreviewValueRequestSchema)` to create a new message.
+ */
+export declare const ClearPreviewValueRequestSchema: GenMessage<ClearPreviewValueRequest>;
+/**
+ * @generated from message tank.envvars.v1.ClearPreviewValueResponse
+ */
+export type ClearPreviewValueResponse = Message<"tank.envvars.v1.ClearPreviewValueResponse"> & {
+    /**
+     * @generated from field: tank.envvars.v1.EnvVar var = 1;
+     */
+    var?: EnvVar;
+};
+/**
+ * Describes the message tank.envvars.v1.ClearPreviewValueResponse.
+ * Use `create(ClearPreviewValueResponseSchema)` to create a new message.
+ */
+export declare const ClearPreviewValueResponseSchema: GenMessage<ClearPreviewValueResponse>;
+/**
  * @generated from service tank.envvars.v1.EnvVarService
  */
 export declare const EnvVarService: GenService<{
@@ -186,5 +284,23 @@ export declare const EnvVarService: GenService<{
         methodKind: "unary";
         input: typeof DeleteEnvVarRequestSchema;
         output: typeof DeleteEnvVarResponseSchema;
+    };
+    /**
+     * A secret's preview value and the hosts it may be sent to, owners and admins only.
+     *
+     * @generated from rpc tank.envvars.v1.EnvVarService.PutPreviewValue
+     */
+    putPreviewValue: {
+        methodKind: "unary";
+        input: typeof PutPreviewValueRequestSchema;
+        output: typeof PutPreviewValueResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.envvars.v1.EnvVarService.ClearPreviewValue
+     */
+    clearPreviewValue: {
+        methodKind: "unary";
+        input: typeof ClearPreviewValueRequestSchema;
+        output: typeof ClearPreviewValueResponseSchema;
     };
 }>;

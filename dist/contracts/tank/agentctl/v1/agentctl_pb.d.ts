@@ -461,12 +461,215 @@ export type RunContext = Message<"tank.agentctl.v1.RunContext"> & {
      * @generated from field: bool standby = 42;
      */
     standby: boolean;
+    /**
+     * Preview secrets (Overdrive, 2026-11-24): what the app this run serves gets in its
+     * environment for each of the workspace's preview secrets. Never a real value: a
+     * `LOCKBOX:<NAME>` placeholder the egress proxy swaps for the preview value on the way
+     * to the hosts that secret is bound to, a relay address for a database, or a value
+     * made for this run alone. Empty unless preview secrets are on for the workspace.
+     *
+     * @generated from field: repeated tank.agentctl.v1.PreviewSecretEnv preview_env = 43;
+     */
+    previewEnv: PreviewSecretEnv[];
+    /**
+     * The certificate of TANK's preview CA, which the egress proxy signs with when it
+     * reads a request to a host a preview secret is bound to. Only the certificate; the key
+     * lives in the egress pod alone. Empty when preview_env has no http secret.
+     *
+     * @generated from field: string preview_ca_pem = 44;
+     */
+    previewCaPem: string;
 };
 /**
  * Describes the message tank.agentctl.v1.RunContext.
  * Use `create(RunContextSchema)` to create a new message.
  */
 export declare const RunContextSchema: GenMessage<RunContext>;
+/**
+ * One preview secret as the app sees it (RunContext.preview_env).
+ *
+ * @generated from message tank.agentctl.v1.PreviewSecretEnv
+ */
+export type PreviewSecretEnv = Message<"tank.agentctl.v1.PreviewSecretEnv"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * http: "LOCKBOX:<name>". postgres, mysql, redis: a relay address carrying a
+     * placeholder. generated: a value made for this run.
+     *
+     * @generated from field: string value = 2;
+     */
+    value: string;
+    /**
+     * http | postgres | mysql | redis | generated
+     *
+     * @generated from field: string kind = 3;
+     */
+    kind: string;
+    /**
+     * Where the value is sent (http) or which database it is (db kinds). Not secret: the app
+     * and a probe may read it, so a request can be aimed at the right host.
+     *
+     * @generated from field: repeated string hosts = 4;
+     */
+    hosts: string[];
+};
+/**
+ * Describes the message tank.agentctl.v1.PreviewSecretEnv.
+ * Use `create(PreviewSecretEnvSchema)` to create a new message.
+ */
+export declare const PreviewSecretEnvSchema: GenMessage<PreviewSecretEnv>;
+/**
+ * A workspace's preview secret as the control plane keeps it. The value is write-only:
+ * it is kept in the Lockbox Agent vault and never returned.
+ *
+ * @generated from message tank.agentctl.v1.PreviewSecret
+ */
+export type PreviewSecret = Message<"tank.agentctl.v1.PreviewSecret"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * http | postgres | mysql | redis | generated
+     *
+     * @generated from field: string kind = 2;
+     */
+    kind: string;
+    /**
+     * Where the value may be sent: hostnames (or "*.example.com") for http; host:port of the
+     * real database for postgres, mysql and redis.
+     *
+     * @generated from field: repeated string hosts = 3;
+     */
+    hosts: string[];
+    /**
+     * http only: the proxy may also put the value in a request's body, not just its headers.
+     *
+     * @generated from field: bool in_body = 4;
+     */
+    inBody: boolean;
+    /**
+     * Whether a preview value is stored. A secret without one gives a preview nothing.
+     *
+     * @generated from field: bool is_set = 5;
+     */
+    isSet: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp updated_at = 6;
+     */
+    updatedAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agentctl.v1.PreviewSecret.
+ * Use `create(PreviewSecretSchema)` to create a new message.
+ */
+export declare const PreviewSecretSchema: GenMessage<PreviewSecret>;
+/**
+ * @generated from message tank.agentctl.v1.ListPreviewSecretsRequest
+ */
+export type ListPreviewSecretsRequest = Message<"tank.agentctl.v1.ListPreviewSecretsRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListPreviewSecretsRequest.
+ * Use `create(ListPreviewSecretsRequestSchema)` to create a new message.
+ */
+export declare const ListPreviewSecretsRequestSchema: GenMessage<ListPreviewSecretsRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListPreviewSecretsResponse
+ */
+export type ListPreviewSecretsResponse = Message<"tank.agentctl.v1.ListPreviewSecretsResponse"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.PreviewSecret secrets = 1;
+     */
+    secrets: PreviewSecret[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ListPreviewSecretsResponse.
+ * Use `create(ListPreviewSecretsResponseSchema)` to create a new message.
+ */
+export declare const ListPreviewSecretsResponseSchema: GenMessage<ListPreviewSecretsResponse>;
+/**
+ * @generated from message tank.agentctl.v1.PutPreviewSecretRequest
+ */
+export type PutPreviewSecretRequest = Message<"tank.agentctl.v1.PutPreviewSecretRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: tank.agentctl.v1.PreviewSecret secret = 2;
+     */
+    secret?: PreviewSecret;
+    /**
+     * The preview value. Empty keeps the stored one; a value is never echoed.
+     *
+     * @generated from field: string value = 3;
+     */
+    value: string;
+    /**
+     * user id, for the audit record
+     *
+     * @generated from field: string requested_by = 4;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.PutPreviewSecretRequest.
+ * Use `create(PutPreviewSecretRequestSchema)` to create a new message.
+ */
+export declare const PutPreviewSecretRequestSchema: GenMessage<PutPreviewSecretRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PutPreviewSecretResponse
+ */
+export type PutPreviewSecretResponse = Message<"tank.agentctl.v1.PutPreviewSecretResponse"> & {
+    /**
+     * @generated from field: tank.agentctl.v1.PreviewSecret secret = 1;
+     */
+    secret?: PreviewSecret;
+};
+/**
+ * Describes the message tank.agentctl.v1.PutPreviewSecretResponse.
+ * Use `create(PutPreviewSecretResponseSchema)` to create a new message.
+ */
+export declare const PutPreviewSecretResponseSchema: GenMessage<PutPreviewSecretResponse>;
+/**
+ * @generated from message tank.agentctl.v1.DeletePreviewSecretRequest
+ */
+export type DeletePreviewSecretRequest = Message<"tank.agentctl.v1.DeletePreviewSecretRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * @generated from field: string requested_by = 3;
+     */
+    requestedBy: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.DeletePreviewSecretRequest.
+ * Use `create(DeletePreviewSecretRequestSchema)` to create a new message.
+ */
+export declare const DeletePreviewSecretRequestSchema: GenMessage<DeletePreviewSecretRequest>;
+/**
+ * @generated from message tank.agentctl.v1.DeletePreviewSecretResponse
+ */
+export type DeletePreviewSecretResponse = Message<"tank.agentctl.v1.DeletePreviewSecretResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.DeletePreviewSecretResponse.
+ * Use `create(DeletePreviewSecretResponseSchema)` to create a new message.
+ */
+export declare const DeletePreviewSecretResponseSchema: GenMessage<DeletePreviewSecretResponse>;
 /**
  * An Ops team as a run sees it (tank.agentops.v1 holds the full record).
  *
@@ -9909,6 +10112,33 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof PutGuardrailRequestSchema;
         output: typeof PutGuardrailResponseSchema;
+    };
+    /**
+     * Preview secrets, for the messaging core's Settings > Environment: the rows live here,
+     * each value in the Lockbox Agent vault.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ListPreviewSecrets
+     */
+    listPreviewSecrets: {
+        methodKind: "unary";
+        input: typeof ListPreviewSecretsRequestSchema;
+        output: typeof ListPreviewSecretsResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.PutPreviewSecret
+     */
+    putPreviewSecret: {
+        methodKind: "unary";
+        input: typeof PutPreviewSecretRequestSchema;
+        output: typeof PutPreviewSecretResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.DeletePreviewSecret
+     */
+    deletePreviewSecret: {
+        methodKind: "unary";
+        input: typeof DeletePreviewSecretRequestSchema;
+        output: typeof DeletePreviewSecretResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.DeleteGuardrail
