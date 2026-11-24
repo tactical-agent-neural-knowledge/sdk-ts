@@ -2,7 +2,7 @@
 import { create } from "@bufbuild/protobuf";
 import { anyPack, timestampFromMs } from "@bufbuild/protobuf/wkt";
 import { createRouterTransport } from "@connectrpc/connect";
-import { act, cleanup, renderHook } from "@testing-library/react";
+import { act, cleanup, renderHook, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it } from "vitest";
 import { planProgress } from "../blocks/plan.js";
@@ -341,8 +341,9 @@ describe("usePreparation", () => {
       ),
     );
     expect(result.current.isPreparing).toBe(true);
-    await act(() => new Promise((r) => setTimeout(r, 150)));
-    expect(result.current.isPreparing).toBe(false);
+    // Waits for the expiry rather than a fixed 150 ms: on a loaded CI runner the 30 ms timer
+    // fired late and the fixed wait read the hook before it had (sdk-ts main, 2026-11-24, twice).
+    await waitFor(() => expect(result.current.isPreparing).toBe(false), { timeout: 3000 });
     expect(result.current.state).toBe(PreparationState.EXPIRED);
   });
 });
