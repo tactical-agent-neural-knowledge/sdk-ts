@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { DismissPredictedWorkRequest, ListPredictedWorkRequest, ListPredictedWorkResponse, ListRepoDeliveryRequest, ListRepoDeliveryResponse, Run, SetRepoDeliveryRequest, SetRepoDeliveryResponse, TakePredictedWorkRequest, TakePredictedWorkResponse, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
+import type { DismissPredictedWorkRequest, ListPredictedWorkRequest, ListPredictedWorkResponse, ListRepoDeliveryRequest, ListRepoDeliveryResponse, Run, SetRepoDeliveryRequest, SetRepoDeliveryResponse, SetWorkspaceDeliveryRequest, SetWorkspaceDeliveryResponse, TakePredictedWorkRequest, TakePredictedWorkResponse, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
 import type { AppAccount, CallToolRequest, CallToolResponse, GetToolsRequest, GetToolsResponse, ListAppsRequest, ListAppsResponse } from "../../apps/v1/apps_pb.js";
 import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks/v1/blocks_pb.js";
 import type { Board, RunReplay } from "../../board/v1/board_pb.js";
@@ -4256,6 +4256,176 @@ export type ReportMigrationProofResponse = Message<"tank.agentctl.v1.ReportMigra
  * Use `create(ReportMigrationProofResponseSchema)` to create a new message.
  */
 export declare const ReportMigrationProofResponseSchema: GenMessage<ReportMigrationProofResponse>;
+/**
+ * One SELECT (or WITH … SELECT), run in a read-only transaction as a read-only role, with a
+ * statement timeout and a row cap. The answer is a summary: how many rows, and per column
+ * how many were null, how many distinct values, and the range of a numeric column. No row
+ * and no text value is returned.
+ *
+ * @generated from message tank.agentctl.v1.AskProductDatabaseRequest
+ */
+export type AskProductDatabaseRequest = Message<"tank.agentctl.v1.AskProductDatabaseRequest"> & {
+    /**
+     * @generated from field: string query = 1;
+     */
+    query: string;
+    /**
+     * the product's database name from tank.yaml; empty = its first
+     *
+     * @generated from field: string database = 2;
+     */
+    database: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.AskProductDatabaseRequest.
+ * Use `create(AskProductDatabaseRequestSchema)` to create a new message.
+ */
+export declare const AskProductDatabaseRequestSchema: GenMessage<AskProductDatabaseRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ColumnSummary
+ */
+export type ColumnSummary = Message<"tank.agentctl.v1.ColumnSummary"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: int32 nulls = 2;
+     */
+    nulls: number;
+    /**
+     * @generated from field: int32 distinct = 3;
+     */
+    distinct: number;
+    /**
+     * Only for a numeric column; empty otherwise.
+     *
+     * @generated from field: string min = 4;
+     */
+    min: string;
+    /**
+     * @generated from field: string max = 5;
+     */
+    max: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ColumnSummary.
+ * Use `create(ColumnSummarySchema)` to create a new message.
+ */
+export declare const ColumnSummarySchema: GenMessage<ColumnSummary>;
+/**
+ * @generated from message tank.agentctl.v1.AskProductDatabaseResponse
+ */
+export type AskProductDatabaseResponse = Message<"tank.agentctl.v1.AskProductDatabaseResponse"> & {
+    /**
+     * rows the query returned, up to the cap
+     *
+     * @generated from field: int32 rows = 1;
+     */
+    rows: number;
+    /**
+     * the cap was reached: there may be more
+     *
+     * @generated from field: bool capped = 2;
+     */
+    capped: boolean;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ColumnSummary columns = 3;
+     */
+    columns: ColumnSummary[];
+    /**
+     * @generated from field: int32 duration_ms = 4;
+     */
+    durationMs: number;
+    /**
+     * the database's own message when the query failed
+     *
+     * @generated from field: string error = 5;
+     */
+    error: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.AskProductDatabaseResponse.
+ * Use `create(AskProductDatabaseResponseSchema)` to create a new message.
+ */
+export declare const AskProductDatabaseResponseSchema: GenMessage<AskProductDatabaseResponse>;
+/**
+ * The run's new migrations (only the up part of each, in order), applied to a copy of the
+ * product's database made for this call and deleted right after.
+ *
+ * @generated from message tank.agentctl.v1.MigrationFile
+ */
+export type MigrationFile = Message<"tank.agentctl.v1.MigrationFile"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string sql = 2;
+     */
+    sql: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.MigrationFile.
+ * Use `create(MigrationFileSchema)` to create a new message.
+ */
+export declare const MigrationFileSchema: GenMessage<MigrationFile>;
+/**
+ * @generated from message tank.agentctl.v1.ProveMigrationOnCloneRequest
+ */
+export type ProveMigrationOnCloneRequest = Message<"tank.agentctl.v1.ProveMigrationOnCloneRequest"> & {
+    /**
+     * @generated from field: repeated tank.agentctl.v1.MigrationFile files = 1;
+     */
+    files: MigrationFile[];
+    /**
+     * @generated from field: string database = 2;
+     */
+    database: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ProveMigrationOnCloneRequest.
+ * Use `create(ProveMigrationOnCloneRequestSchema)` to create a new message.
+ */
+export declare const ProveMigrationOnCloneRequestSchema: GenMessage<ProveMigrationOnCloneRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ProveMigrationOnCloneResponse
+ */
+export type ProveMigrationOnCloneResponse = Message<"tank.agentctl.v1.ProveMigrationOnCloneResponse"> & {
+    /**
+     * @generated from field: bool ok = 1;
+     */
+    ok: boolean;
+    /**
+     * applying the migrations on the copy
+     *
+     * @generated from field: int32 duration_ms = 2;
+     */
+    durationMs: number;
+    /**
+     * making the copy
+     *
+     * @generated from field: int32 clone_ms = 3;
+     */
+    cloneMs: number;
+    /**
+     * the last lines of the output when it failed
+     *
+     * @generated from field: string detail = 4;
+     */
+    detail: string;
+    /**
+     * what the copy cost, recorded on the run's ledger
+     *
+     * @generated from field: double cost_usd = 5;
+     */
+    costUsd: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.ProveMigrationOnCloneResponse.
+ * Use `create(ProveMigrationOnCloneResponseSchema)` to create a new message.
+ */
+export declare const ProveMigrationOnCloneResponseSchema: GenMessage<ProveMigrationOnCloneResponse>;
 /**
  * @generated from message tank.agentctl.v1.Usage
  */
@@ -9308,6 +9478,38 @@ export type SetWorkspaceRepoDeliveryResponse = Message<"tank.agentctl.v1.SetWork
  */
 export declare const SetWorkspaceRepoDeliveryResponseSchema: GenMessage<SetWorkspaceRepoDeliveryResponse>;
 /**
+ * @generated from message tank.agentctl.v1.SetWorkspaceDeliveryDefaultRequest
+ */
+export type SetWorkspaceDeliveryDefaultRequest = Message<"tank.agentctl.v1.SetWorkspaceDeliveryDefaultRequest"> & {
+    /**
+     * @generated from field: tank.agent.v1.SetWorkspaceDeliveryRequest request = 1;
+     */
+    request?: SetWorkspaceDeliveryRequest;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetWorkspaceDeliveryDefaultRequest.
+ * Use `create(SetWorkspaceDeliveryDefaultRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceDeliveryDefaultRequestSchema: GenMessage<SetWorkspaceDeliveryDefaultRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetWorkspaceDeliveryDefaultResponse
+ */
+export type SetWorkspaceDeliveryDefaultResponse = Message<"tank.agentctl.v1.SetWorkspaceDeliveryDefaultResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.SetWorkspaceDeliveryResponse response = 1;
+     */
+    response?: SetWorkspaceDeliveryResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetWorkspaceDeliveryDefaultResponse.
+ * Use `create(SetWorkspaceDeliveryDefaultResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceDeliveryDefaultResponseSchema: GenMessage<SetWorkspaceDeliveryDefaultResponse>;
+/**
  * @generated from message tank.agentctl.v1.ListWorkspacePredictedWorkRequest
  */
 export type ListWorkspacePredictedWorkRequest = Message<"tank.agentctl.v1.ListWorkspacePredictedWorkRequest"> & {
@@ -9404,6 +9606,137 @@ export type TakeWorkspacePredictedWorkResponse = Message<"tank.agentctl.v1.TakeW
  * Use `create(TakeWorkspacePredictedWorkResponseSchema)` to create a new message.
  */
 export declare const TakeWorkspacePredictedWorkResponseSchema: GenMessage<TakeWorkspacePredictedWorkResponse>;
+/**
+ * @generated from message tank.agentctl.v1.PublishPageRequest
+ */
+export type PublishPageRequest = Message<"tank.agentctl.v1.PublishPageRequest"> & {
+    /**
+     * The page that opens first, relative to the folder: "index.html", "guides-white.html".
+     *
+     * @generated from field: string entry = 1;
+     */
+    entry: string;
+    /**
+     * What it is, in a few words, for the thread.
+     *
+     * @generated from field: string title = 2;
+     */
+    title: string;
+    /**
+     * The page's files, sent with the request: the control plane writes them to the previews
+     * bucket itself, so the sandbox keeps no storage credential and no storage egress (the
+     * upload permit below is unused). With files, the response carries the page's url.
+     *
+     * @generated from field: repeated tank.agentctl.v1.PageFile files = 3;
+     */
+    files: PageFile[];
+};
+/**
+ * Describes the message tank.agentctl.v1.PublishPageRequest.
+ * Use `create(PublishPageRequestSchema)` to create a new message.
+ */
+export declare const PublishPageRequestSchema: GenMessage<PublishPageRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PageFile
+ */
+export type PageFile = Message<"tank.agentctl.v1.PageFile"> & {
+    /**
+     * Its path in the folder: "guides-white.html", "img/hero.jpg".
+     *
+     * @generated from field: string path = 1;
+     */
+    path: string;
+    /**
+     * @generated from field: bytes content = 2;
+     */
+    content: Uint8Array;
+};
+/**
+ * Describes the message tank.agentctl.v1.PageFile.
+ * Use `create(PageFileSchema)` to create a new message.
+ */
+export declare const PageFileSchema: GenMessage<PageFile>;
+/**
+ * @generated from message tank.agentctl.v1.PublishPageResponse
+ */
+export type PublishPageResponse = Message<"tank.agentctl.v1.PublishPageResponse"> & {
+    /**
+     * @generated from field: string build_id = 1;
+     */
+    buildId: string;
+    /**
+     * Each file is POSTed to upload_url as multipart form data with upload_fields and its own
+     * key, key_prefix + its path in the folder.
+     *
+     * @generated from field: string upload_url = 2;
+     */
+    uploadUrl: string;
+    /**
+     * @generated from field: map<string, string> upload_fields = 3;
+     */
+    uploadFields: {
+        [key: string]: string;
+    };
+    /**
+     * @generated from field: string key_prefix = 4;
+     */
+    keyPrefix: string;
+    /**
+     * Why there is no permit, in plain words; empty when there is one.
+     *
+     * @generated from field: string refused = 5;
+     */
+    refused: string;
+    /**
+     * The published page's address for people, when files came with the request.
+     *
+     * @generated from field: string url = 6;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.PublishPageResponse.
+ * Use `create(PublishPageResponseSchema)` to create a new message.
+ */
+export declare const PublishPageResponseSchema: GenMessage<PublishPageResponse>;
+/**
+ * @generated from message tank.agentctl.v1.PagePublishedRequest
+ */
+export type PagePublishedRequest = Message<"tank.agentctl.v1.PagePublishedRequest"> & {
+    /**
+     * @generated from field: string build_id = 1;
+     */
+    buildId: string;
+    /**
+     * @generated from field: string entry = 2;
+     */
+    entry: string;
+    /**
+     * @generated from field: int32 files = 3;
+     */
+    files: number;
+};
+/**
+ * Describes the message tank.agentctl.v1.PagePublishedRequest.
+ * Use `create(PagePublishedRequestSchema)` to create a new message.
+ */
+export declare const PagePublishedRequestSchema: GenMessage<PagePublishedRequest>;
+/**
+ * @generated from message tank.agentctl.v1.PagePublishedResponse
+ */
+export type PagePublishedResponse = Message<"tank.agentctl.v1.PagePublishedResponse"> & {
+    /**
+     * The page's address for people, ready to post.
+     *
+     * @generated from field: string url = 1;
+     */
+    url: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.PagePublishedResponse.
+ * Use `create(PagePublishedResponseSchema)` to create a new message.
+ */
+export declare const PagePublishedResponseSchema: GenMessage<PagePublishedResponse>;
 /**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
@@ -10164,6 +10497,27 @@ export declare const RunnerService: GenService<{
         output: typeof ReportMigrationProofResponseSchema;
     };
     /**
+     * Staged database changes against the run's own product database (TANK-hosted products
+     * only; never another product's): a read-only question answered as a summary, never rows,
+     * and a data-rewriting migration tried on a short-lived copy that is deleted after. Every
+     * call is audited.
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.AskProductDatabase
+     */
+    askProductDatabase: {
+        methodKind: "unary";
+        input: typeof AskProductDatabaseRequestSchema;
+        output: typeof AskProductDatabaseResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.ProveMigrationOnClone
+     */
+    proveMigrationOnClone: {
+        methodKind: "unary";
+        input: typeof ProveMigrationOnCloneRequestSchema;
+        output: typeof ProveMigrationOnCloneResponseSchema;
+    };
+    /**
      * Client-streaming transcript: assistant_delta, tool_call, tool_result,
      * permission_request, result, usage. Persisted to agent.run_events.
      *
@@ -10213,6 +10567,28 @@ export declare const RunnerService: GenService<{
         methodKind: "unary";
         input: typeof SessionStoreDeleteRequestSchema;
         output: typeof SessionStoreDeleteResponseSchema;
+    };
+    /**
+     * A web page the agent made (a mockup, static HTML with its assets) published as a live
+     * preview people open: https://<build_id>.preview.<domain>, isolated from TANK, served from
+     * the previews bucket so it outlives the sandbox. PublishPage hands out an upload permit
+     * for the page's folder; PagePublished, once the files are up, makes it the preview.
+     * (cache7, 2026-11-24: a mockup reached people as a zip to download and open locally.)
+     *
+     * @generated from rpc tank.agentctl.v1.RunnerService.PublishPage
+     */
+    publishPage: {
+        methodKind: "unary";
+        input: typeof PublishPageRequestSchema;
+        output: typeof PublishPageResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.RunnerService.PagePublished
+     */
+    pagePublished: {
+        methodKind: "unary";
+        input: typeof PagePublishedRequestSchema;
+        output: typeof PagePublishedResponseSchema;
     };
 }>;
 /**
@@ -10928,6 +11304,14 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceRepoDeliveryRequestSchema;
         output: typeof SetWorkspaceRepoDeliveryResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.SetWorkspaceDeliveryDefault
+     */
+    setWorkspaceDeliveryDefault: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceDeliveryDefaultRequestSchema;
+        output: typeof SetWorkspaceDeliveryDefaultResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.ListWorkspacePredictedWork

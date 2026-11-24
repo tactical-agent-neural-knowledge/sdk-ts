@@ -29,6 +29,11 @@ export declare const OVERDRIVE_COPY: {
         readonly switchMerged: "Your jobs run on TANK's runners.";
         readonly switchBackOpened: "The pull request that moves your jobs back to GitHub's machines is open. Merge it to finish; until then your jobs keep running on TANK's runners.";
         readonly adminsOnly: "Workspace admins choose where a repository builds and deploys.";
+        readonly workspaceTitle: "Where this workspace's repositories build and deploy";
+        readonly workspaceIntro: "Every repository follows this unless it has its own choice in its Tread's settings. Repositories connected later follow it too.";
+        readonly workspaceRunners: "TANK opens one pull request in each repository that follows this. A repository's jobs move when its pull request is merged.";
+        readonly workspaceDefault: "Workspace default";
+        readonly followsDetail: "Follows the workspace's choice. Choose another option to give this repository its own.";
         readonly none: "Connect a repository to a Tread and it shows up here.";
     };
     readonly predicted: {
@@ -66,6 +71,16 @@ export interface DeliveryChoice {
 }
 /** The three choices, in the order they are offered. */
 export declare const DELIVERY_CHOICES: readonly DeliveryChoice[];
+/** The name of a choice, as the options call it. */
+export declare function deliveryLabel(mode: DeliveryMode | undefined): string;
+/** The option that makes a repository follow the workspace: "Workspace default (TANK's runners)". */
+export declare function workspaceDefaultLabel(workspaceDefault: DeliveryMode | undefined): string;
+/**
+ * Which option a repository shows as chosen: "default" while it follows the workspace, its
+ * own mode otherwise. The value a client puts on the "Workspace default" option.
+ */
+export declare const FOLLOWS_DEFAULT = "default";
+export declare function deliveryChoice(r: Pick<RepoDelivery, "mode" | "followsDefault">): DeliveryMode | typeof FOLLOWS_DEFAULT;
 /** A repository with no setting builds on the CI it has today. */
 export declare function deliveryMode(mode: DeliveryMode | undefined): DeliveryMode;
 /**

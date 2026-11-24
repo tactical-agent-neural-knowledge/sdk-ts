@@ -91,3 +91,18 @@ describe("taking built work", () => {
     expect(OVERDRIVE_COPY.spend.fee).toBe("Overdrive add-on fee");
   });
 });
+
+describe("workspace default", () => {
+  it("names the default option after what it follows, and picks it while a repository follows", async () => {
+    const { workspaceDefaultLabel, deliveryChoice, deliveryLabel, FOLLOWS_DEFAULT } = await import(
+      "./overdrive.js"
+    );
+    expect(workspaceDefaultLabel(DeliveryMode.TANK_RUNNERS)).toBe("Workspace default (TANK's runners)");
+    expect(workspaceDefaultLabel(DeliveryMode.UNSPECIFIED)).toBe("Workspace default (Your current CI)");
+    expect(deliveryLabel(DeliveryMode.OTHER_CI)).toBe("Another CI");
+    expect(deliveryChoice({ mode: DeliveryMode.OTHER_CI, followsDefault: true })).toBe(FOLLOWS_DEFAULT);
+    expect(deliveryChoice({ mode: DeliveryMode.OTHER_CI, followsDefault: false })).toBe(
+      DeliveryMode.OTHER_CI,
+    );
+  });
+});
