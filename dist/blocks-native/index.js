@@ -3,3 +3,4 @@ export { ActionButton, ActionsBlock, ApprovalPromptBlock, accentColor, Card, CiS
 export { BlocksNativeContext, DEFAULT_CODE_FONT, useBlocksOptions, } from "./context.js";
 export { Mark } from "./Mark.js";
 export { ElementViewNative, RichTextViewNative } from "./RichTextViewNative.js";
+export { StatusLine } from "./StatusLine.js";

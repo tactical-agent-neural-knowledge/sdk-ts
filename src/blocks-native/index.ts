@@ -31,3 +31,4 @@ export {
 } from "./context.js";
 export { Mark } from "./Mark.js";
 export { ElementViewNative, RichTextViewNative, type RichTextViewNativeProps } from "./RichTextViewNative.js";
+export { StatusLine } from "./StatusLine.js";
