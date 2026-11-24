@@ -4,7 +4,7 @@ export { Backoff, type BackoffOptions } from "./backoff.js";
 export { type CreateChannelInput, type CreateTaskInput, createTankClient, type ListRunsInput, type ListTasksInput, type LoadChannelOptions, type LoadNotificationsInput, type LoadNotificationsResult, type NotifyPick, type RoleName, type SendMessageInput, type SetGoalInput, type SetStatusInput, TankClient, type TankClientEvents, type TankClientOptions, type ThreadLiveStreamInput, type UpdateMessageInput, type UploadFileOptions, } from "./client.js";
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
 export { Emitter, type Handler } from "./emitter.js";
-export { BLOCK_WINDOW_MS, BlockGate, FRESH_FADE_MS, FRESH_MAX_RUNS, FRESH_TICK_MS, type FreshPiece, type FreshRun, FreshTail, freshAlpha, freshChars, freshPieces, } from "./fresh.js";
+export { BLOCK_WINDOW_MS, BlockGate, FRESH_FADE_MS, FRESH_MAX_RUNS, FRESH_TICK_MS, type FreshPiece, type FreshRun, FreshTail, freshAlpha, freshChars, freshPieces, MARKER_HOLD_MS, openMarker, } from "./fresh.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { OFFER_COPY, withOfferedMention } from "./offer.js";
 export * from "./overdrive.js";

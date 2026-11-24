@@ -50,6 +50,8 @@ export {
   freshAlpha,
   freshChars,
   freshPieces,
+  MARKER_HOLD_MS,
+  openMarker,
 } from "./fresh.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { OFFER_COPY, withOfferedMention } from "./offer.js";

@@ -125,6 +125,118 @@ function lastBreak(text, from) {
     }
     return -1;
 }
+/** How long a block may be held back so that a Markdown marker in it can close. */
+export const MARKER_HOLD_MS = 400;
+/**
+ * Where the earliest Markdown marker that is still open at the end of `text` begins, or -1 when
+ * everything that was opened has been closed. Shown as it is, an open marker is raw punctuation
+ * on screen ("**largest to" until the closing stars arrive), so a block is never cut inside one.
+ * Known markers: bold (`**`, `__`), emphasis (`*x`, `_x`), strike (`~~`), inline code, a link
+ * (`[text](address)`), and a code fence. Inline markers do not outlive their paragraph.
+ */
+export function openMarker(text) {
+    let fence = -1;
+    let code = -1;
+    let bold = -1;
+    let under = -1;
+    let strike = -1;
+    let star = -1;
+    let score = -1;
+    let link = -1;
+    let inAddress = false;
+    const clear = () => {
+        code = bold = under = strike = star = score = link = -1;
+        inAddress = false;
+    };
+    const space = (c) => c === undefined || /\s/.test(c);
+    for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        const lineStart = i === 0 || text[i - 1] === "\n";
+        if (lineStart && (text.startsWith("```", i) || text.startsWith("~~~", i))) {
+            fence = fence < 0 ? i : -1;
+            clear();
+            const nl = text.indexOf("\n", i);
+            if (nl < 0)
+                return fence < 0 ? -1 : fence;
+            i = nl;
+            continue;
+        }
+        if (fence >= 0)
+            continue;
+        if (c === "\n" && text[i + 1] === "\n") {
+            clear();
+            continue;
+        }
+        if (c === "\\") {
+            i++;
+            continue;
+        }
+        if (c === "`") {
+            code = code < 0 ? i : -1;
+            continue;
+        }
+        if (code >= 0)
+            continue;
+        if (inAddress) {
+            if (c === ")") {
+                inAddress = false;
+                link = -1;
+            }
+            continue;
+        }
+        if (c === "*" && text[i + 1] === "*") {
+            bold = bold < 0 ? i : -1;
+            i++;
+            continue;
+        }
+        if (c === "_" && text[i + 1] === "_") {
+            under = under < 0 ? i : -1;
+            i++;
+            continue;
+        }
+        if (c === "~" && text[i + 1] === "~") {
+            strike = strike < 0 ? i : -1;
+            i++;
+            continue;
+        }
+        if (c === "*") {
+            // A star with a space after it at the start of a line is a list bullet, not emphasis.
+            if (star < 0 && !space(text[i + 1]) && !(lineStart && text[i + 1] === " "))
+                star = i;
+            else if (star >= 0 && !space(text[i - 1]))
+                star = -1;
+            continue;
+        }
+        if (c === "_") {
+            // An underscore inside a word (snake_case) is not emphasis.
+            if (score < 0 && space(text[i - 1]) && !space(text[i + 1]))
+                score = i;
+            else if (score >= 0 && !space(text[i - 1]) && space(text[i + 1]))
+                score = -1;
+            continue;
+        }
+        if (c === "[") {
+            if (link < 0)
+                link = i;
+            continue;
+        }
+        if (c === "]" && link >= 0) {
+            if (text[i + 1] === "(") {
+                inAddress = true;
+                i++;
+            }
+            else if (i + 1 < text.length) {
+                link = -1; // brackets that were only brackets
+            }
+        }
+    }
+    let first = -1;
+    for (const at of [fence, code, bold, under, strike, star, score, link]) {
+        if (at >= 0 && (first < 0 || at < first))
+            first = at;
+    }
+    return first;
+}
 /** The last place in `text` after `from` that follows whitespace, or -1. */
 function lastSpace(text, from) {
     for (let i = text.length; i > from; i--)
@@ -142,6 +254,8 @@ export class BlockGate {
     /** What has arrived and is not out yet: up to where, and when it arrived. Oldest first. */
     arrivals = [];
     lastOut = Number.NEGATIVE_INFINITY;
+    /** Since when a block has been held back for a marker to close; -1 when none is. */
+    heldSince = -1;
     /** How much of the text is out now. */
     get length() {
         return this.shown;
@@ -156,6 +270,7 @@ export class BlockGate {
             this.shown = Math.min(this.shown, text.length);
             this.seen = this.shown;
             this.arrivals = [];
+            this.heldSince = -1;
         }
         if (text.length > this.seen) {
             this.arrivals.push({ to: text.length, at: now });
@@ -188,6 +303,24 @@ export class BlockGate {
             else if (space > this.shown && space < text.length && young(space))
                 to = space;
         }
+        if (!ended) {
+            // Never cut inside Markdown: a marker opened in this block and not yet closed stays
+            // back, with what follows it, until it closes. Not for long: text is never stalled.
+            const open = openMarker(text.slice(0, to));
+            if (open >= this.shown) {
+                if (this.heldSince < 0)
+                    this.heldSince = now;
+                if (now - this.heldSince < MARKER_HOLD_MS) {
+                    // A code fence is drawn as a block from its first line: it is let out line by line.
+                    const fenced = text.startsWith("```", open) || text.startsWith("~~~", open);
+                    const line = fenced ? text.lastIndexOf("\n", to - 1) + 1 : -1;
+                    to = fenced && line > open ? line : open;
+                }
+            }
+            if (to <= this.shown)
+                return undefined;
+        }
+        this.heldSince = -1;
         this.shown = to;
         this.lastOut = now;
         return to;
