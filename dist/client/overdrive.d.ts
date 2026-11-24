@@ -1,10 +1,23 @@
-import { DeliveryMode, type PredictedWork, type RepoDelivery } from "../contracts/tank/agent/v1/agent_pb.js";
+import { ChecksMode, DeliveryMode, type PredictedWork, type RepoDelivery } from "../contracts/tank/agent/v1/agent_pb.js";
 /**
  * Overdrive: where a repository builds and deploys, and predicted work (the add-on). The
  * sentences live here so web and mobile cannot drift. The server's own sentences (why
  * TANK's runners are not available, why a switch was refused) are shown as they arrive.
  */
 export declare const OVERDRIVE_COPY: {
+    readonly checks: {
+        readonly title: "Checks";
+        readonly intro: "Who decides whether a change passes before it can be merged.";
+        readonly tank: {
+            readonly label: "TANK runs them";
+            readonly detail: "TANK finds your checks and runs them on its own machines on the exact change, the moment it is made. GitHub gets the result as the check \"TANK\". Your workflows keep running as they do today.";
+        };
+        readonly ownCi: {
+            readonly label: "Wait for the repository's own CI";
+            readonly detail: "TANK waits for your CI's result before a change is ready, as before.";
+        };
+        readonly workspaceIntro: "Every repository follows this unless it has its own choice in its Tread's settings.";
+    };
     readonly delivery: {
         readonly title: "Where this builds and deploys";
         readonly intro: "Your workflow files stay the definition of passing. This only chooses who runs them.";
@@ -71,6 +84,21 @@ export interface DeliveryChoice {
 }
 /** The three choices, in the order they are offered. */
 export declare const DELIVERY_CHOICES: readonly DeliveryChoice[];
+export interface ChecksChoice {
+    mode: ChecksMode;
+    label: string;
+    detail: string;
+}
+/** The two checks choices, in the order they are offered. */
+export declare const CHECKS_CHOICES: readonly ChecksChoice[];
+/** A checks choice as it stands: TANK unless it says its own CI. */
+export declare function checksMode(mode: ChecksMode | undefined): ChecksMode;
+/** The name of a checks choice. */
+export declare function checksLabel(mode: ChecksMode | undefined): string;
+/** The option that makes a repository's checks follow the workspace: "Workspace default (TANK runs them)". */
+export declare function workspaceChecksLabel(workspaceChecks: ChecksMode | undefined): string;
+/** Which checks option a repository shows as chosen: FOLLOWS_DEFAULT while it follows the workspace. */
+export declare function checksChoice(r: Pick<RepoDelivery, "checksMode" | "checksFollowsDefault">): ChecksMode | typeof FOLLOWS_DEFAULT;
 /** The name of a choice, as the options call it. */
 export declare function deliveryLabel(mode: DeliveryMode | undefined): string;
 /** The option that makes a repository follow the workspace: "Workspace default (TANK's runners)". */

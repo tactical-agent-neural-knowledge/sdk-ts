@@ -1,10 +1,24 @@
-import { DeliveryMode } from "../contracts/tank/agent/v1/agent_pb.js";
+import { ChecksMode, DeliveryMode, } from "../contracts/tank/agent/v1/agent_pb.js";
 /**
  * Overdrive: where a repository builds and deploys, and predicted work (the add-on). The
  * sentences live here so web and mobile cannot drift. The server's own sentences (why
  * TANK's runners are not available, why a switch was refused) are shown as they arrive.
  */
 export const OVERDRIVE_COPY = {
+    // Who decides a change's checks (TANK-native checks, 2026-11-24).
+    checks: {
+        title: "Checks",
+        intro: "Who decides whether a change passes before it can be merged.",
+        tank: {
+            label: "TANK runs them",
+            detail: 'TANK finds your checks and runs them on its own machines on the exact change, the moment it is made. GitHub gets the result as the check "TANK". Your workflows keep running as they do today.',
+        },
+        ownCi: {
+            label: "Wait for the repository's own CI",
+            detail: "TANK waits for your CI's result before a change is ready, as before.",
+        },
+        workspaceIntro: "Every repository follows this unless it has its own choice in its Tread's settings.",
+    },
     delivery: {
         title: "Where this builds and deploys",
         intro: "Your workflow files stay the definition of passing. This only chooses who runs them.",
@@ -72,6 +86,28 @@ export const DELIVERY_CHOICES = [
     { mode: DeliveryMode.TANK_RUNNERS, ...OVERDRIVE_COPY.delivery.tankRunners },
     { mode: DeliveryMode.OTHER_CI, ...OVERDRIVE_COPY.delivery.otherCi },
 ];
+/** The two checks choices, in the order they are offered. */
+export const CHECKS_CHOICES = [
+    { mode: ChecksMode.TANK, ...OVERDRIVE_COPY.checks.tank },
+    { mode: ChecksMode.OWN_CI, ...OVERDRIVE_COPY.checks.ownCi },
+];
+/** A checks choice as it stands: TANK unless it says its own CI. */
+export function checksMode(mode) {
+    return mode === ChecksMode.OWN_CI ? ChecksMode.OWN_CI : ChecksMode.TANK;
+}
+/** The name of a checks choice. */
+export function checksLabel(mode) {
+    const m = checksMode(mode);
+    return CHECKS_CHOICES.find((c) => c.mode === m)?.label ?? OVERDRIVE_COPY.checks.tank.label;
+}
+/** The option that makes a repository's checks follow the workspace: "Workspace default (TANK runs them)". */
+export function workspaceChecksLabel(workspaceChecks) {
+    return `${OVERDRIVE_COPY.delivery.workspaceDefault} (${checksLabel(workspaceChecks)})`;
+}
+/** Which checks option a repository shows as chosen: FOLLOWS_DEFAULT while it follows the workspace. */
+export function checksChoice(r) {
+    return r.checksFollowsDefault ? FOLLOWS_DEFAULT : checksMode(r.checksMode);
+}
 /** The name of a choice, as the options call it. */
 export function deliveryLabel(mode) {
     const m = deliveryMode(mode);

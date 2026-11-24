@@ -2606,6 +2606,17 @@ export type RepoDelivery = Message<"tank.agent.v1.RepoDelivery"> & {
      * @generated from field: bool follows_default = 13;
      */
     followsDefault: boolean;
+    /**
+     * Who decides this repository's checks, as it stands (never UNSPECIFIED here), and whether
+     * that is the workspace's choice it follows rather than its own.
+     *
+     * @generated from field: tank.agent.v1.ChecksMode checks_mode = 14;
+     */
+    checksMode: ChecksMode;
+    /**
+     * @generated from field: bool checks_follows_default = 15;
+     */
+    checksFollowsDefault: boolean;
 };
 /**
  * Describes the message tank.agent.v1.RepoDelivery.
@@ -2656,6 +2667,12 @@ export type ListRepoDeliveryResponse = Message<"tank.agent.v1.ListRepoDeliveryRe
      * @generated from field: string tank_runners_reason = 5;
      */
     tankRunnersReason: string;
+    /**
+     * The workspace's checks choice as it stands (TANK when it has none).
+     *
+     * @generated from field: tank.agent.v1.ChecksMode workspace_checks_mode = 6;
+     */
+    workspaceChecksMode: ChecksMode;
 };
 /**
  * Describes the message tank.agent.v1.ListRepoDeliveryResponse.
@@ -2691,6 +2708,19 @@ export type SetRepoDeliveryRequest = Message<"tank.agent.v1.SetRepoDeliveryReque
      * @generated from field: bool use_default = 5;
      */
     useDefault: boolean;
+    /**
+     * The repository's checks choice. UNSPECIFIED leaves it as it is. With mode UNSPECIFIED
+     * and use_default false, only the checks choice changes.
+     *
+     * @generated from field: tank.agent.v1.ChecksMode checks_mode = 6;
+     */
+    checksMode: ChecksMode;
+    /**
+     * Drop the repository's own checks choice: it follows the workspace's again.
+     *
+     * @generated from field: bool checks_use_default = 7;
+     */
+    checksUseDefault: boolean;
 };
 /**
  * Describes the message tank.agent.v1.SetRepoDeliveryRequest.
@@ -2729,6 +2759,13 @@ export type SetWorkspaceDeliveryRequest = Message<"tank.agent.v1.SetWorkspaceDel
      * @generated from field: tank.agent.v1.DeliveryMode mode = 2;
      */
     mode: DeliveryMode;
+    /**
+     * The workspace's checks choice. UNSPECIFIED leaves it as it is; with mode UNSPECIFIED
+     * only the checks choice changes.
+     *
+     * @generated from field: tank.agent.v1.ChecksMode checks_mode = 3;
+     */
+    checksMode: ChecksMode;
 };
 /**
  * Describes the message tank.agent.v1.SetWorkspaceDeliveryRequest.
@@ -3320,6 +3357,34 @@ export declare enum DeliveryMode {
  * Describes the enum tank.agent.v1.DeliveryMode.
  */
 export declare const DeliveryModeSchema: GenEnum<DeliveryMode>;
+/**
+ * ChecksMode is who decides a change's checks (Overdrive, 2026-11-24: TANK runs them itself,
+ * not tied to any git host). TANK: TANK finds and runs the repository's checks on its own
+ * nodes on the exact commit and tells the git host the result as the check "TANK"; that
+ * result is what Ready to check and the merge wait for. OWN_CI: wait for the repository's
+ * own CI, as before. UNSPECIFIED on a repository follows the workspace; a workspace with
+ * none is TANK.
+ *
+ * @generated from enum tank.agent.v1.ChecksMode
+ */
+export declare enum ChecksMode {
+    /**
+     * @generated from enum value: CHECKS_MODE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: CHECKS_MODE_TANK = 1;
+     */
+    TANK = 1,
+    /**
+     * @generated from enum value: CHECKS_MODE_OWN_CI = 2;
+     */
+    OWN_CI = 2
+}
+/**
+ * Describes the enum tank.agent.v1.ChecksMode.
+ */
+export declare const ChecksModeSchema: GenEnum<ChecksMode>;
 /**
  * @generated from service tank.agent.v1.AgentService
  */
