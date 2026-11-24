@@ -2482,6 +2482,344 @@ export type EnsureAgentTreadResponse = Message<"tank.agent.v1.EnsureAgentTreadRe
  */
 export declare const EnsureAgentTreadResponseSchema: GenMessage<EnsureAgentTreadResponse>;
 /**
+ * RepoDelivery is one repository's setting. A repository with no setting behaves as
+ * DELIVERY_MODE_OWN_CI, which is how every repository worked before the setting existed.
+ *
+ * @generated from message tank.agent.v1.RepoDelivery
+ */
+export type RepoDelivery = Message<"tank.agent.v1.RepoDelivery"> & {
+    /**
+     * owner/name
+     *
+     * @generated from field: string repo = 1;
+     */
+    repo: string;
+    /**
+     * @generated from field: tank.agent.v1.DeliveryMode mode = 2;
+     */
+    mode: DeliveryMode;
+    /**
+     * TANK_RUNNERS: the pull request that switches the jobs, and where it stands:
+     * none | opened | merged | refused.
+     *
+     * @generated from field: string switch_pull_request_url = 3;
+     */
+    switchPullRequestUrl: string;
+    /**
+     * @generated from field: string switch_status = 4;
+     */
+    switchStatus: string;
+    /**
+     * why a switch was refused, in a sentence; empty otherwise
+     *
+     * @generated from field: string reason = 5;
+     */
+    reason: string;
+    /**
+     * OTHER_CI: whether a report token exists, and where reports are sent. The token
+     * itself is only ever in the response to the SetRepoDelivery that issued it.
+     *
+     * @generated from field: bool has_report_token = 6;
+     */
+    hasReportToken: boolean;
+    /**
+     * @generated from field: string report_url = 7;
+     */
+    reportUrl: string;
+    /**
+     * The address TANK checks after a deploy to say whether the change is live; empty
+     * when the repository has no environment to check.
+     *
+     * @generated from field: string live_check_url = 8;
+     */
+    liveCheckUrl: string;
+    /**
+     * False until the workspace's runners are approved for it: TANK_RUNNERS cannot be
+     * chosen while this is false, and the reason says why.
+     *
+     * @generated from field: bool tank_runners_available = 9;
+     */
+    tankRunnersAvailable: boolean;
+    /**
+     * @generated from field: string tank_runners_reason = 10;
+     */
+    tankRunnersReason: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp updated_at = 11;
+     */
+    updatedAt?: Timestamp;
+    /**
+     * @generated from field: string updated_by = 12;
+     */
+    updatedBy: string;
+};
+/**
+ * Describes the message tank.agent.v1.RepoDelivery.
+ * Use `create(RepoDeliverySchema)` to create a new message.
+ */
+export declare const RepoDeliverySchema: GenMessage<RepoDelivery>;
+/**
+ * @generated from message tank.agent.v1.ListRepoDeliveryRequest
+ */
+export type ListRepoDeliveryRequest = Message<"tank.agent.v1.ListRepoDeliveryRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.ListRepoDeliveryRequest.
+ * Use `create(ListRepoDeliveryRequestSchema)` to create a new message.
+ */
+export declare const ListRepoDeliveryRequestSchema: GenMessage<ListRepoDeliveryRequest>;
+/**
+ * @generated from message tank.agent.v1.ListRepoDeliveryResponse
+ */
+export type ListRepoDeliveryResponse = Message<"tank.agent.v1.ListRepoDeliveryResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.RepoDelivery repos = 1;
+     */
+    repos: RepoDelivery[];
+};
+/**
+ * Describes the message tank.agent.v1.ListRepoDeliveryResponse.
+ * Use `create(ListRepoDeliveryResponseSchema)` to create a new message.
+ */
+export declare const ListRepoDeliveryResponseSchema: GenMessage<ListRepoDeliveryResponse>;
+/**
+ * @generated from message tank.agent.v1.SetRepoDeliveryRequest
+ */
+export type SetRepoDeliveryRequest = Message<"tank.agent.v1.SetRepoDeliveryRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string repo = 2;
+     */
+    repo: string;
+    /**
+     * @generated from field: tank.agent.v1.DeliveryMode mode = 3;
+     */
+    mode: DeliveryMode;
+    /**
+     * OTHER_CI: issue a new report token and revoke the one before it.
+     *
+     * @generated from field: bool rotate_report_token = 4;
+     */
+    rotateReportToken: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.SetRepoDeliveryRequest.
+ * Use `create(SetRepoDeliveryRequestSchema)` to create a new message.
+ */
+export declare const SetRepoDeliveryRequestSchema: GenMessage<SetRepoDeliveryRequest>;
+/**
+ * @generated from message tank.agent.v1.SetRepoDeliveryResponse
+ */
+export type SetRepoDeliveryResponse = Message<"tank.agent.v1.SetRepoDeliveryResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.RepoDelivery repo = 1;
+     */
+    repo?: RepoDelivery;
+    /**
+     * Shown once, when a token was issued by this call.
+     *
+     * @generated from field: string report_token = 2;
+     */
+    reportToken: string;
+};
+/**
+ * Describes the message tank.agent.v1.SetRepoDeliveryResponse.
+ * Use `create(SetRepoDeliveryResponseSchema)` to create a new message.
+ */
+export declare const SetRepoDeliveryResponseSchema: GenMessage<SetRepoDeliveryResponse>;
+/**
+ * PredictedWork is something TANK built, or proposes to build, before it was asked for.
+ * It lives on a branch that is never merged until a person takes it.
+ *
+ * @generated from message tank.agent.v1.PredictedWork
+ */
+export type PredictedWork = Message<"tank.agent.v1.PredictedWork"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * @generated from field: string workspace_id = 2;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string channel_id = 3;
+     */
+    channelId: string;
+    /**
+     * @generated from field: string thread_root_id = 4;
+     */
+    threadRootId: string;
+    /**
+     * the finished task it is offered on as a next step, if any
+     *
+     * @generated from field: string task_id = 5;
+     */
+    taskId: string;
+    /**
+     * @generated from field: string title = 6;
+     */
+    title: string;
+    /**
+     * @generated from field: string summary = 7;
+     */
+    summary: string;
+    /**
+     * Where the prediction came from, most certain first:
+     * queued_task | plan_step | conversation | guess.
+     *
+     * @generated from field: string source = 8;
+     */
+    source: string;
+    /**
+     * idea: a suggestion only (the workspace does not have the add-on).
+     * building | ready: on a branch, checks green and a preview ready when ready.
+     * stale: main moved and it has not been brought up to date yet.
+     * taken | dismissed | expired.
+     *
+     * @generated from field: string state = 9;
+     */
+    state: string;
+    /**
+     * @generated from field: string repo = 10;
+     */
+    repo: string;
+    /**
+     * @generated from field: string branch = 11;
+     */
+    branch: string;
+    /**
+     * @generated from field: string preview_url = 12;
+     */
+    previewUrl: string;
+    /**
+     * A database change proven ahead: none | structure | questions | clone, the furthest
+     * tier it was proven at, and how long it took to apply there.
+     *
+     * @generated from field: string migration_proof = 13;
+     */
+    migrationProof: string;
+    /**
+     * @generated from field: int32 migration_ms = 14;
+     */
+    migrationMs: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp created_at = 15;
+     */
+    createdAt?: Timestamp;
+    /**
+     * @generated from field: google.protobuf.Timestamp ready_at = 16;
+     */
+    readyAt?: Timestamp;
+    /**
+     * the run that built it, when one did
+     *
+     * @generated from field: string run_id = 17;
+     */
+    runId: string;
+};
+/**
+ * Describes the message tank.agent.v1.PredictedWork.
+ * Use `create(PredictedWorkSchema)` to create a new message.
+ */
+export declare const PredictedWorkSchema: GenMessage<PredictedWork>;
+/**
+ * @generated from message tank.agent.v1.ListPredictedWorkRequest
+ */
+export type ListPredictedWorkRequest = Message<"tank.agent.v1.ListPredictedWorkRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * only the next suggestions for this task (at most three)
+     *
+     * @generated from field: string task_id = 2;
+     */
+    taskId: string;
+    /**
+     * only this thread's
+     *
+     * @generated from field: string thread_root_id = 3;
+     */
+    threadRootId: string;
+    /**
+     * taken, dismissed and expired too
+     *
+     * @generated from field: bool include_closed = 4;
+     */
+    includeClosed: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.ListPredictedWorkRequest.
+ * Use `create(ListPredictedWorkRequestSchema)` to create a new message.
+ */
+export declare const ListPredictedWorkRequestSchema: GenMessage<ListPredictedWorkRequest>;
+/**
+ * @generated from message tank.agent.v1.ListPredictedWorkResponse
+ */
+export type ListPredictedWorkResponse = Message<"tank.agent.v1.ListPredictedWorkResponse"> & {
+    /**
+     * @generated from field: repeated tank.agent.v1.PredictedWork work = 1;
+     */
+    work: PredictedWork[];
+    /**
+     * Whether the workspace has the add-on: without it every item is an idea.
+     *
+     * @generated from field: bool addon = 2;
+     */
+    addon: boolean;
+    /**
+     * Of the items offered in the last 30 days, how many were taken.
+     *
+     * @generated from field: int32 offered_30d = 3;
+     */
+    offered30d: number;
+    /**
+     * @generated from field: int32 taken_30d = 4;
+     */
+    taken30d: number;
+};
+/**
+ * Describes the message tank.agent.v1.ListPredictedWorkResponse.
+ * Use `create(ListPredictedWorkResponseSchema)` to create a new message.
+ */
+export declare const ListPredictedWorkResponseSchema: GenMessage<ListPredictedWorkResponse>;
+/**
+ * @generated from message tank.agent.v1.DismissPredictedWorkRequest
+ */
+export type DismissPredictedWorkRequest = Message<"tank.agent.v1.DismissPredictedWorkRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string id = 2;
+     */
+    id: string;
+};
+/**
+ * Describes the message tank.agent.v1.DismissPredictedWorkRequest.
+ * Use `create(DismissPredictedWorkRequestSchema)` to create a new message.
+ */
+export declare const DismissPredictedWorkRequestSchema: GenMessage<DismissPredictedWorkRequest>;
+/**
+ * @generated from message tank.agent.v1.DismissPredictedWorkResponse
+ */
+export type DismissPredictedWorkResponse = Message<"tank.agent.v1.DismissPredictedWorkResponse"> & {};
+/**
+ * Describes the message tank.agent.v1.DismissPredictedWorkResponse.
+ * Use `create(DismissPredictedWorkResponseSchema)` to create a new message.
+ */
+export declare const DismissPredictedWorkResponseSchema: GenMessage<DismissPredictedWorkResponse>;
+/**
  * @generated from enum tank.agent.v1.RunState
  */
 export declare enum RunState {
@@ -2777,6 +3115,44 @@ export declare enum PlanItemStatus {
  */
 export declare const PlanItemStatusSchema: GenEnum<PlanItemStatus>;
 /**
+ * DeliveryMode is who runs a repository's CI. Whichever it is, the repository's own
+ * workflow files stay the definition of passing, and its deploy still goes where it
+ * goes today.
+ *
+ * @generated from enum tank.agent.v1.DeliveryMode
+ */
+export declare enum DeliveryMode {
+    /**
+     * @generated from enum value: DELIVERY_MODE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * TANK's runners: TANK opens one pull request switching the repository's jobs to the
+     * workspace's own runner label. Its secrets stay in GitHub.
+     *
+     * @generated from enum value: DELIVERY_MODE_TANK_RUNNERS = 1;
+     */
+    TANK_RUNNERS = 1,
+    /**
+     * The CI it has today: nothing moves. TANK hears results by webhook, reads the
+     * failure log and fixes it.
+     *
+     * @generated from enum value: DELIVERY_MODE_OWN_CI = 2;
+     */
+    OWN_CI = 2,
+    /**
+     * Another CI system: it reports each result to TANK with one call, authenticated by
+     * the report token. The same fix loop follows.
+     *
+     * @generated from enum value: DELIVERY_MODE_OTHER_CI = 3;
+     */
+    OTHER_CI = 3
+}
+/**
+ * Describes the enum tank.agent.v1.DeliveryMode.
+ */
+export declare const DeliveryModeSchema: GenEnum<DeliveryMode>;
+/**
  * @generated from service tank.agent.v1.AgentService
  */
 export declare const AgentService: GenService<{
@@ -3013,6 +3389,41 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof ListRepoPreviewSetupsRequestSchema;
         output: typeof ListRepoPreviewSetupsResponseSchema;
+    };
+    /**
+     * Overdrive: where each connected repository builds and deploys, and the work TANK
+     * has built ahead for the workspace. Admins set; members read.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.ListRepoDelivery
+     */
+    listRepoDelivery: {
+        methodKind: "unary";
+        input: typeof ListRepoDeliveryRequestSchema;
+        output: typeof ListRepoDeliveryResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.SetRepoDelivery
+     */
+    setRepoDelivery: {
+        methodKind: "unary";
+        input: typeof SetRepoDeliveryRequestSchema;
+        output: typeof SetRepoDeliveryResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.ListPredictedWork
+     */
+    listPredictedWork: {
+        methodKind: "unary";
+        input: typeof ListPredictedWorkRequestSchema;
+        output: typeof ListPredictedWorkResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.DismissPredictedWork
+     */
+    dismissPredictedWork: {
+        methodKind: "unary";
+        input: typeof DismissPredictedWorkRequestSchema;
+        output: typeof DismissPredictedWorkResponseSchema;
     };
     /**
      * The Tread's switchboard: metrics for members, settings for admins.
