@@ -52,6 +52,8 @@ export {
   freshPieces,
   MARKER_HOLD_MS,
   openMarker,
+  TINT_MAX_RUNS,
+  TINT_SETTLE_MS,
 } from "./fresh.js";
 export { MODEL_CHOICES, type ModelChoice, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
 export { OFFER_COPY, withOfferedMention } from "./offer.js";
