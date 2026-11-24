@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { Run, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
+import type { DismissPredictedWorkRequest, ListPredictedWorkRequest, ListPredictedWorkResponse, ListRepoDeliveryRequest, ListRepoDeliveryResponse, Run, SetRepoDeliveryRequest, SetRepoDeliveryResponse, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
 import type { AppAccount, CallToolRequest, CallToolResponse, GetToolsRequest, GetToolsResponse, ListAppsRequest, ListAppsResponse } from "../../apps/v1/apps_pb.js";
 import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks/v1/blocks_pb.js";
 import type { Board } from "../../board/v1/board_pb.js";
@@ -8955,6 +8955,128 @@ export type RevokeInfraRelayResponse = Message<"tank.agentctl.v1.RevokeInfraRela
  */
 export declare const RevokeInfraRelayResponseSchema: GenMessage<RevokeInfraRelayResponse>;
 /**
+ * Overdrive. The api has already checked who is asking; actor_id is that person, for
+ * the audit row. addon says whether the workspace has predicted work.
+ *
+ * @generated from message tank.agentctl.v1.ListWorkspaceRepoDeliveryRequest
+ */
+export type ListWorkspaceRepoDeliveryRequest = Message<"tank.agentctl.v1.ListWorkspaceRepoDeliveryRequest"> & {
+    /**
+     * @generated from field: tank.agent.v1.ListRepoDeliveryRequest request = 1;
+     */
+    request?: ListRepoDeliveryRequest;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListWorkspaceRepoDeliveryRequest.
+ * Use `create(ListWorkspaceRepoDeliveryRequestSchema)` to create a new message.
+ */
+export declare const ListWorkspaceRepoDeliveryRequestSchema: GenMessage<ListWorkspaceRepoDeliveryRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListWorkspaceRepoDeliveryResponse
+ */
+export type ListWorkspaceRepoDeliveryResponse = Message<"tank.agentctl.v1.ListWorkspaceRepoDeliveryResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.ListRepoDeliveryResponse response = 1;
+     */
+    response?: ListRepoDeliveryResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListWorkspaceRepoDeliveryResponse.
+ * Use `create(ListWorkspaceRepoDeliveryResponseSchema)` to create a new message.
+ */
+export declare const ListWorkspaceRepoDeliveryResponseSchema: GenMessage<ListWorkspaceRepoDeliveryResponse>;
+/**
+ * @generated from message tank.agentctl.v1.SetWorkspaceRepoDeliveryRequest
+ */
+export type SetWorkspaceRepoDeliveryRequest = Message<"tank.agentctl.v1.SetWorkspaceRepoDeliveryRequest"> & {
+    /**
+     * @generated from field: tank.agent.v1.SetRepoDeliveryRequest request = 1;
+     */
+    request?: SetRepoDeliveryRequest;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetWorkspaceRepoDeliveryRequest.
+ * Use `create(SetWorkspaceRepoDeliveryRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceRepoDeliveryRequestSchema: GenMessage<SetWorkspaceRepoDeliveryRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetWorkspaceRepoDeliveryResponse
+ */
+export type SetWorkspaceRepoDeliveryResponse = Message<"tank.agentctl.v1.SetWorkspaceRepoDeliveryResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.SetRepoDeliveryResponse response = 1;
+     */
+    response?: SetRepoDeliveryResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetWorkspaceRepoDeliveryResponse.
+ * Use `create(SetWorkspaceRepoDeliveryResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceRepoDeliveryResponseSchema: GenMessage<SetWorkspaceRepoDeliveryResponse>;
+/**
+ * @generated from message tank.agentctl.v1.ListWorkspacePredictedWorkRequest
+ */
+export type ListWorkspacePredictedWorkRequest = Message<"tank.agentctl.v1.ListWorkspacePredictedWorkRequest"> & {
+    /**
+     * @generated from field: tank.agent.v1.ListPredictedWorkRequest request = 1;
+     */
+    request?: ListPredictedWorkRequest;
+    /**
+     * @generated from field: bool addon = 2;
+     */
+    addon: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListWorkspacePredictedWorkRequest.
+ * Use `create(ListWorkspacePredictedWorkRequestSchema)` to create a new message.
+ */
+export declare const ListWorkspacePredictedWorkRequestSchema: GenMessage<ListWorkspacePredictedWorkRequest>;
+/**
+ * @generated from message tank.agentctl.v1.ListWorkspacePredictedWorkResponse
+ */
+export type ListWorkspacePredictedWorkResponse = Message<"tank.agentctl.v1.ListWorkspacePredictedWorkResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.ListPredictedWorkResponse response = 1;
+     */
+    response?: ListPredictedWorkResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.ListWorkspacePredictedWorkResponse.
+ * Use `create(ListWorkspacePredictedWorkResponseSchema)` to create a new message.
+ */
+export declare const ListWorkspacePredictedWorkResponseSchema: GenMessage<ListWorkspacePredictedWorkResponse>;
+/**
+ * @generated from message tank.agentctl.v1.DismissWorkspacePredictedWorkRequest
+ */
+export type DismissWorkspacePredictedWorkRequest = Message<"tank.agentctl.v1.DismissWorkspacePredictedWorkRequest"> & {
+    /**
+     * @generated from field: tank.agent.v1.DismissPredictedWorkRequest request = 1;
+     */
+    request?: DismissPredictedWorkRequest;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.DismissWorkspacePredictedWorkRequest.
+ * Use `create(DismissWorkspacePredictedWorkRequestSchema)` to create a new message.
+ */
+export declare const DismissWorkspacePredictedWorkRequestSchema: GenMessage<DismissWorkspacePredictedWorkRequest>;
+/**
+ * @generated from message tank.agentctl.v1.DismissWorkspacePredictedWorkResponse
+ */
+export type DismissWorkspacePredictedWorkResponse = Message<"tank.agentctl.v1.DismissWorkspacePredictedWorkResponse"> & {};
+/**
+ * Describes the message tank.agentctl.v1.DismissWorkspacePredictedWorkResponse.
+ * Use `create(DismissWorkspacePredictedWorkResponseSchema)` to create a new message.
+ */
+export declare const DismissWorkspacePredictedWorkResponseSchema: GenMessage<DismissWorkspacePredictedWorkResponse>;
+/**
  * Phase the runner is being started for. The control plane decides; the runner
  * picks its permission mode from it (planning -> "plan", implementing ->
  * "acceptEdits").
@@ -10410,5 +10532,39 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceAgentPolicyRequestSchema;
         output: typeof SetWorkspaceAgentPolicyResponseSchema;
+    };
+    /**
+     * Overdrive: the messaging core authorizes, the control plane owns the rows.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.ListWorkspaceRepoDelivery
+     */
+    listWorkspaceRepoDelivery: {
+        methodKind: "unary";
+        input: typeof ListWorkspaceRepoDeliveryRequestSchema;
+        output: typeof ListWorkspaceRepoDeliveryResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.SetWorkspaceRepoDelivery
+     */
+    setWorkspaceRepoDelivery: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceRepoDeliveryRequestSchema;
+        output: typeof SetWorkspaceRepoDeliveryResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.ListWorkspacePredictedWork
+     */
+    listWorkspacePredictedWork: {
+        methodKind: "unary";
+        input: typeof ListWorkspacePredictedWorkRequestSchema;
+        output: typeof ListWorkspacePredictedWorkResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agentctl.v1.ControlService.DismissWorkspacePredictedWork
+     */
+    dismissWorkspacePredictedWork: {
+        methodKind: "unary";
+        input: typeof DismissWorkspacePredictedWorkRequestSchema;
+        output: typeof DismissWorkspacePredictedWorkResponseSchema;
     };
 }>;
