@@ -1,4 +1,4 @@
-import { DeliveryMode, type PredictedWork } from "../contracts/tank/agent/v1/agent_pb.js";
+import { DeliveryMode, type PredictedWork, type RepoDelivery } from "../contracts/tank/agent/v1/agent_pb.js";
 /**
  * Overdrive: where a repository builds and deploys, and predicted work (the add-on). The
  * sentences live here so web and mobile cannot drift. The server's own sentences (why
@@ -27,6 +27,7 @@ export declare const OVERDRIVE_COPY: {
         readonly reportTo: "Send results to";
         readonly switchOpened: "The pull request that switches your jobs is open.";
         readonly switchMerged: "Your jobs run on TANK's runners.";
+        readonly switchBackOpened: "The pull request that moves your jobs back to GitHub's machines is open. Merge it to finish; until then your jobs keep running on TANK's runners.";
         readonly adminsOnly: "Workspace admins choose where a repository builds and deploys.";
         readonly none: "Connect a repository to a Tread and it shows up here.";
     };
@@ -61,6 +62,12 @@ export interface DeliveryChoice {
 export declare const DELIVERY_CHOICES: readonly DeliveryChoice[];
 /** A repository with no setting builds on the CI it has today. */
 export declare function deliveryMode(mode: DeliveryMode | undefined): DeliveryMode;
+/**
+ * The line beside a repository's switch pull request, or "" when there is none to show: the
+ * one that moves its jobs to TANK's runners (open or merged), or the one that moves them back
+ * (while it is open, the repository keeps its runners).
+ */
+export declare function switchLine(r: Pick<RepoDelivery, "mode" | "switchStatus" | "switchPullRequestUrl">): string;
 /** The sentence under one predicted item, by what state it is in. */
 export declare function predictedLine(work: Pick<PredictedWork, "state">): string;
 /** The sentence about a database change proven ahead, or "" when there was none. */
