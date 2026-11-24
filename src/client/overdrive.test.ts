@@ -48,12 +48,15 @@ describe("overdrive", () => {
 });
 
 describe("askToLiveLine", () => {
-  it("words the server's seconds the way the card does", async () => {
-    const { askToLiveLine } = await import("./overdrive.js");
+  it("shows TANK's own time first and the wait for approval beside it, as the card does", async () => {
+    const { askToLiveLine, clock } = await import("./overdrive.js");
     expect(askToLiveLine(0n)).toBe("");
     expect(askToLiveLine(undefined)).toBe("");
-    expect(askToLiveLine(40n)).toBe("Ask to live: 40 s");
-    expect(askToLiveLine(853n)).toBe("Ask to live: 14 min");
-    expect(askToLiveLine(9000)).toBe("Ask to live: 2.5 h");
+    expect(askToLiveLine(325n)).toBe("Live in 5m 25s");
+    expect(askToLiveLine(325n, 0n)).toBe("Live in 5m 25s");
+    expect(askToLiveLine(6383n, 5869n)).toBe("Live in 8m 34s of TANK's time · 1h 38m waiting for approval");
+    expect(clock(40)).toBe("40s");
+    expect(clock(300)).toBe("5m");
+    expect(clock(7200)).toBe("2h");
   });
 });

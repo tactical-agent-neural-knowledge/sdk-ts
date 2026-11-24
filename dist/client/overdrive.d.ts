@@ -69,9 +69,12 @@ export declare function migrationProofLine(work: Pick<PredictedWork, "migrationP
 export declare function predictedAction(work: Pick<PredictedWork, "state">): string;
 /** "4 of 9 taken in the last 30 days", or "" before anything was offered. */
 export declare function hitRateLine(offered: number, taken: number): string;
+/** A duration the way the stopwatch says it: "40s", "5m 25s", "1h 38m" (the card's own wording). */
+export declare function clock(seconds: number): string;
 /**
- * The stopwatch (Overdrive): a task's ask-to-live, small and plain, as both clients show it
- * beside the proof. The seconds come from the server (TaskProof.ask_to_live_seconds); this
- * only words them. "" when there is nothing to show.
+ * The stopwatch (Overdrive): a task's ask-to-live as both clients show it beside the proof,
+ * TANK's own time first and the wait for a person beside it, so a slow approval does not
+ * read as TANK being slow. The seconds come from the server (TaskProof.ask_to_live_seconds,
+ * waiting_seconds); this only words them. "" when there is nothing to show.
  */
-export declare function askToLiveLine(seconds: bigint | number | undefined): string;
+export declare function askToLiveLine(seconds: bigint | number | undefined, waitingSeconds?: bigint | number): string;
