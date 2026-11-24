@@ -61,10 +61,17 @@ describe("runTone", () => {
   });
 
   it("labels and terminal states", () => {
-    expect(runStateLabel(RunState.AWAITING_PLAN_APPROVAL)).toBe("awaiting plan approval");
-    expect(runStateLabel(RunState.AWAITING_ANSWER)).toBe("awaiting answer");
+    expect(runStateLabel(RunState.AWAITING_PLAN_APPROVAL)).toBe("plan ready");
+    expect(runStateLabel(RunState.AWAITING_ANSWER)).toBe("waiting for you");
     expect(isTerminalRunState(RunState.AWAITING_ANSWER)).toBe(false);
-    expect(runStateLabel(RunState.CI_WATCHING)).toBe("watching CI");
+    expect(runStateLabel(RunState.CI_WATCHING)).toBe("checking");
+    expect(runStateLabel(RunState.VERIFYING_DEPLOY)).toBe("checking it live");
+    expect(runStateLabel(RunState.PR_OPEN)).toBe("ready to check");
+    // No state's raw name reaches a person.
+    for (const v of Object.values(RunState)) {
+      if (typeof v === "number")
+        expect(runStateLabel(v)).not.toMatch(/implementing|verifying|deploy|awaiting|_/);
+    }
     expect(runStateLabel(99 as RunState)).toBe("unknown");
     expect(isTerminalRunState(RunState.DONE)).toBe(true);
     expect(isTerminalRunState(RunState.TIMED_OUT)).toBe(true);
@@ -76,9 +83,13 @@ describe("runTone", () => {
 
 describe("runStatusPhrase", () => {
   it("says what the run is doing in a person's words, for every state", () => {
-    expect(runStatusPhrase(RunState.AWAITING_MERGE_APPROVAL)).toBe("Waiting for your go to merge");
+    expect(runStatusPhrase(RunState.AWAITING_MERGE_APPROVAL)).toBe(
+      "Ready to check. Waiting for your go to merge",
+    );
+    expect(runStatusPhrase(RunState.VERIFYING_DEPLOY)).toBe("Checking it live");
+    expect(runStatusPhrase(RunState.MERGED)).toBe("Merged. Going live now");
     expect(runStatusPhrase(RunState.CI_WATCHING)).toBe("Watching the checks");
-    expect(runStatusPhrase(RunState.FAILED)).toBe("Failed");
+    expect(runStatusPhrase(RunState.FAILED)).toBe("Didn't finish");
     // A run held on its own question never reads as a plan waiting for a yes.
     expect(runStatusPhrase(RunState.AWAITING_ANSWER)).toBe("Waiting for an answer to the agent's question");
     expect(runStatusPhrase(RunState.AWAITING_ANSWER)).not.toBe(

@@ -921,9 +921,9 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
         >
           {value.subject}
         </Link>
-      ) : (
+      ) : value.subject.trim() ? (
         <Typography variant="body1">{value.subject}</Typography>
-      )}
+      ) : null}
       {value.detail ? (
         <Typography variant="body2" color="text.secondary" data-testid="approval-detail">
           {value.detail}
@@ -935,15 +935,19 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
           {expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""}
         </Typography>
       )}
+      {/* Decided with its sentence ("Approved by Robby at 7:01 AM.") in the detail: the
+          sentence is the whole of it, with no "approved" chip beside it (2026-11-24). */}
       {value.decided ? (
-        <Chip
-          size="small"
-          label={value.decision || "decided"}
-          color={
-            value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default"
-          }
-          sx={{ alignSelf: "flex-start" }}
-        />
+        value.detail ? null : (
+          <Chip
+            size="small"
+            label={value.decision || "decided"}
+            color={
+              value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default"
+            }
+            sx={{ alignSelf: "flex-start" }}
+          />
+        )
       ) : (
         <Stack direction="row" spacing={1}>
           <Button

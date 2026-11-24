@@ -892,9 +892,9 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
         <LinkText url={value.subject.trim()} ctx={ctx}>
           {value.subject}
         </LinkText>
-      ) : (
+      ) : value.subject.trim() ? (
         <Text variant="bodyLarge">{value.subject}</Text>
-      )}
+      ) : null}
       {value.detail ? (
         <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }} testID="approval-detail">
           {value.detail}
@@ -906,12 +906,18 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
           {expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""}
         </Text>
       )}
+      {/* Decided with its sentence ("Approved by Robby at 7:01 AM.") in the detail: the
+          sentence is the whole of it, with no "approved" chip beside it (2026-11-24). */}
       {value.decided ? (
-        <ToneChip
-          tone={value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "muted"}
-          label={value.decision || "decided"}
-          testID="approval-decision"
-        />
+        value.detail ? null : (
+          <ToneChip
+            tone={
+              value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "muted"
+            }
+            label={value.decision || "decided"}
+            testID="approval-decision"
+          />
+        )
       ) : (
         <View style={styles.wrap}>
           <Button

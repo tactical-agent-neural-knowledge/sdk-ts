@@ -187,6 +187,25 @@ describe("interactions", () => {
     expect(seen).toEqual([{ blockId: expect.any(String), actionId: "gate.request_changes", value: "g9" }]);
   });
 
+  it("a decided plan says who approved it and when, with no hash and no chip", () => {
+    const r = render(
+      <BlocksViewNative
+        blocks={blocks([
+          approvalPrompt({
+            gateId: "g1",
+            kind: "plan",
+            subject: "",
+            decided: true,
+            decision: "approved",
+            detail: "Approved by Robby at 7:01 AM.",
+          }),
+        ])}
+      />,
+    );
+    expect(textOf(byTestId(r.root, "approval-detail"))).toBe("Approved by Robby at 7:01 AM.");
+    expect(hostTestIds(r.root, "approval-decision")).toHaveLength(0);
+  });
+
   it("confirm buttons go through Alert and fire only on confirm", () => {
     const seen: unknown[] = [];
     const r = render(<BlocksViewNative blocks={load("status")} onAction={(a) => seen.push(a)} />);
