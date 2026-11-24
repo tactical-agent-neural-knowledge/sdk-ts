@@ -421,6 +421,14 @@ export type AgentStatus = Message<"tank.events.v1.AgentStatus"> & {
      * @generated from field: string status = 4;
      */
     status: string;
+    /**
+     * The agent whose status this is: its principal (user) id, as a member's. Set for a status
+     * with no run behind it (AgentService.ShowWorking) and for a run's own; empty from an older
+     * server, where a client names the workspace's agent as it did before.
+     *
+     * @generated from field: string agent_id = 5;
+     */
+    agentId: string;
 };
 /**
  * Describes the message tank.events.v1.AgentStatus.

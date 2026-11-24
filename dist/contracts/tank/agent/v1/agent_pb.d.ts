@@ -414,6 +414,45 @@ export type ReplyResponse = Message<"tank.agent.v1.ReplyResponse"> & {
  */
 export declare const ReplyResponseSchema: GenMessage<ReplyResponse>;
 /**
+ * @generated from message tank.agent.v1.ShowWorkingRequest
+ */
+export type ShowWorkingRequest = Message<"tank.agent.v1.ShowWorkingRequest"> & {
+    /**
+     * @generated from field: string channel_id = 1;
+     */
+    channelId: string;
+    /**
+     * The thread the agent is working in; empty for the Tread itself.
+     *
+     * @generated from field: string thread_root_id = 2;
+     */
+    threadRootId: string;
+    /**
+     * @generated from field: string agent_id = 3;
+     */
+    agentId: string;
+    /**
+     * What it is doing, to follow "<agent> is": "reading the thread". Empty clears it.
+     *
+     * @generated from field: string status = 4;
+     */
+    status: string;
+};
+/**
+ * Describes the message tank.agent.v1.ShowWorkingRequest.
+ * Use `create(ShowWorkingRequestSchema)` to create a new message.
+ */
+export declare const ShowWorkingRequestSchema: GenMessage<ShowWorkingRequest>;
+/**
+ * @generated from message tank.agent.v1.ShowWorkingResponse
+ */
+export type ShowWorkingResponse = Message<"tank.agent.v1.ShowWorkingResponse"> & {};
+/**
+ * Describes the message tank.agent.v1.ShowWorkingResponse.
+ * Use `create(ShowWorkingResponseSchema)` to create a new message.
+ */
+export declare const ShowWorkingResponseSchema: GenMessage<ShowWorkingResponse>;
+/**
  * Workspace-level agent settings, admins only. Off by default.
  *
  * @generated from message tank.agent.v1.WorkspaceAgentSettings
@@ -3193,6 +3232,21 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof ReplyRequestSchema;
         output: typeof ReplyResponseSchema;
+    };
+    /**
+     * Shows an agent at work in a Tread or a thread before it has anything to say: the same
+     * agent.status frame a run's status sends, with no run (Overdrive, 2026-11-24: a person
+     * sees the agent respond within a few hundred milliseconds of pressing Send, every time).
+     * Nothing is stored and nothing is posted; clients drop the frame after 30 s or when an
+     * empty status follows. Bot tokens only; the agent must be one of the workspace's own and
+     * a member of the Tread.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.ShowWorking
+     */
+    showWorking: {
+        methodKind: "unary";
+        input: typeof ShowWorkingRequestSchema;
+        output: typeof ShowWorkingResponseSchema;
     };
     /**
      * @generated from rpc tank.agent.v1.AgentService.GetWorkspaceAgentSettings

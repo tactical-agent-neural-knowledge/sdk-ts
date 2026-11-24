@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/envvars/v1/envvars.proto.
  */
 export const file_tank_envvars_v1_envvars: GenFile = /*@__PURE__*/
-  fileDesc("Ch10YW5rL2VudnZhcnMvdjEvZW52dmFycy5wcm90bxIPdGFuay5lbnZ2YXJzLnYxIokBCgZFbnZWYXISDAoEbmFtZRgBIAEoCRINCgV2YWx1ZRgCIAEoCRIOCgZzZWNyZXQYAyABKAgSDgoGaXNfc2V0GAQgASgIEi4KCnVwZGF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYBiABKAkiKgoSTGlzdEVudlZhcnNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI8ChNMaXN0RW52VmFyc1Jlc3BvbnNlEiUKBHZhcnMYASADKAsyFy50YW5rLmVudnZhcnMudjEuRW52VmFyImoKEFB1dEVudlZhclJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFdmFsdWUYAyABKAkSDgoGc2VjcmV0GAQgASgIEhMKC2NyZWF0ZV9vbmx5GAUgASgIIkoKEVB1dEVudlZhclJlc3BvbnNlEiQKA3ZhchgBIAEoCzIXLnRhbmsuZW52dmFycy52MS5FbnZWYXISDwoHY3JlYXRlZBgCIAEoCCI5ChNEZWxldGVFbnZWYXJSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJIhYKFERlbGV0ZUVudlZhclJlc3BvbnNlMpoCCg1FbnZWYXJTZXJ2aWNlElgKC0xpc3RFbnZWYXJzEiMudGFuay5lbnZ2YXJzLnYxLkxpc3RFbnZWYXJzUmVxdWVzdBokLnRhbmsuZW52dmFycy52MS5MaXN0RW52VmFyc1Jlc3BvbnNlElIKCVB1dEVudlZhchIhLnRhbmsuZW52dmFycy52MS5QdXRFbnZWYXJSZXF1ZXN0GiIudGFuay5lbnZ2YXJzLnYxLlB1dEVudlZhclJlc3BvbnNlElsKDERlbGV0ZUVudlZhchIkLnRhbmsuZW52dmFycy52MS5EZWxldGVFbnZWYXJSZXF1ZXN0GiUudGFuay5lbnZ2YXJzLnYxLkRlbGV0ZUVudlZhclJlc3BvbnNlQtgBChNjb20udGFuay5lbnZ2YXJzLnYxQgxFbnZ2YXJzUHJvdG9QAVpVZ2l0aHViLmNvbS90YWN0aWNhbC1hZ2VudC1uZXVyYWwta25vd2xlZGdlL2NvbnRyYWN0cy9nZW4vZ28vdGFuay9lbnZ2YXJzL3YxO2VudnZhcnN2MaICA1RFWKoCD1RhbmsuRW52dmFycy5WMcoCD1RhbmtcRW52dmFyc1xWMeICG1RhbmtcRW52dmFyc1xWMVxHUEJNZXRhZGF0YeoCEVRhbms6OkVudnZhcnM6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp]);
+  fileDesc("Ch10YW5rL2VudnZhcnMvdjEvZW52dmFycy5wcm90bxIPdGFuay5lbnZ2YXJzLnYxIs4BCgZFbnZWYXISDAoEbmFtZRgBIAEoCRINCgV2YWx1ZRgCIAEoCRIOCgZzZWNyZXQYAyABKAgSDgoGaXNfc2V0GAQgASgIEi4KCnVwZGF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCnVwZGF0ZWRfYnkYBiABKAkSEwoLcHJldmlld19zZXQYByABKAgSFQoNcHJldmlld19ob3N0cxgIIAMoCRIXCg9wcmV2aWV3X2luX2JvZHkYCSABKAgiKgoSTGlzdEVudlZhcnNSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCSI8ChNMaXN0RW52VmFyc1Jlc3BvbnNlEiUKBHZhcnMYASADKAsyFy50YW5rLmVudnZhcnMudjEuRW52VmFyImoKEFB1dEVudlZhclJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFdmFsdWUYAyABKAkSDgoGc2VjcmV0GAQgASgIEhMKC2NyZWF0ZV9vbmx5GAUgASgIIkoKEVB1dEVudlZhclJlc3BvbnNlEiQKA3ZhchgBIAEoCzIXLnRhbmsuZW52dmFycy52MS5FbnZWYXISDwoHY3JlYXRlZBgCIAEoCCI5ChNEZWxldGVFbnZWYXJSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJIhYKFERlbGV0ZUVudlZhclJlc3BvbnNlImsKFlB1dFByZXZpZXdWYWx1ZVJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFdmFsdWUYAyABKAkSDQoFaG9zdHMYBCADKAkSDwoHaW5fYm9keRgFIAEoCCI/ChdQdXRQcmV2aWV3VmFsdWVSZXNwb25zZRIkCgN2YXIYASABKAsyFy50YW5rLmVudnZhcnMudjEuRW52VmFyIj4KGENsZWFyUHJldmlld1ZhbHVlUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDAoEbmFtZRgCIAEoCSJBChlDbGVhclByZXZpZXdWYWx1ZVJlc3BvbnNlEiQKA3ZhchgBIAEoCzIXLnRhbmsuZW52dmFycy52MS5FbnZWYXIy7AMKDUVudlZhclNlcnZpY2USWAoLTGlzdEVudlZhcnMSIy50YW5rLmVudnZhcnMudjEuTGlzdEVudlZhcnNSZXF1ZXN0GiQudGFuay5lbnZ2YXJzLnYxLkxpc3RFbnZWYXJzUmVzcG9uc2USUgoJUHV0RW52VmFyEiEudGFuay5lbnZ2YXJzLnYxLlB1dEVudlZhclJlcXVlc3QaIi50YW5rLmVudnZhcnMudjEuUHV0RW52VmFyUmVzcG9uc2USWwoMRGVsZXRlRW52VmFyEiQudGFuay5lbnZ2YXJzLnYxLkRlbGV0ZUVudlZhclJlcXVlc3QaJS50YW5rLmVudnZhcnMudjEuRGVsZXRlRW52VmFyUmVzcG9uc2USZAoPUHV0UHJldmlld1ZhbHVlEicudGFuay5lbnZ2YXJzLnYxLlB1dFByZXZpZXdWYWx1ZVJlcXVlc3QaKC50YW5rLmVudnZhcnMudjEuUHV0UHJldmlld1ZhbHVlUmVzcG9uc2USagoRQ2xlYXJQcmV2aWV3VmFsdWUSKS50YW5rLmVudnZhcnMudjEuQ2xlYXJQcmV2aWV3VmFsdWVSZXF1ZXN0GioudGFuay5lbnZ2YXJzLnYxLkNsZWFyUHJldmlld1ZhbHVlUmVzcG9uc2VC2AEKE2NvbS50YW5rLmVudnZhcnMudjFCDEVudnZhcnNQcm90b1ABWlVnaXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL2VudnZhcnMvdjE7ZW52dmFyc3YxogIDVEVYqgIPVGFuay5FbnZ2YXJzLlYxygIPVGFua1xFbnZ2YXJzXFYx4gIbVGFua1xFbnZ2YXJzXFYxXEdQQk1ldGFkYXRh6gIRVGFuazo6RW52dmFyczo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message tank.envvars.v1.EnvVar
@@ -53,6 +53,27 @@ export type EnvVar = Message<"tank.envvars.v1.EnvVar"> & {
    * @generated from field: string updated_by = 6;
    */
   updatedBy: string;
+
+  /**
+   * Preview value (Overdrive, 2026-11-24), for a secret only: a test value (a Stripe test
+   * key, a sandbox account) that TANK's previews use in place of the real one. Write-only,
+   * like the secret. A preview is never given the real value: without a preview value it
+   * gets nothing for this name. The app sees only a placeholder; TANK adds the preview
+   * value on the way out, to preview_hosts alone.
+   *
+   * @generated from field: bool preview_set = 7;
+   */
+  previewSet: boolean;
+
+  /**
+   * @generated from field: repeated string preview_hosts = 8;
+   */
+  previewHosts: string[];
+
+  /**
+   * @generated from field: bool preview_in_body = 9;
+   */
+  previewInBody: boolean;
 };
 
 /**
@@ -202,6 +223,103 @@ export const DeleteEnvVarResponseSchema: GenMessage<DeleteEnvVarResponse> = /*@_
   messageDesc(file_tank_envvars_v1_envvars, 6);
 
 /**
+ * @generated from message tank.envvars.v1.PutPreviewValueRequest
+ */
+export type PutPreviewValueRequest = Message<"tank.envvars.v1.PutPreviewValueRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * The preview value. Empty keeps the stored one.
+   *
+   * @generated from field: string value = 3;
+   */
+  value: string;
+
+  /**
+   * Hostnames the value may be sent to ("api.stripe.com", "*.example.com"). At least one.
+   *
+   * @generated from field: repeated string hosts = 4;
+   */
+  hosts: string[];
+
+  /**
+   * @generated from field: bool in_body = 5;
+   */
+  inBody: boolean;
+};
+
+/**
+ * Describes the message tank.envvars.v1.PutPreviewValueRequest.
+ * Use `create(PutPreviewValueRequestSchema)` to create a new message.
+ */
+export const PutPreviewValueRequestSchema: GenMessage<PutPreviewValueRequest> = /*@__PURE__*/
+  messageDesc(file_tank_envvars_v1_envvars, 7);
+
+/**
+ * @generated from message tank.envvars.v1.PutPreviewValueResponse
+ */
+export type PutPreviewValueResponse = Message<"tank.envvars.v1.PutPreviewValueResponse"> & {
+  /**
+   * @generated from field: tank.envvars.v1.EnvVar var = 1;
+   */
+  var?: EnvVar;
+};
+
+/**
+ * Describes the message tank.envvars.v1.PutPreviewValueResponse.
+ * Use `create(PutPreviewValueResponseSchema)` to create a new message.
+ */
+export const PutPreviewValueResponseSchema: GenMessage<PutPreviewValueResponse> = /*@__PURE__*/
+  messageDesc(file_tank_envvars_v1_envvars, 8);
+
+/**
+ * @generated from message tank.envvars.v1.ClearPreviewValueRequest
+ */
+export type ClearPreviewValueRequest = Message<"tank.envvars.v1.ClearPreviewValueRequest"> & {
+  /**
+   * @generated from field: string workspace_id = 1;
+   */
+  workspaceId: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+};
+
+/**
+ * Describes the message tank.envvars.v1.ClearPreviewValueRequest.
+ * Use `create(ClearPreviewValueRequestSchema)` to create a new message.
+ */
+export const ClearPreviewValueRequestSchema: GenMessage<ClearPreviewValueRequest> = /*@__PURE__*/
+  messageDesc(file_tank_envvars_v1_envvars, 9);
+
+/**
+ * @generated from message tank.envvars.v1.ClearPreviewValueResponse
+ */
+export type ClearPreviewValueResponse = Message<"tank.envvars.v1.ClearPreviewValueResponse"> & {
+  /**
+   * @generated from field: tank.envvars.v1.EnvVar var = 1;
+   */
+  var?: EnvVar;
+};
+
+/**
+ * Describes the message tank.envvars.v1.ClearPreviewValueResponse.
+ * Use `create(ClearPreviewValueResponseSchema)` to create a new message.
+ */
+export const ClearPreviewValueResponseSchema: GenMessage<ClearPreviewValueResponse> = /*@__PURE__*/
+  messageDesc(file_tank_envvars_v1_envvars, 10);
+
+/**
  * @generated from service tank.envvars.v1.EnvVarService
  */
 export const EnvVarService: GenService<{
@@ -228,6 +346,24 @@ export const EnvVarService: GenService<{
     methodKind: "unary";
     input: typeof DeleteEnvVarRequestSchema;
     output: typeof DeleteEnvVarResponseSchema;
+  },
+  /**
+   * A secret's preview value and the hosts it may be sent to, owners and admins only.
+   *
+   * @generated from rpc tank.envvars.v1.EnvVarService.PutPreviewValue
+   */
+  putPreviewValue: {
+    methodKind: "unary";
+    input: typeof PutPreviewValueRequestSchema;
+    output: typeof PutPreviewValueResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.envvars.v1.EnvVarService.ClearPreviewValue
+   */
+  clearPreviewValue: {
+    methodKind: "unary";
+    input: typeof ClearPreviewValueRequestSchema;
+    output: typeof ClearPreviewValueResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_envvars_v1_envvars, 0);
