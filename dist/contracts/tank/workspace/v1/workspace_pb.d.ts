@@ -1784,6 +1784,20 @@ export type Draft = Message<"tank.workspace.v1.Draft"> & {
      * @generated from field: google.protobuf.Timestamp preparation_expires_at = 10;
      */
     preparationExpiresAt?: Timestamp;
+    /**
+     * Set by the server, never by the client, and only where the offer is switched on: the
+     * draft tags no agent but reads like work, so this agent is ready to take it. A client
+     * that shows the offer and is not told otherwise sends the message with
+     * offered_agent_user_id in PostMessageRequest.mention_ids, which starts the work exactly
+     * as a typed mention would. Empty when there is no offer.
+     *
+     * @generated from field: string offered_agent_id = 11;
+     */
+    offeredAgentId: string;
+    /**
+     * @generated from field: string offered_agent_user_id = 12;
+     */
+    offeredAgentUserId: string;
 };
 /**
  * Describes the message tank.workspace.v1.Draft.

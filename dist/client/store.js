@@ -9,6 +9,26 @@ import { uuidv7Time } from "./uuidv7.js";
 export function preparationKey(channelId, threadRootId) {
     return `${channelId}|${threadRootId}`;
 }
+/** The state with a draft's offer applied: set when the draft carries one, removed when it does not. */
+function withOffer(state, key, d) {
+    const cur = state.offerByThread[key];
+    if (!d.offeredAgentId || !d.offeredAgentUserId) {
+        if (!cur)
+            return state;
+        const offerByThread = { ...state.offerByThread };
+        delete offerByThread[key];
+        return { ...state, offerByThread };
+    }
+    if (cur && cur.agentId === d.offeredAgentId && cur.agentUserId === d.offeredAgentUserId)
+        return state;
+    const entry = {
+        channelId: d.channelId,
+        threadRootId: d.threadRootId,
+        agentId: d.offeredAgentId,
+        agentUserId: d.offeredAgentUserId,
+    };
+    return { ...state, offerByThread: { ...state.offerByThread, [key]: entry } };
+}
 /** The key of one thread's live-output setting: a thread is identified by its channel and root message. */
 export function threadLiveStreamKey(channelId, threadRootId) {
     return `${channelId}:${threadRootId}`;
@@ -38,6 +58,7 @@ export function initialState() {
         agentStream: {},
         threadLiveStreams: {},
         preparationByThread: {},
+        offerByThread: {},
         pending: {},
         connection: "idle",
         cursors: {},
@@ -694,14 +715,15 @@ export function reduce(state, action) {
         case "preparation/seed": {
             const d = action.draft;
             const key = preparationKey(d.channelId, d.threadRootId);
+            const base = withOffer(state, key, d);
             const agentIds = [...d.mentionedAgentIds];
             const idle = !d.preparationId && d.preparationState === PreparationState.UNSPECIFIED;
             if (idle && agentIds.length === 0) {
-                if (!state.preparationByThread[key])
-                    return state;
-                const preparationByThread = { ...state.preparationByThread };
+                if (!base.preparationByThread[key])
+                    return base;
+                const preparationByThread = { ...base.preparationByThread };
                 delete preparationByThread[key];
-                return { ...state, preparationByThread };
+                return { ...base, preparationByThread };
             }
             const entry = {
                 channelId: d.channelId,
@@ -711,7 +733,7 @@ export function reduce(state, action) {
                 agentIds,
                 expiresAt: d.preparationExpiresAt ? tsMs(d.preparationExpiresAt) : undefined,
             };
-            return { ...state, preparationByThread: { ...state.preparationByThread, [key]: entry } };
+            return { ...base, preparationByThread: { ...base.preparationByThread, [key]: entry } };
         }
         case "preparation/expire": {
             let next;
@@ -1379,6 +1401,8 @@ export class TankStore {
     /** Whether the person has live agent output on in this thread. */
     selectThreadLiveStream = (channelId, threadRootId) => this.state.threadLiveStreams[threadLiveStreamKey(channelId, threadRootId)] === true;
     selectAgentStatus = (key) => this.state.agentStatusByThread[key]?.status;
+    /** The agent offered on a composer's draft (empty `threadRootId` = the channel composer), if any. */
+    selectOffer = (channelId, threadRootId) => this.state.offerByThread[preparationKey(channelId, threadRootId)];
     /** The early-run preparation for a composer (empty `threadRootId` = the channel composer), if the store has one. */
     selectPreparation = (channelId, threadRootId) => this.state.preparationByThread[preparationKey(channelId, threadRootId)];
     /** Every live `agent_status` frame in a channel (channel-level and per-thread). */

@@ -3357,6 +3357,14 @@ export type WorkbenchStep = Message<"tank.agentctl.v1.WorkbenchStep"> & {
      * @generated from field: string status = 3;
      */
     status: string;
+    /**
+     * Who is doing the step when several agents work at once ("implementer", "tests",
+     * "review"). Steps that share a lane are laid on one row under its name; empty keeps
+     * the single row.
+     *
+     * @generated from field: string lane = 4;
+     */
+    lane: string;
 };
 /**
  * Describes the message tank.agentctl.v1.WorkbenchStep.
@@ -3433,12 +3441,184 @@ export type WorkbenchShowRequest = Message<"tank.agentctl.v1.WorkbenchShowReques
      * @generated from field: string title = 6;
      */
     title: string;
+    /**
+     * kind "explain": a change to an API or a database, shown rather than described. The
+     * facts come from the run; the narration is written by TANK's own model from them.
+     *
+     * @generated from field: tank.agentctl.v1.Explanation explain = 7;
+     */
+    explain?: Explanation;
 };
 /**
  * Describes the message tank.agentctl.v1.WorkbenchShowRequest.
  * Use `create(WorkbenchShowRequestSchema)` to create a new message.
  */
 export declare const WorkbenchShowRequestSchema: GenMessage<WorkbenchShowRequest>;
+/**
+ * What changed behind the screen, as data a client can animate: the path a request takes,
+ * the tables before and after, and one real request answered by the old code and the new.
+ *
+ * @generated from message tank.agentctl.v1.Explanation
+ */
+export type Explanation = Message<"tank.agentctl.v1.Explanation"> & {
+    /**
+     * in the order the request travels
+     *
+     * @generated from field: repeated tank.agentctl.v1.ExplainHop flow = 1;
+     */
+    flow: ExplainHop[];
+    /**
+     * only tables the change touches
+     *
+     * @generated from field: repeated tank.agentctl.v1.ExplainTable tables = 2;
+     */
+    tables: ExplainTable[];
+    /**
+     * @generated from field: tank.agentctl.v1.ExplainReplay replay = 3;
+     */
+    replay?: ExplainReplay;
+    /**
+     * Server-filled: the change in plain words, from TANK's own model. Never the run's claim.
+     *
+     * @generated from field: string narration = 4;
+     */
+    narration: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.Explanation.
+ * Use `create(ExplanationSchema)` to create a new message.
+ */
+export declare const ExplanationSchema: GenMessage<Explanation>;
+/**
+ * @generated from message tank.agentctl.v1.ExplainHop
+ */
+export type ExplainHop = Message<"tank.agentctl.v1.ExplainHop"> & {
+    /**
+     * @generated from field: string id = 1;
+     */
+    id: string;
+    /**
+     * "POST /orders", "orders service", "orders table"
+     *
+     * @generated from field: string label = 2;
+     */
+    label: string;
+    /**
+     * client | service | database | queue | external
+     *
+     * @generated from field: string kind = 3;
+     */
+    kind: string;
+    /**
+     * one line: what happens here
+     *
+     * @generated from field: string detail = 4;
+     */
+    detail: string;
+    /**
+     * this hop behaves differently after the change
+     *
+     * @generated from field: bool changed = 5;
+     */
+    changed: boolean;
+};
+/**
+ * Describes the message tank.agentctl.v1.ExplainHop.
+ * Use `create(ExplainHopSchema)` to create a new message.
+ */
+export declare const ExplainHopSchema: GenMessage<ExplainHop>;
+/**
+ * @generated from message tank.agentctl.v1.ExplainTable
+ */
+export type ExplainTable = Message<"tank.agentctl.v1.ExplainTable"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * added | removed | changed
+     *
+     * @generated from field: string change = 2;
+     */
+    change: string;
+    /**
+     * @generated from field: repeated tank.agentctl.v1.ExplainColumn columns = 3;
+     */
+    columns: ExplainColumn[];
+};
+/**
+ * Describes the message tank.agentctl.v1.ExplainTable.
+ * Use `create(ExplainTableSchema)` to create a new message.
+ */
+export declare const ExplainTableSchema: GenMessage<ExplainTable>;
+/**
+ * @generated from message tank.agentctl.v1.ExplainColumn
+ */
+export type ExplainColumn = Message<"tank.agentctl.v1.ExplainColumn"> & {
+    /**
+     * @generated from field: string name = 1;
+     */
+    name: string;
+    /**
+     * @generated from field: string type = 2;
+     */
+    type: string;
+    /**
+     * added | removed | changed | "" for untouched
+     *
+     * @generated from field: string change = 3;
+     */
+    change: string;
+    /**
+     * changed: the type before
+     *
+     * @generated from field: string was = 4;
+     */
+    was: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ExplainColumn.
+ * Use `create(ExplainColumnSchema)` to create a new message.
+ */
+export declare const ExplainColumnSchema: GenMessage<ExplainColumn>;
+/**
+ * @generated from message tank.agentctl.v1.ExplainReplay
+ */
+export type ExplainReplay = Message<"tank.agentctl.v1.ExplainReplay"> & {
+    /**
+     * @generated from field: string method = 1;
+     */
+    method: string;
+    /**
+     * @generated from field: string path = 2;
+     */
+    path: string;
+    /**
+     * @generated from field: string request_body = 3;
+     */
+    requestBody: string;
+    /**
+     * @generated from field: int32 old_status = 4;
+     */
+    oldStatus: number;
+    /**
+     * @generated from field: string old_body = 5;
+     */
+    oldBody: string;
+    /**
+     * @generated from field: int32 new_status = 6;
+     */
+    newStatus: number;
+    /**
+     * @generated from field: string new_body = 7;
+     */
+    newBody: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.ExplainReplay.
+ * Use `create(ExplainReplaySchema)` to create a new message.
+ */
+export declare const ExplainReplaySchema: GenMessage<ExplainReplay>;
 /**
  * @generated from message tank.agentctl.v1.WorkbenchShowResponse
  */

@@ -214,6 +214,13 @@ export type Task = Message<"tank.task.v1.Task"> & {
      * @generated from field: repeated string file_ids = 22;
      */
     fileIds: string[];
+    /**
+     * The message this task was made from (a reaction on it), empty for a task somebody typed.
+     * Its thread is the task's thread, so nothing is posted twice.
+     *
+     * @generated from field: string source_message_id = 23;
+     */
+    sourceMessageId: string;
 };
 /**
  * Describes the message tank.task.v1.Task.

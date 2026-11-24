@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import type { TankClient } from "../client/client.js";
-import { type AgentStreamEntry, type ChannelPaging, type ConnectionState, type NotificationPaging, type PendingMessage, type TankState, type TankStore, type ThreadView, type Unreads } from "../client/store.js";
+import { type AgentStreamEntry, type ChannelPaging, type ConnectionState, type NotificationPaging, type OfferEntry, type PendingMessage, type TankState, type TankStore, type ThreadView, type Unreads } from "../client/store.js";
 import type { Run, TreadPlan } from "../contracts/tank/agent/v1/agent_pb.js";
 import type { Channel, ChannelView } from "../contracts/tank/channel/v1/channel_pb.js";
 import type { AgentStatus } from "../contracts/tank/events/v1/events_pb.js";
@@ -181,6 +181,11 @@ export interface ThreadLiveStreamState {
 export declare function useThreadLiveStream(channelId: string, threadRootId: string): ThreadLiveStreamState;
 /** Every live `agent_status` frame in a channel (its threads included). */
 export declare function useAgentStatuses(channelId: string): AgentStatus[];
+/**
+ * The agent the server offers on this composer's draft (`threadRootId` empty = the channel
+ * composer), or undefined. See `OFFER_COPY` and `withOfferedMention` in the client.
+ */
+export declare function useOffer(channelId: string, threadRootId: string): OfferEntry | undefined;
 /** The early-run "getting ready" state for a composer (`threadRootId` empty = the channel composer). */
 export interface Preparation {
     /** The latest `PreparationState`; UNSPECIFIED when the store holds nothing for this composer. */

@@ -5,6 +5,7 @@ export { createTankClient, TankClient, } from "./client.js";
 export { codeFileName, codeFileType, fenceFileName } from "./codefile.js";
 export { Emitter } from "./emitter.js";
 export { MODEL_CHOICES, modelLabel, TANK_NEURAL, TANK_NEURAL_NEXT } from "./models.js";
+export { OFFER_COPY, withOfferedMention } from "./offer.js";
 export { isPaywall, paywallMessage } from "./paywall.js";
 export { plainPreview } from "./plainPreview.js";
 export { createDraftPreparer, PREPARE_PAUSE_MS, } from "./prepare.js";
