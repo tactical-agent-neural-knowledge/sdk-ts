@@ -64,6 +64,13 @@ export type TaskProof = Message<"tank.task.v1.TaskProof"> & {
      * @generated from field: string video_file_id = 6;
      */
     videoFileId: string;
+    /**
+     * Overdrive's stopwatch (2026-11-24): seconds from the ask to the change being live, when
+     * it got there; 0 when nothing confirms it is out. Shown small beside the proof.
+     *
+     * @generated from field: int64 ask_to_live_seconds = 7;
+     */
+    askToLiveSeconds: bigint;
 };
 /**
  * Describes the message tank.task.v1.TaskProof.

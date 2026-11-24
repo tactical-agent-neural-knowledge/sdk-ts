@@ -114,3 +114,18 @@ export function hitRateLine(offered: number, taken: number): string {
   if (!(offered > 0)) return "";
   return `${Math.max(0, Math.min(taken || 0, offered))} of ${offered} taken in the last 30 days`;
 }
+
+/**
+ * The stopwatch (Overdrive): a task's ask-to-live, small and plain, as both clients show it
+ * beside the proof. The seconds come from the server (TaskProof.ask_to_live_seconds); this
+ * only words them. "" when there is nothing to show.
+ */
+export function askToLiveLine(seconds: bigint | number | undefined): string {
+  const s = Number(seconds ?? 0);
+  if (!Number.isFinite(s) || s <= 0) return "";
+  let took: string;
+  if (s < 90) took = `${Math.round(s)} s`;
+  else if (s < 90 * 60) took = `${Math.round(s / 60)} min`;
+  else took = `${(s / 3600).toFixed(1)} h`;
+  return `Ask to live: ${took}`;
+}
