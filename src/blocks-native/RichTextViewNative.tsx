@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Linking, ScrollView, StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
+import { localTimes } from "../blocks/localtime.js";
 import { broadcastWord } from "../blocks/richtext.js";
 import {
   type RichText,
@@ -46,7 +47,16 @@ export function ElementViewNative({ element, ...p }: { element: RichTextElement 
   const k = element.kind;
   switch (k.case) {
     case "text":
-      return <>{styledSpan(k.value.text, k.value.style, codeFont, theme.colors.surfaceVariant)}</>;
+      return (
+        <>
+          {styledSpan(
+            k.value.style?.code ? k.value.text : localTimes(k.value.text),
+            k.value.style,
+            codeFont,
+            theme.colors.surfaceVariant,
+          )}
+        </>
+      );
     case "link": {
       const url = k.value.url;
       return (
@@ -55,7 +65,7 @@ export function ElementViewNative({ element, ...p }: { element: RichTextElement 
           onPress={() => open(url)}
           accessibilityRole="link"
         >
-          {styledSpan(k.value.text || url, k.value.style, codeFont, theme.colors.surfaceVariant)}
+          {styledSpan(localTimes(k.value.text) || url, k.value.style, codeFont, theme.colors.surfaceVariant)}
         </Text>
       );
     }

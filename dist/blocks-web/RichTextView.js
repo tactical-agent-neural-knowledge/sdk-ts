@@ -2,6 +2,7 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-run
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import { localTimes } from "../blocks/localtime.js";
 import { broadcastWord } from "../blocks/richtext.js";
 import { TableAlign, } from "../contracts/tank/richtext/v1/richtext_pb.js";
 import { typography } from "../design/tokens.js";
@@ -30,9 +31,9 @@ export function ElementView({ element, resolveUser, resolveChannel, renderEmoji,
     const k = element.kind;
     switch (k.case) {
         case "text":
-            return _jsx(_Fragment, { children: styled(k.value.text, k.value.style) });
+            return _jsx(_Fragment, { children: styled(k.value.style?.code ? k.value.text : localTimes(k.value.text), k.value.style) });
         case "link":
-            return (_jsx(Link, { href: k.value.url, target: "_blank", rel: "noopener noreferrer", color: "primary", children: styled(k.value.text || k.value.url, k.value.style) }));
+            return (_jsx(Link, { href: k.value.url, target: "_blank", rel: "noopener noreferrer", color: "primary", children: styled(localTimes(k.value.text) || k.value.url, k.value.style) }));
         case "user":
             return (_jsxs(Box, { component: "span", "data-mention": "user", "data-id": k.value.userId, sx: { color: "primary.main", fontWeight: 600 }, children: ["@", resolveUser?.(k.value.userId) ?? "…"] }));
         case "channel":

@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import type { ReactNode } from "react";
+import { localTimes } from "../blocks/localtime.js";
 import { broadcastWord } from "../blocks/richtext.js";
 import {
   type RichText,
@@ -60,11 +61,11 @@ export function ElementView({
   const k = element.kind;
   switch (k.case) {
     case "text":
-      return <>{styled(k.value.text, k.value.style)}</>;
+      return <>{styled(k.value.style?.code ? k.value.text : localTimes(k.value.text), k.value.style)}</>;
     case "link":
       return (
         <Link href={k.value.url} target="_blank" rel="noopener noreferrer" color="primary">
-          {styled(k.value.text || k.value.url, k.value.style)}
+          {styled(localTimes(k.value.text) || k.value.url, k.value.style)}
         </Link>
       );
     case "user":

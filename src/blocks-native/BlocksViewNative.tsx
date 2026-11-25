@@ -1,4 +1,5 @@
 import { StyleSheet, View } from "react-native";
+import { localizeTimes } from "../blocks/localtime.js";
 import type { Block, Blocks } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import {
   ActionsBlock,
@@ -59,7 +60,8 @@ export function BlockViewNative({ block, ...opts }: { block: Block } & BlocksNat
  * Render inside a `PaperProvider` whose theme is built from `paperTheme` (see `…/sdk/design`).
  */
 export function BlocksViewNative({ blocks, ...opts }: BlocksViewNativeProps) {
-  const list = blocks === undefined ? [] : Array.isArray(blocks) ? blocks : blocks.blocks;
+  // Times arrive as tokens and are drawn in the viewer's own zone (localtime.ts).
+  const list = localizeTimes(blocks === undefined ? [] : Array.isArray(blocks) ? blocks : blocks.blocks);
   if (list.length === 0) return null;
   return (
     <BlocksNativeContext.Provider value={opts}>

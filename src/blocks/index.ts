@@ -1,5 +1,14 @@
 export * from "./builders.js";
 export {
+  formatLocalTime,
+  hasTimeTokens,
+  type LocalTimeOptions,
+  type LocalTimeStyle,
+  localizeTimes,
+  localTimes,
+  timeToken,
+} from "./localtime.js";
+export {
   MARK_HEX,
   MARKS,
   type MarkKind,

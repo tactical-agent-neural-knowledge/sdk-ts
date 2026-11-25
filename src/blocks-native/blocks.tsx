@@ -1,6 +1,7 @@
 import { type ReactNode, useEffect, useState } from "react";
 import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native";
 import { Button, Chip, Divider, type MD3Theme, ProgressBar, Text, useTheme } from "react-native-paper";
+import { formatLocalTime } from "../blocks/localtime.js";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { planGlance, planMarkdown } from "../blocks/plan.js";
 import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
@@ -864,7 +865,7 @@ function usePendingDecision(decided: boolean): [string | null, (which: string) =
 export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx: BlockContext }) {
   const theme = useTheme();
   const expires = tsMs(value.expiresAt);
-  const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
+  const fmt = ctx.formatTime ?? ((ms: number) => formatLocalTime(ms, "f"));
   const [pending, setPending] = usePendingDecision(value.decided);
   if (value.kind === GateKind.GUARDRAIL) return <GuardrailPromptBlock value={value} ctx={ctx} />;
   // The ids the control plane answers to (agent-control/internal/cards: gate.approve,
@@ -943,7 +944,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
 export function ToolLogBlock({ value, ctx }: { value: ToolLog; ctx: BlockContext }) {
   const theme = useTheme();
   const sem = semanticColors(theme);
-  const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString().slice(11, 19));
+  const fmt = ctx.formatTime ?? ((ms: number) => formatLocalTime(ms, "t"));
   const mono = { fontFamily: ctx.codeFontFamily ?? DEFAULT_CODE_FONT };
   return (
     <Card accent="agent" label={`Agent · ${value.phase}`}>
@@ -983,7 +984,7 @@ export function ToolLogBlock({ value, ctx }: { value: ToolLog; ctx: BlockContext
 export function StatusCardBlock({ value, ctx }: { value: StatusCard; ctx: BlockContext }) {
   const theme = useTheme();
   const started = tsMs(value.startedAt);
-  const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
+  const fmt = ctx.formatTime ?? ((ms: number) => formatLocalTime(ms, "f"));
   const terminal = /^(done|merged|failed|cancelled|timed_out|budget_exhausted|approval_expired)$/.test(
     value.state,
   );
