@@ -2617,12 +2617,131 @@ export type RepoDelivery = Message<"tank.agent.v1.RepoDelivery"> & {
      * @generated from field: bool checks_follows_default = 15;
      */
     checksFollowsDefault: boolean;
+    /**
+     * How TANK's checks have gone on this repository lately (the last 30 days); unset when
+     * TANK has not checked it.
+     *
+     * @generated from field: tank.agent.v1.ChecksReport checks_report = 16;
+     */
+    checksReport?: ChecksReport;
 };
 /**
  * Describes the message tank.agent.v1.RepoDelivery.
  * Use `create(RepoDeliverySchema)` to create a new message.
  */
 export declare const RepoDeliverySchema: GenMessage<RepoDelivery>;
+/**
+ * ChecksReport is a repository's record of TANK's own checks (TANK-native checks 1c/1d,
+ * 2026-11-25), computed by the control plane from every job it ran. Times are whole jobs,
+ * from the record starting to its verdict.
+ *
+ * @generated from message tank.agent.v1.ChecksReport
+ */
+export type ChecksReport = Message<"tank.agent.v1.ChecksReport"> & {
+    /**
+     * full check jobs in the window
+     *
+     * @generated from field: int32 runs = 1;
+     */
+    runs: number;
+    /**
+     * @generated from field: int32 passed = 2;
+     */
+    passed: number;
+    /**
+     * @generated from field: int32 p50_ms = 3;
+     */
+    p50Ms: number;
+    /**
+     * @generated from field: int32 p95_ms = 4;
+     */
+    p95Ms: number;
+    /**
+     * Time a job waited for its machine before it began, p50 and p95.
+     *
+     * @generated from field: int32 wait_p50_ms = 5;
+     */
+    waitP50Ms: number;
+    /**
+     * @generated from field: int32 wait_p95_ms = 6;
+     */
+    waitP95Ms: number;
+    /**
+     * Steps that failed and then passed on a second run of the same commit.
+     *
+     * @generated from field: repeated tank.agent.v1.FlakyStep flaky = 7;
+     */
+    flaky: FlakyStep[];
+    /**
+     * The image the checks run in, and whether it was pinned from the first green run
+     * ("first_green") or set by a person ("person"); empty follows TANK's current image.
+     *
+     * @generated from field: string image = 8;
+     */
+    image: string;
+    /**
+     * @generated from field: string image_source = 9;
+     */
+    imageSource: string;
+    /**
+     * The latest commit both TANK and the repository's own CI finished, for "TANK 48s ·
+     * GitHub 7m 12s"; zero when there is none.
+     *
+     * @generated from field: int32 compare_tank_ms = 10;
+     */
+    compareTankMs: number;
+    /**
+     * @generated from field: int32 compare_own_ci_ms = 11;
+     */
+    compareOwnCiMs: number;
+    /**
+     * @generated from field: string compare_sha = 12;
+     */
+    compareSha: string;
+    /**
+     * @generated from field: int32 cache_hits = 13;
+     */
+    cacheHits: number;
+    /**
+     * @generated from field: int32 cache_misses = 14;
+     */
+    cacheMisses: number;
+    /**
+     * @generated from field: google.protobuf.Timestamp last_at = 15;
+     */
+    lastAt?: Timestamp;
+};
+/**
+ * Describes the message tank.agent.v1.ChecksReport.
+ * Use `create(ChecksReportSchema)` to create a new message.
+ */
+export declare const ChecksReportSchema: GenMessage<ChecksReport>;
+/**
+ * @generated from message tank.agent.v1.FlakyStep
+ */
+export type FlakyStep = Message<"tank.agent.v1.FlakyStep"> & {
+    /**
+     * @generated from field: string step = 1;
+     */
+    step: string;
+    /**
+     * runs it was flaky in
+     *
+     * @generated from field: int32 flaky = 2;
+     */
+    flaky: number;
+    /**
+     * runs it ran in
+     *
+     * @generated from field: int32 runs = 3;
+     */
+    runs: number;
+};
+/**
+ * Describes the message tank.agent.v1.FlakyStep.
+ * Use `create(FlakyStepSchema)` to create a new message.
+ */
+export declare const FlakyStepSchema: GenMessage<FlakyStep>;
 /**
  * @generated from message tank.agent.v1.ListRepoDeliveryRequest
  */
@@ -2721,6 +2840,18 @@ export type SetRepoDeliveryRequest = Message<"tank.agent.v1.SetRepoDeliveryReque
      * @generated from field: bool checks_use_default = 7;
      */
     checksUseDefault: boolean;
+    /**
+     * The image TANK's checks run in: set_checks_image with checks_image pins it (an image of
+     * TANK's own sandbox repositories only); set_checks_image with "" goes back to pinning
+     * from the next green run.
+     *
+     * @generated from field: bool set_checks_image = 8;
+     */
+    setChecksImage: boolean;
+    /**
+     * @generated from field: string checks_image = 9;
+     */
+    checksImage: string;
 };
 /**
  * Describes the message tank.agent.v1.SetRepoDeliveryRequest.
