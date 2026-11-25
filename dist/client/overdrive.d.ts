@@ -1,4 +1,4 @@
-import { ChecksMode, DeliveryMode, type PredictedWork, type RepoDelivery } from "../contracts/tank/agent/v1/agent_pb.js";
+import { ChecksMode, type ChecksReport, DeliveryMode, type PredictedWork, type RepoDelivery } from "../contracts/tank/agent/v1/agent_pb.js";
 /**
  * Overdrive: where a repository builds and deploys, and predicted work (the add-on). The
  * sentences live here so web and mobile cannot drift. The server's own sentences (why
@@ -17,6 +17,17 @@ export declare const OVERDRIVE_COPY: {
             readonly detail: "TANK waits for your CI's result before a change is ready, as before.";
         };
         readonly workspaceIntro: "Every repository follows this unless it has its own choice in its Tread's settings.";
+        readonly report: {
+            readonly title: "How TANK's checks have gone";
+            readonly none: "TANK has not checked this repository yet.";
+            readonly image: "Checks image";
+            readonly imageCurrent: "TANK's current image";
+            readonly imageFirstGreen: "kept from the first green run";
+            readonly imagePerson: "chosen by a person";
+            readonly imageHint: "Pin an image so a new TANK image never changes this repository's checks under it.";
+            readonly pin: "Pin";
+            readonly unpin: "Use TANK's current image";
+        };
     };
     readonly delivery: {
         readonly title: "Where this builds and deploys";
@@ -139,3 +150,20 @@ export declare function clock(seconds: number): string;
  * waiting_seconds); this only words them. "" when there is nothing to show.
  */
 export declare function askToLiveLine(seconds: bigint | number | undefined, waitingSeconds?: bigint | number): string;
+/** A check's duration from milliseconds: "1.7s" (or "5s") under ten seconds, then the stopwatch's "48s", "7m 12s". */
+export declare function msClock(ms: number | undefined): string;
+/**
+ * "TANK 48s · GitHub 7m 12s": the newest commit both TANK and the repository's own CI
+ * finished, as the server measured them. "" when there is no such commit.
+ */
+export declare function checksCompareLine(r: Pick<ChecksReport, "compareTankMs" | "compareOwnCiMs"> | undefined): string;
+/** Where a repository's checks image came from, in words. */
+export declare function checksImageLine(r: Pick<ChecksReport, "image" | "imageSource"> | undefined): string;
+/**
+ * The checks report's lines, in the order both clients show them: the comparison with the
+ * repository's own CI, how many passed and how long they took (p50 and p95), the wait for a
+ * machine, the dependency cache, and each flaky step. Every number is the server's
+ * (RepoDelivery.checks_report); this only words it. Empty when TANK has not checked the
+ * repository.
+ */
+export declare function checksReportLines(r: ChecksReport | undefined): string[];

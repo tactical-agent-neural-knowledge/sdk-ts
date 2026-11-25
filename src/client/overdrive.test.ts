@@ -1,10 +1,15 @@
+import { create } from "@bufbuild/protobuf";
 import { describe, expect, it } from "vitest";
-import { DeliveryMode } from "../contracts/tank/agent/v1/agent_pb.js";
+import { ChecksReportSchema, DeliveryMode } from "../contracts/tank/agent/v1/agent_pb.js";
 import {
+  checksCompareLine,
+  checksImageLine,
+  checksReportLines,
   DELIVERY_CHOICES,
   deliveryMode,
   hitRateLine,
   migrationProofLine,
+  msClock,
   OVERDRIVE_COPY,
   predictedAction,
   predictedLine,
@@ -122,5 +127,41 @@ describe("checks choice", () => {
       ChecksMode.OWN_CI,
     );
     expect(CHECKS_CHOICES.map((c) => c.mode)).toEqual([ChecksMode.TANK, ChecksMode.OWN_CI]);
+  });
+});
+
+describe("checks report", () => {
+  const report = create(ChecksReportSchema, {
+    runs: 12,
+    passed: 11,
+    p50Ms: 48_000,
+    p95Ms: 125_000,
+    waitP50Ms: 5_000,
+    waitP95Ms: 21_000,
+    compareTankMs: 48_000,
+    compareOwnCiMs: 432_000,
+    cacheHits: 9,
+    cacheMisses: 1,
+    flaky: [{ step: "go test", flaky: 2, runs: 12 }],
+    image: "031879841669.dkr.ecr.us-east-1.amazonaws.com/agent-runner:sha-9e8c50e3e926",
+    imageSource: "first_green",
+  });
+  it("words the server's numbers", () => {
+    expect(checksReportLines(report)).toEqual([
+      "TANK 48s · GitHub 7m 12s",
+      "11 of 12 passed in the last 30 days · usually 48s, 2m 5s at the slowest 1 in 20",
+      "Waited for a machine: usually 5s, up to 21s",
+      "Dependency cache: 9 hits, 1 miss",
+      "Flaky: go test (2 of 12 runs)",
+    ]);
+    expect(checksImageLine(report)).toBe("agent-runner:sha-9e8c50e3e926, kept from the first green run");
+  });
+  it("says nothing it does not have", () => {
+    expect(checksReportLines(undefined)).toEqual([]);
+    expect(checksReportLines(create(ChecksReportSchema, {}))).toEqual([]);
+    expect(checksCompareLine(create(ChecksReportSchema, { compareTankMs: 1_700 }))).toBe("");
+    expect(checksImageLine(undefined)).toBe("TANK's current image");
+    expect(msClock(1_721)).toBe("1.7s");
+    expect(msClock(0)).toBe("");
   });
 });

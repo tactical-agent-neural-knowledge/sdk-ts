@@ -1,5 +1,6 @@
 import {
   ChecksMode,
+  type ChecksReport,
   DeliveryMode,
   type PredictedWork,
   type RepoDelivery,
@@ -25,6 +26,18 @@ export const OVERDRIVE_COPY = {
       detail: "TANK waits for your CI's result before a change is ready, as before.",
     },
     workspaceIntro: "Every repository follows this unless it has its own choice in its Tread's settings.",
+    // The checks report (TANK-native checks 1c/1d, 2026-11-25): the server's numbers, worded.
+    report: {
+      title: "How TANK's checks have gone",
+      none: "TANK has not checked this repository yet.",
+      image: "Checks image",
+      imageCurrent: "TANK's current image",
+      imageFirstGreen: "kept from the first green run",
+      imagePerson: "chosen by a person",
+      imageHint: "Pin an image so a new TANK image never changes this repository's checks under it.",
+      pin: "Pin",
+      unpin: "Use TANK's current image",
+    },
   },
   delivery: {
     title: "Where this builds and deploys",
@@ -256,4 +269,67 @@ export function askToLiveLine(
   const wait = Number(waitingSeconds ?? 0);
   if (!Number.isFinite(wait) || wait < 1 || wait >= total) return `Live in ${clock(total)}`;
   return `Live in ${clock(total - wait)} of TANK's time · ${clock(wait)} waiting for approval`;
+}
+
+/** A check's duration from milliseconds: "1.7s" (or "5s") under ten seconds, then the stopwatch's "48s", "7m 12s". */
+export function msClock(ms: number | undefined): string {
+  const n = Number(ms ?? 0);
+  if (!Number.isFinite(n) || n <= 0) return "";
+  if (n < 10_000) return `${Math.round(n / 100) / 10}s`;
+  return clock(n / 1000);
+}
+
+/**
+ * "TANK 48s · GitHub 7m 12s": the newest commit both TANK and the repository's own CI
+ * finished, as the server measured them. "" when there is no such commit.
+ */
+export function checksCompareLine(
+  r: Pick<ChecksReport, "compareTankMs" | "compareOwnCiMs"> | undefined,
+): string {
+  if (!r || !(r.compareTankMs > 0) || !(r.compareOwnCiMs > 0)) return "";
+  return `TANK ${msClock(r.compareTankMs)} · GitHub ${msClock(r.compareOwnCiMs)}`;
+}
+
+/** Where a repository's checks image came from, in words. */
+export function checksImageLine(r: Pick<ChecksReport, "image" | "imageSource"> | undefined): string {
+  const copy = OVERDRIVE_COPY.checks.report;
+  if (!r?.image) return copy.imageCurrent;
+  const tag = r.image.split("/").pop() ?? r.image;
+  const from = r.imageSource === "person" ? copy.imagePerson : copy.imageFirstGreen;
+  return `${tag}, ${from}`;
+}
+
+/**
+ * The checks report's lines, in the order both clients show them: the comparison with the
+ * repository's own CI, how many passed and how long they took (p50 and p95), the wait for a
+ * machine, the dependency cache, and each flaky step. Every number is the server's
+ * (RepoDelivery.checks_report); this only words it. Empty when TANK has not checked the
+ * repository.
+ */
+export function checksReportLines(r: ChecksReport | undefined): string[] {
+  if (!r || !(r.runs > 0)) return [];
+  const out: string[] = [];
+  const compare = checksCompareLine(r);
+  if (compare) out.push(compare);
+  const p50 = msClock(r.p50Ms);
+  const p95 = msClock(r.p95Ms);
+  let runs = `${r.passed} of ${r.runs} passed in the last 30 days`;
+  if (p50) runs += ` · usually ${p50}`;
+  if (p95 && p95 !== p50) runs += `, ${p95} at the slowest 1 in 20`;
+  out.push(runs);
+  const w50 = msClock(r.waitP50Ms);
+  if (w50) {
+    const w95 = msClock(r.waitP95Ms);
+    out.push(`Waited for a machine: usually ${w50}${w95 && w95 !== w50 ? `, up to ${w95}` : ""}`);
+  }
+  if (r.cacheHits > 0 || r.cacheMisses > 0) {
+    out.push(
+      `Dependency cache: ${r.cacheHits} ${r.cacheHits === 1 ? "hit" : "hits"}, ${r.cacheMisses} ${r.cacheMisses === 1 ? "miss" : "misses"}`,
+    );
+  }
+  for (const f of r.flaky ?? []) {
+    if (f.step && f.flaky > 0)
+      out.push(`Flaky: ${f.step} (${f.flaky} of ${f.runs} ${f.runs === 1 ? "run" : "runs"})`);
+  }
+  return out;
 }
