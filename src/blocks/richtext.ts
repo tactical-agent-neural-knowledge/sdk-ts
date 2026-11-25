@@ -5,6 +5,7 @@ import {
   RichTextSchema,
   type Style,
 } from "../contracts/tank/richtext/v1/richtext_pb.js";
+import { localTimes } from "./localtime.js";
 
 type ElementInit = RichTextElement["kind"];
 
@@ -118,9 +119,9 @@ export function elementToPlain(e: RichTextElement): string {
   const k = e.kind;
   switch (k.case) {
     case "text":
-      return k.value.text;
+      return k.value.style?.code ? k.value.text : localTimes(k.value.text);
     case "link":
-      return k.value.text || k.value.url;
+      return localTimes(k.value.text) || k.value.url;
     case "user":
       return `@${k.value.userId}`;
     case "channel":

@@ -1,6 +1,7 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { Linking, ScrollView, StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
+import { localTimes } from "../blocks/localtime.js";
 import { broadcastWord } from "../blocks/richtext.js";
 import { TableAlign, } from "../contracts/tank/richtext/v1/richtext_pb.js";
 import { DEFAULT_CODE_FONT } from "./context.js";
@@ -27,10 +28,10 @@ export function ElementViewNative({ element, ...p }) {
     const k = element.kind;
     switch (k.case) {
         case "text":
-            return _jsx(_Fragment, { children: styledSpan(k.value.text, k.value.style, codeFont, theme.colors.surfaceVariant) });
+            return (_jsx(_Fragment, { children: styledSpan(k.value.style?.code ? k.value.text : localTimes(k.value.text), k.value.style, codeFont, theme.colors.surfaceVariant) }));
         case "link": {
             const url = k.value.url;
-            return (_jsx(Text, { style: { color: theme.colors.primary, textDecorationLine: "underline" }, onPress: () => open(url), accessibilityRole: "link", children: styledSpan(k.value.text || url, k.value.style, codeFont, theme.colors.surfaceVariant) }));
+            return (_jsx(Text, { style: { color: theme.colors.primary, textDecorationLine: "underline" }, onPress: () => open(url), accessibilityRole: "link", children: styledSpan(localTimes(k.value.text) || url, k.value.style, codeFont, theme.colors.surfaceVariant) }));
         }
         case "user":
             return (_jsxs(Text, { style: { color: theme.colors.primary, fontWeight: "600" }, testID: `mention-user-${k.value.userId}`, children: ["@", p.resolveUser?.(k.value.userId) ?? "…"] }));

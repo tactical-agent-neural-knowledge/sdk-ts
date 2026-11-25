@@ -1,5 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import Box from "@mui/material/Box";
+import { localizeTimes } from "../blocks/localtime.js";
 import { ActionsBlock, ApprovalPromptBlock, CiStatusBlock, ContextBlock, DiffPreviewBlock, DividerBlock, FilePreviewBlock, HeaderBlock, PlanCardBlock, SectionBlock, StatusCardBlock, ToolLogBlock, } from "./blocks.js";
 export function BlockView({ block, ...ctxProps }) {
     const ctx = { ...ctxProps, blockId: block.blockId };
@@ -35,7 +36,8 @@ export function BlockView({ block, ...ctxProps }) {
 }
 /** Renders a message's blocks (Threaded Action Cards) with MUI. Wrap in a ThemeProvider with `tankTheme`. */
 export function BlocksView({ blocks, ...ctxProps }) {
-    const list = blocks === undefined ? [] : Array.isArray(blocks) ? blocks : blocks.blocks;
+    // Times arrive as tokens and are drawn in the viewer's own zone (localtime.ts).
+    const list = localizeTimes(blocks === undefined ? [] : Array.isArray(blocks) ? blocks : blocks.blocks);
     if (list.length === 0)
         return null;
     return (_jsx(Box, { "data-blocks": true, sx: { display: "flex", flexDirection: "column", gap: 1.25, maxWidth: 720 }, children: list.map((b, i) => (_jsx(Box, { "data-block-id": b.blockId, "data-block-kind": b.kind.case, children: _jsx(BlockView, { block: b, ...ctxProps }) }, b.blockId || i))) }));

@@ -12,6 +12,7 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type ReactNode, useEffect, useState } from "react";
+import { formatLocalTime } from "../blocks/localtime.js";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { type PlanFileActions, planGlance, planMarkdown } from "../blocks/plan.js";
 import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
@@ -895,7 +896,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
     ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
   };
   const expires = tsMs(value.expiresAt);
-  const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
+  const fmt = ctx.formatTime ?? ((ms: number) => formatLocalTime(ms, "f"));
   if (value.kind === GateKind.GUARDRAIL) return <GuardrailPromptBlock value={value} ctx={ctx} />;
   return (
     <Card accent="alert" label={GATE_LABEL[value.kind] ?? "approval"}>
@@ -969,7 +970,7 @@ export function ApprovalPromptBlock({ value, ctx }: { value: ApprovalPrompt; ctx
 }
 
 export function ToolLogBlock({ value, ctx }: { value: ToolLog; ctx: BlockContext }) {
-  const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString().slice(11, 19));
+  const fmt = ctx.formatTime ?? ((ms: number) => formatLocalTime(ms, "t"));
   return (
     <Card accent="agent" label={`Agent · ${value.phase}`}>
       <Typography variant="caption" color="text.secondary">
@@ -1018,7 +1019,7 @@ export function ToolLogBlock({ value, ctx }: { value: ToolLog; ctx: BlockContext
 
 export function StatusCardBlock({ value, ctx }: { value: StatusCard; ctx: BlockContext }) {
   const started = tsMs(value.startedAt);
-  const fmt = ctx.formatTime ?? ((ms: number) => new Date(ms).toISOString());
+  const fmt = ctx.formatTime ?? ((ms: number) => formatLocalTime(ms, "f"));
   const terminal = /^(done|merged|failed|cancelled|timed_out|budget_exhausted|approval_expired)$/.test(
     value.state,
   );

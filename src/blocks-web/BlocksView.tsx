@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { localizeTimes } from "../blocks/localtime.js";
 import type { Block, Blocks } from "../contracts/tank/blocks/v1/blocks_pb.js";
 import {
   ActionsBlock,
@@ -58,7 +59,8 @@ export function BlockView({ block, ...ctxProps }: { block: Block } & Omit<Blocks
 
 /** Renders a message's blocks (Threaded Action Cards) with MUI. Wrap in a ThemeProvider with `tankTheme`. */
 export function BlocksView({ blocks, ...ctxProps }: BlocksViewProps) {
-  const list = blocks === undefined ? [] : Array.isArray(blocks) ? blocks : blocks.blocks;
+  // Times arrive as tokens and are drawn in the viewer's own zone (localtime.ts).
+  const list = localizeTimes(blocks === undefined ? [] : Array.isArray(blocks) ? blocks : blocks.blocks);
   if (list.length === 0) return null;
   return (
     <Box data-blocks sx={{ display: "flex", flexDirection: "column", gap: 1.25, maxWidth: 720 }}>

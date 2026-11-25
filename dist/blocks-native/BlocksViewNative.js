@@ -1,5 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { StyleSheet, View } from "react-native";
+import { localizeTimes } from "../blocks/localtime.js";
 import { ActionsBlock, ApprovalPromptBlock, CiStatusBlock, ContextBlock, DiffPreviewBlock, DividerBlock, FilePreviewBlock, HeaderBlock, PlanCardBlock, SectionBlock, StatusCardBlock, ToolLogBlock, } from "./blocks.js";
 import { BlocksNativeContext } from "./context.js";
 export function BlockViewNative({ block, ...opts }) {
@@ -40,7 +41,8 @@ export function BlockViewNative({ block, ...opts }) {
  * Render inside a `PaperProvider` whose theme is built from `paperTheme` (see `…/sdk/design`).
  */
 export function BlocksViewNative({ blocks, ...opts }) {
-    const list = blocks === undefined ? [] : Array.isArray(blocks) ? blocks : blocks.blocks;
+    // Times arrive as tokens and are drawn in the viewer's own zone (localtime.ts).
+    const list = localizeTimes(blocks === undefined ? [] : Array.isArray(blocks) ? blocks : blocks.blocks);
     if (list.length === 0)
         return null;
     return (_jsx(BlocksNativeContext.Provider, { value: opts, children: _jsx(View, { testID: "blocks", style: styles.root, children: list.map((b, i) => (_jsx(View, { testID: `block-${b.blockId}`, accessibilityLabel: b.kind.case, children: _jsx(BlockViewNative, { block: b, ...opts }) }, b.blockId || i))) }) }));

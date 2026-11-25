@@ -2,6 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import { Alert, Image, Linking, Pressable, StyleSheet, View } from "react-native";
 import { Button, Chip, Divider, ProgressBar, Text, useTheme } from "react-native-paper";
+import { formatLocalTime } from "../blocks/localtime.js";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { planGlance, planMarkdown } from "../blocks/plan.js";
 import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
@@ -355,7 +356,7 @@ function usePendingDecision(decided) {
 export function ApprovalPromptBlock({ value, ctx }) {
     const theme = useTheme();
     const expires = tsMs(value.expiresAt);
-    const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
+    const fmt = ctx.formatTime ?? ((ms) => formatLocalTime(ms, "f"));
     const [pending, setPending] = usePendingDecision(value.decided);
     if (value.kind === GateKind.GUARDRAIL)
         return _jsx(GuardrailPromptBlock, { value: value, ctx: ctx });
@@ -373,7 +374,7 @@ export function ApprovalPromptBlock({ value, ctx }) {
 export function ToolLogBlock({ value, ctx }) {
     const theme = useTheme();
     const sem = semanticColors(theme);
-    const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString().slice(11, 19));
+    const fmt = ctx.formatTime ?? ((ms) => formatLocalTime(ms, "t"));
     const mono = { fontFamily: ctx.codeFontFamily ?? DEFAULT_CODE_FONT };
     return (_jsxs(Card, { accent: "agent", label: `Agent · ${value.phase}`, children: [_jsxs(Text, { variant: "bodySmall", style: { color: theme.colors.onSurfaceVariant }, children: [value.toolCalls, " tool call", value.toolCalls === 1 ? "" : "s", " \u00B7 ", value.filesEdited, " file", value.filesEdited === 1 ? "" : "s", " edited"] }), value.runPanelUrl ? (_jsx(LinkText, { url: value.runPanelUrl, ctx: ctx, children: "run panel" })) : null, value.recent.map((e, i) => {
                 const at = tsMs(e.at);
@@ -384,7 +385,7 @@ export function ToolLogBlock({ value, ctx }) {
 export function StatusCardBlock({ value, ctx }) {
     const theme = useTheme();
     const started = tsMs(value.startedAt);
-    const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
+    const fmt = ctx.formatTime ?? ((ms) => formatLocalTime(ms, "f"));
     const terminal = /^(done|merged|failed|cancelled|timed_out|budget_exhausted|approval_expired)$/.test(value.state);
     const bad = /^(failed|cancelled|timed_out|budget_exhausted|approval_expired)$/.test(value.state);
     const mono = { fontFamily: ctx.codeFontFamily ?? DEFAULT_CODE_FONT };

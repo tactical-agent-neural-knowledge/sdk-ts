@@ -13,6 +13,7 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
+import { formatLocalTime } from "../blocks/localtime.js";
 import { MARKS, planMark, stepMark } from "../blocks/marks.js";
 import { planGlance, planMarkdown } from "../blocks/plan.js";
 import { ACTION_REVEAL_KEY, REVEAL_COPIED, REVEAL_GONE } from "../blocks/reveal.js";
@@ -333,13 +334,13 @@ export function ApprovalPromptBlock({ value, ctx }) {
         ctx.onAction?.({ blockId: ctx.blockId, actionId, value: value.gateId });
     };
     const expires = tsMs(value.expiresAt);
-    const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
+    const fmt = ctx.formatTime ?? ((ms) => formatLocalTime(ms, "f"));
     if (value.kind === GateKind.GUARDRAIL)
         return _jsx(GuardrailPromptBlock, { value: value, ctx: ctx });
     return (_jsxs(Card, { accent: "alert", label: GATE_LABEL[value.kind] ?? "approval", children: [isWebUrl(value.subject) ? (_jsx(Link, { href: value.subject, target: "_blank", rel: "noopener noreferrer", variant: "body1", sx: { wordBreak: "break-all" }, "data-testid": "approval-subject-link", children: value.subject })) : value.subject.trim() ? (_jsx(Typography, { variant: "body1", children: value.subject })) : null, value.detail ? (_jsx(Typography, { variant: "body2", color: "text.secondary", "data-testid": "approval-detail", children: value.detail })) : (_jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.minApprovals, " approval", value.minApprovals === 1 ? "" : "s", " needed", value.approverIds.length ? ` from ${names(value.approverIds, ctx)}` : "", expires !== undefined && !value.decided ? ` · expires ${fmt(expires)}` : ""] })), value.decided ? (value.detail ? null : (_jsx(Chip, { size: "small", label: value.decision || "decided", color: value.decision === "approved" ? "success" : value.decision === "rejected" ? "error" : "default", sx: { alignSelf: "flex-start" } }))) : (_jsxs(Stack, { direction: "row", spacing: 1, children: [_jsx(Button, { size: "small", variant: "contained", color: "primary", "data-action-id": "gate.approve", disabled: pending !== null, onClick: () => fire("gate.approve"), children: pending === "gate.approve" ? "Approving…" : value.approveLabel || "Approve" }), _jsx(Button, { size: "small", variant: "outlined", color: "error", "data-action-id": "gate.request_changes", disabled: pending !== null, onClick: () => fire("gate.request_changes"), children: pending === "gate.request_changes" ? "Sending…" : value.rejectLabel || "Reject" })] }))] }));
 }
 export function ToolLogBlock({ value, ctx }) {
-    const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString().slice(11, 19));
+    const fmt = ctx.formatTime ?? ((ms) => formatLocalTime(ms, "t"));
     return (_jsxs(Card, { accent: "agent", label: `Agent · ${value.phase}`, children: [_jsxs(Typography, { variant: "caption", color: "text.secondary", children: [value.toolCalls, " tool call", value.toolCalls === 1 ? "" : "s", " \u00B7 ", value.filesEdited, " file", value.filesEdited === 1 ? "" : "s", " edited", value.runPanelUrl ? (_jsxs(_Fragment, { children: [" · ", _jsx(Link, { href: value.runPanelUrl, target: "_blank", rel: "noopener noreferrer", children: "run panel" })] })) : null] }), value.recent.length > 0 ? (_jsx(Box, { component: "ol", sx: { m: 0, p: 0, listStyle: "none", ...mono, display: "flex", flexDirection: "column", gap: 0.25 }, children: value.recent.map((e, i) => {
                     const at = tsMs(e.at);
                     return (_jsxs(Box, { component: "li", "data-ok": e.ok, sx: { display: "flex", gap: 1, color: e.ok ? "inherit" : "error.main" }, children: [_jsx(Box, { component: "span", sx: { color: "text.disabled" }, children: at !== undefined ? fmt(at) : "--:--:--" }), _jsx(Box, { component: "span", sx: { color: "tank.secondaryText", minWidth: "4em" }, children: e.tool }), _jsx(Box, { component: "span", sx: { overflowWrap: "anywhere" }, children: e.summary })] }, i));
@@ -347,7 +348,7 @@ export function ToolLogBlock({ value, ctx }) {
 }
 export function StatusCardBlock({ value, ctx }) {
     const started = tsMs(value.startedAt);
-    const fmt = ctx.formatTime ?? ((ms) => new Date(ms).toISOString());
+    const fmt = ctx.formatTime ?? ((ms) => formatLocalTime(ms, "f"));
     const terminal = /^(done|merged|failed|cancelled|timed_out|budget_exhausted|approval_expired)$/.test(value.state);
     const bad = /^(failed|cancelled|timed_out|budget_exhausted|approval_expired)$/.test(value.state);
     return (_jsxs(Card, { accent: bad ? "alert" : "agent", label: `Run · ${value.runId}`, children: [_jsxs(Stack, { direction: "row", spacing: 1, alignItems: "center", flexWrap: "wrap", useFlexGap: true, children: [_jsx(Chip, { size: "small", label: value.state.replaceAll("_", " "), color: bad ? "error" : terminal ? "success" : "secondary" }), value.branch ? (_jsx(Typography, { variant: "body2", sx: mono, children: value.branch })) : null, value.costUsd > 0 ? (_jsxs(Typography, { variant: "body2", color: "text.secondary", children: ["$", value.costUsd.toFixed(2)] })) : null] }), value.detail ? _jsx(Typography, { variant: "body2", children: value.detail }) : null, _jsxs(Typography, { variant: "caption", color: "text.secondary", children: [started !== undefined ? `started ${fmt(started)}` : "", value.runPanelUrl ? (_jsxs(_Fragment, { children: [started !== undefined ? " · " : "", _jsx(Link, { href: value.runPanelUrl, target: "_blank", rel: "noopener noreferrer", children: "run panel" })] })) : null] })] }));
