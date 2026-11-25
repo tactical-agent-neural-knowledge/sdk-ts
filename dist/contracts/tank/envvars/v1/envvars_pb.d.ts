@@ -57,6 +57,23 @@ export type EnvVar = Message<"tank.envvars.v1.EnvVar"> & {
      * @generated from field: bool preview_in_body = 9;
      */
     previewInBody: boolean;
+    /**
+     * Who uses it (2026-11-24): "agents", "products" or "both". Agents are the workspace's
+     * agents in their runs; products are the products TANK hosts for the workspace. A value
+     * used by products is applied to every hosted product whose tank.yaml lists the name
+     * under secrets (Secrets Manager agentures/<slug>, by the control plane), and the product
+     * restarts with it. The default for a new name is "both" when a hosted product's
+     * tank.yaml lists it, otherwise "agents".
+     *
+     * @generated from field: string used_by = 10;
+     */
+    usedBy: string;
+    /**
+     * The hosted products whose tank.yaml lists this name, by slug. Filled on a listing.
+     *
+     * @generated from field: repeated string products = 11;
+     */
+    products: string[];
 };
 /**
  * Describes the message tank.envvars.v1.EnvVar.
@@ -122,6 +139,13 @@ export type PutEnvVarRequest = Message<"tank.envvars.v1.PutEnvVarRequest"> & {
      * @generated from field: bool create_only = 5;
      */
     createOnly: boolean;
+    /**
+     * "agents", "products" or "both". Empty keeps an existing variable's, and gives a new one
+     * the default (EnvVar.used_by).
+     *
+     * @generated from field: string used_by = 6;
+     */
+    usedBy: string;
 };
 /**
  * Describes the message tank.envvars.v1.PutEnvVarRequest.
@@ -177,6 +201,44 @@ export type DeleteEnvVarResponse = Message<"tank.envvars.v1.DeleteEnvVarResponse
  * Use `create(DeleteEnvVarResponseSchema)` to create a new message.
  */
 export declare const DeleteEnvVarResponseSchema: GenMessage<DeleteEnvVarResponse>;
+/**
+ * @generated from message tank.envvars.v1.SetEnvVarUseRequest
+ */
+export type SetEnvVarUseRequest = Message<"tank.envvars.v1.SetEnvVarUseRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: string name = 2;
+     */
+    name: string;
+    /**
+     * "agents", "products" or "both".
+     *
+     * @generated from field: string used_by = 3;
+     */
+    usedBy: string;
+};
+/**
+ * Describes the message tank.envvars.v1.SetEnvVarUseRequest.
+ * Use `create(SetEnvVarUseRequestSchema)` to create a new message.
+ */
+export declare const SetEnvVarUseRequestSchema: GenMessage<SetEnvVarUseRequest>;
+/**
+ * @generated from message tank.envvars.v1.SetEnvVarUseResponse
+ */
+export type SetEnvVarUseResponse = Message<"tank.envvars.v1.SetEnvVarUseResponse"> & {
+    /**
+     * @generated from field: tank.envvars.v1.EnvVar var = 1;
+     */
+    var?: EnvVar;
+};
+/**
+ * Describes the message tank.envvars.v1.SetEnvVarUseResponse.
+ * Use `create(SetEnvVarUseResponseSchema)` to create a new message.
+ */
+export declare const SetEnvVarUseResponseSchema: GenMessage<SetEnvVarUseResponse>;
 /**
  * @generated from message tank.envvars.v1.PutPreviewValueRequest
  */
@@ -284,6 +346,16 @@ export declare const EnvVarService: GenService<{
         methodKind: "unary";
         input: typeof DeleteEnvVarRequestSchema;
         output: typeof DeleteEnvVarResponseSchema;
+    };
+    /**
+     * Changes who uses a variable without its value (a secret's cannot be read back).
+     *
+     * @generated from rpc tank.envvars.v1.EnvVarService.SetEnvVarUse
+     */
+    setEnvVarUse: {
+        methodKind: "unary";
+        input: typeof SetEnvVarUseRequestSchema;
+        output: typeof SetEnvVarUseResponseSchema;
     };
     /**
      * A secret's preview value and the hosts it may be sent to, owners and admins only.
