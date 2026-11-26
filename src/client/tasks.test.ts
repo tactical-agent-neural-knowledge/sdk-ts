@@ -14,6 +14,8 @@ import {
 import { EnvelopeSchema, TaskChangedSchema } from "../contracts/tank/events/v1/events_pb.js";
 import { MessageSchema } from "../contracts/tank/message/v1/message_pb.js";
 import {
+  CheckReason,
+  type ConfirmTaskRequest,
   type CreateTaskRequest,
   type CreateTaskWithChannelRequest,
   type Task,
@@ -268,6 +270,7 @@ describe("task client", () => {
       created?: CreateTaskWithChannelRequest;
       createdIn?: CreateTaskRequest;
       pref?: SetChannelPreferenceRequest;
+      confirmed?: ConfirmTaskRequest;
     } = {};
     let failPref = false;
     const transport = createRouterTransport(({ service }) => {
@@ -300,14 +303,17 @@ describe("task client", () => {
             updatedAt: timestampFromMs(T0 + 9),
           }),
         }),
-        confirmTask: (req) => ({
-          task: task({
-            id: req.taskId,
-            stage: TaskStage.DONE,
-            checkedBy: "me",
-            updatedAt: timestampFromMs(T0 + 9),
-          }),
-        }),
+        confirmTask: (req) => {
+          calls.confirmed = req;
+          return {
+            task: task({
+              id: req.taskId,
+              stage: TaskStage.DONE,
+              checkedBy: "me",
+              updatedAt: timestampFromMs(T0 + 9),
+            }),
+          };
+        },
       });
       service(ChannelService, {
         setChannelPreference: (req) => {
@@ -335,6 +341,14 @@ describe("task client", () => {
     expect(client.store.selectTasks("ws1").map((t) => t.id)).toEqual(["t1", "t2"]);
     await client.confirmTask("t2");
     expect(client.store.getState().tasksById.t2?.stage).toBe(TaskStage.DONE);
+  });
+
+  it("sends the one-tap reasons with Looks right", async () => {
+    const { client, calls } = makeClient();
+    await client.confirmTask("t2", [CheckReason.AS_ASKED, CheckReason.WORKS_ON_PHONE]);
+    expect(calls.confirmed?.reasons).toEqual([CheckReason.AS_ASKED, CheckReason.WORKS_ON_PHONE]);
+    await client.confirmTask("t2");
+    expect(calls.confirmed?.reasons).toEqual([]);
   });
 
   it("cancels a task and keeps what the server says", async () => {

@@ -1,6 +1,6 @@
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import type { DismissPredictedWorkRequest, ListPredictedWorkRequest, ListPredictedWorkResponse, ListRepoDeliveryRequest, ListRepoDeliveryResponse, Run, SetRepoDeliveryRequest, SetRepoDeliveryResponse, SetWorkspaceDeliveryRequest, SetWorkspaceDeliveryResponse, TakePredictedWorkRequest, TakePredictedWorkResponse, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
+import type { DismissPredictedWorkRequest, ListPredictedWorkRequest, ListPredictedWorkResponse, ListRepoDeliveryRequest, ListRepoDeliveryResponse, Run, SetRepoDeliveryRequest, SetRepoDeliveryResponse, SetWorkspaceAutoRequest, SetWorkspaceAutoResponse, SetWorkspaceDeliveryRequest, SetWorkspaceDeliveryResponse, TakePredictedWorkRequest, TakePredictedWorkResponse, TreadPlan, TreadPlanItem, TreadSettings } from "../../agent/v1/agent_pb.js";
 import type { AppAccount, CallToolRequest, CallToolResponse, GetToolsRequest, GetToolsResponse, ListAppsRequest, ListAppsResponse } from "../../apps/v1/apps_pb.js";
 import type { Blocks, Check, GateKind, PlanStep, StepStatus } from "../../blocks/v1/blocks_pb.js";
 import type { Board, RunReplay } from "../../board/v1/board_pb.js";
@@ -9510,6 +9510,38 @@ export type SetWorkspaceDeliveryDefaultResponse = Message<"tank.agentctl.v1.SetW
  */
 export declare const SetWorkspaceDeliveryDefaultResponseSchema: GenMessage<SetWorkspaceDeliveryDefaultResponse>;
 /**
+ * @generated from message tank.agentctl.v1.SetWorkspaceAutoDefaultRequest
+ */
+export type SetWorkspaceAutoDefaultRequest = Message<"tank.agentctl.v1.SetWorkspaceAutoDefaultRequest"> & {
+    /**
+     * @generated from field: tank.agent.v1.SetWorkspaceAutoRequest request = 1;
+     */
+    request?: SetWorkspaceAutoRequest;
+    /**
+     * @generated from field: string actor_id = 2;
+     */
+    actorId: string;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetWorkspaceAutoDefaultRequest.
+ * Use `create(SetWorkspaceAutoDefaultRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAutoDefaultRequestSchema: GenMessage<SetWorkspaceAutoDefaultRequest>;
+/**
+ * @generated from message tank.agentctl.v1.SetWorkspaceAutoDefaultResponse
+ */
+export type SetWorkspaceAutoDefaultResponse = Message<"tank.agentctl.v1.SetWorkspaceAutoDefaultResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.SetWorkspaceAutoResponse response = 1;
+     */
+    response?: SetWorkspaceAutoResponse;
+};
+/**
+ * Describes the message tank.agentctl.v1.SetWorkspaceAutoDefaultResponse.
+ * Use `create(SetWorkspaceAutoDefaultResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAutoDefaultResponseSchema: GenMessage<SetWorkspaceAutoDefaultResponse>;
+/**
  * @generated from message tank.agentctl.v1.ListWorkspacePredictedWorkRequest
  */
 export type ListWorkspacePredictedWorkRequest = Message<"tank.agentctl.v1.ListWorkspacePredictedWorkRequest"> & {
@@ -11312,6 +11344,17 @@ export declare const ControlService: GenService<{
         methodKind: "unary";
         input: typeof SetWorkspaceDeliveryDefaultRequestSchema;
         output: typeof SetWorkspaceDeliveryDefaultResponseSchema;
+    };
+    /**
+     * The workspace's Auto default: the messaging core authorizes (admins), the control plane
+     * stores it, applies it in ResolvePolicy and decides what waits in the Treads that follow it.
+     *
+     * @generated from rpc tank.agentctl.v1.ControlService.SetWorkspaceAutoDefault
+     */
+    setWorkspaceAutoDefault: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceAutoDefaultRequestSchema;
+        output: typeof SetWorkspaceAutoDefaultResponseSchema;
     };
     /**
      * @generated from rpc tank.agentctl.v1.ControlService.ListWorkspacePredictedWork
