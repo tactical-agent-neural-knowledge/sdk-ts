@@ -481,6 +481,12 @@ export type ConfirmTaskRequest = Message<"tank.task.v1.ConfirmTaskRequest"> & {
      * @generated from field: string task_id = 1;
      */
     taskId: string;
+    /**
+     * Optional one-tap reasons; unspecified and repeats are dropped.
+     *
+     * @generated from field: repeated tank.task.v1.CheckReason reasons = 2;
+     */
+    reasons: CheckReason[];
 };
 /**
  * Describes the message tank.task.v1.ConfirmTaskRequest.
@@ -852,6 +858,47 @@ export declare enum TaskStage {
  * Describes the enum tank.task.v1.TaskStage.
  */
 export declare const TaskStageSchema: GenEnum<TaskStage>;
+/**
+ * Why a person said it looks right, picked with one tap (2026-11-26). The words people see
+ * are the clients'; the server keeps the reasons on the check (task_checks.reasons) for
+ * TANK Neural's training files.
+ *
+ * @generated from enum tank.task.v1.CheckReason
+ */
+export declare enum CheckReason {
+    /**
+     * @generated from enum value: CHECK_REASON_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * It does what was asked.
+     *
+     * @generated from enum value: CHECK_REASON_AS_ASKED = 1;
+     */
+    AS_ASKED = 1,
+    /**
+     * It came quickly.
+     *
+     * @generated from enum value: CHECK_REASON_FAST = 2;
+     */
+    FAST = 2,
+    /**
+     * It looks good.
+     *
+     * @generated from enum value: CHECK_REASON_LOOKS_GREAT = 3;
+     */
+    LOOKS_GREAT = 3,
+    /**
+     * The person tried it on their phone.
+     *
+     * @generated from enum value: CHECK_REASON_WORKS_ON_PHONE = 4;
+     */
+    WORKS_ON_PHONE = 4
+}
+/**
+ * Describes the enum tank.task.v1.CheckReason.
+ */
+export declare const CheckReasonSchema: GenEnum<CheckReason>;
 /**
  * What a run did to its task, from the control plane.
  *

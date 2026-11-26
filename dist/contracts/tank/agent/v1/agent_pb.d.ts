@@ -1442,6 +1442,16 @@ export type TreadSettings = Message<"tank.agent.v1.TreadSettings"> & {
      * @generated from field: string model = 11;
      */
     model: string;
+    /**
+     * True when the Tread has no Auto choice of its own and follows the workspace's
+     * (WorkspaceAuto): auto_accept_plans and pull_requests then read back as the workspace
+     * default makes them. Sent true on a save, the Tread's own choice is dropped and it
+     * follows the workspace again (auto_accept_plans and the merge half of pull_requests are
+     * then ignored). A client that changes either Auto switch sends it false.
+     *
+     * @generated from field: bool auto_follows_workspace = 12;
+     */
+    autoFollowsWorkspace: boolean;
 };
 /**
  * Describes the message tank.agent.v1.TreadSettings.
@@ -1941,6 +1951,13 @@ export type GetTreadSwitchboardResponse = Message<"tank.agent.v1.GetTreadSwitchb
      * @generated from field: bool can_manage = 3;
      */
     canManage: boolean;
+    /**
+     * The workspace's Auto default, which this Tread follows when
+     * settings.auto_follows_workspace is set.
+     *
+     * @generated from field: tank.agent.v1.WorkspaceAuto workspace_auto = 4;
+     */
+    workspaceAuto?: WorkspaceAuto;
 };
 /**
  * Describes the message tank.agent.v1.GetTreadSwitchboardResponse.
@@ -2920,6 +2937,116 @@ export type SetWorkspaceDeliveryResponse = Message<"tank.agent.v1.SetWorkspaceDe
  */
 export declare const SetWorkspaceDeliveryResponseSchema: GenMessage<SetWorkspaceDeliveryResponse>;
 /**
+ * WorkspaceAuto is the workspace's Auto default. Both off (and no row) is the platform's
+ * own behavior: every plan and every pull request waits for a person unless its Tread says
+ * otherwise.
+ *
+ * @generated from message tank.agent.v1.WorkspaceAuto
+ */
+export type WorkspaceAuto = Message<"tank.agent.v1.WorkspaceAuto"> & {
+    /**
+     * @generated from field: bool approve_plans = 1;
+     */
+    approvePlans: boolean;
+    /**
+     * Merge once the checks pass, in Treads where TANK may merge at all.
+     *
+     * @generated from field: bool merge_pull_requests = 2;
+     */
+    mergePullRequests: boolean;
+    /**
+     * @generated from field: google.protobuf.Timestamp updated_at = 3;
+     */
+    updatedAt?: Timestamp;
+    /**
+     * @generated from field: string updated_by = 4;
+     */
+    updatedBy: string;
+    /**
+     * How many of the workspace's Treads follow it, and how many have Auto settings of their own.
+     *
+     * @generated from field: int32 treads_following = 5;
+     */
+    treadsFollowing: number;
+    /**
+     * @generated from field: int32 treads_own = 6;
+     */
+    treadsOwn: number;
+};
+/**
+ * Describes the message tank.agent.v1.WorkspaceAuto.
+ * Use `create(WorkspaceAutoSchema)` to create a new message.
+ */
+export declare const WorkspaceAutoSchema: GenMessage<WorkspaceAuto>;
+/**
+ * @generated from message tank.agent.v1.GetWorkspaceAutoRequest
+ */
+export type GetWorkspaceAutoRequest = Message<"tank.agent.v1.GetWorkspaceAutoRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+};
+/**
+ * Describes the message tank.agent.v1.GetWorkspaceAutoRequest.
+ * Use `create(GetWorkspaceAutoRequestSchema)` to create a new message.
+ */
+export declare const GetWorkspaceAutoRequestSchema: GenMessage<GetWorkspaceAutoRequest>;
+/**
+ * @generated from message tank.agent.v1.GetWorkspaceAutoResponse
+ */
+export type GetWorkspaceAutoResponse = Message<"tank.agent.v1.GetWorkspaceAutoResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.WorkspaceAuto auto = 1;
+     */
+    auto?: WorkspaceAuto;
+    /**
+     * @generated from field: bool can_manage = 2;
+     */
+    canManage: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.GetWorkspaceAutoResponse.
+ * Use `create(GetWorkspaceAutoResponseSchema)` to create a new message.
+ */
+export declare const GetWorkspaceAutoResponseSchema: GenMessage<GetWorkspaceAutoResponse>;
+/**
+ * @generated from message tank.agent.v1.SetWorkspaceAutoRequest
+ */
+export type SetWorkspaceAutoRequest = Message<"tank.agent.v1.SetWorkspaceAutoRequest"> & {
+    /**
+     * @generated from field: string workspace_id = 1;
+     */
+    workspaceId: string;
+    /**
+     * @generated from field: bool approve_plans = 2;
+     */
+    approvePlans: boolean;
+    /**
+     * @generated from field: bool merge_pull_requests = 3;
+     */
+    mergePullRequests: boolean;
+};
+/**
+ * Describes the message tank.agent.v1.SetWorkspaceAutoRequest.
+ * Use `create(SetWorkspaceAutoRequestSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAutoRequestSchema: GenMessage<SetWorkspaceAutoRequest>;
+/**
+ * @generated from message tank.agent.v1.SetWorkspaceAutoResponse
+ */
+export type SetWorkspaceAutoResponse = Message<"tank.agent.v1.SetWorkspaceAutoResponse"> & {
+    /**
+     * @generated from field: tank.agent.v1.WorkspaceAuto auto = 1;
+     */
+    auto?: WorkspaceAuto;
+};
+/**
+ * Describes the message tank.agent.v1.SetWorkspaceAutoResponse.
+ * Use `create(SetWorkspaceAutoResponseSchema)` to create a new message.
+ */
+export declare const SetWorkspaceAutoResponseSchema: GenMessage<SetWorkspaceAutoResponse>;
+/**
  * PredictedWork is something TANK built, or proposes to build, before it was asked for.
  * It lives on a branch that is never merged until a person takes it.
  *
@@ -3846,6 +3973,27 @@ export declare const AgentService: GenService<{
         methodKind: "unary";
         input: typeof SetTreadSettingsRequestSchema;
         output: typeof SetTreadSettingsResponseSchema;
+    };
+    /**
+     * The workspace's Auto default: whether TANK approves plans and merges pull requests by
+     * itself in every Tread that has no Auto choice of its own (Robby, 2026-11-25). Members
+     * read; admins set. Turning either on decides what is already waiting in the Treads that
+     * follow it.
+     *
+     * @generated from rpc tank.agent.v1.AgentService.GetWorkspaceAuto
+     */
+    getWorkspaceAuto: {
+        methodKind: "unary";
+        input: typeof GetWorkspaceAutoRequestSchema;
+        output: typeof GetWorkspaceAutoResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.agent.v1.AgentService.SetWorkspaceAuto
+     */
+    setWorkspaceAuto: {
+        methodKind: "unary";
+        input: typeof SetWorkspaceAutoRequestSchema;
+        output: typeof SetWorkspaceAutoResponseSchema;
     };
     /**
      * Spend: the workspace's agent money by Tread, person, team, kind and day.

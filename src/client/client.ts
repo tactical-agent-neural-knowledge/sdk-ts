@@ -46,6 +46,7 @@ import {
   type PresenceStatus,
 } from "../contracts/tank/presence/v1/presence_pb.js";
 import {
+  type CheckReason,
   type ListTasksResponse,
   type Task,
   type TaskNotify,
@@ -1270,9 +1271,9 @@ export class TankClient {
     return this.keepTask(await this.tasks.startTask({ taskId }));
   }
 
-  /** Looks right: Ready to check → Done. */
-  async confirmTask(taskId: string): Promise<Task> {
-    return this.keepTask(await this.tasks.confirmTask({ taskId }));
+  /** Looks right: Ready to check → Done, with the one-tap reasons the person picked (optional). */
+  async confirmTask(taskId: string, reasons: CheckReason[] = []): Promise<Task> {
+    return this.keepTask(await this.tasks.confirmTask({ taskId, reasons }));
   }
 
   /** Not yet: the sentence goes to the Tread as the caller and the work goes back. */

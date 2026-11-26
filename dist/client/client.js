@@ -989,9 +989,9 @@ export class TankClient {
     async startTask(taskId) {
         return this.keepTask(await this.tasks.startTask({ taskId }));
     }
-    /** Looks right: Ready to check → Done. */
-    async confirmTask(taskId) {
-        return this.keepTask(await this.tasks.confirmTask({ taskId }));
+    /** Looks right: Ready to check → Done, with the one-tap reasons the person picked (optional). */
+    async confirmTask(taskId, reasons = []) {
+        return this.keepTask(await this.tasks.confirmTask({ taskId, reasons }));
     }
     /** Not yet: the sentence goes to the Tread as the caller and the work goes back. */
     async sendBackTask(taskId, text) {
