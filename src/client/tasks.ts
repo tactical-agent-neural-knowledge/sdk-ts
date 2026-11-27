@@ -13,6 +13,7 @@ export const TASK_STAGES: readonly TaskStage[] = [
   TaskStage.QUEUED,
   TaskStage.IN_PROGRESS,
   TaskStage.READY_TO_CHECK,
+  TaskStage.WAITING_DEPLOY,
   TaskStage.DONE,
   TaskStage.STUCK,
   TaskStage.CANCELLED,
@@ -21,12 +22,14 @@ export const TASK_STAGES: readonly TaskStage[] = [
 /** A stable key per stage, for test ids, routes and analytics-free CSS hooks. */
 export function taskStageKey(
   stage: TaskStage,
-): "queued" | "in_progress" | "ready_to_check" | "done" | "stuck" | "cancelled" {
+): "queued" | "in_progress" | "ready_to_check" | "waiting_deploy" | "done" | "stuck" | "cancelled" {
   switch (stage) {
     case TaskStage.IN_PROGRESS:
       return "in_progress";
     case TaskStage.READY_TO_CHECK:
       return "ready_to_check";
+    case TaskStage.WAITING_DEPLOY:
+      return "waiting_deploy";
     case TaskStage.DONE:
       return "done";
     case TaskStage.STUCK:
