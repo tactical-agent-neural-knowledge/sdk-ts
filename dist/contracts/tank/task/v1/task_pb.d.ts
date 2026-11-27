@@ -293,6 +293,26 @@ export type Task = Message<"tank.task.v1.Task"> & {
      * @generated from field: repeated tank.task.v1.SurfaceCheck surfaces = 24;
      */
     surfaces: SurfaceCheck[];
+    /**
+     * The ask in the asker's own words. title is now a short name (2026-11-27): generated from
+     * the ask a moment after the task is made (until then, the ask clipped), or typed by a person.
+     *
+     * @generated from field: string ask = 25;
+     */
+    ask: string;
+    /**
+     * A person named it with RenameTask; generated names never replace it.
+     *
+     * @generated from field: bool title_edited = 26;
+     */
+    titleEdited: boolean;
+    /**
+     * The newest of: a stage change, or a message in the task's thread by anyone, an agent
+     * included. ListTasks sorts on it for the Tasks view.
+     *
+     * @generated from field: google.protobuf.Timestamp last_activity_at = 27;
+     */
+    lastActivityAt?: Timestamp;
 };
 /**
  * Describes the message tank.task.v1.Task.
@@ -331,6 +351,10 @@ export type ListTasksRequest = Message<"tank.task.v1.ListTasksRequest"> & {
      * @generated from field: int32 limit = 5;
      */
     limit: number;
+    /**
+     * @generated from field: tank.task.v1.TaskSort sort = 6;
+     */
+    sort: TaskSort;
 };
 /**
  * Describes the message tank.task.v1.ListTasksRequest.
@@ -670,6 +694,41 @@ export type CancelTaskResponse = Message<"tank.task.v1.CancelTaskResponse"> & {
  */
 export declare const CancelTaskResponseSchema: GenMessage<CancelTaskResponse>;
 /**
+ * Rename a task, as a Tread is renamed. The name is trimmed, runs of spaces collapse, 1 to 80
+ * characters. It marks the title as edited, so a generated name never replaces it.
+ *
+ * @generated from message tank.task.v1.RenameTaskRequest
+ */
+export type RenameTaskRequest = Message<"tank.task.v1.RenameTaskRequest"> & {
+    /**
+     * @generated from field: string task_id = 1;
+     */
+    taskId: string;
+    /**
+     * @generated from field: string title = 2;
+     */
+    title: string;
+};
+/**
+ * Describes the message tank.task.v1.RenameTaskRequest.
+ * Use `create(RenameTaskRequestSchema)` to create a new message.
+ */
+export declare const RenameTaskRequestSchema: GenMessage<RenameTaskRequest>;
+/**
+ * @generated from message tank.task.v1.RenameTaskResponse
+ */
+export type RenameTaskResponse = Message<"tank.task.v1.RenameTaskResponse"> & {
+    /**
+     * @generated from field: tank.task.v1.Task task = 1;
+     */
+    task?: Task;
+};
+/**
+ * Describes the message tank.task.v1.RenameTaskResponse.
+ * Use `create(RenameTaskResponseSchema)` to create a new message.
+ */
+export declare const RenameTaskResponseSchema: GenMessage<RenameTaskResponse>;
+/**
  * Replace the task's own picks (workspace rules are not affected).
  *
  * @generated from message tank.task.v1.SetTaskNotifyRequest
@@ -1005,6 +1064,27 @@ export declare enum SurfaceState {
  */
 export declare const SurfaceStateSchema: GenEnum<SurfaceState>;
 /**
+ * @generated from enum tank.task.v1.TaskSort
+ */
+export declare enum TaskSort {
+    /**
+     * as before: by stage, then updated_at
+     *
+     * @generated from enum value: TASK_SORT_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * Newest last_activity_at first.
+     *
+     * @generated from enum value: TASK_SORT_ACTIVITY = 1;
+     */
+    ACTIVITY = 1
+}
+/**
+ * Describes the enum tank.task.v1.TaskSort.
+ */
+export declare const TaskSortSchema: GenEnum<TaskSort>;
+/**
  * Why a person said it looks right, picked with one tap (2026-11-26). The words people see
  * are the clients'; the server keeps the reasons on the check (task_checks.reasons) for
  * TANK Neural's training files.
@@ -1222,5 +1302,13 @@ export declare const TaskService: GenService<{
         methodKind: "unary";
         input: typeof SendTaskRequestSchema;
         output: typeof SendTaskResponseSchema;
+    };
+    /**
+     * @generated from rpc tank.task.v1.TaskService.RenameTask
+     */
+    renameTask: {
+        methodKind: "unary";
+        input: typeof RenameTaskRequestSchema;
+        output: typeof RenameTaskResponseSchema;
     };
 }>;

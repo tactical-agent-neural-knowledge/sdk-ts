@@ -58,6 +58,12 @@ export type TaskSort = "newest" | "oldest" | "title" | "tread";
 export declare const TASK_SORTS: readonly TaskSort[];
 /** A copy of the tasks in this order; ties keep a stable order by title then id. */
 export declare function sortTasks<T extends Task>(tasks: readonly T[], sort?: TaskSort): T[];
+/** The time the Tasks view reads: the last message or stage change, else the last update. */
+export declare function activityAt(t: Pick<Task, "lastActivityAt" | "updatedAt" | "createdAt">): number;
+/** True for a task still being worked on: not Done and not Cancelled. */
+export declare function isActiveTask(t: Pick<Task, "stage">): boolean;
+/** The Tasks view: active tasks only, the one with the newest activity first; ties by id. */
+export declare function activeTasksByActivity<T extends Task>(tasks: readonly T[]): T[];
 /** The tasks whose title or Tread name has every word of the query (case-insensitive); a blank query keeps all. */
 export declare function searchTasks<T extends Pick<Task, "title" | "channelName">>(tasks: readonly T[], query: string): T[];
 /** A task can be cancelled at any stage short of Done (and Cancelled again changes nothing). */

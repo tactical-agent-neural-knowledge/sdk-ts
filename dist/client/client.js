@@ -16,7 +16,7 @@ import { ChatService, MessageKind, MessageSchema, PostMessageRequestSchema, } fr
 import { MonitorService } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { PresenceSchema, PresenceService, } from "../contracts/tank/presence/v1/presence_pb.js";
-import { TaskNotifySchema, TaskService, } from "../contracts/tank/task/v1/task_pb.js";
+import { TaskSort as TaskListSort, TaskNotifySchema, TaskService, } from "../contracts/tank/task/v1/task_pb.js";
 import { TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import { GetBootstrapResponseSchema, Role, WorkspaceService, } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Backoff } from "./backoff.js";
@@ -953,6 +953,7 @@ export class TankClient {
             stages: input.stages ?? [],
             askedBy: input.askedBy ?? "",
             limit: input.limit ?? 0,
+            sort: input.sort ?? TaskListSort.UNSPECIFIED,
         });
         this.store.dispatch({ type: "tasks/upsert", tasks: res.tasks });
         return res;
@@ -1001,6 +1002,9 @@ export class TankClient {
         return this.keepTask(await this.tasks.sendBackTask({ taskId, text }));
     }
     /** Try again on a stuck task. */
+    async renameTask(taskId, title) {
+        return this.keepTask(await this.tasks.renameTask({ taskId, title }));
+    }
     async retryTask(taskId) {
         return this.keepTask(await this.tasks.retryTask({ taskId }));
     }
