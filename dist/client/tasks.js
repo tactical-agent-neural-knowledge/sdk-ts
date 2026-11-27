@@ -162,6 +162,20 @@ export function sortTasks(tasks, sort = "newest") {
         }
     });
 }
+/** The time the Tasks view reads: the last message or stage change, else the last update. */
+export function activityAt(t) {
+    return tsMs(t.lastActivityAt) || tsMs(t.updatedAt) || tsMs(t.createdAt);
+}
+/** True for a task still being worked on: not Done and not Cancelled. */
+export function isActiveTask(t) {
+    return t.stage !== TaskStage.DONE && t.stage !== TaskStage.CANCELLED;
+}
+/** The Tasks view: active tasks only, the one with the newest activity first; ties by id. */
+export function activeTasksByActivity(tasks) {
+    return tasks
+        .filter(isActiveTask)
+        .sort((a, b) => activityAt(b) - activityAt(a) || (a.id < b.id ? 1 : a.id > b.id ? -1 : 0));
+}
 /** The tasks whose title or Tread name has every word of the query (case-insensitive); a blank query keeps all. */
 export function searchTasks(tasks, query) {
     const words = query.toLocaleLowerCase().split(/\s+/).filter(Boolean);

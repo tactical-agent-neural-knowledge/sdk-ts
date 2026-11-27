@@ -49,6 +49,7 @@ import {
   type CheckReason,
   type ListTasksResponse,
   type Task,
+  TaskSort as TaskListSort,
   type TaskNotify,
   TaskNotifySchema,
   TaskService,
@@ -191,6 +192,8 @@ export interface ListTasksInput {
   stages?: TaskStage[];
   askedBy?: string;
   limit?: number;
+  /** TaskListSort.ACTIVITY puts the task with the newest last_activity_at first. */
+  sort?: TaskListSort;
 }
 
 /** Who to tell when a task reaches a stage. */
@@ -1230,6 +1233,7 @@ export class TankClient {
       stages: input.stages ?? [],
       askedBy: input.askedBy ?? "",
       limit: input.limit ?? 0,
+      sort: input.sort ?? TaskListSort.UNSPECIFIED,
     });
     this.store.dispatch({ type: "tasks/upsert", tasks: res.tasks });
     return res;
@@ -1290,6 +1294,10 @@ export class TankClient {
   }
 
   /** Try again on a stuck task. */
+  async renameTask(taskId: string, title: string): Promise<Task> {
+    return this.keepTask(await this.tasks.renameTask({ taskId, title }));
+  }
+
   async retryTask(taskId: string): Promise<Task> {
     return this.keepTask(await this.tasks.retryTask({ taskId }));
   }

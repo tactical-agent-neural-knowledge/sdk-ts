@@ -204,6 +204,23 @@ export function sortTasks<T extends Task>(tasks: readonly T[], sort: TaskSort = 
   });
 }
 
+/** The time the Tasks view reads: the last message or stage change, else the last update. */
+export function activityAt(t: Pick<Task, "lastActivityAt" | "updatedAt" | "createdAt">): number {
+  return tsMs(t.lastActivityAt) || tsMs(t.updatedAt) || tsMs(t.createdAt);
+}
+
+/** True for a task still being worked on: not Done and not Cancelled. */
+export function isActiveTask(t: Pick<Task, "stage">): boolean {
+  return t.stage !== TaskStage.DONE && t.stage !== TaskStage.CANCELLED;
+}
+
+/** The Tasks view: active tasks only, the one with the newest activity first; ties by id. */
+export function activeTasksByActivity<T extends Task>(tasks: readonly T[]): T[] {
+  return tasks
+    .filter(isActiveTask)
+    .sort((a, b) => activityAt(b) - activityAt(a) || (a.id < b.id ? 1 : a.id > b.id ? -1 : 0));
+}
+
 /** The tasks whose title or Tread name has every word of the query (case-insensitive); a blank query keeps all. */
 export function searchTasks<T extends Pick<Task, "title" | "channelName">>(
   tasks: readonly T[],

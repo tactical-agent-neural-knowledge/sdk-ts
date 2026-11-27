@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/task/v1/task.proto.
  */
 export const file_tank_task_v1_task: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL3Rhc2svdjEvdGFzay5wcm90bxIMdGFuay50YXNrLnYxIoUCCgxTdXJmYWNlQ2hlY2sSKgoHc3VyZmFjZRgBIAEoDjIZLnRhbmsudGFzay52MS5UYXNrU3VyZmFjZRIpCgVzdGF0ZRgCIAEoDjIaLnRhbmsudGFzay52MS5TdXJmYWNlU3RhdGUSLAoIc3RhdGVfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCndhaXRpbmdfb24YBCABKAkSEgoKY2hlY2tlZF9ieRgFIAEoCRIuCgpjaGVja2VkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIYChBwdWxsX3JlcXVlc3RfdXJsGAcgASgJIicKClByb29mQ2hlY2sSDAoEdGV4dBgBIAEoCRILCgNtZXQYAiABKAgi9QEKCVRhc2tQcm9vZhIQCghsaXZlX3VybBgBIAEoCRIaChJzY3JlZW5zaG90X2ZpbGVfaWQYAiABKAkSKwoJY2hlY2tsaXN0GAMgAygLMhgudGFuay50YXNrLnYxLlByb29mQ2hlY2sSGAoQcHVsbF9yZXF1ZXN0X3VybBgEIAEoCRImCgJhdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNdmlkZW9fZmlsZV9pZBgGIAEoCRIbChNhc2tfdG9fbGl2ZV9zZWNvbmRzGAcgASgDEhcKD3dhaXRpbmdfc2Vjb25kcxgIIAEoAyJdCgpUYXNrTm90aWZ5EiYKBXN0YWdlGAEgASgOMhcudGFuay50YXNrLnYxLlRhc2tTdGFnZRIPCgd1c2VyX2lkGAIgASgJEhYKDmZyb21fd29ya3NwYWNlGAMgASgIIqAFCgRUYXNrEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJEhYKDnRocmVhZF9yb290X2lkGAQgASgJEg0KBXRpdGxlGAUgASgJEg8KB2RldGFpbHMYBiABKAkSJgoFc3RhZ2UYByABKA4yFy50YW5rLnRhc2sudjEuVGFza1N0YWdlEhIKCmNyZWF0ZWRfYnkYCCABKAkSLgoKY3JlYXRlZF9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIc3RhZ2VfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg4KBnJ1bl9pZBgMIAEoCRIQCghwcm9ncmVzcxgNIAEoCRImCgVwcm9vZhgOIAEoCzIXLnRhbmsudGFzay52MS5UYXNrUHJvb2YSEgoKY2hlY2tlZF9ieRgPIAEoCRIuCgpjaGVja2VkX2F0GBAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgxzdHVja19yZWFzb24YESABKAkSKAoGbm90aWZ5GBIgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkSEwoLYXNrZXJfbXV0ZWQYEyABKAgSFAoMY2hhbm5lbF9uYW1lGBQgASgJEgwKBGxpbmsYFSABKAkSEAoIZmlsZV9pZHMYFiADKAkSGQoRc291cmNlX21lc3NhZ2VfaWQYFyABKAkSLAoIc3VyZmFjZXMYGCADKAsyGi50YW5rLnRhc2sudjEuU3VyZmFjZUNoZWNrIoYBChBMaXN0VGFza3NSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJEicKBnN0YWdlcxgDIAMoDjIXLnRhbmsudGFzay52MS5UYXNrU3RhZ2USEAoIYXNrZWRfYnkYBCABKAkSDQoFbGltaXQYBSABKAUiYQoRTGlzdFRhc2tzUmVzcG9uc2USIQoFdGFza3MYASADKAsyEi50YW5rLnRhc2sudjEuVGFzaxIRCgloYXNfYWdlbnQYAiABKAgSFgoOcmVhZHlfdG9fY2hlY2sYAyABKAUiIQoOR2V0VGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCSIzCg9HZXRUYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIqwBChFDcmVhdGVUYXNrUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRINCgV0aXRsZRgDIAEoCRIPCgdkZXRhaWxzGAQgASgJEhEKCXN0YXJ0X25vdxgFIAEoCBIoCgZub3RpZnkYBiADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeRIQCghmaWxlX2lkcxgHIAMoCSI2ChJDcmVhdGVUYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIqMBChxDcmVhdGVUYXNrV2l0aENoYW5uZWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIPCgdkZXRhaWxzGAMgASgJEhEKCXN0YXJ0X25vdxgEIAEoCBIoCgZub3RpZnkYBSADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeRIQCghmaWxlX2lkcxgGIAMoCSJsCh1DcmVhdGVUYXNrV2l0aENoYW5uZWxSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2sSKQoHY2hhbm5lbBgCIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIiMKEFN0YXJ0VGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCSI1ChFTdGFydFRhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2sifgoSQ29uZmlybVRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkSKgoHcmVhc29ucxgCIAMoDjIZLnRhbmsudGFzay52MS5DaGVja1JlYXNvbhIrCghzdXJmYWNlcxgDIAMoDjIZLnRhbmsudGFzay52MS5UYXNrU3VyZmFjZSI3ChNDb25maXJtVGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayI0ChNTZW5kQmFja1Rhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkSDAoEdGV4dBgCIAEoCSI4ChRTZW5kQmFja1Rhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siIwoQUmV0cnlUYXNrUmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJIjUKEVJldHJ5VGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayIkChFDYW5jZWxUYXNrUmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJIjYKEkNhbmNlbFRhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siewoUU2V0VGFza05vdGlmeVJlcXVlc3QSDwoHdGFza19pZBgBIAEoCRIoCgZub3RpZnkYAiADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeRIYCgthc2tlcl9tdXRlZBgDIAEoCEgAiAEBQg4KDF9hc2tlcl9tdXRlZCI5ChVTZXRUYXNrTm90aWZ5UmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIi4KFkdldFRhc2tTZXR0aW5nc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIlcKF0dldFRhc2tTZXR0aW5nc1Jlc3BvbnNlEigKBm5vdGlmeRgBIAMoCzIYLnRhbmsudGFzay52MS5UYXNrTm90aWZ5EhIKCmNhbl9tYW5hZ2UYAiABKAgiWAoWU2V0VGFza1NldHRpbmdzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSKAoGbm90aWZ5GAIgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkiQwoXU2V0VGFza1NldHRpbmdzUmVzcG9uc2USKAoGbm90aWZ5GAEgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkiQgoPU2VuZFRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkSEAoIdXNlcl9pZHMYAiADKAkSDAoEbm90ZRgDIAEoCSIpChBTZW5kVGFza1Jlc3BvbnNlEhUKDXNlbnRfdXNlcl9pZHMYASADKAki+wEKFFJlY29yZFRhc2tSdW5SZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCRIPCgd0YXNrX2lkGAIgASgJEikKBWV2ZW50GAMgASgOMhoudGFuay50YXNrLnYxLlRhc2tSdW5FdmVudBILCgNhc2sYBCABKAkSJgoFcHJvb2YYBSABKAsyFy50YW5rLnRhc2sudjEuVGFza1Byb29mEg4KBnJlYXNvbhgGIAEoCRIQCghwcm9ncmVzcxgHIAEoCRISCgpjaGVja2VkX2J5GAggASgJEiwKCHN1cmZhY2VzGAkgAygLMhoudGFuay50YXNrLnYxLlN1cmZhY2VDaGVjayI5ChVSZWNvcmRUYXNrUnVuUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrKt0BCglUYXNrU3RhZ2USGgoWVEFTS19TVEFHRV9VTlNQRUNJRklFRBAAEhUKEVRBU0tfU1RBR0VfUVVFVUVEEAESGgoWVEFTS19TVEFHRV9JTl9QUk9HUkVTUxACEh0KGVRBU0tfU1RBR0VfUkVBRFlfVE9fQ0hFQ0sQAxITCg9UQVNLX1NUQUdFX0RPTkUQBBIUChBUQVNLX1NUQUdFX1NUVUNLEAUSGAoUVEFTS19TVEFHRV9DQU5DRUxMRUQQBhIdChlUQVNLX1NUQUdFX1dBSVRJTkdfREVQTE9ZEAcqigEKC1Rhc2tTdXJmYWNlEhwKGFRBU0tfU1VSRkFDRV9VTlNQRUNJRklFRBAAEhQKEFRBU0tfU1VSRkFDRV9XRUIQARIXChNUQVNLX1NVUkZBQ0VfTU9CSUxFEAISFAoQVEFTS19TVVJGQUNFX0FQSRADEhgKFFRBU0tfU1VSRkFDRV9ERVNLVE9QEAQqgwEKDFN1cmZhY2VTdGF0ZRIdChlTVVJGQUNFX1NUQVRFX1VOU1BFQ0lGSUVEEAASIAocU1VSRkFDRV9TVEFURV9XQUlUSU5HX0RFUExPWRABEhcKE1NVUkZBQ0VfU1RBVEVfUkVBRFkQAhIZChVTVVJGQUNFX1NUQVRFX0NIRUNLRUQQAyqcAQoLQ2hlY2tSZWFzb24SHAoYQ0hFQ0tfUkVBU09OX1VOU1BFQ0lGSUVEEAASGQoVQ0hFQ0tfUkVBU09OX0FTX0FTS0VEEAESFQoRQ0hFQ0tfUkVBU09OX0ZBU1QQAhIcChhDSEVDS19SRUFTT05fTE9PS1NfR1JFQVQQAxIfChtDSEVDS19SRUFTT05fV09SS1NfT05fUEhPTkUQBCrtAQoMVGFza1J1bkV2ZW50Eh4KGlRBU0tfUlVOX0VWRU5UX1VOU1BFQ0lGSUVEEAASGgoWVEFTS19SVU5fRVZFTlRfU1RBUlRFRBABEhoKFlRBU0tfUlVOX0VWRU5UX1dBSVRJTkcQAhIbChdUQVNLX1JVTl9FVkVOVF9QUk9HUkVTUxADEhgKFFRBU0tfUlVOX0VWRU5UX1JFQURZEAQSGAoUVEFTS19SVU5fRVZFTlRfU1RVQ0sQBRIXChNUQVNLX1JVTl9FVkVOVF9ET05FEAYSGwoXVEFTS19SVU5fRVZFTlRfU1VSRkFDRVMQBzK9CQoLVGFza1NlcnZpY2USTAoJTGlzdFRhc2tzEh4udGFuay50YXNrLnYxLkxpc3RUYXNrc1JlcXVlc3QaHy50YW5rLnRhc2sudjEuTGlzdFRhc2tzUmVzcG9uc2USRgoHR2V0VGFzaxIcLnRhbmsudGFzay52MS5HZXRUYXNrUmVxdWVzdBodLnRhbmsudGFzay52MS5HZXRUYXNrUmVzcG9uc2USTwoKQ3JlYXRlVGFzaxIfLnRhbmsudGFzay52MS5DcmVhdGVUYXNrUmVxdWVzdBogLnRhbmsudGFzay52MS5DcmVhdGVUYXNrUmVzcG9uc2UScAoVQ3JlYXRlVGFza1dpdGhDaGFubmVsEioudGFuay50YXNrLnYxLkNyZWF0ZVRhc2tXaXRoQ2hhbm5lbFJlcXVlc3QaKy50YW5rLnRhc2sudjEuQ3JlYXRlVGFza1dpdGhDaGFubmVsUmVzcG9uc2USTAoJU3RhcnRUYXNrEh4udGFuay50YXNrLnYxLlN0YXJ0VGFza1JlcXVlc3QaHy50YW5rLnRhc2sudjEuU3RhcnRUYXNrUmVzcG9uc2USUgoLQ29uZmlybVRhc2sSIC50YW5rLnRhc2sudjEuQ29uZmlybVRhc2tSZXF1ZXN0GiEudGFuay50YXNrLnYxLkNvbmZpcm1UYXNrUmVzcG9uc2USVQoMU2VuZEJhY2tUYXNrEiEudGFuay50YXNrLnYxLlNlbmRCYWNrVGFza1JlcXVlc3QaIi50YW5rLnRhc2sudjEuU2VuZEJhY2tUYXNrUmVzcG9uc2USTAoJUmV0cnlUYXNrEh4udGFuay50YXNrLnYxLlJldHJ5VGFza1JlcXVlc3QaHy50YW5rLnRhc2sudjEuUmV0cnlUYXNrUmVzcG9uc2USTwoKQ2FuY2VsVGFzaxIfLnRhbmsudGFzay52MS5DYW5jZWxUYXNrUmVxdWVzdBogLnRhbmsudGFzay52MS5DYW5jZWxUYXNrUmVzcG9uc2USWAoNU2V0VGFza05vdGlmeRIiLnRhbmsudGFzay52MS5TZXRUYXNrTm90aWZ5UmVxdWVzdBojLnRhbmsudGFzay52MS5TZXRUYXNrTm90aWZ5UmVzcG9uc2USXgoPR2V0VGFza1NldHRpbmdzEiQudGFuay50YXNrLnYxLkdldFRhc2tTZXR0aW5nc1JlcXVlc3QaJS50YW5rLnRhc2sudjEuR2V0VGFza1NldHRpbmdzUmVzcG9uc2USXgoPU2V0VGFza1NldHRpbmdzEiQudGFuay50YXNrLnYxLlNldFRhc2tTZXR0aW5nc1JlcXVlc3QaJS50YW5rLnRhc2sudjEuU2V0VGFza1NldHRpbmdzUmVzcG9uc2USWAoNUmVjb3JkVGFza1J1bhIiLnRhbmsudGFzay52MS5SZWNvcmRUYXNrUnVuUmVxdWVzdBojLnRhbmsudGFzay52MS5SZWNvcmRUYXNrUnVuUmVzcG9uc2USSQoIU2VuZFRhc2sSHS50YW5rLnRhc2sudjEuU2VuZFRhc2tSZXF1ZXN0Gh4udGFuay50YXNrLnYxLlNlbmRUYXNrUmVzcG9uc2VCwAEKEGNvbS50YW5rLnRhc2sudjFCCVRhc2tQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3Rhc2svdjE7dGFza3YxogIDVFRYqgIMVGFuay5UYXNrLlYxygIMVGFua1xUYXNrXFYx4gIYVGFua1xUYXNrXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6VGFzazo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_channel_v1_channel]);
+  fileDesc("Chd0YW5rL3Rhc2svdjEvdGFzay5wcm90bxIMdGFuay50YXNrLnYxIoUCCgxTdXJmYWNlQ2hlY2sSKgoHc3VyZmFjZRgBIAEoDjIZLnRhbmsudGFzay52MS5UYXNrU3VyZmFjZRIpCgVzdGF0ZRgCIAEoDjIaLnRhbmsudGFzay52MS5TdXJmYWNlU3RhdGUSLAoIc3RhdGVfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCndhaXRpbmdfb24YBCABKAkSEgoKY2hlY2tlZF9ieRgFIAEoCRIuCgpjaGVja2VkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIYChBwdWxsX3JlcXVlc3RfdXJsGAcgASgJIicKClByb29mQ2hlY2sSDAoEdGV4dBgBIAEoCRILCgNtZXQYAiABKAgi9QEKCVRhc2tQcm9vZhIQCghsaXZlX3VybBgBIAEoCRIaChJzY3JlZW5zaG90X2ZpbGVfaWQYAiABKAkSKwoJY2hlY2tsaXN0GAMgAygLMhgudGFuay50YXNrLnYxLlByb29mQ2hlY2sSGAoQcHVsbF9yZXF1ZXN0X3VybBgEIAEoCRImCgJhdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNdmlkZW9fZmlsZV9pZBgGIAEoCRIbChNhc2tfdG9fbGl2ZV9zZWNvbmRzGAcgASgDEhcKD3dhaXRpbmdfc2Vjb25kcxgIIAEoAyJdCgpUYXNrTm90aWZ5EiYKBXN0YWdlGAEgASgOMhcudGFuay50YXNrLnYxLlRhc2tTdGFnZRIPCgd1c2VyX2lkGAIgASgJEhYKDmZyb21fd29ya3NwYWNlGAMgASgIIvkFCgRUYXNrEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJEhYKDnRocmVhZF9yb290X2lkGAQgASgJEg0KBXRpdGxlGAUgASgJEg8KB2RldGFpbHMYBiABKAkSJgoFc3RhZ2UYByABKA4yFy50YW5rLnRhc2sudjEuVGFza1N0YWdlEhIKCmNyZWF0ZWRfYnkYCCABKAkSLgoKY3JlYXRlZF9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIc3RhZ2VfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg4KBnJ1bl9pZBgMIAEoCRIQCghwcm9ncmVzcxgNIAEoCRImCgVwcm9vZhgOIAEoCzIXLnRhbmsudGFzay52MS5UYXNrUHJvb2YSEgoKY2hlY2tlZF9ieRgPIAEoCRIuCgpjaGVja2VkX2F0GBAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgxzdHVja19yZWFzb24YESABKAkSKAoGbm90aWZ5GBIgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkSEwoLYXNrZXJfbXV0ZWQYEyABKAgSFAoMY2hhbm5lbF9uYW1lGBQgASgJEgwKBGxpbmsYFSABKAkSEAoIZmlsZV9pZHMYFiADKAkSGQoRc291cmNlX21lc3NhZ2VfaWQYFyABKAkSLAoIc3VyZmFjZXMYGCADKAsyGi50YW5rLnRhc2sudjEuU3VyZmFjZUNoZWNrEgsKA2FzaxgZIAEoCRIUCgx0aXRsZV9lZGl0ZWQYGiABKAgSNAoQbGFzdF9hY3Rpdml0eV9hdBgbIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAirAEKEExpc3RUYXNrc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSJwoGc3RhZ2VzGAMgAygOMhcudGFuay50YXNrLnYxLlRhc2tTdGFnZRIQCghhc2tlZF9ieRgEIAEoCRINCgVsaW1pdBgFIAEoBRIkCgRzb3J0GAYgASgOMhYudGFuay50YXNrLnYxLlRhc2tTb3J0ImEKEUxpc3RUYXNrc1Jlc3BvbnNlEiEKBXRhc2tzGAEgAygLMhIudGFuay50YXNrLnYxLlRhc2sSEQoJaGFzX2FnZW50GAIgASgIEhYKDnJlYWR5X3RvX2NoZWNrGAMgASgFIiEKDkdldFRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkiMwoPR2V0VGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayKsAQoRQ3JlYXRlVGFza1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSDQoFdGl0bGUYAyABKAkSDwoHZGV0YWlscxgEIAEoCRIRCglzdGFydF9ub3cYBSABKAgSKAoGbm90aWZ5GAYgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkSEAoIZmlsZV9pZHMYByADKAkiNgoSQ3JlYXRlVGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayKjAQocQ3JlYXRlVGFza1dpdGhDaGFubmVsUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSDQoFdGl0bGUYAiABKAkSDwoHZGV0YWlscxgDIAEoCRIRCglzdGFydF9ub3cYBCABKAgSKAoGbm90aWZ5GAUgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkSEAoIZmlsZV9pZHMYBiADKAkibAodQ3JlYXRlVGFza1dpdGhDaGFubmVsUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrEikKB2NoYW5uZWwYAiABKAsyGC50YW5rLmNoYW5uZWwudjEuQ2hhbm5lbCIjChBTdGFydFRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkiNQoRU3RhcnRUYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIn4KEkNvbmZpcm1UYXNrUmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJEioKB3JlYXNvbnMYAiADKA4yGS50YW5rLnRhc2sudjEuQ2hlY2tSZWFzb24SKwoIc3VyZmFjZXMYAyADKA4yGS50YW5rLnRhc2sudjEuVGFza1N1cmZhY2UiNwoTQ29uZmlybVRhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siNAoTU2VuZEJhY2tUYXNrUmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJEgwKBHRleHQYAiABKAkiOAoUU2VuZEJhY2tUYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIiMKEFJldHJ5VGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCSI1ChFSZXRyeVRhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siJAoRQ2FuY2VsVGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCSI2ChJDYW5jZWxUYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIjMKEVJlbmFtZVRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkSDQoFdGl0bGUYAiABKAkiNgoSUmVuYW1lVGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayJ7ChRTZXRUYXNrTm90aWZ5UmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJEigKBm5vdGlmeRgCIAMoCzIYLnRhbmsudGFzay52MS5UYXNrTm90aWZ5EhgKC2Fza2VyX211dGVkGAMgASgISACIAQFCDgoMX2Fza2VyX211dGVkIjkKFVNldFRhc2tOb3RpZnlSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siLgoWR2V0VGFza1NldHRpbmdzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiVwoXR2V0VGFza1NldHRpbmdzUmVzcG9uc2USKAoGbm90aWZ5GAEgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkSEgoKY2FuX21hbmFnZRgCIAEoCCJYChZTZXRUYXNrU2V0dGluZ3NSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIoCgZub3RpZnkYAiADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeSJDChdTZXRUYXNrU2V0dGluZ3NSZXNwb25zZRIoCgZub3RpZnkYASADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeSJCCg9TZW5kVGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCRIQCgh1c2VyX2lkcxgCIAMoCRIMCgRub3RlGAMgASgJIikKEFNlbmRUYXNrUmVzcG9uc2USFQoNc2VudF91c2VyX2lkcxgBIAMoCSL7AQoUUmVjb3JkVGFza1J1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJEg8KB3Rhc2tfaWQYAiABKAkSKQoFZXZlbnQYAyABKA4yGi50YW5rLnRhc2sudjEuVGFza1J1bkV2ZW50EgsKA2FzaxgEIAEoCRImCgVwcm9vZhgFIAEoCzIXLnRhbmsudGFzay52MS5UYXNrUHJvb2YSDgoGcmVhc29uGAYgASgJEhAKCHByb2dyZXNzGAcgASgJEhIKCmNoZWNrZWRfYnkYCCABKAkSLAoIc3VyZmFjZXMYCSADKAsyGi50YW5rLnRhc2sudjEuU3VyZmFjZUNoZWNrIjkKFVJlY29yZFRhc2tSdW5SZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2sq3QEKCVRhc2tTdGFnZRIaChZUQVNLX1NUQUdFX1VOU1BFQ0lGSUVEEAASFQoRVEFTS19TVEFHRV9RVUVVRUQQARIaChZUQVNLX1NUQUdFX0lOX1BST0dSRVNTEAISHQoZVEFTS19TVEFHRV9SRUFEWV9UT19DSEVDSxADEhMKD1RBU0tfU1RBR0VfRE9ORRAEEhQKEFRBU0tfU1RBR0VfU1RVQ0sQBRIYChRUQVNLX1NUQUdFX0NBTkNFTExFRBAGEh0KGVRBU0tfU1RBR0VfV0FJVElOR19ERVBMT1kQByqKAQoLVGFza1N1cmZhY2USHAoYVEFTS19TVVJGQUNFX1VOU1BFQ0lGSUVEEAASFAoQVEFTS19TVVJGQUNFX1dFQhABEhcKE1RBU0tfU1VSRkFDRV9NT0JJTEUQAhIUChBUQVNLX1NVUkZBQ0VfQVBJEAMSGAoUVEFTS19TVVJGQUNFX0RFU0tUT1AQBCqDAQoMU3VyZmFjZVN0YXRlEh0KGVNVUkZBQ0VfU1RBVEVfVU5TUEVDSUZJRUQQABIgChxTVVJGQUNFX1NUQVRFX1dBSVRJTkdfREVQTE9ZEAESFwoTU1VSRkFDRV9TVEFURV9SRUFEWRACEhkKFVNVUkZBQ0VfU1RBVEVfQ0hFQ0tFRBADKj0KCFRhc2tTb3J0EhkKFVRBU0tfU09SVF9VTlNQRUNJRklFRBAAEhYKElRBU0tfU09SVF9BQ1RJVklUWRABKpwBCgtDaGVja1JlYXNvbhIcChhDSEVDS19SRUFTT05fVU5TUEVDSUZJRUQQABIZChVDSEVDS19SRUFTT05fQVNfQVNLRUQQARIVChFDSEVDS19SRUFTT05fRkFTVBACEhwKGENIRUNLX1JFQVNPTl9MT09LU19HUkVBVBADEh8KG0NIRUNLX1JFQVNPTl9XT1JLU19PTl9QSE9ORRAEKu0BCgxUYXNrUnVuRXZlbnQSHgoaVEFTS19SVU5fRVZFTlRfVU5TUEVDSUZJRUQQABIaChZUQVNLX1JVTl9FVkVOVF9TVEFSVEVEEAESGgoWVEFTS19SVU5fRVZFTlRfV0FJVElORxACEhsKF1RBU0tfUlVOX0VWRU5UX1BST0dSRVNTEAMSGAoUVEFTS19SVU5fRVZFTlRfUkVBRFkQBBIYChRUQVNLX1JVTl9FVkVOVF9TVFVDSxAFEhcKE1RBU0tfUlVOX0VWRU5UX0RPTkUQBhIbChdUQVNLX1JVTl9FVkVOVF9TVVJGQUNFUxAHMo4KCgtUYXNrU2VydmljZRJMCglMaXN0VGFza3MSHi50YW5rLnRhc2sudjEuTGlzdFRhc2tzUmVxdWVzdBofLnRhbmsudGFzay52MS5MaXN0VGFza3NSZXNwb25zZRJGCgdHZXRUYXNrEhwudGFuay50YXNrLnYxLkdldFRhc2tSZXF1ZXN0Gh0udGFuay50YXNrLnYxLkdldFRhc2tSZXNwb25zZRJPCgpDcmVhdGVUYXNrEh8udGFuay50YXNrLnYxLkNyZWF0ZVRhc2tSZXF1ZXN0GiAudGFuay50YXNrLnYxLkNyZWF0ZVRhc2tSZXNwb25zZRJwChVDcmVhdGVUYXNrV2l0aENoYW5uZWwSKi50YW5rLnRhc2sudjEuQ3JlYXRlVGFza1dpdGhDaGFubmVsUmVxdWVzdBorLnRhbmsudGFzay52MS5DcmVhdGVUYXNrV2l0aENoYW5uZWxSZXNwb25zZRJMCglTdGFydFRhc2sSHi50YW5rLnRhc2sudjEuU3RhcnRUYXNrUmVxdWVzdBofLnRhbmsudGFzay52MS5TdGFydFRhc2tSZXNwb25zZRJSCgtDb25maXJtVGFzaxIgLnRhbmsudGFzay52MS5Db25maXJtVGFza1JlcXVlc3QaIS50YW5rLnRhc2sudjEuQ29uZmlybVRhc2tSZXNwb25zZRJVCgxTZW5kQmFja1Rhc2sSIS50YW5rLnRhc2sudjEuU2VuZEJhY2tUYXNrUmVxdWVzdBoiLnRhbmsudGFzay52MS5TZW5kQmFja1Rhc2tSZXNwb25zZRJMCglSZXRyeVRhc2sSHi50YW5rLnRhc2sudjEuUmV0cnlUYXNrUmVxdWVzdBofLnRhbmsudGFzay52MS5SZXRyeVRhc2tSZXNwb25zZRJPCgpDYW5jZWxUYXNrEh8udGFuay50YXNrLnYxLkNhbmNlbFRhc2tSZXF1ZXN0GiAudGFuay50YXNrLnYxLkNhbmNlbFRhc2tSZXNwb25zZRJYCg1TZXRUYXNrTm90aWZ5EiIudGFuay50YXNrLnYxLlNldFRhc2tOb3RpZnlSZXF1ZXN0GiMudGFuay50YXNrLnYxLlNldFRhc2tOb3RpZnlSZXNwb25zZRJeCg9HZXRUYXNrU2V0dGluZ3MSJC50YW5rLnRhc2sudjEuR2V0VGFza1NldHRpbmdzUmVxdWVzdBolLnRhbmsudGFzay52MS5HZXRUYXNrU2V0dGluZ3NSZXNwb25zZRJeCg9TZXRUYXNrU2V0dGluZ3MSJC50YW5rLnRhc2sudjEuU2V0VGFza1NldHRpbmdzUmVxdWVzdBolLnRhbmsudGFzay52MS5TZXRUYXNrU2V0dGluZ3NSZXNwb25zZRJYCg1SZWNvcmRUYXNrUnVuEiIudGFuay50YXNrLnYxLlJlY29yZFRhc2tSdW5SZXF1ZXN0GiMudGFuay50YXNrLnYxLlJlY29yZFRhc2tSdW5SZXNwb25zZRJJCghTZW5kVGFzaxIdLnRhbmsudGFzay52MS5TZW5kVGFza1JlcXVlc3QaHi50YW5rLnRhc2sudjEuU2VuZFRhc2tSZXNwb25zZRJPCgpSZW5hbWVUYXNrEh8udGFuay50YXNrLnYxLlJlbmFtZVRhc2tSZXF1ZXN0GiAudGFuay50YXNrLnYxLlJlbmFtZVRhc2tSZXNwb25zZULAAQoQY29tLnRhbmsudGFzay52MUIJVGFza1Byb3RvUAFaT2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvdGFzay92MTt0YXNrdjGiAgNUVFiqAgxUYW5rLlRhc2suVjHKAgxUYW5rXFRhc2tcVjHiAhhUYW5rXFRhc2tcVjFcR1BCTWV0YWRhdGHqAg5UYW5rOjpUYXNrOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_channel_v1_channel]);
 
 /**
  * One surface of a task and where it stands. Surfaces clear independently: checking web does
@@ -354,6 +354,29 @@ export type Task = Message<"tank.task.v1.Task"> & {
    * @generated from field: repeated tank.task.v1.SurfaceCheck surfaces = 24;
    */
   surfaces: SurfaceCheck[];
+
+  /**
+   * The ask in the asker's own words. title is now a short name (2026-11-27): generated from
+   * the ask a moment after the task is made (until then, the ask clipped), or typed by a person.
+   *
+   * @generated from field: string ask = 25;
+   */
+  ask: string;
+
+  /**
+   * A person named it with RenameTask; generated names never replace it.
+   *
+   * @generated from field: bool title_edited = 26;
+   */
+  titleEdited: boolean;
+
+  /**
+   * The newest of: a stage change, or a message in the task's thread by anyone, an agent
+   * included. ListTasks sorts on it for the Tasks view.
+   *
+   * @generated from field: google.protobuf.Timestamp last_activity_at = 27;
+   */
+  lastActivityAt?: Timestamp;
 };
 
 /**
@@ -399,6 +422,11 @@ export type ListTasksRequest = Message<"tank.task.v1.ListTasksRequest"> & {
    * @generated from field: int32 limit = 5;
    */
   limit: number;
+
+  /**
+   * @generated from field: tank.task.v1.TaskSort sort = 6;
+   */
+  sort: TaskSort;
 };
 
 /**
@@ -809,6 +837,48 @@ export const CancelTaskResponseSchema: GenMessage<CancelTaskResponse> = /*@__PUR
   messageDesc(file_tank_task_v1_task, 22);
 
 /**
+ * Rename a task, as a Tread is renamed. The name is trimmed, runs of spaces collapse, 1 to 80
+ * characters. It marks the title as edited, so a generated name never replaces it.
+ *
+ * @generated from message tank.task.v1.RenameTaskRequest
+ */
+export type RenameTaskRequest = Message<"tank.task.v1.RenameTaskRequest"> & {
+  /**
+   * @generated from field: string task_id = 1;
+   */
+  taskId: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+};
+
+/**
+ * Describes the message tank.task.v1.RenameTaskRequest.
+ * Use `create(RenameTaskRequestSchema)` to create a new message.
+ */
+export const RenameTaskRequestSchema: GenMessage<RenameTaskRequest> = /*@__PURE__*/
+  messageDesc(file_tank_task_v1_task, 23);
+
+/**
+ * @generated from message tank.task.v1.RenameTaskResponse
+ */
+export type RenameTaskResponse = Message<"tank.task.v1.RenameTaskResponse"> & {
+  /**
+   * @generated from field: tank.task.v1.Task task = 1;
+   */
+  task?: Task;
+};
+
+/**
+ * Describes the message tank.task.v1.RenameTaskResponse.
+ * Use `create(RenameTaskResponseSchema)` to create a new message.
+ */
+export const RenameTaskResponseSchema: GenMessage<RenameTaskResponse> = /*@__PURE__*/
+  messageDesc(file_tank_task_v1_task, 24);
+
+/**
  * Replace the task's own picks (workspace rules are not affected).
  *
  * @generated from message tank.task.v1.SetTaskNotifyRequest
@@ -835,7 +905,7 @@ export type SetTaskNotifyRequest = Message<"tank.task.v1.SetTaskNotifyRequest"> 
  * Use `create(SetTaskNotifyRequestSchema)` to create a new message.
  */
 export const SetTaskNotifyRequestSchema: GenMessage<SetTaskNotifyRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 23);
+  messageDesc(file_tank_task_v1_task, 25);
 
 /**
  * @generated from message tank.task.v1.SetTaskNotifyResponse
@@ -852,7 +922,7 @@ export type SetTaskNotifyResponse = Message<"tank.task.v1.SetTaskNotifyResponse"
  * Use `create(SetTaskNotifyResponseSchema)` to create a new message.
  */
 export const SetTaskNotifyResponseSchema: GenMessage<SetTaskNotifyResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 24);
+  messageDesc(file_tank_task_v1_task, 26);
 
 /**
  * Settings → Tasks: rules every task in the workspace follows.
@@ -871,7 +941,7 @@ export type GetTaskSettingsRequest = Message<"tank.task.v1.GetTaskSettingsReques
  * Use `create(GetTaskSettingsRequestSchema)` to create a new message.
  */
 export const GetTaskSettingsRequestSchema: GenMessage<GetTaskSettingsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 25);
+  messageDesc(file_tank_task_v1_task, 27);
 
 /**
  * @generated from message tank.task.v1.GetTaskSettingsResponse
@@ -895,7 +965,7 @@ export type GetTaskSettingsResponse = Message<"tank.task.v1.GetTaskSettingsRespo
  * Use `create(GetTaskSettingsResponseSchema)` to create a new message.
  */
 export const GetTaskSettingsResponseSchema: GenMessage<GetTaskSettingsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 26);
+  messageDesc(file_tank_task_v1_task, 28);
 
 /**
  * @generated from message tank.task.v1.SetTaskSettingsRequest
@@ -917,7 +987,7 @@ export type SetTaskSettingsRequest = Message<"tank.task.v1.SetTaskSettingsReques
  * Use `create(SetTaskSettingsRequestSchema)` to create a new message.
  */
 export const SetTaskSettingsRequestSchema: GenMessage<SetTaskSettingsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 27);
+  messageDesc(file_tank_task_v1_task, 29);
 
 /**
  * @generated from message tank.task.v1.SetTaskSettingsResponse
@@ -934,7 +1004,7 @@ export type SetTaskSettingsResponse = Message<"tank.task.v1.SetTaskSettingsRespo
  * Use `create(SetTaskSettingsResponseSchema)` to create a new message.
  */
 export const SetTaskSettingsResponseSchema: GenMessage<SetTaskSettingsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 28);
+  messageDesc(file_tank_task_v1_task, 30);
 
 /**
  * Send to: hand a task to people in its Tread so they hear about it now, at whatever stage it
@@ -968,7 +1038,7 @@ export type SendTaskRequest = Message<"tank.task.v1.SendTaskRequest"> & {
  * Use `create(SendTaskRequestSchema)` to create a new message.
  */
 export const SendTaskRequestSchema: GenMessage<SendTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 29);
+  messageDesc(file_tank_task_v1_task, 31);
 
 /**
  * @generated from message tank.task.v1.SendTaskResponse
@@ -985,7 +1055,7 @@ export type SendTaskResponse = Message<"tank.task.v1.SendTaskResponse"> & {
  * Use `create(SendTaskResponseSchema)` to create a new message.
  */
 export const SendTaskResponseSchema: GenMessage<SendTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 30);
+  messageDesc(file_tank_task_v1_task, 32);
 
 /**
  * Control plane only: the run's own token or the control plane's bot token with
@@ -1058,7 +1128,7 @@ export type RecordTaskRunRequest = Message<"tank.task.v1.RecordTaskRunRequest"> 
  * Use `create(RecordTaskRunRequestSchema)` to create a new message.
  */
 export const RecordTaskRunRequestSchema: GenMessage<RecordTaskRunRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 31);
+  messageDesc(file_tank_task_v1_task, 33);
 
 /**
  * @generated from message tank.task.v1.RecordTaskRunResponse
@@ -1075,7 +1145,7 @@ export type RecordTaskRunResponse = Message<"tank.task.v1.RecordTaskRunResponse"
  * Use `create(RecordTaskRunResponseSchema)` to create a new message.
  */
 export const RecordTaskRunResponseSchema: GenMessage<RecordTaskRunResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 32);
+  messageDesc(file_tank_task_v1_task, 34);
 
 /**
  * @generated from enum tank.task.v1.TaskStage
@@ -1211,6 +1281,31 @@ export const SurfaceStateSchema: GenEnum<SurfaceState> = /*@__PURE__*/
   enumDesc(file_tank_task_v1_task, 2);
 
 /**
+ * @generated from enum tank.task.v1.TaskSort
+ */
+export enum TaskSort {
+  /**
+   * as before: by stage, then updated_at
+   *
+   * @generated from enum value: TASK_SORT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Newest last_activity_at first.
+   *
+   * @generated from enum value: TASK_SORT_ACTIVITY = 1;
+   */
+  ACTIVITY = 1,
+}
+
+/**
+ * Describes the enum tank.task.v1.TaskSort.
+ */
+export const TaskSortSchema: GenEnum<TaskSort> = /*@__PURE__*/
+  enumDesc(file_tank_task_v1_task, 3);
+
+/**
  * Why a person said it looks right, picked with one tap (2026-11-26). The words people see
  * are the clients'; the server keeps the reasons on the check (task_checks.reasons) for
  * TANK Neural's training files.
@@ -1256,7 +1351,7 @@ export enum CheckReason {
  * Describes the enum tank.task.v1.CheckReason.
  */
 export const CheckReasonSchema: GenEnum<CheckReason> = /*@__PURE__*/
-  enumDesc(file_tank_task_v1_task, 3);
+  enumDesc(file_tank_task_v1_task, 4);
 
 /**
  * What a run did to its task, from the control plane.
@@ -1328,7 +1423,7 @@ export enum TaskRunEvent {
  * Describes the enum tank.task.v1.TaskRunEvent.
  */
 export const TaskRunEventSchema: GenEnum<TaskRunEvent> = /*@__PURE__*/
-  enumDesc(file_tank_task_v1_task, 4);
+  enumDesc(file_tank_task_v1_task, 5);
 
 /**
  * @generated from service tank.task.v1.TaskService
@@ -1445,6 +1540,14 @@ export const TaskService: GenService<{
     methodKind: "unary";
     input: typeof SendTaskRequestSchema;
     output: typeof SendTaskResponseSchema;
+  },
+  /**
+   * @generated from rpc tank.task.v1.TaskService.RenameTask
+   */
+  renameTask: {
+    methodKind: "unary";
+    input: typeof RenameTaskRequestSchema;
+    output: typeof RenameTaskResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_tank_task_v1_task, 0);

@@ -18,7 +18,10 @@ import {
   type ConfirmTaskRequest,
   type CreateTaskRequest,
   type CreateTaskWithChannelRequest,
+  type ListTasksRequest,
+  type RenameTaskRequest,
   type Task,
+  TaskSort as TaskListSort,
   TaskNotifySchema,
   TaskSchema,
   TaskService,
@@ -28,6 +31,8 @@ import {
 import { createTankClient } from "./client.js";
 import { envelopeToActions, TankStore } from "./store.js";
 import {
+  activeTasksByActivity,
+  activityAt,
   canCancelTask,
   commandTasks,
   DONE_WINDOW_MS,
@@ -273,18 +278,35 @@ describe("task client", () => {
       createdIn?: CreateTaskRequest;
       pref?: SetChannelPreferenceRequest;
       confirmed?: ConfirmTaskRequest;
+      listed?: ListTasksRequest;
+      renamed?: RenameTaskRequest;
     } = {};
     let failPref = false;
     const transport = createRouterTransport(({ service }) => {
       service(TaskService, {
-        listTasks: (req) => ({
-          tasks: [
-            task({ channelId: req.channelId || "c1" }),
-            task({ id: "t2", stage: TaskStage.READY_TO_CHECK }),
-          ],
-          hasAgent: true,
-          readyToCheck: 1,
-        }),
+        renameTask: (req) => {
+          calls.renamed = req;
+          return {
+            task: task({
+              id: req.taskId,
+              title: req.title,
+              titleEdited: true,
+              ask: "the login page is broken on phones",
+              updatedAt: timestampFromMs(T0 + 9),
+            }),
+          };
+        },
+        listTasks: (req) => {
+          calls.listed = req;
+          return {
+            tasks: [
+              task({ channelId: req.channelId || "c1" }),
+              task({ id: "t2", stage: TaskStage.READY_TO_CHECK }),
+            ],
+            hasAgent: true,
+            readyToCheck: 1,
+          };
+        },
         createTask: (req) => {
           calls.createdIn = req;
           return {
@@ -359,6 +381,25 @@ describe("task client", () => {
     expect(calls.confirmed?.surfaces).toEqual([TaskSurface.WEB]);
     await client.confirmTask("t2");
     expect(calls.confirmed?.surfaces).toEqual([]);
+  });
+
+  it("sends the sort a list asks for, none by default", async () => {
+    const { client, calls } = makeClient();
+    await client.listTasks({ workspaceId: "ws1" });
+    expect(calls.listed?.sort).toBe(TaskListSort.UNSPECIFIED);
+    await client.listTasks({ workspaceId: "ws1", sort: TaskListSort.ACTIVITY });
+    expect(calls.listed?.sort).toBe(TaskListSort.ACTIVITY);
+  });
+
+  it("renames a task and keeps the ask and the name the server says", async () => {
+    const { client, calls } = makeClient();
+    await client.listTasks({ workspaceId: "ws1" });
+    const t = await client.renameTask("t1", "Fix phone login");
+    expect(calls.renamed).toMatchObject({ taskId: "t1", title: "Fix phone login" });
+    expect(t.titleEdited).toBe(true);
+    const kept = client.store.getState().tasksById.t1;
+    expect(kept?.title).toBe("Fix phone login");
+    expect(kept?.ask).toBe("the login page is broken on phones");
   });
 
   it("cancels a task and keeps what the server says", async () => {
@@ -630,5 +671,37 @@ describe("sorting and searching a stage", () => {
     expect(ids(searchTasks(list, "alpha cher"))).toEqual(["c"]);
     expect(ids(searchTasks(list, "nothing"))).toEqual([]);
     expect(ids(searchTasks(list, "  "))).toEqual(["a", "b", "c"]);
+  });
+});
+
+describe("the Tasks view", () => {
+  const at = (ms: number) => timestampFromMs(T0 + ms);
+
+  it("lists active tasks only, the newest activity first", () => {
+    const list = activeTasksByActivity([
+      task({ id: "a", lastActivityAt: at(1) }),
+      task({ id: "b", stage: TaskStage.DONE, lastActivityAt: at(9) }),
+      task({ id: "c", stage: TaskStage.CANCELLED, lastActivityAt: at(8) }),
+      task({ id: "d", stage: TaskStage.STUCK, lastActivityAt: at(3) }),
+      task({ id: "e", stage: TaskStage.READY_TO_CHECK, lastActivityAt: at(2) }),
+    ]);
+    expect(list.map((t) => t.id)).toEqual(["d", "e", "a"]);
+  });
+
+  it("moves a task to the top when a message bumps it, and does not touch the input", () => {
+    const input = [task({ id: "a", lastActivityAt: at(1) }), task({ id: "b", lastActivityAt: at(2) })];
+    expect(activeTasksByActivity(input).map((t) => t.id)).toEqual(["b", "a"]);
+    const bumped = [task({ id: "a", lastActivityAt: at(5) }), input[1] as Task];
+    expect(activeTasksByActivity(bumped).map((t) => t.id)).toEqual(["a", "b"]);
+    expect(input.map((t) => t.id)).toEqual(["a", "b"]);
+  });
+
+  it("falls back to updatedAt for a task the server sent without activity, and breaks ties by id", () => {
+    expect(activityAt(task({ updatedAt: at(7) }))).toBe(T0 + 7);
+    const list = activeTasksByActivity([
+      task({ id: "a", lastActivityAt: at(1) }),
+      task({ id: "b", lastActivityAt: at(1) }),
+    ]);
+    expect(list.map((t) => t.id)).toEqual(["b", "a"]);
   });
 });
