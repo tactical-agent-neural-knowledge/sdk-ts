@@ -14,7 +14,7 @@ import { ChatService, type Message, MessageKind, type PostMessageRequest } from 
 import { MonitorService, type Widget } from "../contracts/tank/monitor/v1/monitor_pb.js";
 import { type Notification, NotificationService } from "../contracts/tank/notification/v1/notification_pb.js";
 import { type DescribeStatusResponse, type Presence, PresenceService, type PresenceStatus } from "../contracts/tank/presence/v1/presence_pb.js";
-import { type CheckReason, type ListTasksResponse, type Task, TaskService, type TaskStage } from "../contracts/tank/task/v1/task_pb.js";
+import { type CheckReason, type ListTasksResponse, type Task, TaskService, type TaskStage, type TaskSurface } from "../contracts/tank/task/v1/task_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import { type Draft, type GetBootstrapResponse, type Invite, type Member, type PendingInvite, Role, type Workspace, WorkspaceService } from "../contracts/tank/workspace/v1/workspace_pb.js";
 import { Emitter } from "./emitter.js";
@@ -440,8 +440,11 @@ export declare class TankClient {
         channel: Channel | undefined;
     }>;
     startTask(taskId: string): Promise<Task>;
-    /** Looks right: Ready to check → Done, with the one-tap reasons the person picked (optional). */
-    confirmTask(taskId: string, reasons?: CheckReason[]): Promise<Task>;
+    /**
+     * Looks right, with the one-tap reasons the person picked (optional). `surfaces` names the
+     * surfaces checked (web, mobile…); empty checks the whole task. Done once every surface is checked.
+     */
+    confirmTask(taskId: string, reasons?: CheckReason[], surfaces?: TaskSurface[]): Promise<Task>;
     /** Not yet: the sentence goes to the Tread as the caller and the work goes back. */
     sendBackTask(taskId: string, text: string): Promise<Task>;
     /** Try again on a stuck task. */

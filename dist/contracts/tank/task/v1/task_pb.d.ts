@@ -7,6 +7,55 @@ import type { Message } from "@bufbuild/protobuf";
  */
 export declare const file_tank_task_v1_task: GenFile;
 /**
+ * One surface of a task and where it stands. Surfaces clear independently: checking web does
+ * not wait for mobile.
+ *
+ * @generated from message tank.task.v1.SurfaceCheck
+ */
+export type SurfaceCheck = Message<"tank.task.v1.SurfaceCheck"> & {
+    /**
+     * @generated from field: tank.task.v1.TaskSurface surface = 1;
+     */
+    surface: TaskSurface;
+    /**
+     * @generated from field: tank.task.v1.SurfaceState state = 2;
+     */
+    state: SurfaceState;
+    /**
+     * when it entered its state
+     *
+     * @generated from field: google.protobuf.Timestamp state_at = 3;
+     */
+    stateAt?: Timestamp;
+    /**
+     * WAITING_DEPLOY: one plain phrase for what it waits on ("TestFlight"); empty otherwise.
+     *
+     * @generated from field: string waiting_on = 4;
+     */
+    waitingOn: string;
+    /**
+     * CHECKED
+     *
+     * @generated from field: string checked_by = 5;
+     */
+    checkedBy: string;
+    /**
+     * @generated from field: google.protobuf.Timestamp checked_at = 6;
+     */
+    checkedAt?: Timestamp;
+    /**
+     * The pull request that changed this surface, so a card can link the right one.
+     *
+     * @generated from field: string pull_request_url = 7;
+     */
+    pullRequestUrl: string;
+};
+/**
+ * Describes the message tank.task.v1.SurfaceCheck.
+ * Use `create(SurfaceCheckSchema)` to create a new message.
+ */
+export declare const SurfaceCheckSchema: GenMessage<SurfaceCheck>;
+/**
  * One line of the checklist against the ask, with whether TANK's record says it was met.
  *
  * @generated from message tank.task.v1.ProofCheck
@@ -235,6 +284,15 @@ export type Task = Message<"tank.task.v1.Task"> & {
      * @generated from field: string source_message_id = 23;
      */
     sourceMessageId: string;
+    /**
+     * Per-surface readiness, only the surfaces the task touched, in TaskSurface order. Empty
+     * for a task with no surface to check (not code, or nothing reported): it is checked as a
+     * whole through stage, as before. stage is derived: READY_TO_CHECK while any surface is
+     * READY, else WAITING_DEPLOY while any waits, else DONE once every one is CHECKED.
+     *
+     * @generated from field: repeated tank.task.v1.SurfaceCheck surfaces = 24;
+     */
+    surfaces: SurfaceCheck[];
 };
 /**
  * Describes the message tank.task.v1.Task.
@@ -487,6 +545,14 @@ export type ConfirmTaskRequest = Message<"tank.task.v1.ConfirmTaskRequest"> & {
      * @generated from field: repeated tank.task.v1.CheckReason reasons = 2;
      */
     reasons: CheckReason[];
+    /**
+     * Surfaces being checked off. Empty = every surface that is READY now (or the whole task
+     * when it has no surfaces). A surface that is not READY is refused for the whole call.
+     * Surfaces still waiting on a deploy stay waiting; the task is DONE only when all are checked.
+     *
+     * @generated from field: repeated tank.task.v1.TaskSurface surfaces = 3;
+     */
+    surfaces: TaskSurface[];
 };
 /**
  * Describes the message tank.task.v1.ConfirmTaskRequest.
@@ -801,6 +867,13 @@ export type RecordTaskRunRequest = Message<"tank.task.v1.RecordTaskRunRequest"> 
      * @generated from field: string checked_by = 8;
      */
     checkedBy: string;
+    /**
+     * READY and SURFACES: the state of each surface the task touched. Surfaces left out keep
+     * their state. A READY with none leaves the task a whole-task check.
+     *
+     * @generated from field: repeated tank.task.v1.SurfaceCheck surfaces = 9;
+     */
+    surfaces: SurfaceCheck[];
 };
 /**
  * Describes the message tank.task.v1.RecordTaskRunRequest.
@@ -852,12 +925,85 @@ export declare enum TaskStage {
     /**
      * @generated from enum value: TASK_STAGE_CANCELLED = 6;
      */
-    CANCELLED = 6
+    CANCELLED = 6,
+    /**
+     * Every surface a person can check is either checked or waiting on a deploy (a TestFlight
+     * build, 2026-11-27); none is ready now. Moves back to READY_TO_CHECK when a waiting
+     * surface goes live, and to DONE when the last one is checked. Never a spinner: the task
+     * says what it waits on (SurfaceCheck.waiting_on).
+     *
+     * @generated from enum value: TASK_STAGE_WAITING_DEPLOY = 7;
+     */
+    WAITING_DEPLOY = 7
 }
 /**
  * Describes the enum tank.task.v1.TaskStage.
  */
 export declare const TaskStageSchema: GenEnum<TaskStage>;
+/**
+ * Where a task's change can be tried. A task has only the surfaces it touched: none for work
+ * that is not code (an answer, a live check), one, or several. Order is display order.
+ *
+ * @generated from enum tank.task.v1.TaskSurface
+ */
+export declare enum TaskSurface {
+    /**
+     * @generated from enum value: TASK_SURFACE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * @generated from enum value: TASK_SURFACE_WEB = 1;
+     */
+    WEB = 1,
+    /**
+     * @generated from enum value: TASK_SURFACE_MOBILE = 2;
+     */
+    MOBILE = 2,
+    /**
+     * @generated from enum value: TASK_SURFACE_API = 3;
+     */
+    API = 3,
+    /**
+     * @generated from enum value: TASK_SURFACE_DESKTOP = 4;
+     */
+    DESKTOP = 4
+}
+/**
+ * Describes the enum tank.task.v1.TaskSurface.
+ */
+export declare const TaskSurfaceSchema: GenEnum<TaskSurface>;
+/**
+ * @generated from enum tank.task.v1.SurfaceState
+ */
+export declare enum SurfaceState {
+    /**
+     * @generated from enum value: SURFACE_STATE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * The change is merged but not out yet (mobile: building and waiting on TestFlight). Not
+     * checkable.
+     *
+     * @generated from enum value: SURFACE_STATE_WAITING_DEPLOY = 1;
+     */
+    WAITING_DEPLOY = 1,
+    /**
+     * Live where a person can try it; "Ready to check on web".
+     *
+     * @generated from enum value: SURFACE_STATE_READY = 2;
+     */
+    READY = 2,
+    /**
+     * A person checked this surface.
+     *
+     * @generated from enum value: SURFACE_STATE_CHECKED = 3;
+     */
+    CHECKED = 3
+}
+/**
+ * Describes the enum tank.task.v1.SurfaceState.
+ */
+export declare const SurfaceStateSchema: GenEnum<SurfaceState>;
 /**
  * Why a person said it looks right, picked with one tap (2026-11-26). The words people see
  * are the clients'; the server keeps the reasons on the check (task_checks.reasons) for
@@ -947,7 +1093,15 @@ export declare enum TaskRunEvent {
      *
      * @generated from enum value: TASK_RUN_EVENT_DONE = 6;
      */
-    DONE = 6
+    DONE = 6,
+    /**
+     * The surfaces in RecordTaskRunRequest.surfaces changed state (2026-11-27): a mobile build
+     * reached TestFlight (WAITING_DEPLOY → READY), or a surface was found to be waiting on a
+     * deploy. Moves the task between READY_TO_CHECK and WAITING_DEPLOY; never to DONE.
+     *
+     * @generated from enum value: TASK_RUN_EVENT_SURFACES = 7;
+     */
+    SURFACES = 7
 }
 /**
  * Describes the enum tank.task.v1.TaskRunEvent.

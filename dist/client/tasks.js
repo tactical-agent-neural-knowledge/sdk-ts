@@ -10,6 +10,7 @@ export const TASK_STAGES = [
     TaskStage.QUEUED,
     TaskStage.IN_PROGRESS,
     TaskStage.READY_TO_CHECK,
+    TaskStage.WAITING_DEPLOY,
     TaskStage.DONE,
     TaskStage.STUCK,
     TaskStage.CANCELLED,
@@ -21,6 +22,8 @@ export function taskStageKey(stage) {
             return "in_progress";
         case TaskStage.READY_TO_CHECK:
             return "ready_to_check";
+        case TaskStage.WAITING_DEPLOY:
+            return "waiting_deploy";
         case TaskStage.DONE:
             return "done";
         case TaskStage.STUCK:

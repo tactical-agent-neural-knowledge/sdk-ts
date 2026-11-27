@@ -23,6 +23,7 @@ import {
   TaskSchema,
   TaskService,
   TaskStage,
+  TaskSurface,
 } from "../contracts/tank/task/v1/task_pb.js";
 import { createTankClient } from "./client.js";
 import { envelopeToActions, TankStore } from "./store.js";
@@ -126,6 +127,7 @@ describe("task rules", () => {
       "queued",
       "in_progress",
       "ready_to_check",
+      "waiting_deploy",
       "done",
       "stuck",
       "cancelled",
@@ -349,6 +351,13 @@ describe("task client", () => {
     expect(calls.confirmed?.reasons).toEqual([CheckReason.AS_ASKED, CheckReason.WORKS_ON_PHONE]);
     await client.confirmTask("t2");
     expect(calls.confirmed?.reasons).toEqual([]);
+    expect(calls.confirmed?.surfaces).toEqual([]);
+  });
+
+  it("sends the surface being checked with Looks right", async () => {
+    const { client, calls } = makeClient();
+    await client.confirmTask("t2", [], [TaskSurface.WEB]);
+    expect(calls.confirmed?.surfaces).toEqual([TaskSurface.WEB]);
   });
 
   it("cancels a task and keeps what the server says", async () => {

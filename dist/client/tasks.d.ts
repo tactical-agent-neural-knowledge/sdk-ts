@@ -5,7 +5,7 @@ import type { Member } from "../contracts/tank/workspace/v1/workspace_pb.js";
 /** Command's columns and the strip's groups, left to right. */
 export declare const TASK_STAGES: readonly TaskStage[];
 /** A stable key per stage, for test ids, routes and analytics-free CSS hooks. */
-export declare function taskStageKey(stage: TaskStage): "queued" | "in_progress" | "ready_to_check" | "done" | "stuck" | "cancelled";
+export declare function taskStageKey(stage: TaskStage): "queued" | "in_progress" | "ready_to_check" | "waiting_deploy" | "done" | "stuck" | "cancelled";
 /** Command keeps Done and Cancelled for 30 days; older ones stay on their Tread. */
 export declare const DONE_WINDOW_MS: number;
 export interface TaskFilter {

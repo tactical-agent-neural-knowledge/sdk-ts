@@ -989,9 +989,12 @@ export class TankClient {
     async startTask(taskId) {
         return this.keepTask(await this.tasks.startTask({ taskId }));
     }
-    /** Looks right: Ready to check → Done, with the one-tap reasons the person picked (optional). */
-    async confirmTask(taskId, reasons = []) {
-        return this.keepTask(await this.tasks.confirmTask({ taskId, reasons }));
+    /**
+     * Looks right, with the one-tap reasons the person picked (optional). `surfaces` names the
+     * surfaces checked (web, mobile…); empty checks the whole task. Done once every surface is checked.
+     */
+    async confirmTask(taskId, reasons = [], surfaces = []) {
+        return this.keepTask(await this.tasks.confirmTask({ taskId, reasons, surfaces }));
     }
     /** Not yet: the sentence goes to the Tread as the caller and the work goes back. */
     async sendBackTask(taskId, text) {
