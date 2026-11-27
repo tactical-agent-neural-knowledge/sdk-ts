@@ -18,7 +18,7 @@ Subpaths: `.` (client), `./react`, `./design`, `./blocks`, `./blocks-web`, `./bl
 ## CI / deploy path
 | Workflow | Trigger | Does | Verified by |
 |---|---|---|---|
-| `ci.yml` check | PR, main | `pnpm install --frozen-lockfile`, lint, typecheck, test, build, **`git diff --exit-code dist/`** | green run |
+| TANK checks (`.tank/checks.yaml`, no workflow) | every push and PR from the org | `pnpm install --frozen-lockfile`, lint, typecheck, test, build, **`git diff --exit-code dist/`**, gitleaks and trivy, run by TANK (agent-control internal/pushchecks); a fork's PR runs only when its author is an org member | the "TANK checks" check run is green |
 
 There is no deploy: a green `main` sha is the artifact. Consumers bump the sha in their `package.json`.
 
