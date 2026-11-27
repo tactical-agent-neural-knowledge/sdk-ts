@@ -21,7 +21,7 @@ export { replyWord, STATUS_WORDS, treadWord, typingWord, } from "./statusWords.j
 export { MemoryStorage, storageKeys } from "./storage.js";
 export { IndexedDbStorage } from "./storage-idb.js";
 export { AGENT_STATUS_TTL_MS, AGENT_STREAM_STEPS, envelopeToActions, initialState, notificationPagingKey, preparationKey, readReceipt, reduce, TankStore, TYPING_TTL_MS, threadLiveStreamKey, tsMs, typingKey, unpackEnvelope, } from "./store.js";
-export { canCancelTask, commandTasks, DONE_ALL, DONE_RANGE_PRESETS, DONE_WINDOW_MS, doneAt, doneRangeBounds, effectiveView, filterDone, isAgentInternal, isAllDone, localDateKey, notifyFor, ownNotify, readyToCheckCount, SEND_NOTE_MAX, searchTasks, simpleConversation, sortTasks, TASK_SORTS, TASK_STAGES, taskForThread, taskSendCandidates, taskStageKey, tasksByStage, } from "./tasks.js";
+export { activeTasksByActivity, activityAt, canCancelTask, commandTasks, DONE_ALL, DONE_RANGE_PRESETS, DONE_WINDOW_MS, doneAt, doneRangeBounds, effectiveView, filterDone, isActiveTask, isAgentInternal, isAllDone, localDateKey, notifyFor, ownNotify, readyToCheckCount, SEND_NOTE_MAX, searchTasks, simpleConversation, sortTasks, TASK_SORTS, TASK_STAGES, taskForThread, taskSendCandidates, taskStageKey, tasksByStage, } from "./tasks.js";
 export { createTankTransport } from "./transport.js";
 export { putUpload, UploadError, } from "./upload.js";
 export { cryptoRandomBytes, isUuidv7, uuidv7, uuidv7Time } from "./uuidv7.js";

@@ -134,6 +134,8 @@ export {
   unpackEnvelope,
 } from "./store.js";
 export {
+  activeTasksByActivity,
+  activityAt,
   canCancelTask,
   commandTasks,
   DONE_ALL,
@@ -144,6 +146,7 @@ export {
   doneRangeBounds,
   effectiveView,
   filterDone,
+  isActiveTask,
   isAgentInternal,
   isAllDone,
   localDateKey,
