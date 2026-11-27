@@ -1,0 +1,24 @@
+# TANK's checks of every push and pull request (agent-control internal/pushchecks). Each job
+# runs on TANK's nodes from a clone of the exact commit; the commit gets one "TANK checks"
+# check run, green only when every job passed. Replaces .github/workflows/ci.yml and
+# security.yml (secrets and dependencies, as it was). This repository is public: TANK runs a
+# pull request from a fork only when its author is a member of the organization.
+version: 1
+toolchain: node
+neuralsecurity: {scanners: [secrets, deps]}
+jobs:
+  - name: check
+    cpu: "4"
+    steps:
+      - name: install
+        setup: corepack enable >/dev/null 2>&1 || true; pnpm install --frozen-lockfile
+      - name: lint
+        run: pnpm lint
+      - name: typecheck
+        run: pnpm typecheck
+      - name: test
+        run: pnpm test
+      - name: build
+        run: pnpm build
+      - name: dist is current
+        run: git diff --exit-code --stat dist/ && test -z "$(git status --porcelain dist/)"
