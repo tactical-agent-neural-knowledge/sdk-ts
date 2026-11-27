@@ -14,7 +14,65 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file tank/task/v1/task.proto.
  */
 export const file_tank_task_v1_task: GenFile = /*@__PURE__*/
-  fileDesc("Chd0YW5rL3Rhc2svdjEvdGFzay5wcm90bxIMdGFuay50YXNrLnYxIicKClByb29mQ2hlY2sSDAoEdGV4dBgBIAEoCRILCgNtZXQYAiABKAgi9QEKCVRhc2tQcm9vZhIQCghsaXZlX3VybBgBIAEoCRIaChJzY3JlZW5zaG90X2ZpbGVfaWQYAiABKAkSKwoJY2hlY2tsaXN0GAMgAygLMhgudGFuay50YXNrLnYxLlByb29mQ2hlY2sSGAoQcHVsbF9yZXF1ZXN0X3VybBgEIAEoCRImCgJhdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNdmlkZW9fZmlsZV9pZBgGIAEoCRIbChNhc2tfdG9fbGl2ZV9zZWNvbmRzGAcgASgDEhcKD3dhaXRpbmdfc2Vjb25kcxgIIAEoAyJdCgpUYXNrTm90aWZ5EiYKBXN0YWdlGAEgASgOMhcudGFuay50YXNrLnYxLlRhc2tTdGFnZRIPCgd1c2VyX2lkGAIgASgJEhYKDmZyb21fd29ya3NwYWNlGAMgASgIIvIECgRUYXNrEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJEhYKDnRocmVhZF9yb290X2lkGAQgASgJEg0KBXRpdGxlGAUgASgJEg8KB2RldGFpbHMYBiABKAkSJgoFc3RhZ2UYByABKA4yFy50YW5rLnRhc2sudjEuVGFza1N0YWdlEhIKCmNyZWF0ZWRfYnkYCCABKAkSLgoKY3JlYXRlZF9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIc3RhZ2VfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg4KBnJ1bl9pZBgMIAEoCRIQCghwcm9ncmVzcxgNIAEoCRImCgVwcm9vZhgOIAEoCzIXLnRhbmsudGFzay52MS5UYXNrUHJvb2YSEgoKY2hlY2tlZF9ieRgPIAEoCRIuCgpjaGVja2VkX2F0GBAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgxzdHVja19yZWFzb24YESABKAkSKAoGbm90aWZ5GBIgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkSEwoLYXNrZXJfbXV0ZWQYEyABKAgSFAoMY2hhbm5lbF9uYW1lGBQgASgJEgwKBGxpbmsYFSABKAkSEAoIZmlsZV9pZHMYFiADKAkSGQoRc291cmNlX21lc3NhZ2VfaWQYFyABKAkihgEKEExpc3RUYXNrc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEhIKCmNoYW5uZWxfaWQYAiABKAkSJwoGc3RhZ2VzGAMgAygOMhcudGFuay50YXNrLnYxLlRhc2tTdGFnZRIQCghhc2tlZF9ieRgEIAEoCRINCgVsaW1pdBgFIAEoBSJhChFMaXN0VGFza3NSZXNwb25zZRIhCgV0YXNrcxgBIAMoCzISLnRhbmsudGFzay52MS5UYXNrEhEKCWhhc19hZ2VudBgCIAEoCBIWCg5yZWFkeV90b19jaGVjaxgDIAEoBSIhCg5HZXRUYXNrUmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJIjMKD0dldFRhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2sirAEKEUNyZWF0ZVRhc2tSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEg8KB2RldGFpbHMYBCABKAkSEQoJc3RhcnRfbm93GAUgASgIEigKBm5vdGlmeRgGIAMoCzIYLnRhbmsudGFzay52MS5UYXNrTm90aWZ5EhAKCGZpbGVfaWRzGAcgAygJIjYKEkNyZWF0ZVRhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siowEKHENyZWF0ZVRhc2tXaXRoQ2hhbm5lbFJlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJEg0KBXRpdGxlGAIgASgJEg8KB2RldGFpbHMYAyABKAkSEQoJc3RhcnRfbm93GAQgASgIEigKBm5vdGlmeRgFIAMoCzIYLnRhbmsudGFzay52MS5UYXNrTm90aWZ5EhAKCGZpbGVfaWRzGAYgAygJImwKHUNyZWF0ZVRhc2tXaXRoQ2hhbm5lbFJlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzaxIpCgdjaGFubmVsGAIgASgLMhgudGFuay5jaGFubmVsLnYxLkNoYW5uZWwiIwoQU3RhcnRUYXNrUmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJIjUKEVN0YXJ0VGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayJRChJDb25maXJtVGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCRIqCgdyZWFzb25zGAIgAygOMhkudGFuay50YXNrLnYxLkNoZWNrUmVhc29uIjcKE0NvbmZpcm1UYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIjQKE1NlbmRCYWNrVGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCRIMCgR0ZXh0GAIgASgJIjgKFFNlbmRCYWNrVGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayIjChBSZXRyeVRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkiNQoRUmV0cnlUYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIiQKEUNhbmNlbFRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkiNgoSQ2FuY2VsVGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayJ7ChRTZXRUYXNrTm90aWZ5UmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJEigKBm5vdGlmeRgCIAMoCzIYLnRhbmsudGFzay52MS5UYXNrTm90aWZ5EhgKC2Fza2VyX211dGVkGAMgASgISACIAQFCDgoMX2Fza2VyX211dGVkIjkKFVNldFRhc2tOb3RpZnlSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siLgoWR2V0VGFza1NldHRpbmdzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkiVwoXR2V0VGFza1NldHRpbmdzUmVzcG9uc2USKAoGbm90aWZ5GAEgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkSEgoKY2FuX21hbmFnZRgCIAEoCCJYChZTZXRUYXNrU2V0dGluZ3NSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRIoCgZub3RpZnkYAiADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeSJDChdTZXRUYXNrU2V0dGluZ3NSZXNwb25zZRIoCgZub3RpZnkYASADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeSJCCg9TZW5kVGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCRIQCgh1c2VyX2lkcxgCIAMoCRIMCgRub3RlGAMgASgJIikKEFNlbmRUYXNrUmVzcG9uc2USFQoNc2VudF91c2VyX2lkcxgBIAMoCSLNAQoUUmVjb3JkVGFza1J1blJlcXVlc3QSDgoGcnVuX2lkGAEgASgJEg8KB3Rhc2tfaWQYAiABKAkSKQoFZXZlbnQYAyABKA4yGi50YW5rLnRhc2sudjEuVGFza1J1bkV2ZW50EgsKA2FzaxgEIAEoCRImCgVwcm9vZhgFIAEoCzIXLnRhbmsudGFzay52MS5UYXNrUHJvb2YSDgoGcmVhc29uGAYgASgJEhAKCHByb2dyZXNzGAcgASgJEhIKCmNoZWNrZWRfYnkYCCABKAkiOQoVUmVjb3JkVGFza1J1blJlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayq+AQoJVGFza1N0YWdlEhoKFlRBU0tfU1RBR0VfVU5TUEVDSUZJRUQQABIVChFUQVNLX1NUQUdFX1FVRVVFRBABEhoKFlRBU0tfU1RBR0VfSU5fUFJPR1JFU1MQAhIdChlUQVNLX1NUQUdFX1JFQURZX1RPX0NIRUNLEAMSEwoPVEFTS19TVEFHRV9ET05FEAQSFAoQVEFTS19TVEFHRV9TVFVDSxAFEhgKFFRBU0tfU1RBR0VfQ0FOQ0VMTEVEEAYqnAEKC0NoZWNrUmVhc29uEhwKGENIRUNLX1JFQVNPTl9VTlNQRUNJRklFRBAAEhkKFUNIRUNLX1JFQVNPTl9BU19BU0tFRBABEhUKEUNIRUNLX1JFQVNPTl9GQVNUEAISHAoYQ0hFQ0tfUkVBU09OX0xPT0tTX0dSRUFUEAMSHwobQ0hFQ0tfUkVBU09OX1dPUktTX09OX1BIT05FEAQq0AEKDFRhc2tSdW5FdmVudBIeChpUQVNLX1JVTl9FVkVOVF9VTlNQRUNJRklFRBAAEhoKFlRBU0tfUlVOX0VWRU5UX1NUQVJURUQQARIaChZUQVNLX1JVTl9FVkVOVF9XQUlUSU5HEAISGwoXVEFTS19SVU5fRVZFTlRfUFJPR1JFU1MQAxIYChRUQVNLX1JVTl9FVkVOVF9SRUFEWRAEEhgKFFRBU0tfUlVOX0VWRU5UX1NUVUNLEAUSFwoTVEFTS19SVU5fRVZFTlRfRE9ORRAGMr0JCgtUYXNrU2VydmljZRJMCglMaXN0VGFza3MSHi50YW5rLnRhc2sudjEuTGlzdFRhc2tzUmVxdWVzdBofLnRhbmsudGFzay52MS5MaXN0VGFza3NSZXNwb25zZRJGCgdHZXRUYXNrEhwudGFuay50YXNrLnYxLkdldFRhc2tSZXF1ZXN0Gh0udGFuay50YXNrLnYxLkdldFRhc2tSZXNwb25zZRJPCgpDcmVhdGVUYXNrEh8udGFuay50YXNrLnYxLkNyZWF0ZVRhc2tSZXF1ZXN0GiAudGFuay50YXNrLnYxLkNyZWF0ZVRhc2tSZXNwb25zZRJwChVDcmVhdGVUYXNrV2l0aENoYW5uZWwSKi50YW5rLnRhc2sudjEuQ3JlYXRlVGFza1dpdGhDaGFubmVsUmVxdWVzdBorLnRhbmsudGFzay52MS5DcmVhdGVUYXNrV2l0aENoYW5uZWxSZXNwb25zZRJMCglTdGFydFRhc2sSHi50YW5rLnRhc2sudjEuU3RhcnRUYXNrUmVxdWVzdBofLnRhbmsudGFzay52MS5TdGFydFRhc2tSZXNwb25zZRJSCgtDb25maXJtVGFzaxIgLnRhbmsudGFzay52MS5Db25maXJtVGFza1JlcXVlc3QaIS50YW5rLnRhc2sudjEuQ29uZmlybVRhc2tSZXNwb25zZRJVCgxTZW5kQmFja1Rhc2sSIS50YW5rLnRhc2sudjEuU2VuZEJhY2tUYXNrUmVxdWVzdBoiLnRhbmsudGFzay52MS5TZW5kQmFja1Rhc2tSZXNwb25zZRJMCglSZXRyeVRhc2sSHi50YW5rLnRhc2sudjEuUmV0cnlUYXNrUmVxdWVzdBofLnRhbmsudGFzay52MS5SZXRyeVRhc2tSZXNwb25zZRJPCgpDYW5jZWxUYXNrEh8udGFuay50YXNrLnYxLkNhbmNlbFRhc2tSZXF1ZXN0GiAudGFuay50YXNrLnYxLkNhbmNlbFRhc2tSZXNwb25zZRJYCg1TZXRUYXNrTm90aWZ5EiIudGFuay50YXNrLnYxLlNldFRhc2tOb3RpZnlSZXF1ZXN0GiMudGFuay50YXNrLnYxLlNldFRhc2tOb3RpZnlSZXNwb25zZRJeCg9HZXRUYXNrU2V0dGluZ3MSJC50YW5rLnRhc2sudjEuR2V0VGFza1NldHRpbmdzUmVxdWVzdBolLnRhbmsudGFzay52MS5HZXRUYXNrU2V0dGluZ3NSZXNwb25zZRJeCg9TZXRUYXNrU2V0dGluZ3MSJC50YW5rLnRhc2sudjEuU2V0VGFza1NldHRpbmdzUmVxdWVzdBolLnRhbmsudGFzay52MS5TZXRUYXNrU2V0dGluZ3NSZXNwb25zZRJYCg1SZWNvcmRUYXNrUnVuEiIudGFuay50YXNrLnYxLlJlY29yZFRhc2tSdW5SZXF1ZXN0GiMudGFuay50YXNrLnYxLlJlY29yZFRhc2tSdW5SZXNwb25zZRJJCghTZW5kVGFzaxIdLnRhbmsudGFzay52MS5TZW5kVGFza1JlcXVlc3QaHi50YW5rLnRhc2sudjEuU2VuZFRhc2tSZXNwb25zZULAAQoQY29tLnRhbmsudGFzay52MUIJVGFza1Byb3RvUAFaT2dpdGh1Yi5jb20vdGFjdGljYWwtYWdlbnQtbmV1cmFsLWtub3dsZWRnZS9jb250cmFjdHMvZ2VuL2dvL3RhbmsvdGFzay92MTt0YXNrdjGiAgNUVFiqAgxUYW5rLlRhc2suVjHKAgxUYW5rXFRhc2tcVjHiAhhUYW5rXFRhc2tcVjFcR1BCTWV0YWRhdGHqAg5UYW5rOjpUYXNrOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_tank_channel_v1_channel]);
+  fileDesc("Chd0YW5rL3Rhc2svdjEvdGFzay5wcm90bxIMdGFuay50YXNrLnYxIoUCCgxTdXJmYWNlQ2hlY2sSKgoHc3VyZmFjZRgBIAEoDjIZLnRhbmsudGFzay52MS5UYXNrU3VyZmFjZRIpCgVzdGF0ZRgCIAEoDjIaLnRhbmsudGFzay52MS5TdXJmYWNlU3RhdGUSLAoIc3RhdGVfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCndhaXRpbmdfb24YBCABKAkSEgoKY2hlY2tlZF9ieRgFIAEoCRIuCgpjaGVja2VkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIYChBwdWxsX3JlcXVlc3RfdXJsGAcgASgJIicKClByb29mQ2hlY2sSDAoEdGV4dBgBIAEoCRILCgNtZXQYAiABKAgi9QEKCVRhc2tQcm9vZhIQCghsaXZlX3VybBgBIAEoCRIaChJzY3JlZW5zaG90X2ZpbGVfaWQYAiABKAkSKwoJY2hlY2tsaXN0GAMgAygLMhgudGFuay50YXNrLnYxLlByb29mQ2hlY2sSGAoQcHVsbF9yZXF1ZXN0X3VybBgEIAEoCRImCgJhdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNdmlkZW9fZmlsZV9pZBgGIAEoCRIbChNhc2tfdG9fbGl2ZV9zZWNvbmRzGAcgASgDEhcKD3dhaXRpbmdfc2Vjb25kcxgIIAEoAyJdCgpUYXNrTm90aWZ5EiYKBXN0YWdlGAEgASgOMhcudGFuay50YXNrLnYxLlRhc2tTdGFnZRIPCgd1c2VyX2lkGAIgASgJEhYKDmZyb21fd29ya3NwYWNlGAMgASgIIqAFCgRUYXNrEgoKAmlkGAEgASgJEhQKDHdvcmtzcGFjZV9pZBgCIAEoCRISCgpjaGFubmVsX2lkGAMgASgJEhYKDnRocmVhZF9yb290X2lkGAQgASgJEg0KBXRpdGxlGAUgASgJEg8KB2RldGFpbHMYBiABKAkSJgoFc3RhZ2UYByABKA4yFy50YW5rLnRhc2sudjEuVGFza1N0YWdlEhIKCmNyZWF0ZWRfYnkYCCABKAkSLgoKY3JlYXRlZF9hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLAoIc3RhZ2VfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg4KBnJ1bl9pZBgMIAEoCRIQCghwcm9ncmVzcxgNIAEoCRImCgVwcm9vZhgOIAEoCzIXLnRhbmsudGFzay52MS5UYXNrUHJvb2YSEgoKY2hlY2tlZF9ieRgPIAEoCRIuCgpjaGVja2VkX2F0GBAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgxzdHVja19yZWFzb24YESABKAkSKAoGbm90aWZ5GBIgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkSEwoLYXNrZXJfbXV0ZWQYEyABKAgSFAoMY2hhbm5lbF9uYW1lGBQgASgJEgwKBGxpbmsYFSABKAkSEAoIZmlsZV9pZHMYFiADKAkSGQoRc291cmNlX21lc3NhZ2VfaWQYFyABKAkSLAoIc3VyZmFjZXMYGCADKAsyGi50YW5rLnRhc2sudjEuU3VyZmFjZUNoZWNrIoYBChBMaXN0VGFza3NSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRISCgpjaGFubmVsX2lkGAIgASgJEicKBnN0YWdlcxgDIAMoDjIXLnRhbmsudGFzay52MS5UYXNrU3RhZ2USEAoIYXNrZWRfYnkYBCABKAkSDQoFbGltaXQYBSABKAUiYQoRTGlzdFRhc2tzUmVzcG9uc2USIQoFdGFza3MYASADKAsyEi50YW5rLnRhc2sudjEuVGFzaxIRCgloYXNfYWdlbnQYAiABKAgSFgoOcmVhZHlfdG9fY2hlY2sYAyABKAUiIQoOR2V0VGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCSIzCg9HZXRUYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIqwBChFDcmVhdGVUYXNrUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSEgoKY2hhbm5lbF9pZBgCIAEoCRINCgV0aXRsZRgDIAEoCRIPCgdkZXRhaWxzGAQgASgJEhEKCXN0YXJ0X25vdxgFIAEoCBIoCgZub3RpZnkYBiADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeRIQCghmaWxlX2lkcxgHIAMoCSI2ChJDcmVhdGVUYXNrUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIqMBChxDcmVhdGVUYXNrV2l0aENoYW5uZWxSZXF1ZXN0EhQKDHdvcmtzcGFjZV9pZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIPCgdkZXRhaWxzGAMgASgJEhEKCXN0YXJ0X25vdxgEIAEoCBIoCgZub3RpZnkYBSADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeRIQCghmaWxlX2lkcxgGIAMoCSJsCh1DcmVhdGVUYXNrV2l0aENoYW5uZWxSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2sSKQoHY2hhbm5lbBgCIAEoCzIYLnRhbmsuY2hhbm5lbC52MS5DaGFubmVsIiMKEFN0YXJ0VGFza1JlcXVlc3QSDwoHdGFza19pZBgBIAEoCSI1ChFTdGFydFRhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2sifgoSQ29uZmlybVRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkSKgoHcmVhc29ucxgCIAMoDjIZLnRhbmsudGFzay52MS5DaGVja1JlYXNvbhIrCghzdXJmYWNlcxgDIAMoDjIZLnRhbmsudGFzay52MS5UYXNrU3VyZmFjZSI3ChNDb25maXJtVGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayI0ChNTZW5kQmFja1Rhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkSDAoEdGV4dBgCIAEoCSI4ChRTZW5kQmFja1Rhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siIwoQUmV0cnlUYXNrUmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJIjUKEVJldHJ5VGFza1Jlc3BvbnNlEiAKBHRhc2sYASABKAsyEi50YW5rLnRhc2sudjEuVGFzayIkChFDYW5jZWxUYXNrUmVxdWVzdBIPCgd0YXNrX2lkGAEgASgJIjYKEkNhbmNlbFRhc2tSZXNwb25zZRIgCgR0YXNrGAEgASgLMhIudGFuay50YXNrLnYxLlRhc2siewoUU2V0VGFza05vdGlmeVJlcXVlc3QSDwoHdGFza19pZBgBIAEoCRIoCgZub3RpZnkYAiADKAsyGC50YW5rLnRhc2sudjEuVGFza05vdGlmeRIYCgthc2tlcl9tdXRlZBgDIAEoCEgAiAEBQg4KDF9hc2tlcl9tdXRlZCI5ChVTZXRUYXNrTm90aWZ5UmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrIi4KFkdldFRhc2tTZXR0aW5nc1JlcXVlc3QSFAoMd29ya3NwYWNlX2lkGAEgASgJIlcKF0dldFRhc2tTZXR0aW5nc1Jlc3BvbnNlEigKBm5vdGlmeRgBIAMoCzIYLnRhbmsudGFzay52MS5UYXNrTm90aWZ5EhIKCmNhbl9tYW5hZ2UYAiABKAgiWAoWU2V0VGFza1NldHRpbmdzUmVxdWVzdBIUCgx3b3Jrc3BhY2VfaWQYASABKAkSKAoGbm90aWZ5GAIgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkiQwoXU2V0VGFza1NldHRpbmdzUmVzcG9uc2USKAoGbm90aWZ5GAEgAygLMhgudGFuay50YXNrLnYxLlRhc2tOb3RpZnkiQgoPU2VuZFRhc2tSZXF1ZXN0Eg8KB3Rhc2tfaWQYASABKAkSEAoIdXNlcl9pZHMYAiADKAkSDAoEbm90ZRgDIAEoCSIpChBTZW5kVGFza1Jlc3BvbnNlEhUKDXNlbnRfdXNlcl9pZHMYASADKAki+wEKFFJlY29yZFRhc2tSdW5SZXF1ZXN0Eg4KBnJ1bl9pZBgBIAEoCRIPCgd0YXNrX2lkGAIgASgJEikKBWV2ZW50GAMgASgOMhoudGFuay50YXNrLnYxLlRhc2tSdW5FdmVudBILCgNhc2sYBCABKAkSJgoFcHJvb2YYBSABKAsyFy50YW5rLnRhc2sudjEuVGFza1Byb29mEg4KBnJlYXNvbhgGIAEoCRIQCghwcm9ncmVzcxgHIAEoCRISCgpjaGVja2VkX2J5GAggASgJEiwKCHN1cmZhY2VzGAkgAygLMhoudGFuay50YXNrLnYxLlN1cmZhY2VDaGVjayI5ChVSZWNvcmRUYXNrUnVuUmVzcG9uc2USIAoEdGFzaxgBIAEoCzISLnRhbmsudGFzay52MS5UYXNrKt0BCglUYXNrU3RhZ2USGgoWVEFTS19TVEFHRV9VTlNQRUNJRklFRBAAEhUKEVRBU0tfU1RBR0VfUVVFVUVEEAESGgoWVEFTS19TVEFHRV9JTl9QUk9HUkVTUxACEh0KGVRBU0tfU1RBR0VfUkVBRFlfVE9fQ0hFQ0sQAxITCg9UQVNLX1NUQUdFX0RPTkUQBBIUChBUQVNLX1NUQUdFX1NUVUNLEAUSGAoUVEFTS19TVEFHRV9DQU5DRUxMRUQQBhIdChlUQVNLX1NUQUdFX1dBSVRJTkdfREVQTE9ZEAcqigEKC1Rhc2tTdXJmYWNlEhwKGFRBU0tfU1VSRkFDRV9VTlNQRUNJRklFRBAAEhQKEFRBU0tfU1VSRkFDRV9XRUIQARIXChNUQVNLX1NVUkZBQ0VfTU9CSUxFEAISFAoQVEFTS19TVVJGQUNFX0FQSRADEhgKFFRBU0tfU1VSRkFDRV9ERVNLVE9QEAQqgwEKDFN1cmZhY2VTdGF0ZRIdChlTVVJGQUNFX1NUQVRFX1VOU1BFQ0lGSUVEEAASIAocU1VSRkFDRV9TVEFURV9XQUlUSU5HX0RFUExPWRABEhcKE1NVUkZBQ0VfU1RBVEVfUkVBRFkQAhIZChVTVVJGQUNFX1NUQVRFX0NIRUNLRUQQAyqcAQoLQ2hlY2tSZWFzb24SHAoYQ0hFQ0tfUkVBU09OX1VOU1BFQ0lGSUVEEAASGQoVQ0hFQ0tfUkVBU09OX0FTX0FTS0VEEAESFQoRQ0hFQ0tfUkVBU09OX0ZBU1QQAhIcChhDSEVDS19SRUFTT05fTE9PS1NfR1JFQVQQAxIfChtDSEVDS19SRUFTT05fV09SS1NfT05fUEhPTkUQBCrtAQoMVGFza1J1bkV2ZW50Eh4KGlRBU0tfUlVOX0VWRU5UX1VOU1BFQ0lGSUVEEAASGgoWVEFTS19SVU5fRVZFTlRfU1RBUlRFRBABEhoKFlRBU0tfUlVOX0VWRU5UX1dBSVRJTkcQAhIbChdUQVNLX1JVTl9FVkVOVF9QUk9HUkVTUxADEhgKFFRBU0tfUlVOX0VWRU5UX1JFQURZEAQSGAoUVEFTS19SVU5fRVZFTlRfU1RVQ0sQBRIXChNUQVNLX1JVTl9FVkVOVF9ET05FEAYSGwoXVEFTS19SVU5fRVZFTlRfU1VSRkFDRVMQBzK9CQoLVGFza1NlcnZpY2USTAoJTGlzdFRhc2tzEh4udGFuay50YXNrLnYxLkxpc3RUYXNrc1JlcXVlc3QaHy50YW5rLnRhc2sudjEuTGlzdFRhc2tzUmVzcG9uc2USRgoHR2V0VGFzaxIcLnRhbmsudGFzay52MS5HZXRUYXNrUmVxdWVzdBodLnRhbmsudGFzay52MS5HZXRUYXNrUmVzcG9uc2USTwoKQ3JlYXRlVGFzaxIfLnRhbmsudGFzay52MS5DcmVhdGVUYXNrUmVxdWVzdBogLnRhbmsudGFzay52MS5DcmVhdGVUYXNrUmVzcG9uc2UScAoVQ3JlYXRlVGFza1dpdGhDaGFubmVsEioudGFuay50YXNrLnYxLkNyZWF0ZVRhc2tXaXRoQ2hhbm5lbFJlcXVlc3QaKy50YW5rLnRhc2sudjEuQ3JlYXRlVGFza1dpdGhDaGFubmVsUmVzcG9uc2USTAoJU3RhcnRUYXNrEh4udGFuay50YXNrLnYxLlN0YXJ0VGFza1JlcXVlc3QaHy50YW5rLnRhc2sudjEuU3RhcnRUYXNrUmVzcG9uc2USUgoLQ29uZmlybVRhc2sSIC50YW5rLnRhc2sudjEuQ29uZmlybVRhc2tSZXF1ZXN0GiEudGFuay50YXNrLnYxLkNvbmZpcm1UYXNrUmVzcG9uc2USVQoMU2VuZEJhY2tUYXNrEiEudGFuay50YXNrLnYxLlNlbmRCYWNrVGFza1JlcXVlc3QaIi50YW5rLnRhc2sudjEuU2VuZEJhY2tUYXNrUmVzcG9uc2USTAoJUmV0cnlUYXNrEh4udGFuay50YXNrLnYxLlJldHJ5VGFza1JlcXVlc3QaHy50YW5rLnRhc2sudjEuUmV0cnlUYXNrUmVzcG9uc2USTwoKQ2FuY2VsVGFzaxIfLnRhbmsudGFzay52MS5DYW5jZWxUYXNrUmVxdWVzdBogLnRhbmsudGFzay52MS5DYW5jZWxUYXNrUmVzcG9uc2USWAoNU2V0VGFza05vdGlmeRIiLnRhbmsudGFzay52MS5TZXRUYXNrTm90aWZ5UmVxdWVzdBojLnRhbmsudGFzay52MS5TZXRUYXNrTm90aWZ5UmVzcG9uc2USXgoPR2V0VGFza1NldHRpbmdzEiQudGFuay50YXNrLnYxLkdldFRhc2tTZXR0aW5nc1JlcXVlc3QaJS50YW5rLnRhc2sudjEuR2V0VGFza1NldHRpbmdzUmVzcG9uc2USXgoPU2V0VGFza1NldHRpbmdzEiQudGFuay50YXNrLnYxLlNldFRhc2tTZXR0aW5nc1JlcXVlc3QaJS50YW5rLnRhc2sudjEuU2V0VGFza1NldHRpbmdzUmVzcG9uc2USWAoNUmVjb3JkVGFza1J1bhIiLnRhbmsudGFzay52MS5SZWNvcmRUYXNrUnVuUmVxdWVzdBojLnRhbmsudGFzay52MS5SZWNvcmRUYXNrUnVuUmVzcG9uc2USSQoIU2VuZFRhc2sSHS50YW5rLnRhc2sudjEuU2VuZFRhc2tSZXF1ZXN0Gh4udGFuay50YXNrLnYxLlNlbmRUYXNrUmVzcG9uc2VCwAEKEGNvbS50YW5rLnRhc2sudjFCCVRhc2tQcm90b1ABWk9naXRodWIuY29tL3RhY3RpY2FsLWFnZW50LW5ldXJhbC1rbm93bGVkZ2UvY29udHJhY3RzL2dlbi9nby90YW5rL3Rhc2svdjE7dGFza3YxogIDVFRYqgIMVGFuay5UYXNrLlYxygIMVGFua1xUYXNrXFYx4gIYVGFua1xUYXNrXFYxXEdQQk1ldGFkYXRh6gIOVGFuazo6VGFzazo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_tank_channel_v1_channel]);
+
+/**
+ * One surface of a task and where it stands. Surfaces clear independently: checking web does
+ * not wait for mobile.
+ *
+ * @generated from message tank.task.v1.SurfaceCheck
+ */
+export type SurfaceCheck = Message<"tank.task.v1.SurfaceCheck"> & {
+  /**
+   * @generated from field: tank.task.v1.TaskSurface surface = 1;
+   */
+  surface: TaskSurface;
+
+  /**
+   * @generated from field: tank.task.v1.SurfaceState state = 2;
+   */
+  state: SurfaceState;
+
+  /**
+   * when it entered its state
+   *
+   * @generated from field: google.protobuf.Timestamp state_at = 3;
+   */
+  stateAt?: Timestamp;
+
+  /**
+   * WAITING_DEPLOY: one plain phrase for what it waits on ("TestFlight"); empty otherwise.
+   *
+   * @generated from field: string waiting_on = 4;
+   */
+  waitingOn: string;
+
+  /**
+   * CHECKED
+   *
+   * @generated from field: string checked_by = 5;
+   */
+  checkedBy: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp checked_at = 6;
+   */
+  checkedAt?: Timestamp;
+
+  /**
+   * The pull request that changed this surface, so a card can link the right one.
+   *
+   * @generated from field: string pull_request_url = 7;
+   */
+  pullRequestUrl: string;
+};
+
+/**
+ * Describes the message tank.task.v1.SurfaceCheck.
+ * Use `create(SurfaceCheckSchema)` to create a new message.
+ */
+export const SurfaceCheckSchema: GenMessage<SurfaceCheck> = /*@__PURE__*/
+  messageDesc(file_tank_task_v1_task, 0);
 
 /**
  * One line of the checklist against the ask, with whether TANK's record says it was met.
@@ -38,7 +96,7 @@ export type ProofCheck = Message<"tank.task.v1.ProofCheck"> & {
  * Use `create(ProofCheckSchema)` to create a new message.
  */
 export const ProofCheckSchema: GenMessage<ProofCheck> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 0);
+  messageDesc(file_tank_task_v1_task, 1);
 
 /**
  * What the run showed when it said it was finished: a live link or a screenshot and a
@@ -106,7 +164,7 @@ export type TaskProof = Message<"tank.task.v1.TaskProof"> & {
  * Use `create(TaskProofSchema)` to create a new message.
  */
 export const TaskProofSchema: GenMessage<TaskProof> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 1);
+  messageDesc(file_tank_task_v1_task, 2);
 
 /**
  * Who hears about a task when it reaches a stage.
@@ -137,7 +195,7 @@ export type TaskNotify = Message<"tank.task.v1.TaskNotify"> & {
  * Use `create(TaskNotifySchema)` to create a new message.
  */
 export const TaskNotifySchema: GenMessage<TaskNotify> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 2);
+  messageDesc(file_tank_task_v1_task, 3);
 
 /**
  * @generated from message tank.task.v1.Task
@@ -286,6 +344,16 @@ export type Task = Message<"tank.task.v1.Task"> & {
    * @generated from field: string source_message_id = 23;
    */
   sourceMessageId: string;
+
+  /**
+   * Per-surface readiness, only the surfaces the task touched, in TaskSurface order. Empty
+   * for a task with no surface to check (not code, or nothing reported): it is checked as a
+   * whole through stage, as before. stage is derived: READY_TO_CHECK while any surface is
+   * READY, else WAITING_DEPLOY while any waits, else DONE once every one is CHECKED.
+   *
+   * @generated from field: repeated tank.task.v1.SurfaceCheck surfaces = 24;
+   */
+  surfaces: SurfaceCheck[];
 };
 
 /**
@@ -293,7 +361,7 @@ export type Task = Message<"tank.task.v1.Task"> & {
  * Use `create(TaskSchema)` to create a new message.
  */
 export const TaskSchema: GenMessage<Task> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 3);
+  messageDesc(file_tank_task_v1_task, 4);
 
 /**
  * @generated from message tank.task.v1.ListTasksRequest
@@ -338,7 +406,7 @@ export type ListTasksRequest = Message<"tank.task.v1.ListTasksRequest"> & {
  * Use `create(ListTasksRequestSchema)` to create a new message.
  */
 export const ListTasksRequestSchema: GenMessage<ListTasksRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 4);
+  messageDesc(file_tank_task_v1_task, 5);
 
 /**
  * @generated from message tank.task.v1.ListTasksResponse
@@ -370,7 +438,7 @@ export type ListTasksResponse = Message<"tank.task.v1.ListTasksResponse"> & {
  * Use `create(ListTasksResponseSchema)` to create a new message.
  */
 export const ListTasksResponseSchema: GenMessage<ListTasksResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 5);
+  messageDesc(file_tank_task_v1_task, 6);
 
 /**
  * @generated from message tank.task.v1.GetTaskRequest
@@ -387,7 +455,7 @@ export type GetTaskRequest = Message<"tank.task.v1.GetTaskRequest"> & {
  * Use `create(GetTaskRequestSchema)` to create a new message.
  */
 export const GetTaskRequestSchema: GenMessage<GetTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 6);
+  messageDesc(file_tank_task_v1_task, 7);
 
 /**
  * @generated from message tank.task.v1.GetTaskResponse
@@ -404,7 +472,7 @@ export type GetTaskResponse = Message<"tank.task.v1.GetTaskResponse"> & {
  * Use `create(GetTaskResponseSchema)` to create a new message.
  */
 export const GetTaskResponseSchema: GenMessage<GetTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 7);
+  messageDesc(file_tank_task_v1_task, 8);
 
 /**
  * @generated from message tank.task.v1.CreateTaskRequest
@@ -453,7 +521,7 @@ export type CreateTaskRequest = Message<"tank.task.v1.CreateTaskRequest"> & {
  * Use `create(CreateTaskRequestSchema)` to create a new message.
  */
 export const CreateTaskRequestSchema: GenMessage<CreateTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 8);
+  messageDesc(file_tank_task_v1_task, 9);
 
 /**
  * @generated from message tank.task.v1.CreateTaskResponse
@@ -470,7 +538,7 @@ export type CreateTaskResponse = Message<"tank.task.v1.CreateTaskResponse"> & {
  * Use `create(CreateTaskResponseSchema)` to create a new message.
  */
 export const CreateTaskResponseSchema: GenMessage<CreateTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 9);
+  messageDesc(file_tank_task_v1_task, 10);
 
 /**
  * Command's Add task: a new Tread whose goal is the title, with the task in it and the
@@ -515,7 +583,7 @@ export type CreateTaskWithChannelRequest = Message<"tank.task.v1.CreateTaskWithC
  * Use `create(CreateTaskWithChannelRequestSchema)` to create a new message.
  */
 export const CreateTaskWithChannelRequestSchema: GenMessage<CreateTaskWithChannelRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 10);
+  messageDesc(file_tank_task_v1_task, 11);
 
 /**
  * @generated from message tank.task.v1.CreateTaskWithChannelResponse
@@ -537,7 +605,7 @@ export type CreateTaskWithChannelResponse = Message<"tank.task.v1.CreateTaskWith
  * Use `create(CreateTaskWithChannelResponseSchema)` to create a new message.
  */
 export const CreateTaskWithChannelResponseSchema: GenMessage<CreateTaskWithChannelResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 11);
+  messageDesc(file_tank_task_v1_task, 12);
 
 /**
  * @generated from message tank.task.v1.StartTaskRequest
@@ -554,7 +622,7 @@ export type StartTaskRequest = Message<"tank.task.v1.StartTaskRequest"> & {
  * Use `create(StartTaskRequestSchema)` to create a new message.
  */
 export const StartTaskRequestSchema: GenMessage<StartTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 12);
+  messageDesc(file_tank_task_v1_task, 13);
 
 /**
  * @generated from message tank.task.v1.StartTaskResponse
@@ -571,7 +639,7 @@ export type StartTaskResponse = Message<"tank.task.v1.StartTaskResponse"> & {
  * Use `create(StartTaskResponseSchema)` to create a new message.
  */
 export const StartTaskResponseSchema: GenMessage<StartTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 13);
+  messageDesc(file_tank_task_v1_task, 14);
 
 /**
  * Looks right: READY_TO_CHECK → DONE, by anyone in the Tread.
@@ -590,6 +658,15 @@ export type ConfirmTaskRequest = Message<"tank.task.v1.ConfirmTaskRequest"> & {
    * @generated from field: repeated tank.task.v1.CheckReason reasons = 2;
    */
   reasons: CheckReason[];
+
+  /**
+   * Surfaces being checked off. Empty = every surface that is READY now (or the whole task
+   * when it has no surfaces). A surface that is not READY is refused for the whole call.
+   * Surfaces still waiting on a deploy stay waiting; the task is DONE only when all are checked.
+   *
+   * @generated from field: repeated tank.task.v1.TaskSurface surfaces = 3;
+   */
+  surfaces: TaskSurface[];
 };
 
 /**
@@ -597,7 +674,7 @@ export type ConfirmTaskRequest = Message<"tank.task.v1.ConfirmTaskRequest"> & {
  * Use `create(ConfirmTaskRequestSchema)` to create a new message.
  */
 export const ConfirmTaskRequestSchema: GenMessage<ConfirmTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 14);
+  messageDesc(file_tank_task_v1_task, 15);
 
 /**
  * @generated from message tank.task.v1.ConfirmTaskResponse
@@ -614,7 +691,7 @@ export type ConfirmTaskResponse = Message<"tank.task.v1.ConfirmTaskResponse"> & 
  * Use `create(ConfirmTaskResponseSchema)` to create a new message.
  */
 export const ConfirmTaskResponseSchema: GenMessage<ConfirmTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 15);
+  messageDesc(file_tank_task_v1_task, 16);
 
 /**
  * Not yet: one sentence, posted in the task's thread as the caller, steers or continues
@@ -639,7 +716,7 @@ export type SendBackTaskRequest = Message<"tank.task.v1.SendBackTaskRequest"> & 
  * Use `create(SendBackTaskRequestSchema)` to create a new message.
  */
 export const SendBackTaskRequestSchema: GenMessage<SendBackTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 16);
+  messageDesc(file_tank_task_v1_task, 17);
 
 /**
  * @generated from message tank.task.v1.SendBackTaskResponse
@@ -656,7 +733,7 @@ export type SendBackTaskResponse = Message<"tank.task.v1.SendBackTaskResponse"> 
  * Use `create(SendBackTaskResponseSchema)` to create a new message.
  */
 export const SendBackTaskResponseSchema: GenMessage<SendBackTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 17);
+  messageDesc(file_tank_task_v1_task, 18);
 
 /**
  * Try again on STUCK: a continuation of the run that stopped.
@@ -675,7 +752,7 @@ export type RetryTaskRequest = Message<"tank.task.v1.RetryTaskRequest"> & {
  * Use `create(RetryTaskRequestSchema)` to create a new message.
  */
 export const RetryTaskRequestSchema: GenMessage<RetryTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 18);
+  messageDesc(file_tank_task_v1_task, 19);
 
 /**
  * @generated from message tank.task.v1.RetryTaskResponse
@@ -692,7 +769,7 @@ export type RetryTaskResponse = Message<"tank.task.v1.RetryTaskResponse"> & {
  * Use `create(RetryTaskResponseSchema)` to create a new message.
  */
 export const RetryTaskResponseSchema: GenMessage<RetryTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 19);
+  messageDesc(file_tank_task_v1_task, 20);
 
 /**
  * Cancel a task at any stage short of DONE: a live run is stopped, and the task moves to
@@ -712,7 +789,7 @@ export type CancelTaskRequest = Message<"tank.task.v1.CancelTaskRequest"> & {
  * Use `create(CancelTaskRequestSchema)` to create a new message.
  */
 export const CancelTaskRequestSchema: GenMessage<CancelTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 20);
+  messageDesc(file_tank_task_v1_task, 21);
 
 /**
  * @generated from message tank.task.v1.CancelTaskResponse
@@ -729,7 +806,7 @@ export type CancelTaskResponse = Message<"tank.task.v1.CancelTaskResponse"> & {
  * Use `create(CancelTaskResponseSchema)` to create a new message.
  */
 export const CancelTaskResponseSchema: GenMessage<CancelTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 21);
+  messageDesc(file_tank_task_v1_task, 22);
 
 /**
  * Replace the task's own picks (workspace rules are not affected).
@@ -758,7 +835,7 @@ export type SetTaskNotifyRequest = Message<"tank.task.v1.SetTaskNotifyRequest"> 
  * Use `create(SetTaskNotifyRequestSchema)` to create a new message.
  */
 export const SetTaskNotifyRequestSchema: GenMessage<SetTaskNotifyRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 22);
+  messageDesc(file_tank_task_v1_task, 23);
 
 /**
  * @generated from message tank.task.v1.SetTaskNotifyResponse
@@ -775,7 +852,7 @@ export type SetTaskNotifyResponse = Message<"tank.task.v1.SetTaskNotifyResponse"
  * Use `create(SetTaskNotifyResponseSchema)` to create a new message.
  */
 export const SetTaskNotifyResponseSchema: GenMessage<SetTaskNotifyResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 23);
+  messageDesc(file_tank_task_v1_task, 24);
 
 /**
  * Settings → Tasks: rules every task in the workspace follows.
@@ -794,7 +871,7 @@ export type GetTaskSettingsRequest = Message<"tank.task.v1.GetTaskSettingsReques
  * Use `create(GetTaskSettingsRequestSchema)` to create a new message.
  */
 export const GetTaskSettingsRequestSchema: GenMessage<GetTaskSettingsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 24);
+  messageDesc(file_tank_task_v1_task, 25);
 
 /**
  * @generated from message tank.task.v1.GetTaskSettingsResponse
@@ -818,7 +895,7 @@ export type GetTaskSettingsResponse = Message<"tank.task.v1.GetTaskSettingsRespo
  * Use `create(GetTaskSettingsResponseSchema)` to create a new message.
  */
 export const GetTaskSettingsResponseSchema: GenMessage<GetTaskSettingsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 25);
+  messageDesc(file_tank_task_v1_task, 26);
 
 /**
  * @generated from message tank.task.v1.SetTaskSettingsRequest
@@ -840,7 +917,7 @@ export type SetTaskSettingsRequest = Message<"tank.task.v1.SetTaskSettingsReques
  * Use `create(SetTaskSettingsRequestSchema)` to create a new message.
  */
 export const SetTaskSettingsRequestSchema: GenMessage<SetTaskSettingsRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 26);
+  messageDesc(file_tank_task_v1_task, 27);
 
 /**
  * @generated from message tank.task.v1.SetTaskSettingsResponse
@@ -857,7 +934,7 @@ export type SetTaskSettingsResponse = Message<"tank.task.v1.SetTaskSettingsRespo
  * Use `create(SetTaskSettingsResponseSchema)` to create a new message.
  */
 export const SetTaskSettingsResponseSchema: GenMessage<SetTaskSettingsResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 27);
+  messageDesc(file_tank_task_v1_task, 28);
 
 /**
  * Send to: hand a task to people in its Tread so they hear about it now, at whatever stage it
@@ -891,7 +968,7 @@ export type SendTaskRequest = Message<"tank.task.v1.SendTaskRequest"> & {
  * Use `create(SendTaskRequestSchema)` to create a new message.
  */
 export const SendTaskRequestSchema: GenMessage<SendTaskRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 28);
+  messageDesc(file_tank_task_v1_task, 29);
 
 /**
  * @generated from message tank.task.v1.SendTaskResponse
@@ -908,7 +985,7 @@ export type SendTaskResponse = Message<"tank.task.v1.SendTaskResponse"> & {
  * Use `create(SendTaskResponseSchema)` to create a new message.
  */
 export const SendTaskResponseSchema: GenMessage<SendTaskResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 29);
+  messageDesc(file_tank_task_v1_task, 30);
 
 /**
  * Control plane only: the run's own token or the control plane's bot token with
@@ -966,6 +1043,14 @@ export type RecordTaskRunRequest = Message<"tank.task.v1.RecordTaskRunRequest"> 
    * @generated from field: string checked_by = 8;
    */
   checkedBy: string;
+
+  /**
+   * READY and SURFACES: the state of each surface the task touched. Surfaces left out keep
+   * their state. A READY with none leaves the task a whole-task check.
+   *
+   * @generated from field: repeated tank.task.v1.SurfaceCheck surfaces = 9;
+   */
+  surfaces: SurfaceCheck[];
 };
 
 /**
@@ -973,7 +1058,7 @@ export type RecordTaskRunRequest = Message<"tank.task.v1.RecordTaskRunRequest"> 
  * Use `create(RecordTaskRunRequestSchema)` to create a new message.
  */
 export const RecordTaskRunRequestSchema: GenMessage<RecordTaskRunRequest> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 30);
+  messageDesc(file_tank_task_v1_task, 31);
 
 /**
  * @generated from message tank.task.v1.RecordTaskRunResponse
@@ -990,7 +1075,7 @@ export type RecordTaskRunResponse = Message<"tank.task.v1.RecordTaskRunResponse"
  * Use `create(RecordTaskRunResponseSchema)` to create a new message.
  */
 export const RecordTaskRunResponseSchema: GenMessage<RecordTaskRunResponse> = /*@__PURE__*/
-  messageDesc(file_tank_task_v1_task, 31);
+  messageDesc(file_tank_task_v1_task, 32);
 
 /**
  * @generated from enum tank.task.v1.TaskStage
@@ -1030,6 +1115,16 @@ export enum TaskStage {
    * @generated from enum value: TASK_STAGE_CANCELLED = 6;
    */
   CANCELLED = 6,
+
+  /**
+   * Every surface a person can check is either checked or waiting on a deploy (a TestFlight
+   * build, 2026-11-27); none is ready now. Moves back to READY_TO_CHECK when a waiting
+   * surface goes live, and to DONE when the last one is checked. Never a spinner: the task
+   * says what it waits on (SurfaceCheck.waiting_on).
+   *
+   * @generated from enum value: TASK_STAGE_WAITING_DEPLOY = 7;
+   */
+  WAITING_DEPLOY = 7,
 }
 
 /**
@@ -1037,6 +1132,83 @@ export enum TaskStage {
  */
 export const TaskStageSchema: GenEnum<TaskStage> = /*@__PURE__*/
   enumDesc(file_tank_task_v1_task, 0);
+
+/**
+ * Where a task's change can be tried. A task has only the surfaces it touched: none for work
+ * that is not code (an answer, a live check), one, or several. Order is display order.
+ *
+ * @generated from enum tank.task.v1.TaskSurface
+ */
+export enum TaskSurface {
+  /**
+   * @generated from enum value: TASK_SURFACE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: TASK_SURFACE_WEB = 1;
+   */
+  WEB = 1,
+
+  /**
+   * @generated from enum value: TASK_SURFACE_MOBILE = 2;
+   */
+  MOBILE = 2,
+
+  /**
+   * @generated from enum value: TASK_SURFACE_API = 3;
+   */
+  API = 3,
+
+  /**
+   * @generated from enum value: TASK_SURFACE_DESKTOP = 4;
+   */
+  DESKTOP = 4,
+}
+
+/**
+ * Describes the enum tank.task.v1.TaskSurface.
+ */
+export const TaskSurfaceSchema: GenEnum<TaskSurface> = /*@__PURE__*/
+  enumDesc(file_tank_task_v1_task, 1);
+
+/**
+ * @generated from enum tank.task.v1.SurfaceState
+ */
+export enum SurfaceState {
+  /**
+   * @generated from enum value: SURFACE_STATE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * The change is merged but not out yet (mobile: building and waiting on TestFlight). Not
+   * checkable.
+   *
+   * @generated from enum value: SURFACE_STATE_WAITING_DEPLOY = 1;
+   */
+  WAITING_DEPLOY = 1,
+
+  /**
+   * Live where a person can try it; "Ready to check on web".
+   *
+   * @generated from enum value: SURFACE_STATE_READY = 2;
+   */
+  READY = 2,
+
+  /**
+   * A person checked this surface.
+   *
+   * @generated from enum value: SURFACE_STATE_CHECKED = 3;
+   */
+  CHECKED = 3,
+}
+
+/**
+ * Describes the enum tank.task.v1.SurfaceState.
+ */
+export const SurfaceStateSchema: GenEnum<SurfaceState> = /*@__PURE__*/
+  enumDesc(file_tank_task_v1_task, 2);
 
 /**
  * Why a person said it looks right, picked with one tap (2026-11-26). The words people see
@@ -1084,7 +1256,7 @@ export enum CheckReason {
  * Describes the enum tank.task.v1.CheckReason.
  */
 export const CheckReasonSchema: GenEnum<CheckReason> = /*@__PURE__*/
-  enumDesc(file_tank_task_v1_task, 1);
+  enumDesc(file_tank_task_v1_task, 3);
 
 /**
  * What a run did to its task, from the control plane.
@@ -1141,13 +1313,22 @@ export enum TaskRunEvent {
    * @generated from enum value: TASK_RUN_EVENT_DONE = 6;
    */
   DONE = 6,
+
+  /**
+   * The surfaces in RecordTaskRunRequest.surfaces changed state (2026-11-27): a mobile build
+   * reached TestFlight (WAITING_DEPLOY → READY), or a surface was found to be waiting on a
+   * deploy. Moves the task between READY_TO_CHECK and WAITING_DEPLOY; never to DONE.
+   *
+   * @generated from enum value: TASK_RUN_EVENT_SURFACES = 7;
+   */
+  SURFACES = 7,
 }
 
 /**
  * Describes the enum tank.task.v1.TaskRunEvent.
  */
 export const TaskRunEventSchema: GenEnum<TaskRunEvent> = /*@__PURE__*/
-  enumDesc(file_tank_task_v1_task, 2);
+  enumDesc(file_tank_task_v1_task, 4);
 
 /**
  * @generated from service tank.task.v1.TaskService

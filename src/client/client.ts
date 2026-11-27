@@ -53,6 +53,7 @@ import {
   TaskNotifySchema,
   TaskService,
   type TaskStage,
+  type TaskSurface,
 } from "../contracts/tank/task/v1/task_pb.js";
 import { type Mark, type MarkType, TopoService } from "../contracts/tank/topo/v1/topo_pb.js";
 import {
@@ -1271,9 +1272,13 @@ export class TankClient {
     return this.keepTask(await this.tasks.startTask({ taskId }));
   }
 
-  /** Looks right: Ready to check → Done, with the one-tap reasons the person picked (optional). */
-  async confirmTask(taskId: string, reasons: CheckReason[] = []): Promise<Task> {
-    return this.keepTask(await this.tasks.confirmTask({ taskId, reasons }));
+  /** Looks right, with the one-tap reasons the person picked (optional). `surfaces` checks only those (each must be READY); empty checks every READY one. */
+  async confirmTask(
+    taskId: string,
+    reasons: CheckReason[] = [],
+    surfaces: TaskSurface[] = [],
+  ): Promise<Task> {
+    return this.keepTask(await this.tasks.confirmTask({ taskId, reasons, surfaces }));
   }
 
   /** Not yet: the sentence goes to the Tread as the caller and the work goes back. */

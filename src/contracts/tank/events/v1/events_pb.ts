@@ -649,7 +649,8 @@ export const NotificationsReadSchema: GenMessage<NotificationsRead> = /*@__PURE_
   messageDesc(file_tank_events_v1_events, 20);
 
 /**
- * agent.run.updated on evt.{ws}.thread.{root}: state, status message or cost changed.
+ * agent.run.updated on evt.{ws}.thread.{root}: sent when the run is created and whenever its
+ * state, status message or cost changes.
  *
  * @generated from message tank.events.v1.AgentRunUpdated
  */
