@@ -117,6 +117,17 @@ const CLOSE_UNAUTHENTICATED = 4003;
 const CLOSE_STOP = 1000;
 
 /**
+ * False for an id only this client knows: a message is named by its client_msg_id (a UUID) until
+ * the server's copy arrives. The gateway cannot read that, and a subscription to one is kept and
+ * re-sent after every reconnect, which once closed every new socket (2026-11-28). So the client
+ * never subscribes to, or focuses, one.
+ */
+export function isServerId(id: string): boolean {
+  if (!id || id === "undefined" || id === "null") return false;
+  return !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+}
+
+/**
  * Binary tank.realtime.v1 client over one WebSocket.
  *
  * - Hello with a freshly minted gateway token, or Resume with the persisted
@@ -253,10 +264,10 @@ export class RealtimeClient {
     canvasIds?: string[];
     boardIds?: string[];
   }): void {
-    const channelIds = (opts.channelIds ?? []).filter((c) => !this.subChannels.has(c));
-    const threadRootIds = (opts.threadRootIds ?? []).filter((t) => !this.subThreads.has(t));
-    const canvasIds = (opts.canvasIds ?? []).filter((c) => !this.subCanvases.has(c));
-    const boardIds = (opts.boardIds ?? []).filter((b) => !this.subBoards.has(b));
+    const channelIds = (opts.channelIds ?? []).filter((c) => isServerId(c) && !this.subChannels.has(c));
+    const threadRootIds = (opts.threadRootIds ?? []).filter((t) => isServerId(t) && !this.subThreads.has(t));
+    const canvasIds = (opts.canvasIds ?? []).filter((c) => isServerId(c) && !this.subCanvases.has(c));
+    const boardIds = (opts.boardIds ?? []).filter((b) => isServerId(b) && !this.subBoards.has(b));
     for (const c of channelIds) this.subChannels.add(c);
     for (const t of threadRootIds) this.subThreads.add(t);
     for (const c of canvasIds) this.subCanvases.add(c);
@@ -319,6 +330,7 @@ export class RealtimeClient {
 
   /** The channel the user is looking at; the server suppresses push for it. */
   focus(channelId: string): void {
+    if (!isServerId(channelId)) return;
     this.focused = channelId;
     this.sendIfReady({ case: "focus", value: { channelId } });
   }

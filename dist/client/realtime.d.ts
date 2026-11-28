@@ -91,6 +91,13 @@ export type OnlineSignal = (retry: () => void) => () => void;
 /** Retries on the browser `online` event when `globalThis.addEventListener` exists; no-op elsewhere. */
 export declare const browserOnlineSignal: OnlineSignal;
 /**
+ * False for an id only this client knows: a message is named by its client_msg_id (a UUID) until
+ * the server's copy arrives. The gateway cannot read that, and a subscription to one is kept and
+ * re-sent after every reconnect, which once closed every new socket (2026-11-28). So the client
+ * never subscribes to, or focuses, one.
+ */
+export declare function isServerId(id: string): boolean;
+/**
  * Binary tank.realtime.v1 client over one WebSocket.
  *
  * - Hello with a freshly minted gateway token, or Resume with the persisted

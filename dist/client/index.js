@@ -12,7 +12,7 @@ export { isPaywall, paywallMessage } from "./paywall.js";
 export { plainPreview } from "./plainPreview.js";
 export { createDraftPreparer, PREPARE_PAUSE_MS, } from "./prepare.js";
 export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
-export { browserOnlineSignal, RealtimeClient, } from "./realtime.js";
+export { browserOnlineSignal, isServerId, RealtimeClient, } from "./realtime.js";
 export { benchAt, frameAtFraction, liveAt, replayClock, replayEnding } from "./replay.js";
 export { nextReveal, REVEAL_TICK_MS, revealSteps } from "./reveal.js";
 export { expandShortcodes } from "./shortcodes.js";
