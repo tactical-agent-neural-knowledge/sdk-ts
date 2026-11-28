@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import WebSocket from "ws";
 import { FakeGateway, fakeMessage, resetSeq } from "../test/fake-gateway.js";
 import type { WebSocketCtor } from "./realtime.js";
-import { browserOnlineSignal, RealtimeClient, type RealtimeOptions } from "./realtime.js";
+import { browserOnlineSignal, isServerId, RealtimeClient, type RealtimeOptions } from "./realtime.js";
 
 let gw: FakeGateway;
 const clients: RealtimeClient[] = [];
@@ -80,6 +80,27 @@ describe("handshake", () => {
     expect(errors).toEqual([1]);
     expect(n).toBe(2);
     expect(gw.conns).toHaveLength(2);
+  });
+});
+
+describe("client-only ids", () => {
+  it("never subscribes to or focuses a client_msg_id, so a reconnect cannot re-send one", async () => {
+    const uuid = "01a2217e-910e-7003-a4da-0cae9b29d462";
+    expect(isServerId(uuid)).toBe(false);
+    expect(isServerId("")).toBe(false);
+    expect(isServerId("undefined")).toBe(false);
+    expect(isServerId("2126609846794039296")).toBe(true);
+    const c = makeClient();
+    c.subscribe({ channelIds: ["general"], threadRootIds: [uuid, "root1"] });
+    c.focus(uuid);
+    c.start();
+    const conn = await gw.waitFor();
+    await until(() => c.state === "ready");
+    await until(() => conn.received.some((f) => f.kind.case === "subscribe"));
+    const sub = conn.received.find((f) => f.kind.case === "subscribe")?.kind;
+    if (sub?.case !== "subscribe") throw new Error("no subscribe");
+    expect(sub.value.threadRootIds).toEqual(["root1"]);
+    expect(conn.received.some((f) => f.kind.case === "focus")).toBe(false);
   });
 });
 

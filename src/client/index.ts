@@ -70,6 +70,7 @@ export {
 export { framesAsPage, opensAsPage, previewable } from "./previewable.js";
 export {
   browserOnlineSignal,
+  isServerId,
   type OnlineSignal,
   RealtimeClient,
   type RealtimeEvents,
